@@ -1,8 +1,8 @@
 {
+  "id": "./",
+  "lang": "ru",
   "name": "MRS — Создание сайтов",
   "short_name": "MRS",
-  "lang": "ru",
-  "id": "/sites-900/",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -25,3 +25,8 @@
     {
       "src": "./mrs-icon-512.png",
       "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
