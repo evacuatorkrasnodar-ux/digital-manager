@@ -29,14 +29,36 @@
     content="MRS"
   >
 
-  <meta name="application-name" content="MRS DIGITAL">
+  <meta name="application-name" content="MRS">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="MRS DIGITAL">
+  <meta name="apple-mobile-web-app-title" content="MRS">
 
   <link
     rel="canonical"
     href="https://evacuatorkrasnodar-ux.github.io/sites-900/"
+  >
+
+  <link
+    rel="manifest"
+    href="./manifest.json"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="./mrs-icon-192.png"
+  >
+
+  <link
+    rel="icon"
+    href="./mrs-favicon-32.png"
+    sizes="32x32"
+    type="image/png"
+  >
+
+  <meta
+    name="format-detection"
+    content="telephone=no"
   >
 
   <!-- Open Graph -->
@@ -736,15 +758,15 @@
     .hero {
       position: relative;
 
-      min-height: 720px;
+      min-height: 650px;
 
       display: flex;
       align-items: center;
 
       padding:
-        calc(var(--header-height) + 45px)
+        calc(var(--header-height) + 30px)
         0
-        65px;
+        45px;
     }
 
 
@@ -988,7 +1010,7 @@
     .hero-visual {
       position: relative;
 
-      min-height: 500px;
+      min-height: 470px;
 
       display: grid;
       place-items: center;
@@ -3894,6 +3916,167 @@
     }
 
 
+    .brand-mark {
+      width: 52px;
+      min-width: 52px;
+      padding: 0 6px;
+      font-size: 12px;
+      letter-spacing: .06em;
+    }
+
+
+    .install-steps {
+      display: grid;
+      gap: 9px;
+      margin: 0 0 22px;
+    }
+
+
+    .install-step {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface-2);
+    }
+
+
+    .install-step strong {
+      color: var(--text-muted);
+      font-size: 10px;
+      letter-spacing: .12em;
+    }
+
+
+    .install-step span {
+      color: var(--text-soft);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+
+    .demo-success {
+      padding: 18px 0 4px;
+      text-align: center;
+    }
+
+
+    .demo-success-icon {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 18px;
+      display: grid;
+      place-items: center;
+      border: 1px solid color-mix(in srgb, var(--success) 35%, var(--line));
+      border-radius: 50%;
+      color: var(--success);
+      background: color-mix(in srgb, var(--success) 9%, transparent);
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+
+    .demo-success h3 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: -.04em;
+    }
+
+
+    .demo-success p {
+      max-width: 480px;
+      margin: 0 auto 22px;
+      color: var(--text-soft);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+
+    /* =====================================================
+       SMOOTH SITE MOTION
+    ====================================================== */
+
+    .motion-reveal {
+      opacity: 0;
+      transform: translate3d(0, 28px, 0) scale(.985);
+      transition:
+        opacity .72s cubic-bezier(.22,.61,.36,1),
+        transform .72s cubic-bezier(.22,.61,.36,1);
+      will-change: opacity, transform;
+    }
+
+    .motion-reveal.is-visible {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    .motion-reveal:nth-child(2) {
+      transition-delay: .06s;
+    }
+
+    .motion-reveal:nth-child(3) {
+      transition-delay: .12s;
+    }
+
+    .motion-reveal:nth-child(4) {
+      transition-delay: .18s;
+    }
+
+    .motion-reveal:nth-child(5) {
+      transition-delay: .24s;
+    }
+
+    .bg-glow-one,
+    .bg-glow-two,
+    .bg-glow-three {
+      animation:
+        mrsFloat 9s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+
+    .bg-glow-two {
+      animation-duration: 11s;
+      animation-delay: -2s;
+    }
+
+    .bg-glow-three {
+      animation-duration: 13s;
+      animation-delay: -4s;
+    }
+
+    @keyframes mrsFloat {
+      from {
+        transform: translate3d(-10px, -8px, 0) scale(1);
+      }
+      to {
+        transform: translate3d(16px, 14px, 0) scale(1.05);
+      }
+    }
+
+    .hero-visual,
+    .project-passport,
+    .final-card {
+      will-change: transform, opacity;
+    }
+
+    .service-card,
+    .price-card,
+    .faq-item,
+    .button,
+    .header-order,
+    .theme-toggle,
+    .menu-toggle {
+      will-change: transform;
+      transition:
+        transform var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition),
+        background var(--transition);
+    }
+
     /* =====================================================
        REDUCED MOTION
     ====================================================== */
@@ -3904,13 +4087,10 @@
         scroll-behavior: auto;
       }
 
-
-      *,
-      *::before,
-      *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
+      .bg-glow-one,
+      .bg-glow-two,
+      .bg-glow-three {
+        animation: none !important;
       }
 
     }
@@ -3953,16 +4133,8 @@
         aria-label="MRS — главная"
       >
 
-        <span class="brand-mark">
-          M
-        </span>
-
-        <span class="brand-text">
-
-          <strong>MRS</strong>
-
-          
-
+        <span class="brand-mark" aria-hidden="true">
+          MRS
         </span>
 
       </a>
@@ -6362,6 +6534,11 @@
         </div>
 
         <label>
+          Email
+          <input type="email" name="email" autocomplete="email" placeholder="example@mail.ru">
+        </label>
+
+        <label>
           Чем вы занимаетесь?
           <input type="text" name="business" required placeholder="Например: мастер, автосервис, магазин">
         </label>
@@ -6469,24 +6646,48 @@
         aria-label="Закрыть"
       >×</button>
 
-      <span class="section-kicker">PWA · INSTALL</span>
+      <span class="section-kicker">PWA · DEMO</span>
 
       <h2 id="installModalTitle">
-        Установить <span>MRS.</span>
+        Сайт можно <span>установить.</span>
       </h2>
 
-      <p class="demo-modal-lead" id="installModalText">
-        Установка приложения.
+      <p
+        class="demo-modal-lead"
+        id="installModalLead"
+      >
+        Если браузер поддерживает установку PWA, появится системное окно.
+        На iPhone установка выполняется через меню «Поделиться».
       </p>
 
-      <div class="audit-results" id="installSteps" aria-live="polite"></div>
+      <div
+        class="install-steps"
+        id="installSteps"
+      >
+
+        <div class="install-step">
+          <strong>01</strong>
+          <span>Откройте меню браузера.</span>
+        </div>
+
+        <div class="install-step">
+          <strong>02</strong>
+          <span>Выберите установку или добавление сайта на главный экран.</span>
+        </div>
+
+        <div class="install-step">
+          <strong>03</strong>
+          <span>После добавления сайт будет запускаться как приложение.</span>
+        </div>
+
+      </div>
 
       <button
         type="button"
-        class="button button-secondary"
+        class="button button-primary button-large"
         id="installAgainButton"
       >
-        Попробовать установить ↻
+        Попробовать установить ещё раз ↓
       </button>
 
     </div>
@@ -7041,8 +7242,16 @@
         ".process-list, " +
         ".project-passport, " +
         ".faq-list, " +
-        ".final-card"
+        ".final-card, " +
+        ".service-card, " +
+        ".price-card, " +
+        ".review-card"
       );
+
+
+    revealElements.forEach(element => {
+      element.classList.add("motion-reveal");
+    });
 
 
     if (
@@ -7059,44 +7268,28 @@
                 return;
               }
 
+              entry.target.classList.add("is-visible");
 
-              entry.target.animate(
-                [
-                  {
-                    opacity: 0,
-                    transform:
-                      "translateY(25px)"
-                  },
-
-                  {
-                    opacity: 1,
-                    transform:
-                      "translateY(0)"
-                  }
-                ],
-                {
-                  duration: 650,
-                  easing: "cubic-bezier(.2,.7,.2,1)",
-                  fill: "forwards"
-                }
-              );
-
-
-              observer.unobserve(
-                entry.target
-              );
+              observer.unobserve(entry.target);
 
             });
 
           },
           {
-            threshold: .08
+            threshold: .08,
+            rootMargin: "0px 0px -6% 0px"
           }
         );
 
 
       revealElements.forEach(
         element => observer.observe(element)
+      );
+
+    } else {
+
+      revealElements.forEach(
+        element => element.classList.add("is-visible")
       );
 
     }
@@ -7112,8 +7305,6 @@
     const installModal = document.getElementById("installModal");
     const installAppButton = document.getElementById("installAppButton");
     const installAgainButton = document.getElementById("installAgainButton");
-    const installModalText = document.getElementById("installModalText");
-    const installSteps = document.getElementById("installSteps");
     const auditButton = document.getElementById("auditButton");
     const auditResults = document.getElementById("auditResults");
     let deferredInstallPrompt = null;
@@ -7206,134 +7397,136 @@
       deferredInstallPrompt = event;
     });
 
-    function renderInstallInstructions() {
-      if (!installModal || !installSteps || !installModalText) return;
 
-      const standalone =
-        window.matchMedia("(display-mode: standalone)").matches ||
-        window.navigator.standalone === true;
+    function isIOSDevice() {
+      return /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    }
 
-      if (standalone) {
-        installModalText.textContent =
-          "Приложение MRS уже установлено и запущено в отдельном окне.";
 
-        installSteps.innerHTML = `
-          <div class="audit-row">
-            <span>Статус</span>
-            <span class="audit-status">Установлено ✓</span>
+    function setInstallInstructions() {
+      const lead = document.getElementById("installModalLead");
+      const steps = document.getElementById("installSteps");
+
+      if (!lead || !steps) return;
+
+      if (isIOSDevice()) {
+
+        lead.textContent =
+          "На iPhone системное окно установки из браузера не вызывается автоматически. Добавьте сайт на экран Домой — после этого он будет запускаться как отдельное приложение.";
+
+        steps.innerHTML = `
+          <div class="install-step">
+            <strong>01</strong>
+            <span>Нажмите «Поделиться» в меню браузера.</span>
+          </div>
+          <div class="install-step">
+            <strong>02</strong>
+            <span>Выберите «На экран Домой».</span>
+          </div>
+          <div class="install-step">
+            <strong>03</strong>
+            <span>Нажмите «Добавить».</span>
           </div>
         `;
+
         return;
       }
 
-      const ua = navigator.userAgent || "";
-      const isIOS = /iPhone|iPad|iPod/i.test(ua);
-      const isAndroid = /Android/i.test(ua);
+      lead.textContent =
+        "Если браузер передал системный запрос, установка откроется автоматически. Иначе используйте меню браузера для установки приложения.";
 
-      if (isIOS) {
-        installModalText.textContent =
-          "На iPhone и iPad браузеры Chrome, Яндекс и Edge используют системную функцию iOS для добавления сайта на экран Домой.";
-
-        installSteps.innerHTML = `
-          <div class="audit-row">
-            <span>1</span>
-            <span class="audit-status">Нажмите «Поделиться» в браузере</span>
-          </div>
-          <div class="audit-row">
-            <span>2</span>
-            <span class="audit-status">Выберите «На экран Домой»</span>
-          </div>
-          <div class="audit-row">
-            <span>3</span>
-            <span class="audit-status">Нажмите «Добавить»</span>
-          </div>
-        `;
-        return;
-      }
-
-      if (deferredInstallPrompt) {
-        installModalText.textContent =
-          "Браузер готов установить MRS как приложение.";
-
-        installSteps.innerHTML = `
-          <div class="audit-row">
-            <span>Готово</span>
-            <span class="audit-status">Можно установить приложение</span>
-          </div>
-        `;
-        return;
-      }
-
-      if (isAndroid) {
-        installModalText.textContent =
-          "Браузер пока не передал сайту системное окно установки.";
-
-        installSteps.innerHTML = `
-          <div class="audit-row">
-            <span>1</span>
-            <span class="audit-status">Откройте меню браузера ⋮</span>
-          </div>
-          <div class="audit-row">
-            <span>2</span>
-            <span class="audit-status">Выберите «Установить приложение» или «Добавить на главный экран»</span>
-          </div>
-        `;
-        return;
-      }
-
-      installModalText.textContent =
-        "Если браузер поддерживает PWA, пункт установки появится в его меню.";
-
-      installSteps.innerHTML = `
-        <div class="audit-row">
-          <span>Установка</span>
-          <span class="audit-status">Откройте меню браузера и выберите установку приложения</span>
+      steps.innerHTML = `
+        <div class="install-step">
+          <strong>01</strong>
+          <span>Откройте меню браузера.</span>
+        </div>
+        <div class="install-step">
+          <strong>02</strong>
+          <span>Выберите «Установить приложение» или «Добавить на главный экран».</span>
+        </div>
+        <div class="install-step">
+          <strong>03</strong>
+          <span>Сайт появится как отдельное приложение.</span>
         </div>
       `;
     }
 
+
+    function showInstallModal() {
+      setInstallInstructions();
+      openModal(installModal);
+    }
+
+
     async function handleInstallApp() {
       if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+
         try {
-          deferredInstallPrompt.prompt();
           await deferredInstallPrompt.userChoice;
-        } catch (error) {
-          console.warn("PWA install prompt error:", error);
-        } finally {
-          deferredInstallPrompt = null;
-        }
+        } catch {}
+
+        deferredInstallPrompt = null;
         return;
       }
 
-      renderInstallInstructions();
-      openModal(installModal);
+      if (
+        window.matchMedia("(display-mode: standalone)").matches ||
+        window.navigator.standalone === true
+      ) {
+        if (installAppButton) {
+          const label = installAppButton.querySelector("span");
+          if (label) label.textContent = "Приложение установлено";
+        }
+        showInstallModal();
+        return;
+      }
+
+      showInstallModal();
     }
+
 
     if (installAppButton) {
       installAppButton.addEventListener("click", handleInstallApp);
     }
 
+
     if (installAgainButton) {
       installAgainButton.addEventListener("click", handleInstallApp);
     }
 
+
     window.addEventListener("appinstalled", () => {
       deferredInstallPrompt = null;
 
-      if (installModalText) {
-        installModalText.textContent =
-          "Приложение MRS успешно установлено.";
+      if (installAppButton) {
+        const label = installAppButton.querySelector("span");
+        if (label) label.textContent = "Приложение установлено";
       }
 
-      if (installSteps) {
-        installSteps.innerHTML = `
-          <div class="audit-row">
-            <span>Статус</span>
-            <span class="audit-status">Установлено ✓</span>
-          </div>
-        `;
-      }
+      closeModal(installModal);
     });
+
+
+    /* Service worker is optional until the PWA support files are published. */
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", async () => {
+        try {
+          const manifestResponse = await fetch("./manifest.json", {
+            method: "HEAD",
+            cache: "no-store"
+          });
+
+          if (!manifestResponse.ok) return;
+
+          await navigator.serviceWorker.register("./sw.js", {
+            scope: "./"
+          });
+        } catch {}
+      });
+    }
+
 
     /* =====================================================
        LIVE SEO / TECH AUDIT
@@ -7376,29 +7569,100 @@
 
 
     /* =====================================================
-       CREATE SITE FORM
+       CREATE SITE FORM — EMAIL
     ====================================================== */
 
     const createSiteForm = document.getElementById("createSiteForm");
 
-    if (createSiteForm) {
-      createSiteForm.addEventListener("submit", event => {
-        event.preventDefault();
-        const data = new FormData(createSiteForm);
+    async function sendCreateSiteForm(event) {
+      event.preventDefault();
+
+      if (!createSiteForm) return;
+
+      const submitButton = createSiteForm.querySelector('button[type="submit"]');
+      const note = createSiteForm.querySelector(".demo-form-note");
+      const data = Object.fromEntries(new FormData(createSiteForm).entries());
+      const originalText = submitButton ? submitButton.textContent : "";
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Отправляем заявку…";
+      }
+
+      const payload = {
+        _subject: "Новая заявка на создание сайта — MRS",
+        _template: "table",
+        _captcha: "false",
+        name: data.name || "",
+        phone: data.phone || "",
+        email: data.email || "",
+        business: data.business || "",
+        package: data.package || "",
+        message: data.message || ""
+      };
+
+      try {
+        const response = await fetch("https://formsubmit.co/ajax/79996362202@ya.ru", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok || result.success === false) {
+          throw new Error("FormSubmit rejected the request");
+        }
+
+        createSiteForm.innerHTML = `
+          <div class="demo-success">
+            <div class="demo-success-icon">✓</div>
+            <h3>Заявка отправлена.</h3>
+            <p>Спасибо. Заявка поступила на почту MRS. Я свяжусь с вами после просмотра задачи.</p>
+            <button type="button" class="button button-secondary" data-modal-close>Закрыть</button>
+          </div>
+        `;
+
+        createSiteForm.querySelector("[data-modal-close]")?.addEventListener("click", () => closeModal(createSiteModal));
+
+      } catch {
         const subject = "Заявка на создание сайта — MRS";
         const body = [
           "Новая заявка с сайта MRS",
           "",
-          "Имя: " + (data.get("name") || ""),
-          "Телефон: " + (data.get("phone") || ""),
-          "Ниша: " + (data.get("business") || ""),
-          "Формат: " + (data.get("package") || ""),
-          "Комментарий: " + (data.get("message") || "")
-        ].join("\\n");
-        window.location.href = "mailto:79996362202@ya.ru?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-        closeModal(createSiteModal);
-      });
+          "Имя: " + (data.name || ""),
+          "Телефон: " + (data.phone || ""),
+          "Email: " + (data.email || ""),
+          "Ниша: " + (data.business || ""),
+          "Формат: " + (data.package || ""),
+          "Комментарий: " + (data.message || "")
+        ].join("\n");
+
+        window.location.href =
+          "mailto:79996362202@ya.ru?subject=" +
+          encodeURIComponent(subject) +
+          "&body=" +
+          encodeURIComponent(body);
+
+        if (note) {
+          note.textContent = "Если почтовое приложение не открылось, напишите напрямую на 79996362202@ya.ru.";
+        }
+
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalText || "Подготовить заявку ↗";
+        }
+      }
     }
+
+
+    if (createSiteForm) {
+      createSiteForm.addEventListener("submit", sendCreateSiteForm);
+    }
+
 
     /* =====================================================
        YEAR
