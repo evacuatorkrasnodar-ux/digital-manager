@@ -29,36 +29,14 @@
     content="MRS"
   >
 
-  <meta name="application-name" content="MRS">
+  <meta name="application-name" content="MRS DIGITAL">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="MRS">
+  <meta name="apple-mobile-web-app-title" content="MRS DIGITAL">
 
   <link
     rel="canonical"
     href="https://evacuatorkrasnodar-ux.github.io/sites-900/"
-  >
-
-  <link
-    rel="manifest"
-    href="./manifest.json"
-  >
-
-  <link
-    rel="apple-touch-icon"
-    href="./mrs-icon-192.png"
-  >
-
-  <link
-    rel="icon"
-    href="./mrs-favicon-32.png"
-    sizes="32x32"
-    type="image/png"
-  >
-
-  <meta
-    name="format-detection"
-    content="telephone=no"
   >
 
   <!-- Open Graph -->
@@ -758,15 +736,15 @@
     .hero {
       position: relative;
 
-      min-height: 650px;
+      min-height: 720px;
 
       display: flex;
       align-items: center;
 
       padding:
-        calc(var(--header-height) + 30px)
+        calc(var(--header-height) + 45px)
         0
-        45px;
+        65px;
     }
 
 
@@ -1010,7 +988,7 @@
     .hero-visual {
       position: relative;
 
-      min-height: 470px;
+      min-height: 500px;
 
       display: grid;
       place-items: center;
@@ -3916,166 +3894,242 @@
     }
 
 
-    .brand-mark {
-      width: 52px;
-      min-width: 52px;
-      padding: 0 6px;
-      font-size: 12px;
-      letter-spacing: .06em;
+    /* =====================================================
+       LIVE AUDIT UI
+    ====================================================== */
+
+    .audit-modal-card {
+      width: min(760px, calc(100vw - 28px));
     }
 
+    .live-audit-form {
+      display: grid;
+      gap: 10px;
+      margin: 24px 0 18px;
+    }
 
-    .install-steps {
+    .live-audit-label {
+      color: var(--text-soft);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .live-audit-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 58px;
+      padding: 0 16px;
+      border: 1px solid var(--line-strong);
+      border-radius: 16px;
+      background: var(--surface-2);
+      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+    }
+
+    .live-audit-input-wrap:focus-within {
+      border-color: var(--success);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--success) 10%, transparent);
+      transform: translateY(-1px);
+    }
+
+    .live-audit-prefix {
+      color: var(--success);
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    #liveAuditUrl {
+      width: 100%;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    #liveAuditUrl::placeholder {
+      color: var(--text-muted);
+    }
+
+    .live-audit-actions {
+      margin-top: 4px;
+    }
+
+    .live-audit-actions .button {
+      cursor: pointer;
+    }
+
+    .audit-progress {
       display: grid;
       gap: 9px;
-      margin: 0 0 22px;
-    }
-
-
-    .install-step {
-      display: grid;
-      grid-template-columns: 36px 1fr;
-      gap: 12px;
-      align-items: center;
-      padding: 13px 14px;
+      margin: 12px 0 20px;
+      padding: 14px;
       border: 1px solid var(--line);
-      border-radius: 12px;
+      border-radius: 14px;
       background: var(--surface-2);
     }
 
+    .audit-progress-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--text-soft);
+      font-size: 11px;
+      font-weight: 700;
+    }
 
-    .install-step strong {
+    .audit-progress-top strong {
+      color: var(--success);
+    }
+
+    .audit-progress-track {
+      height: 5px;
+      overflow: hidden;
+      border-radius: 99px;
+      background: color-mix(in srgb, var(--text) 8%, transparent);
+    }
+
+    .audit-progress-track span {
+      display: block;
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--success);
+      transition: width 260ms ease;
+    }
+
+    .audit-summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 0 0 12px;
+    }
+
+    .audit-score-card {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface-2);
+    }
+
+    .audit-score-card strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .audit-score-card span {
+      display: block;
+      margin-top: 6px;
       color: var(--text-muted);
       font-size: 10px;
-      letter-spacing: .12em;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
     }
 
+    .audit-score-card.good strong { color: var(--success); }
+    .audit-score-card.warn strong { color: #ffd36a; }
+    .audit-score-card.bad strong { color: #ff7d8a; }
 
-    .install-step span {
+    .audit-section-title {
+      margin: 18px 0 8px;
+      color: var(--text-muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .audit-row {
+      min-height: 48px;
+    }
+
+    .audit-row.audit-warn .audit-status {
+      color: #ffd36a;
+    }
+
+    .audit-row.audit-warn .audit-status::before {
+      content: "!";
+      background: color-mix(in srgb, #ffd36a 12%, transparent);
+    }
+
+    .audit-row.audit-bad .audit-status {
+      color: #ff7d8a;
+    }
+
+    .audit-row.audit-bad .audit-status::before {
+      content: "×";
+      background: color-mix(in srgb, #ff7d8a 12%, transparent);
+    }
+
+    .audit-row.audit-info .audit-status {
+      color: var(--text-soft);
+    }
+
+    .audit-row.audit-info .audit-status::before {
+      content: "i";
+      background: color-mix(in srgb, var(--text) 10%, transparent);
+    }
+
+    .audit-detail {
+      margin: 12px 0 0;
+      padding: 13px 15px;
+      border-left: 2px solid var(--success);
+      border-radius: 0 12px 12px 0;
+      background: var(--surface-2);
       color: var(--text-soft);
       font-size: 12px;
-      line-height: 1.5;
+      line-height: 1.65;
     }
 
+    .audit-detail strong {
+      color: var(--text);
+    }
 
-    .demo-success {
-      padding: 18px 0 4px;
+    .audit-url-line {
+      overflow: hidden;
+      margin: 0 0 14px;
+      color: var(--text-muted);
+      font-size: 11px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .audit-empty {
+      padding: 22px 0;
+      color: var(--text-muted);
+      font-size: 13px;
       text-align: center;
     }
 
-
-    .demo-success-icon {
-      width: 58px;
-      height: 58px;
-      margin: 0 auto 18px;
-      display: grid;
-      place-items: center;
-      border: 1px solid color-mix(in srgb, var(--success) 35%, var(--line));
-      border-radius: 50%;
-      color: var(--success);
-      background: color-mix(in srgb, var(--success) 9%, transparent);
-      font-size: 22px;
-      font-weight: 900;
+    .audit-disclaimer {
+      margin: 16px 0 0;
+      color: var(--text-muted);
+      font-size: 10px;
+      line-height: 1.6;
     }
 
-
-    .demo-success h3 {
-      margin: 0 0 8px;
-      font-size: 28px;
-      letter-spacing: -.04em;
-    }
-
-
-    .demo-success p {
-      max-width: 480px;
-      margin: 0 auto 22px;
-      color: var(--text-soft);
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-
-    /* =====================================================
-       SMOOTH SITE MOTION
-    ====================================================== */
-
-    .motion-reveal {
-      opacity: 0;
-      transform: translate3d(0, 28px, 0) scale(.985);
-      transition:
-        opacity .72s cubic-bezier(.22,.61,.36,1),
-        transform .72s cubic-bezier(.22,.61,.36,1);
-      will-change: opacity, transform;
-    }
-
-    .motion-reveal.is-visible {
-      opacity: 1;
-      transform: translate3d(0, 0, 0) scale(1);
-    }
-
-    .motion-reveal:nth-child(2) {
-      transition-delay: .06s;
-    }
-
-    .motion-reveal:nth-child(3) {
-      transition-delay: .12s;
-    }
-
-    .motion-reveal:nth-child(4) {
-      transition-delay: .18s;
-    }
-
-    .motion-reveal:nth-child(5) {
-      transition-delay: .24s;
-    }
-
-    .bg-glow-one,
-    .bg-glow-two,
-    .bg-glow-three {
-      animation:
-        mrsFloat 9s ease-in-out infinite alternate;
-      will-change: transform;
-    }
-
-    .bg-glow-two {
-      animation-duration: 11s;
-      animation-delay: -2s;
-    }
-
-    .bg-glow-three {
-      animation-duration: 13s;
-      animation-delay: -4s;
-    }
-
-    @keyframes mrsFloat {
-      from {
-        transform: translate3d(-10px, -8px, 0) scale(1);
+    @media (max-width: 560px) {
+      .audit-summary {
+        grid-template-columns: 1fr;
       }
-      to {
-        transform: translate3d(16px, 14px, 0) scale(1.05);
+
+      .live-audit-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .live-audit-actions .button {
+        width: 100%;
       }
     }
 
-    .hero-visual,
-    .project-passport,
-    .final-card {
-      will-change: transform, opacity;
-    }
-
-    .service-card,
-    .price-card,
-    .faq-item,
-    .button,
-    .header-order,
-    .theme-toggle,
-    .menu-toggle {
-      will-change: transform;
-      transition:
-        transform var(--transition),
-        border-color var(--transition),
-        box-shadow var(--transition),
-        background var(--transition);
-    }
 
     /* =====================================================
        REDUCED MOTION
@@ -4087,10 +4141,13 @@
         scroll-behavior: auto;
       }
 
-      .bg-glow-one,
-      .bg-glow-two,
-      .bg-glow-three {
-        animation: none !important;
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
       }
 
     }
@@ -4133,8 +4190,16 @@
         aria-label="MRS — главная"
       >
 
-        <span class="brand-mark" aria-hidden="true">
-          MRS
+        <span class="brand-mark">
+          M
+        </span>
+
+        <span class="brand-text">
+
+          <strong>MRS</strong>
+
+          
+
         </span>
 
       </a>
@@ -6534,11 +6599,6 @@
         </div>
 
         <label>
-          Email
-          <input type="email" name="email" autocomplete="email" placeholder="example@mail.ru">
-        </label>
-
-        <label>
           Чем вы занимаетесь?
           <input type="text" name="business" required placeholder="Например: мастер, автосервис, магазин">
         </label>
@@ -6628,74 +6688,6 @@
 
   <div
     class="demo-modal"
-    id="installModal"
-    aria-hidden="true"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="installModalTitle"
-  >
-
-    <div class="demo-modal-backdrop" data-modal-close></div>
-
-    <div class="demo-modal-card demo-modal-compact">
-
-      <button
-        type="button"
-        class="demo-modal-close"
-        data-modal-close
-        aria-label="Закрыть"
-      >×</button>
-
-      <span class="section-kicker">PWA · DEMO</span>
-
-      <h2 id="installModalTitle">
-        Сайт можно <span>установить.</span>
-      </h2>
-
-      <p
-        class="demo-modal-lead"
-        id="installModalLead"
-      >
-        Если браузер поддерживает установку PWA, появится системное окно.
-        На iPhone установка выполняется через меню «Поделиться».
-      </p>
-
-      <div
-        class="install-steps"
-        id="installSteps"
-      >
-
-        <div class="install-step">
-          <strong>01</strong>
-          <span>Откройте меню браузера.</span>
-        </div>
-
-        <div class="install-step">
-          <strong>02</strong>
-          <span>Выберите установку или добавление сайта на главный экран.</span>
-        </div>
-
-        <div class="install-step">
-          <strong>03</strong>
-          <span>После добавления сайт будет запускаться как приложение.</span>
-        </div>
-
-      </div>
-
-      <button
-        type="button"
-        class="button button-primary button-large"
-        id="installAgainButton"
-      >
-        Попробовать установить ещё раз ↓
-      </button>
-
-    </div>
-  </div>
-
-
-  <div
-    class="demo-modal"
     id="auditModal"
     aria-hidden="true"
     role="dialog"
@@ -6705,25 +6697,66 @@
 
     <div class="demo-modal-backdrop" data-modal-close></div>
 
-    <div class="demo-modal-card demo-modal-compact">
+    <div class="demo-modal-card demo-modal-compact audit-modal-card">
 
       <button type="button" class="demo-modal-close" data-modal-close aria-label="Закрыть">×</button>
 
-      <span class="section-kicker">LIVE CHECK</span>
+      <span class="section-kicker">LIVE SEO SCANNER</span>
 
       <h2 id="auditModalTitle">
-        Быстрая проверка <span>сайта.</span>
+        Проверим <span>любой сайт.</span>
       </h2>
 
       <p class="demo-modal-lead">
-        Проверяем текущую страницу прямо в браузере: без отправки данных на сервер.
+        Введите адрес сайта. MRS попробует получить его страницу и проверить основные SEO и технические параметры прямо сейчас.
       </p>
+
+      <form id="liveAuditForm" class="live-audit-form" novalidate>
+        <label class="live-audit-label" for="liveAuditUrl">Адрес сайта</label>
+        <div class="live-audit-input-wrap">
+          <span class="live-audit-prefix">↗</span>
+          <input
+            id="liveAuditUrl"
+            type="url"
+            inputmode="url"
+            autocomplete="url"
+            spellcheck="false"
+            placeholder="https://example.ru"
+            value=""
+            aria-label="Адрес сайта для проверки"
+            required
+          >
+        </div>
+
+        <div class="demo-form-actions live-audit-actions">
+          <button type="submit" class="button button-primary button-large" id="liveAuditButton">
+            Проверить сайт ↗
+          </button>
+          <button type="button" class="button button-secondary" id="auditCurrentButton">
+            Проверить MRS
+          </button>
+        </div>
+      </form>
+
+      <div id="auditProgress" class="audit-progress" hidden aria-live="polite">
+        <div class="audit-progress-top">
+          <span id="auditProgressLabel">Подготавливаем проверку…</span>
+          <strong id="auditProgressPercent">0%</strong>
+        </div>
+        <div class="audit-progress-track">
+          <span id="auditProgressBar"></span>
+        </div>
+      </div>
 
       <div id="auditResults" class="audit-results" aria-live="polite"></div>
 
       <button type="button" class="button button-secondary" id="rerunAuditButton">
-        Запустить ещё раз ↻
+        Проверить ещё раз ↻
       </button>
+
+      <p class="audit-disclaimer">
+        Для внешних доменов используется технический CORS-прокси. Если сайт блокирует получение страницы извне, MRS честно покажет это вместо выдуманного результата.
+      </p>
 
     </div>
   </div>
@@ -7242,16 +7275,8 @@
         ".process-list, " +
         ".project-passport, " +
         ".faq-list, " +
-        ".final-card, " +
-        ".service-card, " +
-        ".price-card, " +
-        ".review-card"
+        ".final-card"
       );
-
-
-    revealElements.forEach(element => {
-      element.classList.add("motion-reveal");
-    });
 
 
     if (
@@ -7268,28 +7293,44 @@
                 return;
               }
 
-              entry.target.classList.add("is-visible");
 
-              observer.unobserve(entry.target);
+              entry.target.animate(
+                [
+                  {
+                    opacity: 0,
+                    transform:
+                      "translateY(25px)"
+                  },
+
+                  {
+                    opacity: 1,
+                    transform:
+                      "translateY(0)"
+                  }
+                ],
+                {
+                  duration: 650,
+                  easing: "cubic-bezier(.2,.7,.2,1)",
+                  fill: "forwards"
+                }
+              );
+
+
+              observer.unobserve(
+                entry.target
+              );
 
             });
 
           },
           {
-            threshold: .08,
-            rootMargin: "0px 0px -6% 0px"
+            threshold: .08
           }
         );
 
 
       revealElements.forEach(
         element => observer.observe(element)
-      );
-
-    } else {
-
-      revealElements.forEach(
-        element => element.classList.add("is-visible")
       );
 
     }
@@ -7302,9 +7343,7 @@
     const createSiteModal = document.getElementById("createSiteModal");
     const domainModal = document.getElementById("domainModal");
     const auditModal = document.getElementById("auditModal");
-    const installModal = document.getElementById("installModal");
     const installAppButton = document.getElementById("installAppButton");
-    const installAgainButton = document.getElementById("installAgainButton");
     const auditButton = document.getElementById("auditButton");
     const auditResults = document.getElementById("auditResults");
     let deferredInstallPrompt = null;
@@ -7397,272 +7436,416 @@
       deferredInstallPrompt = event;
     });
 
-
-    function isIOSDevice() {
-      return /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
-        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-    }
-
-
-    function setInstallInstructions() {
-      const lead = document.getElementById("installModalLead");
-      const steps = document.getElementById("installSteps");
-
-      if (!lead || !steps) return;
-
-      if (isIOSDevice()) {
-
-        lead.textContent =
-          "На iPhone системное окно установки из браузера не вызывается автоматически. Добавьте сайт на экран Домой — после этого он будет запускаться как отдельное приложение.";
-
-        steps.innerHTML = `
-          <div class="install-step">
-            <strong>01</strong>
-            <span>Нажмите «Поделиться» в меню браузера.</span>
-          </div>
-          <div class="install-step">
-            <strong>02</strong>
-            <span>Выберите «На экран Домой».</span>
-          </div>
-          <div class="install-step">
-            <strong>03</strong>
-            <span>Нажмите «Добавить».</span>
-          </div>
-        `;
-
-        return;
-      }
-
-      lead.textContent =
-        "Если браузер передал системный запрос, установка откроется автоматически. Иначе используйте меню браузера для установки приложения.";
-
-      steps.innerHTML = `
-        <div class="install-step">
-          <strong>01</strong>
-          <span>Откройте меню браузера.</span>
-        </div>
-        <div class="install-step">
-          <strong>02</strong>
-          <span>Выберите «Установить приложение» или «Добавить на главный экран».</span>
-        </div>
-        <div class="install-step">
-          <strong>03</strong>
-          <span>Сайт появится как отдельное приложение.</span>
-        </div>
-      `;
-    }
-
-
-    function showInstallModal() {
-      setInstallInstructions();
-      openModal(installModal);
-    }
-
-
     async function handleInstallApp() {
       if (deferredInstallPrompt) {
         deferredInstallPrompt.prompt();
-
         try {
           await deferredInstallPrompt.userChoice;
         } catch {}
-
         deferredInstallPrompt = null;
         return;
       }
 
-      if (
-        window.matchMedia("(display-mode: standalone)").matches ||
-        window.navigator.standalone === true
-      ) {
-        if (installAppButton) {
-          const label = installAppButton.querySelector("span");
-          if (label) label.textContent = "Приложение установлено";
-        }
-        showInstallModal();
-        return;
+      const title = "Установка приложения";
+      const text = window.matchMedia("(display-mode: standalone)").matches
+        ? "Приложение уже запущено как установленное веб-приложение."
+        : "Это демонстрационная кнопка установки. На поддерживаемом браузером PWA-сайте она открывает системное окно установки. Сейчас браузер не передал сайту запрос установки — это нормально для обычного GitHub Pages-превью без подключённого service worker.";
+
+      const modal = auditModal;
+      if (modal && auditResults) {
+        auditResults.innerHTML = "<div class=\"audit-row\"><span>" + title + "</span><span class=\"audit-status\">" + text.replace(/</g, "&lt;") + "</span></div>";
+        openModal(modal);
       }
-
-      showInstallModal();
     }
-
 
     if (installAppButton) {
       installAppButton.addEventListener("click", handleInstallApp);
     }
 
-
-    if (installAgainButton) {
-      installAgainButton.addEventListener("click", handleInstallApp);
-    }
-
-
-    window.addEventListener("appinstalled", () => {
-      deferredInstallPrompt = null;
-
-      if (installAppButton) {
-        const label = installAppButton.querySelector("span");
-        if (label) label.textContent = "Приложение установлено";
-      }
-
-      closeModal(installModal);
-    });
-
-
-    /* Service worker is optional until the PWA support files are published. */
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", async () => {
-        try {
-          const manifestResponse = await fetch("./manifest.json", {
-            method: "HEAD",
-            cache: "no-store"
-          });
-
-          if (!manifestResponse.ok) return;
-
-          await navigator.serviceWorker.register("./sw.js", {
-            scope: "./"
-          });
-        } catch {}
-      });
-    }
-
-
     /* =====================================================
-       LIVE SEO / TECH AUDIT
+       LIVE SEO / TECH AUDIT — REAL URL CHECK
     ====================================================== */
 
-    function runAudit() {
+    const liveAuditForm = document.getElementById("liveAuditForm");
+    const liveAuditUrl = document.getElementById("liveAuditUrl");
+    const liveAuditButton = document.getElementById("liveAuditButton");
+    const auditCurrentButton = document.getElementById("auditCurrentButton");
+    const auditProgress = document.getElementById("auditProgress");
+    const auditProgressLabel = document.getElementById("auditProgressLabel");
+    const auditProgressPercent = document.getElementById("auditProgressPercent");
+    const auditProgressBar = document.getElementById("auditProgressBar");
+
+    const AUDIT_PROXY = "https://api.allorigins.win/raw?url=";
+
+    function escapeAuditHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function normalizeAuditUrl(value) {
+      let raw = String(value || "").trim();
+
+      if (!raw) return null;
+      if (!/^https?:\/\//i.test(raw)) raw = "https://" + raw;
+
+      try {
+        const url = new URL(raw);
+        if (!["http:", "https:"].includes(url.protocol)) return null;
+        url.hash = "";
+        return url;
+      } catch {
+        return null;
+      }
+    }
+
+    function setAuditProgress(percent, label) {
+      const value = Math.max(0, Math.min(100, Number(percent) || 0));
+      if (auditProgress) auditProgress.hidden = false;
+      if (auditProgressLabel) auditProgressLabel.textContent = label;
+      if (auditProgressPercent) auditProgressPercent.textContent = value + "%";
+      if (auditProgressBar) auditProgressBar.style.width = value + "%";
+    }
+
+    function finishAuditProgress() {
+      setAuditProgress(100, "Проверка завершена");
+      setTimeout(() => {
+        if (auditProgress) auditProgress.hidden = true;
+      }, 700);
+    }
+
+    function addAuditResult(list, category, label, state, detail) {
+      list.push({ category, label, state, detail });
+    }
+
+    function hasMeta(doc, name) {
+      return !!doc.querySelector('meta[name="' + name + '"]');
+    }
+
+    function getMeta(doc, name) {
+      const element = doc.querySelector('meta[name="' + name + '"]');
+      return element ? (element.getAttribute("content") || "").trim() : "";
+    }
+
+    function getProperty(doc, property) {
+      const element = doc.querySelector('meta[property="' + property + '"]');
+      return element ? (element.getAttribute("content") || "").trim() : "";
+    }
+
+    async function fetchAuditResource(url, timeout = 12000) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeout);
+
+      try {
+        const sameOrigin = url.origin === location.origin;
+        const target = sameOrigin
+          ? url.href
+          : AUDIT_PROXY + encodeURIComponent(url.href);
+
+        const response = await fetch(target, {
+          method: "GET",
+          cache: "no-store",
+          signal: controller.signal
+        });
+
+        if (!response.ok) {
+          throw new Error("HTTP " + response.status);
+        }
+
+        return await response.text();
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+
+    async function checkOptionalResource(baseUrl, path) {
+      const url = new URL(path, baseUrl);
+
+      try {
+        const text = await fetchAuditResource(url, 9000);
+        return { ok: true, text, url };
+      } catch (error) {
+        return { ok: false, error, url };
+      }
+    }
+
+    function buildAuditReport(targetUrl, html, extra) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, "text/html");
+      const results = [];
+
+      const title = (doc.title || "").trim();
+      const description = getMeta(doc, "description");
+      const canonical = doc.querySelector('link[rel="canonical"]');
+      const viewport = hasMeta(doc, "viewport");
+      const lang = (doc.documentElement.getAttribute("lang") || "").trim();
+      const h1s = [...doc.querySelectorAll("h1")];
+      const h2s = [...doc.querySelectorAll("h2")];
+      const images = [...doc.querySelectorAll("img")];
+      const imagesWithoutAlt = images.filter(img => !img.hasAttribute("alt") || !img.getAttribute("alt").trim());
+      const links = [...doc.querySelectorAll("a[href]")];
+      const ogTitle = getProperty(doc, "og:title");
+      const ogDescription = getProperty(doc, "og:description");
+      const ogImage = getProperty(doc, "og:image");
+      const manifest = doc.querySelector('link[rel="manifest"]');
+      const robotsMeta = hasMeta(doc, "robots");
+
+      addAuditResult(results, "SEO", "HTTPS", targetUrl.protocol === "https:" ? "good" : "warn",
+        targetUrl.protocol === "https:" ? "Соединение защищено HTTPS." : "Сайт открывается без HTTPS.");
+
+      addAuditResult(results, "SEO", "Title", title.length >= 10 && title.length <= 70 ? "good" : title ? "warn" : "bad",
+        title ? `«${title}» · ${title.length} символов.` : "Title не найден.");
+
+      addAuditResult(results, "SEO", "Meta description", description.length >= 70 && description.length <= 170 ? "good" : description ? "warn" : "bad",
+        description ? `${description.length} символов.` : "Meta description не найден.");
+
+      addAuditResult(results, "SEO", "Canonical", canonical ? "good" : "warn",
+        canonical ? (canonical.getAttribute("href") || "Canonical найден.") : "Canonical не найден.");
+
+      addAuditResult(results, "TECH", "Viewport", viewport ? "good" : "bad",
+        viewport ? "Мобильный viewport присутствует." : "Meta viewport не найден.");
+
+      addAuditResult(results, "SEO", "Язык страницы", lang ? "good" : "warn",
+        lang ? `lang="${lang}".` : "Атрибут lang не найден.");
+
+      addAuditResult(results, "SEO", "H1", h1s.length === 1 ? "good" : h1s.length === 0 ? "bad" : "warn",
+        h1s.length === 1 ? "Найден один H1." : `Найдено H1: ${h1s.length}.`);
+
+      addAuditResult(results, "SEO", "H2", h2s.length > 0 ? "good" : "warn",
+        h2s.length ? `Найдено H2: ${h2s.length}.` : "Заголовки H2 не найдены.");
+
+      addAuditResult(results, "SEO", "Изображения ALT", images.length === 0 ? "info" : imagesWithoutAlt.length === 0 ? "good" : "warn",
+        images.length === 0 ? "Изображений не найдено." : imagesWithoutAlt.length === 0 ? `ALT заполнен у ${images.length} изображений.` : `Без ALT: ${imagesWithoutAlt.length} из ${images.length}.`);
+
+      addAuditResult(results, "SOCIAL", "Open Graph", ogTitle && ogDescription && ogImage ? "good" : ogTitle || ogDescription || ogImage ? "warn" : "bad",
+        ogTitle && ogDescription && ogImage ? "og:title, og:description и og:image найдены." : "Open Graph заполнен не полностью.");
+
+      addAuditResult(results, "PWA", "Web App Manifest", manifest ? "good" : "warn",
+        manifest ? (manifest.getAttribute("href") || "Manifest найден.") : "Manifest не подключён.");
+
+      addAuditResult(results, "TECH", "Robots meta", robotsMeta ? "good" : "info",
+        robotsMeta ? getMeta(doc, "robots") : "Отдельный robots meta не используется.");
+
+      addAuditResult(results, "TECH", "Внутренние ссылки", "info",
+        `${links.length} ссылок найдено на странице.`);
+
+      addAuditResult(results, "TECH", "robots.txt", extra.robots.ok ? "good" : "warn",
+        extra.robots.ok ? "robots.txt доступен." : "robots.txt не удалось получить.");
+
+      addAuditResult(results, "TECH", "sitemap.xml", extra.sitemap.ok ? "good" : "warn",
+        extra.sitemap.ok ? "sitemap.xml доступен." : "sitemap.xml не удалось получить.");
+
+      return { doc, results, title, description };
+    }
+
+    function renderAuditReport(targetUrl, report) {
       if (!auditResults) return;
-      const checks = [
-        ["HTTPS", location.protocol === "https:"],
-        ["Title", !!document.title && document.title.length >= 10],
-        ["Meta description", !!document.querySelector('meta[name="description"]')],
-        ["Canonical", !!document.querySelector('link[rel="canonical"]')],
-        ["Viewport", !!document.querySelector('meta[name="viewport"]')],
-        ["Язык страницы", document.documentElement.lang === "ru"],
-        ["H1", document.querySelectorAll("h1").length === 1]
-      ];
-      auditResults.innerHTML = checks.map(([label, ok]) => `
-        <div class="audit-row">
-          <span>${label}</span>
-          <span class="audit-status">${ok ? "OK" : "Проверить"}</span>
+
+      const good = report.results.filter(item => item.state === "good").length;
+      const warn = report.results.filter(item => item.state === "warn").length;
+      const bad = report.results.filter(item => item.state === "bad").length;
+      const scoreBase = report.results.filter(item => item.state !== "info").length;
+      const score = scoreBase ? Math.round((good / scoreBase) * 100) : 0;
+
+      const grouped = {};
+      report.results.forEach(item => {
+        if (!grouped[item.category]) grouped[item.category] = [];
+        grouped[item.category].push(item);
+      });
+
+      const categoryNames = {
+        SEO: "SEO",
+        TECH: "Техническая часть",
+        SOCIAL: "Социальные мета-данные",
+        PWA: "PWA"
+      };
+
+      const statusText = {
+        good: "OK",
+        warn: "Внимание",
+        bad: "Проблема",
+        info: "Инфо"
+      };
+
+      let html = `
+        <div class="audit-url-line">Проверяем: <strong>${escapeAuditHtml(targetUrl.href)}</strong></div>
+        <div class="audit-summary">
+          <div class="audit-score-card good"><strong>${score}</strong><span>балл</span></div>
+          <div class="audit-score-card warn"><strong>${warn}</strong><span>внимание</span></div>
+          <div class="audit-score-card bad"><strong>${bad}</strong><span>проблемы</span></div>
         </div>
-      `).join("");
+      `;
+
+      Object.keys(grouped).forEach(category => {
+        html += `<div class="audit-section-title">${escapeAuditHtml(categoryNames[category] || category)}</div>`;
+
+        grouped[category].forEach(item => {
+          html += `
+            <div class="audit-row audit-${item.state}">
+              <span>${escapeAuditHtml(item.label)}</span>
+              <span class="audit-status">${escapeAuditHtml(statusText[item.state])}</span>
+            </div>
+            <div class="audit-detail"><strong>${escapeAuditHtml(item.label)}:</strong> ${escapeAuditHtml(item.detail)}</div>
+          `;
+        });
+      });
+
+      auditResults.innerHTML = html;
     }
 
-    function openAudit() {
-      runAudit();
+    function renderAuditError(targetUrl, error) {
+      if (!auditResults) return;
+
+      auditResults.innerHTML = `
+        <div class="audit-score-card bad" style="margin-bottom:12px;">
+          <strong>—</strong>
+          <span>проверка не завершена</span>
+        </div>
+        <div class="audit-detail" style="border-left-color:#ff7d8a;">
+          <strong>Не удалось получить страницу.</strong><br>
+          ${escapeAuditHtml(error && error.message ? error.message : "Внешний сайт не разрешил получение страницы.")}
+          <br><br>
+          Это не означает, что сайт плохой. Сервер может блокировать внешние запросы или CORS-прокси.
+        </div>
+      `;
+    }
+
+    async function runLiveAudit(inputValue) {
+      const targetUrl = normalizeAuditUrl(inputValue);
+
+      if (!targetUrl) {
+        if (liveAuditUrl) {
+          liveAuditUrl.setCustomValidity("Введите корректный адрес сайта.");
+          liveAuditUrl.reportValidity();
+          liveAuditUrl.setCustomValidity("");
+          liveAuditUrl.focus();
+        }
+        return;
+      }
+
+      if (liveAuditButton) {
+        liveAuditButton.disabled = true;
+        liveAuditButton.textContent = "Проверяем…";
+      }
+
+      if (auditResults) {
+        auditResults.innerHTML = "";
+      }
+
+      const steps = [
+        [12, "Подключаемся к сайту…"],
+        [30, "Читаем HTML…"],
+        [50, "Проверяем SEO…"],
+        [68, "Проверяем технические параметры…"],
+        [84, "Проверяем robots.txt и sitemap.xml…"],
+        [94, "Собираем рекомендации…"]
+      ];
+
+      let stepTimer = null;
+      let index = 0;
+
+      const advance = () => {
+        if (index >= steps.length) return;
+        setAuditProgress(steps[index][0], steps[index][1]);
+        index += 1;
+        stepTimer = setTimeout(advance, 650);
+      };
+
+      advance();
+
+      try {
+        const html = await fetchAuditResource(targetUrl, 15000);
+
+        const [robots, sitemap] = await Promise.all([
+          checkOptionalResource(targetUrl, "/robots.txt"),
+          checkOptionalResource(targetUrl, "/sitemap.xml")
+        ]);
+
+        const report = buildAuditReport(targetUrl, html, { robots, sitemap });
+
+        clearTimeout(stepTimer);
+        renderAuditReport(targetUrl, report);
+        finishAuditProgress();
+      } catch (error) {
+        clearTimeout(stepTimer);
+        setAuditProgress(100, "Не удалось завершить проверку");
+        renderAuditError(targetUrl, error);
+        setTimeout(() => {
+          if (auditProgress) auditProgress.hidden = true;
+        }, 900);
+      } finally {
+        if (liveAuditButton) {
+          liveAuditButton.disabled = false;
+          liveAuditButton.textContent = "Проверить сайт ↗";
+        }
+      }
+    }
+
+    function openAudit(value) {
       openModal(auditModal);
+      if (value && liveAuditUrl) liveAuditUrl.value = value;
     }
 
-    if (auditButton) auditButton.addEventListener("click", openAudit);
+    if (auditButton) {
+      auditButton.addEventListener("click", () => openAudit(""));
+    }
+
     document.querySelectorAll(".demo-audit-trigger").forEach(button => {
       button.addEventListener("click", event => {
         event.stopPropagation();
-        openAudit();
+        openAudit("");
       });
     });
 
-    const rerunAuditButton = document.getElementById("rerunAuditButton");
-    if (rerunAuditButton) rerunAuditButton.addEventListener("click", runAudit);
+    if (liveAuditForm) {
+      liveAuditForm.addEventListener("submit", event => {
+        event.preventDefault();
+        runLiveAudit(liveAuditUrl ? liveAuditUrl.value : "");
+      });
+    }
 
+    if (auditCurrentButton) {
+      auditCurrentButton.addEventListener("click", () => {
+        const current = new URL("./", location.href).href;
+        if (liveAuditUrl) liveAuditUrl.value = current;
+        runLiveAudit(current);
+      });
+    }
+
+    const rerunAuditButton = document.getElementById("rerunAuditButton");
+    if (rerunAuditButton) {
+      rerunAuditButton.addEventListener("click", () => {
+        runLiveAudit(liveAuditUrl ? liveAuditUrl.value : location.href);
+      });
+    }
 
     /* =====================================================
-       CREATE SITE FORM — EMAIL
+       CREATE SITE FORM
     ====================================================== */
 
     const createSiteForm = document.getElementById("createSiteForm");
 
-    async function sendCreateSiteForm(event) {
-      event.preventDefault();
-
-      if (!createSiteForm) return;
-
-      const submitButton = createSiteForm.querySelector('button[type="submit"]');
-      const note = createSiteForm.querySelector(".demo-form-note");
-      const data = Object.fromEntries(new FormData(createSiteForm).entries());
-      const originalText = submitButton ? submitButton.textContent : "";
-
-      if (submitButton) {
-        submitButton.disabled = true;
-        submitButton.textContent = "Отправляем заявку…";
-      }
-
-      const payload = {
-        _subject: "Новая заявка на создание сайта — MRS",
-        _template: "table",
-        _captcha: "false",
-        name: data.name || "",
-        phone: data.phone || "",
-        email: data.email || "",
-        business: data.business || "",
-        package: data.package || "",
-        message: data.message || ""
-      };
-
-      try {
-        const response = await fetch("https://formsubmit.co/ajax/79996362202@ya.ru", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: JSON.stringify(payload)
-        });
-
-        const result = await response.json().catch(() => ({}));
-
-        if (!response.ok || result.success === false) {
-          throw new Error("FormSubmit rejected the request");
-        }
-
-        createSiteForm.innerHTML = `
-          <div class="demo-success">
-            <div class="demo-success-icon">✓</div>
-            <h3>Заявка отправлена.</h3>
-            <p>Спасибо. Заявка поступила на почту MRS. Я свяжусь с вами после просмотра задачи.</p>
-            <button type="button" class="button button-secondary" data-modal-close>Закрыть</button>
-          </div>
-        `;
-
-        createSiteForm.querySelector("[data-modal-close]")?.addEventListener("click", () => closeModal(createSiteModal));
-
-      } catch {
+    if (createSiteForm) {
+      createSiteForm.addEventListener("submit", event => {
+        event.preventDefault();
+        const data = new FormData(createSiteForm);
         const subject = "Заявка на создание сайта — MRS";
         const body = [
           "Новая заявка с сайта MRS",
           "",
-          "Имя: " + (data.name || ""),
-          "Телефон: " + (data.phone || ""),
-          "Email: " + (data.email || ""),
-          "Ниша: " + (data.business || ""),
-          "Формат: " + (data.package || ""),
-          "Комментарий: " + (data.message || "")
-        ].join("\n");
-
-        window.location.href =
-          "mailto:79996362202@ya.ru?subject=" +
-          encodeURIComponent(subject) +
-          "&body=" +
-          encodeURIComponent(body);
-
-        if (note) {
-          note.textContent = "Если почтовое приложение не открылось, напишите напрямую на 79996362202@ya.ru.";
-        }
-
-        if (submitButton) {
-          submitButton.disabled = false;
-          submitButton.textContent = originalText || "Подготовить заявку ↗";
-        }
-      }
+          "Имя: " + (data.get("name") || ""),
+          "Телефон: " + (data.get("phone") || ""),
+          "Ниша: " + (data.get("business") || ""),
+          "Формат: " + (data.get("package") || ""),
+          "Комментарий: " + (data.get("message") || "")
+        ].join("\\n");
+        window.location.href = "mailto:79996362202@ya.ru?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+        closeModal(createSiteModal);
+      });
     }
-
-
-    if (createSiteForm) {
-      createSiteForm.addEventListener("submit", sendCreateSiteForm);
-    }
-
 
     /* =====================================================
        YEAR
