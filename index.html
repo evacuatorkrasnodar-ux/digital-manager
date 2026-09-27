@@ -33,10 +33,6 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="MRS DIGITAL">
-<meta name="mobile-web-app-capable" content="yes">
-<link rel="manifest" href="./manifest.json">
-<link rel="icon" type="image/png" sizes="192x192" href="./mrs-icon-192.png">
-<link rel="apple-touch-icon" href="./mrs-icon-192.png">
 
   <link
     rel="canonical"
@@ -76,6 +72,11 @@
   >
 
   <title>MRS — Создание сайтов от 1000 ₽</title>
+
+  <!-- PWA / favicon -->
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="./mrs-icon-192.png">
+  <link rel="apple-touch-icon" href="./mrs-icon-192.png">
 
   <!-- Fonts -->
 
@@ -6426,7 +6427,7 @@
       </h2>
 
       <p class="demo-modal-lead">
-        Введите желаемое имя. Кнопка проверки откроет официальный Whois REG.RU
+        Введите полный домен или его имя. Проверка откроет официальный Whois REG.RU
         с готовым адресом для проверки занятости домена.
       </p>
 
@@ -6455,50 +6456,6 @@
 
   <div
     class="demo-modal"
-    id="installModal"
-    aria-hidden="true"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="installModalTitle"
-  >
-
-    <div class="demo-modal-backdrop" data-modal-close></div>
-
-    <div class="demo-modal-card demo-modal-compact">
-
-      <button
-        type="button"
-        class="demo-modal-close"
-        data-modal-close
-        aria-label="Закрыть"
-      >×</button>
-
-      <span class="section-kicker">PWA · INSTALL</span>
-
-      <h2 id="installModalTitle">
-        Установить <span>MRS.</span>
-      </h2>
-
-      <p class="demo-modal-lead" id="installModalText">
-        Установка приложения.
-      </p>
-
-      <div class="audit-results" id="installSteps" aria-live="polite"></div>
-
-      <button
-        type="button"
-        class="button button-secondary"
-        id="installAgainButton"
-      >
-        Попробовать установить ↻
-      </button>
-
-    </div>
-  </div>
-
-
-  <div
-    class="demo-modal"
     id="auditModal"
     aria-hidden="true"
     role="dialog"
@@ -6512,43 +6469,20 @@
 
       <button type="button" class="demo-modal-close" data-modal-close aria-label="Закрыть">×</button>
 
-      <span class="section-kicker">LIVE AUDIT · GOOGLE LIGHTHOUSE</span>
+      <span class="section-kicker">LIVE CHECK</span>
 
       <h2 id="auditModalTitle">
-        Проверим <span>любой сайт.</span>
+        Быстрая проверка <span>сайта.</span>
       </h2>
 
       <p class="demo-modal-lead">
-        Введите адрес сайта. Проверка запускается в реальном времени через Google PageSpeed Insights и показывает SEO, скорость, доступность, лучшие практики и PWA.
+        Проверяем текущую страницу прямо в браузере: без отправки данных на сервер.
       </p>
 
-      <form id="auditForm" class="domain-check-form">
-        <label>
-          Сайт
-          <div class="domain-input-wrap">
-            <input
-              id="auditUrlInput"
-              type="url"
-              inputmode="url"
-              autocomplete="url"
-              placeholder="https://example.ru"
-              required
-            >
-          </div>
-        </label>
-
-        <div class="demo-form-actions">
-          <button type="submit" class="button button-primary button-large" id="startAuditButton">
-            Проверить сайт ↗
-          </button>
-        </div>
-      </form>
-
-      <div id="auditProgress" class="audit-results" aria-live="polite"></div>
       <div id="auditResults" class="audit-results" aria-live="polite"></div>
 
       <button type="button" class="button button-secondary" id="rerunAuditButton">
-        Проверить ещё раз ↻
+        Запустить ещё раз ↻
       </button>
 
     </div>
@@ -7136,11 +7070,7 @@
     const createSiteModal = document.getElementById("createSiteModal");
     const domainModal = document.getElementById("domainModal");
     const auditModal = document.getElementById("auditModal");
-    const installModal = document.getElementById("installModal");
     const installAppButton = document.getElementById("installAppButton");
-    const installAgainButton = document.getElementById("installAgainButton");
-    const installModalText = document.getElementById("installModalText");
-    const installSteps = document.getElementById("installSteps");
     const auditButton = document.getElementById("auditButton");
     const auditResults = document.getElementById("auditResults");
     let deferredInstallPrompt = null;
@@ -7210,17 +7140,50 @@
     if (domainForm && domainInput) {
       domainForm.addEventListener("submit", event => {
         event.preventDefault();
+
         let value = domainInput.value.trim().toLowerCase();
-        value = value.replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0];
-        value = value.replace(/[^a-z0-9а-яё.-]/gi, "");
-        value = value.replace(/\.ru$/i, "");
+
+        value = value
+          .replace(/^https?:\/\//, "")
+          .replace(/^www\./, "")
+          .split("/")[0]
+          .trim();
+
+        value = value.replace(/\s+/g, "");
+
         if (!value) {
           domainInput.focus();
           return;
         }
-        const domain = value + ".ru";
-        const url = "https://www.reg.ru/whois/" + encodeURIComponent(domain);
-        window.open(url, "_blank", "noopener,noreferrer");
+
+        /*
+         * Если пользователь ввёл только имя без зоны,
+         * по умолчанию проверяем .ru.
+         */
+        if (!value.includes(".")) {
+          value += ".ru";
+        }
+
+        /* Поддерживаем обычные доменные имена и IDN-зоны. */
+        const validDomain =
+          /^(?=.{1,253}$)(?:[a-z0-9а-яё](?:[a-z0-9а-яё-]{0,61}[a-z0-9а-яё])?\.)+[a-zа-яё]{2,63}$/i.test(value);
+
+        if (!validDomain) {
+          domainInput.focus();
+          domainInput.select();
+          alert("Введите корректный домен, например example.ru или example.com");
+          return;
+        }
+
+        const url =
+          "https://www.reg.ru/whois/" +
+          encodeURIComponent(value);
+
+        window.open(
+          url,
+          "_blank",
+          "noopener,noreferrer"
+        );
       });
     }
 
@@ -7228,586 +7191,132 @@
        PWA INSTALL
     ====================================================== */
 
-    window.addEventListener("beforeinstallprompt", event => {
-      event.preventDefault();
-      deferredInstallPrompt = event;
-    });
-
-    window.addEventListener("appinstalled", () => {
-      deferredInstallPrompt = null;
-
-      if (installModalText) {
-        installModalText.textContent =
-          "Приложение MRS успешно установлено.";
-      }
-
-      if (installSteps) {
-        installSteps.innerHTML = `
-          <div class="audit-row">
-            <span>Статус</span>
-            <span class="audit-status">Установлено ✓</span>
-          </div>
-        `;
-      }
-    });
-
-    function isStandalone() {
+    function isStandaloneApp() {
       return (
         window.matchMedia("(display-mode: standalone)").matches ||
         window.navigator.standalone === true
       );
     }
 
-    function renderInstallInstructions() {
-      if (!installModalText || !installSteps) return;
+    function showInstallInfo(message) {
+      if (!auditResults || !auditModal) return;
 
-      const ua = navigator.userAgent || "";
-      const isIOS = /iPhone|iPad|iPod/i.test(ua);
+      auditResults.innerHTML =
+        "<div class=\"audit-row\"><span>Установка</span><span class=\"audit-status\">" +
+        String(message).replace(/</g, "&lt;") +
+        "</span></div>";
 
-      if (isStandalone()) {
-        installModalText.textContent =
-          "MRS уже установлено как приложение.";
-
-        installSteps.innerHTML = `
-          <div class="audit-row">
-            <span>Статус</span>
-            <span class="audit-status">Установлено ✓</span>
-          </div>
-        `;
-        return;
-      }
-
-      if (isIOS) {
-        installModalText.textContent =
-          "На iPhone и iPad установка выполняется через меню браузера.";
-
-        installSteps.innerHTML = `
-          <div class="audit-row">
-            <span>1</span>
-            <span class="audit-status">Нажмите «Поделиться»</span>
-          </div>
-          <div class="audit-row">
-            <span>2</span>
-            <span class="audit-status">Выберите «На экран Домой»</span>
-          </div>
-          <div class="audit-row">
-            <span>3</span>
-            <span class="audit-status">Нажмите «Добавить»</span>
-          </div>
-        `;
-        return;
-      }
-
-      if (deferredInstallPrompt) {
-        installModalText.textContent =
-          "Браузер готов установить MRS.";
-
-        installSteps.innerHTML = `
-          <div class="audit-row">
-            <span>Готово</span>
-            <span class="audit-status">Системная установка доступна</span>
-          </div>
-        `;
-        return;
-      }
-
-      installModalText.textContent =
-        "Браузер пока не передал системное окно установки.";
-
-      installSteps.innerHTML = `
-        <div class="audit-row">
-          <span>1</span>
-          <span class="audit-status">Откройте меню браузера</span>
-        </div>
-        <div class="audit-row">
-          <span>2</span>
-          <span class="audit-status">Выберите «Установить приложение» или «Добавить на главный экран»</span>
-        </div>
-      `;
+      openModal(auditModal);
     }
 
+    window.addEventListener("beforeinstallprompt", event => {
+      /* Сохраняем системный prompt до нажатия кнопки. */
+      event.preventDefault();
+      deferredInstallPrompt = event;
+    });
+
+    window.addEventListener("appinstalled", () => {
+      deferredInstallPrompt = null;
+      if (installAppButton) {
+        installAppButton.querySelector("span").textContent = "Приложение установлено";
+      }
+    });
+
     async function handleInstallApp() {
-      if (isStandalone()) {
-        renderInstallInstructions();
-        openModal(installModal);
+      if (isStandaloneApp()) {
+        showInstallInfo("Приложение уже установлено и запущено как PWA.");
         return;
       }
 
       if (deferredInstallPrompt) {
         try {
           deferredInstallPrompt.prompt();
-          await deferredInstallPrompt.userChoice;
+          const choice = await deferredInstallPrompt.userChoice;
+
+          if (choice && choice.outcome === "accepted") {
+            showInstallInfo("Установка приложения запущена.");
+          }
         } catch (error) {
-          console.warn("PWA install prompt error:", error);
+          console.error("PWA install error:", error);
+          showInstallInfo("Не удалось открыть окно установки. Попробуйте меню браузера → Установить приложение.");
         } finally {
           deferredInstallPrompt = null;
         }
+
         return;
       }
 
-      renderInstallInstructions();
-      openModal(installModal);
+      const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+      const isSafari = /Safari/i.test(navigator.userAgent) && !/CriOS|FxiOS|EdgiOS|OPiOS|Chrome|Android/i.test(navigator.userAgent);
+
+      if (isIOS && isSafari) {
+        showInstallInfo("На iPhone/iPad: нажмите «Поделиться» → «На экран Домой».");
+      } else {
+        showInstallInfo("Браузер пока не передал системное окно установки. Откройте меню браузера и выберите «Установить приложение» или «Добавить на главный экран».");
+      }
     }
 
     if (installAppButton) {
       installAppButton.addEventListener("click", handleInstallApp);
     }
 
-    if (installAgainButton) {
-      installAgainButton.addEventListener("click", handleInstallApp);
-    }
-
     /*
-     * Реальная регистрация Service Worker.
-     * Она нужна вместе с manifest.json для нормальной PWA-установки.
+     * Регистрируем Service Worker именно для GitHub Pages-подкаталога.
+     * Используем относительный путь, поэтому сайт работает и после
+     * переноса на собственный домен.
      */
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./sw.js", {
-          scope: "./",
-          updateViaCache: "none"
-        }).then(registration => {
-          console.log("MRS Service Worker:", registration.scope);
-          registration.update();
-        }).catch(error => {
-          console.warn("MRS Service Worker error:", error);
-        });
+        navigator.serviceWorker
+          .register("./sw.js", { updateViaCache: "none" })
+          .then(registration => {
+            console.log("MRS Service Worker зарегистрирован:", registration.scope);
+            registration.update();
+          })
+          .catch(error => {
+            console.error("MRS Service Worker ошибка:", error);
+          });
       }, { once: true });
     }
 
-
     /* =====================================================
-       LIVE DOMAIN AUDIT
-       GOOGLE PAGESPEED / LIGHTHOUSE
+       LIVE SEO / TECH AUDIT
     ====================================================== */
 
-    const auditForm =
-      document.getElementById("auditForm");
-
-    const auditUrlInput =
-      document.getElementById("auditUrlInput");
-
-    const auditProgress =
-      document.getElementById("auditProgress");
-
-    const startAuditButton =
-      document.getElementById("startAuditButton");
-
-
-    function normalizeAuditUrl(value) {
-      let url = String(value || "").trim();
-
-      if (!url) return null;
-
-      if (!/^https?:\/\//i.test(url)) {
-        url = "https://" + url;
-      }
-
-      try {
-        const parsed = new URL(url);
-
-        if (
-          parsed.protocol !== "http:" &&
-          parsed.protocol !== "https:"
-        ) {
-          return null;
-        }
-
-        parsed.hash = "";
-
-        return parsed.href;
-
-      } catch {
-        return null;
-      }
-    }
-
-
-    function escapeHtml(value) {
-      return String(value || "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-
-
-    function scoreValue(category) {
-      if (
-        !category ||
-        typeof category.score !== "number"
-      ) {
-        return null;
-      }
-
-      return Math.round(
-        category.score * 100
-      );
-    }
-
-
-    function scoreLabel(score) {
-      if (score === null) return "Нет данных";
-      if (score >= 90) return "Отлично";
-      if (score >= 50) return "Есть что улучшить";
-      return "Нужно внимание";
-    }
-
-
-    function auditRow(label, score) {
-      const value =
-        score === null
-          ? "Нет данных"
-          : score +
-            "/100 · " +
-            scoreLabel(score);
-
-      return `
-        <div class="audit-row">
-          <span>${escapeHtml(label)}</span>
-          <span class="audit-status">${escapeHtml(value)}</span>
-        </div>
-      `;
-    }
-
-
-    function showAuditProgress(text) {
-      if (!auditProgress) return;
-
-      auditProgress.innerHTML = `
-        <div class="audit-row">
-          <span>Статус</span>
-          <span class="audit-status">${escapeHtml(text)}</span>
-        </div>
-      `;
-    }
-
-
-    async function requestPageSpeedAudit(
-      url,
-      strategy
-    ) {
-      const endpoint =
-        "https://www.googleapis.com/pagespeedonline/v5/runPagespeed" +
-        "?url=" +
-        encodeURIComponent(url) +
-        "&strategy=" +
-        encodeURIComponent(strategy) +
-        "&category=performance" +
-        "&category=accessibility" +
-        "&category=best-practices" +
-        "&category=seo" +
-        "&category=pwa" +
-        "&locale=ru";
-
-      const response =
-        await fetch(endpoint, {
-          method: "GET",
-          credentials: "omit"
-        });
-
-      if (!response.ok) {
-        throw new Error(
-          "PageSpeed HTTP " +
-          response.status
-        );
-      }
-
-      return response.json();
-    }
-
-
-    function renderAuditResult(
-      data,
-      url,
-      strategy
-    ) {
+    function runAudit() {
       if (!auditResults) return;
-
-      const lighthouse =
-        data &&
-        data.lighthouseResult;
-
-      const categories =
-        lighthouse &&
-        lighthouse.categories;
-
-      if (!categories) {
-        throw new Error(
-          "Google не вернул результаты Lighthouse."
-        );
-      }
-
-      const performance =
-        scoreValue(
-          categories.performance
-        );
-
-      const accessibility =
-        scoreValue(
-          categories.accessibility
-        );
-
-      const bestPractices =
-        scoreValue(
-          categories["best-practices"]
-        );
-
-      const seo =
-        scoreValue(
-          categories.seo
-        );
-
-      const pwa =
-        scoreValue(
-          categories.pwa
-        );
-
-      const analyzedUrl =
-        lighthouse.finalDisplayedUrl ||
-        lighthouse.finalUrl ||
-        url;
-
-      auditResults.innerHTML = `
+      const checks = [
+        ["HTTPS", location.protocol === "https:"],
+        ["Title", !!document.title && document.title.length >= 10],
+        ["Meta description", !!document.querySelector('meta[name="description"]')],
+        ["Canonical", !!document.querySelector('link[rel="canonical"]')],
+        ["Viewport", !!document.querySelector('meta[name="viewport"]')],
+        ["Язык страницы", document.documentElement.lang === "ru"],
+        ["H1", document.querySelectorAll("h1").length === 1]
+      ];
+      auditResults.innerHTML = checks.map(([label, ok]) => `
         <div class="audit-row">
-          <span>Сайт</span>
-          <span class="audit-status">${escapeHtml(analyzedUrl)}</span>
+          <span>${label}</span>
+          <span class="audit-status">${ok ? "OK" : "Проверить"}</span>
         </div>
-
-        ${auditRow("SEO", seo)}
-        ${auditRow("Скорость", performance)}
-        ${auditRow("Доступность", accessibility)}
-        ${auditRow("Лучшие практики", bestPractices)}
-        ${auditRow("PWA", pwa)}
-
-        <div class="audit-row">
-          <span>Устройство</span>
-          <span class="audit-status">
-            ${strategy === "mobile" ? "Мобильное" : "ПК"}
-          </span>
-        </div>
-
-        <div class="audit-row">
-          <span>Проверено</span>
-          <span class="audit-status">
-            ${new Date().toLocaleString("ru-RU")}
-          </span>
-        </div>
-      `;
+      `).join("");
     }
-
-
-    async function runAudit(
-      urlOverride
-    ) {
-      if (!auditResults) return;
-
-      const raw =
-        urlOverride ||
-        (
-          auditUrlInput
-            ? auditUrlInput.value
-            : ""
-        );
-
-      const url =
-        normalizeAuditUrl(raw);
-
-      if (!url) {
-
-        if (auditUrlInput) {
-          auditUrlInput.focus();
-        }
-
-        showAuditProgress(
-          "Введите корректный адрес, например https://example.ru"
-        );
-
-        return;
-      }
-
-
-      if (startAuditButton) {
-        startAuditButton.disabled = true;
-
-        startAuditButton.setAttribute(
-          "aria-busy",
-          "true"
-        );
-      }
-
-
-      if (auditProgress) {
-        auditProgress.innerHTML = "";
-      }
-
-      auditResults.innerHTML = "";
-
-
-      showAuditProgress(
-        "Запускаем Google Lighthouse…"
-      );
-
-
-      try {
-
-        let data;
-        let strategy = "mobile";
-
-
-        try {
-
-          data =
-            await requestPageSpeedAudit(
-              url,
-              "mobile"
-            );
-
-        } catch (mobileError) {
-
-          console.warn(
-            "Mobile PageSpeed failed:",
-            mobileError
-          );
-
-          showAuditProgress(
-            "Повторяем проверку для ПК…"
-          );
-
-          strategy = "desktop";
-
-          data =
-            await requestPageSpeedAudit(
-              url,
-              "desktop"
-            );
-        }
-
-
-        if (auditProgress) {
-          auditProgress.innerHTML = "";
-        }
-
-
-        renderAuditResult(
-          data,
-          url,
-          strategy
-        );
-
-
-      } catch (error) {
-
-        console.error(
-          "Audit error:",
-          error
-        );
-
-        showAuditProgress(
-          "Не удалось выполнить проверку. Google PageSpeed временно недоступен или сайт запрещает автоматический анализ."
-        );
-
-
-      } finally {
-
-        if (startAuditButton) {
-          startAuditButton.disabled = false;
-
-          startAuditButton.removeAttribute(
-            "aria-busy"
-          );
-        }
-
-      }
-    }
-
 
     function openAudit() {
-
-      openModal(
-        auditModal
-      );
-
-      if (auditProgress) {
-        auditProgress.innerHTML = "";
-      }
-
-      if (auditResults) {
-        auditResults.innerHTML = "";
-      }
-
-      setTimeout(() => {
-
-        if (auditUrlInput) {
-          auditUrlInput.focus();
-        }
-
-      }, 50);
+      runAudit();
+      openModal(auditModal);
     }
 
+    if (auditButton) auditButton.addEventListener("click", openAudit);
+    document.querySelectorAll(".demo-audit-trigger").forEach(button => {
+      button.addEventListener("click", event => {
+        event.stopPropagation();
+        openAudit();
+      });
+    });
 
-    if (auditButton) {
-
-      auditButton.addEventListener(
-        "click",
-        openAudit
-      );
-
-    }
-
-
-    document
-      .querySelectorAll(
-        ".demo-audit-trigger"
-      )
-      .forEach(
-        button => {
-
-          button.addEventListener(
-            "click",
-            event => {
-
-              event.stopPropagation();
-
-              openAudit();
-
-            }
-          );
-
-        }
-      );
-
-
-    if (auditForm) {
-
-      auditForm.addEventListener(
-        "submit",
-        event => {
-
-          event.preventDefault();
-
-          runAudit();
-
-        }
-      );
-
-    }
-
-
-    const rerunAuditButton =
-      document.getElementById(
-        "rerunAuditButton"
-      );
-
-    if (rerunAuditButton) {
-
-      rerunAuditButton.addEventListener(
-        "click",
-        () => runAudit()
-      );
-
-    }
+    const rerunAuditButton = document.getElementById("rerunAuditButton");
+    if (rerunAuditButton) rerunAuditButton.addEventListener("click", runAudit);
 
 
     /* =====================================================
