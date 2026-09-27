@@ -2,7 +2,7 @@
   "name": "MRS — Создание сайтов",
   "short_name": "MRS",
   "lang": "ru",
-  "id": "./",
+  "id": "/sites-900/",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -10,7 +10,11 @@
   "background_color": "#07090d",
   "theme_color": "#07090d",
   "description": "Современные сайты и лендинги от MRS.",
-  "categories": ["business", "design", "productivity"],
+  "categories": [
+    "business",
+    "design",
+    "productivity"
+  ],
   "icons": [
     {
       "src": "./mrs-icon-192.png",
@@ -21,8 +25,3 @@
     {
       "src": "./mrs-icon-512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ]
-}
