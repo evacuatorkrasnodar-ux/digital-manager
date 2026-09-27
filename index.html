@@ -3996,6 +3996,88 @@
 
 
     /* =====================================================
+       SMOOTH SITE MOTION
+    ====================================================== */
+
+    .motion-reveal {
+      opacity: 0;
+      transform: translate3d(0, 28px, 0) scale(.985);
+      transition:
+        opacity .72s cubic-bezier(.22,.61,.36,1),
+        transform .72s cubic-bezier(.22,.61,.36,1);
+      will-change: opacity, transform;
+    }
+
+    .motion-reveal.is-visible {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    .motion-reveal:nth-child(2) {
+      transition-delay: .06s;
+    }
+
+    .motion-reveal:nth-child(3) {
+      transition-delay: .12s;
+    }
+
+    .motion-reveal:nth-child(4) {
+      transition-delay: .18s;
+    }
+
+    .motion-reveal:nth-child(5) {
+      transition-delay: .24s;
+    }
+
+    .bg-glow-one,
+    .bg-glow-two,
+    .bg-glow-three {
+      animation:
+        mrsFloat 9s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+
+    .bg-glow-two {
+      animation-duration: 11s;
+      animation-delay: -2s;
+    }
+
+    .bg-glow-three {
+      animation-duration: 13s;
+      animation-delay: -4s;
+    }
+
+    @keyframes mrsFloat {
+      from {
+        transform: translate3d(-10px, -8px, 0) scale(1);
+      }
+      to {
+        transform: translate3d(16px, 14px, 0) scale(1.05);
+      }
+    }
+
+    .hero-visual,
+    .project-passport,
+    .final-card {
+      will-change: transform, opacity;
+    }
+
+    .service-card,
+    .price-card,
+    .faq-item,
+    .button,
+    .header-order,
+    .theme-toggle,
+    .menu-toggle {
+      will-change: transform;
+      transition:
+        transform var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition),
+        background var(--transition);
+    }
+
+    /* =====================================================
        REDUCED MOTION
     ====================================================== */
 
@@ -4005,13 +4087,10 @@
         scroll-behavior: auto;
       }
 
-
-      *,
-      *::before,
-      *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
+      .bg-glow-one,
+      .bg-glow-two,
+      .bg-glow-three {
+        animation: none !important;
       }
 
     }
@@ -6573,25 +6652,34 @@
         Сайт можно <span>установить.</span>
       </h2>
 
-      <p class="demo-modal-lead">
-        Это демонстрация возможностей современных сайтов. Если браузер поддерживает
-        установку PWA, появится системное окно. Если браузер не передал запрос
-        установки, ниже остаётся инструкция для ручной установки.
+      <p
+        class="demo-modal-lead"
+        id="installModalLead"
+      >
+        Если браузер поддерживает установку PWA, появится системное окно.
+        На iPhone установка выполняется через меню «Поделиться».
       </p>
 
-      <div class="install-steps">
+      <div
+        class="install-steps"
+        id="installSteps"
+      >
+
         <div class="install-step">
           <strong>01</strong>
           <span>Откройте меню браузера.</span>
         </div>
+
         <div class="install-step">
           <strong>02</strong>
-          <span>Выберите «Установить приложение» или «Добавить на главный экран».</span>
+          <span>Выберите установку или добавление сайта на главный экран.</span>
         </div>
+
         <div class="install-step">
           <strong>03</strong>
-          <span>Сайт появится как отдельное приложение.</span>
+          <span>После добавления сайт будет запускаться как приложение.</span>
         </div>
+
       </div>
 
       <button
@@ -7154,8 +7242,16 @@
         ".process-list, " +
         ".project-passport, " +
         ".faq-list, " +
-        ".final-card"
+        ".final-card, " +
+        ".service-card, " +
+        ".price-card, " +
+        ".review-card"
       );
+
+
+    revealElements.forEach(element => {
+      element.classList.add("motion-reveal");
+    });
 
 
     if (
@@ -7172,44 +7268,28 @@
                 return;
               }
 
+              entry.target.classList.add("is-visible");
 
-              entry.target.animate(
-                [
-                  {
-                    opacity: 0,
-                    transform:
-                      "translateY(25px)"
-                  },
-
-                  {
-                    opacity: 1,
-                    transform:
-                      "translateY(0)"
-                  }
-                ],
-                {
-                  duration: 650,
-                  easing: "cubic-bezier(.2,.7,.2,1)",
-                  fill: "forwards"
-                }
-              );
-
-
-              observer.unobserve(
-                entry.target
-              );
+              observer.unobserve(entry.target);
 
             });
 
           },
           {
-            threshold: .08
+            threshold: .08,
+            rootMargin: "0px 0px -6% 0px"
           }
         );
 
 
       revealElements.forEach(
         element => observer.observe(element)
+      );
+
+    } else {
+
+      revealElements.forEach(
+        element => element.classList.add("is-visible")
       );
 
     }
@@ -7318,7 +7398,63 @@
     });
 
 
+    function isIOSDevice() {
+      return /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    }
+
+
+    function setInstallInstructions() {
+      const lead = document.getElementById("installModalLead");
+      const steps = document.getElementById("installSteps");
+
+      if (!lead || !steps) return;
+
+      if (isIOSDevice()) {
+
+        lead.textContent =
+          "На iPhone системное окно установки из браузера не вызывается автоматически. Добавьте сайт на экран Домой — после этого он будет запускаться как отдельное приложение.";
+
+        steps.innerHTML = `
+          <div class="install-step">
+            <strong>01</strong>
+            <span>Нажмите «Поделиться» в меню браузера.</span>
+          </div>
+          <div class="install-step">
+            <strong>02</strong>
+            <span>Выберите «На экран Домой».</span>
+          </div>
+          <div class="install-step">
+            <strong>03</strong>
+            <span>Нажмите «Добавить».</span>
+          </div>
+        `;
+
+        return;
+      }
+
+      lead.textContent =
+        "Если браузер передал системный запрос, установка откроется автоматически. Иначе используйте меню браузера для установки приложения.";
+
+      steps.innerHTML = `
+        <div class="install-step">
+          <strong>01</strong>
+          <span>Откройте меню браузера.</span>
+        </div>
+        <div class="install-step">
+          <strong>02</strong>
+          <span>Выберите «Установить приложение» или «Добавить на главный экран».</span>
+        </div>
+        <div class="install-step">
+          <strong>03</strong>
+          <span>Сайт появится как отдельное приложение.</span>
+        </div>
+      `;
+    }
+
+
     function showInstallModal() {
+      setInstallInstructions();
       openModal(installModal);
     }
 
@@ -7340,7 +7476,8 @@
         window.navigator.standalone === true
       ) {
         if (installAppButton) {
-          installAppButton.querySelector("span").textContent = "Приложение установлено";
+          const label = installAppButton.querySelector("span");
+          if (label) label.textContent = "Приложение установлено";
         }
         showInstallModal();
         return;
