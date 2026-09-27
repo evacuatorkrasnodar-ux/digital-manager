@@ -56,6 +56,21 @@
     href="./style.css"
   >
 
+  <link
+    rel="manifest"
+    href="./manifest.json"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    href="./mrs-icon-192.png"
+  >
+
+  <meta
+    name="format-detection"
+    content="telephone=no"
+  >
+
   <style>
 
     /* =====================================================
@@ -834,6 +849,15 @@
               type="hidden"
               name="_next"
               value="https://evacuatorkrasnodar-ux.github.io/sites-900/order.html?success=1"
+            >
+
+            <input
+              type="text"
+              name="_honey"
+              tabindex="-1"
+              autocomplete="off"
+              style="display:none !important"
+              aria-hidden="true"
             >
 
 
@@ -1617,18 +1641,28 @@
       const savedTheme =
         localStorage.getItem("mrs-theme");
 
-      if (savedTheme === "light") {
+      const isLight = savedTheme === "light";
 
-        document.documentElement.classList.add(
-          "light-theme"
+      document.documentElement.classList.toggle(
+        "light-theme",
+        isLight
+      );
+
+      document.documentElement.classList.toggle(
+        "dark-theme",
+        !isLight
+      );
+
+      if (document.body) {
+        document.body.classList.toggle(
+          "light-theme",
+          isLight
         );
 
-      } else {
-
-        document.documentElement.classList.add(
-          "dark-theme"
+        document.body.classList.toggle(
+          "dark-theme",
+          !isLight
         );
-
       }
 
       const themeColor =
