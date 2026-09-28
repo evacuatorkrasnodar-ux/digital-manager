@@ -1,43 +1,63 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#07080c">
-
-  <title>Цифровой бизнес — Кабинет</title>
-
-  <meta http-equiv="refresh" content="0;url=./app.html">
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      background: #07080c;
-      color: #f7f8fc;
-      font: 16px system-ui, sans-serif;
-    }
-
-    a {
-      color: #bcb3ff;
-    }
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f5f5f7">
+<title>Цифровой бизнес — Ваш бизнес. На новом уровне.</title>
+<meta name="description" content="Цифровая платформа для развития бизнеса: сайт, клиенты, продвижение и умный помощник в одном месте.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+:root{--bg:#f5f5f7;--ink:#1d1d1f;--muted:#6e6e73;--blue:#0071e3;--line:rgba(29,29,31,.1);--white:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}.container{width:min(1160px,calc(100% - 48px));margin:auto}
+header{position:sticky;top:0;z-index:20;background:rgba(250,250,252,.82);backdrop-filter:blur(22px);border-bottom:1px solid rgba(0,0,0,.07)}.nav{height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;letter-spacing:-.4px}.brand-icon{width:30px;height:30px;background:#1d1d1f;color:white;border-radius:9px;display:grid;place-items:center;font-size:12px;font-weight:800}.links{display:flex;gap:28px;color:#424245;font-size:12px}.links a:hover{color:var(--blue)}.nav-actions{display:flex;gap:12px;align-items:center;font-size:12px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:999px;border:1px solid transparent;font-size:14px;font-weight:600;transition:.2s}.btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{background:#0077ed;transform:translateY(-1px)}.btn-outline{border-color:#d2d2d7;background:rgba(255,255,255,.6);color:var(--ink)}.btn-outline:hover{background:white}.hero{text-align:center;padding:105px 0 70px;background:radial-gradient(ellipse at 50% 0%,#fff 0%,#f5f5f7 68%)}.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid #d9e9fb;background:#eef6ff;color:#0066cc;border-radius:999px;padding:8px 13px;font-size:12px;font-weight:600;margin-bottom:26px}.dot{width:7px;height:7px;background:#34a853;border-radius:50%}.hero h1{font-size:clamp(46px,7.2vw,88px);line-height:.99;letter-spacing:-.075em;margin:0 auto 24px;max-width:950px;font-weight:700}.gradient{background:linear-gradient(100deg,#0071e3 10%,#6e56cf 80%);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{font-size:clamp(17px,2vw,21px);line-height:1.5;color:var(--muted);max-width:650px;margin:0 auto 30px}.hero-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.hero-note{font-size:12px;color:#86868b;margin-top:22px}.hero-visual{margin:66px auto 0;max-width:1000px;background:linear-gradient(145deg,#fff,#e9edf4);border:1px solid #e1e1e6;border-radius:30px;padding:18px;box-shadow:0 35px 90px rgba(0,0,0,.11);text-align:left}.windowbar{display:flex;gap:6px;padding:4px 4px 16px}.windowbar i{width:9px;height:9px;border-radius:50%;background:#d1d1d6}.dashboard{display:grid;grid-template-columns:210px 1fr;gap:16px;min-height:350px}.dash-side{background:#f7f7f9;border:1px solid #e8e8ed;border-radius:18px;padding:20px}.dash-logo{font-size:11px;font-weight:800;margin-bottom:25px}.dash-item{padding:11px 12px;border-radius:10px;font-size:12px;color:#6e6e73;margin:4px 0}.dash-item.active{background:#e7f2ff;color:#0066cc;font-weight:600}.dash-main{background:white;border:1px solid #e8e8ed;border-radius:18px;padding:26px}.dash-top{display:flex;justify-content:space-between;gap:15px;align-items:start}.dash-top h3{font-size:23px;letter-spacing:-1px;margin:0 0 7px}.dash-top p{font-size:12px;color:var(--muted);margin:0}.avatar{width:36px;height:36px;border-radius:50%;background:#eaf2ff;color:#0066cc;display:grid;place-items:center;font-weight:700}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}.metric{border:1px solid #ececf0;border-radius:14px;padding:17px}.metric small{display:block;color:#86868b;font-size:11px;margin-bottom:10px}.metric strong{font-size:25px;letter-spacing:-1px}.up{font-size:11px;color:#24845d;margin-top:7px}.assistant-card{display:flex;gap:15px;background:#f5f9ff;border:1px solid #e0edff;border-radius:16px;padding:18px}.assistant-icon{flex:0 0 38px;width:38px;height:38px;border-radius:12px;background:#0071e3;color:white;display:grid;place-items:center;font-weight:700}.assistant-card b{font-size:13px}.assistant-card p{font-size:12px;line-height:1.5;color:#626875;margin:7px 0 12px}.tiny-link{font-size:12px;color:#0066cc;font-weight:600}
+.section{padding:95px 0}.section-head{text-align:center;max-width:730px;margin:0 auto 48px}.kicker{text-transform:uppercase;letter-spacing:1.5px;color:#86868b;font-size:11px;font-weight:700;margin-bottom:15px}.section h2{font-size:clamp(34px,5vw,56px);line-height:1.05;letter-spacing:-.06em;margin:0 0 18px}.section-head p{font-size:18px;line-height:1.55;color:var(--muted);margin:0}.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.feature{background:white;border:1px solid #e5e5ea;border-radius:25px;padding:30px;min-height:260px;box-shadow:0 5px 24px rgba(0,0,0,.025)}.feature-icon{width:48px;height:48px;border-radius:15px;background:#f0f6ff;color:#0071e3;display:grid;place-items:center;font-size:22px;margin-bottom:28px}.feature h3{font-size:21px;letter-spacing:-.7px;margin:0 0 12px}.feature p{font-size:14px;line-height:1.6;color:var(--muted);margin:0}.split{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}.split-copy h2{font-size:clamp(36px,4.5vw,58px);line-height:1.04;letter-spacing:-.06em;margin:0 0 22px}.split-copy p{font-size:17px;line-height:1.65;color:var(--muted)}.checklist{list-style:none;padding:0;margin:26px 0;display:grid;gap:15px}.checklist li{display:flex;gap:12px;font-size:14px;align-items:start}.check{color:#24845d;font-weight:800}.visual-card{background:linear-gradient(145deg,#e7f1ff,#fff 65%);border:1px solid #dce8f6;border-radius:28px;padding:28px;min-height:390px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 24px 65px rgba(0,70,150,.08)}.visual-top{display:flex;justify-content:space-between;color:#6e6e73;font-size:12px}.orbit{width:210px;height:210px;border-radius:50%;border:1px solid #c6ddf7;margin:20px auto;display:grid;place-items:center;position:relative;background:radial-gradient(circle,#fff 0%,#f0f7ff 70%)}.orbit:before,.orbit:after{content:"";position:absolute;border:1px solid #d8e7f8;border-radius:50%;inset:25px}.orbit:after{inset:53px}.orbit-center{z-index:1;background:#0071e3;color:white;width:76px;height:76px;border-radius:24px;display:grid;place-items:center;font-size:25px;box-shadow:0 10px 30px #0071e344}.floating{position:absolute;background:white;border:1px solid #e1e9f2;border-radius:12px;padding:10px 13px;font-size:11px;box-shadow:0 8px 24px #1232}.f1{top:12px;right:-30px}.f2{bottom:15px;left:-35px}.visual-bottom{background:white;border:1px solid #e5edf6;border-radius:15px;padding:17px;font-size:13px}.visual-bottom small{display:block;color:#86868b;margin-top:5px}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.step{padding:28px;border-top:1px solid #d2d2d7}.step-num{font-size:12px;color:#0071e3;font-weight:700;margin-bottom:28px}.step h3{font-size:21px;margin:0 0 12px;letter-spacing:-.6px}.step p{color:var(--muted);font-size:14px;line-height:1.6;margin:0}.cta{background:#1d1d1f;color:white;border-radius:30px;padding:70px 30px;text-align:center}.cta h2{font-size:clamp(36px,5vw,60px);letter-spacing:-.065em;line-height:1.04;margin:0 auto 20px;max-width:750px}.cta p{color:#b7b7bd;font-size:17px;line-height:1.55;max-width:570px;margin:0 auto 28px}.cta .btn-blue{background:white;color:#1d1d1f}.cta .btn-blue:hover{background:#e8e8ed}.cta .btn-outline{background:transparent;border-color:#555;color:white}.cta .btn-outline:hover{background:#333}
+footer{padding:35px 0 45px;color:#86868b;font-size:12px}.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid #d2d2d7;padding-top:24px}
+@media(max-width:800px){.links{display:none}.hero{padding:72px 0 45px}.hero-visual{padding:10px;margin-top:45px;border-radius:22px}.dashboard{grid-template-columns:1fr}.dash-side{display:none}.dash-main{padding:18px}.metrics{gap:8px}.metric{padding:12px}.metric strong{font-size:20px}.feature-grid{grid-template-columns:1fr}.feature{min-height:auto}.split{grid-template-columns:1fr;gap:30px}.section{padding:70px 0}.steps{grid-template-columns:1fr;gap:0}.cta{padding:52px 22px}.nav-actions .btn{padding:10px 14px}.nav{height:60px}}@media(max-width:480px){.container{width:calc(100% - 30px)}.brand{font-size:12px}.nav-actions>a:first-child{display:none}.hero h1{font-size:47px}.hero p{font-size:17px}.metrics{grid-template-columns:1fr 1fr}.metric:last-child{grid-column:span 2}.dash-top h3{font-size:20px}.assistant-card{padding:14px}.f1{right:-20px}.f2{left:-22px}.orbit{transform:scale(.88)}}
+</style>
 </head>
-
 <body>
-  <p>
-    Открываем кабинет…
-    <a href="./app.html">Нажмите здесь, если переход не сработал.</a>
-  </p>
-
-  <script>
-    window.location.replace("./app.html");
-  </script>
-</body>
-</html>
+<header><div class="container nav">
+<a class="brand" href="#"><span class="brand-icon">ЦБ</span>Цифровой бизнес</a>
+<nav class="links"><a href="#platform">Платформа</a><a href="#features">Возможности</a><a href="#how">Как работает</a></nav>
+<div class="nav-actions"><a href="#platform">Войти</a><a class="btn btn-blue" href="#start">Начать</a></div>
+</div></header>
+<main>
+<section class="hero">
+<div class="container">
+<div class="eyebrow"><span class="dot"></span> Цифровое развитие бизнеса — в одном месте</div>
+<h1>Ваш бизнес.<br><span class="gradient">На новом уровне.</span></h1>
+<p>Сайт, клиенты, продвижение и умный помощник — единая цифровая система, которая помогает вашему бизнесу расти.</p>
+<div class="hero-actions"><a class="btn btn-blue" href="#start">Обсудить мой бизнес <span>→</span></a><a class="btn btn-outline" href="#platform">Посмотреть платформу</a></div>
+<div class="hero-note">Персональный подход · Поддержка 24/7 · Всё под одним управлением</div>
+<div class="hero-visual" id="platform">
+<div class="windowbar"><i></i><i></i><i></i></div>
+<div class="dashboard">
+<aside class="dash-side"><div class="dash-logo">ЦИФРОВОЙ БИЗНЕС</div><div class="dash-item active">⌂ &nbsp; Обзор</div><div class="dash-item">↗ &nbsp; Продвижение</div><div class="dash-item">◎ &nbsp; Клиенты</div><div class="dash-item">◇ &nbsp; Мой бизнес</div><div class="dash-item">☆ &nbsp; Отзывы</div><div class="dash-item">▤ &nbsp; Статистика</div></aside>
+<div class="dash-main"><div class="dash-top"><div><h3>Добро пожаловать!</h3><p>Ваш бизнес — под контролем.</p></div><div class="avatar">ЦБ</div></div>
+<div class="metrics"><div class="metric"><small>Обращения</small><strong>24</strong><div class="up">↗ Динамика за период</div></div><div class="metric"><small>Видимость в поиске</small><strong>86%</strong><div class="up">Показатель проекта</div></div><div class="metric"><small>Задачи помощника</small><strong>08</strong><div class="up">Есть рекомендации</div></div></div>
+<div class="assistant-card"><div class="assistant-icon">✦</div><div><b>Ваш Помощник</b><p>Я собрал важное по вашему бизнесу и подготовил следующие шаги. Посмотрите рекомендации по сайту, продвижению и работе с клиентами.</p><a class="tiny-link" href="#features">Посмотреть рекомендации →</a></div></div>
+</div></div></div>
+</div>
+</section>
+<section class="section" id="features"><div class="container"><div class="section-head"><div class="kicker">Всё связано</div><h2>Меньше рутины.<br>Больше возможностей.</h2><p>Вместо десятков сервисов и подрядчиков — понятное пространство, где цифровые инструменты работают вместе.</p></div>
+<div class="feature-grid">
+<article class="feature"><div class="feature-icon">⌘</div><h3>Ваш сайт</h3><p>Создадим современный сайт или подключим существующий. Структура, контент и мобильная версия — в единой системе.</p></article>
+<article class="feature"><div class="feature-icon">↗</div><h3>Продвижение</h3><p>Помогаем бизнесу быть заметнее в поиске, находим точки роста и объясняем, что стоит улучшить в первую очередь.</p></article>
+<article class="feature"><div class="feature-icon">✦</div><h3>Умный Помощник</h3><p>Сводит важное в одном месте, готовит рекомендации, помогает с ответами клиентам и контентом.</p></article>
+<article class="feature"><div class="feature-icon">♡</div><h3>Клиенты и отзывы</h3><p>Обращения, обратная связь и репутация бизнеса — на виду, чтобы ни один важный контакт не потерялся.</p></article>
+<article class="feature"><div class="feature-icon">▤</div><h3>Понятная аналитика</h3><p>Ключевые показатели и изменения без сложных терминов. Понимайте, что происходит и куда двигаться дальше.</p></article>
+<article class="feature"><div class="feature-icon">♧</div><h3>Поддержка 24/7</h3><p>Когда нужна помощь человека, команда «Цифрового бизнеса» поможет разобраться и довести задачу до результата.</p></article>
+</div></div></section>
+<section class="section"><div class="container split">
+<div class="split-copy"><div class="kicker">Ваш бизнес — в фокусе</div><h2>Технологии сложные.<br>Управление — простое.</h2><p>Не нужно разбираться в десятках инструментов. Вы видите главное простым языком и понимаете, что происходит с вашим бизнесом.</p>
+<ul class="checklist"><li><span class="check">✓</span><span>Одна точка управления цифровыми задачами</span></li><li><span class="check">✓</span><span>Рекомендации с понятным объяснением</span></li><li><span class="check">✓</span><span>Возможность согласовать важные действия</span></li><li><span class="check">✓</span><span>Люди на связи, когда нужна поддержка</span></li></ul>
+<a class="btn btn-blue" href="#start">Узнать, что подойдёт мне →</a></div>
+<div class="visual-card"><div class="visual-top"><span>ЦИФРОВОЙ БИЗНЕС</span><span>Платформа</span></div><div class="orbit"><div class="orbit-center">✦</div><div class="floating f1">Сайт · Под контролем</div><div class="floating f2">Помощник · На связи</div></div><div class="visual-bottom"><b>Всё важное — в одном пространстве</b><small>От первого запуска до ежедневного развития бизнеса.</small></div></div>
+</div></section>
+<section class="section" id="how"><div class="container"><div class="section-head"><div class="kicker">Простой старт</div><h2>Начинаем с вашего бизнеса.</h2><p>Неважно, есть ли у вас сайт и соцсети. Подберём понятный план под вашу ситуацию.</p></div>
+<div class="steps"><div class="step"><div class="step-num">01 / Знакомство</div><h3>Расскажите о бизнесе</h3><p>Чем занимаетесь, где работаете и какие задачи хотите решить.</p></div><div class="step"><div class="step-num">02 / План</div><h3>Получите решение</h3><p>Определим, что уже работает, чего не хватает и с чего начать развитие.</p></div><div class="step"><div class="step-num">03 / Развитие</div><h3>Растите системно</h3><p>Подключим нужные инструменты и поможем управлять ими в одном месте.</p></div></div>
+</div></section>
+<section class="section" id="start"><div class="container"><div class="cta"><div class="kicker" style="color:#a8cfff">Цифровой бизнес</div><h2>Пора дать вашему бизнесу больше возможностей.</h2><p>Расскажите, чем вы занимаетесь. Мы поможем определить следующий шаг — без сложных терминов и лишней суеты.</p><div class="hero-actions"><a class="btn btn-blue" href="mailto:79996362202@ya.ru?subject=Цифровой%20бизнес">Обсудить проект →</a><a class="btn btn-outline" href="https://t.me/" target="_blank" rel="noopener">Написать нам</a></div></div></div></section>
+</main>
+<footer><div class="container footer-inner"><span>© 2026 Цифровой бизнес. Новый цифровой старт под ключ.</span><span>Сайт · Продвижение · Помощник · Поддержка 24/7</span></div></footer>
+</body></html>
