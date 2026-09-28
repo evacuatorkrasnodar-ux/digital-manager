@@ -1,149 +1,229 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru" data-theme="light">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#f5f5f7">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="icon-192.svg">
-<title>Цифровой бизнес — Ваш бизнес. На новом уровне.</title>
-<meta name="description" content="Цифровая платформа для развития бизнеса: сайт, клиенты, продвижение и умный помощник в одном месте.">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Цифровой помощник</title>
+    <meta name="theme-color" content="#f5f5f7">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.svg">
+    <style>
+        @import url('https://googleapis.com');
 
-:root {
-    /* Светлая тема Apple */
-    --bg: #f5f5f7;
-    --ink: #1d1d1f;
-    --muted: #6e6e73;
-    --blue: #0071e3;
-    --line: rgba(29,29,31,.08);
-    --white: #fff;
-    --dash-side-bg: #f7f7f9;
-    --assistant-bg: #f5f9ff;
-    --assistant-border: #e0edff;
-    --transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
+        :root {
+            /* Светлая тема Apple */
+            --bg-main: #f5f5f7;
+            --bg-card: #ffffff;
+            --ink: #1d1d1f;
+            --muted: #86868b;
+            --blue: #0071e3;
+            --green: #34a853;
+            --purple: #6e56cf;
+            --line: rgba(29, 29, 31, 0.08);
+            --blur-bg: rgba(255, 255, 255, 0.8);
+            --chat-user-bg: #0071e3;
+            --chat-user-text: #ffffff;
+            --chat-ai-bg: #e5e5ea;
+        }
 
-[data-theme="dark"] {
-    /* Премиальная OLED темная тема */
-    --bg: #000000;
-    --ink: #f5f5f7;
-    --muted: #86868b;
-    --blue: #2997ff;
-    --line: rgba(255,255,255,.15);
-    --white: #1c1c1e;
-    --dash-side-bg: #121214;
-    --assistant-bg: #131722;
-    --assistant-border: #242f48;
-}
+        [data-theme="dark"] {
+            /* Премиальная OLED темная тема */
+            --bg-main: #000000;
+            --bg-card: #1c1c1e;
+            --ink: #f5f5f7;
+            --muted: #86868b;
+            --blue: #2997ff;
+            --green: #30d158;
+            --purple: #7d7aff;
+            --line: rgba(255, 255, 255, 0.12);
+            --blur-bg: rgba(28, 28, 30, 0.8);
+            --chat-user-bg: #2997ff;
+            --chat-user-text: #ffffff;
+            --chat-ai-bg: #2c2c2e;
+        }
 
-* { box-sizing: border-box; transition: var(--transition); }
-html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--bg); color: var(--ink); font-family: Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; -webkit-font-smoothing: antialiased; }
-a { color: inherit; text-decoration: none; }
-button { font: inherit; cursor: pointer; border: none; background: none; }
-.container { width: min(1160px, calc(100% - 48px)); margin: auto; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
 
-/* Шапка с эффектом размытия стекла */
-header { position: sticky; top: 0; z-index: 20; background: rgba(250,250,252,.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--line); }
-[data-theme="dark"] header { background: rgba(0,0,0,.75); }
+        body {
+            background-color: var(--bg-main);
+            color: var(--ink);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-.nav { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-.brand { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; letter-spacing: -.4px; }
-.brand-icon { width: 30px; height: 30px; background: var(--ink); color: var(--bg); border-radius: 9px; display: grid; place-items: center; font-size: 12px; font-weight: 800; }
-.links { display: flex; gap: 28px; color: var(--muted); font-size: 12px; }
-.links a:hover { color: var(--blue); }
-.nav-actions { display: flex; gap: 12px; align-items: center; font-size: 12px; }
+        /* Оболочка для экранов */
+        .app-container {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 90px; /* Отступ под нижнее меню */
+            position: relative;
+        }
 
-/* Переключатель тем */
-.theme-toggle { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--line); color: var(--ink); font-size: 16px; cursor: pointer; }
-.theme-toggle:hover { transform: scale(1.05); }
+        .screen {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            padding: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
 
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border-radius: 999px; font-size: 14px; font-weight: 600; text-decoration: none; }
-.btn-blue { background: var(--blue); color: #fff; }
-.btn-blue:hover { background: #0077ed; transform: translateY(-1px); }
-.btn-outline { border: 1px solid var(--line); background: rgba(255,255,255,.4); color: var(--ink); }
-[data-theme="dark"] .btn-outline { background: rgba(28,28,30,.5); }
-.btn-outline:hover { background: var(--white); }
+        .screen.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-/* Главный блок */
-.hero { text-align: center; padding: 105px 0 70px; background: radial-gradient(ellipse at 50% 0%, var(--white) 0%, var(--bg) 68%); }
-.eyebrow { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: var(--assistant-bg); color: var(--blue); border-radius: 999px; padding: 8px 13px; font-size: 12px; font-weight: 600; margin-bottom: 26px; }
-.dot { width: 7px; height: 7px; background: #34a853; border-radius: 50%; animation: pulse 2s infinite; }
-@keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+        /* Премиальные карточки Apple-Style */
+        .premium-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
 
-.hero h1 { font-size: clamp(46px, 7.2vw, 88px); line-height: .99; letter-spacing: -.075em; margin: 0 auto 24px; max-width: 950px; font-weight: 700; }
-.gradient { background: linear-gradient(100deg, #0071e3 10%, #6e56cf 80%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.hero p { font-size: clamp(17px, 2vw, 21px); line-height: 1.5; color: var(--muted); max-width: 650px; margin: 0 auto 30px; }
-.hero-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        .flex-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-/* Визуализация Дашборда */
-.hero-visual { margin: 66px auto 0; max-width: 1000px; background: var(--white); border: 1px solid var(--line); border-radius: 30px; padding: 18px; box-shadow: 0 35px 90px rgba(0,0,0,.08); text-align: left; }
-.windowbar { display: flex; gap: 6px; padding: 4px 4px 16px; }
-.windowbar i { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); opacity: 0.5; }
+        /* Ниже идут стили для конкретных экранов */
+        
+        /* ЭКРАН 1: ПРИВЕТСТВИЕ */
+        #screen-welcome {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at 50% 30%, var(--purple) 0%, transparent 70%), var(--bg-main);
+            padding: 40px 24px;
+        }
+        #screen-welcome.active { display: flex; }
+        .welcome-logo { width: 80px; height: 80px; background: #fff; border-radius: 22px; display: grid; place-items: center; font-size: 40px; margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .welcome-title { font-size: 34px; font-weight: 800; letter-spacing: -1px; margin-bottom: 12px; line-height: 1.1; }
+        .welcome-desc { color: var(--muted); font-size: 16px; margin-bottom: 40px; max-width: 300px; line-height: 1.4; }
 
-.dashboard { display: grid; grid-template-columns: 210px 1fr; gap: 16px; min-height: 380px; }
-@media(max-width:768px){ .dashboard { grid-template-columns: 1fr; } }
-.dash-side { background: var(--dash-side-bg); border: 1px solid var(--line); border-radius: 18px; padding: 20px; }
-.dash-logo { font-size: 11px; font-weight: 800; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 0.5px; }
-.dash-item { padding: 11px 12px; border-radius: 10px; font-size: 12px; color: var(--muted); margin: 4px 0; cursor: pointer; }
-.dash-item.active { background: var(--assistant-bg); color: var(--blue); font-weight: 600; border: 1px solid var(--assistant-border); }
+        .btn-apple { background: var(--blue); color: #fff; width: 100%; max-width: 320px; padding: 16px; border-radius: 999px; font-size: 16px; font-weight: 600; text-align: center; border: none; cursor: pointer; margin-bottom: 12px; }
+        .btn-apple-sec { background: transparent; border: 1px solid var(--line); color: var(--ink); width: 100%; max-width: 320px; padding: 16px; border-radius: 999px; font-size: 16px; font-weight: 600; text-align: center; }
 
-.dash-main { background: var(--white); border: 1px solid var(--line); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; justify-content: space-between; }
-.dash-top { display: flex; justify-content: space-between; gap: 15px; align-items: start; }
-.dash-top h3 { font-size: 23px; letter-spacing: -1px; margin: 0 0 7px; font-weight: 700; }
-.dash-top p { font-size: 12px; color: var(--muted); margin: 0; }
-.avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--assistant-bg); color: var(--blue); display: grid; place-items: center; font-weight: 700; font-size: 14px; border: 1px solid var(--assistant-border); }
+        /* ЭКРАН 2: ГЛАВНАЯ */
+        .biz-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; margin-top: 10px; }
+        .biz-avatar { width: 44px; height: 44px; background: var(--purple); color: white; border-radius: 12px; display: grid; place-items: center; font-size: 20px; font-weight: bold; }
+        .biz-title h3 { font-size: 18px; font-weight: 700; }
+        .biz-title p { font-size: 12px; color: var(--green); font-weight: 500; }
 
-.metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
-.metric { border: 1px solid var(--line); border-radius: 14px; padding: 17px; background: rgba(255,255,255,0.02); }
-.metric small { display: block; color: var(--muted); font-size: 11px; margin-bottom: 10px; font-weight: 500; }
-.metric strong { font-size: 25px; letter-spacing: -1px; font-weight: 700; }
-.up { font-size: 11px; color: #24845d; margin-top: 7px; display: flex; align-items: center; gap: 4px; font-weight: 600; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+        .mini-metric { background: var(--bg-card); border: 1px solid var(--line); border-radius: 14px; padding: 12px; text-align: center; }
+        .mini-metric span { display: block; font-size: 10px; color: var(--muted); margin-bottom: 4px; }
+        .mini-metric strong { font-size: 18px; font-weight: 700; }
 
-/* Секция ИИ-помощника */
-.assistant-card { display: flex; gap: 15px; background: var(--assistant-bg); border: 1px solid var(--assistant-border); border-radius: 16px; padding: 18px; align-items: flex-start; position: relative; overflow: hidden; }
-.assistant-icon { flex: 0 0 38px; width: 38px; height: 38px; border-radius: 12px; background: var(--blue); color: white; display: grid; place-items: center; font-weight: 700; font-size: 16px; box-shadow: 0 4px 12px rgba(0,113,227,0.2); }
-.assistant-content { flex: 1; }
-.assistant-card b { font-size: 13px; display: block; margin-bottom: 2px; }
-.assistant-card p { font-size: 12px; line-height: 1.5; color: var(--ink); opacity: 0.9; margin: 7px 0 12px; min-height: 36px; }
-.chat-actions { display: flex; gap: 8px; }
-.btn-chat { background: var(--blue); color: white; padding: 6px 14px; border-radius: 8px; font-size: 11px; font-weight: 600; }
-.btn-chat-sec { background: var(--line); color: var(--ink); padding: 6px 14px; border-radius: 8px; font-size: 11px; font-weight: 600; }
+        /* ЭКРАН 3: РЕСУРСЫ */
+        .resource-item { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line); cursor: pointer; }
+        .resource-item:last-child { border-bottom: none; }
+        .resource-icon { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; font-size: 18px; background: var(--bg-main); }
+        .resource-info { flex: 1; }
+        .resource-info h4 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+        .resource-info p { font-size: 11px; color: var(--muted); }
+        .arrow-r { color: var(--muted); font-size: 14px; }
 
-/* Стилизация остальных блоков */
-.section { padding: 95px 0; border-top: 1px solid var(--line); }
-.section-head { text-align: center; max-width: 730px; margin: 0 auto 48px; }
-.kicker { text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); font-size: 11px; font-weight: 700; margin-bottom: 15px; }
-.section h2 { font-size: clamp(34px, 5vw, 56px); line-height: 1.05; letter-spacing: -.06em; margin: 0 0 18px; font-weight: 700; }
-.section-head p { font-size: 18px; line-height: 1.55; color: var(--muted); margin: 0; }
-.feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-@media(max-width:768px){ .feature-grid { grid-template-columns: 1fr; } }
-.feature { background: var(--white); border: 1px solid var(--line); border-radius: 25px; padding: 30px; min-height: 260px; }
-.feature-icon { width: 48px; height: 48px; border-radius: 15px; background: var(--assistant-bg); color: var(--blue); display: grid; place-items: center; font-size: 22px; margin-bottom: 28px; border: 1px solid var(--assistant-border); }
-.feature h3 { font-size: 21px; letter-spacing: -.7px; margin: 0 0 12px; font-weight: 600; }
-.feature p { font-size: 14px; line-height: 1.6; color: var(--muted); margin: 0; }
+        /* ЭКРАН 4: ЧАТ С ИИ */
+        .chat-box { display: flex; flex-direction: column; height: calc(100vh - 160px); }
+        .chat-messages { flex: 1; overflow-y: auto; padding: 10px 0; display: flex; flex-direction: column; gap: 12px; }
+        .msg { max-width: 80%; padding: 12px 16px; border-radius: 18px; font-size: 14px; line-height: 1.4; }
+        .msg.user { background: var(--chat-user-bg); color: var(--chat-user-text); align-self: flex-end; border-bottom-right-radius: 4px; }
+        .msg.ai { background: var(--chat-ai-bg); color: var(--ink); align-self: flex-start; border-bottom-left-radius: 4px; }
+        
+        .chat-suggestions { display: flex; gap: 8px; overflow-x: auto; padding: 8px 0; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+        .chat-suggestions::-webkit-scrollbar { display: none; }
+        .suggest-btn { background: var(--bg-card); border: 1px solid var(--line); padding: 8px 14px; border-radius: 999px; font-size: 12px; font-weight: 500; color: var(--ink); }
 
-.cta { background: #1d1d1f; color: white; border-radius: 30px; padding: 70px 30px; text-align: center; }
-[data-theme="dark"] .cta { background: #1c1c1e; border: 1px solid var(--line); }
-.cta h2 { font-size: clamp(36px, 5vw, 60px); letter-spacing: -.065em; line-height: 1.04; margin: 0 auto 20px; max-width: 750px; font-weight: 700; }
-.cta p { color: #b7b7bd; font-size: 17px; line-height: 1.55; max-width: 570px; margin: 0 auto 28px; }
-.cta .btn-blue { background: white; color: #1d1d1f; }
-.cta .btn-blue:hover { background: #e8e8ed; }
-footer { padding: 35px 0; text-align: center; font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); }
-</style>
+        .chat-input-area { display: flex; gap: 8px; padding-top: 10px; border-top: 1px solid var(--line); }
+        .chat-input { flex: 1; background: var(--bg-card); border: 1px solid var(--line); padding: 12px 16px; border-radius: 999px; color: var(--ink); font-size: 14px; }
+        .chat-send-btn { width: 42px; height: 42px; background: var(--blue); color: white; border-radius: 50%; display: grid; place-items: center; font-size: 16px; }
+
+        /* ЭКРАН 5: ПРОФИЛЬ */
+        .profile-user { text-align: center; padding: 20px 0; }
+        .profile-avatar { width: 70px; height: 70px; background: var(--purple); color: white; border-radius: 50%; display: grid; place-items: center; font-size: 28px; margin: 0 auto 12px; }
+        
+        /* ПРЕМИУМ iOS TAB BAR (НИЖНЕЕ МЕНЮ) */
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 74px;
+            background: var(--blur-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--line);
+            display: none; /* Скрыт на экране приветствия */
+            justify-content: space-around;
+            align-items: center;
+            padding-bottom: 12px;
+            z-index: 100;
+        }
+        
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--muted);
+            font-size: 10px;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            gap: 4px;
+        }
+        
+        .tab-item.active {
+            color: var(--blue);
+        }
+        
+        .tab-icon {
+            font-size: 20px;
+        }
+
+        /* Индикатор загрузки ИИ */
+        .typing-dots span {
+            width: 6px;
+            height: 6px;
+            background: var(--muted);
+            border-radius: 50%;
+            display: inline-block;
+            animation: bounce 1.3s infinite ease-in-out;
+        }
+        .typing-dots span:nth-child(2) { animation-delay: 0.15s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.3s; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    </style>
 </head>
 <body>
 
-<header>
-    <div class="container nav">
-        <div class="brand">
-            <div class="brand-icon">🤖</div>
-            <span>Цифровой бизнес</span>
+    <div class="app-container">
+
+        <!-- ЭКРАН 1: ПРИВЕТСТВИЕ -->
+        <div id="screen-welcome" class="screen active">
+            <div class="welcome-logo">🤖</div>
+            <h1 class="welcome-title">Цифровой<br>бизнес</h1>
+            <p class="welcome-desc">Ваш бизнес под контролем. Всё в одном приложении.</p>
+            <button class="btn-apple" onclick="navigateTo('screen-main')">Начать</button>
+            <button class="btn-apple-sec" onclick="navigateTo('screen-main')">Войти</button>
         </div>
-        <div class="links">
-            <a href="#features">Возможности</a>
-            <a href="#demo">Интерфейс</a>
-            <a href="app.html">Открыть приложение</a>
-        </div>
+
+        <!-- ЭКРАН 2: ГЛАВНАЯ -->
+        <div id="screen-main" class="screen">
