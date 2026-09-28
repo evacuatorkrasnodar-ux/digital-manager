@@ -1,922 +1,291 @@
-from pathlib import Path
-
-html = r'''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#07090d" id="themeColor">
-  <meta name="description" content="Цифровой бизнес — новый цифровой старт под ключ. Создадим сайт, оформление и всё необходимое для работы бизнеса в интернете, а затем будем вести и развивать его по подписке от 3 990 ₽ в месяц.">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="Цифровой бизнес">
+
+  <meta name="theme-color" content="#07090d">
+  <meta name="description" content="Цифровой бизнес — сайт, продвижение и цифровой помощник для вашего бизнеса по подписке. Подключайте только нужные услуги и расширяйте возможности по мере роста.">
+
   <meta name="application-name" content="Цифровой бизнес">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Цифровой бизнес">
-  <link rel="canonical" href="https://evacuatorkrasnodar-ux.github.io/sites-900/">
+
+  <title>Цифровой бизнес — ваш бизнес в интернете</title>
+
   <link rel="manifest" href="./manifest.json">
-  <link rel="apple-touch-icon" href="./mrs-icon-192.png">
-  <link rel="icon" href="./mrs-icon-192.png" sizes="192x192" type="image/png">
-  <meta name="format-detection" content="telephone=no">
-
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="ru_RU">
-  <meta property="og:title" content="Цифровой бизнес — новый цифровой старт под ключ">
-  <meta property="og:description" content="Создадим сайт, оформление и цифровое присутствие бизнеса, а затем будем сами вести и развивать его по подписке от 3 990 ₽/мес.">
-  <meta property="og:url" content="https://evacuatorkrasnodar-ux.github.io/sites-900/">
-  <meta property="og:site_name" content="Цифровой бизнес">
-
-  <title>Цифровой бизнес — новый цифровой старт под ключ</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <script>
-    (() => {
-      try {
-        const savedTheme = localStorage.getItem("digital-business-theme");
-        document.documentElement.classList.add(savedTheme === "light" ? "light-theme" : "dark-theme");
-      } catch {
-        document.documentElement.classList.add("dark-theme");
-      }
-    })();
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"ProfessionalService",
-    "name":"Цифровой бизнес",
-    "description":"Новый цифровой старт под ключ: сайт, оформление и цифровое сопровождение бизнеса по подписке.",
-    "areaServed":"RU",
-    "telephone":"+79996362202",
-    "email":"79996362202@ya.ru",
-    "url":"https://evacuatorkrasnodar-ux.github.io/sites-900/",
-    "priceRange":"3990₽–9990₽/мес."
-  }
-  </script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
-    :root{
-      --bg:#07090d;
-      --bg-soft:#0b0e14;
-      --surface:#10141c;
-      --surface-2:#151a23;
-      --surface-3:#1b212c;
-      --text:#f4f7fb;
-      --text-soft:#a9b0bd;
-      --text-muted:#737c8c;
-      --line:rgba(255,255,255,.09);
-      --line-strong:rgba(255,255,255,.15);
-      --accent:#fff;
-      --accent-text:#07090d;
-      --success:#7dffb2;
-      --max-width:1240px;
-      --radius-sm:12px;
-      --radius-md:20px;
-      --radius-lg:30px;
-      --header-height:78px;
-      --shadow:0 20px 70px rgba(0,0,0,.25);
-      --transition:220ms ease;
+    :root {
+      --bg: #07090d;
+      --bg-soft: #0b0e14;
+      --surface: #10141c;
+      --surface-2: #151a23;
+
+      --text: #f4f7fb;
+      --text-soft: #a9b0bd;
+      --text-muted: #737c8c;
+
+      --line: rgba(255,255,255,.09);
+      --line-strong: rgba(255,255,255,.15);
+
+      --accent: #dfff00;
+      --accent-text: #07090d;
+      --success: #7dffb2;
+
+      --max-width: 1240px;
+      --radius: 22px;
+      --transition: 220ms ease;
     }
-    html.light-theme{
-      --bg:#f5f7fb;
-      --bg-soft:#edf0f5;
-      --surface:#fff;
-      --surface-2:#f2f4f8;
-      --surface-3:#e8ebf1;
-      --text:#0b0e14;
-      --text-soft:#555e6d;
-      --text-muted:#7d8592;
-      --line:rgba(0,0,0,.09);
-      --line-strong:rgba(0,0,0,.15);
-      --accent:#07090d;
-      --accent-text:#fff;
-      --success:#1f9d55;
-      --shadow:0 20px 70px rgba(0,0,0,.08);
+
+    * {
+      box-sizing: border-box;
     }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth;scroll-padding-top:100px}
-    body{
-      margin:0;min-width:320px;font-family:Inter,Arial,sans-serif;
-      background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;
-      transition:background var(--transition),color var(--transition)
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
     }
-    a{color:inherit;text-decoration:none}
-    button,input,textarea,select{font:inherit}
-    button{border:0}
-    img{max-width:100%;display:block}
-    ::selection{background:var(--text);color:var(--bg)}
-    .container{width:min(calc(100% - 40px),var(--max-width));margin-inline:auto}
-    .section{position:relative;padding:105px 0}
-    .section-heading{display:grid;grid-template-columns:80px 1fr;gap:30px;margin-bottom:60px}
-    .section-number{font-size:14px;font-weight:700;color:var(--text-muted);padding-top:8px}
-    .section-kicker{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.18em;color:var(--text-muted);text-transform:uppercase}
-    .section-heading h2{max-width:900px;margin:14px 0 0;font-size:clamp(38px,5vw,70px);line-height:.98;letter-spacing:-.055em}
-    .section-heading h2 span{display:block;color:var(--text-muted)}
-    .site-background{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:-2}
-    .bg-grid{
-      position:absolute;inset:0;opacity:.35;
-      background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-      background-size:70px 70px;mask-image:linear-gradient(to bottom,black,transparent 85%)
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      font-family: Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-    .bg-glow{position:absolute;width:600px;height:600px;border-radius:50%;filter:blur(100px);opacity:.08}
-    .bg-glow-one{top:-300px;left:-200px;background:#fff}
-    .bg-glow-two{top:35%;right:-350px;background:#667cff}
-    .bg-glow-three{bottom:-350px;left:20%;background:#fff}
 
-    .site-header{
-      position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--header-height);
-      border-bottom:1px solid transparent;
-      background:color-mix(in srgb,var(--bg) 72%,transparent);
-      backdrop-filter:blur(18px);
-      transition:border-color var(--transition),background var(--transition)
+    a {
+      color: inherit;
+      text-decoration: none;
     }
-    .site-header.header-scrolled{border-color:var(--line)}
-    .header-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:25px}
-    .brand{display:flex;align-items:center;gap:11px;flex-shrink:0}
-    .brand-mark{
-      width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--line-strong);
-      border-radius:10px;background:var(--surface);font-weight:800;font-size:17px
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
     }
-    .brand-text{display:flex;flex-direction:column;line-height:1}
-    .brand-text strong{font-size:14px;letter-spacing:.06em}
-    .brand-text small{margin-top:5px;font-size:8px;letter-spacing:.18em;color:var(--text-muted)}
-    .main-nav{display:flex;align-items:center;gap:26px}
-    .main-nav a{position:relative;font-size:12px;font-weight:600;color:var(--text-soft)}
-    .main-nav a:after{content:"";position:absolute;left:0;bottom:-7px;width:0;height:1px;background:var(--text);transition:width var(--transition)}
-    .main-nav a:hover{color:var(--text)}
-    .main-nav a:hover:after{width:100%}
-    .header-actions{display:flex;align-items:center;gap:10px}
-    .theme-toggle,.menu-toggle{
-      width:42px;height:42px;display:grid;place-items:center;cursor:pointer;
-      border:1px solid var(--line);border-radius:50%;color:var(--text);background:var(--surface);
-      transition:transform var(--transition),border-color var(--transition),background var(--transition)
+
+    button {
+      cursor: pointer;
     }
-    .theme-toggle:hover,.menu-toggle:hover{transform:translateY(-2px);border-color:var(--line-strong)}
-    .theme-icon{font-size:17px}
-    .light-theme .theme-sun{display:none}
-    .dark-theme .theme-moon{display:none}
-    .header-order{
-      display:inline-flex;align-items:center;gap:10px;min-height:42px;padding:0 17px;
-      border:1px solid var(--line-strong);border-radius:100px;background:var(--surface);
-      font-size:12px;font-weight:700;transition:transform var(--transition),background var(--transition)
+
+    .container {
+      width: min(calc(100% - 40px), var(--max-width));
+      margin-inline: auto;
     }
-    .header-order:hover{transform:translateY(-2px);background:var(--surface-2)}
-    .header-order b{font-size:16px}
-    .menu-toggle{display:none}
 
-    .mobile-menu{
-      position:fixed;top:var(--header-height);left:20px;right:20px;z-index:999;padding:18px;
-      border:1px solid var(--line);border-radius:20px;background:color-mix(in srgb,var(--surface) 95%,transparent);
-      backdrop-filter:blur(20px);box-shadow:var(--shadow);opacity:0;visibility:hidden;
-      transform:translateY(-10px);transition:opacity var(--transition),visibility var(--transition),transform var(--transition)
+    .section {
+      padding: 100px 0;
     }
-    .mobile-menu.open{opacity:1;visibility:visible;transform:translateY(0)}
-    .mobile-menu a{display:block;padding:14px 10px;border-bottom:1px solid var(--line);font-size:14px;font-weight:600}
-    .mobile-menu a:last-child{border-bottom:0}
 
-    .hero{position:relative;min-height:760px;display:flex;align-items:center;padding:calc(var(--header-height) + 30px) 0 55px}
-    .hero-container{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(420px,.95fr);gap:50px;align-items:center}
-    .eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:26px;font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted)}
-    .eyebrow-dot,.status-dot{width:7px;height:7px;border-radius:50%;background:var(--success);box-shadow:0 0 0 5px color-mix(in srgb,var(--success) 10%,transparent)}
-    .hero h1{max-width:850px;margin:0;font-size:clamp(54px,7.5vw,112px);line-height:.86;letter-spacing:-.075em}
-    .hero h1 span{display:block;color:var(--text-muted)}
-    .hero h1 em{display:block;color:transparent;-webkit-text-stroke:1px var(--text);font-style:normal}
-    .hero-description{max-width:650px;margin:38px 0 0;color:var(--text-soft);font-size:clamp(15px,1.6vw,18px);line-height:1.7}
-    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
-    .button{
-      min-height:52px;display:inline-flex;align-items:center;justify-content:center;gap:18px;
-      padding:0 22px;border-radius:100px;font-size:12px;font-weight:800;cursor:pointer;
-      transition:transform var(--transition),background var(--transition),color var(--transition),border-color var(--transition)
+    .section-heading {
+      max-width: 850px;
+      margin-bottom: 45px;
     }
-    .button:hover{transform:translateY(-3px)}
-    .button:disabled{opacity:.55;cursor:wait;transform:none}
-    .button-primary{color:var(--accent-text);background:var(--accent)}
-    .button-secondary{border:1px solid var(--line-strong);background:var(--surface);color:var(--text)}
-    .button-secondary:hover{background:var(--surface-2)}
-    .button-large{min-height:58px;padding-inline:27px}
-    .hero-note{display:flex;align-items:center;gap:10px;margin-top:22px;font-size:11px;font-weight:700;color:var(--text-muted)}
 
-    .hero-visual{position:relative;min-height:530px;display:grid;place-items:center}
-    .visual-orbit{position:absolute;border:1px solid var(--line);border-radius:50%;transform:rotate(-18deg)}
-    .orbit-one{width:460px;height:460px}
-    .orbit-two{width:590px;height:290px}
-    .visual-card{
-      position:relative;width:min(100%,500px);min-height:430px;padding:25px;
-      border:1px solid var(--line-strong);border-radius:30px;background:linear-gradient(145deg,var(--surface),var(--surface-2));
-      box-shadow:var(--shadow);overflow:hidden
+    .section-heading small {
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
     }
-    .visual-card:before{content:"";position:absolute;width:260px;height:260px;right:-100px;top:-100px;border-radius:50%;background:#667cff;filter:blur(90px);opacity:.13}
-    .visual-top,.visual-bottom{display:flex;justify-content:space-between;color:var(--text-muted);font-size:9px;font-weight:800;letter-spacing:.15em}
-    .visual-main{padding:90px 10px 65px}
-    .visual-kicker{font-size:10px;letter-spacing:.2em;color:var(--text-muted);font-weight:800}
-    .visual-title{margin-top:15px;font-size:clamp(38px,5vw,62px);line-height:.92;letter-spacing:-.06em}
-    .visual-title strong{display:block;color:var(--text-muted)}
-    .visual-line{height:1px;background:var(--line);margin:30px 0}
-    .visual-mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-    .visual-mini-grid div{padding:15px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--surface) 70%,transparent)}
-    .visual-mini-grid strong{display:block;font-size:15px}
-    .visual-mini-grid span{display:block;margin-top:3px;color:var(--text-muted);font-size:9px}
-    .floating-badge{position:absolute;padding:13px 16px;border:1px solid var(--line-strong);border-radius:15px;background:var(--surface);box-shadow:var(--shadow);font-size:10px}
-    .badge-price{left:0;bottom:55px}
-    .badge-price span{display:block;color:var(--text-muted)}
-    .badge-price strong{font-size:20px}
-    .badge-code{right:0;top:55px}
-    .badge-code span{font-size:18px;margin-right:7px}
 
-    .trust-bar{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:23px 0}
-    .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-    .trust-item{display:flex;align-items:center;gap:12px;color:var(--text-muted);font-size:11px;font-weight:700}
-    .trust-item b{color:var(--text);font-size:16px}
-
-    .intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start}
-    .big-statement{font-size:clamp(32px,4vw,58px);line-height:1.02;letter-spacing:-.05em}
-    .big-statement span{color:var(--text-muted)}
-    .simple-copy{color:var(--text-soft);font-size:16px;line-height:1.8}
-    .simple-copy p{margin:0 0 20px}
-    .simple-list{display:grid;gap:10px;margin-top:25px}
-    .simple-list div{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);font-size:14px}
-    .simple-list b{color:var(--success)}
-
-    .service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-    .service-card{padding:26px;border:1px solid var(--line);border-radius:20px;background:var(--surface);transition:transform var(--transition),border-color var(--transition),background var(--transition)}
-    .service-card:hover{transform:translateY(-5px);border-color:var(--line-strong);background:var(--surface-2)}
-    .service-icon{font-size:24px}
-    .service-card h3{margin:20px 0 8px;font-size:17px;letter-spacing:-.02em}
-    .service-card p{margin:0;color:var(--text-muted);font-size:12px;line-height:1.65}
-
-    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-    .step{padding:28px;border:1px solid var(--line);border-radius:22px;background:var(--surface)}
-    .step-num{color:var(--text-muted);font-size:11px;font-weight:800;letter-spacing:.12em}
-    .step h3{margin:45px 0 10px;font-size:19px}
-    .step p{margin:0;color:var(--text-muted);font-size:12px;line-height:1.7}
-
-    .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .price-card{position:relative;padding:30px;border:1px solid var(--line);border-radius:24px;background:var(--surface);overflow:hidden}
-    .price-card.featured{border-color:var(--line-strong);box-shadow:var(--shadow)}
-    .price-label{position:absolute;right:20px;top:20px;padding:7px 10px;border-radius:100px;background:var(--text);color:var(--bg);font-size:8px;font-weight:900;letter-spacing:.08em}
-    .price-top{display:flex;justify-content:space-between;color:var(--text-muted);font-size:10px;font-weight:800;letter-spacing:.12em}
-    .price-card h3{margin:45px 0 10px;font-size:25px;letter-spacing:-.03em}
-    .price-card>p{min-height:55px;margin:0;color:var(--text-muted);font-size:12px}
-    .price{margin:25px 0;font-size:38px;font-weight:800;letter-spacing:-.05em}
-    .price small{font-size:12px;color:var(--text-muted);font-weight:600;letter-spacing:0}
-    .price-list{display:grid;gap:11px;margin:0 0 27px;padding:0;list-style:none}
-    .price-list li{position:relative;padding-left:24px;font-size:12px;color:var(--text-soft)}
-    .price-list li:before{content:"✓";position:absolute;left:0;color:var(--success);font-weight:800}
-    .price-button{width:100%;min-height:50px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line-strong);border-radius:100px;font-size:12px;font-weight:800;background:var(--surface-2)}
-    .price-button:hover{background:var(--text);color:var(--bg)}
-
-    .note-box{margin-top:20px;padding:22px;border:1px solid var(--line);border-radius:20px;background:var(--surface-2);color:var(--text-soft);font-size:12px}
-    .note-box strong{color:var(--text)}
-
-    .faq-list{display:grid;gap:10px}
-    .faq-item{border:1px solid var(--line);border-radius:18px;background:var(--surface);overflow:hidden}
-    .faq-item summary{cursor:pointer;padding:21px 24px;font-size:14px;font-weight:700;list-style:none}
-    .faq-item summary::-webkit-details-marker{display:none}
-    .faq-item p{margin:0;padding:0 24px 22px;color:var(--text-muted);font-size:12px;line-height:1.75}
-
-    .final-card{padding:70px 60px;border:1px solid var(--line-strong);border-radius:30px;background:linear-gradient(145deg,var(--surface),var(--surface-2));text-align:center}
-    .final-card h2{max-width:800px;margin:14px auto 20px;font-size:clamp(40px,6vw,76px);line-height:.95;letter-spacing:-.06em}
-    .final-card h2 span{color:var(--text-muted)}
-    .final-card p{max-width:620px;margin:0 auto;color:var(--text-soft);font-size:15px}
-
-    footer{padding:35px 0 55px;border-top:1px solid var(--line)}
-    .footer-grid{display:flex;align-items:center;justify-content:space-between;gap:25px}
-    .footer-copy{color:var(--text-muted);font-size:10px}
-    .footer-links{display:flex;gap:20px;color:var(--text-muted);font-size:10px}
-    .footer-links a:hover{color:var(--text)}
-
-    .modal{position:fixed;inset:0;z-index:2000;display:grid;place-items:center;padding:20px;opacity:0;visibility:hidden;transition:opacity var(--transition),visibility var(--transition)}
-    .modal.open{opacity:1;visibility:visible}
-    .modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(8px)}
-    .modal-card{position:relative;width:min(100%,650px);max-height:min(90vh,900px);overflow:auto;padding:32px;border:1px solid var(--line-strong);border-radius:28px;background:var(--surface);box-shadow:var(--shadow);transform:translateY(15px);transition:transform var(--transition)}
-    .modal.open .modal-card{transform:translateY(0)}
-    .modal-close{position:absolute;right:18px;top:18px;width:40px;height:40px;border:1px solid var(--line);border-radius:50%;background:var(--surface-2);color:var(--text);cursor:pointer;font-size:22px}
-    .modal-card h2{margin:14px 45px 12px 0;font-size:clamp(34px,5vw,54px);line-height:.95;letter-spacing:-.05em}
-    .modal-card h2 span{color:var(--text-muted)}
-    .modal-lead{margin:0 0 25px;color:var(--text-soft);font-size:13px;line-height:1.7}
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .form-label{display:block;margin-bottom:14px;color:var(--text-soft);font-size:11px;font-weight:700}
-    .form-label input,.form-label textarea,.form-label select{
-      width:100%;margin-top:7px;padding:14px 15px;border:1px solid var(--line);border-radius:14px;outline:0;background:var(--surface-2);color:var(--text);transition:border-color var(--transition)
+    .section-heading h2 {
+      margin: 15px 0;
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 1.05;
+      letter-spacing: -.045em;
     }
-    .form-label input:focus,.form-label textarea:focus,.form-label select:focus{border-color:var(--line-strong)}
-    .form-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
-    .form-note{margin:15px 0 0;color:var(--text-muted);font-size:10px;line-height:1.6}
-    .success{text-align:center;padding:35px 10px}
-    .success-icon{width:60px;height:60px;display:grid;place-items:center;margin:0 auto 18px;border-radius:50%;background:color-mix(in srgb,var(--success) 15%,transparent);color:var(--success);font-size:28px;font-weight:800}
-    .success h3{margin:0 0 10px;font-size:25px}
-    .success p{margin:0;color:var(--text-muted);font-size:12px}
 
-    .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
-    .reveal.visible{opacity:1;transform:none}
+    .section-heading p {
+      max-width: 650px;
+      color: var(--text-soft);
+      font-size: 17px;
+    }
 
-    @media (max-width:1050px){
-      .main-nav{display:none}.menu-toggle{display:grid}
-      .hero-container{grid-template-columns:1fr}.hero{min-height:auto;padding-top:145px}
-      .hero-visual{min-height:500px}
-      .service-grid{grid-template-columns:repeat(2,1fr)}
-      .steps{grid-template-columns:repeat(2,1fr)}
-      .trust-grid{grid-template-columns:repeat(2,1fr)}
+    /* Шапка */
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--line);
+      background: rgba(7,9,13,.92);
+      backdrop-filter: blur(18px);
     }
-    @media (max-width:800px){
-      .section{padding:78px 0}
-      .section-heading{grid-template-columns:1fr;gap:8px;margin-bottom:40px}
-      .section-number{padding:0}
-      .intro-grid{grid-template-columns:1fr;gap:35px}
-      .pricing-grid{grid-template-columns:1fr}
-      .price-card.featured{order:-1}
-      .hero h1{font-size:clamp(52px,15vw,90px)}
-      .hero-visual{min-height:420px}
-      .visual-card{min-height:370px}
-      .visual-main{padding:65px 5px 45px}
-      .visual-mini-grid{grid-template-columns:1fr}
-      .visual-mini-grid div{display:flex;align-items:center;justify-content:space-between}
-      .orbit-one{width:340px;height:340px}.orbit-two{width:420px;height:230px}
-      .badge-price{left:-5px;bottom:30px}.badge-code{right:-5px;top:25px}
-      .final-card{padding:50px 25px}
+
+    .header-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
     }
-    @media (max-width:600px){
-      .container{width:min(calc(100% - 28px),var(--max-width))}
-      .header-order{display:none}
-      .brand-text small{display:none}
-      .hero-actions .button{width:100%}
-      .trust-grid,.service-grid,.steps{grid-template-columns:1fr}
-      .trust-item{padding:5px 0}
-      .visual-card{width:100%}
-      .floating-badge{transform:scale(.9)}
-      .form-grid{grid-template-columns:1fr}
-      .modal-card{padding:25px 18px}
-      .footer-grid{align-items:flex-start;flex-direction:column}
-      .footer-links{flex-wrap:wrap}
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--accent);
+      color: var(--accent-text);
+      font-size: 20px;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .main-nav a {
+      color: var(--text-soft);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .main-nav a:hover {
+      color: var(--accent);
+    }
+
+    .button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 22px;
+      border: 1px solid var(--line-strong);
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: var(--transition);
+    }
+
+    .button-primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: var(--accent-text);
+    }
+
+    .button-primary:hover {
+      transform: translateY(-2px);
+      opacity: .9;
+    }
+
+    .button-secondary {
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    /* Первый экран */
+
+    .hero {
+      padding: 110px 0 90px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 22px;
+      padding: 8px 14px;
+      border: 1px solid var(--line-strong);
+      border-radius: 100px;
+      color: var(--text-soft);
+      font-size: 12px;
+    }
+
+    .hero h1 {
+      margin: 0 0 25px;
+      font-size: clamp(42px, 6.5vw, 82px);
+      line-height: .98;
+      letter-spacing: -.06em;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero-description {
+      max-width: 600px;
+      margin-bottom: 30px;
+      color: var(--text-soft);
+      font-size: 18px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-note {
+      margin-top: 20px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .hero-card {
+      padding: 30px;
+      border: 1px solid var(--line-strong);
+      border-radius: 30px;
+      background: linear-gradient(145deg, #151a23, #0b0e14);
+      box-shadow: 0 30px 90px rgba(0,0,0,.25);
+    }
+
+    .hero-card-label {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    .hero-card h3 {
+      margin: 15px 0;
+      font-size: 32px;
+      line-height: 1.1;
+    }
+
+    .hero-card p {
+      color: var(--text-soft);
+    }
+
+    .feature-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px 0;
+      border-top: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    .feature-check {
+      color: var(--accent);
+      font-weight: 800;
     }
   </style>
-
-<style id="digital-business-app-entry">
-  .hero-pwa-note{
-    margin-top:10px;
-    font-size:12px;
-    opacity:.62;
-    letter-spacing:.01em;
-  }
-  .app-entry{
-    margin-top:18px;
-    font-size:13px;
-    opacity:.72;
-  }
-  .app-entry a{
-    color:inherit;
-    text-decoration:none;
-  }
-  .app-entry a:hover{
-    text-decoration:underline;
-  }
-  @media (max-width:700px){
-    .hero-pwa-note{margin-top:8px}
-  }
-</style>
-
-<style id="digital-business-app-entry">
-  .hero-pwa-note{margin-top:10px;font-size:12px;opacity:.62;letter-spacing:.01em}
-  .app-entry{margin:0 auto 18px;width:min(calc(100% - 40px),var(--max-width));font-size:13px;opacity:.72}
-  .app-entry a{color:inherit;text-decoration:none}
-  .app-entry a:hover{text-decoration:underline}
-</style>
-
 </head>
-
-<body>
-  <div class="site-background" aria-hidden="true">
-    <div class="bg-grid"></div>
-    <div class="bg-glow bg-glow-one"></div>
-    <div class="bg-glow bg-glow-two"></div>
-    <div class="bg-glow bg-glow-three"></div>
-  </div>
-
-  <header class="site-header" id="siteHeader">
-    <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="Цифровой бизнес">
-        <span class="brand-mark">ЦБ</span>
-        <span class="brand-text">
-          <strong>ЦИФРОВОЙ БИЗНЕС</strong>
-          <small>СОЗДАЁМ · ЗАПУСКАЕМ · ВЕДЁМ</small>
-        </span>
-      </a>
-
-      <nav class="main-nav" aria-label="Основная навигация">
-        <a href="#start">Как это работает</a>
-        <a href="#services">Что создаём</a>
-        <a href="#prices">Тарифы</a>
-        <a href="#faq">Вопросы</a>
-      </nav>
-
-      <div class="header-actions">
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Переключить тему">
-          <span class="theme-icon theme-sun">☀</span>
-          <span class="theme-icon theme-moon">☾</span>
-        </button>
-        <a class="header-order" href="./app.html">Открыть кабинет <b>↗</b></a>
-        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Открыть меню">☰</button>
-      </div>
-    </div>
-  </header>
-
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#start">Как это работает</a>
-    <a href="#services">Что создаём</a>
-    <a href="#prices">Тарифы</a>
-    <a href="#faq">Вопросы</a>
-    <a href="./app.html">Открыть цифровой кабинет ↗</a>
-    <a href="#start-project">Начать цифровой старт ↗</a>
-  </div>
-
-  <main id="top">
-    <section class="hero">
-      <div class="container hero-container">
-        <div class="hero-content reveal">
-          <div class="eyebrow"><span class="eyebrow-dot"></span>Новый формат для бизнеса</div>
-
-          <h1>
-            Новый
-            <span>цифровой</span>
-            <em>старт.</em>
-          </h1>
-
-          <p class="hero-description">
-            Создадим вашему бизнесу сайт, оформление и всё необходимое для работы в интернете.
-            А потом сами будем следить за этим и развивать ваш бизнес каждый месяц.
-          </p>
-
-          <div class="hero-actions">
-            <a href="#start-project" class="button button-primary">Начать цифровой старт <b>↗</b></a>
-            <a href="#prices" class="button button-secondary">Посмотреть тарифы</a>
-            <a href="./app.html" class="button button-secondary">Открыть цифровой кабинет ↗</a>
-          </div>
-
-          <div class="hero-note">
-            <span class="status-dot"></span>
-            От 3 990 ₽ в месяц · без большой разовой оплаты за запуск
-          </div>
-        </div>
-
-        <div class="hero-visual reveal">
-          <div class="visual-orbit orbit-one"></div>
-          <div class="visual-orbit orbit-two"></div>
-
-          <div class="visual-card">
-            <div class="visual-top">
-              <span>DIGITAL BUSINESS</span>
-              <span>2026</span>
-            </div>
-
-            <div class="visual-main">
-              <div class="visual-kicker">ВАШ БИЗНЕС В ИНТЕРНЕТЕ</div>
-              <div class="visual-title">Создадим.<strong>Запустим.</strong></div>
-              <div class="visual-line"></div>
-
-              <div class="visual-mini-grid">
-                <div><strong>Сайт</strong><span>создадим с нуля</span></div>
-                <div><strong>Бренд</strong><span>оформим понятно</span></div>
-                <div><strong>Ведение</strong><span>будем заниматься</span></div>
-              </div>
-            </div>
-
-            <div class="visual-bottom">
-              <span>ЦИФРОВОЙ БИЗНЕС</span>
-              <span>START → GROW</span>
-            </div>
-          </div>
-
-          <div class="floating-badge badge-price">
-            <span>подписка от</span>
-            <strong>3 990 ₽</strong>
-          </div>
-
-          <div class="floating-badge badge-code">
-            <span>✓</span> Мы ведём
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="trust-bar">
-      <div class="container trust-grid">
-        <div class="trust-item"><b>01</b> Новый сайт с нуля</div>
-        <div class="trust-item"><b>02</b> Бренд и оформление</div>
-        <div class="trust-item"><b>03</b> Поиск, карты и соцсети</div>
-        <div class="trust-item"><b>04</b> Постоянное ведение</div>
-      </div>
-    </div>
-
-    <section class="section" id="start">
-      <div class="container">
-        <div class="section-heading reveal">
-          <div class="section-number">01</div>
-          <div>
-            <span class="section-kicker">Идея</span>
-            <h2>Вам не нужно разбираться в интернете.<span>Мы разберёмся.</span></h2>
-          </div>
-        </div>
-
-        <div class="intro-grid reveal">
-          <div class="big-statement">
-            У вас есть бизнес.<br>
-            <span>Мы создаём ему цифровую основу.</span>
-          </div>
-
-          <div class="simple-copy">
-            <p>
-              Не нужно искать отдельно дизайнера, разработчика, человека для соцсетей и специалиста по поиску.
-            </p>
-            <p>
-              Вы рассказываете нам о бизнесе обычными словами. Мы сами предлагаем, что нужно сделать, создаём всё необходимое и объясняем результат без сложных терминов.
-            </p>
-
-            <div class="simple-list">
-              <div><b>✓</b><span>Нет сайта? Создадим.</span></div>
-              <div><b>✓</b><span>Нет логотипа? Оформим.</span></div>
-              <div><b>✓</b><span>Нет текстов? Подготовим.</span></div>
-              <div><b>✓</b><span>Не знаете, что делать дальше? Подскажем.</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="services">
-      <div class="container">
-        <div class="section-heading reveal">
-          <div class="section-number">02</div>
-          <div>
-            <span class="section-kicker">Что создаём</span>
-            <h2>Всё необходимое.<span>В одном месте.</span></h2>
-          </div>
-        </div>
-
-        <div class="service-grid">
-          <article class="service-card reveal"><div class="service-icon">🌐</div><h3>Новый сайт</h3><p>Создадим понятный сайт, который удобно открыть с телефона и компьютера.</p></article>
-          <article class="service-card reveal"><div class="service-icon">🎨</div><h3>Оформление</h3><p>Придумаем или приведём в порядок логотип, цвета и общий стиль бизнеса.</p></article>
-          <article class="service-card reveal"><div class="service-icon">🔎</div><h3>Поиск</h3><p>Настроим сайт так, чтобы поисковые системы правильно понимали ваш бизнес.</p></article>
-          <article class="service-card reveal"><div class="service-icon">📍</div><h3>Карты</h3><p>Поможем оформить бизнес на картах и следить, чтобы информация была актуальной.</p></article>
-          <article class="service-card reveal"><div class="service-icon">📱</div><h3>Соцсети</h3><p>Оформим страницы и будем поддерживать их в понятном и аккуратном виде.</p></article>
-          <article class="service-card reveal"><div class="service-icon">⭐</div><h3>Отзывы</h3><p>Будем следить за отзывами и помогать поддерживать хорошее впечатление о бизнесе.</p></article>
-          <article class="service-card reveal"><div class="service-icon">📝</div><h3>Информация</h3><p>Цены, услуги, акции, фотографии и новости можно будет регулярно обновлять.</p></article>
-          <article class="service-card reveal"><div class="service-icon">📊</div><h3>Контроль</h3><p>Будем смотреть, что происходит с сайтом и что можно сделать лучше.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="process">
-      <div class="container">
-        <div class="section-heading reveal">
-          <div class="section-number">03</div>
-          <div>
-            <span class="section-kicker">Как всё происходит</span>
-            <h2>Четыре простых шага.<span>Без головной боли.</span></h2>
-          </div>
-        </div>
-
-        <div class="steps">
-          <article class="step reveal"><div class="step-num">01 · РАССКАЗЫВАЕТЕ</div><h3>Рассказываете о бизнесе</h3><p>Не нужно готовить техническое задание. Просто расскажите, чем вы занимаетесь и где работаете.</p></article>
-          <article class="step reveal"><div class="step-num">02 · СОЗДАЁМ</div><h3>Мы всё собираем</h3><p>Создаём сайт, оформление, страницы и необходимые точки присутствия в интернете.</p></article>
-          <article class="step reveal"><div class="step-num">03 · ЗАПУСКАЕМ</div><h3>Проверяем и запускаем</h3><p>Проверяем телефон, формы, мобильную версию, основные страницы и всё необходимое для старта.</p></article>
-          <article class="step reveal"><div class="step-num">04 · ВЕДЁМ</div><h3>Продолжаем работать</h3><p>После запуска вы не остаётесь один. Мы обновляем, следим и постепенно развиваем цифровую часть бизнеса.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="prices">
-      <div class="container">
-        <div class="section-heading reveal">
-          <div class="section-number">04</div>
-          <div>
-            <span class="section-kicker">Подписка</span>
-            <h2>Одна подписка.<span>Мы занимаемся цифровой частью.</span></h2>
-          </div>
-        </div>
-
-        <div class="pricing-grid">
-          <article class="price-card reveal">
-            <div class="price-top"><span>START</span><span>01</span></div>
-            <h3>Простой старт</h3>
-            <p>Для небольшого бизнеса, которому нужно начать и иметь всё необходимое.</p>
-            <div class="price">3 990 ₽ <small>/ мес.</small></div>
-            <ul class="price-list">
-              <li>Новый простой сайт</li>
-              <li>Базовое оформление</li>
-              <li>Домен и техническая основа</li>
-              <li>Базовая настройка поиска</li>
-              <li>Поддержка и небольшие изменения</li>
-            </ul>
-            <a href="#start-project" class="price-button">Начать →</a>
-          </article>
-
-          <article class="price-card featured reveal">
-            <div class="price-label">ОСНОВНОЙ</div>
-            <div class="price-top"><span>BUSINESS</span><span>02</span></div>
-            <h3>Полный старт</h3>
-            <p>Для бизнеса, которому нужен полноценный сайт и постоянное развитие.</p>
-            <div class="price">6 990 ₽ <small>/ мес.</small></div>
-            <ul class="price-list">
-              <li>Полноценный многостраничный сайт</li>
-              <li>Логотип и фирменный стиль</li>
-              <li>SEO и страницы услуг</li>
-              <li>Карты и соцсети</li>
-              <li>Контент и обновления</li>
-              <li>Постоянное развитие</li>
-            </ul>
-            <a href="#start-project" class="price-button">Начать →</a>
-          </article>
-
-          <article class="price-card reveal">
-            <div class="price-top"><span>PRO</span><span>03</span></div>
-            <h3>Активное развитие</h3>
-            <p>Для бизнеса, которому нужно больше внимания и регулярной работы.</p>
-            <div class="price">9 990 ₽ <small>/ мес.</small></div>
-            <ul class="price-list">
-              <li>Всё из BUSINESS</li>
-              <li>Расширенное SEO</li>
-              <li>Регулярный контент</li>
-              <li>Более активная работа с соцсетями</li>
-              <li>Дополнительные страницы и инструменты</li>
-              <li>Приоритетные задачи</li>
-            </ul>
-            <a href="#start-project" class="price-button">Начать →</a>
-          </article>
-        </div>
-
-        <div class="note-box reveal">
-          <strong>Важно:</strong> большие рекламные бюджеты, профессиональная съёмка, сложные индивидуальные системы и платные сервисы третьих сторон не входят автоматически в подписку. Если такое понадобится, мы заранее объясним стоимость.
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="faq">
-      <div class="container">
-        <div class="section-heading reveal">
-          <div class="section-number">05</div>
-          <div>
-            <span class="section-kicker">Вопросы</span>
-            <h2>Если совсем ничего не знаете.<span>Это нормально.</span></h2>
-          </div>
-        </div>
-
-        <div class="faq-list">
-          <details class="faq-item reveal"><summary>У меня вообще нет сайта. Вы сможете всё сделать?</summary><p>Да. Мы как раз рассчитаны на запуск с нуля. Вы рассказываете о бизнесе, а мы предлагаем понятный план и создаём нужную основу.</p></details>
-          <details class="faq-item reveal"><summary>Мне нужно самому писать тексты?</summary><p>Нет. Вы даёте нам информацию о бизнесе, услугах и клиентах. Дальше мы помогаем подготовить понятные тексты для сайта.</p></details>
-          <details class="faq-item reveal"><summary>А если у меня нет логотипа?</summary><p>Не проблема. В зависимости от тарифа создадим базовое оформление или более полный фирменный стиль.</p></details>
-          <details class="faq-item reveal"><summary>Что будет после запуска сайта?</summary><p>На этом наша работа не заканчивается. Мы продолжаем обновлять сайт, следить за основными площадками и развивать цифровую часть бизнеса в рамках вашего тарифа.</p></details>
-          <details class="faq-item reveal"><summary>Я не понимаю, какой тариф мне нужен.</summary><p>И не нужно заранее разбираться. Расскажите нам о бизнесе — мы объясним разницу простыми словами и предложим подходящий вариант.</p></details>
-          <details class="faq-item reveal"><summary>Я нажму кнопку — с меня сразу спишут деньги?</summary><p>Нет. Сначала вы оставляете заявку. Мы обсуждаем ваш бизнес, объясняем план и условия. Подключение происходит после согласования.</p></details>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="start-project">
-      <div class="container">
-        <div class="final-card reveal">
-          <span class="section-kicker">НАЧАЛО</span>
-          <h2>Расскажите о бизнесе.<span>Остальное мы сделаем вместе.</span></h2>
-          <p>Не нужно знать, какой сайт вам нужен и какие настройки делать. Просто расскажите, чем занимаетесь. Мы зададим нужные вопросы и объясним следующий шаг.</p>
-          <div class="hero-actions" style="justify-content:center;margin-top:30px">
-            <button class="button button-primary button-large" id="openFormButton" type="button">Начать цифровой старт ↗</button>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="app-entry"><a href="./app.html">Открыть личный цифровой кабинет →</a></div>
-    <div class="container footer-grid">
-      <div class="footer-copy">© <span data-year></span> Цифровой бизнес. Новый цифровой старт под ключ.</div>
-      <div class="footer-links">
-        <a href="#top">Наверх ↑</a>
-        <a href="#prices">Тарифы</a>
-        <a href="#start-project">Начать</a>
-      </div>
-    </div>
-  </footer>
-
-  <div class="modal" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
-    <div class="modal-backdrop" data-close></div>
-    <div class="modal-card">
-      <button class="modal-close" type="button" data-close aria-label="Закрыть">×</button>
-      <span class="section-kicker">СТАРТ ЦИФРОВОГО БИЗНЕСА</span>
-      <h2 id="projectModalTitle">Расскажите о <span>бизнесе.</span></h2>
-      <p class="modal-lead">Заполните короткую форму. Сначала мы посмотрим информацию и свяжемся с вами. Оплата не списывается при отправке заявки.</p>
-
-      <form id="projectForm">
-        <div class="form-grid">
-          <label class="form-label">Ваше имя
-            <input name="name" autocomplete="name" required placeholder="Как к вам обращаться">
-          </label>
-          <label class="form-label">Телефон
-            <input name="phone" type="tel" autocomplete="tel" required placeholder="+7 ...">
-          </label>
-        </div>
-
-        <label class="form-label">Как называется ваш бизнес?
-          <input name="business_name" required placeholder="Например: Автосервис «Старт»">
-        </label>
-
-        <label class="form-label">Чем вы занимаетесь?
-          <input name="business" required placeholder="Например: ремонт автомобилей">
-        </label>
-
-        <label class="form-label">Где работаете?
-          <input name="city" required placeholder="Город или несколько городов">
-        </label>
-
-        <label class="form-label">Что уже есть?
-          <select name="existing">
-            <option>Пока ничего</option>
-            <option>Есть сайт</option>
-            <option>Есть логотип</option>
-            <option>Есть соцсети</option>
-            <option>Есть сайт и соцсети</option>
-            <option>Есть понемногу всего</option>
-          </select>
-        </label>
-
-        <label class="form-label">Какой тариф интересует?
-          <select name="package">
-            <option>START — 3 990 ₽/мес.</option>
-            <option>BUSINESS — 6 990 ₽/мес.</option>
-            <option>PRO — 9 990 ₽/мес.</option>
-            <option>Не знаю — помогите выбрать</option>
-          </select>
-        </label>
-
-        <label class="form-label">Что хотите получить?
-          <textarea name="message" rows="4" placeholder="Напишите своими словами. Например: хочу запустить новый бизнес и пока ничего нет."></textarea>
-        </label>
-
-        <div class="form-actions">
-          <button class="button button-primary button-large" type="submit">Отправить заявку ↗</button>
-          <button class="button button-secondary" type="button" data-close>Отмена</button>
-        </div>
-        <p class="form-note" id="formNote">После отправки заявка поступит на почту. Если автоматическая отправка не сработает, мы предложим открыть письмо вручную.</p>
-      </form>
-    </div>
-  </div>
-
-  <script>
-    const $ = (selector, root = document) => root.querySelector(selector);
-    const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
-
-    const header = $("#siteHeader");
-    const themeToggle = $("#themeToggle");
-    const menuToggle = $("#menuToggle");
-    const mobileMenu = $("#mobileMenu");
-    const modal = $("#projectModal");
-    const openFormButton = $("#openFormButton");
-    const projectForm = $("#projectForm");
-    const formNote = $("#formNote");
-
-    function updateHeader() {
-      header?.classList.toggle("header-scrolled", window.scrollY > 10);
-    }
-    updateHeader();
-    window.addEventListener("scroll", updateHeader, { passive: true });
-
-    themeToggle?.addEventListener("click", () => {
-      const light = document.documentElement.classList.toggle("light-theme");
-      document.documentElement.classList.toggle("dark-theme", !light);
-      localStorage.setItem("digital-business-theme", light ? "light" : "dark");
-      $("#themeColor")?.setAttribute("content", light ? "#f5f7fb" : "#07090d");
-    });
-
-    menuToggle?.addEventListener("click", () => {
-      mobileMenu?.classList.toggle("open");
-    });
-
-    $$("#mobileMenu a").forEach(link => {
-      link.addEventListener("click", () => mobileMenu?.classList.remove("open"));
-    });
-
-    function openModal() {
-      modal?.classList.add("open");
-      modal?.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-      setTimeout(() => $('input[name="name"]', modal)?.focus(), 100);
-    }
-
-    function closeModal() {
-      modal?.classList.remove("open");
-      modal?.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-    }
-
-    openFormButton?.addEventListener("click", openModal);
-    $$('[href="#start-project"]').forEach(link => {
-      link.addEventListener("click", event => {
-        if (link.tagName === "A") {
-          event.preventDefault();
-          openModal();
-        }
-      });
-    });
-    $$("[data-close]").forEach(el => el.addEventListener("click", closeModal));
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape") closeModal();
-    });
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.08 });
-
-    $$(".reveal").forEach(el => observer.observe(el));
-
-    $$("[data-year]").forEach(el => el.textContent = new Date().getFullYear());
-
-    async function sendForm(event) {
-      event.preventDefault();
-      const submit = projectForm.querySelector('button[type="submit"]');
-      const original = submit.textContent;
-      const data = Object.fromEntries(new FormData(projectForm).entries());
-
-      submit.disabled = true;
-      submit.textContent = "Отправляем…";
-
-      const payload = {
-        _subject: "Новая заявка — Цифровой бизнес",
-        _template: "table",
-        _captcha: "false",
-        name: data.name || "",
-        phone: data.phone || "",
-        business_name: data.business_name || "",
-        business: data.business || "",
-        city: data.city || "",
-        existing: data.existing || "",
-        package: data.package || "",
-        message: data.message || ""
-      };
-
-      try {
-        const response = await fetch("https://formsubmit.co/ajax/79996362202@ya.ru", {
-          method: "POST",
-          headers: {"Content-Type":"application/json","Accept":"application/json"},
-          body: JSON.stringify(payload)
-        });
-        const result = await response.json().catch(() => ({}));
-
-        if (!response.ok || result.success === false) {
-          throw new Error("FormSubmit rejected the request");
-        }
-
-        projectForm.innerHTML = `
-          <div class="success">
-            <div class="success-icon">✓</div>
-            <h3>Заявка отправлена</h3>
-            <p>Спасибо. Мы получили информацию о вашем бизнесе и свяжемся с вами.</p>
-            <div style="margin-top:25px">
-              <button type="button" class="button button-secondary" data-close>Закрыть</button>
-            </div>
-          </div>
-        `;
-        $("[data-close]", projectForm)?.addEventListener("click", closeModal);
-      } catch {
-        const subject = "Заявка — Цифровой бизнес";
-        const body = [
-          "Новая заявка с сайта «Цифровой бизнес»",
-          "",
-          "Имя: " + (data.name || ""),
-          "Телефон: " + (data.phone || ""),
-          "Бизнес: " + (data.business_name || ""),
-          "Чем занимается: " + (data.business || ""),
-          "Город: " + (data.city || ""),
-          "Что уже есть: " + (data.existing || ""),
-          "Тариф: " + (data.package || ""),
-          "Комментарий: " + (data.message || "")
-        ].join("\n");
-
-        window.location.href =
-          "mailto:79996362202@ya.ru?subject=" +
-          encodeURIComponent(subject) +
-          "&body=" +
-          encodeURIComponent(body);
-
-        formNote.textContent = "Если почтовое приложение не открылось, напишите напрямую на 79996362202@ya.ru.";
-        submit.disabled = false;
-        submit.textContent = original;
-      }
-    }
-
-    projectForm?.addEventListener("submit", sendForm);
-  </script>
-</body>
-</html>
-'''
-
-path = Path("/mnt/data/index.html")
-path.write_text(html, encoding="utf-8")
-print(f"Готово: {path}")
-print(f"Размер: {path.stat().st_size:,} байт")
