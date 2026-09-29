@@ -52,21 +52,46 @@ header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 8
 .hero p{font-size:18px;line-height:1.65;color:var(--muted);max-width:620px;margin:0 0 28px}
 .hero-actions{display:flex;flex-wrap:wrap;gap:10px}
 .hero-note{font-size:11px;color:var(--muted);margin-top:18px}
-.product-window{border:1px solid var(--line-strong);border-radius:28px;background:var(--surface);box-shadow:var(--shadow);padding:12px;transform:perspective(1200px) rotateY(-2deg);transition:transform .5s}
-.product-window:hover{transform:perspective(1200px) rotateY(0) translateY(-4px)}
-.window-top{height:34px;display:flex;align-items:center;gap:6px;padding:0 8px;color:var(--muted);font-size:10px}
-.window-dot{width:7px;height:7px;border:1px solid var(--line-strong);border-radius:50%}
-.app-preview{display:grid;grid-template-columns:150px 1fr;gap:10px;min-height:370px}
-.preview-side{border:1px solid var(--line);border-radius:19px;padding:14px;background:var(--surface2)}
-.preview-brand{font-size:9px;font-weight:800;letter-spacing:.12em;margin:4px 5px 20px}
-.preview-nav{display:grid;gap:4px}.preview-nav div{padding:9px 8px;border-radius:10px;font-size:10px;color:var(--muted);display:flex;align-items:center;gap:7px}.preview-nav div.active{background:var(--surface);color:var(--ink);box-shadow:0 4px 15px rgba(0,0,0,.05)}
-.preview-nav .icon{width:15px;height:15px}
-.preview-main{border:1px solid var(--line);border-radius:19px;padding:20px;background:var(--surface)}
-.preview-head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}.preview-head h3{font-size:20px;letter-spacing:-.05em;margin:0 0 5px}.preview-head p{font-size:10px;color:var(--muted);margin:0}
-.status-chip{font-size:9px;padding:6px 8px;border-radius:999px;border:1px solid var(--line);color:var(--green)}
-.mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0}.mini-card{border:1px solid var(--line);border-radius:13px;padding:12px}.mini-card small{display:block;font-size:9px;color:var(--muted);margin-bottom:7px}.mini-card b{font-size:18px;letter-spacing:-.05em}
-.assistant{border:1px solid var(--line);border-radius:17px;padding:15px;background:linear-gradient(145deg,var(--surface2),var(--surface))}
-.assistant-head{display:flex;gap:10px;align-items:center}.assistant-avatar{width:30px;height:30px;border:1px solid var(--line-strong);border-radius:10px;display:grid;place-items:center}.assistant b{font-size:11px}.assistant p{font-size:10px;line-height:1.55;color:var(--muted);margin:9px 0 12px}.assistant-action{font-size:10px;font-weight:650}
+
+.phone-stage{position:relative;min-height:650px;display:grid;place-items:center;overflow:visible}
+.phone-stage:before{content:"";position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(130,104,255,.22),rgba(73,151,255,.09) 42%,transparent 72%);filter:blur(10px);animation:phoneGlow 7s ease-in-out infinite}
+.phone-stage:after{content:"";position:absolute;width:300px;height:76px;border-radius:50%;background:rgba(0,0,0,.11);filter:blur(28px);bottom:16px;left:50%;transform:translateX(-50%);z-index:0}
+.phone-stage-art{min-height:650px;overflow:visible;display:grid;place-items:center}
+.hero-phone-art-wrap{position:relative;z-index:2;width:min(100%, 760px);transition:transform .5s cubic-bezier(.2,.75,.25,1),filter .45s;filter:drop-shadow(0 32px 40px rgba(0,0,0,.16));animation:heroPhoneFloat 7s ease-in-out infinite}
+.hero-phone-art-wrap:hover{transform:translateY(-8px) scale(1.012);filter:drop-shadow(0 40px 46px rgba(0,0,0,.20))}
+.hero-phone-art{display:block;width:100%;height:auto;max-height:760px;object-fit:contain}
+@keyframes heroPhoneFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@media (max-width: 980px){.phone-stage-art{min-height:auto;margin-top:24px}.hero-phone-art-wrap{width:min(100%, 640px)}}
+@media (max-width: 640px){.hero-phone-art-wrap{width:min(108vw, 620px);margin-left:-4vw}.hero-phone-art{max-height:none}}
+@media (prefers-reduced-motion: reduce){.hero-phone-art-wrap{animation:none;transition:none}.hero-phone-art-wrap:hover{transform:none}}
+
+@keyframes phoneGlow{50%{transform:scale(1.04);opacity:.82}}
+.interactive-phone{--phone-bg:#f7f7fa;--phone-surface:#fff;--phone-ink:#16171b;--phone-muted:#737780;--phone-line:rgba(20,20,25,.11);--phone-purple:#745cff;--phone-blue:#3f8cff;--phone-green:#23b978;--phone-orange:#f0a54a;--phone-pink:#eb6e9c;position:relative;z-index:2;width:min(100%,390px);aspect-ratio: .5 / 1;transform:perspective(1450px) rotateY(-8deg) rotateZ(.6deg);transition:transform .6s cubic-bezier(.2,.75,.25,1),filter .45s;filter:drop-shadow(0 38px 42px rgba(0,0,0,.23))}
+.interactive-phone:hover{transform:perspective(1450px) rotateY(-2deg) rotateZ(0) translateY(-7px) scale(1.012);filter:drop-shadow(0 46px 48px rgba(0,0,0,.25))}
+.interactive-phone.dark{--phone-bg:#090a0d;--phone-surface:#14161b;--phone-ink:#f7f8fb;--phone-muted:#9ea4b1;--phone-line:rgba(255,255,255,.10);--phone-purple:#8b7cff;--phone-blue:#69adff;--phone-green:#48daa0;--phone-orange:#ffc166;--phone-pink:#ff93bb}
+.phone-frame{position:absolute;inset:0;border-radius:48px;padding:7px;background:linear-gradient(145deg,#1d1e21,#09090b 30%,#34363a 53%,#101113 77%,#24262a);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22),inset 0 0 18px rgba(255,255,255,.06)}
+.phone-frame:before{content:"";position:absolute;left:-3px;top:185px;width:4px;height:62px;border-radius:4px 0 0 4px;background:#77797d;box-shadow:0 75px 0 #77797d,0 132px 0 #77797d;opacity:.72}
+.phone-frame:after{content:"";position:absolute;right:-3px;top:235px;width:4px;height:94px;border-radius:0 4px 4px 0;background:#77797d;opacity:.72}
+.phone-screen{height:100%;border-radius:42px;overflow:hidden;background:var(--phone-bg);color:var(--phone-ink);position:relative;border:1px solid rgba(255,255,255,.12)}
+.phone-island{position:absolute;z-index:4;top:8px;left:50%;transform:translateX(-50%);width:112px;height:28px;border-radius:20px;background:#050505;box-shadow:0 1px 0 rgba(255,255,255,.05)}
+.phone-status{height:43px;padding:14px 17px 0;display:flex;justify-content:space-between;align-items:center;font-size:9px;font-weight:700;letter-spacing:.01em}
+.phone-status .signals{display:flex;gap:5px;align-items:center}.phone-status svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.6}
+.phone-appbar{padding:10px 16px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--phone-line)}
+.phone-brand{display:flex;align-items:center;gap:8px}.phone-logo{width:30px;height:30px;border-radius:10px;background:linear-gradient(135deg,#9a8cff,#6553ee);display:grid;place-items:center;color:#fff}.phone-logo svg{width:16px;height:16px}.phone-brand b{display:block;font-size:11px;letter-spacing:-.02em}.phone-brand small{display:block;color:var(--phone-muted);font-size:7px;margin-top:1px}.phone-tool{width:30px;height:30px;border:1px solid var(--phone-line);border-radius:10px;background:var(--phone-surface);display:grid;place-items:center;color:var(--phone-muted)}
+.phone-content{position:absolute;inset:86px 0 45px;overflow:hidden;padding:16px 13px 16px}
+.phone-screen[data-view="chat"] .phone-content{padding-top:14px}.phone-screen[data-view="task"] .phone-content{padding-top:13px}
+.phone-view{display:none;height:100%;animation:phoneViewIn .45s ease}.phone-view.active{display:block}@keyframes phoneViewIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.phone-greeting{font-size:22px;line-height:1.06;letter-spacing:-.055em;margin:0 0 5px}.phone-sub{color:var(--phone-muted);font-size:9px;line-height:1.45;margin-bottom:12px}.phone-card{background:var(--phone-surface);border:1px solid var(--phone-line);border-radius:16px;padding:11px;margin-bottom:8px;box-shadow:0 7px 20px rgba(0,0,0,.05)}
+.phone-status-card{display:flex;gap:9px;align-items:center}.phone-status-icon{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;flex:0 0 30px}.phone-status-icon svg{width:15px;height:15px}.phone-status-icon.green{background:color-mix(in srgb,var(--phone-green) 14%,transparent);color:var(--phone-green)}.phone-status-icon.orange{background:color-mix(in srgb,var(--phone-orange) 16%,transparent);color:var(--phone-orange)}.phone-status-icon.blue{background:color-mix(in srgb,var(--phone-blue) 14%,transparent);color:var(--phone-blue)}
+.phone-status-card b{font-size:10px}.phone-status-card span{display:block;color:var(--phone-muted);font-size:8px;margin-top:2px}
+.phone-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.phone-metric{padding:10px;border:1px solid var(--phone-line);border-radius:14px;background:color-mix(in srgb,var(--phone-surface) 90%,var(--phone-bg))}.phone-metric strong{display:block;font-size:18px;letter-spacing:-.05em}.phone-metric span{display:block;margin-top:3px;color:var(--phone-muted);font-size:7px;line-height:1.25}.phone-label{font-size:9px;font-weight:750;margin:10px 2px 7px}
+.phone-action{padding:11px;border:1px solid var(--phone-line);background:var(--phone-surface);border-radius:15px;margin-bottom:7px}.phone-action-top{display:flex;gap:8px;align-items:center}.phone-mini-icon{width:29px;height:29px;border-radius:10px;display:grid;place-items:center;background:color-mix(in srgb,var(--phone-purple) 13%,transparent);color:var(--phone-purple);flex:0 0 29px}.phone-mini-icon svg{width:14px;height:14px}.phone-action b{font-size:9px}.phone-action p{margin:4px 0 0 37px;color:var(--phone-muted);font-size:7.5px;line-height:1.35}.phone-cta{margin-top:7px;height:30px;border:0;border-radius:10px;background:linear-gradient(135deg,var(--phone-purple),#5b48e9);color:#fff;font-size:8px;font-weight:700;width:100%}
+.phone-chat-bubble{max-width:88%;padding:10px 11px;border-radius:16px;font-size:8px;line-height:1.42;margin-bottom:8px}.phone-chat-bubble.me{margin-left:auto;background:var(--phone-purple);color:white;border-bottom-right-radius:5px}.phone-chat-bubble.ai{background:var(--phone-surface);border:1px solid var(--phone-line);border-bottom-left-radius:5px}.phone-chat-title{font-weight:800;font-size:10px;margin-bottom:3px}.phone-list{display:grid;gap:6px;margin-top:7px}.phone-list-item{display:flex;gap:7px;align-items:flex-start}.phone-num{width:18px;height:18px;border-radius:50%;background:color-mix(in srgb,var(--phone-purple) 12%,transparent);color:var(--phone-purple);display:grid;place-items:center;font-size:7px;font-weight:800;flex:0 0 18px}.phone-list-item b{font-size:7.8px}.phone-list-item span{display:block;color:var(--phone-muted);font-size:7px;margin-top:2px;line-height:1.3}
+.phone-result{display:flex;gap:8px;align-items:flex-start;padding:10px 11px;background:color-mix(in srgb,var(--phone-green) 8%,var(--phone-surface));border:1px solid color-mix(in srgb,var(--phone-green) 22%,var(--phone-line));border-radius:14px;margin-top:7px}.phone-result svg{width:16px;height:16px;color:var(--phone-green);flex:0 0 16px}.phone-result b{font-size:8px}.phone-result span{display:block;color:var(--phone-muted);font-size:7px;line-height:1.35;margin-top:2px}
+.phone-input{position:absolute;left:11px;right:11px;bottom:8px;height:31px;border:1px solid var(--phone-line);background:var(--phone-surface);border-radius:12px;display:flex;align-items:center;padding:0 9px;color:var(--phone-muted);font-size:7.5px}.phone-input span{margin-left:auto;width:22px;height:22px;border-radius:8px;display:grid;place-items:center;background:var(--phone-purple);color:#fff}.phone-input svg{width:11px;height:11px}
+.phone-nav{position:absolute;left:0;right:0;bottom:0;height:45px;background:color-mix(in srgb,var(--phone-bg) 88%,transparent);backdrop-filter:blur(12px);border-top:1px solid var(--phone-line);display:grid;grid-template-columns:repeat(4,1fr);padding:4px 7px 5px}.phone-nav button{border:0;background:none;color:var(--phone-muted);font-size:6.5px;display:grid;place-items:center;gap:2px;cursor:pointer}.phone-nav button.active{color:var(--phone-purple)}.phone-nav svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.7}
+.phone-controls{position:absolute;z-index:3;left:-32px;bottom:58px;display:flex;flex-direction:column;gap:7px}.phone-control{border:1px solid var(--line);background:color-mix(in srgb,var(--surface) 90%,transparent);color:var(--ink);backdrop-filter:blur(14px);border-radius:13px;padding:8px 10px;font-size:9px;box-shadow:0 10px 24px rgba(0,0,0,.08);transition:.22s;white-space:nowrap}.phone-control:hover{transform:translateX(3px)}.phone-control.active{box-shadow:0 10px 24px rgba(116,92,255,.13);border-color:color-mix(in srgb,var(--phone-purple,#745cff) 36%,var(--line))}.phone-caption{position:absolute;z-index:2;bottom:20px;right:-4px;padding:9px 12px;border:1px solid var(--line);background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(16px);border-radius:999px;font-size:10px;color:var(--muted);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+
 .section{padding:96px 0}.section-head{max-width:760px;margin-bottom:42px}.kicker{font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);font-weight:750;margin-bottom:14px}.section h2{font-size:clamp(36px,5vw,58px);line-height:1.03;letter-spacing:-.065em;margin:0 0 16px}.section-head p{font-size:17px;line-height:1.65;color:var(--muted);margin:0}
 .path-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .path-card{border:1px solid var(--line);background:var(--surface);border-radius:26px;padding:28px;transition:.25s}.path-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--line-strong)}
@@ -80,8 +105,8 @@ header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 8
 .cta{border-radius:30px;padding:68px 30px;background:var(--ink);color:var(--bg);text-align:center}.cta h2{max-width:760px;margin:0 auto 16px;font-size:clamp(38px,5vw,62px);line-height:1.02;letter-spacing:-.07em}.cta p{max-width:590px;margin:0 auto 26px;color:color-mix(in srgb,var(--bg) 58%,transparent);font-size:16px;line-height:1.6}.cta .btn-dark{background:var(--bg);color:var(--ink);border-color:var(--bg)}.cta .btn-soft{border-color:color-mix(in srgb,var(--bg) 22%,transparent);color:var(--bg);background:transparent}
 footer{padding:28px 0 45px;color:var(--muted);font-size:11px}.footer-inner{border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
 #installHelp{max-width:620px;margin:18px auto 0;padding:15px 17px;background:var(--surface);border:1px solid var(--line);border-radius:16px;color:var(--muted);font-size:12px;line-height:1.55;text-align:left;box-shadow:var(--shadow)}#installHelp b{display:block;margin-bottom:4px;color:var(--ink)}#closeInstallHelp{float:right;border:0;background:transparent;font-size:18px}
-@media(max-width:900px){.hero-grid,.promo-panel{grid-template-columns:1fr}.product-window{transform:none}.app-preview{min-height:0}.flow{grid-template-columns:1fr 1fr}.flow-step:nth-child(2){border-right:0}.flow-step:nth-child(3){border-top:1px solid var(--line)}.flow-step:nth-child(4){border-top:1px solid var(--line)}.flow-step:nth-child(5){grid-column:1/-1;border-top:1px solid var(--line);border-right:0}.flow-arrow{display:none}}
-@media(max-width:700px){.container{width:min(100% - 28px,1180px)}.links{display:none}.nav{height:60px}.nav-actions>a:first-child{display:none}.hero{padding:60px 0 25px}.hero h1{font-size:clamp(43px,13vw,64px)}.hero p{font-size:16px}.app-preview{grid-template-columns:1fr}.preview-side{display:none}.mini-grid{grid-template-columns:1fr 1fr}.mini-card:last-child{grid-column:1/-1}.section{padding:70px 0}.path-grid,.feature-grid{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.flow-step,.flow-step:nth-child(n){border-right:0;border-top:1px solid var(--line)}.flow-step:first-child{border-top:0}.flow-step:nth-child(5){grid-column:auto}.flow-num{margin-bottom:18px}.cta{padding:50px 20px}.theme-btn{width:36px;height:36px}}
+@media(max-width:900px){.hero-grid,.promo-panel{grid-template-columns:1fr}.interactive-phone{transform:perspective(1450px) rotateY(-3deg) rotateZ(.3deg)}.app-preview{min-height:0}.flow{grid-template-columns:1fr 1fr}.flow-step:nth-child(2){border-right:0}.flow-step:nth-child(3){border-top:1px solid var(--line)}.flow-step:nth-child(4){border-top:1px solid var(--line)}.flow-step:nth-child(5){grid-column:1/-1;border-top:1px solid var(--line);border-right:0}.flow-arrow{display:none}}
+@media(max-width:700px){.container{width:min(100% - 28px,1180px)}.links{display:none}.nav{height:60px}.nav-actions>a:first-child{display:none}.hero{padding:60px 0 25px}.hero h1{font-size:clamp(43px,13vw,64px)}.hero p{font-size:16px}.phone-stage{min-height:570px}.interactive-phone{width:min(100%,350px)}.phone-controls{left:auto;right:-4px;bottom:36px;flex-direction:row}.preview-side{display:none}.mini-grid{grid-template-columns:1fr 1fr}.mini-card:last-child{grid-column:1/-1}.section{padding:70px 0}.path-grid,.feature-grid{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.flow-step,.flow-step:nth-child(n){border-right:0;border-top:1px solid var(--line)}.flow-step:first-child{border-top:0}.flow-step:nth-child(5){grid-column:auto}.flow-num{margin-bottom:18px}.cta{padding:50px 20px}.theme-btn{width:36px;height:36px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 <style>.hero-price{display:flex;align-items:baseline;gap:9px;margin-top:18px;color:var(--muted);font-size:11px}.hero-price strong{font-size:18px;color:var(--ink);letter-spacing:-.04em}@media(max-width:700px){.hero-price{margin-top:15px}}</style></style>
 
@@ -114,35 +139,9 @@ footer{padding:28px 0 45px;color:var(--muted);font-size:11px}.footer-inner{borde
       <div class="hero-price"><strong>300 ₽</strong><span>в месяц · без сложного обучения</span></div>
     </div>
 
-    <div class="product-window" id="demo">
-      <div class="window-top"><i class="window-dot"></i><i class="window-dot"></i><i class="window-dot"></i><span style="margin-left:auto">Рабочий стол · Цифровой бизнес</span></div>
-      <div class="app-preview">
-        <aside class="preview-side">
-          <div class="preview-brand">ЦИФРОВОЙ БИЗНЕС</div>
-          <div class="preview-nav">
-            <div class="active"><svg class="icon" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10M9 20v-6h6v6"/></svg>Обзор</div>
-            <div><svg class="icon" viewBox="0 0 24 24"><path d="M4 17 10 11l4 4 6-8"/><path d="M16 7h4v4"/></svg>Продвижение</div>
-            <div><svg class="icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M16 5c2.8 0 5 2.2 5 5M17 14c2.2.8 3.7 2.8 4 5"/></svg>Клиенты</div>
-            <div><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 8h10M7 12h6M7 16h8"/></svg>Мой бизнес</div>
-            <div><svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M8 8h8v8H8z"/></svg>Сайт</div>
-          </div>
-        </aside>
-        <div class="preview-main">
-          <div class="preview-head">
-            <div><h3>Доброе утро</h3><p>Я проверил ваш бизнес и подготовил следующие шаги.</p></div>
-            <span class="status-chip">● Всё под контролем</span>
-          </div>
-          <div class="mini-grid">
-            <div class="mini-card"><small>Сайт</small><b>2</b><small>возможности</small></div>
-            <div class="mini-card"><small>Продвижение</small><b>1</b><small>точка роста</small></div>
-            <div class="mini-card"><small>Действия</small><b>3</b><small>готовы к запуску</small></div>
-          </div>
-          <div class="assistant">
-            <div class="assistant-head"><span class="assistant-avatar"><svg class="icon sm" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="5"/></svg></span><b>Ваш Помощник</b></div>
-            <p>На сайте можно усилить страницу услуги. В поиске есть возможность увеличить видимость. Я подготовил конкретные действия — вам останется подтвердить.</p>
-            <span class="assistant-action">Открыть план действий →</span>
-          </div>
-        </div>
+    <div class="phone-stage phone-stage-art" id="demo">
+      <div class="hero-phone-art-wrap">
+        <img class="hero-phone-art" src="./hero-app-phones.png" alt="Приложение «Цифровой бизнес» на современном iPhone: светлая и тёмная тема, ответы помощника и готовые действия" loading="eager" decoding="async">
       </div>
     </div>
   </div>
@@ -261,6 +260,39 @@ themeBtn.addEventListener('click',()=>{
  if(dark)delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme='dark';
  localStorage.setItem('db-theme',dark?'light':'dark');
 });
+
+// Интерактивный iPhone в первом экране: переключение темы и сценариев помощника.
+const heroPhone=document.getElementById('heroPhone');
+const phoneScreen=document.getElementById('phoneScreen');
+let heroPhoneTimer;
+function setHeroPhoneView(view){
+  if(!heroPhone||!phoneScreen)return;
+  phoneScreen.querySelectorAll('.phone-view').forEach(v=>v.classList.toggle('active',v.dataset.view===view));
+  phoneScreen.dataset.view=view;
+  heroPhone.querySelectorAll('[data-phone-view]').forEach(b=>b.classList.toggle('active',b.dataset.phoneView===view));
+}
+function resetHeroPhoneTimer(){
+  clearInterval(heroPhoneTimer);
+  const sequence=['home','chat','task'];
+  let i=Math.max(0,sequence.indexOf(phoneScreen?.dataset.view||'home'));
+  heroPhoneTimer=setInterval(()=>{i=(i+1)%sequence.length;setHeroPhoneView(sequence[i]);},5200);
+}
+function toggleHeroPhoneTheme(){
+  heroPhone?.classList.toggle('dark');
+}
+heroPhone?.querySelectorAll('[data-phone-view]').forEach(button=>button.addEventListener('click',()=>{
+  setHeroPhoneView(button.dataset.phoneView);
+  resetHeroPhoneTimer();
+}));
+heroPhone?.querySelectorAll('[data-phone-theme], #phoneTheme').forEach(button=>button.addEventListener('click',toggleHeroPhoneTheme));
+heroPhone?.querySelectorAll('[data-phone-action]').forEach(button=>button.addEventListener('click',()=>{
+  setHeroPhoneView(button.dataset.phoneAction);
+  resetHeroPhoneTimer();
+}));
+if(heroPhone){
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduced)resetHeroPhoneTimer();
+}
 if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
 </script>
 <style>
