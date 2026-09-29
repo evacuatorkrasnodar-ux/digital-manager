@@ -1,149 +1,304 @@
 <!doctype html>
-<html lang="ru" data-theme="light">
+<html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f5f5f7">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-192.svg">
 <title>Цифровой бизнес — Ваш бизнес. На новом уровне.</title>
 <meta name="description" content="Цифровая платформа для развития бизнеса: сайт, клиенты, продвижение и умный помощник в одном месте.">
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
-:root {
-    /* Светлая тема Apple */
-    --bg: #f5f5f7;
-    --ink: #1d1d1f;
-    --muted: #6e6e73;
-    --blue: #0071e3;
-    --line: rgba(29,29,31,.08);
-    --white: #fff;
-    --dash-side-bg: #f7f7f9;
-    --assistant-bg: #f5f9ff;
-    --assistant-border: #e0edff;
-    --transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+:root{
+ --bg:#f5f5f7;--surface:#fff;--surface2:#f0f0f3;--ink:#171719;--muted:#6f7077;
+ --line:rgba(20,20,22,.10);--line-strong:rgba(20,20,22,.16);--accent:#111;
+ --blue:#1677ff;--green:#16845b;--orange:#b66b00;--red:#c63c49;
+ --shadow:0 24px 70px rgba(20,20,25,.10);--radius:26px
 }
-
-[data-theme="dark"] {
-    /* Премиальная OLED темная тема */
-    --bg: #000000;
-    --ink: #f5f5f7;
-    --muted: #86868b;
-    --blue: #2997ff;
-    --line: rgba(255,255,255,.15);
-    --white: #1c1c1e;
-    --dash-side-bg: #121214;
-    --assistant-bg: #131722;
-    --assistant-border: #242f48;
+html[data-theme="dark"]{
+ --bg:#0b0b0d;--surface:#141416;--surface2:#1b1b1e;--ink:#f7f7f8;--muted:#a4a4ab;
+ --line:rgba(255,255,255,.10);--line-strong:rgba(255,255,255,.18);--accent:#fff;
+ --blue:#7db1ff;--green:#5fe0ac;--orange:#ffc56b;--red:#ff8290;
+ --shadow:0 28px 80px rgba(0,0,0,.35)
 }
-
-* { box-sizing: border-box; transition: var(--transition); }
-html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--bg); color: var(--ink); font-family: Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; -webkit-font-smoothing: antialiased; }
-a { color: inherit; text-decoration: none; }
-button { font: inherit; cursor: pointer; border: none; background: none; }
-.container { width: min(1160px, calc(100% - 48px)); margin: auto; }
-
-/* Шапка с эффектом размытия стекла */
-header { position: sticky; top: 0; z-index: 20; background: rgba(250,250,252,.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--line); }
-[data-theme="dark"] header { background: rgba(0,0,0,.75); }
-
-.nav { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-.brand { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; letter-spacing: -.4px; }
-.brand-icon { width: 30px; height: 30px; background: var(--ink); color: var(--bg); border-radius: 9px; display: grid; place-items: center; font-size: 12px; font-weight: 800; }
-.links { display: flex; gap: 28px; color: var(--muted); font-size: 12px; }
-.links a:hover { color: var(--blue); }
-.nav-actions { display: flex; gap: 12px; align-items: center; font-size: 12px; }
-
-/* Переключатель тем */
-.theme-toggle { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--line); color: var(--ink); font-size: 16px; cursor: pointer; }
-.theme-toggle:hover { transform: scale(1.05); }
-
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border-radius: 999px; font-size: 14px; font-weight: 600; text-decoration: none; }
-.btn-blue { background: var(--blue); color: #fff; }
-.btn-blue:hover { background: #0077ed; transform: translateY(-1px); }
-.btn-outline { border: 1px solid var(--line); background: rgba(255,255,255,.4); color: var(--ink); }
-[data-theme="dark"] .btn-outline { background: rgba(28,28,30,.5); }
-.btn-outline:hover { background: var(--white); }
-
-/* Главный блок */
-.hero { text-align: center; padding: 105px 0 70px; background: radial-gradient(ellipse at 50% 0%, var(--white) 0%, var(--bg) 68%); }
-.eyebrow { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: var(--assistant-bg); color: var(--blue); border-radius: 999px; padding: 8px 13px; font-size: 12px; font-weight: 600; margin-bottom: 26px; }
-.dot { width: 7px; height: 7px; background: #34a853; border-radius: 50%; animation: pulse 2s infinite; }
-@keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
-
-.hero h1 { font-size: clamp(46px, 7.2vw, 88px); line-height: .99; letter-spacing: -.075em; margin: 0 auto 24px; max-width: 950px; font-weight: 700; }
-.gradient { background: linear-gradient(100deg, #0071e3 10%, #6e56cf 80%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.hero p { font-size: clamp(17px, 2vw, 21px); line-height: 1.5; color: var(--muted); max-width: 650px; margin: 0 auto 30px; }
-.hero-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
-
-/* Визуализация Дашборда */
-.hero-visual { margin: 66px auto 0; max-width: 1000px; background: var(--white); border: 1px solid var(--line); border-radius: 30px; padding: 18px; box-shadow: 0 35px 90px rgba(0,0,0,.08); text-align: left; }
-.windowbar { display: flex; gap: 6px; padding: 4px 4px 16px; }
-.windowbar i { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); opacity: 0.5; }
-
-.dashboard { display: grid; grid-template-columns: 210px 1fr; gap: 16px; min-height: 380px; }
-@media(max-width:768px){ .dashboard { grid-template-columns: 1fr; } }
-.dash-side { background: var(--dash-side-bg); border: 1px solid var(--line); border-radius: 18px; padding: 20px; }
-.dash-logo { font-size: 11px; font-weight: 800; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 0.5px; }
-.dash-item { padding: 11px 12px; border-radius: 10px; font-size: 12px; color: var(--muted); margin: 4px 0; cursor: pointer; }
-.dash-item.active { background: var(--assistant-bg); color: var(--blue); font-weight: 600; border: 1px solid var(--assistant-border); }
-
-.dash-main { background: var(--white); border: 1px solid var(--line); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; justify-content: space-between; }
-.dash-top { display: flex; justify-content: space-between; gap: 15px; align-items: start; }
-.dash-top h3 { font-size: 23px; letter-spacing: -1px; margin: 0 0 7px; font-weight: 700; }
-.dash-top p { font-size: 12px; color: var(--muted); margin: 0; }
-.avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--assistant-bg); color: var(--blue); display: grid; place-items: center; font-weight: 700; font-size: 14px; border: 1px solid var(--assistant-border); }
-
-.metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
-.metric { border: 1px solid var(--line); border-radius: 14px; padding: 17px; background: rgba(255,255,255,0.02); }
-.metric small { display: block; color: var(--muted); font-size: 11px; margin-bottom: 10px; font-weight: 500; }
-.metric strong { font-size: 25px; letter-spacing: -1px; font-weight: 700; }
-.up { font-size: 11px; color: #24845d; margin-top: 7px; display: flex; align-items: center; gap: 4px; font-weight: 600; }
-
-/* Секция ИИ-помощника */
-.assistant-card { display: flex; gap: 15px; background: var(--assistant-bg); border: 1px solid var(--assistant-border); border-radius: 16px; padding: 18px; align-items: flex-start; position: relative; overflow: hidden; }
-.assistant-icon { flex: 0 0 38px; width: 38px; height: 38px; border-radius: 12px; background: var(--blue); color: white; display: grid; place-items: center; font-weight: 700; font-size: 16px; box-shadow: 0 4px 12px rgba(0,113,227,0.2); }
-.assistant-content { flex: 1; }
-.assistant-card b { font-size: 13px; display: block; margin-bottom: 2px; }
-.assistant-card p { font-size: 12px; line-height: 1.5; color: var(--ink); opacity: 0.9; margin: 7px 0 12px; min-height: 36px; }
-.chat-actions { display: flex; gap: 8px; }
-.btn-chat { background: var(--blue); color: white; padding: 6px 14px; border-radius: 8px; font-size: 11px; font-weight: 600; }
-.btn-chat-sec { background: var(--line); color: var(--ink); padding: 6px 14px; border-radius: 8px; font-size: 11px; font-weight: 600; }
-
-/* Стилизация остальных блоков */
-.section { padding: 95px 0; border-top: 1px solid var(--line); }
-.section-head { text-align: center; max-width: 730px; margin: 0 auto 48px; }
-.kicker { text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); font-size: 11px; font-weight: 700; margin-bottom: 15px; }
-.section h2 { font-size: clamp(34px, 5vw, 56px); line-height: 1.05; letter-spacing: -.06em; margin: 0 0 18px; font-weight: 700; }
-.section-head p { font-size: 18px; line-height: 1.55; color: var(--muted); margin: 0; }
-.feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-@media(max-width:768px){ .feature-grid { grid-template-columns: 1fr; } }
-.feature { background: var(--white); border: 1px solid var(--line); border-radius: 25px; padding: 30px; min-height: 260px; }
-.feature-icon { width: 48px; height: 48px; border-radius: 15px; background: var(--assistant-bg); color: var(--blue); display: grid; place-items: center; font-size: 22px; margin-bottom: 28px; border: 1px solid var(--assistant-border); }
-.feature h3 { font-size: 21px; letter-spacing: -.7px; margin: 0 0 12px; font-weight: 600; }
-.feature p { font-size: 14px; line-height: 1.6; color: var(--muted); margin: 0; }
-
-.cta { background: #1d1d1f; color: white; border-radius: 30px; padding: 70px 30px; text-align: center; }
-[data-theme="dark"] .cta { background: #1c1c1e; border: 1px solid var(--line); }
-.cta h2 { font-size: clamp(36px, 5vw, 60px); letter-spacing: -.065em; line-height: 1.04; margin: 0 auto 20px; max-width: 750px; font-weight: 700; }
-.cta p { color: #b7b7bd; font-size: 17px; line-height: 1.55; max-width: 570px; margin: 0 auto 28px; }
-.cta .btn-blue { background: white; color: #1d1d1f; }
-.cta .btn-blue:hover { background: #e8e8ed; }
-footer { padding: 35px 0; text-align: center; font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;transition:background .25s,color .25s}
+a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer;color:inherit}
+.container{width:min(1180px,calc(100% - 40px));margin:auto}
+.icon{width:22px;height:22px;display:block;fill:none;stroke:currentColor;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round}
+.icon.sm{width:18px;height:18px}.icon.lg{width:28px;height:28px}
+.icon-box{width:46px;height:46px;border:1px solid var(--line);border-radius:15px;display:grid;place-items:center;background:var(--surface);color:var(--ink)}
+.icon-box .icon{transition:transform .35s ease}.icon-box:hover .icon{transform:translateY(-2px) scale(1.05)}
+header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(22px);border-bottom:1px solid var(--line)}
+.nav{height:68px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.brand{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:-.03em}
+.brand-mark{width:32px;height:32px;border:1px solid var(--line-strong);border-radius:10px;display:grid;place-items:center;font-size:10px;font-weight:800}
+.links{display:flex;gap:26px;color:var(--muted);font-size:12px}.links a:hover{color:var(--ink)}
+.nav-actions{display:flex;align-items:center;gap:8px;font-size:12px}
+.theme-btn{width:38px;height:38px;border:1px solid var(--line);background:var(--surface);border-radius:12px;display:grid;place-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 18px;border-radius:999px;border:1px solid var(--line-strong);background:var(--surface);font-size:13px;font-weight:650;transition:.22s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 9px 24px rgba(0,0,0,.08)}
+.btn-dark{background:var(--ink);color:var(--bg);border-color:var(--ink)}.btn-dark:hover{opacity:.88}
+.btn-soft{background:transparent}
+.hero{padding:86px 0 42px}
+.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:54px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:11px;font-weight:650;letter-spacing:.02em;margin-bottom:22px}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 6px color-mix(in srgb,var(--green) 12%,transparent);animation:pulseDot 2.2s infinite}
+@keyframes pulseDot{50%{box-shadow:0 0 0 10px transparent}}
+.hero h1{font-size:clamp(48px,6.7vw,82px);line-height:.98;letter-spacing:-.075em;margin:0 0 24px;max-width:760px}
+.hero h1 em{font-style:normal;color:var(--muted)}
+.hero p{font-size:18px;line-height:1.65;color:var(--muted);max-width:620px;margin:0 0 28px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px}
+.hero-note{font-size:11px;color:var(--muted);margin-top:18px}
+.product-window{border:1px solid var(--line-strong);border-radius:28px;background:var(--surface);box-shadow:var(--shadow);padding:12px;transform:perspective(1200px) rotateY(-2deg);transition:transform .5s}
+.product-window:hover{transform:perspective(1200px) rotateY(0) translateY(-4px)}
+.window-top{height:34px;display:flex;align-items:center;gap:6px;padding:0 8px;color:var(--muted);font-size:10px}
+.window-dot{width:7px;height:7px;border:1px solid var(--line-strong);border-radius:50%}
+.app-preview{display:grid;grid-template-columns:150px 1fr;gap:10px;min-height:370px}
+.preview-side{border:1px solid var(--line);border-radius:19px;padding:14px;background:var(--surface2)}
+.preview-brand{font-size:9px;font-weight:800;letter-spacing:.12em;margin:4px 5px 20px}
+.preview-nav{display:grid;gap:4px}.preview-nav div{padding:9px 8px;border-radius:10px;font-size:10px;color:var(--muted);display:flex;align-items:center;gap:7px}.preview-nav div.active{background:var(--surface);color:var(--ink);box-shadow:0 4px 15px rgba(0,0,0,.05)}
+.preview-nav .icon{width:15px;height:15px}
+.preview-main{border:1px solid var(--line);border-radius:19px;padding:20px;background:var(--surface)}
+.preview-head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}.preview-head h3{font-size:20px;letter-spacing:-.05em;margin:0 0 5px}.preview-head p{font-size:10px;color:var(--muted);margin:0}
+.status-chip{font-size:9px;padding:6px 8px;border-radius:999px;border:1px solid var(--line);color:var(--green)}
+.mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0}.mini-card{border:1px solid var(--line);border-radius:13px;padding:12px}.mini-card small{display:block;font-size:9px;color:var(--muted);margin-bottom:7px}.mini-card b{font-size:18px;letter-spacing:-.05em}
+.assistant{border:1px solid var(--line);border-radius:17px;padding:15px;background:linear-gradient(145deg,var(--surface2),var(--surface))}
+.assistant-head{display:flex;gap:10px;align-items:center}.assistant-avatar{width:30px;height:30px;border:1px solid var(--line-strong);border-radius:10px;display:grid;place-items:center}.assistant b{font-size:11px}.assistant p{font-size:10px;line-height:1.55;color:var(--muted);margin:9px 0 12px}.assistant-action{font-size:10px;font-weight:650}
+.section{padding:96px 0}.section-head{max-width:760px;margin-bottom:42px}.kicker{font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);font-weight:750;margin-bottom:14px}.section h2{font-size:clamp(36px,5vw,58px);line-height:1.03;letter-spacing:-.065em;margin:0 0 16px}.section-head p{font-size:17px;line-height:1.65;color:var(--muted);margin:0}
+.path-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.path-card{border:1px solid var(--line);background:var(--surface);border-radius:26px;padding:28px;transition:.25s}.path-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--line-strong)}
+.path-card.featured{background:var(--ink);color:var(--bg)}.path-card.featured .muted,.path-card.featured p{color:color-mix(in srgb,var(--bg) 55%,transparent)}.path-card.featured .path-icon{border-color:color-mix(in srgb,var(--bg) 20%,transparent)}
+.path-icon{width:48px;height:48px;border:1px solid var(--line);border-radius:15px;display:grid;place-items:center;margin-bottom:26px}
+.path-card h3{font-size:25px;letter-spacing:-.05em;margin:0 0 10px}.path-card p{font-size:13px;line-height:1.65;color:var(--muted);margin:0 0 22px}.path-list{display:grid;gap:9px;margin:0 0 25px;padding:0;list-style:none}.path-list li{display:flex;gap:9px;font-size:12px}.check{width:16px;height:16px;border:1px solid var(--line-strong);border-radius:50%;display:grid;place-items:center;font-size:9px;flex:0 0 16px}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.feature{background:var(--surface);border:1px solid var(--line);border-radius:23px;padding:25px;min-height:220px;transition:.25s}.feature:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--line-strong)}.feature h3{font-size:18px;letter-spacing:-.04em;margin:20px 0 9px}.feature p{font-size:13px;line-height:1.65;color:var(--muted);margin:0}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.flow-step{padding:28px 20px 30px;border-right:1px solid var(--line);position:relative}.flow-step:last-child{border-right:0}.flow-num{font-size:10px;color:var(--muted);margin-bottom:34px}.flow-step h3{font-size:16px;letter-spacing:-.03em;margin:0 0 8px}.flow-step p{font-size:12px;line-height:1.55;color:var(--muted);margin:0}.flow-arrow{position:absolute;right:-7px;top:31px;width:13px;height:13px;background:var(--bg);border-right:1px solid var(--line);border-top:1px solid var(--line);transform:rotate(45deg);z-index:2}
+.promo-panel{display:grid;grid-template-columns:.72fr 1.28fr;gap:16px}.promo-copy{border-radius:26px;padding:32px;background:var(--ink);color:var(--bg)}.promo-copy h2{font-size:clamp(32px,4vw,48px);margin:0 0 16px}.promo-copy p{color:color-mix(in srgb,var(--bg) 55%,transparent);font-size:14px;line-height:1.65}.promo-board{border:1px solid var(--line);background:var(--surface);border-radius:26px;padding:20px}.task{display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}.task:last-child{border-bottom:0}.task-icon{width:30px;height:30px;border:1px solid var(--line);border-radius:9px;display:grid;place-items:center}.task b{font-size:12px}.task span{display:block;color:var(--muted);font-size:10px;margin-top:3px}.task-state{font-size:9px;color:var(--green);border:1px solid var(--line);border-radius:999px;padding:5px 7px}
+.cta{border-radius:30px;padding:68px 30px;background:var(--ink);color:var(--bg);text-align:center}.cta h2{max-width:760px;margin:0 auto 16px;font-size:clamp(38px,5vw,62px);line-height:1.02;letter-spacing:-.07em}.cta p{max-width:590px;margin:0 auto 26px;color:color-mix(in srgb,var(--bg) 58%,transparent);font-size:16px;line-height:1.6}.cta .btn-dark{background:var(--bg);color:var(--ink);border-color:var(--bg)}.cta .btn-soft{border-color:color-mix(in srgb,var(--bg) 22%,transparent);color:var(--bg);background:transparent}
+footer{padding:28px 0 45px;color:var(--muted);font-size:11px}.footer-inner{border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+#installHelp{max-width:620px;margin:18px auto 0;padding:15px 17px;background:var(--surface);border:1px solid var(--line);border-radius:16px;color:var(--muted);font-size:12px;line-height:1.55;text-align:left;box-shadow:var(--shadow)}#installHelp b{display:block;margin-bottom:4px;color:var(--ink)}#closeInstallHelp{float:right;border:0;background:transparent;font-size:18px}
+@media(max-width:900px){.hero-grid,.promo-panel{grid-template-columns:1fr}.product-window{transform:none}.app-preview{min-height:0}.flow{grid-template-columns:1fr 1fr}.flow-step:nth-child(2){border-right:0}.flow-step:nth-child(3){border-top:1px solid var(--line)}.flow-step:nth-child(4){border-top:1px solid var(--line)}.flow-step:nth-child(5){grid-column:1/-1;border-top:1px solid var(--line);border-right:0}.flow-arrow{display:none}}
+@media(max-width:700px){.container{width:min(100% - 28px,1180px)}.links{display:none}.nav{height:60px}.nav-actions>a:first-child{display:none}.hero{padding:60px 0 25px}.hero h1{font-size:clamp(43px,13vw,64px)}.hero p{font-size:16px}.app-preview{grid-template-columns:1fr}.preview-side{display:none}.mini-grid{grid-template-columns:1fr 1fr}.mini-card:last-child{grid-column:1/-1}.section{padding:70px 0}.path-grid,.feature-grid{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.flow-step,.flow-step:nth-child(n){border-right:0;border-top:1px solid var(--line)}.flow-step:first-child{border-top:0}.flow-step:nth-child(5){grid-column:auto}.flow-num{margin-bottom:18px}.cta{padding:50px 20px}.theme-btn{width:36px;height:36px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
-</head>
-<body>
 
-<header>
-    <div class="container nav">
-        <div class="brand">
-            <div class="brand-icon">🤖</div>
-            <span>Цифровой бизнес</span>
+<body>
+<header><div class="container nav">
+  <a class="brand" href="#"><span class="brand-mark">ЦБ</span>Цифровой бизнес</a>
+  <nav class="links"><a href="#paths">Для бизнеса</a><a href="#system">Система</a><a href="#flow">Как работает</a></nav>
+  <div class="nav-actions">
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Переключить тему">
+      <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    </button>
+    <a href="#system">Войти</a>
+    <button class="btn btn-dark" id="installBtn" type="button">Установить</button>
+  </div>
+</div></header>
+
+<main>
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow"><i class="live-dot"></i> Цифровой бизнес · помощник онлайн</div>
+      <h1>Ваш бизнес может работать <em>под контролем одного помощника.</em></h1>
+      <p>Сайт, поиск, Авито, соцсети, реклама, клиенты и заявки — не разрозненные инструменты, а одна система, которая показывает, что происходит и что делать дальше.</p>
+      <div class="hero-actions">
+        <a class="btn btn-dark" href="#paths">Создать цифровой бизнес <span>→</span></a>
+        <a class="btn" href="#demo">Посмотреть, как работает помощник</a>
+      </div>
+      <div class="hero-note">Вы подтверждаете важные действия. Система готовит работу и показывает результат.</div>
+    </div>
+
+    <div class="product-window" id="demo">
+      <div class="window-top"><i class="window-dot"></i><i class="window-dot"></i><i class="window-dot"></i><span style="margin-left:auto">Рабочий стол · Цифровой бизнес</span></div>
+      <div class="app-preview">
+        <aside class="preview-side">
+          <div class="preview-brand">ЦИФРОВОЙ БИЗНЕС</div>
+          <div class="preview-nav">
+            <div class="active"><svg class="icon" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10M9 20v-6h6v6"/></svg>Обзор</div>
+            <div><svg class="icon" viewBox="0 0 24 24"><path d="M4 17 10 11l4 4 6-8"/><path d="M16 7h4v4"/></svg>Продвижение</div>
+            <div><svg class="icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M16 5c2.8 0 5 2.2 5 5M17 14c2.2.8 3.7 2.8 4 5"/></svg>Клиенты</div>
+            <div><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 8h10M7 12h6M7 16h8"/></svg>Мой бизнес</div>
+            <div><svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M8 8h8v8H8z"/></svg>Сайт</div>
+          </div>
+        </aside>
+        <div class="preview-main">
+          <div class="preview-head">
+            <div><h3>Доброе утро</h3><p>Я проверил ваш бизнес и подготовил следующие шаги.</p></div>
+            <span class="status-chip">● Всё под контролем</span>
+          </div>
+          <div class="mini-grid">
+            <div class="mini-card"><small>Сайт</small><b>2</b><small>возможности</small></div>
+            <div class="mini-card"><small>Продвижение</small><b>1</b><small>точка роста</small></div>
+            <div class="mini-card"><small>Действия</small><b>3</b><small>готовы к запуску</small></div>
+          </div>
+          <div class="assistant">
+            <div class="assistant-head"><span class="assistant-avatar"><svg class="icon sm" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="5"/></svg></span><b>Ваш Помощник</b></div>
+            <p>На сайте можно усилить страницу услуги. В поиске есть возможность увеличить видимость. Я подготовил конкретные действия — вам останется подтвердить.</p>
+            <span class="assistant-action">Открыть план действий →</span>
+          </div>
         </div>
-        <div class="links">
-            <a href="#features">Возможности</a>
-            <a href="#demo">Интерфейс</a>
-            <a href="app.html">Открыть приложение</a>
-        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="paths">
+  <div class="container">
+    <div class="section-head"><div class="kicker">Два сценария</div><h2>Начните с той точки, где находится ваш бизнес.</h2><p>Неважно, запускаетесь вы с нуля или уже работаете. Система собирает цифровую инфраструктуру вокруг бизнеса, а не заставляет вас собирать её вручную.</p></div>
+    <div class="path-grid">
+      <article class="path-card featured">
+        <div class="path-icon"><svg class="icon lg" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/><path d="M6 6h12v12H6z"/></svg></div>
+        <h3>Создать цифровой бизнес</h3>
+        <p>Для нового бизнеса или ситуации, когда цифровой основы ещё нет.</p>
+        <ul class="path-list">
+          <li><span class="check">✓</span>Сайт и структура услуг</li>
+          <li><span class="check">✓</span>Соцсети и площадки</li>
+          <li><span class="check">✓</span>Поиск, реклама и продвижение</li>
+          <li><span class="check">✓</span>Помощник и единое управление</li>
+        </ul>
+        <a class="btn btn-soft" href="#start">Начать создание →</a>
+      </article>
+      <article class="path-card">
+        <div class="path-icon"><svg class="icon lg" viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg></div>
+        <h3>Продвигать существующий бизнес</h3>
+        <p>Если уже есть сайт, соцсети, Авито, реклама, CRM и клиенты — подключаем то, что работает, и находим следующий шаг.</p>
+        <ul class="path-list">
+          <li><span class="check">✓</span>Подключаем существующие каналы</li>
+          <li><span class="check">✓</span>Находим точки роста</li>
+          <li><span class="check">✓</span>Формируем план действий</li>
+          <li><span class="check">✓</span>Отслеживаем результат</li>
+        </ul>
+        <a class="btn" href="#start">Подключить бизнес →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="system">
+  <div class="container">
+    <div class="section-head"><div class="kicker">Внутри системы</div><h2>Не набор услуг. Рабочая система бизнеса.</h2><p>Каждый инструмент имеет смысл только тогда, когда помогает следующему действию: привлечь, получить, обработать или вернуть клиента.</p></div>
+    <div class="feature-grid">
+      <article class="feature"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 8h10M7 12h7M7 16h4"/></svg></div><h3>Сайт</h3><p>Страницы услуг, структура, контент и техническое состояние — под контролем системы.</p></article>
+      <article class="feature"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg></div><h3>Геолокация</h3><p>Регион, точки присутствия и локальный спрос учитываются там, где это влияет на клиентов.</p></article>
+      <article class="feature"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="M6.5 4h3l1.5 4-2 1.4a13 13 0 0 0 5.6 5.6l1.4-2 4 1.5v3c0 1-0.8 1.5-1.8 1.5C11 19 5 13 5 5.8 5 4.8 5.5 4 6.5 4Z"/></svg></div><h3>Звонки</h3><p>Обращения и источники звонков становятся частью общей картины, а не отдельной таблицей.</p></article>
+      <article class="feature"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h6M8 16h4"/></svg></div><h3>Заявки</h3><p>Помощник помогает не терять обращения и подсказывает, где требуется реакция.</p></article>
+      <article class="feature"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></svg></div><h3>Отзывы</h3><p>Репутация видна рядом с клиентским контекстом — можно вовремя ответить и разобрать проблему.</p></article>
+      <article class="feature"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19V5M4 19h17"/><path d="m7 15 4-4 3 2 5-7"/></svg></div><h3>Аналитика</h3><p>Показатели объясняются простым языком: что изменилось, почему важно и какое действие стоит проверить.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="flow">
+  <div class="container">
+    <div class="section-head"><div class="kicker">Главный цикл</div><h2>Вы говорите, чего хотите. Помощник переводит это в работу.</h2></div>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-num">01</div><h3>Хочу больше клиентов</h3><p>Фиксируем цель, а не отдельную услугу.</p><i class="flow-arrow"></i></div>
+      <div class="flow-step"><div class="flow-num">02</div><h3>Помощник анализирует</h3><p>Смотрит на сайт, каналы, заявки и изменения.</p><i class="flow-arrow"></i></div>
+      <div class="flow-step"><div class="flow-num">03</div><h3>Готовит работу</h3><p>Предлагает конкретное действие с понятным объяснением.</p><i class="flow-arrow"></i></div>
+      <div class="flow-step"><div class="flow-num">04</div><h3>Вы подтверждаете</h3><p>Важные изменения остаются под вашим контролем.</p><i class="flow-arrow"></i></div>
+      <div class="flow-step"><div class="flow-num">05</div><h3>Смотрим результат</h3><p>Система возвращает данные и предлагает следующий шаг.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container promo-panel">
+    <div class="promo-copy"><div class="kicker" style="color:inherit;opacity:.55">Продвижение бизнеса</div><h2>Не «SEO». Не «SMM». А следующий шаг.</h2><p>Помощник не продаёт вам набор каналов. Он показывает, где есть возможность роста, что именно изменить и какую работу можно подготовить.</p><a class="btn btn-dark" href="#start">Посмотреть сценарий →</a></div>
+    <div class="promo-board">
+      <div class="kicker">План на сейчас</div>
+      <div class="task"><div class="task-icon"><svg class="icon sm" viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg></div><div><b>Усилить страницу услуги</b><span>Добавить блоки, которые помогают клиенту принять решение</span></div><span class="task-state">готово</span></div>
+      <div class="task"><div class="task-icon"><svg class="icon sm" viewBox="0 0 24 24"><path d="M4 17 10 11l4 4 6-8"/><path d="M16 7h4v4"/></svg></div><div><b>Проверить видимость в поиске</b><span>Найти запросы, где есть потенциал роста</span></div><span class="task-state">проверить</span></div>
+      <div class="task"><div class="task-icon"><svg class="icon sm" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M9 7h6M9 17h6"/></svg></div><div><b>Протестировать площадку</b><span>Подготовить гипотезу для Авито или другого канала</span></div><span class="task-state">новое</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="start">
+  <div class="container"><div class="cta">
+    <div class="kicker" style="color:inherit;opacity:.5">Цифровой бизнес</div>
+    <h2>Пусть система показывает, что делать дальше.</h2>
+    <p>Начните с создания цифрового бизнеса или подключите то, что уже работает. Дальше Помощник собирает картину и ведёт вас по действиям.</p>
+    <div class="hero-actions" style="justify-content:center">
+      <a class="btn btn-dark" href="mailto:79996362202@ya.ru?subject=Создать%20цифровой%20бизнес">Создать цифровой бизнес →</a>
+      <a class="btn btn-soft" href="mailto:79996362202@ya.ru?subject=Продвигать%20существующий%20бизнес">Продвигать существующий</a>
+    </div>
+  </div></div>
+</section>
+</main>
+
+<footer><div class="container footer-inner"><span>© 2026 Цифровой бизнес</span><span>Сайт · Поиск · Авито · Соцсети · Реклама · Клиенты · Помощник</span></div></footer>
+
+<div id="installHelp" role="status" style="display:none"><b>Как установить приложение</b><span id="installHelpText">Добавьте приложение на главный экран телефона.</span><button type="button" id="closeInstallHelp" aria-label="Закрыть">×</button></div>
+
+<script>
+let deferredInstallPrompt=null;
+const installBtn=document.getElementById('installBtn');
+const help=document.getElementById('installHelp');
+const helpText=document.getElementById('installHelpText');
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;installBtn.textContent='Установить приложение';});
+installBtn.addEventListener('click',async()=>{
+ if(deferredInstallPrompt){deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;return;}
+ help.style.display='block';
+ const ua=navigator.userAgent;
+ if(/iPhone|iPad|iPod/i.test(ua)){helpText.textContent='На iPhone: нажмите «Поделиться» в Safari, затем «На экран Домой».';}
+ else if(/Android/i.test(ua)){helpText.textContent='На Android: откройте меню браузера (⋮) и выберите «Установить приложение» или «Добавить на главный экран».';}
+ else{helpText.textContent='Откройте меню браузера и выберите «Установить приложение», если такой пункт доступен.';}
+ help.scrollIntoView({behavior:'smooth',block:'nearest'});
+});
+document.getElementById('closeInstallHelp').addEventListener('click',()=>help.style.display='none');
+
+const themeBtn=document.getElementById('themeBtn');
+const savedTheme=localStorage.getItem('db-theme');
+if(savedTheme)document.documentElement.dataset.theme=savedTheme;
+themeBtn.addEventListener('click',()=>{
+ const dark=document.documentElement.dataset.theme==='dark';
+ if(dark)delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme='dark';
+ localStorage.setItem('db-theme',dark?'light':'dark');
+});
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
+</script>
+<style>
+#db-app-overlay{position:fixed;inset:0;z-index:999999;background:#090a0f;display:none}
+#db-app-overlay.is-open{display:block}
+#db-app-frame{display:block;width:100%;height:100%;border:0;background:#090a0f}
+#db-app-back{position:absolute;top:max(12px,env(safe-area-inset-top));left:14px;z-index:5;border:1px solid rgba(255,255,255,.22);background:rgba(15,17,25,.88);color:#fff;border-radius:999px;padding:10px 15px;font:600 13px Inter,-apple-system,BlinkMacSystemFont,sans-serif;box-shadow:0 8px 28px #0003;backdrop-filter:blur(14px)}
+body.db-app-active{overflow:hidden}
+@media(max-width:600px){#db-app-back{top:max(8px,env(safe-area-inset-top));left:8px;padding:9px 12px;font-size:12px}}
+</style>
+<div id="db-app-overlay" aria-hidden="true">
+  <button id="db-app-back" type="button">← На сайт</button>
+  <iframe id="db-app-frame" title="Цифровой бизнес — приложение" allow="clipboard-read; clipboard-write"></iframe>
+</div>
+<script>
+(()=> {
+ const overlay=document.getElementById('db-app-overlay');
+ const frame=document.getElementById('db-app-frame');
+ const appHtml="<!doctype html>\n<html lang=\"ru\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,viewport-fit=cover\">\n<meta name=\"theme-color\" content=\"#090a0f\">\n<link rel=\"manifest\" href=\"./manifest.json\">\n<meta name=\"mobile-web-app-capable\" content=\"yes\">\n<meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n<meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n<title>Цифровой бизнес — Кабинет</title>\n<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap\" rel=\"stylesheet\">\n<style>\n:root{--bg:#08090d;--panel:rgba(18,20,28,.72);--panel2:#11131b;--text:#f7f8fb;--muted:#9298a8;--line:rgba(255,255,255,.09);--accent:#8b7cff;--accent2:#43e6b0;--warn:#ffc85a;--danger:#ff6f86;--blue:#6fb6ff;--shadow:0 25px 80px rgba(0,0,0,.38);--r:24px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 65% -10%,rgba(139,124,255,.18),transparent 34%),radial-gradient(circle at 0 80%,rgba(67,230,176,.07),transparent 30%),var(--bg);color:var(--text);font:14px/1.5 Inter,system-ui,sans-serif;overflow-x:hidden}button,input{font:inherit}button{color:inherit}.app{display:flex;min-height:100vh}.sidebar{width:264px;position:fixed;inset:0 auto 0 0;padding:24px 16px;border-right:1px solid var(--line);background:rgba(8,9,13,.78);backdrop-filter:blur(24px);z-index:20}.brand{display:flex;align-items:center;gap:11px;padding:5px 10px 25px}.logo{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,#a69aff,#6254f2);box-shadow:0 0 35px rgba(139,124,255,.42);display:grid;place-items:center;font-weight:800}.brand b{font-size:13px;letter-spacing:.08em}.brand small{display:block;color:var(--muted);font-size:10px;margin-top:2px}.nav{display:grid;gap:4px}.nav button{border:0;background:transparent;padding:11px 12px;border-radius:14px;display:flex;align-items:center;gap:12px;color:#aeb3c1;cursor:pointer;text-align:left;transition:.25s}.nav button:hover{background:rgba(255,255,255,.05);color:#fff;transform:translateX(2px)}.nav button.active{background:linear-gradient(90deg,rgba(139,124,255,.18),rgba(139,124,255,.05));color:#fff;box-shadow:inset 2px 0 var(--accent)}.ico{width:20px;text-align:center;font-size:17px}.side-bottom{position:absolute;left:16px;right:16px;bottom:20px}.support{border:1px solid var(--line);background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border-radius:18px;padding:14px}.support .online{color:var(--accent2);font-size:11px}.support b{display:block;margin:5px 0 2px}.support small{color:var(--muted)}.main{margin-left:264px;width:calc(100% - 264px);padding:22px 30px 80px}.topbar{height:58px;display:flex;align-items:center;justify-content:space-between;max-width:1420px;margin:auto}.crumb{color:var(--muted);font-size:12px}.top-actions{display:flex;gap:8px}.circle{width:40px;height:40px;border:1px solid var(--line);background:rgba(255,255,255,.04);border-radius:13px;cursor:pointer}.avatar{background:linear-gradient(135deg,#d9d2ff,#7568ff);color:#19162d;font-weight:800}.view{max-width:1420px;margin:10px auto 0}.page{display:none;animation:fade .45s ease}.page.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}.hero{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:32px;padding:32px;background:linear-gradient(135deg,rgba(139,124,255,.16),rgba(255,255,255,.035) 45%,rgba(67,230,176,.05));box-shadow:var(--shadow)}.hero:before{content:\"\";position:absolute;width:330px;height:330px;border-radius:50%;right:-80px;top:-150px;background:rgba(139,124,255,.25);filter:blur(55px);animation:float 7s ease-in-out infinite}.hero-grid{display:grid;grid-template-columns:1.45fr .8fr;gap:28px;position:relative}.eyebrow{color:#b9b2ff;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}.hero h1{font-size:clamp(30px,4vw,52px);line-height:1.02;letter-spacing:-.05em;margin:12px 0}.hero p{max-width:650px;color:#b7bcc9;font-size:15px}.assistant-line{display:flex;align-items:center;gap:9px;margin-top:22px;color:#dfe2ea}.pulse{width:9px;height:9px;border-radius:50%;background:var(--accent2);box-shadow:0 0 0 7px rgba(67,230,176,.1),0 0 25px var(--accent2);animation:pulse 2s infinite}@keyframes pulse{50%{box-shadow:0 0 0 12px rgba(67,230,176,.02),0 0 30px var(--accent2)}}.orb-wrap{display:grid;place-items:center;min-height:240px}.orb{width:190px;height:190px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#eeeaff 0 3%,#a79cff 12%,#6d5cf5 40%,#241d67 70%,transparent 71%),radial-gradient(circle,#6d5cf5,transparent 70%);filter:drop-shadow(0 0 55px rgba(139,124,255,.55));animation:float 6s ease-in-out infinite;position:relative}.orb:after,.orb:before{content:\"\";position:absolute;inset:-22px;border:1px solid rgba(139,124,255,.18);border-radius:50%;animation:spin 12s linear infinite}.orb:before{inset:-42px;animation-duration:18s;border-color:rgba(67,230,176,.12)}@keyframes spin{to{transform:rotate(360deg)}}@keyframes float{50%{transform:translateY(-8px)}}.grid{display:grid;gap:14px}.stats{grid-template-columns:repeat(4,1fr);margin-top:14px}.card{border:1px solid var(--line);background:var(--panel);backdrop-filter:blur(20px);border-radius:var(--r);padding:20px;box-shadow:0 15px 50px rgba(0,0,0,.16)}.stat .label{color:var(--muted);font-size:12px}.stat .num{font-size:29px;font-weight:800;letter-spacing:-.04em;margin:8px 0 3px}.up{color:var(--accent2);font-size:11px}.section-head{display:flex;justify-content:space-between;align-items:center;margin:28px 2px 12px}.section-head h2{font-size:19px;letter-spacing:-.025em;margin:0}.section-head span{color:var(--muted);font-size:12px}.two{grid-template-columns:1.15fr .85fr}.three{grid-template-columns:repeat(3,1fr)}.action{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);align-items:center}.action:last-child{border:0}.badge{width:38px;height:38px;border-radius:13px;display:grid;place-items:center;background:rgba(139,124,255,.13)}.action-main{flex:1}.action-main b{font-size:13px}.action-main p{margin:3px 0 0;color:var(--muted);font-size:12px}.btn{border:1px solid var(--line);background:rgba(255,255,255,.06);padding:9px 13px;border-radius:11px;cursor:pointer;transition:.2s}.btn:hover{background:rgba(255,255,255,.11);transform:translateY(-1px)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,#9182ff,#6656e9);box-shadow:0 8px 25px rgba(111,91,235,.25)}.status-list{display:grid;gap:10px}.status{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border-radius:15px;background:rgba(255,255,255,.035)}.status-left{display:flex;align-items:center;gap:10px}.dot{width:8px;height:8px;border-radius:50%}.green{background:var(--accent2);box-shadow:0 0 14px var(--accent2)}.yellow{background:var(--warn);box-shadow:0 0 14px var(--warn)}.blue{background:var(--blue);box-shadow:0 0 14px var(--blue)}.muted{color:var(--muted)}.bar{height:7px;border-radius:99px;background:#242733;overflow:hidden;margin:14px 0 7px}.bar i{display:block;height:100%;width:76%;border-radius:99px;background:linear-gradient(90deg,#6f60ef,#a395ff)}.table{width:100%;border-collapse:collapse}.table th,.table td{text-align:left;padding:14px 8px;border-bottom:1px solid var(--line);font-size:12px}.table th{color:var(--muted);font-weight:500}.review{display:flex;gap:13px}.stars{letter-spacing:2px;color:#ffc85a}.big-rating{font-size:42px;font-weight:800;letter-spacing:-.06em}.keyword{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line)}.rank{font-weight:800;font-size:17px}.rank.good{color:var(--accent2)}.rank.mid{color:var(--warn)}.rank.bad{color:var(--danger)}.tag{font-size:10px;padding:5px 8px;border-radius:8px;background:rgba(67,230,176,.1);color:var(--accent2)}.business-form{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:grid;gap:7px}.field label{font-size:11px;color:var(--muted)}.field input{width:100%;border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:13px;padding:12px;color:#fff;outline:none}.field input:focus{border-color:rgba(139,124,255,.7);box-shadow:0 0 0 4px rgba(139,124,255,.08)}.wide{grid-column:1/-1}.modal{position:fixed;inset:0;background:rgba(0,0,0,.62);backdrop-filter:blur(12px);display:none;align-items:flex-end;justify-content:center;z-index:50}.modal.show{display:flex}.chat{width:min(720px,100%);max-height:88vh;background:#11131a;border:1px solid var(--line);border-radius:28px 28px 0 0;box-shadow:0 -30px 100px rgba(0,0,0,.55);padding:20px}.chat-head{display:flex;justify-content:space-between;align-items:center}.chat-body{padding:22px 4px;display:grid;gap:12px;max-height:55vh;overflow:auto}.bubble{max-width:78%;padding:13px 15px;border-radius:17px;background:#1a1d27;color:#dfe2e9}.bubble.ai{border-top-left-radius:5px}.bubble.me{justify-self:end;background:linear-gradient(135deg,#7667ef,#5748d5);border-top-right-radius:5px}.chat-input{display:flex;gap:8px}.chat-input input{flex:1;background:#1a1d26;border:1px solid var(--line);border-radius:14px;padding:13px;color:#fff;outline:none}.bottom{display:none}.toast{position:fixed;right:24px;bottom:24px;padding:13px 16px;background:#171a23;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);transform:translateY(20px);opacity:0;pointer-events:none;transition:.3s;z-index:70}.toast.show{transform:none;opacity:1}.demo{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);font-size:10px;color:#737989;z-index:15;background:rgba(8,9,13,.7);padding:5px 10px;border:1px solid var(--line);border-radius:99px;backdrop-filter:blur(10px)}\n@media(max-width:1050px){.sidebar{width:220px}.main{margin-left:220px;width:calc(100% - 220px);padding:18px}.hero-grid{grid-template-columns:1fr}.orb-wrap{display:none}.stats{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}.three{grid-template-columns:1fr}}\n@media(max-width:720px){body{padding-bottom:74px}.sidebar{display:none}.main{margin:0;width:100%;padding:12px 12px 45px}.topbar{height:50px}.crumb{font-size:11px}.circle{width:37px;height:37px}.view{margin-top:5px}.hero{padding:22px;border-radius:25px}.hero h1{font-size:34px}.hero p{font-size:13px}.stats{grid-template-columns:1fr 1fr;gap:9px}.card{padding:16px;border-radius:19px}.stat .num{font-size:24px}.section-head{margin-top:22px}.business-form{grid-template-columns:1fr}.wide{grid-column:auto}.bottom{position:fixed;display:grid;grid-template-columns:repeat(4,1fr);bottom:0;left:0;right:0;height:70px;padding:7px 8px calc(7px + env(safe-area-inset-bottom));background:rgba(10,11,16,.9);border-top:1px solid var(--line);backdrop-filter:blur(24px);z-index:30}.bottom button{border:0;background:transparent;color:#818797;font-size:10px;display:grid;place-items:center;gap:2px}.bottom button.active{color:#fff}.bottom .ico{font-size:18px}.table{min-width:560px}.table-wrap{overflow:auto}.chat{border-radius:25px 25px 0 0}.demo{bottom:76px;font-size:9px}}\n\n.scan-result{display:none;margin-top:12px;padding:20px;border:1px solid rgba(139,124,255,.24);border-radius:20px;background:linear-gradient(145deg,rgba(139,124,255,.10),rgba(255,255,255,.025));animation:fade .45s ease}.scan-result.show{display:block}.result-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:#aaa0ff;font-weight:800}.scan-result h3{font-size:25px;letter-spacing:-.04em;margin:6px 0}.scan-result>p{color:#b9becb;margin:0 0 17px}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}.result-grid>div{padding:12px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06)}.result-grid span{display:block;color:#858c9c;font-size:10px;margin-bottom:4px}.result-grid b{font-size:12px}.result-note{font-size:10px;color:#737b8e;margin-bottom:14px;line-height:1.55}@media(max-width:650px){.result-grid{grid-template-columns:1fr}}\n.onboarding{position:fixed;inset:0;background:radial-gradient(circle at 50% 15%,rgba(139,124,255,.20),transparent 36%),rgba(4,5,9,.90);backdrop-filter:blur(22px);z-index:100;display:flex;align-items:center;justify-content:center;padding:18px;transition:.45s}.onboarding.hide{opacity:0;pointer-events:none;transform:scale(1.02)}.onboard-card{width:min(760px,100%);border:1px solid rgba(255,255,255,.12);border-radius:32px;background:linear-gradient(145deg,rgba(23,25,35,.96),rgba(12,14,20,.96));box-shadow:0 40px 120px rgba(0,0,0,.58);padding:34px}.onboard-top{display:flex;justify-content:space-between;align-items:center}.mini-logo{width:44px;height:44px;border-radius:15px;background:linear-gradient(135deg,#a69aff,#6254f2);display:grid;place-items:center;font-weight:900;box-shadow:0 0 35px rgba(139,124,255,.38)}.onboard-card h2{font-size:clamp(30px,5vw,48px);line-height:1.02;letter-spacing:-.05em;margin:28px 0 12px}.onboard-card>p{color:#aeb4c3;max-width:610px;font-size:15px}.onboard-form{display:grid;gap:12px;margin-top:24px}.onboard-input{border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.045);border-radius:15px;padding:14px 15px;color:#fff;outline:none;width:100%}.onboard-input:focus{border-color:rgba(139,124,255,.72);box-shadow:0 0 0 4px rgba(139,124,255,.08)}.onboard-actions{display:flex;gap:10px;align-items:center;margin-top:14px}.scan-state{display:none;margin-top:20px;padding:18px;border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(255,255,255,.035)}.scan-state.show{display:block}.scan-line{height:7px;border-radius:99px;background:#262936;overflow:hidden;margin:13px 0}.scan-line i{display:block;height:100%;width:20%;background:linear-gradient(90deg,#6f60ef,#43e6b0);animation:scan 1.8s ease forwards}@keyframes scan{to{width:100%}}.install-chip{display:none;border:1px solid rgba(139,124,255,.35);background:rgba(139,124,255,.10);color:#dcd8ff;border-radius:12px;padding:8px 11px;cursor:pointer;font-size:11px}.install-chip.show{display:block}.context-note{font-size:11px;color:#777e90}.reveal{animation:fade .5s ease both}.welcome-line{display:inline-flex;align-items:center;gap:8px;margin-top:10px;color:#dfe2ea}.spark{animation:spin 6s linear infinite;display:inline-block}.mobile-install{display:none}\n@media(max-width:720px){.onboard-card{padding:25px 20px;border-radius:26px}.onboard-card h2{margin-top:22px}.onboard-actions{flex-direction:column;align-items:stretch}.mobile-install{display:block}}\n\n/* PREMIUM POLISH — refined spacing, surfaces, typography and interactions */\n:root{\n --bg:#07080c;--panel:rgba(17,19,27,.82);--panel2:#11131b;--text:#f7f8fc;--muted:#969cad;\n --line:rgba(255,255,255,.075);--accent:#9b8cff;--accent2:#5be7bd;--warn:#ffd17a;\n --danger:#ff8297;--blue:#82bdff;--shadow:0 28px 90px rgba(0,0,0,.42);--r:22px\n}\nbody{\n background:\n radial-gradient(ellipse at 78% -12%,rgba(125,105,255,.19),transparent 38%),\n radial-gradient(ellipse at -10% 55%,rgba(50,208,164,.065),transparent 32%),\n #07080c;\n letter-spacing:-.012em\n}\n.sidebar{\n background:rgba(7,8,12,.86);border-right-color:rgba(255,255,255,.065);\n box-shadow:12px 0 60px rgba(0,0,0,.10)\n}\n.brand{padding:8px 10px 30px}\n.logo,.mini-logo{\n background:linear-gradient(145deg,#c3baff 0%,#8d7bff 42%,#5b4be0 100%);\n box-shadow:0 8px 28px rgba(123,103,255,.25),inset 0 1px rgba(255,255,255,.4)\n}\n.brand b{letter-spacing:.11em;font-size:11px}\n.nav{gap:6px}\n.nav button{padding:12px 13px;border:1px solid transparent;font-size:13px}\n.nav button.active{border-color:rgba(160,145,255,.12);background:linear-gradient(100deg,rgba(139,124,255,.19),rgba(139,124,255,.045));box-shadow:inset 2px 0 #a99cff,0 6px 24px rgba(0,0,0,.10)}\n.nav button:hover{transform:translateX(3px);background:rgba(255,255,255,.045)}\n.main{padding-top:25px}\n.topbar{margin-bottom:18px}\n.crumb{font-size:11px;letter-spacing:.015em}\n.circle{background:rgba(255,255,255,.035);border-color:rgba(255,255,255,.09);transition:all .22s ease}\n.circle:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.17);transform:translateY(-1px)}\n.hero{\n min-height:310px;padding:clamp(26px,3.4vw,46px);\n border-color:rgba(174,160,255,.15);\n background:linear-gradient(118deg,rgba(126,108,255,.15),rgba(20,21,31,.68) 52%,rgba(67,230,176,.045));\n box-shadow:0 30px 100px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.055)\n}\n.hero:before{background:rgba(139,124,255,.22);filter:blur(68px)}\n.eyebrow{font-size:10px;letter-spacing:.16em;color:#bcb3ff}\n.hero h1{font-weight:700;letter-spacing:-.065em;line-height:.99}\n.hero p{line-height:1.8;color:#b9becc;max-width:590px}\n.orb{transform:scale(1.03);background:radial-gradient(circle at 34% 27%,#fff 0 2%,#c6bdff 9%,#9280ff 20%,#6150df 43%,#21194f 68%,transparent 70%);filter:drop-shadow(0 0 45px rgba(139,124,255,.42))}\n.card{\n background:linear-gradient(145deg,rgba(22,24,33,.84),rgba(14,16,23,.84));\n border-color:rgba(255,255,255,.075);box-shadow:0 12px 40px rgba(0,0,0,.13),inset 0 1px rgba(255,255,255,.025);\n transition:border-color .22s,transform .22s,background .22s\n}\n.card:hover{border-color:rgba(255,255,255,.12)}\n.stats .card{min-height:132px}\n.stat .label{font-size:11px;letter-spacing:.01em}\n.stat .num{font-size:31px;letter-spacing:-.055em}\n.section-head{margin-top:32px;margin-bottom:14px}\n.section-head h2{font-size:18px;letter-spacing:-.04em}\n.btn{font-size:12px;font-weight:600;letter-spacing:-.01em;border-color:rgba(255,255,255,.10);background:rgba(255,255,255,.045);padding:10px 15px}\n.btn.primary{background:linear-gradient(135deg,#a397ff 0%,#7967f5 55%,#6252dc 100%);box-shadow:0 8px 24px rgba(111,91,235,.22),inset 0 1px rgba(255,255,255,.24);color:white}\n.btn.primary:hover{box-shadow:0 12px 32px rgba(111,91,235,.32);filter:brightness(1.07)}\n.action{padding:17px 0}\n.badge{background:linear-gradient(145deg,rgba(153,136,255,.16),rgba(153,136,255,.055));border:1px solid rgba(153,136,255,.10);font-size:15px}\n.action-main b{font-size:12px;letter-spacing:-.015em}\n.action-main p{line-height:1.65}\n.status{background:rgba(255,255,255,.027);border:1px solid rgba(255,255,255,.035);font-size:12px}\n.field input,.onboard-input,.chat-input input{background:rgba(255,255,255,.035);border-color:rgba(255,255,255,.09);transition:border-color .2s,box-shadow .2s}\n.field input:focus,.onboard-input:focus,.chat-input input:focus{border-color:rgba(164,149,255,.7);box-shadow:0 0 0 4px rgba(139,124,255,.09)}\n.onboard-card{background:linear-gradient(145deg,rgba(23,25,35,.98),rgba(10,11,17,.98));border-color:rgba(255,255,255,.12);box-shadow:0 40px 140px rgba(0,0,0,.65)}\n.onboard-card h2{font-weight:700;letter-spacing:-.065em}\n.onboard-card>p{line-height:1.8}\n.modal{align-items:center;padding:18px}\n.chat{border-radius:26px;max-height:86vh;border-color:rgba(255,255,255,.10);box-shadow:0 30px 120px rgba(0,0,0,.65)}\n.chat-body{scrollbar-width:thin}\n.bubble{font-size:13px;line-height:1.7}\n.toast{font-size:12px;backdrop-filter:blur(22px)}\n.demo{letter-spacing:.08em;font-size:9px}\n.page.active{animation:premiumIn .32s cubic-bezier(.2,.7,.2,1)}\n@keyframes premiumIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}\n@media(max-width:1050px){.main{padding:18px 20px 70px}.hero{min-height:unset}}\n@media(max-width:720px){\n .main{padding:10px 12px 48px}\n .hero{padding:24px 21px;border-radius:24px}\n .hero h1{font-size:clamp(32px,9vw,40px)}\n .hero p{line-height:1.7}\n .stats .card{min-height:118px}\n .stat .num{font-size:25px}\n .section-head{align-items:flex-start;gap:10px}\n .section-head h2{font-size:17px}\n .bottom{background:rgba(8,9,14,.94);border-top-color:rgba(255,255,255,.08);box-shadow:0 -12px 40px rgba(0,0,0,.2)}\n .bottom button{font-weight:500}\n .modal{padding:0;align-items:flex-end}\n .chat{border-radius:25px 25px 0 0}\n .onboard-card{max-height:92vh;overflow:auto}\n}\n@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}\n\n</style>\n\n/* PREMIUM POLISH PASS — refined hierarchy, responsive rhythm, and micro-interactions */\n<style id=\"premium-polish-pass\">\n:root{\n  --premium-ink:#f6f5ff;\n  --premium-muted:#9d9bb5;\n  --premium-line:rgba(255,255,255,.085);\n  --premium-glass:rgba(21,20,39,.78);\n  --premium-violet:#9b8cff;\n  --premium-violet-strong:#7662f6;\n}\nhtml{scroll-behavior:smooth}\nbody{\n  background:\n    radial-gradient(ellipse at 72% -10%,rgba(118,98,246,.16),transparent 38%),\n    radial-gradient(ellipse at 0% 45%,rgba(76,112,218,.07),transparent 32%),\n    #090910;\n  color:var(--premium-ink);\n  -webkit-font-smoothing:antialiased;\n}\nbutton,a,input,textarea,select{ -webkit-tap-highlight-color:transparent }\nbutton,a{transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease,background .2s ease,color .2s ease}\nbutton:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{\n  outline:2px solid #a99cff;outline-offset:3px\n}\n.app{isolation:isolate}\n.sidebar{\n  background:linear-gradient(180deg,rgba(17,16,31,.97),rgba(11,11,21,.97));\n  border-right:1px solid var(--premium-line);\n  box-shadow:12px 0 60px rgba(0,0,0,.12)\n}\n.brand{padding-bottom:26px}\n.brand .logo{\n  box-shadow:0 0 0 1px rgba(173,159,255,.25),0 8px 28px rgba(118,98,246,.22);\n  background:linear-gradient(145deg,#a99bff,#6c58e8)\n}\n.nav button{\n  position:relative;border:1px solid transparent;\n  letter-spacing:-.01em;font-weight:550\n}\n.nav button .ico{transition:transform .2s ease}\n.nav button:hover .ico{transform:translateY(-1px) scale(1.06)}\n.nav button.active{\n  background:linear-gradient(100deg,rgba(133,113,255,.19),rgba(133,113,255,.055));\n  border-color:rgba(157,140,255,.17);\n  box-shadow:inset 3px 0 0 #9c8bff,0 8px 24px rgba(0,0,0,.12)\n}\n.main,.content,.page-content{min-width:0}\n.topbar,.top-bar{\n  backdrop-filter:blur(18px);\n  background:rgba(9,9,16,.72);\n  border-bottom:1px solid var(--premium-line)\n}\nh1,h2,h3,h4{letter-spacing:-.04em;text-wrap:balance}\np{line-height:1.65}\n.card,.panel,.stat-card,.metric-card,.widget,.task-card,.client-card,.feature-card{\n  border:1px solid var(--premium-line);\n  background:linear-gradient(145deg,rgba(28,26,48,.86),rgba(16,15,29,.88));\n  box-shadow:0 16px 48px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.025);\n  backdrop-filter:blur(14px);\n  transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease\n}\n.card:hover,.panel:hover,.stat-card:hover,.metric-card:hover,.widget:hover,.task-card:hover,.client-card:hover,.feature-card:hover{\n  border-color:rgba(161,146,255,.22);\n  box-shadow:0 22px 58px rgba(0,0,0,.24),0 0 0 1px rgba(161,146,255,.025)\n}\n.btn,.button,.primary,.btn-primary{\n  font-weight:650;letter-spacing:-.015em;\n  box-shadow:0 7px 22px rgba(104,82,235,.17)\n}\n.btn.primary,.button.primary,.btn-primary{\n  background:linear-gradient(135deg,#9b8aff 0%,#7660ef 100%);\n  border:1px solid rgba(210,202,255,.22);\n  color:#fff\n}\n.btn.primary:hover,.button.primary:hover,.btn-primary:hover{\n  transform:translateY(-2px);\n  box-shadow:0 12px 30px rgba(118,96,239,.3)\n}\ninput,textarea,select{\n  background:rgba(8,8,17,.62)!important;\n  border-color:rgba(255,255,255,.105)!important;\n  color:#f6f5ff!important\n}\ninput::placeholder,textarea::placeholder{color:#77758f!important}\n.badge,.pill,.tag{letter-spacing:.01em}\ntable{border-collapse:separate;border-spacing:0}\nth{color:#aaa7c2;font-weight:600}\ntd,th{border-bottom:1px solid rgba(255,255,255,.055)}\n#modal,.modal,.overlay{\n  backdrop-filter:blur(12px);\n  background:rgba(3,3,9,.72)\n}\n.chat,.chat-window,.assistant-panel{\n  box-shadow:0 28px 100px rgba(0,0,0,.48);\n  border:1px solid rgba(166,151,255,.18)\n}\n::-webkit-scrollbar{width:9px;height:9px}\n::-webkit-scrollbar-track{background:transparent}\n::-webkit-scrollbar-thumb{background:rgba(153,145,191,.22);border:2px solid transparent;background-clip:padding-box;border-radius:20px}\n::-webkit-scrollbar-thumb:hover{background:rgba(153,145,191,.4);background-clip:padding-box}\n@media(max-width:900px){\n  .sidebar{box-shadow:0 -10px 45px rgba(0,0,0,.22)}\n  .card,.panel,.stat-card,.metric-card,.widget{backdrop-filter:blur(10px)}\n}\n@media(max-width:600px){\n  h1{font-size:clamp(1.8rem,8vw,2.6rem)}\n  .card,.panel,.stat-card,.metric-card,.widget{border-radius:18px}\n  button,.btn,.button{min-height:42px}\n}\n@media(prefers-reduced-motion:reduce){\n  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}\n}\n</style>\n\n</head>\n<body>\n<div class=\"onboarding\" id=\"onboarding\">\n  <div class=\"onboard-card\">\n    <div class=\"onboard-top\"><div class=\"mini-logo\">✦</div><span class=\"context-note\">Первый запуск</span></div>\n    <h2>Давайте познакомимся<br>с вашим бизнесом.</h2>\n    <p>Введите сайт — Помощник познакомится с вашим бизнесом, найдёт услуги, контакты и точки роста. Реальные показатели подключим после интеграции с источниками данных.</p>\n    <div class=\"onboard-form\" id=\"onboardForm\">\n      <input class=\"onboard-input\" id=\"businessUrl\" value=\"https://evakuator-krd.online/\" placeholder=\"Адрес сайта, например: example.ru\" autocomplete=\"url\">\n      <input class=\"onboard-input\" id=\"businessName\" value=\"Эвакуатор Краснодар 24/7\" placeholder=\"Название бизнеса — можно пропустить\">\n    </div>\n    <div class=\"onboard-actions\" id=\"onboardActions\"><button class=\"btn primary\" style=\"padding:13px 18px\" onclick=\"startBusinessScan()\">Познакомить Помощника с бизнесом ✦</button><button class=\"btn\" onclick=\"skipOnboarding()\">Пока посмотреть демо</button></div>\n    <div class=\"scan-state\" id=\"scanState\"><b id=\"scanTitle\">Изучаем ваш бизнес…</b><div class=\"scan-line\"><i></i></div><div class=\"muted\" id=\"scanText\">Смотрим сайт и собираем понятную картину.</div></div><div class=\"scan-result\" id=\"scanResult\">\n  <div class=\"result-kicker\">Профиль бизнеса</div>\n  <h3 id=\"resultName\">Эвакуатор Краснодар 24/7</h3>\n  <p id=\"resultSummary\">Круглосуточная эвакуация автомобилей в Краснодаре и Краснодарском крае.</p>\n  <div class=\"result-grid\">\n    <div><span>📍 Регион</span><b id=\"resultRegion\">Краснодар и Краснодарский край</b></div>\n    <div><span>🕐 Режим работы</span><b id=\"resultHours\">24/7</b></div>\n    <div><span>🛠 Услуги</span><b id=\"resultServices\">Легковые · кроссоверы · минивэны · малый грузовой</b></div>\n    <div><span>☎️ Контакт</span><b id=\"resultPhone\">+7 (988) 871-70-18</b></div>\n  </div>\n  <div class=\"result-note\">Это предварительное понимание бизнеса по доступной информации сайта. После подключения источников Помощник сможет проверять показатели и изменения автоматически.</div>\n  <button class=\"btn primary\" onclick=\"confirmBusiness()\">Да, это мой бизнес →</button>\n</div>\n  </div>\n</div>\n<div class=\"app\">\n<aside class=\"sidebar\">\n  <div class=\"brand\"><div class=\"logo\">ЦБ</div><div><b>ЦИФРОВОЙ БИЗНЕС</b><small>PREMIUM CABINET</small></div></div>\n  <nav class=\"nav\">\n    <button class=\"active\" data-page=\"home\"><span class=\"ico\">⌂</span>Главная</button>\n    <button data-page=\"growth\"><span class=\"ico\">↗</span>Продвижение</button>\n    <button data-page=\"clients\"><span class=\"ico\">◉</span>Клиенты</button>\n    <button data-page=\"business\"><span class=\"ico\">◆</span>Мой бизнес</button>\n    <button data-page=\"site\"><span class=\"ico\">◌</span>Сайт</button>\n    <button data-page=\"reviews\"><span class=\"ico\">★</span>Отзывы</button>\n    <button data-page=\"posts\"><span class=\"ico\">✦</span>Публикации</button>\n    <button data-page=\"stats\"><span class=\"ico\">▥</span>Статистика</button>\n    <button data-page=\"tasks\"><span class=\"ico\">✓</span>Задачи</button>\n  </nav>\n  <div class=\"side-bottom\"><div class=\"support\"><span class=\"online\">● На связи</span><b>Поддержка 24/7</b><small>Поможем, когда нужен человек.</small></div></div>\n</aside>\n<main class=\"main\">\n  <header class=\"topbar\"><div class=\"crumb\">Цифровой бизнес / <span id=\"crumb\">Главная</span></div><div class=\"top-actions\"><button class=\"circle\" onclick=\"openChat()\">✦</button><button class=\"circle\">♧</button><button class=\"circle avatar\">М</button></div></header>\n  <div class=\"view\">\n    <section class=\"page active\" id=\"home\">\n      <div class=\"hero\"><div class=\"hero-grid\"><div><div class=\"eyebrow\">Эвакуатор Краснодар 24/7 · Помощник онлайн</div><h1>Ваш бизнес<br>под контролем.</h1><p>Я познакомился с сайтом и собрал понятную картину: чем вы занимаетесь, где работаете, какие услуги предлагаете и что уже есть для клиентов.</p><div class=\"assistant-line\"><i class=\"pulse\"></i><span>Сайт проверен · данные о бизнесе подтверждены</span></div><div style=\"margin-top:22px;display:flex;gap:9px;flex-wrap:wrap\"><button class=\"btn primary\" onclick=\"openChat()\">Спросить Помощника ✦</button><button class=\"btn\" onclick=\"go('tasks')\">Что можно улучшить</button></div></div><div class=\"orb-wrap\"><div class=\"orb\"></div></div></div></div>\n      <div class=\"grid stats\"><div class=\"card stat\"><span class=\"label\">Посетители сайта</span><div class=\"num\">—</div><span class=\"muted\">подключим аналитику</span></div><div class=\"card stat\"><span class=\"label\">Заявки</span><div class=\"num\">—</div><span class=\"muted\">подключим обращения</span></div><div class=\"card stat\"><span class=\"label\">Звонки</span><div class=\"num\">—</div><span class=\"muted\">подключим телефонию</span></div><div class=\"card stat\"><span class=\"label\">Новые клиенты</span><div class=\"num\">—</div><span class=\"muted\">данных пока нет</span></div></div>\n      <div class=\"section-head\"><h2>Что требует внимания</h2><span>Сегодня · 3 действия</span></div>\n      <div class=\"grid two\"><div class=\"card\"><div class=\"action\"><div class=\"badge\">⭐</div><div class=\"action-main\"><b>На сайте уже есть отзывы</b><p>Помощник может подключить управление отзывами и ответы.</p></div><button class=\"btn\" onclick=\"go('reviews')\">Посмотреть</button></div><div class=\"action\"><div class=\"badge\">↗</div><div class=\"action-main\"><b>Можно усилить присутствие в поиске</b><p>Подключим поисковые данные и найдём реальные возможности.</p></div><button class=\"btn\" onclick=\"go('growth')\">Открыть</button></div><div class=\"action\"><div class=\"badge\">✦</div><div class=\"action-main\"><b>Социальные сети можно подключить</b><p>После подключения Помощник сможет готовить публикации.</p></div><button class=\"btn\" onclick=\"go('posts')\">Проверить</button></div></div>\n      <div class=\"card\"><div class=\"section-head\" style=\"margin:0 0 13px\"><h2>Состояние бизнеса</h2><span>6 из 6 зон проверены</span></div><div class=\"status-list\"><div class=\"status\"><div class=\"status-left\"><i class=\"dot green\"></i>Сайт работает</div><span class=\"muted\">OK</span></div><div class=\"status\"><div class=\"status-left\"><i class=\"dot green\"></i>Клиенты получают ответы</div><span class=\"muted\">OK</span></div><div class=\"status\"><div class=\"status-left\"><i class=\"dot yellow\"></i>Есть новый отзыв</div><span class=\"muted\">1</span></div><div class=\"status\"><div class=\"status-left\"><i class=\"dot green\"></i>Продвижение под контролем</div><span class=\"muted\">OK</span></div><div class=\"status\"><div class=\"status-left\"><i class=\"dot blue\"></i>Подготовлена публикация</div><span class=\"muted\">1</span></div></div></div></div>\n    </section>\n\n    <section class=\"page\" id=\"growth\"><div class=\"section-head\"><div><div class=\"eyebrow\">Продвижение в поиске <span class=\"muted\">(SEO)</span></div><h2 style=\"font-size:30px;margin:5px 0\">Как вас находят</h2></div><button class=\"btn primary\" onclick=\"toast('Для реальных позиций подключите поисковые данные')\">Подключить данные ✦</button></div><div class=\"grid two\"><div class=\"card\"><div class=\"eyebrow\">Что уже понятно</div><h2>Ваш сайт говорит о главном</h2><p class=\"muted\">На сайте ясно указано: эвакуатор работает круглосуточно в Краснодаре и Краснодарском крае, есть цены, услуги и контакты.</p><div class=\"status-list\" style=\"margin-top:14px\"><div class=\"status\"><span>Услуга понятна</span><span class=\"tag\">есть</span></div><div class=\"status\"><span>Регион указан</span><span class=\"tag\">есть</span></div><div class=\"status\"><span>Круглосуточная работа</span><span class=\"tag\">есть</span></div></div></div><div class=\"card\"><div class=\"eyebrow\">Следующий шаг</div><h2>Узнать, что люди ищут</h2><p class=\"muted\">Сейчас мы не показываем выдуманные позиции. После подключения поисковых данных Помощник сможет показать реальные запросы, показы и возможности.</p><div class=\"bar\"><i style=\"width:28%\"></i></div><small class=\"muted\">Подключение данных · следующий шаг</small><div style=\"margin-top:18px\"><button class=\"btn primary\" onclick=\"toast('Поисковые данные можно подключить в настройках')\">Подключить</button></div></div></div></section>\n\n    <section class=\"page\" id=\"clients\"><div class=\"section-head\"><div><div class=\"eyebrow\">Заявки от клиентов <span class=\"muted\">(Leads)</span></div><h2 style=\"font-size:30px;margin:5px 0\">Все обращения в одном месте</h2></div><button class=\"btn\" onclick=\"openChat()\">Настроить Помощника</button></div><div class=\"grid stats\"><div class=\"card stat\"><span class=\"label\">Новые обращения</span><div class=\"num\">—</div><span class=\"muted\">подключим формы</span></div><div class=\"card stat\"><span class=\"label\">Звонки</span><div class=\"num\">—</div><span class=\"muted\">подключим телефонию</span></div><div class=\"card stat\"><span class=\"label\">В работе</span><div class=\"num\">—</div><span class=\"muted\">данных пока нет</span></div><div class=\"card stat\"><span class=\"label\">Новые клиенты</span><div class=\"num\">—</div><span class=\"muted\">подключим CRM</span></div></div><div class=\"card\" style=\"margin-top:14px\"><div class=\"action\"><div class=\"badge\">✦</div><div class=\"action-main\"><b>Подключите источники обращений</b><p>Тогда здесь появятся заявки с сайта, звонки и история работы с клиентами. Мы не будем придумывать показатели.</p></div><button class=\"btn primary\" onclick=\"toast('Источники можно подключить в настройках')\">Подключить</button></div></div></section>\n\n    <section class=\"page\" id=\"business\"><div class=\"section-head\"><div><div class=\"eyebrow\">Единый профиль</div><h2 style=\"font-size:30px;margin:5px 0\">Мой бизнес</h2></div><button class=\"btn primary\" onclick=\"toast('Профиль сохранён')\">Сохранить</button></div><div class=\"card\"><div class=\"business-form\"><div class=\"field\"><label>Название</label><input value=\"Эвакуатор Краснодар 24/7\"></div><div class=\"field\"><label>Чем занимаемся</label><input value=\"Круглосуточная эвакуация автомобилей\"></div><div class=\"field\"><label>Где работаем</label><input value=\"Краснодар и Краснодарский край\"></div><div class=\"field\"><label>Телефон</label><input value=\"+7 (988) 871-70-18\"></div><div class=\"field wide\"><label>Адрес</label><input value=\"ул. Дзержинского, 100, Краснодар\"></div><div class=\"field\"><label>Услуги</label><input value=\"4 основные категории\"></div><div class=\"field\"><label>График</label><input value=\"Ежедневно · 24/7\"></div></div></div><div class=\"section-head\"><h2>Профиль используется везде</h2></div><div class=\"grid three\"><div class=\"card\"><b>🌐 Сайт</b><p class=\"muted\">Контент и контакты</p></div><div class=\"card\"><b>✦ Публикации</b><p class=\"muted\">Темы и предложения</p></div><div class=\"card\"><b>↗ Продвижение</b><p class=\"muted\">Страницы и запросы</p></div></div></section>\n\n    <section class=\"page\" id=\"site\"><div class=\"section-head\"><div><div class=\"eyebrow\">Сайт</div><h2 style=\"font-size:30px;margin:5px 0\">Ваш сайт под контролем</h2></div><button class=\"btn primary\" onclick=\"toast('Проверка сайта запущена')\">Проверить сейчас</button></div><div class=\"grid two\"><div class=\"card\"><div style=\"display:flex;justify-content:space-between;align-items:center\"><div><span class=\"eyebrow\">Состояние</span><h2 style=\"font-size:32px;margin:6px 0\">Работает</h2><span class=\"up\">● Проверено только что</span></div><div style=\"font-size:50px\">✓</div></div></div><div class=\"card\"><span class=\"muted\">Последняя проверка</span><h2 style=\"margin:5px 0\">Сегодня, 07:12</h2><span class=\"muted\">Количество страниц уточним после полноценного аудита · реальные проблемы покажем только после проверки</span></div></div><div class=\"section-head\"><h2>Что проверяем</h2></div><div class=\"grid three\"><div class=\"card\">🟢 <b>HTTPS</b><p class=\"muted\">Защищённое соединение</p></div><div class=\"card\">🟢 <b>Мобильная версия</b><p class=\"muted\">Удобно с телефона</p></div><div class=\"card\">🟢 <b>Контакты</b><p class=\"muted\">Телефон и связь</p></div><div class=\"card\">🟡 <b>Страница «Цены»</b><p class=\"muted\">Есть возможность улучшения</p></div><div class=\"card\">🔵 <b>Индексация</b><p class=\"muted\">Проверим после подключения аудита</p></div><div class=\"card\">🔵 <b>SEO-возможности</b><p class=\"muted\">Помощник подготовит после проверки</p></div></div></section>\n\n    <section class=\"page\" id=\"reviews\"><div class=\"section-head\"><div><div class=\"eyebrow\">Отзывы</div><h2 style=\"font-size:30px;margin:5px 0\">Репутация бизнеса</h2></div><button class=\"btn\" onclick=\"toast('Отзывы обновлены')\">Обновить</button></div><div class=\"grid two\"><div class=\"card\"><span class=\"muted\">Отзывы на сайте</span><div class=\"big-rating\">4</div><div class=\"stars\">★★★★★</div><p class=\"muted\">На странице опубликованы 4 отзыва</p></div><div class=\"card\"><div class=\"review\"><div style=\"font-size:27px\">⚠️</div><div><b>Есть опубликованные отзывы</b><p class=\"muted\">Помощник может подключить сбор новых отзывов и подготовку ответов.</p><button class=\"btn primary\" onclick=\"toast('Открыт предложенный ответ')\">Посмотреть ответ</button></div></div></div></div><div class=\"section-head\"><h2>Последние отзывы</h2></div><div class=\"card\"><div class=\"review\"><div>⭐⭐⭐⭐⭐</div><div><b>«Быстро приехали, аккуратно погрузили авто.»</b><p class=\"muted\">Отзыв опубликован на сайте. Для автоматических ответов подключим источник отзывов.</p><button class=\"btn\" onclick=\"toast('Ответ опубликован')\">Опубликовать</button></div></div></div></section>\n\n    <section class=\"page\" id=\"posts\"><div class=\"section-head\"><div><div class=\"eyebrow\">Публикации</div><h2 style=\"font-size:30px;margin:5px 0\">Готовим контент за вас</h2></div><button class=\"btn primary\" onclick=\"toast('Помощник создаёт публикацию')\">Создать публикацию ✦</button></div><div class=\"grid two\"><div class=\"card\"><span class=\"eyebrow\">Идея дня</span><h2>Подготовка автомобиля к зиме</h2><p class=\"muted\">Помощник предлагает рассказать клиентам о сезонном обслуживании и мягко привести их к записи.</p><button class=\"btn primary\" onclick=\"toast('Публикация подготовлена')\">Создать</button></div><div class=\"card\"><span class=\"muted\">Каналы</span><div class=\"status-list\" style=\"margin-top:10px\"><div class=\"status\">☑ Сайт <span class=\"muted\">готово</span></div><div class=\"status\">☑ VK <span class=\"muted\">готово</span></div><div class=\"status\">☑ Telegram <span class=\"muted\">готово</span></div><div class=\"status\">☐ Дзен <span class=\"muted\">не подключён</span></div></div></div></div></section>\n\n    <section class=\"page\" id=\"stats\"><div class=\"section-head\"><div><div class=\"eyebrow\">Статистика <span class=\"muted\">(Analytics)</span></div><h2 style=\"font-size:30px;margin:5px 0\">Как идут дела</h2></div><button class=\"btn primary\" onclick=\"toast('Подключите аналитику, чтобы увидеть реальные показатели')\">Подключить данные</button></div><div class=\"grid stats\"><div class=\"card stat\"><span class=\"label\">Посетители сайта</span><div class=\"num\">—</div><span class=\"muted\">данных пока нет</span></div><div class=\"card stat\"><span class=\"label\">Обращения</span><div class=\"num\">—</div><span class=\"muted\">подключим формы</span></div><div class=\"card stat\"><span class=\"label\">Звонки</span><div class=\"num\">—</div><span class=\"muted\">подключим телефонию</span></div><div class=\"card stat\"><span class=\"label\">Новые клиенты</span><div class=\"num\">—</div><span class=\"muted\">подключим CRM</span></div></div><div class=\"section-head\"><h2>Что сможет замечать Помощник</h2></div><div class=\"card\"><div class=\"action\"><div class=\"badge\">↗</div><div class=\"action-main\"><b>«Вас стало находить больше людей»</b><p>После подключения поисковых и аналитических данных Помощник сможет объяснять изменения человеческим языком.</p></div><button class=\"btn\" onclick=\"go('growth')\">Посмотреть</button></div></div></section>\n\n    <section class=\"page\" id=\"tasks\"><div class=\"section-head\"><div><div class=\"eyebrow\">Центр действий</div><h2 style=\"font-size:30px;margin:5px 0\">Сегодня</h2></div><span class=\"muted\">1 важное · 3 рекомендации · 2 подготовлено</span></div><div class=\"grid two\"><div class=\"card\"><div class=\"action\"><div class=\"badge\">🔴</div><div class=\"action-main\"><b>Ответить клиенту</b><p>Иван ждёт стоимость услуги.</p></div><button class=\"btn primary\" onclick=\"toast('Ответ отправлен')\">Выполнить</button></div><div class=\"action\"><div class=\"badge\">🟡</div><div class=\"action-main\"><b>Посмотреть новый отзыв</b><p>Помощник подготовил ответ.</p></div><button class=\"btn\" onclick=\"go('reviews')\">Открыть</button></div><div class=\"action\"><div class=\"badge\">🔵</div><div class=\"action-main\"><b>Одобрить новую страницу</b><p>Готов черновик под поисковый запрос.</p></div><button class=\"btn\" onclick=\"go('growth')\">Проверить</button></div><div class=\"action\"><div class=\"badge\">✦</div><div class=\"action-main\"><b>Опубликовать пост</b><p>Текст и каналы уже подготовлены.</p></div><button class=\"btn\" onclick=\"go('posts')\">Открыть</button></div></div><div class=\"card\"><span class=\"eyebrow\">Как работает Помощник</span><div style=\"margin-top:18px;font-size:16px;line-height:2.2\"><b>Обнаружил</b> → <b>объяснил</b> → <b>предложил</b> → <b>подготовил</b> → <b>получил разрешение</b> → <b>выполнил</b> → <b>проверил результат</b></div></div></div></section>\n  </div>\n</main>\n</div>\n<div class=\"bottom\"><button class=\"active\" data-page=\"home\"><span class=\"ico\">⌂</span>Главная</button><button data-page=\"growth\"><span class=\"ico\">↗</span>Продвижение</button><button data-page=\"clients\"><span class=\"ico\">◉</span>Клиенты</button><button onclick=\"openChat()\"><span class=\"ico\">✦</span>Помощник</button></div>\n<div class=\"demo\">ДЕМОНСТРАЦИОННЫЙ РЕЖИМ · данные на экране примерные</div>\n<div class=\"modal\" id=\"modal\" onclick=\"if(event.target===this)closeChat()\"><div class=\"chat\"><div class=\"chat-head\"><div><b>Ваш Помощник ✦</b><div class=\"muted\" style=\"font-size:11px\">Контекст бизнеса подключён</div></div><button class=\"circle\" onclick=\"closeChat()\">×</button></div><div class=\"chat-body\" id=\"chatBody\"><div class=\"bubble ai\">Я проверил бизнес. Сейчас есть 3 вещи, которые стоит сделать сегодня. С чего начнём?</div><div class=\"bubble ai\">Могу ответить клиенту, разобрать отзыв, подготовить страницу для поиска или создать публикацию.</div></div><div class=\"chat-input\"><input id=\"chatInput\" placeholder=\"Например: что нам сейчас улучшить?\" onkeydown=\"if(event.key==='Enter')sendChat()\"><button class=\"btn primary\" onclick=\"sendChat()\">Отправить</button></div></div></div>\n<div class=\"toast\" id=\"toast\"></div>\n<script>\nconst labels={home:'Главная',growth:'Продвижение',clients:'Клиенты',business:'Мой бизнес',site:'Сайт',reviews:'Отзывы',posts:'Публикации',stats:'Статистика',tasks:'Задачи'};\nfunction go(id){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('[data-page]').forEach(x=>x.classList.toggle('active',x.dataset.page===id));document.getElementById('crumb').textContent=labels[id]||'Главная';window.scrollTo({top:0,behavior:'smooth'})}\ndocument.querySelectorAll('[data-page]').forEach(x=>x.addEventListener('click',()=>go(x.dataset.page)));\nfunction toast(t){const e=document.getElementById('toast');e.textContent=t;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2600)}\nfunction openChat(){document.getElementById('modal').classList.add('show');setTimeout(()=>document.getElementById('chatInput').focus(),150)}function closeChat(){document.getElementById('modal').classList.remove('show')}\nfunction sendChat(){const i=document.getElementById('chatInput'),v=i.value.trim();if(!v)return;const b=document.getElementById('chatBody');b.insertAdjacentHTML('beforeend',`<div class=\"bubble me\">${v.replace(/[<>]/g,'')}</div>`);i.value='';setTimeout(()=>{b.insertAdjacentHTML('beforeend','<div class=\"bubble ai\">Понял. В рабочей версии я проверю данные бизнеса, найду связанные изменения и предложу конкретное действие. Сейчас это демонстрационный режим.</div>');b.scrollTop=b.scrollHeight},650)}\n\nlet deferredInstallPrompt=null;\nwindow.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;document.getElementById('installBtn')?.classList.add('show')});\nasync function installPWA(){if(!deferredInstallPrompt){toast('В браузере доступна установка через меню «Установить приложение»');return}deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;document.getElementById('installBtn')?.classList.remove('show')}\nfunction skipOnboarding(){localStorage.setItem('db_onboarded','1');document.getElementById('onboarding').classList.add('hide');toast('Демо открыто — здесь можно познакомиться с системой')}\nfunction startBusinessScan(){const url=document.getElementById('businessUrl').value.trim();if(!url){document.getElementById('businessUrl').focus();toast('Введите адрес сайта');return}const name=document.getElementById('businessName').value.trim()||'Ваш бизнес';localStorage.setItem('db_business_url',url);localStorage.setItem('db_business_name',name);const state=document.getElementById('scanState');state.classList.add('show');document.getElementById('onboardActions').style.display='none';document.getElementById('onboardForm').style.display='none';const steps=[['Проверяем сайт…','Смотрим страницы, контакты и услуги.'],['Понимаем бизнес…','Определяем, чем вы занимаетесь и где работаете.'],['Собираем картину…','Отделяем то, что уже известно, от данных, которые ещё нужно подключить.'],['Готово ✦','Профиль бизнеса собран.']];let n=0;const timer=setInterval(()=>{document.getElementById('scanTitle').textContent=steps[n][0];document.getElementById('scanText').textContent=steps[n][1];n++;if(n===steps.length){clearInterval(timer);showBusinessResult(url,name)}},800)}\nfunction showBusinessResult(url,name){const isDemo=/evakuator-krd\\.online/i.test(url);if(isDemo){document.getElementById('resultName').textContent='Эвакуатор Краснодар 24/7';document.getElementById('resultSummary').textContent='Круглосуточная эвакуация автомобилей в Краснодаре и Краснодарском крае.';document.getElementById('resultRegion').textContent='Краснодар и Краснодарский край';document.getElementById('resultHours').textContent='24/7';document.getElementById('resultServices').textContent='Легковые · кроссоверы · минивэны · малый грузовой';document.getElementById('resultPhone').textContent='+7 (988) 871-70-18'}else{document.getElementById('resultName').textContent=name;document.getElementById('resultSummary').textContent='Мы подготовили предварительный профиль. Для точного анализа подключим сканер сайта на следующем шаге.';document.getElementById('resultRegion').textContent='Нужно определить';document.getElementById('resultHours').textContent='Нужно проверить';document.getElementById('resultServices').textContent='Будут определены после сканирования';document.getElementById('resultPhone').textContent='Будет найден на сайте'}document.getElementById('scanResult').classList.add('show');document.getElementById('scanTitle').textContent='Мы познакомились с вашим бизнесом';document.getElementById('scanText').textContent='Проверьте профиль перед тем, как открыть кабинет.'}\nfunction confirmBusiness(){localStorage.setItem('db_onboarded','1');localStorage.setItem('db_business_confirmed','1');document.getElementById('onboarding').classList.add('hide');toast('Профиль бизнеса сохранён ✦')}\nif('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}\nif(localStorage.getItem('db_onboarded')==='1')document.getElementById('onboarding').classList.add('hide');\n</script>\n</body></html>";
+ let initialized=false;
+ function openApp(event){
+   if(event) event.preventDefault();
+   if(!initialized){frame.srcdoc=appHtml;initialized=true;}
+   overlay.classList.add('is-open');
+   overlay.setAttribute('aria-hidden','false');
+   document.body.classList.add('db-app-active');
+   history.replaceState(null,'',location.pathname+location.search+'#app');
+ }
+ function closeApp(){
+   overlay.classList.remove('is-open');
+   overlay.setAttribute('aria-hidden','true');
+   document.body.classList.remove('db-app-active');
+   if(location.hash==='#app') history.replaceState(null,'',location.pathname+location.search);
+ }
+ document.getElementById('db-app-back').addEventListener('click',closeApp);
+ document.querySelectorAll('a[href="#platform"]').forEach(a=>a.addEventListener('click',openApp));
+ document.querySelectorAll('a[href="#app"], [data-open-app]').forEach(a=>a.addEventListener('click',openApp));
+ window.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('is-open'))closeApp();});
+ if(location.hash==='#app') openApp();
+})();
+</script>
+
+</body></html>
