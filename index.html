@@ -113,6 +113,42 @@ footer{padding:28px 0 45px;color:var(--muted);font-size:11px}.footer-inner{borde
 
 #installHelp{max-width:620px;margin:18px auto 0;padding:15px 17px;background:var(--surface);border:1px solid var(--line);border-radius:16px;color:var(--muted);font-size:12px;line-height:1.55;text-align:left;box-shadow:var(--shadow)}#installHelp b{display:block;margin-bottom:4px;color:var(--ink)}#closeInstallHelp{float:right;border:0;background:transparent;font-size:18px}#db-app-overlay{position:fixed;inset:0;z-index:999999;background:#090a0f;display:none}#db-app-overlay.is-open{display:block}#db-app-frame{display:block;width:100%;height:100%;border:0;background:#090a0f}#db-app-back{position:absolute;top:max(12px,env(safe-area-inset-top));left:14px;z-index:5;border:1px solid rgba(255,255,255,.22);background:rgba(15,17,25,.88);color:#fff;border-radius:999px;padding:10px 15px;font:600 13px Inter,-apple-system,BlinkMacSystemFont,sans-serif;box-shadow:0 8px 28px #0003;backdrop-filter:blur(14px)}body.db-app-active{overflow:hidden}@media(max-width:600px){#db-app-back{top:max(8px,env(safe-area-inset-top));left:8px;padding:9px 12px;font-size:12px}}
 .card-note{margin:12px 0 16px;padding:10px 12px;border-radius:12px;background:var(--surface2);color:var(--muted);font-size:10px;line-height:1.5;border:1px solid var(--line)}
+
+/* Mobile readability pass: desktop layout is unchanged. */
+@media (max-width:700px){
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  body{font-size:16px}
+  .container{width:min(100% - 24px,1180px)}
+  .nav{height:62px}
+  .brand{font-size:14px;gap:9px}.brand-mark{width:34px;height:34px;font-size:10px}
+  .nav-actions{font-size:13px}.nav-actions .btn{font-size:13px;padding:10px 13px}
+  .hero{padding:50px 2px 26px}
+  .hero h1{font-size:clamp(42px,12.5vw,58px);line-height:.99;max-width:100%;margin-bottom:20px}
+  .hero p{font-size:18px;line-height:1.58;max-width:100%}
+  .hero-note{font-size:13px;line-height:1.5}
+  .hero-price{font-size:13px}.hero-price strong{font-size:21px}
+  .phone-stage{min-height:590px}
+  .hero-phone-art-wrap{width:min(112vw,680px);margin-left:-6vw}
+  .phone-install-card{padding:16px;gap:12px;border-radius:18px}
+  .phone-install-copy strong{font-size:14px}.phone-install-copy span{font-size:12px;line-height:1.5}
+  .phone-install-btn{font-size:14px;padding:12px 15px}
+  .section{padding:76px 0}
+  .section h2{font-size:clamp(36px,11vw,50px)}
+  .section-head p{font-size:18px;line-height:1.6}
+  .kicker{font-size:11px}
+  .path-card{padding:24px}.path-card h3{font-size:27px}.path-card p{font-size:15px;line-height:1.65}
+  .path-list li{font-size:14px;line-height:1.45}
+  .feature{padding:23px;min-height:0}.feature h3{font-size:21px}.feature p{font-size:15px;line-height:1.6}
+  .flow-step{padding:23px 18px}.flow-num{font-size:11px}.flow-step h3{font-size:18px}.flow-step p{font-size:14px;line-height:1.6}
+  .promo-copy h2{font-size:38px}.promo-copy p{font-size:15px;line-height:1.6}
+  .task{grid-template-columns:34px 1fr;gap:11px;padding:17px 0}.task-icon{width:34px;height:34px}.task b{font-size:14px}.task span{font-size:12px;line-height:1.45}.task-state{font-size:11px;padding:6px 8px;grid-column:2;justify-self:start}
+  .demo-copy h2{font-size:38px}.demo-copy p{font-size:15px;line-height:1.6}.demo-bubble{font-size:13px;line-height:1.5;padding:13px 14px}.demo-hint{font-size:12px;line-height:1.55}.hint-chip{font-size:12px;padding:6px 10px}
+  .price-banner strong{font-size:28px}.price-banner span{font-size:12px}
+  .cta{padding:54px 18px}.cta h2{font-size:clamp(38px,11vw,52px)}.cta p{font-size:17px;line-height:1.6}
+  #installHelp{font-size:14px;line-height:1.6}
+  .theme-btn{width:42px;height:42px}
+}
+
 </style>
 </head>
 
