@@ -185,7 +185,7 @@ footer{padding:28px 0 45px;color:var(--muted);font-size:11px}.footer-inner{borde
 </div>
 <div class="phone-stage phone-stage-art" id="demo">
 <div class="hero-phone-art-wrap">
-<img alt="Приложение «Цифровой бизнес» на современном iPhone: светлая и тёмная тема, ответы помощника и готовые действия" class="hero-phone-art" decoding="async" loading="eager" src="./hero-app-phones.png"/>
+<img alt="Приложение «Цифровой бизнес» на современном iPhone: светлая и тёмная тема, ответы помощника и готовые действия" class="hero-phone-art" decoding="async" loading="eager" src="./hero-app-phones-ru.png"/>
 </div>
 <div class="phone-install-card">
 <div class="phone-install-icon"><svg class="icon" viewbox="0 0 24 24"><path d="M12 3v11"></path><path d="m8 10 4 4 4-4"></path><path d="M5 18.5h14"></path></svg></div>
@@ -418,7 +418,14 @@ footer{padding:28px 0 45px;color:var(--muted);font-size:11px}.footer-inner{borde
     document.documentElement.lang=lang==='en'?'en':'ru';
     for(const key of ids){const el=document.getElementById(key); if(!el||d[key]===undefined) continue; const val=d[key]; if(Array.isArray(val)){if(key==='heroTitle'){el.innerHTML=val[0]+'<em>'+val[1]+'</em>';} else if(key==='demoAnswer'){el.innerHTML='<b>'+val[0]+'</b><br>'+val[1];}} else el.textContent=val;}
     const lb=document.getElementById('langBtn'); if(lb) lb.textContent=lang==='en'?'EN':'RU';
-    const title=document.getElementById('heroTitle'); if(title) title.setAttribute('aria-label',val='');
+    const heroArt=document.querySelector('.hero-phone-art');
+    if(heroArt){
+      heroArt.src=lang==='en'?'./hero-app-phones-en.png':'./hero-app-phones-ru.png';
+      heroArt.alt=lang==='en'
+        ? 'Digital Business app on modern smartphones in light and dark mode'
+        : 'Приложение «Цифровой бизнес» на современных смартфонах в светлой и тёмной теме';
+    }
+    const title=document.getElementById('heroTitle'); if(title) title.setAttribute('aria-label',lang==='en'?'Your business. One assistant. Right on your phone.':'Ваш бизнес. Один помощник. Прямо в вашем телефоне.');
     localStorage.setItem('db-lang',lang);
   }
   const stored=localStorage.getItem('db-lang');
