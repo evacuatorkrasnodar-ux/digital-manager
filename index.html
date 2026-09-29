@@ -1,13 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="ru">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#f5f5f7">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-192.svg">
+<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#f5f5f7" name="theme-color"/>
+<link href="manifest.json" rel="manifest"/>
+<link href="icon-192.svg" rel="apple-touch-icon"/>
 <title>Цифровой бизнес — Ваш бизнес. На новом уровне.</title>
-<meta name="description" content="Цифровая платформа для развития бизнеса: сайт, клиенты, продвижение и умный помощник в одном месте.">
-
+<meta content="Цифровая платформа для развития бизнеса: сайт, клиенты, продвижение и умный помощник в одном месте." name="description"/>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 :root{
@@ -149,165 +149,157 @@ footer{padding:28px 0 45px;color:var(--muted);font-size:11px}.footer-inner{borde
   .theme-btn{width:42px;height:42px}
 }
 
+
+.lang-btn{min-width:42px;height:38px;padding:0 10px;border:1px solid var(--line);background:var(--surface);border-radius:12px;font-size:11px;font-weight:800;letter-spacing:.04em}
+.lang-btn:hover{transform:translateY(-1px);box-shadow:0 9px 24px rgba(0,0,0,.08)}
+@media(max-width:700px){.lang-btn{height:36px;min-width:40px}}
 </style>
 </head>
-
 <body>
 <header><div class="container nav">
-  <a class="brand" href="#"><span class="brand-mark">ЦБ</span>Цифровой бизнес</a>
-  <nav class="links"><a href="#paths" title="Посмотреть, что мы можем сделать для бизнеса">Для бизнеса</a><a href="#live-demo" title="Открыть живой пример работы приложения">Демо</a><a href="#system">Как это работает</a><a href="#start">300 ₽ / месяц</a></nav>
-  <div class="nav-actions">
-    <button class="theme-btn" id="themeBtn" type="button" aria-label="Переключить тему">
-      <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-    </button>
-    <a href="#app" data-open-app>Войти</a>
-    <button class="btn btn-dark" id="installBtn" type="button">Установить</button>
-  </div>
+<a class="brand" href="#"><span class="brand-mark">ЦБ</span>Цифровой бизнес</a>
+<nav class="links"><a href="#paths" id="navBusiness" title="Посмотреть, что мы можем сделать для бизнеса">Для бизнеса</a><a href="#live-demo" id="navDemo" title="Открыть живой пример работы приложения">Демо</a><a href="#system" id="navHow">Как это работает</a><a href="./pay.html" id="navPrice">300 ₽ / месяц</a></nav>
+<div class="nav-actions">
+<button aria-label="Переключить язык" class="lang-btn" id="langBtn" type="button">RU</button>
+<button aria-label="Переключить тему" class="theme-btn" id="themeBtn" type="button">
+<svg class="icon" viewbox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+</button>
+<a data-open-app="" href="#app" id="navLogin">Войти</a>
+<button class="btn btn-dark" id="installBtn" type="button">Установить приложение</button>
+</div>
 </div></header>
-
 <main>
 <section class="hero">
-  <div class="container hero-grid">
-    <div>
-      <div class="eyebrow"><i class="live-dot"></i> Приложение для бизнеса · всегда в телефоне</div>
-      <h1>Ваш бизнес. Один помощник. <em>Прямо в вашем телефоне.</em></h1>
-      <p>Это не просто сайт. Это приложение в вашем телефоне. Вы пишете, чего хотите, а Помощник объясняет простыми словами, что делать, готовит работу и ждёт вашего подтверждения.</p>
-      <div class="hero-actions">
-        <a class="btn btn-dark" href="#paths">Создать цифровой бизнес <span>→</span></a>
-        <a class="btn" href="#paths">Продвигать существующий бизнес</a>
-        <a class="btn" href="#app" data-open-app>Открыть живое демо приложения</a>
-      </div>
-      <div class="hero-note">Сайт — только одна часть. Главное — приложение в телефоне: помощник всегда под рукой.</div>
-      <div class="hero-price"><strong>Всего 300 ₽</strong><span>в месяц · приложение + помощник</span></div>
-    </div>
-
-    <div class="phone-stage phone-stage-art" id="demo">
-      <div class="hero-phone-art-wrap">
-        <img class="hero-phone-art" src="./hero-app-phones.png" alt="Приложение «Цифровой бизнес» на современном iPhone: светлая и тёмная тема, ответы помощника и готовые действия" loading="eager" decoding="async">
-      </div>
-      <div class="phone-install-card">
-        <div class="phone-install-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3v11"></path><path d="m8 10 4 4 4-4"></path><path d="M5 18.5h14"></path></svg></div>
-        <div class="phone-install-copy"><strong>Установите приложение на телефон</strong><span>Откройте его с главного экрана — помощник всегда рядом.</span></div>
-        <button class="btn btn-dark phone-install-btn" type="button" onclick="installPWA()">Установить приложение</button>
-      </div>
-    </div>
-  </div>
+<div class="container hero-grid">
+<div>
+<div class="eyebrow" id="heroEyebrow"><i class="live-dot"></i> Приложение для бизнеса · всегда в телефоне</div>
+<h1 id="heroTitle">Ваш бизнес. Один помощник. <em>Прямо в вашем телефоне.</em></h1>
+<p id="heroText">Это не просто сайт. Это приложение в вашем телефоне. Вы пишете, чего хотите, а Помощник объясняет простыми словами, что делать, готовит работу и ждёт вашего подтверждения.</p>
+<div class="hero-actions">
+<a class="btn btn-dark" href="#paths" id="heroCreate">Создать цифровой бизнес <span>→</span></a>
+<a class="btn" href="#paths" id="heroGrow">Продвигать существующий бизнес</a>
+<a class="btn" data-open-app="" href="#app" id="heroDemo">Открыть живое демо приложения</a>
+</div>
+<div class="hero-note" id="heroNote">Сайт — только одна часть. Главное — приложение в телефоне: помощник всегда под рукой.</div>
+<div class="hero-price"><strong id="heroPrice">Всего 300 ₽</strong><span id="heroPriceNote">в месяц · приложение + помощник</span></div><a class="btn btn-dark" href="./pay.html" id="heroPay" style="margin-top:10px">Подключить за 300 ₽ →</a>
+</div>
+<div class="phone-stage phone-stage-art" id="demo">
+<div class="hero-phone-art-wrap">
+<img alt="Приложение «Цифровой бизнес» на современном iPhone: светлая и тёмная тема, ответы помощника и готовые действия" class="hero-phone-art" decoding="async" loading="eager" src="./hero-app-phones.png"/>
+</div>
+<div class="phone-install-card">
+<div class="phone-install-icon"><svg class="icon" viewbox="0 0 24 24"><path d="M12 3v11"></path><path d="m8 10 4 4 4-4"></path><path d="M5 18.5h14"></path></svg></div>
+<div class="phone-install-copy"><strong id="installTitle">Установите приложение на телефон</strong><span id="installText">Откройте его с главного экрана — помощник всегда рядом.</span></div>
+<button class="btn btn-dark phone-install-btn" id="phoneInstall" onclick="installPWA()" type="button">Установить приложение</button>
+</div>
+</div>
+</div>
 </section>
-
 <section class="section" id="paths">
-  <div class="container">
-    <div class="section-head"><div class="kicker">Два сценария</div><h2>Можно начать с нуля — или подключить то, что уже есть.</h2><p>Не нужно быть маркетологом или программистом. Вы рассказываете, чем занимаетесь, а мы помогаем собрать всё нужное и потом показываем, что делать дальше.</p></div>
-    <div class="path-grid">
-      <article class="path-card featured">
-        <div class="path-icon"><svg class="icon lg" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/><path d="M6 6h12v12H6z"/></svg></div>
-        <h3>Создать цифровой бизнес</h3>
-        <p>Вы просто говорите, чем занимаетесь. Мы помогаем сделать цифровую основу целиком — без беготни по разным подрядчикам.</p>
-        <ul class="path-list">
-          <li><span class="check"><svg class="icon" style="width:11px;height:11px" viewBox="0 0 24 24" aria-hidden="true"><path d="m5.5 12.6 4 4 9-9"/></svg></span>Сайт и страницы услуг</li>
-          <li><span class="check"><svg class="icon" style="width:11px;height:11px" viewBox="0 0 24 24" aria-hidden="true"><path d="m5.5 12.6 4 4 9-9"/></svg></span>Соцсети и площадки объявлений</li>
-          <li><span class="check"><svg class="icon" style="width:11px;height:11px" viewBox="0 0 24 24" aria-hidden="true"><path d="m5.5 12.6 4 4 9-9"/></svg></span>Поиск, реклама и привлечение клиентов</li>
-          <li><span class="check"><svg class="icon" style="width:11px;height:11px" viewBox="0 0 24 24" aria-hidden="true"><path d="m5.5 12.6 4 4 9-9"/></svg></span>Приложение с вашим помощником</li>
-        </ul>
-        <div class="card-note">Вам не надо искать отдельно дизайнера, программиста и рекламу — мы собираем систему вместе с вами.</div><a class="btn btn-soft" href="#start">Создать мой цифровой бизнес →</a>
-      </article>
-      <article class="path-card">
-        <div class="path-icon"><svg class="icon lg" viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg></div>
-        <h3>Продвигать существующий бизнес</h3>
-        <p>Уже есть сайт, соцсети, Авито, реклама или CRM? Подключим то, что уже работает, и поможем найти следующий шаг.</p>
-        <ul class="path-list">
-          <li><span class="check"><svg class="icon" style="width:11px;height:11px" viewBox="0 0 24 24" aria-hidden="true"><path d="m5.5 12.6 4 4 9-9"/></svg></span>Подключаем то, что уже есть</li>
-          <li><span class="check"><svg class="icon" style="width:11px;height:11px" viewBox="0 0 24 24" aria-hidden="true"><path d="m5.5 12.6 4 4 9-9"/></svg></span>Находим, что можно улучшить</li>
-          <li><span class="check"><svg class="icon" style="width:11px;height:11px" viewBox="0 0 24 24" aria-hidden="true"><path d="m5.5 12.6 4 4 9-9"/></svg></span>Говорим простыми словами, что сделать</li>
-          <li><span class="check"><svg class="icon" style="width:11px;height:11px" viewBox="0 0 24 24" aria-hidden="true"><path d="m5.5 12.6 4 4 9-9"/></svg></span>Смотрим, что получилось</li>
-        </ul>
-        <a class="btn" href="#start">Подключить мой бизнес →</a>
-      </article>
-    </div>
-  </div>
+<div class="container">
+<div class="section-head"><div class="kicker" id="pathsKicker">Два сценария</div><h2 id="pathsTitle">Можно начать с нуля — или подключить то, что уже есть.</h2><p id="pathsText">Не нужно быть маркетологом или программистом. Вы рассказываете, чем занимаетесь, а мы помогаем собрать всё нужное и потом показываем, что делать дальше.</p></div>
+<div class="path-grid">
+<article class="path-card featured">
+<div class="path-icon"><svg class="icon lg" viewbox="0 0 24 24"><path d="M12 3v18M3 12h18"></path><path d="M6 6h12v12H6z"></path></svg></div>
+<h3 id="createTitle">Создать цифровой бизнес</h3>
+<p id="createText">Вы просто говорите, чем занимаетесь. Мы помогаем сделать цифровую основу целиком — без беготни по разным подрядчикам.</p>
+<ul class="path-list">
+<li id="createLi1"><span class="check"><svg aria-hidden="true" class="icon" style="width:11px;height:11px" viewbox="0 0 24 24"><path d="m5.5 12.6 4 4 9-9"></path></svg></span>Сайт и страницы услуг</li>
+<li id="createLi2"><span class="check"><svg aria-hidden="true" class="icon" style="width:11px;height:11px" viewbox="0 0 24 24"><path d="m5.5 12.6 4 4 9-9"></path></svg></span>Соцсети и площадки объявлений</li>
+<li id="createLi3"><span class="check"><svg aria-hidden="true" class="icon" style="width:11px;height:11px" viewbox="0 0 24 24"><path d="m5.5 12.6 4 4 9-9"></path></svg></span>Поиск, реклама и привлечение клиентов</li>
+<li id="createLi4"><span class="check"><svg aria-hidden="true" class="icon" style="width:11px;height:11px" viewbox="0 0 24 24"><path d="m5.5 12.6 4 4 9-9"></path></svg></span>Приложение с вашим помощником</li>
+</ul>
+<div class="card-note" id="createNote">Вам не надо искать отдельно дизайнера, программиста и рекламу — мы собираем систему вместе с вами.</div><a class="btn btn-soft" href="./pay.html" id="createBtn">Создать мой цифровой бизнес →</a>
+</article>
+<article class="path-card">
+<div class="path-icon"><svg class="icon lg" viewbox="0 0 24 24"><path d="M4 5h16v14H4z"></path><path d="M8 9h8M8 13h5"></path></svg></div>
+<h3 id="growTitle">Продвигать существующий бизнес</h3>
+<p id="growText">Уже есть сайт, соцсети, Авито, реклама или CRM? Подключим то, что уже работает, и поможем найти следующий шаг.</p>
+<ul class="path-list">
+<li><span class="check"><svg aria-hidden="true" class="icon" style="width:11px;height:11px" viewbox="0 0 24 24"><path d="m5.5 12.6 4 4 9-9"></path></svg></span>Подключаем то, что уже есть</li>
+<li><span class="check"><svg aria-hidden="true" class="icon" style="width:11px;height:11px" viewbox="0 0 24 24"><path d="m5.5 12.6 4 4 9-9"></path></svg></span>Находим, что можно улучшить</li>
+<li><span class="check"><svg aria-hidden="true" class="icon" style="width:11px;height:11px" viewbox="0 0 24 24"><path d="m5.5 12.6 4 4 9-9"></path></svg></span>Говорим простыми словами, что сделать</li>
+<li><span class="check"><svg aria-hidden="true" class="icon" style="width:11px;height:11px" viewbox="0 0 24 24"><path d="m5.5 12.6 4 4 9-9"></path></svg></span>Смотрим, что получилось</li>
+</ul>
+<a class="btn" href="./pay.html" id="growBtn">Подключить мой бизнес →</a>
+</article>
+</div>
+</div>
 </section>
-
-
 <section class="section live-demo" id="live-demo">
-  <div class="container">
-    <div class="demo-panel">
-      <div class="demo-copy">
-        <div class="kicker">Живое демо</div>
-        <h2>Посмотрите, как Помощник отвечает и что происходит дальше.</h2>
-        <p>Внутри приложения можно переключать разделы, тёмную и светлую тему, задавать вопрос и смотреть, как из вопроса получается конкретное действие.</p>
-        <div class="demo-actions">
-          <a class="btn btn-dark" href="#app" data-open-app>Открыть приложение</a>
-          <a class="btn" href="https://evakuator-krd.online/" target="_blank" rel="noopener">Посмотреть реальное демо бизнеса</a>
-        </div>
-      </div>
-      <div class="demo-example">
-        <div class="demo-example-kicker">Пример вопроса</div>
-        <div class="demo-bubble user">Как получить больше клиентов?</div>
-        <div class="demo-bubble ai"><b>Я посмотрел ваш бизнес.</b><br>Давайте начнём с трёх простых шагов: улучшить страницу услуги, проверить поиск и подготовить объявление.</div>
-        <div class="demo-hint"><span class="hint-chip">Подсказка</span> Вы нажимаете «Открыть» — дальше Помощник ведёт вас по шагам.</div>
-      </div>
-    </div>
-  </div>
+<div class="container">
+<div class="demo-panel">
+<div class="demo-copy">
+<div class="kicker" id="demoKicker">Живое демо</div>
+<h2 id="demoTitle">Посмотрите, как Помощник отвечает и что происходит дальше.</h2>
+<p id="demoText">Внутри приложения можно переключать разделы, тёмную и светлую тему, задавать вопрос и смотреть, как из вопроса получается конкретное действие.</p>
+<div class="demo-actions">
+<a class="btn btn-dark" data-open-app="" href="#app" id="demoOpen">Открыть приложение</a>
+<a class="btn" href="https://evakuator-krd.online/" id="realDemo" rel="noopener" target="_blank">Посмотреть реальное демо бизнеса</a>
+</div>
+</div>
+<div class="demo-example">
+<div class="demo-example-kicker" id="questionKicker">Пример вопроса</div>
+<div class="demo-bubble user" id="demoQuestion">Как получить больше клиентов?</div>
+<div class="demo-bubble ai" id="demoAnswer"><b>Я посмотрел ваш бизнес.</b><br/>Давайте начнём с трёх простых шагов: улучшить страницу услуги, проверить поиск и подготовить объявление.</div>
+<div class="demo-hint" id="demoHint"><span class="hint-chip">Подсказка</span> Вы нажимаете «Открыть» — дальше Помощник ведёт вас по шагам.</div>
+</div>
+</div>
+</div>
 </section>
 <section class="section" id="system">
-  <div class="container">
-    <div class="section-head"><div class="kicker">Внутри системы</div><h2>Всё нужное для бизнеса — в одном приложении.</h2><p>Не нужно учить десятки сервисов. Помощник объяснит каждую вещь и подскажет, куда нажать.</p></div>
-    <div class="feature-grid">
-      <article class="feature"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 8h10M7 12h7M7 16h4"/></svg></div><h3>Сайт</h3><p>Страницы услуг, структура, контент и техническое состояние — под контролем системы.</p></article>
-      <article class="feature"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg></div><h3>Где вас искать</h3><p>Помогаем показывать ваш бизнес людям рядом. <span class="term-note">Геолокация</span></p></article>
-      <article class="feature"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="M6.5 4h3l1.5 4-2 1.4a13 13 0 0 0 5.6 5.6l1.4-2 4 1.5v3c0 1-0.8 1.5-1.8 1.5C11 19 5 13 5 5.8 5 4.8 5.5 4 6.5 4Z"/></svg></div><h3>Звонки</h3><p>Обращения и источники звонков становятся частью общей картины, а не отдельной таблицей.</p></article>
-      <article class="feature"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h6M8 16h4"/></svg></div><h3>Заявки</h3><p>Помощник помогает не терять обращения и подсказывает, где требуется реакция.</p></article>
-      <article class="feature"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></svg></div><h3>Отзывы</h3><p>Репутация видна рядом с клиентским контекстом — можно вовремя ответить и разобрать проблему.</p></article>
-      <article class="feature"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19V5M4 19h17"/><path d="m7 15 4-4 3 2 5-7"/></svg></div><h3>Что получилось</h3><p>Показываем простые цифры и объясняем, что они значат. <span class="term-note">Аналитика</span></p></article>
-    </div>
-  </div>
+<div class="container">
+<div class="section-head"><div class="kicker" id="systemKicker">Внутри системы</div><h2 id="systemTitle">Всё нужное для бизнеса — в одном приложении.</h2><p id="systemText">Не нужно учить десятки сервисов. Помощник объяснит каждую вещь и подскажет, куда нажать.</p></div>
+<div class="feature-grid">
+<article class="feature"><div class="icon-box"><svg class="icon" viewbox="0 0 24 24"><rect height="16" rx="3" width="18" x="3" y="4"></rect><path d="M7 8h10M7 12h7M7 16h4"></path></svg></div><h3>Сайт</h3><p>Страницы услуг, структура, контент и техническое состояние — под контролем системы.</p></article>
+<article class="feature"><div class="icon-box"><svg class="icon" viewbox="0 0 24 24"><path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"></path><circle cx="12" cy="9" r="2.3"></circle></svg></div><h3>Где вас искать</h3><p>Помогаем показывать ваш бизнес людям рядом. <span class="term-note">Геолокация</span></p></article>
+<article class="feature"><div class="icon-box"><svg class="icon" viewbox="0 0 24 24"><path d="M6.5 4h3l1.5 4-2 1.4a13 13 0 0 0 5.6 5.6l1.4-2 4 1.5v3c0 1-0.8 1.5-1.8 1.5C11 19 5 13 5 5.8 5 4.8 5.5 4 6.5 4Z"></path></svg></div><h3>Звонки</h3><p>Обращения и источники звонков становятся частью общей картины, а не отдельной таблицей.</p></article>
+<article class="feature"><div class="icon-box"><svg class="icon" viewbox="0 0 24 24"><path d="M5 4h14v16H5z"></path><path d="M8 8h8M8 12h6M8 16h4"></path></svg></div><h3>Заявки</h3><p>Помощник помогает не терять обращения и подсказывает, где требуется реакция.</p></article>
+<article class="feature"><div class="icon-box"><svg class="icon" viewbox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"></path></svg></div><h3>Отзывы</h3><p>Репутация видна рядом с клиентским контекстом — можно вовремя ответить и разобрать проблему.</p></article>
+<article class="feature"><div class="icon-box"><svg class="icon" viewbox="0 0 24 24"><path d="M4 19V5M4 19h17"></path><path d="m7 15 4-4 3 2 5-7"></path></svg></div><h3>Что получилось</h3><p>Показываем простые цифры и объясняем, что они значат. <span class="term-note">Аналитика</span></p></article>
+</div>
+</div>
 </section>
-
 <section class="section" id="flow">
-  <div class="container">
-    <div class="section-head"><div class="kicker">Главный цикл</div><h2>Вы говорите, чего хотите. Помощник переводит это в работу.</h2></div>
-    <div class="flow">
-      <div class="flow-step"><div class="flow-num">01</div><h3>Хочу больше клиентов</h3><p>Фиксируем цель, а не отдельную услугу.</p><i class="flow-arrow"></i></div>
-      <div class="flow-step"><div class="flow-num">02</div><h3>Помощник анализирует</h3><p>Смотрит на сайт, каналы, заявки и изменения.</p><i class="flow-arrow"></i></div>
-      <div class="flow-step"><div class="flow-num">03</div><h3>Готовит работу</h3><p>Предлагает конкретное действие с понятным объяснением.</p><i class="flow-arrow"></i></div>
-      <div class="flow-step"><div class="flow-num">04</div><h3>Вы подтверждаете</h3><p>Важные изменения остаются под вашим контролем.</p><i class="flow-arrow"></i></div>
-      <div class="flow-step"><div class="flow-num">05</div><h3>Смотрим результат</h3><p>Система возвращает данные и предлагает следующий шаг.</p></div>
-    </div>
-  </div>
+<div class="container">
+<div class="section-head"><div class="kicker" id="flowKicker">Главный цикл</div><h2 id="flowTitle">Вы говорите, чего хотите. Помощник переводит это в работу.</h2></div>
+<div class="flow">
+<div class="flow-step"><div class="flow-num">01</div><h3>Хочу больше клиентов</h3><p>Фиксируем цель, а не отдельную услугу.</p><i class="flow-arrow"></i></div>
+<div class="flow-step"><div class="flow-num">02</div><h3>Помощник анализирует</h3><p>Смотрит на сайт, каналы, заявки и изменения.</p><i class="flow-arrow"></i></div>
+<div class="flow-step"><div class="flow-num">03</div><h3>Готовит работу</h3><p>Предлагает конкретное действие с понятным объяснением.</p><i class="flow-arrow"></i></div>
+<div class="flow-step"><div class="flow-num">04</div><h3>Вы подтверждаете</h3><p>Важные изменения остаются под вашим контролем.</p><i class="flow-arrow"></i></div>
+<div class="flow-step"><div class="flow-num">05</div><h3>Смотрим результат</h3><p>Система возвращает данные и предлагает следующий шаг.</p></div>
+</div>
+</div>
 </section>
-
 <section class="section">
-  <div class="container promo-panel">
-    <div class="promo-copy"><div class="kicker" style="color:inherit;opacity:.55">Продвижение бизнеса</div><h2>Не нужно знать «SEO» и «SMM». Помощник скажет, что сделать.</h2><p>Помощник не продаёт вам набор каналов. Он показывает, где есть возможность роста, что именно изменить и какую работу можно подготовить.</p><a class="btn btn-dark" href="#start">Посмотреть сценарий →</a></div>
-    <div class="promo-board">
-      <div class="kicker">План на сейчас</div>
-      <div class="task"><div class="task-icon"><svg class="icon sm" viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg></div><div><b>Усилить страницу услуги</b><span>Добавить блоки, которые помогают клиенту принять решение</span></div><span class="task-state">готово</span></div>
-      <div class="task"><div class="task-icon"><svg class="icon sm" viewBox="0 0 24 24"><path d="M4 17 10 11l4 4 6-8"/><path d="M16 7h4v4"/></svg></div><div><b>Проверить видимость в поиске</b><span>Найти запросы, где есть потенциал роста</span></div><span class="task-state">проверить</span></div>
-      <div class="task"><div class="task-icon"><svg class="icon sm" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M9 7h6M9 17h6"/></svg></div><div><b>Протестировать площадку</b><span>Подготовить гипотезу для Авито или другого канала</span></div><span class="task-state">новое</span></div>
-    </div>
-  </div>
+<div class="container promo-panel">
+<div class="promo-copy"><div class="kicker" id="promoKicker" style="color:inherit;opacity:.55">Продвижение бизнеса</div><h2 id="promoTitle">Не нужно знать «SEO» и «SMM». Помощник скажет, что сделать.</h2><p id="promoText">Помощник не продаёт вам набор каналов. Он показывает, где есть возможность роста, что именно изменить и какую работу можно подготовить.</p><a class="btn btn-dark" href="./pay.html" id="promoBtn">Подключить помощника →</a></div>
+<div class="promo-board">
+<div class="kicker">План на сейчас</div>
+<div class="task"><div class="task-icon"><svg class="icon sm" viewbox="0 0 24 24"><path d="M4 5h16v14H4z"></path><path d="M8 9h8M8 13h5"></path></svg></div><div><b>Усилить страницу услуги</b><span>Добавить блоки, которые помогают клиенту принять решение</span></div><span class="task-state">готово</span></div>
+<div class="task"><div class="task-icon"><svg class="icon sm" viewbox="0 0 24 24"><path d="M4 17 10 11l4 4 6-8"></path><path d="M16 7h4v4"></path></svg></div><div><b>Проверить видимость в поиске</b><span>Найти запросы, где есть потенциал роста</span></div><span class="task-state">проверить</span></div>
+<div class="task"><div class="task-icon"><svg class="icon sm" viewbox="0 0 24 24"><rect height="18" rx="3" width="14" x="5" y="3"></rect><path d="M9 7h6M9 17h6"></path></svg></div><div><b>Протестировать площадку</b><span>Подготовить гипотезу для Авито или другого канала</span></div><span class="task-state">новое</span></div>
+</div>
+</div>
 </section>
-
 <section class="section" id="start">
-  <div class="container"><div class="cta">
-    <div class="kicker" style="color:inherit;opacity:.55">Создать цифровой бизнес</div>
-    <h2>Скажите, чем вы занимаетесь — остальное соберём вместе.</h2>
-    <p>Вы даёте название и коротко рассказываете о бизнесе. Мы помогаем создать сайт, страницы услуг, соцсети, площадки объявлений, поиск, рекламу, приём заявок и подключить приложение с Помощником. Потом помогаем продвигать и улучшать всё это.</p>
-    <div class="price-banner"><strong>Всего 300 ₽ в месяц</strong><span>За приложение, Помощника и систему управления бизнесом.</span></div><div class="hero-actions" style="justify-content:center">
-      <a class="btn btn-dark" href="mailto:79996362202@ya.ru?subject=Создать%20цифровой%20бизнес">Создать цифровой бизнес →</a>
-      <a class="btn btn-soft" href="mailto:79996362202@ya.ru?subject=Продвигать%20существующий%20бизнес">Продвигать существующий</a>
-    </div>
-  </div></div>
+<div class="container"><div class="cta">
+<div class="kicker" id="finalKicker" style="color:inherit;opacity:.55">Создать цифровой бизнес</div>
+<h2>Скажите, чем вы занимаетесь — остальное соберём вместе.</h2>
+<p id="finalText">Вы даёте название и коротко рассказываете о бизнесе. Мы помогаем создать сайт, страницы услуг, соцсети, площадки объявлений, поиск, рекламу, приём заявок и подключить приложение с Помощником. Потом помогаем продвигать и улучшать всё это.</p>
+<div class="price-banner"><strong id="finalPrice">Всего 300 ₽ в месяц</strong><span id="finalPriceNote">За приложение, Помощника и систему управления бизнесом.</span><a class="btn btn-dark" href="./pay.html" id="finalPay">Перейти к оплате →</a></div><div class="hero-actions" style="justify-content:center">
+<a class="btn btn-dark" href="mailto:79996362202@ya.ru?subject=Создать%20цифровой%20бизнес" id="mailCreate">Создать цифровой бизнес →</a>
+<a class="btn btn-soft" href="mailto:79996362202@ya.ru?subject=Продвигать%20существующий%20бизнес">Продвигать существующий</a>
+</div>
+</div></div>
 </section>
 </main>
-
-<div id="installHelp" role="status"><b>Установить приложение</b><span id="installHelpText">Добавьте приложение на главный экран телефона — так Помощник будет всегда под рукой.</span><button type="button" id="closeInstallHelp" aria-label="Закрыть">×</button></div>
-
-<footer><div class="container footer-inner"><span>© 2026 Цифровой бизнес</span><span>Сайт · Поиск · Авито · Соцсети · Реклама · Клиенты · Помощник</span></div></footer>
-
-
-<div id="db-app-overlay" aria-hidden="true">
-  <button id="db-app-back" type="button">← На сайт</button>
-  <iframe id="db-app-frame" title="Цифровой бизнес — приложение" allow="clipboard-read; clipboard-write"></iframe>
+<div id="installHelp" role="status"><b id="installHelpTitle">Установить приложение</b><span id="installHelpText">Добавьте приложение на главный экран телефона — так Помощник будет всегда под рукой.</span><button aria-label="Закрыть" id="closeInstallHelp" type="button">×</button></div>
+<footer><div class="container footer-inner"><span>© 2026 Digital Business</span><span id="footerLinks">Website · Search · Listings · Social · Ads · Clients · Assistant</span></div></footer>
+<div aria-hidden="true" id="db-app-overlay">
+<button id="db-app-back" type="button">← На сайт</button>
+<iframe allow="clipboard-read; clipboard-write" id="db-app-frame" title="Цифровой бизнес — приложение"></iframe>
 </div>
 <script>
 (() => {
@@ -413,4 +405,27 @@ footer{padding:28px 0 45px;color:var(--muted);font-size:11px}.footer-inner{borde
   }
 })();
 </script>
-</body></html>
+\n<script>
+(function(){
+  const dict={
+    ru:{navBusiness:'Для бизнеса',navDemo:'Демо',navHow:'Как это работает',navPrice:'300 ₽ / месяц',navLogin:'Войти',installNav:'Установить приложение',heroEyebrow:'Приложение для бизнеса · всегда в телефоне',heroTitle:['Ваш бизнес. Один помощник. ','Прямо в вашем телефоне.'],heroText:'Это не просто сайт. Это приложение в вашем телефоне. Вы пишете, чего хотите, а Помощник объясняет простыми словами, что делать, готовит работу и ждёт вашего подтверждения.',heroCreate:'Создать цифровой бизнес →',heroGrow:'Продвигать существующий бизнес',heroDemo:'Открыть живое демо приложения',heroNote:'Сайт — только одна часть. Главное — приложение в телефоне: помощник всегда под рукой.',heroPrice:'Всего 300 ₽',heroPriceNote:'в месяц · приложение + помощник',heroPay:'Подключить за 300 ₽ →',installTitle:'Установите приложение на телефон',installText:'Откройте его с главного экрана — помощник всегда рядом.',pathsKicker:'Два сценария',pathsTitle:'Можно начать с нуля — или подключить то, что уже есть.',pathsText:'Не нужно быть маркетологом или программистом. Вы рассказываете, чем занимаетесь, а мы помогаем собрать всё нужное и потом показываем, что делать дальше.',createTitle:'Создать цифровой бизнес',createText:'Вы просто говорите, чем занимаетесь. Мы помогаем сделать цифровую основу целиком — без беготни по разным подрядчикам.',createLi1:'Сайт и страницы услуг',createLi2:'Соцсети и площадки объявлений',createLi3:'Поиск, реклама и привлечение клиентов',createLi4:'Приложение с вашим помощником',createNote:'Вам не надо искать отдельно дизайнера, программиста и рекламу — мы собираем систему вместе с вами.',createBtn:'Создать мой цифровой бизнес →',growTitle:'Продвигать существующий бизнес',growText:'Уже есть сайт, соцсети, Авито, реклама или CRM? Подключим то, что уже работает, и поможем найти следующий шаг.',growBtn:'Подключить мой бизнес →',demoKicker:'Живое демо',demoTitle:'Посмотрите, как Помощник отвечает и что происходит дальше.',demoText:'Внутри приложения можно переключать разделы, тёмную и светлую тему, задавать вопрос и смотреть, как из вопроса получается конкретное действие.',demoOpen:'Открыть приложение',realDemo:'Посмотреть реальное демо бизнеса',questionKicker:'Пример вопроса',demoQuestion:'Как получить больше клиентов?',demoAnswer:['Я посмотрел ваш бизнес.','Давайте начнём с трёх простых шагов: улучшить страницу услуги, проверить поиск и подготовить объявление.'],demoHint:'Вы нажимаете «Открыть» — дальше Помощник ведёт вас по шагам.',systemKicker:'Внутри системы',systemTitle:'Всё нужное для бизнеса — в одном приложении.',systemText:'Не нужно учить десятки сервисов. Помощник объяснит каждую вещь и подскажет, куда нажать.',flowKicker:'Главный цикл',flowTitle:'Вы говорите, чего хотите. Помощник переводит это в работу.',promoKicker:'Продвижение бизнеса',promoTitle:'Не нужно знать «SEO» и «SMM». Помощник скажет, что сделать.',promoText:'Помощник не продаёт вам набор каналов. Он показывает, где есть возможность роста, что именно изменить и какую работу можно подготовить.',promoBtn:'Подключить помощника →',finalKicker:'Создать цифровой бизнес',finalText:'Вы даёте название и коротко рассказываете о бизнесе. Мы помогаем создать сайт, страницы услуг, соцсети, площадки объявлений, поиск, рекламу, приём заявок и подключить приложение с Помощником. Потом помогаем продвигать и улучшать всё это.',finalPrice:'Всего 300 ₽ в месяц',finalPriceNote:'За приложение, Помощника и систему управления бизнесом.',finalPay:'Перейти к оплате →',mailCreate:'Создать цифровой бизнес →',installHelpTitle:'Установить приложение',installHelpText:'Добавьте приложение на главный экран телефона — так Помощник будет всегда под рукой.',footerLinks:'Сайт · Поиск · Авито · Соцсети · Реклама · Клиенты · Помощник'},
+    en:{navBusiness:'For business',navDemo:'Demo',navHow:'How it works',navPrice:'$3.99 / month',navLogin:'Open app',installNav:'Install app',heroEyebrow:'Business app · always in your phone',heroTitle:['Your business. One assistant. ','Right on your phone.'],heroText:'This is more than a website. It is an app on your phone. Tell the Assistant what you want, and it explains what to do, prepares the work, and waits for your approval.',heroCreate:'Create my digital business →',heroGrow:'Grow my existing business',heroDemo:'Open live app demo',heroNote:'The website is only one part. The main thing is the app on your phone — your assistant is always close.',heroPrice:'$3.99',heroPriceNote:'per month · app + assistant',heroPay:'Start for $3.99 →',installTitle:'Install the app on your phone',installText:'Open it from your home screen — your assistant is always close.',pathsKicker:'Two ways to start',pathsTitle:'Start from zero — or connect what you already have.',pathsText:'You do not need to be a marketer or a programmer. Tell us what your business does, and we help build what you need and show you what to do next.',createTitle:'Create a digital business',createText:'Simply tell us what you do. We help build the digital foundation for you, without juggling multiple contractors.',createLi1:'Website and service pages',createLi2:'Social profiles and listings',createLi3:'Search, ads and customer growth',createLi4:'App with your personal assistant',createNote:'You do not need to find a designer, developer and marketer separately — we bring the pieces together.',createBtn:'Create my digital business →',growTitle:'Grow an existing business',growText:'Already have a website, social profiles, listings, ads or a CRM? Connect what already works and we help find the next step.',growBtn:'Connect my business →',demoKicker:'Live demo',demoTitle:'See how the Assistant answers and what happens next.',demoText:'Inside the app you can switch sections, change light/dark mode, ask a question and see how a question becomes a real action.',demoOpen:'Open the app',realDemo:'See the real business demo',questionKicker:'Example question',demoQuestion:'How can I get more customers?',demoAnswer:['I checked your business.','Let’s start with three simple steps: improve a service page, check search visibility, and prepare a listing.'],demoHint:'Tap “Open” and the Assistant guides you step by step.',systemKicker:'Inside the app',systemTitle:'Everything your business needs — in one app.',systemText:'You do not need to learn dozens of services. The Assistant explains each one and tells you where to tap.',flowKicker:'The main loop',flowTitle:'Tell us what you want. The Assistant turns it into work.',promoKicker:'Business growth',promoTitle:'You do not need to know “SEO” or “SMM”. The Assistant tells you what to do.',promoText:'The Assistant does not sell you a list of channels. It shows where there is room to grow, what to change, and what work can be prepared.',promoBtn:'Connect the Assistant →',finalKicker:'Create a digital business',finalText:'Give us a name and a short description of your business. We help create the website, service pages, social profiles, listings, search visibility, ads, lead intake and the app with your Assistant. Then we help improve and grow it.',finalPrice:'$3.99 per month',finalPriceNote:'For the app, Assistant and business control system.',finalPay:'Go to checkout →',mailCreate:'Create my digital business →',installHelpTitle:'Install the app',installHelpText:'Add the app to your home screen so the Assistant is always close.',footerLinks:'Website · Search · Listings · Social · Ads · Clients · Assistant'}
+  };
+  const ids=Object.keys(dict.ru);
+  function setLang(lang){
+    const d=dict[lang];
+    document.documentElement.lang=lang==='en'?'en':'ru';
+    for(const key of ids){const el=document.getElementById(key); if(!el||d[key]===undefined) continue; const val=d[key]; if(Array.isArray(val)){if(key==='heroTitle'){el.innerHTML=val[0]+'<em>'+val[1]+'</em>';} else if(key==='demoAnswer'){el.innerHTML='<b>'+val[0]+'</b><br>'+val[1];}} else el.textContent=val;}
+    const lb=document.getElementById('langBtn'); if(lb) lb.textContent=lang==='en'?'EN':'RU';
+    const title=document.getElementById('heroTitle'); if(title) title.setAttribute('aria-label',val='');
+    localStorage.setItem('db-lang',lang);
+  }
+  const stored=localStorage.getItem('db-lang');
+  const lang=stored || ((navigator.language||'').toLowerCase().startsWith('en')?'en':'ru');
+  document.getElementById('langBtn')?.addEventListener('click',()=>setLang((localStorage.getItem('db-lang')||lang)==='en'?'ru':'en'));
+  setLang(lang);
+  window.dbLang=()=>localStorage.getItem('db-lang')||lang;
+  // Keep install help language-friendly.
+  const oldShow=window.showInstallHelp;
+})();
+</script>\n</body></html>
