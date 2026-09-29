@@ -7,62 +7,233 @@
 <link rel="apple-touch-icon" href="icon-192.svg">
 <title>Цифровой бизнес — Ваш бизнес. На новом уровне.</title>
 <meta name="description" content="Цифровая платформа для развития бизнеса: сайт, клиенты, продвижение и умный помощник в одном месте.">
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-:root{--bg:#f5f5f7;--ink:#1d1d1f;--muted:#6e6e73;--blue:#0071e3;--line:rgba(29,29,31,.1);--white:#fff}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}.container{width:min(1160px,calc(100% - 48px));margin:auto}
-header{position:sticky;top:0;z-index:20;background:rgba(250,250,252,.82);backdrop-filter:blur(22px);border-bottom:1px solid rgba(0,0,0,.07)}.nav{height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;letter-spacing:-.4px}.brand-icon{width:30px;height:30px;background:#1d1d1f;color:white;border-radius:9px;display:grid;place-items:center;font-size:12px;font-weight:800}.links{display:flex;gap:28px;color:#424245;font-size:12px}.links a:hover{color:var(--blue)}.nav-actions{display:flex;gap:12px;align-items:center;font-size:12px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:999px;border:1px solid transparent;font-size:14px;font-weight:600;transition:.2s}.btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{background:#0077ed;transform:translateY(-1px)}.btn-outline{border-color:#d2d2d7;background:rgba(255,255,255,.6);color:var(--ink)}.btn-outline:hover{background:white}.hero{text-align:center;padding:105px 0 70px;background:radial-gradient(ellipse at 50% 0%,#fff 0%,#f5f5f7 68%)}.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid #d9e9fb;background:#eef6ff;color:#0066cc;border-radius:999px;padding:8px 13px;font-size:12px;font-weight:600;margin-bottom:26px}.dot{width:7px;height:7px;background:#34a853;border-radius:50%}.hero h1{font-size:clamp(46px,7.2vw,88px);line-height:.99;letter-spacing:-.075em;margin:0 auto 24px;max-width:950px;font-weight:700}.gradient{background:linear-gradient(100deg,#0071e3 10%,#6e56cf 80%);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{font-size:clamp(17px,2vw,21px);line-height:1.5;color:var(--muted);max-width:650px;margin:0 auto 30px}.hero-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.hero-note{font-size:12px;color:#86868b;margin-top:22px}.hero-visual{margin:66px auto 0;max-width:1000px;background:linear-gradient(145deg,#fff,#e9edf4);border:1px solid #e1e1e6;border-radius:30px;padding:18px;box-shadow:0 35px 90px rgba(0,0,0,.11);text-align:left}.windowbar{display:flex;gap:6px;padding:4px 4px 16px}.windowbar i{width:9px;height:9px;border-radius:50%;background:#d1d1d6}.dashboard{display:grid;grid-template-columns:210px 1fr;gap:16px;min-height:350px}.dash-side{background:#f7f7f9;border:1px solid #e8e8ed;border-radius:18px;padding:20px}.dash-logo{font-size:11px;font-weight:800;margin-bottom:25px}.dash-item{padding:11px 12px;border-radius:10px;font-size:12px;color:#6e6e73;margin:4px 0}.dash-item.active{background:#e7f2ff;color:#0066cc;font-weight:600}.dash-main{background:white;border:1px solid #e8e8ed;border-radius:18px;padding:26px}.dash-top{display:flex;justify-content:space-between;gap:15px;align-items:start}.dash-top h3{font-size:23px;letter-spacing:-1px;margin:0 0 7px}.dash-top p{font-size:12px;color:var(--muted);margin:0}.avatar{width:36px;height:36px;border-radius:50%;background:#eaf2ff;color:#0066cc;display:grid;place-items:center;font-weight:700}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}.metric{border:1px solid #ececf0;border-radius:14px;padding:17px}.metric small{display:block;color:#86868b;font-size:11px;margin-bottom:10px}.metric strong{font-size:25px;letter-spacing:-1px}.up{font-size:11px;color:#24845d;margin-top:7px}.assistant-card{display:flex;gap:15px;background:#f5f9ff;border:1px solid #e0edff;border-radius:16px;padding:18px}.assistant-icon{flex:0 0 38px;width:38px;height:38px;border-radius:12px;background:#0071e3;color:white;display:grid;place-items:center;font-weight:700}.assistant-card b{font-size:13px}.assistant-card p{font-size:12px;line-height:1.5;color:#626875;margin:7px 0 12px}.tiny-link{font-size:12px;color:#0066cc;font-weight:600}
-.section{padding:95px 0}.section-head{text-align:center;max-width:730px;margin:0 auto 48px}.kicker{text-transform:uppercase;letter-spacing:1.5px;color:#86868b;font-size:11px;font-weight:700;margin-bottom:15px}.section h2{font-size:clamp(34px,5vw,56px);line-height:1.05;letter-spacing:-.06em;margin:0 0 18px}.section-head p{font-size:18px;line-height:1.55;color:var(--muted);margin:0}.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.feature{background:white;border:1px solid #e5e5ea;border-radius:25px;padding:30px;min-height:260px;box-shadow:0 5px 24px rgba(0,0,0,.025)}.feature-icon{width:48px;height:48px;border-radius:15px;background:#f0f6ff;color:#0071e3;display:grid;place-items:center;font-size:22px;margin-bottom:28px}.feature h3{font-size:21px;letter-spacing:-.7px;margin:0 0 12px}.feature p{font-size:14px;line-height:1.6;color:var(--muted);margin:0}.split{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}.split-copy h2{font-size:clamp(36px,4.5vw,58px);line-height:1.04;letter-spacing:-.06em;margin:0 0 22px}.split-copy p{font-size:17px;line-height:1.65;color:var(--muted)}.checklist{list-style:none;padding:0;margin:26px 0;display:grid;gap:15px}.checklist li{display:flex;gap:12px;font-size:14px;align-items:start}.check{color:#24845d;font-weight:800}.visual-card{background:linear-gradient(145deg,#e7f1ff,#fff 65%);border:1px solid #dce8f6;border-radius:28px;padding:28px;min-height:390px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 24px 65px rgba(0,70,150,.08)}.visual-top{display:flex;justify-content:space-between;color:#6e6e73;font-size:12px}.orbit{width:210px;height:210px;border-radius:50%;border:1px solid #c6ddf7;margin:20px auto;display:grid;place-items:center;position:relative;background:radial-gradient(circle,#fff 0%,#f0f7ff 70%)}.orbit:before,.orbit:after{content:"";position:absolute;border:1px solid #d8e7f8;border-radius:50%;inset:25px}.orbit:after{inset:53px}.orbit-center{z-index:1;background:#0071e3;color:white;width:76px;height:76px;border-radius:24px;display:grid;place-items:center;font-size:25px;box-shadow:0 10px 30px #0071e344}.floating{position:absolute;background:white;border:1px solid #e1e9f2;border-radius:12px;padding:10px 13px;font-size:11px;box-shadow:0 8px 24px #1232}.f1{top:12px;right:-30px}.f2{bottom:15px;left:-35px}.visual-bottom{background:white;border:1px solid #e5edf6;border-radius:15px;padding:17px;font-size:13px}.visual-bottom small{display:block;color:#86868b;margin-top:5px}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.step{padding:28px;border-top:1px solid #d2d2d7}.step-num{font-size:12px;color:#0071e3;font-weight:700;margin-bottom:28px}.step h3{font-size:21px;margin:0 0 12px;letter-spacing:-.6px}.step p{color:var(--muted);font-size:14px;line-height:1.6;margin:0}.cta{background:#1d1d1f;color:white;border-radius:30px;padding:70px 30px;text-align:center}.cta h2{font-size:clamp(36px,5vw,60px);letter-spacing:-.065em;line-height:1.04;margin:0 auto 20px;max-width:750px}.cta p{color:#b7b7bd;font-size:17px;line-height:1.55;max-width:570px;margin:0 auto 28px}.cta .btn-blue{background:white;color:#1d1d1f}.cta .btn-blue:hover{background:#e8e8ed}.cta .btn-outline{background:transparent;border-color:#555;color:white}.cta .btn-outline:hover{background:#333}
-footer{padding:35px 0 45px;color:#86868b;font-size:12px}.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid #d2d2d7;padding-top:24px}
-@media(max-width:800px){.links{display:none}.hero{padding:72px 0 45px}.hero-visual{padding:10px;margin-top:45px;border-radius:22px}.dashboard{grid-template-columns:1fr}.dash-side{display:none}.dash-main{padding:18px}.metrics{gap:8px}.metric{padding:12px}.metric strong{font-size:20px}.feature-grid{grid-template-columns:1fr}.feature{min-height:auto}.split{grid-template-columns:1fr;gap:30px}.section{padding:70px 0}.steps{grid-template-columns:1fr;gap:0}.cta{padding:52px 22px}.nav-actions .btn{padding:10px 14px}.nav{height:60px}}@media(max-width:480px){.container{width:calc(100% - 30px)}.brand{font-size:12px}.nav-actions>a:first-child{display:none}.hero h1{font-size:47px}.hero p{font-size:17px}.metrics{grid-template-columns:1fr 1fr}.metric:last-child{grid-column:span 2}.dash-top h3{font-size:20px}.assistant-card{padding:14px}.f1{right:-20px}.f2{left:-22px}.orbit{transform:scale(.88)}}
+:root{
+ --bg:#f5f5f7;--surface:#fff;--surface2:#f0f0f3;--ink:#171719;--muted:#6f7077;
+ --line:rgba(20,20,22,.10);--line-strong:rgba(20,20,22,.16);--accent:#111;
+ --blue:#1677ff;--green:#16845b;--orange:#b66b00;--red:#c63c49;
+ --shadow:0 24px 70px rgba(20,20,25,.10);--radius:26px
+}
+html[data-theme="dark"]{
+ --bg:#0b0b0d;--surface:#141416;--surface2:#1b1b1e;--ink:#f7f7f8;--muted:#a4a4ab;
+ --line:rgba(255,255,255,.10);--line-strong:rgba(255,255,255,.18);--accent:#fff;
+ --blue:#7db1ff;--green:#5fe0ac;--orange:#ffc56b;--red:#ff8290;
+ --shadow:0 28px 80px rgba(0,0,0,.35)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;transition:background .25s,color .25s}
+a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer;color:inherit}
+.container{width:min(1180px,calc(100% - 40px));margin:auto}
+.icon{width:22px;height:22px;display:block;fill:none;stroke:currentColor;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round}
+.icon.sm{width:18px;height:18px}.icon.lg{width:28px;height:28px}
+.icon-box{width:46px;height:46px;border:1px solid var(--line);border-radius:15px;display:grid;place-items:center;background:var(--surface);color:var(--ink)}
+.icon-box .icon{transition:transform .35s ease}.icon-box:hover .icon{transform:translateY(-2px) scale(1.05)}
+header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(22px);border-bottom:1px solid var(--line)}
+.nav{height:68px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.brand{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:-.03em}
+.brand-mark{width:32px;height:32px;border:1px solid var(--line-strong);border-radius:10px;display:grid;place-items:center;font-size:10px;font-weight:800}
+.links{display:flex;gap:26px;color:var(--muted);font-size:12px}.links a:hover{color:var(--ink)}
+.nav-actions{display:flex;align-items:center;gap:8px;font-size:12px}
+.theme-btn{width:38px;height:38px;border:1px solid var(--line);background:var(--surface);border-radius:12px;display:grid;place-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 18px;border-radius:999px;border:1px solid var(--line-strong);background:var(--surface);font-size:13px;font-weight:650;transition:.22s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 9px 24px rgba(0,0,0,.08)}
+.btn-dark{background:var(--ink);color:var(--bg);border-color:var(--ink)}.btn-dark:hover{opacity:.88}
+.btn-soft{background:transparent}
+.hero{padding:86px 0 42px}
+.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:54px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:11px;font-weight:650;letter-spacing:.02em;margin-bottom:22px}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 6px color-mix(in srgb,var(--green) 12%,transparent);animation:pulseDot 2.2s infinite}
+@keyframes pulseDot{50%{box-shadow:0 0 0 10px transparent}}
+.hero h1{font-size:clamp(48px,6.7vw,82px);line-height:.98;letter-spacing:-.075em;margin:0 0 24px;max-width:760px}
+.hero h1 em{font-style:normal;color:var(--muted)}
+.hero p{font-size:18px;line-height:1.65;color:var(--muted);max-width:620px;margin:0 0 28px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px}
+.hero-note{font-size:11px;color:var(--muted);margin-top:18px}
+.product-window{border:1px solid var(--line-strong);border-radius:28px;background:var(--surface);box-shadow:var(--shadow);padding:12px;transform:perspective(1200px) rotateY(-2deg);transition:transform .5s}
+.product-window:hover{transform:perspective(1200px) rotateY(0) translateY(-4px)}
+.window-top{height:34px;display:flex;align-items:center;gap:6px;padding:0 8px;color:var(--muted);font-size:10px}
+.window-dot{width:7px;height:7px;border:1px solid var(--line-strong);border-radius:50%}
+.app-preview{display:grid;grid-template-columns:150px 1fr;gap:10px;min-height:370px}
+.preview-side{border:1px solid var(--line);border-radius:19px;padding:14px;background:var(--surface2)}
+.preview-brand{font-size:9px;font-weight:800;letter-spacing:.12em;margin:4px 5px 20px}
+.preview-nav{display:grid;gap:4px}.preview-nav div{padding:9px 8px;border-radius:10px;font-size:10px;color:var(--muted);display:flex;align-items:center;gap:7px}.preview-nav div.active{background:var(--surface);color:var(--ink);box-shadow:0 4px 15px rgba(0,0,0,.05)}
+.preview-nav .icon{width:15px;height:15px}
+.preview-main{border:1px solid var(--line);border-radius:19px;padding:20px;background:var(--surface)}
+.preview-head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}.preview-head h3{font-size:20px;letter-spacing:-.05em;margin:0 0 5px}.preview-head p{font-size:10px;color:var(--muted);margin:0}
+.status-chip{font-size:9px;padding:6px 8px;border-radius:999px;border:1px solid var(--line);color:var(--green)}
+.mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0}.mini-card{border:1px solid var(--line);border-radius:13px;padding:12px}.mini-card small{display:block;font-size:9px;color:var(--muted);margin-bottom:7px}.mini-card b{font-size:18px;letter-spacing:-.05em}
+.assistant{border:1px solid var(--line);border-radius:17px;padding:15px;background:linear-gradient(145deg,var(--surface2),var(--surface))}
+.assistant-head{display:flex;gap:10px;align-items:center}.assistant-avatar{width:30px;height:30px;border:1px solid var(--line-strong);border-radius:10px;display:grid;place-items:center}.assistant b{font-size:11px}.assistant p{font-size:10px;line-height:1.55;color:var(--muted);margin:9px 0 12px}.assistant-action{font-size:10px;font-weight:650}
+.section{padding:96px 0}.section-head{max-width:760px;margin-bottom:42px}.kicker{font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);font-weight:750;margin-bottom:14px}.section h2{font-size:clamp(36px,5vw,58px);line-height:1.03;letter-spacing:-.065em;margin:0 0 16px}.section-head p{font-size:17px;line-height:1.65;color:var(--muted);margin:0}
+.path-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.path-card{border:1px solid var(--line);background:var(--surface);border-radius:26px;padding:28px;transition:.25s}.path-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--line-strong)}
+.path-card.featured{background:var(--ink);color:var(--bg)}.path-card.featured .muted,.path-card.featured p{color:color-mix(in srgb,var(--bg) 55%,transparent)}.path-card.featured .path-icon{border-color:color-mix(in srgb,var(--bg) 20%,transparent)}
+.path-icon{width:48px;height:48px;border:1px solid var(--line);border-radius:15px;display:grid;place-items:center;margin-bottom:26px}
+.path-card h3{font-size:25px;letter-spacing:-.05em;margin:0 0 10px}.path-card p{font-size:13px;line-height:1.65;color:var(--muted);margin:0 0 22px}.path-list{display:grid;gap:9px;margin:0 0 25px;padding:0;list-style:none}.path-list li{display:flex;gap:9px;font-size:12px}.check{width:16px;height:16px;border:1px solid var(--line-strong);border-radius:50%;display:grid;place-items:center;font-size:9px;flex:0 0 16px}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.feature{background:var(--surface);border:1px solid var(--line);border-radius:23px;padding:25px;min-height:220px;transition:.25s}.feature:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--line-strong)}.feature h3{font-size:18px;letter-spacing:-.04em;margin:20px 0 9px}.feature p{font-size:13px;line-height:1.65;color:var(--muted);margin:0}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.flow-step{padding:28px 20px 30px;border-right:1px solid var(--line);position:relative}.flow-step:last-child{border-right:0}.flow-num{font-size:10px;color:var(--muted);margin-bottom:34px}.flow-step h3{font-size:16px;letter-spacing:-.03em;margin:0 0 8px}.flow-step p{font-size:12px;line-height:1.55;color:var(--muted);margin:0}.flow-arrow{position:absolute;right:-7px;top:31px;width:13px;height:13px;background:var(--bg);border-right:1px solid var(--line);border-top:1px solid var(--line);transform:rotate(45deg);z-index:2}
+.promo-panel{display:grid;grid-template-columns:.72fr 1.28fr;gap:16px}.promo-copy{border-radius:26px;padding:32px;background:var(--ink);color:var(--bg)}.promo-copy h2{font-size:clamp(32px,4vw,48px);margin:0 0 16px}.promo-copy p{color:color-mix(in srgb,var(--bg) 55%,transparent);font-size:14px;line-height:1.65}.promo-board{border:1px solid var(--line);background:var(--surface);border-radius:26px;padding:20px}.task{display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}.task:last-child{border-bottom:0}.task-icon{width:30px;height:30px;border:1px solid var(--line);border-radius:9px;display:grid;place-items:center}.task b{font-size:12px}.task span{display:block;color:var(--muted);font-size:10px;margin-top:3px}.task-state{font-size:9px;color:var(--green);border:1px solid var(--line);border-radius:999px;padding:5px 7px}
+.cta{border-radius:30px;padding:68px 30px;background:var(--ink);color:var(--bg);text-align:center}.cta h2{max-width:760px;margin:0 auto 16px;font-size:clamp(38px,5vw,62px);line-height:1.02;letter-spacing:-.07em}.cta p{max-width:590px;margin:0 auto 26px;color:color-mix(in srgb,var(--bg) 58%,transparent);font-size:16px;line-height:1.6}.cta .btn-dark{background:var(--bg);color:var(--ink);border-color:var(--bg)}.cta .btn-soft{border-color:color-mix(in srgb,var(--bg) 22%,transparent);color:var(--bg);background:transparent}
+footer{padding:28px 0 45px;color:var(--muted);font-size:11px}.footer-inner{border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+#installHelp{max-width:620px;margin:18px auto 0;padding:15px 17px;background:var(--surface);border:1px solid var(--line);border-radius:16px;color:var(--muted);font-size:12px;line-height:1.55;text-align:left;box-shadow:var(--shadow)}#installHelp b{display:block;margin-bottom:4px;color:var(--ink)}#closeInstallHelp{float:right;border:0;background:transparent;font-size:18px}
+@media(max-width:900px){.hero-grid,.promo-panel{grid-template-columns:1fr}.product-window{transform:none}.app-preview{min-height:0}.flow{grid-template-columns:1fr 1fr}.flow-step:nth-child(2){border-right:0}.flow-step:nth-child(3){border-top:1px solid var(--line)}.flow-step:nth-child(4){border-top:1px solid var(--line)}.flow-step:nth-child(5){grid-column:1/-1;border-top:1px solid var(--line);border-right:0}.flow-arrow{display:none}}
+@media(max-width:700px){.container{width:min(100% - 28px,1180px)}.links{display:none}.nav{height:60px}.nav-actions>a:first-child{display:none}.hero{padding:60px 0 25px}.hero h1{font-size:clamp(43px,13vw,64px)}.hero p{font-size:16px}.app-preview{grid-template-columns:1fr}.preview-side{display:none}.mini-grid{grid-template-columns:1fr 1fr}.mini-card:last-child{grid-column:1/-1}.section{padding:70px 0}.path-grid,.feature-grid{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.flow-step,.flow-step:nth-child(n){border-right:0;border-top:1px solid var(--line)}.flow-step:first-child{border-top:0}.flow-step:nth-child(5){grid-column:auto}.flow-num{margin-bottom:18px}.cta{padding:50px 20px}.theme-btn{width:36px;height:36px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
-</head>
+
 <body>
 <header><div class="container nav">
-<a class="brand" href="#"><span class="brand-icon">ЦБ</span>Цифровой бизнес</a>
-<nav class="links"><a href="#platform">Платформа</a><a href="#features">Возможности</a><a href="#how">Как работает</a></nav>
-<div class="nav-actions"><a href="#platform">Войти</a><button class="btn btn-outline" id="installBtn" type="button">Скачать приложение</button><a class="btn btn-blue" href="#app" data-open-app>Начать</a></div>
+  <a class="brand" href="#"><span class="brand-mark">ЦБ</span>Цифровой бизнес</a>
+  <nav class="links"><a href="#paths">Для бизнеса</a><a href="#system">Система</a><a href="#flow">Как работает</a></nav>
+  <div class="nav-actions">
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Переключить тему">
+      <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    </button>
+    <a href="#system">Войти</a>
+    <button class="btn btn-dark" id="installBtn" type="button">Установить</button>
+  </div>
 </div></header>
+
 <main>
 <section class="hero">
-<div class="container">
-<div class="eyebrow"><span class="dot"></span> Цифровое развитие бизнеса — в одном месте</div>
-<h1>Ваш бизнес.<br><span class="gradient">На новом уровне.</span></h1>
-<p>Сайт, клиенты, продвижение и умный помощник — единая цифровая система, которая помогает вашему бизнесу расти.</p>
-<div class="hero-actions"><a class="btn btn-blue" href="#start">Обсудить мой бизнес <span>→</span></a><a class="btn btn-outline" href="#platform">Посмотреть платформу</a></div>
-<div class="hero-note">Персональный подход · Поддержка 24/7 · Всё под одним управлением</div>
-<div id="installHelp" role="status" style="display:none;max-width:620px;margin:18px auto 0;padding:16px 18px;background:#fff;border:1px solid #dce8f8;border-radius:16px;color:#424245;font-size:13px;line-height:1.55;text-align:left"><b style="display:block;margin-bottom:5px;color:#1d1d1f">Как установить приложение</b><span id="installHelpText">Добавьте приложение на главный экран телефона.</span><button type="button" id="closeInstallHelp" aria-label="Закрыть" style="float:right;border:0;background:transparent;font-size:18px">×</button></div>
-<div class="hero-visual" id="platform">
-<div class="windowbar"><i></i><i></i><i></i></div>
-<div class="dashboard">
-<aside class="dash-side"><div class="dash-logo">ЦИФРОВОЙ БИЗНЕС</div><div class="dash-item active">⌂ &nbsp; Обзор</div><div class="dash-item">↗ &nbsp; Продвижение</div><div class="dash-item">◎ &nbsp; Клиенты</div><div class="dash-item">◇ &nbsp; Мой бизнес</div><div class="dash-item">☆ &nbsp; Отзывы</div><div class="dash-item">▤ &nbsp; Статистика</div></aside>
-<div class="dash-main"><div class="dash-top"><div><h3>Добро пожаловать!</h3><p>Ваш бизнес — под контролем.</p></div><div class="avatar">ЦБ</div></div>
-<div class="metrics"><div class="metric"><small>Обращения</small><strong>24</strong><div class="up">↗ Динамика за период</div></div><div class="metric"><small>Видимость в поиске</small><strong>86%</strong><div class="up">Показатель проекта</div></div><div class="metric"><small>Задачи помощника</small><strong>08</strong><div class="up">Есть рекомендации</div></div></div>
-<div class="assistant-card"><div class="assistant-icon">✦</div><div><b>Ваш Помощник</b><p>Я собрал важное по вашему бизнесу и подготовил следующие шаги. Посмотрите рекомендации по сайту, продвижению и работе с клиентами.</p><a class="tiny-link" href="#features">Посмотреть рекомендации →</a></div></div>
-</div></div></div>
-</div>
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow"><i class="live-dot"></i> Цифровой бизнес · помощник онлайн</div>
+      <h1>Ваш бизнес может работать <em>под контролем одного помощника.</em></h1>
+      <p>Сайт, поиск, Авито, соцсети, реклама, клиенты и заявки — не разрозненные инструменты, а одна система, которая показывает, что происходит и что делать дальше.</p>
+      <div class="hero-actions">
+        <a class="btn btn-dark" href="#paths">Создать цифровой бизнес <span>→</span></a>
+        <a class="btn" href="#demo">Посмотреть, как работает помощник</a>
+      </div>
+      <div class="hero-note">Вы подтверждаете важные действия. Система готовит работу и показывает результат.</div>
+    </div>
+
+    <div class="product-window" id="demo">
+      <div class="window-top"><i class="window-dot"></i><i class="window-dot"></i><i class="window-dot"></i><span style="margin-left:auto">Рабочий стол · Цифровой бизнес</span></div>
+      <div class="app-preview">
+        <aside class="preview-side">
+          <div class="preview-brand">ЦИФРОВОЙ БИЗНЕС</div>
+          <div class="preview-nav">
+            <div class="active"><svg class="icon" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10M9 20v-6h6v6"/></svg>Обзор</div>
+            <div><svg class="icon" viewBox="0 0 24 24"><path d="M4 17 10 11l4 4 6-8"/><path d="M16 7h4v4"/></svg>Продвижение</div>
+            <div><svg class="icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M16 5c2.8 0 5 2.2 5 5M17 14c2.2.8 3.7 2.8 4 5"/></svg>Клиенты</div>
+            <div><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 8h10M7 12h6M7 16h8"/></svg>Мой бизнес</div>
+            <div><svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M8 8h8v8H8z"/></svg>Сайт</div>
+          </div>
+        </aside>
+        <div class="preview-main">
+          <div class="preview-head">
+            <div><h3>Доброе утро</h3><p>Я проверил ваш бизнес и подготовил следующие шаги.</p></div>
+            <span class="status-chip">● Всё под контролем</span>
+          </div>
+          <div class="mini-grid">
+            <div class="mini-card"><small>Сайт</small><b>2</b><small>возможности</small></div>
+            <div class="mini-card"><small>Продвижение</small><b>1</b><small>точка роста</small></div>
+            <div class="mini-card"><small>Действия</small><b>3</b><small>готовы к запуску</small></div>
+          </div>
+          <div class="assistant">
+            <div class="assistant-head"><span class="assistant-avatar"><svg class="icon sm" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="5"/></svg></span><b>Ваш Помощник</b></div>
+            <p>На сайте можно усилить страницу услуги. В поиске есть возможность увеличить видимость. Я подготовил конкретные действия — вам останется подтвердить.</p>
+            <span class="assistant-action">Открыть план действий →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-<section class="section" id="features"><div class="container"><div class="section-head"><div class="kicker">Всё связано</div><h2>Меньше рутины.<br>Больше возможностей.</h2><p>Вместо десятков сервисов и подрядчиков — понятное пространство, где цифровые инструменты работают вместе.</p></div>
-<div class="feature-grid">
-<article class="feature"><div class="feature-icon">⌘</div><h3>Ваш сайт</h3><p>Создадим современный сайт или подключим существующий. Структура, контент и мобильная версия — в единой системе.</p></article>
-<article class="feature"><div class="feature-icon">↗</div><h3>Продвижение</h3><p>Помогаем бизнесу быть заметнее в поиске, находим точки роста и объясняем, что стоит улучшить в первую очередь.</p></article>
-<article class="feature"><div class="feature-icon">✦</div><h3>Умный Помощник</h3><p>Сводит важное в одном месте, готовит рекомендации, помогает с ответами клиентам и контентом.</p></article>
-<article class="feature"><div class="feature-icon">♡</div><h3>Клиенты и отзывы</h3><p>Обращения, обратная связь и репутация бизнеса — на виду, чтобы ни один важный контакт не потерялся.</p></article>
-<article class="feature"><div class="feature-icon">▤</div><h3>Понятная аналитика</h3><p>Ключевые показатели и изменения без сложных терминов. Понимайте, что происходит и куда двигаться дальше.</p></article>
-<article class="feature"><div class="feature-icon">♧</div><h3>Поддержка 24/7</h3><p>Когда нужна помощь человека, команда «Цифрового бизнеса» поможет разобраться и довести задачу до результата.</p></article>
-</div></div></section>
-<section class="section"><div class="container split">
-<div class="split-copy"><div class="kicker">Ваш бизнес — в фокусе</div><h2>Технологии сложные.<br>Управление — простое.</h2><p>Не нужно разбираться в десятках инструментов. Вы видите главное простым языком и понимаете, что происходит с вашим бизнесом.</p>
-<ul class="checklist"><li><span class="check">✓</span><span>Одна точка управления цифровыми задачами</span></li><li><span class="check">✓</span><span>Рекомендации с понятным объяснением</span></li><li><span class="check">✓</span><span>Возможность согласовать важные действия</span></li><li><span class="check">✓</span><span>Люди на связи, когда нужна поддержка</span></li></ul>
-<a class="btn btn-blue" href="#start">Узнать, что подойдёт мне →</a></div>
-<div class="visual-card"><div class="visual-top"><span>ЦИФРОВОЙ БИЗНЕС</span><span>Платформа</span></div><div class="orbit"><div class="orbit-center">✦</div><div class="floating f1">Сайт · Под контролем</div><div class="floating f2">Помощник · На связи</div></div><div class="visual-bottom"><b>Всё важное — в одном пространстве</b><small>От первого запуска до ежедневного развития бизнеса.</small></div></div>
-</div></section>
-<section class="section" id="how"><div class="container"><div class="section-head"><div class="kicker">Простой старт</div><h2>Начинаем с вашего бизнеса.</h2><p>Неважно, есть ли у вас сайт и соцсети. Подберём понятный план под вашу ситуацию.</p></div>
-<div class="steps"><div class="step"><div class="step-num">01 / Знакомство</div><h3>Расскажите о бизнесе</h3><p>Чем занимаетесь, где работаете и какие задачи хотите решить.</p></div><div class="step"><div class="step-num">02 / План</div><h3>Получите решение</h3><p>Определим, что уже работает, чего не хватает и с чего начать развитие.</p></div><div class="step"><div class="step-num">03 / Развитие</div><h3>Растите системно</h3><p>Подключим нужные инструменты и поможем управлять ими в одном месте.</p></div></div>
-</div></section>
-<section class="section" id="start"><div class="container"><div class="cta"><div class="kicker" style="color:#a8cfff">Цифровой бизнес</div><h2>Пора дать вашему бизнесу больше возможностей.</h2><p>Расскажите, чем вы занимаетесь. Мы поможем определить следующий шаг — без сложных терминов и лишней суеты.</p><div class="hero-actions"><a class="btn btn-blue" href="mailto:79996362202@ya.ru?subject=Цифровой%20бизнес">Обсудить проект →</a><a class="btn btn-outline" href="https://t.me/" target="_blank" rel="noopener">Написать нам</a></div></div></div></section>
+
+<section class="section" id="paths">
+  <div class="container">
+    <div class="section-head"><div class="kicker">Два сценария</div><h2>Начните с той точки, где находится ваш бизнес.</h2><p>Неважно, запускаетесь вы с нуля или уже работаете. Система собирает цифровую инфраструктуру вокруг бизнеса, а не заставляет вас собирать её вручную.</p></div>
+    <div class="path-grid">
+      <article class="path-card featured">
+        <div class="path-icon"><svg class="icon lg" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/><path d="M6 6h12v12H6z"/></svg></div>
+        <h3>Создать цифровой бизнес</h3>
+        <p>Для нового бизнеса или ситуации, когда цифровой основы ещё нет.</p>
+        <ul class="path-list">
+          <li><span class="check">✓</span>Сайт и структура услуг</li>
+          <li><span class="check">✓</span>Соцсети и площадки</li>
+          <li><span class="check">✓</span>Поиск, реклама и продвижение</li>
+          <li><span class="check">✓</span>Помощник и единое управление</li>
+        </ul>
+        <a class="btn btn-soft" href="#start">Начать создание →</a>
+      </article>
+      <article class="path-card">
+        <div class="path-icon"><svg class="icon lg" viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg></div>
+        <h3>Продвигать существующий бизнес</h3>
+        <p>Если уже есть сайт, соцсети, Авито, реклама, CRM и клиенты — подключаем то, что работает, и находим следующий шаг.</p>
+        <ul class="path-list">
+          <li><span class="check">✓</span>Подключаем существующие каналы</li>
+          <li><span class="check">✓</span>Находим точки роста</li>
+          <li><span class="check">✓</span>Формируем план действий</li>
+          <li><span class="check">✓</span>Отслеживаем результат</li>
+        </ul>
+        <a class="btn" href="#start">Подключить бизнес →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="system">
+  <div class="container">
+    <div class="section-head"><div class="kicker">Внутри системы</div><h2>Не набор услуг. Рабочая система бизнеса.</h2><p>Каждый инструмент имеет смысл только тогда, когда помогает следующему действию: привлечь, получить, обработать или вернуть клиента.</p></div>
+    <div class="feature-grid">
+      <article class="feature"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 8h10M7 12h7M7 16h4"/></svg></div><h3>Сайт</h3><p>Страницы услуг, структура, контент и техническое состояние — под контролем системы.</p></article>
+      <article class="feature"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg></div><h3>Геолокация</h3><p>Регион, точки присутствия и локальный спрос учитываются там, где это влияет на клиентов.</p></article>
+      <article class="feature"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="M6.5 4h3l1.5 4-2 1.4a13 13 0 0 0 5.6 5.6l1.4-2 4 1.5v3c0 1-0.8 1.5-1.8 1.5C11 19 5 13 5 5.8 5 4.8 5.5 4 6.5 4Z"/></svg></div><h3>Звонки</h3><p>Обращения и источники звонков становятся частью общей картины, а не отдельной таблицей.</p></article>
+      <article class="feature"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h6M8 16h4"/></svg></div><h3>Заявки</h3><p>Помощник помогает не терять обращения и подсказывает, где требуется реакция.</p></article>
+      <article class="feature"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></svg></div><h3>Отзывы</h3><p>Репутация видна рядом с клиентским контекстом — можно вовремя ответить и разобрать проблему.</p></article>
+      <article class="feature"><div class="icon-box"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19V5M4 19h17"/><path d="m7 15 4-4 3 2 5-7"/></svg></div><h3>Аналитика</h3><p>Показатели объясняются простым языком: что изменилось, почему важно и какое действие стоит проверить.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="flow">
+  <div class="container">
+    <div class="section-head"><div class="kicker">Главный цикл</div><h2>Вы говорите, чего хотите. Помощник переводит это в работу.</h2></div>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-num">01</div><h3>Хочу больше клиентов</h3><p>Фиксируем цель, а не отдельную услугу.</p><i class="flow-arrow"></i></div>
+      <div class="flow-step"><div class="flow-num">02</div><h3>Помощник анализирует</h3><p>Смотрит на сайт, каналы, заявки и изменения.</p><i class="flow-arrow"></i></div>
+      <div class="flow-step"><div class="flow-num">03</div><h3>Готовит работу</h3><p>Предлагает конкретное действие с понятным объяснением.</p><i class="flow-arrow"></i></div>
+      <div class="flow-step"><div class="flow-num">04</div><h3>Вы подтверждаете</h3><p>Важные изменения остаются под вашим контролем.</p><i class="flow-arrow"></i></div>
+      <div class="flow-step"><div class="flow-num">05</div><h3>Смотрим результат</h3><p>Система возвращает данные и предлагает следующий шаг.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container promo-panel">
+    <div class="promo-copy"><div class="kicker" style="color:inherit;opacity:.55">Продвижение бизнеса</div><h2>Не «SEO». Не «SMM». А следующий шаг.</h2><p>Помощник не продаёт вам набор каналов. Он показывает, где есть возможность роста, что именно изменить и какую работу можно подготовить.</p><a class="btn btn-dark" href="#start">Посмотреть сценарий →</a></div>
+    <div class="promo-board">
+      <div class="kicker">План на сейчас</div>
+      <div class="task"><div class="task-icon"><svg class="icon sm" viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg></div><div><b>Усилить страницу услуги</b><span>Добавить блоки, которые помогают клиенту принять решение</span></div><span class="task-state">готово</span></div>
+      <div class="task"><div class="task-icon"><svg class="icon sm" viewBox="0 0 24 24"><path d="M4 17 10 11l4 4 6-8"/><path d="M16 7h4v4"/></svg></div><div><b>Проверить видимость в поиске</b><span>Найти запросы, где есть потенциал роста</span></div><span class="task-state">проверить</span></div>
+      <div class="task"><div class="task-icon"><svg class="icon sm" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M9 7h6M9 17h6"/></svg></div><div><b>Протестировать площадку</b><span>Подготовить гипотезу для Авито или другого канала</span></div><span class="task-state">новое</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="start">
+  <div class="container"><div class="cta">
+    <div class="kicker" style="color:inherit;opacity:.5">Цифровой бизнес</div>
+    <h2>Пусть система показывает, что делать дальше.</h2>
+    <p>Начните с создания цифрового бизнеса или подключите то, что уже работает. Дальше Помощник собирает картину и ведёт вас по действиям.</p>
+    <div class="hero-actions" style="justify-content:center">
+      <a class="btn btn-dark" href="mailto:79996362202@ya.ru?subject=Создать%20цифровой%20бизнес">Создать цифровой бизнес →</a>
+      <a class="btn btn-soft" href="mailto:79996362202@ya.ru?subject=Продвигать%20существующий%20бизнес">Продвигать существующий</a>
+    </div>
+  </div></div>
+</section>
 </main>
-<footer><div class="container footer-inner"><span>© 2026 Цифровой бизнес. Новый цифровой старт под ключ.</span><span>Сайт · Продвижение · Помощник · Поддержка 24/7</span></div></footer>
+
+<footer><div class="container footer-inner"><span>© 2026 Цифровой бизнес</span><span>Сайт · Поиск · Авито · Соцсети · Реклама · Клиенты · Помощник</span></div></footer>
+
+<div id="installHelp" role="status" style="display:none"><b>Как установить приложение</b><span id="installHelpText">Добавьте приложение на главный экран телефона.</span><button type="button" id="closeInstallHelp" aria-label="Закрыть">×</button></div>
+
 <script>
 let deferredInstallPrompt=null;
 const installBtn=document.getElementById('installBtn');
@@ -73,15 +244,23 @@ installBtn.addEventListener('click',async()=>{
  if(deferredInstallPrompt){deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;return;}
  help.style.display='block';
  const ua=navigator.userAgent;
- if(/iPhone|iPad|iPod/i.test(ua)){helpText.textContent='На iPhone: нажмите «Поделиться» в браузере Safari, затем выберите «На экран Домой» и подтвердите добавление.';}
- else if(/Android/i.test(ua)){helpText.textContent='На Android: откройте меню браузера (⋮) и выберите «Установить приложение» или «Добавить на главный экран». Если пункта нет, откройте страницу в Chrome.';}
- else{helpText.textContent='Откройте меню браузера и выберите «Установить приложение» или «Установить сайт как приложение», если такой пункт доступен.';}
+ if(/iPhone|iPad|iPod/i.test(ua)){helpText.textContent='На iPhone: нажмите «Поделиться» в Safari, затем «На экран Домой».';}
+ else if(/Android/i.test(ua)){helpText.textContent='На Android: откройте меню браузера (⋮) и выберите «Установить приложение» или «Добавить на главный экран».';}
+ else{helpText.textContent='Откройте меню браузера и выберите «Установить приложение», если такой пункт доступен.';}
  help.scrollIntoView({behavior:'smooth',block:'nearest'});
 });
 document.getElementById('closeInstallHelp').addEventListener('click',()=>help.style.display='none');
+
+const themeBtn=document.getElementById('themeBtn');
+const savedTheme=localStorage.getItem('db-theme');
+if(savedTheme)document.documentElement.dataset.theme=savedTheme;
+themeBtn.addEventListener('click',()=>{
+ const dark=document.documentElement.dataset.theme==='dark';
+ if(dark)delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme='dark';
+ localStorage.setItem('db-theme',dark?'light':'dark');
+});
 if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
 </script>
-
 <style>
 #db-app-overlay{position:fixed;inset:0;z-index:999999;background:#090a0f;display:none}
 #db-app-overlay.is-open{display:block}
