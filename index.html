@@ -5,7 +5,6 @@
 <meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="#f5f5f7" name="theme-color"/>
 <link href="manifest.json" rel="manifest"/>
-<link id="heroPhonePreload" rel="preload" as="image" href="./hero-app-phones-ru.png" fetchpriority="high"/>
 <link href="icon-192.svg" rel="apple-touch-icon"/>
 <title>Цифровой бизнес — Ваш бизнес. На новом уровне.</title>
 <meta content="Цифровая платформа для развития бизнеса: сайт, клиенты, продвижение и умный помощник в одном месте." name="description"/>
@@ -46,7 +45,7 @@ header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 8
 .hero{padding:86px 0 42px}
 .hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:54px;align-items:center}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:11px;font-weight:650;letter-spacing:.02em;margin-bottom:22px}
-.live-dot{display:inline-block;flex:0 0 7px;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 6px color-mix(in srgb,var(--green) 12%,transparent);animation:pulseDot 2.2s infinite}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 6px color-mix(in srgb,var(--green) 12%,transparent);animation:pulseDot 2.2s infinite}
 @keyframes pulseDot{50%{box-shadow:0 0 0 10px transparent}}
 .hero h1{font-size:clamp(48px,6.7vw,82px);line-height:.98;letter-spacing:-.075em;margin:0 0 24px;max-width:760px}
 .hero h1 em{font-style:normal;color:var(--muted)}
@@ -217,7 +216,7 @@ html[data-theme="dark"] .db-msg.ai{background:#19171f;border-color:#2d2940}.db-m
 </div>
 <div class="phone-stage phone-stage-art" id="demo">
 <div class="hero-phone-art-wrap">
-<img id="heroPhoneArt" alt="Приложение «Цифровой бизнес» на современном iPhone: светлая и тёмная тема, ответы помощника и готовые действия" class="hero-phone-art" decoding="async" loading="eager" fetchpriority="high" width="1567" height="1870" src="./hero-app-phones-ru.png"/>
+<img id="heroPhoneArt" alt="Приложение «Цифровой бизнес» на современном iPhone: светлая и тёмная тема, ответы помощника и готовые действия" class="hero-phone-art" decoding="async" loading="eager" fetchpriority="high" src="./hero-app-phones-ru.png"/>
 </div>
 <div class="phone-install-card windows-install-card">
 <div class="windows-logo" aria-hidden="true">
@@ -452,13 +451,14 @@ html[data-theme="dark"] .db-msg.ai{background:#19171f;border-color:#2d2940}.db-m
     document.documentElement.lang=lang==='en'?'en':'ru';
     for(const key of ids){const el=document.getElementById(key); if(!el||d[key]===undefined) continue; const val=d[key]; if(Array.isArray(val)){if(key==='heroTitle'){el.innerHTML=val[0]+'<em>'+val[1]+'</em>';} else if(key==='demoAnswer'){el.innerHTML='<b>'+val[0]+'</b><br>'+val[1];}} else el.textContent=val;}
     const lb=document.getElementById('langBtn'); if(lb) lb.textContent=lang==='en'?'EN':'RU';
-    const heroPhone=document.getElementById('heroPhoneArt');
-    const heroPreload=document.getElementById('heroPhonePreload');
-    const phoneSrc=lang==='en'?'./hero-app-phones-en.png':'./hero-app-phones-ru.png';
-    if(heroPhone && heroPhone.getAttribute('src')!==phoneSrc){ heroPhone.src=phoneSrc; }
-    if(heroPhone){ heroPhone.alt=lang==='en'?'Digital Business app on modern iPhones: light and dark themes, assistant answers and ready actions':'Приложение «Цифровой бизнес» на современном iPhone: светлая и тёмная тема, ответы помощника и готовые действия'; }
-    if(heroPreload) heroPreload.href=phoneSrc;
-    const title=document.getElementById('heroTitle'); if(title) title.setAttribute('aria-label', title.textContent || '');
+    // Switch the hero phone artwork together with the site language.
+    const heroPhoneArt=document.getElementById('heroPhoneArt');
+    if(heroPhoneArt){
+      const phoneSrc=lang==='en'?'./hero-app-phones-en.png':'./hero-app-phones-ru.png';
+      if(heroPhoneArt.getAttribute('src')!==phoneSrc) heroPhoneArt.setAttribute('src',phoneSrc);
+      heroPhoneArt.alt=lang==='en'?'Digital Business app on modern iPhones: light and dark themes, assistant answers and ready actions':'Приложение «Цифровой бизнес» на современном iPhone: светлая и тёмная тема, ответы помощника и готовые действия';
+    }
+    const title=document.getElementById('heroTitle'); if(title) title.setAttribute('aria-label',val='');
     localStorage.setItem('db-lang',lang);
   }
   const stored=localStorage.getItem('db-lang');
