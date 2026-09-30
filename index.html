@@ -6,8 +6,8 @@
 <meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="#f5f5f7" name="theme-color"/>
 <link href="manifest.json" rel="manifest"/>
-<link href="icon-192.svg?v=3" rel="icon" type="image/svg+xml"/>
-<link href="icon-192.svg?v=3" rel="apple-touch-icon"/>
+<link href="icon-192.svg?v=4" rel="icon" type="image/svg+xml"/>
+<link href="icon-192.svg" rel="apple-touch-icon"/>
 <title>Цифровой бизнес — Ваш бизнес. На новом уровне.</title>
 <meta content="Цифровой управляющий для вашего бизнеса: сайт, клиенты, продвижение и управление в одном приложении." name="description"/>
 <style>
@@ -334,7 +334,7 @@ html[data-theme="dark"] .db-msg.ai{background:#19171f;border-color:#2d2940}.db-m
 <svg viewbox="0 0 24 24"><path d="M2 4.6 11 3.2v8.2H2V4.6Zm10  -1.55L22 1.5v9.9h-10V3.05ZM2 12.7h9v8.1L2 19.45v-6.75Zm10 0h10v9.8l-10-1.55v-8.25Z"></path></svg>
 </div>
 <div class="phone-install-copy"><strong id="installTitle">Установить для Windows</strong><span id="installText">Откройте приложение прямо с компьютера. Цифровой управляющий всегда рядом.</span></div>
-<button class="windows-install-btn" id="phoneInstall" onclick="installPWA()" type="button"><span class="windows-btn-logo" aria-hidden="true"><svg viewbox="0 0 24 24"><path d="M2 4.6 11 3.2v8.2H2V4.6Zm10-1.55L22 1.5v9.9h-10V3.05ZM2 12.7h9v8.1L2 19.45v-6.75Zm10 0h10v9.8l-10-1.55v-8.25Z"></path></svg></span><span>Установить для Windows</span></button>
+<button class="phone-install-btn windows-install-btn" id="phoneInstall" onclick="installPWA()" type="button"><span class="windows-btn-logo" aria-hidden="true"><svg viewbox="0 0 24 24"><path d="M2 4.6 11 3.2v8.2H2V4.6Zm10-1.55L22 1.5v9.9h-10V3.05ZM2 12.7h9v8.1L2 19.45v-6.75Zm10 0h10v9.8l-10-1.55v-8.25Z"></path></svg></span><span>Установить для Windows</span></button>
 </div>
 </div>
 
@@ -657,10 +657,14 @@ html[data-theme="dark"] .db-msg.ai{background:#19171f;border-color:#2d2940}.db-m
     help.scrollIntoView({behavior:'smooth',block:'nearest'});
   }
   async function installPWA(){
+    if(window.matchMedia && window.matchMedia('(display-mode: standalone)').matches){
+      return;
+    }
     if(deferredInstallPrompt){
-      deferredInstallPrompt.prompt();
-      try{ await deferredInstallPrompt.userChoice; }catch(e){}
+      const promptEvent=deferredInstallPrompt;
       deferredInstallPrompt=null;
+      promptEvent.prompt();
+      try{ await promptEvent.userChoice; }catch(e){}
       return;
     }
     showInstallHelp();
