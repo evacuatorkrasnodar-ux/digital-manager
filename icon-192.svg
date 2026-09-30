@@ -1,1 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#0071e3"/><path d="M140 150h232v54H140zm0 79h232v54H140zm0 79h145v54H140z" fill="white"/><circle cx="354" cy="335" r="42" fill="#b8dcff"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0B0C0F"/>
+  <rect x="22" y="22" width="468" height="468" rx="94" fill="none" stroke="#5C6068" stroke-width="4"/>
+  <text x="256" y="304" text-anchor="middle"
+        font-family="Inter, SF Pro Display, SF Pro Text, Arial, sans-serif"
+        font-size="142" font-weight="600" letter-spacing="-7"
+        fill="#F5F6F8">ЦБ</text>
+</svg>
