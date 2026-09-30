@@ -606,7 +606,7 @@ html[data-theme="dark"] .db-msg.ai{background:#19171f;border-color:#2d2940}.db-m
   let initialized = false;
   function openApp(event){
     if(event) event.preventDefault();
-    if(!initialized){ frame.src='./app.html'; initialized=true; }
+    if(!initialized){ frame.src='./app/'; initialized=true; }
     overlay.classList.add('is-open');
     overlay.setAttribute('aria-hidden','false');
     document.body.classList.add('db-app-active');
@@ -639,18 +639,8 @@ html[data-theme="dark"] .db-msg.ai{background:#19171f;border-color:#2d2940}.db-m
     help.style.display='block';
     help.scrollIntoView({behavior:'smooth',block:'nearest'});
   }
-  async function installPWA(){
-    if(window.matchMedia && window.matchMedia('(display-mode: standalone)').matches){
-      return;
-    }
-    if(deferredInstallPrompt){
-      const promptEvent=deferredInstallPrompt;
-      deferredInstallPrompt=null;
-      promptEvent.prompt();
-      try{ await promptEvent.userChoice; }catch(e){}
-      return;
-    }
-    showInstallHelp();
+  function installPWA(){
+    window.location.href='./app/';
   }
   window.installPWA = installPWA;
   window.addEventListener('beforeinstallprompt',e=>{
