@@ -23,4 +23,13 @@ const body=document.body,theme=document.getElementById('theme'),label=document.g
 document.getElementById('askForm').onsubmit=e=>{e.preventDefault();if(document.getElementById('askInput').value.trim())document.getElementById('reply').classList.add('show')};
 document.querySelectorAll('[data-demo]').forEach(b=>b.onclick=()=>alert(b.dataset.demo==='site'?'Демо: открываем изменение страницы заказа и проверяем конверсию.':'Демо: открываем подготовленные ответы на отзывы.'));
 const R=window.SpeechRecognition||window.webkitSpeechRecognition;if(R){const r=new R;r.lang='ru-RU';r.interimResults=false;r.maxAlternatives=1;document.getElementById('voice').onclick=()=>{try{r.start()}catch(e){}};r.onresult=e=>document.getElementById('askInput').value=e.results[0][0].transcript}
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(() => console.log('Цифровой управляющий: Service Worker подключён'))
+      .catch(error => console.error('Ошибка Service Worker:', error));
+  });
+}
 </script></body></html>
