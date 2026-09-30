@@ -276,6 +276,22 @@ html[data-theme="dark"] .db-msg.ai{background:#19171f;border-color:#2d2940}.db-m
 .db-send svg,.db-mic svg,.db-speak svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.db-voice-note{font-size:10px;color:#7b7c84;line-height:1.45}
 @media(max-width:600px){#db-assist-launcher{right:12px;bottom:12px;padding:8px 12px 8px 8px}.db-assist-orb{width:36px;height:36px}#db-assist-panel{right:10px;bottom:68px;width:calc(100vw - 20px);max-height:calc(100vh - 92px);border-radius:22px}.db-assist-body{padding:13px}.db-msg{font-size:14px}.db-quick button{font-size:12px;padding:9px 11px}.db-input-row input{font-size:14px}}
 </style>
+
+<style id="db-assist-name-style">
+#db-name-modal{position:fixed;inset:0;z-index:1000;display:none;place-items:center;padding:20px;background:rgba(10,10,14,.38);backdrop-filter:blur(12px)}
+#db-name-modal.open{display:grid}
+.db-name-card{width:min(460px,100%);padding:30px;border:1px solid var(--line);border-radius:28px;background:var(--surface);color:var(--ink);box-shadow:0 30px 90px rgba(0,0,0,.22)}
+.db-name-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);font-weight:750;margin-bottom:12px}
+.db-name-card h3{font-size:30px;line-height:1.05;letter-spacing:-.055em;margin:0 0 12px}
+.db-name-card p{font-size:13px;line-height:1.65;color:var(--muted);margin:0 0 20px}
+.db-name-examples{font-size:11px;color:var(--muted);margin:-10px 0 12px}
+#db-name-input{width:100%;height:48px;padding:0 15px;border:1px solid var(--line-strong);border-radius:14px;background:var(--bg);color:var(--ink);outline:none;font:inherit}
+#db-name-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 14%,transparent)}
+.db-name-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
+.db-name-skip{border:0;background:transparent;color:var(--muted);padding:10px 12px;font-size:12px}
+.db-name-save{border:0;background:var(--ink);color:var(--bg);border-radius:999px;padding:11px 18px;font-size:12px;font-weight:700}
+@media(max-width:600px){.db-name-card{padding:24px;border-radius:24px}.db-name-card h3{font-size:27px}}
+</style>
 </head>
 <body>
 <header><div class="container nav">
@@ -789,6 +805,20 @@ html[data-theme="dark"] .db-msg.ai{background:#19171f;border-color:#2d2940}.db-m
   <span class="db-assist-orb" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 18.2 4.5 20l.6-3.7A8.4 8.4 0 0 1 3 10.8C3 6.5 7 3 12 3s9 3.5 9 7.8-4 7.8-9 7.8c-1.7 0-3.4-.4-4.8-1.1Z"/><path d="M8 10.3h.01M12 10.3h.01M16 10.3h.01"/><path d="M8.5 13.7c1.2 1 2.8 1.4 4.2 1.1 1-.2 1.9-.6 2.8-1.3"/></svg><span class="db-orb-online"></span></span>
   <span data-assist-launch-text>Спросить управляющего</span><span class="db-assist-online"><i class="db-assist-online-dot"></i><span data-assist-online>Онлайн</span></span>
 </div>
+
+<div id="db-name-modal" aria-hidden="true">
+  <div class="db-name-card" role="dialog" aria-modal="true" aria-labelledby="db-name-title">
+    <div class="db-name-kicker" id="db-name-kicker">Первое знакомство</div>
+    <h3 id="db-name-title">Как вы хотели бы меня называть?</h3>
+    <p id="db-name-text">Вы можете придумать мне любое имя. Так будет проще обращаться ко мне в приложении.</p>
+    <div class="db-name-examples" id="db-name-examples">Например: Марк, Алекс, Макс, Мира — или ваше имя.</div>
+    <input id="db-name-input" type="text" maxlength="24" autocomplete="off" placeholder="Введите имя" />
+    <div class="db-name-actions">
+      <button class="db-name-skip" id="db-name-skip" type="button">Оставить «Цифровой управляющий»</button>
+      <button class="db-name-save" id="db-name-save" type="button">Продолжить →</button>
+    </div>
+  </div>
+</div>
 <section id="db-assist-panel" aria-label="Цифровой управляющий" aria-hidden="true">
   <header class="db-assist-head">
     <div class="db-assist-title"><span class="db-assist-orb" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 18.2 4.5 20l.6-3.7A8.4 8.4 0 0 1 3 10.8C3 6.5 7 3 12 3s9 3.5 9 7.8-4 7.8-9 7.8c-1.7 0-3.4-.4-4.8-1.1Z"/><path d="M8 10.3h.01M12 10.3h.01M16 10.3h.01"/><path d="M8.5 13.7c1.2 1 2.8 1.4 4.2 1.1 1-.2 1.9-.6 2.8-1.3"/></svg></span><div><strong data-assist-title>Цифровой управляющий</strong><span data-assist-subtitle>Объясняю простыми словами</span></div></div>
@@ -822,27 +852,64 @@ html[data-theme="dark"] .db-msg.ai{background:#19171f;border-color:#2d2940}.db-m
   const speak=document.getElementById('db-assist-speak');
   if(!panel||!launcher) return;
   let lastAnswer='';
+  const NAME_KEY='digitalBusinessManagerName';
+  let managerName=localStorage.getItem(NAME_KEY)||'';
+  const nameModal=document.getElementById('db-name-modal');
+  const nameInput=document.getElementById('db-name-input');
+  const nameSave=document.getElementById('db-name-save');
+  const nameSkip=document.getElementById('db-name-skip');
+  function displayName(){return managerName||'';}
+  function managerLabel(base){return managerName ? managerName : base;}
   const copy={
-    ru:{launch:'Спросить управляющего',online:'Онлайн',title:'Цифровой управляющий',sub:'Объясняю простыми словами',hello:'Здравствуйте! Я цифровой управляющий. Спросите, что вас интересует — я объясню так, чтобы было понятно даже школьнику.',ph:'Напишите свой вопрос…',voice:'Можно задать вопрос голосом и попросить цифрового управляющего проговорить ответ. В демо используется голос вашего устройства.',q1:'Что вы делаете?',q2:'Как получить больше клиентов?',q3:'Что такое SEO?',q4:'Сколько стоит?',no:'Я отвечаю по «Цифровому бизнесу»: создание бизнеса, сайт, продвижение, приложение и подписка.',a1:'Мы помогаем собрать цифровую основу бизнеса: сайт, страницы услуг, соцсети, площадки объявлений, поиск, рекламу, заявки и приложение с помощником.',a2:'Начнём просто. Сначала проверим, что уже есть. Потом найдём 2–3 места, где можно получить больше клиентов, и подготовим конкретные действия. Вам останется подтвердить.',a3:'SEO — это простыми словами способ сделать так, чтобы ваш сайт легче находили в поиске. Например: человек ищет эвакуатор, а ваш сайт появляется среди результатов.',a4:'Для российской версии подписка стоит 300 ₽ в месяц. После оплаты приложение и помощник будут доступны по вашей подписке.',prompt:'Например: «У меня эвакуатор. Что мне сделать?»'},
-    en:{launch:'Ask the digital manager',online:'Online',title:'Digital manager',sub:'Explained in simple words',hello:'Hi! I’m the Digital manager for Digital Business. Ask anything about the product and I’ll explain it in plain, easy language.',ph:'Type your question…',voice:'You can ask a question by voice and ask the Assistant to read the answer aloud. Demo voice uses your device.',q1:'What do you do?',q2:'How can I get more customers?',q3:'What is SEO?',q4:'How much does it cost?',no:'I answer questions about Digital Business: creating a business, websites, growth, the app and subscriptions.',a1:'We help build the digital foundation of a business: website, service pages, social profiles, listings, search, ads, leads and an app with your digital manager.',a2:'Let’s keep it simple. First we check what you already have. Then we find 2–3 places where you can get more customers and prepare concrete actions. You approve them.',a3:'SEO simply means making it easier for people to find your website in search. For example, someone searches for a tow service and your site can become easier to discover.',a4:'For the Russian version, the subscription is 300 ₽ per month. After payment, the app and Assistant are available through your subscription.',prompt:'For example: “I run a towing business. What should I do?”'}
+    ru:{firstKicker:'Первое знакомство',firstTitle:'Как вы хотели бы меня называть?',firstText:'Вы можете придумать мне любое имя. Так будет проще обращаться ко мне в приложении.',firstExamples:'Например: Марк, Алекс, Макс, Мира — или ваше имя.',firstPlaceholder:'Введите имя',firstSave:'Продолжить →',firstSkip:'Оставить «Цифровой управляющий»',launch:'Спросить управляющего',online:'Онлайн',title:'Цифровой управляющий',sub:'Объясняю простыми словами',hello:'Здравствуйте! Я цифровой управляющий. Спросите, что вас интересует — я объясню так, чтобы было понятно даже школьнику.',ph:'Напишите свой вопрос…',voice:'Можно задать вопрос голосом и попросить цифрового управляющего проговорить ответ. В демо используется голос вашего устройства.',q1:'Что вы делаете?',q2:'Как получить больше клиентов?',q3:'Что такое SEO?',q4:'Сколько стоит?',no:'Я отвечаю по «Цифровому бизнесу»: создание бизнеса, сайт, продвижение, приложение и подписка.',a1:'Мы помогаем собрать цифровую основу бизнеса: сайт, страницы услуг, соцсети, площадки объявлений, поиск, рекламу, заявки и приложение с помощником.',a2:'Начнём просто. Сначала проверим, что уже есть. Потом найдём 2–3 места, где можно получить больше клиентов, и подготовим конкретные действия. Вам останется подтвердить.',a3:'SEO — это простыми словами способ сделать так, чтобы ваш сайт легче находили в поиске. Например: человек ищет эвакуатор, а ваш сайт появляется среди результатов.',a4:'Для российской версии подписка стоит 300 ₽ в месяц. После оплаты приложение и помощник будут доступны по вашей подписке.',prompt:'Например: «У меня эвакуатор. Что мне сделать?»'},
+    en:{firstKicker:'First introduction',firstTitle:'What would you like to call me?',firstText:'You can choose any name for me. It will make talking to me in the app feel more natural.',firstExamples:'For example: Mark, Alex, Max, Mira — or your own name.',firstPlaceholder:'Enter a name',firstSave:'Continue →',firstSkip:'Keep “Digital manager”',launch:'Ask the digital manager',online:'Online',title:'Digital manager',sub:'Explained in simple words',hello:'Hi! I’m the Digital manager for Digital Business. Ask anything about the product and I’ll explain it in plain, easy language.',ph:'Type your question…',voice:'You can ask a question by voice and ask the Assistant to read the answer aloud. Demo voice uses your device.',q1:'What do you do?',q2:'How can I get more customers?',q3:'What is SEO?',q4:'How much does it cost?',no:'I answer questions about Digital Business: creating a business, websites, growth, the app and subscriptions.',a1:'We help build the digital foundation of a business: website, service pages, social profiles, listings, search, ads, leads and an app with your digital manager.',a2:'Let’s keep it simple. First we check what you already have. Then we find 2–3 places where you can get more customers and prepare concrete actions. You approve them.',a3:'SEO simply means making it easier for people to find your website in search. For example, someone searches for a tow service and your site can become easier to discover.',a4:'For the Russian version, the subscription is 300 ₽ per month. After payment, the app and Assistant are available through your subscription.',prompt:'For example: “I run a towing business. What should I do?”'}
   };
   function lang(){return document.documentElement.lang==='en'?'en':'ru'}
   function text(key){return copy[lang()][key]}
   function apply(){
-    document.querySelectorAll('[data-assist-launch-text]').forEach(e=>e.textContent=text('launch'));
+    document.querySelectorAll('[data-assist-launch-text]').forEach(e=>e.textContent=managerName ? (lang()==='en' ? 'Ask '+managerName : 'Спросить '+managerName) : text('launch'));
+    if(nameModal){
+      document.getElementById('db-name-kicker').textContent=text('firstKicker');
+      document.getElementById('db-name-title').textContent=text('firstTitle');
+      document.getElementById('db-name-text').textContent=text('firstText');
+      document.getElementById('db-name-examples').textContent=text('firstExamples');
+      nameInput.placeholder=text('firstPlaceholder');
+      nameSave.textContent=text('firstSave');
+      nameSkip.textContent=text('firstSkip');
+    }
     const online=document.querySelector('[data-assist-online]'); if(online) online.textContent=text('online');
     document.querySelector('[data-assist-title]').textContent=text('title');
     document.querySelector('[data-assist-subtitle]').textContent=text('sub');
     document.getElementById('db-assist-greeting').textContent=text('hello');
+    if(managerName) document.getElementById('db-assist-greeting').textContent=lang()==='en' ? 'Hi! I’m '+managerName+'. I’m your Digital manager. Ask me anything about your business.' : 'Здравствуйте! Я '+managerName+'. Я ваш цифровой управляющий. Спросите, что происходит в бизнесе, — я разберусь и объясню.';
     input.placeholder=text('ph');
     document.getElementById('db-assist-voice-note').textContent=text('voice');
     const qs=[text('q1'),text('q2'),text('q3'),text('q4')];
     document.querySelectorAll('#db-assist-quick button').forEach((b,i)=>{b.textContent=qs[i]; b.dataset.q=[text('q1'),text('q2'),text('q3'),text('q4')][i]});
   }
-  function open(){panel.classList.add('open');panel.setAttribute('aria-hidden','false');input.focus();}
+  function open(){
+    if(!managerName && nameModal){
+      nameModal.classList.add('open'); nameModal.setAttribute('aria-hidden','false');
+      apply(); setTimeout(()=>nameInput.focus(),40); return;
+    }
+    panel.classList.add('open');panel.setAttribute('aria-hidden','false');input.focus();
+  }
   function close(){panel.classList.remove('open');panel.setAttribute('aria-hidden','true');}
+  function closeNameModal(){nameModal?.classList.remove('open');nameModal?.setAttribute('aria-hidden','true');}
+  function saveManagerName(value){
+    const clean=(value||'').trim().replace(/\s+/g,' ');
+    if(clean){managerName=clean;localStorage.setItem(NAME_KEY,managerName);}
+    closeNameModal(); apply();
+    panel.classList.add('open'); panel.setAttribute('aria-hidden','false');
+    input.focus();
+    const greeting=document.getElementById('db-assist-greeting');
+    greeting.textContent=lang()==='en' ? 'Hi! I’m '+managerName+'. I’m your Digital manager. Ask me anything about your business.' : 'Здравствуйте! Я '+managerName+'. Я ваш цифровой управляющий. Спросите, что происходит в бизнесе, — я разберусь и объясню.';
+  }
+  nameSave?.addEventListener('click',()=>saveManagerName(nameInput.value));
+  nameSkip?.addEventListener('click',()=>saveManagerName(''));
+  nameInput?.addEventListener('keydown',e=>{if(e.key==='Enter') saveManagerName(nameInput.value); if(e.key==='Escape') closeNameModal();});
   launcher.addEventListener('click',open); closeBtn.addEventListener('click',close);
-  document.addEventListener('keydown',e=>{if(e.key==='Escape') close()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(nameModal?.classList.contains('open')) closeNameModal(); else close();}});
   function addMsg(text,who){const d=document.createElement('div');d.className='db-msg '+who;d.textContent=text;body.appendChild(d);body.scrollTop=body.scrollHeight;return d}
   function answerFor(q){
     const s=q.toLowerCase();
