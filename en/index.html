@@ -249,13 +249,13 @@ html[data-theme="dark"] .device-laptop-base{background:linear-gradient(to bottom
 @media(max-width:900px){.morning-columns{grid-template-columns:1fr 1fr}.morning-panel:first-child{grid-column:1/-1}.morning-metrics{grid-template-columns:repeat(2,1fr)}.metric:nth-child(2){border-right:0}.metric:nth-child(-n+2){border-bottom:1px solid var(--line)}}
 @media(max-width:620px){.morning-dashboard{padding:20px}.morning-top{gap:12px}.morning-top h3{font-size:24px}.morning-date{display:none}.morning-columns{grid-template-columns:1fr}.morning-panel:first-child{grid-column:auto}.morning-metrics{grid-template-columns:1fr 1fr}.metric strong{display:block;margin:0 0 2px}.morning-ask{flex-wrap:wrap}.ask-placeholder{order:3;flex-basis:100%;padding-left:37px}}
 </style>
-<style id="db-digital manager-voice-style">
+<style id="db-digital-manager-voice-style">
 #db-assist-launcher{position:fixed;right:22px;bottom:22px;z-index:99990;display:flex;align-items:center;gap:10px;border:1px solid rgba(255,255,255,.16);background:linear-gradient(135deg,#17131f,#271b43);color:#fff;border-radius:999px;padding:10px 14px 10px 10px;box-shadow:0 18px 45px rgba(37,23,77,.28);cursor:pointer;font:700 14px/1 Inter,-apple-system,BlinkMacSystemFont,sans-serif;backdrop-filter:blur(18px);transition:.22s ease}
 .db-assist-online{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:650;color:#7fe3ae;opacity:.92;margin-left:2px}
-.db-assist-online-dot{width:7px;height:7px;border-radius:50%;background:#31d58a;box-shadow:0 0 0 0 rgba(49,213,138,.34);animation:digital managerOnlinePulse 2.4s ease-in-out infinite;flex:0 0 7px}
-@keyframes digital managerOnlinePulse{0%,100%{box-shadow:0 0 0 0 rgba(49,213,138,.30);opacity:.82}50%{box-shadow:0 0 0 5px rgba(49,213,138,0);opacity:1}}
+.db-assist-online-dot{width:7px;height:7px;border-radius:50%;background:#31d58a;box-shadow:0 0 0 0 rgba(49,213,138,.34);animation:digitalManagerOnlinePulse 2.4s ease-in-out infinite;flex:0 0 7px}
+@keyframes digitalManagerOnlinePulse{0%,100%{box-shadow:0 0 0 0 rgba(49,213,138,.30);opacity:.82}50%{box-shadow:0 0 0 5px rgba(49,213,138,0);opacity:1}}
 .db-assist-orb{position:relative}
-.db-assist-orb .db-orb-online{position:absolute;right:-1px;bottom:-1px;width:9px;height:9px;border-radius:50%;background:#31d58a;border:2px solid #1e1831;box-shadow:0 0 0 0 rgba(49,213,138,.30);animation:digital managerOnlinePulse 2.4s ease-in-out infinite}
+.db-assist-orb .db-orb-online{position:absolute;right:-1px;bottom:-1px;width:9px;height:9px;border-radius:50%;background:#31d58a;border:2px solid #1e1831;box-shadow:0 0 0 0 rgba(49,213,138,.30);animation:digitalManagerOnlinePulse 2.4s ease-in-out infinite}
 html[data-theme="light"] .db-assist-orb .db-orb-online{border-color:#fff}
 @media(max-width:700px){.db-assist-online{display:none}}
 #db-assist-launcher:hover{transform:translateY(-2px);box-shadow:0 24px 54px rgba(37,23,77,.34)}
@@ -776,7 +776,7 @@ html[data-theme="dark"] .db-msg.ai{background:#19171f;border-color:#2d2940}.db-m
 <div class="db-voice-note" id="db-assist-voice-note">You can ask a question by voice and ask the digital manager to read the answer aloud. The demo uses your device voice.</div>
 </footer>
 </section>
-<script id="db-digital manager-voice-script">
+<script id="db-digital-manager-voice-script">
 (function(){
   const panel=document.getElementById('db-assist-panel');
   const launcher=document.getElementById('db-assist-launcher');
