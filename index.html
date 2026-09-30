@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <!-- Phone artwork is kept as separate repository assets: hero-app-phones-ru.png / hero-app-phones-en.png. -->
 <!DOCTYPE html>
 
@@ -248,7 +249,6 @@ html[data-theme="dark"] .device-laptop-base{background:linear-gradient(to bottom
 @media(max-width:900px){.morning-columns{grid-template-columns:1fr 1fr}.morning-panel:first-child{grid-column:1/-1}.morning-metrics{grid-template-columns:repeat(2,1fr)}.metric:nth-child(2){border-right:0}.metric:nth-child(-n+2){border-bottom:1px solid var(--line)}}
 @media(max-width:620px){.morning-dashboard{padding:20px}.morning-top{gap:12px}.morning-top h3{font-size:24px}.morning-date{display:none}.morning-columns{grid-template-columns:1fr}.morning-panel:first-child{grid-column:auto}.morning-metrics{grid-template-columns:1fr 1fr}.metric strong{display:block;margin:0 0 2px}.morning-ask{flex-wrap:wrap}.ask-placeholder{order:3;flex-basis:100%;padding-left:37px}}
 </style>
-
 <style id="db-assistant-voice-style">
 #db-assist-launcher{position:fixed;right:22px;bottom:22px;z-index:99990;display:flex;align-items:center;gap:10px;border:1px solid rgba(255,255,255,.16);background:linear-gradient(135deg,#17131f,#271b43);color:#fff;border-radius:999px;padding:10px 14px 10px 10px;box-shadow:0 18px 45px rgba(37,23,77,.28);cursor:pointer;font:700 14px/1 Inter,-apple-system,BlinkMacSystemFont,sans-serif;backdrop-filter:blur(18px);transition:.22s ease}
 .db-assist-online{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:650;color:#7fe3ae;opacity:.92;margin-left:2px}
@@ -276,34 +276,17 @@ html[data-theme="dark"] .db-msg.ai{background:#19171f;border-color:#2d2940}.db-m
 .db-send svg,.db-mic svg,.db-speak svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.db-voice-note{font-size:10px;color:#7b7c84;line-height:1.45}
 @media(max-width:600px){#db-assist-launcher{right:12px;bottom:12px;padding:8px 12px 8px 8px}.db-assist-orb{width:36px;height:36px}#db-assist-panel{right:10px;bottom:68px;width:calc(100vw - 20px);max-height:calc(100vh - 92px);border-radius:22px}.db-assist-body{padding:13px}.db-msg{font-size:14px}.db-quick button{font-size:12px;padding:9px 11px}.db-input-row input{font-size:14px}}
 </style>
-
-<style id="db-assist-name-style">
-#db-name-modal{position:fixed;inset:0;z-index:1000;display:none;place-items:center;padding:20px;background:rgba(10,10,14,.38);backdrop-filter:blur(12px)}
-#db-name-modal.open{display:grid}
-.db-name-card{width:min(460px,100%);padding:30px;border:1px solid var(--line);border-radius:28px;background:var(--surface);color:var(--ink);box-shadow:0 30px 90px rgba(0,0,0,.22)}
-.db-name-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);font-weight:750;margin-bottom:12px}
-.db-name-card h3{font-size:30px;line-height:1.05;letter-spacing:-.055em;margin:0 0 12px}
-.db-name-card p{font-size:13px;line-height:1.65;color:var(--muted);margin:0 0 20px}
-.db-name-examples{font-size:11px;color:var(--muted);margin:-10px 0 12px}
-#db-name-input{width:100%;height:48px;padding:0 15px;border:1px solid var(--line-strong);border-radius:14px;background:var(--bg);color:var(--ink);outline:none;font:inherit}
-#db-name-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 14%,transparent)}
-.db-name-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
-.db-name-skip{border:0;background:transparent;color:var(--muted);padding:10px 12px;font-size:12px}
-.db-name-save{border:0;background:var(--ink);color:var(--bg);border-radius:999px;padding:11px 18px;font-size:12px;font-weight:700}
-@media(max-width:600px){.db-name-card{padding:24px;border-radius:24px}.db-name-card h3{font-size:27px}}
-</style>
 </head>
 <body>
 <header><div class="container nav">
 <a class="brand" href="#"><span class="brand-mark">ЦБ</span>Цифровой бизнес</a>
 <nav class="links"><a href="#paths" id="navBusiness" title="Посмотреть, что мы можем сделать для бизнеса">Для бизнеса</a><a href="#live-demo" id="navDemo" title="Открыть живой пример работы приложения">Демо</a><a href="#system" id="navHow">Как это работает</a><a href="./pay.html" id="navPrice">300 ₽ / месяц</a></nav>
 <div class="nav-actions">
-<button aria-label="Переключить язык" class="lang-btn" id="langBtn" type="button">RU</button>
+
 <button aria-label="Переключить тему" class="theme-btn" id="themeBtn" type="button">
 <svg class="icon" viewbox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
 </button>
 <a data-open-app="" href="#app" id="navLogin">Войти</a>
-
 </div>
 </div></header>
 <main>
@@ -319,25 +302,22 @@ html[data-theme="dark"] .db-msg.ai{background:#19171f;border-color:#2d2940}.db-m
 <a class="btn" href="#paths" id="heroGrow">Продвигать существующий бизнес</a>
 <a class="btn" data-open-app="" href="#app" id="heroDemo">Открыть живое демо приложения</a>
 </div>
-
 </div>
 <div class="phone-stage phone-stage-art" id="demo">
 <div class="hero-phone-art-wrap">
 <picture id="heroPhonePicture">
-  <source id="heroPhoneSource" srcset="./hero-app-phones-ru.png" type="image/png"/>
-  <img alt="Приложение «Цифровой бизнес» на современном iPhone: светлая и тёмная тема, ответы помощника и готовые действия" class="hero-phone-art" id="heroPhoneArt" decoding="async" loading="eager" fetchpriority="high" src="./hero-app-phones-ru.png"/>
+<source id="heroPhoneSource" srcset="./hero-app-phones-ru.png" type="image/png"/>
+<img alt="Приложение «Цифровой бизнес» на современном iPhone: светлая и тёмная тема, ответы помощника и готовые действия" class="hero-phone-art" decoding="async" fetchpriority="high" id="heroPhoneArt" loading="eager" src="./hero-app-phones-ru.png"/>
 </picture>
 </div>
 <div class="phone-install-card windows-install-card">
-<div class="windows-logo" aria-hidden="true">
+<div aria-hidden="true" class="windows-logo">
 <svg viewbox="0 0 24 24"><path d="M2 4.6 11 3.2v8.2H2V4.6Zm10  -1.55L22 1.5v9.9h-10V3.05ZM2 12.7h9v8.1L2 19.45v-6.75Zm10 0h10v9.8l-10-1.55v-8.25Z"></path></svg>
 </div>
 <div class="phone-install-copy"><strong id="installTitle">Установить для Windows</strong><span id="installText">Откройте приложение прямо с компьютера. Цифровой управляющий всегда рядом.</span></div>
-<button class="windows-install-btn" id="phoneInstall" onclick="installPWA()" type="button"><span class="windows-btn-logo" aria-hidden="true"><svg viewbox="0 0 24 24"><path d="M2 4.6 11 3.2v8.2H2V4.6Zm10-1.55L22 1.5v9.9h-10V3.05ZM2 12.7h9v8.1L2 19.45v-6.75Zm10 0h10v9.8l-10-1.55v-8.25Z"></path></svg></span><span>Установить для Windows</span></button>
+<button class="windows-install-btn" id="phoneInstall" onclick="installPWA()" type="button"><span aria-hidden="true" class="windows-btn-logo"><svg viewbox="0 0 24 24"><path d="M2 4.6 11 3.2v8.2H2V4.6Zm10-1.55L22 1.5v9.9h-10V3.05ZM2 12.7h9v8.1L2 19.45v-6.75Zm10 0h10v9.8l-10-1.55v-8.25Z"></path></svg></span><span>Установить для Windows</span></button>
 </div>
 </div>
-
-
 </div>
 </section>
 <section class="section" id="paths">
@@ -379,14 +359,14 @@ html[data-theme="dark"] .db-msg.ai{background:#19171f;border-color:#2d2940}.db-m
 </div>
 <div class="custom-tools-future"><strong>Будущее уже наступило.</strong><span>Теперь оно развивается вместе с вашим бизнесом.</span></div>
 </div>
-<div class="custom-tools-action" aria-label="Пример запроса на новый инструмент">
+<div aria-label="Пример запроса на новый инструмент" class="custom-tools-action">
 <div class="kicker" id="toolsActionKicker">Прямо в приложении</div>
 <strong id="toolsActionTitle">«Мне нужен инструмент для моего бизнеса…»</strong>
 <p id="toolsActionText">Опишите задачу своими словами. Напишите сообщение или нажмите на микрофон и скажите голосом — мы получим ваше пожелание и превратим его в работу.</p>
-<div class="custom-tools-input"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M4 5h16v11H8l-4 4V5Z"></path><path d="M8 9h8M8 12h5"></path></svg><span id="toolsInputPlaceholder">Расскажите, чего не хватает…</span><span class="voice" aria-hidden="true"><svg class="icon sm" viewbox="0 0 24 24"><rect height="10" rx="5" width="6" x="9" y="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></span></div>
+<div class="custom-tools-input"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M4 5h16v11H8l-4 4V5Z"></path><path d="M8 9h8M8 12h5"></path></svg><span id="toolsInputPlaceholder">Расскажите, чего не хватает…</span><span aria-hidden="true" class="voice"><svg class="icon sm" viewbox="0 0 24 24"><rect height="10" rx="5" width="6" x="9" y="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></span></div>
 </div>
-</div>
-</div>
+
+
 </section>
 <section class="section live-demo" id="live-demo">
 <div class="container">
@@ -400,7 +380,7 @@ html[data-theme="dark"] .db-msg.ai{background:#19171f;border-color:#2d2940}.db-m
 <a class="btn" href="https://evakuator-krd.online/" id="realDemo" rel="noopener" target="_blank">Посмотреть реальное демо бизнеса</a>
 </div>
 </div>
-<div class="demo-example" aria-label="Пример работы цифрового управляющего">
+<div aria-label="Пример работы цифрового управляющего" class="demo-example">
 <div class="demo-status"><span class="status-dot"></span><span id="questionKicker">Цифровой управляющий · онлайн</span></div>
 <div class="demo-flow-step">
 <div class="demo-step-icon"><svg class="icon" viewbox="0 0 24 24"><path d="M4 5h16v12H4z"></path><path d="M8 9h8M8 13h5"></path></svg></div>
@@ -414,7 +394,7 @@ html[data-theme="dark"] .db-msg.ai{background:#19171f;border-color:#2d2940}.db-m
 <div class="demo-proposal">
 <div class="proposal-icon"><svg class="icon" viewbox="0 0 24 24"><path d="M12 3v14"></path><path d="m7 12 5 5 5-5"></path><path d="M5 21h14"></path></svg></div>
 <div><span class="demo-step-label">Предложение</span><strong>Проверить и исправить страницу заказа?</strong></div>
-<button class="demo-confirm" type="button" aria-label="Подтвердить действие"><svg class="icon" viewbox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg></button>
+<button aria-label="Подтвердить действие" class="demo-confirm" type="button"><svg class="icon" viewbox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg></button>
 </div>
 <div class="demo-hint" id="demoHint">Вы подтверждаете — управляющий выполняет действие и показывает результат.</div>
 </div>
@@ -425,148 +405,138 @@ html[data-theme="dark"] .db-msg.ai{background:#19171f;border-color:#2d2940}.db-m
 <div class="container">
 <div class="section-head"><div class="kicker" id="systemKicker">Цифровой управляющий</div><h2 id="systemTitle">Он знает, что происходит в вашем бизнесе.</h2><p id="systemText">Утром вы открываете приложение и сразу видите главное: что изменилось, что требует внимания, что уже сделано и что нужно подтвердить.</p></div>
 <div class="feature-grid">
-<div class="manager-device-showcase" aria-label="Пример интерфейса приложения Цифровой управляющий на iPhone и MacBook">
-  <div class="device-phone">
-    <div class="device-phone-shell">
-      <div class="device-phone-dynamic-island"></div>
-      <div class="device-screen"><article class="feature morning-dashboard">
+<div aria-label="Пример интерфейса приложения Цифровой управляющий на iPhone и MacBook" class="manager-device-showcase">
+<div class="device-phone">
+<div class="device-phone-shell">
+<div class="device-phone-dynamic-island"></div>
+<div class="device-screen"><article class="feature morning-dashboard">
 <div class="morning-top">
-  <div>
-    <div class="morning-kicker"><span class="status-dot"></span> Цифровой управляющий · онлайн</div>
-    <h3>Доброе утро, Алексей.</h3>
-    <p class="morning-lead"><strong>Сегодня у вас 7 важных задач.</strong> Я проверил бизнес и собрал главное.</p>
-  </div>
-  <div class="morning-date">Сегодня</div>
+<div>
+<div class="morning-kicker"><span class="status-dot"></span> Цифровой управляющий · онлайн</div>
+<h3>Доброе утро, Алексей.</h3>
+<p class="morning-lead"><strong>Сегодня у вас 7 важных задач.</strong> Я проверил бизнес и собрал главное.</p>
 </div>
-
+<div class="morning-date">Сегодня</div>
+</div>
 <div class="morning-metrics">
-  <div class="metric"><span class="metric-label">Оборот · вчера</span><strong>184 000 ₽</strong><span class="metric-change positive">+8,4%</span></div>
-  <div class="metric"><span class="metric-label">Новые заявки</span><strong>14</strong><span class="metric-change positive">стоимость −12%</span></div>
-  <div class="metric"><span class="metric-label">Нужно внимания</span><strong>3</strong><span class="metric-change warning">сейчас</span></div>
-  <div class="metric"><span class="metric-label">Следующая встреча</span><strong>11:00</strong><span class="metric-change">поставщик</span></div>
+<div class="metric"><span class="metric-label">Оборот · вчера</span><strong>184 000 ₽</strong><span class="metric-change positive">+8,4%</span></div>
+<div class="metric"><span class="metric-label">Новые заявки</span><strong>14</strong><span class="metric-change positive">стоимость −12%</span></div>
+<div class="metric"><span class="metric-label">Нужно внимания</span><strong>3</strong><span class="metric-change warning">сейчас</span></div>
+<div class="metric"><span class="metric-label">Следующая встреча</span><strong>11:00</strong><span class="metric-change">поставщик</span></div>
 </div>
-
 <div class="morning-columns">
-  <div class="morning-panel">
-    <div class="panel-title"><span>Требует внимания</span><span class="panel-count">3</span></div>
-    <div class="morning-row">
-      <span class="row-icon row-warning"><svg class="icon sm" viewBox="0 0 24 24"><path d="M12 4 21 19H3L12 4Z"></path><path d="M12 9v5M12 17h.01"></path></svg></span>
-      <div><strong>Конверсия сайта −18%</strong><span>Найдены изменения на странице заказа</span></div>
-      <button class="row-action" type="button">Проверить <span>→</span></button>
-    </div>
-    <div class="morning-row">
-      <span class="row-icon row-pink"><svg class="icon sm" viewBox="0 0 24 24"><path d="M5 6h14v10H8l-3 3V6Z"></path><path d="M8 10h8M8 13h5"></path></svg></span>
-      <div><strong>3 новых отзыва</strong><span>На два стоит ответить сегодня</span></div>
-      <button class="row-action" type="button">Показать <span>→</span></button>
-    </div>
-    <div class="morning-row">
-      <span class="row-icon row-blue"><svg class="icon sm" viewBox="0 0 24 24"><path d="M5 17 10 12l3 3 6-7"></path><path d="M16 8h3v3"></path></svg></span>
-      <div><strong>Реклама работает лучше</strong><span>14 заявок · стоимость снизилась на 12%</span></div>
-      <button class="row-action" type="button">Открыть <span>→</span></button>
-    </div>
-  </div>
-
-  <div class="morning-panel">
-    <div class="panel-title"><span>Я уже сделал</span><span class="panel-check">✓</span></div>
-    <div class="done-row"><span class="done-icon"><svg class="icon sm" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg></span><span>Ответил на 2 отзыва</span></div>
-    <div class="done-row"><span class="done-icon"><svg class="icon sm" viewBox="0 0 24 24"><path d="M5 5h14v14H5z"></path><path d="M8 9h8M8 13h6"></path></svg></span><span>Обновил информацию на сайте</span></div>
-    <div class="done-row"><span class="done-icon"><svg class="icon sm" viewBox="0 0 24 24"><path d="M5 18V6M5 18h14"></path><path d="m8 14 3-3 3 2 4-6"></path></svg></span><span>Перераспределил рекламный бюджет</span></div>
-  </div>
-
-  <div class="morning-panel">
-    <div class="panel-title"><span>От вас нужно</span><span class="panel-count accent">2</span></div>
-    <div class="approval-row">
-      <div><strong>Изменить цену товара X</strong><span>Осталось 4 дня</span></div>
-      <button class="approve-btn" type="button">Подтвердить</button>
-    </div>
-    <div class="approval-row">
-      <div><strong>Позвонить Иванову</strong><span>Сегодня · 14:00</span></div>
-      <button class="row-action" type="button">В календарь <span>→</span></button>
-    </div>
-  </div>
+<div class="morning-panel">
+<div class="panel-title"><span>Требует внимания</span><span class="panel-count">3</span></div>
+<div class="morning-row">
+<span class="row-icon row-warning"><svg class="icon sm" viewbox="0 0 24 24"><path d="M12 4 21 19H3L12 4Z"></path><path d="M12 9v5M12 17h.01"></path></svg></span>
+<div><strong>Конверсия сайта −18%</strong><span>Найдены изменения на странице заказа</span></div>
+<button class="row-action" type="button">Проверить <span>→</span></button>
 </div>
-
+<div class="morning-row">
+<span class="row-icon row-pink"><svg class="icon sm" viewbox="0 0 24 24"><path d="M5 6h14v10H8l-3 3V6Z"></path><path d="M8 10h8M8 13h5"></path></svg></span>
+<div><strong>3 новых отзыва</strong><span>На два стоит ответить сегодня</span></div>
+<button class="row-action" type="button">Показать <span>→</span></button>
+</div>
+<div class="morning-row">
+<span class="row-icon row-blue"><svg class="icon sm" viewbox="0 0 24 24"><path d="M5 17 10 12l3 3 6-7"></path><path d="M16 8h3v3"></path></svg></span>
+<div><strong>Реклама работает лучше</strong><span>14 заявок · стоимость снизилась на 12%</span></div>
+<button class="row-action" type="button">Открыть <span>→</span></button>
+</div>
+</div>
+<div class="morning-panel">
+<div class="panel-title"><span>Я уже сделал</span><span class="panel-check">✓</span></div>
+<div class="done-row"><span class="done-icon"><svg class="icon sm" viewbox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg></span><span>Ответил на 2 отзыва</span></div>
+<div class="done-row"><span class="done-icon"><svg class="icon sm" viewbox="0 0 24 24"><path d="M5 5h14v14H5z"></path><path d="M8 9h8M8 13h6"></path></svg></span><span>Обновил информацию на сайте</span></div>
+<div class="done-row"><span class="done-icon"><svg class="icon sm" viewbox="0 0 24 24"><path d="M5 18V6M5 18h14"></path><path d="m8 14 3-3 3 2 4-6"></path></svg></span><span>Перераспределил рекламный бюджет</span></div>
+</div>
+<div class="morning-panel">
+<div class="panel-title"><span>От вас нужно</span><span class="panel-count accent">2</span></div>
+<div class="approval-row">
+<div><strong>Изменить цену товара X</strong><span>Осталось 4 дня</span></div>
+<button class="approve-btn" type="button">Подтвердить</button>
+</div>
+<div class="approval-row">
+<div><strong>Позвонить Иванову</strong><span>Сегодня · 14:00</span></div>
+<button class="row-action" type="button">В календарь <span>→</span></button>
+</div>
+</div>
+</div>
 <div class="morning-ask">
-  <span class="ask-icon"><svg class="icon sm" viewBox="0 0 24 24"><path d="M12 3a8 8 0 0 0-8 8v3a2 2 0 0 0 2 2h1v-6H5a7 7 0 0 1 14 0h-2v6h1a2 2 0 0 0 2-2v-3a8 8 0 0 0-8-8Z"></path><path d="M18 16c-.5 3-2.5 5-6 5"></path></svg></span>
-  <span>Что хотите узнать?</span>
-  <span class="ask-placeholder">«Почему вчера было мало продаж?»</span>
-  <button class="ask-mic" type="button" aria-label="Голосовой вопрос"><svg class="icon sm" viewBox="0 0 24 24"><rect height="10" rx="5" width="8" x="8" y="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></button>
+<span class="ask-icon"><svg class="icon sm" viewbox="0 0 24 24"><path d="M12 3a8 8 0 0 0-8 8v3a2 2 0 0 0 2 2h1v-6H5a7 7 0 0 1 14 0h-2v6h1a2 2 0 0 0 2-2v-3a8 8 0 0 0-8-8Z"></path><path d="M18 16c-.5 3-2.5 5-6 5"></path></svg></span>
+<span>Что хотите узнать?</span>
+<span class="ask-placeholder">«Почему вчера было мало продаж?»</span>
+<button aria-label="Голосовой вопрос" class="ask-mic" type="button"><svg class="icon sm" viewbox="0 0 24 24"><rect height="10" rx="5" width="8" x="8" y="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></button>
 </div>
 </article></div>
-    </div>
-    <div class="device-caption">iPhone · приложение</div>
-  </div>
-  <div class="device-laptop">
-    <div class="device-laptop-screen">
-      <div class="laptop-camera"></div>
-      <div class="laptop-screen-inner"><article class="feature morning-dashboard dashboard-desktop">
+</div>
+<div class="device-caption">iPhone · приложение</div>
+</div>
+<div class="device-laptop">
+<div class="device-laptop-screen">
+<div class="laptop-camera"></div>
+<div class="laptop-screen-inner"><article class="feature morning-dashboard dashboard-desktop">
 <div class="morning-top">
-  <div>
-    <div class="morning-kicker"><span class="status-dot"></span> Цифровой управляющий · онлайн</div>
-    <h3>Доброе утро, Алексей.</h3>
-    <p class="morning-lead"><strong>Сегодня у вас 7 важных задач.</strong> Я проверил бизнес и собрал главное.</p>
-  </div>
-  <div class="morning-date">Сегодня</div>
+<div>
+<div class="morning-kicker"><span class="status-dot"></span> Цифровой управляющий · онлайн</div>
+<h3>Доброе утро, Алексей.</h3>
+<p class="morning-lead"><strong>Сегодня у вас 7 важных задач.</strong> Я проверил бизнес и собрал главное.</p>
 </div>
-
+<div class="morning-date">Сегодня</div>
+</div>
 <div class="morning-metrics">
-  <div class="metric"><span class="metric-label">Оборот · вчера</span><strong>184 000 ₽</strong><span class="metric-change positive">+8,4%</span></div>
-  <div class="metric"><span class="metric-label">Новые заявки</span><strong>14</strong><span class="metric-change positive">стоимость −12%</span></div>
-  <div class="metric"><span class="metric-label">Нужно внимания</span><strong>3</strong><span class="metric-change warning">сейчас</span></div>
-  <div class="metric"><span class="metric-label">Следующая встреча</span><strong>11:00</strong><span class="metric-change">поставщик</span></div>
+<div class="metric"><span class="metric-label">Оборот · вчера</span><strong>184 000 ₽</strong><span class="metric-change positive">+8,4%</span></div>
+<div class="metric"><span class="metric-label">Новые заявки</span><strong>14</strong><span class="metric-change positive">стоимость −12%</span></div>
+<div class="metric"><span class="metric-label">Нужно внимания</span><strong>3</strong><span class="metric-change warning">сейчас</span></div>
+<div class="metric"><span class="metric-label">Следующая встреча</span><strong>11:00</strong><span class="metric-change">поставщик</span></div>
 </div>
-
 <div class="morning-columns">
-  <div class="morning-panel">
-    <div class="panel-title"><span>Требует внимания</span><span class="panel-count">3</span></div>
-    <div class="morning-row">
-      <span class="row-icon row-warning"><svg class="icon sm" viewBox="0 0 24 24"><path d="M12 4 21 19H3L12 4Z"></path><path d="M12 9v5M12 17h.01"></path></svg></span>
-      <div><strong>Конверсия сайта −18%</strong><span>Найдены изменения на странице заказа</span></div>
-      <button class="row-action" type="button">Проверить <span>→</span></button>
-    </div>
-    <div class="morning-row">
-      <span class="row-icon row-pink"><svg class="icon sm" viewBox="0 0 24 24"><path d="M5 6h14v10H8l-3 3V6Z"></path><path d="M8 10h8M8 13h5"></path></svg></span>
-      <div><strong>3 новых отзыва</strong><span>На два стоит ответить сегодня</span></div>
-      <button class="row-action" type="button">Показать <span>→</span></button>
-    </div>
-    <div class="morning-row">
-      <span class="row-icon row-blue"><svg class="icon sm" viewBox="0 0 24 24"><path d="M5 17 10 12l3 3 6-7"></path><path d="M16 8h3v3"></path></svg></span>
-      <div><strong>Реклама работает лучше</strong><span>14 заявок · стоимость снизилась на 12%</span></div>
-      <button class="row-action" type="button">Открыть <span>→</span></button>
-    </div>
-  </div>
-
-  <div class="morning-panel">
-    <div class="panel-title"><span>Я уже сделал</span><span class="panel-check">✓</span></div>
-    <div class="done-row"><span class="done-icon"><svg class="icon sm" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg></span><span>Ответил на 2 отзыва</span></div>
-    <div class="done-row"><span class="done-icon"><svg class="icon sm" viewBox="0 0 24 24"><path d="M5 5h14v14H5z"></path><path d="M8 9h8M8 13h6"></path></svg></span><span>Обновил информацию на сайте</span></div>
-    <div class="done-row"><span class="done-icon"><svg class="icon sm" viewBox="0 0 24 24"><path d="M5 18V6M5 18h14"></path><path d="m8 14 3-3 3 2 4-6"></path></svg></span><span>Перераспределил рекламный бюджет</span></div>
-  </div>
-
-  <div class="morning-panel">
-    <div class="panel-title"><span>От вас нужно</span><span class="panel-count accent">2</span></div>
-    <div class="approval-row">
-      <div><strong>Изменить цену товара X</strong><span>Осталось 4 дня</span></div>
-      <button class="approve-btn" type="button">Подтвердить</button>
-    </div>
-    <div class="approval-row">
-      <div><strong>Позвонить Иванову</strong><span>Сегодня · 14:00</span></div>
-      <button class="row-action" type="button">В календарь <span>→</span></button>
-    </div>
-  </div>
+<div class="morning-panel">
+<div class="panel-title"><span>Требует внимания</span><span class="panel-count">3</span></div>
+<div class="morning-row">
+<span class="row-icon row-warning"><svg class="icon sm" viewbox="0 0 24 24"><path d="M12 4 21 19H3L12 4Z"></path><path d="M12 9v5M12 17h.01"></path></svg></span>
+<div><strong>Конверсия сайта −18%</strong><span>Найдены изменения на странице заказа</span></div>
+<button class="row-action" type="button">Проверить <span>→</span></button>
 </div>
-
+<div class="morning-row">
+<span class="row-icon row-pink"><svg class="icon sm" viewbox="0 0 24 24"><path d="M5 6h14v10H8l-3 3V6Z"></path><path d="M8 10h8M8 13h5"></path></svg></span>
+<div><strong>3 новых отзыва</strong><span>На два стоит ответить сегодня</span></div>
+<button class="row-action" type="button">Показать <span>→</span></button>
+</div>
+<div class="morning-row">
+<span class="row-icon row-blue"><svg class="icon sm" viewbox="0 0 24 24"><path d="M5 17 10 12l3 3 6-7"></path><path d="M16 8h3v3"></path></svg></span>
+<div><strong>Реклама работает лучше</strong><span>14 заявок · стоимость снизилась на 12%</span></div>
+<button class="row-action" type="button">Открыть <span>→</span></button>
+</div>
+</div>
+<div class="morning-panel">
+<div class="panel-title"><span>Я уже сделал</span><span class="panel-check">✓</span></div>
+<div class="done-row"><span class="done-icon"><svg class="icon sm" viewbox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg></span><span>Ответил на 2 отзыва</span></div>
+<div class="done-row"><span class="done-icon"><svg class="icon sm" viewbox="0 0 24 24"><path d="M5 5h14v14H5z"></path><path d="M8 9h8M8 13h6"></path></svg></span><span>Обновил информацию на сайте</span></div>
+<div class="done-row"><span class="done-icon"><svg class="icon sm" viewbox="0 0 24 24"><path d="M5 18V6M5 18h14"></path><path d="m8 14 3-3 3 2 4-6"></path></svg></span><span>Перераспределил рекламный бюджет</span></div>
+</div>
+<div class="morning-panel">
+<div class="panel-title"><span>От вас нужно</span><span class="panel-count accent">2</span></div>
+<div class="approval-row">
+<div><strong>Изменить цену товара X</strong><span>Осталось 4 дня</span></div>
+<button class="approve-btn" type="button">Подтвердить</button>
+</div>
+<div class="approval-row">
+<div><strong>Позвонить Иванову</strong><span>Сегодня · 14:00</span></div>
+<button class="row-action" type="button">В календарь <span>→</span></button>
+</div>
+</div>
+</div>
 <div class="morning-ask">
-  <span class="ask-icon"><svg class="icon sm" viewBox="0 0 24 24"><path d="M12 3a8 8 0 0 0-8 8v3a2 2 0 0 0 2 2h1v-6H5a7 7 0 0 1 14 0h-2v6h1a2 2 0 0 0 2-2v-3a8 8 0 0 0-8-8Z"></path><path d="M18 16c-.5 3-2.5 5-6 5"></path></svg></span>
-  <span>Что хотите узнать?</span>
-  <span class="ask-placeholder">«Почему вчера было мало продаж?»</span>
-  <button class="ask-mic" type="button" aria-label="Голосовой вопрос"><svg class="icon sm" viewBox="0 0 24 24"><rect height="10" rx="5" width="8" x="8" y="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></button>
+<span class="ask-icon"><svg class="icon sm" viewbox="0 0 24 24"><path d="M12 3a8 8 0 0 0-8 8v3a2 2 0 0 0 2 2h1v-6H5a7 7 0 0 1 14 0h-2v6h1a2 2 0 0 0 2-2v-3a8 8 0 0 0-8-8Z"></path><path d="M18 16c-.5 3-2.5 5-6 5"></path></svg></span>
+<span>Что хотите узнать?</span>
+<span class="ask-placeholder">«Почему вчера было мало продаж?»</span>
+<button aria-label="Голосовой вопрос" class="ask-mic" type="button"><svg class="icon sm" viewbox="0 0 24 24"><rect height="10" rx="5" width="8" x="8" y="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></button>
 </div>
 </article></div>
-    </div>
-    <div class="device-laptop-base"><div class="laptop-hinge"></div></div>
-    <div class="device-caption">MacBook · приложение</div>
-  </div>
+</div>
+<div class="device-laptop-base"><div class="laptop-hinge"></div></div>
+<div class="device-caption">MacBook · приложение</div>
+</div>
 </div>
 <article class="feature"><div class="icon-box"><svg class="icon" viewbox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle><path d="M12 7v5l3 2"></path></svg></div><h3>Стратегический мозг</h3><p>Цели, оборот, прибыль, KPI и приоритеты. Отвечает на главный вопрос: <strong>что сейчас происходит с бизнесом?</strong></p></article>
 <article class="feature"><div class="icon-box"><svg class="icon" viewbox="0 0 24 24"><path d="M4 18V6"></path><path d="m6 15 4-5 3 3 5-7"></path><path d="M16 6h3v3"></path></svg></div><h3>Маркетинговый мозг</h3><p>Сайт, SEO, реклама, соцсети, отзывы и конкуренты. Находит возможность роста и предлагает конкретное действие.</p></article>
@@ -718,128 +688,66 @@ html[data-theme="dark"] .db-msg.ai{background:#19171f;border-color:#2d2940}.db-m
   }
 })();
 </script>
-
-<script>
-(function(){
+<script>(function(){
   const dict={
-    ru:{navBusiness:'Для бизнеса',navDemo:'Демо',navHow:'Как это работает',navPrice:'300 ₽ / месяц',navLogin:'Войти',installNav:'Установить для Windows',heroEyebrow:'Приложение для бизнеса · всегда на вашем устройстве',heroTitle:['Один маленький шаг для вас. ','Гигантский скачок для вашего бизнеса.'],heroSub:'Один цифровой управляющий для вашего бизнеса. Всё в одном приложении.',heroText:'Он анализирует, показывает и объясняет, что происходит, предлагает решение. Вы подтверждаете — он выполняет работу за вас и показывает результат. Вас видят. Вас выбирают. У вас покупают. Вы зарабатываете.',heroCreate:'Создать цифровой бизнес →',heroGrow:'Продвигать существующий бизнес',heroDemo:'Открыть живое демо приложения',installTitle:'Установить для Windows',installText:'Откройте приложение прямо с компьютера. Цифровой управляющий всегда рядом.',pathsKicker:'Два пути',pathsTitle:'Создаёте бизнес с нуля — или приводите в порядок тот, что уже есть.',pathsText:'Если вы только планируете создать своё дело мечты, команда «Цифровой бизнес» поможет собрать цифровую основу и запустить её. Если бизнес уже работает, но клиентов стало меньше или всё держится на вас, не нужно нанимать ещё нескольких подрядчиков — подключаемся к тому, что уже есть, находим проблемы и точки роста, а цифровой управляющий помогает разрулить приоритеты и довести изменения до результата.',toolsKicker:'Система, которая развивается вместе с вами',toolsTitle:'Это не просто приложение. Оно развивается вместе с вашим бизнесом.',toolsText:'Наше суперприложение не заканчивается на тех инструментах, которые уже есть. Мы будем помогать предпринимателям дальше: добавлять новые инструменты и улучшать существующие под реальные задачи вашего бизнеса. И это не просто обещание: вы говорите, что вам нужно, мы разбираемся и делаем.',toolsNote:'Напишите или скажите голосом прямо в приложении: <strong>«Мне нужно вот это».</strong> Вы говорите — мы разбираемся и делаем. Именно так приложение будет расти вместе с вами.',toolsActionKicker:'Прямо в приложении',toolsActionTitle:'«Мне нужен инструмент для моего бизнеса…»',toolsActionText:'Опишите задачу своими словами. Напишите сообщение или нажмите на микрофон и скажите голосом — мы получим ваше пожелание и превратим его в работу.',toolsInputPlaceholder:'Расскажите, чего не хватает…',createTitle:'Создать цифровой бизнес',createText:'Если вы только планируете своё дело, расскажите, чем хотите заниматься. Команда «Цифровой бизнес» соберёт цифровую основу вместе с вами — от сайта до заявок и управления.',createLi1:'Сайт и страницы услуг',createLi2:'Соцсети и площадки объявлений',createLi3:'Поиск, реклама и приём заявок',createLi4:'Приложение с цифровым управляющим',createNote:'Не нужно искать отдельно дизайнера, программиста, маркетолога и других подрядчиков — мы собираем цифровую систему в одном месте.',createBtn:'Создать цифровой бизнес →',growTitle:'Если бизнес уже работает — подключим управление',growText:'Есть сайт, соцсети, Авито, реклама или CRM, но бизнес просел, заявок стало меньше или всё приходится контролировать самому? Не будем добавлять ещё одну команду поверх хаоса. Подключимся к тому, что уже есть, разберёмся, где теряются клиенты и деньги, и покажем, что нужно сделать в первую очередь.',growBtn:'Разобрать мой бизнес →',demoKicker:'Как работает цифровой управляющий',demoTitle:'Вы задаёте вопрос. Он разбирается в ситуации и превращает ответ в действие.',demoText:'Не просто отвечает текстом. Анализирует подключённые данные, объясняет простыми словами, предлагает решение и ждёт вашего подтверждения.',demoOpen:'Открыть приложение',realDemo:'Посмотреть реальное демо бизнеса',questionKicker:'Цифровой управляющий · онлайн',demoQuestion:'Почему вчера было мало продаж?',demoAnswer:['Нашёл причину.','Трафик сохранился, но конверсия сайта упала с 3,8% до 2,9%. Я нашёл изменение на странице заказа, которое произошло вчера вечером.'],demoHint:'Вы подтверждаете — управляющий выполняет действие и показывает результат.',systemKicker:'Цифровой управляющий',systemTitle:'Он знает, что происходит в вашем бизнесе.',systemText:'Утром вы открываете приложение и сразу видите главное: что изменилось, что требует внимания, что уже сделано и что нужно подтвердить.',flowKicker:'Главный цикл',flowTitle:'Вы говорите, чего хотите. Цифровой управляющий переводит это в работу.',promoKicker:'Продвижение бизнеса',promoTitle:'Не нужно знать «SEO» и «SMM». Цифровой управляющий скажет, что сделать.',promoText:'Цифровой управляющий не продаёт вам набор каналов. Он показывает, где есть возможность роста, что именно изменить и какую работу можно подготовить.',promoBtn:'Подключить цифрового управляющего →',finalKicker:'Подписка',finalText:'Подписка — 300 ₽ в месяц. Вы получаете приложение и цифрового управляющего, который регулярно проверяет ваш бизнес, показывает проблемы и возможности, объясняет всё простыми словами, предлагает конкретные действия и после вашего подтверждения помогает их выполнить. Создание сайта, рекламы и других цифровых элементов — отдельная работа команды, если она вам нужна.',finalPrice:'300 ₽ в месяц',finalPriceNote:'Подписка на приложение и цифрового управляющего. Без оплаты за сам факт использования управляющего.',finalPay:'Подключить подписку →',mailCreate:'Создать цифровой бизнес →',installHelpTitle:'Установка приложения',installHelpText:'Откройте меню браузера и выберите установку приложения. На Windows оно появится как отдельное приложение.',footerLinks:'Сайт · Поиск · Авито · Соцсети · Реклама · Клиенты · Помощник'},
-    en:{navBusiness:'For business',navDemo:'Demo',navHow:'How it works',navPrice:'$3.99 / month',navLogin:'Open app',installNav:'Install for Windows',heroEyebrow:'Business app · always in your phone',heroTitle:['One small step for you. ','A giant leap for your business.'],heroSub:'One digital manager for your business. Everything in one app.',heroText:'One digital manager for your business. Everything in one app. It analyzes, shows, and explains what is happening, proposes a solution. You approve — it does the work for you and shows the result. People see you. They choose you. They buy from you. You earn.',heroCreate:'Create my digital business →',heroGrow:'Grow my existing business',heroDemo:'Open live app demo',installTitle:'Install for Windows',installText:'Open the app directly from your computer. Your digital manager is always close.',pathsKicker:'Two paths',pathsTitle:'Build your business from scratch — or get the one you already have back under control.',pathsText:'If you are planning the business you have always wanted, the Digital Business team helps build its digital foundation and launch it. If the business already exists but customers have dropped or everything depends on you, you do not need another pile of contractors — we connect to what you already have, find the problems and growth points, and the Digital Manager helps set priorities and move the work forward.',createTitle:'Create a digital business',createText:'If you are planning your business, tell us what you want to build. The Digital Business team helps assemble the digital foundation — from the website to leads and management.',createLi1:'Website and service pages',createLi2:'Social profiles and listings',createLi3:'Search, ads and lead capture',createLi4:'App with your Digital Manager',createNote:'You do not need to hire a designer, developer, marketer and other contractors separately — we build the digital system together.',createBtn:'Create my digital business →',growTitle:'Already have a business? Connect management',growText:'Have a website, social profiles, listings, ads or a CRM, but the business has slowed down, leads have dropped, or you have to control everything yourself? We do not add another team on top of the chaos. We connect to what you already have, find where customers and money are being lost, and show what to do first.',growBtn:'Connect my business →',demoKicker:'How the digital manager works',demoTitle:'Ask a question. It analyzes the situation and turns the answer into action.',demoText:'It does not just reply with text. It analyzes connected data, explains it simply, proposes a solution and waits for your approval.',demoOpen:'Open the app',realDemo:'See the real business demo',questionKicker:'Digital manager · online',demoQuestion:'Why were sales low yesterday?',demoAnswer:['I found the reason.','Traffic stayed stable, but website conversion fell from 3.8% to 2.9%. I found a change on the order page that happened yesterday evening.'],demoHint:'You approve — the manager performs the action and shows the result.',systemKicker:'Inside the app',systemTitle:'Everything your business needs — in one app.',systemText:'You do not need to learn dozens of services. The Assistant explains each one and tells you where to tap.',flowKicker:'The main loop',flowTitle:'Tell us what you want. The Assistant turns it into work.',promoKicker:'Business growth',promoTitle:'You do not need to know “SEO” or “SMM”. The Assistant tells you what to do.',promoText:'The Assistant does not sell you a list of channels. It shows where there is room to grow, what to change, and what work can be prepared.',promoBtn:'Connect the Assistant →',finalKicker:'Create a digital business',finalText:'Give us a name and a short description of your business. We help create the website, service pages, social profiles, listings, search visibility, ads, lead intake and the app with your digital manager. Then we help improve and grow it.',finalPrice:'$3.99 per month',finalPriceNote:'For the app, Assistant and business control system.',finalPay:'Go to checkout →',mailCreate:'Create my digital business →',installHelpTitle:'Install the app',installHelpText:'Add the app to your home screen so the Assistant is always close.',footerLinks:'Website · Search · Listings · Social · Ads · Clients · Assistant'}
+    ru:{navBusiness:'Для бизнеса',navDemo:'Демо',navHow:'Как это работает',navPrice:'300 ₽ / месяц',navLogin:'Войти',installNav:'Установить для Windows',heroEyebrow:'Приложение для бизнеса · всегда на вашем устройстве',heroTitle:['Один маленький шаг для вас. ','Гигантский скачок для вашего бизнеса.'],heroSub:'Один цифровой управляющий для вашего бизнеса. Всё в одном приложении.',heroText:'Он анализирует, показывает и объясняет, что происходит, предлагает решение. Вы подтверждаете — он выполняет работу за вас и показывает результат. Вас видят. Вас выбирают. У вас покупают. Вы зарабатываете.',heroCreate:'Создать цифровой бизнес →',heroGrow:'Продвигать существующий бизнес',heroDemo:'Открыть живое демо приложения',installTitle:'Установить для Windows',installText:'Откройте приложение прямо с компьютера. Цифровой управляющий всегда рядом.',pathsKicker:'Два пути',pathsTitle:'Создаёте бизнес с нуля — или приводите в порядок тот, что уже есть.',pathsText:'Если вы только планируете создать своё дело мечты, команда «Цифровой бизнес» поможет собрать цифровую основу и запустить её. Если бизнес уже работает, но клиентов стало меньше или всё держится на вас, не нужно нанимать ещё нескольких подрядчиков — подключаемся к тому, что уже есть, находим проблемы и точки роста, а цифровой управляющий помогает разрулить приоритеты и довести изменения до результата.',toolsKicker:'Система, которая развивается вместе с вами',toolsTitle:'Это не просто приложение. Оно развивается вместе с вашим бизнесом.',toolsText:'Наше суперприложение не заканчивается на тех инструментах, которые уже есть. Мы будем помогать предпринимателям дальше: добавлять новые инструменты и улучшать существующие под реальные задачи вашего бизнеса. И это не просто обещание: вы говорите, что вам нужно, мы разбираемся и делаем.',toolsNote:'Напишите или скажите голосом прямо в приложении: <strong>«Мне нужно вот это».</strong> Вы говорите — мы разбираемся и делаем. Именно так приложение будет расти вместе с вами.',toolsActionKicker:'Прямо в приложении',toolsActionTitle:'«Мне нужен инструмент для моего бизнеса…»',toolsActionText:'Опишите задачу своими словами. Напишите сообщение или нажмите на микрофон и скажите голосом — мы получим ваше пожелание и превратим его в работу.',toolsInputPlaceholder:'Расскажите, чего не хватает…',createTitle:'Создать цифровой бизнес',createText:'Если вы только планируете своё дело, расскажите, чем хотите заниматься. Команда «Цифровой бизнес» соберёт цифровую основу вместе с вами — от сайта до заявок и управления.',createLi1:'Сайт и страницы услуг',createLi2:'Соцсети и площадки объявлений',createLi3:'Поиск, реклама и приём заявок',createLi4:'Приложение с цифровым управляющим',createNote:'Не нужно искать отдельно дизайнера, программиста, маркетолога и других подрядчиков — мы собираем цифровую систему в одном месте.',createBtn:'Создать цифровой бизнес →',growTitle:'Если бизнес уже работает — подключим управление',growText:'Есть сайт, соцсети, Авито, реклама или CRM, но бизнес просел, заявок стало меньше или всё приходится контролировать самому? Не будем добавлять ещё одну команду поверх хаоса. Подключимся к тому, что уже есть, разберёмся, где теряются клиенты и деньги, и покажем, что нужно сделать в первую очередь.',growBtn:'Разобрать мой бизнес →',demoKicker:'Как работает цифровой управляющий',demoTitle:'Вы задаёте вопрос. Он разбирается в ситуации и превращает ответ в действие.',demoText:'Не просто отвечает текстом. Анализирует подключённые данные, объясняет простыми словами, предлагает решение и ждёт вашего подтверждения.',demoOpen:'Открыть приложение',realDemo:'Посмотреть реальное демо бизнеса',questionKicker:'Цифровой управляющий · онлайн',demoQuestion:'Почему вчера было мало продаж?',demoAnswer:['Нашёл причину.','Трафик сохранился, но конверсия сайта упала с 3,8% до 2,9%. Я нашёл изменение на странице заказа, которое произошло вчера вечером.'],demoHint:'Вы подтверждаете — управляющий выполняет действие и показывает результат.',systemKicker:'Цифровой управляющий',systemTitle:'Он знает, что происходит в вашем бизнесе.',systemText:'Утром вы открываете приложение и сразу видите главное: что изменилось, что требует внимания, что уже сделано и что нужно подтвердить.',flowKicker:'Главный цикл',flowTitle:'Вы говорите, чего хотите. Цифровой управляющий переводит это в работу.',promoKicker:'Продвижение бизнеса',promoTitle:'Не нужно знать «SEO» и «SMM». Цифровой управляющий скажет, что сделать.',promoText:'Цифровой управляющий не продаёт вам набор каналов. Он показывает, где есть возможность роста, что именно изменить и какую работу можно подготовить.',promoBtn:'Подключить цифрового управляющего →',finalKicker:'Подписка',finalText:'Подписка — 300 ₽ в месяц. Вы получаете приложение и цифрового управляющего, который регулярно проверяет ваш бизнес, показывает проблемы и возможности, объясняет всё простыми словами, предлагает конкретные действия и после вашего подтверждения помогает их выполнить. Создание сайта, рекламы и других цифровых элементов — отдельная работа команды, если она вам нужна.',finalPrice:'300 ₽ в месяц',finalPriceNote:'Подписка на приложение и цифрового управляющего. Без оплаты за сам факт использования управляющего.',finalPay:'Подключить подписку →',mailCreate:'Создать цифровой бизнес →',installHelpTitle:'Установка приложения',installHelpText:'Откройте меню браузера и выберите установку приложения. На Windows оно появится как отдельное приложение.',footerLinks:'Сайт · Поиск · Авито · Соцсети · Реклама · Клиенты · Помощник'}
   };
   const ids=Object.keys(dict.ru);
-  function setLang(lang){
-    const d=dict[lang];
-    document.documentElement.lang=lang==='en'?'en':'ru';
-    for(const key of ids){const el=document.getElementById(key); if(!el||d[key]===undefined) continue; const val=d[key]; if(Array.isArray(val)){if(key==='heroTitle'){el.innerHTML=val[0]+'<em>'+val[1]+'</em>';} else if(key==='demoAnswer'){el.innerHTML='<b>'+val[0]+'</b><br>'+val[1];}} else el.textContent=val;}
-    const lb=document.getElementById('langBtn'); if(lb) lb.textContent=lang==='en'?'EN':'RU';
+  function applyRussian(){
+    const d=dict.ru;
+    document.documentElement.lang='ru';
+    for(const key of ids){
+      const el=document.getElementById(key);
+      if(!el || d[key]===undefined) continue;
+      const val=d[key];
+      if(Array.isArray(val)){
+        if(key==='heroTitle') el.innerHTML=val[0]+'<em>'+val[1]+'</em>';
+        else if(key==='demoAnswer') el.innerHTML='<b>'+val[0]+'</b><br>'+val[1];
+      } else {
+        el.textContent=val;
+      }
+    }
     const heroPhoneArt=document.getElementById('heroPhoneArt');
     const heroPhoneSource=document.getElementById('heroPhoneSource');
-    const heroPhoneImage=lang==='en'?'./hero-app-phones-en.png':'./hero-app-phones-ru.png';
-    if(heroPhoneArt){ heroPhoneArt.src=heroPhoneImage; heroPhoneArt.alt=lang==='en'?'Digital Business app on modern iPhone: light and dark themes, assistant answers and ready actions':'Приложение «Цифровой бизнес» на современном iPhone: светлая и тёмная тема, ответы помощника и готовые действия'; }
-    if(heroPhoneSource) heroPhoneSource.srcset=heroPhoneImage;
-    const title=document.getElementById('heroTitle'); if(title) title.setAttribute('aria-label','');
-    localStorage.setItem('db-lang',lang);
+    if(heroPhoneArt){
+      heroPhoneArt.src='./hero-app-phones-ru.png';
+      heroPhoneArt.alt='Приложение «Цифровой бизнес» на современном iPhone: светлая и тёмная тема, ответы помощника и готовые действия';
+    }
+    if(heroPhoneSource) heroPhoneSource.srcset='./hero-app-phones-ru.png';
   }
-  const stored=localStorage.getItem('db-lang');
   const heroPhoneArt=document.getElementById('heroPhoneArt');
-  if(heroPhoneArt){ heroPhoneArt.addEventListener('error',()=>{ if(!heroPhoneArt.dataset.fallback){ heroPhoneArt.dataset.fallback='1'; heroPhoneArt.src=(document.documentElement.lang==='en'?'./hero-app-phones-en.png':'./hero-app-phones-ru.png'); } }); }
-  const lang=stored || ((navigator.language||'').toLowerCase().startsWith('en')?'en':'ru');
-  document.getElementById('langBtn')?.addEventListener('click',()=>setLang((localStorage.getItem('db-lang')||lang)==='en'?'ru':'en'));
-  setLang(lang);
-  window.dbLang=()=>localStorage.getItem('db-lang')||lang;
-  // Keep install help language-friendly.
-  const oldShow=window.showInstallHelp;
-})();
-</script>
-
-
-<script id="db-full-i18n">
-(function(){
-  const RU_EN={"Цифровой бизнес — Ваш бизнес. На новом уровне.":"Digital Business — Your business. On a new level.","Цифровая платформа для развития бизнеса: сайт, клиенты, продвижение и умный помощник в одном месте.":"A digital platform for your business: website, customers, growth and a smart assistant in one place.","Цифровой бизнес":"Digital Business","Стратегический мозг":"Strategy Brain","Маркетинговый мозг":"Marketing Brain","Мозг сайта":"Website Brain","Личный помощник":"Personal Assistant","Бизнес-мозг":"Business Brain","Сайт · Поиск · Площадки · Соцсети · Реклама · Клиенты · Управление":"Website · Search · Listings · Social · Ads · Clients · Management","Цифровой управляющий":"Digital manager","ЦБ":"DB","ЦИФРОВОЙ БИЗНЕС":"DIGITAL BUSINESS","Для бизнеса":"For business","Демо":"Demo","Как это работает":"How it works","Войти":"Open app","Установить приложение":"Install app","Установить для Windows":"Install for Windows","Приложение для бизнеса · всегда на вашем устройстве":"Business app · always on your device","Ваш бизнес. Один помощник.":"Your business. One assistant.","Прямо в вашем телефоне.":"Right on your phone.","Он анализирует, показывает и объясняет, что происходит, предлагает решение. Вы подтверждаете — он выполняет работу за вас и показывает результат. Вас видят. Вас выбирают. У вас покупают. Вы зарабатываете.":"It analyzes, shows and explains what is happening, proposes a solution. You approve — it does the work for you and shows the result.\n\nPeople see you. People choose you. People buy from you. You earn.","Создать цифровой бизнес →":"Create my digital business →","Создать цифровой бизнес":"Create a digital business","Продвигать существующий бизнес":"Grow an existing business","Продвигать существующий":"Grow existing","Открыть живое демо приложения":"Open live app demo","Открыть приложение":"Open the app","Установите приложение на телефон":"Install the app on your phone","Установить для Windows":"Install for Windows","Откройте приложение прямо с компьютера. Цифровой управляющий всегда рядом.":"Open the app directly from your computer. Your digital manager is always close.","Откройте его с главного экрана — помощник всегда рядом.":"Open it from your home screen — your assistant is always close.","Два сценария":"Two ways to start","Можно начать с нуля — или подключить то, что уже есть.":"Start from zero — or connect what you already have.","Не нужно быть маркетологом или программистом. Вы рассказываете, чем занимаетесь, а мы помогаем собрать всё нужное и потом показываем, что делать дальше.":"You do not need to be a marketer or a programmer. Tell us what your business does, and we help build what you need and show you what to do next.","Вы просто говорите, чем занимаетесь. Мы помогаем сделать цифровую основу целиком — без беготни по разным подрядчикам.":"Simply tell us what you do. We help build the digital foundation for you, without juggling multiple contractors.","Сайт и страницы услуг":"Website and service pages","Соцсети и площадки объявлений":"Social profiles and listings","Поиск, реклама и привлечение клиентов":"Search, ads and customer growth","Приложение с вашим помощником":"App with your personal assistant","Вам не надо искать отдельно дизайнера, программиста и рекламу — мы собираем систему вместе с вами.":"You do not need to find a designer, developer and marketer separately — we bring everything together for you.","Создать мой цифровой бизнес →":"Create my digital business →","Уже есть сайт, соцсети, Авито, реклама или CRM? Подключим то, что уже работает, и поможем найти следующий шаг.":"Already have a website, social profiles, Avito, ads or a CRM? Connect what already works and we will help find the next step.","Подключить то, что уже есть":"Connect what you already have","Находим, что можно улучшить":"Find what can be improved","Говорим простыми словами, что сделать":"Explain what to do in plain language","Смотрим, что получилось":"See what happened","Подключить мой бизнес →":"Connect my business →","Живое демо":"Live demo","Посмотрите, как Помощник отвечает и что происходит дальше.":"See how the Assistant answers and what happens next.","Внутри приложения можно переключать разделы, тёмную и светлую тему, задавать вопрос и смотреть, как из вопроса получается конкретное действие.":"Inside the app you can switch sections, change light/dark mode, ask a question and see how a question becomes a real action.","Посмотреть реальное демо бизнеса":"See the real business demo","Пример вопроса":"Example question","Как получить больше клиентов?":"How can I get more customers?","Я посмотрел ваш бизнес.":"I checked your business.","Давайте начнём с трёх простых шагов: улучшить страницу услуги, проверить поиск и подготовить объявление.":"Let’s start with three simple steps: improve a service page, check search visibility, and prepare a listing.","Подсказка":"Tip","Вы нажимаете «Открыть» — дальше Помощник ведёт вас по шагам.":"Tap “Open” and the Assistant guides you step by step.","Внутри системы":"Inside the app","Всё нужное для бизнеса — в одном приложении.":"Everything your business needs — in one app.","Не нужно учить десятки сервисов. Помощник объяснит каждую вещь и подскажет, куда нажать.":"You do not need to learn dozens of services. The Assistant explains each one and tells you where to tap.","Сайт":"Website","Где вас искать":"Where people find you","Геолокация":"Location","Звонки":"Calls","Заявки":"Leads","Отзывы":"Reviews","Что получилось":"What happened","Страницы услуг, структура, контент и техническое состояние — под контролем системы.":"Service pages, structure, content and technical health — all under the system’s control.","Помогаем показывать ваш бизнес людям рядом.":"We help people nearby find your business.","Обращения и источники звонков становятся частью общей картины, а не отдельной таблицей.":"Leads and call sources become part of the full picture, not a separate spreadsheet.","Помощник помогает не терять обращения и подсказывает, где требуется реакция.":"The Assistant helps you avoid missed leads and shows where action is needed.","Репутация видна рядом с клиентским контекстом — можно вовремя ответить и разобрать проблему.":"Your reputation is shown next to customer context, so you can reply in time and understand issues.","Показываем простые цифры и объясняем, что они значат.":"We show simple numbers and explain what they mean.","Аналитика":"Analytics","Главный цикл":"The main loop","Вы говорите, чего хотите. Цифровой управляющий переводит это в работу.":"Tell us what you want. The Assistant turns it into work.","Хочу больше клиентов":"I want more customers","Фиксируем цель, а не отдельную услугу.":"We focus on your goal, not a single service.","Помощник анализирует":"The Assistant analyzes","Смотрит на сайт, каналы, заявки и изменения.":"It looks at your website, channels, leads and changes.","Готовит работу":"Prepares the work","Предлагает конкретное действие с понятным объяснением.":"It suggests a specific action with a clear explanation.","Вы подтверждаете":"You approve","Важные изменения остаются под вашим контролем.":"Important changes stay under your control.","Система возвращает данные и предлагает следующий шаг.":"The system returns the results and suggests the next step.","Продвижение бизнеса":"Business growth","Не нужно знать «SEO» и «SMM». Цифровой управляющий скажет, что сделать.":"You do not need to know “SEO” or “SMM”. The Assistant tells you what to do.","Цифровой управляющий не продаёт вам набор каналов. Он показывает, где есть возможность роста, что именно изменить и какую работу можно подготовить.":"The Assistant does not sell you a list of channels. It shows where there is room to grow, what to change, and what work can be prepared.","План на сейчас":"Plan for now","Усилить страницу услуги":"Improve the service page","Добавить блоки, которые помогают клиенту принять решение":"Add sections that help the customer decide","Проверить видимость в поиске":"Check search visibility","Найти запросы, где есть потенциал роста":"Find searches with growth potential","Протестировать площадку":"Test a listing platform","Подготовить гипотезу для Авито или другого канала":"Prepare a test idea for Avito or another channel","Подключить цифрового управляющего →":"Connect the Assistant →","Создать публикацию":"Create a post","Не нужно учить десятки сервисов.":"No need to learn dozens of services.","Скажите, чем вы занимаетесь — остальное соберём вместе.":"Tell us what you do — we will put the rest together.","За приложение, Помощника и систему управления бизнесом.":"For the app, Assistant and business control system.","Перейти к оплате →":"Go to checkout →","← На сайт":"← Back to site","Добавьте приложение на главный экран телефона — так цифровой управляющий будет всегда под рукой.":"Add the app to your home screen so the Assistant is always close.","Цифровой бизнес /":"Digital Business /","Ваш личный помощник":"Your personal assistant","На связи":"Online","Проверено только что":"Checked just now","Продвижение":"Growth","Публикации":"Posts","Клиенты":"Clients","Помощник":"Assistant","Главная":"Home","Мой бизнес":"My business","Статистика":"Analytics","Задачи":"Tasks","Контент и контакты":"Content & contacts","(заявки / Leads)":"(leads)","1 важное · 3 рекомендации · 2 подготовлено":"1 important · 3 suggestions · 2 prepared","6 из 6 зон проверены":"6 of 6 areas checked","SEO-возможности":"SEO opportunities","Адрес":"Address","В работе":"In progress","Ваш Помощник":"Your Assistant","Ваш бизнес":"Your business","Ваш сайт говорит о главном":"Your website covers the basics","Ваш сайт под контролем":"Your website is under control","Введите сайт. Помощник посмотрит, чем вы занимаетесь, где работаете и что уже есть. Потом подскажет, что улучшить. Сложные слова объясним простыми словами.":"Enter your website. The Assistant will look at what you do, where you work and what you already have. Then it will show what to improve. Technical words are explained in plain English.","Показать Помощнику мой бизнес":"Show my business to the Assistant","Сразу открыть демо":"Open demo","Первый запуск":"First launch","Давайте познакомимся":"Let’s get to know","Что нажимать?":"What should I tap?","Начните с «Что можно улучшить» или спросите меня.":"Start with “What can I improve?” or ask me a question.","Спросить Помощника":"Ask the Assistant","Что можно улучшить":"What can I improve","Что требует внимания":"Needs attention","Что проверяем":"What we check","Что уже понятно":"What is clear","Что сможет замечать Помощник":"What the Assistant can notice","Эвакуатор Краснодар 24/7":"Tow Truck Krasnodar 24/7","Эвакуатор Краснодар 24/7 · Помощник онлайн":"Tow Truck Krasnodar 24/7 · Assistant online","Круглосуточная эвакуация автомобилей в Краснодаре и Краснодарском крае.":"24/7 vehicle towing in Krasnodar and Krasnodar Krai.","Краснодар и Краснодарский край":"Krasnodar and Krasnodar Krai","Круглосуточная работа":"Open 24/7","Легковые · кроссоверы · минивэны · малый грузовой":"Cars · crossovers · minivans · light commercial","Телефон":"Phone","Мобильная версия":"Mobile version","Могу ответить клиенту, разобрать отзыв, подготовить страницу для поиска или создать публикацию.":"I can reply to a customer, review feedback, prepare a search page, or create a post.","Можно усилить присутствие в поиске":"Search visibility can be improved","На сайте уже есть отзывы":"The website already has reviews","На сайте ясно указано: эвакуатор работает круглосуточно в Краснодаре и Краснодарском крае, есть цены, услуги и контакты.":"The website clearly says the towing service works 24/7 in Krasnodar and Krasnodar Krai, with prices, services and contacts.","На странице опубликованы 4 отзыва":"4 reviews are published on the page","Название":"Name","Настроить Помощника":"Set up the Assistant","Новые клиенты":"New customers","Новые обращения":"New leads","Обнаружил":"Found","Обновить":"Refresh","Обращения":"Leads","Одобрить новую страницу":"Approve new page","Опубликовать":"Publish","Опубликовать пост":"Publish post","Ответить клиенту":"Reply to customer","Отзыв опубликован на сайте. Для автоматических ответов подключим источник отзывов.":"The review is published on the website. We can connect the review source for automatic replies.","Отзывы на сайте":"Reviews on the website","Открыть":"Open","Отправить":"Send","Подготовка автомобиля к зиме":"Winter vehicle preparation","Подготовлена публикация":"Post prepared","Поддержка 24/7":"24/7 support","Подключение данных · следующий шаг":"Connect data · next step","Подключим поисковые данные и найдём реальные возможности.":"Connect search data and find real opportunities.","Подключите источники обращений":"Connect lead sources","Подключить":"Connect","Подключить данные":"Connect data","Поможем, когда нужен человек.":"We are here when you need a human.","Помощник может подключить сбор новых отзывов и подготовку ответов.":"The Assistant can connect new review collection and prepare replies.","Помощник может подключить управление отзывами и ответы.":"The Assistant can connect review management and replies.","Помощник подготовил ответ.":"The Assistant prepared a reply.","Помощник подготовит после проверки":"The Assistant will prepare it after checking","Помощник предлагает рассказать клиентам о сезонном обслуживании и мягко привести их к записи.":"The Assistant suggests telling customers about seasonal service and gently guiding them to book.","Посетители сайта":"Website visitors","После подключения Помощник сможет готовить публикации.":"After connection, the Assistant can prepare posts.","После подключения поисковых и аналитических данных Помощник сможет объяснять изменения человеческим языком.":"After connecting search and analytics data, the Assistant can explain changes in plain language.","Последние отзывы":"Latest reviews","Последняя проверка":"Last check","Посмотреть":"View","Посмотреть новый отзыв":"View new review","Посмотреть ответ":"View reply","Проверим после подключения аудита":"We will check after the audit is connected","Проверить":"Check","Проверить сейчас":"Check now","Продвижение под контролем":"Growth under control","Профиль бизнеса":"Business profile","Профиль используется везде":"Profile used everywhere","Работает":"Working","Регион":"Region","Регион указан":"Region set","Режим работы":"Hours","Репутация бизнеса":"Business reputation","Сайт проверен · я вижу, чем занимается бизнес":"Website checked · I understand the business","Сайт работает":"Website is working","Сегодня":"Today","Сегодня · 3 действия":"Today · 3 actions","Сегодня, 07:12":"Today, 07:12","Сейчас мы не показываем выдуманные позиции. После подключения поисковых данных Помощник сможет показать реальные запросы, показы и возможности.":"We do not show made-up rankings. After connecting search data, the Assistant can show real queries, impressions and opportunities.","Следующий шаг":"Next step","Смотрим сайт и собираем понятную картину.":"We check the website and build a simple picture.","Создать":"Create","Сообщения от клиентов":"Customer messages","Состояние":"Status","Состояние бизнеса":"Business status","Сохранить":"Save","Социальные сети можно подключить":"Social profiles can be connected","Удобно с телефона":"Easy to use on your phone","Текст и каналы уже подготовлены.":"Text and channels are already prepared.","Телефон и связь":"Phone & contact","Темы и предложения":"Topics and offers","Тогда здесь появятся заявки с сайта, звонки и история работы с клиентами. Мы не будем придумывать показатели.":"Then website leads, calls and customer history will appear here. We will not invent metrics.","Узнать, что люди ищут":"See what people search for","Услуга понятна":"Service is clear","Услуги":"Services","Единый профиль":"One profile","Дзен":"Zen","Готов черновик под поисковый запрос.":"A draft is ready for a search query.","Готовим контент за вас":"We prepare content for you","График":"Chart","ДЕМОНСТРАЦИОННЫЙ РЕЖИМ · данные на экране примерные":"DEMO MODE · data on the screen is illustrative","Да, это мой бизнес →":"Yes, this is my business →","Есть возможность улучшения":"There is an opportunity to improve","Есть новый отзыв":"There is a new review","Есть опубликованные отзывы":"There are published reviews","Центр действий":"Action center","Как вас находят":"How people find you","Как идут дела":"How things are going","Как работает Помощник":"How the Assistant works","Каналы":"Channels","Клиенты получают ответы":"Customers get replies","Количество страниц уточним после полноценного аудита · реальные проблемы покажем только после проверки":"We will confirm the page count after a full audit · real issues will be shown only after checking","Контакт":"Contact","Контакты":"Contacts","Контекст бизнеса подключён":"Business context connected","Изучаем ваш бизнес…":"Learning about your business…","Идея дня":"Idea of the day","Индексация":"Search indexing","Понял. В рабочей версии я проверю данные бизнеса, найду связанные изменения и предложу конкретное действие. Сейчас это демонстрационный режим.":"Got it. In the live version I will check your business data, find related changes and suggest a specific action. This is demo mode.","Я познакомился с сайтом и собрал понятную картину: чем вы занимаетесь, где работаете, какие услуги предлагаете и что уже есть для клиентов.":"I checked the website and built a simple picture: what you do, where you work, what you offer and what customers can already see.","Я проверил бизнес. Сейчас есть 3 вещи, которые стоит сделать сегодня. С чего начнём?":"I checked the business. There are 3 things worth doing today. Where should we start?","подготовил":"prepared","проверил результат":"checked the result","предложил":"suggested","выполнил":"completed","готово":"done","новое":"new","проверить":"check","объяснил":"explained","данных пока нет":"no data yet","не подключён":"not connected","под контролем.":"under control.","с вашим бизнесом.":"with your business.","подключим CRM":"connect CRM","подключим аналитику":"connect analytics","подключим обращения":"connect leads","подключим телефонию":"connect phone","подключим формы":"connect forms","получил разрешение":"permission received","есть":"available","«Быстро приехали, аккуратно погрузили авто.»":"“You arrived fast and loaded the car carefully.”","«Вас стало находить больше людей»":"“More people are finding you”","Иван ждёт стоимость услуги.":"Ivan is waiting for the service price.","Подписка":"Subscription","Ваш бизнес.":"Your business.","Под контролем помощника.":"Under your assistant’s control.","Вы платите один раз в месяц и получаете приложение, где помощник проверяет ваш бизнес, подсказывает простыми словами, что улучшить, и помогает подготовить работу.":"You pay once a month and get an app where the Assistant checks your business, explains what to improve in simple words, and helps prepare the work.","300 ₽":"300 ₽","в месяц":"per month","Подписка продлевается автоматически. Её можно отменить в любое время.":"Your subscription renews automatically. You can cancel anytime.","Приложение в телефоне":"An app on your phone","Чтобы помощник был под рукой, а не где-то на сайте.":"Your assistant is with you — not hidden on a website.","Понятные подсказки":"Simple guidance","Сначала обычный язык. Сложные слова объясняем отдельно.":"We use plain language first and explain technical terms separately.","Что делать дальше":"Know what to do next","Помощник показывает конкретный следующий шаг.":"The Assistant shows a clear next step.","Что произойдёт после оплаты?":"What happens after payment?","Откроется приложение. Там вы расскажете о бизнесе, а помощник начнёт проверку и предложит первые действия.":"The app opens. Tell us about your business and the Assistant starts the check and suggests your first actions.","Оплата 300 ₽":"Pay 300 ₽","Выберите удобный способ. Ничего сложного.":"Choose the easiest method. Nothing complicated.","Банковская карта":"Bank card","Visa · Mastercard · Мир":"Visa · Mastercard · Mir","Быстрая оплата":"Fast pay","Быстрый переход к оплате":"Quick checkout","По QR через ваш банк":"Pay by QR with your bank","Через приложение банка":"Through your bank app","Имя на карте":"Name on card","Номер карты":"Card number","Срок":"Expiry date","CVC":"CVC","Откройте приложение банка и отсканируйте QR-код.":"Open your banking app and scan the QR code.","Демонстрационный QR":"Demo QR","На телефоне QR не нужен.":"On a phone, no QR is needed.","Нажмите кнопку ниже — в реальной интеграции откроется приложение банка.":"Tap the button below — a live integration can open your banking app.","Открыть банк":"Open bank","Подтвердить в банковском приложении":"Confirm in your banking app","Я понимаю, что после первого платежа подписка будет автоматически продлеваться на 300 ₽ раз в месяц, пока я её не отменю.":"I understand that after the first payment, the subscription renews automatically at 300 ₽ per month until I cancel it.","Оплатить 300 ₽":"Pay 300 ₽","Защищённая форма оплаты · после подключения эквайера данные передаются напрямую платёжному провайдеру":"Secure checkout · after the payment provider is connected, payment details are handled directly by the provider","Готово":"Done","Демо-оплата прошла. В настоящем запуске сюда подключается ответ вашей платёжной системы.":"Demo payment completed. In production, this screen will show the real payment provider response.","Защищённое соединение":"Secure connection","Поставьте галочку — так вы подтверждаете условия подписки.":"Please tick the box to confirm the subscription terms.","Профиль бизнеса сохранён":"Business profile saved","Демо открыто — здесь можно познакомиться с системой":"Demo opened — this is where you can explore the system","Проверка сайта запущена":"Website check started","Введите адрес сайта":"Enter the website address","Настоящая версия проверит данные автоматически":"The live version will check the data automatically","Подключение источников":"Connecting sources","Отправлено":"Sent","Ответ готов":"Reply ready","300 ₽ / месяц":"300 ₽ / month","← Вернуться":"← Back"};
-  const norm=s=>s.replace(/\s+/g,' ').trim();
-  const keys=Object.keys(RU_EN).sort((a,b)=>b.length-a.length);
-  const originals=new WeakMap();
-  const attrOriginals=new WeakMap();
-  function toEnglish(raw){
-    if(!/[А-Яа-яЁё]/.test(raw)) return raw;
-    const lead=(raw.match(/^\s*/) || [''])[0];
-    const trail=(raw.match(/\s*$/) || [''])[0];
-    const core=norm(raw);
-    if(RU_EN[core]) return lead+RU_EN[core]+trail;
-    let out=core;
-    for(const k of keys) if(out.includes(k)) out=out.split(k).join(RU_EN[k]);
-    return out===core ? raw : lead+out+trail;
-  }
-  function translateTextNode(n,lang){
-    if(!originals.has(n) && /[А-Яа-яЁё]/.test(n.nodeValue)) originals.set(n,n.nodeValue);
-    const original=originals.get(n);
-    if(original===undefined) return;
-    n.nodeValue = lang==='en' ? toEnglish(original) : original;
-  }
-  function translateRoot(root,lang){
-    if(!root) return;
-    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
-    const nodes=[]; while(walker.nextNode()) nodes.push(walker.currentNode);
-    for(const n of nodes) translateTextNode(n,lang);
-    root.querySelectorAll?.('[placeholder],[title],[aria-label],[alt]').forEach(el=>{
-      for(const a of ['placeholder','title','aria-label','alt']){
-        const v=el.getAttribute(a); if(!v) continue;
-        let store=attrOriginals.get(el);
-        if(!store){store={};attrOriginals.set(el,store);}
-        if(store[a]===undefined && /[А-Яа-яЁё]/.test(v)) store[a]=v;
-        if(store[a]!==undefined) el.setAttribute(a,lang==='en'?toEnglish(store[a]):store[a]);
-      }
+  if(heroPhoneArt){
+    heroPhoneArt.addEventListener('error',()=>{
+      heroPhoneArt.src='./hero-app-phones-ru.png';
     });
   }
-  function run(){translateRoot(document.body,document.documentElement.lang==='en'?'en':'ru');}
-  let pending=false;
-  const mo=new MutationObserver(()=>{if(pending)return;pending=true;queueMicrotask(()=>{pending=false;run();});});
-  mo.observe(document.body,{childList:true,subtree:true});
-  const langObserver=new MutationObserver(run);
-  langObserver.observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
-  window.addEventListener('load',run);
-  setTimeout(run,30);
-})();
-</script>
+  applyRussian();
+})();</script>
 
-<div id="db-assist-launcher" aria-label="Спросить управляющего" title="Спросить управляющего">
-  <span class="db-assist-orb" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 18.2 4.5 20l.6-3.7A8.4 8.4 0 0 1 3 10.8C3 6.5 7 3 12 3s9 3.5 9 7.8-4 7.8-9 7.8c-1.7 0-3.4-.4-4.8-1.1Z"/><path d="M8 10.3h.01M12 10.3h.01M16 10.3h.01"/><path d="M8.5 13.7c1.2 1 2.8 1.4 4.2 1.1 1-.2 1.9-.6 2.8-1.3"/></svg><span class="db-orb-online"></span></span>
-  <span data-assist-launch-text>Спросить управляющего</span>
+<div aria-label="Спросить управляющего" id="db-assist-launcher" title="Спросить управляющего">
+<span aria-hidden="true" class="db-assist-orb"><svg viewbox="0 0 24 24"><path d="M7 18.2 4.5 20l.6-3.7A8.4 8.4 0 0 1 3 10.8C3 6.5 7 3 12 3s9 3.5 9 7.8-4 7.8-9 7.8c-1.7 0-3.4-.4-4.8-1.1Z"></path><path d="M8 10.3h.01M12 10.3h.01M16 10.3h.01"></path><path d="M8.5 13.7c1.2 1 2.8 1.4 4.2 1.1 1-.2 1.9-.6 2.8-1.3"></path></svg><span class="db-orb-online"></span></span>
+<span data-assist-launch-text="">Спросить управляющего</span><span class="db-assist-online"><i class="db-assist-online-dot"></i><span data-assist-online="">Онлайн</span></span>
 </div>
-
-<div id="db-name-modal" aria-hidden="true">
-  <div class="db-name-card" role="dialog" aria-modal="true" aria-labelledby="db-name-title">
-    <div class="db-name-kicker" id="db-name-kicker">Первое знакомство</div>
-    <h3 id="db-name-title">Как вы хотели бы меня называть?</h3>
-    <p id="db-name-text">Вы можете придумать мне любое имя. Так будет проще обращаться ко мне в приложении.</p>
-    <div class="db-name-examples" id="db-name-examples">Например: Марк, Алекс, Макс, Мира — или ваше имя.</div>
-    <input id="db-name-input" type="text" maxlength="24" autocomplete="off" placeholder="Введите имя" />
-    <div class="db-name-actions">
-      <button class="db-name-skip" id="db-name-skip" type="button">Оставить «Цифровой управляющий»</button>
-      <button class="db-name-save" id="db-name-save" type="button">Продолжить →</button>
-    </div>
-  </div>
+<section aria-hidden="true" aria-label="Цифровой управляющий" id="db-assist-panel">
+<header class="db-assist-head">
+<div class="db-assist-title"><span aria-hidden="true" class="db-assist-orb"><svg viewbox="0 0 24 24"><path d="M7 18.2 4.5 20l.6-3.7A8.4 8.4 0 0 1 3 10.8C3 6.5 7 3 12 3s9 3.5 9 7.8-4 7.8-9 7.8c-1.7 0-3.4-.4-4.8-1.1Z"></path><path d="M8 10.3h.01M12 10.3h.01M16 10.3h.01"></path><path d="M8.5 13.7c1.2 1 2.8 1.4 4.2 1.1 1-.2 1.9-.6 2.8-1.3"></path></svg></span><div><strong data-assist-title="">Цифровой управляющий</strong><span data-assist-subtitle="">Объясняю простыми словами</span></div></div>
+<button aria-label="Закрыть" class="db-assist-close" id="db-assist-close">×</button>
+</header>
+<div class="db-assist-body" id="db-assist-body">
+<div class="db-msg ai" id="db-assist-greeting">Здравствуйте! Я цифровой управляющий. Спросите, что вас интересует — я объясню так, чтобы было понятно даже школьнику.</div>
+<div class="db-quick" id="db-assist-quick">
+<button data-q="Что вы делаете?" type="button">Что вы делаете?</button>
+<button data-q="Как мне получить больше клиентов?" type="button">Как получить больше клиентов?</button>
+<button data-q="Что такое SEO?" type="button">Что такое SEO?</button>
+<button data-q="Сколько стоит подписка?" type="button">Сколько стоит?</button>
 </div>
-<section id="db-assist-panel" aria-label="Цифровой управляющий" aria-hidden="true">
-  <header class="db-assist-head">
-    <div class="db-assist-title"><span class="db-assist-orb" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 18.2 4.5 20l.6-3.7A8.4 8.4 0 0 1 3 10.8C3 6.5 7 3 12 3s9 3.5 9 7.8-4 7.8-9 7.8c-1.7 0-3.4-.4-4.8-1.1Z"/><path d="M8 10.3h.01M12 10.3h.01M16 10.3h.01"/><path d="M8.5 13.7c1.2 1 2.8 1.4 4.2 1.1 1-.2 1.9-.6 2.8-1.3"/></svg></span><div><strong data-assist-title>Цифровой управляющий</strong><span data-assist-subtitle>Объясняю простыми словами</span></div></div>
-    <button class="db-assist-close" id="db-assist-close" aria-label="Закрыть">×</button>
-  </header>
-  <div class="db-assist-body" id="db-assist-body">
-    <div class="db-msg ai" id="db-assist-greeting">Здравствуйте! Я цифровой управляющий. Спросите, что вас интересует — я объясню так, чтобы было понятно даже школьнику.</div>
-    <div class="db-quick" id="db-assist-quick">
-      <button type="button" data-q="Что вы делаете?">Что вы делаете?</button>
-      <button type="button" data-q="Как мне получить больше клиентов?">Как получить больше клиентов?</button>
-      <button type="button" data-q="Что такое SEO?">Что такое SEO?</button>
-      <button type="button" data-q="Сколько стоит подписка?">Сколько стоит?</button>
-    </div>
-  </div>
-  <footer class="db-assist-foot">
-    <div class="db-input-row"><input id="db-assist-input" placeholder="Напишите свой вопрос…" autocomplete="off"/><button class="db-mic" id="db-assist-mic" type="button" title="Сказать вопрос голосом" aria-label="Сказать вопрос голосом"><svg viewBox="0 0 24 24"><rect x="8" y="3" width="8" height="12" rx="4"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/></svg></button><button class="db-send" id="db-assist-send" type="button" title="Отправить" aria-label="Отправить"><svg viewBox="0 0 24 24"><path d="m4 4 16 8-16 8 3-8-3-8Z"/><path d="M7 12h11"/></svg></button></div>
-    <div class="db-input-row" style="justify-content:flex-end"><button class="db-speak" id="db-assist-speak" type="button" title="Прослушать ответ" aria-label="Прослушать ответ"><svg viewBox="0 0 24 24"><path d="M5 10v4h4l5 4V6l-5 4H5Z"/><path d="M17 9a4.5 4.5 0 0 1 0 6M19.5 6.5a8 8 0 0 1 0 11"/></svg></button></div>
-    <div class="db-voice-note" id="db-assist-voice-note">Можно задать вопрос голосом и попросить помощника проговорить ответ. В демо используется голос вашего устройства.</div>
-  </footer>
+</div>
+<footer class="db-assist-foot">
+<div class="db-input-row"><input autocomplete="off" id="db-assist-input" placeholder="Напишите свой вопрос…"/><button aria-label="Сказать вопрос голосом" class="db-mic" id="db-assist-mic" title="Сказать вопрос голосом" type="button"><svg viewbox="0 0 24 24"><rect height="12" rx="4" width="8" x="8" y="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"></path></svg></button><button aria-label="Отправить" class="db-send" id="db-assist-send" title="Отправить" type="button"><svg viewbox="0 0 24 24"><path d="m4 4 16 8-16 8 3-8-3-8Z"></path><path d="M7 12h11"></path></svg></button></div>
+<div class="db-input-row" style="justify-content:flex-end"><button aria-label="Прослушать ответ" class="db-speak" id="db-assist-speak" title="Прослушать ответ" type="button"><svg viewbox="0 0 24 24"><path d="M5 10v4h4l5 4V6l-5 4H5Z"></path><path d="M17 9a4.5 4.5 0 0 1 0 6M19.5 6.5a8 8 0 0 1 0 11"></path></svg></button></div>
+<div class="db-voice-note" id="db-assist-voice-note">Можно задать вопрос голосом и попросить помощника проговорить ответ. В демо используется голос вашего устройства.</div>
+</footer>
 </section>
-
 <script id="db-assistant-voice-script">
 (function(){
   const panel=document.getElementById('db-assist-panel');
@@ -852,63 +760,26 @@ html[data-theme="dark"] .db-msg.ai{background:#19171f;border-color:#2d2940}.db-m
   const speak=document.getElementById('db-assist-speak');
   if(!panel||!launcher) return;
   let lastAnswer='';
-  const NAME_KEY='digitalBusinessManagerName';
-  let managerName=localStorage.getItem(NAME_KEY)||'';
-  const nameModal=document.getElementById('db-name-modal');
-  const nameInput=document.getElementById('db-name-input');
-  const nameSave=document.getElementById('db-name-save');
-  const nameSkip=document.getElementById('db-name-skip');
-  function displayName(){return managerName||'';}
-  function managerLabel(base){return managerName ? managerName : base;}
   const copy={
-    ru:{firstKicker:'Первое знакомство',firstTitle:'Как вы хотели бы меня называть?',firstText:'Вы можете придумать мне любое имя. Так будет проще обращаться ко мне в приложении.',firstExamples:'Например: Марк, Алекс, Макс, Мира — или ваше имя.',firstPlaceholder:'Введите имя',firstSave:'Продолжить →',firstSkip:'Оставить «Цифровой управляющий»',launch:'Спросить управляющего',online:'Онлайн',title:'Цифровой управляющий',sub:'Объясняю простыми словами',hello:'Здравствуйте! Я цифровой управляющий. Спросите, что вас интересует — я объясню так, чтобы было понятно даже школьнику.',ph:'Напишите свой вопрос…',voice:'Можно задать вопрос голосом и попросить цифрового управляющего проговорить ответ. В демо используется голос вашего устройства.',q1:'Что вы делаете?',q2:'Как получить больше клиентов?',q3:'Что такое SEO?',q4:'Сколько стоит?',no:'Я отвечаю по «Цифровому бизнесу»: создание бизнеса, сайт, продвижение, приложение и подписка.',a1:'Мы помогаем собрать цифровую основу бизнеса: сайт, страницы услуг, соцсети, площадки объявлений, поиск, рекламу, заявки и приложение с помощником.',a2:'Начнём просто. Сначала проверим, что уже есть. Потом найдём 2–3 места, где можно получить больше клиентов, и подготовим конкретные действия. Вам останется подтвердить.',a3:'SEO — это простыми словами способ сделать так, чтобы ваш сайт легче находили в поиске. Например: человек ищет эвакуатор, а ваш сайт появляется среди результатов.',a4:'Для российской версии подписка стоит 300 ₽ в месяц. После оплаты приложение и помощник будут доступны по вашей подписке.',prompt:'Например: «У меня эвакуатор. Что мне сделать?»'},
-    en:{firstKicker:'First introduction',firstTitle:'What would you like to call me?',firstText:'You can choose any name for me. It will make talking to me in the app feel more natural.',firstExamples:'For example: Mark, Alex, Max, Mira — or your own name.',firstPlaceholder:'Enter a name',firstSave:'Continue →',firstSkip:'Keep “Digital manager”',launch:'Ask the digital manager',online:'Online',title:'Digital manager',sub:'Explained in simple words',hello:'Hi! I’m the Digital manager for Digital Business. Ask anything about the product and I’ll explain it in plain, easy language.',ph:'Type your question…',voice:'You can ask a question by voice and ask the Assistant to read the answer aloud. Demo voice uses your device.',q1:'What do you do?',q2:'How can I get more customers?',q3:'What is SEO?',q4:'How much does it cost?',no:'I answer questions about Digital Business: creating a business, websites, growth, the app and subscriptions.',a1:'We help build the digital foundation of a business: website, service pages, social profiles, listings, search, ads, leads and an app with your digital manager.',a2:'Let’s keep it simple. First we check what you already have. Then we find 2–3 places where you can get more customers and prepare concrete actions. You approve them.',a3:'SEO simply means making it easier for people to find your website in search. For example, someone searches for a tow service and your site can become easier to discover.',a4:'For the Russian version, the subscription is 300 ₽ per month. After payment, the app and Assistant are available through your subscription.',prompt:'For example: “I run a towing business. What should I do?”'}
+    ru:{launch:'Спросить управляющего',online:'Онлайн',title:'Цифровой управляющий',sub:'Объясняю простыми словами',hello:'Здравствуйте! Я цифровой управляющий. Спросите, что вас интересует — я объясню так, чтобы было понятно даже школьнику.',ph:'Напишите свой вопрос…',voice:'Можно задать вопрос голосом и попросить цифрового управляющего проговорить ответ. В демо используется голос вашего устройства.',q1:'Что вы делаете?',q2:'Как получить больше клиентов?',q3:'Что такое SEO?',q4:'Сколько стоит?',no:'Я отвечаю по «Цифровому бизнесу»: создание бизнеса, сайт, продвижение, приложение и подписка.',a1:'Мы помогаем собрать цифровую основу бизнеса: сайт, страницы услуг, соцсети, площадки объявлений, поиск, рекламу, заявки и приложение с помощником.',a2:'Начнём просто. Сначала проверим, что уже есть. Потом найдём 2–3 места, где можно получить больше клиентов, и подготовим конкретные действия. Вам останется подтвердить.',a3:'SEO — это простыми словами способ сделать так, чтобы ваш сайт легче находили в поиске. Например: человек ищет эвакуатор, а ваш сайт появляется среди результатов.',a4:'Для российской версии подписка стоит 300 ₽ в месяц. После оплаты приложение и помощник будут доступны по вашей подписке.',prompt:'Например: «У меня эвакуатор. Что мне сделать?»'}
   };
-  function lang(){return document.documentElement.lang==='en'?'en':'ru'}
-  function text(key){return copy[lang()][key]}
+  function text(key){return copy.ru[key]}
+  function lang(){return 'ru'}
   function apply(){
-    document.querySelectorAll('[data-assist-launch-text]').forEach(e=>e.textContent=managerName ? (lang()==='en' ? 'Ask '+managerName : 'Спросить '+managerName) : text('launch'));
-    if(nameModal){
-      document.getElementById('db-name-kicker').textContent=text('firstKicker');
-      document.getElementById('db-name-title').textContent=text('firstTitle');
-      document.getElementById('db-name-text').textContent=text('firstText');
-      document.getElementById('db-name-examples').textContent=text('firstExamples');
-      nameInput.placeholder=text('firstPlaceholder');
-      nameSave.textContent=text('firstSave');
-      nameSkip.textContent=text('firstSkip');
-    }
+    document.querySelectorAll('[data-assist-launch-text]').forEach(e=>e.textContent=text('launch'));
+    const online=document.querySelector('[data-assist-online]'); if(online) online.textContent=text('online');
     document.querySelector('[data-assist-title]').textContent=text('title');
     document.querySelector('[data-assist-subtitle]').textContent=text('sub');
     document.getElementById('db-assist-greeting').textContent=text('hello');
-    if(managerName) document.getElementById('db-assist-greeting').textContent=lang()==='en' ? 'Hi! I’m '+managerName+'. I’m your Digital manager. Ask me anything about your business.' : 'Здравствуйте! Я '+managerName+'. Я ваш цифровой управляющий. Спросите, что происходит в бизнесе, — я разберусь и объясню.';
     input.placeholder=text('ph');
     document.getElementById('db-assist-voice-note').textContent=text('voice');
     const qs=[text('q1'),text('q2'),text('q3'),text('q4')];
     document.querySelectorAll('#db-assist-quick button').forEach((b,i)=>{b.textContent=qs[i]; b.dataset.q=[text('q1'),text('q2'),text('q3'),text('q4')][i]});
   }
-  function open(){
-    if(!managerName && nameModal){
-      nameModal.classList.add('open'); nameModal.setAttribute('aria-hidden','false');
-      apply(); setTimeout(()=>nameInput.focus(),40); return;
-    }
-    panel.classList.add('open');panel.setAttribute('aria-hidden','false');input.focus();
-  }
+  function open(){panel.classList.add('open');panel.setAttribute('aria-hidden','false');input.focus();}
   function close(){panel.classList.remove('open');panel.setAttribute('aria-hidden','true');}
-  function closeNameModal(){nameModal?.classList.remove('open');nameModal?.setAttribute('aria-hidden','true');}
-  function saveManagerName(value){
-    const clean=(value||'').trim().replace(/\s+/g,' ');
-    if(clean){managerName=clean;localStorage.setItem(NAME_KEY,managerName);}
-    closeNameModal(); apply();
-    panel.classList.add('open'); panel.setAttribute('aria-hidden','false');
-    input.focus();
-    const greeting=document.getElementById('db-assist-greeting');
-    greeting.textContent=lang()==='en' ? 'Hi! I’m '+managerName+'. I’m your Digital manager. Ask me anything about your business.' : 'Здравствуйте! Я '+managerName+'. Я ваш цифровой управляющий. Спросите, что происходит в бизнесе, — я разберусь и объясню.';
-  }
-  nameSave?.addEventListener('click',()=>saveManagerName(nameInput.value));
-  nameSkip?.addEventListener('click',()=>saveManagerName(''));
-  nameInput?.addEventListener('keydown',e=>{if(e.key==='Enter') saveManagerName(nameInput.value); if(e.key==='Escape') closeNameModal();});
   launcher.addEventListener('click',open); closeBtn.addEventListener('click',close);
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(nameModal?.classList.contains('open')) closeNameModal(); else close();}});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape') close()});
   function addMsg(text,who){const d=document.createElement('div');d.className='db-msg '+who;d.textContent=text;body.appendChild(d);body.scrollTop=body.scrollHeight;return d}
   function answerFor(q){
     const s=q.toLowerCase();
@@ -922,13 +793,13 @@ html[data-theme="dark"] .db-msg.ai{background:#19171f;border-color:#2d2940}.db-m
   function sendQuestion(q){
     q=(q||input.value||'').trim(); if(!q) return;
     addMsg(q,'me'); input.value='';
-    const typing=addMsg(lang()==='en'?'Thinking…':'Думаю…','ai');
+    const typing=addMsg('Думаю…','ai');
     setTimeout(()=>{typing.remove();lastAnswer=answerFor(q);addMsg(lastAnswer,'ai'); if(window.innerWidth<700) body.scrollTop=body.scrollHeight;},550);
   }
   send.addEventListener('click',()=>sendQuestion());
   input.addEventListener('keydown',e=>{if(e.key==='Enter') sendQuestion()});
   document.querySelectorAll('#db-assist-quick button').forEach(b=>b.addEventListener('click',()=>sendQuestion(b.dataset.q)));
-  speak.addEventListener('click',()=>{if(!lastAnswer) return; if(!('speechSynthesis' in window)){alert(lang()==='en'?'Voice playback is not supported by this browser.':'Этот браузер не умеет озвучивать текст.');return;} window.speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(lastAnswer); u.lang=lang()==='en'?'en-US':'ru-RU'; u.rate=.95; u.pitch=1; window.speechSynthesis.speak(u);});
+  speak.addEventListener('click',()=>{if(!lastAnswer) return; if(!('speechSynthesis' in window)){alert('Этот браузер не умеет озвучивать текст.');return;} window.speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(lastAnswer); u.lang='ru-RU'; u.rate=.95; u.pitch=1; window.speechSynthesis.speak(u);});
   const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
   if(SpeechRecognition){
     const rec=new SpeechRecognition(); rec.interimResults=false; rec.continuous=false;
@@ -936,9 +807,8 @@ html[data-theme="dark"] .db-msg.ai{background:#19171f;border-color:#2d2940}.db-m
     rec.addEventListener('result',e=>{const t=e.results?.[0]?.[0]?.transcript||'';input.value=t;sendQuestion(t);});
     rec.addEventListener('end',()=>mic.style.transform=''); rec.addEventListener('error',()=>mic.style.transform='');
   }else{
-    mic.title=lang()==='en'?'Voice input is not supported by this browser':'Голосовой ввод не поддерживается этим браузером';
+    mic.title='Голосовой ввод не поддерживается этим браузером';
   }
-  const langObs=new MutationObserver(apply); langObs.observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
   apply();
 })();
 </script>
