@@ -178,7 +178,7 @@ document.getElementById('askForm').onsubmit=e=>{e.preventDefault();if(document.g
 const tasksPage=document.getElementById('tasksPage'),clientsPage=document.getElementById('clientsPage'),financePage=document.getElementById('financePage');
 const homeMain=document.querySelector('main.content');
 const sectionButtons=document.querySelectorAll('[data-section]');
-const homeSections=homeMain?Array.from(homeMain.children).filter(el=>!['tasksPage','clientsPage'].includes(el.id)):[];
+const homeSections=homeMain?Array.from(homeMain.children).filter(el=>!['tasksPage','clientsPage','financePage'].includes(el.id)):[];
 function showSection(section){const isTasks=section==='tasks',isClients=section==='clients',isFinance=section==='finance';homeSections.forEach(el=>el.style.display=(isTasks||isClients||isFinance)?'none':'');if(tasksPage)tasksPage.classList.toggle('show',isTasks);if(clientsPage)clientsPage.classList.toggle('show',isClients);if(financePage)financePage.classList.toggle('show',isFinance);sectionButtons.forEach(b=>b.classList.toggle('active',b.dataset.section===section));}
 sectionButtons.forEach(b=>b.addEventListener('click',()=>showSection(b.dataset.section)));
 document.getElementById('tasksBack')?.addEventListener('click',()=>showSection('home'));
