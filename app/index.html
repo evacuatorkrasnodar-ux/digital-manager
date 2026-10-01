@@ -9,11 +9,38 @@
 .pwa-install{width:100%;margin:14px 0 10px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--text);font:inherit;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(20,25,35,.06)}.pwa-install:hover{transform:translateY(-1px)}.pwa-install[hidden]{display:none}
 
 .tasks-page{display:none;max-width:1280px;margin:auto}.tasks-page.show{display:block}.tasks-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:20px}.tasks-title{font-size:32px;font-weight:760;letter-spacing:-.04em}.tasks-sub{color:var(--muted);font-size:13px;margin-top:6px}.task-list{display:grid;gap:10px}.task-row{display:flex;gap:14px;align-items:center;padding:17px;border:1px solid var(--line);border-radius:18px;background:var(--panel);box-shadow:var(--shadow)}.task-state{width:10px;height:10px;border-radius:50%;flex:none}.task-row-main{flex:1;min-width:0}.task-row-title{font-size:14px;font-weight:700}.task-row-text{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.45}.task-tag{font-size:11px;color:var(--muted);padding:7px 10px;border:1px solid var(--line);border-radius:10px;white-space:nowrap}.task-back{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:12px;padding:9px 12px;font-size:12px;font-weight:650}.reply-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}.confirm-action,.later-action{min-height:48px;border-radius:15px;padding:0 18px;font-size:12px;font-weight:700}.confirm-action{flex:1;border:0;background:var(--text);color:#fff;box-shadow:0 10px 24px rgba(20,20,25,.14)}.later-action{border:1px solid var(--line);background:transparent;color:var(--muted)}.result{display:none;margin-top:12px;padding:14px;border:1px solid rgba(39,168,102,.18);border-radius:15px;background:rgba(39,168,102,.07);font-size:13px;line-height:1.45}.result.show{display:block} .clients-page{display:none;max-width:1280px;margin:0 auto}.clients-page.show{display:block}.clients-head{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:18px}.clients-title{font-size:32px;font-weight:760;letter-spacing:-.045em}.clients-sub{font-size:13px;color:var(--muted);margin-top:5px}.clients-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}.client-stat{padding:18px;border:1px solid var(--line);border-radius:20px;background:var(--panel);box-shadow:var(--shadow)}.client-stat span{font-size:11px;color:var(--muted)}.client-stat b{display:block;font-size:26px;margin-top:7px}.client-list{display:grid;gap:10px}.client-row{display:flex;align-items:center;gap:14px;padding:16px;border:1px solid var(--line);border-radius:20px;background:var(--panel);box-shadow:var(--shadow)}.client-avatar{width:42px;height:42px;border-radius:14px;background:rgba(114,87,255,.1);color:var(--purple);display:grid;place-items:center;font-weight:750;flex:none}.client-main{flex:1;min-width:0}.client-name{font-size:14px;font-weight:700}.client-info{font-size:12px;color:var(--muted);margin-top:4px}.client-status{font-size:11px;padding:7px 10px;border-radius:12px;background:rgba(39,168,102,.1);color:var(--green);white-space:nowrap}.client-status.wait{background:rgba(230,138,25,.1);color:var(--orange)}.client-action{border:1px solid var(--line);background:transparent;border-radius:12px;padding:9px 12px;color:var(--text);font-size:11px;font-weight:650}.clients-empty{margin-top:18px;padding:16px;border-radius:18px;background:rgba(114,87,255,.07);border:1px solid rgba(114,87,255,.12);font-size:12px;color:var(--muted);line-height:1.5}@media(max-width:700px){.clients-stats{grid-template-columns:1fr}.clients-head{align-items:flex-start}.client-row{align-items:flex-start}.client-action{display:none}.client-status{margin-left:auto}}@media(max-width:520px){.tasks-head{align-items:start}.task-row{align-items:flex-start}.task-tag{display:none}.reply-actions{flex-direction:column}.confirm-action,.later-action{width:100%}}
+
+.finance-page{display:none;max-width:1280px;margin:0 auto}.finance-page.show{display:block}
+.finance-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:20px}
+.finance-title{font-size:32px;font-weight:760;letter-spacing:-.045em}.finance-sub{font-size:13px;color:var(--muted);margin-top:5px}
+.finance-period{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:13px;padding:10px 13px;font-size:12px}
+.finance-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.finance-stat{padding:18px;border:1px solid var(--line);border-radius:20px;background:var(--panel);box-shadow:var(--shadow)}
+.finance-stat span{font-size:11px;color:var(--muted)}.finance-stat b{display:block;font-size:25px;letter-spacing:-.035em;margin-top:7px}
+.finance-change{font-size:11px;margin-top:5px}.finance-good{color:var(--green)}.finance-warn{color:var(--orange)}.finance-bad{color:var(--red)}
+.finance-grid{display:grid;grid-template-columns:1.35fr .85fr;gap:18px}.finance-card{padding:21px;border:1px solid var(--line);border-radius:22px;background:var(--panel);box-shadow:var(--shadow)}
+.finance-card-title{font-size:15px;font-weight:720}.finance-card-sub{font-size:12px;color:var(--muted);margin-top:4px}
+.finance-chart{height:205px;margin-top:18px;display:flex;align-items:end;gap:10px;padding:8px 4px 0;border-bottom:1px solid var(--line)}
+.finance-bar-wrap{height:100%;flex:1;display:flex;align-items:end;gap:5px}.finance-bar{flex:1;min-width:5px;border-radius:7px 7px 2px 2px;background:rgba(22,119,255,.72)}.finance-bar.expense{background:rgba(230,138,25,.48)}
+.finance-labels{display:flex;gap:10px;padding:7px 4px 0}.finance-label{flex:1;text-align:center;font-size:10px;color:var(--muted)}
+.finance-legend{display:flex;gap:16px;margin-top:12px;font-size:11px;color:var(--muted)}.finance-legend i{display:inline-block;width:8px;height:8px;border-radius:3px;margin-right:5px;background:var(--blue)}.finance-legend i.exp{background:var(--orange)}
+.finance-list{display:grid;gap:9px;margin-top:16px}.finance-row{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.34)}
+.finance-dot{width:9px;height:9px;border-radius:50%;background:var(--purple);flex:none}.finance-row-main{flex:1;min-width:0}.finance-row-title{font-size:12px;font-weight:680}.finance-row-text{font-size:11px;color:var(--muted);margin-top:3px}.finance-row-value{font-size:12px;font-weight:720;white-space:nowrap}
+.finance-insight{margin-top:18px;padding:15px;border-radius:18px;background:rgba(39,168,102,.07);border:1px solid rgba(39,168,102,.14)}
+.finance-insight b{font-size:12px;color:var(--green)}.finance-insight div{font-size:12px;color:var(--muted);line-height:1.5;margin-top:5px}
+.finance-action{margin-top:10px;width:100%;border:0;background:var(--text);color:#fff;border-radius:14px;padding:12px;font-size:12px;font-weight:700}
+.finance-warning{padding:15px;border-radius:18px;background:rgba(230,138,25,.07);border:1px solid rgba(230,138,25,.14);margin-top:16px}
+.finance-warning b{font-size:12px;color:var(--orange)}.finance-warning div{font-size:12px;color:var(--muted);line-height:1.5;margin-top:5px}
+.finance-source{margin-top:17px}.finance-source-row{display:flex;align-items:center;gap:10px;margin-top:13px}.finance-source-name{width:105px;font-size:11px;color:var(--muted)}.finance-source-track{flex:1;height:8px;border-radius:8px;background:rgba(20,20,24,.07);overflow:hidden}.finance-source-fill{height:100%;border-radius:8px;background:var(--purple)}.finance-source-value{width:75px;text-align:right;font-size:11px;font-weight:700}
+body.dark .finance-row,body.dark .finance-stat,body.dark .finance-card{background:rgba(255,255,255,.035)}
+body.dark .finance-source-track{background:rgba(255,255,255,.08)}
+@media(max-width:900px){.finance-grid{grid-template-columns:1fr}.finance-stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.finance-head{align-items:flex-start}.finance-period{display:none}.finance-title{font-size:29px}.finance-stats{grid-template-columns:1fr}.finance-card{padding:18px}.finance-chart{height:180px}}
 </style>
 </head>
 <body>
 <div class="app">
-<aside class="sidebar"><div class="brand"><div class="mark">ЦБ</div><div><div class="brand-title">Цифровой бизнес</div><div class="brand-sub">Цифровой управляющий</div></div></div><nav class="nav"><button class="active" type="button" data-section="home">⌂ &nbsp;Главная</button><button type="button" data-section="tasks">✓ &nbsp;Задачи</button><button type="button" data-section="clients">◯ &nbsp;Клиенты</button><button>₽ &nbsp;Финансы</button><button>↗ &nbsp;Продвижение</button><button>▤ &nbsp;Отчёты</button><button>⚙ &nbsp;Настройки</button></nav><button class="pwa-install" id="installBtn" type="button" hidden>Установить приложение</button>
+<aside class="sidebar"><div class="brand"><div class="mark">ЦБ</div><div><div class="brand-title">Цифровой бизнес</div><div class="brand-sub">Цифровой управляющий</div></div></div><nav class="nav"><button class="active" type="button" data-section="home">⌂ &nbsp;Главная</button><button type="button" data-section="tasks">✓ &nbsp;Задачи</button><button type="button" data-section="clients">◯ &nbsp;Клиенты</button><button type="button" data-section="finance">₽ &nbsp;Финансы</button><button>↗ &nbsp;Продвижение</button><button>▤ &nbsp;Отчёты</button><button>⚙ &nbsp;Настройки</button></nav><button class="pwa-install" id="installBtn" type="button" hidden>Установить приложение</button>
 <div class="online"><span class="dot"></span>Цифровой управляющий · онлайн</div><button class="theme" id="theme">Тема <span id="themeText">Тёмная</span></button></aside>
 <main class="content"><header class="top"><div><div class="eyebrow"><b>Цифровой управляющий</b> · сегодня</div><h1>Доброе утро, Алексей.</h1><p class="lead">Сегодня у тебя 7 важных задач. Я уже проверил бизнес.</p></div><div class="date">30 сентября 2026</div></header>
 <section class="grid">
@@ -40,19 +67,90 @@
     <div class="task-row"><span class="task-state green"></span><div class="task-row-main"><div class="task-row-title">Перераспределить рекламный бюджет</div><div class="task-row-text">Выполнено: бюджет перераспределён между двумя кампаниями.</div></div><span class="task-tag">Выполнено</span></div>
   </div>
 </section>
+
+<section class="finance-page" id="financePage">
+  <div class="finance-head">
+    <div>
+      <div class="finance-title">Финансы</div>
+      <div class="finance-sub">Я слежу за деньгами и объясняю, что изменилось в бизнесе.</div>
+    </div>
+    <button class="finance-period" type="button">Последние 30 дней ▾</button>
+  </div>
+
+  <div class="finance-stats">
+    <div class="finance-stat"><span>Оборот</span><b>4 860 000 ₽</b><div class="finance-change finance-good">↑ 8,4% к прошлому периоду</div></div>
+    <div class="finance-stat"><span>Расходы</span><b>3 594 200 ₽</b><div class="finance-change finance-warn">↑ 5,1% к прошлому периоду</div></div>
+    <div class="finance-stat"><span>Прибыль</span><b>1 265 800 ₽</b><div class="finance-change finance-good">↑ 12,7% к прошлому периоду</div></div>
+    <div class="finance-stat"><span>Денег сейчас</span><b>2 184 000 ₽</b><div class="finance-change finance-good">Достаточно для текущих обязательств</div></div>
+  </div>
+
+  <div class="finance-grid">
+    <article class="finance-card">
+      <div class="finance-card-title">Движение денег</div>
+      <div class="finance-card-sub">Выручка и расходы за последние 7 дней</div>
+      <div class="finance-chart">
+        <div class="finance-bar-wrap"><span class="finance-bar" style="height:62%"></span><span class="finance-bar expense" style="height:42%"></span></div>
+        <div class="finance-bar-wrap"><span class="finance-bar" style="height:76%"></span><span class="finance-bar expense" style="height:51%"></span></div>
+        <div class="finance-bar-wrap"><span class="finance-bar" style="height:69%"></span><span class="finance-bar expense" style="height:48%"></span></div>
+        <div class="finance-bar-wrap"><span class="finance-bar" style="height:83%"></span><span class="finance-bar expense" style="height:55%"></span></div>
+        <div class="finance-bar-wrap"><span class="finance-bar" style="height:71%"></span><span class="finance-bar expense" style="height:52%"></span></div>
+        <div class="finance-bar-wrap"><span class="finance-bar" style="height:91%"></span><span class="finance-bar expense" style="height:61%"></span></div>
+        <div class="finance-bar-wrap"><span class="finance-bar" style="height:86%"></span><span class="finance-bar expense" style="height:58%"></span></div>
+      </div>
+      <div class="finance-labels"><span class="finance-label">24</span><span class="finance-label">25</span><span class="finance-label">26</span><span class="finance-label">27</span><span class="finance-label">28</span><span class="finance-label">29</span><span class="finance-label">30</span></div>
+      <div class="finance-legend"><span><i></i>Выручка</span><span><i class="exp"></i>Расходы</span></div>
+      <div class="finance-insight"><b>Что изменилось</b><div>Вчера оборот составил 184 000 ₽. Прибыль выросла на 8%, хотя расходы на рекламу увеличились на 14%. Стоимость заявки при этом снизилась на 12%, поэтому увеличение рекламного бюджета пока окупается.</div></div>
+    </article>
+
+    <aside class="finance-card">
+      <div class="finance-card-title">Куда уходят деньги</div>
+      <div class="finance-card-sub">Основные расходы за 30 дней</div>
+      <div class="finance-list">
+        <div class="finance-row"><span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Реклама</div><div class="finance-row-text">Google / Яндекс / соцсети</div></div><div class="finance-row-value">684 000 ₽</div></div>
+        <div class="finance-row"><span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Закупки</div><div class="finance-row-text">Товары и материалы</div></div><div class="finance-row-value">1 420 000 ₽</div></div>
+        <div class="finance-row"><span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Зарплаты</div><div class="finance-row-text">Команда</div></div><div class="finance-row-value">920 000 ₽</div></div>
+        <div class="finance-row"><span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Прочее</div><div class="finance-row-text">Сервисы, аренда, связь</div></div><div class="finance-row-value">570 200 ₽</div></div>
+      </div>
+      <div class="finance-warning"><b>Внимание</b><div>Расходы на рекламу выросли быстрее остальных расходов. Я пока не предлагаю сокращать бюджет: стоимость заявки снижается. Проверю окупаемость по каждому каналу.</div><button class="finance-action" type="button" id="financeCheck">Проверить окупаемость →</button></div>
+    </aside>
+
+    <article class="finance-card">
+      <div class="finance-card-title">Откуда приходит выручка</div>
+      <div class="finance-card-sub">Распределение оборота по источникам</div>
+      <div class="finance-source">
+        <div class="finance-source-row"><span class="finance-source-name">Сайт</span><span class="finance-source-track"><span class="finance-source-fill" style="width:72%"></span></span><span class="finance-source-value">2,34 млн ₽</span></div>
+        <div class="finance-source-row"><span class="finance-source-name">Повторные</span><span class="finance-source-track"><span class="finance-source-fill" style="width:54%"></span></span><span class="finance-source-value">1,46 млн ₽</span></div>
+        <div class="finance-source-row"><span class="finance-source-name">Реклама</span><span class="finance-source-track"><span class="finance-source-fill" style="width:31%"></span></span><span class="finance-source-value">720 тыс. ₽</span></div>
+        <div class="finance-source-row"><span class="finance-source-name">Другое</span><span class="finance-source-track"><span class="finance-source-fill" style="width:15%"></span></span><span class="finance-source-value">340 тыс. ₽</span></div>
+      </div>
+    </article>
+
+    <article class="finance-card">
+      <div class="finance-card-title">Что сделать сейчас</div>
+      <div class="finance-card-sub">Решения, которые требуют твоего внимания</div>
+      <div class="finance-list">
+        <div class="finance-row"><span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Проверить окупаемость рекламы</div><div class="finance-row-text">Расходы растут, но CPL снижается.</div></div></div>
+        <div class="finance-row"><span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Подготовить прогноз на 14 дней</div><div class="finance-row-text">С учётом текущих продаж и обязательств.</div></div></div>
+        <div class="finance-row"><span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Проверить крупные платежи</div><div class="finance-row-text">Ближайшие обязательства ещё не влияют на остаток.</div></div></div>
+      </div>
+    </article>
+  </div>
+</section>
 </main></div>
 <nav class="mobile-nav"><button class="active" type="button" data-section="home">⌂<br>Главная</button><button type="button" data-section="tasks">✓<br>Задачи</button><button type="button" data-section="clients">◯<br>Клиенты</button><button>☰<br>Ещё</button></nav>
 <script>
 const body=document.body,theme=document.getElementById('theme'),label=document.getElementById('themeText');if(localStorage.getItem('db-theme')==='dark')body.classList.add('dark');function themeLabel(){label.textContent=body.classList.contains('dark')?'Светлая':'Тёмная'}themeLabel();theme.onclick=()=>{body.classList.toggle('dark');localStorage.setItem('db-theme',body.classList.contains('dark')?'dark':'light');themeLabel()};
 document.getElementById('askForm').onsubmit=e=>{e.preventDefault();if(document.getElementById('askInput').value.trim())document.getElementById('reply').classList.add('show')};
-const tasksPage=document.getElementById('tasksPage'),clientsPage=document.getElementById('clientsPage');
+const tasksPage=document.getElementById('tasksPage'),clientsPage=document.getElementById('clientsPage'),financePage=document.getElementById('financePage');
 const homeMain=document.querySelector('main.content');
 const sectionButtons=document.querySelectorAll('[data-section]');
 const homeSections=homeMain?Array.from(homeMain.children).filter(el=>!['tasksPage','clientsPage'].includes(el.id)):[];
-function showSection(section){const isTasks=section==='tasks',isClients=section==='clients';homeSections.forEach(el=>el.style.display=(isTasks||isClients)?'none':'');if(tasksPage)tasksPage.classList.toggle('show',isTasks);if(clientsPage)clientsPage.classList.toggle('show',isClients);sectionButtons.forEach(b=>b.classList.toggle('active',b.dataset.section===section));}
+function showSection(section){const isTasks=section==='tasks',isClients=section==='clients',isFinance=section==='finance';homeSections.forEach(el=>el.style.display=(isTasks||isClients||isFinance)?'none':'');if(tasksPage)tasksPage.classList.toggle('show',isTasks);if(clientsPage)clientsPage.classList.toggle('show',isClients);if(financePage)financePage.classList.toggle('show',isFinance);sectionButtons.forEach(b=>b.classList.toggle('active',b.dataset.section===section));}
 sectionButtons.forEach(b=>b.addEventListener('click',()=>showSection(b.dataset.section)));
 document.getElementById('tasksBack')?.addEventListener('click',()=>showSection('home'));
 document.getElementById('clientsBack')?.addEventListener('click',()=>showSection('home'));
+const financeCheck=document.getElementById('financeCheck');
+financeCheck?.addEventListener('click',()=>{financeCheck.disabled=true;financeCheck.textContent='Проверяю данные…';setTimeout(()=>{financeCheck.textContent='Готово — проверка запущена';},700)});
 
 document.querySelectorAll('[data-demo]').forEach(b=>b.onclick=()=>alert(b.dataset.demo==='site'?'Демо: открываем изменение страницы заказа и проверяем конверсию.':'Демо: открываем подготовленные ответы на отзывы.'));
 const confirmAction=document.getElementById('confirmAction'),laterAction=document.getElementById('laterAction'),result=document.getElementById('result');
