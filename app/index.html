@@ -45,11 +45,39 @@ body.dark .finance-source-track{background:rgba(255,255,255,.08)}
 .finance-clickable{width:100%;text-align:left;color:var(--text);font:inherit;cursor:pointer}.finance-clickable>span:last-child{color:var(--muted);font-size:18px}
 .finance-ai-response{margin-top:15px;padding:14px;border-radius:16px;background:rgba(114,87,255,.06);border:1px solid rgba(114,87,255,.11);font-size:12px;line-height:1.5}.finance-ai-response b{display:block;color:var(--purple);margin-bottom:4px}.finance-ai-response div{color:var(--muted)}
 @media(max-width:600px){.finance-health{align-items:flex-start}.finance-health-tag{display:none}}
+
+.promo-page{display:none;max-width:1280px;margin:0 auto}.promo-page.show{display:block}
+.promo-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:20px}
+.promo-title{font-size:32px;font-weight:760;letter-spacing:-.045em}.promo-sub{font-size:13px;color:var(--muted);margin-top:5px}
+.promo-period{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:13px;padding:10px 13px;font-size:12px}
+.promo-health{display:flex;align-items:center;gap:13px;padding:16px 18px;margin-bottom:18px;border:1px solid rgba(114,87,255,.14);border-radius:20px;background:rgba(114,87,255,.055);box-shadow:var(--shadow)}
+.promo-health-icon{width:34px;height:34px;border-radius:12px;background:rgba(114,87,255,.11);color:var(--purple);display:grid;place-items:center;font-weight:800;flex:none}
+.promo-health-main{flex:1;min-width:0;font-size:12px}.promo-health-main b{font-size:13px}.promo-health-main div{color:var(--muted);margin-top:3px;line-height:1.45}
+.promo-tag{font-size:11px;color:var(--purple);padding:7px 10px;border-radius:11px;background:rgba(114,87,255,.1);white-space:nowrap}
+.promo-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.promo-stat{padding:18px;border:1px solid var(--line);border-radius:20px;background:var(--panel);box-shadow:var(--shadow)}
+.promo-stat span{font-size:11px;color:var(--muted)}.promo-stat b{display:block;font-size:25px;letter-spacing:-.035em;margin-top:7px}.promo-change{font-size:11px;margin-top:5px}.promo-good{color:var(--green)}.promo-warn{color:var(--orange)}
+.promo-grid{display:grid;grid-template-columns:1.35fr .85fr;gap:18px}
+.promo-card{padding:21px;border:1px solid var(--line);border-radius:22px;background:var(--panel);box-shadow:var(--shadow)}
+.promo-card-title{font-size:15px;font-weight:720}.promo-card-sub{font-size:12px;color:var(--muted);margin-top:4px}
+.channel-list{display:grid;gap:9px;margin-top:16px}
+.channel-row{display:flex;align-items:center;gap:12px;padding:13px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.34)}
+.channel-icon{width:38px;height:38px;border-radius:12px;background:rgba(114,87,255,.1);color:var(--purple);display:grid;place-items:center;font-size:12px;font-weight:800;flex:none}
+.channel-main{flex:1;min-width:0}.channel-name{font-size:13px;font-weight:700}.channel-meta{font-size:11px;color:var(--muted);margin-top:3px}.channel-value{text-align:right;white-space:nowrap}.channel-value b{font-size:12px}.channel-value div{font-size:10px;color:var(--muted);margin-top:3px}
+.channel-status{font-size:10px;padding:6px 8px;border-radius:9px;background:rgba(39,168,102,.1);color:var(--green);white-space:nowrap}.channel-status.demo{background:rgba(230,138,25,.1);color:var(--orange)}
+.promo-funnel{display:grid;gap:8px;margin-top:16px}.funnel-row{display:flex;justify-content:space-between;align-items:center;padding:11px 12px;border-radius:13px;background:rgba(20,20,24,.035);font-size:12px}.funnel-row span{color:var(--muted)}.funnel-row b{font-size:13px}
+.promo-insight{margin-top:16px;padding:15px;border-radius:18px;background:rgba(39,168,102,.07);border:1px solid rgba(39,168,102,.14)}.promo-insight b{font-size:12px;color:var(--green)}.promo-insight div{font-size:12px;color:var(--muted);line-height:1.5;margin-top:5px}
+.promo-action{margin-top:10px;width:100%;border:0;background:var(--text);color:#fff;border-radius:14px;padding:12px;font-size:12px;font-weight:700}
+.promo-result{display:none;margin-top:10px;padding:11px 12px;border-radius:13px;background:rgba(39,168,102,.08);color:var(--muted);font-size:11px;line-height:1.45}.promo-result.show{display:block}
+.promo-ai{margin-top:15px;padding:14px;border-radius:16px;background:rgba(114,87,255,.06);border:1px solid rgba(114,87,255,.11);font-size:12px;line-height:1.5}.promo-ai b{display:block;color:var(--purple);margin-bottom:4px}.promo-ai div{color:var(--muted)}
+.promo-click{width:100%;text-align:left;color:var(--text);font:inherit;cursor:pointer}.promo-click>span:last-child{color:var(--muted);font-size:18px}
+@media(max-width:900px){.promo-grid{grid-template-columns:1fr}.promo-stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.promo-health{align-items:flex-start}.promo-tag{display:none}.promo-stats{grid-template-columns:1fr}.promo-head{align-items:flex-start}.promo-period{display:none}}
 </style>
 </head>
 <body>
 <div class="app">
-<aside class="sidebar"><div class="brand"><div class="mark">ЦБ</div><div><div class="brand-title">Цифровой бизнес</div><div class="brand-sub">Цифровой управляющий</div></div></div><nav class="nav"><button class="active" type="button" data-section="home">⌂ &nbsp;Главная</button><button type="button" data-section="tasks">✓ &nbsp;Задачи</button><button type="button" data-section="clients">◯ &nbsp;Клиенты</button><button type="button" data-section="finance">₽ &nbsp;Финансы</button><button>↗ &nbsp;Продвижение</button><button>▤ &nbsp;Отчёты</button><button>⚙ &nbsp;Настройки</button></nav><button class="pwa-install" id="installBtn" type="button" hidden>Установить приложение</button>
+<aside class="sidebar"><div class="brand"><div class="mark">ЦБ</div><div><div class="brand-title">Цифровой бизнес</div><div class="brand-sub">Цифровой управляющий</div></div></div><nav class="nav"><button class="active" type="button" data-section="home">⌂ &nbsp;Главная</button><button type="button" data-section="tasks">✓ &nbsp;Задачи</button><button type="button" data-section="clients">◯ &nbsp;Клиенты</button><button type="button" data-section="finance">₽ &nbsp;Финансы</button><button type="button" data-section="promo">↗ &nbsp;Продвижение</button><button>▤ &nbsp;Отчёты</button><button>⚙ &nbsp;Настройки</button></nav><button class="pwa-install" id="installBtn" type="button" hidden>Установить приложение</button>
 <div class="online"><span class="dot"></span>Цифровой управляющий · онлайн</div><button class="theme" id="theme">Тема <span id="themeText">Тёмная</span></button></aside>
 <main class="content"><header class="top"><div><div class="eyebrow"><b>Цифровой управляющий</b> · сегодня</div><h1>Доброе утро, Алексей.</h1><p class="lead">Сегодня у тебя 7 важных задач. Я уже проверил бизнес.</p></div><div class="date">30 сентября 2026</div></header>
 <section class="grid">
@@ -170,16 +198,98 @@ body.dark .finance-source-track{background:rgba(255,255,255,.08)}
     </article>
   </div>
 </section>
+
+<section class="promo-page" id="promoPage">
+  <div class="promo-head">
+    <div>
+      <div class="promo-title">Продвижение</div>
+      <div class="promo-sub">Я смотрю, откуда приходят люди, заявки и деньги — и сравниваю каналы между собой.</div>
+    </div>
+    <select class="promo-period" id="promoPeriod" aria-label="Период">
+      <option>Последние 7 дней</option><option selected>Последние 30 дней</option><option>Последние 90 дней</option>
+    </select>
+  </div>
+
+  <div class="promo-health">
+    <div class="promo-health-icon">AI</div>
+    <div class="promo-health-main">
+      <b>Главный вывод за период</b>
+      <div>Telegram и VK дают больше качественных обращений, а сайт закрывает большую часть продаж. Я бы не оценивал каналы только по заявкам — важнее, сколько денег они реально приносят.</div>
+    </div>
+    <span class="promo-tag">Анализ готов</span>
+  </div>
+
+  <div class="promo-stats">
+    <div class="promo-stat"><span>Все обращения</span><b>83</b><div class="promo-change promo-good">↑ 16% к прошлому периоду</div></div>
+    <div class="promo-stat"><span>Продажи</span><b>23</b><div class="promo-change promo-good">↑ 9% к прошлому периоду</div></div>
+    <div class="promo-stat"><span>Выручка из каналов</span><b>1,29 млн ₽</b><div class="promo-change promo-good">↑ 13,2%</div></div>
+    <div class="promo-stat"><span>Средний чек</span><b>56 100 ₽</b><div class="promo-change promo-warn">− 3,1%</div></div>
+  </div>
+
+  <div class="promo-grid">
+    <article class="promo-card">
+      <div class="promo-card-title">Каналы</div>
+      <div class="promo-card-sub">Не только охваты — заявки, продажи и деньги</div>
+      <div class="channel-list">
+        <div class="channel-row"><div class="channel-icon">VK</div><div class="channel-main"><div class="channel-name">VK</div><div class="channel-meta">31 обращение · 8 продаж</div></div><div class="channel-value"><b>418 000 ₽</b><div>13 100 ₽ / заявка</div></div><span class="channel-status">Подключён</span></div>
+        <div class="channel-row"><div class="channel-icon">TG</div><div class="channel-main"><div class="channel-name">Telegram</div><div class="channel-meta">19 обращений · 6 продаж</div></div><div class="channel-value"><b>362 000 ₽</b><div>лучшая конверсия</div></div><span class="channel-status">Подключён</span></div>
+        <div class="channel-row"><div class="channel-icon">MAX</div><div class="channel-main"><div class="channel-name">MAX</div><div class="channel-meta">Пока нет данных о продажах</div></div><div class="channel-value"><b>—</b><div>нужно подключение</div></div><span class="channel-status demo">Подключить</span></div>
+        <div class="channel-row"><div class="channel-icon">OK</div><div class="channel-main"><div class="channel-name">Одноклассники</div><div class="channel-meta">14 обращений · 4 продажи</div></div><div class="channel-value"><b>196 000 ₽</b><div>стабильный канал</div></div><span class="channel-status">Подключён</span></div>
+        <div class="channel-row"><div class="channel-icon">ДЗ</div><div class="channel-main"><div class="channel-name">Дзен</div><div class="channel-meta">7 обращений · 2 продажи</div></div><div class="channel-value"><b>88 000 ₽</b><div>контентный канал</div></div><span class="channel-status">Подключён</span></div>
+        <div class="channel-row"><div class="channel-icon">WEB</div><div class="channel-main"><div class="channel-name">Сайт</div><div class="channel-meta">12 обращений · 3 продажи</div></div><div class="channel-value"><b>226 000 ₽</b><div>самый высокий чек</div></div><span class="channel-status">Подключён</span></div>
+      </div>
+    </article>
+
+    <aside class="promo-card">
+      <div class="promo-card-title">Путь до продажи</div>
+      <div class="promo-card-sub">Что произошло с обращениями</div>
+      <div class="promo-funnel">
+        <div class="funnel-row"><span>Обращения</span><b>83</b></div>
+        <div class="funnel-row"><span>Квалифицированы</span><b>49</b></div>
+        <div class="funnel-row"><span>Предложения</span><b>31</b></div>
+        <div class="funnel-row"><span>Продажи</span><b>23</b></div>
+      </div>
+      <div class="promo-insight">
+        <b>Что я заметил</b>
+        <div>Telegram конвертирует обращения в продажи лучше остальных каналов. VK даёт больше объёма. Поэтому я бы не переносил весь бюджет в один канал — сначала проверил прибыль на клиента.</div>
+        <button class="promo-action" id="promoCheck" type="button">Проверить прибыльность каналов →</button>
+        <div class="promo-result" id="promoResult"></div>
+      </div>
+    </aside>
+
+    <article class="promo-card">
+      <div class="promo-card-title">Что сделать сейчас</div>
+      <div class="promo-card-sub">Решения цифрового управляющего</div>
+      <div class="channel-list">
+        <button class="channel-row promo-click" type="button" data-promo-action="telegram"><div class="channel-icon">TG</div><div class="channel-main"><div class="channel-name">Усилить Telegram</div><div class="channel-meta">Высокая конверсия в продажу</div></div><span>›</span></button>
+        <button class="channel-row promo-click" type="button" data-promo-action="vk"><div class="channel-icon">VK</div><div class="channel-main"><div class="channel-name">Проверить контент VK</div><div class="channel-meta">Объём хороший, но нужно сравнить стоимость продаж</div></div><span>›</span></button>
+        <button class="channel-row promo-click" type="button" data-promo-action="connect"><div class="channel-icon">+</div><div class="channel-main"><div class="channel-name">Подключить новый канал</div><div class="channel-meta">Чтобы управляющий видел больше продаж</div></div><span>›</span></button>
+      </div>
+      <div class="promo-ai" id="promoAi"><b>Спроси меня о продвижении</b><div>Например: «Откуда пришло больше всего денег?» или «Куда лучше перенести рекламный бюджет?»</div></div>
+    </article>
+
+    <article class="promo-card">
+      <div class="promo-card-title">Подключения</div>
+      <div class="promo-card-sub">Источники, которые управляющий может анализировать</div>
+      <div class="channel-list">
+        <div class="channel-row"><div class="channel-icon">CRM</div><div class="channel-main"><div class="channel-name">Продажи / CRM</div><div class="channel-meta">Связывает обращения с реальными сделками</div></div><span class="channel-status">Подключён</span></div>
+        <div class="channel-row"><div class="channel-icon">ADS</div><div class="channel-main"><div class="channel-name">Реклама</div><div class="channel-meta">Расходы, заявки, стоимость привлечения</div></div><span class="channel-status">Подключён</span></div>
+        <div class="channel-row"><div class="channel-icon">WEB</div><div class="channel-main"><div class="channel-name">Сайт и аналитика</div><div class="channel-meta">Трафик, конверсия и продажи</div></div><span class="channel-status">Подключён</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
 </main></div>
 <nav class="mobile-nav"><button class="active" type="button" data-section="home">⌂<br>Главная</button><button type="button" data-section="tasks">✓<br>Задачи</button><button type="button" data-section="clients">◯<br>Клиенты</button><button>☰<br>Ещё</button></nav>
 <script>
 const body=document.body,theme=document.getElementById('theme'),label=document.getElementById('themeText');if(localStorage.getItem('db-theme')==='dark')body.classList.add('dark');function themeLabel(){label.textContent=body.classList.contains('dark')?'Светлая':'Тёмная'}themeLabel();theme.onclick=()=>{body.classList.toggle('dark');localStorage.setItem('db-theme',body.classList.contains('dark')?'dark':'light');themeLabel()};
 document.getElementById('askForm').onsubmit=e=>{e.preventDefault();if(document.getElementById('askInput').value.trim())document.getElementById('reply').classList.add('show')};
-const tasksPage=document.getElementById('tasksPage'),clientsPage=document.getElementById('clientsPage'),financePage=document.getElementById('financePage');
+const tasksPage=document.getElementById('tasksPage'),clientsPage=document.getElementById('clientsPage'),financePage=document.getElementById('financePage'),promoPage=document.getElementById('promoPage');
 const homeMain=document.querySelector('main.content');
 const sectionButtons=document.querySelectorAll('[data-section]');
-const homeSections=homeMain?Array.from(homeMain.children).filter(el=>!['tasksPage','clientsPage','financePage'].includes(el.id)):[];
-function showSection(section){const isTasks=section==='tasks',isClients=section==='clients',isFinance=section==='finance';homeSections.forEach(el=>el.style.display=(isTasks||isClients||isFinance)?'none':'');if(tasksPage)tasksPage.classList.toggle('show',isTasks);if(clientsPage)clientsPage.classList.toggle('show',isClients);if(financePage)financePage.classList.toggle('show',isFinance);sectionButtons.forEach(b=>b.classList.toggle('active',b.dataset.section===section));}
+const homeSections=homeMain?Array.from(homeMain.children).filter(el=>!['tasksPage','clientsPage','financePage','promoPage'].includes(el.id)) : [];
+function showSection(section){const isTasks=section==='tasks',isClients=section==='clients',isFinance=section==='finance',isPromo=section==='promo';homeSections.forEach(el=>el.style.display=(isTasks||isClients||isFinance||isPromo)?'none':'');if(tasksPage)tasksPage.classList.toggle('show',isTasks);if(clientsPage)clientsPage.classList.toggle('show',isClients);if(financePage)financePage.classList.toggle('show',isFinance);if(promoPage)promoPage.classList.toggle('show',isPromo);sectionButtons.forEach(b=>b.classList.toggle('active',b.dataset.section===section));}
 sectionButtons.forEach(b=>b.addEventListener('click',()=>showSection(b.dataset.section)));
 document.getElementById('tasksBack')?.addEventListener('click',()=>showSection('home'));
 document.getElementById('clientsBack')?.addEventListener('click',()=>showSection('home'));
@@ -222,6 +332,29 @@ document.querySelectorAll('[data-finance-action]').forEach(btn=>{
 document.getElementById('financePeriod')?.addEventListener('change',e=>{
   const sub=document.querySelector('.finance-sub');
   if(sub)sub.textContent=e.target.value==='7'?'Я слежу за деньгами за последнюю неделю и объясняю изменения.':e.target.value==='90'?'Я анализирую финансовую картину за последние 90 дней.':'Я слежу за деньгами и объясняю, что происходит с бизнесом.';
+});
+
+
+const promoCheck=document.getElementById('promoCheck'),promoResult=document.getElementById('promoResult');
+promoCheck?.addEventListener('click',()=>{
+  promoCheck.disabled=true;promoCheck.textContent='Сравниваю каналы…';
+  setTimeout(()=>{
+    promoCheck.textContent='Анализ завершён ✓';
+    promoResult.innerHTML='<b>Предварительный вывод:</b> Telegram показывает лучшую конверсию, а VK даёт больше объёма. Перед переносом бюджета я бы сравнил чистую прибыль по продажам, а не только стоимость заявки.';
+    promoResult.classList.add('show');
+  },900);
+});
+document.querySelectorAll('[data-promo-action]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const response=document.getElementById('promoAi');
+    const type=btn.dataset.promoAction;
+    const data={
+      telegram:'Telegram: 19 обращений дали 6 продаж. Канал выглядит самым эффективным по конверсии. Следующий шаг — проверить маржу этих продаж и стоимость привлечения.',
+      vk:'VK: канал дал больше всего обращений и 8 продаж. Я бы не увеличивал бюджет автоматически — сначала проверю, какие публикации и рекламные объявления приводят клиентов, а не просто заявки.',
+      connect:'Подключение: новый источник должен передавать не только охваты и обращения, но и связь с продажей. Тогда я смогу посчитать реальную прибыльность канала.'
+    };
+    response.innerHTML='<b>Я проверил данные.</b><div>'+data[type]+'</div>';
+  });
 });
 
 document.querySelectorAll('[data-demo]').forEach(b=>b.onclick=()=>alert(b.dataset.demo==='site'?'Демо: открываем изменение страницы заказа и проверяем конверсию.':'Демо: открываем подготовленные ответы на отзывы.'));
