@@ -1,198 +1,36 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Цифровой управляющий — демо кабинета</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f7"><meta name="description" content="Цифровой управляющий для вашего бизнеса">
+<link rel="manifest" href="manifest.json"><title>Цифровой бизнес — Цифровой управляющий</title>
 <style>
-:root{
-  --bg:#f4f7ff;--panel:rgba(255,255,255,.72);--solid:#fff;--text:#17213a;--muted:#7b879f;
-  --line:rgba(72,94,140,.12);--blue:#4f75ff;--purple:#8158ff;--green:#20c978;--orange:#ff9d2f;--pink:#ef5aa4;
-  --shadow:0 18px 50px rgba(58,82,150,.12)
-}
-*{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;color:var(--text);
-background:radial-gradient(circle at 72% -5%,#dce7ff 0,transparent 34%),var(--bg);transition:.25s}
-body.dark{--bg:#07101f;--panel:rgba(18,30,54,.72);--solid:#101d35;--text:#f5f8ff;--muted:#91a0bb;--line:rgba(180,200,255,.12);--shadow:0 22px 70px rgba(0,0,0,.38);
-background:radial-gradient(circle at 72% -5%,#1a3470 0,transparent 38%),var(--bg)}
-button{font:inherit;cursor:pointer}
-.shell{min-height:100vh;display:grid;grid-template-columns:238px 1fr}
-.sidebar{padding:22px 15px;border-right:1px solid var(--line);background:rgba(255,255,255,.38);backdrop-filter:blur(25px)}
-.dark .sidebar{background:rgba(5,10,20,.55)}
-.brand{display:flex;align-items:center;gap:10px;padding:3px 9px 27px;font-weight:750}
-.brandIcon{width:38px;height:38px;border-radius:12px;background:linear-gradient(145deg,#637bff,#9851ff);display:grid;place-items:center;color:white;font-size:19px;box-shadow:0 10px 28px #6f65ff40}
-.brand small{display:block;color:var(--muted);font-weight:500;font-size:10px;margin-top:2px}
-.nav{display:flex;gap:11px;align-items:center;width:100%;padding:11px 12px;margin:4px 0;border-radius:13px;color:var(--muted);font-size:13px;background:transparent;border:0;text-align:left}
-.nav.active{background:var(--solid);color:var(--blue);box-shadow:0 8px 22px #00000009}
-.sideProfile{position:absolute;left:15px;bottom:18px;right:15px;padding:11px;border:1px solid var(--line);border-radius:17px;background:var(--panel);backdrop-filter:blur(18px);font-size:12px}
-.avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#7b71ff,#b8d6ff);display:grid;place-items:center;color:white;font-weight:700}
-.main{max-width:1320px;width:100%;margin:auto;padding:21px 27px 35px}
-.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.status{font-size:12px;color:var(--muted)}
-.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px #20c97817;margin-right:7px}
-.topBtns{display:flex;gap:8px}.topBtn{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:13px;padding:9px 13px}
-.hero{display:flex;justify-content:space-between;align-items:center;padding:26px 29px;border:1px solid var(--line);border-radius:25px;background:linear-gradient(135deg,var(--panel),rgba(105,128,255,.10));box-shadow:var(--shadow);overflow:hidden;position:relative}
-.hero:after{content:"";position:absolute;width:330px;height:180px;right:-80px;top:-75px;border-radius:50%;background:linear-gradient(135deg,#6f8fff38,#a65cff32);filter:blur(10px)}
-.eyebrow{font-size:11px;color:var(--blue);font-weight:750}.hero h1{font-size:34px;letter-spacing:-1.2px;margin:5px 0}.hero p{color:var(--muted);font-size:13px;line-height:1.45;margin:0;max-width:600px}
-.heroOrb{position:relative;z-index:1;width:76px;height:76px;border-radius:23px;background:radial-gradient(circle at 35% 28%,#fff,#9aaaff 35%,#6d48ff 78%);box-shadow:0 18px 40px #705cff55;display:grid;place-items:center;color:#fff;font-size:28px}
-.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin:11px 0}
-.metric{padding:16px;border:1px solid var(--line);border-radius:18px;background:var(--panel);backdrop-filter:blur(18px)}
-.metric span{font-size:11px;color:var(--muted)}.metric strong{display:block;font-size:22px;margin:7px 0 2px}.green{color:var(--green)}.orange{color:var(--orange)}
-.cards{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:12px}.card{padding:18px;border:1px solid var(--line);border-radius:21px;background:var(--panel);backdrop-filter:blur(18px);box-shadow:0 8px 28px #00000005}.card h3{font-size:14px;margin:0 0 10px}.badge{float:right;border:1px solid var(--line);border-radius:20px;padding:3px 8px;color:var(--muted);font-size:11px}
-.row{display:flex;gap:10px;padding:12px 0;border-top:1px solid var(--line);align-items:flex-start}.row:first-of-type{border-top:0}.icon{width:30px;height:30px;border-radius:10px;background:#edf1ff;color:var(--blue);display:grid;place-items:center;flex:none;font-size:14px}.icon.g{background:#e5f8ef;color:var(--green)}.icon.o{background:#fff0dc;color:var(--orange)}.icon.p{background:#fde8f2;color:var(--pink)}.dark .icon,.dark .icon.g,.dark .icon.o,.dark .icon.p{background:#16243e}
-.row b{font-size:12px}.row p{font-size:11px;line-height:1.35;color:var(--muted);margin:3px 0 0}.row button{margin-left:auto;border:0;background:transparent;color:var(--blue);font-size:11px;padding:4px}
-.ask{display:flex;gap:10px;align-items:center;margin-top:11px;padding:11px 13px;border:1px solid var(--line);border-radius:19px;background:var(--solid);box-shadow:var(--shadow)}
-.askIcon{width:37px;height:37px;border-radius:12px;background:radial-gradient(circle at 35% 30%,#fff,#a49bff 35%,#7155ff 75%);display:grid;place-items:center;color:white}.ask input{flex:1;border:0;outline:0;background:transparent;color:var(--text);font-size:12px}.ask button{width:38px;height:38px;border:0;border-radius:50%;background:#171a21;color:#fff}.dark .ask button{background:#fff;color:#111}
-.toast{position:fixed;right:22px;bottom:22px;background:#16181e;color:white;border-radius:15px;padding:12px 16px;opacity:0;transform:translateY(8px);transition:.22s}.toast.show{opacity:1;transform:none}
+:root{--bg:#f5f5f7;--panel:rgba(255,255,255,.78);--text:#17171a;--muted:#74747b;--line:rgba(20,20,24,.09);--blue:#1677ff;--purple:#7257ff;--green:#27a866;--orange:#e68a19;--red:#e45151;--shadow:0 18px 55px rgba(30,35,50,.08);--r:26px}*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;background:var(--bg);color:var(--text)}button,input{font:inherit}button{cursor:pointer}.app{min-height:100vh;display:grid;grid-template-columns:250px 1fr}.sidebar{position:sticky;top:0;height:100vh;padding:24px 16px;border-right:1px solid var(--line);background:rgba(248,248,250,.72);backdrop-filter:blur(22px);display:flex;flex-direction:column}.brand{display:flex;align-items:center;gap:12px;padding:4px 10px 28px}.mark{width:42px;height:42px;border-radius:13px;background:#17171a;color:#fff;display:grid;place-items:center;font-weight:700}.brand-title{font-size:15px;font-weight:700}.brand-sub{font-size:11px;color:var(--muted);margin-top:3px}.nav{display:grid;gap:6px}.nav button,.mobile-nav button{border:0;background:transparent;color:#666872;text-align:left;padding:12px 13px;border-radius:14px}.nav button.active{background:#fff;color:var(--text);box-shadow:0 8px 24px rgba(25,30,40,.06)}.online{margin-top:auto;padding:12px 10px;color:var(--muted);font-size:12px}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(39,168,102,.1);margin-right:8px}.theme{width:100%;border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:10px 12px;color:var(--text);display:flex;justify-content:space-between}.content{padding:34px clamp(20px,4vw,58px) 90px}.top,.grid{max-width:1280px;margin:auto}.top{display:flex;justify-content:space-between;gap:20px;margin-bottom:26px}.eyebrow{font-size:13px;color:var(--muted);margin-bottom:8px}.eyebrow b{color:var(--text)}h1{font-size:clamp(32px,4vw,48px);letter-spacing:-.055em;line-height:1;margin:0 0 10px}.lead{margin:0;color:var(--muted);font-size:15px}.date{font-size:12px;color:var(--muted);padding-top:7px;white-space:nowrap}.grid{display:grid;grid-template-columns:1.55fr 1fr;gap:18px}.card,.ask{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:blur(22px)}.pad{padding:23px}.title{font-size:15px;font-weight:720}.desc{font-size:12px;color:var(--muted);margin-top:4px}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.metric{padding:17px;border:1px solid var(--line);border-radius:19px;background:rgba(255,255,255,.48)}.ml{font-size:11px;color:var(--muted)}.mv{font-size:25px;font-weight:760;letter-spacing:-.04em;margin-top:7px}.good{color:var(--green)}.items,.done,.calendar{display:grid;gap:10px;margin-top:17px}.item{display:flex;gap:12px;padding:14px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.44)}.status{width:10px;height:10px;border-radius:50%;margin-top:5px;flex:none}.red{background:var(--red)}.orange{background:var(--orange)}.green{background:var(--green)}.item-main{flex:1}.item-title{font-size:13px;font-weight:680}.item-text{font-size:12px;color:var(--muted);line-height:1.45;margin-top:3px}.action{margin-top:9px;border:0;background:transparent;color:var(--blue);font-size:12px;padding:0;font-weight:650}.done-row{display:flex;gap:10px;font-size:13px}.check{width:20px;height:20px;border-radius:7px;background:rgba(39,168,102,.12);color:var(--green);display:grid;place-items:center;flex:none}.needs{margin-top:20px;padding:15px;border-radius:18px;background:rgba(114,87,255,.07);border:1px solid rgba(114,87,255,.12)}.needs b{font-size:12px;color:var(--purple)}.needs div{font-size:12px;color:var(--muted);line-height:1.45;margin-top:5px}.event{display:flex;gap:12px;align-items:center}.time{width:45px;font-size:12px;color:var(--muted)}.event-box{flex:1;border:1px solid var(--line);border-radius:14px;padding:11px 12px;font-size:12px;background:rgba(255,255,255,.42)}.ask{grid-column:1/-1;padding:20px;background:linear-gradient(135deg,rgba(114,87,255,.08),rgba(22,119,255,.06))}.ask-head{display:flex;justify-content:space-between;gap:20px}.ask-title{font-size:18px;font-weight:740}.ask-sub{font-size:12px;color:var(--muted);margin-top:4px}.manager{font-size:12px;color:var(--muted);white-space:nowrap}.ask-form{display:flex;gap:10px;margin-top:17px}.ask-input{flex:1;min-width:0;border:1px solid var(--line);background:rgba(255,255,255,.84);border-radius:17px;padding:14px 16px;outline:0}.round,.send{border:0;border-radius:16px}.round{width:49px;background:#fff;border:1px solid var(--line);color:var(--purple)}.send{padding:0 19px;background:var(--text);color:#fff;font-size:12px;font-weight:650}.reply{display:none;margin-top:13px;padding:15px;border-radius:17px;background:#fff;border:1px solid var(--line);font-size:13px;line-height:1.5}.reply.show{display:block}.reply b{display:block;margin-bottom:5px}.mobile-nav{display:none}body.dark{--bg:#111214;--panel:rgba(29,30,34,.78);--text:#f4f4f5;--muted:#a0a1a8;--line:rgba(255,255,255,.09);--shadow:0 20px 60px rgba(0,0,0,.25)}body.dark .sidebar{background:rgba(18,19,22,.76)}body.dark .nav button.active,body.dark .metric,body.dark .item,body.dark .event-box,body.dark .ask-input,body.dark .reply,body.dark .round{background:rgba(255,255,255,.055)}body.dark .mark{background:#f5f5f7;color:#17171a}@media(max-width:900px){.app{display:block}.sidebar{display:none}.content{padding:24px 15px 92px}.grid{grid-template-columns:1fr}.ask{grid-column:auto}.metrics{grid-template-columns:repeat(3,1fr)}.mobile-nav{position:fixed;z-index:20;display:grid;grid-template-columns:repeat(4,1fr);left:10px;right:10px;bottom:10px;padding:7px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.86);backdrop-filter:blur(22px);box-shadow:0 15px 45px rgba(20,25,35,.15)}.mobile-nav button{text-align:center;padding:8px 3px;font-size:10px}.mobile-nav button.active{color:var(--text);font-weight:700}.date{display:none}}@media(max-width:520px){h1{font-size:34px}.metrics{grid-template-columns:1fr}.ask-form{flex-wrap:wrap}.ask-input{flex-basis:calc(100% - 59px)}.send{height:49px;flex:1}.pad{padding:19px}}
 
-.view{animation:fade .22s ease}@keyframes fade{from{opacity:.2;transform:translateY(5px)}to{opacity:1;transform:none}}
-.pageTitle{display:flex;justify-content:space-between;align-items:flex-end;margin:8px 0 16px}.pageTitle h1{font-size:34px;letter-spacing:-1px;margin:5px 0}.pageTitle p{margin:0;color:var(--muted);font-size:13px}.primary{border:0;background:linear-gradient(135deg,#5f7cff,#8157ff);color:#fff;padding:11px 15px;border-radius:13px;box-shadow:0 10px 25px #6d65ff35}.filterRow{display:flex;gap:7px;margin-bottom:12px;flex-wrap:wrap}.filter{border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:9px 12px;border-radius:12px}.filter.active{background:var(--solid);color:var(--blue)}.taskGrid{display:grid;grid-template-columns:1.35fr 1fr;gap:12px}.task{display:flex;gap:12px;padding:15px 0;border-top:1px solid var(--line);align-items:center}.task:first-of-type{border-top:0}.taskDot{width:10px;height:10px;border-radius:50%;background:var(--blue);flex:none}.taskDot.orange{background:var(--orange)}.taskDot.pink{background:var(--pink)}.task p{margin:4px 0 0;color:var(--muted);font-size:11px}.task button,.report button,.channel button{margin-left:auto;border:0;background:transparent;color:var(--blue);font-size:11px}.timeline{display:flex;gap:18px;padding:14px 0;border-top:1px solid var(--line);font-size:12px}.timeline:first-of-type{border-top:0}.timeline b{width:45px}.timeline span{color:var(--muted)}.tableCard{padding:0;overflow:hidden}.tableHead{display:flex;justify-content:space-between;padding:18px;border-bottom:1px solid var(--line);font-size:13px}.tableHead span{color:var(--muted);font-size:11px}.clientRow{display:grid;grid-template-columns:38px 1fr auto 25px;align-items:center;gap:11px;padding:13px 18px;border-bottom:1px solid var(--line)}.clientRow:last-child{border-bottom:0}.clientRow p{margin:3px 0 0;color:var(--muted);font-size:11px}.clientRow>strong{font-size:12px}.clientRow button{border:0;background:transparent;color:var(--blue);font-size:17px}.avatar.small{width:34px;height:34px}.financeGrid{display:grid;grid-template-columns:1.6fr 1fr;gap:12px}.chartCard{min-height:300px}.fakeChart{height:190px;display:flex;align-items:end;gap:8px;padding:30px 8px 0;border-bottom:1px solid var(--line)}.fakeChart i{display:block;flex:1;border-radius:8px 8px 2px 2px;background:linear-gradient(#86a0ff,#6755ff);opacity:.85}.chartLabels{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;padding-top:8px}.channelGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.channelTop{display:flex;align-items:center;gap:9px}.channelTop em{margin-left:auto;font-size:10px;font-style:normal}.good{color:var(--green)}.attention{color:var(--orange)}.channel strong{display:block;font-size:26px;margin:22px 0 2px}.channel p{color:var(--muted);font-size:11px;margin:0}.channelIcon{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:#edf1ff}.channelIcon.purple{color:var(--purple)}.channelIcon.pink{color:var(--pink)}.channelIcon.blue{color:var(--blue)}.reportGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.report{min-height:180px}.reportIcon{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:#edf1ff;color:var(--blue)}.report h3{margin:15px 0 6px}.report p{color:var(--muted);font-size:12px;line-height:1.45;max-width:520px}.settingsCard{max-width:800px}.setting{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}.setting:last-child{border-bottom:0}.setting p{margin:4px 0 0;color:var(--muted);font-size:11px}.switch{width:46px;height:27px;border:0;border-radius:20px;background:#c8ced9;padding:3px}.switch i{display:block;width:21px;height:21px;background:white;border-radius:50%;transition:.2s}.switch.on{background:var(--green)}.switch.on i{transform:translateX(19px)}
-.dark .channelIcon,.dark .reportIcon{background:#172541}
-@media(max-width:900px){.shell{display:block}.sidebar{display:none}.main{padding:14px}.hero h1{font-size:29px}.metrics{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:1fr}}
-@media(max-width:900px){.pageTitle{align-items:flex-start;gap:12px}.taskGrid,.financeGrid{grid-template-columns:1fr}.channelGrid{grid-template-columns:1fr}.reportGrid{grid-template-columns:1fr}}@media(max-width:520px){.hero{padding:20px;border-radius:21px}.heroOrb{width:60px;height:60px;border-radius:19px}.hero p{font-size:12px}.metrics{gap:7px}.metric{padding:12px}.metric strong{font-size:19px}.card{border-radius:19px;padding:15px}}
-</style>
+.confirm-wrap{margin-top:12px}.confirm-btn{border:0;border-radius:14px;padding:12px 16px;background:var(--text);color:#fff;font-size:12px;font-weight:700}.result{margin-top:12px;padding:14px 16px;border-radius:16px;background:rgba(39,168,102,.08);border:1px solid rgba(39,168,102,.16);font-size:13px;line-height:1.5}.result b{display:inline-block;margin-right:4px}</style>
 </head>
 <body>
-<div class="shell">
-<aside class="sidebar">
-  <div class="brand"><div class="brandIcon">✦</div><div>Цифровой бизнес<small>Цифровой управляющий</small></div></div>
-  <button class="nav active" data-view="home">⌂ <b>Главная</b></button>
-  <button class="nav" data-view="tasks">✓ <b>Задачи</b></button>
-  <button class="nav" data-view="clients">♙ <b>Клиенты</b></button>
-  <button class="nav" data-view="finance">▣ <b>Финансы</b></button>
-  <button class="nav" data-view="marketing">↗ <b>Продвижение</b></button>
-  <button class="nav" data-view="reports">▤ <b>Отчёты</b></button>
-  <button class="nav" data-view="settings">⚙ <b>Настройки</b></button>
-  <div class="sideProfile"><div style="display:flex;gap:9px;align-items:center"><div class="avatar">А</div><div><b>Алексей</b><div style="color:var(--muted);font-size:10px">Демо-профиль</div></div></div></div>
-</aside>
-<main class="main">
-  <div class="top">
-    <div class="status"><i class="dot"></i>Цифровой управляющий · онлайн</div>
-    <div class="topBtns"><button class="topBtn">Сегодня</button><button class="topBtn" id="theme">☾</button></div>
-  </div>
-
-  <div id="view-home" class="view">
-    <section class="hero"><div><div class="eyebrow">ДЕМО-КАБИНЕТ</div><h1>Доброе утро, Алексей.</h1><p><b>Сегодня у вас 7 важных задач.</b> Я проверил бизнес и собрал главное.</p></div><div class="heroOrb">✦</div></section>
-    <section class="metrics">
-      <div class="metric"><span>Оборот · вчера</span><strong>184 000 ₽</strong><div class="green" style="font-size:11px">+8,4%</div></div>
-      <div class="metric"><span>Новые заявки</span><strong>14</strong><div class="green" style="font-size:11px">+12%</div></div>
-      <div class="metric"><span>Нужно внимания</span><strong>3</strong><div class="orange" style="font-size:11px">сейчас</div></div>
-      <div class="metric"><span>Следующая встреча</span><strong>11:00</strong><span>Поставщик</span></div>
-    </section>
-    <section class="cards">
-      <div class="card"><h3>Требует внимания <span class="badge">3</span></h3>
-        <div class="row"><div class="icon o">△</div><div><b>Конверсия сайта −18%</b><p>Найдены изменения на странице заказа</p></div><button onclick="toast('Проверка сайта запущена')">Проверить →</button></div>
-        <div class="row"><div class="icon p">▤</div><div><b>3 новых отзыва</b><p>На два стоит ответить сегодня</p></div><button onclick="toast('Ответы на отзывы подготовлены')">Показать →</button></div>
-        <div class="row"><div class="icon">↗</div><div><b>Реклама работает лучше</b><p>14 заявок · стоимость снизилась на 12%</p></div><button onclick="toast('Аналитика рекламы открыта')">Открыть →</button></div>
-      </div>
-      <div class="card"><h3>Я уже сделал <span class="badge">✓</span></h3>
-        <div class="row"><div class="icon g">✓</div><div><b>Ответил на 2 отзыва</b><p>Клиенты получили ответы</p></div></div>
-        <div class="row"><div class="icon g">▤</div><div><b>Обновил информацию на сайте</b><p>Проверил ключевые страницы</p></div></div>
-        <div class="row"><div class="icon g">↗</div><div><b>Перераспределил рекламный бюджет</b><p>Снизил расходы на слабую кампанию</p></div></div>
-      </div>
-      <div class="card"><h3>От вас нужно <span class="badge">2</span></h3>
-        <div class="row"><div class="icon">₽</div><div><b>Изменить цену товара X</b><p>Осталось 4 дня · рекомендую +7%</p></div><button onclick="toast('Изменение цены подтверждено')">Подтвердить</button></div>
-        <div class="row"><div class="icon">◷</div><div><b>Позвонить Иванову</b><p>Сегодня · 14:00</p></div><button onclick="toast('Задача добавлена в календарь')">В календарь →</button></div>
-      </div>
-    </section>
-  </div>
-
-  <div id="view-tasks" class="view" hidden>
-    <div class="pageTitle"><div><div class="eyebrow">УПРАВЛЕНИЕ ДЕЛАМИ</div><h1>Задачи</h1><p>Цифровой управляющий распределяет главное по приоритету.</p></div><button class="primary" onclick="toast('Новая задача создана')">＋ Новая задача</button></div>
-    <div class="filterRow"><button class="filter active">Сегодня · 7</button><button class="filter">В работе · 3</button><button class="filter">Ждут вас · 2</button><button class="filter">Выполнено · 12</button></div>
-    <div class="taskGrid">
-      <div class="card"><h3>Высокий приоритет <span class="badge">3</span></h3>
-        <div class="task"><div class="taskDot orange"></div><div><b>Проверить падение конверсии</b><p>Изменение на странице заказа · сегодня</p></div><button onclick="toast('Проверка запущена')">Открыть</button></div>
-        <div class="task"><div class="taskDot pink"></div><div><b>Ответить на отзывы</b><p>2 ответа подготовлены управляющим</p></div><button onclick="toast('Ответы открыты')">Посмотреть</button></div>
-        <div class="task"><div class="taskDot blue"></div><div><b>Подтвердить изменение цены</b><p>Товар X · осталось 4 дня</p></div><button onclick="toast('Изменение подтверждено')">Подтвердить</button></div>
-      </div>
-      <div class="card"><h3>Сегодня</h3>
-        <div class="timeline"><b>09:30</b><span>Проверка рекламы</span></div>
-        <div class="timeline"><b>11:00</b><span>Встреча с поставщиком</span></div>
-        <div class="timeline"><b>14:00</b><span>Звонок Иванову</span></div>
-        <div class="timeline"><b>17:30</b><span>Итоги дня</span></div>
-      </div>
-    </div>
-  </div>
-
-  <div id="view-clients" class="view" hidden>
-    <div class="pageTitle"><div><div class="eyebrow">ОТНОШЕНИЯ С КЛИЕНТАМИ</div><h1>Клиенты</h1><p>Все заявки и контакты в одном месте.</p></div><button class="primary" onclick="toast('Новый клиент добавлен')">＋ Новый клиент</button></div>
-    <div class="metrics">
-      <div class="metric"><span>Всего клиентов</span><strong>428</strong><div class="green">+16 за месяц</div></div>
-      <div class="metric"><span>Новые заявки</span><strong>14</strong><div class="green">+12%</div></div>
-      <div class="metric"><span>Ждут ответа</span><strong>3</strong><div class="orange">сейчас</div></div>
-      <div class="metric"><span>Повторные покупки</span><strong>38%</strong><div class="green">+4,2%</div></div>
-    </div>
-    <div class="card tableCard"><div class="tableHead"><b>Последние клиенты</b><span>Сегодня</span></div>
-      <div class="clientRow"><div class="avatar small">И</div><div><b>Иван Иванов</b><p>Заявка · сегодня 10:42</p></div><strong>84 000 ₽</strong><button onclick="toast('Карточка Иванова открыта')">→</button></div>
-      <div class="clientRow"><div class="avatar small">М</div><div><b>Мария Петрова</b><p>Повторный клиент · вчера</p></div><strong>32 500 ₽</strong><button onclick="toast('Карточка Петровой открыта')">→</button></div>
-      <div class="clientRow"><div class="avatar small">А</div><div><b>Александр Смирнов</b><p>Новая заявка · вчера</p></div><strong>18 900 ₽</strong><button onclick="toast('Карточка Смирнова открыта')">→</button></div>
-    </div>
-  </div>
-
-  <div id="view-finance" class="view" hidden>
-    <div class="pageTitle"><div><div class="eyebrow">ДЕНЬГИ БИЗНЕСА</div><h1>Финансы</h1><p>Цифровой управляющий связывает продажи, расходы и прибыль.</p></div></div>
-    <div class="metrics">
-      <div class="metric"><span>Оборот · месяц</span><strong>4,82 млн ₽</strong><div class="green">+11,8%</div></div>
-      <div class="metric"><span>Расходы</span><strong>2,91 млн ₽</strong><div class="orange">+3,4%</div></div>
-      <div class="metric"><span>Прибыль</span><strong>1,91 млн ₽</strong><div class="green">+18,2%</div></div>
-      <div class="metric"><span>Маржа</span><strong>39,6%</strong><div class="green">+2,1 п.п.</div></div>
-    </div>
-    <div class="financeGrid">
-      <div class="card chartCard"><h3>Оборот за месяц</h3><div class="fakeChart"><i style="height:35%"></i><i style="height:47%"></i><i style="height:42%"></i><i style="height:58%"></i><i style="height:55%"></i><i style="height:72%"></i><i style="height:88%"></i><i style="height:78%"></i><i style="height:96%"></i></div><div class="chartLabels"><span>1</span><span>7</span><span>14</span><span>21</span><span>30</span></div></div>
-      <div class="card"><h3>Что изменилось</h3><div class="row"><div class="icon g">↑</div><div><b>Продажи выросли</b><p>Основной вклад — новые заявки</p></div></div><div class="row"><div class="icon o">!</div><div><b>Реклама подорожала</b><p>Стоимость заявки +6,4%</p></div></div><div class="row"><div class="icon">₽</div><div><b>Есть точка роста</b><p>Можно сократить расход на кампанию X</p></div></div></div>
-    </div>
-  </div>
-
-  <div id="view-marketing" class="view" hidden>
-    <div class="pageTitle"><div><div class="eyebrow">РОСТ И ПРИВЛЕЧЕНИЕ</div><h1>Продвижение</h1><p>Сайт, реклама, поиск и отзывы — в одной картине.</p></div><button class="primary" onclick="toast('Отчёт по продвижению обновлён')">Обновить данные</button></div>
-    <div class="metrics">
-      <div class="metric"><span>Заявки</span><strong>14</strong><div class="green">+12%</div></div>
-      <div class="metric"><span>Стоимость заявки</span><strong>1 840 ₽</strong><div class="green">−12%</div></div>
-      <div class="metric"><span>Конверсия сайта</span><strong>4,8%</strong><div class="orange">−18%</div></div>
-      <div class="metric"><span>Новые отзывы</span><strong>3</strong><div class="green">+2</div></div>
-    </div>
-    <div class="channelGrid">
-      <div class="card channel"><div class="channelTop"><span class="channelIcon blue">↗</span><b>Сайт</b><em class="good">Работает</em></div><strong>4,8%</strong><p>Конверсия</p><button onclick="toast('Анализ сайта запущен')">Проверить →</button></div>
-      <div class="card channel"><div class="channelTop"><span class="channelIcon purple">◆</span><b>Реклама</b><em class="good">Активна</em></div><strong>14</strong><p>Заявок сегодня</p><button onclick="toast('Кампании открыты')">Открыть →</button></div>
-      <div class="card channel"><div class="channelTop"><span class="channelIcon pink">▤</span><b>Отзывы</b><em class="attention">3 новых</em></div><strong>4,8 ★</strong><p>Средняя оценка</p><button onclick="toast('Отзывы открыты')">Посмотреть →</button></div>
-    </div>
-  </div>
-
-  <div id="view-reports" class="view" hidden>
-    <div class="pageTitle"><div><div class="eyebrow">АНАЛИТИКА</div><h1>Отчёты</h1><p>Коротко о том, что произошло и что стоит сделать дальше.</p></div><button class="primary" onclick="toast('Демо-отчёт подготовлен')">Сформировать отчёт</button></div>
-    <div class="reportGrid">
-      <div class="card report"><span class="reportIcon">◷</span><h3>Утренний отчёт</h3><p>Главные изменения бизнеса за ночь и список действий на сегодня.</p><button onclick="toast('Утренний отчёт открыт')">Открыть →</button></div>
-      <div class="card report"><span class="reportIcon">↗</span><h3>Продажи</h3><p>Заявки, клиенты, оборот и причины изменений относительно прошлого периода.</p><button onclick="toast('Отчёт по продажам открыт')">Открыть →</button></div>
-      <div class="card report"><span class="reportIcon">₽</span><h3>Финансовый</h3><p>Доходы, расходы, прибыль и точки, где можно улучшить результат.</p><button onclick="toast('Финансовый отчёт открыт')">Открыть →</button></div>
-      <div class="card report"><span class="reportIcon">✦</span><h3>Отчёт управляющего</h3><p>Что он заметил, что уже сделал и какие решения ждут вашего подтверждения.</p><button onclick="toast('Отчёт управляющего открыт')">Открыть →</button></div>
-    </div>
-  </div>
-
-  <div id="view-settings" class="view" hidden>
-    <div class="pageTitle"><div><div class="eyebrow">ДЕМО-НАСТРОЙКИ</div><h1>Настройки</h1><p>Параметры демонстрационного кабинета.</p></div></div>
-    <div class="card settingsCard"><div class="setting"><div><b>Автопилот</b><p>Демо-режим: действия требуют подтверждения.</p></div><button class="switch" onclick="this.classList.toggle('on')"><i></i></button></div>
-      <div class="setting"><div><b>Утренний отчёт</b><p>Показывать сводку при открытии кабинета.</p></div><button class="switch on" onclick="this.classList.toggle('on')"><i></i></button></div>
-      <div class="setting"><div><b>Уведомления</b><p>Сообщать о важных изменениях бизнеса.</p></div><button class="switch on" onclick="this.classList.toggle('on')"><i></i></button></div>
-    </div>
-  </div>
-
-  <div class="ask"><div class="askIcon">✦</div><input id="question" placeholder="Что хотите узнать? Например: почему вчера было мало продаж?"><button onclick="ask()">⌁</button></div>
-</main>
-</div>
-<div class="toast" id="toast"></div>
+<div class="app">
+<aside class="sidebar"><div class="brand"><div class="mark">ЦБ</div><div><div class="brand-title">Цифровой бизнес</div><div class="brand-sub">Цифровой управляющий</div></div></div><nav class="nav"><button class="active">⌂ &nbsp;Главная</button><button>✓ &nbsp;Задачи</button><button>◯ &nbsp;Клиенты</button><button>₽ &nbsp;Финансы</button><button>↗ &nbsp;Продвижение</button><button>▤ &nbsp;Отчёты</button><button>⚙ &nbsp;Настройки</button></nav><div class="online"><span class="dot"></span>Цифровой управляющий · онлайн</div><button class="theme" id="theme">Тема <span id="themeText">Тёмная</span></button></aside>
+<main class="content"><header class="top"><div><div class="eyebrow"><b>Цифровой управляющий</b> · сегодня</div><h1>Доброе утро, Алексей.</h1><p class="lead">Сегодня у тебя 7 важных задач. Я уже проверил бизнес.</p></div><div class="date">30 сентября 2026</div></header>
+<section class="grid">
+<article class="card"><div class="pad"><div class="title">Что происходит с бизнесом</div><div class="desc">Ключевые показатели за вчера</div><div class="metrics"><div class="metric"><div class="ml">Оборот</div><div class="mv">184 000 ₽</div><div class="good">+8,4%</div></div><div class="metric"><div class="ml">Новые заявки</div><div class="mv">14</div><div class="good">−12% стоимость</div></div><div class="metric"><div class="ml">Новых клиентов</div><div class="mv">8</div><div class="ml">за вчера</div></div></div><div class="items"><div class="item"><span class="status red"></span><div class="item-main"><div class="item-title">На сайте упала конверсия на 18%</div><div class="item-text">Я нашёл изменение на странице заказа, которое произошло вчера вечером.</div><button class="action" data-demo="site">Проверить →</button></div></div><div class="item"><span class="status orange"></span><div class="item-main"><div class="item-title">Три клиента оставили отзывы</div><div class="item-text">На два отзыва нужно ответить. Я подготовил варианты ответов.</div><button class="action" data-demo="reviews">Показать →</button></div></div><div class="item"><span class="status green"></span><div class="item-main"><div class="item-title">Реклама принесла 14 заявок</div><div class="item-text">Стоимость заявки снизилась на 12%. Кампания работает лучше вчерашнего.</div></div></div></div></div></article>
+<aside class="card"><div class="pad"><div class="title">Я уже сделал</div><div class="desc">Работа без лишних уведомлений</div><div class="done"><div class="done-row"><span class="check">✓</span>Ответил на 2 отзыва</div><div class="done-row"><span class="check">✓</span>Обновил информацию на сайте</div><div class="done-row"><span class="check">✓</span>Перераспределил рекламный бюджет между двумя кампаниями</div></div><div class="needs"><b>От тебя нужно</b><div>Подтвердить изменение цены на товар X и позвонить Иванову в 14:00.</div></div><div class="title" style="margin-top:22px">Сегодня</div><div class="calendar"><div class="event"><span class="time">11:00</span><div class="event-box">Встреча с поставщиком</div></div><div class="event"><span class="time">14:00</span><div class="event-box">Позвонить Иванову</div></div><div class="event"><span class="time">17:30</span><div class="event-box">Итоги дня</div></div></div></div></aside>
+<section class="ask"><div class="ask-head"><div><div class="ask-title">Что будем делать?</div><div class="ask-sub">Спроси голосом или напиши. Я разберусь в данных и объясню причину.</div></div><div class="manager"><span class="dot"></span>Цифровой управляющий</div></div><form class="ask-form" id="askForm"><input class="ask-input" id="askInput" placeholder="Например: Почему вчера было мало продаж?"><button type="button" class="round" id="voice" aria-label="Голосовой вопрос">⌕</button><button class="send">Спросить</button></form><div class="reply" id="reply"><b>Я проверил подключённые данные.</b>Основное падение произошло из-за рекламы: трафик сохранился, но конверсия сайта снизилась с 3,8% до 2,9%. Я нашёл изменение на странице заказа, которое произошло вчера вечером. Проверить и исправить?</div><div class="confirm-wrap" id="confirmWrap" hidden><button class="confirm-btn" id="confirmBtn" type="button">Да, проверить и исправить</button></div><div class="result" id="result" hidden><b>Готово.</b> Изменение исправлено. Проверяю результат.</div></section>
+</section></main></div>
+<nav class="mobile-nav"><button class="active">⌂<br>Главная</button><button>✓<br>Задачи</button><button>◯<br>Клиенты</button><button>☰<br>Ещё</button></nav>
 <script>
-const body=document.body,theme=document.getElementById('theme');
-theme.onclick=()=>{body.classList.toggle('dark');theme.textContent=body.classList.contains('dark')?'☀':'☾'};
-const navs=[...document.querySelectorAll('.nav[data-view]')], views=[...document.querySelectorAll('.view')];
-navs.forEach(n=>n.addEventListener('click',()=>{
-  navs.forEach(x=>x.classList.remove('active')); n.classList.add('active');
-  const id=n.dataset.view;
-  views.forEach(v=>v.hidden=v.id!=='view-'+id);
-  window.scrollTo({top:0,behavior:'smooth'});
-}));
-function toast(text){const el=document.getElementById('toast');el.textContent=text;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2200)}
-function ask(){const q=document.getElementById('question');if(!q.value.trim())return;toast('Цифровой управляющий анализирует запрос…');setTimeout(()=>{toast('Нашёл причину и подготовил следующее действие.');q.value=''},900)}
+const body=document.body,theme=document.getElementById('theme'),label=document.getElementById('themeText');if(localStorage.getItem('db-theme')==='dark')body.classList.add('dark');function themeLabel(){label.textContent=body.classList.contains('dark')?'Светлая':'Тёмная'}themeLabel();theme.onclick=()=>{body.classList.toggle('dark');localStorage.setItem('db-theme',body.classList.contains('dark')?'dark':'light');themeLabel()};
+const askForm=document.getElementById('askForm'),askInput=document.getElementById('askInput'),reply=document.getElementById('reply'),confirmWrap=document.getElementById('confirmWrap'),confirmBtn=document.getElementById('confirmBtn'),result=document.getElementById('result');askForm.onsubmit=e=>{e.preventDefault();if(askInput.value.trim()){reply.classList.add('show');confirmWrap.hidden=false;result.hidden=true;}};confirmBtn.onclick=()=>{confirmWrap.hidden=true;result.hidden=false;};
+document.querySelectorAll('[data-demo]').forEach(b=>b.onclick=()=>alert(b.dataset.demo==='site'?'Демо: открываем изменение страницы заказа и проверяем конверсию.':'Демо: открываем подготовленные ответы на отзывы.'));
+const R=window.SpeechRecognition||window.webkitSpeechRecognition;if(R){const r=new R;r.lang='ru-RU';r.interimResults=false;r.maxAlternatives=1;document.getElementById('voice').onclick=()=>{try{r.start()}catch(e){}};r.onresult=e=>document.getElementById('askInput').value=e.results[0][0].transcript}
 </script>
-</body>
-</html>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(() => console.log('Цифровой управляющий: Service Worker подключён'))
+      .catch(error => console.error('Ошибка Service Worker:', error));
+  });
+}
+</script></body></html>
