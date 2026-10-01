@@ -36,6 +36,15 @@ body.dark .finance-row,body.dark .finance-stat,body.dark .finance-card{backgroun
 body.dark .finance-source-track{background:rgba(255,255,255,.08)}
 @media(max-width:900px){.finance-grid{grid-template-columns:1fr}.finance-stats{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.finance-head{align-items:flex-start}.finance-period{display:none}.finance-title{font-size:29px}.finance-stats{grid-template-columns:1fr}.finance-card{padding:18px}.finance-chart{height:180px}}
+
+.finance-health{display:flex;align-items:center;gap:13px;padding:16px 18px;margin-bottom:18px;border:1px solid rgba(39,168,102,.16);border-radius:20px;background:rgba(39,168,102,.055);box-shadow:var(--shadow)}
+.finance-health-icon{width:34px;height:34px;border-radius:12px;background:rgba(39,168,102,.12);color:var(--green);display:grid;place-items:center;font-weight:800;flex:none}
+.finance-health-main{flex:1;min-width:0;font-size:12px}.finance-health-main b{font-size:13px}.finance-health-main div{color:var(--muted);margin-top:3px;line-height:1.45}
+.finance-health-tag{font-size:11px;color:var(--green);padding:7px 10px;border-radius:11px;background:rgba(39,168,102,.1);white-space:nowrap}
+.finance-result{display:none;margin-top:10px;padding:11px 12px;border-radius:13px;background:rgba(39,168,102,.08);color:var(--muted);font-size:11px;line-height:1.45}.finance-result.show{display:block}
+.finance-clickable{width:100%;text-align:left;color:var(--text);font:inherit;cursor:pointer}.finance-clickable>span:last-child{color:var(--muted);font-size:18px}
+.finance-ai-response{margin-top:15px;padding:14px;border-radius:16px;background:rgba(114,87,255,.06);border:1px solid rgba(114,87,255,.11);font-size:12px;line-height:1.5}.finance-ai-response b{display:block;color:var(--purple);margin-bottom:4px}.finance-ai-response div{color:var(--muted)}
+@media(max-width:600px){.finance-health{align-items:flex-start}.finance-health-tag{display:none}}
 </style>
 </head>
 <body>
@@ -72,46 +81,61 @@ body.dark .finance-source-track{background:rgba(255,255,255,.08)}
   <div class="finance-head">
     <div>
       <div class="finance-title">Финансы</div>
-      <div class="finance-sub">Я слежу за деньгами и объясняю, что изменилось в бизнесе.</div>
+      <div class="finance-sub">Я слежу за деньгами и объясняю, что происходит с бизнесом.</div>
     </div>
-    <button class="finance-period" type="button">Последние 30 дней ▾</button>
+    <select class="finance-period" id="financePeriod" aria-label="Период">
+      <option value="7">Последние 7 дней</option>
+      <option value="30" selected>Последние 30 дней</option>
+      <option value="90">Последние 90 дней</option>
+    </select>
   </div>
 
-  <div class="finance-stats">
-    <div class="finance-stat"><span>Оборот</span><b>4 860 000 ₽</b><div class="finance-change finance-good">↑ 8,4% к прошлому периоду</div></div>
-    <div class="finance-stat"><span>Расходы</span><b>3 594 200 ₽</b><div class="finance-change finance-warn">↑ 5,1% к прошлому периоду</div></div>
-    <div class="finance-stat"><span>Прибыль</span><b>1 265 800 ₽</b><div class="finance-change finance-good">↑ 12,7% к прошлому периоду</div></div>
-    <div class="finance-stat"><span>Денег сейчас</span><b>2 184 000 ₽</b><div class="finance-change finance-good">Достаточно для текущих обязательств</div></div>
+  <div class="finance-health">
+    <div class="finance-health-icon">✓</div>
+    <div class="finance-health-main">
+      <b>Финансовое состояние: стабильно</b>
+      <div id="financeHealthText">Оборот и прибыль растут быстрее расходов. Денежного запаса достаточно для текущих обязательств.</div>
+    </div>
+    <span class="finance-health-tag">Низкий риск</span>
+  </div>
+
+  <div class="finance-stats" id="financeStats">
+    <div class="finance-stat"><span>Оборот</span><b data-finance="revenue">4 860 000 ₽</b><div class="finance-change finance-good">↑ 8,4% к прошлому периоду</div></div>
+    <div class="finance-stat"><span>Расходы</span><b data-finance="expenses">3 594 200 ₽</b><div class="finance-change finance-warn">↑ 5,1% к прошлому периоду</div></div>
+    <div class="finance-stat"><span>Прибыль</span><b data-finance="profit">1 265 800 ₽</b><div class="finance-change finance-good">↑ 12,7% к прошлому периоду</div></div>
+    <div class="finance-stat"><span>Денег сейчас</span><b data-finance="cash">2 184 000 ₽</b><div class="finance-change finance-good">Достаточно для обязательств</div></div>
   </div>
 
   <div class="finance-grid">
     <article class="finance-card">
       <div class="finance-card-title">Движение денег</div>
       <div class="finance-card-sub">Выручка и расходы за последние 7 дней</div>
-      <div class="finance-chart">
-        <div class="finance-bar-wrap"><span class="finance-bar" style="height:62%"></span><span class="finance-bar expense" style="height:42%"></span></div>
-        <div class="finance-bar-wrap"><span class="finance-bar" style="height:76%"></span><span class="finance-bar expense" style="height:51%"></span></div>
-        <div class="finance-bar-wrap"><span class="finance-bar" style="height:69%"></span><span class="finance-bar expense" style="height:48%"></span></div>
-        <div class="finance-bar-wrap"><span class="finance-bar" style="height:83%"></span><span class="finance-bar expense" style="height:55%"></span></div>
-        <div class="finance-bar-wrap"><span class="finance-bar" style="height:71%"></span><span class="finance-bar expense" style="height:52%"></span></div>
-        <div class="finance-bar-wrap"><span class="finance-bar" style="height:91%"></span><span class="finance-bar expense" style="height:61%"></span></div>
-        <div class="finance-bar-wrap"><span class="finance-bar" style="height:86%"></span><span class="finance-bar expense" style="height:58%"></span></div>
-      </div>
-      <div class="finance-labels"><span class="finance-label">24</span><span class="finance-label">25</span><span class="finance-label">26</span><span class="finance-label">27</span><span class="finance-label">28</span><span class="finance-label">29</span><span class="finance-label">30</span></div>
+      <div class="finance-chart" id="financeChart"></div>
+      <div class="finance-labels" id="financeLabels"></div>
       <div class="finance-legend"><span><i></i>Выручка</span><span><i class="exp"></i>Расходы</span></div>
-      <div class="finance-insight"><b>Что изменилось</b><div>Вчера оборот составил 184 000 ₽. Прибыль выросла на 8%, хотя расходы на рекламу увеличились на 14%. Стоимость заявки при этом снизилась на 12%, поэтому увеличение рекламного бюджета пока окупается.</div></div>
+
+      <div class="finance-insight">
+        <b>Что изменилось</b>
+        <div id="financeInsight">Вчера оборот составил 184 000 ₽. Прибыль выросла на 8%, хотя расходы на рекламу увеличились на 14%. Стоимость заявки снизилась на 12%, поэтому дополнительный бюджет пока окупается.</div>
+      </div>
     </article>
 
     <aside class="finance-card">
       <div class="finance-card-title">Куда уходят деньги</div>
       <div class="finance-card-sub">Основные расходы за 30 дней</div>
-      <div class="finance-list">
+      <div class="finance-list" id="expenseList">
         <div class="finance-row"><span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Реклама</div><div class="finance-row-text">Google / Яндекс / соцсети</div></div><div class="finance-row-value">684 000 ₽</div></div>
         <div class="finance-row"><span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Закупки</div><div class="finance-row-text">Товары и материалы</div></div><div class="finance-row-value">1 420 000 ₽</div></div>
         <div class="finance-row"><span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Зарплаты</div><div class="finance-row-text">Команда</div></div><div class="finance-row-value">920 000 ₽</div></div>
         <div class="finance-row"><span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Прочее</div><div class="finance-row-text">Сервисы, аренда, связь</div></div><div class="finance-row-value">570 200 ₽</div></div>
       </div>
-      <div class="finance-warning"><b>Внимание</b><div>Расходы на рекламу выросли быстрее остальных расходов. Я пока не предлагаю сокращать бюджет: стоимость заявки снижается. Проверю окупаемость по каждому каналу.</div><button class="finance-action" type="button" id="financeCheck">Проверить окупаемость →</button></div>
+
+      <div class="finance-warning">
+        <b>Что я заметил</b>
+        <div>Расходы на рекламу растут быстрее остальных. Но стоимость заявки снижается на 12%, поэтому я не предлагаю сокращать бюджет вслепую.</div>
+        <button class="finance-action" type="button" id="financeCheck">Проверить окупаемость →</button>
+        <div class="finance-result" id="financeResult"></div>
+      </div>
     </aside>
 
     <article class="finance-card">
@@ -126,12 +150,22 @@ body.dark .finance-source-track{background:rgba(255,255,255,.08)}
     </article>
 
     <article class="finance-card">
-      <div class="finance-card-title">Что сделать сейчас</div>
-      <div class="finance-card-sub">Решения, которые требуют твоего внимания</div>
+      <div class="finance-card-title">Финансовый мозг</div>
+      <div class="finance-card-sub">Что требует внимания прямо сейчас</div>
       <div class="finance-list">
-        <div class="finance-row"><span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Проверить окупаемость рекламы</div><div class="finance-row-text">Расходы растут, но CPL снижается.</div></div></div>
-        <div class="finance-row"><span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Подготовить прогноз на 14 дней</div><div class="finance-row-text">С учётом текущих продаж и обязательств.</div></div></div>
-        <div class="finance-row"><span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Проверить крупные платежи</div><div class="finance-row-text">Ближайшие обязательства ещё не влияют на остаток.</div></div></div>
+        <button class="finance-row finance-clickable" type="button" data-finance-action="ads">
+          <span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Проверить окупаемость рекламы</div><div class="finance-row-text">Расходы растут, но CPL снижается.</div></div><span>›</span>
+        </button>
+        <button class="finance-row finance-clickable" type="button" data-finance-action="forecast">
+          <span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Подготовить прогноз на 14 дней</div><div class="finance-row-text">С учётом текущих продаж и обязательств.</div></div><span>›</span>
+        </button>
+        <button class="finance-row finance-clickable" type="button" data-finance-action="payments">
+          <span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Проверить крупные платежи</div><div class="finance-row-text">Ближайшие обязательства ещё не влияют на остаток.</div></div><span>›</span>
+        </button>
+      </div>
+      <div class="finance-ai-response" id="financeAiResponse">
+        <b>Спроси меня о деньгах</b>
+        <div>Например: «Почему прибыль выросла?» или «Хватит ли денег на ближайшие две недели?»</div>
       </div>
     </article>
   </div>
@@ -149,8 +183,46 @@ function showSection(section){const isTasks=section==='tasks',isClients=section=
 sectionButtons.forEach(b=>b.addEventListener('click',()=>showSection(b.dataset.section)));
 document.getElementById('tasksBack')?.addEventListener('click',()=>showSection('home'));
 document.getElementById('clientsBack')?.addEventListener('click',()=>showSection('home'));
-const financeCheck=document.getElementById('financeCheck');
-financeCheck?.addEventListener('click',()=>{financeCheck.disabled=true;financeCheck.textContent='Проверяю данные…';setTimeout(()=>{financeCheck.textContent='Готово — проверка запущена';},700)});
+const financeData={
+  revenue:4860000, expenses:3594200, profit:1265800, cash:2184000,
+  days:[{d:'24',r:62,e:42},{d:'25',r:76,e:51},{d:'26',r:69,e:48},{d:'27',r:83,e:55},{d:'28',r:71,e:52},{d:'29',r:91,e:61},{d:'30',r:86,e:58}]
+};
+const money=n=>new Intl.NumberFormat('ru-RU').format(n)+' ₽';
+function renderFinance(){
+  const chart=document.getElementById('financeChart'),labels=document.getElementById('financeLabels');
+  if(!chart||!labels)return;
+  chart.innerHTML=financeData.days.map(x=>`<div class="finance-bar-wrap"><span class="finance-bar" style="height:${x.r}%"></span><span class="finance-bar expense" style="height:${x.e}%"></span></div>`).join('');
+  labels.innerHTML=financeData.days.map(x=>`<span class="finance-label">${x.d}</span>`).join('');
+}
+renderFinance();
+
+const financeCheck=document.getElementById('financeCheck'),financeResult=document.getElementById('financeResult');
+financeCheck?.addEventListener('click',()=>{
+  financeCheck.disabled=true; financeCheck.textContent='Анализирую рекламу…';
+  setTimeout(()=>{
+    financeCheck.textContent='Анализ завершён ✓';
+    financeResult.innerHTML='<b>Реклама окупается.</b> CPL снизился на 12%, а дополнительный расход пока компенсируется ростом заявок. Я бы не сокращал бюджет — сначала проверил ROAS по каждому каналу.';
+    financeResult.classList.add('show');
+  },900);
+});
+
+document.querySelectorAll('[data-finance-action]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const response=document.getElementById('financeAiResponse');
+    const type=btn.dataset.financeAction;
+    const data={
+      ads:'Реклама: расходы выросли на 14%, но стоимость заявки снизилась на 12%. Следующий шаг — сравнить выручку и маржу по каждому рекламному каналу, прежде чем менять бюджет.',
+      forecast:'Прогноз: при сохранении текущего темпа продаж денежного запаса достаточно для ближайших обязательств. Я бы отдельно учёл закупку товара X и крупные платежи ближайших 14 дней.',
+      payments:'Платежи: текущего остатка достаточно, но финансовый мозг должен заранее учитывать обязательства, а не ждать снижения остатка. Следующий шаг — собрать все платежи на 14 дней.'
+    };
+    response.innerHTML='<b>Я проверил данные.</b><div>'+data[type]+'</div>';
+  });
+});
+
+document.getElementById('financePeriod')?.addEventListener('change',e=>{
+  const sub=document.querySelector('.finance-sub');
+  if(sub)sub.textContent=e.target.value==='7'?'Я слежу за деньгами за последнюю неделю и объясняю изменения.':e.target.value==='90'?'Я анализирую финансовую картину за последние 90 дней.':'Я слежу за деньгами и объясняю, что происходит с бизнесом.';
+});
 
 document.querySelectorAll('[data-demo]').forEach(b=>b.onclick=()=>alert(b.dataset.demo==='site'?'Демо: открываем изменение страницы заказа и проверяем конверсию.':'Демо: открываем подготовленные ответы на отзывы.'));
 const confirmAction=document.getElementById('confirmAction'),laterAction=document.getElementById('laterAction'),result=document.getElementById('result');
