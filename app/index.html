@@ -161,6 +161,80 @@ button:focus-visible,input:focus-visible,select:focus-visible{
   background:rgba(22,119,255,.18);
 }
 
+
+/* Sales v2 — premium management experience */
+.sales-hero{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;margin-bottom:24px}
+.sales-hero-copy h2{font-size:42px;letter-spacing:-1.8px;margin:7px 0 8px;line-height:1.05}
+.sales-hero-copy p{margin:0;max-width:680px;color:var(--muted);font-size:16px;line-height:1.55}
+.sales-live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#32c759;box-shadow:0 0 0 5px rgba(50,199,89,.12);vertical-align:middle;margin:0 4px}
+.sales-hero-controls{display:flex;gap:10px;align-items:center}
+.sales-ask-btn,.sales-primary,.sales-wide-action,.sales-text-action{border:0;cursor:pointer;font:inherit}
+.sales-ask-btn{padding:12px 15px;border-radius:14px;background:rgba(0,0,0,.045);color:var(--text);font-weight:700}
+.sales-ask-btn span{opacity:.45;font-size:11px;margin-left:8px}
+.sales-command{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;padding:26px;border-radius:28px;background:linear-gradient(135deg,rgba(255,255,255,.92),rgba(246,247,251,.88));border:1px solid rgba(0,0,0,.07);box-shadow:0 22px 60px rgba(30,35,50,.09);overflow:hidden}
+.sales-command:after{content:"";position:absolute;width:280px;height:280px;border-radius:50%;right:-90px;top:-150px;background:radial-gradient(circle,rgba(76,111,255,.14),transparent 65%);pointer-events:none}
+.sales-command-icon{width:52px;height:52px;border-radius:17px;display:grid;place-items:center;background:linear-gradient(145deg,#111827,#4b5563);color:white;font-size:22px;box-shadow:0 9px 22px rgba(17,24,39,.22)}
+.sales-command-label{font-size:11px;text-transform:uppercase;letter-spacing:.09em;font-weight:800;color:#697386}
+.sales-command h3{font-size:21px;letter-spacing:-.5px;margin:4px 0 6px}
+.sales-command p{margin:0;color:var(--muted);line-height:1.5}
+.sales-command-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.sales-command-meta span{font-size:12px;font-weight:700;padding:7px 10px;border-radius:999px;background:rgba(0,0,0,.045)}
+.sales-primary{position:relative;z-index:1;white-space:nowrap;padding:13px 17px;border-radius:14px;background:#111827;color:#fff;font-weight:800;box-shadow:0 9px 20px rgba(17,24,39,.18);transition:.2s}
+.sales-primary:hover{transform:translateY(-1px);box-shadow:0 13px 26px rgba(17,24,39,.22)}
+.sales-primary span{margin-left:8px;opacity:.7}
+.sales-tip-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0 18px}
+.sales-tip{display:flex;gap:10px;align-items:flex-start;padding:13px 15px;border-radius:18px;background:rgba(255,255,255,.64);border:1px solid rgba(0,0,0,.055)}
+.sales-tip>span{font-size:17px}
+.sales-tip b{display:block;font-size:12px;margin-bottom:3px}
+.sales-tip small{display:block;color:var(--muted);font-size:11px;line-height:1.4}
+.sales-stats-premium{margin-bottom:18px}
+.sales-stat{position:relative}
+.sales-stat span i{display:inline-grid;place-items:center;width:15px;height:15px;border-radius:50%;background:rgba(0,0,0,.06);font-style:normal;font-size:9px;cursor:help}
+.sales-stat small{display:block;color:var(--muted);font-size:11px;margin-top:2px}
+.sales-stat[data-tip]:hover:after{content:attr(data-tip);position:absolute;left:12px;top:calc(100% - 3px);z-index:5;width:190px;padding:9px 11px;border-radius:12px;background:#111827;color:#fff;font-size:11px;line-height:1.35;box-shadow:0 10px 25px rgba(0,0,0,.18)}
+.sales-grid-v2{align-items:stretch}
+.sales-card-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.mini-help{border:0;width:27px;height:27px;border-radius:50%;background:rgba(0,0,0,.045);color:var(--muted);cursor:pointer;font-weight:800}
+.sales-funnel-v2{margin-top:14px}
+.sales-funnel-v2 .sales-funnel-row{position:relative;border:0;width:100%;text-align:left;cursor:pointer;transition:.2s}
+.sales-funnel-v2 .sales-funnel-row:hover{transform:translateX(3px);background:rgba(0,0,0,.025)}
+.sales-funnel-v2 .sales-funnel-row em{position:relative;z-index:2;font-style:normal;font-size:10px;color:var(--muted);font-weight:800}
+.sales-funnel-v2 .is-final .sales-funnel-bar{background:linear-gradient(90deg,#32c759,#20a846)}
+.sales-explain{display:flex;gap:10px;margin-top:14px;padding:13px;border-radius:16px;background:rgba(255,149,0,.075)}
+.sales-explain>span{font-weight:900;color:#ff9500}.sales-explain b{font-size:12px}.sales-explain p{margin:3px 0 0;color:var(--muted);font-size:11px;line-height:1.4}
+.sales-recovery-card{background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(248,249,252,.86))}
+.recovery-count{display:grid;place-items:center;width:30px;height:30px;border-radius:10px;background:rgba(255,59,48,.1);color:#ff3b30;font-weight:900}
+.recovery-total{display:flex;align-items:baseline;gap:8px;margin:16px 0}.recovery-total b{font-size:25px;letter-spacing:-.7px}.recovery-total span{color:var(--muted);font-size:11px}
+.recovery-list{display:grid;gap:8px}.recovery-row{display:grid;grid-template-columns:34px 1fr auto;gap:9px;align-items:center;padding:9px;border-radius:14px;background:rgba(0,0,0,.027)}
+.avatar{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:#eef1f7;font-size:10px;font-weight:900}
+.recovery-row b{display:block;font-size:12px}.recovery-row small{display:block;color:var(--muted);font-size:10px;margin-top:2px}
+.recovery-row button{border:0;background:transparent;color:#1677ff;font-weight:800;font-size:11px;cursor:pointer}
+.sales-wide-action{width:100%;margin-top:11px;padding:11px;border-radius:13px;background:#111827;color:#fff;font-weight:800}
+.sales-source-v2 .sales-source-row{padding:9px 0}
+.source-best{color:#32a852!important;font-weight:700}
+.sales-text-action{background:transparent;color:#1677ff;font-weight:800;font-size:12px;padding:10px 0 0}
+.sales-manager-card{background:linear-gradient(145deg,#111827,#202938);color:#fff;position:relative;overflow:hidden}
+.sales-manager-card .sales-card-sub,.sales-manager-card .sales-action-response div{color:rgba(255,255,255,.68)}
+.manager-orb{position:absolute;right:22px;top:18px;width:44px;height:44px;border-radius:15px;display:grid;place-items:center;background:rgba(255,255,255,.09);font-size:20px}
+.sales-manager-card .sales-card-title{color:#fff}
+.manager-recommendation{display:grid;gap:8px;margin:18px 0}
+.manager-step{display:flex;gap:10px;align-items:center;padding:10px;border-radius:13px;background:rgba(255,255,255,.07);font-size:12px}
+.manager-step span{display:grid;place-items:center;width:23px;height:23px;border-radius:8px;background:rgba(255,255,255,.13);font-size:10px}
+.manager-main-action{width:100%;background:#fff;color:#111827;box-shadow:none}
+.sales-action-response{margin-top:12px;padding:11px 12px;border-radius:13px;background:rgba(255,255,255,.06);font-size:11px}
+.sales-action-response b{font-size:11px}
+.sales-bottom-note{display:flex;align-items:center;gap:10px;margin-top:14px;padding:13px 16px;border-radius:17px;background:rgba(255,255,255,.62);border:1px solid rgba(0,0,0,.055);color:var(--muted);font-size:11px}
+.sales-bottom-note>span{width:23px;height:23px;border-radius:8px;background:rgba(0,0,0,.05);display:grid;place-items:center;font-weight:900;color:var(--text)}
+.sales-bottom-note b{color:var(--text)}.sales-bottom-note button{margin-left:auto;border:0;background:transparent;color:#1677ff;font-weight:800;cursor:pointer}
+body.dark .sales-command,body.dark .sales-tip,body.dark .sales-bottom-note{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.08)}
+body.dark .sales-command:after{opacity:.45}
+body.dark .sales-ask-btn,body.dark .sales-tip-row .sales-tip,.sales-stat span i,body.dark .mini-help,body.dark .recovery-row,body.dark .avatar{background:rgba(255,255,255,.07)}
+body.dark .sales-primary,body.dark .sales-wide-action{background:#fff;color:#111827}
+body.dark .sales-manager-card .sales-primary{background:#fff;color:#111827}
+body.dark .sales-bottom-note>span{background:rgba(255,255,255,.07)}
+@media(max-width:900px){.sales-hero{align-items:flex-start;flex-direction:column}.sales-hero-controls{width:100%}.sales-ask-btn{margin-left:auto}.sales-command{grid-template-columns:auto 1fr}.sales-command .sales-primary{grid-column:1/-1;width:100%}.sales-tip-row{grid-template-columns:1fr}.sales-grid-v2{grid-template-columns:1fr}}
+@media(max-width:600px){.sales-hero-copy h2{font-size:32px}.sales-hero-controls{display:none}.sales-command{padding:18px;border-radius:22px}.sales-command-icon{width:43px;height:43px;border-radius:14px}.sales-command h3{font-size:18px}.sales-command-meta span{font-size:10px}.sales-bottom-note{align-items:flex-start}.sales-bottom-note button{display:none}}
+
 </style>
 </head>
 <body>
@@ -194,96 +268,115 @@ button:focus-visible,input:focus-visible,select:focus-visible{
 </section>
 
 
+
 <section class="sales-page" id="salesPage">
-  <div class="sales-head">
-    <div>
-      <div class="sales-title">Продажи</div>
-      <div class="sales-sub">Я связываю заявки, клиентов, источники и деньги, чтобы показать, где бизнес зарабатывает и где теряет продажи.</div>
+  <div class="sales-hero">
+    <div class="sales-hero-copy">
+      <div class="eyebrow">Продажи · <span class="sales-live-dot"></span> данные обновлены</div>
+      <h2>Продажи под контролем.</h2>
+      <p>Я собрал всё важное в одном месте и уже нашёл, где сегодня можно вернуть деньги.</p>
     </div>
-    <select class="sales-period" id="salesPeriod" aria-label="Период">
-      <option>Сегодня</option><option selected>Последние 7 дней</option><option>Последние 30 дней</option>
-    </select>
-  </div>
-
-  <div class="sales-health">
-    <div class="sales-health-icon">◈</div>
-    <div class="sales-health-main">
-      <b>Главный вывод по продажам</b>
-      <div>Заявок стало больше, но основная потеря сейчас происходит после отправки предложения. Я нашёл клиентов, которым не сделали повторный контакт.</div>
+    <div class="sales-hero-controls">
+      <select class="sales-period" id="salesPeriod" aria-label="Период">
+        <option>Сегодня</option><option selected>Последние 7 дней</option><option>Последние 30 дней</option>
+      </select>
+      <button class="sales-ask-btn" type="button" id="salesAskBtn">Спросить меня <span>⌘K</span></button>
     </div>
-    <span class="sales-tag">Анализ готов</span>
   </div>
 
-  <div class="sales-stats">
-    <div class="sales-stat"><span>Новые заявки</span><b>42</b><div class="sales-change sales-good">↑ 18% к прошлому периоду</div></div>
-    <div class="sales-stat"><span>Сделки</span><b>11</b><div class="sales-change sales-warn">− 2 к прошлому периоду</div></div>
-    <div class="sales-stat"><span>Выручка</span><b>184 000 ₽</b><div class="sales-change sales-good">↑ 8,4% за день</div></div>
-    <div class="sales-stat"><span>Средний чек</span><b>16 700 ₽</b><div class="sales-change sales-good">↑ 5,2%</div></div>
+  <div class="sales-command">
+    <div class="sales-command-icon">◈</div>
+    <div class="sales-command-copy">
+      <div class="sales-command-label">Что происходит</div>
+      <h3>Заявок больше, но 8 клиентов остановились после предложения.</h3>
+      <p>Похоже, проблема сейчас не в рекламе. Клиенты уже проявили интерес — им просто не сделали следующий шаг.</p>
+      <div class="sales-command-meta">
+        <span>42 заявки</span><span>11 продаж</span><span>184 000 ₽ выручки</span>
+      </div>
+    </div>
+    <button class="sales-primary" id="salesAnalyze" type="button">Показать, кого вернуть <span>→</span></button>
   </div>
 
-  <div class="sales-grid">
-    <article class="sales-card">
-      <div class="sales-card-title">Воронка продаж</div>
-      <div class="sales-card-sub">Обращение → квалификация → предложение → продажа</div>
-      <div class="sales-funnel">
-        <div class="sales-funnel-row"><span class="sales-funnel-bar" style="width:100%"></span><div class="sales-funnel-main"><span>Обращения</span><b>42</b></div></div>
-        <div class="sales-funnel-row"><span class="sales-funnel-bar" style="width:64%"></span><div class="sales-funnel-main"><span>Квалифицированы</span><b>27</b></div></div>
-        <div class="sales-funnel-row"><span class="sales-funnel-bar" style="width:45%"></span><div class="sales-funnel-main"><span>Предложения</span><b>19</b></div></div>
-        <div class="sales-funnel-row"><span class="sales-funnel-bar" style="width:26%"></span><div class="sales-funnel-main"><span>Продажи</span><b>11</b></div></div>
-      </div>
+  <div class="sales-tip-row">
+    <div class="sales-tip"><span>💡</span><div><b>Простыми словами</b><small>Воронка — это путь клиента от первого сообщения до оплаты.</small></div></div>
+    <div class="sales-tip"><span>⚡</span><div><b>Главное сейчас</b><small>Не ищем больше заявок — сначала забираем уже готовые.</small></div></div>
+    <div class="sales-tip"><span>✓</span><div><b>Можно делегировать</b><small>Я могу подготовить ответы, задачи и предложения.</small></div></div>
+  </div>
 
-      <div class="sales-loss">
-        <b>🔴 Где теряем клиентов</b>
-        <div>8 клиентов получили предложение, но не купили. Самая частая проблема — после предложения не было повторного контакта.</div>
-      </div>
+  <div class="sales-stats sales-stats-premium">
+    <div class="sales-stat sales-stat-featured" data-tip="Все новые обращения за выбранный период."><span>Новые заявки <i>?</i></span><b>42</b><div class="sales-change sales-good">↑ 18%</div><small>к прошлому периоду</small></div>
+    <div class="sales-stat" data-tip="Заявки, которые дошли до реальной сделки."><span>Продажи <i>?</i></span><b>11</b><div class="sales-change sales-warn">− 2</div><small>к прошлому периоду</small></div>
+    <div class="sales-stat" data-tip="Деньги от закрытых продаж за выбранный период."><span>Выручка <i>?</i></span><b>184 000 ₽</b><div class="sales-change sales-good">↑ 8,4%</div><small>за день</small></div>
+    <div class="sales-stat" data-tip="Средняя сумма одной закрытой продажи."><span>Средний чек <i>?</i></span><b>16 700 ₽</b><div class="sales-change sales-good">↑ 5,2%</div><small>к прошлому периоду</small></div>
+  </div>
 
-      <div class="sales-manager-analysis">
-        <b>◈ Анализ цифрового управляющего</b>
-        <div>Количество обращений растёт, поэтому проблема сейчас не в привлечении. Если вернуть повторный контакт с горячими клиентами, конверсия предложения в продажу может восстановиться.</div>
-        <button class="sales-action" id="salesAnalyze">Проверить потерянные сделки →</button>
-        <div class="sales-result" id="salesResult"></div>
+  <div class="sales-grid sales-grid-v2">
+    <article class="sales-card sales-funnel-card">
+      <div class="sales-card-head">
+        <div><div class="sales-card-title">Путь клиента</div><div class="sales-card-sub">Где люди сейчас находятся</div></div>
+        <button class="mini-help" type="button" title="Нажми на этап — я объясню, что он значит">?</button>
       </div>
+      <div class="sales-funnel sales-funnel-v2">
+        <button class="sales-funnel-row" type="button" data-funnel="42 заявки">
+          <span class="sales-funnel-bar" style="width:100%"></span><div class="sales-funnel-main"><span>Обращение</span><b>42</b></div><em>100%</em>
+        </button>
+        <button class="sales-funnel-row" type="button" data-funnel="27 квалифицированных клиентов">
+          <span class="sales-funnel-bar" style="width:64%"></span><div class="sales-funnel-main"><span>Подходят</span><b>27</b></div><em>64%</em>
+        </button>
+        <button class="sales-funnel-row" type="button" data-funnel="19 отправленных предложений">
+          <span class="sales-funnel-bar" style="width:45%"></span><div class="sales-funnel-main"><span>Предложение</span><b>19</b></div><em>45%</em>
+        </button>
+        <button class="sales-funnel-row is-final" type="button" data-funnel="11 продаж">
+          <span class="sales-funnel-bar" style="width:26%"></span><div class="sales-funnel-main"><span>Оплата</span><b>11</b></div><em>26%</em>
+        </button>
+      </div>
+      <div class="sales-explain"><span>↳</span><div><b>Самое слабое место</b><p>После предложения пропадает слишком много клиентов. Здесь сейчас больше всего денег для возврата.</p></div></div>
     </article>
 
-    <aside class="sales-card">
-      <div class="sales-card-title">Источники продаж</div>
-      <div class="sales-card-sub">Откуда пришли обращения и сколько денег они принесли</div>
-      <div class="sales-source-list">
-        <div class="sales-source-row"><div class="sales-source-icon">WEB</div><div class="sales-source-main"><div class="sales-source-name">Сайт</div><div class="sales-source-meta">12 заявок · 3 продажи</div></div><div class="sales-source-value"><b>226 000 ₽</b><div>самый высокий чек</div></div></div>
+    <article class="sales-card sales-recovery-card">
+      <div class="sales-card-head">
+        <div><div class="sales-card-title">Можно вернуть сегодня</div><div class="sales-card-sub">Клиенты уже были близки к покупке</div></div>
+        <span class="recovery-count">8</span>
+      </div>
+      <div class="recovery-total"><b>до 74 000 ₽</b><span>потенциальной выручки</span></div>
+      <div class="recovery-list">
+        <div class="recovery-row"><div class="avatar">МС</div><div><b>Мария С.</b><small>Предложение · 18 500 ₽ · вчера</small></div><button data-sales-client="remind">Напомнить</button></div>
+        <div class="recovery-row"><div class="avatar">АК</div><div><b>Алексей К.</b><small>Новая заявка · сегодня 08:42</small></div><button data-sales-client="reply">Ответить</button></div>
+        <div class="recovery-row"><div class="avatar">АИ</div><div><b>Андрей И.</b><small>Просил предложение · горячий</small></div><button data-sales-client="offer">Предложение</button></div>
+      </div>
+      <button class="sales-wide-action" id="salesRecoveryBtn" type="button">Разобрать всех 8 клиентов →</button>
+    </article>
+
+    <article class="sales-card">
+      <div class="sales-card-head">
+        <div><div class="sales-card-title">Откуда приходят деньги</div><div class="sales-card-sub">Не просто заявки — реальные продажи</div></div>
+      </div>
+      <div class="sales-source-list sales-source-v2">
+        <div class="sales-source-row"><div class="sales-source-icon">TG</div><div class="sales-source-main"><div class="sales-source-name">Telegram</div><div class="sales-source-meta">7 заявок · 3 продажи</div></div><div class="sales-source-value"><b>46 000 ₽</b><div class="source-best">лучше всего</div></div></div>
+        <div class="sales-source-row"><div class="sales-source-icon">WEB</div><div class="sales-source-main"><div class="sales-source-name">Сайт</div><div class="sales-source-meta">12 заявок · 3 продажи</div></div><div class="sales-source-value"><b>226 000 ₽</b><div>высокий чек</div></div></div>
         <div class="sales-source-row"><div class="sales-source-icon">VK</div><div class="sales-source-main"><div class="sales-source-name">VK</div><div class="sales-source-meta">9 заявок · 2 продажи</div></div><div class="sales-source-value"><b>31 000 ₽</b><div>8,1% в продажу</div></div></div>
-        <div class="sales-source-row"><div class="sales-source-icon">TG</div><div class="sales-source-main"><div class="sales-source-name">Telegram</div><div class="sales-source-meta">7 заявок · 3 продажи</div></div><div class="sales-source-value"><b>46 000 ₽</b><div>лучшая конверсия</div></div></div>
-        <div class="sales-source-row"><div class="sales-source-icon">MAX</div><div class="sales-source-main"><div class="sales-source-name">MAX</div><div class="sales-source-meta">5 заявок · 1 продажа</div></div><div class="sales-source-value"><b>15 000 ₽</b><div>данные подключены</div></div></div>
-        <div class="sales-source-row"><div class="sales-source-icon">OK</div><div class="sales-source-main"><div class="sales-source-name">Одноклассники</div><div class="sales-source-meta">5 заявок · 1 продажа</div></div><div class="sales-source-value"><b>12 000 ₽</b><div>стабильный канал</div></div></div>
-        <div class="sales-source-row"><div class="sales-source-icon">ДЗ</div><div class="sales-source-main"><div class="sales-source-name">Дзен</div><div class="sales-source-meta">4 заявки · 1 продажа</div></div><div class="sales-source-value"><b>18 000 ₽</b><div>контентный канал</div></div></div>
+        <div class="sales-source-row"><div class="sales-source-icon">MAX</div><div class="sales-source-main"><div class="sales-source-name">MAX</div><div class="sales-source-meta">5 заявок · 1 продажа</div></div><div class="sales-source-value"><b>15 000 ₽</b><div>подключён</div></div></div>
       </div>
-
-      <div class="sales-finance-link">
-        <b>💰 Связь с Финансами</b>
-        <div>Каждая закрытая сделка добавляет выручку. Сейчас продажи из подключённых источников формируют 184 000 ₽ оборота за вчера.</div>
-        <button type="button" id="salesFinanceBtn">Открыть Финансы →</button>
-      </div>
-    </aside>
-
-    <article class="sales-card">
-      <div class="sales-card-title">Клиенты, которым нужно внимание</div>
-      <div class="sales-card-sub">Горячие заявки и клиенты, ожидающие следующего действия</div>
-      <div class="sales-client-list">
-        <div class="sales-client-row"><div class="sales-source-icon">АК</div><div class="sales-client-main"><div class="sales-client-name">Алексей К.</div><div class="sales-client-meta">Новая заявка · доставка · сегодня 08:42</div></div><span class="sales-client-status hot">Горячий</span><button class="sales-client-action" type="button" data-sales-client="reply">Ответить</button></div>
-        <div class="sales-client-row"><div class="sales-source-icon">МС</div><div class="sales-client-main"><div class="sales-client-name">Мария С.</div><div class="sales-client-meta">Предложение отправлено вчера · 18 500 ₽</div></div><span class="sales-client-status">Ждёт ответа</span><button class="sales-client-action" type="button" data-sales-client="remind">Напомнить</button></div>
-        <div class="sales-client-row"><div class="sales-source-icon">АИ</div><div class="sales-client-main"><div class="sales-client-name">Андрей И.</div><div class="sales-client-meta">Запросил коммерческое предложение</div></div><span class="sales-client-status hot">Горячий</span><button class="sales-client-action" type="button" data-sales-client="offer">Предложение</button></div>
-      </div>
+      <button class="sales-text-action" id="salesFinanceBtn" type="button">Посмотреть связь с деньгами →</button>
     </article>
 
-    <article class="sales-card">
-      <div class="sales-card-title">Что сделать сейчас</div>
-      <div class="sales-card-sub">Действия цифрового управляющего</div>
-      <div class="sales-actions">
-        <button class="sales-action-row" type="button" data-sales-action="remind"><span class="sales-action-icon">↗</span><div class="sales-action-main"><div class="sales-action-title">Напомнить клиентам</div><div class="sales-action-text">3 клиента ждут следующего контакта</div></div><span>›</span></button>
-        <button class="sales-action-row" type="button" data-sales-action="task"><span class="sales-action-icon">✓</span><div class="sales-action-main"><div class="sales-action-title">Создать задачу</div><div class="sales-action-text">Позвонить горячим клиентам сегодня</div></div><span>›</span></button>
-        <button class="sales-action-row" type="button" data-sales-action="offer"><span class="sales-action-icon">₽</span><div class="sales-action-main"><div class="sales-action-title">Подготовить предложение</div><div class="sales-action-text">Для клиента, который готов купить</div></div><span>›</span></button>
+    <article class="sales-card sales-manager-card">
+      <div class="manager-orb">◈</div>
+      <div class="sales-card-title">Я бы сделал вот что</div>
+      <div class="sales-card-sub">Без сложных отчётов — один понятный следующий шаг.</div>
+      <div class="manager-recommendation">
+        <div class="manager-step"><span>1</span><b>Вернуть 3 горячих клиентов</b></div>
+        <div class="manager-step"><span>2</span><b>Проверить ещё 5 предложений</b></div>
+        <div class="manager-step"><span>3</span><b>Только потом увеличивать рекламу</b></div>
       </div>
-      <div class="sales-action-response" id="salesActionResponse"><b>Цифровой управляющий</b><div>Выбери действие — я покажу, что именно будет сделано.</div></div>
+      <button class="sales-primary manager-main-action" id="salesManagerAction" type="button">Начать с первого шага <span>→</span></button>
+      <div class="sales-action-response" id="salesActionResponse"><b>Цифровой управляющий</b><div>Я подготовлю всё необходимое и покажу перед отправкой.</div></div>
     </article>
+  </div>
+
+  <div class="sales-bottom-note">
+    <span>⌘</span><div><b>Подсказка</b> — можно просто спросить: «Почему сегодня меньше продаж?» или «Кому нужно позвонить?»</div>
+    <button id="salesAskBottom" type="button">Спросить →</button>
   </div>
 </section>
 
@@ -476,42 +569,79 @@ sectionButtons.forEach(b=>b.addEventListener('click',()=>showSection(b.dataset.s
 document.getElementById('tasksBack')?.addEventListener('click',()=>showSection('home'));
 document.getElementById('clientsBack')?.addEventListener('click',()=>showSection('home'));
 
+
 const salesAnalyze=document.getElementById('salesAnalyze'),salesResult=document.getElementById('salesResult');
 salesAnalyze?.addEventListener('click',()=>{
-  salesAnalyze.disabled=true;salesAnalyze.textContent='Проверяю сделки…';
+  salesAnalyze.disabled=true;salesAnalyze.innerHTML='Проверяю клиентов…';
   setTimeout(()=>{
-    salesAnalyze.textContent='Анализ завершён ✓';
-    salesResult.innerHTML='<b>Нашёл 6 потерянных возможностей.</b> 4 клиента получили предложение и не получили повторного контакта. Я подготовил список для follow-up и могу создать задачи.';
-    salesResult.classList.add('show');
+    salesAnalyze.innerHTML='Готово ✓';
+    const command=document.querySelector('.sales-command h3');
+    if(command) command.textContent='Нашёл 8 клиентов, которых можно вернуть в работу.';
+    const p=document.querySelector('.sales-command p');
+    if(p)p.textContent='Три клиента уже горячие. Я подготовил следующий шаг для каждого и не буду отправлять ничего без твоего подтверждения.';
+    const response=document.getElementById('salesActionResponse');
+    if(response) response.innerHTML='<b>Я подготовил список.</b><div>3 горячих клиента → ответить сегодня. Ещё 5 → мягкое напоминание после предложения.</div>';
+    document.getElementById('salesRecoveryBtn')?.scrollIntoView({behavior:'smooth',block:'center'});
   },850);
 });
-document.querySelectorAll('[data-sales-action]').forEach(btn=>{
+
+document.querySelectorAll('[data-funnel]').forEach(btn=>{
   btn.addEventListener('click',()=>{
-    const response=document.getElementById('salesActionResponse'),type=btn.dataset.salesAction;
-    const data={
-      remind:'Я нашёл 3 клиента, которым нужен следующий контакт. Могу подготовить персональные напоминания с учётом истории общения.',
-      task:'Создам задачи на сегодня: связаться с Алексеем К., Марией С. и Андреем И. и добавлю контекст последнего обращения.',
-      offer:'Подготовлю предложение для горячего клиента на основе его запроса и текущих условий продажи.'
-    };
-    response.innerHTML='<b>Я подготовил действие.</b><div>'+data[type]+'</div>';
+    const text=btn.dataset.funnel;
+    const response=document.getElementById('salesActionResponse');
+    if(response){response.innerHTML='<b>Простыми словами.</b><div>Сейчас здесь <strong>'+text+'</strong>. Если хочешь, я разберу этот этап и покажу, где теряются люди.</div>';response.scrollIntoView({behavior:'smooth',block:'nearest'});}
   });
 });
+
 document.querySelectorAll('[data-sales-client]').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const type=btn.dataset.salesClient;
     const data={
-      reply:'Я подготовил ответ Алексею К. с учётом его заявки. Следующий шаг — отправить.',
-      remind:'Напоминание Марии С. подготовлено. Я сохраню его как задачу и свяжу с этой сделкой.',
-      offer:'Для Андрея И. соберу коммерческое предложение на основе его запроса.'
+      reply:'Я подготовил короткий ответ по заявке и учёл предыдущий разговор. Ничего не отправляю без твоего подтверждения.',
+      remind:'Я подготовил мягкое напоминание без давления. Оно связано с этой сделкой и историей общения.',
+      offer:'Я соберу предложение из запроса клиента, суммы и условий. Перед отправкой покажу тебе готовый вариант.'
     };
-    const old=btn.textContent;btn.disabled=true;btn.textContent='Готово ✓';
-    setTimeout(()=>{btn.title=data[type];},50);
+    btn.textContent='Готово ✓';btn.disabled=true;
+    const response=document.getElementById('salesActionResponse');
+    if(response)response.innerHTML='<b>Цифровой управляющий</b><div>'+data[type]+'</div>';
   });
 });
+
+document.getElementById('salesRecoveryBtn')?.addEventListener('click',()=>{
+  const response=document.getElementById('salesActionResponse');
+  if(response)response.innerHTML='<b>Я разобрал 8 клиентов.</b><div>3 — ответить сейчас, 2 — напомнить сегодня, 3 — проверить завтра. Список готов.</div>';
+});
+
+document.querySelectorAll('[data-sales-action]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const response=document.getElementById('salesActionResponse'),type=btn.dataset.salesAction;
+    const data={
+      remind:'Я нашёл клиентов, которым нужен следующий контакт. Могу подготовить персональные сообщения с учётом истории общения.',
+      task:'Создам задачи на сегодня и добавлю в каждую задачу имя клиента, сумму и последний контакт.',
+      offer:'Подготовлю предложение для горячего клиента на основе его запроса и текущих условий продажи.'
+    };
+    if(response)response.innerHTML='<b>Я подготовил действие.</b><div>'+data[type]+'</div>';
+  });
+});
+
+document.getElementById('salesManagerAction')?.addEventListener('click',()=>{
+  const response=document.getElementById('salesActionResponse');
+  if(response)response.innerHTML='<b>Первый шаг готов.</b><div>Я собрал 3 горячих клиента. Нажми на клиента выше — сначала подготовлю сообщение, затем покажу его перед отправкой.</div>';
+  document.querySelector('.sales-recovery-card')?.scrollIntoView({behavior:'smooth',block:'center'});
+});
+
+function openSalesAsk(){
+  const input=document.getElementById('askInput');
+  if(input){input.focus();input.placeholder='Например: почему сегодня меньше продаж?';}
+  document.querySelector('.ask')?.scrollIntoView({behavior:'smooth',block:'center'});
+}
+document.getElementById('salesAskBtn')?.addEventListener('click',openSalesAsk);
+document.getElementById('salesAskBottom')?.addEventListener('click',openSalesAsk);
+
 document.getElementById('salesFinanceBtn')?.addEventListener('click',()=>showSection('finance'));
 document.getElementById('salesPeriod')?.addEventListener('change',e=>{
-  const sub=document.querySelector('.sales-sub');
-  if(sub)sub.textContent=e.target.value==='Сегодня'?'Я показываю сделки и деньги за сегодня.':e.target.value==='Последние 30 дней'?'Я анализирую продажи за последние 30 дней и ищу изменения.':'Я связываю заявки, клиентов, источники и деньги за последние 7 дней.';
+  const sub=document.querySelector('.sales-hero-copy p');
+  if(sub)sub.textContent=e.target.value==='Сегодня'?'Я показываю продажи и деньги за сегодня.':e.target.value==='Последние 30 дней'?'Я ищу изменения в продажах за последние 30 дней и объясняю их.':'Я связываю заявки, клиентов, источники и деньги за последние 7 дней.';
 });
 
 const financeData={
