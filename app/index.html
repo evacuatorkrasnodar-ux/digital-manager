@@ -1002,7 +1002,7 @@ body.dark .nav-list a::before{
   padding:20px 21px;
   border:1px solid var(--line);
   border-radius:26px;
-  background:linear-gradient(135deg, rgba(255,255,255,.58), rgba(255,255,255,.24));
+  background:linear-gradient(135deg, rgba(255,255,255,.70), rgba(255,255,255,.28));
   backdrop-filter:blur(24px);
   box-shadow:var(--shadow);
   cursor:pointer;
@@ -1090,6 +1090,426 @@ body.dark .memory-sheet{background:rgba(28,28,30,.94)}
   .memory-grid{grid-template-columns:1fr}
 }
 
+
+/* === Digital Manager: first-launch onboarding === */
+.dm-onboarding{
+  position:fixed;inset:0;z-index:10050;
+  background:#f6f6f4;color:#101114;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,system-ui,sans-serif;
+}
+body.dark .dm-onboarding{background:#090a0c;color:#f7f7f5}
+.dm-onboarding[hidden]{display:none}
+.dm-onboarding::before{
+  content:"";position:absolute;width:70vw;height:70vw;max-width:760px;max-height:760px;
+  border-radius:50%;left:-30%;bottom:-42%;
+  background:radial-gradient(circle,rgba(0,0,0,.055),transparent 67%);
+  filter:blur(10px);pointer-events:none;
+}
+body.dark .dm-onboarding::before{background:radial-gradient(circle,rgba(255,255,255,.075),transparent 67%)}
+.dm-ob-glow{
+  position:absolute;width:420px;height:420px;border-radius:50%;
+  right:-180px;top:-190px;border:1px solid currentColor;opacity:.07;
+  box-shadow:0 0 0 42px rgba(127,127,127,.025),0 0 0 84px rgba(127,127,127,.018);
+  animation:dmObOrbit 11s ease-in-out infinite;
+}
+.dm-ob-shell{
+  width:min(100%,720px);min-height:min(760px,100vh);
+  display:flex;flex-direction:column;position:relative;
+  padding:clamp(22px,4vw,44px);
+}
+.dm-ob-top{
+  display:flex;align-items:center;justify-content:space-between;
+  min-height:34px;font-size:12px;color:rgba(16,17,20,.52);
+}
+body.dark .dm-ob-top{color:rgba(255,255,255,.55)}
+.dm-ob-progress{display:flex;gap:5px;align-items:center}
+.dm-ob-progress i{width:18px;height:2px;border-radius:99px;background:currentColor;opacity:.14;transition:width .4s ease,opacity .4s ease}
+.dm-ob-progress i.on{width:34px;opacity:.7}
+.dm-ob-skip{border:0;background:transparent;color:inherit;opacity:.65;padding:8px;cursor:pointer}
+.dm-ob-stage{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  padding:28px 0 20px;
+}
+.dm-ob-screen{
+  width:100%;max-width:590px;text-align:left;
+  animation:dmObIn .65s cubic-bezier(.2,.8,.2,1) both;
+}
+.dm-ob-center{text-align:center}
+.dm-ob-kicker{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:rgba(16,17,20,.45);margin-bottom:18px}
+body.dark .dm-ob-kicker{color:rgba(255,255,255,.45)}
+.dm-ob-title{
+  font-size:clamp(38px,7vw,68px);line-height:.98;letter-spacing:-.065em;
+  margin:0 0 18px;font-weight:700;
+}
+.dm-ob-title.small{font-size:clamp(31px,5.4vw,52px)}
+.dm-ob-copy{font-size:15px;line-height:1.6;color:rgba(16,17,20,.58);max-width:560px}
+body.dark .dm-ob-copy{color:rgba(255,255,255,.62)}
+.dm-ob-logo{
+  width:112px;height:112px;margin:0 auto 30px;
+  position:relative;display:grid;place-items:center;
+  animation:dmObLogoFloat 4s ease-in-out infinite;
+}
+.dm-ob-logo .orb{
+  position:absolute;inset:8px;border:1px solid currentColor;border-radius:38% 62% 46% 54%/52% 42% 58% 48%;opacity:.26;
+}
+.dm-ob-logo .orb:nth-child(1){transform:rotate(28deg) scaleX(.82);animation:dmObOrb1 7s ease-in-out infinite}
+.dm-ob-logo .orb:nth-child(2){transform:rotate(-28deg) scaleY(.82);animation:dmObOrb2 8s ease-in-out infinite}
+.dm-ob-logo .orb:nth-child(3){transform:rotate(90deg) scale(.9);animation:dmObOrb3 9s ease-in-out infinite}
+.dm-ob-logo .core{
+  width:42px;height:42px;transform:rotate(45deg);
+  border:1.5px solid currentColor;border-radius:12px;
+  display:grid;place-items:center;box-shadow:0 0 30px rgba(127,127,127,.12);
+}
+.dm-ob-logo .core span{width:15px;height:15px;background:currentColor;transform:rotate(-45deg);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+.dm-ob-name{font-size:13px;letter-spacing:.01em;margin-bottom:5px}
+.dm-ob-tag{font-size:11px;color:rgba(16,17,20,.46)}
+body.dark .dm-ob-tag{color:rgba(255,255,255,.46)}
+.dm-ob-field{
+  margin-top:28px;border:1px solid rgba(16,17,20,.14);border-radius:19px;
+  background:rgba(255,255,255,.54);backdrop-filter:blur(18px);
+  display:flex;align-items:center;padding:0 16px;height:58px;
+  transition:border-color .25s,box-shadow .25s;
+}
+body.dark .dm-ob-field{border-color:rgba(255,255,255,.16);background:rgba(255,255,255,.045)}
+.dm-ob-field:focus-within{border-color:rgba(16,17,20,.38);box-shadow:0 0 0 4px rgba(16,17,20,.045)}
+body.dark .dm-ob-field:focus-within{border-color:rgba(255,255,255,.36);box-shadow:0 0 0 4px rgba(255,255,255,.035)}
+.dm-ob-field input{border:0;outline:0;background:transparent;color:inherit;width:100%;font:inherit;font-size:16px}
+.dm-ob-choices{display:grid;gap:10px;margin-top:25px}
+.dm-ob-choice{
+  width:100%;min-height:70px;border:1px solid rgba(16,17,20,.11);
+  border-radius:19px;background:rgba(255,255,255,.5);color:inherit;
+  display:flex;align-items:center;gap:13px;padding:14px 16px;text-align:left;
+  cursor:pointer;transition:transform .3s,background .3s,border-color .3s,box-shadow .3s;
+}
+body.dark .dm-ob-choice{border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.045)}
+.dm-ob-choice:hover{transform:translateY(-2px);border-color:rgba(16,17,20,.24);box-shadow:0 14px 35px rgba(0,0,0,.055)}
+body.dark .dm-ob-choice:hover{border-color:rgba(255,255,255,.25);box-shadow:0 14px 35px rgba(0,0,0,.18)}
+.dm-ob-choice .sig{
+  width:40px;height:40px;border:1px solid rgba(16,17,20,.12);border-radius:14px;display:grid;place-items:center;flex:none
+}
+body.dark .dm-ob-choice .sig{border-color:rgba(255,255,255,.15)}
+.dm-ob-choice b{display:block;font-size:14px}.dm-ob-choice small{display:block;margin-top:3px;color:rgba(16,17,20,.5);font-size:11px}
+body.dark .dm-ob-choice small{color:rgba(255,255,255,.52)}
+.dm-ob-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.dm-ob-button{
+  min-height:50px;border-radius:16px;padding:0 19px;border:1px solid rgba(16,17,20,.16);
+  background:#101114;color:white;font-weight:700;cursor:pointer;transition:transform .25s,box-shadow .25s;
+}
+body.dark .dm-ob-button{background:#f5f5f3;color:#101114;border-color:rgba(255,255,255,.12)}
+.dm-ob-button:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(0,0,0,.12)}
+.dm-ob-button.secondary{background:transparent;color:inherit;border-color:rgba(16,17,20,.12)}
+body.dark .dm-ob-button.secondary{border-color:rgba(255,255,255,.13)}
+.dm-ob-back{border:0;background:transparent;color:inherit;opacity:.55;padding:10px;cursor:pointer}
+.dm-ob-voice{
+  width:148px;height:148px;border-radius:50%;margin:24px auto 25px;
+  border:1px solid currentColor;display:grid;place-items:center;position:relative;
+}
+.dm-ob-voice:before,.dm-ob-voice:after{
+  content:"";position:absolute;border:1px solid currentColor;border-radius:50%;inset:13px;opacity:.12;
+  animation:dmObPulse 2.6s ease-out infinite;
+}
+.dm-ob-voice:after{inset:-1px;animation-delay:1.1s}
+.dm-ob-wave{display:flex;gap:3px;align-items:center;height:34px;margin-top:22px;justify-content:center}
+.dm-ob-wave i{width:2px;border-radius:99px;background:currentColor;height:9px;opacity:.42;animation:dmObWave 1.15s ease-in-out infinite}
+.dm-ob-wave i:nth-child(2){height:17px;animation-delay:.08s}.dm-ob-wave i:nth-child(3){height:27px;animation-delay:.16s}.dm-ob-wave i:nth-child(4){height:13px;animation-delay:.24s}.dm-ob-wave i:nth-child(5){height:22px;animation-delay:.32s}.dm-ob-wave i:nth-child(6){height:10px;animation-delay:.4s}
+.dm-ob-analysis{
+  margin-top:26px;border:1px solid rgba(16,17,20,.1);border-radius:22px;background:rgba(255,255,255,.5);
+  overflow:hidden;
+}
+body.dark .dm-ob-analysis{border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.045)}
+.dm-ob-analysis-row{display:flex;align-items:center;gap:11px;padding:14px 15px;border-bottom:1px solid rgba(16,17,20,.07)}
+body.dark .dm-ob-analysis-row{border-color:rgba(255,255,255,.08)}
+.dm-ob-analysis-row:last-child{border-bottom:0}
+.dm-ob-analysis-row .check{margin-left:auto;opacity:.55}
+.dm-ob-result{margin-top:22px;display:grid;gap:10px}
+.dm-ob-result-card{padding:15px;border:1px solid rgba(16,17,20,.1);border-radius:17px;background:rgba(255,255,255,.45)}
+body.dark .dm-ob-result-card{border-color:rgba(255,255,255,.11);background:rgba(255,255,255,.035)}
+.dm-ob-result-card small{display:block;color:rgba(16,17,20,.45);font-size:10px;margin-bottom:5px}
+body.dark .dm-ob-result-card small{color:rgba(255,255,255,.48)}
+.dm-ob-result-card b{font-size:13px}
+.dm-ob-rules{display:grid;gap:10px;margin-top:22px}
+.dm-ob-rule{display:flex;justify-content:space-between;align-items:center;padding:14px 15px;border:1px solid rgba(16,17,20,.1);border-radius:17px}
+body.dark .dm-ob-rule{border-color:rgba(255,255,255,.11)}
+.dm-ob-switch{width:43px;height:25px;border-radius:99px;background:rgba(16,17,20,.12);padding:3px}
+.dm-ob-switch span{display:block;width:19px;height:19px;border-radius:50%;background:currentColor;transition:transform .3s}
+.dm-ob-switch.on{background:rgba(16,17,20,.78);color:#fff}.dm-ob-switch.on span{transform:translateX(18px)}
+body.dark .dm-ob-switch{background:rgba(255,255,255,.15)}body.dark .dm-ob-switch.on{background:#fff;color:#101114}
+.dm-ob-final{
+  min-height:220px;display:grid;place-items:center;text-align:center;position:relative;overflow:hidden;
+}
+.dm-ob-final .dm-ob-logo{margin-bottom:22px}
+.dm-ob-final-orbit{position:absolute;width:430px;height:430px;border:1px solid currentColor;border-radius:50%;opacity:.06;animation:dmObSpin 14s linear infinite}
+.dm-ob-final-orbit:after{content:"";position:absolute;width:7px;height:7px;background:currentColor;border-radius:50%;left:50%;top:-3px;box-shadow:0 0 22px currentColor}
+@keyframes dmObIn{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes dmObLogoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes dmObOrb1{0%,100%{transform:rotate(28deg) scaleX(.82)}50%{transform:rotate(38deg) scaleX(.9)}}
+@keyframes dmObOrb2{0%,100%{transform:rotate(-28deg) scaleY(.82)}50%{transform:rotate(-18deg) scaleY(.9)}}
+@keyframes dmObOrb3{0%,100%{transform:rotate(90deg) scale(.9)}50%{transform:rotate(78deg) scale(1)}}
+@keyframes dmObPulse{0%{transform:scale(.65);opacity:.18}80%,100%{transform:scale(1.55);opacity:0}}
+@keyframes dmObWave{0%,100%{transform:scaleY(.65);opacity:.3}50%{transform:scaleY(1.25);opacity:.8}}
+@keyframes dmObOrbit{0%,100%{transform:rotate(0) scale(1)}50%{transform:rotate(9deg) scale(1.04)}}
+@keyframes dmObSpin{to{transform:rotate(360deg)}}
+@media(max-width:620px){
+  .dm-ob-shell{padding:20px 18px;min-height:100dvh}
+  .dm-ob-stage{padding:20px 0 15px}
+  .dm-ob-title{font-size:42px}
+  .dm-ob-title.small{font-size:32px}
+  .dm-ob-choice{min-height:64px}
+}
+@media(prefers-reduced-motion:reduce){
+  .dm-onboarding *{animation:none!important;transition:none!important}
+}
+
+
+.dm-brand-logo{width:38px;height:38px;display:inline-grid;place-items:center;color:var(--icon,#111216);flex:none}
+.dm-brand-logo svg{width:100%;height:100%}
+
+
+/* =========================================================
+   DIGITAL MANAGER — GLOBAL PREMIUM VISUAL LANGUAGE
+   One visual system across onboarding + app
+   ========================================================= */
+:root{
+  --dm-black:#101114;
+  --dm-paper:#f6f6f4;
+  --dm-white:#ffffff;
+  --dm-line:rgba(16,17,20,.095);
+  --dm-line-strong:rgba(16,17,20,.16);
+  --dm-muted:rgba(16,17,20,.52);
+  --dm-glass:rgba(255,255,255,.58);
+  --dm-shadow:0 18px 60px rgba(16,17,20,.055);
+  --dm-radius:26px;
+}
+body{
+  background:
+    radial-gradient(circle at 88% 8%, rgba(0,0,0,.025), transparent 24%),
+    radial-gradient(circle at 8% 92%, rgba(0,0,0,.022), transparent 25%),
+    var(--dm-paper);
+  color:var(--dm-black);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,system-ui,sans-serif;
+  letter-spacing:-.012em;
+}
+body.dark{
+  --dm-line:rgba(255,255,255,.09);
+  --dm-line-strong:rgba(255,255,255,.16);
+  --dm-muted:rgba(255,255,255,.55);
+  --dm-glass:rgba(255,255,255,.045);
+  --dm-shadow:0 18px 60px rgba(0,0,0,.24);
+  background:
+    radial-gradient(circle at 88% 8%, rgba(255,255,255,.035), transparent 25%),
+    radial-gradient(circle at 8% 92%, rgba(255,255,255,.025), transparent 25%),
+    #090a0c;
+  color:#f7f7f5;
+}
+
+/* App shell */
+.sidebar{
+  background:rgba(246,246,244,.70)!important;
+  backdrop-filter:blur(28px) saturate(120%);
+  border-right:1px solid var(--dm-line)!important;
+}
+body.dark .sidebar{background:rgba(12,13,15,.72)!important}
+.sidebar .logo,.sidebar .brand{
+  letter-spacing:-.035em;
+}
+.sidebar nav a,.sidebar .nav-item,.nav-list a{
+  border-radius:17px!important;
+  color:inherit!important;
+  background:transparent!important;
+}
+.sidebar nav a.active,.sidebar .nav-item.active,.nav-list a.active{
+  background:rgba(16,17,20,.045)!important;
+  border:1px solid var(--dm-line)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.32),0 8px 25px rgba(0,0,0,.025)!important;
+}
+body.dark .sidebar nav a.active,
+body.dark .sidebar .nav-item.active,
+body.dark .nav-list a.active{
+  background:rgba(255,255,255,.055)!important;
+  border-color:var(--dm-line)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.035),0 8px 25px rgba(0,0,0,.18)!important;
+}
+
+/* Main content typography */
+main h1,.main h1,.page-title{
+  font-size:clamp(34px,4vw,54px)!important;
+  line-height:1!important;
+  letter-spacing:-.06em!important;
+  font-weight:720!important;
+}
+main h2,.main h2{letter-spacing:-.045em!important}
+main h3,.main h3{letter-spacing:-.03em!important}
+.subtitle,.muted,.section-subtitle{color:var(--dm-muted)!important}
+
+/* Cards become quiet premium surfaces */
+.card,.panel,.metric-card,.stat-card,.glass-card,.task-card,.client-card,
+.finance-card,.promo-card,.sales-card,.insight-card,.action-card,
+.analysis-card,.health-card,.calendar-card,.source-card{
+  border:1px solid var(--dm-line)!important;
+  background:var(--dm-glass)!important;
+  backdrop-filter:blur(24px) saturate(110%);
+  box-shadow:var(--dm-shadow)!important;
+  border-radius:var(--dm-radius)!important;
+}
+.card:hover,.panel:hover,.metric-card:hover,.stat-card:hover,.task-card:hover,
+.client-card:hover,.action-card:hover,.source-card:hover{
+  border-color:var(--dm-line-strong)!important;
+  transform:translateY(-2px);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s ease;
+}
+
+/* Buttons */
+button,.btn,.button,.action-button{
+  border-radius:16px!important;
+  font-weight:650!important;
+  letter-spacing:-.01em!important;
+  transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,background .3s ease,border-color .3s ease!important;
+}
+button:hover,.btn:hover,.button:hover,.action-button:hover{
+  transform:translateY(-1px);
+}
+button.primary,.btn.primary,.button.primary,.action-button.primary,
+.primary-btn{
+  background:var(--dm-black)!important;
+  color:#fff!important;
+  border:1px solid var(--dm-black)!important;
+  box-shadow:0 10px 28px rgba(16,17,20,.12)!important;
+}
+body.dark button.primary,body.dark .btn.primary,body.dark .button.primary,
+body.dark .action-button.primary,body.dark .primary-btn{
+  background:#f5f5f3!important;color:#101114!important;border-color:#f5f5f3!important;
+}
+
+/* Inputs */
+input,textarea,select{
+  border:1px solid var(--dm-line-strong)!important;
+  border-radius:16px!important;
+  background:rgba(255,255,255,.42)!important;
+  color:inherit!important;
+  backdrop-filter:blur(12px);
+}
+body.dark input,body.dark textarea,body.dark select{
+  background:rgba(255,255,255,.035)!important;
+}
+input:focus,textarea:focus,select:focus{
+  outline:none!important;
+  border-color:rgba(16,17,20,.35)!important;
+  box-shadow:0 0 0 4px rgba(16,17,20,.035)!important;
+}
+body.dark input:focus,body.dark textarea:focus,body.dark select:focus{
+  border-color:rgba(255,255,255,.35)!important;
+  box-shadow:0 0 0 4px rgba(255,255,255,.035)!important;
+}
+
+/* Monochrome icon system */
+.dm-icon svg,.icon svg,.sidebar svg{
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.35;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.sidebar .dm-icon{
+  width:22px;height:22px;
+}
+.sidebar .dm-icon svg{width:21px;height:21px}
+body:not(.dark) .sidebar .dm-icon{color:#17181b}
+body.dark .sidebar .dm-icon{color:#f4f4f2}
+
+/* Replace visual noise from legacy colorful accents */
+.badge,.status,.pill{
+  border:1px solid var(--dm-line)!important;
+  background:rgba(127,127,127,.055)!important;
+  color:inherit!important;
+  box-shadow:none!important;
+}
+.success,.positive,.green,.blue,.purple,.orange,.red{
+  color:inherit!important;
+}
+
+/* Premium section dividers */
+.section,.block,.module{
+  border-color:var(--dm-line)!important;
+}
+hr{border:0;border-top:1px solid var(--dm-line)!important}
+
+/* Manager / hero area */
+.hero,.manager-hero,.command-card,.business-hero{
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--dm-line)!important;
+  background:
+    radial-gradient(circle at 90% 0%, rgba(16,17,20,.055), transparent 34%),
+    linear-gradient(135deg,rgba(255,255,255,.70),rgba(255,255,255,.28))!important;
+  box-shadow:var(--dm-shadow)!important;
+}
+body.dark .hero,body.dark .manager-hero,body.dark .command-card,body.dark .business-hero{
+  background:
+    radial-gradient(circle at 90% 0%, rgba(255,255,255,.065), transparent 34%),
+    linear-gradient(135deg,rgba(255,255,255,.065),rgba(255,255,255,.025))!important;
+}
+.hero::after,.manager-hero::after,.command-card::after,.business-hero::after{
+  content:"";
+  position:absolute;width:190px;height:190px;right:-105px;top:-105px;
+  border:1px solid currentColor;border-radius:50%;opacity:.06;
+  box-shadow:0 0 0 28px rgba(127,127,127,.02),0 0 0 56px rgba(127,127,127,.015);
+  animation:dmGlobalOrbit 10s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes dmGlobalOrbit{
+  0%,100%{transform:rotate(0) scale(1)}
+  50%{transform:rotate(8deg) scale(1.045)}
+}
+
+/* KPI numbers — quiet, large */
+.metric-value,.stat-value,.kpi-value{
+  letter-spacing:-.055em!important;
+  font-weight:700!important;
+}
+
+/* Tables become airy */
+table{border-collapse:separate!important;border-spacing:0 6px!important}
+th{
+  color:var(--dm-muted)!important;
+  font-size:10px!important;
+  text-transform:uppercase;
+  letter-spacing:.09em!important;
+  font-weight:650!important;
+}
+td{
+  border-top:1px solid var(--dm-line)!important;
+  border-bottom:1px solid var(--dm-line)!important;
+  background:var(--dm-glass)!important;
+}
+td:first-child{border-left:1px solid var(--dm-line)!important;border-radius:14px 0 0 14px}
+td:last-child{border-right:1px solid var(--dm-line)!important;border-radius:0 14px 14px 0}
+
+/* Mobile: preserve the same calm composition */
+@media(max-width:700px){
+  body{font-size:14px}
+  main h1,.main h1,.page-title{font-size:36px!important}
+  .card,.panel,.metric-card,.stat-card,.glass-card,.task-card,.client-card,
+  .finance-card,.promo-card,.sales-card,.insight-card,.action-card{
+    border-radius:22px!important;
+    box-shadow:0 12px 35px rgba(0,0,0,.04)!important;
+  }
+  body.dark .card,body.dark .panel,body.dark .metric-card,body.dark .stat-card,
+  body.dark .glass-card,body.dark .task-card,body.dark .client-card{
+    box-shadow:0 12px 35px rgba(0,0,0,.16)!important;
+  }
+}
+
+/* Reduced motion */
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;transition:none!important}
+}
+
+
+.dm-global-logo{display:inline-grid;place-items:center;width:36px;height:36px;color:inherit;vertical-align:middle;margin-right:8px}
+.dm-global-logo svg{width:100%;height:100%}
+
 </style>
 
 <style>
@@ -1106,7 +1526,19 @@ body.dark .more-panel,body.dark .control-panel,body.dark .pulse-panel{background
 </head>
 <body>
 <div class="app">
-<aside class="sidebar"><div class="brand"><div class="mark">ЦБ</div><div><div class="brand-title">Цифровой бизнес</div><div class="brand-sub">Цифровой управляющий</div></div></div><nav class="nav"><button class="active" type="button" data-section="home"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5z"/><path d="M9.5 20v-5.5h5V20"/></svg></span><span class="premium-nav-label">Главная</span></button><button type="button" data-section="tasks"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M5 12.5 9.2 17 19 7"/></svg></span><span class="premium-nav-label">Задачи</span></button><button type="button" data-section="clients"><span class="dm-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c.5-3.2 2.4-5 5.5-5s5 1.8 5.5 5"/><path d="M15.5 6.5c2.5.2 4 1.7 4 4"/><path d="M16 14.5c2.2.5 3.5 2 4 4.5"/></svg></span><span class="premium-nav-label">Клиенты</span></button><button type="button" data-section="sales"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M5 17 19 5"/><path d="M10 5h9v9"/></svg></span><span class="premium-nav-label">Продажи</span></button><button type="button" data-section="finance"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M8 4v16"/><path d="M11.5 4H14a4 4 0 0 1 0 8H8"/><path d="M8 12h6a4 4 0 0 1 0 8h-3"/></svg></span><span class="premium-nav-label">Финансы</span></button><button type="button" data-section="promo"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M5 19V8"/><path d="M10 19V5"/><path d="M15 19v-8"/><path d="M20 19V3"/></svg></span><span class="premium-nav-label">Продвижение</span></button><button type="button" data-section="reports"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M8 15v2"/><path d="M12 11v6"/><path d="M16 8v9"/></svg></span><span class="premium-nav-label">Отчёты</span></button><button type="button" data-section="settings"><span class="dm-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.8 1.8 0 0 0 .35 2l.05.05-1.9 1.9-.05-.05a1.8 1.8 0 0 0-2-.35 1.8 1.8 0 0 0-1.1 1.65V20h-2.7v-.1a1.8 1.8 0 0 0-1.1-1.65 1.8 1.8 0 0 0-2 .35l-.05.05L7 16.95l.05-.05a1.8 1.8 0 0 0 .35-2 1.8 1.8 0 0 0-1.65-1.1H5v-2.7h.75a1.8 1.8 0 0 0 1.65-1.1 1.8 1.8 0 0 0-.35-2L7 7.95 8.9 6.05l.05.05a1.8 1.8 0 0 0 2 .35A1.8 1.8 0 0 0 12.05 4.8V4h2.7v.8a1.8 1.8 0 0 0 1.1 1.65 1.8 1.8 0 0 0 2-.35l.05-.05 1.9 1.9-.05.05a1.8 1.8 0 0 0-.35 2 1.8 1.8 0 0 0 1.65 1.1H22v2.7h-.95A1.8 1.8 0 0 0 19.4 15z"/></svg></span><span class="premium-nav-label">Настройки</span></button></nav><button class="pwa-install" id="installBtn" type="button" hidden>Установить приложение</button>
+<aside class="sidebar"><div class="brand"><span class="dm-global-logo" aria-hidden="true"><svg viewBox="0 0 48 48">
+<g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M24 4.5c6.2 0 11.5 8.1 11.5 19.5S30.2 43.5 24 43.5 12.5 35.4 12.5 24 17.8 4.5 24 4.5z"/>
+<path d="M4.5 24C4.5 17.8 12.6 12.5 24 12.5S43.5 17.8 43.5 24 35.4 35.5 24 35.5 4.5 30.2 4.5 24z"/>
+<path d="M9.5 9.5c4.4-4.4 12.4-1 18.2 6.8s7.6 15.2 3.2 19.6-12.4 1-18.2-6.8S5.1 13.9 9.5 9.5z"/>
+</g><path d="M24 14.5 33.5 24 24 33.5 14.5 24z" fill="currentColor"/><path d="M24 19.2 28.8 24 24 28.8 19.2 24z" fill="var(--dm-paper)"/>
+</svg></span><span class="dm-brand-logo" aria-hidden="true">
+<svg viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.25">
+<path d="M24 5c6 0 11 8 11 19S30 43 24 43 13 35 13 24 18 5 24 5z"/>
+<path d="M5 24c0-6 8-11 19-11s19 5 19 11-8 11-19 11S5 30 5 24z"/>
+<path d="M10 10c4-4 12-1 18 6s9 15 5 19-12 1-18-6S6 14 10 10z"/>
+</g><path d="M24 15l9 9-9 9-9-9z" fill="currentColor"/><path d="M24 19l5 5-5 5-5-5z" fill="var(--panel,#f5f5f7)"/></svg>
+</span><div class="mark">ЦБ</div><div><div class="brand-title">Цифровой бизнес</div><div class="brand-sub">Цифровой управляющий</div></div></div><nav class="nav"><button class="active" type="button" data-section="home"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5z"/><path d="M9.5 20v-5.5h5V20"/></svg></span><span class="premium-nav-label">Главная</span></button><button type="button" data-section="tasks"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M5 12.5 9.2 17 19 7"/></svg></span><span class="premium-nav-label">Задачи</span></button><button type="button" data-section="clients"><span class="dm-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c.5-3.2 2.4-5 5.5-5s5 1.8 5.5 5"/><path d="M15.5 6.5c2.5.2 4 1.7 4 4"/><path d="M16 14.5c2.2.5 3.5 2 4 4.5"/></svg></span><span class="premium-nav-label">Клиенты</span></button><button type="button" data-section="sales"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M5 17 19 5"/><path d="M10 5h9v9"/></svg></span><span class="premium-nav-label">Продажи</span></button><button type="button" data-section="finance"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M8 4v16"/><path d="M11.5 4H14a4 4 0 0 1 0 8H8"/><path d="M8 12h6a4 4 0 0 1 0 8h-3"/></svg></span><span class="premium-nav-label">Финансы</span></button><button type="button" data-section="promo"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M5 19V8"/><path d="M10 19V5"/><path d="M15 19v-8"/><path d="M20 19V3"/></svg></span><span class="premium-nav-label">Продвижение</span></button><button type="button" data-section="reports"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M8 15v2"/><path d="M12 11v6"/><path d="M16 8v9"/></svg></span><span class="premium-nav-label">Отчёты</span></button><button type="button" data-section="settings"><span class="dm-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.8 1.8 0 0 0 .35 2l.05.05-1.9 1.9-.05-.05a1.8 1.8 0 0 0-2-.35 1.8 1.8 0 0 0-1.1 1.65V20h-2.7v-.1a1.8 1.8 0 0 0-1.1-1.65 1.8 1.8 0 0 0-2 .35l-.05.05L7 16.95l.05-.05a1.8 1.8 0 0 0 .35-2 1.8 1.8 0 0 0-1.65-1.1H5v-2.7h.75a1.8 1.8 0 0 0 1.65-1.1 1.8 1.8 0 0 0-.35-2L7 7.95 8.9 6.05l.05.05a1.8 1.8 0 0 0 2 .35A1.8 1.8 0 0 0 12.05 4.8V4h2.7v.8a1.8 1.8 0 0 0 1.1 1.65 1.8 1.8 0 0 0 2-.35l.05-.05 1.9 1.9-.05.05a1.8 1.8 0 0 0-.35 2 1.8 1.8 0 0 0 1.65 1.1H22v2.7h-.95A1.8 1.8 0 0 0 19.4 15z"/></svg></span><span class="premium-nav-label">Настройки</span></button></nav><button class="pwa-install" id="installBtn" type="button" hidden>Установить приложение</button>
 <div class="online"><span class="dot"></span>Цифровой управляющий · онлайн</div><button class="theme" id="theme">Тема <span id="themeText">Тёмная</span></button></aside>
 <main class="content"><header class="top"><div><div class="eyebrow"><b>Цифровой управляющий</b> · сегодня</div><h1>Доброе утро, Алексей.</h1><p class="lead">Сегодня у тебя 7 важных задач. Я уже проверил бизнес.</p></div><div class="date">30 сентября 2026</div></header>
 <section class="grid">
@@ -1965,6 +2397,183 @@ function closeBusinessMemory(){
 document.addEventListener('keydown', function(e){
   if(e.key === 'Escape') closeBusinessMemory();
 });
+</script>
+
+
+<div class="dm-onboarding" id="dmOnboarding" aria-modal="true" role="dialog">
+  <div class="dm-ob-glow"></div>
+  <div class="dm-ob-shell">
+    <div class="dm-ob-top">
+      <div class="dm-ob-progress" id="dmObProgress"></div>
+      <button class="dm-ob-skip" type="button" onclick="dmObSkip()">Пропустить</button>
+    </div>
+    <div class="dm-ob-stage" id="dmObStage"></div>
+    <div class="dm-ob-bottom" id="dmObBottom"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const root = document.getElementById('dmOnboarding');
+  const stage = document.getElementById('dmObStage');
+  const bottom = document.getElementById('dmObBottom');
+  const progress = document.getElementById('dmObProgress');
+  const skip = root?.querySelector('.dm-ob-skip');
+  let step = 0;
+  const total = 8;
+  const data = {name:'', source:''};
+
+  const logo = () => `
+    <div class="dm-ob-logo" aria-label="Логотип Цифрового управляющего">
+      <span class="orb"></span><span class="orb"></span><span class="orb"></span>
+      <span class="core"><span></span></span>
+    </div>`;
+
+  const icon = (kind) => {
+    const paths = {
+      voice:`<path d="M12 4a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V7a3 3 0 0 1 3-3z"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5V21"/><path d="M9 21h6"/>`,
+      site:`<path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17.5z"/><path d="M4 9h16"/><path d="M7 6.5h.01M10 6.5h.01"/>`,
+      social:`<circle cx="8" cy="8" r="3"/><path d="M3.5 19c.5-3 2.1-4.5 4.5-4.5S12 16 12.5 19"/><path d="M15 9h5M17.5 6.5v5"/>`,
+      plus:`<path d="M12 5v14M5 12h14"/>`,
+      spark:`<path d="m12 3 1.8 6.2L20 11l-6.2 1.8L12 19l-1.8-6.2L4 11l6.2-1.8z"/>`,
+      check:`<path d="M5 12.5 9.2 17 19 7"/>`,
+      arrow:`<path d="M5 12h13M13 6l6 6-6 6"/>`
+    };
+    return `<span class="sig"><svg viewBox="0 0 24 24" width="19" height="19">${paths[kind]||paths.spark}</svg></span>`;
+  };
+
+  function setProgress(){
+    progress.innerHTML = Array.from({length:total},(_,i)=>`<i class="${i<=step?'on':''}"></i>`).join('');
+    skip.textContent = step===0 ? 'Пропустить' : 'Позже';
+  }
+
+  function render(){
+    setProgress();
+    let html='', actions='';
+    if(step===0){
+      html=`<div class="dm-ob-screen dm-ob-center">
+        ${logo()}
+        <div class="dm-ob-name">Цифровой управляющий</div>
+        <div class="dm-ob-tag">Ваш бизнес. Под контролем.</div>
+      </div>`;
+      actions=`<button class="dm-ob-button" onclick="dmObNext()">Начать знакомство <span style="opacity:.65">→</span></button>`;
+    }
+    if(step===1){
+      html=`<div class="dm-ob-screen">
+        <div class="dm-ob-kicker">Знакомство</div>
+        <h1 class="dm-ob-title">Здравствуйте.</h1>
+        <div class="dm-ob-title small">Давайте познакомимся.</div>
+        <p class="dm-ob-copy">Я буду помогать вам видеть главное, помнить важное и вовремя подсказывать, что делать.</p>
+        <div class="dm-ob-field"><input id="dmObName" autocomplete="given-name" placeholder="Как к вам обращаться?" value="${data.name}"></div>
+      </div>`;
+      actions=`<button class="dm-ob-button" onclick="dmObNameNext()">Продолжить →</button>`;
+    }
+    if(step===2){
+      html=`<div class="dm-ob-screen">
+        <div class="dm-ob-kicker">Теперь главное</div>
+        <h1 class="dm-ob-title small">${data.name||'Давайте'} расскажите мне о своём деле.</h1>
+        <p class="dm-ob-copy">Не нужно заполнять анкету. Можно рассказать своими словами, показать сайт или познакомить меня с соцсетями.</p>
+        <div class="dm-ob-choices">
+          <button class="dm-ob-choice" onclick="dmObSource('voice')">${icon('voice')}<span><b>Расскажите голосом</b><small>Самый простой способ начать</small></span></button>
+          <button class="dm-ob-choice" onclick="dmObSource('site')">${icon('site')}<span><b>Покажите сайт</b><small>Я познакомлюсь с вашим бизнесом</small></span></button>
+          <button class="dm-ob-choice" onclick="dmObSource('social')">${icon('social')}<span><b>Покажите соцсети</b><small>Посмотрю, как вас видят клиенты</small></span></button>
+          <button class="dm-ob-choice" onclick="dmObSource('later')">${icon('plus')}<span><b>Пока ничего</b><small>Познакомимся постепенно</small></span></button>
+        </div>
+      </div>`;
+      actions=`<button class="dm-ob-back" onclick="dmObPrev()">← Назад</button>`;
+    }
+    if(step===3){
+      html=`<div class="dm-ob-screen dm-ob-center">
+        <div class="dm-ob-kicker">Расскажите мне</div>
+        <div class="dm-ob-voice">${icon('voice')}</div>
+        <h1 class="dm-ob-title small">Говорите как есть.</h1>
+        <p class="dm-ob-copy" style="margin:auto">Не нужно подбирать правильные слова. Расскажите, чем занимаетесь, кто ваши клиенты и что для вас важно.</p>
+        <div class="dm-ob-wave">${Array.from({length:6},()=>'<i></i>').join('')}</div>
+        <p class="dm-ob-copy" style="margin:18px auto 0;font-size:11px">Демо-запись · можно остановить в любой момент</p>
+      </div>`;
+      actions=`<button class="dm-ob-button secondary" onclick="dmObFinishVoice()">Завершить рассказ</button>`;
+    }
+    if(step===4){
+      html=`<div class="dm-ob-screen">
+        <div class="dm-ob-kicker">Знакомство продолжается</div>
+        <h1 class="dm-ob-title small">Покажите мне ваш сайт.</h1>
+        <p class="dm-ob-copy">Это поможет лучше понять услуги, предложения и то, как вас видят клиенты.</p>
+        <div class="dm-ob-field"><input id="dmObSite" inputmode="url" placeholder="https://ваш-сайт.ru"></div>
+        <div class="dm-ob-analysis">
+          <div class="dm-ob-analysis-row">${icon('site')}<span>Услуги и предложения</span><span class="check">○</span></div>
+          <div class="dm-ob-analysis-row">${icon('spark')}<span>Клиенты и точки контакта</span><span class="check">○</span></div>
+          <div class="dm-ob-analysis-row">${icon('arrow')}<span>Возможности для роста</span><span class="check">○</span></div>
+        </div>
+      </div>`;
+      actions=`<button class="dm-ob-button" onclick="dmObAnalyze()">Познакомить меня с бизнесом →</button>`;
+    }
+    if(step===5){
+      html=`<div class="dm-ob-screen">
+        <div class="dm-ob-kicker">Я вас понял</div>
+        <h1 class="dm-ob-title small">Вот что я уже знаю.</h1>
+        <p class="dm-ob-copy">Я собрал это из вашего рассказа и того, что вы показали.</p>
+        <div class="dm-ob-result">
+          <div class="dm-ob-result-card">${icon('spark')}<small>Ваш бизнес</small><b>Я понял, чем вы занимаетесь</b></div>
+          <div class="dm-ob-result-card">${icon('voice')}<small>Клиенты</small><b>Я вижу, для кого вы работаете</b></div>
+          <div class="dm-ob-result-card">${icon('arrow')}<small>Возможности</small><b>Я нашёл первые точки внимания</b></div>
+        </div>
+      </div>`;
+      actions=`<button class="dm-ob-button" onclick="dmObNext()">Показать, что я могу →</button>`;
+    }
+    if(step===6){
+      html=`<div class="dm-ob-screen">
+        <div class="dm-ob-kicker">Моя работа</div>
+        <h1 class="dm-ob-title small">Часть работы я могу взять на себя.</h1>
+        <div class="dm-ob-rules">
+          <div class="dm-ob-rule"><span><b>Следить за клиентами</b><small style="display:block;color:var(--muted);margin-top:3px">кому пора напомнить</small></span><span class="dm-ob-switch on"><span></span></span></div>
+          <div class="dm-ob-rule"><span><b>Следить за заявками</b><small style="display:block;color:var(--muted);margin-top:3px">кто ждёт ответа</small></span><span class="dm-ob-switch on"><span></span></span></div>
+          <div class="dm-ob-rule"><span><b>Следить за деньгами</b><small style="display:block;color:var(--muted);margin-top:3px">продажи и расходы</small></span><span class="dm-ob-switch on"><span></span></span></div>
+          <div class="dm-ob-rule"><span><b>Следить за сайтом</b><small style="display:block;color:var(--muted);margin-top:3px">важные изменения</small></span><span class="dm-ob-switch on"><span></span></span></div>
+        </div>
+      </div>`;
+      actions=`<button class="dm-ob-button" onclick="dmObNext()">Дальше →</button>`;
+    }
+    if(step===7){
+      html=`<div class="dm-ob-screen dm-ob-center dm-ob-final">
+        <div class="dm-ob-final-orbit"></div>
+        ${logo()}
+        <div class="dm-ob-kicker">Готово</div>
+        <h1 class="dm-ob-title small">Теперь я знаю ваш бизнес.</h1>
+        <p class="dm-ob-copy" style="margin:auto">Каждый день я буду смотреть, что происходит, и говорить вам только главное.</p>
+      </div>`;
+      actions=`<button class="dm-ob-button" onclick="dmObComplete()">Показать мой бизнес →</button>`;
+    }
+    stage.innerHTML=html;
+    bottom.innerHTML=actions;
+  }
+
+  window.dmObNext=function(){ if(step<total-1){step++;render()} };
+  window.dmObPrev=function(){ if(step>0){step--;render()} };
+  window.dmObNameNext=function(){
+    const v=document.getElementById('dmObName')?.value?.trim();
+    if(v)data.name=v;
+    step=2;render();
+  };
+  window.dmObSource=function(source){
+    data.source=source;
+    if(source==='voice'){step=3}
+    else if(source==='site'){step=4}
+    else {step=5}
+    render();
+  };
+  window.dmObFinishVoice=function(){step=5;render()};
+  window.dmObAnalyze=function(){step=5;render()};
+  window.dmObSkip=function(){dmObComplete()};
+  window.dmObComplete=function(){
+    localStorage.setItem('dm_onboarding_seen','1');
+    root.classList.add('dm-ob-closing');
+    setTimeout(()=>{root.hidden=true;root.remove()},420);
+  };
+
+  // For development/demo, show every time. To make first-launch persistent,
+  // uncomment the localStorage guard below.
+  render();
+})();
 </script>
 
 </body></html>
