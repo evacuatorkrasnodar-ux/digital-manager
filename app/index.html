@@ -858,6 +858,71 @@ body.dark .recovery-main,body.dark .recovery-actions .send{background:#fff;color
   .recovery-overlay{align-items:center;padding:20px}
   .recovery-sheet{border-radius:30px;max-height:88vh}
 }
+
+/* Living minimal icon system */
+:root{
+  --icon: #111216;
+  --icon-muted: rgba(17,18,22,.58);
+  --icon-line: rgba(17,18,22,.14);
+}
+body.dark{
+  --icon: #fff;
+  --icon-muted: rgba(255,255,255,.66);
+  --icon-line: rgba(255,255,255,.18);
+}
+.dm-icon{
+  width:24px;height:24px;display:inline-grid;place-items:center;flex:none;
+  color:var(--icon);position:relative;
+}
+.dm-icon svg{width:20px;height:20px;overflow:visible}
+.dm-icon svg *{
+  fill:none;stroke:currentColor;stroke-width:1.55;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+.dm-icon--soft{color:var(--icon-muted)}
+.dm-icon--live svg{animation:dmIconBreath 2.8s ease-in-out infinite}
+.dm-icon--live:after{
+  content:"";position:absolute;inset:2px;border:1px solid currentColor;
+  border-radius:50%;opacity:.10;animation:dmIconRing 2.8s ease-out infinite;
+}
+.dm-icon--success svg{animation:dmIconDraw .7s ease-out both}
+.dm-icon--return svg{animation:dmIconFloat 2.6s ease-in-out infinite}
+.dm-icon--pulse svg{animation:dmIconPulse 1.8s ease-in-out infinite}
+@keyframes dmIconBreath{0%,100%{transform:scale(1);opacity:.82}50%{transform:scale(1.06);opacity:1}}
+@keyframes dmIconRing{0%{transform:scale(.65);opacity:.22}75%,100%{transform:scale(1.25);opacity:0}}
+@keyframes dmIconDraw{from{stroke-dasharray:70;stroke-dashoffset:70}to{stroke-dasharray:70;stroke-dashoffset:0}}
+@keyframes dmIconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@keyframes dmIconPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@media (prefers-reduced-motion:reduce){
+  .dm-icon svg,.dm-icon:after{animation:none!important}
+}
+.icon-action{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+}
+.icon-action .dm-icon{margin-left:1px}
+
+
+.return-cycle{max-width:1280px;margin:0 auto 18px;padding:22px;border:1px solid var(--line);border-radius:26px;background:var(--panel);backdrop-filter:blur(22px);box-shadow:var(--shadow);overflow:hidden;position:relative}
+.return-cycle:before{content:"";position:absolute;width:180px;height:180px;right:-70px;top:-80px;border-radius:50%;border:1px solid var(--icon-line);opacity:.35}
+.return-cycle-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}
+.return-cycle .eyebrow{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.02em}
+.return-cycle h2{margin:10px 0 5px;font-size:24px;letter-spacing:-.035em}
+.return-cycle p{margin:0;color:var(--muted);font-size:13px;line-height:1.5;max-width:620px}
+.return-cycle-live{width:42px;height:42px;border:1px solid var(--icon-line);border-radius:15px;display:grid;place-items:center;background:rgba(255,255,255,.18)}
+.return-cycle-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.return-client{display:flex;align-items:center;gap:11px;min-width:0}
+.return-client-icon{width:42px;height:42px;border:1px solid var(--icon-line);border-radius:14px;display:grid;place-items:center}
+.return-client b{display:block;font-size:13px}.return-client small{display:block;color:var(--muted);margin-top:3px;font-size:11px}
+.return-cycle-btn{min-height:44px;border:1px solid var(--icon-line);background:transparent;color:var(--text);border-radius:14px;padding:0 13px;font-weight:700}
+body.dark .return-cycle{background:rgba(255,255,255,.045)}
+body.dark .return-cycle-live,.dark .return-client-icon{background:rgba(255,255,255,.035)}
+@media(max-width:700px){
+  .return-cycle{margin:0 0 14px;padding:18px;border-radius:22px}
+  .return-cycle h2{font-size:21px}
+  .return-cycle-row{align-items:flex-start;flex-direction:column}
+  .return-cycle-btn{width:100%;justify-content:center}
+}
+
 </style>
 
 <style>
@@ -874,7 +939,7 @@ body.dark .more-panel,body.dark .control-panel,body.dark .pulse-panel{background
 </head>
 <body>
 <div class="app">
-<aside class="sidebar"><div class="brand"><div class="mark">ЦБ</div><div><div class="brand-title">Цифровой бизнес</div><div class="brand-sub">Цифровой управляющий</div></div></div><nav class="nav"><button class="active" type="button" data-section="home">⌂ &nbsp;Главная</button><button type="button" data-section="tasks">✓ &nbsp;Задачи</button><button type="button" data-section="clients">◯ &nbsp;Клиенты</button><button type="button" data-section="sales">↗ &nbsp;Продажи</button><button type="button" data-section="finance">₽ &nbsp;Финансы</button><button type="button" data-section="promo">↗ &nbsp;Продвижение</button><button type="button" data-section="reports">▤ &nbsp;Отчёты</button><button type="button" data-section="settings">⚙ &nbsp;Настройки</button></nav><button class="pwa-install" id="installBtn" type="button" hidden>Установить приложение</button>
+<aside class="sidebar"><div class="brand"><div class="mark">ЦБ</div><div><div class="brand-title">Цифровой бизнес</div><div class="brand-sub">Цифровой управляющий</div></div></div><nav class="nav"><button class="active" type="button" data-section="home"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5z"/><path d="M9.5 20v-5.5h5V20"/></svg></span>Главная</button><button type="button" data-section="tasks"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M5 12.5 9.2 17 19 7"/></svg></span>Задачи</button><button type="button" data-section="clients"><span class="dm-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c.5-3.2 2.4-5 5.5-5s5 1.8 5.5 5"/><path d="M15.5 6.5c2.5.2 4 1.7 4 4"/><path d="M16 14.5c2.2.5 3.5 2 4 4.5"/></svg></span>Клиенты</button><button type="button" data-section="sales"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M5 17 19 5"/><path d="M10 5h9v9"/></svg></span>Продажи</button><button type="button" data-section="finance"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M8 4v16"/><path d="M11.5 4H14a4 4 0 0 1 0 8H8"/><path d="M8 12h6a4 4 0 0 1 0 8h-3"/></svg></span>Финансы</button><button type="button" data-section="promo"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M5 19V8"/><path d="M10 19V5"/><path d="M15 19v-8"/><path d="M20 19V3"/></svg></span>Продвижение</button><button type="button" data-section="reports"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M8 15v2"/><path d="M12 11v6"/><path d="M16 8v9"/></svg></span>Отчёты</button><button type="button" data-section="settings"><span class="dm-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.8 1.8 0 0 0 .35 2l.05.05-1.9 1.9-.05-.05a1.8 1.8 0 0 0-2-.35 1.8 1.8 0 0 0-1.1 1.65V20h-2.7v-.1a1.8 1.8 0 0 0-1.1-1.65 1.8 1.8 0 0 0-2 .35l-.05.05L7 16.95l.05-.05a1.8 1.8 0 0 0 .35-2 1.8 1.8 0 0 0-1.65-1.1H5v-2.7h.75a1.8 1.8 0 0 0 1.65-1.1 1.8 1.8 0 0 0-.35-2L7 7.95 8.9 6.05l.05.05a1.8 1.8 0 0 0 2 .35A1.8 1.8 0 0 0 12.05 4.8V4h2.7v.8a1.8 1.8 0 0 0 1.1 1.65 1.8 1.8 0 0 0 2-.35l.05-.05 1.9 1.9-.05.05a1.8 1.8 0 0 0-.35 2 1.8 1.8 0 0 0 1.65 1.1H22v2.7h-.95A1.8 1.8 0 0 0 19.4 15z"/></svg></span>Настройки</button></nav><button class="pwa-install" id="installBtn" type="button" hidden>Установить приложение</button>
 <div class="online"><span class="dot"></span>Цифровой управляющий · онлайн</div><button class="theme" id="theme">Тема <span id="themeText">Тёмная</span></button></aside>
 <main class="content"><header class="top"><div><div class="eyebrow"><b>Цифровой управляющий</b> · сегодня</div><h1>Доброе утро, Алексей.</h1><p class="lead">Сегодня у тебя 7 важных задач. Я уже проверил бизнес.</p></div><div class="date">30 сентября 2026</div></header>
 <section class="grid">
