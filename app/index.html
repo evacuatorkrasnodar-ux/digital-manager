@@ -768,6 +768,96 @@ body.dark .report-trigger::after{background:rgba(120,150,255,.12)}
     font-size:12px;
   }
 }
+
+/* Client recovery flow */
+.recovery-overlay{
+  position:fixed;inset:0;z-index:10001;
+  display:none;align-items:flex-end;justify-content:center;
+  background:rgba(8,9,13,.38);
+  backdrop-filter:blur(13px);
+  -webkit-backdrop-filter:blur(13px);
+}
+.recovery-overlay.open{display:flex}
+.recovery-sheet{
+  width:min(760px,100%);
+  max-height:91vh;overflow:auto;
+  padding:20px 18px 18px;
+  border-radius:30px 30px 0 0;
+  background:rgba(250,250,252,.97);
+  box-shadow:0 -20px 70px rgba(0,0,0,.18);
+  animation:recoveryUp .3s ease both;
+}
+@keyframes recoveryUp{from{transform:translateY(30px);opacity:.6}to{transform:none;opacity:1}}
+.recovery-handle{width:38px;height:4px;border-radius:99px;background:rgba(0,0,0,.12);margin:0 auto 18px}
+.recovery-head{display:flex;justify-content:space-between;gap:12px}
+.recovery-kicker{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+.recovery-head h2{margin:7px 0 5px;font-size:27px;line-height:1;letter-spacing:-.055em}
+.recovery-head p{margin:0;color:var(--muted);font-size:11px;line-height:1.45;max-width:290px}
+.recovery-close{width:38px;height:38px;flex:none;border:0;border-radius:50%;background:rgba(0,0,0,.055);font-size:18px}
+.recovery-summary{
+  display:flex;gap:8px;margin:17px 0 12px;
+}
+.recovery-summary div{
+  flex:1;padding:12px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.55)
+}
+.recovery-summary b{display:block;font-size:18px;letter-spacing:-.04em}
+.recovery-summary span{font-size:9px;color:var(--muted)}
+.recovery-client{
+  padding:15px;border:1px solid var(--line);border-radius:20px;
+  background:rgba(255,255,255,.62);margin-top:8px;
+}
+.recovery-client-top{display:flex;align-items:center;gap:11px}
+.recovery-avatar{
+  width:39px;height:39px;border-radius:13px;display:grid;place-items:center;
+  background:rgba(22,119,255,.09);color:var(--blue);font-weight:800;font-size:12px
+}
+.recovery-name{font-size:13px;font-weight:750}
+.recovery-meta{margin-top:3px;color:var(--muted);font-size:10px}
+.recovery-value{margin-left:auto;text-align:right}
+.recovery-value b{display:block;font-size:12px}
+.recovery-value span{font-size:9px;color:var(--muted)}
+.recovery-message{
+  margin-top:12px;padding:12px 13px;border-radius:15px;
+  background:rgba(245,245,247,.9);font-size:10.5px;line-height:1.48;color:var(--muted)
+}
+.recovery-actions{display:flex;gap:7px;margin-top:10px}
+.recovery-actions button{
+  min-height:39px;padding:0 12px;border-radius:12px;font-size:10px;font-weight:700;
+  border:1px solid var(--line);background:rgba(255,255,255,.7);color:var(--text)
+}
+.recovery-actions .send{border:0;background:#111217;color:#fff}
+.recovery-bottom{
+  margin-top:14px;padding:15px;border-radius:19px;
+  background:linear-gradient(135deg,rgba(22,119,255,.07),rgba(114,87,255,.07));
+  border:1px solid rgba(22,119,255,.09);
+}
+.recovery-bottom strong{font-size:12px}
+.recovery-bottom p{margin:5px 0 12px;color:var(--muted);font-size:10px;line-height:1.4}
+.recovery-main{
+  width:100%;min-height:48px;border:0;border-radius:14px;background:#111217;color:#fff;
+  font-size:12px;font-weight:750
+}
+.recovery-success{text-align:center;padding:28px 8px 16px}
+.recovery-success-icon{
+  width:58px;height:58px;margin:0 auto 14px;border-radius:20px;
+  display:grid;place-items:center;background:rgba(53,201,138,.11);color:#26a96f;font-size:25px
+}
+.recovery-success h2{font-size:25px;letter-spacing:-.05em;margin:0}
+.recovery-success p{color:var(--muted);font-size:11px;line-height:1.5;max-width:300px;margin:8px auto 18px}
+.recovery-result{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:7px;text-align:left
+}
+.recovery-result div{padding:12px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.55)}
+.recovery-result b{display:block;font-size:17px}.recovery-result span{font-size:9px;color:var(--muted)}
+body.dark .recovery-sheet{background:rgba(27,28,33,.98)}
+body.dark .recovery-close{background:rgba(255,255,255,.08)}
+body.dark .recovery-client,body.dark .recovery-summary div,body.dark .recovery-actions button,body.dark .recovery-result div{background:rgba(255,255,255,.04)}
+body.dark .recovery-message{background:rgba(255,255,255,.055)}
+body.dark .recovery-main,body.dark .recovery-actions .send{background:#fff;color:#111217}
+@media(min-width:701px){
+  .recovery-overlay{align-items:center;padding:20px}
+  .recovery-sheet{border-radius:30px;max-height:88vh}
+}
 </style>
 </head>
 <body>
@@ -787,7 +877,7 @@ body.dark .report-trigger::after{background:rgba(120,150,255,.12)}
     <h2>Продажи можно вернуть уже сегодня.</h2>
     <p>Я вижу 8 клиентов, которые получили предложение, но не получили повторного ответа. Это самая понятная точка роста прямо сейчас.</p>
     <div class="manager-command-actions">
-      <button class="manager-primary" onclick="alert('Готовлю список клиентов для возврата')">Вернуть клиентов</button>
+      <button class="manager-primary" onclick="openRecovery()">Вернуть клиентов</button>
       <button class="manager-secondary" onclick="alert('Открываю подробный разбор')">Почему так?</button>
     </div>
   </div>
@@ -1382,6 +1472,37 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape') closeMonthReport();
 });
 
+
+function openRecovery(){
+  const el=document.getElementById('recoveryOverlay');
+  const list=document.getElementById('recoveryListView');
+  const success=document.getElementById('recoverySuccessView');
+  if(el){el.classList.add('open');document.body.style.overflow='hidden';}
+  if(list) list.style.display='';
+  if(success) success.style.display='none';
+}
+function closeRecovery(){
+  const el=document.getElementById('recoveryOverlay');
+  if(el) el.classList.remove('open');
+  document.body.style.overflow='';
+}
+function runRecovery(){
+  const list=document.getElementById('recoveryListView');
+  const success=document.getElementById('recoverySuccessView');
+  if(list) list.style.display='none';
+  if(success) success.style.display='block';
+}
+function sendRecovery(name){
+  const button=event.currentTarget;
+  button.textContent='Готово ✓';
+  button.disabled=true;
+  button.style.opacity='.65';
+}
+function showRecoveryMessage(name){
+  alert('Здесь можно будет изменить сообщение для '+name);
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeRecovery()});
+
 </script>
 <div class="month-report-overlay" id="monthReportOverlay" onclick="if(event.target===this)closeMonthReport()">
   <div class="month-report" role="dialog" aria-modal="true" aria-labelledby="monthReportTitle">
@@ -1433,6 +1554,77 @@ document.addEventListener('keydown',e=>{
     <div class="report-footer">
       <button class="report-main-action" onclick="closeMonthReport();alert('Открываю план действий')">Открыть план действий</button>
       <button class="report-secondary-action" onclick="closeMonthReport()">Понятно</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="recovery-overlay" id="recoveryOverlay" onclick="if(event.target===this)closeRecovery()">
+  <div class="recovery-sheet" role="dialog" aria-modal="true" aria-labelledby="recoveryTitle">
+    <div class="recovery-handle"></div>
+    <div id="recoveryListView">
+      <div class="recovery-head">
+        <div>
+          <div class="recovery-kicker">Цифровой управляющий · продажи</div>
+          <h2 id="recoveryTitle">8 клиентов можно вернуть</h2>
+          <p>Я выбрал тех, у кого сейчас самый понятный следующий шаг.</p>
+        </div>
+        <button class="recovery-close" onclick="closeRecovery()" aria-label="Закрыть">×</button>
+      </div>
+
+      <div class="recovery-summary">
+        <div><b>8</b><span>клиентов</span></div>
+        <div><b>74 000 ₽</b><span>потенциал</span></div>
+        <div><b>3</b><span>самых горячих</span></div>
+      </div>
+
+      <div class="recovery-client">
+        <div class="recovery-client-top">
+          <div class="recovery-avatar">МС</div>
+          <div><div class="recovery-name">Мария С.</div><div class="recovery-meta">Предложение · вчера</div></div>
+          <div class="recovery-value"><b>≈ 28 000 ₽</b><span>потенциал</span></div>
+        </div>
+        <div class="recovery-message">«Мария, добрый день. Хотел уточнить, удалось ли посмотреть наше предложение. Если остались вопросы — я рядом и помогу.»</div>
+        <div class="recovery-actions"><button class="send" onclick="sendRecovery('Мария С.')">Ответить</button><button onclick="showRecoveryMessage('Мария С.')">Изменить</button></div>
+      </div>
+
+      <div class="recovery-client">
+        <div class="recovery-client-top">
+          <div class="recovery-avatar">АК</div>
+          <div><div class="recovery-name">Алексей К.</div><div class="recovery-meta">Предложение · 2 дня назад</div></div>
+          <div class="recovery-value"><b>≈ 24 000 ₽</b><span>потенциал</span></div>
+        </div>
+        <div class="recovery-message">«Алексей, добрый день. Возвращаюсь к нашему предложению. Подскажите, актуально ли ещё обсудить детали?»</div>
+        <div class="recovery-actions"><button class="send" onclick="sendRecovery('Алексей К.')">Напомнить</button><button onclick="showRecoveryMessage('Алексей К.')">Изменить</button></div>
+      </div>
+
+      <div class="recovery-client">
+        <div class="recovery-client-top">
+          <div class="recovery-avatar">АС</div>
+          <div><div class="recovery-name">Андрей С.</div><div class="recovery-meta">Предложение · 3 дня назад</div></div>
+          <div class="recovery-value"><b>≈ 22 000 ₽</b><span>потенциал</span></div>
+        </div>
+        <div class="recovery-message">«Андрей, добрый день. Хотел коротко уточнить статус по предложению. Если нужно — могу ещё раз пройтись по условиям.»</div>
+        <div class="recovery-actions"><button class="send" onclick="sendRecovery('Андрей С.')">Ответить</button><button onclick="showRecoveryMessage('Андрей С.')">Изменить</button></div>
+      </div>
+
+      <div class="recovery-bottom">
+        <strong>Я подготовил сообщения для всех 8.</strong>
+        <p>Первые три — самые понятные для возврата. Остальных можно обработать после них.</p>
+        <button class="recovery-main" onclick="runRecovery()">Сделать</button>
+      </div>
+    </div>
+
+    <div id="recoverySuccessView" class="recovery-success" style="display:none">
+      <div class="recovery-success-icon">✓</div>
+      <h2>Готово.</h2>
+      <p>Я запустил возврат клиентов и оставил под контролем тех, кому требуется твоё подтверждение.</p>
+      <div class="recovery-result">
+        <div><b>8</b><span>подготовлено</span></div>
+        <div><b>6</b><span>отправлено</span></div>
+        <div><b>2</b><span>ждут тебя</span></div>
+      </div>
+      <button class="recovery-main" style="margin-top:14px" onclick="closeRecovery()">Понятно</button>
     </div>
   </div>
 </div>
