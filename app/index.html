@@ -923,6 +923,173 @@ body.dark .return-cycle-live,.dark .return-client-icon{background:rgba(255,255,2
   .return-cycle-btn{width:100%;justify-content:center}
 }
 
+
+/* Premium living navigation */
+.sidebar nav, .side-nav, .nav-list{
+  position:relative;
+}
+.sidebar nav a, .sidebar .nav-item, .nav-list a{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  transition:transform .32s cubic-bezier(.2,.8,.2,1), background .32s ease,
+              border-color .32s ease, box-shadow .32s ease;
+}
+.sidebar nav a::before, .sidebar .nav-item::before, .nav-list a::before{
+  content:"";
+  position:absolute;
+  left:8px;right:8px;top:5px;bottom:5px;
+  border-radius:16px;
+  background:radial-gradient(circle at 10% 50%, rgba(0,0,0,.08), transparent 55%);
+  opacity:0;
+  transform:scale(.92);
+  transition:opacity .35s ease, transform .45s cubic-bezier(.2,.8,.2,1);
+  z-index:-1;
+}
+body.dark .sidebar nav a::before,
+body.dark .sidebar .nav-item::before,
+body.dark .nav-list a::before{
+  background:radial-gradient(circle at 10% 50%, rgba(255,255,255,.14), transparent 55%);
+}
+.sidebar nav a:hover, .sidebar .nav-item:hover, .nav-list a:hover{
+  transform:translateX(3px);
+}
+.sidebar nav a:hover::before, .sidebar .nav-item:hover::before, .nav-list a:hover::before,
+.sidebar nav a.active::before, .sidebar .nav-item.active::before, .nav-list a.active::before{
+  opacity:1;
+  transform:scale(1);
+}
+.sidebar nav a.active, .sidebar .nav-item.active, .nav-list a.active{
+  box-shadow:inset 0 0 0 1px var(--icon-line, rgba(17,18,22,.12));
+}
+.sidebar nav a .dm-icon, .sidebar .nav-item .dm-icon, .nav-list a .dm-icon{
+  transition:transform .45s cubic-bezier(.2,.8,.2,1);
+}
+.sidebar nav a:hover .dm-icon, .sidebar .nav-item:hover .dm-icon, .nav-list a:hover .dm-icon,
+.sidebar nav a.active .dm-icon, .sidebar .nav-item.active .dm-icon, .nav-list a.active .dm-icon{
+  transform:translateX(1px) scale(1.08);
+}
+.sidebar nav a.active .dm-icon svg, .sidebar .nav-item.active .dm-icon svg, .nav-list a.active .dm-icon svg{
+  animation:navIconWake .7s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes navIconWake{
+  0%{opacity:.55;transform:scale(.82)}
+  55%{opacity:1;transform:scale(1.13)}
+  100%{opacity:1;transform:scale(1)}
+}
+.premium-nav-label{
+  position:relative;
+}
+.premium-nav-label::after{
+  content:"";
+  position:absolute;
+  left:0;right:100%;bottom:-2px;height:1px;
+  background:currentColor;
+  opacity:.35;
+  transition:right .4s cubic-bezier(.2,.8,.2,1);
+}
+.sidebar nav a:hover .premium-nav-label::after,
+.sidebar .nav-item:hover .premium-nav-label::after{
+  right:35%;
+}
+
+/* Business memory CTA */
+.business-memory{
+  max-width:1280px;
+  margin:0 auto 18px;
+  position:relative;
+  overflow:hidden;
+  padding:20px 21px;
+  border:1px solid var(--line);
+  border-radius:26px;
+  background:linear-gradient(135deg, rgba(255,255,255,.58), rgba(255,255,255,.24));
+  backdrop-filter:blur(24px);
+  box-shadow:var(--shadow);
+  cursor:pointer;
+}
+body.dark .business-memory{
+  background:linear-gradient(135deg, rgba(255,255,255,.075), rgba(255,255,255,.025));
+}
+.business-memory::before{
+  content:"";
+  position:absolute;
+  width:280px;height:280px;
+  right:-150px;top:-175px;
+  border-radius:50%;
+  border:1px solid var(--icon-line);
+  box-shadow:0 0 0 28px rgba(127,127,127,.025),0 0 0 58px rgba(127,127,127,.018);
+  animation:memoryOrbit 8s ease-in-out infinite;
+}
+.business-memory::after{
+  content:"";
+  position:absolute;
+  width:110px;height:110px;
+  right:28px;bottom:-70px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(127,127,127,.10), transparent 68%);
+  filter:blur(8px);
+}
+.business-memory-head{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  position:relative;z-index:1;
+}
+.business-memory-left{display:flex;align-items:center;gap:13px;min-width:0}
+.business-memory-mark{
+  width:48px;height:48px;border:1px solid var(--icon-line);
+  border-radius:16px;display:grid;place-items:center;
+  background:rgba(255,255,255,.24);
+  box-shadow:inset 0 0 18px rgba(127,127,127,.05);
+}
+body.dark .business-memory-mark{background:rgba(255,255,255,.04)}
+.business-memory h3{margin:0;font-size:17px;letter-spacing:-.025em}
+.business-memory p{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.45}
+.business-memory-arrow{
+  width:38px;height:38px;border:1px solid var(--icon-line);border-radius:13px;
+  display:grid;place-items:center;flex:none;
+  transition:transform .4s cubic-bezier(.2,.8,.2,1),background .3s ease;
+}
+.business-memory:hover .business-memory-arrow{transform:translateX(4px)}
+.business-memory:hover .business-memory-mark .dm-icon{animation:memoryMark .9s ease both}
+@keyframes memoryOrbit{0%,100%{transform:rotate(0deg) scale(1)}50%{transform:rotate(7deg) scale(1.04)}}
+@keyframes memoryMark{0%{transform:rotate(0) scale(1)}45%{transform:rotate(-7deg) scale(1.1)}100%{transform:rotate(0) scale(1)}}
+
+/* Memory bottom sheet */
+.memory-sheet-backdrop{
+  position:fixed;inset:0;background:rgba(0,0,0,.22);
+  backdrop-filter:blur(7px);z-index:9990;opacity:0;pointer-events:none;
+  transition:opacity .28s ease;
+}
+.memory-sheet-backdrop.open{opacity:1;pointer-events:auto}
+.memory-sheet{
+  position:fixed;z-index:9991;left:50%;bottom:18px;transform:translate(-50%,20px);
+  width:min(620px,calc(100% - 28px));max-height:min(82vh,760px);overflow:auto;
+  border:1px solid var(--line);border-radius:30px;padding:24px;
+  background:rgba(250,250,252,.92);backdrop-filter:blur(30px);
+  box-shadow:0 28px 80px rgba(0,0,0,.22);
+  opacity:0;pointer-events:none;transition:opacity .3s ease,transform .45s cubic-bezier(.2,.8,.2,1);
+}
+body.dark .memory-sheet{background:rgba(28,28,30,.94)}
+.memory-sheet.open{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
+.memory-sheet-grab{width:38px;height:4px;border-radius:99px;background:var(--icon-line);margin:0 auto 18px}
+.memory-sheet-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.memory-sheet h2{margin:0;font-size:27px;letter-spacing:-.04em}
+.memory-sheet-sub{margin:7px 0 20px;color:var(--muted);font-size:13px;line-height:1.5}
+.memory-close{width:40px;height:40px;border:1px solid var(--icon-line);background:transparent;border-radius:14px;display:grid;place-items:center;color:var(--text)}
+.memory-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.memory-item{padding:15px;border:1px solid var(--line);border-radius:18px;background:rgba(127,127,127,.035)}
+.memory-item small{display:block;color:var(--muted);font-size:10px;margin-bottom:5px}
+.memory-item b{font-size:13px}
+.memory-footer{margin-top:14px;padding-top:15px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.memory-status{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:11px}
+.memory-dot{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 5px rgba(127,127,127,.08)}
+.memory-edit{min-height:44px;padding:0 16px;border-radius:14px;border:1px solid var(--icon-line);background:transparent;color:var(--text);font-weight:700}
+@media(max-width:700px){
+  .business-memory{margin:0 0 14px;padding:18px;border-radius:22px}
+  .business-memory h3{font-size:16px}
+  .memory-sheet{bottom:0;border-radius:30px 30px 0 0;width:100%;max-height:88vh;padding:20px}
+  .memory-grid{grid-template-columns:1fr}
+}
+
 </style>
 
 <style>
@@ -939,7 +1106,7 @@ body.dark .more-panel,body.dark .control-panel,body.dark .pulse-panel{background
 </head>
 <body>
 <div class="app">
-<aside class="sidebar"><div class="brand"><div class="mark">ЦБ</div><div><div class="brand-title">Цифровой бизнес</div><div class="brand-sub">Цифровой управляющий</div></div></div><nav class="nav"><button class="active" type="button" data-section="home"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5z"/><path d="M9.5 20v-5.5h5V20"/></svg></span>Главная</button><button type="button" data-section="tasks"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M5 12.5 9.2 17 19 7"/></svg></span>Задачи</button><button type="button" data-section="clients"><span class="dm-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c.5-3.2 2.4-5 5.5-5s5 1.8 5.5 5"/><path d="M15.5 6.5c2.5.2 4 1.7 4 4"/><path d="M16 14.5c2.2.5 3.5 2 4 4.5"/></svg></span>Клиенты</button><button type="button" data-section="sales"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M5 17 19 5"/><path d="M10 5h9v9"/></svg></span>Продажи</button><button type="button" data-section="finance"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M8 4v16"/><path d="M11.5 4H14a4 4 0 0 1 0 8H8"/><path d="M8 12h6a4 4 0 0 1 0 8h-3"/></svg></span>Финансы</button><button type="button" data-section="promo"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M5 19V8"/><path d="M10 19V5"/><path d="M15 19v-8"/><path d="M20 19V3"/></svg></span>Продвижение</button><button type="button" data-section="reports"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M8 15v2"/><path d="M12 11v6"/><path d="M16 8v9"/></svg></span>Отчёты</button><button type="button" data-section="settings"><span class="dm-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.8 1.8 0 0 0 .35 2l.05.05-1.9 1.9-.05-.05a1.8 1.8 0 0 0-2-.35 1.8 1.8 0 0 0-1.1 1.65V20h-2.7v-.1a1.8 1.8 0 0 0-1.1-1.65 1.8 1.8 0 0 0-2 .35l-.05.05L7 16.95l.05-.05a1.8 1.8 0 0 0 .35-2 1.8 1.8 0 0 0-1.65-1.1H5v-2.7h.75a1.8 1.8 0 0 0 1.65-1.1 1.8 1.8 0 0 0-.35-2L7 7.95 8.9 6.05l.05.05a1.8 1.8 0 0 0 2 .35A1.8 1.8 0 0 0 12.05 4.8V4h2.7v.8a1.8 1.8 0 0 0 1.1 1.65 1.8 1.8 0 0 0 2-.35l.05-.05 1.9 1.9-.05.05a1.8 1.8 0 0 0-.35 2 1.8 1.8 0 0 0 1.65 1.1H22v2.7h-.95A1.8 1.8 0 0 0 19.4 15z"/></svg></span>Настройки</button></nav><button class="pwa-install" id="installBtn" type="button" hidden>Установить приложение</button>
+<aside class="sidebar"><div class="brand"><div class="mark">ЦБ</div><div><div class="brand-title">Цифровой бизнес</div><div class="brand-sub">Цифровой управляющий</div></div></div><nav class="nav"><button class="active" type="button" data-section="home"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5z"/><path d="M9.5 20v-5.5h5V20"/></svg></span><span class="premium-nav-label">Главная</span></button><button type="button" data-section="tasks"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M5 12.5 9.2 17 19 7"/></svg></span><span class="premium-nav-label">Задачи</span></button><button type="button" data-section="clients"><span class="dm-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c.5-3.2 2.4-5 5.5-5s5 1.8 5.5 5"/><path d="M15.5 6.5c2.5.2 4 1.7 4 4"/><path d="M16 14.5c2.2.5 3.5 2 4 4.5"/></svg></span><span class="premium-nav-label">Клиенты</span></button><button type="button" data-section="sales"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M5 17 19 5"/><path d="M10 5h9v9"/></svg></span><span class="premium-nav-label">Продажи</span></button><button type="button" data-section="finance"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M8 4v16"/><path d="M11.5 4H14a4 4 0 0 1 0 8H8"/><path d="M8 12h6a4 4 0 0 1 0 8h-3"/></svg></span><span class="premium-nav-label">Финансы</span></button><button type="button" data-section="promo"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M5 19V8"/><path d="M10 19V5"/><path d="M15 19v-8"/><path d="M20 19V3"/></svg></span><span class="premium-nav-label">Продвижение</span></button><button type="button" data-section="reports"><span class="dm-icon"><svg viewBox="0 0 24 24"><path d="M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M8 15v2"/><path d="M12 11v6"/><path d="M16 8v9"/></svg></span><span class="premium-nav-label">Отчёты</span></button><button type="button" data-section="settings"><span class="dm-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.8 1.8 0 0 0 .35 2l.05.05-1.9 1.9-.05-.05a1.8 1.8 0 0 0-2-.35 1.8 1.8 0 0 0-1.1 1.65V20h-2.7v-.1a1.8 1.8 0 0 0-1.1-1.65 1.8 1.8 0 0 0-2 .35l-.05.05L7 16.95l.05-.05a1.8 1.8 0 0 0 .35-2 1.8 1.8 0 0 0-1.65-1.1H5v-2.7h.75a1.8 1.8 0 0 0 1.65-1.1 1.8 1.8 0 0 0-.35-2L7 7.95 8.9 6.05l.05.05a1.8 1.8 0 0 0 2 .35A1.8 1.8 0 0 0 12.05 4.8V4h2.7v.8a1.8 1.8 0 0 0 1.1 1.65 1.8 1.8 0 0 0 2-.35l.05-.05 1.9 1.9-.05.05a1.8 1.8 0 0 0-.35 2 1.8 1.8 0 0 0 1.65 1.1H22v2.7h-.95A1.8 1.8 0 0 0 19.4 15z"/></svg></span><span class="premium-nav-label">Настройки</span></button></nav><button class="pwa-install" id="installBtn" type="button" hidden>Установить приложение</button>
 <div class="online"><span class="dot"></span>Цифровой управляющий · онлайн</div><button class="theme" id="theme">Тема <span id="themeText">Тёмная</span></button></aside>
 <main class="content"><header class="top"><div><div class="eyebrow"><b>Цифровой управляющий</b> · сегодня</div><h1>Доброе утро, Алексей.</h1><p class="lead">Сегодня у тебя 7 важных задач. Я уже проверил бизнес.</p></div><div class="date">30 сентября 2026</div></header>
 <section class="grid">
@@ -1757,5 +1924,47 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeRecovery()});
     </div>
   </div>
 </div>
+
+
+<div class="memory-sheet-backdrop" id="businessMemoryBackdrop" onclick="closeBusinessMemory()"></div>
+<section class="memory-sheet" id="businessMemorySheet" aria-label="Память бизнеса">
+  <div class="memory-sheet-grab"></div>
+  <div class="memory-sheet-top">
+    <div>
+      <h2>Я знаю ваш бизнес</h2>
+      <p class="memory-sheet-sub">Я собираю контекст, чтобы не заставлять вас каждый раз объяснять всё заново.</p>
+    </div>
+    <button class="memory-close" type="button" onclick="closeBusinessMemory()" aria-label="Закрыть">
+      <span class="dm-icon"><svg viewBox="0 0 24 24"><path d="m6 6 12 12"/><path d="m18 6-12 12"/></svg></span>
+    </button>
+  </div>
+  <div class="memory-grid">
+    <div class="memory-item"><small>Бизнес</small><b>Автосервис</b></div>
+    <div class="memory-item"><small>Главная цель</small><b>Больше повторных клиентов</b></div>
+    <div class="memory-item"><small>Средний чек</small><b>16 700 ₽</b></div>
+    <div class="memory-item"><small>Что отслеживаю</small><b>Продажи · деньги · продвижение</b></div>
+    <div class="memory-item"><small>Память клиентов</small><b>Покупки и интервалы обращений</b></div>
+    <div class="memory-item"><small>Ваше правило</small><b>Денежные действия — сначала спросить</b></div>
+  </div>
+  <div class="memory-footer">
+    <div class="memory-status"><span class="memory-dot"></span> Обновлено сегодня</div>
+    <button class="memory-edit" type="button" onclick="closeBusinessMemory()">Понятно</button>
+  </div>
+</section>
+<script>
+function openBusinessMemory(){
+  document.getElementById('businessMemoryBackdrop')?.classList.add('open');
+  document.getElementById('businessMemorySheet')?.classList.add('open');
+  document.body.classList.add('modal-open');
+}
+function closeBusinessMemory(){
+  document.getElementById('businessMemoryBackdrop')?.classList.remove('open');
+  document.getElementById('businessMemorySheet')?.classList.remove('open');
+  document.body.classList.remove('modal-open');
+}
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') closeBusinessMemory();
+});
+</script>
 
 </body></html>
