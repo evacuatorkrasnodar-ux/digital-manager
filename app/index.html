@@ -503,6 +503,145 @@ body.dark .grid > .card:first-child,
 body.dark .ask,
 body.dark .sales-command,
 body.dark .sales-recovery{background-color:rgba(255,255,255,.045)!important}
+
+/* ULTIMATE DIGITAL MANAGER — mobile-first premium layer */
+.manager-orbit{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+}
+.manager-orbit::before{
+  content:"";
+  position:absolute;
+  width:280px;height:280px;
+  right:-110px;top:-150px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(102,82,255,.16),transparent 68%);
+  pointer-events:none;
+  z-index:-1;
+}
+.manager-orbit::after{
+  content:"";
+  position:absolute;
+  width:180px;height:180px;
+  left:-100px;bottom:-120px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(40,190,125,.11),transparent 70%);
+  pointer-events:none;
+  z-index:-1;
+}
+.manager-status{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  font-size:11px;
+  font-weight:650;
+  color:var(--muted);
+}
+.manager-status i{
+  width:7px;height:7px;border-radius:50%;
+  background:#35c98a;
+  box-shadow:0 0 0 4px rgba(53,201,138,.10);
+}
+.manager-command{
+  margin-top:16px;
+  padding:19px;
+  border:1px solid rgba(30,30,40,.07);
+  border-radius:22px;
+  background:rgba(255,255,255,.67);
+  box-shadow:0 16px 45px rgba(30,35,50,.07);
+}
+.manager-command-kicker{
+  font-size:10px;
+  font-weight:750;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--muted);
+}
+.manager-command h2{
+  margin:8px 0 7px;
+  font-size:21px;
+  line-height:1.12;
+  letter-spacing:-.045em;
+}
+.manager-command p{
+  margin:0;
+  max-width:330px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.48;
+}
+.manager-command-actions{
+  display:flex;gap:8px;flex-wrap:wrap;margin-top:15px;
+}
+.manager-primary{
+  min-height:44px;
+  padding:0 16px;
+  border:0;border-radius:14px;
+  background:#111217;color:white;
+  font-weight:700;font-size:12px;
+  box-shadow:0 8px 20px rgba(17,18,23,.16);
+}
+.manager-secondary{
+  min-height:44px;
+  padding:0 14px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:rgba(255,255,255,.65);
+  color:var(--text);
+  font-weight:650;font-size:12px;
+}
+.manager-three{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:10px;
+}
+.manager-mini{
+  min-height:78px;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:17px;
+  background:rgba(255,255,255,.48);
+}
+.manager-mini b{display:block;font-size:17px;letter-spacing:-.04em}
+.manager-mini span{display:block;margin-top:4px;color:var(--muted);font-size:10px;line-height:1.25}
+.manager-mini em{display:block;margin-top:7px;font-style:normal;font-size:9px;font-weight:750}
+.manager-mini.up em{color:var(--green)}
+.manager-mini.warn em{color:#d58a00}
+.manager-mini.down em{color:#e15b5b}
+
+.focus-strip{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;margin-top:12px;padding:13px 15px;
+  border:1px solid rgba(30,30,40,.06);
+  border-radius:17px;
+  background:rgba(255,255,255,.52);
+}
+.focus-strip strong{font-size:12px}
+.focus-strip span{font-size:10px;color:var(--muted)}
+.focus-dot{
+  flex:none;width:8px;height:8px;border-radius:50%;
+  background:#ffb020;box-shadow:0 0 0 5px rgba(255,176,32,.10);
+}
+
+@media(max-width:700px){
+  .manager-orbit{margin-top:8px}
+  .manager-command{padding:18px}
+  .manager-command h2{font-size:20px}
+  .manager-primary,.manager-secondary{flex:1}
+  .manager-three{gap:7px}
+  .manager-mini{padding:11px 10px}
+  .manager-mini b{font-size:16px}
+}
+body.dark .manager-command,
+body.dark .manager-mini,
+body.dark .focus-strip,
+body.dark .manager-secondary{
+  background:rgba(255,255,255,.045);
+  border-color:rgba(255,255,255,.08);
+}
+body.dark .manager-primary{background:#fff;color:#111217}
 </style>
 </head>
 <body>
@@ -513,6 +652,32 @@ body.dark .sales-recovery{background-color:rgba(255,255,255,.045)!important}
 <section class="grid">
 <article class="card"><div class="pad"><div class="title">Что происходит с бизнесом</div><div class="desc">Самое важное за вчера</div><div class="metrics"><div class="metric"><div class="ml">Оборот</div><div class="mv">184 000 ₽</div><div class="good">+8,4%</div></div><div class="metric"><div class="ml">Новые заявки</div><div class="mv">14</div><div class="good">−12% стоимость</div></div><div class="metric"><div class="ml">Новых клиентов</div><div class="mv">8</div><div class="ml">за вчера</div></div></div><div class="items"><div class="item"><span class="status red"></span><div class="item-main"><div class="item-title">На сайте упала конверсия на 18%</div><div class="item-text">Я нашёл изменение на странице заказа, которое произошло вчера вечером.</div><button class="action" data-demo="site">Проверить →</button></div></div><div class="item"><span class="status orange"></span><div class="item-main"><div class="item-title">Три клиента оставили отзывы</div><div class="item-text">На два отзыва нужно ответить. Я подготовил варианты ответов.</div><button class="action" data-demo="reviews">Показать →</button></div></div><div class="item"><span class="status green"></span><div class="item-main"><div class="item-title">Реклама принесла 14 заявок</div><div class="item-text">Стоимость заявки снизилась на 12%. Кампания работает лучше вчерашнего.</div></div></div></div></div></article>
 <aside class="card"><div class="pad"><div class="title">Я уже сделал</div><div class="desc">Работа без лишних уведомлений</div><div class="done"><div class="done-row"><span class="check">✓</span>Ответил на 2 отзыва</div><div class="done-row"><span class="check">✓</span>Обновил информацию на сайте</div><div class="done-row"><span class="check">✓</span>Перераспределил рекламный бюджет между двумя кампаниями</div></div><div class="needs"><b>От тебя нужно</b><div>Подтвердить изменение цены на товар X и позвонить Иванову в 14:00.</div></div><div class="title" style="margin-top:22px">Сегодня</div><div class="calendar"><div class="event"><span class="time">11:00</span><div class="event-box">Встреча с поставщиком</div></div><div class="event"><span class="time">14:00</span><div class="event-box">Позвонить Иванову</div></div><div class="event"><span class="time">17:30</span><div class="event-box">Итоги дня</div></div></div></div></aside>
+
+<section class="manager-orbit" aria-label="Цифровой управляющий">
+  <div class="manager-status"><i></i> Цифровой управляющий на связи</div>
+
+  <div class="manager-command">
+    <div class="manager-command-kicker">Главное сейчас</div>
+    <h2>Продажи можно вернуть уже сегодня.</h2>
+    <p>Я вижу 8 клиентов, которые получили предложение, но не получили повторного ответа. Это самая понятная точка роста прямо сейчас.</p>
+    <div class="manager-command-actions">
+      <button class="manager-primary" onclick="alert('Готовлю список клиентов для возврата')">Вернуть клиентов</button>
+      <button class="manager-secondary" onclick="alert('Открываю подробный разбор')">Почему так?</button>
+    </div>
+  </div>
+
+  <div class="manager-three">
+    <div class="manager-mini up"><b>184 000 ₽</b><span>продажи вчера</span><em>+8% к дню ранее</em></div>
+    <div class="manager-mini warn"><b>8</b><span>клиентов ждут</span><em>можно вернуть</em></div>
+    <div class="manager-mini down"><b>−18%</b><span>конверсия сайта</span><em>нужно проверить</em></div>
+  </div>
+
+  <div class="focus-strip">
+    <div><strong>Мой фокус на сегодня</strong><br><span>сначала вернём клиентов, потом увеличим рекламу</span></div>
+    <i class="focus-dot"></i>
+  </div>
+</section>
+
 <section class="ask"><div class="ask-head"><div><div class="ask-title">Что будем делать?</div><div class="ask-sub">Спроси голосом или напиши. Я разберусь в данных и объясню причину.</div></div><div class="manager"><span class="dot"></span>Цифровой управляющий</div></div><form class="ask-form" id="askForm"><input class="ask-input" id="askInput" placeholder="Например: Почему вчера было мало продаж?"><button type="button" class="round" id="voice" aria-label="Голосовой вопрос">⌕</button><button class="send">Спросить</button></form><div class="reply" id="reply"><b>Я проверил подключённые данные.</b>Основное падение произошло из-за рекламы: трафик сохранился, но конверсия сайта снизилась с 3,8% до 2,9%. Я нашёл изменение на странице заказа, которое произошло вчера вечером. Проверить и исправить?<div class="reply-actions"><button class="confirm-action" id="confirmAction" type="button">✓&nbsp; Да, проверить и исправить</button><button class="later-action" id="laterAction" type="button">Не сейчас</button></div><div class="result" id="result"><b>Готово.</b> Изменение исправлено. Проверяю результат.</div></div></section>
 </section>
 <section class="clients-page" id="clientsPage">
