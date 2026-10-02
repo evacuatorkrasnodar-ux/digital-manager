@@ -43,7 +43,7 @@ body.dark .finance-source-track{background:rgba(255,255,255,.08)}
 .finance-health-tag{font-size:11px;color:var(--green);padding:7px 10px;border-radius:11px;background:rgba(39,168,102,.1);white-space:nowrap}
 .finance-result{display:none;margin-top:10px;padding:11px 12px;border-radius:13px;background:rgba(39,168,102,.08);color:var(--muted);font-size:11px;line-height:1.45}.finance-result.show{display:block}
 .finance-clickable{width:100%;text-align:left;color:var(--text);font:inherit;cursor:pointer}.finance-clickable>span:last-child{color:var(--muted);font-size:18px}
-.finance-ai-response{margin-top:15px;padding:14px;border-radius:16px;background:rgba(114,87,255,.06);border:1px solid rgba(114,87,255,.11);font-size:12px;line-height:1.5}.finance-ai-response b{display:block;color:var(--purple);margin-bottom:4px}.finance-ai-response div{color:var(--muted)}
+.finance-manager-response{margin-top:15px;padding:14px;border-radius:16px;background:rgba(114,87,255,.06);border:1px solid rgba(114,87,255,.11);font-size:12px;line-height:1.5}.finance-manager-response b{display:block;color:var(--purple);margin-bottom:4px}.finance-manager-response div{color:var(--muted)}
 @media(max-width:600px){.finance-health{align-items:flex-start}.finance-health-tag{display:none}}
 
 .promo-page{display:none;max-width:1280px;margin:0 auto}.promo-page.show{display:block}
@@ -69,7 +69,7 @@ body.dark .finance-source-track{background:rgba(255,255,255,.08)}
 .promo-insight{margin-top:16px;padding:15px;border-radius:18px;background:rgba(39,168,102,.07);border:1px solid rgba(39,168,102,.14)}.promo-insight b{font-size:12px;color:var(--green)}.promo-insight div{font-size:12px;color:var(--muted);line-height:1.5;margin-top:5px}
 .promo-action{margin-top:10px;width:100%;border:0;background:var(--text);color:#fff;border-radius:14px;padding:12px;font-size:12px;font-weight:700}
 .promo-result{display:none;margin-top:10px;padding:11px 12px;border-radius:13px;background:rgba(39,168,102,.08);color:var(--muted);font-size:11px;line-height:1.45}.promo-result.show{display:block}
-.promo-ai{margin-top:15px;padding:14px;border-radius:16px;background:rgba(114,87,255,.06);border:1px solid rgba(114,87,255,.11);font-size:12px;line-height:1.5}.promo-ai b{display:block;color:var(--purple);margin-bottom:4px}.promo-ai div{color:var(--muted)}
+.manager-insight{margin-top:15px;padding:14px;border-radius:16px;background:rgba(114,87,255,.06);border:1px solid rgba(114,87,255,.11);font-size:12px;line-height:1.5}.manager-insight b{display:block;color:var(--purple);margin-bottom:4px}.manager-insight div{color:var(--muted)}
 .promo-click{width:100%;text-align:left;color:var(--text);font:inherit;cursor:pointer}.promo-click>span:last-child{color:var(--muted);font-size:18px}
 @media(max-width:900px){.promo-grid{grid-template-columns:1fr}.promo-stats{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.promo-health{align-items:flex-start}.promo-tag{display:none}.promo-stats{grid-template-columns:1fr}.promo-head{align-items:flex-start}.promo-period{display:none}}
@@ -95,8 +95,8 @@ body.dark .finance-source-track{background:rgba(255,255,255,.08)}
 .sales-funnel-main{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;width:100%;font-size:12px}.sales-funnel-main span{color:var(--muted)}.sales-funnel-main b{font-size:14px}
 .sales-loss{margin-top:16px;padding:15px;border-radius:18px;background:rgba(228,81,81,.06);border:1px solid rgba(228,81,81,.13)}
 .sales-loss b{font-size:12px;color:var(--red)}.sales-loss div{font-size:12px;color:var(--muted);line-height:1.5;margin-top:5px}
-.sales-ai{margin-top:16px;padding:15px;border-radius:18px;background:rgba(114,87,255,.07);border:1px solid rgba(114,87,255,.12)}
-.sales-ai b{font-size:12px;color:var(--purple)}.sales-ai div{font-size:12px;color:var(--muted);line-height:1.5;margin-top:5px}
+.sales-manager-analysis{margin-top:16px;padding:15px;border-radius:18px;background:rgba(114,87,255,.07);border:1px solid rgba(114,87,255,.12)}
+.sales-manager-analysis b{font-size:12px;color:var(--purple)}.sales-manager-analysis div{font-size:12px;color:var(--muted);line-height:1.5;margin-top:5px}
 .sales-action{margin-top:10px;width:100%;border:0;background:var(--text);color:#fff;border-radius:14px;padding:12px;font-size:12px;font-weight:700}
 .sales-result{display:none;margin-top:10px;padding:11px 12px;border-radius:13px;background:rgba(39,168,102,.08);color:var(--muted);font-size:11px;line-height:1.45}.sales-result.show{display:block}
 .sales-source-list,.sales-client-list{display:grid;gap:9px;margin-top:16px}
@@ -118,6 +118,49 @@ body.dark .finance-source-track{background:rgba(255,255,255,.08)}
 body.dark .sales-source-row,body.dark .sales-client-row,body.dark .sales-action-row,body.dark .sales-funnel-row{background:rgba(255,255,255,.035)}
 @media(max-width:900px){.sales-grid{grid-template-columns:1fr}.sales-stats{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.sales-head{align-items:flex-start}.sales-period{display:none}.sales-health{align-items:flex-start}.sales-tag{display:none}.sales-stats{grid-template-columns:1fr}.sales-title{font-size:29px}.sales-card{padding:18px}.sales-client-action{display:none}}
+
+/* Premium product layer — спокойный, тактильный интерфейс */
+html{
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+body{
+  letter-spacing:-.01em;
+}
+button,.card,.ask,.task-row,.client-row,.finance-card,.finance-stat,
+.promo-card,.promo-stat,.sales-card,.sales-stat,.sales-action-row,
+.channel-row,.finance-row,.metric,.item,.event-box{
+  transition:
+    transform .22s cubic-bezier(.2,.7,.2,1),
+    box-shadow .22s cubic-bezier(.2,.7,.2,1),
+    border-color .22s ease,
+    background-color .22s ease,
+    opacity .22s ease;
+}
+button:hover:not(:disabled){
+  transform:translateY(-1px);
+}
+button:active:not(:disabled){
+  transform:translateY(0) scale(.985);
+}
+.card:hover,.finance-card:hover,.promo-card:hover,.sales-card:hover,
+.task-row:hover,.client-row:hover,.finance-stat:hover,.promo-stat:hover,
+.sales-stat:hover{
+  box-shadow:0 22px 65px rgba(30,35,50,.10);
+}
+body.dark .card:hover,body.dark .finance-card:hover,body.dark .promo-card:hover,
+body.dark .sales-card:hover,body.dark .task-row:hover,body.dark .client-row:hover,
+body.dark .finance-stat:hover,body.dark .promo-stat:hover,body.dark .sales-stat:hover{
+  box-shadow:0 24px 70px rgba(0,0,0,.30);
+}
+button:focus-visible,input:focus-visible,select:focus-visible{
+  outline:2px solid rgba(22,119,255,.55);
+  outline-offset:2px;
+}
+::selection{
+  background:rgba(22,119,255,.18);
+}
+
 </style>
 </head>
 <body>
@@ -163,7 +206,7 @@ body.dark .sales-source-row,body.dark .sales-client-row,body.dark .sales-action-
   </div>
 
   <div class="sales-health">
-    <div class="sales-health-icon">AI</div>
+    <div class="sales-health-icon">◈</div>
     <div class="sales-health-main">
       <b>Главный вывод по продажам</b>
       <div>Заявок стало больше, но основная потеря сейчас происходит после отправки предложения. Я нашёл клиентов, которым не сделали повторный контакт.</div>
@@ -194,8 +237,8 @@ body.dark .sales-source-row,body.dark .sales-client-row,body.dark .sales-action-
         <div>8 клиентов получили предложение, но не купили. Самая частая проблема — после предложения не было повторного контакта.</div>
       </div>
 
-      <div class="sales-ai">
-        <b>🧠 AI-анализ</b>
+      <div class="sales-manager-analysis">
+        <b>◈ Анализ цифрового управляющего</b>
         <div>Количество обращений растёт, поэтому проблема сейчас не в привлечении. Если вернуть повторный контакт с горячими клиентами, конверсия предложения в продажу может восстановиться.</div>
         <button class="sales-action" id="salesAnalyze">Проверить потерянные сделки →</button>
         <div class="sales-result" id="salesResult"></div>
@@ -330,8 +373,8 @@ body.dark .sales-source-row,body.dark .sales-client-row,body.dark .sales-action-
           <span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Проверить крупные платежи</div><div class="finance-row-text">Ближайшие обязательства ещё не влияют на остаток.</div></div><span>›</span>
         </button>
       </div>
-      <div class="finance-ai-response" id="financeAiResponse">
-        <b>Спроси меня о деньгах</b>
+      <div class="finance-manager-response" id="financeManagerResponse">
+        <b>Спроси цифрового управляющего о деньгах</b>
         <div>Например: «Почему прибыль выросла?» или «Хватит ли денег на ближайшие две недели?»</div>
       </div>
     </article>
@@ -350,7 +393,7 @@ body.dark .sales-source-row,body.dark .sales-client-row,body.dark .sales-action-
   </div>
 
   <div class="promo-health">
-    <div class="promo-health-icon">AI</div>
+    <div class="promo-health-icon">◈</div>
     <div class="promo-health-main">
       <b>Главный вывод за период</b>
       <div>Telegram и VK дают больше качественных обращений, а сайт закрывает большую часть продаж. Я бы не оценивал каналы только по заявкам — важнее, сколько денег они реально приносят.</div>
@@ -404,7 +447,7 @@ body.dark .sales-source-row,body.dark .sales-client-row,body.dark .sales-action-
         <button class="channel-row promo-click" type="button" data-promo-action="vk"><div class="channel-icon">VK</div><div class="channel-main"><div class="channel-name">Проверить контент VK</div><div class="channel-meta">Объём хороший, но нужно сравнить стоимость продаж</div></div><span>›</span></button>
         <button class="channel-row promo-click" type="button" data-promo-action="connect"><div class="channel-icon">+</div><div class="channel-main"><div class="channel-name">Подключить новый канал</div><div class="channel-meta">Чтобы управляющий видел больше продаж</div></div><span>›</span></button>
       </div>
-      <div class="promo-ai" id="promoAi"><b>Спроси меня о продвижении</b><div>Например: «Откуда пришло больше всего денег?» или «Куда лучше перенести рекламный бюджет?»</div></div>
+      <div class="manager-insight" id="promoAi"><b>Спроси цифрового управляющего о продвижении</b><div>Например: «Откуда пришло больше всего денег?» или «Куда лучше перенести рекламный бюджет?»</div></div>
     </article>
 
     <article class="promo-card">
@@ -496,7 +539,7 @@ financeCheck?.addEventListener('click',()=>{
 
 document.querySelectorAll('[data-finance-action]').forEach(btn=>{
   btn.addEventListener('click',()=>{
-    const response=document.getElementById('financeAiResponse');
+    const response=document.getElementById('financeManagerResponse');
     const type=btn.dataset.financeAction;
     const data={
       ads:'Реклама: расходы выросли на 14%, но стоимость заявки снизилась на 12%. Следующий шаг — сравнить выручку и маржу по каждому рекламному каналу, прежде чем менять бюджет.',
