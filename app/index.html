@@ -117,7 +117,7 @@ body.dark .finance-source-track{background:rgba(255,255,255,.08)}
 .sales-finance-link button{margin-top:10px;width:100%;border:1px solid rgba(39,168,102,.2);background:transparent;color:var(--green);border-radius:13px;padding:10px;font-size:11px;font-weight:700}
 body.dark .sales-source-row,body.dark .sales-client-row,body.dark .sales-action-row,body.dark .sales-funnel-row{background:rgba(255,255,255,.035)}
 @media(max-width:900px){.sales-grid{grid-template-columns:1fr}.sales-stats{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.sales-head{align-items:flex-start}.sales-period{display:none}.sales-health{align-items:flex-start}.sales-tag{display:none}.sales-stats{grid-template-columns:1fr}.sales-title{font-size:29px}.sales-card{padding:18px}.sales-client-action{display:none}}
+@media(max-width:600px){.sales-head{align-items:flex-start}.sales-period{display:none}.sales-health{align-items:flex-start}.sales-tag{display:none}.sales-stats{grid-template-columns:1fr}.sales-title{font-size:29px}.sales-card{padding:18px}.sales-client-action{display:inline-flex;min-height:42px;align-items:center}}
 
 /* Premium product layer — спокойный, тактильный интерфейс */
 html{
@@ -235,6 +235,274 @@ body.dark .sales-bottom-note>span{background:rgba(255,255,255,.07)}
 @media(max-width:900px){.sales-hero{align-items:flex-start;flex-direction:column}.sales-hero-controls{width:100%}.sales-ask-btn{margin-left:auto}.sales-command{grid-template-columns:auto 1fr}.sales-command .sales-primary{grid-column:1/-1;width:100%}.sales-tip-row{grid-template-columns:1fr}.sales-grid-v2{grid-template-columns:1fr}}
 @media(max-width:600px){.sales-hero-copy h2{font-size:32px}.sales-hero-controls{display:none}.sales-command{padding:18px;border-radius:22px}.sales-command-icon{width:43px;height:43px;border-radius:14px}.sales-command h3{font-size:18px}.sales-command-meta span{font-size:10px}.sales-bottom-note{align-items:flex-start}.sales-bottom-note button{display:none}}
 
+
+/* Mobile-first product layer */
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+button,input{touch-action:manipulation}
+@media(max-width:700px){
+  :root{--mobile-pad:14px;--mobile-bottom:88px}
+  body{overflow-x:hidden}
+  .content{padding:18px var(--mobile-pad) calc(var(--mobile-bottom) + env(safe-area-inset-bottom))}
+  .top{display:block;margin-bottom:18px;padding:0 2px}
+  .eyebrow{font-size:11px;margin-bottom:7px}
+  h1{font-size:35px;line-height:.98;letter-spacing:-.065em;max-width:340px}
+  .lead{font-size:13px;line-height:1.45;max-width:330px}
+  .date{display:none}
+  .grid{display:grid;gap:12px}
+  .card,.ask,.sales-card,.finance-card,.promo-card{border-radius:23px}
+  .pad{padding:18px}
+  .metrics{display:flex;overflow-x:auto;gap:9px;margin-top:14px;padding:1px 1px 5px;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .metrics::-webkit-scrollbar{display:none}
+  .metric{min-width:142px;flex:0 0 142px;padding:15px;border-radius:18px;scroll-snap-align:start}
+  .mv{font-size:23px}
+  .items{gap:8px;margin-top:12px}
+  .item{padding:13px;border-radius:17px}
+  .item-title{font-size:13px;line-height:1.3}
+  .item-text{font-size:11.5px}
+  .action{min-height:42px;padding:9px 0}
+  .ask{padding:17px}
+  .ask-head{display:block}
+  .ask-title{font-size:17px}
+  .manager{display:none}
+  .ask-form{gap:8px}
+  .ask-input{height:50px;border-radius:16px;padding:0 14px}
+  .round{width:50px;height:50px}
+  .send{height:50px;border-radius:16px;padding:0 17px}
+  .mobile-nav{
+    left:10px;right:10px;bottom:calc(8px + env(safe-area-inset-bottom));
+    height:66px;padding:6px;gap:2px;border-radius:22px;
+    grid-template-columns:repeat(5,1fr);
+    background:rgba(255,255,255,.86);
+    box-shadow:0 18px 55px rgba(20,25,35,.18);
+  }
+  .mobile-nav button{
+    position:relative;height:54px;padding:5px 2px;border-radius:17px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+    color:#85858d;font-size:18px;text-align:center;
+  }
+  .mobile-nav button span{font-size:18px;line-height:18px}
+  .mobile-nav button small{font-size:9px;line-height:12px;font-weight:650}
+  .mobile-nav button.active{background:rgba(20,20,24,.07);color:var(--text)}
+  .mobile-nav button em{
+    position:absolute;top:3px;right:14px;min-width:16px;height:16px;padding:0 4px;
+    border-radius:8px;background:var(--red);color:#fff;font-size:9px;font-style:normal;
+    display:grid;place-items:center
+  }
+  .mobile-manager{
+    position:fixed;z-index:24;right:18px;
+    bottom:calc(86px + env(safe-area-inset-bottom));
+    width:56px;height:56px;border:0;border-radius:19px;
+    background:linear-gradient(145deg,#18181c,#303039);color:#fff;
+    display:grid;place-items:center;
+    box-shadow:0 16px 38px rgba(20,20,25,.24);
+  }
+  .mobile-manager span{font-size:22px;line-height:1;transition:transform .25s}
+  .mobile-manager:active span{transform:scale(.88)}
+  body.dark .mobile-nav{background:rgba(28,29,34,.9)}
+  body.dark .mobile-nav button.active{background:rgba(255,255,255,.09)}
+  body.dark .mobile-manager{background:linear-gradient(145deg,#f4f4f5,#dcdce1);color:#17171a}
+  .manager-sheet{position:fixed;inset:0;z-index:60;display:none}
+  .manager-sheet.show{display:block}
+  .manager-backdrop{position:absolute;inset:0;background:rgba(10,10,15,.38);backdrop-filter:blur(5px)}
+  .manager-panel{
+    position:absolute;left:0;right:0;bottom:0;
+    padding:10px 16px calc(18px + env(safe-area-inset-bottom));
+    border-radius:28px 28px 0 0;
+    background:rgba(250,250,252,.96);color:var(--text);
+    box-shadow:0 -18px 55px rgba(0,0,0,.18);
+    transform:translateY(105%);transition:transform .3s cubic-bezier(.2,.8,.2,1)
+  }
+  .manager-sheet.show .manager-panel{transform:translateY(0)}
+  .manager-grab{width:38px;height:4px;border-radius:4px;background:rgba(20,20,25,.18);margin:0 auto 15px}
+  .manager-panel-head{display:flex;gap:12px;align-items:flex-start}
+  .manager-panel-head>div{flex:1}
+  .manager-kicker{font-size:10px;color:var(--purple);font-weight:750;text-transform:uppercase;letter-spacing:.06em}
+  .manager-panel h2{font-size:27px;line-height:1;letter-spacing:-.05em;margin:5px 0 7px}
+  .manager-panel p{font-size:12px;color:var(--muted);line-height:1.45;margin:0;max-width:330px}
+  .manager-close{width:36px;height:36px;border:0;border-radius:12px;background:rgba(20,20,25,.06);color:var(--text);font-size:24px;line-height:1}
+  .manager-suggestions{display:flex;gap:8px;overflow-x:auto;padding:17px 0 3px;scrollbar-width:none}
+  .manager-suggestions::-webkit-scrollbar{display:none}
+  .manager-suggestions button{
+    flex:none;border:1px solid var(--line);background:rgba(255,255,255,.78);color:var(--text);
+    border-radius:15px;padding:10px 12px;font-size:11px;white-space:nowrap
+  }
+  .manager-form{display:flex;gap:7px;margin-top:13px}
+  .manager-form input{
+    flex:1;min-width:0;height:50px;border:1px solid var(--line);outline:0;
+    background:rgba(255,255,255,.9);border-radius:16px;padding:0 14px;color:var(--text)
+  }
+  .manager-voice,.manager-send{
+    height:50px;border-radius:16px;border:1px solid var(--line);font-weight:700
+  }
+  .manager-voice{width:50px;background:#fff;color:var(--purple)}
+  .manager-send{padding:0 15px;background:var(--text);color:#fff;border:0}
+  .manager-answer{
+    display:none;margin-top:12px;padding:14px;border-radius:16px;
+    background:rgba(114,87,255,.07);border:1px solid rgba(114,87,255,.12);
+    font-size:12px;line-height:1.5;color:var(--muted)
+  }
+  .manager-answer.show{display:block}
+  .manager-answer b{display:block;color:var(--purple);margin-bottom:4px}
+  body.dark .manager-panel{background:rgba(25,26,30,.97)}
+  body.dark .manager-grab{background:rgba(255,255,255,.2)}
+  body.dark .manager-close,body.dark .manager-suggestions button,body.dark .manager-form input,body.dark .manager-voice{background:rgba(255,255,255,.06)}
+}
+@media(min-width:701px){
+  .mobile-manager,.manager-sheet{display:none!important}
+}
+
+/* Premium clarity pass — mobile first */
+@media(max-width:700px){
+  :root{
+    --premium-radius:24px;
+    --premium-soft:rgba(255,255,255,.64);
+  }
+  .content{padding-top:16px}
+  .top{
+    padding:6px 4px 2px;
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:7px 10px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    background:rgba(255,255,255,.5);
+    font-size:10px;
+    letter-spacing:.01em;
+  }
+  .eyebrow b{font-weight:750}
+  h1{
+    margin-top:13px;
+    font-size:38px;
+    max-width:355px;
+    letter-spacing:-.07em;
+  }
+  .lead{
+    margin-top:9px;
+    max-width:335px;
+    font-size:13px;
+  }
+
+  /* Turn generic cards into calm product surfaces */
+  .card,.ask,.sales-card,.finance-card,.promo-card{
+    border-radius:var(--premium-radius);
+    box-shadow:0 10px 35px rgba(25,30,40,.055);
+  }
+  .card:hover,.sales-card:hover,.finance-card:hover,.promo-card:hover{
+    transform:none;
+  }
+  .title,.sales-card-title,.finance-card-title,.promo-card-title{
+    font-size:16px;
+    letter-spacing:-.02em;
+  }
+  .desc,.sales-card-sub,.finance-card-sub,.promo-card-sub{
+    font-size:11.5px;
+    line-height:1.45;
+  }
+
+  /* Make the first business signal visually dominant */
+  .grid > .card:first-child{
+    background:
+      radial-gradient(circle at 100% 0%,rgba(114,87,255,.08),transparent 34%),
+      rgba(255,255,255,.72);
+  }
+  .grid > .card:first-child .pad{padding:20px}
+  .metrics{margin-top:16px}
+  .metric{
+    min-width:150px;
+    background:rgba(255,255,255,.56);
+    border-color:rgba(20,20,24,.065);
+  }
+  .metric:first-child{
+    background:rgba(39,168,102,.065);
+    border-color:rgba(39,168,102,.13);
+  }
+  .metric:first-child .ml{color:var(--green)}
+  .mv{font-size:24px}
+
+  /* Actions should look like decisions, not links */
+  .action{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    min-height:40px;
+    margin-top:8px;
+    padding:8px 12px;
+    border-radius:12px;
+    background:rgba(22,119,255,.07);
+    color:var(--blue);
+  }
+
+  /* Ask card */
+  .ask{
+    background:
+      radial-gradient(circle at 0 0,rgba(114,87,255,.11),transparent 38%),
+      rgba(255,255,255,.72);
+  }
+  .ask-title{font-size:18px;letter-spacing:-.035em}
+  .ask-sub{max-width:290px;line-height:1.45}
+
+  /* Sales hero */
+  .sales-title{font-size:34px!important;line-height:.98;letter-spacing:-.065em}
+  .sales-hero{padding:3px 2px 5px}
+  .sales-sub{max-width:315px;line-height:1.45}
+  .sales-command{
+    border-radius:24px!important;
+    padding:20px!important;
+    background:
+      radial-gradient(circle at 100% 0,rgba(22,119,255,.11),transparent 42%),
+      rgba(255,255,255,.76)!important;
+  }
+  .sales-command-title{font-size:18px!important;line-height:1.18!important}
+  .sales-command-text{font-size:12px!important;line-height:1.55!important}
+  .sales-command-stats{gap:8px!important}
+  .sales-command-stat{border-radius:15px!important;padding:11px!important}
+  .sales-command-stat b{font-size:18px!important}
+
+  /* Funnel becomes a clear journey */
+  .sales-funnel-row{
+    min-height:58px;
+    border-radius:17px!important;
+  }
+  .sales-funnel-row b{font-size:18px}
+  .sales-funnel-row::after{
+    content:'›';
+    color:var(--muted);
+    font-size:18px;
+    margin-left:auto;
+  }
+
+  /* Recovery is the action card */
+  .sales-recovery{
+    background:
+      radial-gradient(circle at 100% 0,rgba(39,168,102,.11),transparent 40%),
+      rgba(255,255,255,.75)!important;
+  }
+  .sales-client-row{
+    border-radius:17px!important;
+    padding:14px!important;
+  }
+  .sales-client-action{
+    min-height:40px!important;
+    border-radius:12px!important;
+  }
+
+  /* Hide decorative secondary copy on very small screens */
+  .sales-tip-row .sales-tip:nth-child(3){display:none}
+}
+@media(max-width:390px){
+  h1{font-size:34px}
+  .sales-title{font-size:31px!important}
+  .metric{min-width:140px}
+  .sales-tip-row .sales-tip{font-size:10px}
+}
+body.dark .eyebrow{background:rgba(255,255,255,.045)}
+body.dark .grid > .card:first-child,
+body.dark .ask,
+body.dark .sales-command,
+body.dark .sales-recovery{background-color:rgba(255,255,255,.045)!important}
 </style>
 </head>
 <body>
@@ -243,7 +511,7 @@ body.dark .sales-bottom-note>span{background:rgba(255,255,255,.07)}
 <div class="online"><span class="dot"></span>Цифровой управляющий · онлайн</div><button class="theme" id="theme">Тема <span id="themeText">Тёмная</span></button></aside>
 <main class="content"><header class="top"><div><div class="eyebrow"><b>Цифровой управляющий</b> · сегодня</div><h1>Доброе утро, Алексей.</h1><p class="lead">Сегодня у тебя 7 важных задач. Я уже проверил бизнес.</p></div><div class="date">30 сентября 2026</div></header>
 <section class="grid">
-<article class="card"><div class="pad"><div class="title">Что происходит с бизнесом</div><div class="desc">Ключевые показатели за вчера</div><div class="metrics"><div class="metric"><div class="ml">Оборот</div><div class="mv">184 000 ₽</div><div class="good">+8,4%</div></div><div class="metric"><div class="ml">Новые заявки</div><div class="mv">14</div><div class="good">−12% стоимость</div></div><div class="metric"><div class="ml">Новых клиентов</div><div class="mv">8</div><div class="ml">за вчера</div></div></div><div class="items"><div class="item"><span class="status red"></span><div class="item-main"><div class="item-title">На сайте упала конверсия на 18%</div><div class="item-text">Я нашёл изменение на странице заказа, которое произошло вчера вечером.</div><button class="action" data-demo="site">Проверить →</button></div></div><div class="item"><span class="status orange"></span><div class="item-main"><div class="item-title">Три клиента оставили отзывы</div><div class="item-text">На два отзыва нужно ответить. Я подготовил варианты ответов.</div><button class="action" data-demo="reviews">Показать →</button></div></div><div class="item"><span class="status green"></span><div class="item-main"><div class="item-title">Реклама принесла 14 заявок</div><div class="item-text">Стоимость заявки снизилась на 12%. Кампания работает лучше вчерашнего.</div></div></div></div></div></article>
+<article class="card"><div class="pad"><div class="title">Что происходит с бизнесом</div><div class="desc">Самое важное за вчера</div><div class="metrics"><div class="metric"><div class="ml">Оборот</div><div class="mv">184 000 ₽</div><div class="good">+8,4%</div></div><div class="metric"><div class="ml">Новые заявки</div><div class="mv">14</div><div class="good">−12% стоимость</div></div><div class="metric"><div class="ml">Новых клиентов</div><div class="mv">8</div><div class="ml">за вчера</div></div></div><div class="items"><div class="item"><span class="status red"></span><div class="item-main"><div class="item-title">На сайте упала конверсия на 18%</div><div class="item-text">Я нашёл изменение на странице заказа, которое произошло вчера вечером.</div><button class="action" data-demo="site">Проверить →</button></div></div><div class="item"><span class="status orange"></span><div class="item-main"><div class="item-title">Три клиента оставили отзывы</div><div class="item-text">На два отзыва нужно ответить. Я подготовил варианты ответов.</div><button class="action" data-demo="reviews">Показать →</button></div></div><div class="item"><span class="status green"></span><div class="item-main"><div class="item-title">Реклама принесла 14 заявок</div><div class="item-text">Стоимость заявки снизилась на 12%. Кампания работает лучше вчерашнего.</div></div></div></div></div></article>
 <aside class="card"><div class="pad"><div class="title">Я уже сделал</div><div class="desc">Работа без лишних уведомлений</div><div class="done"><div class="done-row"><span class="check">✓</span>Ответил на 2 отзыва</div><div class="done-row"><span class="check">✓</span>Обновил информацию на сайте</div><div class="done-row"><span class="check">✓</span>Перераспределил рекламный бюджет между двумя кампаниями</div></div><div class="needs"><b>От тебя нужно</b><div>Подтвердить изменение цены на товар X и позвонить Иванову в 14:00.</div></div><div class="title" style="margin-top:22px">Сегодня</div><div class="calendar"><div class="event"><span class="time">11:00</span><div class="event-box">Встреча с поставщиком</div></div><div class="event"><span class="time">14:00</span><div class="event-box">Позвонить Иванову</div></div><div class="event"><span class="time">17:30</span><div class="event-box">Итоги дня</div></div></div></div></aside>
 <section class="ask"><div class="ask-head"><div><div class="ask-title">Что будем делать?</div><div class="ask-sub">Спроси голосом или напиши. Я разберусь в данных и объясню причину.</div></div><div class="manager"><span class="dot"></span>Цифровой управляющий</div></div><form class="ask-form" id="askForm"><input class="ask-input" id="askInput" placeholder="Например: Почему вчера было мало продаж?"><button type="button" class="round" id="voice" aria-label="Голосовой вопрос">⌕</button><button class="send">Спросить</button></form><div class="reply" id="reply"><b>Я проверил подключённые данные.</b>Основное падение произошло из-за рекламы: трафик сохранился, но конверсия сайта снизилась с 3,8% до 2,9%. Я нашёл изменение на странице заказа, которое произошло вчера вечером. Проверить и исправить?<div class="reply-actions"><button class="confirm-action" id="confirmAction" type="button">✓&nbsp; Да, проверить и исправить</button><button class="later-action" id="laterAction" type="button">Не сейчас</button></div><div class="result" id="result"><b>Готово.</b> Изменение исправлено. Проверяю результат.</div></div></section>
 </section>
@@ -434,7 +702,7 @@ body.dark .sales-bottom-note>span{background:rgba(255,255,255,.07)}
       </div>
 
       <div class="finance-warning">
-        <b>Что я заметил</b>
+        <b>Вот что важно</b>
         <div>Расходы на рекламу растут быстрее остальных. Но стоимость заявки снижается на 12%, поэтому я не предлагаю сокращать бюджет вслепую.</div>
         <button class="finance-action" type="button" id="financeCheck">Проверить окупаемость →</button>
         <div class="finance-result" id="financeResult"></div>
@@ -504,7 +772,7 @@ body.dark .sales-bottom-note>span{background:rgba(255,255,255,.07)}
   <div class="promo-grid">
     <article class="promo-card">
       <div class="promo-card-title">Каналы</div>
-      <div class="promo-card-sub">Не только охваты — заявки, продажи и деньги</div>
+      <div class="promo-card-sub">Смотрим не охваты, а реальные продажи</div>
       <div class="channel-list">
         <div class="channel-row"><div class="channel-icon">VK</div><div class="channel-main"><div class="channel-name">VK</div><div class="channel-meta">31 обращение · 8 продаж</div></div><div class="channel-value"><b>418 000 ₽</b><div>13 100 ₽ / заявка</div></div><span class="channel-status">Подключён</span></div>
         <div class="channel-row"><div class="channel-icon">TG</div><div class="channel-main"><div class="channel-name">Telegram</div><div class="channel-meta">19 обращений · 6 продаж</div></div><div class="channel-value"><b>362 000 ₽</b><div>лучшая конверсия</div></div><span class="channel-status">Подключён</span></div>
@@ -516,7 +784,7 @@ body.dark .sales-bottom-note>span{background:rgba(255,255,255,.07)}
     </article>
 
     <aside class="promo-card">
-      <div class="promo-card-title">Путь до продажи</div>
+      <div class="promo-card-title">Как заявки превращаются в деньги</div>
       <div class="promo-card-sub">Что произошло с обращениями</div>
       <div class="promo-funnel">
         <div class="funnel-row"><span>Обращения</span><b>83</b></div>
@@ -525,7 +793,7 @@ body.dark .sales-bottom-note>span{background:rgba(255,255,255,.07)}
         <div class="funnel-row"><span>Продажи</span><b>23</b></div>
       </div>
       <div class="promo-insight">
-        <b>Что я заметил</b>
+        <b>Вот что важно</b>
         <div>Telegram конвертирует обращения в продажи лучше остальных каналов. VK даёт больше объёма. Поэтому я бы не переносил весь бюджет в один канал — сначала проверил прибыль на клиента.</div>
         <button class="promo-action" id="promoCheck" type="button">Проверить прибыльность каналов →</button>
         <div class="promo-result" id="promoResult"></div>
@@ -533,8 +801,8 @@ body.dark .sales-bottom-note>span{background:rgba(255,255,255,.07)}
     </aside>
 
     <article class="promo-card">
-      <div class="promo-card-title">Что сделать сейчас</div>
-      <div class="promo-card-sub">Решения цифрового управляющего</div>
+      <div class="promo-card-title">Что сделать сегодня</div>
+      <div class="promo-card-sub">Что я предлагаю</div>
       <div class="channel-list">
         <button class="channel-row promo-click" type="button" data-promo-action="telegram"><div class="channel-icon">TG</div><div class="channel-main"><div class="channel-name">Усилить Telegram</div><div class="channel-meta">Высокая конверсия в продажу</div></div><span>›</span></button>
         <button class="channel-row promo-click" type="button" data-promo-action="vk"><div class="channel-icon">VK</div><div class="channel-main"><div class="channel-name">Проверить контент VK</div><div class="channel-meta">Объём хороший, но нужно сравнить стоимость продаж</div></div><span>›</span></button>
@@ -544,7 +812,7 @@ body.dark .sales-bottom-note>span{background:rgba(255,255,255,.07)}
     </article>
 
     <article class="promo-card">
-      <div class="promo-card-title">Подключения</div>
+      <div class="promo-card-title">Откуда я беру данные</div>
       <div class="promo-card-sub">Источники, которые управляющий может анализировать</div>
       <div class="channel-list">
         <div class="channel-row"><div class="channel-icon">CRM</div><div class="channel-main"><div class="channel-name">Продажи / CRM</div><div class="channel-meta">Связывает обращения с реальными сделками</div></div><span class="channel-status">Подключён</span></div>
@@ -556,7 +824,43 @@ body.dark .sales-bottom-note>span{background:rgba(255,255,255,.07)}
 </section>
 
 </main></div>
-<nav class="mobile-nav"><button class="active" type="button" data-section="home">⌂<br>Главная</button><button type="button" data-section="tasks">✓<br>Задачи</button><button type="button" data-section="clients">◯<br>Клиенты</button><button type="button" data-section="sales">↗<br>Продажи</button></nav>
+<nav class="mobile-nav" aria-label="Основная навигация">
+  <button class="active" type="button" data-section="home"><span>⌂</span><small>Главная</small></button>
+  <button type="button" data-section="sales"><span>↗</span><small>Продажи</small></button>
+  <button type="button" data-section="tasks"><span>✓</span><small>Задачи</small><em>7</em></button>
+  <button type="button" data-section="finance"><span>₽</span><small>Деньги</small></button>
+  <button type="button" data-section="clients"><span>•••</span><small>Ещё</small></button>
+</nav>
+<button class="mobile-manager" id="mobileManager" type="button" aria-label="Открыть цифрового управляющего">
+  <span>◈</span>
+</button>
+
+<div class="manager-sheet" id="managerSheet" aria-hidden="true">
+  <div class="manager-backdrop" id="managerBackdrop"></div>
+  <section class="manager-panel" role="dialog" aria-modal="true" aria-labelledby="managerTitle">
+    <div class="manager-grab"></div>
+    <div class="manager-panel-head">
+      <div>
+        <div class="manager-kicker">Цифровой управляющий</div>
+        <h2 id="managerTitle">Чем займёмся?</h2>
+        <p>Спроси как есть. Я разберусь в данных и объясню простыми словами.</p>
+      </div>
+      <button class="manager-close" id="managerClose" type="button" aria-label="Закрыть">×</button>
+    </div>
+    <div class="manager-suggestions">
+      <button type="button" data-manager-q="Почему сегодня мало продаж?">Почему мало продаж?</button>
+      <button type="button" data-manager-q="Кому нужно ответить?">Кому ответить?</button>
+      <button type="button" data-manager-q="Где мы теряем клиентов?">Где теряем клиентов?</button>
+      <button type="button" data-manager-q="Сколько заработали?">Сколько заработали?</button>
+    </div>
+    <form class="manager-form" id="managerForm">
+      <input id="managerInput" autocomplete="off" placeholder="Напиши вопрос…" />
+      <button class="manager-voice" id="managerVoice" type="button" aria-label="Голосовой ввод">◉</button>
+      <button class="manager-send" type="submit">Спросить</button>
+    </form>
+    <div class="manager-answer" id="managerAnswer"></div>
+  </section>
+</div>
 <script>
 const body=document.body,theme=document.getElementById('theme'),label=document.getElementById('themeText');if(localStorage.getItem('db-theme')==='dark')body.classList.add('dark');function themeLabel(){label.textContent=body.classList.contains('dark')?'Светлая':'Тёмная'}themeLabel();theme.onclick=()=>{body.classList.toggle('dark');localStorage.setItem('db-theme',body.classList.contains('dark')?'dark':'light');themeLabel()};
 document.getElementById('askForm').onsubmit=e=>{e.preventDefault();if(document.getElementById('askInput').value.trim())document.getElementById('reply').classList.add('show')};
@@ -722,4 +1026,53 @@ window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredIns
 installBtn?.addEventListener('click',async()=>{if(!deferredInstallPrompt)return;const p=deferredInstallPrompt;deferredInstallPrompt=null;await p.prompt();try{await p.userChoice}catch(e){}if(installBtn)installBtn.hidden=true;});
 window.addEventListener('appinstalled',()=>{deferredInstallPrompt=null;if(installBtn)installBtn.hidden=true;});
 if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js').catch(error=>console.error('Ошибка Service Worker:',error));});}
+
+// Mobile command sheet
+const mobileManager=document.getElementById('mobileManager');
+const managerSheet=document.getElementById('managerSheet');
+const managerBackdrop=document.getElementById('managerBackdrop');
+const managerClose=document.getElementById('managerClose');
+const managerForm=document.getElementById('managerForm');
+const managerInput=document.getElementById('managerInput');
+const managerAnswer=document.getElementById('managerAnswer');
+const managerVoice=document.getElementById('managerVoice');
+
+function openManager(question=''){
+  if(!managerSheet)return;
+  managerSheet.classList.add('show');
+  managerSheet.setAttribute('aria-hidden','false');
+  if(question){managerInput.value=question}
+  setTimeout(()=>managerInput?.focus(),220);
+}
+function closeManager(){
+  managerSheet?.classList.remove('show');
+  managerSheet?.setAttribute('aria-hidden','true');
+}
+mobileManager?.addEventListener('click',()=>openManager());
+managerBackdrop?.addEventListener('click',closeManager);
+managerClose?.addEventListener('click',closeManager);
+document.querySelectorAll('[data-manager-q]').forEach(btn=>{
+  btn.addEventListener('click',()=>openManager(btn.dataset.managerQ||''));
+});
+managerForm?.addEventListener('submit',e=>{
+  e.preventDefault();
+  const q=(managerInput?.value||'').trim();
+  if(!q)return;
+  let answer='Я посмотрю продажи, источники и последние действия. Затем объясню, что изменилось и какой шаг даст наибольший эффект.';
+  if(/мало продаж|продаж/i.test(q)) answer='Сейчас слабое место — переход после предложения: 8 клиентов остановились. Я бы сначала вернул горячих клиентов, а уже потом увеличивал рекламу.';
+  else if(/ответ|кому/i.test(q)) answer='Сейчас внимания ждут клиенты после предложения. Я могу подготовить ответы и поставить задачи, чтобы ни один контакт не потерялся.';
+  else if(/теряем|клиент/i.test(q)) answer='Больше всего клиентов теряется между предложением и оплатой. Это место я бы проверил первым.';
+  else if(/заработ|деньг|выруч/i.test(q)) answer='За вчера оборот — 184 000 ₽. Прибыль выросла на 8%, а стоимость заявки снизилась на 12%.';
+  managerAnswer.innerHTML='<b>Что я вижу</b><div>'+answer+'</div>';
+  managerAnswer.classList.add('show');
+});
+const MR=window.SpeechRecognition||window.webkitSpeechRecognition;
+if(MR&&managerVoice){
+  const mr=new MR();mr.lang='ru-RU';mr.interimResults=false;mr.maxAlternatives=1;
+  managerVoice.addEventListener('click',()=>{try{mr.start();managerVoice.textContent='…'}catch(e){}});
+  mr.onresult=e=>{managerInput.value=e.results[0][0].transcript;managerVoice.textContent='◉'};
+  mr.onerror=()=>managerVoice.textContent='◉';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeManager()});
+
 </script></body></html>
