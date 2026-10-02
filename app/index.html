@@ -859,10 +859,22 @@ body.dark .recovery-main,body.dark .recovery-actions .send{background:#fff;color
   .recovery-sheet{border-radius:30px;max-height:88vh}
 }
 </style>
+
+<style>
+.more-sheet,.control-overlay,.business-pulse{position:fixed;inset:0;z-index:90;display:none}.more-sheet.show,.control-overlay.show,.business-pulse.show{display:block}.more-backdrop,.control-backdrop,.pulse-backdrop{position:absolute;inset:0;background:rgba(8,9,14,.42);backdrop-filter:blur(9px)}
+.more-panel,.control-panel,.pulse-panel{position:absolute;background:rgba(250,250,252,.96);border:1px solid rgba(255,255,255,.62);box-shadow:0 30px 100px rgba(0,0,0,.25);backdrop-filter:blur(30px)}
+.more-panel{left:50%;bottom:18px;transform:translateX(-50%);width:min(650px,calc(100% - 28px));border-radius:30px;padding:22px}.more-handle{width:38px;height:4px;border-radius:9px;background:rgba(20,20,25,.15);margin:0 auto 18px}.more-head{display:flex;gap:12px}.more-head>div{flex:1}.more-head h2{margin:4px 0 6px;font-size:30px;letter-spacing:-.055em}.more-head p{margin:0;color:var(--muted);font-size:12px}.more-close,.control-close,.pulse-top button{border:0;background:rgba(20,20,25,.06);width:38px;height:38px;border-radius:13px;font-size:23px;color:var(--text)}
+.pulse-card{display:flex;gap:13px;align-items:center;margin-top:18px;padding:15px;border-radius:21px;background:linear-gradient(135deg,rgba(114,87,255,.12),rgba(22,119,255,.07));border:1px solid rgba(114,87,255,.14);cursor:pointer}.pulse-card>div:nth-child(2){flex:1}.pulse-card span{display:block;font-size:10px;color:var(--purple);font-weight:800}.pulse-card b{display:block;font-size:13px;line-height:1.3;margin-top:4px}.pulse-card small{display:block;color:var(--muted);font-size:10px;line-height:1.35;margin-top:4px}.pulse-card em{font-style:normal;font-size:25px;color:var(--muted)}.pulse-orb{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#fff 0 7%,#b7aaff 10%,#7257ff 45%,#2e54e8 75%,#17172a 100%);box-shadow:0 0 35px rgba(114,87,255,.28);flex:none}.pulse-orb i{width:11px;height:11px;border-radius:50%;background:#fff;box-shadow:0 0 14px #fff;animation:pulseDot 2s infinite}.pulse-orb.big{width:70px;height:70px;border-radius:22px}.more-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.more-grid button{border:1px solid var(--line);background:rgba(255,255,255,.55);border-radius:19px;text-align:left;padding:15px;color:var(--text);min-height:92px}.more-grid span{font-size:17px;color:var(--purple)}.more-grid b{display:block;font-size:12px;margin-top:9px}.more-grid small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
+.control-panel{left:50%;top:50%;transform:translate(-50%,-50%);width:min(700px,calc(100% - 28px));max-height:min(760px,calc(100% - 30px));overflow:auto;border-radius:30px;padding:25px}.control-close{position:absolute;right:18px;top:18px}.control-kicker{font-size:10px;color:var(--purple);font-weight:800;text-transform:uppercase;letter-spacing:.08em}.control-title{font-size:34px;letter-spacing:-.055em;margin:7px 45px 7px 0}.control-sub{font-size:12px;color:var(--muted);line-height:1.45;max-width:500px}.memory-list,.rule-list{display:grid;gap:9px;margin-top:20px}.memory-row,.rule-row{display:flex;gap:12px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.5)}.memory-icon{width:34px;height:34px;border-radius:11px;background:rgba(114,87,255,.09);display:grid;place-items:center;color:var(--purple);flex:none}.memory-row b,.rule-row b{display:block;font-size:12px}.memory-row small,.rule-row small{display:block;color:var(--muted);font-size:10px;margin-top:3px;line-height:1.35}.rule-toggle{margin-left:auto;width:43px;height:25px;border-radius:20px;background:rgba(39,168,102,.2);padding:3px}.rule-toggle i{display:block;width:19px;height:19px;border-radius:50%;background:var(--green);margin-left:17px}.control-action{width:100%;margin-top:16px;border:0;border-radius:16px;background:var(--text);color:#fff;padding:14px;font-size:12px;font-weight:700}
+.business-pulse .pulse-panel{left:50%;top:50%;transform:translate(-50%,-50%);width:min(760px,calc(100% - 28px));border-radius:32px;padding:27px}.pulse-top{display:flex;justify-content:space-between;gap:15px}.pulse-top>div{flex:1}.pulse-top span{font-size:10px;color:var(--purple);font-weight:800;text-transform:uppercase;letter-spacing:.08em}.pulse-top h2{font-size:42px;line-height:.95;letter-spacing:-.06em;margin:8px 0 0}.pulse-hero{display:flex;align-items:center;gap:18px;margin-top:24px;padding:18px;border-radius:24px;background:linear-gradient(135deg,rgba(114,87,255,.1),rgba(22,119,255,.06))}.pulse-hero b{font-size:16px}.pulse-hero p{font-size:12px;color:var(--muted);line-height:1.5;margin:6px 0 0}.pulse-links{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:10px}.pulse-links>div{padding:15px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.48)}.pulse-links span,.pulse-links em{display:block;font-size:10px;color:var(--muted);font-style:normal}.pulse-links b{display:block;font-size:16px;margin:7px 0}.pulse-bottom{margin-top:14px;padding:16px;border-radius:20px;background:rgba(39,168,102,.07);border:1px solid rgba(39,168,102,.12)}.pulse-bottom b{font-size:12px;color:var(--green)}.pulse-bottom p{font-size:12px;color:var(--muted);line-height:1.45;margin:5px 0 12px}.pulse-bottom button{border:0;background:var(--text);color:#fff;border-radius:14px;padding:12px 16px;font-size:12px;font-weight:700}
+@keyframes pulseDot{0%,100%{transform:scale(.85);opacity:.75}50%{transform:scale(1.18);opacity:1}}
+body.dark .more-panel,body.dark .control-panel,body.dark .pulse-panel{background:rgba(24,25,29,.97)}body.dark .more-grid button,body.dark .memory-row,body.dark .rule-row,body.dark .pulse-links>div{background:rgba(255,255,255,.045)}body.dark .more-close,body.dark .control-close,body.dark .pulse-top button{background:rgba(255,255,255,.07)}
+@media(max-width:700px){.more-panel{bottom:0;width:100%;border-radius:28px 28px 0 0;padding:18px 15px calc(18px + env(safe-area-inset-bottom))}.more-head h2{font-size:27px}.control-panel{top:auto;bottom:0;transform:translateX(-50%);width:100%;border-radius:28px 28px 0 0;padding:20px 15px calc(20px + env(safe-area-inset-bottom));max-height:86vh}.control-title{font-size:30px}.pulse-panel{top:auto!important;bottom:0;transform:translateX(-50%)!important;width:100%!important;border-radius:28px 28px 0 0!important;padding:20px 15px calc(20px + env(safe-area-inset-bottom))!important}.pulse-top h2{font-size:34px}.pulse-links{grid-template-columns:1fr 1fr}.pulse-hero{align-items:flex-start}.pulse-orb.big{width:56px;height:56px;border-radius:18px}}
+</style>
 </head>
 <body>
 <div class="app">
-<aside class="sidebar"><div class="brand"><div class="mark">ЦБ</div><div><div class="brand-title">Цифровой бизнес</div><div class="brand-sub">Цифровой управляющий</div></div></div><nav class="nav"><button class="active" type="button" data-section="home">⌂ &nbsp;Главная</button><button type="button" data-section="tasks">✓ &nbsp;Задачи</button><button type="button" data-section="clients">◯ &nbsp;Клиенты</button><button type="button" data-section="sales">↗ &nbsp;Продажи</button><button type="button" data-section="finance">₽ &nbsp;Финансы</button><button type="button" data-section="promo">↗ &nbsp;Продвижение</button><button>▤ &nbsp;Отчёты</button><button>⚙ &nbsp;Настройки</button></nav><button class="pwa-install" id="installBtn" type="button" hidden>Установить приложение</button>
+<aside class="sidebar"><div class="brand"><div class="mark">ЦБ</div><div><div class="brand-title">Цифровой бизнес</div><div class="brand-sub">Цифровой управляющий</div></div></div><nav class="nav"><button class="active" type="button" data-section="home">⌂ &nbsp;Главная</button><button type="button" data-section="tasks">✓ &nbsp;Задачи</button><button type="button" data-section="clients">◯ &nbsp;Клиенты</button><button type="button" data-section="sales">↗ &nbsp;Продажи</button><button type="button" data-section="finance">₽ &nbsp;Финансы</button><button type="button" data-section="promo">↗ &nbsp;Продвижение</button><button type="button" data-section="reports">▤ &nbsp;Отчёты</button><button type="button" data-section="settings">⚙ &nbsp;Настройки</button></nav><button class="pwa-install" id="installBtn" type="button" hidden>Установить приложение</button>
 <div class="online"><span class="dot"></span>Цифровой управляющий · онлайн</div><button class="theme" id="theme">Тема <span id="themeText">Тёмная</span></button></aside>
 <main class="content"><header class="top"><div><div class="eyebrow"><b>Цифровой управляющий</b> · сегодня</div><h1>Доброе утро, Алексей.</h1><p class="lead">Сегодня у тебя 7 важных задач. Я уже проверил бизнес.</p></div><div class="date">30 сентября 2026</div></header>
 <section class="grid">
@@ -1211,12 +1223,52 @@ body.dark .recovery-main,body.dark .recovery-actions .send{background:#fff;color
   <button type="button" data-section="sales"><span>↗</span><small>Продажи</small></button>
   <button type="button" data-section="tasks"><span>✓</span><small>Задачи</small><em>7</em></button>
   <button type="button" data-section="finance"><span>₽</span><small>Деньги</small></button>
-  <button type="button" data-section="clients"><span>•••</span><small>Ещё</small></button>
+  <button type="button" data-section="more"><span>•••</span><small>Ещё</small></button>
 </nav>
 <button class="mobile-manager" id="mobileManager" type="button" aria-label="Открыть цифрового управляющего">
   <span>◈</span>
 </button>
 
+
+<div class="more-sheet" id="moreSheet" aria-hidden="true">
+  <div class="more-backdrop" onclick="closeMore()"></div>
+  <section class="more-panel" role="dialog" aria-modal="true" aria-labelledby="moreTitle">
+    <div class="more-handle"></div>
+    <div class="more-head"><div><div class="manager-kicker">Ваш бизнес · под контролем</div><h2 id="moreTitle">Всё важное — здесь.</h2><p>Не меню. Ваши знания, правила и разборы бизнеса.</p></div><button class="more-close" onclick="closeMore()">×</button></div>
+    <div class="pulse-card" onclick="openBusinessPulse()">
+      <div class="pulse-orb"><i></i></div><div><span>Состояние бизнеса</span><b>Есть рост. Есть одна точка, которую стоит забрать сегодня.</b><small>Продажи растут · стоимость заявки снижается · сайт теряет часть клиентов</small></div><em>›</em>
+    </div>
+    <div class="more-grid">
+      <button onclick="openBusinessMemory()"><span>◉</span><b>Я знаю ваш бизнес</b><small>Что уже запомнил</small></button>
+      <button onclick="openBusinessRules()"><span>⌁</span><b>Правила</b><small>Что делать автоматически</small></button>
+      <button onclick="openMonthReport();closeMore()"><span>▤</span><b>Разборы</b><small>Месяц в одном экране</small></button>
+      <button onclick="openSettingsPanel()"><span>⚙</span><b>Настройки</b><small>Как я работаю</small></button>
+    </div>
+  </section>
+</div>
+
+<div class="control-overlay" id="controlOverlay" aria-hidden="true">
+  <div class="control-backdrop" onclick="closeControl()"></div>
+  <section class="control-panel" role="dialog" aria-modal="true">
+    <button class="control-close" onclick="closeControl()">×</button>
+    <div id="controlContent"></div>
+  </section>
+</div>
+
+<div class="business-pulse" id="businessPulse" aria-hidden="true">
+  <div class="pulse-backdrop" onclick="closeBusinessPulse()"></div>
+  <section class="pulse-panel" role="dialog" aria-modal="true">
+    <div class="pulse-top"><div><span>Цифровой управляющий</span><h2>Что происходит<br>с бизнесом?</h2></div><button onclick="closeBusinessPulse()">×</button></div>
+    <div class="pulse-hero"><div class="pulse-orb big"><i></i></div><div><b>Сегодня бизнес чувствует себя хорошо.</b><p>Но часть денег остаётся на столе: клиенты получают предложение и не получают повторного контакта.</p></div></div>
+    <div class="pulse-links">
+      <div><span>Продажи</span><b>184 000 ₽</b><em>вчера · +8%</em></div>
+      <div><span>Деньги</span><b>1 265 800 ₽</b><em>прибыль за период</em></div>
+      <div><span>Продвижение</span><b>−12%</b><em>стоимость заявки</em></div>
+      <div><span>Сайт</span><b>−18%</b><em>конверсия</em></div>
+    </div>
+    <div class="pulse-bottom"><b>Мой вывод</b><p>Сейчас не время просто покупать больше рекламы. Сначала вернём тех, кто уже почти купил.</p><button onclick="closeBusinessPulse();openRecovery()">Вернуть клиентов</button></div>
+  </section>
+</div>
 <div class="manager-sheet" id="managerSheet" aria-hidden="true">
   <div class="manager-backdrop" id="managerBackdrop"></div>
   <section class="manager-panel" role="dialog" aria-modal="true" aria-labelledby="managerTitle">
@@ -1244,13 +1296,25 @@ body.dark .recovery-main,body.dark .recovery-actions .send{background:#fff;color
   </section>
 </div>
 <script>
+
+function openMore(){document.getElementById('moreSheet').classList.add('show')}
+function closeMore(){document.getElementById('moreSheet').classList.remove('show')}
+function openControl(html){document.getElementById('controlContent').innerHTML=html;document.getElementById('controlOverlay').classList.add('show')}
+function closeControl(){document.getElementById('controlOverlay').classList.remove('show')}
+function openBusinessMemory(){closeMore();openControl(`<div class="control-kicker">Память бизнеса</div><div class="control-title">Я знаю ваш бизнес.</div><div class="control-sub">Не нужно каждый раз объяснять одно и то же. Здесь живёт контекст, который помогает мне принимать решения вместе с вами.</div><div class="memory-list"><div class="memory-row"><span class="memory-icon">₽</span><div><b>Цель</b><small>Расти по прибыли, а не просто по обороту.</small></div></div><div class="memory-row"><span class="memory-icon">⌂</span><div><b>Основной канал</b><small>Сайт приводит заявки, Telegram даёт заметную долю продаж.</small></div></div><div class="memory-row"><span class="memory-icon">◯</span><div><b>Клиенты</b><small>Важны быстрый ответ и повторный контакт после предложения.</small></div></div><div class="memory-row"><span class="memory-icon">◇</span><div><b>Ваш стиль управления</b><small>Сначала показать причину. Потом предложить действие. Деньги — только после подтверждения.</small></div></div></div><button class="control-action" onclick="closeControl();openBusinessRules()">Посмотреть правила</button>`)}
+function openBusinessRules(){closeMore();openControl(`<div class="control-kicker">Автоматизация</div><div class="control-title">Я знаю, когда действовать.</div><div class="control-sub">Вы задаёте границы. Я слежу за бизнесом внутри них и не делаю важные шаги молча.</div><div class="rule-list"><div class="rule-row"><div><b>Если клиент ждёт больше 30 минут</b><small>Подготовить напоминание владельцу.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Если стоимость заявки выросла на 20%</b><small>Сообщить и показать, какой канал изменился.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Если клиент готов купить</b><small>Создать задачу и поднять её наверх.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Если действие влияет на деньги</b><small>Сначала спросить вас.</small></div><span class="rule-toggle"><i></i></span></div></div><button class="control-action" onclick="closeControl();openBusinessPulse()">Посмотреть бизнес целиком</button>`)}
+function openSettingsPanel(){closeMore();openControl(`<div class="control-kicker">Настройки управляющего</div><div class="control-title">Вы задаёте характер.</div><div class="control-sub">Настройки здесь не про кнопки. Они про то, насколько самостоятельно я могу работать.</div><div class="rule-list"><div class="rule-row"><div><b>Режим работы</b><small>Советую → вы подтверждаете</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Важные действия</b><small>Всегда спрашивать перед отправкой и изменением бюджета.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Тон общения</b><small>Коротко, спокойно, по делу.</small></div><span class="rule-toggle"><i></i></span></div></div><button class="control-action" onclick="closeControl();openBusinessMemory()">Посмотреть, что я помню</button>`)}
+function openBusinessPulse(){closeMore();document.getElementById('businessPulse').classList.add('show')}
+function closeBusinessPulse(){document.getElementById('businessPulse').classList.remove('show')}
+function closeControlAndMore(){closeControl();closeMore()}
+
 const body=document.body,theme=document.getElementById('theme'),label=document.getElementById('themeText');if(localStorage.getItem('db-theme')==='dark')body.classList.add('dark');function themeLabel(){label.textContent=body.classList.contains('dark')?'Светлая':'Тёмная'}themeLabel();theme.onclick=()=>{body.classList.toggle('dark');localStorage.setItem('db-theme',body.classList.contains('dark')?'dark':'light');themeLabel()};
 document.getElementById('askForm').onsubmit=e=>{e.preventDefault();if(document.getElementById('askInput').value.trim())document.getElementById('reply').classList.add('show')};
 const tasksPage=document.getElementById('tasksPage'),clientsPage=document.getElementById('clientsPage'),salesPage=document.getElementById('salesPage'),financePage=document.getElementById('financePage'),promoPage=document.getElementById('promoPage');
 const homeMain=document.querySelector('main.content');
 const sectionButtons=document.querySelectorAll('[data-section]');
 const homeSections=homeMain?Array.from(homeMain.children).filter(el=>!['tasksPage','clientsPage','salesPage','financePage','promoPage'].includes(el.id)) : [];
-function showSection(section){const isTasks=section==='tasks',isClients=section==='clients',isSales=section==='sales',isFinance=section==='finance',isPromo=section==='promo';homeSections.forEach(el=>el.style.display=(isTasks||isClients||isSales||isFinance||isPromo)?'none':'');if(tasksPage)tasksPage.classList.toggle('show',isTasks);if(clientsPage)clientsPage.classList.toggle('show',isClients);if(salesPage)salesPage.classList.toggle('show',isSales);if(financePage)financePage.classList.toggle('show',isFinance);if(promoPage)promoPage.classList.toggle('show',isPromo);sectionButtons.forEach(b=>b.classList.toggle('active',b.dataset.section===section));}
+function showSection(section){if(section==='more'){openMore();return;}const isTasks=section==='tasks',isClients=section==='clients',isSales=section==='sales',isFinance=section==='finance',isPromo=section==='promo',isReports=section==='reports',isSettings=section==='settings';if(isReports){openMonthReport();return;}if(isSettings){openSettingsPanel();return;}homeSections.forEach(el=>el.style.display=(isTasks||isClients||isSales||isFinance||isPromo)?'none':'');if(tasksPage)tasksPage.classList.toggle('show',isTasks);if(clientsPage)clientsPage.classList.toggle('show',isClients);if(salesPage)salesPage.classList.toggle('show',isSales);if(financePage)financePage.classList.toggle('show',isFinance);if(promoPage)promoPage.classList.toggle('show',isPromo);sectionButtons.forEach(b=>b.classList.toggle('active',b.dataset.section===section));}
 sectionButtons.forEach(b=>b.addEventListener('click',()=>showSection(b.dataset.section)));
 document.getElementById('tasksBack')?.addEventListener('click',()=>showSection('home'));
 document.getElementById('clientsBack')?.addEventListener('click',()=>showSection('home'));
