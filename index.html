@@ -35,6 +35,8 @@ a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer;color:in
 header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(22px);border-bottom:1px solid var(--line)}
 .nav{height:68px;display:flex;align-items:center;justify-content:space-between;gap:22px}
 .brand{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:-.03em}
+.brand-copy{display:flex;align-items:baseline;gap:10px;line-height:1}.brand-name{font-size:13px;font-weight:700;letter-spacing:-.03em}.brand-tech{font-size:8px;font-weight:700;letter-spacing:.13em;color:var(--muted);white-space:nowrap;opacity:.82}.brand:hover .brand-tech{color:var(--ink);opacity:1}
+@media(max-width:700px){.brand-tech{display:none}.brand-copy{display:block}.brand-name{font-size:12px}}
 .brand-mark{width:32px;height:32px;border:1px solid var(--line-strong);border-radius:10px;display:grid;place-items:center;font-size:10px;font-weight:800}
 .links{display:flex;gap:26px;color:var(--muted);font-size:12px}.links a:hover{color:var(--ink)}
 .nav-actions{display:flex;align-items:center;gap:8px;font-size:12px}
