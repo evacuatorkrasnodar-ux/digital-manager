@@ -2489,6 +2489,8 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
   .company-section h3{font-size:18px;}
 }
 
+</style>
+
 <style id="future-v17-navigation">
 /* v17 — меньше меню, больше управляющего */
 .sidebar .nav{gap:5px}
@@ -3366,6 +3368,523 @@ body.dark .theme{background:rgba(255,255,255,.055);border-color:rgba(255,255,255
   .assistant-ring-a,.assistant-ring-b,.assistant-core svg{animation:none!important}
 }
 </style>
+
+
+<style id="theme-text-stability-v25">
+/* Точечная стабилизация тем: существующий дизайн не меняем. */
+
+/* Светлая тема: верхний герой НЕ должен содержать белого текста на светлом фоне. */
+body:not(.dark) .future-state{
+  color:#111114 !important;
+}
+body:not(.dark) .future-state .state-greeting h1,
+body:not(.dark) .future-state .state-greeting p,
+body:not(.dark) .future-state .state-time strong,
+body:not(.dark) .future-state .state-copy h2,
+body:not(.dark) .future-state .state-copy p{
+  color:#111114 !important;
+}
+body:not(.dark) .future-state .state-greeting p,
+body:not(.dark) .future-state .state-time span,
+body:not(.dark) .future-state .state-copy p,
+body:not(.dark) .future-state .state-meta{
+  color:rgba(17,17,20,.56) !important;
+}
+body:not(.dark) .future-state .state-time strong{
+  color:#111114 !important;
+}
+body:not(.dark) .future-state .state-eyebrow,
+body:not(.dark) .future-state .future-kicker{
+  color:#77777f !important;
+}
+body:not(.dark) .future-state .state-copy:before{
+  background:#111114 !important;
+}
+
+/* Тёмная тема: сохраняем белую типографику именно внутри тёмного героя. */
+body.dark .future-state{
+  color:#f7f7f5 !important;
+}
+body.dark .future-state .state-greeting h1,
+body.dark .future-state .state-greeting p,
+body.dark .future-state .state-time strong,
+body.dark .future-state .state-copy h2,
+body.dark .future-state .state-copy p{
+  color:#f7f7f5 !important;
+}
+body.dark .future-state .state-greeting p,
+body.dark .future-state .state-time span,
+body.dark .future-state .state-copy p,
+body.dark .future-state .state-meta{
+  color:rgba(255,255,255,.58) !important;
+}
+body.dark .future-state .future-kicker,
+body.dark .future-state .state-eyebrow{
+  color:rgba(255,255,255,.52) !important;
+}
+body.dark .future-state .state-copy:before{
+  background:#fff !important;
+}
+
+/* Переключатель темы не зависит от ошибочного чтения localStorage. */
+.theme{color:var(--text)!important}
+.theme-icon{color:var(--text)!important}
+.theme-icon svg{stroke:currentColor!important}
+</style>
+
+
+
+<style id="theme-complete-stability-v26">
+/* Финальная починка тем: только цветовые слои, без изменения композиции. */
+
+body.dark{
+  --bg:#090a0c;
+  --panel:rgba(255,255,255,.045);
+  --text:#f5f5f7;
+  --muted:#a0a1a8;
+  --line:rgba(255,255,255,.09);
+  --shadow:0 20px 60px rgba(0,0,0,.25);
+  background:#090a0c !important;
+  color:#f5f5f7 !important;
+}
+body.dark .content,
+body.dark .premium-home{
+  background:transparent !important;
+  color:#f5f5f7 !important;
+}
+body.dark .sidebar{
+  background:rgba(12,13,15,.78) !important;
+  color:#f5f5f7 !important;
+}
+body.dark .brand{
+  background:transparent !important;
+  color:#f5f5f7 !important;
+  border-color:transparent !important;
+}
+body.dark .brand-title,
+body.dark .brand-sub,
+body.dark .nav button,
+body.dark .online{
+  color:#f5f5f7 !important;
+}
+body.dark .brand-sub,
+body.dark .online{color:rgba(255,255,255,.52) !important}
+body.dark .nav button.active{
+  background:rgba(255,255,255,.09) !important;
+  color:#fff !important;
+  box-shadow:none !important;
+}
+
+/* Все обычные поверхности становятся действительно тёмными. */
+body.dark .future-card,
+body.dark .card,
+body.dark .ask,
+body.dark .task-row,
+body.dark .client-row,
+body.dark .client-stat,
+body.dark .finance-card,
+body.dark .finance-stat,
+body.dark .promo-card,
+body.dark .promo-stat,
+body.dark .sales-card,
+body.dark .sales-stat,
+body.dark .sales-action-row,
+body.dark .sales-funnel-row,
+body.dark .sales-source-row,
+body.dark .sales-client-row{
+  background:rgba(255,255,255,.045) !important;
+  color:#f5f5f7 !important;
+  border-color:rgba(255,255,255,.09) !important;
+  box-shadow:none;
+}
+body.dark .metric,
+body.dark .item,
+body.dark .event-box,
+body.dark .channel-row,
+body.dark .finance-row,
+body.dark .sales-tip,
+body.dark .sales-bottom-note,
+body.dark .recovery-row,
+body.dark .finance-source-track,
+body.dark .promo-funnel .funnel-row{
+  background:rgba(255,255,255,.035) !important;
+  color:#f5f5f7 !important;
+  border-color:rgba(255,255,255,.075) !important;
+}
+body.dark .future-card p,
+body.dark .future-card small,
+body.dark .future-card .future-desc,
+body.dark .task-row-text,
+body.dark .client-info,
+body.dark .finance-card-sub,
+body.dark .promo-card-sub,
+body.dark .sales-card-sub,
+body.dark .sales-source-meta,
+body.dark .sales-client-meta,
+body.dark .sales-action-text,
+body.dark .desc,
+body.dark .item-text,
+body.dark .event-box,
+body.dark .finance-row-text,
+body.dark .channel-meta{
+  color:rgba(255,255,255,.60) !important;
+}
+body.dark .future-card h2,
+body.dark .future-card h3,
+body.dark .future-card b,
+body.dark .card .title,
+body.dark .task-row-title,
+body.dark .client-name,
+body.dark .finance-card-title,
+body.dark .promo-card-title,
+body.dark .sales-card-title,
+body.dark .sales-client-name,
+body.dark .sales-source-name{
+  color:#f5f5f7 !important;
+}
+
+/* Поля, кнопки и селекторы в тёмной теме. */
+body.dark .ask-input,
+body.dark .manager-form input,
+body.dark .finance-period,
+body.dark .promo-period,
+body.dark .sales-period,
+body.dark .task-back,
+body.dark .round,
+body.dark .reply,
+body.dark .manager-voice,
+body.dark .manager-suggestions button,
+body.dark .premium-example,
+body.dark .premium-secondary,
+body.dark .mini-help{
+  background:rgba(255,255,255,.055) !important;
+  color:#f5f5f7 !important;
+  border-color:rgba(255,255,255,.10) !important;
+}
+body.dark .action,
+body.dark .future-link,
+body.dark .sales-text-action,
+body.dark .sales-bottom-note button{
+  color:#aebfff !important;
+}
+body.dark .reply b,
+body.dark .manager-kicker,
+body.dark .premium-kicker span{
+  color:#f5f5f7 !important;
+}
+body.dark .future-label,
+body.dark .future-kicker{
+  color:rgba(255,255,255,.48) !important;
+}
+
+/* Мобильная панель и плавающий управляющий. */
+body.dark .mobile-nav{
+  background:rgba(25,26,30,.92) !important;
+  border-color:rgba(255,255,255,.10) !important;
+  color:#f5f5f7 !important;
+  box-shadow:0 18px 55px rgba(0,0,0,.34) !important;
+}
+body.dark .mobile-nav button{color:rgba(255,255,255,.55) !important}
+body.dark .mobile-nav button.active{background:rgba(255,255,255,.09) !important;color:#fff !important}
+body.dark .mobile-manager{background:#f4f4f5 !important;color:#17171a !important}
+
+/* Нейтральные элементы бренда/иконок остаются монохромными. */
+body.dark .dm-company-mark{background:#f5f5f7 !important;color:#17171a !important}
+body.dark .dm-icon{color:#f5f5f7 !important}
+</style>
+
+
+<style id="final-dark-text-and-manager-v27">
+/* Только точечные исправления тёмной темы и плавающего помощника. */
+
+/* Убираем остатки светлой типографики/поверхностей из тёмной темы. */
+body.dark .future-shell,
+body.dark .future-shell *{
+  text-shadow:none;
+}
+body.dark .future-shell h1,
+body.dark .future-shell h2,
+body.dark .future-shell h3,
+body.dark .future-shell h4,
+body.dark .future-shell h5,
+body.dark .future-shell h6,
+body.dark .future-shell strong,
+body.dark .future-shell b,
+body.dark .future-shell .future-label,
+body.dark .future-shell .future-kicker{
+  color:#f5f5f7 !important;
+}
+body.dark .future-shell p,
+body.dark .future-shell small,
+body.dark .future-shell span,
+body.dark .future-shell label,
+body.dark .future-shell time{
+  color:rgba(255,255,255,.64) !important;
+}
+/* Возвращаем смысловые акценты поверх общего белого текста. */
+body.dark .future-shell .future-link,
+body.dark .future-shell .action,
+body.dark .future-shell .sales-text-action,
+body.dark .future-shell .sales-bottom-note button{color:#aebfff !important}
+body.dark .future-shell .good,
+body.dark .future-shell .green,
+body.dark .future-shell .finance-good,
+body.dark .future-shell .promo-good,
+body.dark .future-shell .sales-good{color:#5ee39b !important}
+body.dark .future-shell .red,
+body.dark .future-shell .sales-bad,
+body.dark .future-shell .finance-bad{color:#ff858b !important}
+body.dark .future-shell .orange,
+body.dark .future-shell .sales-warn,
+body.dark .future-shell .finance-warn,
+body.dark .future-shell .promo-warn{color:#f1bd67 !important}
+
+/* Светлые вложенные карточки/панели больше не светятся белым в тёмной теме. */
+body.dark .future-shell .future-card .opportunity-preview,
+body.dark .future-shell .opportunity-preview,
+body.dark .future-shell .future-create,
+body.dark .future-shell .future-blindspot,
+body.dark .future-shell .future-state + .future-grid .future-card,
+body.dark .future-shell .sales-command,
+body.dark .future-shell .sales-tip,
+body.dark .future-shell .sales-bottom-note,
+body.dark .future-shell .recovery-row,
+body.dark .future-shell .future-command,
+body.dark .future-shell .future-card .preview-orb{
+  color:#f5f5f7 !important;
+}
+body.dark .future-shell .future-card .opportunity-preview,
+body.dark .future-shell .opportunity-preview,
+body.dark .future-shell .future-create,
+body.dark .future-shell .future-blindspot,
+body.dark .future-shell .sales-command,
+body.dark .future-shell .sales-tip,
+body.dark .future-shell .sales-bottom-note,
+body.dark .future-shell .recovery-row,
+body.dark .future-shell .future-command{
+  background:rgba(255,255,255,.045) !important;
+  border-color:rgba(255,255,255,.09) !important;
+}
+body.dark .future-shell .future-card .opportunity-preview strong,
+body.dark .future-shell .opportunity-preview strong,
+body.dark .future-shell .future-create h2,
+body.dark .future-shell .future-create h3,
+body.dark .future-shell .future-blindspot h2,
+body.dark .future-shell .sales-command h3,
+body.dark .future-shell .sales-bottom-note b,
+body.dark .future-shell .recovery-row b{
+  color:#f5f5f7 !important;
+}
+body.dark .future-shell .future-card .opportunity-preview small,
+body.dark .future-shell .opportunity-preview small,
+body.dark .future-shell .future-create p,
+body.dark .future-shell .future-blindspot p,
+body.dark .future-shell .sales-command p,
+body.dark .future-shell .sales-tip small,
+body.dark .future-shell .sales-bottom-note,
+body.dark .future-shell .recovery-row small{
+  color:rgba(255,255,255,.58) !important;
+}
+
+/* Модальные окна, которые исторически имели белый фон. */
+body.dark .future-autopilot-modal .autopilot-sheet,
+body.dark .future-blindspot-modal .blindspot-sheet,
+body.dark .future-build-modal .future-build-sheet,
+body.dark .future-build-modal .build-result,
+body.dark .future-intent-modal .intent-sheet,
+body.dark .future-twin-modal .twin-sheet,
+body.dark .future-sim-modal .sim-sheet,
+body.dark .future-memory-modal .memory-sheet-v11,
+body.dark .future-evolution-modal .evo-modal-sheet{
+  background:#17181c !important;
+  color:#f5f5f7 !important;
+  border-color:rgba(255,255,255,.09) !important;
+}
+body.dark .future-autopilot-modal .auto-level,
+body.dark .future-autopilot-modal .auto-rule,
+body.dark .future-build-modal .build-example,
+body.dark .future-build-modal .build-close{
+  background:rgba(255,255,255,.055) !important;
+  color:#f5f5f7 !important;
+  border-color:rgba(255,255,255,.09) !important;
+}
+
+/* Плавающий управляющий: тот же знак, что и в основном экране помощника. */
+.mobile-manager{
+  overflow:visible !important;
+}
+.mobile-manager-orbit{
+  position:relative;
+  width:36px;height:36px;
+  display:grid;place-items:center;
+  color:#17181b;
+}
+.mobile-manager-ring{
+  position:absolute;
+  border:1px solid currentColor;
+  border-radius:50%;
+  pointer-events:none;
+}
+.mobile-manager-ring.ring-a{inset:0;opacity:.20;animation:mobileManagerSpin 16s linear infinite}
+.mobile-manager-ring.ring-b{inset:7px;opacity:.12;animation:mobileManagerSpin 10s linear infinite reverse}
+.mobile-manager-core{
+  width:28px;height:28px;border-radius:50%;
+  display:grid;place-items:center;
+  border:1px solid currentColor;
+  background:rgba(255,255,255,.86);
+  box-shadow:0 5px 16px rgba(0,0,0,.10);
+  position:relative;z-index:2;
+}
+.mobile-manager-core svg{width:15px;height:15px;overflow:visible;animation:mobileManagerFloat 3.2s ease-in-out infinite}
+.mobile-manager-core path{fill:none;stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round}
+.mobile-manager-core circle{fill:currentColor;stroke:none;opacity:.72}
+body.dark .mobile-manager{
+  background:#f5f5f7 !important;
+  color:#17181b !important;
+}
+body.dark .mobile-manager-orbit{color:#17181b}
+body.dark .mobile-manager-core{background:rgba(255,255,255,.94);box-shadow:0 5px 18px rgba(0,0,0,.24)}
+body:not(.dark) .mobile-manager{color:#17181b !important}
+@keyframes mobileManagerSpin{to{transform:rotate(360deg)}}
+@keyframes mobileManagerFloat{0%,100%{transform:translateY(0) scale(1);opacity:.88}50%{transform:translateY(-1px) scale(1.04);opacity:1}}
+@media(prefers-reduced-motion:reduce){
+  .mobile-manager-ring.ring-a,.mobile-manager-ring.ring-b,.mobile-manager-core svg{animation:none!important}
+}
+</style>
+
+
+<style id="dark-surfaces-v28">
+/* DARK V28 — только исправление оставшихся светлых поверхностей. */
+body.dark .future-evolution,
+body.dark .future-twin,
+body.dark .future-simulator,
+body.dark .future-memory,
+body.dark .future-blindspot,
+body.dark .future-create,
+body.dark .future-command,
+body.dark .future-shell .opportunity-preview,
+body.dark .future-shell .evo-summary>div,
+body.dark .evo-summary>div,
+body.dark .future-shell .evo-summary,
+body.dark .future-shell .twin-map,
+body.dark .future-shell .twin-node,
+body.dark .future-shell .sim-option,
+body.dark .future-shell .sim-result,
+body.dark .future-shell .sim-chart,
+body.dark .future-shell .sim-notes>div,
+body.dark .future-shell .memory-cards article,
+body.dark .future-shell .auto-level,
+body.dark .future-shell .build-input-wrap,
+body.dark .future-shell .build-example,
+body.dark .future-shell .intent-command,
+body.dark .future-shell .intent-suggestions button,
+body.dark .future-shell .twin-detail-grid button,
+body.dark .future-shell .evo-summary>div,
+body.dark .more-grid button,
+body.dark .premium-secondary,
+body.dark .premium-ask-input{
+  background:rgba(255,255,255,.045) !important;
+  color:#f5f5f7 !important;
+  border-color:rgba(255,255,255,.09) !important;
+  box-shadow:none !important;
+}
+
+/* Вложенные карты и схемы тоже должны быть тёмными. */
+body.dark .future-shell .twin-map{
+  background:rgba(255,255,255,.025) !important;
+}
+body.dark .future-shell .twin-node{
+  border-color:rgba(255,255,255,.11) !important;
+  box-shadow:0 10px 28px rgba(0,0,0,.22) !important;
+}
+body.dark .future-shell .twin-node small,
+body.dark .future-shell .twin-node span,
+body.dark .future-shell .evolution-head p,
+body.dark .future-shell .evolution-count,
+body.dark .future-shell .evolution-foot,
+body.dark .future-shell .evolution-row small,
+body.dark .future-shell .evo-num,
+body.dark .future-shell .memory-strip span,
+body.dark .future-shell .memory-strip small,
+body.dark .future-shell .sim-copy p,
+body.dark .future-shell .sim-option small,
+body.dark .future-shell .sim-result p,
+body.dark .future-shell .evo-summary small,
+body.dark .future-shell .evo-summary span,
+body.dark .future-shell .evo-full-list time,
+body.dark .future-shell .evo-full-list p,
+body.dark .future-shell .evo-full-list label{
+  color:rgba(255,255,255,.56) !important;
+}
+body.dark .future-shell .evolution-row,
+body.dark .future-shell .evolution-foot button,
+body.dark .future-shell .future-link,
+body.dark .future-shell .twin-detail-grid button,
+body.dark .future-shell .intent-command,
+body.dark .future-shell .intent-text,
+body.dark .future-shell .memory-strip b,
+body.dark .future-shell .evo-full-list b,
+body.dark .future-shell .evo-summary b{
+  color:#f5f5f7 !important;
+}
+body.dark .future-shell .evolution-list,
+body.dark .future-shell .evolution-row,
+body.dark .future-shell .evo-full-list,
+body.dark .future-shell .evo-full-list article,
+body.dark .future-shell .evo-summary{
+  border-color:rgba(255,255,255,.09) !important;
+}
+body.dark .future-shell .twin-lines path{stroke:rgba(255,255,255,.15) !important}
+
+/* Тёмные поля и подсказки в модальных экранах. */
+body.dark .future-shell .build-input,
+body.dark .future-shell .intent-sheet textarea,
+body.dark .future-shell .command-form input{
+  background:rgba(255,255,255,.055) !important;
+  color:#f5f5f7 !important;
+  border-color:rgba(255,255,255,.10) !important;
+}
+body.dark .future-shell .build-input::placeholder,
+body.dark .future-shell .command-form input::placeholder,
+body.dark .future-shell .intent-sheet textarea::placeholder{
+  color:rgba(255,255,255,.35) !important;
+}
+body.dark .future-shell .sim-option.active{
+  background:rgba(255,255,255,.09) !important;
+}
+
+/* Оставляем белыми только сознательные контрастные CTA-кнопки. */
+body.dark .future-shell .twin-open,
+body.dark .future-shell .memory-head button,
+body.dark .future-shell .build-result button,
+body.dark .future-shell .intent-command button,
+body.dark .future-shell .future-create-btn,
+body.dark .future-shell .blindspot-btn,
+body.dark .future-shell .future-primary{
+  background:#f5f5f7 !important;
+  color:#111216 !important;
+}
+
+/* Бренд в боковой панели — никакого серого прямоугольника. */
+body.dark .brand-button,
+body.dark .brand-button:hover,
+body.dark .brand-button:focus-visible{
+  background:transparent !important;
+  color:#f5f5f7 !important;
+}
+
+/* Если где-то осталась старая белая поверхность внутри тёмного кабинета,
+   она получает нейтральную тёмную подложку, не затрагивая чёрные/контрастные CTA. */
+body.dark .future-shell .future-card > .future-card-inner,
+body.dark .future-shell .future-card .card-inner,
+body.dark .future-shell .future-card .surface,
+body.dark .future-shell .future-card .panel,
+body.dark .future-shell .future-card .sub-card{
+  background:rgba(255,255,255,.045) !important;
+  color:#f5f5f7 !important;
+  border-color:rgba(255,255,255,.09) !important;
+}
+</style>
 </head>
 <body>
 <div class="app">
@@ -4103,7 +4622,16 @@ body.dark .theme{background:rgba(255,255,255,.055);border-color:rgba(255,255,255
 <button data-section="more" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><circle cx="5" cy="12" fill="currentColor" r="1" stroke="none"></circle><circle cx="12" cy="12" fill="currentColor" r="1" stroke="none"></circle><circle cx="19" cy="12" fill="currentColor" r="1" stroke="none"></circle></svg></span><small>Ещё</small></button>
 </nav>
 <button aria-label="Открыть цифрового управляющего" class="mobile-manager" id="mobileManager" type="button">
-<span class="dm-icon dm-icon--live"><svg viewbox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle><path d="M12 7v10M7 12h10"></path></svg></span>
+  <span class="mobile-manager-orbit" aria-hidden="true">
+    <span class="mobile-manager-ring ring-a"></span>
+    <span class="mobile-manager-ring ring-b"></span>
+    <span class="mobile-manager-core">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 3.5l1.55 5.95L19.5 11l-5.95 1.55L12 18.5l-1.55-5.95L4.5 11l5.95-1.55L12 3.5z"></path>
+        <circle cx="12" cy="11" r="1.35"></circle>
+      </svg>
+    </span>
+  </span>
 </button>
 <div aria-hidden="true" class="company-sheet" id="companySheet">
 <div class="company-backdrop" onclick="closeCompanySheet()"></div>
@@ -4206,7 +4734,17 @@ function openBusinessPulse(){closeMore();document.getElementById('businessPulse'
 function closeBusinessPulse(){document.getElementById('businessPulse').classList.remove('show')}
 function closeControlAndMore(){closeControl();closeMore()}
 
-const body=document.body,theme=document.getElementById('theme'),label=document.getElementById('themeText');if(localStorage.getItem('db-theme')==='dark')body.classList.add('dark');function themeLabel(){label.textContent=body.classList.contains('dark')?'Светлая':'Тёмная'}themeLabel();theme.onclick=()=>{body.classList.toggle('dark');localStorage.setItem('db-theme',body.classList.contains('dark')?'dark':'light');themeLabel()};
+const body=document.body,theme=document.getElementById('theme'),label=document.getElementById('themeText');
+let savedTheme='light';
+try{savedTheme=localStorage.getItem('db-theme')||'light'}catch(e){}
+if(savedTheme==='dark')body.classList.add('dark');
+function themeLabel(){if(label)label.textContent=body.classList.contains('dark')?'Светлая':'Тёмная'}
+themeLabel();
+if(theme)theme.onclick=()=>{
+  body.classList.toggle('dark');
+  try{localStorage.setItem('db-theme',body.classList.contains('dark')?'dark':'light')}catch(e){}
+  themeLabel();
+};
 document.getElementById('askForm')?.addEventListener('submit',e=>{e.preventDefault();const input=document.getElementById('askInput');if(input?.value.trim())document.getElementById('reply')?.classList.add('show')});
 const tasksPage=document.getElementById('tasksPage'),clientsPage=document.getElementById('clientsPage'),salesPage=document.getElementById('salesPage'),financePage=document.getElementById('financePage'),promoPage=document.getElementById('promoPage');
 const homeMain=document.querySelector('main.content');
@@ -4404,7 +4942,7 @@ const confirmAction=document.getElementById('confirmAction'),laterAction=documen
 confirmAction?.addEventListener('click',()=>{confirmAction.disabled=true;confirmAction.textContent='Проверяю и исправляю…';setTimeout(()=>{confirmAction.style.display='none';if(laterAction)laterAction.style.display='none';result?.classList.add('show')},650)});
 laterAction?.addEventListener('click',()=>{if(confirmAction)confirmAction.style.display='none';laterAction.style.display='none'});
 
-const R=window.SpeechRecognition||window.webkitSpeechRecognition;if(R){const r=new R;r.lang='ru-RU';r.interimResults=false;r.maxAlternatives=1;document.getElementById('voice').onclick=()=>{try{r.start()}catch(e){}};r.onresult=e=>document.getElementById('askInput').value=e.results[0][0].transcript}
+const R=window.SpeechRecognition||window.webkitSpeechRecognition;const voiceBtn=document.getElementById('voice');if(R&&voiceBtn){const r=new R;r.lang='ru-RU';r.interimResults=false;r.maxAlternatives=1;voiceBtn.onclick=()=>{try{r.start()}catch(e){}};r.onresult=e=>{const input=document.getElementById('askInput');if(input)input.value=e.results[0][0].transcript}}
 
 let deferredInstallPrompt=null;
 const installBtn=document.getElementById('installBtn');
