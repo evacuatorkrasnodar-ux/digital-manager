@@ -3021,7 +3021,18 @@ const tasksPage=document.getElementById('tasksPage'),clientsPage=document.getEle
 const homeMain=document.querySelector('main.content');
 const sectionButtons=document.querySelectorAll('[data-section]');
 const homeSections=homeMain?Array.from(homeMain.children).filter(el=>!['tasksPage','clientsPage','salesPage','financePage','promoPage'].includes(el.id)) : [];
-function showSection(section){if(section==='more'){openMore();return;}const isTasks=section==='tasks',isClients=section==='clients',isSales=section==='sales',isFinance=section==='finance',isPromo=section==='promo',isReports=section==='reports',isSettings=section==='settings';if(isReports){openMonthReport();return;}if(isSettings){openSettingsPanel();return;}homeSections.forEach(el=>el.style.display=(isTasks||isClients||isSales||isFinance||isPromo)?'none':'');if(tasksPage)tasksPage.classList.toggle('show',isTasks);if(clientsPage)clientsPage.classList.toggle('show',isClients);if(salesPage)salesPage.classList.toggle('show',isSales);if(financePage)financePage.classList.toggle('show',isFinance);if(promoPage)promoPage.classList.toggle('show',isPromo);sectionButtons.forEach(b=>b.classList.toggle('active',b.dataset.section===section));}
+function showSection(section){
+  const pages={tasks:tasksPage,clients:clientsPage,sales:salesPage,finance:financePage,promo:promoPage};
+  if(section==='more'){openMore();return;}
+  if(section==='reports'){openMonthReport();return;}
+  if(section==='settings'){openSettingsPanel();return;}
+  const isHome=section==='home';
+  homeSections.forEach(el=>{el.style.display=isHome?'':'none'});
+  Object.keys(pages).forEach(key=>{if(pages[key])pages[key].classList.toggle('show',key===section)});
+  sectionButtons.forEach(b=>b.classList.toggle('active',b.dataset.section===section));
+  document.querySelectorAll('.mobile-nav button[data-section]').forEach(b=>b.classList.toggle('active',b.dataset.section===section));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 sectionButtons.forEach(b=>b.addEventListener('click',()=>showSection(b.dataset.section)));
 document.getElementById('tasksBack')?.addEventListener('click',()=>showSection('home'));
 document.getElementById('clientsBack')?.addEventListener('click',()=>showSection('home'));
@@ -3721,4 +3732,25 @@ body.dark .manager-personality-mark{background:#f4f4f5;color:#111214}
 })();
 </script>
 
+
+<style id="navigation-fix-v14">
+.mobile-nav{z-index:10000!important;pointer-events:auto!important;touch-action:manipulation}
+.mobile-nav button{position:relative;z-index:1;pointer-events:auto!important;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.mobile-nav button *{pointer-events:none}
+</style>
+<script id="navigation-fix-v14-js">
+(function(){
+  function bindMobileNavigation(){
+    document.querySelectorAll('.mobile-nav button[data-section]').forEach(function(btn){
+      btn.addEventListener('click',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        var section=btn.getAttribute('data-section');
+        if(typeof showSection==='function') showSection(section);
+      },{passive:false});
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bindMobileNavigation); else bindMobileNavigation();
+})();
+</script>
 </body></html>
