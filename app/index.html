@@ -2533,7 +2533,102 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
   .finance-manager-note,.promo-manager-note{padding:19px;border-radius:22px}
   .finance-manager-note b,.promo-manager-note b{font-size:19px}
 }
-</style></head>
+</style>
+<style id="mobile-compact-v19">
+/* V19 — mobile compact pass */
+@media (max-width: 600px){
+  body{overflow-x:hidden}
+  .future-shell{padding:18px 12px 92px}
+  .future-header{margin-bottom:14px;align-items:flex-start}
+  .future-kicker{font-size:8px;letter-spacing:.13em;margin-bottom:9px}
+  .future-header h1{font-size:32px;line-height:.98;letter-spacing:-.065em;max-width:330px}
+  .future-lead{font-size:12px;line-height:1.35;margin-top:8px;max-width:320px}
+  .future-state{
+    display:flex;align-items:center;gap:14px;
+    min-height:0;padding:16px;border-radius:20px;margin-bottom:9px;
+  }
+  .state-orbit{width:54px;height:54px;flex:0 0 54px;margin:0;transform:none!important}
+  .orbit-ring{display:none}
+  .orbit-core{width:54px;height:54px;border-radius:17px}
+  .core-dot{width:6px;height:6px;margin-bottom:5px}
+  .core-word{font-size:7px;letter-spacing:.08em}
+  .state-eyebrow{font-size:7px;margin-bottom:5px}
+  .state-copy h2{font-size:20px;line-height:1.02;margin-bottom:5px}
+  .state-copy p{font-size:10px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .state-meta{font-size:7px;gap:5px;margin-top:7px}
+  .future-grid{gap:9px}
+  .future-card{padding:16px;border-radius:19px}
+  .future-card h3{font-size:15px;line-height:1.2;margin-top:7px}
+  .future-desc{font-size:10px;line-height:1.45;margin-top:8px}
+  .finding{margin:15px 0 13px;padding:12px 0;gap:10px}
+  .finding strong{font-size:12px;margin-top:4px}
+  .finding small{font-size:9px}
+  .action-row{gap:6px}
+  .future-btn{height:34px;padding:0 12px;font-size:9px;border-radius:10px}
+  .mini-result{margin-top:15px}
+  .mini-result div{padding:11px 0}
+  .mini-result b{font-size:16px}
+  .mini-result span{font-size:8px}
+  .quiet-note{font-size:8px;margin-top:9px}
+  .opportunity-preview{margin:13px 0 9px;padding:10px;gap:9px}
+  .preview-orb{height:28px;width:28px}
+  .opportunity-preview strong{font-size:10px}
+  .timeline{margin:12px 0 8px}
+  .timeline div{grid-template-columns:43px 1fr;padding:8px 0}
+  .timeline span{font-size:9px}
+  .future-command{margin-top:9px;padding:17px;border-radius:20px}
+  .command-copy h2{font-size:20px;margin:7px 0 5px}
+  .command-copy p{font-size:10px;line-height:1.4}
+  .command-form{grid-template-columns:1fr 42px 42px;gap:6px;margin-top:13px}
+  .command-form input{height:44px;border-radius:12px;padding:0 12px;font-size:10px}
+  .command-form button{border-radius:12px}
+  .command-suggestions{gap:6px;margin-top:8px}
+  .command-suggestions button{font-size:8px}
+  .future-create{margin-top:9px;padding:17px;border-radius:20px}
+  .create-visual{display:none}
+  .create-copy h2{font-size:20px;margin:7px 0}
+  .create-copy p{font-size:10px;line-height:1.45;margin-bottom:12px}
+  .future-create-btn{height:36px;font-size:9px}
+  .future-footer{font-size:8px;margin-top:15px}
+  .manager-personality{margin-top:9px;padding:9px 10px;border-radius:13px}
+  .manager-personality-mark{width:24px;height:24px;border-radius:8px;font-size:9px}
+  .manager-personality-copy{font-size:10px}
+  .manager-personality-copy b{font-size:8px;margin-bottom:1px}
+  .mobile-nav{
+    left:8px!important;right:8px!important;bottom:8px!important;
+    padding:5px!important;border-radius:17px!important;
+  }
+  .mobile-nav button{padding:7px 2px!important}
+  .mobile-nav button .dm-icon{margin-bottom:2px}
+  .mobile-nav button small{font-size:8px!important}
+  .mobile-nav button em{font-size:7px!important}
+}
+@media (max-width:390px){
+  .future-shell{padding-left:10px;padding-right:10px}
+  .future-header h1{font-size:29px}
+  .future-state{padding:14px}
+  .state-copy h2{font-size:18px}
+  .future-card{padding:14px}
+}
+</style>
+
+
+<style id="personality-v20">
+.manager-personality{
+  display:none!important;
+}
+@media(max-width:600px){
+  #managerGreeting{
+    max-width:340px;
+  }
+  #managerGreetingSub{
+    max-width:310px;
+    min-height:2.7em;
+  }
+}
+</style>
+
+</head>
 <body>
 <div class="app">
 <aside class="sidebar"><button aria-label="О компании Цифровой бизнес" class="brand brand-button" onclick="openCompanySheet()" type="button"><span aria-hidden="true" class="mark dm-company-mark">ЦБ</span><div><div class="brand-title">Цифровой бизнес</div><div class="brand-sub">IT-компания</div></div></button><nav class="nav">
@@ -2552,8 +2647,8 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
 <header class="future-header">
 <div>
 <div class="future-kicker"><span class="pulse"></span> ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</div>
-<h1>Доброе утро, Юлия.</h1>
-<p class="future-lead">Я уже проверил бизнес. Сейчас всё спокойно.</p>
+<h1 id="managerGreeting">Доброе утро, Юлия.</h1>
+<p class="future-lead" id="managerGreetingSub">Я уже проверил бизнес. Сейчас всё спокойно.</p>
 </div>
 <div class="future-time">
 <strong>09:41</strong>
@@ -4132,4 +4227,155 @@ body.dark .manager-personality-mark{background:#f4f4f5;color:#111214}
   else syncMobileState();
 })();
 </script>
+
+<script id="manager-personality-v20">
+(function(){
+  const defaultName='Юлия';
+  const femaleNames=new Set(['юлия','анна','мария','елена','ольга','наталья','наталия','екатерина','виктория','алина','полина','дарья','ирина','светлана','татьяна','ксения','евгения','валерия','вероника','диана','кристина','марина','людмила','надежда','любовь','софия','софья','александра','анастасия']);
+  const maleNames=new Set(['алексей','иван','михаил','максим','дмитрий','андрей','сергей','николай','артём','артем','павел','роман','евгений','владимир','александр','денис','кирилл','илья','егор','тимур','никита','константин','антон','виктор','олег','глеб','руслан','станислав','фёдор','федор']);
+
+  function clean(v){return String(v||'').trim().replace(/\s+/g,' ').replace(/[.!?]+$/,'')}
+  function gender(name){
+    const n=clean(name).toLowerCase();
+    if(femaleNames.has(n))return'female';
+    if(maleNames.has(n))return'male';
+    if(/(ия|ья|на|ва|ла|та|са|за|ра|ка)$/.test(n))return'female';
+    if(/(й|н|р|м|в|д|с|т|к|г|б|л|п|ц|ф|х|ч)$/.test(n))return'male';
+    return'neutral';
+  }
+  function period(){
+    const h=new Date().getHours();
+    if(h>=5&&h<12)return'Доброе утро';
+    if(h>=12&&h<18)return'Добрый день';
+    if(h>=18&&h<24)return'Добрый вечер';
+    return'Доброй ночи';
+  }
+  function name(){
+    try{return clean(localStorage.getItem('dm_user_name'))||defaultName}catch(e){return defaultName}
+  }
+  function pick(a){
+    const day=Math.floor(Date.now()/86400000);
+    return a[(day+new Date().getHours())%a.length];
+  }
+
+  const moods={
+    calm:{
+      female:[
+        'Прекрасно выглядишь. Бизнес тоже старается не отставать.',
+        'Сегодня можно без героизма. Я уже забрал часть работы себе.',
+        'Я всё проверил. Пока можно спокойно заниматься главным.'
+      ],
+      male:[
+        'Выглядишь бодро. Я уже проверил, что бизнес тоже.',
+        'Сегодня можно без героизма. Я заберу цифровую часть.',
+        'Я всё проверил. Пока ничего не горит — редкая роскошь.'
+      ],
+      neutral:[
+        'Выглядите отлично. Бизнес тоже старается не отставать.',
+        'Сегодня можно без героизма. Я уже забрал часть работы себе.',
+        'Я всё проверил. Пока можно спокойно заниматься главным.'
+      ]
+    },
+    success:{
+      female:[
+        'Готово. Можно поставить галочку. Я уже поставил.',
+        'Сделано. Клиенты могут выдохнуть. Я тоже.',
+        'Получилось. Иногда бизнес умеет слушаться.'
+      ],
+      male:[
+        'Готово. Можно поставить галочку. Я уже поставил.',
+        'Сделано. Клиенты могут выдохнуть. Я тоже.',
+        'Получилось. Иногда бизнес умеет слушаться.'
+      ],
+      neutral:[
+        'Готово. Можно поставить галочку. Я уже поставил.',
+        'Сделано. Клиенты могут выдохнуть. Я тоже.',
+        'Получилось. Иногда бизнес умеет слушаться.'
+      ]
+    },
+    warning:{
+      female:[
+        'Есть проблема. Я уже разбираюсь. Тебе пока ничего делать не нужно.',
+        'Нашёл место, где бизнес начал капризничать. Уже смотрю.',
+        'Есть отклонение. Без паники — сначала разберусь, потом расскажу.'
+      ],
+      male:[
+        'Есть проблема. Я уже разбираюсь. Тебе пока ничего делать не нужно.',
+        'Нашёл место, где бизнес начал капризничать. Уже смотрю.',
+        'Есть отклонение. Без паники — сначала разберусь, потом расскажу.'
+      ],
+      neutral:[
+        'Есть проблема. Я уже разбираюсь. Вам пока ничего делать не нужно.',
+        'Нашёл место, где бизнес начал капризничать. Уже смотрю.',
+        'Есть отклонение. Без паники — сначала разберусь, потом расскажу.'
+      ]
+    },
+    urgent:{
+      female:[
+        'Сейчас без шуток. Есть вещь, которую лучше решить сегодня.',
+        'Мне нужен твой взгляд на одну вещь. Остальное я уже держу.',
+        'Здесь лучше не ждать. Я подготовил решение и покажу причину.'
+      ],
+      male:[
+        'Сейчас без шуток. Есть вещь, которую лучше решить сегодня.',
+        'Мне нужен твой взгляд на одну вещь. Остальное я уже держу.',
+        'Здесь лучше не ждать. Я подготовил решение и покажу причину.'
+      ],
+      neutral:[
+        'Сейчас без шуток. Есть вещь, которую лучше решить сегодня.',
+        'Мне нужен ваш взгляд на одну вещь. Остальное я уже держу.',
+        'Здесь лучше не ждать. Я подготовил решение и покажу причину.'
+      ]
+    }
+  };
+
+  function detectMood(){
+    // Optional state hooks: other modules can set window.managerState.
+    const s=window.managerState||{};
+    if(s.urgent||s.severity==='critical')return'urgent';
+    if(s.problem||s.severity==='warning')return'warning';
+    if(s.completed||s.success)return'success';
+    return'calm';
+  }
+
+  function render(mood){
+    const n=name(),g=gender(n);
+    const h=document.getElementById('managerGreeting');
+    const sub=document.getElementById('managerGreetingSub');
+    if(!h||!sub)return;
+
+    h.textContent=period()+', '+n+'.';
+    const pool=moods[mood||detectMood()][g]||moods.calm.neutral;
+    sub.textContent=pick(pool);
+
+    window.managerProfile={
+      name:n,
+      gender:g,
+      mood:mood||detectMood(),
+      setName:function(v){
+        v=clean(v);if(!v)return;
+        try{localStorage.setItem('dm_user_name',v)}catch(e){}
+        render();
+      },
+      setMood:function(v){render(v)}
+    };
+  }
+
+  // Public API for the rest of the product:
+  // managerSetState({problem:true}), managerSetState({completed:true}), etc.
+  window.managerSetState=function(state){
+    window.managerState=Object.assign({},window.managerState||{},state||{});
+    render();
+  };
+
+  // Lightweight event bridge for future modules.
+  document.addEventListener('manager:state',function(e){
+    window.managerSetState(e.detail||{});
+  });
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>render());
+  else render();
+})();
+</script>
+
 </body></html>
