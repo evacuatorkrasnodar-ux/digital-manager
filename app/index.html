@@ -3293,6 +3293,81 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
 }
 </style>
 
+
+<style id="precision-fixes-v24">
+/* Только точечные исправления — основной дизайн не меняем. */
+
+/* Верхний блок: один материал в обеих темах. */
+body.dark .future-state{
+  background:
+    radial-gradient(circle at 86% 12%,rgba(255,255,255,.065),transparent 27%),
+    linear-gradient(145deg,#17181c,#111214)!important;
+  border-color:rgba(255,255,255,.085)!important;
+  box-shadow:0 25px 70px rgba(0,0,0,.28),0 2px 8px rgba(0,0,0,.16)!important;
+}
+body.dark .future-state:hover{
+  box-shadow:0 32px 90px rgba(0,0,0,.34),0 2px 8px rgba(0,0,0,.18)!important;
+}
+body.dark .future-shell:before{
+  background:radial-gradient(circle,rgba(255,255,255,.045),transparent 68%);
+}
+body.dark .state-copy:before{background:#fff;opacity:.55}
+body.dark .state-orbit{filter:drop-shadow(0 12px 24px rgba(0,0,0,.35))}
+
+/* Новый значок помощника: тонкий, монохромный, без эмодзи. */
+.assistant-orbit{
+  color:var(--icon);
+  filter:none!important;
+}
+.assistant-orbit-ring{
+  position:absolute;
+  border:1px solid currentColor;
+  border-radius:50%;
+  opacity:.14;
+  pointer-events:none;
+}
+.assistant-ring-a{inset:0;animation:assistantSpin 18s linear infinite}
+.assistant-ring-b{inset:24px;opacity:.09;animation:assistantSpin 13s linear infinite reverse}
+.assistant-core{
+  width:112px;height:112px;border-radius:50%;
+  display:grid;place-items:center;position:relative;z-index:2;
+  color:var(--icon);
+  background:color-mix(in srgb,var(--panel) 78%,transparent);
+  border:1px solid color-mix(in srgb,var(--icon) 16%,transparent);
+  box-shadow:0 12px 34px rgba(0,0,0,.07);
+  backdrop-filter:blur(16px);
+}
+.assistant-core svg{width:34px;height:34px;overflow:visible;animation:assistantFloat 3.4s ease-in-out infinite}
+.assistant-core path{fill:none;stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round}
+.assistant-core circle{fill:currentColor;stroke:none;opacity:.7}
+body.dark .assistant-core{
+  background:rgba(255,255,255,.045);
+  border-color:rgba(255,255,255,.16);
+  box-shadow:0 14px 38px rgba(0,0,0,.28);
+}
+@keyframes assistantSpin{to{transform:rotate(360deg)}}
+@keyframes assistantFloat{0%,100%{transform:translateY(0) scale(1);opacity:.88}50%{transform:translateY(-2px) scale(1.04);opacity:1}}
+
+/* Переключатель темы — аккуратный чёрно-белый контрол. */
+.theme{align-items:center;gap:10px;transition:background .25s ease,border-color .25s ease,transform .25s ease}
+.theme:hover{transform:translateY(-1px)}
+.theme-left{display:flex;align-items:center;gap:9px}
+.theme-icon{width:20px;height:20px;display:grid;place-items:center;color:var(--icon)}
+.theme-icon svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round}
+.theme-moon{display:none}
+body.dark .theme-sun{display:none}
+body.dark .theme-moon{display:block}
+body.dark .theme{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.12);color:var(--text)}
+
+@media(max-width:600px){
+  .assistant-core{width:54px;height:54px;border-radius:17px}
+  .assistant-core svg{width:22px;height:22px}
+  .assistant-ring-b{inset:11px}
+}
+@media(prefers-reduced-motion:reduce){
+  .assistant-ring-a,.assistant-ring-b,.assistant-core svg{animation:none!important}
+}
+</style>
 </head>
 <body>
 <div class="app">
@@ -3305,7 +3380,16 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
 <button data-section="promo" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><path d="M5 19V8"></path><path d="M10 19V5"></path><path d="M15 19v-8"></path><path d="M20 19V3"></path></svg></span><span class="premium-nav-label">Продвижение</span></button>
 <button data-section="more" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><circle cx="5" cy="12" fill="currentColor" r="1" stroke="none"></circle><circle cx="12" cy="12" fill="currentColor" r="1" stroke="none"></circle><circle cx="19" cy="12" fill="currentColor" r="1" stroke="none"></circle></svg></span><span class="premium-nav-label">Ещё</span></button>
 </nav><button class="pwa-install" hidden="" id="installBtn" type="button">Установить приложение</button>
-<div class="online"><span class="dot"></span>Цифровой управляющий · онлайн</div><button class="theme" id="theme">Тема <span id="themeText">Тёмная</span></button></aside>
+<div class="online"><span class="dot"></span>Цифровой управляющий · онлайн</div><button class="theme" id="theme" type="button" aria-label="Переключить светлую и тёмную тему">
+  <span class="theme-left">
+    <span class="theme-icon" aria-hidden="true">
+      <svg class="theme-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.8v2.1M12 19.1v2.1M21.2 12h-2.1M4.9 12H2.8M18.5 5.5l-1.5 1.5M7 17l-1.5 1.5M18.5 18.5L17 17M7 7L5.5 5.5"></path></svg>
+      <svg class="theme-moon" viewBox="0 0 24 24"><path d="M18.8 15.6A7.7 7.7 0 0 1 8.4 5.2 7.7 7.7 0 1 0 18.8 15.6z"></path></svg>
+    </span>
+    <span>Тема</span>
+  </span>
+  <span id="themeText">Тёмная</span>
+</button></aside>
 <main class="content">
 <div class="premium-home">
 <div class="future-shell">
@@ -3316,13 +3400,15 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
   <p id="managerGreetingSub">Прекрасно выглядишь. Бизнес тоже старается не отставать.</p>
   <div class="state-time"><strong>09:41</strong><span>понедельник · 5 октября</span></div>
 </div>
-<div class="state-orbit">
-<div class="orbit-ring ring-a"></div>
-<div class="orbit-ring ring-b"></div>
-<div class="orbit-core">
-<span class="core-dot"></span>
-<span class="core-word">СПОКОЙНО</span>
-</div>
+<div class="state-orbit assistant-orbit" aria-label="Цифровой управляющий" title="Цифровой управляющий">
+  <div class="assistant-orbit-ring assistant-ring-a"></div>
+  <div class="assistant-orbit-ring assistant-ring-b"></div>
+  <div class="assistant-core">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 3.5l1.55 5.95L19.5 11l-5.95 1.55L12 18.5l-1.55-5.95L4.5 11l5.95-1.55L12 3.5z"></path>
+      <circle cx="12" cy="11" r="1.35"></circle>
+    </svg>
+  </div>
 </div>
 <div class="state-copy">
 <div class="state-eyebrow">СОСТОЯНИЕ БИЗНЕСА</div>
