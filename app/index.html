@@ -2513,7 +2513,27 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
 }
 </style>
 </style>
-</head>
+<style id="future-v18-polish">
+.task-command,.finance-manager-note,.promo-manager-note{
+  margin:0 0 22px;padding:24px;border-radius:26px;
+  background:linear-gradient(145deg,#111217,#202126);color:#fff;
+  box-shadow:0 18px 50px rgba(0,0,0,.12)
+}
+.task-command-kicker,.finance-manager-note>span,.promo-manager-note>span{
+  display:block;text-transform:uppercase;letter-spacing:.12em;font-size:11px;opacity:.55;margin-bottom:9px
+}
+.task-command h2{font-size:clamp(25px,4vw,38px);line-height:1.03;letter-spacing:-.045em;margin:0 0 10px}
+.task-command p,.finance-manager-note p,.promo-manager-note p{margin:0 0 18px;color:rgba(255,255,255,.68);line-height:1.55}
+.finance-manager-note b,.promo-manager-note b{display:block;font-size:21px;line-height:1.2;letter-spacing:-.025em;margin-bottom:8px}
+.finance-manager-note,.promo-manager-note{background:var(--card,#fff);color:var(--text,#111);border:1px solid var(--line,#e7e7ea);box-shadow:none}
+.finance-manager-note p,.promo-manager-note p{color:var(--muted,#72757d);margin-bottom:0}
+@media(max-width:600px){
+  .task-command{padding:21px;border-radius:22px}
+  .task-command h2{font-size:27px}
+  .finance-manager-note,.promo-manager-note{padding:19px;border-radius:22px}
+  .finance-manager-note b,.promo-manager-note b{font-size:19px}
+}
+</style></head>
 <body>
 <div class="app">
 <aside class="sidebar"><button aria-label="О компании Цифровой бизнес" class="brand brand-button" onclick="openCompanySheet()" type="button"><span aria-hidden="true" class="mark dm-company-mark">ЦБ</span><div><div class="brand-title">Цифровой бизнес</div><div class="brand-sub">IT-компания</div></div></button><nav class="nav">
@@ -2846,7 +2866,7 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
 
 <div class="future-twin-modal" id="futureTwinModal" aria-hidden="true" onclick="if(event.target===this)closeTwin()">
   <div class="twin-sheet" role="dialog" aria-modal="true">
-    <div class="modal-top"><div><span class="future-label">ЦИФРОВОЙ ДВОЙНИК · LIVE</span><h2>Вся система бизнеса — в одной модели.</h2><p>Связи обновляются по мере поступления новых данных. Нажми на узел, чтобы увидеть, как он влияет на остальные.</p></div><button class="build-close" onclick="closeTwin()">×</button></div>
+    <div class="modal-top"><div><span class="future-label">ЦИФРОВОЙ ДВОЙНИК · LIVE</span><h2>Я вижу бизнес целиком.</h2><p>Клиенты, продажи, деньги, реклама и товары связаны между собой. Нажми на любой узел — покажу, что на него влияет.</p></div><button class="build-close" onclick="closeTwin()">×</button></div>
     <div class="twin-detail-grid">
       <button onclick="twinFocus('Клиенты','1 284','вечерние заявки снижают повторный контакт')"><b>Клиенты</b><strong>1 284</strong><small>активные связи</small></button>
       <button onclick="twinFocus('Продажи','742k ₽','маржа растёт быстрее выручки')"><b>Продажи</b><strong>742k ₽</strong><small>за текущий период</small></button>
@@ -2956,18 +2976,18 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
   </div>
 </div>
 <section class="clients-page" id="clientsPage">
-<div class="clients-head"><div><div class="clients-title">Клиенты</div><div class="clients-sub">Новые заявки, текущие клиенты и те, кому нужно ответить.</div></div><button class="task-back" id="clientsBack" type="button">← Главная</button></div>
+<div class="clients-head"><div><div class="clients-title">Клиенты</div><div class="clients-sub">Я помню, кто к нам пришёл, что покупал и кому пора ответить.</div></div><button class="task-back" id="clientsBack" type="button">← Главная</button></div>
 <div class="clients-stats"><div class="client-stat"><span>Новые заявки</span><b>14</b></div><div class="client-stat"><span>Ждут ответа</span><b>3</b></div><div class="client-stat"><span>Новых клиентов</span><b>8</b></div></div>
 <div class="client-list">
 <div class="client-row"><div class="client-avatar">АК</div><div class="client-main"><div class="client-name">Алексей К.</div><div class="client-info">Новая заявка · услуга «Доставка» · сегодня 08:42</div></div><span class="client-status wait">Нужно ответить</span><button class="client-action" type="button">Открыть</button></div>
 <div class="client-row"><div class="client-avatar">ИВ</div><div class="client-main"><div class="client-name">Иванов И.</div><div class="client-info">Встреча сегодня в 14:00 · есть контекст разговора</div></div><span class="client-status wait">Сегодня</span><button class="client-action" type="button">Открыть</button></div>
 <div class="client-row"><div class="client-avatar">МС</div><div class="client-main"><div class="client-name">Мария С.</div><div class="client-info">Покупка вчера · 18 500 ₽ · постоянный клиент</div></div><span class="client-status">Клиент</span><button class="client-action" type="button">Открыть</button></div>
 </div>
-<div class="clients-empty"><b>Цифровой управляющий следит за клиентами.</b><br/>После подключения CRM, сайта или других источников здесь появятся реальные заявки, история общения, покупки и задачи по каждому клиенту.</div>
+<div class="clients-empty"><b>Цифровой управляющий следит за клиентами.</b><br/>Когда подключим источники, я соберу здесь всю историю клиента сам. Никаких поисков по пяти системам — я уже побежал.</div>
 </section>
 <section class="tasks-page" id="tasksPage">
 <div class="tasks-head"><div><div class="tasks-title">Что я делаю</div><div class="tasks-sub">Не список дел. Здесь видно, что управляющий делает, что ждёт вас и что уже закончил.</div></div><button class="task-back" id="tasksBack" type="button">← Главная</button></div>
-<div class="task-list">
+<div class="task-command"><div class="task-command-kicker">Сейчас</div><h2>Я уже работаю. От вас нужен только один ответ.</h2><p>На странице заказа что-то изменилось. Я нашёл связь с падением конверсии и подготовил вариант исправления.</p><button type="button" class="sales-primary" onclick="openManager()">Посмотреть, что я нашёл →</button></div><div class="task-list">
 <div class="task-row"><span class="task-state red"></span><div class="task-row-main"><div class="task-row-title">Разобраться, почему сайт продаёт хуже</div><div class="task-row-text">Изменение на странице заказа найдено вчера вечером. Требуется подтверждение.</div></div><span class="task-tag">Нужно подтвердить</span></div>
 <div class="task-row"><span class="task-state orange"></span><div class="task-row-main"><div class="task-row-title">Подготовить ответы на отзывы</div><div class="task-row-text">Варианты ответов подготовлены цифровым управляющим.</div></div><span class="task-tag">Сегодня</span></div>
 <div class="task-row"><span class="task-state orange"></span><div class="task-row-main"><div class="task-row-title">Позвонить Иванову</div><div class="task-row-text">Сегодня в 14:00. В календаре есть контекст встречи.</div></div><span class="task-tag">14:00</span></div>
@@ -3102,7 +3122,7 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
 <div class="finance-stat"><span>Прибыль</span><b data-finance="profit">1 265 800 ₽</b><div class="finance-change finance-good">↑ 12,7% к прошлому периоду</div></div>
 <div class="finance-stat"><span>Денег сейчас</span><b data-finance="cash">2 184 000 ₽</b><div class="finance-change finance-good">Достаточно для обязательств</div></div>
 </div>
-<div class="finance-grid">
+<div class="finance-manager-note"><span>Мой вывод</span><b>Деньги в порядке. Но расходы растут чуть быстрее, чем мне хотелось бы.</b><p>Я уже смотрю, что именно подорожало. Если найду лишнее — покажу, а не просто нарисую красивый график.</p></div><div class="finance-grid">
 <article class="finance-card">
 <div class="finance-card-title">Движение денег</div>
 <div class="finance-card-sub">Выручка и расходы за последние 7 дней</div>
@@ -3185,7 +3205,7 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
 <div class="promo-stat"><span>Выручка из каналов</span><b>1,29 млн ₽</b><div class="promo-change promo-good">↑ 13,2%</div></div>
 <div class="promo-stat"><span>Средний чек</span><b>56 100 ₽</b><div class="promo-change promo-warn">− 3,1%</div></div>
 </div>
-<div class="promo-grid">
+<div class="promo-manager-note"><span>Мой вывод</span><b>Не гонимся за дешёвыми заявками. Нам нужны люди, которые покупают.</b><p>Я сравниваю каналы по деньгам на выходе. Охваты пусть пока немного понервничают.</p></div><div class="promo-grid">
 <article class="promo-card">
 <div class="promo-card-title">Каналы</div>
 <div class="promo-card-sub">Смотрим не охваты, а реальные продажи</div>
