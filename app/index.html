@@ -2628,6 +2628,550 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
 }
 </style>
 
+
+<style id="unified-sections-v21">
+/* V21 — all sections speak the same visual language as Home */
+.unified-page,
+.sales-page,
+.finance-page,
+.promo-page{
+  --u-ink:#111114;
+  --u-muted:#74747c;
+  --u-soft:#f6f6f7;
+  --u-line:rgba(17,17,20,.08);
+  --u-radius:28px;
+  color:var(--u-ink);
+}
+.unified-page,
+.sales-page,
+.finance-page,
+.promo-page{
+  max-width:1180px;
+  margin:0 auto;
+}
+.unified-page .clients-head,
+.unified-page .tasks-head,
+.promo-head,
+.sales-hero,
+.finance-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:24px;
+  margin:0 0 24px;
+  padding:4px 0 0;
+}
+.clients-title,
+.tasks-title,
+.promo-title,
+.sales-hero h2,
+.finance-title{
+  font-size:clamp(34px,4vw,58px)!important;
+  line-height:.96!important;
+  letter-spacing:-.065em!important;
+  font-weight:700!important;
+}
+.clients-sub,
+.tasks-sub,
+.promo-sub,
+.sales-hero-copy p,
+.finance-sub{
+  max-width:590px;
+  margin-top:12px;
+  color:var(--u-muted);
+  font-size:15px;
+  line-height:1.5;
+}
+.task-back,
+.clients-page .task-back{
+  border:0!important;
+  background:transparent!important;
+  color:#77777e!important;
+  padding:8px 0!important;
+  font-size:12px!important;
+}
+.unified-page .clients-stats,
+.unified-page .task-list,
+.unified-page .clients-empty,
+.sales-stats,
+.finance-stats,
+.promo-stats{
+  border:0!important;
+  box-shadow:none!important;
+}
+.unified-page .clients-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-bottom:12px;
+}
+.unified-page .client-stat{
+  background:var(--u-soft)!important;
+  border:0!important;
+  border-radius:20px!important;
+  padding:20px!important;
+}
+.unified-page .client-stat span{
+  color:#85858d!important;
+  font-size:11px!important;
+}
+.unified-page .client-stat b{
+  display:block;
+  margin-top:8px;
+  font-size:30px!important;
+  letter-spacing:-.05em;
+}
+.unified-page .client-list{
+  border-top:1px solid var(--u-line)!important;
+}
+.unified-page .client-row{
+  min-height:72px;
+  padding:14px 0!important;
+  border-bottom:1px solid var(--u-line)!important;
+  background:transparent!important;
+}
+.unified-page .client-avatar{
+  width:38px!important;height:38px!important;
+  border-radius:12px!important;
+}
+.unified-page .client-name{font-size:14px!important}
+.unified-page .client-info{font-size:11px!important;color:#8a8a91!important}
+.unified-page .client-action{
+  border:0!important;background:#111114!important;color:#fff!important;
+  border-radius:11px!important;padding:8px 12px!important;
+}
+.unified-page .clients-empty{
+  margin-top:16px!important;
+  padding:18px!important;
+  border-radius:20px!important;
+  background:#111114!important;
+  color:#fff!important;
+  font-size:11px!important;
+  line-height:1.5!important;
+}
+.unified-page .clients-empty b{font-size:14px!important}
+
+.unified-page .task-command,
+.finance-manager-note,
+.promo-manager-note,
+.sales-command,
+.finance-health,
+.promo-health{
+  border-radius:var(--u-radius)!important;
+  box-shadow:none!important;
+}
+.unified-page .task-command{
+  margin:0 0 14px!important;
+  background:#111114!important;
+  color:#fff!important;
+  border:0!important;
+  padding:24px!important;
+}
+.unified-page .task-command h2{
+  max-width:700px;
+  font-size:clamp(24px,3vw,38px)!important;
+  line-height:1.02!important;
+  letter-spacing:-.045em!important;
+}
+.unified-page .task-command p{
+  max-width:650px;
+  color:#b9b9c0!important;
+}
+.unified-page .task-list{
+  border-top:1px solid var(--u-line)!important;
+}
+.unified-page .task-row{
+  padding:16px 0!important;
+  border-bottom:1px solid var(--u-line)!important;
+  background:transparent!important;
+}
+.unified-page .task-row-title{font-size:14px!important}
+.unified-page .task-row-text{font-size:11px!important;color:#85858d!important}
+.unified-page .task-tag{
+  border:0!important;
+  background:#f2f2f3!important;
+  border-radius:999px!important;
+  font-size:9px!important;
+  padding:7px 10px!important;
+}
+
+.sales-page .sales-hero{
+  align-items:flex-end;
+}
+.sales-page .sales-hero-controls{
+  display:flex;
+  gap:8px;
+}
+.sales-command{
+  background:#111114!important;
+  color:#fff!important;
+  border:0!important;
+  padding:26px!important;
+  margin-bottom:12px!important;
+}
+.sales-command-copy h3{
+  font-size:clamp(24px,3vw,38px)!important;
+  line-height:1.02!important;
+  letter-spacing:-.045em!important;
+}
+.sales-command-copy p{color:#b9b9c0!important;max-width:680px}
+.sales-tip-row{
+  gap:10px!important;
+  margin-bottom:12px!important;
+}
+.sales-tip{
+  border:0!important;
+  background:#f6f6f7!important;
+  border-radius:20px!important;
+  padding:15px!important;
+}
+.sales-stats{
+  gap:10px!important;
+  margin-bottom:12px!important;
+}
+.sales-stat{
+  border:0!important;
+  background:#f6f6f7!important;
+  border-radius:20px!important;
+  padding:18px!important;
+}
+.sales-stat b{
+  font-size:28px!important;
+  letter-spacing:-.05em!important;
+}
+.sales-grid{gap:12px!important}
+.sales-card{
+  border:0!important;
+  background:#f6f6f7!important;
+  border-radius:24px!important;
+  box-shadow:none!important;
+}
+.sales-card-head{border-bottom:1px solid var(--u-line)!important}
+.sales-explain{background:#fff!important;border-radius:16px!important}
+
+.finance-page .finance-health,
+.finance-manager-note{
+  background:#111114!important;
+  color:#fff!important;
+  border:0!important;
+}
+.finance-manager-note{
+  padding:22px!important;
+  margin:12px 0!important;
+}
+.finance-manager-note span{
+  color:#a9a9b1!important;
+  font-size:9px!important;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+}
+.finance-manager-note b{
+  display:block;
+  max-width:700px;
+  margin:7px 0;
+  font-size:22px!important;
+  line-height:1.08!important;
+  letter-spacing:-.035em;
+}
+.finance-manager-note p{color:#b9b9c0!important;max-width:650px}
+.finance-stats{
+  gap:10px!important;
+}
+.finance-stat{
+  background:#f6f6f7!important;
+  border:0!important;
+  border-radius:20px!important;
+}
+.finance-card{
+  background:#f6f6f7!important;
+  border:0!important;
+  border-radius:24px!important;
+  box-shadow:none!important;
+}
+.finance-chart-card,
+.finance-list-card{box-shadow:none!important}
+.finance-manager-response{
+  border:0!important;
+  background:#111114!important;
+  color:#fff!important;
+  border-radius:18px!important;
+}
+
+.promo-health,
+.promo-manager-note{
+  background:#111114!important;
+  color:#fff!important;
+  border:0!important;
+}
+.promo-manager-note{
+  padding:22px!important;
+  margin:12px 0!important;
+}
+.promo-manager-note span{
+  color:#a9a9b1!important;
+  font-size:9px!important;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+}
+.promo-manager-note b{
+  display:block;
+  max-width:720px;
+  margin:7px 0;
+  font-size:22px!important;
+  line-height:1.08!important;
+  letter-spacing:-.035em;
+}
+.promo-manager-note p{color:#b9b9c0!important}
+.promo-stats{gap:10px!important}
+.promo-stat{
+  background:#f6f6f7!important;
+  border:0!important;
+  border-radius:20px!important;
+}
+.promo-card{
+  background:#f6f6f7!important;
+  border:0!important;
+  border-radius:24px!important;
+  box-shadow:none!important;
+}
+.channel-row{
+  border-bottom:1px solid var(--u-line)!important;
+}
+.channel-row:last-child{border-bottom:0!important}
+
+@media(max-width:600px){
+  .unified-page,.sales-page,.finance-page,.promo-page{
+    padding:18px 12px 92px!important;
+  }
+  .unified-page .clients-head,
+  .unified-page .tasks-head,
+  .promo-head,
+  .sales-hero,
+  .finance-head{
+    display:block!important;
+    margin-bottom:15px!important;
+  }
+  .clients-title,.tasks-title,.promo-title,.sales-hero h2,.finance-title{
+    font-size:32px!important;
+    line-height:.98!important;
+  }
+  .clients-sub,.tasks-sub,.promo-sub,.sales-hero-copy p,.finance-sub{
+    margin-top:8px!important;
+    font-size:11px!important;
+    line-height:1.4!important;
+  }
+  .task-back,.clients-page .task-back{
+    display:block!important;
+    margin-top:9px!important;
+  }
+  .unified-page .clients-stats{
+    grid-template-columns:repeat(3,1fr)!important;
+    gap:6px!important;
+  }
+  .unified-page .client-stat{
+    padding:12px!important;
+    border-radius:16px!important;
+  }
+  .unified-page .client-stat span{font-size:8px!important}
+  .unified-page .client-stat b{font-size:22px!important;margin-top:5px!important}
+  .unified-page .client-row{gap:8px!important}
+  .unified-page .client-action{font-size:8px!important;padding:7px 9px!important}
+  .unified-page .clients-empty{padding:15px!important;border-radius:18px!important}
+  .unified-page .task-command{
+    padding:17px!important;
+    border-radius:20px!important;
+  }
+  .unified-page .task-command h2{
+    font-size:20px!important;
+  }
+  .unified-page .task-command p{
+    font-size:10px!important;
+    line-height:1.4!important;
+  }
+  .unified-page .task-row{
+    display:grid!important;
+    grid-template-columns:8px 1fr auto!important;
+    gap:9px!important;
+  }
+  .sales-page .sales-hero-controls{
+    margin-top:10px;
+  }
+  .sales-command{
+    padding:17px!important;
+    border-radius:20px!important;
+  }
+  .sales-command-copy h3{font-size:20px!important}
+  .sales-command-copy p{font-size:10px!important;line-height:1.4!important}
+  .sales-tip-row{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+  }
+  .sales-tip:nth-child(1){display:none!important}
+  .sales-stat{
+    padding:13px!important;
+    border-radius:17px!important;
+  }
+  .sales-stat b{font-size:21px!important}
+  .sales-grid{grid-template-columns:1fr!important}
+  .sales-card{border-radius:20px!important}
+  .finance-manager-note,.promo-manager-note{
+    padding:17px!important;
+    border-radius:20px!important;
+  }
+  .finance-manager-note b,.promo-manager-note b{font-size:19px!important}
+  .finance-stats,.promo-stats{
+    grid-template-columns:repeat(2,1fr)!important;
+    gap:6px!important;
+  }
+  .finance-stat,.promo-stat{
+    border-radius:17px!important;
+    padding:13px!important;
+  }
+  .finance-stat b,.promo-stat b{font-size:21px!important}
+  .finance-card,.promo-card{border-radius:20px!important}
+  .promo-health{padding:17px!important;border-radius:20px!important}
+  .promo-health-main{font-size:10px!important;line-height:1.4!important}
+  .promo-health-main b{font-size:12px!important}
+  .promo-grid{grid-template-columns:1fr!important}
+  .channel-row{padding:11px 0!important}
+  .channel-value b{font-size:11px!important}
+}
+</style>
+
+
+<style id="compact-hero-v22">
+/* V22 — one compact hero: greeting + business control */
+.future-shell{max-width:980px!important}
+.future-header{display:none!important}
+.future-state{
+  position:relative;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto;
+  grid-template-areas:
+    "greeting orbit"
+    "copy orbit";
+  column-gap:22px;
+  row-gap:14px;
+  align-items:center;
+  padding:24px!important;
+  border-radius:28px!important;
+  margin-bottom:12px!important;
+}
+.state-greeting{grid-area:greeting;min-width:0}
+.state-copy{grid-area:copy;min-width:0}
+.state-orbit{grid-area:orbit;align-self:center}
+.state-greeting .future-kicker{
+  font-size:9px!important;
+  margin-bottom:8px!important;
+}
+.state-greeting h1{
+  margin:0!important;
+  font-size:clamp(28px,4vw,44px)!important;
+  line-height:.98!important;
+  letter-spacing:-.065em!important;
+}
+.state-greeting p{
+  margin:8px 0 0!important;
+  max-width:620px;
+  font-size:12px!important;
+  line-height:1.4!important;
+  color:var(--muted);
+}
+.state-time{
+  display:flex;
+  align-items:baseline;
+  gap:7px;
+  margin-top:9px;
+  color:var(--muted);
+  font-size:9px;
+}
+.state-time strong{
+  color:var(--text);
+  font-size:10px;
+  font-weight:700;
+}
+.state-copy{
+  padding-top:2px;
+  border-top:1px solid var(--line);
+  padding-top:14px;
+}
+.state-copy .state-eyebrow{font-size:8px!important}
+.state-copy h2{
+  font-size:22px!important;
+  letter-spacing:-.045em!important;
+  margin:5px 0!important;
+}
+.state-copy p{
+  max-width:650px;
+  font-size:10px!important;
+  line-height:1.45!important;
+}
+.state-meta{
+  font-size:8px!important;
+  margin-top:8px!important;
+}
+.future-grid{gap:10px!important}
+@media(max-width:600px){
+  .future-shell{padding:12px 10px 90px!important}
+  .future-state{
+    grid-template-columns:1fr 54px;
+    grid-template-areas:
+      "greeting orbit"
+      "copy copy";
+    column-gap:12px;
+    row-gap:12px;
+    padding:16px!important;
+    border-radius:20px!important;
+  }
+  .state-greeting .future-kicker{
+    font-size:7px!important;
+    margin-bottom:6px!important;
+  }
+  .state-greeting h1{
+    font-size:25px!important;
+    line-height:1!important;
+  }
+  .state-greeting p{
+    font-size:10px!important;
+    line-height:1.35!important;
+    margin-top:6px!important;
+  }
+  .state-time{
+    margin-top:7px!important;
+    font-size:7px!important;
+  }
+  .state-time strong{font-size:8px!important}
+  .state-orbit{
+    width:54px!important;
+    height:54px!important;
+    margin:0!important;
+  }
+  .state-orbit .orbit-core{
+    width:54px!important;height:54px!important;border-radius:16px!important;
+  }
+  .state-copy{
+    padding-top:11px!important;
+  }
+  .state-copy h2{
+    font-size:18px!important;
+    margin:4px 0!important;
+  }
+  .state-copy p{
+    font-size:9px!important;
+    line-height:1.4!important;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .state-meta{
+    font-size:7px!important;
+    margin-top:7px!important;
+  }
+  .future-grid{gap:8px!important}
+}
+</style>
+
 </head>
 <body>
 <div class="app">
@@ -2644,18 +3188,13 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
 <main class="content">
 <div class="premium-home">
 <div class="future-shell">
-<header class="future-header">
-<div>
-<div class="future-kicker"><span class="pulse"></span> ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</div>
-<h1 id="managerGreeting">Доброе утро, Юлия.</h1>
-<p class="future-lead" id="managerGreetingSub">Я уже проверил бизнес. Сейчас всё спокойно.</p>
-</div>
-<div class="future-time">
-<strong>09:41</strong>
-<span>понедельник · 5 октября</span>
-</div>
-</header>
 <section class="future-state">
+<div class="state-greeting">
+  <div class="future-kicker"><span class="pulse"></span> ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</div>
+  <h1 id="managerGreeting">Доброе утро, Юлия.</h1>
+  <p id="managerGreetingSub">Прекрасно выглядишь. Бизнес тоже старается не отставать.</p>
+  <div class="state-time"><strong>09:41</strong><span>понедельник · 5 октября</span></div>
+</div>
 <div class="state-orbit">
 <div class="orbit-ring ring-a"></div>
 <div class="orbit-ring ring-b"></div>
@@ -3070,7 +3609,7 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
     <div class="build-result" id="buildResult"><small>ГОТОВО</small><strong id="buildResultTitle">Инструмент создан.</strong><p>Я подготовил основу и могу подключить её к нужному разделу бизнеса.</p><button type="button" onclick="closeBuildModal()">Открыть инструмент →</button></div>
   </div>
 </div>
-<section class="clients-page" id="clientsPage">
+<section class="clients-page unified-page" id="clientsPage">
 <div class="clients-head"><div><div class="clients-title">Клиенты</div><div class="clients-sub">Я помню, кто к нам пришёл, что покупал и кому пора ответить.</div></div><button class="task-back" id="clientsBack" type="button">← Главная</button></div>
 <div class="clients-stats"><div class="client-stat"><span>Новые заявки</span><b>14</b></div><div class="client-stat"><span>Ждут ответа</span><b>3</b></div><div class="client-stat"><span>Новых клиентов</span><b>8</b></div></div>
 <div class="client-list">
@@ -3080,7 +3619,7 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
 </div>
 <div class="clients-empty"><b>Цифровой управляющий следит за клиентами.</b><br/>Когда подключим источники, я соберу здесь всю историю клиента сам. Никаких поисков по пяти системам — я уже побежал.</div>
 </section>
-<section class="tasks-page" id="tasksPage">
+<section class="tasks-page unified-page" id="tasksPage">
 <div class="tasks-head"><div><div class="tasks-title">Что я делаю</div><div class="tasks-sub">Не список дел. Здесь видно, что управляющий делает, что ждёт вас и что уже закончил.</div></div><button class="task-back" id="tasksBack" type="button">← Главная</button></div>
 <div class="task-command"><div class="task-command-kicker">Сейчас</div><h2>Я уже работаю. От вас нужен только один ответ.</h2><p>На странице заказа что-то изменилось. Я нашёл связь с падением конверсии и подготовил вариант исправления.</p><button type="button" class="sales-primary" onclick="openManager()">Посмотреть, что я нашёл →</button></div><div class="task-list">
 <div class="task-row"><span class="task-state red"></span><div class="task-row-main"><div class="task-row-title">Разобраться, почему сайт продаёт хуже</div><div class="task-row-text">Изменение на странице заказа найдено вчера вечером. Требуется подтверждение.</div></div><span class="task-tag">Нужно подтвердить</span></div>
@@ -3089,7 +3628,7 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
 <div class="task-row"><span class="task-state green"></span><div class="task-row-main"><div class="task-row-title">Перераспределить рекламный бюджет</div><div class="task-row-text">Выполнено: бюджет перераспределён между двумя кампаниями.</div></div><span class="task-tag">Выполнено</span></div>
 </div>
 </section>
-<section class="sales-page" id="salesPage">
+<section class="sales-page unified-page" id="salesPage">
 <div class="sales-hero">
 <div class="sales-hero-copy">
 <div class="eyebrow">Продажи · <span class="sales-live-dot"></span> данные обновлены</div>
@@ -3276,7 +3815,7 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
 </article>
 </div>
 </section>
-<section class="promo-page" id="promoPage">
+<section class="promo-page unified-page" id="promoPage">
 <div class="promo-head">
 <div>
 <div class="promo-title">Продвижение</div>
