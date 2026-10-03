@@ -4092,6 +4092,41 @@ body.dark .dm-signature-button-logo .sig-core{fill:#f5f5f7!important}
   .dm-signature-manager-button::before,.dm-signature-button-logo .sig-orbit,.dm-signature-button-logo .sig-diamond-wrap{animation:none!important}
 }
 </style>
+
+<style id="mobile-theme-and-stability-v1">
+/* Только точечная мобильная настройка. Основной дизайн приложения не переписываем. */
+.mobile-theme-card{
+  grid-column:1 / -1;
+  display:flex;align-items:center;gap:13px;
+  min-height:66px;padding:13px 14px;
+  border:1px solid var(--line);border-radius:20px;
+  background:var(--panel);color:var(--text);
+  box-shadow:var(--shadow);
+}
+.mobile-theme-icon{width:38px;height:38px;border-radius:13px;display:grid;place-items:center;flex:none;background:rgba(20,20,24,.055);color:var(--text)}
+.mobile-theme-icon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.mobile-theme-moon{display:none}
+.mobile-theme-copy{min-width:0;flex:1;display:grid;gap:3px}
+.mobile-theme-copy b{font-size:13px;line-height:1.2}
+.mobile-theme-copy small{font-size:11px;color:var(--muted)}
+.mobile-theme-toggle{width:48px;height:28px;padding:2px;border:0;border-radius:999px;background:#d9d9de;display:flex;align-items:center;justify-content:flex-start;flex:none}
+.mobile-theme-toggle span{width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 7px rgba(0,0,0,.16);transition:transform .22s ease}
+body.dark .mobile-theme-icon{background:rgba(255,255,255,.07)}
+body.dark .mobile-theme-toggle{background:#f5f5f7;justify-content:flex-end}
+body.dark .mobile-theme-toggle span{background:#17181b}
+body.dark .mobile-theme-sun{display:none}
+body.dark .mobile-theme-moon{display:block}
+@media(max-width:600px){
+  .more-panel{max-height:88vh;overflow:auto}
+  .more-grid{grid-template-columns:1fr 1fr!important;gap:10px!important}
+  .mobile-theme-card{grid-column:1 / -1!important}
+  .more-grid>button{min-height:92px!important}
+}
+@media(max-width:380px){
+  .more-grid{grid-template-columns:1fr!important}
+}
+</style>
+
 </head>
 <body>
 <div class="app">
@@ -4872,6 +4907,16 @@ body.dark .dm-signature-button-logo .sig-core{fill:#f5f5f7!important}
 <div class="pulse-orb"><i></i></div><div><span>Состояние бизнеса</span><b>Есть рост. И одна точка, где сегодня лежат деньги.</b><small>Продажи растут · стоимость заявки снижается · сайт теряет часть клиентов</small></div><em>›</em>
 </div>
 <div class="more-grid">
+<div class="mobile-theme-card" id="mobileThemeCard">
+  <div class="mobile-theme-icon" aria-hidden="true">
+    <svg class="mobile-theme-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.8v2.1M12 19.1v2.1M21.2 12h-2.1M4.9 12H2.8M18.5 5.5l-1.5 1.5M7 17l-1.5 1.5M18.5 18.5L17 17M7 7L5.5 5.5"></path></svg>
+    <svg class="mobile-theme-moon" viewBox="0 0 24 24"><path d="M18.8 15.6A7.7 7.7 0 0 1 8.4 5.2 7.7 7.7 0 1 0 18.8 15.6z"></path></svg>
+  </div>
+  <div class="mobile-theme-copy"><b>Тема оформления</b><small id="mobileThemeText">Тёмная</small></div>
+  <button class="mobile-theme-toggle" id="mobileThemeToggle" type="button" aria-label="Переключить тему">
+    <span></span>
+  </button>
+</div>
 <button onclick="closeMore();openTwin()"><span>◌</span><b>Цифровой двойник</b><small>Живая карта бизнеса</small></button>
 <button onclick="closeMore();openEvolution()"><span>✦</span><b>Эволюция</b><small>Что бизнес уже научился делать</small></button>
 <button onclick="openBusinessMemory()"><span>◉</span><b>Память бизнеса</b><small>Что я помню и почему это важно</small></button>
@@ -4948,13 +4993,22 @@ const body=document.body,theme=document.getElementById('theme'),label=document.g
 let savedTheme='light';
 try{savedTheme=localStorage.getItem('db-theme')||'light'}catch(e){}
 if(savedTheme==='dark')body.classList.add('dark');
-function themeLabel(){if(label)label.textContent=body.classList.contains('dark')?'Светлая':'Тёмная'}
-themeLabel();
-if(theme)theme.onclick=()=>{
+const mobileThemeText=document.getElementById('mobileThemeText');
+const mobileThemeToggle=document.getElementById('mobileThemeToggle');
+function themeLabel(){
+  const next=body.classList.contains('dark')?'Светлая':'Тёмная';
+  if(label)label.textContent=next;
+  if(mobileThemeText)mobileThemeText.textContent=next;
+  if(mobileThemeToggle)mobileThemeToggle.setAttribute('aria-label','Включить '+next.toLowerCase()+' тему');
+}
+function toggleAppTheme(){
   body.classList.toggle('dark');
   try{localStorage.setItem('db-theme',body.classList.contains('dark')?'dark':'light')}catch(e){}
   themeLabel();
-};
+}
+themeLabel();
+if(theme)theme.onclick=toggleAppTheme;
+if(mobileThemeToggle)mobileThemeToggle.onclick=toggleAppTheme;
 document.getElementById('askForm')?.addEventListener('submit',e=>{e.preventDefault();const input=document.getElementById('askInput');if(input?.value.trim())document.getElementById('reply')?.classList.add('show')});
 const tasksPage=document.getElementById('tasksPage'),clientsPage=document.getElementById('clientsPage'),salesPage=document.getElementById('salesPage'),financePage=document.getElementById('financePage'),promoPage=document.getElementById('promoPage');
 const homeMain=document.querySelector('main.content');
