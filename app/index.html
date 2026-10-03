@@ -3269,10 +3269,9 @@ function closeBusinessPulse(){document.getElementById('businessPulse').classList
 function closeControlAndMore(){closeControl();closeMore()}
 
 const body=document.body,theme=document.getElementById('theme'),label=document.getElementById('themeText');if(localStorage.getItem('db-theme')==='dark')body.classList.add('dark');function themeLabel(){label.textContent=body.classList.contains('dark')?'Светлая':'Тёмная'}themeLabel();theme.onclick=()=>{body.classList.toggle('dark');localStorage.setItem('db-theme',body.classList.contains('dark')?'dark':'light');themeLabel()};
-document.getElementById('askForm').onsubmit=e=>{e.preventDefault();if(document.getElementById('askInput').value.trim())document.getElementById('reply').classList.add('show')};
+document.getElementById('askForm')?.addEventListener('submit',e=>{e.preventDefault();const input=document.getElementById('askInput');if(input?.value.trim())document.getElementById('reply')?.classList.add('show')});
 const tasksPage=document.getElementById('tasksPage'),clientsPage=document.getElementById('clientsPage'),salesPage=document.getElementById('salesPage'),financePage=document.getElementById('financePage'),promoPage=document.getElementById('promoPage');
 const homeMain=document.querySelector('main.content');
-const sectionButtons=document.querySelectorAll('[data-section]');
 const homeSections=homeMain?Array.from(homeMain.children).filter(el=>!['tasksPage','clientsPage','salesPage','financePage','promoPage'].includes(el.id)) : [];
 function showSection(section){
   const pages = {
