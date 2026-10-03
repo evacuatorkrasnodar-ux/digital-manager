@@ -2497,11 +2497,34 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
   .company-section h3{font-size:18px;}
 }
 
+<style id="future-v17-navigation">
+/* v17 — меньше меню, больше управляющего */
+.sidebar .nav{gap:5px}
+.sidebar .nav button[data-section="more"]{margin-top:8px;border-top:1px solid var(--line);border-radius:0 0 14px 14px;padding-top:18px}
+.more-panel{max-width:760px}
+.more-head h2{letter-spacing:-.045em}
+.more-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.more-grid button{min-height:116px;text-align:left}
+.more-grid button:last-child{grid-column:1/-1}
+@media(max-width:600px){
+  .more-grid{grid-template-columns:1fr 1fr}
+  .more-grid button{min-height:104px}
+  .more-grid button:last-child{grid-column:1/-1}
+}
+</style>
 </style>
 </head>
 <body>
 <div class="app">
-<aside class="sidebar"><button aria-label="О компании Цифровой бизнес" class="brand brand-button" onclick="openCompanySheet()" type="button"><span aria-hidden="true" class="mark dm-company-mark">ЦБ</span><div><div class="brand-title">Цифровой бизнес</div><div class="brand-sub">IT-компания</div></div></button><nav class="nav"><button class="active" data-section="home" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5z"></path><path d="M9.5 20v-5.5h5V20"></path></svg></span><span class="premium-nav-label">Главная</span></button><button data-section="tasks" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><path d="M5 12.5 9.2 17 19 7"></path></svg></span><span class="premium-nav-label">Действия</span></button><button data-section="clients" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><circle cx="9" cy="8" r="3"></circle><path d="M3.5 19c.5-3.2 2.4-5 5.5-5s5 1.8 5.5 5"></path><path d="M15.5 6.5c2.5.2 4 1.7 4 4"></path><path d="M16 14.5c2.2.5 3.5 2 4 4.5"></path></svg></span><span class="premium-nav-label">Клиенты</span></button><button data-section="sales" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><path d="M5 17 19 5"></path><path d="M10 5h9v9"></path></svg></span><span class="premium-nav-label">Продажи</span></button><button data-section="finance" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><path d="M8 4v16"></path><path d="M11.5 4H14a4 4 0 0 1 0 8H8"></path><path d="M8 12h6a4 4 0 0 1 0 8h-3"></path></svg></span><span class="premium-nav-label">Деньги</span></button><button data-section="promo" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><path d="M5 19V8"></path><path d="M10 19V5"></path><path d="M15 19v-8"></path><path d="M20 19V3"></path></svg></span><span class="premium-nav-label">Продвижение</span></button><button data-section="reports" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><path d="M6 4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"></path><path d="M8 15v2"></path><path d="M12 11v6"></path><path d="M16 8v9"></path></svg></span><span class="premium-nav-label">Отчёты</span></button><button data-section="settings" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><circle cx="12" cy="12" r="3.2"></circle><path d="M19.4 15a1.8 1.8 0 0 0 .35 2l.05.05-1.9 1.9-.05-.05a1.8 1.8 0 0 0-2-.35 1.8 1.8 0 0 0-1.1 1.65V20h-2.7v-.1a1.8 1.8 0 0 0-1.1-1.65 1.8 1.8 0 0 0-2 .35l-.05.05L7 16.95l.05-.05a1.8 1.8 0 0 0 .35-2 1.8 1.8 0 0 0-1.65-1.1H5v-2.7h.75a1.8 1.8 0 0 0 1.65-1.1 1.8 1.8 0 0 0-.35-2L7 7.95 8.9 6.05l.05.05a1.8 1.8 0 0 0 2 .35A1.8 1.8 0 0 0 12.05 4.8V4h2.7v.8a1.8 1.8 0 0 0 1.1 1.65 1.8 1.8 0 0 0 2-.35l.05-.05 1.9 1.9-.05.05a1.8 1.8 0 0 0-.35 2 1.8 1.8 0 0 0 1.65 1.1H22v2.7h-.95A1.8 1.8 0 0 0 19.4 15z"></path></svg></span><span class="premium-nav-label">Настройки</span></button></nav><button class="pwa-install" hidden="" id="installBtn" type="button">Установить приложение</button>
+<aside class="sidebar"><button aria-label="О компании Цифровой бизнес" class="brand brand-button" onclick="openCompanySheet()" type="button"><span aria-hidden="true" class="mark dm-company-mark">ЦБ</span><div><div class="brand-title">Цифровой бизнес</div><div class="brand-sub">IT-компания</div></div></button><nav class="nav">
+<button class="active" data-section="home" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5z"></path><path d="M9.5 20v-5.5h5V20"></path></svg></span><span class="premium-nav-label">Главная</span></button>
+<button data-section="tasks" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><path d="M5 12.5 9.2 17 19 7"></path></svg></span><span class="premium-nav-label">Действия</span></button>
+<button data-section="clients" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><circle cx="9" cy="8" r="3"></circle><path d="M3.5 19c.5-3.2 2.4-5 5.5-5s5 1.8 5.5 5"></path><path d="M15.5 6.5c2.5.2 4 1.7 4 4"></path><path d="M16 14.5c2.2.5 3.5 2 4 4.5"></path></svg></span><span class="premium-nav-label">Клиенты</span></button>
+<button data-section="sales" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><path d="M5 17 19 5"></path><path d="M10 5h9v9"></path></svg></span><span class="premium-nav-label">Продажи</span></button>
+<button data-section="finance" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><path d="M8 4v16"></path><path d="M11.5 4H14a4 4 0 0 1 0 8H8"></path><path d="M8 12h6a4 4 0 0 1 0 8h-3"></path></svg></span><span class="premium-nav-label">Деньги</span></button>
+<button data-section="promo" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><path d="M5 19V8"></path><path d="M10 19V5"></path><path d="M15 19v-8"></path><path d="M20 19V3"></path></svg></span><span class="premium-nav-label">Продвижение</span></button>
+<button data-section="more" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><circle cx="5" cy="12" fill="currentColor" r="1" stroke="none"></circle><circle cx="12" cy="12" fill="currentColor" r="1" stroke="none"></circle><circle cx="19" cy="12" fill="currentColor" r="1" stroke="none"></circle></svg></span><span class="premium-nav-label">Ещё</span></button>
+</nav><button class="pwa-install" hidden="" id="installBtn" type="button">Установить приложение</button>
 <div class="online"><span class="dot"></span>Цифровой управляющий · онлайн</div><button class="theme" id="theme">Тема <span id="themeText">Тёмная</span></button></aside>
 <main class="content">
 <div class="premium-home">
@@ -2943,10 +2966,10 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
 <div class="clients-empty"><b>Цифровой управляющий следит за клиентами.</b><br/>После подключения CRM, сайта или других источников здесь появятся реальные заявки, история общения, покупки и задачи по каждому клиенту.</div>
 </section>
 <section class="tasks-page" id="tasksPage">
-<div class="tasks-head"><div><div class="tasks-title">Задачи</div><div class="tasks-sub">Я собрал задачи по важности и статусу.</div></div><button class="task-back" id="tasksBack" type="button">← Главная</button></div>
+<div class="tasks-head"><div><div class="tasks-title">Что я делаю</div><div class="tasks-sub">Не список дел. Здесь видно, что управляющий делает, что ждёт вас и что уже закончил.</div></div><button class="task-back" id="tasksBack" type="button">← Главная</button></div>
 <div class="task-list">
-<div class="task-row"><span class="task-state red"></span><div class="task-row-main"><div class="task-row-title">Проверить падение конверсии сайта</div><div class="task-row-text">Изменение на странице заказа найдено вчера вечером. Требуется подтверждение.</div></div><span class="task-tag">Нужно подтвердить</span></div>
-<div class="task-row"><span class="task-state orange"></span><div class="task-row-main"><div class="task-row-title">Ответить на два отзыва</div><div class="task-row-text">Варианты ответов подготовлены цифровым управляющим.</div></div><span class="task-tag">Сегодня</span></div>
+<div class="task-row"><span class="task-state red"></span><div class="task-row-main"><div class="task-row-title">Разобраться, почему сайт продаёт хуже</div><div class="task-row-text">Изменение на странице заказа найдено вчера вечером. Требуется подтверждение.</div></div><span class="task-tag">Нужно подтвердить</span></div>
+<div class="task-row"><span class="task-state orange"></span><div class="task-row-main"><div class="task-row-title">Подготовить ответы на отзывы</div><div class="task-row-text">Варианты ответов подготовлены цифровым управляющим.</div></div><span class="task-tag">Сегодня</span></div>
 <div class="task-row"><span class="task-state orange"></span><div class="task-row-main"><div class="task-row-title">Позвонить Иванову</div><div class="task-row-text">Сегодня в 14:00. В календаре есть контекст встречи.</div></div><span class="task-tag">14:00</span></div>
 <div class="task-row"><span class="task-state green"></span><div class="task-row-main"><div class="task-row-title">Перераспределить рекламный бюджет</div><div class="task-row-text">Выполнено: бюджет перераспределён между двумя кампаниями.</div></div><span class="task-tag">Выполнено</span></div>
 </div>
@@ -3215,8 +3238,8 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
 </main></div>
 <nav aria-label="Основная навигация" class="mobile-nav">
 <button class="active" data-section="home" type="button"><span class="dm-icon dm-icon--live"><svg viewbox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5z"></path><path d="M9.5 20v-5.5h5V20"></path></svg></span><small>Главная</small></button>
-<button data-section="sales" type="button"><span class="dm-icon dm-icon--return"><svg viewbox="0 0 24 24"><path d="M5 17 19 5"></path><path d="M10 5h9v9"></path></svg></span><small>Продажи</small></button>
 <button data-section="tasks" type="button"><span class="dm-icon dm-icon--success"><svg viewbox="0 0 24 24"><path d="M5 12.5 9.2 17 19 7"></path></svg></span><small>Действия</small><em>7</em></button>
+<button data-section="sales" type="button"><span class="dm-icon dm-icon--return"><svg viewbox="0 0 24 24"><path d="M5 17 19 5"></path><path d="M10 5h9v9"></path></svg></span><small>Продажи</small></button>
 <button data-section="finance" type="button"><span class="dm-icon dm-icon--pulse"><svg viewbox="0 0 24 24"><path d="M8 4v16"></path><path d="M11.5 4H14a4 4 0 0 1 0 8H8"></path><path d="M8 12h6a4 4 0 0 1 0 8h-3"></path></svg></span><small>Деньги</small></button>
 <button data-section="more" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><circle cx="5" cy="12" fill="currentColor" r="1" stroke="none"></circle><circle cx="12" cy="12" fill="currentColor" r="1" stroke="none"></circle><circle cx="19" cy="12" fill="currentColor" r="1" stroke="none"></circle></svg></span><small>Ещё</small></button>
 </nav>
@@ -3248,16 +3271,19 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
 <div aria-hidden="true" class="more-sheet" id="moreSheet">
 <div class="more-backdrop" onclick="closeMore()"></div>
 <section aria-labelledby="moreTitle" aria-modal="true" class="more-panel" role="dialog">
-<div class="more-handle"></div>
-<div class="more-head"><div><div class="manager-kicker">Ваш бизнес · под контролем</div><h2 id="moreTitle">Всё важное — здесь.</h2><p>Не меню. Ваши знания, правила и разборы бизнеса.</p></div><button class="more-close" onclick="closeMore()">×</button></div>
+<div class="more-head">
+<div><div class="manager-kicker">Цифровой управляющий</div><h2 id="moreTitle">Ещё немного будущего.</h2><p>Здесь не прячется свалка настроек. Здесь живёт то, что помогает мне понимать и развивать бизнес.</p></div>
+<button class="more-close" onclick="closeMore()">×</button>
+</div>
 <div class="pulse-card" onclick="openBusinessPulse()">
-<div class="pulse-orb"><i></i></div><div><span>Состояние бизнеса</span><b>Есть рост. Есть одна точка, которую стоит забрать сегодня.</b><small>Продажи растут · стоимость заявки снижается · сайт теряет часть клиентов</small></div><em>›</em>
+<div class="pulse-orb"><i></i></div><div><span>Состояние бизнеса</span><b>Есть рост. И одна точка, где сегодня лежат деньги.</b><small>Продажи растут · стоимость заявки снижается · сайт теряет часть клиентов</small></div><em>›</em>
 </div>
 <div class="more-grid">
-<button onclick="openBusinessMemory()"><span>◉</span><b>Я знаю ваш бизнес</b><small>Что уже запомнил</small></button>
-<button onclick="openBusinessRules()"><span>⌁</span><b>Правила</b><small>Что делать автоматически</small></button>
-<button onclick="openMonthReport();closeMore()"><span>▤</span><b>Разборы</b><small>Месяц в одном экране</small></button>
-<button onclick="openSettingsPanel()"><span>⚙</span><b>Настройки</b><small>Как я работаю</small></button>
+<button onclick="closeMore();openTwin()"><span>◌</span><b>Цифровой двойник</b><small>Живая карта бизнеса</small></button>
+<button onclick="closeMore();openEvolution()"><span>✦</span><b>Эволюция</b><small>Что бизнес уже научился делать</small></button>
+<button onclick="openBusinessMemory()"><span>◉</span><b>Память бизнеса</b><small>Что я помню и почему это важно</small></button>
+<button onclick="openBusinessRules()"><span>⌁</span><b>Правила</b><small>Где я решаю сам, а где спрашиваю</small></button>
+<button onclick="openSettingsPanel()"><span>⚙</span><b>Характер управляющего</b><small>Как со мной работать</small></button>
 </div>
 </section>
 </div>
@@ -3316,7 +3342,7 @@ function openControl(html){document.getElementById('controlContent').innerHTML=h
 function closeControl(){document.getElementById('controlOverlay').classList.remove('show')}
 function openBusinessMemory(){closeMore();openControl(`<div class="control-kicker">Память бизнеса</div><div class="control-title">Я знаю ваш бизнес.</div><div class="control-sub">Не нужно каждый раз объяснять одно и то же. Здесь живёт контекст, который помогает мне принимать решения вместе с вами.</div><div class="memory-list"><div class="memory-row"><span class="memory-icon">₽</span><div><b>Цель</b><small>Расти по прибыли, а не просто по обороту.</small></div></div><div class="memory-row"><span class="memory-icon">⌂</span><div><b>Основной канал</b><small>Сайт приводит заявки, Telegram даёт заметную долю продаж.</small></div></div><div class="memory-row"><span class="memory-icon">◯</span><div><b>Клиенты</b><small>Важны быстрый ответ и повторный контакт после предложения.</small></div></div><div class="memory-row"><span class="memory-icon">◇</span><div><b>Ваш стиль управления</b><small>Сначала показать причину. Потом предложить действие. Деньги — только после подтверждения.</small></div></div></div><button class="control-action" onclick="closeControl();openBusinessRules()">Открыть правила</button>`)}
 function openBusinessRules(){closeMore();openControl(`<div class="control-kicker">Автоматизация</div><div class="control-title">Я знаю, когда действовать.</div><div class="control-sub">Вы задаёте границы. Я слежу за бизнесом внутри них и не делаю важные шаги молча.</div><div class="rule-list"><div class="rule-row"><div><b>Если клиент ждёт больше 30 минут</b><small>Подготовить напоминание владельцу.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Если стоимость заявки выросла на 20%</b><small>Сообщить и показать, какой канал изменился.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Если клиент готов купить</b><small>Создать задачу и поднять её наверх.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Если действие влияет на деньги</b><small>Сначала спросить вас.</small></div><span class="rule-toggle"><i></i></span></div></div><button class="control-action" onclick="closeControl();openBusinessPulse()">Открыть бизнес целиком</button>`)}
-function openSettingsPanel(){closeMore();openControl(`<div class="control-kicker">Настройки управляющего</div><div class="control-title">Вы задаёте характер.</div><div class="control-sub">Настройки здесь не про кнопки. Они про то, насколько самостоятельно я могу работать.</div><div class="rule-list"><div class="rule-row"><div><b>Режим работы</b><small>Советую → вы подтверждаете</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Важные действия</b><small>Всегда спрашивать перед отправкой и изменением бюджета.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Тон общения</b><small>Коротко, спокойно, по делу.</small></div><span class="rule-toggle"><i></i></span></div></div><button class="control-action" onclick="closeControl();openBusinessMemory()">Открыть, что я помню</button>`)}
+function openSettingsPanel(){closeMore();openControl(`<div class="control-kicker">Правила управляющего</div><div class="control-title">Вы задаёте границы. Я работаю внутри них.</div><div class="control-sub">Не двадцать настроек ради настроек. Только то, что реально меняет мою самостоятельность.</div><div class="rule-list"><div class="rule-row"><div><b>Самостоятельность</b><small>Советую → вы подтверждаете важные действия.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Деньги</b><small>Изменения бюджета и расходы — сначала спросить вас.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Общение</b><small>Коротко, спокойно, по делу. Шутки — только когда бизнес не горит.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Автопилот</b><small>Можно расширить границы, когда появится доверие.</small></div><span class="rule-toggle"><i></i></span></div></div><button class="control-action" onclick="closeControl();openAutopilot()">Настроить автопилот →</button>`)}
 function openBusinessPulse(){closeMore();document.getElementById('businessPulse').classList.add('show')}
 function closeBusinessPulse(){document.getElementById('businessPulse').classList.remove('show')}
 function closeControlAndMore(){closeControl();closeMore()}
@@ -3337,9 +3363,6 @@ function showSection(section){
   };
 
   if(section === 'more'){ openMore(); return; }
-  if(section === 'reports'){ openMonthReport(); return; }
-  if(section === 'settings'){ openSettingsPanel(); return; }
-
   const isKnown = Object.prototype.hasOwnProperty.call(pages, section);
   if(!isKnown) return;
 
