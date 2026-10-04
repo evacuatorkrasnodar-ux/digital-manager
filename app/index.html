@@ -7822,7 +7822,7 @@ body.dark .dm-living-dots{color:#f7f9ff}
  setTimeout(addDots,500);
 })();
 </script>
-</body>
+
 
 <style id="settings-sections-compact-v44">
 /* v44: Разделы на Главной — компактное продолжение настроек поведения. Темы не меняем. */
@@ -8768,7 +8768,7 @@ body.dark .dm-living-dots i{
 }
 </style>
 
-</html>
+
 <style id="final-mobile-readable-fix-v30">
 /* Финальная точечная правка: верхний баннер, логотип, радары и читаемость. */
 
@@ -10686,3 +10686,88 @@ body.dark #homeSectionPreviews .preview-status .check{
   text-shadow:none!important;
 }
 </style>
+
+<style id="v24-settings-real-final">
+/* Настройки — финальная точечная правка. */
+
+#controlOverlay .control-close{
+  font-size:0!important;
+  width:40px!important;height:40px!important;min-width:40px!important;
+  border-radius:50%!important;
+  display:grid!important;place-items:center!important;
+  color:#182447!important;
+  background:rgba(24,36,71,.07)!important;
+  border:1px solid rgba(24,36,71,.12)!important;
+  box-shadow:none!important;
+}
+#controlOverlay .control-close::before{
+  content:"←"!important;
+  font-size:19px!important;
+  line-height:1!important;
+  font-weight:500!important;
+}
+body.dark #controlOverlay .control-close{
+  color:#f7f9ff!important;
+  background:rgba(255,255,255,.07)!important;
+  border-color:rgba(255,255,255,.12)!important;
+}
+
+/* Обучение — сапфир, а не голубая кнопка. */
+#controlContent .dm-learning-button,
+#controlContent button.dm-learning-button{
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
+  color:#fff!important;
+  border:1px solid rgba(93,112,166,.42)!important;
+  box-shadow:0 8px 22px rgba(30,48,91,.16)!important;
+}
+
+/* Переключатели. */
+#controlContent .settings-home-switch,
+#controlContent .settings-rule-toggle{
+  background:#d9dee8!important;
+  border:1px solid rgba(20,28,45,.12)!important;
+  box-shadow:inset 0 1px 2px rgba(16,31,76,.08)!important;
+}
+#controlContent .settings-home-switch i,
+#controlContent .settings-rule-toggle i{
+  background:#fff!important;
+  box-shadow:0 1px 4px rgba(16,31,76,.22)!important;
+  transition:transform .22s ease!important;
+}
+#controlContent .settings-home-switch.is-on,
+#controlContent .settings-rule-toggle.is-on{
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
+  border-color:rgba(93,112,166,.42)!important;
+}
+#controlContent .settings-home-switch.is-on i,
+#controlContent .settings-rule-toggle.is-on i{
+  background:#fff!important;
+}
+body.dark #controlContent .settings-home-switch,
+body.dark #controlContent .settings-rule-toggle{
+  background:#343a48!important;
+  border-color:rgba(255,255,255,.10)!important;
+}
+body.dark #controlContent .settings-home-switch.is-on,
+body.dark #controlContent .settings-rule-toggle.is-on{
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
+}
+body.dark #controlContent .settings-home-switch i,
+body.dark #controlContent .settings-rule-toggle i{
+  background:#f7f9ff!important;
+}
+body.dark #controlContent .settings-home-switch.is-on i,
+body.dark #controlContent .settings-rule-toggle.is-on i{
+  background:#fff!important;
+}
+
+@media(max-width:700px){
+  #controlOverlay .control-close{
+    width:38px!important;height:38px!important;min-width:38px!important;
+  }
+  #controlOverlay .control-close::before{font-size:18px!important}
+}
+</style>
+
+</body>
+</html>
