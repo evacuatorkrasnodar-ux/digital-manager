@@ -4570,6 +4570,38 @@ body.dark .future-evolution .evo-next button{
   .top-banner-settings-icon{font-size:13px}
 }
 </style>
+
+<style id="polish-mobile-v27">
+/* Финальная полировка: не меняет существующую тему, только читаемость и управление. */
+.top-banner-settings{
+  right:20px!important;top:18px!important;height:42px!important;padding:0 15px!important;
+  border:1px solid rgba(255,255,255,.24)!important;
+  background:rgba(255,255,255,.11)!important;color:#fff!important;
+  box-shadow:0 0 0 1px rgba(255,255,255,.04),0 0 22px rgba(255,255,255,.10),0 10px 28px rgba(0,0,0,.18)!important;
+  text-shadow:0 0 14px rgba(255,255,255,.35);font-size:11px!important;letter-spacing:.01em!important;
+}
+.top-banner-settings:hover{background:rgba(255,255,255,.16)!important;box-shadow:0 0 28px rgba(255,255,255,.15),0 12px 32px rgba(0,0,0,.2)!important}
+.top-banner-settings-icon{font-size:16px!important;opacity:1!important}
+.assistant-core,.assistant-orbit{filter:drop-shadow(0 0 12px rgba(255,255,255,.12))!important}
+.assistant-core .dm-signature-logo{filter:drop-shadow(0 0 8px rgba(255,255,255,.26))}
+.assistant-core .dm-signature-logo .sig-orbit{opacity:.42!important}
+.assistant-core .dm-signature-logo .sig-diamond{filter:drop-shadow(0 0 6px rgba(255,255,255,.34))}
+.settings-theme-box{margin-top:18px;padding:16px;border:1px solid var(--line);border-radius:18px;background:color-mix(in srgb,var(--panel) 82%,transparent);display:flex;justify-content:space-between;align-items:center;gap:15px}
+.settings-theme-box b{display:block;font-size:13px}.settings-theme-box small{display:block;margin-top:4px;color:var(--muted);font-size:10px;line-height:1.35}
+.theme-mode-row{display:flex;gap:7px;flex-shrink:0}.theme-mode-btn{border:1px solid var(--line);background:transparent;color:var(--text);border-radius:12px;padding:10px 12px;font-size:10px;font-weight:650;cursor:pointer}.theme-mode-btn.active{background:var(--text);color:var(--panel);border-color:var(--text)}
+/* Карточки чуть плотнее, но без потери воздуха. */
+.future-card{padding:22px!important;border-radius:23px!important}.future-card h3{font-size:17px!important}.future-desc{font-size:12px!important;line-height:1.5!important}.future-label{font-size:9px!important}.finding strong{font-size:13px}.finding small{font-size:10px!important}.action-row .future-btn{font-size:10px!important}
+.state-greeting p{font-size:14px!important}.state-time{font-size:12px!important}.state-time strong{font-size:14px!important}.state-time span{font-size:12px!important}
+.future-lead{font-size:15px!important}
+@media(max-width:700px){
+ .top-banner-settings{right:12px!important;top:12px!important;height:40px!important;padding:0 13px!important;font-size:11px!important;border-radius:13px!important}
+ .top-banner-settings-icon{font-size:15px!important}
+ .future-card{padding:18px!important;border-radius:20px!important}.future-card h3{font-size:17px!important}.future-desc{font-size:13px!important;line-height:1.5!important}.future-label{font-size:9px!important}.finding strong{font-size:14px!important}.finding small{font-size:11px!important}.action-row .future-btn{font-size:11px!important}
+ .state-greeting p{font-size:14px!important;line-height:1.45!important}.state-time{font-size:12px!important}.state-time strong{font-size:15px!important}.state-time span{font-size:12px!important}
+ .future-lead{font-size:14px!important}
+ .settings-theme-box{display:block}.theme-mode-row{margin-top:12px}.theme-mode-btn{flex:1;font-size:11px;padding:11px 9px}
+}
+</style>
 </head>
 <body>
 <div class="app">
@@ -4603,6 +4635,7 @@ body.dark .future-evolution .evo-next button{
 </div>
 </aside>
 <main class="content">
+<div class="home-swipe-hint" aria-hidden="true"><span>←</span><span>Свайп — следующий блок</span><span>→</span></div>
 <div class="premium-home">
 <div class="future-shell">
 <section class="future-state home-block" data-home-block="state" data-home-title="Состояние бизнеса">
@@ -5402,7 +5435,8 @@ function openControl(html){document.getElementById('controlContent').innerHTML=h
 function closeControl(){document.getElementById('controlOverlay').classList.remove('show')}
 function openBusinessMemory(){closeMore();openControl(`<div class="control-kicker">Память бизнеса</div><div class="control-title">Я знаю ваш бизнес.</div><div class="control-sub">Не нужно каждый раз объяснять одно и то же. Здесь живёт контекст, который помогает мне принимать решения вместе с вами.</div><div class="memory-list"><div class="memory-row"><span class="memory-icon">₽</span><div><b>Цель</b><small>Расти по прибыли, а не просто по обороту.</small></div></div><div class="memory-row"><span class="memory-icon">⌂</span><div><b>Основной канал</b><small>Сайт приводит заявки, Telegram даёт заметную долю продаж.</small></div></div><div class="memory-row"><span class="memory-icon">◯</span><div><b>Клиенты</b><small>Важны быстрый ответ и повторный контакт после предложения.</small></div></div><div class="memory-row"><span class="memory-icon">◇</span><div><b>Ваш стиль управления</b><small>Сначала показать причину. Потом предложить действие. Деньги — только после подтверждения.</small></div></div></div><button class="control-action" onclick="closeControl();openBusinessRules()">Открыть правила</button>`)}
 function openBusinessRules(){closeMore();openControl(`<div class="control-kicker">Автоматизация</div><div class="control-title">Я знаю, когда действовать.</div><div class="control-sub">Вы задаёте границы. Я слежу за бизнесом внутри них и не делаю важные шаги молча.</div><div class="rule-list"><div class="rule-row"><div><b>Если клиент ждёт больше 30 минут</b><small>Подготовить напоминание владельцу.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Если стоимость заявки выросла на 20%</b><small>Сообщить и показать, какой канал изменился.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Если клиент готов купить</b><small>Создать задачу и поднять её наверх.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Если действие влияет на деньги</b><small>Сначала спросить вас.</small></div><span class="rule-toggle"><i></i></span></div></div><button class="control-action" onclick="closeControl();openBusinessPulse()">Открыть бизнес целиком</button>`)}
-function openSettingsPanel(){closeMore();openControl(`<div class="control-kicker">Правила управляющего</div><div class="control-title">Вы задаёте границы. Я работаю внутри них.</div><div class="control-sub">Не двадцать настроек ради настроек. Только то, что реально меняет мою самостоятельность.</div><div class="rule-list"><div class="rule-row"><div><b>Самостоятельность</b><small>Советую → вы подтверждаете важные действия.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Деньги</b><small>Изменения бюджета и расходы — сначала спросить вас.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Общение</b><small>Коротко, спокойно, по делу. Шутки — только когда бизнес не горит.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Автопилот</b><small>Можно расширить границы, когда появится доверие.</small></div><span class="rule-toggle"><i></i></span></div></div><button class="control-action" onclick="closeControl();openAutopilot()">Настроить автопилот →</button>`)}
+function setThemeMode(mode){const b=document.body;if(mode==='dark')b.classList.add('dark');else b.classList.remove('dark');try{localStorage.setItem('db-theme',mode)}catch(e){}themeLabel();document.querySelectorAll('.theme-mode-btn').forEach(x=>x.classList.toggle('active',x.dataset.mode===mode));}
+function openSettingsPanel(){closeMore();openControl(`<div class="control-kicker">Настройки управляющего</div><div class="control-title">Вы задаёте границы. Я работаю внутри них.</div><div class="control-sub">Только важные настройки — без лишних меню.</div><div class="settings-theme-box"><div><b>Экран</b><small>Выберите, как выглядит приложение.</small></div><div class="theme-mode-row"><button class="theme-mode-btn" data-mode="light" onclick="setThemeMode('light')">☀ Светлая</button><button class="theme-mode-btn" data-mode="dark" onclick="setThemeMode('dark')">◐ Тёмная</button></div></div><div class="rule-list"><div class="rule-row"><div><b>Самостоятельность</b><small>Советую → вы подтверждаете важные действия.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Деньги</b><small>Изменения бюджета и расходы — сначала спросить вас.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Общение</b><small>Коротко, спокойно, по делу. Шутки — только когда бизнес не горит.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Автопилот</b><small>Можно расширить границы, когда появится доверие.</small></div><span class="rule-toggle"><i></i></span></div></div><button class="control-action" onclick="closeControl();openAutopilot()">Настроить автопилот →</button>`)}
 function openBusinessPulse(){closeMore();document.getElementById('businessPulse').classList.add('show')}
 function closeBusinessPulse(){document.getElementById('businessPulse').classList.remove('show')}
 function closeControlAndMore(){closeControl();closeMore()}
@@ -5425,6 +5459,7 @@ function toggleAppTheme(){
   themeLabel();
 }
 themeLabel();
+document.addEventListener('click',e=>{if(e.target.closest('.theme-mode-btn')){const m=e.target.closest('.theme-mode-btn').dataset.mode;setThemeMode(m)}});
 if(theme)theme.onclick=toggleAppTheme;
 if(mobileThemeToggle)mobileThemeToggle.onclick=toggleAppTheme;
 document.getElementById('askForm')?.addEventListener('submit',e=>{e.preventDefault();const input=document.getElementById('askInput');if(input?.value.trim())document.getElementById('reply')?.classList.add('show')});
@@ -6552,10 +6587,49 @@ body.dark .home-organize-bar{background:rgba(29,30,34,.78);border-color:rgba(255
 </div>
 </div>
 <div class="home-toast" id="homeToast" role="status"></div>
+
+<style id="home-blocks-order-swipe-v1">
+/* Порядок блоков + горизонтальный просмотр на телефоне. Визуальную тему не меняем. */
+@media (max-width:700px){
+  .future-shell{
+    overflow-x:auto!important;
+    overflow-y:visible!important;
+    display:flex!important;
+    flex-direction:row!important;
+    flex-wrap:nowrap!important;
+    gap:14px!important;
+    scroll-snap-type:x mandatory!important;
+    scroll-behavior:smooth!important;
+    -webkit-overflow-scrolling:touch!important;
+    scrollbar-width:none!important;
+    padding-bottom:8px!important;
+  }
+  .future-shell::-webkit-scrollbar{display:none!important}
+  .future-shell>.home-block{
+    flex:0 0 100%!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin:0!important;
+    scroll-snap-align:start!important;
+    scroll-snap-stop:always!important;
+    box-sizing:border-box!important;
+  }
+  .future-shell>.home-block.is-hidden{display:none!important}
+  .future-shell>.home-block.is-dragging{opacity:.78!important;transform:scale(.985)!important}
+  .future-shell>.home-block.is-drop-target{outline:2px dashed rgba(255,255,255,.3)!important;outline-offset:5px!important}
+  body:not(.dark) .future-shell>.home-block.is-drop-target{outline-color:rgba(30,50,120,.25)!important}
+  .home-swipe-hint{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    margin:-2px auto 10px;font-size:9px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--muted);opacity:.72;
+  }
+}
+@media (min-width:701px){.home-swipe-hint{display:none!important}}
+</style>
 <script id="home-organizer-js">
 (function(){
   const KEY='db-home-layout-v1';
-  const defaults=['state','attention','command','intent','twin','simulator','memory','evolution','contract','blindspot','create'];
+  const defaults=['state','attention','command','evolution','intent','twin','simulator','memory','contract','blindspot','create'];
   const titles={state:'Состояние бизнеса',attention:'Главное внимание',command:'Команда управляющему',intent:'Цель бизнеса',twin:'Цифровой двойник',simulator:'Симулятор',memory:'Память бизнеса',evolution:'Эволюция бизнеса',contract:'Правила работы',blindspot:'Что можно улучшить',create:'Создать новое'};
   let layout=defaults.map(id=>({id,hidden:false}));
   try{const saved=JSON.parse(localStorage.getItem(KEY)||'null');if(Array.isArray(saved)){const ids=new Set(saved.map(x=>x.id));layout=[...saved,...defaults.filter(id=>!ids.has(id)).map(id=>({id,hidden:false}))]}}catch(e){}
@@ -6566,7 +6640,7 @@ body.dark .home-organize-bar{background:rgba(29,30,34,.78);border-color:rgba(255
   function toggleBlock(id){const x=layout.find(v=>v.id===id);if(!x)return;x.hidden=!x.hidden;apply();render();toast(x.hidden?'Блок убран с Главной. Не переживай — я сохраню его и верну в любой момент.':'Блок снова на Главной.');}
   window.openHomeCustomizer=function(){render();const m=document.getElementById('homeCustomizer');m.classList.add('is-open');m.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'};
   window.closeHomeCustomizer=function(){const m=document.getElementById('homeCustomizer');m.classList.remove('is-open');m.setAttribute('aria-hidden','true');document.body.style.overflow=''};
-  window.autoArrangeHome=function(){const priority=['state','attention','command','intent','twin','evolution','memory','simulator','contract','blindspot','create'];const current=new Map(layout.map(x=>[x.id,x]));layout=priority.map(id=>current.get(id)||{id,hidden:false});apply();render();toast('Готово. Я навёл порядок на Главной и сохранил скрытые блоки.');};
+  window.autoArrangeHome=function(){const priority=['state','attention','command','evolution','intent','twin','simulator','memory','contract','blindspot','create'];const current=new Map(layout.map(x=>[x.id,x]));layout=priority.map(id=>current.get(id)||{id,hidden:false});apply();render();toast('Готово. Я навёл порядок на Главной и сохранил скрытые блоки.');};
   window.restoreHomeLayout=function(){layout=defaults.map(id=>({id,hidden:false}));apply();render();toast('Вернул все блоки. Теперь можно настроить Главную заново.');};
   function toast(msg){const t=document.getElementById('homeToast');if(!t)return;t.textContent=msg;t.classList.add('show');clearTimeout(window.__homeToastTimer);window.__homeToastTimer=setTimeout(()=>t.classList.remove('show'),3200)}
   window.homeOrganizerCommand=function(text){const q=(text||'').toLowerCase();if(!/(наведи порядок|сделай порядок|приведи в порядок|упорядочи).*(главн|страниц)|главн.*(наведи порядок|порядок|упорядочи)/i.test(q))return false;autoArrangeHome();closeHomeCustomizer();return true;}
@@ -6602,7 +6676,7 @@ body.dark .home-organize-bar{background:rgba(29,30,34,.78);border-color:rgba(255
       el.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&!mobile())return;if(e.pointerType==='mouse'&&e.button!==0)return;startEdit(el,e)});
       el.addEventListener('pointermove',e=>{
         if(!drag||e.pointerId!==pointerId)return;
-        if(!active){if(Math.hypot(e.clientX-startX,e.clientY-startY)>12)clearTimeout(timer);return;}
+        if(!active){if(Math.hypot(e.clientX-startX,e.clientY-startY)>12){clearTimeout(timer);timer=null;drag=null;pointerId=null;}return;}
         e.preventDefault();
         const target=[...blocks()].filter(x=>x!==drag&&!x.classList.contains('is-hidden')).reduce((best,x)=>{const r=x.getBoundingClientRect(),c=r.top+r.height/2;if(e.clientY>r.top-Math.min(70,r.height*.35)&&e.clientY<r.bottom+Math.min(70,r.height*.35)){if(!best||Math.abs(e.clientY-c)<Math.abs(e.clientY-(best.getBoundingClientRect().top+best.getBoundingClientRect().height/2)))return x}return best},null);
         blocks().forEach(x=>x.classList.remove('is-drop-target','is-drop-before','is-drop-after'));
@@ -7068,4 +7142,581 @@ body.dark .home-drag-placeholder{background:linear-gradient(135deg,rgba(130,145,
 body.dark .home-block.is-dragging{box-shadow:0 30px 80px rgba(0,0,0,.42)!important}
 @media(prefers-reduced-motion:reduce){.home-block,#homeEditBar{transition:none!important}.home-edit-live i{animation:none!important}}
 </style>
-</body></html>
+</body>
+<style id="final-compact-future-polish-v31">
+/* 1. Верхний блок: одинаково надёжный на светлой/тёмной теме и при любом сжатии. */
+.future-state{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  background:
+    radial-gradient(circle at 82% 18%,rgba(62,132,255,.22),transparent 30%),
+    radial-gradient(circle at 18% 82%,rgba(36,210,184,.10),transparent 25%),
+    linear-gradient(145deg,#17191e,#0d0f13)!important;
+  color:#fff!important;
+  border:1px solid rgba(116,184,255,.16)!important;
+}
+.future-state>*{min-width:0}
+.future-state .state-greeting,.future-state .state-copy{min-width:0;position:relative;z-index:2}
+.future-state .state-orbit{flex:none;position:relative;z-index:2}
+.future-state .state-greeting h1,.future-state .state-copy h2{color:#fff!important}
+.future-state .state-greeting p,.future-state .state-copy p{color:rgba(255,255,255,.74)!important}
+.future-state .state-time strong{color:#fff!important}
+.future-state .future-kicker,.future-state .state-eyebrow,.future-state .state-meta,.future-state .state-time span{color:rgba(255,255,255,.58)!important}
+
+/* 2. Кнопка помощника — тот же живой холодный свет, что и логотип. */
+.mobile-manager.dm-signature-manager-button{
+  color:#8bd7ff!important;
+  filter:drop-shadow(0 0 10px rgba(65,170,255,.28))!important;
+}
+.mobile-manager.dm-signature-manager-button::before{
+  background:radial-gradient(circle,rgba(74,184,255,.34) 0 28%,rgba(53,150,255,.14) 52%,transparent 74%)!important;
+  filter:blur(9px)!important;
+  opacity:.9!important;
+  animation:dmSignatureButtonGlowV31 3.5s ease-in-out infinite!important;
+}
+.mobile-manager.dm-signature-manager-button::after{
+  border:1px solid rgba(104,196,255,.30)!important;
+  box-shadow:0 0 24px rgba(55,155,255,.20),0 16px 44px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.16)!important;
+  animation:dmSignatureButtonHaloV31 4s ease-in-out infinite!important;
+}
+.dm-signature-button-logo .sig-orbit{stroke:#79cfff!important;opacity:.55!important}
+.dm-signature-button-logo .sig-diamond{stroke:#dff7ff!important;filter:drop-shadow(0 0 6px rgba(76,184,255,.62))!important}
+.dm-signature-button-logo .sig-core{fill:#8bd7ff!important}
+@keyframes dmSignatureButtonGlowV31{0%,100%{transform:scale(.92);opacity:.55}50%{transform:scale(1.08);opacity:1}}
+@keyframes dmSignatureButtonHaloV31{0%,100%{transform:scale(.985);opacity:.72}50%{transform:scale(1.045);opacity:1}}
+
+/* 3. Убираем устаревший блок «Куда ты хочешь прийти?» — цель приложение понимает из состояния бизнеса.
+   Никаких полей для заполнения на главном экране. */
+.future-intent.home-block,
+.future-command.home-block{display:none!important}
+
+/* 4. Главная становится компактнее: меньше воздуха, больше структуры. */
+.future-grid{gap:10px!important}
+.future-card{
+  padding:16px!important;
+  border-radius:20px!important;
+}
+.future-card h3{font-size:18px!important;line-height:1.14!important;letter-spacing:-.035em!important}
+.future-desc{font-size:13px!important;line-height:1.42!important}
+.finding{margin:12px 0!important;padding:12px 0!important}
+.finding strong{font-size:14px!important}
+.finding small{font-size:11px!important}
+.action-row{gap:7px!important;margin-top:10px!important}
+.future-btn{min-height:38px!important;padding:0 12px!important;font-size:11px!important;border-radius:12px!important}
+.future-grid .future-card:nth-child(n+3){padding:14px!important}
+.future-grid .future-card:nth-child(n+3) h3{font-size:16px!important}
+.future-grid .future-card:nth-child(n+3) .future-desc{font-size:12px!important}
+
+/* Ozon — главный сигнал, но не огромная панель. */
+.future-card.attention{
+  padding:15px!important;
+  border-radius:19px!important;
+}
+.future-card.attention .card-top{gap:10px!important}
+.future-card.attention h3{font-size:17px!important}
+.future-card.attention .finding{margin:10px 0!important;padding:10px 0!important}
+
+@media(max-width:900px){
+  .future-state{grid-template-columns:minmax(110px,.7fr) minmax(0,1fr)!important;padding:24px 26px!important;gap:20px!important;min-height:250px!important}
+}
+@media(max-width:700px){
+  .future-state{grid-template-columns:74px minmax(0,1fr)!important;gap:14px!important;padding:18px!important;min-height:0!important;border-radius:24px!important}
+  .state-orbit{width:70px!important;height:70px!important}
+  .orbit-core{width:52px!important;height:52px!important}
+  .future-grid{gap:8px!important}
+  .future-card,.future-card.attention{padding:14px!important;border-radius:18px!important}
+  .future-card h3,.future-card.attention h3{font-size:16px!important}
+  .future-desc,.future-card.attention .future-desc{font-size:12.5px!important}
+  .future-card .finding strong{font-size:13px!important}
+}
+@media(max-width:430px){
+  .future-state{grid-template-columns:58px minmax(0,1fr)!important;gap:11px!important;padding:15px!important;border-radius:21px!important}
+  .state-orbit{width:54px!important;height:54px!important}
+  .orbit-core{width:45px!important;height:45px!important}
+  .future-card,.future-card.attention{padding:13px!important}
+  .future-card h3,.future-card.attention h3{font-size:15px!important}
+  .future-desc,.future-card.attention .future-desc{font-size:12px!important}
+}
+</style>
+
+
+
+</html>
+<style id="final-mobile-readable-fix-v30">
+/* Финальная точечная правка: верхний баннер, логотип, радары и читаемость. */
+
+/* Верхний баннер всегда остаётся тёмным материалом — и на светлой теме, и при сужении. */
+.future-state{
+  background:
+    radial-gradient(circle at 82% 18%,rgba(36,112,255,.16),transparent 28%),
+    radial-gradient(circle at 18% 82%,rgba(38,211,180,.07),transparent 24%),
+    linear-gradient(145deg,#15161a,#0e0f12) !important;
+  color:#fff !important;
+  border:1px solid rgba(255,255,255,.07);
+}
+.future-state .state-greeting h1,
+.future-state .state-greeting p,
+.future-state .state-time strong,
+.future-state .state-copy h2,
+.future-state .state-copy p{color:#fff !important}
+.future-state .state-greeting p,
+.future-state .state-time span,
+.future-state .state-copy p{color:rgba(255,255,255,.72) !important}
+.future-state .state-eyebrow,
+.future-state .future-kicker{color:rgba(255,255,255,.55) !important}
+.future-state .state-meta{color:rgba(255,255,255,.55) !important}
+
+/* Верхняя кнопка настроек: заметная, но не кричащая. */
+.top-banner-settings{
+  color:#f8fbff !important;
+  background:rgba(255,255,255,.09) !important;
+  border:1px solid rgba(100,177,255,.42) !important;
+  box-shadow:0 0 0 1px rgba(79,156,255,.08),0 0 22px rgba(50,132,255,.22),0 8px 26px rgba(0,0,0,.28) !important;
+}
+.top-banner-settings:hover{background:rgba(75,145,255,.16) !important;border-color:rgba(112,190,255,.68) !important}
+.top-banner-settings-icon{color:#73c7ff !important;text-shadow:0 0 12px rgba(70,176,255,.8)}
+
+/* Дышащий логотип: тонкий холодный сине-голубой свет, видимый и в тёмной теме. */
+.assistant-orbit{
+  color:#72c9ff !important;
+  filter:drop-shadow(0 0 13px rgba(55,166,255,.24)) !important;
+}
+.assistant-orbit-ring{border-color:#72c9ff !important;opacity:.25 !important}
+.assistant-ring-b{opacity:.16 !important}
+.assistant-core{
+  color:#8bd4ff !important;
+  border-color:rgba(101,192,255,.48) !important;
+  background:rgba(28,43,59,.54) !important;
+  box-shadow:0 0 0 1px rgba(92,181,255,.08),0 0 24px rgba(49,145,255,.25),0 14px 38px rgba(0,0,0,.28) !important;
+}
+.assistant-core .dm-signature-logo{filter:drop-shadow(0 0 8px rgba(74,183,255,.8)) !important}
+.assistant-core .dm-signature-logo .sig-orbit{opacity:.68 !important;stroke:#75caff !important}
+.assistant-core .dm-signature-logo .sig-diamond{filter:drop-shadow(0 0 7px rgba(74,183,255,.65));stroke:#dff5ff !important}
+
+/* Радары/орбиты: чуть больше глубины и аккуратные цветные точки. */
+.state-orbit{filter:drop-shadow(0 0 18px rgba(44,147,255,.10))}
+.orbit-ring{border-color:rgba(116,196,255,.25) !important}
+.ring-b{border-color:rgba(53,214,182,.22) !important}
+.ring-a:after{background:#6ec8ff !important;box-shadow:0 0 14px rgba(67,178,255,.95) !important}
+.ring-b:after{background:#52d8b5 !important;box-shadow:0 0 14px rgba(48,211,175,.85) !important}
+.orbit-core{background:radial-gradient(circle at 35% 30%,rgba(82,168,255,.16),rgba(255,255,255,.035) 62%) !important;border-color:rgba(112,198,255,.3) !important;box-shadow:0 0 26px rgba(42,137,255,.13) !important}
+.core-dot{background:#55d7b2 !important;box-shadow:0 0 22px rgba(63,219,177,.9) !important}
+
+/* Убираем действительно дублирующий блок «Что я вижу, а ты пока нет?» — его смысл уже раскрывается управляющим и карточками внимания. */
+.future-blindspot{display:none !important}
+
+/* Больше не прячем текст в мелкие 7–10px кегли на телефонах. */
+.future-lead{font-size:16px !important;line-height:1.45 !important}
+.future-time span{font-size:13px !important;line-height:1.35 !important}
+.future-time strong{font-size:20px !important}
+.future-card h3{font-size:20px !important;line-height:1.25 !important}
+.future-desc{font-size:14px !important;line-height:1.55 !important}
+.future-label{font-size:11px !important;letter-spacing:.11em !important}
+.finding strong{font-size:16px !important;line-height:1.35 !important}
+.finding small{font-size:13px !important;line-height:1.45 !important}
+.finding span{font-size:10px !important}
+.future-btn{font-size:13px !important;height:42px !important}
+.quiet-note{font-size:12px !important}
+.mini-result span{font-size:12px !important}
+.future-link{font-size:13px !important}
+.timeline time,.timeline span{font-size:12px !important}
+.state-copy p{font-size:15px !important;line-height:1.6 !important}
+.state-meta{font-size:12px !important}
+.state-eyebrow{font-size:11px !important}
+
+/* На узком телефоне — не сжимаем содержимое, а перестраиваем баннер. */
+@media(max-width:700px){
+  .future-shell{padding:22px 14px 76px !important}
+  .future-header{display:block !important;margin-bottom:18px !important}
+  .future-header h1{font-size:38px !important;line-height:1 !important;max-width:100% !important}
+  .future-lead{font-size:15px !important;margin-top:9px !important}
+  .future-time{display:block !important;text-align:left !important;margin-top:10px !important}
+  .future-time strong{display:inline-block !important;font-size:18px !important;margin-right:8px}
+  .future-time span{display:inline-block !important;font-size:13px !important}
+  .future-state{display:grid !important;grid-template-columns:74px minmax(0,1fr) !important;gap:14px !important;align-items:center !important;min-height:0 !important;padding:18px !important;border-radius:24px !important}
+  .state-orbit{width:68px !important;height:68px !important;margin:0 !important;transform:none !important;flex:none !important}
+  .orbit-core{width:52px !important;height:52px !important;border-radius:16px !important}
+  .core-word{font-size:6px !important}
+  .core-dot{width:6px !important;height:6px !important;margin-bottom:4px !important}
+  .ring-a,.ring-b{display:block !important}
+  .state-copy{padding:0 !important;border:0 !important;min-width:0 !important}
+  .state-copy h2{font-size:22px !important;line-height:1.08 !important;margin-bottom:7px !important}
+  .state-copy p{font-size:14px !important;line-height:1.48 !important;display:block !important;-webkit-line-clamp:unset !important}
+  .state-meta{font-size:11px !important;gap:5px !important;margin-top:9px !important;flex-wrap:wrap !important}
+  .state-greeting h1{font-size:27px !important;line-height:1.02 !important}
+  .state-greeting p{font-size:14px !important;line-height:1.42 !important}
+  .state-time{font-size:12px !important}
+  .state-time strong{font-size:14px !important}
+  .top-banner-settings{right:12px !important;top:12px !important;height:40px !important;padding:0 12px !important;font-size:12px !important}
+  .top-banner-settings-icon{font-size:16px !important}
+  .future-grid{display:flex !important;flex-direction:column !important;gap:10px !important}
+  .future-card{padding:18px !important;border-radius:20px !important}
+  .future-card h3{font-size:18px !important}
+  .future-desc{font-size:14px !important}
+  .finding{margin:16px 0 !important;padding:13px 0 !important}
+}
+@media(max-width:430px){
+  .future-state{grid-template-columns:58px minmax(0,1fr) !important;gap:11px !important;padding:16px !important}
+  .state-orbit{width:54px !important;height:54px !important}
+  .orbit-core{width:46px !important;height:46px !important;border-radius:14px !important}
+  .state-copy h2{font-size:20px !important}
+  .state-copy p{font-size:13.5px !important}
+  .state-greeting h1{font-size:24px !important}
+  .future-header h1{font-size:34px !important}
+}
+</style>
+
+<style id="repair-layout-v33">
+@media(max-width:700px){
+  .mobile-manager.dm-signature-manager-button{
+    left:18px !important;
+    right:auto !important;
+  }
+}
+</style>
+
+<style id="final-v34-home-stability">
+/* V34 — стабильная мобильная Главная + компактная иерархия */
+
+/* На телефоне Главная больше не превращается в горизонтальную ленту. */
+@media(max-width:700px){
+  .future-shell{
+    display:block !important;
+    flex-direction:initial !important;
+    flex-wrap:initial !important;
+    overflow-x:visible !important;
+    overflow-y:visible !important;
+    scroll-snap-type:none !important;
+    -webkit-overflow-scrolling:auto !important;
+    width:100% !important;
+    max-width:100% !important;
+    padding:18px 14px 104px !important;
+  }
+  .future-shell>.home-block{
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+    scroll-snap-align:none !important;
+  }
+  .home-swipe-hint{display:none !important}
+}
+
+/* Главная должна быть тихой: оставляем состояние + главное внимание.
+   Глубокие разделы открываются долгим нажатием на управляющего. */
+.future-shell>.home-block[data-home-block="evolution"],
+.future-shell>.home-block[data-home-block="command"],
+.future-shell>.home-block[data-home-block="intent"],
+.future-shell>.home-block[data-home-block="twin"],
+.future-shell>.home-block[data-home-block="simulator"],
+.future-shell>.home-block[data-home-block="memory"],
+.future-shell>.home-block[data-home-block="contract"],
+.future-shell>.home-block[data-home-block="blindspot"],
+.future-shell>.home-block[data-home-block="create"]{
+  display:none !important;
+}
+
+/* Внутри «Главного внимания» оставляем две действительно важные истории. */
+.future-shell>.home-block[data-home-block="attention"] .future-card:nth-child(n+3){
+  display:none !important;
+}
+.future-shell>.home-block[data-home-block="attention"] .future-card.attention{
+  padding:18px !important;
+  border-radius:22px !important;
+}
+.future-shell>.home-block[data-home-block="attention"] .future-card.attention .card-top{gap:12px !important}
+.future-shell>.home-block[data-home-block="attention"] .future-card.attention h3{
+  font-size:22px !important;
+  line-height:1.12 !important;
+  max-width:720px !important;
+}
+.future-shell>.home-block[data-home-block="attention"] .future-card.attention .future-desc{
+  font-size:13px !important;
+  line-height:1.45 !important;
+  margin-top:9px !important;
+}
+.future-shell>.home-block[data-home-block="attention"] .future-card.attention .finding{
+  margin:14px 0 !important;
+  padding:12px 0 !important;
+}
+.future-shell>.home-block[data-home-block="attention"] .future-card.attention .finding strong{
+  font-size:16px !important;
+  line-height:1.25 !important;
+}
+.future-shell>.home-block[data-home-block="attention"] .future-card.attention .finding small{
+  font-size:11px !important;
+}
+.future-shell>.home-block[data-home-block="attention"] .future-card:not(.attention){
+  padding:16px !important;
+  border-radius:20px !important;
+}
+.future-shell>.home-block[data-home-block="attention"] .future-card:not(.attention) h3{
+  font-size:18px !important;
+}
+
+/* Чёткий верхний баннер на светлой теме: всегда тёмная поверхность + белая типографика. */
+body:not(.dark) .future-state,
+body.dark .future-state{
+  background:
+    radial-gradient(circle at 84% 18%,rgba(65,120,255,.22),transparent 25%),
+    radial-gradient(circle at 13% 84%,rgba(48,213,180,.10),transparent 22%),
+    linear-gradient(145deg,#141b31 0%,#101526 58%,#0d111d 100%) !important;
+  color:#fff !important;
+  border-color:rgba(127,181,255,.18) !important;
+}
+body:not(.dark) .future-state .state-greeting h1,
+body:not(.dark) .future-state .state-greeting p,
+body:not(.dark) .future-state .state-time strong,
+body:not(.dark) .future-state .state-time span,
+body:not(.dark) .future-state .state-copy h2,
+body:not(.dark) .future-state .state-copy p,
+body:not(.dark) .future-state .state-meta,
+body.dark .future-state .state-greeting h1,
+body.dark .future-state .state-greeting p,
+body.dark .future-state .state-time strong,
+body.dark .future-state .state-time span,
+body.dark .future-state .state-copy h2,
+body.dark .future-state .state-copy p,
+body.dark .future-state .state-meta{
+  color:#f8fbff !important;
+  text-shadow:0 1px 14px rgba(0,0,0,.18);
+}
+body:not(.dark) .future-state .state-greeting p,
+body:not(.dark) .future-state .state-time span,
+body:not(.dark) .future-state .state-copy p,
+body:not(.dark) .future-state .state-meta,
+body.dark .future-state .state-greeting p,
+body.dark .future-state .state-time span,
+body.dark .future-state .state-copy p,
+body.dark .future-state .state-meta{
+  color:rgba(248,251,255,.78) !important;
+}
+body:not(.dark) .future-state .future-kicker,
+body:not(.dark) .future-state .state-eyebrow,
+body.dark .future-state .future-kicker,
+body.dark .future-state .state-eyebrow{
+  color:rgba(228,240,255,.66) !important;
+}
+
+/* Настройки не должны съедать приветствие на узком экране. */
+@media(max-width:700px){
+  .future-state{min-width:0 !important;overflow:hidden !important}
+  .future-state>*{min-width:0 !important}
+  .state-greeting,.state-copy{overflow-wrap:anywhere !important;word-break:normal !important}
+  .state-time{min-width:0 !important;flex-wrap:wrap !important}
+  .top-banner-settings{max-width:42px !important;padding:0 10px !important;overflow:hidden !important}
+  .top-banner-settings span:last-child{display:none !important}
+}
+
+/* Надёжная перестройка героя на мобильном: ни перекрытий, ни горизонтального развала. */
+@media(max-width:600px){
+  .future-state{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) 68px !important;
+    grid-template-areas:"greeting orbit" "copy copy" !important;
+    column-gap:12px !important;
+    row-gap:14px !important;
+    align-items:center !important;
+    padding:18px !important;
+    border-radius:24px !important;
+  }
+  .state-greeting{grid-area:greeting !important}
+  .state-orbit{grid-area:orbit !important;width:68px !important;height:68px !important;margin:0 0 0 auto !important;transform:none !important}
+  .state-copy{grid-area:copy !important;padding-top:12px !important;border-top:1px solid rgba(255,255,255,.14) !important}
+  .future-state .assistant-core{width:54px !important;height:54px !important}
+  .future-state .assistant-core .dm-signature-logo{width:54px !important;height:54px !important}
+  .future-state .assistant-orbit-ring{transform:scale(.9) !important}
+  .state-greeting h1{font-size:28px !important;line-height:1.02 !important;max-width:100% !important}
+  .state-greeting p{font-size:14px !important;line-height:1.45 !important;max-width:100% !important}
+  .state-time{font-size:12px !important;margin-top:8px !important}
+  .state-time strong{font-size:16px !important}
+  .state-time span{font-size:12px !important}
+  .state-copy h2{font-size:22px !important;line-height:1.08 !important}
+  .state-copy p{font-size:14px !important;line-height:1.5 !important;max-width:100% !important}
+  .state-meta{font-size:11px !important;line-height:1.4 !important}
+}
+@media(max-width:420px){
+  .future-state{
+    grid-template-columns:1fr !important;
+    grid-template-areas:"greeting" "orbit" "copy" !important;
+    row-gap:12px !important;
+    padding:16px !important;
+  }
+  .state-orbit{width:74px !important;height:74px !important;margin:2px auto 0 !important}
+  .future-state .assistant-core{width:58px !important;height:58px !important}
+  .future-state .assistant-core .dm-signature-logo{width:58px !important;height:58px !important}
+  .state-greeting h1{font-size:26px !important}
+  .state-greeting p{font-size:14px !important}
+  .state-copy{padding-top:12px !important}
+}
+</style>
+
+<style id="manager-quick-menu-v34">
+/* Долгое нажатие на управляющего = быстрые подсказки + разделы. */
+.mobile-manager.dm-signature-manager-button{
+  left:50% !important;
+  right:auto !important;
+  bottom:calc(22px + env(safe-area-inset-bottom)) !important;
+  transform:translateX(-50%) !important;
+  z-index:1000 !important;
+}
+.mobile-manager.dm-signature-manager-button:hover{
+  transform:translateX(-50%) scale(1.035) !important;
+}
+.mobile-manager.dm-signature-manager-button:active,
+.mobile-manager.dm-signature-manager-button.is-pressing{
+  transform:translateX(-50%) scale(.92) !important;
+}
+@media(max-width:700px){
+  .mobile-manager.dm-signature-manager-button{
+    width:76px !important;height:76px !important;
+  }
+  .dm-signature-button-logo{width:76px !important;height:76px !important}
+}
+
+.dm-quick-menu{
+  position:fixed;
+  left:50%;
+  bottom:calc(108px + env(safe-area-inset-bottom));
+  transform:translate(-50%,18px) scale(.97);
+  width:min(420px,calc(100vw - 24px));
+  max-height:min(72vh,620px);
+  overflow:auto;
+  padding:16px;
+  border:1px solid rgba(17,18,22,.10);
+  border-radius:26px;
+  background:rgba(250,251,255,.88);
+  backdrop-filter:blur(28px) saturate(1.35);
+  -webkit-backdrop-filter:blur(28px) saturate(1.35);
+  box-shadow:0 28px 90px rgba(18,25,48,.22),inset 0 1px 0 rgba(255,255,255,.9);
+  z-index:999;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .22s ease,transform .3s cubic-bezier(.2,.8,.2,1);
+}
+.dm-quick-menu.is-open{
+  transform:translate(-50%,0) scale(1);
+  opacity:1;
+  pointer-events:auto;
+}
+.dm-quick-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.dm-quick-head b{font-size:15px;letter-spacing:-.02em;color:#111216}
+.dm-quick-head span{display:block;margin-top:3px;font-size:10px;line-height:1.35;color:#747983}
+.dm-quick-close{width:32px;height:32px;border:1px solid rgba(17,18,22,.08);border-radius:11px;background:rgba(255,255,255,.6);color:#333;border:1px solid rgba(17,18,22,.08)}
+.dm-quick-kicker{font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:#8b8f98;margin:10px 0 8px}
+.dm-quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dm-quick-item{min-height:58px;padding:12px;border:1px solid rgba(17,18,22,.08);border-radius:16px;background:rgba(255,255,255,.66);color:#111216;text-align:left;display:flex;flex-direction:column;justify-content:center;gap:3px;transition:transform .18s ease,background .18s ease,border-color .18s ease;cursor:pointer}
+.dm-quick-item:hover{transform:translateY(-1px);background:#fff;border-color:rgba(47,75,145,.24)}
+.dm-quick-item b{font-size:11px;letter-spacing:-.01em}
+.dm-quick-item small{font-size:9px;color:#7b8089;line-height:1.35}
+.dm-quick-suggests{display:grid;gap:7px}
+.dm-quick-suggest{width:100%;border:0;border-radius:15px;padding:11px 12px;background:rgba(17,18,22,.045);color:#111216;text-align:left;cursor:pointer}
+.dm-quick-suggest b{font-size:10px;font-weight:700}
+.dm-quick-suggest small{display:block;font-size:9px;color:#858b95;margin-top:3px}
+.dm-quick-menu .dm-quick-foot{margin-top:12px;font-size:9px;color:#959aa4;text-align:center}
+body.dark .dm-quick-menu{background:rgba(19,21,26,.92);border-color:rgba(255,255,255,.10);box-shadow:0 28px 90px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.07)}
+body.dark .dm-quick-head b,body.dark .dm-quick-item,body.dark .dm-quick-suggest{color:#f6f7f9}
+body.dark .dm-quick-head span,body.dark .dm-quick-item small,body.dark .dm-quick-suggest small,body.dark .dm-quick-kicker,body.dark .dm-quick-menu .dm-quick-foot{color:#9ca0a9}
+body.dark .dm-quick-close{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.10);color:#f3f4f6}
+body.dark .dm-quick-item{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09)}
+body.dark .dm-quick-item:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18)}
+body.dark .dm-quick-suggest{background:rgba(255,255,255,.055)}
+@media(max-width:420px){
+  .dm-quick-menu{bottom:calc(104px + env(safe-area-inset-bottom));padding:14px;border-radius:23px}
+  .dm-quick-grid{gap:7px}
+  .dm-quick-item{min-height:54px;padding:10px}
+}
+</style>
+
+<script id="manager-quick-menu-v34">
+(function(){
+  const btn=document.getElementById('mobileManager');
+  if(!btn)return;
+  let pressTimer=null;
+  let longPressed=false;
+  let suppressClick=false;
+  const createMenu=()=>{
+    if(document.getElementById('dmQuickMenu'))return document.getElementById('dmQuickMenu');
+    const menu=document.createElement('section');
+    menu.id='dmQuickMenu';
+    menu.className='dm-quick-menu';
+    menu.setAttribute('aria-hidden','true');
+    menu.innerHTML=`
+      <div class="dm-quick-head">
+        <div><b>Что будем делать?</b><span>Долгое нажатие — быстрый доступ без лишнего меню.</span></div>
+        <button class="dm-quick-close" type="button" aria-label="Закрыть">×</button>
+      </div>
+      <div class="dm-quick-kicker">Подсказки</div>
+      <div class="dm-quick-suggests">
+        <button class="dm-quick-suggest" type="button" data-question="Что сейчас самое важное в бизнесе?"><b>Что сейчас самое важное?</b><small>Покажи один следующий шаг.</small></button>
+        <button class="dm-quick-suggest" type="button" data-question="Почему сегодня просели продажи?"><b>Почему просели продажи?</b><small>Найди причину, а не просто цифру.</small></button>
+        <button class="dm-quick-suggest" type="button" data-question="Что можно улучшить в бизнесе прямо сейчас?"><b>Что можно улучшить?</b><small>Найди одну точку роста.</small></button>
+      </div>
+      <div class="dm-quick-kicker">Разделы</div>
+      <div class="dm-quick-grid">
+        <button class="dm-quick-item" type="button" data-section-go="sales"><b>Продажи</b><small>Клиенты, заявки, сделки</small></button>
+        <button class="dm-quick-item" type="button" data-section-go="finance"><b>Деньги</b><small>Выручка, расходы, запас</small></button>
+        <button class="dm-quick-item" type="button" data-section-go="clients"><b>Клиенты</b><small>Контакты и отношения</small></button>
+        <button class="dm-quick-item" type="button" data-section-go="promo"><b>Продвижение</b><small>Реклама и каналы</small></button>
+        <button class="dm-quick-item" type="button" data-modal-go="evolution"><b>Эволюция</b><small>Что я уже улучшил</small></button>
+        <button class="dm-quick-item" type="button" data-modal-go="memory"><b>Память</b><small>Что бизнес уже знает</small></button>
+        <button class="dm-quick-item" type="button" data-modal-go="rules"><b>Правила</b><small>Границы моей самостоятельности</small></button>
+        <button class="dm-quick-item" type="button" data-modal-go="create"><b>Создать</b><small>Новый инструмент или процесс</small></button>
+      </div>
+      <div class="dm-quick-foot">Нажми ещё раз коротко — и я просто откроюсь для разговора.</div>
+    `;
+    document.body.appendChild(menu);
+    const close=()=>{menu.classList.remove('is-open');menu.setAttribute('aria-hidden','true');btn.classList.remove('is-pressing')};
+    menu.querySelector('.dm-quick-close').addEventListener('click',close);
+    menu.addEventListener('click',e=>{
+      const q=e.target.closest('[data-question]');
+      if(q){close();window.openManager?.(q.dataset.question||'');return;}
+      const s=e.target.closest('[data-section-go]');
+      if(s){close();window.showSection?.(s.dataset.sectionGo);return;}
+      const m=e.target.closest('[data-modal-go]');
+      if(!m)return;
+      close();
+      const map={evolution:'openEvolution',memory:'openMemory',rules:'openBusinessRules',create:'openBuildModal'};
+      const fn=window[map[m.dataset.modalGo]];
+      if(typeof fn==='function')fn();
+    });
+    menu.__close=close;
+    return menu;
+  };
+  const openQuick=()=>{
+    const menu=createMenu();
+    menu.classList.add('is-open');
+    menu.setAttribute('aria-hidden','false');
+    btn.classList.add('is-pressing');
+    if(navigator.vibrate)try{navigator.vibrate(16)}catch(_){ }
+  };
+  const cancel=()=>{if(pressTimer){clearTimeout(pressTimer);pressTimer=null}btn.classList.remove('is-pressing')};
+  const start=(e)=>{
+    if(e.pointerType==='mouse' && e.button!==0)return;
+    longPressed=false;
+    cancel();
+    pressTimer=setTimeout(()=>{pressTimer=null;longPressed=true;suppressClick=true;openQuick()},560);
+  };
+  const end=()=>{
+    if(pressTimer){clearTimeout(pressTimer);pressTimer=null}
+    if(!longPressed)btn.classList.remove('is-pressing');
+  };
+  btn.addEventListener('pointerdown',start,{passive:true});
+  btn.addEventListener('pointerup',end,{passive:true});
+  btn.addEventListener('pointercancel',end,{passive:true});
+  btn.addEventListener('pointerleave',()=>{if(!longPressed)cancel()},{passive:true});
+  btn.addEventListener('contextmenu',e=>e.preventDefault());
+  btn.addEventListener('click',e=>{
+    if(suppressClick){
+      e.preventDefault();e.stopImmediatePropagation();
+      suppressClick=false;
+      return;
+    }
+    // Короткое нажатие сохраняет основной сценарий: сразу разговор.
+  },true);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('dmQuickMenu')?.__close?.()});
+})();
+</script>
