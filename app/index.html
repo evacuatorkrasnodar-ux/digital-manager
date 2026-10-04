@@ -8768,6 +8768,127 @@ body.dark .dm-living-dots i{
 }
 </style>
 
+
+<style id="v23-settings-final-polish">
+/* V23 — финальная полировка настроек:
+   красивый выход, сапфировая кнопка обучения и нормальное состояние переключателей. */
+
+/* Выход из настроек: вместо крестика — спокойная стрелка назад. */
+#controlOverlay .control-close{
+  width:40px!important;
+  height:40px!important;
+  min-width:40px!important;
+  border-radius:50%!important;
+  border:1px solid rgba(24,36,71,.12)!important;
+  background:rgba(24,36,71,.06)!important;
+  color:#182447!important;
+  font-size:0!important;
+  line-height:1!important;
+  display:grid!important;
+  place-items:center!important;
+  box-shadow:none!important;
+}
+#controlOverlay .control-close::before{
+  content:"←"!important;
+  font-size:19px!important;
+  font-weight:500!important;
+}
+#controlOverlay .control-close:hover{
+  background:rgba(24,36,71,.11)!important;
+  transform:none!important;
+}
+body.dark #controlOverlay .control-close{
+  border-color:rgba(255,255,255,.12)!important;
+  background:rgba(255,255,255,.07)!important;
+  color:#f7f9ff!important;
+}
+body.dark #controlOverlay .control-close:hover{
+  background:rgba(255,255,255,.12)!important;
+}
+
+/* «Пройти обучение» — тот же глубокий сапфир, что и остальные важные действия. */
+#controlContent .dm-learning-button{
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
+  color:#fff!important;
+  border:1px solid rgba(93,112,166,.42)!important;
+  box-shadow:0 8px 22px rgba(30,48,91,.16)!important;
+}
+#controlContent .dm-learning-button:hover{
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
+  color:#fff!important;
+}
+
+/* Переключатели: ВЫКЛ — спокойный серый, ВКЛ — сапфир.
+   Одинаково и для настроек Главной, и для правил управляющего. */
+#controlContent .settings-home-switch,
+#controlContent .settings-rule-toggle{
+  background:#d9dee8!important;
+  border:1px solid rgba(20,28,45,.12)!important;
+  box-shadow:inset 0 1px 2px rgba(16,31,76,.08)!important;
+}
+#controlContent .settings-home-switch i,
+#controlContent .settings-rule-toggle i{
+  background:#fff!important;
+  box-shadow:0 1px 4px rgba(16,31,76,.22)!important;
+}
+#controlContent .settings-home-switch.is-on,
+#controlContent .settings-rule-toggle.is-on{
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
+  border-color:rgba(93,112,166,.42)!important;
+  box-shadow:0 5px 14px rgba(30,48,91,.18),inset 0 1px 0 rgba(255,255,255,.10)!important;
+}
+#controlContent .settings-home-switch.is-on i,
+#controlContent .settings-rule-toggle.is-on i{
+  background:#fff!important;
+}
+
+/* В тёмной теме тоже: ВКЛ должен быть сапфировым, а не белым. */
+body.dark #controlContent .settings-home-switch,
+body.dark #controlContent .settings-rule-toggle{
+  background:#343a48!important;
+  border-color:rgba(255,255,255,.10)!important;
+}
+body.dark #controlContent .settings-home-switch i,
+body.dark #controlContent .settings-rule-toggle i{
+  background:#f7f9ff!important;
+  box-shadow:0 1px 5px rgba(0,0,0,.35)!important;
+}
+body.dark #controlContent .settings-home-switch.is-on,
+body.dark #controlContent .settings-rule-toggle.is-on{
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
+  border-color:rgba(120,143,199,.38)!important;
+}
+body.dark #controlContent .settings-home-switch.is-on i,
+body.dark #controlContent .settings-rule-toggle.is-on i{
+  background:#fff!important;
+}
+
+/* Сохраняем компактный размер на телефоне. */
+@media(max-width:700px){
+  #controlOverlay .control-close{
+    width:38px!important;height:38px!important;min-width:38px!important;
+  }
+  #controlOverlay .control-close::before{font-size:18px!important}
+}
+
+/* Если настройки перерисовываются JS — стрелка остаётся стрелкой. */
+</style>
+<script id="v23-settings-close-final">
+(function(){
+  function syncSettingsClose(){
+    document.querySelectorAll('#controlOverlay .control-close').forEach(function(btn){
+      btn.textContent='←';
+      btn.setAttribute('aria-label','Назад');
+      btn.title='Назад';
+    });
+  }
+  syncSettingsClose();
+  const mo=new MutationObserver(syncSettingsClose);
+  const overlay=document.getElementById('controlOverlay');
+  if(overlay) mo.observe(overlay,{childList:true,subtree:true});
+})();
+</script>
+
 </html>
 <style id="final-mobile-readable-fix-v30">
 /* Финальная точечная правка: верхний баннер, логотип, радары и читаемость. */
