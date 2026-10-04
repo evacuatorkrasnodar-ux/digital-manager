@@ -4447,6 +4447,66 @@ body.dark .home-theme-moon{display:block}
   .home-organize-open{min-width:58px !important;}
 }
 </style>
+
+<style id="v23-clean-layout">
+/* V23 — clean geometry: one grid, equal cards, no muddy transition */
+html,body{overflow-x:hidden}
+.premium-home{width:100%!important;max-width:none!important;margin:0!important}
+.premium-home .future-shell{width:min(1180px,calc(100vw - 40px))!important;max-width:1180px!important;margin:0 auto!important;padding:0!important;display:grid!important;grid-template-columns:repeat(12,minmax(0,1fr))!important;gap:14px!important;align-items:stretch!important}
+.premium-home .future-shell>.home-block{width:100%!important;min-width:0!important;margin:0!important;box-sizing:border-box!important}
+.premium-home .future-shell>.future-state{grid-column:1/-1!important}
+.premium-home .future-shell>.future-grid{grid-column:1/-1!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important;align-self:stretch!important}
+.premium-home .future-shell>.future-command{grid-column:1/-1!important}
+.premium-home .future-shell>.future-intent{grid-column:span 6!important}
+.premium-home .future-shell>.future-twin{grid-column:span 6!important}
+.premium-home .future-shell>.future-simulator{grid-column:span 4!important}
+.premium-home .future-shell>.future-memory{grid-column:span 4!important}
+.premium-home .future-shell>.future-evolution{grid-column:span 4!important}
+.premium-home .future-shell>.future-contract{grid-column:span 6!important}
+.premium-home .future-shell>.future-blindspot{grid-column:span 6!important}
+.premium-home .future-shell>.future-create{grid-column:1/-1!important}
+.premium-home .future-grid>.future-card{height:100%!important;min-height:235px!important;display:flex!important;flex-direction:column!important;box-sizing:border-box!important}
+.premium-home .future-grid>.future-card .action-row{margin-top:auto!important}
+.premium-home .future-grid>.future-card .mini-result,.premium-home .future-grid>.future-card .finding,.premium-home .future-grid>.future-card .timeline{margin-top:auto!important}
+/* no accidental transforms that make cards look uneven */
+.premium-home .home-block:hover{transform:none!important}
+.premium-home .future-grid>.future-card:hover{transform:translateY(-2px)!important}
+/* Greeting is the first visual object on mobile */
+@media(max-width:700px){
+  .content{padding:0 12px 150px!important}
+  .premium-home .future-shell{width:100%!important;display:grid!important;grid-template-columns:1fr!important;gap:10px!important;padding:0!important}
+  .premium-home .future-shell>.home-block{grid-column:1/-1!important;width:100%!important}
+  .premium-home .future-shell>.future-state{margin-top:0!important}
+  .premium-home .future-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+  .premium-home .future-grid>.future-card{min-height:0!important;height:auto!important;min-width:0!important;padding:14px!important}
+  .premium-home .future-grid>.future-card h3{font-size:13px!important}
+  .premium-home .future-grid>.future-card .future-desc{font-size:9px!important}
+  .premium-home .future-intent,.premium-home .future-twin,.premium-home .future-simulator,.premium-home .future-memory,.premium-home .future-evolution,.premium-home .future-contract,.premium-home .future-blindspot{min-height:0!important}
+  .premium-home .future-state{padding:18px 16px!important;border-radius:22px!important}
+}
+@media(max-width:430px){
+  .premium-home .future-grid{grid-template-columns:1fr!important}
+  .premium-home .future-grid>.future-card{min-height:0!important}
+}
+/* Expansion: no blur, no grey veil. The selected card is the only moving surface. */
+.fc-expand-overlay,.fc-expand-overlay:before,.fc-expand-overlay:after{
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;filter:none!important
+}
+.fc-expand-overlay{background:rgba(255,255,255,0)!important;opacity:0!important;transition:opacity .35s ease!important}
+body.dark .fc-expand-overlay{background:rgba(0,0,0,0)!important}
+body.fc-open .fc-expand-overlay{opacity:1!important;background:rgba(0,0,0,.025)!important}
+body.dark.fc-open .fc-expand-overlay{background:rgba(0,0,0,.07)!important}
+.fc-expanded{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.fc-expanded{border-radius:28px!important;will-change:left,top,width,height,border-radius!important}
+@media(max-width:700px){
+  .fc-expanded{left:8px!important;top:8px!important;width:calc(100vw - 16px)!important;height:calc(100vh - 16px)!important;max-height:none!important;border-radius:24px!important;padding:22px 16px 30px!important}
+}
+/* Keep the organizer separate from the desktop sidebar; compact on phone only. */
+@media(min-width:701px){.home-organize-bar{display:none!important}}
+/* Fix accessibility warning when closing manager */
+.manager-sheet[aria-hidden="true"]{visibility:hidden!important;pointer-events:none!important}
+.manager-sheet[aria-hidden="false"]{visibility:visible!important;pointer-events:auto!important}
+</style>
 </head>
 <body>
 <div class="app">
@@ -7312,6 +7372,177 @@ body.dark .home-block.is-dragging{box-shadow:0 30px 80px rgba(0,0,0,.42)!importa
 .fc-expanded{position:fixed!important;z-index:9999!important;margin:0!important;overflow:auto!important;overscroll-behavior:contain;box-shadow:0 35px 120px rgba(10,14,25,.28)!important;transition:left .58s cubic-bezier(.2,.8,.2,1),top .58s cubic-bezier(.2,.8,.2,1),width .58s cubic-bezier(.2,.8,.2,1),height .58s cubic-bezier(.2,.8,.2,1),border-radius .58s cubic-bezier(.2,.8,.2,1),box-shadow .58s ease!important}.fc-expanded .fc-more-content{max-height:900px!important;opacity:1!important;transform:none!important;margin-top:16px!important}.fc-more-content{max-height:0;opacity:0;overflow:hidden;transform:translateY(10px);transition:max-height .5s ease,opacity .35s ease,transform .5s ease,margin .35s ease}.fc-more-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.fc-more-pill{padding:14px;border-radius:17px;background:rgba(127,127,127,.075);border:1px solid rgba(127,127,127,.11)}.fc-more-pill b{display:block;font-size:20px;letter-spacing:-.045em;color:var(--text)}.fc-more-pill span{display:block;margin-top:4px;font-size:8px;color:var(--muted)}.fc-detail-text{margin-top:13px;font-size:11px;line-height:1.5;color:var(--muted)}.fc-live-chart{height:74px;margin-top:13px;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,rgba(110,120,255,.10),rgba(110,120,255,.025))}.fc-live-chart svg{width:100%;height:100%;display:block}.fc-live-line{fill:none;stroke:url(#fcGrad);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:320;stroke-dashoffset:320;animation:fcDraw 1.15s .15s cubic-bezier(.2,.8,.2,1) forwards}.fc-live-dot{fill:#fff;stroke:#8d7dff;stroke-width:2;animation:fcDot 2.4s ease-in-out infinite}@keyframes fcDraw{to{stroke-dashoffset:0}}@keyframes fcDot{0%,100%{transform:scale(.85);opacity:.72}50%{transform:scale(1.12);opacity:1}}.fc-close{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;border:1px solid rgba(127,127,127,.16);background:rgba(255,255,255,.72);color:var(--text);display:grid;place-items:center;font-size:18px;line-height:1;cursor:pointer;opacity:0;transform:scale(.8);transition:.3s ease;z-index:10;backdrop-filter:blur(12px)}.fc-expanded .fc-close{opacity:1;transform:scale(1)}body.dark .fc-expand-overlay{background:rgba(0,0,0,.60)}body.dark .fc-more-pill{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.10)}body.dark .fc-close{background:rgba(30,31,36,.84);border-color:rgba(255,255,255,.12);color:#fff}
 @media(min-width:701px){.home-organize-bar{display:none!important}}@media(max-width:700px){.premium-home .future-shell{padding-top:8px!important;padding-bottom:142px!important}.home-organize-bar{position:fixed!important;left:10px!important;right:10px!important;bottom:76px!important;width:auto!important;max-width:none!important;z-index:38!important;margin:0!important;min-height:50px!important;height:auto!important;padding:7px 8px!important;border-radius:16px!important;background:rgba(255,255,255,.82)!important;backdrop-filter:blur(24px) saturate(1.2)!important;box-shadow:0 16px 48px rgba(20,25,35,.16)!important}.home-organize-copy b{font-size:9px!important}.home-organize-copy small{display:block!important;font-size:7px!important;max-width:170px!important}.home-organize-actions button{height:30px!important;min-height:30px!important;font-size:7px!important}body.dark .home-organize-bar{background:rgba(24,25,29,.88)!important;box-shadow:0 18px 55px rgba(0,0,0,.42)!important}.fc-expanded{left:8px!important;top:8px!important;width:calc(100vw - 16px)!important;height:calc(100vh - 16px)!important;border-radius:26px!important;padding-bottom:24px}.fc-more-grid{gap:6px}.fc-more-pill{padding:11px 9px}.fc-more-pill b{font-size:17px}.fc-live-chart{height:66px}}@media(prefers-reduced-motion:reduce){.fc-expand-overlay,.fc-expanded,.fc-more-content,.fc-close{transition:none!important}.fc-live-line{animation:none!important;stroke-dashoffset:0}.fc-live-dot{animation:none!important}}
 </style>
+
+<style id="v21-clean-transform-and-symmetry">
+/* V21 — чистое раскрытие без мутной пелены + единая геометрия Главной */
+.fc-expand-overlay{
+  background:rgba(10,12,18,.055)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  transition:opacity .28s ease!important;
+}
+body.dark .fc-expand-overlay{background:rgba(0,0,0,.14)!important}
+.fc-expanded{
+  box-shadow:0 34px 110px rgba(10,16,30,.22),0 2px 10px rgba(10,16,30,.10)!important;
+  border-radius:28px!important;
+  overflow:auto!important;
+  transition:left .62s cubic-bezier(.16,1,.3,1),top .62s cubic-bezier(.16,1,.3,1),width .62s cubic-bezier(.16,1,.3,1),height .62s cubic-bezier(.16,1,.3,1),border-radius .48s ease,box-shadow .48s ease!important;
+  animation:none!important;
+}
+body.dark .fc-expanded{box-shadow:0 38px 120px rgba(0,0,0,.52),0 2px 12px rgba(0,0,0,.32)!important}
+.fc-expanded .fc-more-content{padding-bottom:12px}
+.fc-placeholder{visibility:hidden!important;pointer-events:none!important}
+
+/* Все элементы Главной держат одну сетку и одинаковые боковые края. */
+.premium-home .future-shell{
+  width:min(1120px,100%)!important;
+  box-sizing:border-box!important;
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:14px!important;
+  align-items:stretch!important;
+}
+.premium-home .future-shell > .home-block{
+  width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  box-sizing:border-box!important;
+  align-self:stretch!important;
+}
+.premium-home .future-shell > .future-state,
+.premium-home .future-shell > .future-command,
+.premium-home .future-shell > .future-evolution,
+.premium-home .future-shell > .future-create{
+  grid-column:1 / -1!important;
+}
+.premium-home .future-shell > .future-card,
+.premium-home .future-shell > .future-intent,
+.premium-home .future-shell > .future-twin,
+.premium-home .future-shell > .future-simulator,
+.premium-home .future-shell > .future-memory,
+.premium-home .future-shell > .future-contract,
+.premium-home .future-shell > .future-blindspot{
+  height:100%!important;
+}
+.premium-home .future-shell > .home-block::after{pointer-events:none!important}
+
+/* Никаких лишних элементов над первым приветствием. */
+.premium-home .content{padding-top:0!important}
+.premium-home .future-shell{padding-top:0!important}
+.premium-home .future-state{margin-top:0!important}
+
+@media(max-width:700px){
+  .premium-home .future-shell{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:9px!important;
+    padding:0 10px 142px!important;
+  }
+  .premium-home .future-shell > .home-block,
+  .premium-home .future-shell > .future-state,
+  .premium-home .future-shell > .future-command,
+  .premium-home .future-shell > .future-evolution,
+  .premium-home .future-shell > .future-create,
+  .premium-home .future-shell > .future-card,
+  .premium-home .future-shell > .future-intent,
+  .premium-home .future-shell > .future-twin,
+  .premium-home .future-shell > .future-simulator,
+  .premium-home .future-shell > .future-memory,
+  .premium-home .future-shell > .future-contract,
+  .premium-home .future-shell > .future-blindspot{
+    grid-column:1!important;
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+  }
+  .premium-home .future-shell > .home-block{border-radius:20px!important}
+  .premium-home .future-shell > .future-state{margin-top:0!important}
+  .fc-expanded{border-radius:24px!important}
+}
+</style>
+
+
+<style id="v22-final-repair">
+/* V22 — clean expansion: no fog, no screen blur */
+.fc-expand-overlay{
+  background:transparent!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
+body.fc-open{background:var(--bg)!important}
+body.fc-open .home-block:not(.fc-expanded){filter:none!important;opacity:1!important}
+.fc-expanded{
+  box-shadow:0 30px 90px rgba(10,12,20,.22),0 0 0 1px rgba(255,255,255,.12)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  overflow:auto!important;
+}
+body.dark .fc-expanded{box-shadow:0 34px 100px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.08)!important}
+/* One clean grid on every screen */
+.premium-home .future-shell{width:100%!important;max-width:1160px!important;margin:0 auto!important}
+.premium-home .future-shell > .home-block{width:100%!important;max-width:none!important;min-width:0!important;box-sizing:border-box!important}
+.premium-home .future-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:10px!important;width:100%!important}
+.premium-home .future-grid > .home-block{width:100%!important;max-width:none!important;min-width:0!important;grid-column:1!important}
+.premium-home .future-card{width:100%!important;box-sizing:border-box!important}
+@media(min-width:701px){
+  .premium-home .future-shell{padding-left:32px!important;padding-right:32px!important}
+  .premium-home .future-grid{grid-template-columns:minmax(0,1fr)!important}
+}
+@media(max-width:700px){
+  .content{padding:0 0 110px!important}
+  .premium-home{padding:0!important;margin:0!important}
+  .premium-home .future-shell{padding:0 12px 142px!important;gap:10px!important}
+  .premium-home .future-shell > .home-block,
+  .premium-home .future-grid,
+  .premium-home .future-grid > .home-block{width:100%!important;max-width:none!important}
+  .premium-home .future-grid{gap:10px!important}
+  .premium-home .future-shell > .home-block{margin-left:0!important;margin-right:0!important}
+  .premium-home .state-greeting{padding-top:4px!important}
+  .premium-home .future-state{margin-top:0!important}
+  .fc-expanded{left:8px!important;top:8px!important;width:calc(100vw - 16px)!important;height:calc(100vh - 16px)!important;border-radius:28px!important}
+}
+</style>
+<script id="v22-navigation-restore">
+(function(){
+  /* Keep the original application's screen switching as the single source of truth. */
+  document.querySelectorAll('[data-section]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      if(typeof showSection==='function') showSection(this.dataset.section);
+    },false);
+  });
+})();
+</script>
+
+<script id="v23-clean-fixes">
+(function(){
+  /* Inline favicon: no more /favicon.ico 404 in GitHub Pages. */
+  if(!document.querySelector('link[rel="icon"]')){
+    var f=document.createElement('link');f.rel='icon';f.href='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#111216"/><path d="M32 11 48 27 32 53 16 27z" fill="none" stroke="white" stroke-width="2"/><circle cx="32" cy="32" r="3" fill="white"/></svg>');document.head.appendChild(f);
+  }
+  /* Never hide a focused element inside the manager dialog. */
+  var sheet=document.getElementById('managerSheet');
+  var close=document.getElementById('managerClose');
+  var backdrop=document.getElementById('managerBackdrop');
+  var originalClose=window.closeManager;
+  window.closeManager=function(){
+    try{
+      if(document.activeElement && sheet && sheet.contains(document.activeElement)) document.activeElement.blur();
+      if(sheet) sheet.setAttribute('inert','');
+    }catch(e){}
+    if(typeof originalClose==='function') originalClose();
+    else if(sheet){sheet.classList.remove('show');sheet.setAttribute('aria-hidden','true');}
+    try{document.body.focus({preventScroll:true})}catch(e){}
+  };
+  window.openManager=(function(old){return function(question){
+    if(sheet) sheet.removeAttribute('inert');
+    return old ? old(question) : undefined;
+  }})(window.openManager);
+  /* The browser's beforeinstallprompt informational message is harmless; keep the event
+     available for the explicit install action instead of attempting to show it on load. */
+})();
+</script>
 </body></html>
 <style id="evo-timeline-visibility-final">
 /* FINAL VISIBILITY FIX — evolution activity block */
@@ -7420,3 +7651,37 @@ body.dark .future-evolution .evo-next button{
   color:#f7f8fa !important;
 }
 </style>
+
+
+<style id="home-v20-wow-fix">
+/* V20 — карточка действительно превращается в экран, а фон остаётся живым */
+.fc-expand-overlay{background:rgba(255,255,255,.16)!important;backdrop-filter:blur(4px) saturate(1.02)!important;-webkit-backdrop-filter:blur(4px) saturate(1.02)!important;transition:opacity .48s cubic-bezier(.22,1,.36,1)!important}
+body.dark .fc-expand-overlay{background:rgba(0,0,0,.20)!important}
+.fc-expanded{background:rgba(255,255,255,.94)!important;border:1px solid rgba(255,255,255,.82)!important;border-radius:30px!important;box-shadow:0 40px 120px rgba(22,27,45,.24),0 0 0 1px rgba(110,120,255,.07),inset 0 1px 0 rgba(255,255,255,.95)!important;transition:left .72s cubic-bezier(.16,1,.3,1),top .72s cubic-bezier(.16,1,.3,1),width .72s cubic-bezier(.16,1,.3,1),height .72s cubic-bezier(.16,1,.3,1),border-radius .72s cubic-bezier(.16,1,.3,1),box-shadow .55s ease!important}
+body.dark .fc-expanded{background:rgba(22,24,30,.96)!important;border-color:rgba(255,255,255,.12)!important;box-shadow:0 45px 130px rgba(0,0,0,.48),0 0 0 1px rgba(130,140,255,.08),inset 0 1px 0 rgba(255,255,255,.08)!important}
+/* Не принуждаем мобильную карточку сразу прыгать в 8px — теперь JS-анимация видна от исходной точки */
+@media(max-width:700px){
+  .fc-expanded{left:auto!important;top:auto!important;width:auto!important;height:auto!important;border-radius:28px!important;padding:22px 16px 30px!important}
+  .fc-expanded .fc-live-chart{height:150px!important;margin-top:20px!important;border-radius:22px!important}
+  .fc-expanded .fc-more-grid{gap:9px!important;margin-top:18px!important}
+  .fc-expanded .fc-more-pill{padding:15px 13px!important;border-radius:18px!important}
+  .fc-expanded .fc-more-pill b{font-size:20px!important}
+  .fc-expanded .fc-detail-text{font-size:13px!important;line-height:1.55!important;margin-top:18px!important}
+}
+@media(min-width:701px){.fc-expanded .fc-live-chart{height:190px!important;margin-top:22px!important;border-radius:24px!important}.fc-expanded .fc-more-grid{margin-top:20px!important;gap:12px!important}.fc-expanded .fc-more-pill{padding:17px!important}.fc-expanded .fc-more-pill b{font-size:25px!important}.fc-expanded .fc-detail-text{font-size:13px!important;line-height:1.6!important;margin-top:20px!important}}
+.fc-expanded .fc-more-content{animation:fcContentIn .7s .12s cubic-bezier(.16,1,.3,1) both!important}
+@keyframes fcContentIn{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+.fc-expanded .fc-live-chart{position:relative;box-shadow:inset 0 0 0 1px rgba(110,120,255,.08),0 18px 50px rgba(80,90,180,.08)}
+.fc-expanded .fc-live-chart:after{content:"ЖИВАЯ ДИНАМИКА";position:absolute;left:14px;top:11px;font-size:8px;letter-spacing:.12em;color:var(--muted);font-weight:700;pointer-events:none}
+.fc-expanded .fc-live-line{stroke-width:3!important}
+.fc-expanded .fc-close{width:38px!important;height:38px!important;top:14px!important;right:14px!important;font-size:20px!important}
+/* Юлия всегда первая: на телефоне убираем верхний воздух над Главной */
+@media(max-width:700px){
+  .content{padding-top:0!important}
+  .premium-home{padding-top:0!important}
+  .premium-home .future-shell{padding-top:0!important;margin-top:0!important}
+  .premium-home .future-state{margin-top:0!important}
+  .premium-home .state-greeting{padding-top:6px!important}
+}
+</style>
+
