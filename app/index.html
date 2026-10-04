@@ -10769,5 +10769,95 @@ body.dark #controlContent .settings-rule-toggle.is-on i{
 }
 </style>
 
+
+<style id="button-language-v26">
+/* V26 — единый стиль действий: спокойные чёрные кнопки без лишнего стекла. */
+.settings-create-card button{
+  height:40px!important;
+  min-height:40px!important;
+  padding:0 17px!important;
+  border:0!important;
+  border-radius:14px!important;
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  font-size:10px!important;
+  font-weight:700!important;
+  letter-spacing:-.01em!important;
+  line-height:1!important;
+  box-shadow:0 8px 20px rgba(17,17,19,.12)!important;
+  transition:transform .18s ease,box-shadow .18s ease,background .18s ease!important;
+}
+.settings-create-card button:hover{
+  background:linear-gradient(135deg,#263968 0%,#3d4f83 100%)!important;
+  transform:translateY(-1px)!important;
+  box-shadow:0 11px 24px rgba(17,17,19,.16)!important;
+}
+.settings-create-card button:active{transform:scale(.97)!important;box-shadow:0 5px 14px rgba(17,17,19,.12)!important}
+
+/* Кнопка возврата — в том же языке, что и основные действия на Главной. */
+#deepSectionBack{
+  height:40px!important;
+  min-height:40px!important;
+  padding:0 15px 0 12px!important;
+  gap:7px!important;
+  border:0!important;
+  border-radius:14px!important;
+  background:#111113!important;
+  color:#fff!important;
+  box-shadow:0 10px 24px rgba(17,17,19,.16)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  font-size:10px!important;
+  font-weight:700!important;
+  letter-spacing:-.01em!important;
+}
+#deepSectionBack:hover{
+  background:#19191c!important;
+  border:0!important;
+  transform:translateY(-1px)!important;
+  box-shadow:0 12px 28px rgba(17,17,19,.19)!important;
+}
+#deepSectionBack:active{transform:scale(.97)!important}
+#deepSectionBack .back-x{
+  font-size:18px!important;
+  line-height:1!important;
+  opacity:.92!important;
+  margin-top:-1px!important;
+}
+@media(max-width:700px){
+  .settings-create-card button{height:40px!important;min-height:40px!important;padding:0 16px!important;border-radius:14px!important}
+  #deepSectionBack{height:38px!important;min-height:38px!important;padding:0 14px 0 11px!important;border-radius:14px!important;font-size:9.5px!important}
+}
+</style>
+
+<style id="v28-assistant-sapphire">
+/* V28 — помощник в том же сапфировом индиго, что и основные кнопки.
+   Тёмную тему не меняем. */
+body:not(.dark) .mobile-manager.dm-signature-manager-button{
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
+  border:1px solid rgba(93,112,166,.42)!important;
+  box-shadow:0 14px 34px rgba(30,48,91,.22),inset 0 1px 0 rgba(255,255,255,.12)!important;
+  color:#fff!important;
+}
+body:not(.dark) .dm-signature-button-logo{
+  color:#fff!important;
+  filter:drop-shadow(0 6px 14px rgba(0,0,0,.16))!important;
+}
+body:not(.dark) .dm-signature-button-logo .sig-orbit{
+  stroke:#fff!important;
+  opacity:.42!important;
+}
+body:not(.dark) .dm-signature-button-logo .sig-diamond{
+  fill:rgba(255,255,255,.96)!important;
+  stroke:#263968!important;
+}
+body:not(.dark) .dm-signature-button-logo .sig-core{
+  fill:#263968!important;
+}
+body:not(.dark) .mobile-manager.dm-signature-manager-button:hover{
+  filter:brightness(1.06)!important;
+}
+</style>
 </body>
 </html>
