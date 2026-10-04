@@ -4637,35 +4637,46 @@ body.dark .future-evolution .evo-next button{
 }
 #controlContent .settings-rules-list .settings-rule-toggle,
 #controlContent .settings-sections-v2 .settings-home-switch{
-  width:38px!important;height:20px!important;min-width:38px!important;max-width:38px!important;
-  min-height:20px!important;max-height:20px!important;padding:2px!important;margin:0!important;
-  border:0!important;border-radius:999px!important;box-sizing:border-box!important;
+  width:42px!important;height:22px!important;min-width:42px!important;max-width:42px!important;
+  min-height:22px!important;max-height:22px!important;padding:2px!important;margin:0!important;
+  border:1px solid rgba(20,28,45,.14)!important;border-radius:999px!important;box-sizing:border-box!important;
   position:relative!important;display:block!important;justify-self:end!important;cursor:pointer!important;
+  background:#dfe3ea!important;transition:background .18s ease,border-color .18s ease,box-shadow .18s ease!important;
 }
 #controlContent .settings-rules-list .settings-rule-toggle i,
 #controlContent .settings-sections-v2 .settings-home-switch i{
   display:block!important;width:16px!important;height:16px!important;min-width:16px!important;max-width:16px!important;
   min-height:16px!important;max-height:16px!important;border-radius:50%!important;
-  margin:0!important;transform:translateX(0)!important;transition:transform .18s ease!important;
+  margin:0!important;transform:translateX(0)!important;transition:transform .18s ease,background .18s ease!important;
+  background:#fff!important;box-shadow:0 1px 4px rgba(16,31,76,.22)!important;
 }
 #controlContent .settings-rules-list .settings-rule-toggle.is-on i,
 #controlContent .settings-sections-v2 .settings-home-switch.is-on i{transform:translateX(18px)!important}
-body:not(.dark) #controlContent .settings-rule-toggle,
-body:not(.dark) #controlContent .settings-home-switch{
-  background:linear-gradient(135deg,#123b8f 0%,#3850c9 55%,#5b3fd0 100%)!important;
+body:not(.dark) #controlContent .settings-rules-list .settings-rule-toggle.is-on,
+body:not(.dark) #controlContent .settings-sections-v2 .settings-home-switch.is-on{
+  background:linear-gradient(135deg,#123b8f 0%,#3850c9 55%,#5b3fd0 100%)!important;border-color:transparent!important;
 }
-body:not(.dark) #controlContent .settings-rule-toggle i,
-body:not(.dark) #controlContent .settings-home-switch i{
-  background:#fff!important;box-shadow:0 1px 3px rgba(16,31,76,.18)!important;
-}
-body.dark #controlContent .settings-rule-toggle,
-body.dark #controlContent .settings-home-switch{background:#f4f5f7!important}
-body.dark #controlContent .settings-rule-toggle i,
-body.dark #controlContent .settings-home-switch i{background:#17181b!important;box-shadow:0 1px 3px rgba(0,0,0,.25)!important}
+body.dark #controlContent .settings-rules-list .settings-rule-toggle.is-on,
+body.dark #controlContent .settings-sections-v2 .settings-home-switch.is-on{background:#f4f5f7!important;border-color:#f4f5f7!important}
+body.dark #controlContent .settings-rules-list .settings-rule-toggle,
+body.dark #controlContent .settings-sections-v2 .settings-home-switch{background:#303640!important;border-color:rgba(255,255,255,.12)!important}
+body.dark #controlContent .settings-rules-list .settings-rule-toggle.is-on i,
+body.dark #controlContent .settings-sections-v2 .settings-home-switch.is-on i{background:#17181b!important}
+body.dark #controlContent .settings-rules-list .settings-rule-toggle:not(.is-on) i,
+body.dark #controlContent .settings-sections-v2 .settings-home-switch:not(.is-on) i{background:#aeb6c4!important}
+#controlContent .settings-rule-toggle:active,
+#controlContent .settings-home-switch:active{transform:scale(.96)!important}
 #controlContent .settings-autopilot-action{height:44px!important;min-height:44px!important;margin-top:9px!important;border-radius:14px!important}
 body:not(.dark) #controlContent .settings-autopilot-action{
   background:linear-gradient(135deg,#123b8f 0%,#3850c9 55%,#5b3fd0 100%)!important;color:#fff!important;border:0!important;
 }
+#controlContent .settings-toggle-legend{display:flex;gap:12px;align-items:center;margin-top:9px;color:var(--muted);font-size:8px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+#controlContent .settings-toggle-legend span{display:inline-flex;align-items:center;gap:5px}
+#controlContent .settings-toggle-legend i{display:inline-block;width:7px;height:7px;border-radius:50%}
+#controlContent .settings-toggle-legend .legend-on{background:#3850c9}
+#controlContent .settings-toggle-legend .legend-off{background:#c4c9d2}
+body.dark #controlContent .settings-toggle-legend .legend-on{background:#f4f5f7}
+body.dark #controlContent .settings-toggle-legend .legend-off{background:#596273}
 #controlContent .settings-hints-row{margin-top:8px!important}
 @media(max-width:700px){
   #controlContent .control-title{font-size:24px!important;line-height:1.08!important}
@@ -5548,6 +5559,8 @@ function toggleManagerRule(id,btn){
 }
 function syncManagerSettings(){setManagerCommunicationMode(getManagerCommunicationMode());syncManagerRuleSwitches();}
 document.addEventListener('click',e=>{
+  const hint=e.target.closest?.('#managerHintsToggle');
+  if(hint){e.preventDefault();e.stopPropagation();window.toggleManagerHints?.(hint);return;}
   const rule=e.target.closest?.('.settings-rule-toggle[data-rule-id]');
   if(rule){e.preventDefault();e.stopPropagation();toggleManagerRule(rule.dataset.ruleId,rule);}
 });
@@ -5576,16 +5589,17 @@ function openSettingsPanel(){
   openControl(`<div class="control-kicker">Настройки управляющего</div>
     <div class="control-title">Вы задаёте границы. Я работаю внутри них.</div>
     <div class="control-sub">Только важные настройки — без лишних меню.</div>
+    <div class="settings-toggle-legend"><span><i class="legend-on"></i> ВКЛ</span><span><i class="legend-off"></i> ВЫКЛ</span></div>
 
     <div class="settings-theme-box"><div><b>Экран</b><small>Выберите, как выглядит приложение.</small></div><div class="theme-mode-row"><button class="theme-mode-btn" data-mode="light" onclick="setThemeMode('light')">☀ Светлая тема</button><button class="theme-mode-btn" data-mode="dark" onclick="setThemeMode('dark')">◐ Тёмная тема</button></div></div>
 
     <div class="settings-section-title">Как работает управляющий</div>
     <div class="settings-section-note">Настройки сохраняются и задают мои границы.</div>
     <div class="rule-list settings-rules-list">
-      <div class="rule-row settings-rule-row"><div><b>Самостоятельность</b><small>Советую → вы подтверждаете важные действия.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="independence" role="switch" aria-checked="true" aria-label="Самостоятельность"><i></i></button></div>
-      <div class="rule-row settings-rule-row"><div><b>Деньги</b><small>Изменения бюджета и расходы — сначала спросить вас.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="money" role="switch" aria-checked="true" aria-label="Деньги"><i></i></button></div>
-      <div class="rule-row settings-rule-row"><div><b>Общение</b><small>Коротко, спокойно, по делу. Шутки — только когда бизнес не горит.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="communication" role="switch" aria-checked="true" aria-label="Общение"><i></i></button></div>
-      <div class="rule-row settings-rule-row"><div><b>Автопилот</b><small>Можно расширить границы, когда появится доверие.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="autopilot" role="switch" aria-checked="false" aria-label="Автопилот"><i></i></button></div>
+      <div class="rule-row settings-rule-row"><div><b>Самостоятельность</b><small>Советую → вы подтверждаете важные действия.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="independence" role="switch" aria-checked="true" aria-label="Самостоятельность" onclick="event.preventDefault();event.stopPropagation();toggleManagerRule('independence',this)"><i></i></button></div>
+      <div class="rule-row settings-rule-row"><div><b>Деньги</b><small>Изменения бюджета и расходы — сначала спросить вас.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="money" role="switch" aria-checked="true" aria-label="Деньги" onclick="event.preventDefault();event.stopPropagation();toggleManagerRule('money',this)"><i></i></button></div>
+      <div class="rule-row settings-rule-row"><div><b>Общение</b><small>Коротко, спокойно, по делу. Шутки — только когда бизнес не горит.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="communication" role="switch" aria-checked="true" aria-label="Общение" onclick="event.preventDefault();event.stopPropagation();toggleManagerRule('communication',this)"><i></i></button></div>
+      <div class="rule-row settings-rule-row"><div><b>Автопилот</b><small>Можно расширить границы, когда появится доверие.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="autopilot" role="switch" aria-checked="false" aria-label="Автопилот" onclick="event.preventDefault();event.stopPropagation();toggleManagerRule('autopilot',this)"><i></i></button></div>
     </div>
     <button class="control-action settings-autopilot-action" onclick="closeControl();openAutopilot()">Настроить автопилот →</button>
 
@@ -5596,7 +5610,7 @@ function openSettingsPanel(){
     <div class="rule-list settings-rules-list settings-hints-row">
       <div class="rule-row settings-rule-row">
         <div><b>Подсказки</b><small>Показывать маленькие подсказки по ходу работы. Надоели — отключите.</small></div>
-        <button type="button" class="rule-toggle settings-rule-toggle" id="managerHintsToggle" role="switch" aria-checked="true" aria-label="Подсказки"><i></i></button>
+        <button type="button" class="rule-toggle settings-rule-toggle" id="managerHintsToggle" role="switch" aria-checked="true" aria-label="Подсказки" onclick="event.preventDefault();event.stopPropagation();window.toggleManagerHints&&window.toggleManagerHints(this)"><i></i></button>
       </div>
     </div>
 
@@ -7481,7 +7495,10 @@ body.dark .settings-sections-home-grid button{background:rgba(255,255,255,.045);
     const wasHolding=isHolding;const shouldWrite=!moved&&!wasHolding;
     clearHold();isHolding=false;pointerId=null;
     if(wasHolding) stopVoice(true);
-    else if(shouldWrite) openWrite();
+    else if(shouldWrite){
+      if(document.body.classList.contains('dm-write-mode')) closeWrite();
+      else openWrite();
+    }
   });
   btn.addEventListener('pointercancel',()=>{clearHold();if(isHolding)stopVoice(false);isHolding=false;pointerId=null;});
   btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();});
@@ -7915,6 +7932,34 @@ body.dark .dm-quick-form button{
   .dm-quick-form button svg{width:17px !important;height:17px !important;}
 }
 </style>
+<script id="settings-real-controls-v92">
+(function(){
+  function sync(){
+    try{ if(window.syncManagerRuleSwitches) window.syncManagerRuleSwitches(); }catch(e){}
+    try{ if(window.syncSettingsHomeSwitches) window.syncSettingsHomeSwitches(); }catch(e){}
+    try{ if(window.__syncHintsToggle) window.__syncHintsToggle(); }catch(e){}
+  }
+  window.__syncHintsToggle=function(){
+    const b=document.getElementById('managerHintsToggle');
+    if(!b)return;
+    let on=true; try{on=localStorage.getItem('db-hints-enabled')!=='0'}catch(e){}
+    b.classList.toggle('is-on',on); b.setAttribute('aria-checked',String(on));
+  };
+  document.addEventListener('click',function(e){
+    const h=e.target.closest && e.target.closest('#managerHintsToggle');
+    if(h){ e.preventDefault(); e.stopImmediatePropagation(); if(window.toggleManagerHints) window.toggleManagerHints(h); window.__syncHintsToggle(); return; }
+    const r=e.target.closest && e.target.closest('.settings-rule-toggle[data-rule-id]');
+    if(r && r.id!=='managerHintsToggle'){ e.preventDefault(); e.stopImmediatePropagation(); if(window.toggleManagerRule) window.toggleManagerRule(r.dataset.ruleId,r); return; }
+    const sh=e.target.closest && e.target.closest('.settings-home-switch[data-section-id]');
+    if(sh){ e.preventDefault(); e.stopImmediatePropagation(); if(window.toggleSettingsHomeSection) window.toggleSettingsHomeSection(sh.dataset.sectionId,sh); return; }
+  },true);
+  const original=window.openSettingsPanel;
+  if(typeof original==='function'){
+    window.openSettingsPanel=function(){ original.apply(this,arguments); setTimeout(sync,0); };
+  }
+  setTimeout(sync,0);
+})();
+</script>
 </html>
 <style id="final-mobile-readable-fix-v30">
 /* Финальная точечная правка: верхний баннер, логотип, радары и читаемость. */
@@ -9139,7 +9184,7 @@ body.dark .dm-light-demo-orb b{color:#8bc8ff}
   }
   function syncHintsToggle(){
     const t=document.getElementById('managerHintsToggle');
-    if(t) t.setAttribute('aria-checked', hintsEnabled()?'true':'false');
+    if(t){const on=hintsEnabled();t.classList.toggle('is-on',on);t.setAttribute('aria-checked',on?'true':'false');}
   }
   window.toggleManagerHints=function(btn){
     const next=!hintsEnabled();
@@ -9502,3 +9547,69 @@ body:not(.dark) .state-control-meta i{background:#8992a1}
   .state-control-card{margin-top:0}
 }
 </style>
+
+<style id="settings-light-switch-fix-v93">
+/* v93: светлая тема — переключатель обязан визуально различать ВКЛ / ВЫКЛ */
+@media(max-width:700px){
+  body:not(.dark) #controlContent .settings-rules-list .settings-rule-toggle,
+  body:not(.dark) #controlContent .settings-sections-v2 .settings-home-switch{
+    background:#d9dee8!important;
+    border:1px solid rgba(20,28,45,.14)!important;
+    box-shadow:inset 0 1px 2px rgba(16,31,76,.08)!important;
+  }
+  body:not(.dark) #controlContent .settings-rules-list .settings-rule-toggle.is-on,
+  body:not(.dark) #controlContent .settings-sections-v2 .settings-home-switch.is-on{
+    background:linear-gradient(135deg,#123b8f 0%,#3850c9 55%,#5b3fd0 100%)!important;
+    border-color:transparent!important;
+    box-shadow:0 4px 12px rgba(31,58,156,.18),inset 0 0 0 1px rgba(255,255,255,.10)!important;
+  }
+  body:not(.dark) #controlContent .settings-rules-list .settings-rule-toggle i,
+  body:not(.dark) #controlContent .settings-sections-v2 .settings-home-switch i{
+    background:#fff!important;
+    box-shadow:0 1px 4px rgba(16,31,76,.22)!important;
+  }
+}
+</style>
+
+<style id="theme-mode-buttons-v94">
+/* v94 — fix theme choice contrast in both themes */
+.theme-mode-btn{
+  color:var(--text)!important;
+  background:transparent!important;
+  border-color:var(--line)!important;
+}
+.theme-mode-btn.active{
+  background:#17171a!important;
+  color:#ffffff!important;
+  border-color:#17171a!important;
+}
+body.dark .theme-mode-btn.active{
+  background:#f4f4f5!important;
+  color:#17181b!important;
+  border-color:#f4f4f5!important;
+}
+</style>
+<script id="theme-mode-buttons-v94-js">
+(function(){
+  function syncThemeButtons(){
+    const mode=document.body.classList.contains('dark')?'dark':'light';
+    document.querySelectorAll('.theme-mode-btn').forEach(btn=>{
+      const active=btn.dataset.mode===mode;
+      btn.classList.toggle('active',active);
+      btn.setAttribute('aria-pressed',active?'true':'false');
+    });
+  }
+  const oldSetThemeMode=window.setThemeMode;
+  if(typeof oldSetThemeMode==='function'){
+    window.setThemeMode=function(mode){
+      oldSetThemeMode(mode);
+      syncThemeButtons();
+    };
+  }
+  syncThemeButtons();
+  document.addEventListener('click',function(e){
+    const btn=e.target.closest?.('.theme-mode-btn');
+    if(btn) setTimeout(syncThemeButtons,0);
+  },true);
+})();
+</script>
