@@ -3536,6 +3536,13 @@ body.dark .manager-voice,
 body.dark .manager-suggestions button,
 body.dark .premium-example,
 body.dark .premium-secondary,
+body.dark .settings-autopilot-action{
+  background:#f7f7f5!important;
+  color:#111217!important;
+  border-color:#f7f7f5!important;
+  -webkit-text-fill-color:#111217!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.18)!important;
+}
 body.dark .mini-help{
   background:rgba(255,255,255,.055) !important;
   color:#f5f5f7 !important;
@@ -4763,6 +4770,346 @@ body.dark #dmWriteSend{background:linear-gradient(135deg,#234eae 0%,#4558cf 55%,
 
 /* The mobile manager stays visible only where the mobile shell is used. */
 @media(min-width:901px){.mobile-manager.dm-signature-manager-button{display:none!important}}
+</style>
+
+<style id="light-sapphire-unification-v2">
+/* Светлая тема: последние оставшиеся тёмные смысловые блоки → тот же sapphire-indigo.
+   Тёмную тему, текстовые цвета и композицию не меняем. */
+body:not(.dark){
+  --light-sapphire-1:#182447;
+  --light-sapphire-2:#263968;
+  --light-sapphire-3:#3d4f83;
+}
+body:not(.dark) .sales-primary,
+body:not(.dark) .sales-wide-action,
+body:not(.dark) .sales-manager-card,
+body:not(.dark) .manager-primary,
+body:not(.dark) .report-main-action,
+body:not(.dark) .recovery-actions .send,
+body:not(.dark) .recovery-main,
+body:not(.dark) .control-action,
+body:not(.dark) .task-command,
+body:not(.dark) .finance-manager-note,
+body:not(.dark) .promo-manager-note,
+body:not(.dark) .unified-page .task-command,
+body:not(.dark) .sales-command,
+body:not(.dark) .finance-page .finance-health,
+body:not(.dark) .finance-manager-response,
+body:not(.dark) .promo-health,
+body:not(.dark) .unified-page .client-action,
+body:not(.dark) .unified-page .clients-empty{
+  background:linear-gradient(135deg,var(--light-sapphire-1) 0%,var(--light-sapphire-2) 52%,var(--light-sapphire-3) 100%) !important;
+  color:#fff !important;
+  border-color:rgba(93,112,166,.42) !important;
+}
+body:not(.dark) .sales-command-icon{
+  background:linear-gradient(145deg,#20345f,#465a91) !important;
+  color:#fff !important;
+  box-shadow:0 9px 22px rgba(30,48,91,.24) !important;
+}
+body:not(.dark) .sales-stat[data-tip]:hover:after{
+  background:linear-gradient(135deg,var(--light-sapphire-1),var(--light-sapphire-2)) !important;
+  color:#fff !important;
+}
+body:not(.dark) .build-action,
+body:not(.dark) .build-result{
+  background:linear-gradient(135deg,var(--light-sapphire-1),var(--light-sapphire-2),var(--light-sapphire-3)) !important;
+  color:#fff !important;
+}
+body:not(.dark) .future-state .state-copy:before{
+  background:linear-gradient(135deg,var(--light-sapphire-1),var(--light-sapphire-2)) !important;
+}
+/* Чёрный фирменный квадрат оставляем фирменным знаком; остальные смысловые блоки уже sapphire. */
+</style>
+
+
+<style id="light-sapphire-buttons-v2">
+/* Светлая тема — кнопки в том же глубоком сапфирово-индиго. */
+body:not(.dark) .send,
+body:not(.dark) .confirm-action,
+body:not(.dark) .finance-action,
+body:not(.dark) .promo-action,
+body:not(.dark) .future-primary,
+body:not(.dark) .future-button,
+body:not(.dark) .manager-primary,
+body:not(.dark) .report-main-action,
+body:not(.dark) .recovery-main,
+body:not(.dark) .recovery-actions .send,
+body:not(.dark) .sales-primary,
+body:not(.dark) .sales-wide-action,
+body:not(.dark) .control-action,
+body:not(.dark) .build-action{
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%) !important;
+  color:#fff !important;
+  border-color:rgba(93,112,166,.42) !important;
+  box-shadow:0 10px 28px rgba(30,48,91,.16) !important;
+}
+body:not(.dark) .sales-primary:hover,
+body:not(.dark) .sales-wide-action:hover,
+body:not(.dark) .send:hover,
+body:not(.dark) .confirm-action:hover,
+body:not(.dark) .finance-action:hover,
+body:not(.dark) .promo-action:hover,
+body:not(.dark) .future-primary:hover,
+body:not(.dark) .future-button:hover,
+body:not(.dark) .manager-primary:hover,
+body:not(.dark) .report-main-action:hover,
+body:not(.dark) .control-action:hover,
+body:not(.dark) .build-action:hover{
+  filter:brightness(1.06);
+}
+</style>
+
+
+<style id="home-preview-sapphire-v4">
+/* Светлая тема — кнопки новых компактных блоков Главной в едином сапфировом стиле. */
+body:not(.dark) .home-section-preview .preview-open{
+ background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%) !important;
+ color:#fff !important;
+ border:1px solid rgba(93,112,166,.42) !important;
+ box-shadow:0 8px 22px rgba(30,48,91,.16) !important;
+}
+body:not(.dark) .home-section-preview .preview-open span{color:#fff !important}
+</style>
+<style id="home-preview-dots-v5">
+/* Индикатор точками для добавленных через Настройки блоков Главной. */
+@media(max-width:700px){
+  #homeSectionPreviews{position:relative;display:flex!important;overflow-x:auto!important;overflow-y:visible!important;flex-wrap:nowrap!important;gap:10px!important;scroll-snap-type:x mandatory!important;scrollbar-width:none!important;padding:0 2px 4px!important;margin:0 0 4px!important;-webkit-overflow-scrolling:touch!important}
+  #homeSectionPreviews::-webkit-scrollbar{display:none!important}
+  #homeSectionPreviews .home-section-preview{flex:0 0 100%!important;width:100%!important;max-width:100%!important;scroll-snap-align:start!important;scroll-snap-stop:always!important;box-sizing:border-box!important;margin:0!important}
+  #homeSectionPreviewDots{display:flex;align-items:center;justify-content:center;gap:5px;height:14px;margin:0 auto 8px}
+  #homeSectionPreviewDots button{appearance:none;-webkit-appearance:none;width:5px;height:5px;min-height:5px;padding:0!important;border:0;border-radius:50%;background:rgba(23,24,27,.20);box-shadow:none;transition:transform .22s ease,opacity .22s ease,background .22s ease;cursor:pointer}
+  #homeSectionPreviewDots button.is-active{width:6px;height:6px;min-height:6px;background:#263968;opacity:1;transform:scale(1.12)}
+  body.dark #homeSectionPreviewDots button{background:rgba(255,255,255,.22)}
+  body.dark #homeSectionPreviewDots button.is-active{background:#fff}
+}
+@media(min-width:701px){#homeSectionPreviewDots{display:none!important}}
+</style>
+<style id="home-preview-copy-cards-v6">
+/* v6 — карточки подключаемых разделов повторяют язык реальных карточек Главной. */
+@media(max-width:700px){
+  #homeSectionPreviews{gap:10px!important;padding:0 0 3px!important;margin-bottom:3px!important}
+  #homeSectionPreviews .home-section-preview{
+    padding:25px 27px 24px!important;
+    border-radius:32px!important;
+    border:1px solid rgba(20,20,24,.08)!important;
+    background:rgba(255,255,255,.86)!important;
+    box-shadow:0 18px 48px rgba(24,28,38,.055), inset 0 1px 0 rgba(255,255,255,.92)!important;
+  }
+  body.dark #homeSectionPreviews .home-section-preview{
+    background:rgba(29,30,34,.78)!important;
+    border-color:rgba(255,255,255,.09)!important;
+    box-shadow:0 20px 55px rgba(0,0,0,.22)!important;
+  }
+  #homeSectionPreviews .preview-orb{
+    position:absolute;right:18px;top:18px;width:30px;height:30px;border-radius:50%;
+    background:rgba(232,76,86,.09);display:grid;place-items:center;
+  }
+  #homeSectionPreviews .preview-orb i{width:10px;height:10px;border-radius:50%;background:#e6535c;display:block;box-shadow:0 0 0 0 rgba(230,83,92,.18);animation:previewPulseRed 2.2s ease-in-out infinite}
+  #homeSectionPreviews .preview-orb.is-done{background:rgba(39,168,102,.09)}
+  #homeSectionPreviews .preview-orb.is-done i{background:#27a866;animation:previewPulseGreen 2.2s ease-in-out infinite}
+  #homeSectionPreviews .preview-kicker{font-size:10px!important;letter-spacing:.12em!important;font-weight:800!important;color:#a0a1a8!important;margin:0 0 17px!important}
+  #homeSectionPreviews .preview-title{margin:0!important;padding-right:32px!important;font-size:25px!important;line-height:1.08!important;letter-spacing:-.055em!important;font-weight:760!important;color:#17171a!important}
+  #homeSectionPreviews .preview-copy{margin:14px 0 0!important;font-size:14px!important;line-height:1.55!important;color:#777981!important;max-width:none!important}
+  #homeSectionPreviews .preview-divider{height:1px;background:rgba(20,20,24,.09);margin:21px 0 17px}
+  #homeSectionPreviews .preview-finding{border-left:3px solid #ed575d;padding:0 0 0 20px}
+  #homeSectionPreviews .preview-finding-label{font-size:10px;letter-spacing:.14em;font-weight:800;color:#a0a1a8;margin-bottom:13px}
+  #homeSectionPreviews .preview-finding strong{display:block;font-size:22px;line-height:1.15;letter-spacing:-.045em;color:#17171a}
+  #homeSectionPreviews .preview-finding small{display:block;margin-top:7px;font-size:12px;line-height:1.35;color:#85868d}
+  #homeSectionPreviews .preview-actions{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:10px!important;margin:0!important}
+  #homeSectionPreviews .preview-open,#homeSectionPreviews .preview-why{min-height:50px!important;padding:0 19px!important;border-radius:17px!important;font-size:13px!important;font-weight:760!important;white-space:nowrap!important}
+  #homeSectionPreviews .preview-open{background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;color:#fff!important;border:1px solid rgba(93,112,166,.42)!important;box-shadow:0 10px 24px rgba(30,48,91,.16)!important}
+  #homeSectionPreviews .preview-why{border:0!important;background:#ececef!important;color:#666871!important}
+  #homeSectionPreviews .preview-done-copy{margin:14px 0 0!important;font-size:14px!important;line-height:1.55!important;color:#777981!important}
+  #homeSectionPreviews .preview-metrics{display:grid!important;grid-template-columns:1fr 1fr!important;gap:0!important;margin:0!important;border-top:0!important}
+  #homeSectionPreviews .preview-metric{min-width:0!important;padding:0 16px 0 0!important;border:0!important;border-radius:0!important;background:transparent!important}
+  #homeSectionPreviews .preview-metric+ .preview-metric{padding-left:22px!important;border-left:1px solid rgba(20,20,24,.09)!important}
+  #homeSectionPreviews .preview-metric small{display:block;font-size:11px!important;color:#a0a1a8!important;margin:0 0 7px!important}
+  #homeSectionPreviews .preview-metric b{display:block;font-size:25px!important;line-height:1!important;letter-spacing:-.055em!important;color:#17171a!important}
+  #homeSectionPreviews .preview-status{display:flex;align-items:center;gap:10px;font-size:12px;color:#7d7e85}
+  #homeSectionPreviews .preview-status .check{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:rgba(39,168,102,.10);color:#27a866;font-size:14px;font-weight:800}
+  body.dark #homeSectionPreviews .preview-title,body.dark #homeSectionPreviews .preview-finding strong,body.dark #homeSectionPreviews .preview-metric b{color:#f4f4f5}
+  body.dark #homeSectionPreviews .preview-copy,body.dark #homeSectionPreviews .preview-finding small,body.dark #homeSectionPreviews .preview-done-copy,body.dark #homeSectionPreviews .preview-status{color:#a0a1a8}
+  body.dark #homeSectionPreviews .preview-divider,body.dark #homeSectionPreviews .preview-metric+ .preview-metric{border-color:rgba(255,255,255,.09)!important}
+  body.dark #homeSectionPreviews .preview-why{background:rgba(255,255,255,.08)!important;color:#d8d8dc!important}
+  #homeSectionPreviewDots{height:16px!important;gap:6px!important;margin:1px auto 9px!important}
+  #homeSectionPreviewDots button{width:6px!important;height:6px!important;min-height:6px!important;background:rgba(23,24,27,.18)!important}
+  #homeSectionPreviewDots button.is-active{width:7px!important;height:7px!important;background:#e6535c!important;transform:scale(1.05)!important;box-shadow:0 0 0 4px rgba(230,83,92,.08)!important}
+  body.dark #homeSectionPreviewDots button{background:rgba(255,255,255,.22)!important}
+  body.dark #homeSectionPreviewDots button.is-active{background:#fff!important;box-shadow:0 0 0 4px rgba(255,255,255,.08)!important}
+}
+@media(max-width:390px){
+  #homeSectionPreviews .home-section-preview{padding:22px 22px 21px!important;border-radius:29px!important}
+  #homeSectionPreviews .preview-title{font-size:23px!important}
+  #homeSectionPreviews .preview-copy,#homeSectionPreviews .preview-done-copy{font-size:13px!important}
+  #homeSectionPreviews .preview-finding strong{font-size:20px!important}
+  #homeSectionPreviews .preview-metric b{font-size:22px!important}
+}
+@keyframes previewPulseRed{0%,100%{box-shadow:0 0 0 0 rgba(230,83,92,.10);transform:scale(.94)}50%{box-shadow:0 0 0 7px rgba(230,83,92,0);transform:scale(1.04)}}
+@keyframes previewPulseGreen{0%,100%{box-shadow:0 0 0 0 rgba(39,168,102,.10);transform:scale(.94)}50%{box-shadow:0 0 0 7px rgba(39,168,102,0);transform:scale(1.04)}}
+</style>
+
+<style id="home-added-cards-native-v7">
+/* Добавленные через Настройки карточки используют ту же систему, что и родные карточки Главной. */
+.home-section-previews{
+  display:grid!important;
+  grid-template-columns:1.15fr .85fr!important;
+  gap:14px!important;
+  margin:0 0 14px!important;
+}
+.home-section-previews .home-added-card{
+  width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+.home-section-previews .home-added-card.attention{grid-row:span 2!important}
+.home-section-previews .home-added-card .signal{margin-top:4px!important}
+.home-section-previews .home-added-card h3{max-width:490px!important}
+.home-section-previews .home-added-card .future-link{margin-top:12px!important}
+body:not(.dark) .home-section-previews .home-added-card .future-btn.primary{
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
+  color:#fff!important;
+  border:1px solid rgba(93,112,166,.42)!important;
+  box-shadow:0 8px 22px rgba(30,48,91,.16)!important;
+}
+@media(max-width:700px){
+  .home-section-previews{grid-template-columns:1fr!important;gap:8px!important;margin-bottom:12px!important}
+  .home-section-previews .home-added-card.attention{grid-row:auto!important}
+  .home-section-previews .home-added-card{padding:14px!important;border-radius:18px!important}
+  .home-section-previews .home-added-card h3{font-size:16px!important}
+  .home-section-previews .home-added-card .future-desc{font-size:12.5px!important}
+}
+</style>
+<style id="home-only-cards-v8">
+/* На Главной подключённые разделы показываются только как карточки.
+   Полные страницы открываются исключительно после нажатия на карточку. */
+body[data-current-section="home"] #tasksPage,
+body[data-current-section="home"] #clientsPage,
+body[data-current-section="home"] #salesPage,
+body[data-current-section="home"] #financePage,
+body[data-current-section="home"] #promoPage,
+body[data-current-section="home"] .home-embedded-section{
+  display:none!important;
+}
+body[data-current-section="home"] #homeSectionPreviews{
+  display:grid!important;
+}
+</style>
+<script id="home-only-cards-v8-js">
+(function(){
+  const pageIds=['tasksPage','clientsPage','salesPage','financePage','promoPage'];
+  function hideFullPagesOnHome(){
+    if(document.body.dataset.currentSection!=='home') return;
+    pageIds.forEach(id=>{
+      const el=document.getElementById(id);
+      if(el){
+        el.classList.remove('show','home-embedded-section');
+        el.style.setProperty('display','none','important');
+      }
+    });
+  }
+  const oldShow=window.showSection;
+  if(typeof oldShow==='function'){
+    window.showSection=function(section){
+      oldShow.apply(this,arguments);
+      if(section==='home') setTimeout(hideFullPagesOnHome,0);
+    };
+  }
+  document.addEventListener('DOMContentLoaded',()=>{
+    hideFullPagesOnHome();
+    setTimeout(hideFullPagesOnHome,120);
+  });
+  window.__hideFullPagesOnHome=hideFullPagesOnHome;
+})();
+</script>
+
+<style id="dark-readability-final-v9">
+/* V9 — финальная проверка читаемости тёмной темы.
+   Не меняет геометрию и полностью исключает сферу/кнопку помощника. */
+body.dark .tasks-title,
+body.dark .clients-title,
+body.dark .finance-title,
+body.dark .promo-title,
+body.dark .sales-title,
+body.dark .tasks-page h1,
+body.dark .clients-page h1,
+body.dark .finance-page h1,
+body.dark .promo-page h1,
+body.dark .sales-page h1{
+  color:#f7f8fa!important;
+  -webkit-text-fill-color:#f7f8fa!important;
+}
+body.dark .tasks-sub,
+body.dark .clients-sub,
+body.dark .finance-sub,
+body.dark .promo-sub,
+body.dark .sales-sub{
+  color:rgba(235,238,245,.70)!important;
+}
+
+/* Основные действия страниц — в тёмной теме белые, как единый премиальный CTA. */
+body.dark .task-back,
+body.dark #tasksBack,
+body.dark #clientsBack,
+body.dark .sales-ask-btn,
+body.dark .sales-primary,
+body.dark .sales-wide-action,
+body.dark .sales-text-action,
+body.dark .finance-action,
+body.dark .promo-action,
+body.dark .future-btn.primary,
+body.dark .future-btn.ghost{
+  background:#f7f7f5!important;
+  color:#111217!important;
+  border-color:#f7f7f5!important;
+  -webkit-text-fill-color:#111217!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.18)!important;
+}
+body.dark .task-back:hover,
+body.dark #tasksBack:hover,
+body.dark #clientsBack:hover,
+body.dark .sales-ask-btn:hover,
+body.dark .sales-primary:hover,
+body.dark .sales-wide-action:hover,
+body.dark .sales-text-action:hover,
+body.dark .finance-action:hover,
+body.dark .promo-action:hover,
+body.dark .future-btn.primary:hover,
+body.dark .future-btn.ghost:hover{
+  background:#fff!important;
+  color:#0d0f14!important;
+}
+
+/* Вторичные кнопки и маленькие CTA: белые, но визуально спокойнее. */
+body.dark .mini-help{
+  background:#f7f7f5!important;
+  color:#111217!important;
+  border-color:#f7f7f5!important;
+}
+body.dark .mini-help *{color:#111217!important}
+
+/* В карточках действий оставляем сами карточки тёмными — белыми становятся только CTA,
+   чтобы не превратить строки данных в белые панели. */
+body.dark .sales-action-row button,
+body.dark .finance-row,
+body.dark .channel-row{
+  background:rgba(255,255,255,.045)!important;
+  color:#f8fbff!important;
+  border-color:rgba(127,181,255,.14)!important;
+  box-shadow:none!important;
+}
+
+/* Назад к Главной — компактная белая кнопка. Отдельный deepSectionBack сохраняет свою
+   плавающую навигацию и не конфликтует с CTA. */
+body.dark .task-back,
+body.dark #tasksBack,
+body.dark #clientsBack{
+  background:#f7f7f5!important;
+  color:#111217!important;
+}
+
+/* Не трогаем помощника: .mobile-manager, его оболочку, сферу, listening UI и composer
+   намеренно не переопределяем этим блоком. */
 </style>
 </head>
 <body>
@@ -7942,10 +8289,10 @@ body.dark .home-section-preview .preview-open{background:#f4f4f5;color:#17181b}
  function prefs(){try{const x=JSON.parse(localStorage.getItem(KEY)||'null');return {...defs,...(x&&typeof x==='object'?x:{})}}catch(e){return {...defs}}}
  function previewData(id){
    const data={
-    sales:{k:'ПРОДАЖИ',title:'Продажи под контролем.',text:'42 заявки, 11 продаж. Я уже вижу, где можно вернуть деньги сегодня.',metrics:[['Заявки','42'],['Продажи','11'],['Выручка','184 000 ₽']],note:'Есть клиенты, которые остановились после предложения.'},
-    finance:{k:'ДЕНЬГИ',title:'Деньги под контролем.',text:'Выручка, расходы и прибыль в одном месте. Я уже проверил, где сейчас утекают деньги.',metrics:[['Выручка','4,86 млн ₽'],['Расходы','3,59 млн ₽'],['Прибыль','1,27 млн ₽']],note:'Реклама пока окупается — бюджет резко не режем.'},
-    clients:{k:'КЛИЕНТЫ',title:'Клиенты.',text:'Я помню новые заявки, ожидания ответа и историю отношений с клиентами.',metrics:[['Новые заявки','14'],['Ждут ответа','3'],['Новых клиентов','8']],note:'Три клиента ждут следующего шага.'},
-    promo:{k:'ПРОДВИЖЕНИЕ',title:'Продвижение под контролем.',text:'Реклама и каналы в одном месте. Смотрю не только на клики, а на деньги.',metrics:[['Заявки','14'],['CPL','−12%'],['Каналы','4']],note:'Есть канал, который сейчас работает заметно лучше.'}
+    sales:{k:'ТРЕБУЕТ РЕШЕНИЯ',title:'Продажи стали приносить меньше заказов.',text:'Я сравнил заявки, продажи и изменения в воронке. Нашёл наиболее вероятную причину.',type:'decision',finding:'Часть клиентов останавливается после предложения.',findingSmall:'Я уже вижу, где можно вернуть деньги сегодня.'},
+    finance:{k:'Я УЖЕ СДЕЛАЛ',title:'Перераспределил рекламный бюджет.',text:'Остановил неэффективное направление и перенёс бюджет туда, где сегодня выше результат.',type:'done',metrics:[['− 3 400 ₽','лишних расходов'],['+ 18%','ожидаемая эффективность']]},
+    clients:{k:'ТРЕБУЕТ РЕШЕНИЯ',title:'Три клиента ждут следующего шага.',text:'Я проверил новые заявки и историю общения. Есть люди, которым сейчас важно не дать диалогу остановиться.',type:'decision',finding:'3 клиента ждут ответа.',findingSmall:'Следующий шаг уже понятен — осталось подтвердить его.'},
+    promo:{k:'Я УЖЕ СДЕЛАЛ',title:'Перенёс бюджет туда, где реклама работает лучше.',text:'Нашёл канал с более низкой стоимостью заявки и усилил его вместо неэффективного направления.',type:'done',metrics:[['− 12%','стоимость заявки'],['14','новых заявок']]}
    };return data[id];
  }
  function render(){
@@ -7953,9 +8300,44 @@ body.dark .home-section-preview .preview-open{background:#f4f4f5;color:#17181b}
    let wrap=document.getElementById('homeSectionPreviews');
    if(!wrap){wrap=document.createElement('div');wrap.id='homeSectionPreviews';wrap.className='home-section-previews';const state=shell.querySelector('[data-home-block="state"]');if(state)state.insertAdjacentElement('afterend',wrap);else shell.prepend(wrap);}
    const p=prefs();
-   wrap.innerHTML=['sales','finance','clients','promo'].filter(id=>p[id]).map(id=>{const d=previewData(id);return `<article class="home-section-preview" data-preview-section="${id}"><div class="preview-kicker">${d.k}</div><h3>${d.title}</h3><p>${d.text}</p><div class="preview-metrics">${d.metrics.map(m=>`<div class="preview-metric"><small>${m[0]}</small><b>${m[1]}</b></div>`).join('')}</div><div class="preview-actions"><span class="preview-note">${d.note}</span><button type="button" class="preview-open" onclick="showSection('${id}')">Открыть раздел <span>→</span></button></div></article>`}).join('');
+   wrap.innerHTML=['sales','finance','clients','promo'].filter(id=>p[id]).map(id=>{
+     const d=previewData(id);
+     if(d.type==='decision') return `<article class="future-card attention home-added-card" data-preview-section="${id}">
+       <div class="card-top">
+         <div>
+           <span class="future-label">${d.k}</span>
+           <h3>${d.title}</h3>
+         </div>
+         <span class="signal red"></span>
+       </div>
+       <p class="future-desc">${d.text}</p>
+       <div class="finding">
+         <div class="finding-line"></div>
+         <div><span>Я НАШЁЛ</span><strong>${d.finding}</strong><small>${d.findingSmall}</small></div>
+       </div>
+       <div class="action-row">
+         <button type="button" class="future-btn primary" onclick="showSection('${id}')">Исправить</button>
+         <button type="button" class="future-btn ghost" onclick="showSection('${id}')">Почему?</button>
+       </div>
+     </article>`;
+     return `<article class="future-card home-added-card" data-preview-section="${id}">
+       <div class="card-top">
+         <div>
+           <span class="future-label">${d.k}</span>
+           <h3>${d.title}</h3>
+         </div>
+         <span class="signal green"></span>
+       </div>
+       <p class="future-desc">${d.text}</p>
+       <div class="mini-result">
+         ${d.metrics.map(m=>`<div><b>${m[0]}</b><span>${m[1]}</span></div>`).join('')}
+       </div>
+       <div class="quiet-note"><span class="check">✓</span> Сделано автоматически по твоим правилам</div>
+       <div class="home-added-open"><button type="button" class="future-link" onclick="showSection('${id}')">Ознакомиться →</button></div>
+     </article>`;
+   }).join('');
    wrap.style.display=wrap.children.length?'grid':'none';
-   // Полные страницы не встраиваем на Главную. Они открываются только через кнопку.
+   const dots=document.getElementById('homeSectionPreviewDots'); if(dots)dots.remove();
    ['salesPage','financePage','clientsPage','promoPage'].forEach(pid=>{const el=document.getElementById(pid);if(el){el.classList.remove('home-embedded-section');if(document.body.dataset.currentSection==='home')el.style.display='none';}});
  }
  window.renderHomeSectionPreviews=render;
@@ -8028,6 +8410,210 @@ body.dark .home-section-preview .preview-open{background:#f4f4f5;color:#17181b}
   setTimeout(function(){syncBack(document.body.dataset.currentSection||'home')},100);
 })();
 </script>
+
+<style id="dark-buttons-material-v40">
+/* V40 — тёмная тема: кнопки остаются тёмными, подписи — светлыми.
+   Кнопку помощника и её внутренние элементы не меняем. */
+body.dark .sales-primary,
+body.dark .sales-wide-action,
+body.dark .sales-manager-card .sales-primary,
+body.dark .manager-primary,
+body.dark .report-main-action,
+body.dark .recovery-main,
+body.dark .recovery-actions .send,
+body.dark .future-evolution .evo-open,
+body.dark .home-section-preview .preview-open,
+body.dark .settings-autopilot-action,
+body.dark #controlContent .settings-autopilot-action,
+body.dark .home-organize-bar button,
+body.dark .home-order-actions button.primary,
+body.dark .future-btn.primary,
+body.dark .future-create-btn,
+body.dark .sales-primary,
+body.dark .sales-wide-action{
+  background:rgba(255,255,255,.055) !important;
+  color:#f8fbff !important;
+  border-color:rgba(127,181,255,.16) !important;
+  box-shadow:0 8px 24px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.035) !important;
+}
+body.dark .sales-primary:hover,
+body.dark .sales-wide-action:hover,
+body.dark .sales-manager-card .sales-primary:hover,
+body.dark .manager-primary:hover,
+body.dark .report-main-action:hover,
+body.dark .recovery-main:hover,
+body.dark .recovery-actions .send:hover,
+body.dark .future-evolution .evo-open:hover,
+body.dark .home-section-preview .preview-open:hover,
+body.dark .settings-autopilot-action:hover,
+body.dark #controlContent .settings-autopilot-action:hover,
+body.dark .home-organize-bar button:hover,
+body.dark .home-order-actions button.primary:hover,
+body.dark .future-btn.primary:hover,
+body.dark .future-create-btn:hover{
+  background:rgba(255,255,255,.085) !important;
+  color:#ffffff !important;
+  border-color:rgba(127,181,255,.24) !important;
+}
+
+/* В тёмной теме подписи основных действий всегда белые. */
+body.dark .sales-primary *,
+body.dark .sales-wide-action *,
+body.dark .sales-manager-card .sales-primary *,
+body.dark .manager-primary *,
+body.dark .report-main-action *,
+body.dark .recovery-main *,
+body.dark .recovery-actions .send *,
+body.dark .future-evolution .evo-open *,
+body.dark .home-section-preview .preview-open *,
+body.dark .settings-autopilot-action *,
+body.dark #controlContent .settings-autopilot-action *,
+body.dark .home-organize-bar button *,
+body.dark .home-order-actions button.primary *,
+body.dark .future-btn.primary *,
+body.dark .future-create-btn *{
+  color:#f8fbff !important;
+}
+
+/* Нейтральные кнопки интерфейса — тот же тёмный материал. */
+body.dark button:not(.mobile-manager):not(.settings-home-switch):not(.settings-rule-toggle):not(.theme-mode-btn):not(.dm-quick-item):not(.dm-quick-close):not(#dmWriteSend):not(.dm-learning-button):not(.dm-light-tutorial-next):not(.dm-ob-button){
+  color:#f8fbff;
+}
+
+/* Не даём старым правилам вернуть белый фон отдельным action-кнопкам. */
+body.dark .task-command,
+body.dark .control-action,
+body.dark .client-action,
+body.dark .sales-command,
+body.dark .finance-manager-note,
+body.dark .finance-manager-response,
+body.dark .promo-manager-note,
+body.dark .promo-health{
+  color:#f8fbff !important;
+}
+
+/* Вспомогательные кнопки управляющего и его панели — НЕ ТРОГАЕМ. */
+</style>
+
+<style id="dark-theme-final-material-v12">
+/* V12 — финальный проход тёмной темы.
+   Все обычные кнопки приложения — тёмный материал + светлая подпись.
+   Переключатели и помощник исключены намеренно. */
+body.dark button:not(.settings-home-switch):not(.settings-rule-toggle):not(.rule-toggle):not(.mobile-manager):not(.dm-ob-button):not(.dm-learning-button):not(.dm-light-tutorial-next):not(.dm-ob-button):not(.dm-quick-item):not(.dm-quick-close):not(#dmWriteSend):not(.dm-intelligence-button):not(.dm-signature-manager-button):not(.theme-mode-btn):not(.mobile-theme-toggle):not(.dm-quick-form button){
+  background:rgba(255,255,255,.055)!important;
+  color:#f7f9ff!important;
+  -webkit-text-fill-color:#f7f9ff!important;
+  border-color:rgba(255,255,255,.12)!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.035)!important;
+}
+body.dark button:not(.settings-home-switch):not(.settings-rule-toggle):not(.rule-toggle):not(.mobile-manager):not(.dm-ob-button):not(.dm-learning-button):not(.dm-light-tutorial-next):not(.dm-quick-item):not(.dm-quick-close):not(#dmWriteSend):not(.dm-intelligence-button):not(.dm-signature-manager-button):not(.theme-mode-btn):not(.mobile-theme-toggle):not(.dm-quick-form button):hover{
+  background:rgba(255,255,255,.085)!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  border-color:rgba(255,255,255,.18)!important;
+}
+/* Часто используемые текстовые элементы внутри кнопок */
+body.dark button:not(.settings-home-switch):not(.settings-rule-toggle):not(.rule-toggle):not(.mobile-manager):not(.dm-ob-button):not(.dm-learning-button):not(.dm-light-tutorial-next):not(.dm-quick-item):not(.dm-quick-close):not(#dmWriteSend):not(.dm-intelligence-button):not(.dm-signature-manager-button):not(.theme-mode-btn):not(.mobile-theme-toggle):not(.dm-quick-form button) *{
+  color:#f7f9ff!important;
+  -webkit-text-fill-color:#f7f9ff!important;
+}
+/* Явно убираем старые белые/синие версии основных действий. */
+body.dark .sales-primary,
+body.dark .sales-wide-action,
+body.dark .sales-manager-card .sales-primary,
+body.dark .manager-primary,
+body.dark .report-main-action,
+body.dark .recovery-main,
+body.dark .recovery-actions .send,
+body.dark .future-evolution .evo-open,
+body.dark .home-section-preview .preview-open,
+body.dark .settings-autopilot-action,
+body.dark #controlContent .settings-autopilot-action,
+body.dark .home-organize-bar button,
+body.dark .home-order-actions button,
+body.dark .home-block-row button,
+body.dark .future-btn.primary,
+body.dark .future-btn.ghost,
+body.dark .future-create-btn,
+body.dark .round,
+body.dark .task-back,
+body.dark #tasksBack,
+body.dark #clientsBack,
+body.dark .sales-ask-btn,
+body.dark .sales-text-action,
+body.dark .finance-action,
+body.dark .promo-action,
+body.dark .control-action{
+  background:rgba(255,255,255,.055)!important;
+  color:#f7f9ff!important;
+  -webkit-text-fill-color:#f7f9ff!important;
+  border-color:rgba(255,255,255,.12)!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.035)!important;
+}
+body.dark .sales-primary:hover,
+body.dark .sales-wide-action:hover,
+body.dark .manager-primary:hover,
+body.dark .report-main-action:hover,
+body.dark .recovery-main:hover,
+body.dark .recovery-actions .send:hover,
+body.dark .settings-autopilot-action:hover,
+body.dark #controlContent .settings-autopilot-action:hover,
+body.dark .future-btn.primary:hover,
+body.dark .future-btn.ghost:hover,
+body.dark .future-create-btn:hover,
+body.dark .control-action:hover{
+  background:rgba(255,255,255,.085)!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+}
+/* Автопилот — отдельно, чтобы ни одно старое правило не вернуло синий градиент. */
+body.dark .settings-autopilot-action,
+body.dark #controlContent .settings-autopilot-action{
+  background:rgba(255,255,255,.055)!important;
+  color:#f7f9ff!important;
+  -webkit-text-fill-color:#f7f9ff!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.035)!important;
+}
+body.dark .settings-autopilot-action * ,
+body.dark #controlContent .settings-autopilot-action *{
+  color:#f7f9ff!important;
+  -webkit-text-fill-color:#f7f9ff!important;
+}
+/* Переключатели остаются отдельными системными элементами — их белый бегунок не меняем. */
+</style>
+
+<style id="dark-sales-explain-v14">
+/* V14 — блок «Самое слабое место»: в тёмной теме не засвечиваем текст белым фоном. */
+body.dark .sales-explain{
+  background:rgba(255,149,0,.075) !important;
+  border:1px solid rgba(255,149,0,.12) !important;
+  color:#f4f6fb !important;
+}
+body.dark .sales-explain>span{
+  color:#ffb340 !important;
+}
+body.dark .sales-explain b{
+  color:#ffffff !important;
+}
+body.dark .sales-explain p{
+  color:rgba(244,246,251,.72) !important;
+}
+</style>
+
+<style id="dark-sales-explain-v15">
+/* V15 — пояснение «Самое слабое место» в тёмной теме */
+body.dark .sales-explain{
+  background:rgba(255,149,0,.075)!important;
+  border:1px solid rgba(255,149,0,.12)!important;
+  color:#f7f9ff!important;
+  box-shadow:none!important;
+}
+body.dark .sales-explain>div{color:#f7f9ff!important;}
+body.dark .sales-explain>span{color:#ffb340!important;-webkit-text-fill-color:#ffb340!important;}
+body.dark .sales-explain b{color:#fff!important;-webkit-text-fill-color:#fff!important;}
+body.dark .sales-explain p{color:rgba(247,249,255,.82)!important;-webkit-text-fill-color:rgba(247,249,255,.82)!important;}
+</style>
 </html>
 <style id="final-mobile-readable-fix-v30">
 /* Финальная точечная правка: верхний баннер, логотип, радары и читаемость. */
@@ -9830,3 +10416,119 @@ body.dark .settings-create-card{background:rgba(255,255,255,.035)}
   setTimeout(function(){mo.disconnect()},12000);
 })();
 </script>
+
+
+<style id="dark-buttons-final-v41">
+/* V41 — финальный материал тёмной темы.
+   Все ОСНОВНЫЕ кнопки приложения — тёмные, подписи светлые.
+   Переключатели и плавающий помощник намеренно не трогаем. */
+body.dark .sales-primary,
+body.dark .sales-wide-action,
+body.dark .sales-manager-card .sales-primary,
+body.dark .manager-primary,
+body.dark .report-main-action,
+body.dark .recovery-main,
+body.dark .recovery-actions .send,
+body.dark .future-evolution .evo-open,
+body.dark .home-section-preview .preview-open,
+body.dark .settings-autopilot-action,
+body.dark #controlContent .settings-autopilot-action,
+body.dark .home-organize-bar button,
+body.dark .home-order-actions button.primary,
+body.dark .future-btn.primary,
+body.dark .future-create-btn,
+body.dark .round,
+body.dark .task-back,
+body.dark .sales-ask-btn{
+  background:rgba(255,255,255,.055)!important;
+  color:#f7f9ff!important;
+  -webkit-text-fill-color:#f7f9ff!important;
+  border-color:rgba(255,255,255,.12)!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.035)!important;
+}
+body.dark .sales-primary:hover,
+body.dark .sales-wide-action:hover,
+body.dark .sales-manager-card .sales-primary:hover,
+body.dark .manager-primary:hover,
+body.dark .report-main-action:hover,
+body.dark .recovery-main:hover,
+body.dark .recovery-actions .send:hover,
+body.dark .future-evolution .evo-open:hover,
+body.dark .home-section-preview .preview-open:hover,
+body.dark .settings-autopilot-action:hover,
+body.dark #controlContent .settings-autopilot-action:hover,
+body.dark .home-organize-bar button:hover,
+body.dark .home-order-actions button.primary:hover,
+body.dark .future-btn.primary:hover,
+body.dark .future-create-btn:hover,
+body.dark .round:hover,
+body.dark .task-back:hover,
+body.dark .sales-ask-btn:hover{
+  background:rgba(255,255,255,.085)!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  border-color:rgba(255,255,255,.18)!important;
+}
+/* Автопилот: никаких синих градиентов в тёмной теме. */
+body.dark .settings-autopilot-action,
+body.dark #controlContent .settings-autopilot-action{
+  background:rgba(255,255,255,.055)!important;
+  color:#f7f9ff!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.035)!important;
+}
+body.dark .settings-autopilot-action * ,
+body.dark #controlContent .settings-autopilot-action * ,
+body.dark .sales-primary *,
+body.dark .sales-wide-action *,
+body.dark .sales-manager-card .sales-primary *,
+body.dark .manager-primary *,
+body.dark .report-main-action *,
+body.dark .recovery-main *,
+body.dark .recovery-actions .send *,
+body.dark .future-evolution .evo-open *,
+body.dark .home-section-preview .preview-open *,
+body.dark .home-organize-bar button *,
+body.dark .home-order-actions button.primary *,
+body.dark .future-btn.primary *,
+body.dark .future-create-btn *,
+body.dark .round *,
+body.dark .task-back *,
+body.dark .sales-ask-btn *{
+  color:#f7f9ff!important;
+  -webkit-text-fill-color:#f7f9ff!important;
+}
+/* Кнопки редактора Главной внутри тёмной панели. */
+body.dark .home-order-actions button,
+body.dark .home-block-row button{
+  background:#202126!important;
+  color:#f5f6f7!important;
+  border-color:rgba(255,255,255,.10)!important;
+}
+body.dark .home-order-actions button.primary{
+  background:rgba(255,255,255,.055)!important;
+  color:#fff!important;
+}
+</style>
+
+<style id="dark-check-visibility-v13">
+/* V13 — галочка в «Сделано автоматически» должна быть видна в тёмной теме так же, как в светлой. */
+body.dark .quiet-note .check,
+body.dark #homeSectionPreviews .preview-status .check{
+  width:18px!important;
+  height:18px!important;
+  min-width:18px!important;
+  min-height:18px!important;
+  border-radius:50%!important;
+  display:grid!important;
+  place-items:center!important;
+  background:#e9f7ef!important;
+  color:#27a866!important;
+  -webkit-text-fill-color:#27a866!important;
+  font-size:12px!important;
+  line-height:1!important;
+  font-weight:800!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+</style>
