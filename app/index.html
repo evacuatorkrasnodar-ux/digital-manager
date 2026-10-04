@@ -4545,7 +4545,286 @@ body.dark .future-evolution .evo-next button{
     transform:none !important;
   }
 }
-</style></head>
+</style>
+<style id="watch-greeting-v8-wow">
+/* V8 — cinematic greeting hero: readable date + large breathing signature. */
+.premium-home .future-state{
+  position:relative!important;
+  min-height:0!important;
+  overflow:hidden!important;
+  padding:24px 26px 22px!important;
+  border-radius:30px!important;
+  background:
+    radial-gradient(420px 210px at 88% 12%,rgba(112,126,255,.20),transparent 68%),
+    radial-gradient(340px 220px at 12% 100%,rgba(64,219,181,.09),transparent 70%),
+    linear-gradient(145deg,#0d0e11 0%,#141821 54%,#1c2741 100%)!important;
+  box-shadow:0 24px 85px rgba(11,14,22,.18),inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+.premium-home .future-state::before{
+  content:"";
+  position:absolute;
+  width:240px;height:240px;
+  right:70px;top:-92px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.05);
+  box-shadow:0 0 0 22px rgba(110,126,255,.025),0 0 0 44px rgba(110,126,255,.018);
+  animation:greetingHalo 7s ease-in-out infinite;
+  pointer-events:none;
+}
+.premium-home .future-state::after{
+  content:"";
+  position:absolute;
+  left:-80px;bottom:-100px;
+  width:300px;height:190px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(72,228,183,.12),transparent 70%);
+  filter:blur(8px);
+  animation:greetingGlow 6s ease-in-out infinite;
+  pointer-events:none;
+}
+.premium-home .future-state .state-greeting{
+  position:relative;z-index:3;
+}
+.premium-home .future-state .state-greeting .future-kicker{
+  margin-bottom:10px!important;
+  font-size:8.5px!important;
+  letter-spacing:.18em!important;
+  color:rgba(255,255,255,.52)!important;
+}
+.premium-home .future-state .state-greeting h1{
+  font-size:clamp(34px,4.2vw,48px)!important;
+  line-height:.95!important;
+  letter-spacing:-.07em!important;
+  max-width:620px;
+  text-shadow:0 1px 22px rgba(255,255,255,.06);
+}
+.premium-home .future-state .state-greeting p{
+  font-size:12.5px!important;
+  line-height:1.45!important;
+  max-width:520px!important;
+  margin-top:9px!important;
+  color:rgba(255,255,255,.58)!important;
+}
+.premium-home .watch-greeting-meta{
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+  margin-top:14px!important;
+  color:#fff!important;
+  text-align:left!important;
+}
+.premium-home .watch-clock{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  min-width:70px;
+  min-height:64px;
+  padding:9px 10px;
+  border-radius:16px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.085);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 14px 34px rgba(0,0,0,.12);
+}
+.premium-home .watch-clock span{
+  display:block!important;
+  margin:0!important;
+  color:rgba(255,255,255,.40)!important;
+  font-size:8px!important;
+  font-weight:800!important;
+  letter-spacing:.15em!important;
+}
+.premium-home .watch-clock strong{
+  display:block!important;
+  margin-top:4px!important;
+  color:#fff!important;
+  font-size:23px!important;
+  font-weight:760!important;
+  letter-spacing:-.055em!important;
+  line-height:1!important;
+}
+.premium-home .greeting-calendar{
+  position:relative!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  min-width:182px!important;
+  min-height:64px!important;
+  margin:0!important;
+  padding:9px 13px 9px 15px!important;
+  border:1px solid rgba(255,255,255,.11)!important;
+  border-radius:17px!important;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.095),rgba(255,255,255,.035))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 16px 40px rgba(0,0,0,.14)!important;
+  overflow:hidden!important;
+  flex:none!important;
+}
+.premium-home .greeting-calendar::before{
+  content:""!important;
+  position:absolute!important;
+  left:0!important;right:0!important;top:0!important;
+  height:3px!important;
+  background:linear-gradient(90deg,#ff4f73 0%,#ffca57 34%,#67d9ff 67%,#8b79ff 100%)!important;
+  opacity:1!important;
+}
+.premium-home .greeting-calendar::after{
+  content:""!important;
+  position:absolute!important;
+  right:-25px!important;bottom:-32px!important;
+  width:92px!important;height:92px!important;border-radius:50%!important;
+  border:1px solid rgba(123,145,255,.15)!important;
+  box-shadow:0 0 0 14px rgba(123,145,255,.025),0 0 0 28px rgba(123,145,255,.015)!important;
+}
+.premium-home .greeting-calendar-week{
+  display:block!important;
+  font-size:9px!important;
+  line-height:1!important;
+  letter-spacing:.15em!important;
+  color:rgba(255,255,255,.55)!important;
+  font-weight:800!important;
+  margin:0 0 7px!important;
+}
+.premium-home .greeting-calendar-row{
+  display:flex!important;
+  align-items:baseline!important;
+  gap:9px!important;
+}
+.premium-home .greeting-calendar-row>b{
+  display:block!important;
+  font-size:31px!important;
+  line-height:.9!important;
+  letter-spacing:-.065em!important;
+  color:#fff!important;
+  font-weight:790!important;
+}
+.premium-home .greeting-calendar-side{
+  display:flex!important;
+  align-items:baseline!important;
+  gap:6px!important;
+}
+.premium-home .greeting-calendar-side strong{
+  color:#fff!important;
+  font-size:15px!important;
+  line-height:1!important;
+  font-weight:760!important;
+  letter-spacing:-.025em!important;
+}
+.premium-home .greeting-calendar-side span{
+  color:rgba(255,255,255,.42)!important;
+  font-size:10px!important;
+  font-weight:700!important;
+  letter-spacing:.06em!important;
+}
+.premium-home .future-state .state-orbit{
+  position:relative!important;
+  z-index:3!important;
+  width:164px!important;height:164px!important;
+  align-self:center!important;
+  justify-self:end!important;
+  margin:0!important;
+  opacity:1!important;
+  filter:drop-shadow(0 18px 36px rgba(0,0,0,.25))!important;
+}
+.premium-home .future-state .state-orbit::before,
+.premium-home .future-state .state-orbit::after{
+  content:"";
+  position:absolute;
+  inset:4px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.08);
+  pointer-events:none;
+  animation:greetingOrbitPulse 4.6s ease-in-out infinite;
+}
+.premium-home .future-state .state-orbit::after{
+  inset:17px;
+  border-color:rgba(110,140,255,.14);
+  animation-delay:-2.3s;
+}
+.premium-home .future-state .assistant-orbit-ring{transform:none!important}
+.premium-home .future-state .assistant-ring-a{width:126px!important;height:126px!important;border-color:rgba(255,255,255,.13)!important;animation:heroRingSpin 14s linear infinite!important}
+.premium-home .future-state .assistant-ring-b{width:102px!important;height:102px!important;border-color:rgba(105,137,255,.16)!important;animation:heroRingSpin 10s linear infinite reverse!important}
+.premium-home .future-state .assistant-core{
+  width:110px!important;height:110px!important;border-radius:50%!important;
+  background:radial-gradient(circle at 38% 34%,rgba(255,255,255,.12),rgba(255,255,255,.035) 52%,transparent 72%)!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  box-shadow:0 0 45px rgba(111,132,255,.12),inset 0 1px 0 rgba(255,255,255,.07)!important;
+  backdrop-filter:blur(18px)!important;
+}
+.premium-home .future-state .assistant-core::after{
+  content:"";
+  position:absolute;
+  width:12px;height:12px;border-radius:50%;
+  background:#d9fff2;
+  box-shadow:0 0 24px rgba(83,255,191,.85),0 0 60px rgba(83,255,191,.28);
+  animation:heroCorePulse 2.8s ease-in-out infinite;
+}
+.premium-home .future-state .assistant-core .dm-signature-logo{
+  width:118px!important;height:118px!important;
+  color:#fff!important;
+  filter:drop-shadow(0 0 18px rgba(120,143,255,.20))!important;
+  animation:heroSignatureBreath 3.8s ease-in-out infinite!important;
+}
+.premium-home .future-state .assistant-core .dm-signature-logo .sig-orbit{stroke-width:1.15!important;opacity:.70!important}
+.premium-home .future-state .assistant-core .dm-signature-logo .sig-diamond{fill:rgba(255,255,255,.035)!important;stroke:#fff!important;stroke-width:1.35!important}
+.premium-home .future-state .assistant-core .dm-signature-logo .sig-core{fill:#fff!important}
+.premium-home .future-state .state-copy{display:none!important}
+
+@media(max-width:700px){
+  .premium-home .future-state{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) 112px!important;
+    grid-template-areas:"greeting orbit" "meta meta"!important;
+    column-gap:10px!important;
+    row-gap:11px!important;
+    padding:18px!important;
+    border-radius:24px!important;
+  }
+  .premium-home .future-state .state-greeting{grid-area:greeting!important}
+  .premium-home .future-state .state-greeting .future-kicker{font-size:8px!important;margin-bottom:8px!important}
+  .premium-home .future-state .state-greeting h1{font-size:31px!important;max-width:245px!important;line-height:.93!important}
+  .premium-home .future-state .state-greeting p{font-size:11px!important;max-width:245px!important;line-height:1.4!important;margin-top:8px!important}
+  .premium-home .future-state .state-time{grid-area:meta!important;display:flex!important;align-items:center!important;gap:9px!important;margin:0!important;text-align:left!important}
+  .premium-home .watch-clock{min-width:70px;min-height:58px;padding:8px 9px;border-radius:15px}
+  .premium-home .watch-clock span{font-size:7px!important}
+  .premium-home .watch-clock strong{font-size:21px!important}
+  .premium-home .greeting-calendar{min-width:0!important;flex:1!important;min-height:58px!important;padding:8px 11px 8px 13px!important;border-radius:15px!important}
+  .premium-home .greeting-calendar-week{font-size:9px!important;margin-bottom:6px!important}
+  .premium-home .greeting-calendar-row>b{font-size:28px!important}
+  .premium-home .greeting-calendar-side strong{font-size:14px!important}
+  .premium-home .greeting-calendar-side span{font-size:9px!important}
+  .premium-home .future-state .state-orbit{grid-area:orbit!important;width:112px!important;height:112px!important;position:relative!important;right:auto!important;top:auto!important;justify-self:end!important;opacity:1!important}
+  .premium-home .future-state .assistant-core{width:76px!important;height:76px!important}
+  .premium-home .future-state .assistant-core .dm-signature-logo{width:88px!important;height:88px!important}
+  .premium-home .future-state .assistant-ring-a{width:96px!important;height:96px!important}
+  .premium-home .future-state .assistant-ring-b{width:77px!important;height:77px!important}
+}
+@media(max-width:390px){
+  .premium-home .future-state{grid-template-columns:minmax(0,1fr) 96px!important;padding:16px!important}
+  .premium-home .future-state .state-greeting h1{font-size:28px!important}
+  .premium-home .future-state .state-greeting p{font-size:10.5px!important}
+  .premium-home .future-state .state-orbit{width:96px!important;height:96px!important}
+  .premium-home .future-state .assistant-core{width:67px!important;height:67px!important}
+  .premium-home .future-state .assistant-core .dm-signature-logo{width:78px!important;height:78px!important}
+  .premium-home .future-state .assistant-ring-a{width:84px!important;height:84px!important}
+  .premium-home .future-state .assistant-ring-b{width:67px!important;height:67px!important}
+  .premium-home .watch-greeting-meta{gap:7px!important}
+  .premium-home .watch-clock{min-width:65px!important}
+  .premium-home .greeting-calendar-week{font-size:8px!important}
+  .premium-home .greeting-calendar-row>b{font-size:26px!important}
+  .premium-home .greeting-calendar-side strong{font-size:13px!important}
+}
+@keyframes heroRingSpin{to{transform:rotate(360deg)}}
+@keyframes heroSignatureBreath{0%,100%{transform:scale(.96);opacity:.90}50%{transform:scale(1.04);opacity:1}}
+@keyframes heroCorePulse{0%,100%{transform:scale(.78);opacity:.72}50%{transform:scale(1.16);opacity:1}}
+@keyframes greetingHalo{0%,100%{transform:scale(.96);opacity:.34}50%{transform:scale(1.04);opacity:.70}}
+@keyframes greetingGlow{0%,100%{transform:translate3d(0,4px,0) scale(.94);opacity:.45}50%{transform:translate3d(0,-6px,0) scale(1.05);opacity:.90}}
+@keyframes greetingOrbitPulse{0%,100%{transform:scale(.96);opacity:.34}50%{transform:scale(1.04);opacity:.70}}
+@media(prefers-reduced-motion:reduce){
+  .premium-home .future-state::before,.premium-home .future-state::after,.premium-home .future-state .state-orbit::before,.premium-home .future-state .state-orbit::after,
+  .premium-home .future-state .assistant-ring-a,.premium-home .future-state .assistant-ring-b,.premium-home .future-state .assistant-core::after,.premium-home .future-state .assistant-core .dm-signature-logo{animation:none!important}
+}
+</style>
+</head>
 <body>
 <div class="app">
 <aside class="sidebar"><button aria-label="О компании Цифровой бизнес" class="brand brand-button" onclick="openCompanySheet()" type="button"><span aria-hidden="true" class="mark dm-company-mark">ЦБ</span><div class="brand-copy"><div class="brand-title">Цифровой бизнес</div><div class="brand-sub">IT · AI · AUTOMATION</div></div></button><nav class="nav">
@@ -4581,11 +4860,18 @@ body.dark .future-evolution .evo-next button{
 <div class="premium-home">
 <div class="future-shell">
 <section class="future-state home-block" data-home-block="state" data-home-title="Состояние бизнеса">
+<button class="home-os-settings" type="button" aria-label="Настройки" onclick="homeOSOpenSettings()"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19 12a7 7 0 0 0-.12-1.28l1.62-1.27-1.6-2.78-1.92.73a7.06 7.06 0 0 0-2.22-1.28L14.5 4h-3.2l-.26 2.12a7.06 7.06 0 0 0-2.22 1.28L6.9 6.67 5.3 9.45l1.62 1.27A7 7 0 0 0 6.8 12c0 .44.04.87.12 1.28L5.3 14.55l1.6 2.78 1.92-.73a7.06 7.06 0 0 0 2.22 1.28L11.3 20h3.2l.26-2.12a7.06 7.06 0 0 0 2.22-1.28l1.92.73 1.6-2.78-1.62-1.27c.08-.41.12-.84.12-1.28Z"></path></svg></button>
 <div class="state-greeting">
 <div class="future-kicker"><span class="pulse"></span> ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</div>
 <h1 id="managerGreeting">Доброе утро, Юлия.</h1>
 <p id="managerGreetingSub">Прекрасно выглядишь. Бизнес тоже старается не отставать.</p>
-<div class="state-time"><strong>09:41</strong><span>понедельник · 5 октября</span></div>
+<div class="state-time watch-greeting-meta" aria-label="Понедельник, 5 октября 2026 года">
+  <div class="watch-clock"><span>СЕЙЧАС</span><strong>09:41</strong></div>
+  <div class="greeting-calendar">
+    <div class="greeting-calendar-week">ПОНЕДЕЛЬНИК</div>
+    <div class="greeting-calendar-row"><b>5</b><div class="greeting-calendar-side"><strong>ОКТЯБРЯ</strong><span>2026</span></div></div>
+  </div>
+</div>
 </div>
 <div aria-label="Цифровой управляющий" class="state-orbit assistant-orbit" title="Цифровой управляющий">
 <div class="assistant-orbit-ring assistant-ring-a"></div>
@@ -4602,6 +4888,26 @@ body.dark .future-evolution .evo-next button{
 <span>0 критических проблем</span>
 </div>
 </div>
+</section>
+<section class="home-os-launchers" aria-label="Основные показатели бизнеса">
+  <button class="home-os-tile home-os-sales" type="button" data-home-route="sales">
+    <span class="home-os-tile-accent" aria-hidden="true"></span><span class="home-os-tile-kicker">ПРОДАЖИ</span><strong>184 000 ₽</strong><span class="home-os-tile-meta">+12% сегодня</span><span class="home-os-tile-ring" aria-hidden="true"><i></i></span>
+  </button>
+  <button class="home-os-tile home-os-finance" type="button" data-home-route="finance">
+    <span class="home-os-tile-accent" aria-hidden="true"></span><span class="home-os-tile-kicker">ДЕНЬГИ</span><strong>1,24 млн ₽</strong><span class="home-os-tile-meta">оборот · месяц</span><span class="home-os-tile-ring" aria-hidden="true"><i></i></span>
+  </button>
+  <button class="home-os-tile home-os-clients" type="button" data-home-route="clients">
+    <span class="home-os-tile-accent" aria-hidden="true"></span><span class="home-os-tile-kicker">КЛИЕНТЫ</span><strong>1 284</strong><span class="home-os-tile-meta">+12% база</span><span class="home-os-tile-ring" aria-hidden="true"><i></i></span>
+  </button>
+  <button class="home-os-tile home-os-tasks" type="button" data-home-route="tasks">
+    <span class="home-os-tile-accent" aria-hidden="true"></span><span class="home-os-tile-kicker">ДЕЙСТВИЯ</span><strong>7</strong><span class="home-os-tile-meta">2 требуют решения</span><span class="home-os-tile-ring" aria-hidden="true"><i></i></span>
+  </button>
+  <button class="home-os-tile home-os-promo" type="button" data-home-route="promo">
+    <span class="home-os-tile-accent" aria-hidden="true"></span><span class="home-os-tile-kicker">ПРОДВИЖЕНИЕ</span><strong>14 заявок</strong><span class="home-os-tile-meta">стоимость −12%</span><span class="home-os-tile-ring" aria-hidden="true"><i></i></span>
+  </button>
+  <button class="home-os-tile home-os-reports" type="button" data-home-route="report">
+    <span class="home-os-tile-accent" aria-hidden="true"></span><span class="home-os-tile-kicker">РАЗБОР</span><strong>+18%</strong><span class="home-os-tile-meta">изменения системы</span><span class="home-os-tile-ring" aria-hidden="true"><i></i></span>
+  </button>
 </section><section class="future-evolution home-block" data-home-block="evolution" data-home-title="Эволюция бизнеса">
 <div class="evo-head">
 <div>
@@ -7042,4 +7348,887 @@ body.dark .home-drag-placeholder{background:linear-gradient(135deg,rgba(130,145,
 body.dark .home-block.is-dragging{box-shadow:0 30px 80px rgba(0,0,0,.42)!important}
 @media(prefers-reduced-motion:reduce){.home-block,#homeEditBar{transition:none!important}.home-edit-live i{animation:none!important}}
 </style>
+
+<style id="watch-home-v3">
+/* HOME V3 — compact business complications, inspired by glanceable watch interfaces. */
+.premium-home .future-shell{
+  display:grid;
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  gap:12px;
+  max-width:1160px;
+}
+.premium-home .future-shell > .home-block{margin:0!important;min-width:0;}
+.premium-home .future-grid{display:contents!important;}
+.premium-home .future-state{grid-column:1/-1;min-height:0;height:auto;padding:22px 26px;border-radius:28px;grid-template-columns:1fr auto;gap:24px;align-items:center;background:linear-gradient(135deg,#101012 0%,#171b28 58%,#1f2947 100%);box-shadow:0 18px 50px rgba(15,18,25,.13);cursor:default;}
+.premium-home .future-state .state-greeting{display:grid;grid-template-columns:1fr auto;column-gap:18px;align-items:end;}
+.premium-home .future-state .state-greeting .future-kicker{grid-column:1/-1;margin:0 0 8px;font-size:8px;color:rgba(255,255,255,.46)}
+.premium-home .future-state .state-greeting h1{font-size:30px;line-height:1;letter-spacing:-.06em;margin:0;color:#fff}
+.premium-home .future-state .state-greeting p{font-size:10px;color:rgba(255,255,255,.45);margin:7px 0 0;max-width:430px;line-height:1.45}
+.premium-home .future-state .state-time{grid-column:2;grid-row:2/4;text-align:right;margin:0;color:rgba(255,255,255,.45);align-self:end;}
+.premium-home .future-state .state-time strong{font-size:22px;color:#fff;letter-spacing:-.04em}
+.premium-home .future-state .state-time span{font-size:8px;margin-top:5px;white-space:nowrap}
+.premium-home .future-state .state-orbit{width:112px;height:112px;transform:none;margin:0;order:0;}
+.premium-home .future-state .assistant-orbit-ring{transform:scale(.72)!important}
+.premium-home .future-state .assistant-core{width:76px!important;height:76px!important}
+.premium-home .future-state .assistant-core .dm-signature-logo{width:76px!important;height:76px!important}
+.premium-home .future-state .state-copy{display:none}
+
+.premium-home .watch-complication-block,
+.premium-home .future-grid .future-card{
+  position:relative;overflow:hidden;min-height:132px;padding:16px 17px!important;border:1px solid rgba(20,20,28,.075);border-radius:22px;background:rgba(255,255,255,.78);box-shadow:0 12px 34px rgba(20,25,35,.045);backdrop-filter:blur(18px);cursor:pointer;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+}
+.premium-home .watch-complication-block:hover,
+.premium-home .future-grid .future-card:hover{transform:translateY(-2px)!important;box-shadow:0 18px 42px rgba(20,25,35,.07)}
+.premium-home .future-evolution{grid-column:1/8;background:linear-gradient(135deg,#111216,#1a1f2d 65%,#2a3150);color:#fff;border-color:rgba(255,255,255,.08);}
+.premium-home .future-command{grid-column:8/-1;background:linear-gradient(135deg,#1b2340,#2c3763 70%,#3d4c7e);color:#fff;}
+.premium-home .future-intent{grid-column:1/7;background:linear-gradient(145deg,#1a2444,#263a70);color:#fff;}
+.premium-home .future-twin{grid-column:7/-1;background:linear-gradient(145deg,#f7f8fb,#edf0f6);}
+.premium-home .future-simulator{grid-column:1/5;background:linear-gradient(145deg,#fff,#eef3ff);}
+.premium-home .future-memory{grid-column:5/9;background:linear-gradient(145deg,#fff,#f1f1f4);}
+.premium-home .future-contract{grid-column:9/-1;background:linear-gradient(145deg,#15171d,#262b37);}
+.premium-home .future-blindspot{grid-column:1/7;background:linear-gradient(145deg,#f7f8fa,#eceef3);}
+.premium-home .future-create{grid-column:7/-1;background:linear-gradient(145deg,#fff,#eceef3);}
+
+/* Default compact surface: summary is visible, original long content stays available to the detail panel. */
+.premium-home .watch-complication-block > :not(.watch-summary),
+.premium-home .future-grid .future-card > :not(.watch-summary){display:none!important}
+.watch-summary{position:relative;z-index:2;min-height:98px;height:100%;display:flex;flex-direction:column;justify-content:space-between;gap:10px;pointer-events:none}
+.watch-summary-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.watch-summary-label{font-size:7px;letter-spacing:.13em;font-weight:800;color:rgba(20,20,25,.45);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.watch-summary-title{font-size:16px;line-height:1.08;letter-spacing:-.04em;font-weight:730;color:#17171a;max-width:92%}
+.watch-summary-value-row{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-top:auto}
+.watch-summary-value{font-size:28px;line-height:.95;letter-spacing:-.055em;font-weight:760;color:#15161a}
+.watch-summary-sub{font-size:8px;line-height:1.35;color:#7c7e86;text-align:right;max-width:52%}
+.watch-summary-spark{height:18px;margin-top:2px;border-bottom:1px solid rgba(20,20,25,.07);position:relative;overflow:hidden}
+.watch-summary-spark:before{content:"";position:absolute;inset:3px 0;background:linear-gradient(180deg,transparent 49%,rgba(110,125,255,.08) 50%,transparent 51%)}
+.watch-summary-spark:after{content:"";position:absolute;left:0;right:0;bottom:4px;height:1px;background:linear-gradient(90deg,transparent,rgba(85,100,235,.2),rgba(85,100,235,.6),rgba(85,100,235,.1),transparent);transform:skewY(-2deg);}
+.watch-summary-dot{width:7px;height:7px;border-radius:50%;background:#37b775;box-shadow:0 0 0 5px rgba(55,183,117,.09);flex:none}
+.watch-summary-dot.red{background:#e94f58;box-shadow:0 0 0 5px rgba(233,79,88,.09)}
+.watch-summary-dot.blue{background:#6279ff;box-shadow:0 0 0 5px rgba(98,121,255,.10)}
+
+/* Tailored summary emphasis */
+.future-evolution .watch-summary-label,.future-command .watch-summary-label,.future-intent .watch-summary-label,.future-contract .watch-summary-label{color:rgba(255,255,255,.45)}
+.future-evolution .watch-summary-title,.future-command .watch-summary-title,.future-intent .watch-summary-title,.future-contract .watch-summary-title,.future-evolution .watch-summary-value,.future-command .watch-summary-value,.future-intent .watch-summary-value,.future-contract .watch-summary-value{color:#fff}
+.future-evolution .watch-summary-sub,.future-command .watch-summary-sub,.future-intent .watch-summary-sub,.future-contract .watch-summary-sub{color:rgba(255,255,255,.52)}
+.future-evolution .watch-summary-spark,.future-command .watch-summary-spark,.future-intent .watch-summary-spark,.future-contract .watch-summary-spark{border-color:rgba(255,255,255,.10)}
+.future-evolution .watch-summary-spark:after,.future-command .watch-summary-spark:after,.future-intent .watch-summary-spark:after,.future-contract .watch-summary-spark:after{background:linear-gradient(90deg,transparent,rgba(180,190,255,.20),rgba(255,255,255,.65),rgba(180,190,255,.08),transparent)}
+.future-twin .watch-summary-title{max-width:75%}
+.future-twin .watch-summary-value{font-size:24px}
+.future-memory .watch-summary-value{font-size:24px}
+.future-contract .watch-summary-value{font-size:34px}
+.future-blindspot .watch-summary-value{font-size:26px}
+.future-create .watch-summary-value{font-size:34px}
+
+/* Detail transformation */
+.watch-detail{position:fixed;inset:0;z-index:900;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(8,10,15,.42);backdrop-filter:blur(16px);opacity:0;}
+.watch-detail.is-open{display:flex;animation:watchBackdropIn .24s ease forwards}
+.watch-detail-card{width:min(760px,calc(100vw - 32px));max-height:min(88vh,860px);overflow:auto;border-radius:30px;padding:26px;background:#f7f7f9;color:#111216;box-shadow:0 30px 100px rgba(0,0,0,.26);transform:translate(var(--from-x,0),var(--from-y,0)) scale(var(--from-sx,1),var(--from-sy,1));transform-origin:center center;opacity:.92;transition:transform .42s cubic-bezier(.2,.8,.2,1),opacity .3s ease,border-radius .42s ease;}
+.watch-detail.is-open .watch-detail-card{transform:translate(0,0) scale(1);opacity:1;border-radius:30px}
+.watch-detail-close{position:sticky;top:0;float:right;z-index:3;width:36px;height:36px;border:0;border-radius:50%;background:rgba(20,20,25,.07);color:#555;font-size:21px;line-height:1;cursor:pointer}
+.watch-detail-card .watch-detail-kicker{font-size:8px;letter-spacing:.14em;color:#92939a;font-weight:800}
+.watch-detail-card h2{font-size:31px;line-height:1.02;letter-spacing:-.055em;margin:9px 0 8px}
+.watch-detail-card p{font-size:12px;line-height:1.55;color:#6d6f77}
+.watch-detail-body{margin-top:17px}
+.watch-detail-card body{}
+body.dark .watch-detail-card{background:#17181c;color:#f5f6f7}
+body.dark .watch-detail-card h2{color:#f5f6f7}
+body.dark .watch-detail-card p{color:#b3b6bf}
+body.dark .watch-detail-close{background:rgba(255,255,255,.07);color:#fff}
+@keyframes watchBackdropIn{to{opacity:1}}
+
+@media(max-width:700px){
+  .premium-home .future-shell{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:18px 12px 92px}
+  .premium-home .future-state{grid-column:1/-1;display:grid;grid-template-columns:1fr auto;padding:17px 16px;border-radius:22px;gap:12px;}
+  .premium-home .future-state .state-greeting{display:block}
+  .premium-home .future-state .state-greeting h1{font-size:25px;line-height:1.02}
+  .premium-home .future-state .state-greeting p{font-size:9px;margin-top:6px;max-width:250px}
+  .premium-home .future-state .state-time{display:block;grid-column:auto;grid-row:auto;text-align:right;align-self:end}
+  .premium-home .future-state .state-time strong{font-size:17px}
+  .premium-home .future-state .state-time span{font-size:7px;white-space:normal;max-width:82px;display:block}
+  .premium-home .future-state .state-orbit{width:84px;height:84px;position:absolute;right:12px;top:12px;opacity:.45}
+  .premium-home .future-evolution{grid-column:1/-1}
+  .premium-home .future-command{grid-column:1/-1}
+  .premium-home .future-intent,.premium-home .future-twin,.premium-home .future-blindspot,.premium-home .future-create{grid-column:span 1}
+  .premium-home .future-simulator,.premium-home .future-memory,.premium-home .future-contract{grid-column:span 1}
+  .premium-home .watch-complication-block,.premium-home .future-grid .future-card{min-height:126px;padding:14px!important;border-radius:19px}
+  .watch-summary{min-height:96px}
+  .watch-summary-label{font-size:6px}
+  .watch-summary-title{font-size:14px}
+  .watch-summary-value{font-size:24px}
+  .watch-summary-sub{font-size:7px}
+  .watch-detail{padding:0;align-items:flex-end}
+  .watch-detail-card{width:100%;max-height:90vh;border-radius:28px 28px 0 0;padding:21px 17px calc(24px + env(safe-area-inset-bottom));}
+  .watch-detail.is-open .watch-detail-card{border-radius:28px 28px 0 0}
+  .watch-detail-card h2{font-size:27px}
+}
+@media(max-width:390px){
+  .premium-home .future-shell{padding-left:9px;padding-right:9px;gap:7px}
+  .premium-home .watch-complication-block,.premium-home .future-grid .future-card{min-height:118px;padding:12px!important}
+  .watch-summary-title{font-size:13px}
+  .watch-summary-value{font-size:21px}
+}
+</style>
+
+
+<script id="watch-home-v3-js">
+(function(){
+  const root=document.querySelector('.premium-home .future-shell');
+  if(!root) return;
+  const data={
+    evolution:{label:'ЭВОЛЮЦИЯ БИЗНЕСА',title:'Я улучшаю систему',value:'+18%',sub:'5 октября · 14 изменений',date:'11 выполнено самостоятельно'},
+    command:{label:'КОМАНДА УПРАВЛЯЮЩЕМУ',title:'Куда двигаемся?',value:'→',sub:'Сегодня · следующий шаг',date:'Скажи цель — я построю маршрут'},
+    intent:{label:'ЦЕЛЬ БИЗНЕСА',title:'Прибыль без роста расходов',value:'ЦЕЛЬ',sub:'На этот месяц · главный ориентир',date:'Модель → гипотезы → действия'},
+    twin:{label:'ЦИФРОВОЙ ДВОЙНИК',title:'Бизнес как одна система',value:'LIVE',sub:'Сейчас · данные обновляются',date:'1 284 клиента · 742k ₽ продаж'},
+    simulator:{label:'СИМУЛЯТОР',title:'Цена +5%',value:'+6.8%',sub:'Сценарий · прогноз на сегодня',date:'возможная прибыль'},
+    memory:{label:'ПАМЯТЬ БИЗНЕСА',title:'Я помню решения',value:'14',sub:'Сегодня · важные решения',date:'правила и контекст бизнеса'},
+    contract:{label:'КОНТРАК',title:'Работаю внутри границ',value:'72%',sub:'Сейчас · уровень самостоятельности',date:'в рамках твоих правил'},
+    blindspot:{label:'НЕЗАМЕЧЕННОЕ',title:'Есть один новый сигнал',value:'1',sub:'Сегодня · требуется проверка',date:'точка для внимания'},
+    create:{label:'СОЗДАТЬ НОВОЕ',title:'Нужен новый инструмент?',value:'+',sub:'В любой момент · просто опиши задачу',date:'я соберу первый вариант'}
+  };
+  function makeSummary(block, cfg){
+    const s=document.createElement('div');
+    s.className='watch-summary';
+    s.innerHTML='<div class="watch-summary-top"><span class="watch-summary-label"></span><span class="watch-summary-dot"></span></div><div class="watch-summary-title"></div><div class="watch-summary-value-row"><strong class="watch-summary-value"></strong><span class="watch-summary-sub"></span></div><div class="watch-summary-date"></div><div class="watch-summary-spark"></div>';
+    s.querySelector('.watch-summary-label').textContent=cfg.label;
+    s.querySelector('.watch-summary-title').textContent=cfg.title;
+    s.querySelector('.watch-summary-value').textContent=cfg.value;
+    s.querySelector('.watch-summary-sub').textContent=cfg.sub;
+    s.querySelector('.watch-summary-date').textContent=cfg.date || '';
+    const dot=s.querySelector('.watch-summary-dot');
+    if(block.dataset.homeBlock==='blindspot') dot.classList.add('blue');
+    if(block.dataset.homeBlock==='attention') dot.classList.add('red');
+    return s;
+  }
+  function addToBlock(block,cfg){
+    if(!block || block.querySelector(':scope > .watch-summary')) return;
+    block.classList.add('watch-complication-block');
+    block.appendChild(makeSummary(block,cfg));
+  }
+  addToBlock(root.querySelector('[data-home-block="evolution"]'),data.evolution);
+  addToBlock(root.querySelector('[data-home-block="command"]'),data.command);
+  addToBlock(root.querySelector('[data-home-block="intent"]'),data.intent);
+  addToBlock(root.querySelector('[data-home-block="twin"]'),data.twin);
+  addToBlock(root.querySelector('[data-home-block="simulator"]'),data.simulator);
+  addToBlock(root.querySelector('[data-home-block="memory"]'),data.memory);
+  addToBlock(root.querySelector('[data-home-block="contract"]'),data.contract);
+  addToBlock(root.querySelector('[data-home-block="blindspot"]'),data.blindspot);
+  addToBlock(root.querySelector('[data-home-block="create"]'),data.create);
+
+  const att=root.querySelector('[data-home-block="attention"]');
+  if(att){
+    att.querySelectorAll('.future-card').forEach((card,i)=>{
+      const label=card.querySelector('.future-label')?.textContent?.trim() || 'СИГНАЛ';
+      const title=card.querySelector('h3')?.textContent?.trim() || 'Событие бизнеса';
+      const desc=card.querySelector('.future-desc')?.textContent?.trim() || '';
+      const value=i===0?'−11%':i===1?'+18%':i===2?'1':'3';
+      const sub=i===0?'заказы Ozon · требует решения':i===1?'эффективность рекламы':i===2?'новый канал продаж':'сегодня в расписании';
+      card.classList.add('watch-complication-block');
+      card.appendChild(makeSummary(card,{label,title,value,sub}));
+      const dot=card.querySelector(':scope > .watch-summary .watch-summary-dot');
+      if(dot && i===0) dot.classList.add('red');
+      if(dot && i===2) dot.classList.add('blue');
+    });
+  }
+
+  function targetFor(e){
+    const card=e.target.closest('.watch-complication-block.future-card');
+    if(card && root.contains(card)) return card;
+    const block=e.target.closest('.watch-complication-block[data-home-block]');
+    return block && root.contains(block) ? block : null;
+  }
+  function openDetail(source){
+    if(document.body.classList.contains('home-longpress-mode')) return;
+    const existing=document.querySelector('.watch-detail');
+    if(existing) existing.remove();
+    const r=source.getBoundingClientRect();
+    const clone=source.cloneNode(true);
+    clone.classList.remove('watch-complication-block');
+    clone.classList.add('watch-detail-card');
+    clone.style.minHeight='0';
+    clone.querySelectorAll('.watch-summary').forEach(x=>x.remove());
+    clone.querySelectorAll('[data-home-block]').forEach(x=>x.removeAttribute('data-home-block'));
+    const kicker=document.createElement('div');
+    kicker.className='watch-detail-kicker';
+    kicker.textContent=(source.dataset.homeTitle||source.querySelector('.future-label')?.textContent||'ПОДРОБНО').toUpperCase();
+    const close=document.createElement('button');
+    close.type='button';close.className='watch-detail-close';close.setAttribute('aria-label','Закрыть');close.textContent='×';
+    clone.prepend(close,kicker);
+    const body=document.createElement('div');body.className='watch-detail-body';
+    Array.from(clone.children).filter(x=>x!==close && x!==kicker).forEach(x=>body.appendChild(x));
+    clone.appendChild(body);
+    const wrap=document.createElement('div');wrap.className='watch-detail';wrap.setAttribute('role','dialog');wrap.setAttribute('aria-modal','true');
+    wrap.appendChild(clone);document.body.appendChild(wrap);
+    const vw=window.innerWidth,vh=window.innerHeight;
+    const targetW=Math.min(760,vw-32), targetH=Math.min(vh*.88,860);
+    const tx=(r.left+r.width/2)-vw/2, ty=(r.top+r.height/2)-vh/2;
+    const sx=Math.max(.22,Math.min(1,r.width/targetW)), sy=Math.max(.18,Math.min(1,r.height/targetH));
+    clone.style.setProperty('--from-x',tx+'px');clone.style.setProperty('--from-y',ty+'px');clone.style.setProperty('--from-sx',sx);clone.style.setProperty('--from-sy',sy);
+    requestAnimationFrame(()=>wrap.classList.add('is-open'));
+    const closeIt=()=>{wrap.classList.remove('is-open');setTimeout(()=>wrap.remove(),360)};
+    close.addEventListener('click',closeIt);
+    wrap.addEventListener('click',e=>{if(e.target===wrap)closeIt()});
+    document.addEventListener('keydown',function esc(e){if(e.key==='Escape'){closeIt();document.removeEventListener('keydown',esc)}});
+  }
+  root.addEventListener('click',e=>{
+    if(e.target.closest('button,input,textarea,a')) return;
+    const t=targetFor(e);if(t) openDetail(t);
+  });
+})();
+</script>
+
+
+
+<style id="watch-home-v4-wow">
+/* V4 — larger type + living color signals. No layout-shift, only optical effects. */
+.premium-home .watch-complication-block,
+.premium-home .future-grid .future-card{
+  --watch-a:#6f7cff;
+  --watch-b:#69c8ff;
+}
+.premium-home .future-evolution{--watch-a:#9a7cff;--watch-b:#54b6ff}
+.premium-home .future-command{--watch-a:#42d9ff;--watch-b:#7b70ff}
+.premium-home .future-intent{--watch-a:#ffc56b;--watch-b:#ff6f97}
+.premium-home .future-twin{--watch-a:#46d5a4;--watch-b:#61a7ff}
+.premium-home .future-simulator{--watch-a:#b07bff;--watch-b:#52d9ff}
+.premium-home .future-memory{--watch-a:#f076db;--watch-b:#7f7aff}
+.premium-home .future-contract{--watch-a:#ffb24f;--watch-b:#ff6d7a}
+.premium-home .future-blindspot{--watch-a:#ff6677;--watch-b:#a478ff}
+.premium-home .future-create{--watch-a:#6bc7ff;--watch-b:#b07cff}
+.premium-home .future-grid .future-card:nth-child(1){--watch-a:#ff6670;--watch-b:#ffb05b}
+.premium-home .future-grid .future-card:nth-child(2){--watch-a:#5c8dff;--watch-b:#61ddba}
+.premium-home .future-grid .future-card:nth-child(3){--watch-a:#b07cff;--watch-b:#60caff}
+.premium-home .future-grid .future-card:nth-child(4){--watch-a:#59d7a1;--watch-b:#8d7cff}
+
+/* Larger, calmer type. */
+.premium-home .watch-summary-title{
+  font-size:18px;
+  line-height:1.06;
+  letter-spacing:-.045em;
+}
+.premium-home .watch-summary-value{
+  font-size:34px;
+  line-height:.92;
+}
+.premium-home .watch-summary-sub{font-size:9px;max-width:58%}
+.premium-home .watch-summary-label{font-size:7.5px}
+.premium-home .future-state .state-greeting h1{font-size:32px}
+
+/* Living spectral light — purely optical, does not move layout. */
+.premium-home .watch-complication-block::before,
+.premium-home .future-grid .future-card::before{
+  content:"";
+  position:absolute;
+  width:170px;height:170px;
+  right:-72px;top:-82px;
+  border-radius:50%;
+  background:radial-gradient(circle at 38% 38%,color-mix(in srgb,var(--watch-a) 30%,transparent) 0%,color-mix(in srgb,var(--watch-b) 16%,transparent) 33%,transparent 72%);
+  filter:blur(2px);
+  opacity:.55;
+  pointer-events:none;
+  animation:watchLivingOrb 6.4s ease-in-out infinite;
+  z-index:0;
+}
+.premium-home .watch-complication-block::after,
+.premium-home .future-grid .future-card::after{
+  content:"";
+  position:absolute;
+  left:12%;right:12%;bottom:7px;height:2px;
+  border-radius:99px;
+  background:linear-gradient(90deg,transparent,var(--watch-a),var(--watch-b),transparent);
+  background-size:210% 100%;
+  opacity:.42;
+  pointer-events:none;
+  animation:watchLivingSweep 4.6s linear infinite;
+  z-index:0;
+}
+.premium-home .watch-summary{z-index:2}
+.premium-home .watch-summary-dot{
+  background:var(--watch-a);
+  box-shadow:0 0 0 5px color-mix(in srgb,var(--watch-a) 12%,transparent),0 0 16px color-mix(in srgb,var(--watch-a) 34%,transparent);
+  animation:watchLivePulse 2.8s ease-in-out infinite;
+}
+.premium-home .watch-summary-dot.red{background:#ff5d69;box-shadow:0 0 0 5px rgba(255,93,105,.11),0 0 17px rgba(255,93,105,.35)}
+.premium-home .watch-summary-dot.blue{background:#6c82ff;box-shadow:0 0 0 5px rgba(108,130,255,.11),0 0 17px rgba(108,130,255,.35)}
+.premium-home .watch-complication-block:hover::before,
+.premium-home .future-grid .future-card:hover::before{opacity:.75}
+.premium-home .watch-complication-block:hover::after,
+.premium-home .future-grid .future-card:hover::after{opacity:.68}
+
+@keyframes watchLivingOrb{
+  0%,100%{transform:translate3d(0,0,0) scale(.92);opacity:.38}
+  50%{transform:translate3d(-12px,8px,0) scale(1.08);opacity:.68}
+}
+@keyframes watchLivingSweep{
+  0%{background-position:200% 0;opacity:.18}
+  45%{opacity:.55}
+  100%{background-position:-10% 0;opacity:.2}
+}
+@keyframes watchLivePulse{
+  0%,100%{transform:scale(.92);filter:saturate(.95)}
+  50%{transform:scale(1.18);filter:saturate(1.18)}
+}
+
+/* Richer detail sheet, while keeping the clean expansion. */
+.watch-detail-card::before{
+  content:"";position:absolute;width:220px;height:220px;right:-110px;top:-100px;border-radius:50%;
+  background:radial-gradient(circle,rgba(111,124,255,.16),transparent 68%);
+  pointer-events:none;
+}
+.watch-detail-card{position:relative;overflow:hidden}
+.watch-detail-card h2{font-size:34px}
+.watch-detail-card p{font-size:13px}
+
+@media(max-width:700px){
+  .premium-home .future-state .state-greeting h1{font-size:29px;line-height:1.0}
+  .premium-home .watch-complication-block,
+  .premium-home .future-grid .future-card{min-height:136px;padding:15px!important}
+  .watch-summary{min-height:104px;gap:11px}
+  .watch-summary-label{font-size:7px}
+  .watch-summary-title{font-size:17px}
+  .watch-summary-value{font-size:29px}
+  .watch-summary-sub{font-size:8px;max-width:56%}
+  .watch-summary-spark{height:20px}
+  .watch-detail-card h2{font-size:29px}
+  .watch-detail-card p{font-size:12.5px}
+}
+@media(max-width:390px){
+  .premium-home .future-shell{gap:8px}
+  .premium-home .watch-complication-block,
+  .premium-home .future-grid .future-card{min-height:130px;padding:14px!important}
+  .watch-summary-title{font-size:16px}
+  .watch-summary-value{font-size:27px}
+}
+body.dark .premium-home .watch-complication-block::before,
+body.dark .premium-home .future-grid .future-card::before{opacity:.68}
+body.dark .premium-home .watch-complication-block::after,
+body.dark .premium-home .future-grid .future-card::after{opacity:.52}
+@media(prefers-reduced-motion:reduce){
+  .premium-home .watch-complication-block::before,
+  .premium-home .future-grid .future-card::before,
+  .premium-home .watch-complication-block::after,
+  .premium-home .future-grid .future-card::after,
+  .premium-home .watch-summary-dot{animation:none!important}
+}
+</style>
+
+
+<style id="watch-home-v5-readability-wow">
+/* V5 — readable mobile typography + richer Watch-like visual signals. */
+.premium-home .watch-complication-block,
+.premium-home .future-grid .future-card{
+  --watch-ring:var(--watch-a);
+  --watch-ring-b:var(--watch-b);
+  position:relative;
+  overflow:hidden;
+}
+
+/* Readable hierarchy: date/context text is no longer microscopic. */
+.premium-home .watch-summary-label{
+  font-size:10px;
+  line-height:1;
+  letter-spacing:.12em;
+  font-weight:800;
+  color:rgba(20,20,25,.52);
+}
+.premium-home .watch-summary-title{
+  font-size:20px;
+  line-height:1.04;
+  letter-spacing:-.045em;
+  font-weight:750;
+  max-width:94%;
+}
+.premium-home .watch-summary-value{
+  font-size:36px;
+  line-height:.9;
+  letter-spacing:-.06em;
+  font-weight:780;
+}
+.premium-home .watch-summary-sub{
+  font-size:11px;
+  line-height:1.18;
+  color:#70727a;
+  max-width:60%;
+}
+
+/* Every card gets its own living ring — subtle, not decorative noise. */
+.premium-home .watch-summary-top{position:relative;}
+.premium-home .watch-summary-top::before{
+  content:"";
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  flex:none;
+  margin-right:auto;
+  margin-left:2px;
+  background:conic-gradient(from 210deg,
+    var(--watch-ring) 0 24%,
+    color-mix(in srgb,var(--watch-ring-b) 85%,transparent) 24% 48%,
+    transparent 48% 67%,
+    var(--watch-ring-b) 67% 84%,
+    transparent 84% 100%);
+  -webkit-mask:radial-gradient(circle,transparent 0 56%,#000 58% 100%);
+  mask:radial-gradient(circle,transparent 0 56%,#000 58% 100%);
+  opacity:.78;
+  filter:drop-shadow(0 0 7px color-mix(in srgb,var(--watch-ring) 36%,transparent));
+  animation:watchRingFloat 4.8s ease-in-out infinite;
+}
+.premium-home .watch-summary-top .watch-summary-dot{margin-left:7px;}
+
+/* Moving point gives the card a small “live instrument” feeling. */
+.premium-home .watch-summary-spark{
+  height:22px;
+  margin-top:3px;
+  border-bottom:1px solid color-mix(in srgb,var(--watch-a) 16%,transparent);
+  background:
+    linear-gradient(180deg,color-mix(in srgb,var(--watch-a) 6%,transparent),transparent 75%);
+}
+.premium-home .watch-summary-spark::before{
+  content:"";
+  position:absolute;
+  bottom:2px;
+  left:5%;
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:var(--watch-a);
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--watch-a) 10%,transparent),0 0 14px color-mix(in srgb,var(--watch-a) 50%,transparent);
+  animation:watchSparkPoint 3.6s ease-in-out infinite;
+}
+.premium-home .watch-summary-spark::after{
+  height:1px;
+  bottom:5px;
+  background:linear-gradient(90deg,transparent,var(--watch-a),var(--watch-b),transparent);
+  opacity:.7;
+  animation:watchLivingSweep 3.9s linear infinite;
+}
+
+/* More breathing room on phones so dates and context remain visible. */
+@media(max-width:700px){
+  .premium-home .future-grid{gap:10px!important}
+  .premium-home .watch-complication-block,
+  .premium-home .future-grid .future-card{
+    min-height:148px!important;
+    padding:16px!important;
+    border-radius:21px!important;
+  }
+  .premium-home .watch-summary{
+    min-height:116px;
+    gap:10px;
+  }
+  .premium-home .watch-summary-label{font-size:9.5px}
+  .premium-home .watch-summary-title{font-size:19px}
+  .premium-home .watch-summary-value{font-size:34px}
+  .premium-home .watch-summary-sub{
+    font-size:10.5px;
+    line-height:1.2;
+    max-width:60%;
+  }
+  .premium-home .watch-summary-top::before{width:17px;height:17px}
+  .premium-home .watch-summary-dot{width:8px;height:8px}
+  .premium-home .watch-summary-spark{height:22px}
+}
+@media(max-width:390px){
+  .premium-home .watch-complication-block,
+  .premium-home .future-grid .future-card{
+    min-height:142px!important;
+    padding:15px!important;
+  }
+  .premium-home .watch-summary{min-height:111px}
+  .premium-home .watch-summary-label{font-size:9px}
+  .premium-home .watch-summary-title{font-size:18px}
+  .premium-home .watch-summary-value{font-size:32px}
+  .premium-home .watch-summary-sub{font-size:10px;max-width:61%}
+}
+
+/* Each card gets a slightly different motion rhythm. */
+.premium-home .future-evolution .watch-summary-top::before{animation-delay:-1.2s}
+.premium-home .future-command .watch-summary-top::before{animation-delay:-2.4s}
+.premium-home .future-intent .watch-summary-top::before{animation-delay:-3.1s}
+.premium-home .future-twin .watch-summary-top::before{animation-delay:-.7s}
+.premium-home .future-simulator .watch-summary-top::before{animation-delay:-1.8s}
+.premium-home .future-memory .watch-summary-top::before{animation-delay:-2.8s}
+.premium-home .future-contract .watch-summary-top::before{animation-delay:-3.7s}
+.premium-home .future-blindspot .watch-summary-top::before{animation-delay:-1.6s}
+.premium-home .future-create .watch-summary-top::before{animation-delay:-2.1s}
+
+@keyframes watchRingFloat{
+  0%,100%{transform:rotate(-8deg) scale(.94);opacity:.52}
+  50%{transform:rotate(10deg) scale(1.06);opacity:.9}
+}
+@keyframes watchSparkPoint{
+  0%,100%{left:6%;transform:scale(.75);opacity:.35}
+  35%{left:42%;transform:scale(1.05);opacity:.9}
+  70%{left:78%;transform:scale(.9);opacity:.62}
+}
+
+/* Dark theme readability */
+body.dark .premium-home .watch-summary-label{color:rgba(255,255,255,.58)}
+body.dark .premium-home .watch-summary-title,
+body.dark .premium-home .watch-summary-value{color:#fff}
+body.dark .premium-home .watch-summary-sub{color:rgba(255,255,255,.64)}
+</style>
+
+
+
+<style id="watch-home-v6-apple-watch-pass">
+/* V6 — inspired by the information density and visual language of activity/watch surfaces.
+   Larger secondary text, strong hierarchy, crisp color accents, and living rings. */
+.premium-home .watch-complication-block,
+.premium-home .future-grid .future-card{
+  border-radius:22px!important;
+}
+.premium-home .watch-summary{
+  min-height:136px!important;
+  gap:8px!important;
+  padding-right:2px;
+}
+.premium-home .watch-summary-top{min-height:18px}
+.premium-home .watch-summary-label{
+  font-size:11px!important;
+  line-height:1!important;
+  letter-spacing:.105em!important;
+  font-weight:800!important;
+}
+.premium-home .watch-summary-title{
+  font-size:22px!important;
+  line-height:1.03!important;
+  letter-spacing:-.05em!important;
+  font-weight:760!important;
+  max-width:82%!important;
+}
+.premium-home .watch-summary-value-row{
+  align-items:baseline!important;
+  gap:8px!important;
+}
+.premium-home .watch-summary-value{
+  font-size:40px!important;
+  line-height:.88!important;
+  letter-spacing:-.065em!important;
+  font-weight:790!important;
+  color:var(--watch-a,#5f73ff)!important;
+  text-shadow:0 0 22px color-mix(in srgb,var(--watch-a,#5f73ff) 18%,transparent);
+}
+.premium-home .watch-summary-sub{
+  font-size:12px!important;
+  line-height:1.18!important;
+  font-weight:650!important;
+  color:#666a73!important;
+  text-align:right!important;
+  max-width:56%!important;
+}
+.premium-home .watch-summary-date{
+  display:block!important;
+  min-height:14px;
+  font-size:12px!important;
+  line-height:1.15!important;
+  color:#8a8d96!important;
+  letter-spacing:-.01em;
+}
+/* Activity-style concentric ring, but unique to each business signal. */
+.premium-home .watch-summary::before{
+  content:"";
+  position:absolute;
+  right:6px;
+  top:27px;
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  background:
+    conic-gradient(from -38deg,
+      var(--watch-a,#5f73ff) 0 54%,
+      color-mix(in srgb,var(--watch-b,#61ddba) 88%,transparent) 54% 79%,
+      color-mix(in srgb,var(--watch-a,#5f73ff) 9%,transparent) 79% 100%);
+  -webkit-mask:radial-gradient(circle,transparent 0 54%,#000 56% 67%,transparent 69% 100%);
+  mask:radial-gradient(circle,transparent 0 54%,#000 56% 67%,transparent 69% 100%);
+  filter:drop-shadow(0 0 10px color-mix(in srgb,var(--watch-a,#5f73ff) 22%,transparent));
+  opacity:.9;
+  transform:rotate(-13deg);
+  animation:watchActivityRing 7.5s ease-in-out infinite;
+  pointer-events:none;
+}
+/* Second, thinner ring gives the card a live instrument quality. */
+.premium-home .watch-summary::after{
+  content:"";
+  position:absolute;
+  right:0;
+  top:21px;
+  width:61px;
+  height:61px;
+  border-radius:50%;
+  border:1px solid color-mix(in srgb,var(--watch-b,#61ddba) 24%,transparent);
+  opacity:.72;
+  animation:watchOuterRing 6.5s ease-in-out infinite;
+  pointer-events:none;
+}
+.premium-home .watch-summary .watch-summary-dot{display:none!important}
+.premium-home .watch-summary-spark{
+  height:17px!important;
+  margin-top:0!important;
+  border-bottom:0!important;
+  background:linear-gradient(180deg,transparent 20%,color-mix(in srgb,var(--watch-a) 6%,transparent) 100%);
+}
+.premium-home .watch-summary-spark::after{
+  height:2px!important;
+  bottom:4px!important;
+  opacity:.82!important;
+  background:linear-gradient(90deg,transparent,var(--watch-a),var(--watch-b),transparent)!important;
+}
+.premium-home .future-evolution .watch-summary-value,
+.premium-home .future-command .watch-summary-value,
+.premium-home .future-intent .watch-summary-value,
+.premium-home .future-contract .watch-summary-value{color:var(--watch-a)!important}
+/* Dark mode gets stronger contrast, as in the reference image, without changing the layout. */
+body.dark .premium-home .watch-summary-sub{color:rgba(255,255,255,.72)!important}
+body.dark .premium-home .watch-summary-date{color:rgba(255,255,255,.50)!important}
+body.dark .premium-home .watch-summary-value{color:var(--watch-a,#8ea0ff)!important}
+body.dark .premium-home .watch-summary::after{border-color:color-mix(in srgb,var(--watch-b,#61ddba) 34%,transparent)}
+@media(max-width:700px){
+  .premium-home .watch-complication-block,
+  .premium-home .future-grid .future-card{min-height:160px!important;padding:17px!important}
+  .premium-home .watch-summary{min-height:142px!important}
+  .premium-home .watch-summary-label{font-size:11px!important}
+  .premium-home .watch-summary-title{font-size:21px!important;max-width:78%!important}
+  .premium-home .watch-summary-value{font-size:41px!important}
+  .premium-home .watch-summary-sub{font-size:12.5px!important;max-width:53%!important}
+  .premium-home .watch-summary-date{font-size:12px!important}
+  .premium-home .watch-summary::before{width:50px;height:50px;right:7px;top:27px}
+  .premium-home .watch-summary::after{width:66px;height:66px;right:0;top:20px}
+}
+@media(max-width:390px){
+  .premium-home .watch-complication-block,
+  .premium-home .future-grid .future-card{min-height:151px!important;padding:16px!important}
+  .premium-home .watch-summary{min-height:134px!important}
+  .premium-home .watch-summary-title{font-size:20px!important}
+  .premium-home .watch-summary-value{font-size:38px!important}
+  .premium-home .watch-summary-sub,.premium-home .watch-summary-date{font-size:11.5px!important}
+}
+@keyframes watchActivityRing{
+  0%,100%{transform:rotate(-13deg) scale(.94);opacity:.72}
+  50%{transform:rotate(8deg) scale(1.04);opacity:1}
+}
+@keyframes watchOuterRing{
+  0%,100%{transform:scale(.96);opacity:.48}
+  50%{transform:scale(1.02);opacity:.84}
+}
+@media(prefers-reduced-motion:reduce){
+  .premium-home .watch-summary::before,.premium-home .watch-summary::after{animation:none!important}
+}
+</style>
+
+<style id="watch-home-v7-calendar-readability">
+/* V7 — readable dates + compact calendar in the greeting block. */
+.premium-home .watch-summary-date{
+  display:flex!important;
+  align-items:center!important;
+  min-height:22px!important;
+  margin-top:1px!important;
+  padding:5px 9px!important;
+  width:max-content!important;
+  max-width:100%!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--watch-a,#6377ff) 9%,transparent)!important;
+  border:1px solid color-mix(in srgb,var(--watch-a,#6377ff) 18%,transparent)!important;
+  color:color-mix(in srgb,var(--watch-a,#6377ff) 72%,#5b5f69)!important;
+  font-size:14px!important;
+  line-height:1.05!important;
+  font-weight:760!important;
+  letter-spacing:-.018em!important;
+}
+.premium-home .watch-summary-sub{
+  font-size:13px!important;
+  line-height:1.2!important;
+  font-weight:650!important;
+}
+.premium-home .watch-summary-label{font-size:11.5px!important}
+.premium-home .watch-summary-title{font-size:23px!important}
+.premium-home .watch-summary-value{font-size:42px!important}
+
+/* Greeting calendar — small physical-looking date instrument. */
+.premium-home .state-time{
+  display:flex!important;
+  align-items:center!important;
+  gap:8px!important;
+}
+.premium-home .greeting-calendar{
+  position:relative;
+  display:grid!important;
+  grid-template-columns:1fr auto;
+  grid-template-rows:auto auto;
+  align-items:center;
+  column-gap:7px;
+  min-width:70px;
+  min-height:43px;
+  margin-left:8px;
+  padding:6px 9px 6px 11px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:14px;
+  background:rgba(255,255,255,.07);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 10px 24px rgba(0,0,0,.12);
+  overflow:hidden;
+  flex:none;
+}
+.premium-home .greeting-calendar::before{
+  content:"";
+  position:absolute;
+  left:0;right:0;top:0;
+  height:3px;
+  background:linear-gradient(90deg,#ff5f6d,#ffc45a,#63d8ff,#8b78ff);
+  opacity:.95;
+}
+.premium-home .greeting-calendar small{
+  grid-column:1;
+  grid-row:1;
+  align-self:end;
+  font-size:8px!important;
+  line-height:1!important;
+  letter-spacing:.12em;
+  color:rgba(255,255,255,.58)!important;
+  font-weight:800!important;
+}
+.premium-home .greeting-calendar b{
+  grid-column:1;
+  grid-row:2;
+  align-self:start;
+  font-size:19px!important;
+  line-height:1!important;
+  letter-spacing:-.05em;
+  color:#fff!important;
+  font-weight:790!important;
+}
+.premium-home .greeting-calendar em{
+  grid-column:2;
+  grid-row:1/3;
+  align-self:center;
+  font-style:normal;
+  font-size:9px!important;
+  line-height:1!important;
+  font-weight:800!important;
+  letter-spacing:.08em;
+  color:rgba(255,255,255,.82)!important;
+}
+@media(max-width:700px){
+  .premium-home .watch-summary-date{
+    min-height:24px!important;
+    padding:6px 10px!important;
+    font-size:14px!important;
+  }
+  .premium-home .watch-summary-sub{font-size:13px!important}
+  .premium-home .watch-summary-title{font-size:22px!important}
+  .premium-home .watch-summary-value{font-size:41px!important}
+  .premium-home .greeting-calendar{
+    min-width:68px!important;
+    min-height:42px!important;
+    margin-left:5px!important;
+    padding:6px 8px 6px 10px!important;
+  }
+  .premium-home .greeting-calendar small{font-size:8px!important}
+  .premium-home .greeting-calendar b{font-size:19px!important}
+  .premium-home .greeting-calendar em{font-size:9px!important}
+}
+@media(max-width:390px){
+  .premium-home .watch-summary-date{font-size:13.5px!important}
+  .premium-home .watch-summary-sub{font-size:12.5px!important}
+  .premium-home .watch-summary-title{font-size:21px!important}
+  .premium-home .watch-summary-value{font-size:39px!important}
+  .premium-home .greeting-calendar{min-width:64px!important;min-height:40px!important}
+}
+body.dark .premium-home .watch-summary-date{
+  background:color-mix(in srgb,var(--watch-a,#8ea0ff) 15%,transparent)!important;
+  border-color:color-mix(in srgb,var(--watch-b,#61ddba) 27%,transparent)!important;
+  color:#fff!important;
+}
+</style>
+
+
+<style id="home-os-v1">
+/* HOME OS — one-screen business instrument */
+:root{--os-space:14px}
+body.home-os-mode{overflow-x:hidden}
+body.home-os-mode .sidebar,
+body.home-os-mode .mobile-nav,
+body.home-os-mode .home-organize-bar{display:none!important}
+body.home-os-mode .app{display:block!important;min-height:100vh}
+body.home-os-mode .content{width:100%;max-width:1540px;margin:0 auto;padding:28px clamp(18px,4vw,54px) 80px}
+.home-os-settings{position:absolute!important;right:20px;top:18px;width:42px;height:42px;padding:0;border:1px solid rgba(255,255,255,.12);border-radius:50%;background:rgba(255,255,255,.055);color:rgba(255,255,255,.82);display:grid;place-items:center;backdrop-filter:blur(16px);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 10px 30px rgba(0,0,0,.12);z-index:20}
+.home-os-settings svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round;transition:transform .4s ease}
+.home-os-settings:hover svg{transform:rotate(38deg)}
+.home-os-launchers{grid-column:1/-1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin:12px 0 14px}
+.home-os-tile{position:relative;min-height:132px;overflow:hidden;text-align:left;padding:16px 15px;border-radius:22px;border:1px solid rgba(20,20,24,.08);background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(245,247,251,.82));box-shadow:0 16px 44px rgba(30,35,50,.07);color:#17181c;cursor:pointer;isolation:isolate;transform:translateZ(0);transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s ease,border-color .28s ease}
+.home-os-tile:hover{transform:translateY(-3px);box-shadow:0 24px 56px rgba(30,35,50,.12)}
+.home-os-tile:active{transform:scale(.985)}
+.home-os-tile-accent{position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--a),var(--b));opacity:.95}
+.home-os-tile-kicker{display:block;font-size:9px;font-weight:850;letter-spacing:.13em;color:#757983}
+.home-os-tile strong{display:block;margin-top:10px;font-size:24px;line-height:.96;letter-spacing:-.055em;font-weight:790;white-space:nowrap}
+.home-os-tile-meta{display:block;margin-top:8px;font-size:10px;line-height:1.3;color:#7c7f88;max-width:82px}
+.home-os-tile-ring{position:absolute;right:11px;bottom:9px;width:54px;height:54px;border-radius:50%;border:1px solid color-mix(in srgb,var(--a) 30%, transparent);box-shadow:0 0 0 8px color-mix(in srgb,var(--a) 4%, transparent);animation:osRingPulse 4.4s ease-in-out infinite}
+.home-os-tile-ring::before{content:"";position:absolute;inset:6px;border-radius:50%;border:1px solid color-mix(in srgb,var(--b) 28%, transparent);animation:osRingSpin 9s linear infinite}
+.home-os-tile-ring i{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--b);right:2px;top:50%;margin-top:-3px;box-shadow:0 0 15px color-mix(in srgb,var(--b) 70%, transparent);animation:osDotOrbit 5.8s linear infinite}
+.home-os-sales{--a:#ff3b72;--b:#ff9b53}.home-os-finance{--a:#37d7b1;--b:#5d9bff}.home-os-clients{--a:#a97cff;--b:#5fcdff}.home-os-tasks{--a:#ffbd55;--b:#ff6f9c}.home-os-promo{--a:#4bd7ff;--b:#7d78ff}.home-os-reports{--a:#64e0a1;--b:#9c7bff}
+.home-os-back{position:fixed;left:20px;top:18px;z-index:450;width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:rgba(255,255,255,.74);color:#17181c;display:none;place-items:center;box-shadow:0 12px 34px rgba(20,25,35,.12);backdrop-filter:blur(16px);font-size:20px;cursor:pointer}
+body.home-os-detail-mode .home-os-back{display:grid}
+body.home-os-detail-mode .content{max-width:1400px;padding-top:82px}
+body.dark .home-os-tile{background:linear-gradient(145deg,rgba(33,34,39,.96),rgba(24,26,31,.88));color:#f6f7f8;border-color:rgba(255,255,255,.08);box-shadow:0 20px 60px rgba(0,0,0,.25)}
+body.dark .home-os-tile-kicker,body.dark .home-os-tile-meta{color:#aeb1ba}
+body.dark .home-os-back{background:rgba(31,32,37,.82);color:#f5f6f7;border-color:rgba(255,255,255,.10)}
+.home-os-settings::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:1px solid rgba(130,150,255,.10);animation:osGearHalo 4.5s ease-in-out infinite;pointer-events:none}
+@keyframes osRingPulse{0%,100%{transform:scale(.94);opacity:.68}50%{transform:scale(1.03);opacity:1}}
+@keyframes osRingSpin{to{transform:rotate(360deg)}}
+@keyframes osDotOrbit{to{transform:rotate(360deg);transform-origin:-21px 3px}}
+@keyframes osGearHalo{0%,100%{transform:scale(.86);opacity:.15}50%{transform:scale(1.06);opacity:.65}}
+@media(max-width:1050px){.home-os-launchers{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){
+  body.home-os-mode .content{padding:12px 10px calc(28px + env(safe-area-inset-bottom))}
+  .home-os-settings{right:14px;top:14px;width:40px;height:40px}
+  .home-os-launchers{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:9px 0 12px}
+  .home-os-tile{min-height:118px;padding:13px 12px;border-radius:19px}
+  .home-os-tile-kicker{font-size:8px}
+  .home-os-tile strong{font-size:21px;margin-top:9px}
+  .home-os-tile-meta{font-size:9px;margin-top:7px}
+  .home-os-tile-ring{width:45px;height:45px;right:8px;bottom:8px}
+  .home-os-back{left:12px;top:12px;width:40px;height:40px}
+  body.home-os-detail-mode .content{padding-top:68px}
+}
+@media(prefers-reduced-motion:reduce){.home-os-tile-ring,.home-os-tile-ring::before,.home-os-tile-ring i,.home-os-settings::after{animation:none!important}}
+</style>
+<script id="home-os-v1-js">
+(function(){
+  document.body.classList.add('home-os-mode');
+  if(!document.getElementById('homeOSBack')){
+    const back=document.createElement('button');back.id='homeOSBack';back.className='home-os-back';back.type='button';back.setAttribute('aria-label','Вернуться на Главную');back.innerHTML='‹';back.onclick=()=>window.homeOSGoHome();document.body.appendChild(back);
+  }
+  const routeMap={sales:'sales',finance:'finance',clients:'clients',tasks:'tasks',promo:'promo'};
+  function go(route){
+    if(route==='report'){
+      if(typeof window.openMonthReport==='function'){window.openMonthReport();return}
+      if(typeof window.openReport==='function'){window.openReport();return}
+      const r=document.querySelector('.home-os-tile[data-home-route="report"]'); if(r) r.classList.add('is-active'); return;
+    }
+    if(typeof showSection==='function' && routeMap[route]){
+      document.body.classList.add('home-os-detail-mode');
+      showSection(routeMap[route]);
+      window.scrollTo(0,0);
+    }
+  }
+  window.homeOSGoHome=function(){
+    if(typeof showSection==='function')showSection('home');
+    document.body.classList.remove('home-os-detail-mode');
+    window.scrollTo(0,0);
+  };
+  document.addEventListener('click',function(e){
+    const tile=e.target.closest('.home-os-tile[data-home-route]');
+    if(tile){e.preventDefault();e.stopPropagation();go(tile.dataset.homeRoute);return;}
+  },true);
+  window.homeOSOpenSettings=function(){
+    if(typeof openControl!=='function')return;
+    openControl(`<div class="control-kicker">ЦИФРОВОЙ БИЗНЕС</div><div class="control-title">Настройки в одном месте.</div><div class="control-sub">Здесь можно управлять тем, как устроена Главная и как Цифровой управляющий работает с бизнесом.</div><div class="memory-list"><div class="memory-row"><span class="memory-icon">◉</span><div><b>Главная</b><small>Порядок и вид блоков.</small></div></div><div class="memory-row"><span class="memory-icon">☼</span><div><b>Тема</b><small>Сейчас: ${document.body.classList.contains('dark')?'тёмная':'светлая'}.</small></div></div><div class="memory-row"><span class="memory-icon">◇</span><div><b>Память бизнеса</b><small>Контекст, решения и цели, которые я сохраняю.</small></div></div><div class="memory-row"><span class="memory-icon">◎</span><div><b>Правила работы</b><small>Границы самостоятельности и подтверждения.</small></div></div></div><div style="display:grid;gap:8px;margin-top:18px"><button class="control-action" onclick="closeControl();openHomeCustomizer()">Настроить Главную →</button><button class="control-action" onclick="toggleAppTheme();homeOSOpenSettings()">Переключить тему →</button><button class="control-action" onclick="closeControl();openBusinessRules()">Правила управляющего →</button><button class="control-action" onclick="closeControl();openBusinessMemory()">Память бизнеса →</button></div>`);
+  };
+  // Convert the existing Day card into a direct Tasks route too.
+  document.addEventListener('click',function(e){
+    const card=e.target.closest('.future-card');
+    if(!card)return;
+    const title=(card.querySelector('h3')?.textContent||'').toLowerCase();
+    if(title.includes('твой день') && !e.target.closest('button,input,a')){e.preventDefault();e.stopImmediatePropagation();go('tasks');}
+  },true);
+})();
+</script>
 </body></html>
