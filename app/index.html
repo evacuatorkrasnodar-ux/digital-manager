@@ -8111,7 +8111,7 @@ body.dark .dm-living-dots{color:#f7f9ff}
    const el=candidates.find(x=>/Доброе утро,?\s*Юлия/i.test(x.textContent||''));
    if(!el||el.querySelector('.dm-living-dots')) return;
    const b=document.createElement('button'); b.type='button'; b.className='dm-living-dots'; b.setAttribute('aria-label','Настроить управляющего');
-   b.innerHTML='<i></i><i></i><i></i>';
+   b.innerHTML='<span class="dm-menu-logo" aria-hidden="true"><svg viewBox="0 0 120 120"><rect class="sig-diamond" x="38" y="38" width="44" height="44" rx="9" transform="rotate(45 60 60)"></rect><rect class="sig-core" x="55" y="55" width="10" height="10" transform="rotate(45 60 60)"></rect></svg></span>';
    b.onclick=function(){ if(typeof window.showSection==='function') window.showSection('more'); else if(typeof window.openControl==='function') window.openControl(); else { const x=document.querySelector('#controlOverlay'); if(x) x.style.display='block'; }};
    el.appendChild(b);
  }
@@ -8976,7 +8976,7 @@ body.dark .dm-living-dots i:nth-child(3){color:#dfe7ff!important}
    b.type='button'; b.className='dm-living-dots';
    b.setAttribute('aria-label','Настроить управляющего');
    b.title='Настроить управляющего';
-   b.innerHTML='<i></i><i></i><i></i>';
+   b.innerHTML='<span class="dm-menu-logo" aria-hidden="true"><svg viewBox="0 0 120 120"><rect class="sig-diamond" x="38" y="38" width="44" height="44" rx="9" transform="rotate(45 60 60)"></rect><rect class="sig-core" x="55" y="55" width="10" height="10" transform="rotate(45 60 60)"></rect></svg></span>';
    b.addEventListener('click',function(e){
      e.preventDefault();e.stopPropagation();
      if(typeof window.openSettingsPanel==='function') window.openSettingsPanel();
@@ -12089,4 +12089,17 @@ body:not(.dark) .dm-signature-button-logo{
   body:not(.dark) .mobile-manager.dm-signature-manager-button::before,
   body:not(.dark) .mobile-manager.dm-signature-manager-button::after{animation:none!important}
 }
+</style>
+
+<style id="menu-logo-no-orbits-only">
+/* Только фирменный знак вместо троеточия. Без ореолов, свечения и орбит. */
+.dm-living-dots .dm-menu-logo{display:grid!important;place-items:center!important;width:30px!important;height:30px!important;color:currentColor!important;filter:none!important;box-shadow:none!important;background:none!important;}
+.dm-living-dots .dm-menu-logo svg{width:30px!important;height:30px!important;display:block!important;overflow:visible!important;filter:none!important;}
+.dm-living-dots .dm-menu-logo .sig-diamond{fill:#fff!important;stroke:currentColor!important;stroke-width:1.45!important;filter:none!important;}
+.dm-living-dots .dm-menu-logo .sig-core{fill:currentColor!important;filter:none!important;}
+.dm-living-dots:before,.dm-living-dots:after{content:none!important;display:none!important;box-shadow:none!important;filter:none!important;}
+body:not(.dark) .dm-living-dots .dm-menu-logo .sig-diamond{fill:#fff!important;stroke:#111216!important;}
+body:not(.dark) .dm-living-dots .dm-menu-logo .sig-core{fill:#111216!important;}
+body.dark .dm-living-dots .dm-menu-logo .sig-diamond{fill:#111216!important;stroke:#f5f5f7!important;}
+body.dark .dm-living-dots .dm-menu-logo .sig-core{fill:#f5f5f7!important;}
 </style>
