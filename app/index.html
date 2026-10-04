@@ -1512,6 +1512,7 @@ td:last-child{border-right:1px solid var(--dm-line)!important;border-radius:0 14
 .dm-global-logo{display:inline-grid;place-items:center;width:36px;height:36px;color:inherit;vertical-align:middle;margin-right:8px}
 .dm-global-logo svg{width:100%;height:100%}
 
+.sidebar .theme{display:none!important}
 </style>
 <style>
 .more-sheet,.control-overlay,.business-pulse{position:fixed;inset:0;z-index:90;display:none}.more-sheet.show,.control-overlay.show,.business-pulse.show{display:block}.more-backdrop,.control-backdrop,.pulse-backdrop{position:absolute;inset:0;background:rgba(8,9,14,.42);backdrop-filter:blur(9px)}
@@ -4545,7 +4546,31 @@ body.dark .future-evolution .evo-next button{
     transform:none !important;
   }
 }
-</style></head>
+</style>
+<style id="final-context-nav-fix">
+/* Точечная правка: мобильное нижнее меню больше не показываем. Тему/остальной дизайн не меняем. */
+.mobile-nav{display:none!important}
+
+/* Настройки — аккуратная кнопка прямо в верхнем баннере. */
+.future-state{position:relative}
+.top-banner-settings{
+  position:absolute;right:22px;top:20px;z-index:8;
+  display:inline-flex;align-items:center;gap:7px;
+  height:36px;padding:0 13px;border:1px solid rgba(255,255,255,.14);
+  border-radius:12px;background:rgba(255,255,255,.075);color:rgba(255,255,255,.88);
+  font-size:10px;font-weight:650;letter-spacing:-.01em;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:transform .2s ease,background .2s ease,border-color .2s ease;
+}
+.top-banner-settings:hover{transform:translateY(-1px);background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.22)}
+.top-banner-settings:active{transform:scale(.97)}
+.top-banner-settings-icon{font-size:14px;line-height:1;opacity:.8}
+@media(max-width:700px){
+  .top-banner-settings{right:14px;top:14px;height:34px;padding:0 11px;font-size:9px;border-radius:11px}
+  .top-banner-settings-icon{font-size:13px}
+}
+</style>
+</head>
 <body>
 <div class="app">
 <aside class="sidebar"><button aria-label="О компании Цифровой бизнес" class="brand brand-button" onclick="openCompanySheet()" type="button"><span aria-hidden="true" class="mark dm-company-mark">ЦБ</span><div class="brand-copy"><div class="brand-title">Цифровой бизнес</div><div class="brand-sub">IT · AI · AUTOMATION</div></div></button><nav class="nav">
@@ -4563,12 +4588,12 @@ body.dark .future-evolution .evo-next button{
 <svg class="theme-sun" viewbox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.8v2.1M12 19.1v2.1M21.2 12h-2.1M4.9 12H2.8M18.5 5.5l-1.5 1.5M7 17l-1.5 1.5M18.5 18.5L17 17M7 7L5.5 5.5"></path></svg>
 <svg class="theme-moon" viewbox="0 0 24 24"><path d="M18.8 15.6A7.7 7.7 0 0 1 8.4 5.2 7.7 7.7 0 1 0 18.8 15.6z"></path></svg>
 </span>
-<span>Тема</span>
+<span>Экран</span>
 </span>
-<span id="themeText">Тёмная</span>
+<span id="themeText">Сменить свет / тёмная</span>
 </button>
 <div class="home-organize-bar" id="homeOrganizeBar">
-<div class="home-organize-copy"><span class="home-organize-kicker">ТВОЯ ГЛАВНАЯ</span><b>Наведи порядок как тебе удобно.</b><small>Блоки можно убрать, вернуть и переставить.</small></div>
+<div class="home-organize-copy"><span class="home-organize-kicker">ТВОЯ ГЛАВНАЯ</span><b>Настрой главный экран под себя.</b><small>Меняет экран и блоки: светлая или тёмная тема — без настроек на три этажа.</small></div>
 <div class="home-organize-actions">
 <button aria-label="Переключить тему" class="home-organize-theme" id="homeThemeToggle" onclick="toggleAppTheme()" type="button">
 <span aria-hidden="true" class="home-theme-icon"><svg class="home-theme-sun" viewbox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.8v2.1M12 19.1v2.1M21.2 12h-2.1M4.9 12H2.8M18.5 5.5l-1.5 1.5M7 17l-1.5 1.5M18.5 18.5L17 17M7 7L5.5 5.5"></path></svg><svg class="home-theme-moon" viewbox="0 0 24 24"><path d="M18.8 15.6A7.7 7.7 0 0 1 8.4 5.2 7.7 7.7 0 1 0 18.8 15.6z"></path></svg></span><span id="homeThemeText">Выкл. свет</span>
@@ -4581,6 +4606,7 @@ body.dark .future-evolution .evo-next button{
 <div class="premium-home">
 <div class="future-shell">
 <section class="future-state home-block" data-home-block="state" data-home-title="Состояние бизнеса">
+<button class="top-banner-settings" type="button" onclick="openSettingsPanel()" aria-label="Открыть настройки"><span class="top-banner-settings-icon" aria-hidden="true">⚙</span><span>Настройки</span></button>
 <div class="state-greeting">
 <div class="future-kicker"><span class="pulse"></span> ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</div>
 <h1 id="managerGreeting">Доброе утро, Юлия.</h1>
