@@ -7720,3 +7720,317 @@ body.dark .dm-quick-suggest{background:rgba(255,255,255,.055)}
   document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('dmQuickMenu')?.__close?.()});
 })();
 </script>
+
+<style id="theme-material-v35">
+/* V35 — только цветовой материал. Геометрию, размеры и JS не меняем. */
+
+/* =========================
+   ТЁМНАЯ ТЕМА
+   Один глубокий материал, как у главного верхнего блока.
+   ========================= */
+body.dark{
+  --bg:#101012 !important;
+  --panel:rgba(16,16,18,.92) !important;
+  --text:#f5f6f8 !important;
+  --muted:#a4a6ae !important;
+  --line:rgba(255,255,255,.085) !important;
+  --shadow:0 20px 60px rgba(0,0,0,.28) !important;
+  background:#101012 !important;
+  color:#f5f6f8 !important;
+}
+body.dark .app,
+body.dark .content,
+body.dark main,
+body.dark .sidebar,
+body.dark .future-shell{
+  background:#101012 !important;
+}
+body.dark .sidebar{
+  border-right-color:rgba(255,255,255,.075) !important;
+  background:#101012 !important;
+}
+body.dark .future-card,
+body.dark .future-evolution,
+body.dark .future-twin,
+body.dark .future-simulator,
+body.dark .future-memory,
+body.dark .future-command,
+body.dark .future-contract,
+body.dark .premium-ask,
+body.dark .sim-result,
+body.dark .build-result,
+body.dark .twin-focus{
+  background:rgba(16,16,18,.96) !important;
+  border-color:rgba(255,255,255,.08) !important;
+}
+body.dark .future-state{
+  background:#101012 !important;
+  border-color:rgba(255,255,255,.08) !important;
+}
+body.dark .dm-quick-menu{
+  background:#101012 !important;
+  border-color:rgba(255,255,255,.10) !important;
+}
+
+/* =========================
+   СВЕТЛАЯ ТЕМА
+   Верхний блок — очень светлый холодный оттенок,
+   заметный относительно белого фона, но остаётся светлым.
+   ========================= */
+body:not(.dark) .future-state{
+  background:
+    radial-gradient(circle at 84% 12%,rgba(74,91,170,.09),transparent 29%),
+    radial-gradient(circle at 16% 86%,rgba(65,91,160,.055),transparent 26%),
+    linear-gradient(145deg,#f0f2f7,#e9ecf3) !important;
+  color:#15171c !important;
+  border:1px solid rgba(27,37,61,.07) !important;
+  box-shadow:0 18px 55px rgba(35,45,70,.09) !important;
+}
+body:not(.dark) .future-state .state-greeting h1,
+body:not(.dark) .future-state .state-copy h2,
+body:not(.dark) .future-state .state-time strong{
+  color:#15171c !important;
+}
+body:not(.dark) .future-state .state-greeting p,
+body:not(.dark) .future-state .state-time span,
+body:not(.dark) .future-state .state-copy p{
+  color:#5e6471 !important;
+}
+body:not(.dark) .future-state .state-eyebrow,
+body:not(.dark) .future-state .future-kicker,
+body:not(.dark) .future-state .state-meta{
+  color:#7b818d !important;
+}
+body:not(.dark) .future-state .state-copy:before{
+  background:#18254a !important;
+  opacity:.22 !important;
+}
+
+/* Настройки — одна из акцентных кнопок. */
+body:not(.dark) .top-banner-settings{
+  background:linear-gradient(135deg,#233b82 0%,#4053a7 52%,#5a4eb5 100%) !important;
+  color:#fff !important;
+  border-color:rgba(35,59,130,.28) !important;
+  box-shadow:0 10px 26px rgba(48,64,145,.20) !important;
+  text-shadow:none !important;
+}
+body:not(.dark) .top-banner-settings:hover{
+  background:linear-gradient(135deg,#2a448f 0%,#465bb4 52%,#6356c1 100%) !important;
+  border-color:rgba(47,70,150,.36) !important;
+}
+body:not(.dark) .top-banner-settings-icon{
+  color:#fff !important;
+  text-shadow:none !important;
+}
+
+/* Глубокий сапфирово-синий / индиго — только для основных действий. */
+body:not(.dark) .future-btn.primary,
+body:not(.dark) .future-create-btn,
+body:not(.dark) .evo-open,
+body:not(.dark) .sales-primary,
+body:not(.dark) .sales-wide-action,
+body:not(.dark) .manager-primary{
+  background:linear-gradient(135deg,#233b82 0%,#4053a7 52%,#5a4eb5 100%) !important;
+  color:#fff !important;
+  border-color:rgba(35,59,130,.30) !important;
+  box-shadow:0 10px 28px rgba(49,65,145,.17) !important;
+}
+body:not(.dark) .future-btn.primary:hover,
+body:not(.dark) .future-create-btn:hover,
+body:not(.dark) .evo-open:hover,
+body:not(.dark) .sales-primary:hover,
+body:not(.dark) .sales-wide-action:hover,
+body:not(.dark) .manager-primary:hover{
+  background:linear-gradient(135deg,#2a448f 0%,#465bb4 52%,#6356c1 100%) !important;
+  box-shadow:0 13px 30px rgba(49,65,145,.22) !important;
+}
+
+/* Остальные кнопки остаются нейтральными — акцент не расползается по интерфейсу. */
+</style>
+
+<style id="dark-material-exact-v36">
+/* V36: в тёмной теме возвращаем ТОТ ЖЕ материал, что у исходного верхнего блока.
+   Геометрию, размеры, светлую тему и JS не меняем. */
+:root{
+  --dm-dark-hero:radial-gradient(circle at 84% 18%,rgba(65,120,255,.22),transparent 25%),radial-gradient(circle at 13% 84%,rgba(48,213,180,.10),transparent 22%),linear-gradient(145deg,#141b31 0%,#101526 58%,#0d111d 100%);
+}
+body.dark,
+body.dark .app,
+body.dark .content,
+body.dark main,
+body.dark .premium-home,
+body.dark .future-shell,
+body.dark .sidebar{
+  background:var(--dm-dark-hero) !important;
+  color:#f8fbff !important;
+}
+
+/* Все основные поверхности получают тот же материал, а не отдельные серые оттенки. */
+body.dark .future-state,
+body.dark .future-card,
+body.dark .future-evolution,
+body.dark .future-twin,
+body.dark .future-simulator,
+body.dark .future-memory,
+body.dark .future-command,
+body.dark .future-contract,
+body.dark .future-create,
+body.dark .premium-ask,
+body.dark .sim-result,
+body.dark .build-result,
+body.dark .twin-focus,
+body.dark .card,
+body.dark .ask,
+body.dark .task-row,
+body.dark .client-row,
+body.dark .client-stat,
+body.dark .finance-card,
+body.dark .finance-stat,
+body.dark .promo-card,
+body.dark .promo-stat,
+body.dark .sales-card,
+body.dark .sales-stat,
+body.dark .sales-action-row,
+body.dark .sales-funnel-row,
+body.dark .sales-source-row,
+body.dark .sales-client-row,
+body.dark .metric,
+body.dark .item,
+body.dark .event-box,
+body.dark .channel-row,
+body.dark .finance-row,
+body.dark .sales-tip,
+body.dark .sales-bottom-note,
+body.dark .recovery-row,
+body.dark .finance-source-track,
+body.dark .promo-funnel .funnel-row,
+body.dark .opportunity-preview,
+body.dark .sales-command{
+  background:var(--dm-dark-hero) !important;
+  color:#f8fbff !important;
+  border-color:rgba(127,181,255,.14) !important;
+}
+
+/* Вложенные модальные/быстрые панели — тот же материал. */
+body.dark .future-autopilot-modal .autopilot-sheet,
+body.dark .future-blindspot-modal .blindspot-sheet,
+body.dark .future-build-modal .future-build-sheet,
+body.dark .future-intent-modal .intent-sheet,
+body.dark .future-twin-modal .twin-sheet,
+body.dark .future-sim-modal .sim-sheet,
+body.dark .future-memory-modal .memory-sheet-v11,
+body.dark .future-evolution-modal .evo-modal-sheet,
+body.dark .dm-quick-menu{
+  background:var(--dm-dark-hero) !important;
+  color:#f8fbff !important;
+  border-color:rgba(127,181,255,.16) !important;
+}
+
+/* Текст остаётся хорошо читаемым на тёмно-синем материале. */
+body.dark .future-card p,
+body.dark .future-card small,
+body.dark .future-card .future-desc,
+body.dark .task-row-text,
+body.dark .client-info,
+body.dark .finance-card-sub,
+body.dark .promo-card-sub,
+body.dark .sales-card-sub,
+body.dark .sales-source-meta,
+body.dark .sales-client-meta,
+body.dark .sales-action-text,
+body.dark .desc,
+body.dark .item-text,
+body.dark .finance-row-text,
+body.dark .channel-meta,
+body.dark .dm-quick-head span,
+body.dark .dm-quick-item small,
+body.dark .dm-quick-suggest small,
+body.dark .dm-quick-kicker,
+body.dark .dm-quick-menu .dm-quick-foot{
+  color:rgba(248,251,255,.68) !important;
+}
+body.dark .future-card h2,
+body.dark .future-card h3,
+body.dark .future-card b,
+body.dark .card .title,
+body.dark .task-row-title,
+body.dark .client-name,
+body.dark .finance-card-title,
+body.dark .promo-card-title,
+body.dark .sales-card-title,
+body.dark .sales-client-name,
+body.dark .sales-source-name,
+body.dark .dm-quick-head b,
+body.dark .dm-quick-item,
+body.dark .dm-quick-suggest{
+  color:#f8fbff !important;
+}
+
+/* Иконки/кнопки с нейтральным материалом не становятся серыми. */
+body.dark .theme,
+body.dark .dm-quick-close,
+body.dark .dm-quick-item,
+body.dark .dm-quick-suggest{
+  background:rgba(255,255,255,.055) !important;
+  border-color:rgba(127,181,255,.14) !important;
+}
+body.dark .theme:hover,
+body.dark .dm-quick-item:hover{
+  background:rgba(255,255,255,.085) !important;
+}
+
+/* Сам верхний блок — буквально тот же фон, без изменений. */
+body.dark .future-state{
+  background:var(--dm-dark-hero) !important;
+  border-color:rgba(127,181,255,.18) !important;
+}
+</style>
+
+<style id="manager-button-glow-v37">
+/* Финальная подстройка свечения кнопки управляющего под цвет верхнего тёмного блока. */
+.mobile-manager.dm-signature-manager-button{
+  color:#8fb8ff!important;
+  filter:drop-shadow(0 0 12px rgba(62,132,255,.28))!important;
+}
+.mobile-manager.dm-signature-manager-button::before{
+  background:
+    radial-gradient(circle,
+      rgba(62,132,255,.34) 0 28%,
+      rgba(42,111,229,.16) 50%,
+      rgba(36,210,184,.08) 62%,
+      transparent 76%)!important;
+  filter:blur(10px)!important;
+  opacity:.88!important;
+}
+.mobile-manager.dm-signature-manager-button::after{
+  border-color:rgba(93,151,255,.28)!important;
+  box-shadow:
+    0 0 24px rgba(62,132,255,.18),
+    0 16px 44px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.14)!important;
+}
+.dm-signature-button-logo .sig-orbit{
+  stroke:#77aaff!important;
+  opacity:.58!important;
+}
+.dm-signature-button-logo .sig-diamond{
+  stroke:#d8e6ff!important;
+  filter:drop-shadow(0 0 7px rgba(62,132,255,.48))!important;
+}
+.dm-signature-button-logo .sig-core{
+  fill:#6ea0ff!important;
+}
+</style>
+
+<style id="manager-button-diamond-dark-v39">
+/* V39: меняем именно ромб внутри кнопки голосового помощника.
+   Центральная точка остаётся белой. Верхний большой логотип не затрагиваем. */
+body.dark .mobile-manager.dm-signature-manager-button .dm-signature-button-logo .sig-diamond{
+  fill:#101526 !important;
+  stroke:rgba(127,181,255,.58) !important;
+  filter:drop-shadow(0 0 6px rgba(62,132,255,.16)) !important;
+}
+body.dark .mobile-manager.dm-signature-manager-button .dm-signature-button-logo .sig-core{
+  fill:#ffffff !important;
+}
+</style>
