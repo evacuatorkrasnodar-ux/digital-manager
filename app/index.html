@@ -5120,7 +5120,6 @@ body.dark #clientsBack{
 <div class="premium-home">
 <div class="future-shell">
 <section class="future-state home-block" data-home-block="state" data-home-title="Состояние бизнеса">
-<button class="top-banner-settings" type="button" onclick="openSettingsPanel()" aria-label="Открыть настройки"><span class="top-banner-settings-icon" aria-hidden="true">⚙</span><span>Настройки</span></button>
 <div class="state-greeting">
 <div class="future-kicker"><span class="pulse"></span> ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</div>
 <h1 id="managerGreeting">Доброе утро, Юлия.</h1>
@@ -7799,6 +7798,30 @@ body.dark .settings-sections-home-grid button{background:rgba(255,255,255,.045);
   ensureUi();
 })();
 </script>
+
+<style id="living-manager-dots-v1">
+.dm-living-dots{display:inline-flex;align-items:center;gap:5px;margin-left:9px;padding:6px 5px;border:0;background:transparent;color:inherit;cursor:pointer;vertical-align:middle;border-radius:999px;}
+.dm-living-dots i{display:block;width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.34;animation:dmDotPulse 2.4s ease-in-out infinite;}
+.dm-living-dots i:nth-child(2){animation-delay:.28s}.dm-living-dots i:nth-child(3){animation-delay:.56s}
+@keyframes dmDotPulse{0%,100%{transform:scale(.72);opacity:.25}35%{transform:scale(1.35);opacity:.9}55%{transform:scale(.9);opacity:.5}}
+body.dark .dm-living-dots{color:#f7f9ff}
+@media(prefers-reduced-motion:reduce){.dm-living-dots i{animation:none;opacity:.65}}
+</style>
+<script>
+(function(){
+ function addDots(){
+   const candidates=[...document.querySelectorAll('h1,h2,h3,.future-title,.future-greeting,[class*="greeting"]')];
+   const el=candidates.find(x=>/Доброе утро,?\s*Юлия/i.test(x.textContent||''));
+   if(!el||el.querySelector('.dm-living-dots')) return;
+   const b=document.createElement('button'); b.type='button'; b.className='dm-living-dots'; b.setAttribute('aria-label','Настроить управляющего');
+   b.innerHTML='<i></i><i></i><i></i>';
+   b.onclick=function(){ if(typeof window.showSection==='function') window.showSection('more'); else if(typeof window.openControl==='function') window.openControl(); else { const x=document.querySelector('#controlOverlay'); if(x) x.style.display='block'; }};
+   el.appendChild(b);
+ }
+ document.addEventListener('DOMContentLoaded',()=>setTimeout(addDots,80));
+ setTimeout(addDots,500);
+})();
+</script>
 </body>
 
 <style id="settings-sections-compact-v44">
@@ -8614,6 +8637,137 @@ body.dark .sales-explain>span{color:#ffb340!important;-webkit-text-fill-color:#f
 body.dark .sales-explain b{color:#fff!important;-webkit-text-fill-color:#fff!important;}
 body.dark .sales-explain p{color:rgba(247,249,255,.82)!important;-webkit-text-fill-color:rgba(247,249,255,.82)!important;}
 </style>
+
+<style id="v18-living-settings-dots-final">
+/* V18: убираем старую шестерёнку из верхнего блока. Настройки открываются через живые точки рядом с приветствием. */
+.top-banner-settings{display:none!important}
+.dm-living-dots{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:6px!important;
+  width:42px!important;height:30px!important;margin-left:8px!important;padding:0!important;
+  border:0!important;border-radius:999px!important;background:transparent!important;
+  color:#182447!important;vertical-align:middle!important;cursor:pointer!important;
+  position:relative!important;top:-2px!important;z-index:20!important;
+}
+.dm-living-dots i{
+  display:block!important;width:6px!important;height:6px!important;min-width:6px!important;min-height:6px!important;
+  border-radius:50%!important;background:currentColor!important;opacity:.42!important;
+  box-shadow:0 0 0 2px rgba(24,36,71,.06)!important;
+  animation:dmDotPulseV18 2.2s ease-in-out infinite!important;
+}
+.dm-living-dots i:nth-child(2){animation-delay:.28s!important}
+.dm-living-dots i:nth-child(3){animation-delay:.56s!important}
+@keyframes dmDotPulseV18{0%,100%{transform:scale(.72);opacity:.30}35%{transform:scale(1.45);opacity:1}55%{transform:scale(.92);opacity:.52}}
+body.dark .dm-living-dots{color:#dfe7ff!important}
+body.dark .dm-living-dots i{
+  background:#dfe7ff!important;
+  opacity:.42!important;
+  box-shadow:0 0 0 2px rgba(223,231,255,.06)!important;
+}
+body.dark .dm-living-dots i:nth-child(1),
+body.dark .dm-living-dots i:nth-child(2),
+body.dark .dm-living-dots i:nth-child(3){color:#dfe7ff!important}
+@media(max-width:700px){.dm-living-dots{width:46px!important;height:34px!important;gap:6px!important;margin-left:6px!important}.dm-living-dots i{width:7px!important;height:7px!important;min-width:7px!important;min-height:7px!important}}
+@media(prefers-reduced-motion:reduce){.dm-living-dots i{animation:none!important;opacity:.72!important}}
+</style>
+<script>
+(function(){
+ function mountDots(){
+   document.querySelectorAll('.top-banner-settings').forEach(x=>x.remove());
+   const h=document.getElementById('managerGreeting');
+   if(!h || h.querySelector('.dm-living-dots')) return;
+   const b=document.createElement('button');
+   b.type='button'; b.className='dm-living-dots';
+   b.setAttribute('aria-label','Настроить управляющего');
+   b.title='Настроить управляющего';
+   b.innerHTML='<i></i><i></i><i></i>';
+   b.addEventListener('click',function(e){
+     e.preventDefault();e.stopPropagation();
+     if(typeof window.openSettingsPanel==='function') window.openSettingsPanel();
+     else if(typeof window.showSection==='function') window.showSection('more');
+   });
+   h.appendChild(b);
+ }
+ function go(){mountDots();setTimeout(mountDots,250);setTimeout(mountDots,900);}
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',go); else go();
+})();
+</script>
+
+<style id="v20-dark-dots-clean">
+/* V20 — в тёмной теме точки выглядят ровно так же, как в светлой:
+   без овальной подложки, без отдельной кнопочной плашки. */
+.dm-living-dots,
+body.dark .dm-living-dots{
+  background:transparent!important;
+  background-color:transparent!important;
+  box-shadow:none!important;
+  border:0!important;
+  outline:0!important;
+}
+body.dark .dm-living-dots:hover,
+body.dark .dm-living-dots:focus,
+body.dark .dm-living-dots:active{
+  background:transparent!important;
+  background-color:transparent!important;
+  box-shadow:none!important;
+}
+body.dark .dm-living-dots i{
+  background:#f7f9ff!important;
+  box-shadow:none!important;
+  opacity:.48!important;
+}
+</style>
+
+
+<style id="v21-dots-right-corner">
+/* V21 — точки остаются такими же, но уходят в правый край блока приветствия. */
+#managerGreeting{
+  position:relative!important;
+  padding-right:58px!important;
+}
+#managerGreeting .dm-living-dots{
+  position:absolute!important;
+  right:0!important;
+  top:50%!important;
+  transform:translateY(-50%)!important;
+  margin-left:0!important;
+  z-index:30!important;
+}
+@media(max-width:700px){
+  #managerGreeting{
+    padding-right:54px!important;
+  }
+  #managerGreeting .dm-living-dots{
+    right:0!important;
+  }
+}
+</style>
+
+
+<style id="v22-dots-old-gear-position">
+/* V22 — возвращаем точки ровно в место, где раньше была шестерёнка. */
+#managerGreeting{
+  position:static!important;
+  padding-right:0!important;
+}
+#managerGreeting .dm-living-dots{
+  position:absolute!important;
+  right:20px!important;
+  top:18px!important;
+  left:auto!important;
+  margin:0!important;
+  transform:none!important;
+  width:46px!important;
+  height:34px!important;
+  z-index:30!important;
+}
+@media(max-width:700px){
+  #managerGreeting .dm-living-dots{
+    right:12px!important;
+    top:12px!important;
+  }
+}
+</style>
+
 </html>
 <style id="final-mobile-readable-fix-v30">
 /* Финальная точечная правка: верхний баннер, логотип, радары и читаемость. */
