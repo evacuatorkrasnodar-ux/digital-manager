@@ -5111,6 +5111,280 @@ body.dark #clientsBack{
 /* Не трогаем помощника: .mobile-manager, его оболочку, сферу, listening UI и composer
    намеренно не переопределяем этим блоком. */
 </style>
+
+<style id="automation-page-v33">
+/* V33 — Автоматизация: единый премиальный экран в обеих темах. */
+#controlOverlay .control-panel:has(.control-kicker:first-child) {
+  border:1px solid rgba(24,36,71,.10)!important;
+  box-shadow:0 28px 90px rgba(18,27,55,.16)!important;
+}
+#controlOverlay .control-panel .control-kicker{
+  color:#3d4f83!important;
+}
+#controlOverlay .control-panel .control-title{
+  color:#151a28!important;
+  font-weight:720!important;
+}
+#controlOverlay .control-panel .control-sub{
+  color:#687084!important;
+  max-width:560px!important;
+}
+#controlOverlay .control-panel .rule-list{
+  gap:10px!important;
+  margin-top:22px!important;
+}
+#controlOverlay .control-panel .rule-row{
+  min-height:68px!important;
+  padding:15px 16px!important;
+  border-radius:19px!important;
+  border-color:rgba(24,36,71,.10)!important;
+  background:rgba(247,248,251,.82)!important;
+  box-shadow:0 5px 18px rgba(20,28,50,.035)!important;
+}
+#controlOverlay .control-panel .rule-row b{
+  color:#1b2232!important;
+  font-size:12px!important;
+}
+#controlOverlay .control-panel .rule-row small{
+  color:#70798a!important;
+  font-size:10px!important;
+}
+#controlOverlay .control-panel .rule-toggle{
+  width:43px!important;
+  height:25px!important;
+  flex:0 0 43px!important;
+  border-radius:999px!important;
+  background:#d9dee8!important;
+  border:1px solid rgba(20,28,45,.12)!important;
+  padding:2px!important;
+  box-sizing:border-box!important;
+}
+#controlOverlay .control-panel .rule-toggle i{
+  width:19px!important;
+  height:19px!important;
+  margin:0!important;
+  border-radius:50%!important;
+  background:#fff!important;
+  box-shadow:0 1px 4px rgba(16,31,76,.20)!important;
+  transform:translateX(16px)!important;
+}
+#controlOverlay .control-panel .control-action{
+  margin-top:18px!important;
+  border-radius:14px!important;
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
+  color:#fff!important;
+  box-shadow:0 8px 22px rgba(30,48,91,.16)!important;
+}
+body.dark #controlOverlay .control-panel{
+  background:rgba(18,22,32,.98)!important;
+  border-color:rgba(255,255,255,.09)!important;
+  box-shadow:0 30px 90px rgba(0,0,0,.48)!important;
+}
+body.dark #controlOverlay .control-panel .control-kicker{color:#8da6ff!important}
+body.dark #controlOverlay .control-panel .control-title{color:#f7f9ff!important}
+body.dark #controlOverlay .control-panel .control-sub{color:#aeb6c4!important}
+body.dark #controlOverlay .control-panel .rule-row{
+  background:rgba(255,255,255,.045)!important;
+  border-color:rgba(255,255,255,.09)!important;
+  box-shadow:none!important;
+}
+body.dark #controlOverlay .control-panel .rule-row b{color:#f7f9ff!important}
+body.dark #controlOverlay .control-panel .rule-row small{color:#aeb6c4!important}
+body.dark #controlOverlay .control-panel .rule-toggle{
+  background:#343a48!important;
+  border-color:rgba(255,255,255,.10)!important;
+}
+body.dark #controlOverlay .control-panel .rule-toggle i{
+  background:#f7f9ff!important;
+  box-shadow:0 1px 4px rgba(0,0,0,.28)!important;
+}
+body.dark #controlOverlay .control-panel .control-action{
+  background:#f7f9ff!important;
+  color:#111217!important;
+  box-shadow:none!important;
+}
+@media(max-width:700px){
+  #controlOverlay .control-panel .control-kicker{font-size:9px!important}
+  #controlOverlay .control-panel .control-title{font-size:28px!important;line-height:1.06!important;letter-spacing:-.05em!important}
+  #controlOverlay .control-panel .control-sub{font-size:12px!important;line-height:1.5!important}
+  #controlOverlay .control-panel .rule-row{min-height:64px!important;padding:14px!important}
+}
+</style>
+
+<style id="autopilot-polish-v34">
+/* V34 — Автопилот: единый премиальный стиль для светлой и тёмной темы. */
+.future-autopilot-modal{
+  padding:18px!important;
+  align-items:flex-end!important;
+  background:rgba(8,12,24,.46)!important;
+  backdrop-filter:blur(22px)!important;
+  -webkit-backdrop-filter:blur(22px)!important;
+}
+.future-autopilot-modal .autopilot-sheet{
+  width:min(720px,100%)!important;
+  max-height:min(88dvh,760px)!important;
+  overflow:auto!important;
+  padding:30px!important;
+  border:1px solid rgba(24,36,71,.10)!important;
+  border-radius:30px!important;
+  background:rgba(248,249,252,.96)!important;
+  color:#10131a!important;
+  box-shadow:0 30px 100px rgba(20,28,50,.22)!important;
+}
+.future-autopilot-modal .auto-head h2{
+  font-size:30px!important;
+  line-height:1.04!important;
+  letter-spacing:-.055em!important;
+  margin:9px 0 10px!important;
+}
+.future-autopilot-modal .auto-head p{
+  max-width:560px!important;
+  font-size:12px!important;
+  line-height:1.55!important;
+  color:#687080!important;
+}
+.future-autopilot-modal .auto-level{
+  margin-top:24px!important;
+  padding:20px!important;
+  border-radius:20px!important;
+  background:#fff!important;
+  border:1px solid rgba(24,36,71,.08)!important;
+  box-shadow:0 12px 34px rgba(24,36,71,.06)!important;
+}
+.future-autopilot-modal .auto-level>div:first-child{
+  color:#858b98!important;
+}
+.future-autopilot-modal .auto-level strong{
+  color:#182447!important;
+  font-size:18px!important;
+}
+.future-autopilot-modal .auto-level input{
+  accent-color:#263968!important;
+}
+.future-autopilot-modal .auto-scale{
+  color:#9aa0ac!important;
+}
+.future-autopilot-modal .auto-rules{
+  margin-top:16px!important;
+  border:0!important;
+  display:grid!important;
+  gap:8px!important;
+}
+.future-autopilot-modal .auto-rule{
+  display:grid!important;
+  grid-template-columns:1fr auto 30px!important;
+  min-height:58px!important;
+  padding:12px 14px!important;
+  border:1px solid rgba(24,36,71,.08)!important;
+  border-radius:16px!important;
+  background:rgba(255,255,255,.82)!important;
+  box-shadow:0 7px 22px rgba(24,36,71,.035)!important;
+}
+.future-autopilot-modal .auto-rule span{
+  color:#182447!important;
+  font-size:11px!important;
+}
+.future-autopilot-modal .auto-rule b{
+  color:#777f8e!important;
+  font-size:9px!important;
+}
+.future-autopilot-modal .auto-rule i{
+  width:24px!important;height:24px!important;
+  display:grid!important;place-items:center!important;
+  border-radius:50%!important;
+  color:#9aa0aa!important;
+  background:#eef0f4!important;
+}
+.future-autopilot-modal .auto-rule.is-on i{
+  color:#fff!important;
+  background:linear-gradient(135deg,#182447,#263968 55%,#3d4f83)!important;
+  box-shadow:0 4px 12px rgba(38,57,104,.20)!important;
+}
+.future-autopilot-modal .auto-save{
+  margin-top:18px!important;
+  height:48px!important;
+  border-radius:14px!important;
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
+  color:#fff!important;
+  box-shadow:0 10px 25px rgba(38,57,104,.20)!important;
+}
+
+/* Тёмная тема — без белой панели и белых карточек. */
+body.dark .future-autopilot-modal{
+  background:rgba(5,8,18,.62)!important;
+}
+body.dark .future-autopilot-modal .autopilot-sheet{
+  background:#111827!important;
+  color:#f5f7fb!important;
+  border-color:rgba(126,157,230,.14)!important;
+  box-shadow:0 30px 100px rgba(0,0,0,.48)!important;
+}
+body.dark .future-autopilot-modal .auto-head p{
+  color:rgba(235,240,250,.62)!important;
+}
+body.dark .future-autopilot-modal .auto-level{
+  background:rgba(255,255,255,.045)!important;
+  border-color:rgba(126,157,230,.13)!important;
+  box-shadow:none!important;
+}
+body.dark .future-autopilot-modal .auto-level>div:first-child,
+body.dark .future-autopilot-modal .auto-scale{
+  color:rgba(235,240,250,.52)!important;
+}
+body.dark .future-autopilot-modal .auto-level strong{
+  color:#fff!important;
+}
+body.dark .future-autopilot-modal .auto-rule{
+  background:rgba(255,255,255,.045)!important;
+  border-color:rgba(126,157,230,.13)!important;
+  box-shadow:none!important;
+}
+body.dark .future-autopilot-modal .auto-rule span{
+  color:#f5f7fb!important;
+}
+body.dark .future-autopilot-modal .auto-rule b{
+  color:rgba(235,240,250,.54)!important;
+}
+body.dark .future-autopilot-modal .auto-rule i{
+  color:rgba(235,240,250,.55)!important;
+  background:rgba(255,255,255,.08)!important;
+}
+body.dark .future-autopilot-modal .auto-rule.is-on i{
+  color:#fff!important;
+  background:linear-gradient(135deg,#182447,#263968 52%,#3d4f83)!important;
+}
+body.dark .future-autopilot-modal .auto-save{
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
+}
+
+@media(max-width:700px){
+  .future-autopilot-modal{
+    padding:10px!important;
+  }
+  .future-autopilot-modal .autopilot-sheet{
+    width:100%!important;
+    max-height:calc(100dvh - 20px)!important;
+    padding:22px 16px calc(18px + env(safe-area-inset-bottom,0px))!important;
+    border-radius:25px!important;
+  }
+  .future-autopilot-modal .auto-head h2{
+    font-size:26px!important;
+  }
+  .future-autopilot-modal .auto-head p{
+    font-size:11px!important;
+  }
+  .future-autopilot-modal .auto-level{
+    padding:17px!important;
+    border-radius:18px!important;
+  }
+  .future-autopilot-modal .auto-rule{
+    min-height:56px!important;
+    grid-template-columns:1fr auto 28px!important;
+    padding:11px 12px!important;
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="app">
@@ -5422,7 +5696,7 @@ body.dark #clientsBack{
 <div aria-labelledby="evolutionTitle" aria-modal="true" class="evolution-sheet" role="dialog">
 <div class="evo-modal-head">
 <div><span class="future-label">ЭВОЛЮЦИЯ · ПОСЛЕДНИЕ 7 ДНЕЙ</span><h2 id="evolutionTitle">Как изменился твой бизнес.</h2><p>Это история не задач, а изменений. Здесь видно, что управляющий обнаружил, создал, проверил и чему научился.</p></div>
-<button aria-label="Закрыть" class="build-close" onclick="closeEvolution()" type="button">×</button>
+<button aria-label="На главную" class="build-close evolution-home-button" onclick="closeEvolution();if(window.showSection)window.showSection('home')" type="button">← На главную</button>
 </div>
 <div class="evo-summary">
 <div><small>ИЗМЕНЕНИЙ</small><b>14</b><span>за 7 дней</span></div>
@@ -5853,14 +6127,14 @@ body.dark #clientsBack{
 <div aria-hidden="true" class="control-overlay" id="controlOverlay">
 <div class="control-backdrop" onclick="closeControl()"></div>
 <section aria-modal="true" class="control-panel" role="dialog">
-<button class="control-close" onclick="closeControl()">×</button>
+<button class="control-close" onclick="closeControl();if(window.showSection)window.showSection('home')">← На главную</button>
 <div id="controlContent"></div>
 </section>
 </div>
 <div aria-hidden="true" class="business-pulse" id="businessPulse">
 <div class="pulse-backdrop" onclick="closeBusinessPulse()"></div>
 <section aria-modal="true" class="pulse-panel" role="dialog">
-<div class="pulse-top"><div><span>Цифровой управляющий</span><h2>Что происходит<br>с бизнесом?</br></h2></div><button onclick="closeBusinessPulse()">×</button></div>
+<div class="pulse-top"><div><span>Цифровой управляющий</span><h2>Что происходит<br>с бизнесом?</br></h2></div><button class="pulse-home-button" onclick="closeBusinessPulse();if(window.showSection)window.showSection('home')" aria-label="На главную">← На главную</button></div>
 <div class="pulse-hero"><div class="pulse-orb big"><i></i></div><div><b>Сегодня бизнес чувствует себя хорошо.</b><p>Но часть денег остаётся на столе: клиенты получают предложение и не получают повторного контакта.</p></div></div>
 <div class="pulse-links">
 <div><span>Продажи</span><b>184 000 ₽</b><em>вчера · +8%</em></div>
@@ -5956,7 +6230,7 @@ function openSettingsPanel(){
   syncSettingsHomeSwitches();
   syncManagerSettings();
 }
-function openDeveloperContact(){openControl(`<div class="control-kicker">Цифровой бизнес · IT · AI · AUTOMATION</div><div class="control-title">Связь с разработчиками</div><div class="control-sub">Канал для предложений по продукту, багов и идей. Подключение к почте добавим следующим шагом.</div><button class="control-action" onclick="closeControl()">Понятно</button>`)}
+function openDeveloperContact(){openControl(`<div class="developer-contact-shell"><div class="control-kicker">Цифровой бизнес · IT · AI · AUTOMATION</div><div class="control-title">Связь с разработчиками</div><div class="control-sub">Канал для предложений по продукту, багов и идей. Подключение к почте добавим следующим шагом.</div><div class="developer-contact-note"><b>Есть идея или что-то работает не так?</b><span>Расскажи — это место именно для связи с командой, которая развивает «Цифровой управляющий».</span></div><button class="control-action" onclick="closeControl()">Понятно</button></div>`) }
 function openBusinessPulse(){closeMore();document.getElementById('businessPulse').classList.add('show')}
 function closeBusinessPulse(){document.getElementById('businessPulse').classList.remove('show')}
 function closeControlAndMore(){closeControl();closeMore()}
@@ -10830,5 +11104,646 @@ body.dark #controlContent .settings-rule-toggle.is-on i{
   #deepSectionBack{height:38px!important;min-height:38px!important;padding:0 14px 0 11px!important;border-radius:14px!important;font-size:9.5px!important}
 }
 </style>
+
+<style id="v28-assistant-sapphire">
+/* V28 — помощник в том же сапфировом индиго, что и основные кнопки.
+   Тёмную тему не меняем. */
+body:not(.dark) .mobile-manager.dm-signature-manager-button{
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
+  border:1px solid rgba(93,112,166,.42)!important;
+  box-shadow:0 14px 34px rgba(30,48,91,.22),inset 0 1px 0 rgba(255,255,255,.12)!important;
+  color:#fff!important;
+}
+body:not(.dark) .dm-signature-button-logo{
+  color:#fff!important;
+  filter:drop-shadow(0 6px 14px rgba(0,0,0,.16))!important;
+}
+body:not(.dark) .dm-signature-button-logo .sig-orbit{
+  stroke:#fff!important;
+  opacity:.42!important;
+}
+body:not(.dark) .dm-signature-button-logo .sig-diamond{
+  fill:rgba(255,255,255,.96)!important;
+  stroke:#263968!important;
+}
+body:not(.dark) .dm-signature-button-logo .sig-core{
+  fill:#263968!important;
+}
+body:not(.dark) .mobile-manager.dm-signature-manager-button:hover{
+  filter:brightness(1.06)!important;
+}
+</style>
+
+<style id="v29-assistant-remove-circle">
+/* V29 — убираем только внешнюю круглую оболочку помощника.
+   Логотип и остальной интерфейс не меняем. */
+body:not(.dark) .mobile-manager.dm-signature-manager-button{
+  background:transparent!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+}
+</style>
+
+<style id="v30-assistant-theme-swap">
+/* V30 — меняем местами оформление помощника между светлой и тёмной темами. */
+/* Светлая тема получает прежний вид тёмной темы. */
+body:not(.dark) .mobile-manager.dm-signature-manager-button{
+  background:transparent!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+  color:#f5f5f7!important;
+  filter:none!important;
+}
+body:not(.dark) .dm-signature-manager-button::before{
+  background:radial-gradient(circle,rgba(255,255,255,.28) 0 32%,rgba(255,255,255,.10) 56%,transparent 74%)!important;
+  filter:blur(10px)!important;
+  opacity:.9!important;
+}
+body:not(.dark) .dm-signature-manager-button::after{
+  border:1px solid rgba(255,255,255,.20)!important;
+  box-shadow:0 18px 48px rgba(0,0,0,.52),inset 0 1px 0 rgba(255,255,255,.16)!important;
+}
+body:not(.dark) .dm-signature-button-logo .sig-orbit{stroke:#f7f8fa!important;opacity:.42!important}
+body:not(.dark) .dm-signature-button-logo .sig-diamond{fill:rgba(17,18,22,.96)!important;stroke:#f5f5f7!important}
+body:not(.dark) .dm-signature-button-logo .sig-core{fill:#f5f6f7!important}
+
+/* Тёмная тема получает прежний светлый/сапфировый вид. */
+body.dark .mobile-manager.dm-signature-manager-button{
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
+  border:1px solid rgba(93,112,166,.42)!important;
+  box-shadow:0 14px 34px rgba(30,48,91,.22),inset 0 1px 0 rgba(255,255,255,.12)!important;
+  color:#fff!important;
+  filter:none!important;
+}
+body.dark .dm-signature-button-logo{
+  color:#fff!important;
+  filter:drop-shadow(0 6px 14px rgba(0,0,0,.16))!important;
+}
+body.dark .dm-signature-button-logo .sig-orbit{
+  stroke:#fff!important;
+  opacity:.42!important;
+}
+body.dark .dm-signature-button-logo .sig-diamond{
+  fill:rgba(255,255,255,.96)!important;
+  stroke:#263968!important;
+}
+body.dark .dm-signature-button-logo .sig-core{
+  fill:#263968!important;
+}
+</style>
+
+
+<style id="v31-remove-duplicate-home-back">
+/* V31 — на внутренних страницах оставляем одну кнопку «На главную».
+   Фиксированная кнопка сверху уже выполняет эту функцию. */
+.clients-head .task-back,
+.tasks-head .task-back{
+  display:none!important;
+}
+</style>
+
+<style id="evolution-page-v32">
+/* V32 — Эволюция: единый премиальный экран для светлой и тёмной темы. */
+.future-evolution-modal{
+  padding:16px !important;
+  background:rgba(8,12,24,.48) !important;
+  backdrop-filter:blur(20px) saturate(120%) !important;
+  -webkit-backdrop-filter:blur(20px) saturate(120%) !important;
+}
+.evolution-sheet{
+  width:min(820px,100%) !important;
+  max-height:min(90vh,820px) !important;
+  padding:30px !important;
+  border:1px solid rgba(24,36,71,.10) !important;
+  background:linear-gradient(180deg,#ffffff 0%,#fafbfe 100%) !important;
+  box-shadow:0 30px 100px rgba(15,25,55,.22) !important;
+}
+.evo-modal-head{
+  align-items:flex-start !important;
+}
+.evo-modal-head h2{
+  font-weight:720 !important;
+  letter-spacing:-.055em !important;
+}
+.evo-modal-head p{
+  max-width:600px !important;
+  color:#707582 !important;
+}
+.evo-summary{
+  background:rgba(24,36,71,.10) !important;
+  border-color:rgba(24,36,71,.10) !important;
+  box-shadow:0 10px 30px rgba(24,36,71,.045) !important;
+}
+.evo-summary>div{
+  background:rgba(255,255,255,.92) !important;
+}
+.evo-summary b{
+  color:#182447 !important;
+}
+.evo-full-list{
+  border-color:rgba(24,36,71,.10) !important;
+}
+.evo-full-list article{
+  border-color:rgba(24,36,71,.10) !important;
+  grid-template-columns:96px 30px 1fr !important;
+  gap:15px !important;
+}
+.evo-full-mark{
+  color:#263968 !important;
+  border-color:rgba(38,57,104,.20) !important;
+  background:rgba(38,57,104,.055) !important;
+}
+.evo-full-list b{
+  color:#161a24 !important;
+  font-size:12px !important;
+}
+.evo-full-list p{
+  color:#707582 !important;
+  font-size:10px !important;
+}
+.evo-full-list label{
+  color:#66759a !important;
+}
+.evo-learning{
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%) !important;
+  box-shadow:0 14px 32px rgba(24,36,71,.16) !important;
+}
+.evo-learning span{color:rgba(255,255,255,.62) !important}
+.evo-learning p{color:rgba(255,255,255,.70) !important}
+
+/* Тёмная тема — исправляем старый селектор evo-modal-sheet и делаем весь экран единым. */
+body.dark .future-evolution-modal{
+  background:rgba(2,5,12,.64) !important;
+}
+body.dark .future-evolution-modal .evolution-sheet{
+  background:linear-gradient(180deg,#111827 0%,#0e1422 100%) !important;
+  color:#f7f9ff !important;
+  border-color:rgba(127,181,255,.14) !important;
+  box-shadow:0 30px 100px rgba(0,0,0,.48) !important;
+}
+body.dark .future-evolution-modal .evo-modal-head p{
+  color:rgba(248,251,255,.62) !important;
+}
+body.dark .future-evolution-modal .evo-summary{
+  background:rgba(127,181,255,.10) !important;
+  border-color:rgba(127,181,255,.13) !important;
+  box-shadow:none !important;
+}
+body.dark .future-evolution-modal .evo-summary>div{
+  background:rgba(255,255,255,.045) !important;
+  color:#f7f9ff !important;
+}
+body.dark .future-evolution-modal .evo-summary b{
+  color:#f7f9ff !important;
+}
+body.dark .future-evolution-modal .evo-full-list,
+body.dark .future-evolution-modal .evo-full-list article{
+  border-color:rgba(255,255,255,.09) !important;
+}
+body.dark .future-evolution-modal .evo-full-mark{
+  color:#dbe6ff !important;
+  border-color:rgba(127,181,255,.18) !important;
+  background:rgba(127,181,255,.07) !important;
+}
+body.dark .future-evolution-modal .evo-full-list b{
+  color:#f7f9ff !important;
+}
+body.dark .future-evolution-modal .evo-full-list p{
+  color:rgba(248,251,255,.62) !important;
+}
+body.dark .future-evolution-modal .evo-full-list label{
+  color:rgba(176,202,255,.72) !important;
+}
+body.dark .future-evolution-modal .evo-learning{
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%) !important;
+  box-shadow:0 14px 34px rgba(0,0,0,.28) !important;
+}
+
+@media(max-width:700px){
+  .future-evolution-modal{
+    padding:0 !important;
+    align-items:stretch !important;
+  }
+  .evolution-sheet{
+    width:100% !important;
+    max-height:none !important;
+    min-height:100dvh !important;
+    height:100dvh !important;
+    overflow:auto !important;
+    border-radius:0 !important;
+    padding:calc(18px + env(safe-area-inset-top)) 16px calc(22px + env(safe-area-inset-bottom)) !important;
+  }
+  .evo-modal-head{gap:12px !important}
+  .evo-modal-head h2{font-size:28px !important;line-height:1.02 !important}
+  .evo-modal-head p{font-size:12px !important;line-height:1.48 !important}
+  .evo-summary{grid-template-columns:1fr 1fr !important;margin-top:20px !important}
+  .evo-summary>div{padding:15px !important}
+  .evo-summary>div:last-child{grid-column:1/-1 !important}
+  .evo-summary b{font-size:24px !important}
+  .evo-full-list{margin-top:20px !important}
+  .evo-full-list article{
+    grid-template-columns:28px 1fr !important;
+    gap:11px !important;
+    padding:17px 0 !important;
+  }
+  .evo-full-list time{
+    grid-column:1/-1 !important;
+    font-size:8px !important;
+    margin-bottom:1px !important;
+  }
+  .evo-full-mark{width:28px !important;height:28px !important}
+  .evo-full-list b{font-size:13px !important;line-height:1.28 !important}
+  .evo-full-list p{font-size:11px !important;line-height:1.48 !important;margin-top:6px !important}
+  .evo-full-list label{font-size:7px !important}
+  .evo-learning{margin-top:16px !important;padding:18px !important;border-radius:20px !important}
+  .evo-learning b{font-size:13px !important;line-height:1.3 !important}
+  .evo-learning p{font-size:10px !important;line-height:1.5 !important}
+}
+</style>
+
+<style id="developer-contact-premium-v35">
+/* v35 — developer contact: same premium language as the other settings screens */
+#controlContent .developer-contact-shell{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+#controlContent .developer-contact-shell .control-kicker{
+  margin-bottom:10px;
+}
+#controlContent .developer-contact-shell .control-title{
+  letter-spacing:-.045em;
+  line-height:1.04;
+}
+#controlContent .developer-contact-shell .control-sub{
+  max-width:560px;
+  line-height:1.55;
+}
+#controlContent .developer-contact-note{
+  margin-top:22px;
+  padding:18px 18px 17px;
+  border:1px solid rgba(24,36,71,.10);
+  border-radius:20px;
+  background:rgba(24,36,71,.035);
+  color:inherit;
+}
+#controlContent .developer-contact-note b{
+  display:block;
+  font-size:13px;
+  letter-spacing:-.015em;
+}
+#controlContent .developer-contact-note span{
+  display:block;
+  margin-top:6px;
+  font-size:10px;
+  line-height:1.5;
+  color:var(--f-muted,#777);
+}
+#controlContent .developer-contact-shell .control-action{
+  margin-top:18px;
+}
+body.dark #controlContent .developer-contact-note{
+  border-color:rgba(255,255,255,.10);
+  background:rgba(255,255,255,.045);
+}
+@media(max-width:700px){
+  #controlContent .developer-contact-shell .control-title{
+    font-size:29px!important;
+  }
+  #controlContent .developer-contact-note{
+    margin-top:18px;
+    border-radius:18px;
+    padding:16px;
+  }
+}
+</style>
+
+
+<style id="developer-back-home-v36">
+#controlOverlay .control-close{
+  width:auto!important;
+  min-width:118px!important;
+  height:38px!important;
+  padding:0 14px!important;
+  border-radius:13px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:6px!important;
+  font:700 10px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif!important;
+  letter-spacing:-.01em!important;
+  color:#fff!important;
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
+  border:1px solid rgba(93,112,166,.42)!important;
+  box-shadow:0 8px 22px rgba(30,48,91,.16)!important;
+}
+#controlOverlay .control-close::before{
+  content:"←  На главную"!important;
+  font-size:10px!important;
+  line-height:1!important;
+  font-weight:700!important;
+}
+#controlOverlay .control-close span,
+#controlOverlay .control-close svg{
+  display:none!important;
+}
+body.dark #controlOverlay .control-close{
+  color:#fff!important;
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
+  border-color:rgba(93,112,166,.42)!important;
+}
+@media(max-width:700px){
+  #controlOverlay .control-close{
+    min-width:112px!important;
+    height:36px!important;
+    border-radius:12px!important;
+    padding:0 12px!important;
+  }
+}
+</style>
+
 </body>
+
+<style id="clients-single-home-v38">
+/* V38 — на странице «Клиенты» оставляем только одну кнопку «На главную». */
+#clientsPage #clientsBack{
+  display:none!important;
+}
+</style>
+
 </html>
+
+
+<style id="evolution-home-button-v37">
+/* V37 — в Эволюции вместо крестика единая кнопка «На главную». */
+#futureEvolutionModal .evolution-home-button{
+  width:auto!important;
+  min-width:118px!important;
+  height:38px!important;
+  padding:0 14px!important;
+  border:1px solid rgba(93,112,166,.42)!important;
+  border-radius:13px!important;
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
+  color:#fff!important;
+  box-shadow:0 8px 22px rgba(30,48,91,.16)!important;
+  font:700 10px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif!important;
+  letter-spacing:-.01em!important;
+  cursor:pointer!important;
+}
+#futureEvolutionModal .evolution-home-button:hover{
+  transform:translateY(-1px)!important;
+}
+#futureEvolutionModal .evolution-home-button:active{
+  transform:scale(.97)!important;
+}
+body.dark #futureEvolutionModal .evolution-home-button{
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
+  color:#fff!important;
+}
+@media(max-width:700px){
+  #futureEvolutionModal .evolution-home-button{
+    min-width:112px!important;
+    height:36px!important;
+    padding:0 12px!important;
+    border-radius:12px!important;
+  }
+}
+</style>
+
+
+<style id="memory-home-button-v39">
+/* V39 — «Память бизнеса»: настоящая кнопка «На главную», без крестика. */
+#controlOverlay .control-close::before{
+  content:none!important;
+  display:none!important;
+}
+#controlOverlay .control-close{
+  text-indent:0!important;
+}
+</style>
+
+
+<style id="business-pulse-home-v40">
+/* V40 — Business Pulse: единая кнопка «На главную» вместо крестика. */
+#businessPulse .pulse-top .pulse-home-button{
+  width:auto!important;
+  min-width:118px!important;
+  height:38px!important;
+  padding:0 14px!important;
+  border:1px solid rgba(93,112,166,.42)!important;
+  border-radius:13px!important;
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
+  color:#fff!important;
+  box-shadow:0 8px 22px rgba(30,48,91,.16)!important;
+  font:700 10px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif!important;
+  letter-spacing:-.01em!important;
+  cursor:pointer!important;
+}
+@media(max-width:700px){
+  #businessPulse .pulse-top .pulse-home-button{
+    min-width:112px!important;
+    height:36px!important;
+    padding:0 12px!important;
+    border-radius:12px!important;
+  }
+}
+</style>
+
+
+<style id="business-pulse-modern-v41">
+/* V41 — обновляем только внешний вид «Что происходит с бизнесом».
+   Логику, данные и действия не меняем. */
+.business-pulse .pulse-backdrop{
+  background:rgba(7,10,18,.58)!important;
+  backdrop-filter:blur(18px)!important;
+  -webkit-backdrop-filter:blur(18px)!important;
+}
+.business-pulse .pulse-panel{
+  width:min(820px,calc(100% - 32px))!important;
+  max-height:min(760px,calc(100vh - 32px))!important;
+  overflow:auto!important;
+  padding:30px!important;
+  border-radius:30px!important;
+  background:rgba(250,251,255,.97)!important;
+  border:1px solid rgba(24,36,71,.10)!important;
+  box-shadow:0 35px 100px rgba(12,20,42,.30)!important;
+}
+.business-pulse .pulse-top{
+  align-items:flex-start!important;
+  gap:22px!important;
+}
+.business-pulse .pulse-top span{
+  display:block!important;
+  font-size:9px!important;
+  letter-spacing:.14em!important;
+  font-weight:800!important;
+  color:#5368d9!important;
+}
+.business-pulse .pulse-top h2{
+  margin:9px 0 0!important;
+  font-size:43px!important;
+  line-height:.96!important;
+  letter-spacing:-.06em!important;
+  font-weight:760!important;
+  color:#111318!important;
+}
+.business-pulse .pulse-top .pulse-home-button{
+  flex:0 0 auto!important;
+  align-self:flex-start!important;
+}
+.business-pulse .pulse-hero{
+  margin-top:25px!important;
+  padding:20px!important;
+  gap:20px!important;
+  border-radius:25px!important;
+  background:linear-gradient(135deg,rgba(24,36,71,.07),rgba(61,79,131,.10))!important;
+  border:1px solid rgba(24,36,71,.08)!important;
+}
+.business-pulse .pulse-orb.big{
+  width:70px!important;
+  height:70px!important;
+  min-width:70px!important;
+  border-radius:22px!important;
+  box-shadow:0 12px 38px rgba(66,77,220,.28)!important;
+}
+.business-pulse .pulse-hero b{
+  display:block!important;
+  font-size:17px!important;
+  line-height:1.2!important;
+  letter-spacing:-.025em!important;
+  color:#15171c!important;
+}
+.business-pulse .pulse-hero p{
+  margin:7px 0 0!important;
+  font-size:12px!important;
+  line-height:1.52!important;
+  color:#737887!important;
+}
+.business-pulse .pulse-links{
+  gap:10px!important;
+  margin-top:12px!important;
+}
+.business-pulse .pulse-links>div{
+  min-height:92px!important;
+  padding:16px!important;
+  border-radius:19px!important;
+  background:rgba(255,255,255,.72)!important;
+  border:1px solid rgba(24,36,71,.09)!important;
+  box-shadow:0 8px 25px rgba(20,28,45,.035)!important;
+}
+.business-pulse .pulse-links span,
+.business-pulse .pulse-links em{
+  font-size:9px!important;
+  line-height:1.3!important;
+}
+.business-pulse .pulse-links b{
+  margin:9px 0 4px!important;
+  font-size:18px!important;
+  letter-spacing:-.035em!important;
+  color:#17191e!important;
+}
+.business-pulse .pulse-bottom{
+  margin-top:13px!important;
+  padding:18px!important;
+  border-radius:21px!important;
+  background:rgba(32,164,106,.055)!important;
+  border:1px solid rgba(32,164,106,.12)!important;
+}
+.business-pulse .pulse-bottom b{
+  font-size:10px!important;
+  letter-spacing:.08em!important;
+  text-transform:uppercase!important;
+}
+.business-pulse .pulse-bottom p{
+  margin:6px 0 13px!important;
+  font-size:11px!important;
+  line-height:1.5!important;
+}
+.business-pulse .pulse-bottom button{
+  min-height:40px!important;
+  padding:0 17px!important;
+  border-radius:12px!important;
+  background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
+  box-shadow:0 8px 20px rgba(30,48,91,.16)!important;
+}
+
+/* Тёмная тема — отдельный современный материал, без белых старых карточек. */
+body.dark .business-pulse .pulse-panel{
+  background:rgba(16,18,24,.985)!important;
+  border-color:rgba(255,255,255,.09)!important;
+  box-shadow:0 35px 110px rgba(0,0,0,.55)!important;
+}
+body.dark .business-pulse .pulse-top h2{
+  color:#f7f8fc!important;
+}
+body.dark .business-pulse .pulse-top span{
+  color:#8c82ff!important;
+}
+body.dark .business-pulse .pulse-hero{
+  background:linear-gradient(135deg,rgba(43,53,91,.48),rgba(54,63,110,.25))!important;
+  border-color:rgba(120,137,205,.12)!important;
+}
+body.dark .business-pulse .pulse-hero b{
+  color:#f5f7fb!important;
+}
+body.dark .business-pulse .pulse-hero p{
+  color:#a4a8b4!important;
+}
+body.dark .business-pulse .pulse-links>div{
+  background:rgba(255,255,255,.045)!important;
+  border-color:rgba(255,255,255,.09)!important;
+  box-shadow:none!important;
+}
+body.dark .business-pulse .pulse-links b{
+  color:#f4f6fa!important;
+}
+body.dark .business-pulse .pulse-links span,
+body.dark .business-pulse .pulse-links em{
+  color:#989eac!important;
+}
+body.dark .business-pulse .pulse-bottom{
+  background:rgba(32,164,106,.07)!important;
+  border-color:rgba(32,164,106,.16)!important;
+}
+body.dark .business-pulse .pulse-bottom p{
+  color:#a7acb7!important;
+}
+
+@media(max-width:700px){
+  .business-pulse .pulse-panel{
+    width:100%!important;
+    max-height:100dvh!important;
+    padding:20px 15px calc(20px + env(safe-area-inset-bottom))!important;
+    border-radius:28px 28px 0 0!important;
+  }
+  .business-pulse .pulse-top h2{
+    font-size:34px!important;
+  }
+  .business-pulse .pulse-top{
+    gap:12px!important;
+  }
+  .business-pulse .pulse-top .pulse-home-button{
+    min-width:112px!important;
+    height:36px!important;
+    padding:0 12px!important;
+    border-radius:12px!important;
+  }
+  .business-pulse .pulse-hero{
+    padding:16px!important;
+    gap:14px!important;
+    align-items:flex-start!important;
+  }
+  .business-pulse .pulse-orb.big{
+    width:58px!important;
+    height:58px!important;
+    min-width:58px!important;
+    border-radius:18px!important;
+  }
+  .business-pulse .pulse-hero b{
+    font-size:15px!important;
+  }
+  .business-pulse .pulse-links{
+    grid-template-columns:1fr 1fr!important;
+  }
+}
+</style>
