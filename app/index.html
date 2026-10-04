@@ -5557,12 +5557,6 @@ function toggleManagerRule(id,btn){
   btn.classList.toggle('is-on',rules[id]); btn.setAttribute('aria-checked',String(rules[id]));
 }
 function syncManagerSettings(){setManagerCommunicationMode(getManagerCommunicationMode());syncManagerRuleSwitches();}
-document.addEventListener('click',e=>{
-  const hint=e.target.closest?.('#managerHintsToggle');
-  if(hint){e.preventDefault();e.stopPropagation();window.toggleManagerHints?.(hint);return;}
-  const rule=e.target.closest?.('.settings-rule-toggle[data-rule-id]');
-  if(rule){e.preventDefault();e.stopPropagation();toggleManagerRule(rule.dataset.ruleId,rule);}
-});
 function openSettingsPanel(){
   closeMore();
   const sections = [
@@ -5570,58 +5564,48 @@ function openSettingsPanel(){
     {id:'finance', icon:'₽', title:'Деньги', desc:'Выручка, расходы, запас', action:"window.showSection?.('finance')"},
     {id:'clients', icon:'○', title:'Клиенты', desc:'Контакты и отношения', action:"window.showSection?.('clients')"},
     {id:'promo', icon:'⌁', title:'Продвижение', desc:'Реклама и каналы', action:"window.showSection?.('promo')"},
-    {id:'evolution', icon:'✦', title:'Эволюция', desc:'Что я уже улучшил', action:'openEvolution()'},
-    {id:'memory', icon:'◉', title:'Память', desc:'Что бизнес уже знает', action:'openBusinessMemory()'},
-    {id:'rules', icon:'⌁', title:'Правила', desc:'Границы моей самостоятельности', action:'openBusinessRules()'},
-    {id:'create', icon:'＋', title:'Создать', desc:'Новый инструмент или процесс', action:'openBuildModal()'}
+    {id:'evolution', icon:'✦', title:'Эволюция', desc:'Что управляющий уже улучшил', action:'openEvolution()'},
+    {id:'memory', icon:'◉', title:'Память бизнеса', desc:'Что управляющий помнит', action:'openBusinessMemory()'},
+    {id:'rules', icon:'⌁', title:'Правила', desc:'Границы самостоятельности', action:'openBusinessRules()'}
   ];
   const html = sections.map(s => `
-    <div class="rule-row settings-section-rule-row" data-setting-section="${s.id}">
-      <button type="button" class="settings-section-open-v46" onclick="closeControl();${s.action}">
-        <div><b>${s.title}</b><small>${s.desc}</small></div>
+    <div class="settings-clean-row" data-setting-section="${s.id}">
+      <button type="button" class="settings-clean-open" onclick="closeControl();${s.action}">
+        <span class="settings-clean-icon">${s.icon}</span><span class="settings-clean-copy"><b>${s.title}</b><small>${s.desc}</small></span>
       </button>
-      <button type="button" class="rule-toggle settings-rule-toggle settings-home-switch" data-section-id="${s.id}" aria-label="Показывать ${s.title} на Главной" aria-pressed="false" onclick="event.stopPropagation();toggleSettingsHomeSection('${s.id}',this)">
-        <i></i>
-      </button>
+      <button type="button" class="rule-toggle settings-rule-toggle settings-home-switch" data-section-id="${s.id}" aria-label="Показывать ${s.title} на Главной" aria-pressed="false"><i></i></button>
     </div>`).join('');
 
   openControl(`<div class="control-kicker">Настройки управляющего</div>
-    <div class="control-title">Вы задаёте границы. Я работаю внутри них.</div>
-    <div class="control-sub">Только важные настройки — без лишних меню.</div>
-    <div class="settings-toggle-legend"><span><i class="legend-on"></i> ВКЛ</span><span><i class="legend-off"></i> ВЫКЛ</span></div>
+    <div class="control-title">Настройки без путаницы.</div>
+    <div class="control-sub">Здесь только то, как я работаю и что показываю на Главной.</div>
 
-    <div class="settings-theme-box"><div><b>Экран</b><small>Выберите, как выглядит приложение.</small></div><div class="theme-mode-row"><button class="theme-mode-btn" data-mode="light" onclick="setThemeMode('light')">☀ Светлая тема</button><button class="theme-mode-btn" data-mode="dark" onclick="setThemeMode('dark')">◐ Тёмная тема</button></div></div>
+    <div class="settings-theme-box"><div><b>Экран</b><small>Светлая или тёмная тема.</small></div><div class="theme-mode-row"><button class="theme-mode-btn" data-mode="light" onclick="setThemeMode('light')">☀ Светлая</button><button class="theme-mode-btn" data-mode="dark" onclick="setThemeMode('dark')">◐ Тёмная</button></div></div>
 
-    <div class="settings-section-title">Как работает управляющий</div>
-    <div class="settings-section-note">Настройки сохраняются и задают мои границы.</div>
+    <div class="settings-section-title">1 · Как работает управляющий</div>
+    <div class="settings-section-note">Здесь задаются мои границы, стиль общения и уровень самостоятельности.</div>
     <div class="rule-list settings-rules-list">
-      <div class="rule-row settings-rule-row"><div><b>Самостоятельность</b><small>Советую → вы подтверждаете важные действия.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="independence" role="switch" aria-checked="true" aria-label="Самостоятельность" onclick="event.preventDefault();event.stopPropagation();toggleManagerRule('independence',this)"><i></i></button></div>
-      <div class="rule-row settings-rule-row"><div><b>Деньги</b><small>Изменения бюджета и расходы — сначала спросить вас.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="money" role="switch" aria-checked="true" aria-label="Деньги" onclick="event.preventDefault();event.stopPropagation();toggleManagerRule('money',this)"><i></i></button></div>
-      <div class="rule-row settings-rule-row"><div><b>Общение</b><small>Коротко, спокойно, по делу. Шутки — только когда бизнес не горит.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="communication" role="switch" aria-checked="true" aria-label="Общение" onclick="event.preventDefault();event.stopPropagation();toggleManagerRule('communication',this)"><i></i></button></div>
-      <div class="rule-row settings-rule-row"><div><b>Автопилот</b><small>Можно расширить границы, когда появится доверие.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="autopilot" role="switch" aria-checked="false" aria-label="Автопилот" onclick="event.preventDefault();event.stopPropagation();toggleManagerRule('autopilot',this)"><i></i></button></div>
+      <div class="rule-row settings-rule-row"><div><b>Самостоятельность</b><small>Советую → вы подтверждаете важные действия.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="independence" role="switch" aria-checked="true" aria-label="Самостоятельность"><i></i></button></div>
+      <div class="rule-row settings-rule-row"><div><b>Деньги</b><small>Расходы и изменения бюджета — сначала спросить вас.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="money" role="switch" aria-checked="true" aria-label="Деньги"><i></i></button></div>
+      <div class="rule-row settings-rule-row"><div><b>Общение</b><small>Коротко, спокойно и по делу. Юмор — когда всё спокойно.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="communication" role="switch" aria-checked="true" aria-label="Общение"><i></i></button></div>
+      <div class="rule-row settings-rule-row"><div><b>Автопилот</b><small>Расширяет границы, когда вы готовы доверить мне больше.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="autopilot" role="switch" aria-checked="false" aria-label="Автопилот"><i></i></button></div>
     </div>
     <button class="control-action settings-autopilot-action" onclick="closeControl();openAutopilot()">Настроить автопилот →</button>
 
-    <div class="settings-section-title">Разделы на Главной</div>
-    <div class="settings-section-note">Компактно: включи только то, что действительно хочешь видеть на Главной.</div>
-    <div class="settings-sections settings-sections-v2">${html}</div>
+    <div class="settings-section-title">2 · Что показывать на Главной</div>
+    <div class="settings-section-note">Переключатель справа — добавить короткую карточку на Главную. Нажми название — открыть полный раздел отдельно.</div>
+    <div class="settings-clean-list">${html}</div>
 
-    <div class="rule-list settings-rules-list settings-hints-row">
-      <div class="rule-row settings-rule-row">
-        <div><b>Подсказки</b><small>Показывать маленькие подсказки по ходу работы. Надоели — отключите.</small></div>
-        <button type="button" class="rule-toggle settings-rule-toggle" id="managerHintsToggle" role="switch" aria-checked="true" aria-label="Подсказки" onclick="event.preventDefault();event.stopPropagation();window.toggleManagerHints&&window.toggleManagerHints(this)"><i></i></button>
-      </div>
+    <div class="settings-create-card">
+      <div><span>ДОПОЛНИТЕЛЬНО</span><b>Создать новый инструмент</b><small>Не раздел и не настройка. Просто скажи, чего не хватает бизнесу.</small></div>
+      <button type="button" onclick="closeControl();openBuildModal()">Создать →</button>
     </div>
 
-    <div class="dm-learning-card">
-      <div class="dm-learning-copy">
-        <div class="dm-learning-kicker">Лёгкое обучение</div>
-        <b>Покажу, что здесь куда.</b>
-        <small>За минуту расскажу, что нажимать, когда говорить, когда писать и где искать главное. Без лекции на 40 минут — я сам такое не люблю.</small>
-      </div>
-      <button type="button" class="control-action dm-learning-button" onclick="openLightTutorial()">Пройти обучение →</button>
+    <div class="settings-section-title">3 · Помощь и обучение</div>
+    <div class="rule-list settings-rules-list">
+      <div class="rule-row settings-rule-row settings-hints-row"><div><b>Подсказки</b><small>Показывать маленькие подсказки по ходу работы.</small></div><button type="button" class="rule-toggle settings-rule-toggle" id="managerHintsToggle" role="switch" aria-checked="true" aria-label="Подсказки" onclick="event.preventDefault();event.stopPropagation();window.toggleManagerHints&&window.toggleManagerHints(this)"><i></i></button></div>
     </div>
-
+    <div class="dm-learning-card"><div class="dm-learning-copy"><div class="dm-learning-kicker">Лёгкое обучение</div><b>Покажу, что здесь куда.</b><small>За минуту объясню Главную, разделы и управляющего — без длинной лекции.</small></div><button type="button" class="control-action dm-learning-button" onclick="openLightTutorial()">Пройти обучение →</button></div>
     <div class="settings-company-footer"><div class="settings-company-brand"><span class="mark dm-company-mark">ЦБ</span><div><b>Цифровой бизнес</b><small>IT · AI · AUTOMATION</small></div></div><button type="button" class="settings-developer-link" onclick="openDeveloperContact()">Связаться с разработчиками <span>→</span></button></div>`);
   syncSettingsHomeSwitches();
   syncManagerSettings();
@@ -5657,42 +5641,25 @@ const tasksPage=document.getElementById('tasksPage'),clientsPage=document.getEle
 const homeMain=document.querySelector('main.content');
 const homeSections=homeMain?Array.from(homeMain.children).filter(el=>!['tasksPage','clientsPage','salesPage','financePage','promoPage'].includes(el.id)) : [];
 function showSection(section){
-  const pages = {
-    home: null,
-    tasks: tasksPage,
-    clients: clientsPage,
-    sales: salesPage,
-    finance: financePage,
-    promo: promoPage
-  };
-
+  document.body.dataset.currentSection=section;
+  const pages = {home:null,tasks:tasksPage,clients:clientsPage,sales:salesPage,finance:financePage,promo:promoPage};
   if(section === 'more'){ openMore(); return; }
   const isKnown = Object.prototype.hasOwnProperty.call(pages, section);
   if(!isKnown) return;
-
-  // One source of truth: hide every screen, then show exactly one.
-  homeSections.forEach(el => {
-    el.style.display = section === 'home' ? '' : 'none';
+  const prefs = (()=>{try{const x=JSON.parse(localStorage.getItem('db-home-section-switches-v1')||'null');return {sales:false,finance:false,clients:false,promo:false,...(x&&typeof x==='object'?x:{})}}catch(e){return {sales:false,finance:false,clients:false,promo:false}}})();
+  homeSections.forEach(el => { el.style.display = section === 'home' ? '' : 'none'; });
+  Object.keys(pages).forEach(key=>{
+    const page=pages[key]; if(!page)return;
+    const embedded = false; // На Главной показываем только компактный предпросмотр; полный раздел — только после открытия.
+    page.classList.toggle('show', key===section || embedded);
+    page.style.display = (key===section || embedded) ? 'block' : 'none';
+    page.classList.toggle('home-embedded-section', embedded);
   });
-
-  Object.keys(pages).forEach(key => {
-    const page = pages[key];
-    if(!page) return;
-    page.classList.toggle('show', key === section);
-    page.style.display = key === section ? 'block' : 'none';
+  document.querySelectorAll('[data-section]').forEach(btn=>{
+    btn.classList.toggle('active', btn.dataset.section===section);
+    if(btn.getAttribute('aria-current')!==null){ if(btn.dataset.section===section)btn.setAttribute('aria-current','page'); else btn.removeAttribute('aria-current'); }
   });
-
-  document.querySelectorAll('[data-section]').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.section === section);
-    if(btn.getAttribute('aria-current') !== null){
-      if(btn.dataset.section === section) btn.setAttribute('aria-current','page');
-      else btn.removeAttribute('aria-current');
-    }
-  });
-
-  document.documentElement.scrollTop = 0;
-  document.body.scrollTop = 0;
-  window.scrollTo(0,0);
+  document.documentElement.scrollTop=0; document.body.scrollTop=0; window.scrollTo(0,0);
 }
 
 document.querySelectorAll('[data-section]').forEach(btn => {
@@ -7277,47 +7244,19 @@ body.dark .rule-toggle i{background:#17181b!important}
 <script id="settings-home-switches-js-v41">
 (function(){
   const KEY='db-home-section-switches-v1';
-  const defaults={sales:false,finance:false,clients:false,promo:false,evolution:true,memory:true,rules:true,create:true};
-  const descriptions={sales:'Продажи',finance:'Деньги',clients:'Клиенты',promo:'Продвижение',evolution:'Эволюция',memory:'Память',rules:'Правила',create:'Создать'};
-  const homeBlockMap={evolution:'evolution',memory:'memory',rules:'contract',create:'create'};
+  const defaults={sales:false,finance:false,clients:false,promo:false,evolution:true,memory:true,rules:true};
   function load(){try{const x=JSON.parse(localStorage.getItem(KEY)||'null');return {...defaults,...(x&&typeof x==='object'?x:{})}}catch(e){return {...defaults}}}
   function save(x){try{localStorage.setItem(KEY,JSON.stringify(x))}catch(e){}}
-  function syncMappedHomeBlocks(prefs){
-    Object.entries(homeBlockMap).forEach(([id,blockId])=>{
-      const el=document.querySelector('[data-home-block=\"'+blockId+'\"]');
-      if(el)el.classList.toggle('is-hidden',prefs[id]===false);
-    });
-    try{
-      const raw=JSON.parse(localStorage.getItem('db-home-layout-v1')||'null');
-      if(Array.isArray(raw)){
-        raw.forEach(item=>{for(const [id,blockId] of Object.entries(homeBlockMap)){if(item.id===blockId)item.hidden=prefs[id]===false;}});
-        localStorage.setItem('db-home-layout-v1',JSON.stringify(raw));
-      }
-    }catch(e){}
+  function sync(){
+    const x=load();
+    document.querySelectorAll('.settings-home-switch[data-section-id]').forEach(btn=>{const on=!!x[btn.dataset.sectionId];btn.classList.toggle('is-on',on);btn.setAttribute('aria-pressed',String(on));});
+    ['evolution','memory','rules'].forEach((id)=>{const map={evolution:'evolution',memory:'memory',rules:'contract'}[id];const el=document.querySelector('[data-home-block="'+map+'"]');if(el)el.classList.toggle('is-hidden',x[id]===false);});
+    const pages={sales:'salesPage',finance:'financePage',clients:'clientsPage',promo:'promoPage'};
+    Object.entries(pages).forEach(([id,pid])=>{const el=document.getElementById(pid);if(el && document.body.dataset.currentSection==='home')el.style.display=x[id]?'block':'none'});
   }
-  function syncHomeLauncher(){
-    let shell=document.querySelector('.future-shell'); if(!shell)return;
-    const prefs=load();
-    syncMappedHomeBlocks(prefs);
-    let block=document.getElementById('settingsSectionsHomeBlock');
-    const active=['sales','finance','clients','promo'].filter(k=>prefs[k]);
-    if(!active.length){if(block)block.remove();return;}
-    if(!block){
-      block=document.createElement('section');
-      block.id='settingsSectionsHomeBlock';block.className='settings-sections-home-block';
-      block.setAttribute('data-home-block','settingsSections');block.setAttribute('data-home-title','Разделы на Главной');
-      shell.insertBefore(block,shell.children[1]||null);
-    }
-    const items=active.map(k=>{
-      const a={sales:"window.showSection?.('sales')",finance:"window.showSection?.('finance')",clients:"window.showSection?.('clients')",promo:"window.showSection?.('promo')",evolution:'openEvolution()',memory:'openBusinessMemory()',rules:'openBusinessRules()',create:'openBuildModal()'}[k];
-      const icon={sales:'↗',finance:'₽',clients:'○',promo:'⌁',evolution:'✦',memory:'◉',rules:'⌁',create:'＋'}[k];
-      return `<button type="button" onclick="${a}"><span>${icon}</span><b>${descriptions[k]}</b></button>`;
-    }).join('');
-    block.innerHTML=`<div class="settings-sections-home-head"><div><span>БЫСТРЫЙ ДОСТУП</span><b>Разделы, которые ты оставил на Главной.</b></div></div><div class="settings-sections-home-grid">${items}</div>`;
-  }
-  window.toggleSettingsHomeSection=function(id,btn){const x=load();x[id]=!x[id];save(x);btn.classList.toggle('is-on',x[id]);btn.setAttribute('aria-pressed',String(x[id]));syncHomeLauncher();};
-  window.syncSettingsHomeSwitches=function(){const x=load();document.querySelectorAll('.settings-home-switch[data-section-id]').forEach(btn=>{const on=!!x[btn.dataset.sectionId];btn.classList.toggle('is-on',on);btn.setAttribute('aria-pressed',String(on));});syncHomeLauncher();};
-  syncHomeLauncher();
+  window.toggleSettingsHomeSection=function(id,btn){const x=load();x[id]=!x[id];save(x);sync(); if(typeof showSection==='function')showSection('home');};
+  window.syncSettingsHomeSwitches=sync;
+  sync();
 })();
 </script>
 <style id="settings-sections-home-block-v41">
@@ -7957,6 +7896,136 @@ body.dark .dm-quick-form button{
     window.openSettingsPanel=function(){ original.apply(this,arguments); setTimeout(sync,0); };
   }
   setTimeout(sync,0);
+})();
+</script>
+
+<style id="home-section-preview-v110">
+/* Включённый раздел на Главной = компактный предпросмотр. Полная страница открывается только по действию. */
+.home-section-previews{display:grid;gap:10px;margin:0 0 12px}
+.home-section-preview{position:relative;overflow:hidden;padding:16px 16px 14px;border:1px solid var(--line);border-radius:20px;background:var(--panel);box-shadow:var(--shadow)}
+.home-section-preview::after{content:"";position:absolute;right:-34px;top:-42px;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(72,91,190,.13),transparent 68%);pointer-events:none}
+.home-section-preview .preview-kicker{font-size:8px;letter-spacing:.14em;font-weight:800;color:var(--muted);text-transform:uppercase}
+.home-section-preview h3{margin:5px 0 4px;font-size:18px;line-height:1.08;letter-spacing:-.035em}
+.home-section-preview p{margin:0;color:var(--muted);font-size:10px;line-height:1.45;max-width:560px}
+.home-section-preview .preview-metrics{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
+.home-section-preview .preview-metric{padding:7px 9px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.34);min-width:72px}
+.home-section-preview .preview-metric small{display:block;font-size:7px;color:var(--muted);margin-bottom:2px}
+.home-section-preview .preview-metric b{font-size:12px;letter-spacing:-.03em}
+.home-section-preview .preview-actions{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
+.home-section-preview .preview-note{font-size:8px;color:var(--muted)}
+.home-section-preview .preview-open{border:0;border-radius:11px;padding:9px 12px;background:#17181b;color:#fff;font-size:9px;font-weight:750;cursor:pointer;white-space:nowrap}
+.home-section-preview .preview-open span{opacity:.7;margin-left:3px}
+body.dark .home-section-preview .preview-metric{background:rgba(255,255,255,.045)}
+body.dark .home-section-preview .preview-open{background:#f4f4f5;color:#17181b}
+@media(max-width:700px){
+ .home-section-previews{gap:8px;margin-bottom:10px}
+ .home-section-preview{padding:14px;border-radius:18px}
+ .home-section-preview h3{font-size:16px}
+ .home-section-preview p{font-size:9.5px}
+ .home-section-preview .preview-metrics{margin-top:9px}
+ .home-section-preview .preview-actions{margin-top:10px}
+}
+
+/* Переключатели настроек: маленькие, спокойные, без ощущения огромной кнопки. */
+#controlContent .rule-toggle,#controlContent .settings-home-switch{width:38px!important;height:22px!important;padding:2px!important;border-radius:999px!important;flex:0 0 38px!important}
+#controlContent .rule-toggle i,#controlContent .settings-home-switch i{width:18px!important;height:18px!important}
+#controlContent .rule-toggle.is-on i,#controlContent .settings-home-switch.is-on i{transform:translateX(16px)!important}
+@media(max-width:700px){
+ #controlContent .rule-toggle,#controlContent .settings-home-switch{width:38px!important;height:22px!important;flex-basis:38px!important}
+ #controlContent .rule-toggle i,#controlContent .settings-home-switch i{width:18px!important;height:18px!important}
+}
+</style>
+<script id="home-section-preview-v110-js">
+(function(){
+ const KEY='db-home-section-switches-v1';
+ const defs={sales:false,finance:false,clients:false,promo:false};
+ function prefs(){try{const x=JSON.parse(localStorage.getItem(KEY)||'null');return {...defs,...(x&&typeof x==='object'?x:{})}}catch(e){return {...defs}}}
+ function previewData(id){
+   const data={
+    sales:{k:'ПРОДАЖИ',title:'Продажи под контролем.',text:'42 заявки, 11 продаж. Я уже вижу, где можно вернуть деньги сегодня.',metrics:[['Заявки','42'],['Продажи','11'],['Выручка','184 000 ₽']],note:'Есть клиенты, которые остановились после предложения.'},
+    finance:{k:'ДЕНЬГИ',title:'Деньги под контролем.',text:'Выручка, расходы и прибыль в одном месте. Я уже проверил, где сейчас утекают деньги.',metrics:[['Выручка','4,86 млн ₽'],['Расходы','3,59 млн ₽'],['Прибыль','1,27 млн ₽']],note:'Реклама пока окупается — бюджет резко не режем.'},
+    clients:{k:'КЛИЕНТЫ',title:'Клиенты.',text:'Я помню новые заявки, ожидания ответа и историю отношений с клиентами.',metrics:[['Новые заявки','14'],['Ждут ответа','3'],['Новых клиентов','8']],note:'Три клиента ждут следующего шага.'},
+    promo:{k:'ПРОДВИЖЕНИЕ',title:'Продвижение под контролем.',text:'Реклама и каналы в одном месте. Смотрю не только на клики, а на деньги.',metrics:[['Заявки','14'],['CPL','−12%'],['Каналы','4']],note:'Есть канал, который сейчас работает заметно лучше.'}
+   };return data[id];
+ }
+ function render(){
+   const shell=document.querySelector('.future-shell'); if(!shell)return;
+   let wrap=document.getElementById('homeSectionPreviews');
+   if(!wrap){wrap=document.createElement('div');wrap.id='homeSectionPreviews';wrap.className='home-section-previews';const state=shell.querySelector('[data-home-block="state"]');if(state)state.insertAdjacentElement('afterend',wrap);else shell.prepend(wrap);}
+   const p=prefs();
+   wrap.innerHTML=['sales','finance','clients','promo'].filter(id=>p[id]).map(id=>{const d=previewData(id);return `<article class="home-section-preview" data-preview-section="${id}"><div class="preview-kicker">${d.k}</div><h3>${d.title}</h3><p>${d.text}</p><div class="preview-metrics">${d.metrics.map(m=>`<div class="preview-metric"><small>${m[0]}</small><b>${m[1]}</b></div>`).join('')}</div><div class="preview-actions"><span class="preview-note">${d.note}</span><button type="button" class="preview-open" onclick="showSection('${id}')">Открыть раздел <span>→</span></button></div></article>`}).join('');
+   wrap.style.display=wrap.children.length?'grid':'none';
+   // Полные страницы не встраиваем на Главную. Они открываются только через кнопку.
+   ['salesPage','financePage','clientsPage','promoPage'].forEach(pid=>{const el=document.getElementById(pid);if(el){el.classList.remove('home-embedded-section');if(document.body.dataset.currentSection==='home')el.style.display='none';}});
+ }
+ window.renderHomeSectionPreviews=render;
+ document.addEventListener('DOMContentLoaded',()=>setTimeout(render,0));
+ const oldToggle=window.toggleSettingsHomeSection;
+ window.toggleSettingsHomeSection=function(id,btn){if(typeof oldToggle==='function')oldToggle(id,btn);setTimeout(render,0)};
+ const oldShow=window.showSection;
+ window.showSection=function(section){if(typeof oldShow==='function')oldShow(section);if(section==='home')setTimeout(render,0)};
+ setTimeout(render,80);
+})();
+</script>
+
+<style id="deep-section-back-v120">
+/* Возврат из большого раздела: всегда доступен, не зависит от нижнего меню. */
+#deepSectionBack{
+  position:fixed!important;
+  left:max(14px,env(safe-area-inset-left))!important;
+  top:max(14px,env(safe-area-inset-top))!important;
+  z-index:100050!important;
+  display:none;
+  align-items:center!important;
+  gap:6px!important;
+  height:36px!important;
+  padding:0 12px!important;
+  border:1px solid rgba(255,255,255,.14)!important;
+  border-radius:999px!important;
+  background:rgba(18,19,23,.86)!important;
+  color:#fff!important;
+  box-shadow:0 10px 30px rgba(0,0,0,.18)!important;
+  backdrop-filter:blur(18px)!important;
+  -webkit-backdrop-filter:blur(18px)!important;
+  font:700 10px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif!important;
+  cursor:pointer!important;
+}
+#deepSectionBack.show{display:flex!important}
+#deepSectionBack .back-x{font-size:17px!important;font-weight:400!important;line-height:1!important;opacity:.9}
+@media(max-width:700px){
+  #deepSectionBack{left:10px!important;top:max(10px,env(safe-area-inset-top))!important;height:34px!important;padding:0 11px!important;font-size:9px!important}
+}
+</style>
+<script id="deep-section-back-v120-js">
+(function(){
+  function ensureBack(){
+    let b=document.getElementById('deepSectionBack');
+    if(!b){
+      b=document.createElement('button');
+      b.id='deepSectionBack';
+      b.type='button';
+      b.innerHTML='<span class="back-x">‹</span><span>На главную</span>';
+      b.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();if(window.showSection)window.showSection('home');});
+      document.body.appendChild(b);
+    }
+    return b;
+  }
+  function syncBack(section){
+    const b=ensureBack();
+    b.classList.toggle('show',section && section!=='home' && section!=='more');
+  }
+  const oldShow=window.showSection;
+  if(typeof oldShow==='function'){
+    window.showSection=function(section){
+      oldShow.apply(this,arguments);
+      syncBack(section);
+    };
+  }
+  document.addEventListener('DOMContentLoaded',function(){
+    const current=document.body.dataset.currentSection||'home';
+    syncBack(current);
+  });
+  setTimeout(function(){syncBack(document.body.dataset.currentSection||'home')},100);
 })();
 </script>
 </html>
@@ -9657,3 +9726,107 @@ body.dark .theme-mode-btn.active{
 }
 body.dark #controlOverlay{background:rgba(0,0,0,.34)!important}
 </style>
+
+<style id="settings-order-v1">
+/* Новая логика настроек: разделы на Главной используют существующие полноценные страницы. */
+.settings-clean-list{display:grid;gap:7px;margin-top:8px}
+.settings-clean-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px;min-height:58px;padding:7px 9px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.48)}
+.settings-clean-open{display:grid;grid-template-columns:30px minmax(0,1fr);align-items:center;gap:9px;min-width:0;border:0;background:none;color:var(--text);text-align:left;padding:2px 0;cursor:pointer}
+.settings-clean-icon{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:rgba(20,54,130,.08);font-size:12px;font-weight:800}
+.settings-clean-copy{min-width:0}.settings-clean-copy b{display:block;font-size:12px}.settings-clean-copy small{display:block;margin-top:3px;font-size:9px;line-height:1.3;color:var(--muted)}
+.settings-create-card{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:9px;padding:13px;border:1px dashed var(--line);border-radius:16px;background:rgba(255,255,255,.34)}
+.settings-create-card span{display:block;font-size:7px;letter-spacing:.14em;color:var(--muted);font-weight:800}.settings-create-card b{display:block;font-size:12px;margin-top:3px}.settings-create-card small{display:block;font-size:9px;color:var(--muted);margin-top:3px}.settings-create-card button{flex:0 0 auto;border:0;border-radius:11px;padding:9px 12px;background:var(--text);color:var(--bg);font-size:10px;font-weight:800;cursor:pointer}
+.home-embedded-section{margin-top:14px!important}.home-embedded-section .task-back{display:none!important}
+.settings-sections-home-block{display:none!important}
+body.dark .settings-clean-row{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09)}
+body.dark .settings-clean-icon{background:rgba(255,255,255,.07)}
+body.dark .settings-create-card{background:rgba(255,255,255,.035)}
+@media(max-width:700px){.settings-clean-row{min-height:54px;padding:7px 8px;border-radius:15px}.settings-clean-open{grid-template-columns:27px minmax(0,1fr);gap:8px}.settings-clean-icon{width:27px;height:27px;border-radius:9px;font-size:11px}.settings-clean-copy b{font-size:11px}.settings-clean-copy small{font-size:8.5px}.settings-create-card{padding:12px}.settings-create-card small{max-width:210px}}
+</style>
+
+
+<style id="premium-consistency-fix-v121">
+/* Только визуальная доводка существующих элементов. Функциональность не меняем. */
+#controlContent .settings-sections-v2 .settings-home-switch,
+#controlContent .settings-clean-list .settings-home-switch{
+  width:38px!important;
+  height:22px!important;
+  min-width:38px!important;
+  max-width:38px!important;
+  flex:0 0 38px!important;
+  padding:2px!important;
+  margin:0!important;
+  border-radius:999px!important;
+  box-sizing:border-box!important;
+}
+#controlContent .settings-sections-v2 .settings-home-switch i,
+#controlContent .settings-clean-list .settings-home-switch i{
+  width:18px!important;
+  height:18px!important;
+  min-width:18px!important;
+  max-width:18px!important;
+  margin:0!important;
+  border-radius:50%!important;
+  transition:transform .22s cubic-bezier(.2,.8,.2,1)!important;
+}
+#controlContent .settings-sections-v2 .settings-home-switch.is-on i,
+#controlContent .settings-clean-list .settings-home-switch.is-on i{
+  transform:translateX(16px)!important;
+}
+#controlContent .settings-clean-row{
+  min-height:50px!important;
+  padding:8px 10px!important;
+  border-radius:16px!important;
+}
+#controlContent .settings-clean-copy b{font-size:11px!important;letter-spacing:-.01em!important}
+#controlContent .settings-clean-copy small{font-size:8.5px!important;line-height:1.25!important}
+
+/* Единая кнопка возврата для глубоких разделов — в языке существующего интерфейса. */
+#deepSectionBack{
+  left:max(14px,env(safe-area-inset-left))!important;
+  top:max(14px,env(safe-area-inset-top))!important;
+  height:38px!important;
+  padding:0 13px 0 10px!important;
+  gap:7px!important;
+  border:1px solid rgba(255,255,255,.13)!important;
+  border-radius:14px!important;
+  background:rgba(17,18,22,.76)!important;
+  color:rgba(255,255,255,.94)!important;
+  box-shadow:0 12px 34px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.07)!important;
+  backdrop-filter:blur(20px) saturate(1.2)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(1.2)!important;
+  font-size:10px!important;
+  letter-spacing:-.01em!important;
+  transition:transform .2s ease,background .2s ease,border-color .2s ease!important;
+}
+#deepSectionBack:hover{background:rgba(28,30,36,.88)!important;border-color:rgba(255,255,255,.2)!important;transform:translateY(-1px)!important}
+#deepSectionBack:active{transform:scale(.97)!important}
+#deepSectionBack .back-x{font-size:19px!important;line-height:1!important;opacity:.82!important;margin-top:-1px!important}
+@media(max-width:700px){
+  #deepSectionBack{
+    left:12px!important;
+    top:max(12px,env(safe-area-inset-top))!important;
+    height:36px!important;
+    padding:0 12px 0 9px!important;
+    border-radius:13px!important;
+    font-size:9px!important;
+  }
+}
+</style>
+<script id="premium-consistency-fix-v121-js">
+(function(){
+  // Убираем старый конфликт геометрии переключателей после динамического рендера настроек.
+  function polishSwitches(){
+    document.querySelectorAll('#controlContent .settings-home-switch').forEach(function(b){
+      b.style.width='38px';
+      b.style.height='22px';
+      b.style.flex='0 0 38px';
+    });
+  }
+  polishSwitches();
+  document.addEventListener('DOMContentLoaded',polishSwitches);
+  const mo=new MutationObserver(function(){polishSwitches()});
+  mo.observe(document.body,{childList:true,subtree:true});
+  setTimeout(function(){mo.disconnect()},12000);
+})();
+</script>
