@@ -4602,6 +4602,158 @@ body.dark .future-evolution .evo-next button{
  .settings-theme-box{display:block}.theme-mode-row{margin-top:12px}.theme-mode-btn{flex:1;font-size:11px;padding:11px 9px}
 }
 </style>
+
+<style id="cleanup-v69">
+/* v69 — cleanup: one source of truth for settings + assistant. */
+
+/* ===== SETTINGS: compact and symmetric ===== */
+#controlContent{box-sizing:border-box!important;overflow-x:hidden!important}
+#controlContent .settings-rules-list,
+#controlContent .settings-sections-v2{display:grid!important;grid-template-columns:1fr!important;gap:6px!important}
+#controlContent .settings-rules-list .settings-rule-row,
+#controlContent .settings-sections-v2 .settings-section-rule-row{
+  width:100%!important;min-height:50px!important;height:50px!important;
+  margin:0!important;padding:9px 11px!important;box-sizing:border-box!important;
+  display:grid!important;grid-template-columns:minmax(0,1fr) 38px!important;
+  align-items:center!important;column-gap:10px!important;
+  border-radius:15px!important;overflow:hidden!important;
+}
+#controlContent .settings-rules-list .settings-rule-row>div,
+#controlContent .settings-sections-v2 .settings-section-open-v46{
+  min-width:0!important;width:100%!important;margin:0!important;padding:0!important;
+}
+#controlContent .settings-sections-v2 .settings-section-open-v46{
+  border:0!important;background:transparent!important;text-align:left!important;display:block!important;color:inherit!important;
+}
+#controlContent .settings-rules-list b,
+#controlContent .settings-sections-v2 .settings-section-open-v46 b{
+  display:block!important;margin:0!important;font-size:12px!important;line-height:1.1!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+}
+#controlContent .settings-rules-list small,
+#controlContent .settings-sections-v2 .settings-section-open-v46 small{
+  display:block!important;margin:3px 0 0!important;font-size:9px!important;line-height:1.15!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+}
+#controlContent .settings-rules-list .settings-rule-toggle,
+#controlContent .settings-sections-v2 .settings-home-switch{
+  width:38px!important;height:20px!important;min-width:38px!important;max-width:38px!important;
+  min-height:20px!important;max-height:20px!important;padding:2px!important;margin:0!important;
+  border:0!important;border-radius:999px!important;box-sizing:border-box!important;
+  position:relative!important;display:block!important;justify-self:end!important;cursor:pointer!important;
+}
+#controlContent .settings-rules-list .settings-rule-toggle i,
+#controlContent .settings-sections-v2 .settings-home-switch i{
+  display:block!important;width:16px!important;height:16px!important;min-width:16px!important;max-width:16px!important;
+  min-height:16px!important;max-height:16px!important;border-radius:50%!important;
+  margin:0!important;transform:translateX(0)!important;transition:transform .18s ease!important;
+}
+#controlContent .settings-rules-list .settings-rule-toggle.is-on i,
+#controlContent .settings-sections-v2 .settings-home-switch.is-on i{transform:translateX(18px)!important}
+body:not(.dark) #controlContent .settings-rule-toggle,
+body:not(.dark) #controlContent .settings-home-switch{
+  background:linear-gradient(135deg,#123b8f 0%,#3850c9 55%,#5b3fd0 100%)!important;
+}
+body:not(.dark) #controlContent .settings-rule-toggle i,
+body:not(.dark) #controlContent .settings-home-switch i{
+  background:#fff!important;box-shadow:0 1px 3px rgba(16,31,76,.18)!important;
+}
+body.dark #controlContent .settings-rule-toggle,
+body.dark #controlContent .settings-home-switch{background:#f4f5f7!important}
+body.dark #controlContent .settings-rule-toggle i,
+body.dark #controlContent .settings-home-switch i{background:#17181b!important;box-shadow:0 1px 3px rgba(0,0,0,.25)!important}
+#controlContent .settings-autopilot-action{height:44px!important;min-height:44px!important;margin-top:9px!important;border-radius:14px!important}
+body:not(.dark) #controlContent .settings-autopilot-action{
+  background:linear-gradient(135deg,#123b8f 0%,#3850c9 55%,#5b3fd0 100%)!important;color:#fff!important;border:0!important;
+}
+#controlContent .settings-hints-row{margin-top:8px!important}
+@media(max-width:700px){
+  #controlContent .control-title{font-size:24px!important;line-height:1.08!important}
+  #controlContent .settings-theme-box{padding:12px!important}
+  #controlContent .settings-rules-list .settings-rule-row,
+  #controlContent .settings-sections-v2 .settings-section-rule-row{height:48px!important;min-height:48px!important}
+}
+
+/* ===== REMOVE THE OLD SIDE/QUICK MENU COMPLETELY ===== */
+#dmQuickMenu,.dm-quick-menu,.dm-quick-menu.is-open{display:none!important;visibility:hidden!important;pointer-events:none!important}
+.more-sheet{display:none!important;visibility:hidden!important;pointer-events:none!important}
+
+/* ===== ASSISTANT: tap = write, hold = voice ===== */
+.mobile-manager.dm-signature-manager-button{
+  left:50%!important;right:auto!important;bottom:calc(6px + env(safe-area-inset-bottom))!important;
+  width:78px!important;height:78px!important;padding:0!important;
+  transform:translateX(-50%)!important;transition:left .36s cubic-bezier(.2,.8,.2,1),right .36s cubic-bezier(.2,.8,.2,1),transform .36s cubic-bezier(.2,.8,.2,1),filter .24s ease!important;
+  touch-action:none!important;-webkit-user-select:none!important;user-select:none!important;
+  display:grid!important;place-items:center!important;overflow:visible!important;
+}
+.mobile-manager.dm-signature-manager-button::before,
+.mobile-manager.dm-signature-manager-button::after{content:none!important;display:none!important}
+body.dm-write-mode .mobile-manager.dm-signature-manager-button{
+  left:auto!important;right:18px!important;transform:none!important;
+}
+
+/* The old large quick-panel is gone. This is the only text composer. */
+#dmWritePanel{
+  position:fixed!important;z-index:100000!important;left:16px!important;right:112px!important;
+  bottom:calc(37px + env(safe-area-inset-bottom))!important;
+  opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+  transform:translateX(-10px)!important;transition:opacity .24s ease,transform .32s cubic-bezier(.2,.8,.2,1),visibility 0s linear .24s!important;
+}
+body.dm-write-mode #dmWritePanel{opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:translateX(0)!important;transition-delay:0s!important}
+#dmWriteHints{display:flex!important;gap:6px!important;overflow:auto!important;scrollbar-width:none!important;margin:0 0 7px!important;padding:0 1px!important}
+#dmWriteHints::-webkit-scrollbar{display:none!important}
+#dmWriteHints button{
+  flex:0 0 auto!important;height:27px!important;padding:0 10px!important;border-radius:999px!important;
+  font:600 9px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif!important;
+  border:1px solid rgba(49,86,199,.14)!important;color:#29448f!important;background:rgba(248,250,255,.82)!important;
+  box-shadow:0 5px 16px rgba(21,36,84,.06)!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;
+}
+#dmWriteRow{display:flex!important;align-items:center!important;gap:7px!important}
+#dmWriteInput{
+  flex:1 1 auto!important;width:100%!important;height:46px!important;min-width:0!important;
+  padding:0 14px!important;border-radius:15px!important;border:1px solid rgba(49,86,199,.15)!important;
+  background:rgba(248,250,255,.92)!important;color:#151821!important;outline:0!important;
+  font:500 12px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif!important;
+  box-shadow:0 9px 24px rgba(21,36,84,.08)!important;backdrop-filter:blur(16px)!important;-webkit-backdrop-filter:blur(16px)!important;
+}
+#dmWriteSend{
+  flex:0 0 46px!important;width:46px!important;height:46px!important;border:0!important;border-radius:15px!important;
+  padding:0!important;display:grid!important;place-items:center!important;cursor:pointer!important;color:#fff!important;
+  background:linear-gradient(135deg,#153f9a 0%,#3d4dcb 55%,#5a3fd0 100%)!important;
+  box-shadow:0 10px 24px rgba(36,62,161,.22)!important;transition:transform .18s ease,box-shadow .18s ease!important;
+}
+#dmWriteSend:active{transform:scale(.94)!important;box-shadow:0 5px 14px rgba(36,62,161,.18)!important}
+#dmWriteSend svg{width:18px!important;height:18px!important;fill:none!important;stroke:currentColor!important;stroke-width:2.2!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+
+/* Voice: one clean label and one living ring. */
+#dmListeningRing{position:absolute;inset:-9px!important;border:1px solid rgba(74,154,255,.42)!important;border-radius:50%!important;pointer-events:none!important;opacity:0!important}
+#dmListeningLabel{position:absolute;left:50%!important;bottom:calc(100% + 10px)!important;transform:translate(-50%,4px)!important;
+  padding:5px 10px!important;border-radius:999px!important;white-space:nowrap!important;opacity:0!important;pointer-events:none!important;
+  font:700 10px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif!important;letter-spacing:.01em!important;
+  color:#2f56bf!important;background:rgba(248,250,255,.94)!important;border:1px solid rgba(49,86,199,.13)!important;
+  box-shadow:0 8px 20px rgba(21,36,84,.10)!important;transition:opacity .2s ease,transform .2s ease!important;
+}
+body.dm-voice-active #dmListeningRing{opacity:1!important;animation:dmCleanListenRing 1.55s ease-out infinite!important}
+body.dm-voice-active #dmListeningLabel{opacity:1!important;transform:translate(-50%,0)!important}
+@keyframes dmCleanListenRing{0%{transform:scale(.86);opacity:.68}72%{transform:scale(1.12);opacity:0}100%{transform:scale(1.12);opacity:0}}
+body.dark #dmListeningRing{border-color:rgba(110,168,255,.55)!important}
+body.dark #dmListeningLabel{color:#eaf1ff!important;background:rgba(20,28,55,.94)!important;border-color:rgba(110,168,255,.24)!important;box-shadow:0 8px 20px rgba(0,0,0,.28)!important}
+body.dark #dmWriteHints button{color:#c6d7ff!important;background:rgba(20,28,55,.72)!important;border-color:rgba(110,168,255,.22)!important}
+body.dark #dmWriteInput{color:#f5f7fb!important;background:rgba(20,28,55,.88)!important;border-color:rgba(110,168,255,.22)!important}
+body.dark #dmWriteSend{background:linear-gradient(135deg,#234eae 0%,#4558cf 55%,#6547d7 100%)!important}
+
+@media(max-width:420px){
+  #dmWritePanel{left:10px!important;right:98px!important;bottom:calc(34px + env(safe-area-inset-bottom))!important}
+  #dmWriteHints{gap:5px!important;margin-bottom:6px!important}
+  #dmWriteHints button{height:25px!important;padding:0 8px!important;font-size:8px!important}
+  #dmWriteInput{height:43px!important;font-size:11px!important;border-radius:14px!important}
+  #dmWriteSend{flex-basis:43px!important;width:43px!important;height:43px!important;border-radius:14px!important}
+  #dmListeningLabel{font-size:9px!important}
+}
+
+/* The mobile manager stays visible only where the mobile shell is used. */
+@media(min-width:901px){.mobile-manager.dm-signature-manager-button{display:none!important}}
+</style>
 </head>
 <body>
 <div class="app">
@@ -4612,7 +4764,6 @@ body.dark .future-evolution .evo-next button{
 <button data-section="sales" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><path d="M5 17 19 5"></path><path d="M10 5h9v9"></path></svg></span><span class="premium-nav-label">Продажи</span></button>
 <button data-section="finance" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><path d="M8 4v16"></path><path d="M11.5 4H14a4 4 0 0 1 0 8H8"></path><path d="M8 12h6a4 4 0 0 1 0 8h-3"></path></svg></span><span class="premium-nav-label">Деньги</span></button>
 <button data-section="promo" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><path d="M5 19V8"></path><path d="M10 19V5"></path><path d="M15 19v-8"></path><path d="M20 19V3"></path></svg></span><span class="premium-nav-label">Продвижение</span></button>
-<button data-section="more" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><circle cx="5" cy="12" fill="currentColor" r="1" stroke="none"></circle><circle cx="12" cy="12" fill="currentColor" r="1" stroke="none"></circle><circle cx="19" cy="12" fill="currentColor" r="1" stroke="none"></circle></svg></span><span class="premium-nav-label">Ещё</span></button>
 </nav><button class="pwa-install" hidden="" id="installBtn" type="button">Установить приложение</button>
 <div class="online"><span class="dot"></span>Цифровой управляющий · онлайн</div><button aria-label="Переключить светлую и тёмную тему" class="theme" id="theme" type="button">
 <span class="theme-left">
@@ -5307,7 +5458,6 @@ body.dark .future-evolution .evo-next button{
 <button data-section="tasks" type="button"><span class="dm-icon dm-icon--success"><svg viewbox="0 0 24 24"><path d="M5 12.5 9.2 17 19 7"></path></svg></span><small>Действия</small><em>7</em></button>
 <button data-section="sales" type="button"><span class="dm-icon dm-icon--return"><svg viewbox="0 0 24 24"><path d="M5 17 19 5"></path><path d="M10 5h9v9"></path></svg></span><small>Продажи</small></button>
 <button data-section="finance" type="button"><span aria-hidden="true" class="dm-ruble-icon">₽</span><small>Деньги</small></button>
-<button data-section="more" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><circle cx="5" cy="12" fill="currentColor" r="1" stroke="none"></circle><circle cx="12" cy="12" fill="currentColor" r="1" stroke="none"></circle><circle cx="19" cy="12" fill="currentColor" r="1" stroke="none"></circle></svg></span><small>Ещё</small></button>
 </nav>
 <button aria-label="Открыть цифрового управляющего" class="mobile-manager dm-signature-manager-button" id="mobileManager" type="button">
 <span aria-hidden="true" class="dm-signature-button-aura"></span>
@@ -5332,7 +5482,7 @@ body.dark .future-evolution .evo-next button{
 <div class="company-head">
 <div class="company-brandline">
 <span aria-hidden="true" class="mark dm-company-mark company-logo"><span aria-hidden="true" class="dm-signature-logo"><svg viewbox="0 0 120 120"><g class="sig-orbits"><ellipse class="sig-orbit o1" cx="60" cy="60" rx="48" ry="30" transform="rotate(-8 60 60)"></ellipse><ellipse class="sig-orbit o2" cx="60" cy="60" rx="48" ry="30" transform="rotate(28 60 60)"></ellipse><ellipse class="sig-orbit o3" cx="60" cy="60" rx="42" ry="42" transform="rotate(-20 60 60)"></ellipse></g><g class="sig-diamond-wrap"><rect class="sig-diamond" height="42" rx="10" transform="rotate(45 60 60)" width="42" x="39" y="39"></rect><rect class="sig-core" height="10" transform="rotate(45 60 60)" width="10" x="55" y="55"></rect></g></svg></span></span>
-<div><div class="company-kicker">Компания</div><h2 id="companyTitle">Цифровой бизнес</h2><p>IT-компания</p></div>
+<div><div class="company-kicker">Компания</div><h2 id="companyTitle">Цифровой бизнес</h2><p>IT · AI · AUTOMATION</p></div>
 </div>
 <button aria-label="Закрыть" class="company-close" onclick="closeCompanySheet()" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><path d="m6 6 12 12"></path><path d="m18 6-12 12"></path></svg></span></button>
 </div>
@@ -5397,36 +5547,6 @@ body.dark .future-evolution .evo-next button{
 <div class="pulse-bottom" data-legacy-hidden="true"><b>Мой вывод</b><p>Сейчас не время просто покупать больше рекламы. Сначала вернём тех, кто уже почти купил.</p><button onclick="closeBusinessPulse();openRecovery()">Вернуть клиентов</button></div>
 </section>
 </div>
-<div aria-hidden="true" class="manager-sheet" id="managerSheet">
-<div class="manager-backdrop" id="managerBackdrop"></div>
-<section aria-labelledby="managerTitle" aria-modal="true" class="manager-panel dm-intelligence-panel" role="dialog">
-<div class="manager-grab"></div>
-<div class="dm-intel-hero">
-<div aria-hidden="true" class="dm-intel-orb-large" id="managerOrb"><span></span><i></i><b></b></div>
-<div class="dm-intel-status" id="managerStatus">ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</div>
-<h2 id="managerTitle">Я здесь.<br/><em>Говори.</em></h2>
-<p>Спроси меня о бизнесе голосом или напиши. Я разберусь и объясню всё простыми словами.</p>
-</div>
-<button aria-label="Начать разговор голосом" class="dm-talk-button" id="managerTalk" type="button">
-<span class="dm-talk-ripple r1"></span><span class="dm-talk-ripple r2"></span>
-<span class="dm-talk-mic"><svg viewbox="0 0 24 24"><rect height="12" rx="4" width="8" x="8" y="3"></rect><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3M9 21h6"></path></svg></span>
-<small id="managerTalkLabel">Нажми и говори</small>
-</button>
-<div class="dm-live-transcript" id="managerTranscript"><span class="dm-transcript-dot"></span><span id="managerTranscriptText">Я слушаю тебя.</span></div>
-<div class="manager-suggestions dm-intel-suggestions">
-<button data-manager-q="Почему сегодня мало продаж?" type="button">Почему мало продаж?</button>
-<button data-manager-q="Кому нужно ответить?" type="button">Кому ответить?</button>
-<button data-manager-q="Где мы теряем клиентов?" type="button">Где теряем клиентов?</button>
-<button data-manager-q="Сколько заработали?" type="button">Сколько заработали?</button>
-</div>
-<form class="manager-form dm-intel-form" id="managerForm">
-<input autocomplete="off" id="managerInput" placeholder="Или напиши мне…">
-<button aria-label="Отправить" class="manager-send" type="submit"><svg viewbox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"></path></svg></button>
-</input></form>
-<div class="manager-answer" id="managerAnswer"></div>
-<button aria-label="Закрыть" class="manager-close dm-intel-close" id="managerClose" type="button">×</button>
-</section>
-</div>
 <script>
 
 function openMore(){document.getElementById('moreSheet').classList.add('show')}
@@ -5436,7 +5556,96 @@ function closeControl(){document.getElementById('controlOverlay').classList.remo
 function openBusinessMemory(){closeMore();openControl(`<div class="control-kicker">Память бизнеса</div><div class="control-title">Я знаю ваш бизнес.</div><div class="control-sub">Не нужно каждый раз объяснять одно и то же. Здесь живёт контекст, который помогает мне принимать решения вместе с вами.</div><div class="memory-list"><div class="memory-row"><span class="memory-icon">₽</span><div><b>Цель</b><small>Расти по прибыли, а не просто по обороту.</small></div></div><div class="memory-row"><span class="memory-icon">⌂</span><div><b>Основной канал</b><small>Сайт приводит заявки, Telegram даёт заметную долю продаж.</small></div></div><div class="memory-row"><span class="memory-icon">◯</span><div><b>Клиенты</b><small>Важны быстрый ответ и повторный контакт после предложения.</small></div></div><div class="memory-row"><span class="memory-icon">◇</span><div><b>Ваш стиль управления</b><small>Сначала показать причину. Потом предложить действие. Деньги — только после подтверждения.</small></div></div></div><button class="control-action" onclick="closeControl();openBusinessRules()">Открыть правила</button>`)}
 function openBusinessRules(){closeMore();openControl(`<div class="control-kicker">Автоматизация</div><div class="control-title">Я знаю, когда действовать.</div><div class="control-sub">Вы задаёте границы. Я слежу за бизнесом внутри них и не делаю важные шаги молча.</div><div class="rule-list"><div class="rule-row"><div><b>Если клиент ждёт больше 30 минут</b><small>Подготовить напоминание владельцу.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Если стоимость заявки выросла на 20%</b><small>Сообщить и показать, какой канал изменился.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Если клиент готов купить</b><small>Создать задачу и поднять её наверх.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Если действие влияет на деньги</b><small>Сначала спросить вас.</small></div><span class="rule-toggle"><i></i></span></div></div><button class="control-action" onclick="closeControl();openBusinessPulse()">Открыть бизнес целиком</button>`)}
 function setThemeMode(mode){const b=document.body;if(mode==='dark')b.classList.add('dark');else b.classList.remove('dark');try{localStorage.setItem('db-theme',mode)}catch(e){}themeLabel();document.querySelectorAll('.theme-mode-btn').forEach(x=>x.classList.toggle('active',x.dataset.mode===mode));}
-function openSettingsPanel(){closeMore();openControl(`<div class="control-kicker">Настройки управляющего</div><div class="control-title">Вы задаёте границы. Я работаю внутри них.</div><div class="control-sub">Только важные настройки — без лишних меню.</div><div class="settings-theme-box"><div><b>Экран</b><small>Выберите, как выглядит приложение.</small></div><div class="theme-mode-row"><button class="theme-mode-btn" data-mode="light" onclick="setThemeMode('light')">☀ Светлая</button><button class="theme-mode-btn" data-mode="dark" onclick="setThemeMode('dark')">◐ Тёмная</button></div></div><div class="rule-list"><div class="rule-row"><div><b>Самостоятельность</b><small>Советую → вы подтверждаете важные действия.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Деньги</b><small>Изменения бюджета и расходы — сначала спросить вас.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Общение</b><small>Коротко, спокойно, по делу. Шутки — только когда бизнес не горит.</small></div><span class="rule-toggle"><i></i></span></div><div class="rule-row"><div><b>Автопилот</b><small>Можно расширить границы, когда появится доверие.</small></div><span class="rule-toggle"><i></i></span></div></div><button class="control-action" onclick="closeControl();openAutopilot()">Настроить автопилот →</button>`)}
+
+const MANAGER_COMM_KEY='db-manager-communication-v1';
+const MANAGER_RULES_KEY='db-manager-rules-v1';
+function getManagerCommunicationMode(){try{return localStorage.getItem(MANAGER_COMM_KEY)||'both'}catch(e){return 'both'}}
+function setManagerCommunicationMode(mode){
+  const next=['voice','text','both'].includes(mode)?mode:'both';
+  try{localStorage.setItem(MANAGER_COMM_KEY,next)}catch(e){}
+  document.querySelectorAll('[data-communication-mode]').forEach(b=>{const on=b.dataset.communicationMode===next;b.classList.toggle('is-active',on);b.setAttribute('aria-pressed',String(on));});
+}
+function getManagerRules(){
+  const defaults={independence:true,money:true,communication:true,autopilot:false};
+  try{const x=JSON.parse(localStorage.getItem(MANAGER_RULES_KEY)||'null');return {...defaults,...(x&&typeof x==='object'?x:{})}}catch(e){return {...defaults}}
+}
+function syncManagerRuleSwitches(){
+  const rules=getManagerRules();
+  document.querySelectorAll('.settings-rule-toggle[data-rule-id]').forEach(btn=>{const on=!!rules[btn.dataset.ruleId];btn.classList.toggle('is-on',on);btn.setAttribute('aria-checked',String(on));});
+}
+function toggleManagerRule(id,btn){
+  const rules=getManagerRules(); rules[id]=!rules[id];
+  try{localStorage.setItem(MANAGER_RULES_KEY,JSON.stringify(rules))}catch(e){}
+  btn.classList.toggle('is-on',rules[id]); btn.setAttribute('aria-checked',String(rules[id]));
+}
+function syncManagerSettings(){setManagerCommunicationMode(getManagerCommunicationMode());syncManagerRuleSwitches();}
+document.addEventListener('click',e=>{
+  const rule=e.target.closest?.('.settings-rule-toggle[data-rule-id]');
+  if(rule){e.preventDefault();e.stopPropagation();toggleManagerRule(rule.dataset.ruleId,rule);}
+});
+function openSettingsPanel(){
+  closeMore();
+  const sections = [
+    {id:'sales', icon:'↗', title:'Продажи', desc:'Клиенты, заявки, сделки', action:"window.showSection?.('sales')"},
+    {id:'finance', icon:'₽', title:'Деньги', desc:'Выручка, расходы, запас', action:"window.showSection?.('finance')"},
+    {id:'clients', icon:'○', title:'Клиенты', desc:'Контакты и отношения', action:"window.showSection?.('clients')"},
+    {id:'promo', icon:'⌁', title:'Продвижение', desc:'Реклама и каналы', action:"window.showSection?.('promo')"},
+    {id:'evolution', icon:'✦', title:'Эволюция', desc:'Что я уже улучшил', action:'openEvolution()'},
+    {id:'memory', icon:'◉', title:'Память', desc:'Что бизнес уже знает', action:'openBusinessMemory()'},
+    {id:'rules', icon:'⌁', title:'Правила', desc:'Границы моей самостоятельности', action:'openBusinessRules()'},
+    {id:'create', icon:'＋', title:'Создать', desc:'Новый инструмент или процесс', action:'openBuildModal()'}
+  ];
+  const html = sections.map(s => `
+    <div class="rule-row settings-section-rule-row" data-setting-section="${s.id}">
+      <button type="button" class="settings-section-open-v46" onclick="closeControl();${s.action}">
+        <div><b>${s.title}</b><small>${s.desc}</small></div>
+      </button>
+      <button type="button" class="rule-toggle settings-rule-toggle settings-home-switch" data-section-id="${s.id}" aria-label="Показывать ${s.title} на Главной" aria-pressed="false" onclick="event.stopPropagation();toggleSettingsHomeSection('${s.id}',this)">
+        <i></i>
+      </button>
+    </div>`).join('');
+
+  openControl(`<div class="control-kicker">Настройки управляющего</div>
+    <div class="control-title">Вы задаёте границы. Я работаю внутри них.</div>
+    <div class="control-sub">Только важные настройки — без лишних меню.</div>
+
+    <div class="settings-theme-box"><div><b>Экран</b><small>Выберите, как выглядит приложение.</small></div><div class="theme-mode-row"><button class="theme-mode-btn" data-mode="light" onclick="setThemeMode('light')">☀ Светлая тема</button><button class="theme-mode-btn" data-mode="dark" onclick="setThemeMode('dark')">◐ Тёмная тема</button></div></div>
+
+    <div class="settings-section-title">Как работает управляющий</div>
+    <div class="settings-section-note">Настройки сохраняются и задают мои границы.</div>
+    <div class="rule-list settings-rules-list">
+      <div class="rule-row settings-rule-row"><div><b>Самостоятельность</b><small>Советую → вы подтверждаете важные действия.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="independence" role="switch" aria-checked="true" aria-label="Самостоятельность"><i></i></button></div>
+      <div class="rule-row settings-rule-row"><div><b>Деньги</b><small>Изменения бюджета и расходы — сначала спросить вас.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="money" role="switch" aria-checked="true" aria-label="Деньги"><i></i></button></div>
+      <div class="rule-row settings-rule-row"><div><b>Общение</b><small>Коротко, спокойно, по делу. Шутки — только когда бизнес не горит.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="communication" role="switch" aria-checked="true" aria-label="Общение"><i></i></button></div>
+      <div class="rule-row settings-rule-row"><div><b>Автопилот</b><small>Можно расширить границы, когда появится доверие.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="autopilot" role="switch" aria-checked="false" aria-label="Автопилот"><i></i></button></div>
+    </div>
+    <button class="control-action settings-autopilot-action" onclick="closeControl();openAutopilot()">Настроить автопилот →</button>
+
+    <div class="settings-section-title">Разделы на Главной</div>
+    <div class="settings-section-note">Компактно: включи только то, что действительно хочешь видеть на Главной.</div>
+    <div class="settings-sections settings-sections-v2">${html}</div>
+
+    <div class="rule-list settings-rules-list settings-hints-row">
+      <div class="rule-row settings-rule-row">
+        <div><b>Подсказки</b><small>Показывать маленькие подсказки по ходу работы. Надоели — отключите.</small></div>
+        <button type="button" class="rule-toggle settings-rule-toggle" id="managerHintsToggle" role="switch" aria-checked="true" aria-label="Подсказки"><i></i></button>
+      </div>
+    </div>
+
+    <div class="dm-learning-card">
+      <div class="dm-learning-copy">
+        <div class="dm-learning-kicker">Лёгкое обучение</div>
+        <b>Покажу, что здесь куда.</b>
+        <small>За минуту расскажу, что нажимать, когда говорить, когда писать и где искать главное. Без лекции на 40 минут — я сам такое не люблю.</small>
+      </div>
+      <button type="button" class="control-action dm-learning-button" onclick="openLightTutorial()">Пройти обучение →</button>
+    </div>
+
+    <div class="settings-company-footer"><div class="settings-company-brand"><span class="mark dm-company-mark">ЦБ</span><div><b>Цифровой бизнес</b><small>IT · AI · AUTOMATION</small></div></div><button type="button" class="settings-developer-link" onclick="openDeveloperContact()">Связаться с разработчиками <span>→</span></button></div>`);
+  syncSettingsHomeSwitches();
+  syncManagerSettings();
+}
+function openDeveloperContact(){openControl(`<div class="control-kicker">Цифровой бизнес · IT · AI · AUTOMATION</div><div class="control-title">Связь с разработчиками</div><div class="control-sub">Канал для предложений по продукту, багов и идей. Подключение к почте добавим следующим шагом.</div><button class="control-action" onclick="closeControl()">Понятно</button>`)}
 function openBusinessPulse(){closeMore();document.getElementById('businessPulse').classList.add('show')}
 function closeBusinessPulse(){document.getElementById('businessPulse').classList.remove('show')}
 function closeControlAndMore(){closeControl();closeMore()}
@@ -5694,100 +5903,26 @@ installBtn?.addEventListener('click',()=>{
 window.addEventListener('appinstalled',()=>{deferredInstallPrompt=null;window.__dmInstallRequested=false;if(installBtn)installBtn.hidden=true;});
 if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js').catch(error=>console.error('Ошибка Service Worker:',error));});}
 
-// Mobile command sheet
+// Mobile command button — no full-screen assistant screen.
 const mobileManager=document.getElementById('mobileManager');
-const managerSheet=document.getElementById('managerSheet');
-const managerBackdrop=document.getElementById('managerBackdrop');
-const managerClose=document.getElementById('managerClose');
-const managerForm=document.getElementById('managerForm');
-const managerInput=document.getElementById('managerInput');
-const managerAnswer=document.getElementById('managerAnswer');
-const managerVoice=document.getElementById('managerVoice');
-
-function openManager(question=''){
-  if(!managerSheet)return;
-  managerSheet.classList.add('show');
-  managerSheet.setAttribute('aria-hidden','false');
-  if(question){managerInput.value=question}
-  setTimeout(()=>managerInput?.focus(),220);
+let dmRecognition=null, dmListening=false;
+function dmVoiceToast(text){
+  let el=document.getElementById('dmVoiceToast');
+  if(!el){el=document.createElement('div');el.id='dmVoiceToast';el.setAttribute('aria-live','polite');document.body.appendChild(el)}
+  el.textContent=text;el.classList.add('show');clearTimeout(el.__t);el.__t=setTimeout(()=>el.classList.remove('show'),2600);
 }
-function closeManager(){
-  managerSheet?.classList.remove('show');
-  managerSheet?.setAttribute('aria-hidden','true');
+function startDirectVoice(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){dmVoiceToast('Голосовой режим недоступен в этом браузере.');return}
+  if(dmListening){try{dmRecognition?.stop()}catch(e){}return}
+  dmRecognition=new SR();dmRecognition.lang='ru-RU';dmRecognition.interimResults=true;dmRecognition.continuous=false;dmListening=true;mobileManager?.classList.add('listening');dmVoiceToast('Слушаю тебя…');
+  dmRecognition.onresult=e=>{let finalText='',interim='';for(const r of e.results){if(r.isFinal)finalText+=r[0].transcript;else interim+=r[0].transcript}if(interim&&!finalText)dmVoiceToast(interim);if(finalText){dmVoiceToast('Принял: '+finalText)}};
+  dmRecognition.onend=()=>{dmListening=false;mobileManager?.classList.remove('listening')};
+  dmRecognition.onerror=()=>{dmListening=false;mobileManager?.classList.remove('listening');dmVoiceToast('Не получилось услышать. Попробуй ещё раз.')};
+  try{dmRecognition.start()}catch(e){dmListening=false;mobileManager?.classList.remove('listening')}
 }
-mobileManager?.addEventListener('click',()=>openManager());
-managerBackdrop?.addEventListener('click',closeManager);
-managerClose?.addEventListener('click',closeManager);
-document.querySelectorAll('[data-manager-q]').forEach(btn=>{
-  btn.addEventListener('click',()=>openManager(btn.dataset.managerQ||''));
-});
-managerForm?.addEventListener('submit',e=>{
-  e.preventDefault();
-  const q=(managerInput?.value||'').trim();
-  if(!q)return;
-  let answer='Я посмотрю продажи, источники и последние действия. Затем объясню, что изменилось и какой шаг даст наибольший эффект.';
-  if(/мало продаж|продаж/i.test(q)) answer='Сейчас слабое место — переход после предложения: 8 клиентов остановились. Я бы сначала вернул горячих клиентов, а уже потом увеличивал рекламу.';
-  else if(/ответ|кому/i.test(q)) answer='Сейчас внимания ждут клиенты после предложения. Я могу подготовить ответы и поставить задачи, чтобы ни один контакт не потерялся.';
-  else if(/теряем|клиент/i.test(q)) answer='Больше всего клиентов теряется между предложением и оплатой. Это место я бы проверил первым.';
-  else if(/заработ|деньг|выруч/i.test(q)) answer='За вчера оборот — 184 000 ₽. Прибыль выросла на 8%, а стоимость заявки снизилась на 12%.';
-  managerAnswer.innerHTML='<b>Что я вижу</b><div>'+answer+'</div>';
-  managerAnswer.classList.add('show');
-});
-const MR=window.SpeechRecognition||window.webkitSpeechRecognition;
-if(MR&&managerVoice){
-  const mr=new MR();mr.lang='ru-RU';mr.interimResults=false;mr.maxAlternatives=1;
-  managerVoice.addEventListener('click',()=>{try{mr.start();managerVoice.textContent='…'}catch(e){}});
-  mr.onresult=e=>{managerInput.value=e.results[0][0].transcript;managerVoice.textContent='◉'};
-  mr.onerror=()=>managerVoice.textContent='◉';
-}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeManager()});
-
-
-function openMonthReport(){
-  const el=document.getElementById('monthReportOverlay');
-  if(el) el.classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeMonthReport(){
-  const el=document.getElementById('monthReportOverlay');
-  if(el) el.classList.remove('open');
-  document.body.style.overflow='';
-}
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape') closeMonthReport();
-});
-
-
-function openRecovery(){
-  const el=document.getElementById('recoveryOverlay');
-  const list=document.getElementById('recoveryListView');
-  const success=document.getElementById('recoverySuccessView');
-  if(el){el.classList.add('open');document.body.style.overflow='hidden';}
-  if(list) list.style.display='';
-  if(success) success.style.display='none';
-}
-function closeRecovery(){
-  const el=document.getElementById('recoveryOverlay');
-  if(el) el.classList.remove('open');
-  document.body.style.overflow='';
-}
-function runRecovery(){
-  const list=document.getElementById('recoveryListView');
-  const success=document.getElementById('recoverySuccessView');
-  if(list) list.style.display='none';
-  if(success) success.style.display='block';
-}
-function sendRecovery(name){
-  const button=event.currentTarget;
-  button.textContent='Готово ✓';
-  button.disabled=true;
-  button.style.opacity='.65';
-}
-function showRecoveryMessage(name){
-  alert('Здесь можно будет изменить сообщение для '+name);
-}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeRecovery()});
-
+function openManager(){startDirectVoice()}
+function closeManager(){}
 </script>
 <div class="month-report-overlay" id="monthReportOverlay" onclick="if(event.target===this)closeMonthReport()">
 <div aria-labelledby="monthReportTitle" aria-modal="true" class="month-report" role="dialog">
@@ -6401,18 +6536,7 @@ body.dark .manager-personality-mark{background:#f4f4f5;color:#111214}
 })();
 </script>
 
-<script id="dm-intelligence-voice-v2">
-(()=>{
- const talk=document.getElementById('managerTalk'), label=document.getElementById('managerTalkLabel'), status=document.getElementById('managerStatus'), tx=document.getElementById('managerTranscriptText'), input=document.getElementById('managerInput'), answer=document.getElementById('managerAnswer');
- const Speech=window.SpeechRecognition||window.webkitSpeechRecognition; if(!talk||!Speech)return;
- const rec=new Speech(); rec.lang='ru-RU'; rec.interimResults=true; rec.continuous=false; let active=false;
- talk.addEventListener('click',()=>{ if(active){try{rec.stop()}catch(e){} return;} try{rec.start();active=true;talk.classList.add('listening');label.textContent='Слушаю тебя…';status.textContent='СЛУШАЮ';tx.textContent='Говори. Я рядом.'}catch(e){} });
- rec.onresult=e=>{let interim='',finalText='';for(const r of e.results){if(r.isFinal)finalText+=r[0].transcript;else interim+=r[0].transcript} tx.textContent=finalText||interim||'Слушаю…'; if(finalText){input.value=finalText; setTimeout(()=>document.getElementById('managerForm')?.requestSubmit(),220)}};
- rec.onend=()=>{active=false;talk.classList.remove('listening');label.textContent='Нажми и говори';status.textContent='ЦИФРОВОЙ УПРАВЛЯЮЩИЙ';if(!tx.textContent||tx.textContent==='Слушаю…')tx.textContent='Я слушаю тебя.'};
- rec.onerror=()=>{active=false;talk.classList.remove('listening');label.textContent='Нажми и говори';status.textContent='ЦИФРОВОЙ УПРАВЛЯЮЩИЙ';tx.textContent='Не получилось услышать. Попробуй ещё раз.'};
- const original=window.openManager; if(typeof original==='function'){const old=original;window.openManager=function(q=''){old(q);setTimeout(()=>{tx.textContent=q?'Готов разобрать это вместе с тобой.':'Я слушаю тебя.'},230)}}
-})();
-</script>
+
 <style id="dm-dark-final-polish-v2">
 /* FINAL DARK THEME POLISH — only overrides conflicting legacy rules */
 body.dark{
@@ -7142,7 +7266,353 @@ body.dark .home-drag-placeholder{background:linear-gradient(135deg,rgba(130,145,
 body.dark .home-block.is-dragging{box-shadow:0 30px 80px rgba(0,0,0,.42)!important}
 @media(prefers-reduced-motion:reduce){.home-block,#homeEditBar{transition:none!important}.home-edit-live i{animation:none!important}}
 </style>
+
+<style id="settings-home-switches-v41">
+.settings-section-note{margin:-2px 0 9px;color:var(--muted);font-size:10px;line-height:1.4}
+.settings-sections-v2{display:grid;gap:8px;margin-top:8px}
+.settings-section-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.48);transition:background .18s ease,border-color .18s ease,transform .18s ease}
+.settings-section-row:hover{background:rgba(255,255,255,.68);border-color:rgba(47,75,145,.22);transform:translateY(-1px)}
+.settings-section-open{display:grid;grid-template-columns:25px minmax(0,1fr);gap:9px;align-items:center;min-width:0;padding:2px 0;border:0;background:transparent;color:var(--text);text-align:left;cursor:pointer}
+.settings-section-icon{width:25px;height:25px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,#153c8f,#5a40cc);color:#fff;font-size:11px;font-weight:800;box-shadow:0 5px 14px rgba(35,62,153,.16)}
+.settings-section-copy{min-width:0}.settings-section-copy b{display:block;font-size:11px;line-height:1.1}.settings-section-copy small{display:block;font-size:9px;line-height:1.3;color:var(--muted);margin-top:2px}
+.settings-home-switch{position:relative;width:48px;height:28px;flex:none;padding:2px;border:0;border-radius:999px;background:#d9d9de;box-shadow:inset 0 0 0 1px rgba(0,0,0,.10);cursor:pointer;transition:background .22s ease,box-shadow .22s ease}
+.settings-home-switch i{display:block;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 7px rgba(0,0,0,.16);transition:transform .22s ease}
+.settings-home-switch.is-on{background:linear-gradient(135deg,#0f3b93,#3846c8 55%,#5b35bb);box-shadow:0 6px 15px rgba(31,58,156,.20),inset 0 0 0 1px rgba(255,255,255,.10)}
+.settings-home-switch.is-on i{transform:translateX(20px)}
+body.dark .settings-section-row{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09)}
+body.dark .settings-section-row:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16)}
+body.dark .settings-home-switch{background:#f4f5f7;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
+body.dark .settings-home-switch i{background:#17181b;box-shadow:0 2px 8px rgba(0,0,0,.32)}
+body.dark .settings-home-switch.is-on{background:#fff;box-shadow:inset 0 0 0 1px rgba(0,0,0,.10),0 4px 12px rgba(0,0,0,.22)}
+body.dark .settings-home-switch.is-on i{background:#17181b}
+@media(max-width:700px){.settings-section-row{padding:9px 10px}.settings-section-copy b{font-size:12px}.settings-section-copy small{font-size:10px}.settings-home-switch{width:50px;height:29px}.settings-home-switch i{width:25px;height:25px}.settings-home-switch.is-on i{transform:translateX(21px)}}
+
+.settings-section-row .settings-home-switch + *{}
+body:not(.dark) .rule-toggle{background:linear-gradient(135deg,#0f3b93,#3846c8 55%,#5b35bb)!important;box-shadow:0 5px 14px rgba(31,58,156,.16)!important}
+body:not(.dark) .rule-toggle i{background:#fff!important;color:#fff!important}
+body.dark .rule-toggle{background:#fff!important}
+body.dark .rule-toggle i{background:#17181b!important}
+</style>
+<script id="settings-home-switches-js-v41">
+(function(){
+  const KEY='db-home-section-switches-v1';
+  const defaults={sales:false,finance:false,clients:false,promo:false,evolution:true,memory:true,rules:true,create:true};
+  const descriptions={sales:'Продажи',finance:'Деньги',clients:'Клиенты',promo:'Продвижение',evolution:'Эволюция',memory:'Память',rules:'Правила',create:'Создать'};
+  const homeBlockMap={evolution:'evolution',memory:'memory',rules:'contract',create:'create'};
+  function load(){try{const x=JSON.parse(localStorage.getItem(KEY)||'null');return {...defaults,...(x&&typeof x==='object'?x:{})}}catch(e){return {...defaults}}}
+  function save(x){try{localStorage.setItem(KEY,JSON.stringify(x))}catch(e){}}
+  function syncMappedHomeBlocks(prefs){
+    Object.entries(homeBlockMap).forEach(([id,blockId])=>{
+      const el=document.querySelector('[data-home-block=\"'+blockId+'\"]');
+      if(el)el.classList.toggle('is-hidden',prefs[id]===false);
+    });
+    try{
+      const raw=JSON.parse(localStorage.getItem('db-home-layout-v1')||'null');
+      if(Array.isArray(raw)){
+        raw.forEach(item=>{for(const [id,blockId] of Object.entries(homeBlockMap)){if(item.id===blockId)item.hidden=prefs[id]===false;}});
+        localStorage.setItem('db-home-layout-v1',JSON.stringify(raw));
+      }
+    }catch(e){}
+  }
+  function syncHomeLauncher(){
+    let shell=document.querySelector('.future-shell'); if(!shell)return;
+    const prefs=load();
+    syncMappedHomeBlocks(prefs);
+    let block=document.getElementById('settingsSectionsHomeBlock');
+    const active=['sales','finance','clients','promo'].filter(k=>prefs[k]);
+    if(!active.length){if(block)block.remove();return;}
+    if(!block){
+      block=document.createElement('section');
+      block.id='settingsSectionsHomeBlock';block.className='settings-sections-home-block';
+      block.setAttribute('data-home-block','settingsSections');block.setAttribute('data-home-title','Разделы на Главной');
+      shell.insertBefore(block,shell.children[1]||null);
+    }
+    const items=active.map(k=>{
+      const a={sales:"window.showSection?.('sales')",finance:"window.showSection?.('finance')",clients:"window.showSection?.('clients')",promo:"window.showSection?.('promo')",evolution:'openEvolution()',memory:'openBusinessMemory()',rules:'openBusinessRules()',create:'openBuildModal()'}[k];
+      const icon={sales:'↗',finance:'₽',clients:'○',promo:'⌁',evolution:'✦',memory:'◉',rules:'⌁',create:'＋'}[k];
+      return `<button type="button" onclick="${a}"><span>${icon}</span><b>${descriptions[k]}</b></button>`;
+    }).join('');
+    block.innerHTML=`<div class="settings-sections-home-head"><div><span>БЫСТРЫЙ ДОСТУП</span><b>Разделы, которые ты оставил на Главной.</b></div></div><div class="settings-sections-home-grid">${items}</div>`;
+  }
+  window.toggleSettingsHomeSection=function(id,btn){const x=load();x[id]=!x[id];save(x);btn.classList.toggle('is-on',x[id]);btn.setAttribute('aria-pressed',String(x[id]));syncHomeLauncher();};
+  window.syncSettingsHomeSwitches=function(){const x=load();document.querySelectorAll('.settings-home-switch[data-section-id]').forEach(btn=>{const on=!!x[btn.dataset.sectionId];btn.classList.toggle('is-on',on);btn.setAttribute('aria-pressed',String(on));});syncHomeLauncher();};
+  syncHomeLauncher();
+})();
+</script>
+<style id="settings-sections-home-block-v41">
+.settings-sections-home-block{padding:16px 18px;border:1px solid var(--line);border-radius:20px;background:var(--panel);box-shadow:var(--shadow)}
+.settings-sections-home-head span{display:block;font-size:8px;letter-spacing:.14em;font-weight:800;color:var(--muted)}
+.settings-sections-home-head b{display:block;margin-top:4px;font-size:13px;letter-spacing:-.01em}
+.settings-sections-home-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.settings-sections-home-grid button{display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:7px 11px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.45);color:var(--text);font-size:10px;font-weight:700;cursor:pointer}
+.settings-sections-home-grid button span{width:21px;height:21px;border-radius:7px;display:grid;place-items:center;background:linear-gradient(135deg,#153c8f,#5a40cc);color:#fff;font-size:9px}
+body.dark .settings-sections-home-block{background:rgba(255,255,255,.035);border-color:rgba(255,255,255,.09)}
+body.dark .settings-sections-home-grid button{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.10)}
+@media(max-width:700px){.settings-sections-home-block{padding:14px;border-radius:18px}.settings-sections-home-grid{gap:7px}.settings-sections-home-grid button{font-size:10px;flex:0 1 auto}}
+</style>
+
+<style id="settings-layout-v43">
+/* v43: структура настроек как на референсе — правила крупно, разделы компактно. */
+.settings-section-title{margin:18px 0 8px!important;font-size:11px!important;font-weight:800!important;letter-spacing:-.01em!important}
+.settings-section-note{margin:-2px 0 9px!important;font-size:9.5px!important;line-height:1.45!important}
+.settings-rules-list{display:grid;gap:7px!important;margin-top:0!important}
+.settings-rules-list .settings-rule-row{min-height:58px!important;padding:11px 12px!important;border-radius:16px!important}
+.settings-rules-list .settings-rule-row b{font-size:12px!important}
+.settings-rules-list .settings-rule-row small{font-size:9.5px!important;margin-top:4px!important;line-height:1.35!important}
+.settings-sections-v2{display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important;margin-top:8px!important}
+.settings-sections-v2 .settings-section-row{min-height:50px!important;padding:7px 8px!important;border-radius:14px!important;gap:7px!important}
+.settings-sections-v2 .settings-section-open{grid-template-columns:22px minmax(0,1fr)!important;gap:7px!important}
+.settings-sections-v2 .settings-section-icon{width:22px!important;height:22px!important;border-radius:7px!important;font-size:9px!important;box-shadow:none!important}
+.settings-sections-v2 .settings-section-copy b{font-size:10px!important;line-height:1.15!important}
+.settings-sections-v2 .settings-section-copy small{font-size:8px!important;line-height:1.2!important;margin-top:2px!important}
+.settings-sections-v2 .settings-home-switch{width:40px!important;height:24px!important;padding:2px!important}
+.settings-sections-v2 .settings-home-switch i{width:20px!important;height:20px!important}
+.settings-sections-v2 .settings-home-switch.is-on i{transform:translateX(16px)!important}
+.settings-communication{margin-top:2px!important}
+.settings-company-footer{margin-top:16px!important}
+@media(max-width:700px){
+  .settings-rules-list .settings-rule-row{min-height:61px!important;padding:12px!important}
+  .settings-sections-v2{grid-template-columns:1fr!important;gap:6px!important}
+  .settings-sections-v2 .settings-section-row{min-height:46px!important;padding:7px 9px!important}
+  .settings-sections-v2 .settings-section-copy b{font-size:11px!important}
+  .settings-sections-v2 .settings-section-copy small{font-size:8.5px!important}
+  .settings-sections-v2 .settings-home-switch{width:44px!important;height:26px!important}
+  .settings-sections-v2 .settings-home-switch i{width:22px!important;height:22px!important}
+  .settings-sections-v2 .settings-home-switch.is-on i{transform:translateX(18px)!important}
+}
+</style>
+
+<script id="assistant-clean-v69-js">
+(function(){
+  const btn=document.getElementById('mobileManager');
+  if(!btn || btn.dataset.v69Bound==='1') return;
+  btn.dataset.v69Bound='1';
+
+  let holdTimer=null;
+  let isHolding=false;
+  let moved=false;
+  let startX=0,startY=0,pointerId=null;
+  let recognition=null;
+  let voiceText='';
+
+  function ensureUi(){
+    if(!btn.querySelector('#dmListeningRing')){
+      const ring=document.createElement('span'); ring.id='dmListeningRing'; ring.setAttribute('aria-hidden','true'); btn.appendChild(ring);
+    }
+    if(!btn.querySelector('#dmListeningLabel')){
+      const label=document.createElement('span'); label.id='dmListeningLabel'; label.textContent='Слушаю тебя'; label.setAttribute('aria-live','polite'); btn.appendChild(label);
+    }
+    let panel=document.getElementById('dmWritePanel');
+    if(panel) return panel;
+    panel=document.createElement('section');
+    panel.id='dmWritePanel';
+    panel.setAttribute('aria-label','Написать помощнику');
+    panel.innerHTML=`
+      <div id="dmWriteHints">
+        <button type="button" data-q="Что сейчас самое важное?">Что важнее?</button>
+        <button type="button" data-q="Почему упали продажи?">Почему продажи?</button>
+        <button type="button" data-q="Что можно улучшить?">Что улучшить?</button>
+      </div>
+      <form id="dmWriteRow" autocomplete="off">
+        <input id="dmWriteInput" type="text" placeholder="Напиши помощнику…" aria-label="Напиши помощнику">
+        <button id="dmWriteSend" type="submit" aria-label="Отправить">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12 20 4l-4 16-4.5-6.5L4 12Z"></path><path d="M11.5 13.5 20 4"></path></svg>
+        </button>
+      </form>`;
+    document.body.appendChild(panel);
+    panel.addEventListener('pointerdown',e=>e.stopPropagation());
+    panel.querySelectorAll('#dmWriteHints button').forEach(b=>b.addEventListener('click',()=>{
+      const input=panel.querySelector('#dmWriteInput'); input.value=b.dataset.q||''; input.focus();
+    }));
+    panel.querySelector('#dmWriteRow').addEventListener('submit',e=>{
+      e.preventDefault();
+      const input=panel.querySelector('#dmWriteInput');
+      if(!input.value.trim()) return input.focus();
+      const value=input.value.trim();
+      input.value='';
+      input.placeholder='Отправлено. Думаю…';
+      setTimeout(()=>{input.placeholder='Напиши помощнику…';},1100);
+      window.__dmLastPrompt=value;
+    });
+    return panel;
+  }
+
+  function openWrite(){
+    stopVoice(false);
+    ensureUi();
+    document.body.classList.add('dm-write-mode');
+    document.getElementById('dmWriteInput')?.focus({preventScroll:true});
+  }
+  function closeWrite(){document.body.classList.remove('dm-write-mode')}
+
+  function startVoice(){
+    closeWrite();
+    ensureUi();
+    document.body.classList.add('dm-voice-active');
+    const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+    if(!SR){
+      setTimeout(()=>document.body.classList.remove('dm-voice-active'),600);
+      return;
+    }
+    voiceText='';
+    try{ recognition?.stop(); }catch(e){}
+    recognition=new SR();
+    recognition.lang='ru-RU';
+    recognition.interimResults=true;
+    recognition.continuous=true;
+    recognition.onresult=e=>{
+      let interim='';
+      for(let i=e.resultIndex;i<e.results.length;i++){
+        const r=e.results[i];
+        if(r.isFinal) voiceText+=(r[0]?.transcript||''); else interim+=(r[0]?.transcript||'');
+      }
+      const label=document.getElementById('dmListeningLabel');
+      if(label) label.textContent=interim ? interim.trim() : 'Слушаю тебя';
+    };
+    recognition.onerror=()=>{};
+    recognition.onend=()=>{
+      document.body.classList.remove('dm-voice-active');
+      const label=document.getElementById('dmListeningLabel');
+      if(label) label.textContent='Слушаю тебя';
+    };
+    try{recognition.start()}catch(e){}
+  }
+  function stopVoice(showResult=true){
+    if(recognition){
+      try{recognition.stop()}catch(e){}
+      recognition=null;
+    }
+    document.body.classList.remove('dm-voice-active');
+    if(showResult && voiceText.trim()){
+      const label=document.getElementById('dmListeningLabel');
+      if(label){
+        label.textContent='Понял. Думаю…';
+        setTimeout(()=>{if(label)label.textContent='Слушаю тебя';},900);
+      }
+    }
+    voiceText='';
+  }
+
+  function clearHold(){if(holdTimer){clearTimeout(holdTimer);holdTimer=null}}
+  function pointFrom(e){return {x:e.clientX||0,y:e.clientY||0}}
+
+  btn.addEventListener('pointerdown',e=>{
+    if(e.pointerType==='mouse' && e.button!==0) return;
+    pointerId=e.pointerId;
+    const p=pointFrom(e);startX=p.x;startY=p.y;moved=false;isHolding=false;clearHold();
+    try{btn.setPointerCapture?.(pointerId)}catch(err){}
+    holdTimer=setTimeout(()=>{holdTimer=null;isHolding=true;startVoice()},460);
+  });
+  btn.addEventListener('pointermove',e=>{
+    if(pointerId!==e.pointerId)return;
+    const p=pointFrom(e);
+    if(Math.hypot(p.x-startX,p.y-startY)>10){moved=true;clearHold();}
+  });
+  btn.addEventListener('pointerup',e=>{
+    if(pointerId!==e.pointerId)return;
+    const wasHolding=isHolding;const shouldWrite=!moved&&!wasHolding;
+    clearHold();isHolding=false;pointerId=null;
+    if(wasHolding) stopVoice(true);
+    else if(shouldWrite) openWrite();
+  });
+  btn.addEventListener('pointercancel',()=>{clearHold();if(isHolding)stopVoice(false);isHolding=false;pointerId=null;});
+  btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();});
+
+  document.addEventListener('pointerdown',e=>{
+    if(!document.body.classList.contains('dm-write-mode')) return;
+    if(e.target.closest('#mobileManager')||e.target.closest('#dmWritePanel')) return;
+    closeWrite();
+  });
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeWrite();stopVoice(false)}});
+
+  window.openManager=openWrite;
+  ensureUi();
+})();
+</script>
 </body>
+
+<style id="settings-sections-compact-v44">
+/* v44: Разделы на Главной — компактное продолжение настроек поведения. Темы не меняем. */
+.settings-sections-v2{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:7px!important;
+  margin-top:8px!important;
+}
+.settings-sections-v2 .settings-section-row{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:center!important;
+  min-height:48px!important;
+  padding:9px 11px!important;
+  border-radius:16px!important;
+  gap:10px!important;
+  background:rgba(255,255,255,.48)!important;
+  border:1px solid var(--line)!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+.settings-sections-v2 .settings-section-row:hover{
+  background:rgba(255,255,255,.68)!important;
+  border-color:rgba(47,75,145,.18)!important;
+  transform:none!important;
+}
+.settings-sections-v2 .settings-section-open{
+  display:grid!important;
+  grid-template-columns:27px minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:9px!important;
+  min-width:0!important;
+  padding:1px 0!important;
+}
+.settings-sections-v2 .settings-section-icon{
+  width:27px!important;
+  height:27px!important;
+  border-radius:9px!important;
+  font-size:10px!important;
+  box-shadow:0 4px 12px rgba(35,62,153,.12)!important;
+}
+.settings-sections-v2 .settings-section-copy b{
+  font-size:11px!important;
+  line-height:1.15!important;
+}
+.settings-sections-v2 .settings-section-copy small{
+  font-size:9px!important;
+  line-height:1.28!important;
+  margin-top:3px!important;
+}
+.settings-sections-v2 .settings-home-switch{
+  width:43px!important;
+  height:25px!important;
+  padding:3px!important;
+  border-radius:999px!important;
+}
+.settings-sections-v2 .settings-home-switch i{
+  width:19px!important;
+  height:19px!important;
+}
+.settings-sections-v2 .settings-home-switch.is-on i{
+  transform:translateX(18px)!important;
+}
+body.dark .settings-sections-v2 .settings-section-row{
+  background:rgba(255,255,255,.045)!important;
+  border-color:rgba(255,255,255,.09)!important;
+}
+body.dark .settings-sections-v2 .settings-section-row:hover{
+  background:rgba(255,255,255,.08)!important;
+  border-color:rgba(255,255,255,.16)!important;
+}
+@media(max-width:700px){
+  .settings-sections-v2{gap:6px!important}
+  .settings-sections-v2 .settings-section-row{
+    min-height:47px!important;
+    padding:8px 10px!important;
+    border-radius:15px!important;
+  }
+  .settings-sections-v2 .settings-section-copy b{font-size:11px!important}
+  .settings-sections-v2 .settings-section-copy small{font-size:8.5px!important}
+}
+</style>
 <style id="final-compact-future-polish-v31">
 /* 1. Верхний блок: одинаково надёжный на светлой/тёмной теме и при любом сжатии. */
 .future-state{
@@ -7242,6 +7712,241 @@ body.dark .home-block.is-dragging{box-shadow:0 30px 80px rgba(0,0,0,.42)!importa
 
 
 
+
+<style id="settings-clean-final-v47">
+/* v47 — чистый финальный слой настроек. Темы не меняем. */
+.control-panel{overflow-x:hidden!important}
+#controlContent{min-width:0!important;overflow-x:hidden!important;box-sizing:border-box!important}
+#controlContent *{box-sizing:border-box}
+
+/* Никаких невидимых белых кнопок в тёмной теме. */
+body:not(.dark) .control-action{
+  background:#111217!important;
+  color:#fff!important;
+}
+body.dark .control-action{
+  background:#fff!important;
+  color:#111217!important;
+  border-color:transparent!important;
+}
+
+/* Правила и разделы — один и тот же визуальный язык. */
+.settings-rules-list .settings-rule-row,
+.settings-sections-v2 .settings-section-rule-row{
+  display:flex!important;
+  align-items:center!important;
+  width:100%!important;
+  min-height:58px!important;
+  padding:12px 14px!important;
+  gap:12px!important;
+  margin:0!important;
+  border:1px solid var(--line)!important;
+  border-radius:18px!important;
+  background:rgba(255,255,255,.50)!important;
+  box-shadow:none!important;
+}
+.settings-rules-list .settings-rule-row>div,
+.settings-sections-v2 .settings-section-rule-row>div{
+  min-width:0!important;
+  flex:1 1 auto!important;
+}
+.settings-sections-v2{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:7px!important;
+  width:100%!important;
+  margin-top:8px!important;
+}
+.settings-sections-v2 .settings-section-open-v46{
+  display:block!important;
+  flex:1 1 auto!important;
+  min-width:0!important;
+  width:auto!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  color:var(--text)!important;
+  text-align:left!important;
+  cursor:pointer!important;
+}
+.settings-sections-v2 .settings-section-open-v46 b{
+  display:block!important;
+  font-size:12px!important;
+  line-height:1.15!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.settings-sections-v2 .settings-section-open-v46 small{
+  display:block!important;
+  margin-top:4px!important;
+  color:var(--muted)!important;
+  font-size:9.5px!important;
+  line-height:1.35!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.settings-sections-v2 .settings-home-switch,
+.settings-rules-list .settings-rule-toggle{
+  position:relative!important;
+  flex:none!important;
+  width:48px!important;
+  height:28px!important;
+  min-width:48px!important;
+  min-height:28px!important;
+  margin-left:auto!important;
+  padding:2px!important;
+  border:0!important;
+  border-radius:999px!important;
+  cursor:pointer!important;
+  box-sizing:border-box!important;
+  background:#d9d9de!important;
+}
+.settings-sections-v2 .settings-home-switch i,
+.settings-rules-list .settings-rule-toggle i{
+  display:block!important;
+  width:24px!important;
+  height:24px!important;
+  min-width:24px!important;
+  min-height:24px!important;
+  margin:0!important;
+  border-radius:50%!important;
+  background:#fff!important;
+  box-shadow:0 2px 7px rgba(0,0,0,.16)!important;
+  transform:translateX(0)!important;
+  transition:transform .22s ease!important;
+}
+.settings-sections-v2 .settings-home-switch.is-on,
+.settings-rules-list .settings-rule-toggle.is-on{
+  background:linear-gradient(135deg,#123b8f,#5b3fd0)!important;
+}
+.settings-sections-v2 .settings-home-switch.is-on i,
+.settings-rules-list .settings-rule-toggle.is-on i{
+  transform:translateX(20px)!important;
+}
+body.dark .settings-sections-v2 .settings-section-rule-row,
+body.dark .settings-rules-list .settings-rule-row{
+  background:rgba(255,255,255,.045)!important;
+  border-color:rgba(255,255,255,.10)!important;
+}
+body.dark .settings-sections-v2 .settings-home-switch,
+body.dark .settings-rules-list .settings-rule-toggle{
+  background:#f4f5f7!important;
+}
+body.dark .settings-sections-v2 .settings-home-switch i,
+body.dark .settings-rules-list .settings-rule-toggle i{
+  background:#17181b!important;
+}
+body.dark .settings-sections-v2 .settings-home-switch.is-on,
+body.dark .settings-rules-list .settings-rule-toggle.is-on{
+  background:#fff!important;
+}
+body.dark .settings-sections-v2 .settings-home-switch.is-on i,
+body.dark .settings-rules-list .settings-rule-toggle.is-on i{
+  background:#17181b!important;
+}
+
+/* Формат общения — компактный и без горизонтального переполнения. */
+.settings-communication{min-width:0!important}
+.settings-communication button{min-width:0!important;overflow:hidden!important}
+
+@media(max-width:700px){
+  .settings-sections-v2{gap:6px!important;margin-top:8px!important}
+  .settings-sections-v2 .settings-section-rule-row,
+  .settings-rules-list .settings-rule-row{min-height:56px!important;padding:11px 12px!important;border-radius:16px!important}
+  .settings-sections-v2 .settings-section-open-v46 b{font-size:12px!important}
+  .settings-sections-v2 .settings-section-open-v46 small{font-size:9.5px!important}
+  .settings-sections-v2 .settings-home-switch,
+  .settings-rules-list .settings-rule-toggle{width:48px!important;height:28px!important;min-width:48px!important}
+}
+</style>
+
+
+
+
+
+<style id="v50-settings-autopilot-and-manager-sidepanel">
+/* v50 — точечная правка: автопилот и long-press помощника. Остальной дизайн не меняем. */
+body:not(.dark) .settings-autopilot-action{
+  background:linear-gradient(135deg,#0f3b93 0%,#264eb5 48%,#5b3fd0 100%) !important;
+  color:#fff !important;
+  border-color:transparent !important;
+  box-shadow:0 7px 18px rgba(31,58,156,.18),inset 0 1px 0 rgba(255,255,255,.16) !important;
+}
+body:not(.dark) .settings-autopilot-action:hover{filter:brightness(1.04);}
+body.dark .settings-autopilot-action{
+  background:#fff !important; color:#17181b !important; border-color:transparent !important;
+}
+
+/* По умолчанию помощник живёт по центру. При долгом нажатии освобождаем справа место под панель. */
+@media(max-width:900px){
+  .mobile-manager.dm-signature-manager-button{
+    left:50% !important; right:auto !important;
+    transform:translateX(-50%) !important;
+    transition:left .38s cubic-bezier(.2,.8,.2,1),right .38s cubic-bezier(.2,.8,.2,1),transform .38s cubic-bezier(.2,.8,.2,1),filter .28s ease !important;
+  }
+  body.dm-longpress-active .mobile-manager.dm-signature-manager-button{
+    left:auto !important; right:14px !important;
+    transform:scale(.92) !important;
+  }
+  .dm-quick-menu{
+    left:12px !important; right:104px !important; bottom:calc(94px + env(safe-area-inset-bottom)) !important;
+    width:auto !important; max-width:none !important;
+    transform:translateY(14px) scale(.98) !important;
+    border-radius:20px !important; padding:13px !important;
+  }
+  .dm-quick-menu.is-open{transform:translateY(0) scale(1) !important;}
+  .dm-quick-head{margin-bottom:9px !important;}
+  .dm-quick-head b{font-size:13px !important;}
+  .dm-quick-head span{font-size:9px !important;}
+  .dm-quick-form{margin-top:8px !important;}
+  .dm-quick-form input{min-height:42px !important;padding:10px 12px !important;font-size:12px !important;}
+  .dm-quick-form button{width:42px !important;height:42px !important;}
+  .dm-quick-kicker{margin:9px 0 6px !important;}
+  .dm-quick-suggests{gap:5px !important;}
+  .dm-quick-suggest{padding:8px 10px !important;border-radius:12px !important;}
+  .dm-quick-suggest b{font-size:9px !important;}
+  .dm-quick-suggest small{font-size:8px !important;}
+  .dm-quick-menu .dm-quick-foot{font-size:8px !important;margin-top:8px !important;}
+}
+</style>
+
+<style id="premium-send-button-v52">
+/* Premium send action */
+.dm-quick-form button{
+  width:44px !important;
+  height:44px !important;
+  flex:0 0 44px !important;
+  border:1px solid rgba(255,255,255,.22) !important;
+  border-radius:14px !important;
+  background:linear-gradient(135deg,#123b8f 0%,#4b3fc4 100%) !important;
+  color:#fff !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  box-shadow:0 8px 22px rgba(34,60,150,.28), inset 0 1px 0 rgba(255,255,255,.24) !important;
+  transition:transform .18s ease,box-shadow .18s ease,filter .18s ease !important;
+}
+.dm-quick-form button:hover{
+  transform:translateY(-1px) !important;
+  box-shadow:0 11px 26px rgba(34,60,150,.34), inset 0 1px 0 rgba(255,255,255,.28) !important;
+  filter:saturate(1.08) !important;
+}
+.dm-quick-form button:active{transform:scale(.95) !important;}
+.dm-quick-form button svg{width:18px !important;height:18px !important;display:block !important;}
+.dm-quick-form button svg path{stroke:#fff !important;stroke-width:2.2 !important;fill:none !important;stroke-linecap:round !important;stroke-linejoin:round !important;}
+body.dark .dm-quick-form button{
+  background:linear-gradient(135deg,#173f91 0%,#5a43c9 100%) !important;
+  border-color:rgba(255,255,255,.18) !important;
+  box-shadow:0 9px 24px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.22) !important;
+}
+@media(max-width:520px){
+  .dm-quick-form button{width:40px !important;height:40px !important;flex-basis:40px !important;border-radius:13px !important;}
+  .dm-quick-form button svg{width:17px !important;height:17px !important;}
+}
+</style>
 </html>
 <style id="final-mobile-readable-fix-v30">
 /* Финальная точечная правка: верхний баннер, логотип, радары и читаемость. */
@@ -7554,172 +8259,46 @@ body.dark .future-state .state-eyebrow{
 }
 </style>
 
-<style id="manager-quick-menu-v34">
-/* Долгое нажатие на управляющего = быстрые подсказки + разделы. */
-.mobile-manager.dm-signature-manager-button{
-  left:50% !important;
-  right:auto !important;
-  bottom:calc(22px + env(safe-area-inset-bottom)) !important;
-  transform:translateX(-50%) !important;
-  z-index:1000 !important;
-}
-.mobile-manager.dm-signature-manager-button:hover{
-  transform:translateX(-50%) scale(1.035) !important;
-}
-.mobile-manager.dm-signature-manager-button:active,
-.mobile-manager.dm-signature-manager-button.is-pressing{
-  transform:translateX(-50%) scale(.92) !important;
-}
-@media(max-width:700px){
-  .mobile-manager.dm-signature-manager-button{
-    width:76px !important;height:76px !important;
-  }
-  .dm-signature-button-logo{width:76px !important;height:76px !important}
-}
 
-.dm-quick-menu{
-  position:fixed;
-  left:50%;
-  bottom:calc(108px + env(safe-area-inset-bottom));
-  transform:translate(-50%,18px) scale(.97);
-  width:min(420px,calc(100vw - 24px));
-  max-height:min(72vh,620px);
-  overflow:auto;
-  padding:16px;
-  border:1px solid rgba(17,18,22,.10);
-  border-radius:26px;
-  background:rgba(250,251,255,.88);
-  backdrop-filter:blur(28px) saturate(1.35);
-  -webkit-backdrop-filter:blur(28px) saturate(1.35);
-  box-shadow:0 28px 90px rgba(18,25,48,.22),inset 0 1px 0 rgba(255,255,255,.9);
-  z-index:999;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .22s ease,transform .3s cubic-bezier(.2,.8,.2,1);
+
+<style id="settings-refinement-v40">
+/* v40 — только настройки: цвета переключателей, разделы и блок разработчиков. */
+body:not(.dark) .rule-toggle{
+  background:linear-gradient(135deg,#123b8f 0%,#264eb5 48%,#5b3fd0 100%) !important;
+  box-shadow:0 5px 14px rgba(38,78,181,.20),inset 0 1px 0 rgba(255,255,255,.18) !important;
 }
-.dm-quick-menu.is-open{
-  transform:translate(-50%,0) scale(1);
-  opacity:1;
-  pointer-events:auto;
+body:not(.dark) .rule-toggle i{
+  background:#fff !important;
+  box-shadow:0 2px 7px rgba(16,31,76,.24) !important;
 }
-.dm-quick-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
-.dm-quick-head b{font-size:15px;letter-spacing:-.02em;color:#111216}
-.dm-quick-head span{display:block;margin-top:3px;font-size:10px;line-height:1.35;color:#747983}
-.dm-quick-close{width:32px;height:32px;border:1px solid rgba(17,18,22,.08);border-radius:11px;background:rgba(255,255,255,.6);color:#333;border:1px solid rgba(17,18,22,.08)}
-.dm-quick-kicker{font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:#8b8f98;margin:10px 0 8px}
-.dm-quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.dm-quick-item{min-height:58px;padding:12px;border:1px solid rgba(17,18,22,.08);border-radius:16px;background:rgba(255,255,255,.66);color:#111216;text-align:left;display:flex;flex-direction:column;justify-content:center;gap:3px;transition:transform .18s ease,background .18s ease,border-color .18s ease;cursor:pointer}
-.dm-quick-item:hover{transform:translateY(-1px);background:#fff;border-color:rgba(47,75,145,.24)}
-.dm-quick-item b{font-size:11px;letter-spacing:-.01em}
-.dm-quick-item small{font-size:9px;color:#7b8089;line-height:1.35}
-.dm-quick-suggests{display:grid;gap:7px}
-.dm-quick-suggest{width:100%;border:0;border-radius:15px;padding:11px 12px;background:rgba(17,18,22,.045);color:#111216;text-align:left;cursor:pointer}
-.dm-quick-suggest b{font-size:10px;font-weight:700}
-.dm-quick-suggest small{display:block;font-size:9px;color:#858b95;margin-top:3px}
-.dm-quick-menu .dm-quick-foot{margin-top:12px;font-size:9px;color:#959aa4;text-align:center}
-body.dark .dm-quick-menu{background:rgba(19,21,26,.92);border-color:rgba(255,255,255,.10);box-shadow:0 28px 90px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.07)}
-body.dark .dm-quick-head b,body.dark .dm-quick-item,body.dark .dm-quick-suggest{color:#f6f7f9}
-body.dark .dm-quick-head span,body.dark .dm-quick-item small,body.dark .dm-quick-suggest small,body.dark .dm-quick-kicker,body.dark .dm-quick-menu .dm-quick-foot{color:#9ca0a9}
-body.dark .dm-quick-close{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.10);color:#f3f4f6}
-body.dark .dm-quick-item{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09)}
-body.dark .dm-quick-item:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18)}
-body.dark .dm-quick-suggest{background:rgba(255,255,255,.055)}
-@media(max-width:420px){
-  .dm-quick-menu{bottom:calc(104px + env(safe-area-inset-bottom));padding:14px;border-radius:23px}
-  .dm-quick-grid{gap:7px}
-  .dm-quick-item{min-height:54px;padding:10px}
+.settings-section-title{margin:22px 0 10px;font-size:10px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
+.settings-sections{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:8px}
+.settings-sections button{min-height:66px;padding:11px 12px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.48);color:var(--text);text-align:left;display:grid;grid-template-columns:25px 1fr;grid-template-rows:auto auto;column-gap:9px;row-gap:2px;cursor:pointer;transition:transform .18s ease,background .18s ease,border-color .18s ease}
+.settings-sections button:hover{transform:translateY(-1px);border-color:rgba(47,75,145,.22);background:rgba(255,255,255,.68)}
+.settings-sections button span{grid-row:1 / span 2;width:25px;height:25px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,#153c8f,#5a40cc);color:#fff;font-size:11px;font-weight:800;box-shadow:0 5px 14px rgba(35,62,153,.16)}
+.settings-sections button b{font-size:11px;line-height:1.1}
+.settings-sections button small{font-size:9px;line-height:1.3;color:var(--muted)}
+.settings-company-footer{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:24px;padding-top:17px;border-top:1px solid var(--line)}
+.settings-company-brand{display:flex;align-items:center;gap:10px;min-width:0}
+.settings-company-brand .mark{width:36px;height:36px;border-radius:11px;font-size:12px;flex:none}
+.settings-company-brand b{display:block;font-size:11px}
+.settings-company-brand small{display:block;margin-top:3px;font-size:9px;color:var(--muted)}
+.settings-developer-link{border:1px solid var(--line);background:transparent;color:var(--text);border-radius:13px;padding:10px 12px;font-size:10px;font-weight:700;white-space:nowrap;cursor:pointer}
+.settings-developer-link span{margin-left:3px;opacity:.7}
+.theme-mode-btn{transition:background .2s ease,color .2s ease,border-color .2s ease,box-shadow .2s ease}
+body:not(.dark) .theme-mode-btn.active{background:linear-gradient(135deg,#123b8f 0%,#5b3fd0 100%) !important;color:#fff !important;border-color:transparent !important;box-shadow:0 8px 20px rgba(38,78,181,.18) !important}
+body.dark .settings-sections button{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09)}
+body.dark .settings-sections button:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16)}
+body.dark .settings-sections button span{background:linear-gradient(135deg,#183d88,#5842c7)}
+body.dark .settings-company-footer{border-color:rgba(255,255,255,.09)}
+body.dark .settings-developer-link{border-color:rgba(255,255,255,.11)}
+@media(max-width:520px){
+  .settings-sections{grid-template-columns:1fr}
+  .settings-company-footer{align-items:flex-start;flex-direction:column}
+  .settings-developer-link{width:100%}
 }
 </style>
 
-<script id="manager-quick-menu-v34">
-(function(){
-  const btn=document.getElementById('mobileManager');
-  if(!btn)return;
-  let pressTimer=null;
-  let longPressed=false;
-  let suppressClick=false;
-  const createMenu=()=>{
-    if(document.getElementById('dmQuickMenu'))return document.getElementById('dmQuickMenu');
-    const menu=document.createElement('section');
-    menu.id='dmQuickMenu';
-    menu.className='dm-quick-menu';
-    menu.setAttribute('aria-hidden','true');
-    menu.innerHTML=`
-      <div class="dm-quick-head">
-        <div><b>Что будем делать?</b><span>Долгое нажатие — быстрый доступ без лишнего меню.</span></div>
-        <button class="dm-quick-close" type="button" aria-label="Закрыть">×</button>
-      </div>
-      <div class="dm-quick-kicker">Подсказки</div>
-      <div class="dm-quick-suggests">
-        <button class="dm-quick-suggest" type="button" data-question="Что сейчас самое важное в бизнесе?"><b>Что сейчас самое важное?</b><small>Покажи один следующий шаг.</small></button>
-        <button class="dm-quick-suggest" type="button" data-question="Почему сегодня просели продажи?"><b>Почему просели продажи?</b><small>Найди причину, а не просто цифру.</small></button>
-        <button class="dm-quick-suggest" type="button" data-question="Что можно улучшить в бизнесе прямо сейчас?"><b>Что можно улучшить?</b><small>Найди одну точку роста.</small></button>
-      </div>
-      <div class="dm-quick-kicker">Разделы</div>
-      <div class="dm-quick-grid">
-        <button class="dm-quick-item" type="button" data-section-go="sales"><b>Продажи</b><small>Клиенты, заявки, сделки</small></button>
-        <button class="dm-quick-item" type="button" data-section-go="finance"><b>Деньги</b><small>Выручка, расходы, запас</small></button>
-        <button class="dm-quick-item" type="button" data-section-go="clients"><b>Клиенты</b><small>Контакты и отношения</small></button>
-        <button class="dm-quick-item" type="button" data-section-go="promo"><b>Продвижение</b><small>Реклама и каналы</small></button>
-        <button class="dm-quick-item" type="button" data-modal-go="evolution"><b>Эволюция</b><small>Что я уже улучшил</small></button>
-        <button class="dm-quick-item" type="button" data-modal-go="memory"><b>Память</b><small>Что бизнес уже знает</small></button>
-        <button class="dm-quick-item" type="button" data-modal-go="rules"><b>Правила</b><small>Границы моей самостоятельности</small></button>
-        <button class="dm-quick-item" type="button" data-modal-go="create"><b>Создать</b><small>Новый инструмент или процесс</small></button>
-      </div>
-      <div class="dm-quick-foot">Нажми ещё раз коротко — и я просто откроюсь для разговора.</div>
-    `;
-    document.body.appendChild(menu);
-    const close=()=>{menu.classList.remove('is-open');menu.setAttribute('aria-hidden','true');btn.classList.remove('is-pressing')};
-    menu.querySelector('.dm-quick-close').addEventListener('click',close);
-    menu.addEventListener('click',e=>{
-      const q=e.target.closest('[data-question]');
-      if(q){close();window.openManager?.(q.dataset.question||'');return;}
-      const s=e.target.closest('[data-section-go]');
-      if(s){close();window.showSection?.(s.dataset.sectionGo);return;}
-      const m=e.target.closest('[data-modal-go]');
-      if(!m)return;
-      close();
-      const map={evolution:'openEvolution',memory:'openMemory',rules:'openBusinessRules',create:'openBuildModal'};
-      const fn=window[map[m.dataset.modalGo]];
-      if(typeof fn==='function')fn();
-    });
-    menu.__close=close;
-    return menu;
-  };
-  const openQuick=()=>{
-    const menu=createMenu();
-    menu.classList.add('is-open');
-    menu.setAttribute('aria-hidden','false');
-    btn.classList.add('is-pressing');
-    if(navigator.vibrate)try{navigator.vibrate(16)}catch(_){ }
-  };
-  const cancel=()=>{if(pressTimer){clearTimeout(pressTimer);pressTimer=null}btn.classList.remove('is-pressing')};
-  const start=(e)=>{
-    if(e.pointerType==='mouse' && e.button!==0)return;
-    longPressed=false;
-    cancel();
-    pressTimer=setTimeout(()=>{pressTimer=null;longPressed=true;suppressClick=true;openQuick()},560);
-  };
-  const end=()=>{
-    if(pressTimer){clearTimeout(pressTimer);pressTimer=null}
-    if(!longPressed)btn.classList.remove('is-pressing');
-  };
-  btn.addEventListener('pointerdown',start,{passive:true});
-  btn.addEventListener('pointerup',end,{passive:true});
-  btn.addEventListener('pointercancel',end,{passive:true});
-  btn.addEventListener('pointerleave',()=>{if(!longPressed)cancel()},{passive:true});
-  btn.addEventListener('contextmenu',e=>e.preventDefault());
-  btn.addEventListener('click',e=>{
-    if(suppressClick){
-      e.preventDefault();e.stopImmediatePropagation();
-      suppressClick=false;
-      return;
-    }
-    // Короткое нажатие сохраняет основной сценарий: сразу разговор.
-  },true);
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('dmQuickMenu')?.__close?.()});
-})();
-</script>
 
 <style id="theme-material-v35">
 /* V35 — только цветовой материал. Геометрию, размеры и JS не меняем. */
@@ -8032,5 +8611,886 @@ body.dark .mobile-manager.dm-signature-manager-button .dm-signature-button-logo 
 }
 body.dark .mobile-manager.dm-signature-manager-button .dm-signature-button-logo .sig-core{
   fill:#ffffff !important;
+}
+</style>
+
+
+
+
+<style id="settings-sections-final-v45">
+/* v45: Разделы на Главной — ровный компактный список. Экран/темы не затрагиваем. */
+.settings-sections-v2{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:6px!important;
+  margin-top:8px!important;
+  width:100%!important;
+}
+.settings-sections-v2 .settings-section-row{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:center!important;
+  min-height:48px!important;
+  width:100%!important;
+  box-sizing:border-box!important;
+  padding:7px 10px!important;
+  gap:10px!important;
+  border:1px solid var(--line)!important;
+  border-radius:15px!important;
+  background:rgba(255,255,255,.48)!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+.settings-sections-v2 .settings-section-open{
+  display:grid!important;
+  grid-template-columns:26px minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:8px!important;
+  min-width:0!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  background:transparent!important;
+  color:var(--text)!important;
+  text-align:left!important;
+}
+.settings-sections-v2 .settings-section-icon{
+  width:26px!important;
+  height:26px!important;
+  flex:none!important;
+  border-radius:8px!important;
+  display:grid!important;
+  place-items:center!important;
+  background:linear-gradient(135deg,#153c8f,#5a40cc)!important;
+  color:#fff!important;
+  font-size:10px!important;
+  font-weight:800!important;
+  box-shadow:none!important;
+}
+.settings-sections-v2 .settings-section-copy{
+  min-width:0!important;
+  overflow:hidden!important;
+}
+.settings-sections-v2 .settings-section-copy b{
+  display:block!important;
+  font-size:11px!important;
+  line-height:1.15!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.settings-sections-v2 .settings-section-copy small{
+  display:block!important;
+  margin-top:2px!important;
+  font-size:8.5px!important;
+  line-height:1.2!important;
+  color:var(--muted)!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.settings-sections-v2 .settings-home-switch{
+  position:relative!important;
+  width:43px!important;
+  height:25px!important;
+  flex:none!important;
+  margin:0!important;
+  padding:2px!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:#d9d9de!important;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.10)!important;
+  cursor:pointer!important;
+}
+.settings-sections-v2 .settings-home-switch i{
+  display:block!important;
+  width:21px!important;
+  height:21px!important;
+  border-radius:50%!important;
+  background:#fff!important;
+  box-shadow:0 2px 7px rgba(0,0,0,.16)!important;
+  transform:translateX(0)!important;
+  transition:transform .22s ease!important;
+}
+.settings-sections-v2 .settings-home-switch.is-on{
+  background:linear-gradient(135deg,#0f3b93,#3846c8 55%,#5b35bb)!important;
+  box-shadow:0 4px 12px rgba(31,58,156,.18),inset 0 0 0 1px rgba(255,255,255,.10)!important;
+}
+.settings-sections-v2 .settings-home-switch.is-on i{
+  transform:translateX(18px)!important;
+}
+body.dark .settings-sections-v2 .settings-section-row{
+  background:rgba(255,255,255,.045)!important;
+  border-color:rgba(255,255,255,.09)!important;
+}
+body.dark .settings-sections-v2 .settings-section-row:hover{
+  background:rgba(255,255,255,.07)!important;
+}
+body.dark .settings-sections-v2 .settings-home-switch{
+  background:#f4f5f7!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)!important;
+}
+body.dark .settings-sections-v2 .settings-home-switch i{
+  background:#17181b!important;
+  box-shadow:0 2px 8px rgba(0,0,0,.32)!important;
+}
+body.dark .settings-sections-v2 .settings-home-switch.is-on{
+  background:#fff!important;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.10),0 4px 12px rgba(0,0,0,.22)!important;
+}
+body.dark .settings-sections-v2 .settings-home-switch.is-on i{
+  background:#17181b!important;
+}
+@media(max-width:700px){
+  .settings-sections-v2{gap:5px!important}
+  .settings-sections-v2 .settings-section-row{
+    min-height:46px!important;
+    padding:7px 9px!important;
+    border-radius:14px!important;
+  }
+  .settings-sections-v2 .settings-section-icon{width:24px!important;height:24px!important;border-radius:7px!important;font-size:9px!important}
+  .settings-sections-v2 .settings-section-open{grid-template-columns:24px minmax(0,1fr)!important;gap:8px!important}
+  .settings-sections-v2 .settings-section-copy b{font-size:11px!important}
+  .settings-sections-v2 .settings-section-copy small{font-size:8.5px!important}
+  .settings-sections-v2 .settings-home-switch{width:42px!important;height:24px!important}
+  .settings-sections-v2 .settings-home-switch i{width:20px!important;height:20px!important}
+  .settings-sections-v2 .settings-home-switch.is-on i{transform:translateX(18px)!important}
+}
+</style>
+
+<style id="settings-sections-match-rules-v46">
+/* v46: Разделы на Главной визуально один в один с блоками Самостоятельность / Деньги / Общение / Автопилот. */
+.settings-sections-v2{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:9px!important;
+  margin-top:20px!important;
+}
+.settings-sections-v2 .settings-section-rule-row{
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+  min-height:62px!important;
+  box-sizing:border-box!important;
+  padding:14px!important;
+  border:1px solid var(--line)!important;
+  border-radius:18px!important;
+  background:rgba(255,255,255,.5)!important;
+  box-shadow:none!important;
+}
+.settings-sections-v2 .settings-section-open-v46{
+  display:block!important;
+  flex:1 1 auto!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  color:var(--text)!important;
+  text-align:left!important;
+  cursor:pointer!important;
+}
+.settings-sections-v2 .settings-section-open-v46 b{
+  display:block!important;
+  font-size:12px!important;
+  line-height:1.15!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.settings-sections-v2 .settings-section-open-v46 small{
+  display:block!important;
+  margin-top:3px!important;
+  color:var(--muted)!important;
+  font-size:10px!important;
+  line-height:1.35!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.settings-sections-v2 .settings-home-switch{
+  flex:none!important;
+}
+body.dark .settings-sections-v2 .settings-section-rule-row{
+  background:rgba(255,255,255,.5)!important;
+}
+@media(max-width:520px){
+  .settings-sections-v2{gap:8px!important;margin-top:18px!important}
+  .settings-sections-v2 .settings-section-rule-row{min-height:58px!important;padding:13px!important}
+  .settings-sections-v2 .settings-section-open-v46 b{font-size:12px!important}
+  .settings-sections-v2 .settings-section-open-v46 small{font-size:9.5px!important}
+}
+</style>
+
+
+
+
+
+
+<style id="final-stable-settings-and-assistant-v58">
+/* v58 — финальная стабилизация. Никакой новой компоновки, только возвращаем согласованный вид. */
+
+/* ---------- НАСТРОЙКИ: компактные, как единая система ---------- */
+#controlContent{min-width:0!important;overflow-x:hidden!important}
+#controlContent .control-kicker{font-size:10px!important;line-height:1.2!important;letter-spacing:.10em!important}
+#controlContent .control-title{font-size:28px!important;line-height:1.06!important;letter-spacing:-.045em!important;margin:6px 42px 6px 0!important;max-width:560px!important}
+#controlContent .control-sub{font-size:11px!important;line-height:1.35!important;max-width:500px!important;margin-bottom:0!important}
+#controlContent .settings-theme-box{
+  margin-top:16px!important;padding:13px!important;border-radius:18px!important;
+}
+#controlContent .settings-theme-box>div:first-child b{font-size:13px!important}
+#controlContent .settings-theme-box>div:first-child small{font-size:10px!important;margin-top:3px!important}
+#controlContent .theme-mode-row{gap:8px!important;margin-top:10px!important}
+#controlContent .theme-mode-btn{min-height:42px!important;height:42px!important;padding:0 12px!important;border-radius:13px!important;font-size:11px!important}
+#controlContent .settings-section-title{margin:16px 0 7px!important;font-size:10px!important;letter-spacing:.10em!important;line-height:1.2!important}
+#controlContent .settings-section-note{margin:0!important;font-size:10px!important;line-height:1.3!important}
+#controlContent .settings-rules-list{display:grid!important;gap:6px!important;margin-top:8px!important}
+#controlContent .settings-rules-list .settings-rule-row,
+#controlContent .settings-sections-v2 .settings-section-rule-row{
+  min-height:50px!important;height:50px!important;padding:10px 12px!important;border-radius:16px!important;
+  border:1px solid var(--line)!important;display:flex!important;align-items:center!important;
+  gap:10px!important;box-sizing:border-box!important;overflow:hidden!important;
+}
+#controlContent .settings-rules-list .settings-rule-row>div,
+#controlContent .settings-sections-v2 .settings-section-open-v46{
+  min-width:0!important;flex:1 1 auto!important;
+}
+#controlContent .settings-rules-list .settings-rule-row b,
+#controlContent .settings-sections-v2 .settings-section-open-v46 b{
+  display:block!important;font-size:12px!important;line-height:1.15!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+}
+#controlContent .settings-rules-list .settings-rule-row small,
+#controlContent .settings-sections-v2 .settings-section-open-v46 small{
+  display:block!important;margin-top:2px!important;font-size:9px!important;line-height:1.2!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+}
+#controlContent .settings-rules-list .settings-rule-toggle,
+#controlContent .settings-sections-v2 .settings-home-switch{
+  width:38px!important;height:20px!important;min-width:38px!important;min-height:20px!important;
+  max-width:38px!important;max-height:20px!important;flex:0 0 38px!important;
+  padding:2px!important;margin-left:auto!important;border:0!important;border-radius:999px!important;
+  box-sizing:border-box!important;position:relative!important;box-shadow:none!important;cursor:pointer!important;
+}
+#controlContent .settings-rules-list .settings-rule-toggle i,
+#controlContent .settings-sections-v2 .settings-home-switch i{
+  width:16px!important;height:16px!important;min-width:16px!important;min-height:16px!important;
+  max-width:16px!important;max-height:16px!important;border-radius:50%!important;display:block!important;
+  transform:translateX(0)!important;transition:transform .18s ease!important;
+}
+#controlContent .settings-rules-list .settings-rule-toggle.is-on i,
+#controlContent .settings-sections-v2 .settings-home-switch.is-on i{transform:translateX(18px)!important}
+body:not(.dark) #controlContent .settings-rules-list .settings-rule-toggle,
+body:not(.dark) #controlContent .settings-sections-v2 .settings-home-switch{
+  background:linear-gradient(135deg,#123b8f 0%,#3850c9 55%,#5b3fd0 100%)!important;
+}
+body:not(.dark) #controlContent .settings-rules-list .settings-rule-toggle i,
+body:not(.dark) #controlContent .settings-sections-v2 .settings-home-switch i{
+  background:#fff!important;box-shadow:0 1px 3px rgba(16,31,76,.18)!important;
+}
+body.dark #controlContent .settings-rules-list .settings-rule-toggle,
+body.dark #controlContent .settings-sections-v2 .settings-home-switch{
+  background:#f4f5f7!important;
+}
+body.dark #controlContent .settings-rules-list .settings-rule-toggle i,
+body.dark #controlContent .settings-sections-v2 .settings-home-switch i{
+  background:#17181b!important;box-shadow:0 1px 3px rgba(0,0,0,.25)!important;
+}
+#controlContent .settings-autopilot-action{
+  margin-top:10px!important;min-height:46px!important;height:46px!important;padding:0 14px!important;
+  border-radius:15px!important;font-size:11px!important;font-weight:750!important;
+}
+body:not(.dark) #controlContent .settings-autopilot-action{
+  background:linear-gradient(135deg,#123b8f 0%,#3850c9 55%,#5b3fd0 100%)!important;color:#fff!important;border:0!important;
+  box-shadow:0 8px 20px rgba(38,78,181,.16)!important;
+}
+body.dark #controlContent .settings-autopilot-action{
+  background:var(--dm-dark-hero)!important;color:#f8fbff!important;border:1px solid rgba(127,181,255,.16)!important;
+}
+#controlContent .settings-sections-v2{display:grid!important;grid-template-columns:1fr!important;gap:6px!important;margin-top:8px!important}
+#controlContent .settings-sections-v2 .settings-section-rule-row{margin:0!important}
+#controlContent .settings-company-footer{margin-top:14px!important;padding-top:12px!important;gap:10px!important}
+#controlContent .settings-company-brand{gap:8px!important}
+#controlContent .settings-company-brand .mark{width:30px!important;height:30px!important;border-radius:9px!important}
+#controlContent .settings-company-brand b{font-size:10px!important}
+#controlContent .settings-company-brand small{font-size:8.5px!important;margin-top:2px!important}
+#controlContent .settings-developer-link{padding:8px 10px!important;border-radius:11px!important;font-size:9px!important}
+
+/* Тёмная тема: карточки настроек с тем же глубоким сине-графитовым материалом. */
+body.dark #controlOverlay .control-panel{
+  background:var(--dm-dark-hero)!important;color:#f8fbff!important;border-color:rgba(127,181,255,.16)!important;
+  box-shadow:0 30px 100px rgba(0,0,0,.45)!important;
+}
+body.dark #controlContent .settings-theme-box,
+body.dark #controlContent .settings-rules-list .settings-rule-row,
+body.dark #controlContent .settings-sections-v2 .settings-section-rule-row{
+  background:var(--dm-dark-hero)!important;color:#f8fbff!important;
+  border-color:rgba(127,181,255,.15)!important;
+}
+body.dark #controlContent .settings-theme-box>div:first-child b,
+body.dark #controlContent .settings-theme-box>div:first-child small,
+body.dark #controlContent .settings-section-title,
+body.dark #controlContent .settings-section-note,
+body.dark #controlContent .settings-rules-list .settings-rule-row b,
+body.dark #controlContent .settings-sections-v2 .settings-section-open-v46 b{color:#f8fbff!important}
+body.dark #controlContent .settings-rules-list .settings-rule-row small,
+body.dark #controlContent .settings-sections-v2 .settings-section-open-v46 small{color:rgba(248,251,255,.68)!important}
+
+/* ---------- ПОМОЩНИК: обычный тап = голос, долгий = ручной ввод слева ---------- */
+.mobile-manager.dm-signature-manager-button{
+  touch-action:none!important;
+}
+.mobile-manager.dm-signature-manager-button.listening{
+  z-index:1100!important;
+}
+.mobile-manager.dm-signature-manager-button.listening::before{
+  content:""!important;position:absolute!important;inset:-8px!important;border-radius:50%!important;
+  border:1px solid color-mix(in srgb,var(--voice-accent,#3156c7) 65%,transparent)!important;
+  pointer-events:none!important;animation:dmListeningPulseFinal 1.65s ease-out infinite!important;
+}
+.mobile-manager.dm-signature-manager-button.listening::after{
+  content:"Слушаю тебя"!important;position:absolute!important;left:50%!important;
+  bottom:calc(100% + 9px)!important;top:auto!important;transform:translateX(-50%)!important;
+  white-space:nowrap!important;padding:5px 9px!important;border-radius:999px!important;
+  font-size:10px!important;font-weight:750!important;line-height:1!important;
+  color:#3156c7!important;background:rgba(255,255,255,.92)!important;
+  border:1px solid rgba(49,86,199,.12)!important;box-shadow:0 7px 20px rgba(25,42,90,.10)!important;
+  pointer-events:none!important;z-index:20!important;animation:dmListeningLabelFinal .22s ease both!important;
+}
+body.dark .mobile-manager.dm-signature-manager-button.listening::after{
+  color:#eaf1ff!important;background:rgba(20,28,55,.92)!important;border-color:rgba(106,139,235,.23)!important;
+  box-shadow:0 7px 20px rgba(0,0,0,.26)!important;
+}
+@keyframes dmListeningPulseFinal{
+  0%{transform:scale(.84);opacity:.78}
+  68%{transform:scale(1.10);opacity:0}
+  100%{transform:scale(1.10);opacity:0}
+}
+@keyframes dmListeningLabelFinal{from{opacity:0;transform:translate(-50%,4px)}to{opacity:1;transform:translate(-50%,0)}}
+
+/* Долгий режим: кнопка вправо, поле слева, подсказки над ним. */
+@media(max-width:900px){
+  body.dm-longpress-active .mobile-manager.dm-signature-manager-button{
+    left:auto!important;right:14px!important;bottom:calc(22px + env(safe-area-inset-bottom))!important;
+    transform:none!important;transition:right .34s cubic-bezier(.2,.8,.2,1),transform .34s cubic-bezier(.2,.8,.2,1)!important;
+  }
+  body.dm-longpress-active .dm-quick-menu{
+    left:14px!important;right:104px!important;bottom:calc(22px + env(safe-area-inset-bottom))!important;
+    width:auto!important;max-width:none!important;padding:0!important;background:transparent!important;border:0!important;
+    box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+    transform:translateY(10px)!important;opacity:0!important;pointer-events:none!important;
+    transition:opacity .24s ease,transform .28s ease!important;
+  }
+  body.dm-longpress-active .dm-quick-menu.is-open{transform:translateY(0)!important;opacity:1!important;pointer-events:auto!important}
+  .dm-quick-suggests{display:flex!important;gap:5px!important;overflow:hidden!important;margin:0 0 7px!important}
+  .dm-quick-suggest{flex:0 0 auto!important;width:auto!important;min-height:0!important;padding:6px 8px!important;border-radius:999px!important;
+    white-space:nowrap!important;font-size:8px!important;background:rgba(248,250,255,.84)!important;border:1px solid rgba(49,86,199,.10)!important;
+    color:#263d7e!important;backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important;box-shadow:none!important}
+  .dm-quick-suggest b{font-size:8px!important;line-height:1!important}
+  .dm-quick-form{display:flex!important;gap:6px!important;align-items:center!important;width:100%!important}
+  .dm-quick-form input{height:42px!important;min-height:42px!important;width:100%!important;padding:0 13px!important;border-radius:14px!important;
+    border:1px solid rgba(49,86,199,.13)!important;background:rgba(248,250,255,.88)!important;color:#151821!important;font-size:11px!important;
+    box-shadow:0 8px 22px rgba(21,36,84,.07)!important;backdrop-filter:blur(16px)!important;-webkit-backdrop-filter:blur(16px)!important}
+  .dm-quick-form button{width:42px!important;height:42px!important;min-width:42px!important;border-radius:13px!important;
+    padding:0!important;border:0!important;background:linear-gradient(135deg,#153f9a,#3d4dcb 55%,#5a3fd0)!important;
+    color:#fff!important;display:grid!important;place-items:center!important;box-shadow:0 9px 22px rgba(36,62,161,.22)!important}
+  .dm-quick-form button svg{width:17px!important;height:17px!important;fill:none!important;stroke:currentColor!important;stroke-width:2.1!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+  body.dark .dm-quick-suggest{background:rgba(21,31,57,.88)!important;color:#e8efff!important;border-color:rgba(127,181,255,.14)!important}
+  body.dark .dm-quick-form input{background:rgba(18,27,49,.90)!important;color:#f8fbff!important;border-color:rgba(127,181,255,.15)!important;box-shadow:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .mobile-manager.dm-signature-manager-button.listening::before,.mobile-manager.dm-signature-manager-button.listening::after{animation:none!important}
+}
+</style>
+
+
+
+
+
+
+<style id="signature-sphere-v63">
+/* v63 — логотип не «дышит», а создаёт иллюзию вращающейся 3D-сферы. */
+.dm-signature-logo .sig-orbit{
+  transform-box:fill-box!important;
+  transform-origin:center center!important;
+  animation-timing-function:linear!important;
+}
+.dm-signature-logo .sig-orbit.o1{
+  animation:sigSphereO1 8.5s linear infinite!important;
+}
+.dm-signature-logo .sig-orbit.o2{
+  animation:sigSphereO2 10.5s linear infinite reverse!important;
+}
+.dm-signature-logo .sig-orbit.o3{
+  animation:sigSphereO3 12.5s linear infinite!important;
+}
+@keyframes sigSphereO1{
+  0%   {transform:rotate(-8deg) scaleY(1);opacity:.24}
+  12.5%{transform:rotate(37deg) scaleY(.62);opacity:.30}
+  25%  {transform:rotate(82deg) scaleY(.18);opacity:.16}
+  37.5%{transform:rotate(127deg) scaleY(.62);opacity:.30}
+  50%  {transform:rotate(172deg) scaleY(1);opacity:.24}
+  62.5%{transform:rotate(217deg) scaleY(.62);opacity:.30}
+  75%  {transform:rotate(262deg) scaleY(.18);opacity:.16}
+  87.5%{transform:rotate(307deg) scaleY(.62);opacity:.30}
+  100% {transform:rotate(352deg) scaleY(1);opacity:.24}
+}
+@keyframes sigSphereO2{
+  0%   {transform:rotate(28deg) scaleY(1);opacity:.22}
+  12.5%{transform:rotate(73deg) scaleY(.62);opacity:.28}
+  25%  {transform:rotate(118deg) scaleY(.18);opacity:.15}
+  37.5%{transform:rotate(163deg) scaleY(.62);opacity:.28}
+  50%  {transform:rotate(208deg) scaleY(1);opacity:.22}
+  62.5%{transform:rotate(253deg) scaleY(.62);opacity:.28}
+  75%  {transform:rotate(298deg) scaleY(.18);opacity:.15}
+  87.5%{transform:rotate(343deg) scaleY(.62);opacity:.28}
+  100% {transform:rotate(388deg) scaleY(1);opacity:.22}
+}
+@keyframes sigSphereO3{
+  0%   {transform:rotate(-20deg) scaleY(.98);opacity:.20}
+  12.5%{transform:rotate(25deg) scaleY(.56);opacity:.25}
+  25%  {transform:rotate(70deg) scaleY(.14);opacity:.13}
+  37.5%{transform:rotate(115deg) scaleY(.56);opacity:.25}
+  50%  {transform:rotate(160deg) scaleY(.98);opacity:.20}
+  62.5%{transform:rotate(205deg) scaleY(.56);opacity:.25}
+  75%  {transform:rotate(250deg) scaleY(.14);opacity:.13}
+  87.5%{transform:rotate(295deg) scaleY(.56);opacity:.25}
+  100% {transform:rotate(340deg) scaleY(.98);opacity:.20}
+}
+.dm-signature-button-logo .sig-orbit.o1{animation:sigSphereO1 7.8s linear infinite!important}
+.dm-signature-button-logo .sig-orbit.o2{animation:sigSphereO2 9.6s linear infinite reverse!important}
+.dm-signature-button-logo .sig-orbit.o3{animation:sigSphereO3 11.4s linear infinite!important}
+@media(prefers-reduced-motion:reduce){
+  .dm-signature-logo .sig-orbit,.dm-signature-button-logo .sig-orbit{animation:none!important}
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style id="light-learning-and-hints-v67-css">
+/* v67 — лёгкое обучение + ненавязчивые постоянные подсказки. */
+.dm-learning-card{
+  margin-top:16px;padding:15px 16px;border:1px solid rgba(16,17,20,.09);border-radius:18px;
+  background:rgba(255,255,255,.52);display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.dm-learning-copy{min-width:0;display:grid;gap:4px}
+.dm-learning-kicker{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(16,17,20,.42);font-weight:700}
+.dm-learning-copy b{font-size:13px;letter-spacing:-.01em}
+.dm-learning-copy small{font-size:10px;line-height:1.5;color:rgba(16,17,20,.55);max-width:520px}
+.dm-learning-always{display:flex;align-items:center;gap:7px;margin-top:3px;font-size:9px;color:rgba(16,17,20,.48)}
+.dm-learning-dot{width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,#173f9a,#5a43c9);box-shadow:0 0 9px rgba(70,99,210,.3);flex:none}
+.dm-learning-button{flex:none;white-space:nowrap}
+body.dark .dm-learning-card{background:linear-gradient(135deg,rgba(17,31,57,.72),rgba(10,24,48,.82));border-color:rgba(118,177,255,.13);box-shadow:0 16px 34px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.025)}
+body.dark .dm-learning-kicker{color:rgba(238,245,255,.44)}
+body.dark .dm-learning-copy small,body.dark .dm-learning-always{color:rgba(234,242,255,.58)}
+body.dark .dm-learning-dot{background:#fff;box-shadow:0 0 8px rgba(255,255,255,.34)}
+body.dark .dm-learning-button{background:linear-gradient(135deg,#173f91,#4f43bf)!important;color:#fff!important;border-color:rgba(255,255,255,.14)!important}
+
+.settings-hints-row{margin-top:10px}
+.settings-hints-row .settings-rule-row{min-height:62px}
+.settings-hints-row .settings-rule-row small{max-width:560px}
+/* Постоянная мягкая подсказка: не мешает, но всегда рядом. */
+.dm-context-hint{
+  position:fixed;left:50%;bottom:calc(78px + env(safe-area-inset-bottom));transform:translate(-50%,8px);z-index:420;
+  max-width:min(84vw,360px);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.78);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  color:#25314d;box-shadow:0 10px 34px rgba(22,38,83,.10);font-size:10px;line-height:1.3;text-align:center;
+  opacity:.92;pointer-events:none;transition:opacity .35s ease,transform .35s ease;
+}
+.dm-context-hint b{font-weight:800}
+#controlOverlay.show ~ #dmContextHint,.dm-onboarding:not([hidden]) ~ #dmContextHint{opacity:0;transform:translate(-50%,12px)}
+body.dark .dm-context-hint{background:rgba(16,31,56,.84);border-color:rgba(122,180,255,.18);color:#eef5ff;box-shadow:0 12px 32px rgba(0,0,0,.24)}
+body.dark .dm-context-hint .dm-hint-dot{background:#fff;box-shadow:0 0 7px rgba(255,255,255,.38)}
+.dm-hint-dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:linear-gradient(135deg,#173f9a,#5a43c9);margin-right:7px;vertical-align:1px;box-shadow:0 0 7px rgba(70,99,210,.34)}
+body.dm-text-mode .dm-context-hint,.dm-context-hint.is-hidden{opacity:0;transform:translate(-50%,12px)}
+@media(min-width:701px){.dm-context-hint{bottom:24px}}
+@media(max-width:520px){
+  .dm-learning-card{display:grid;gap:11px;padding:14px 14px}
+  .dm-learning-button{width:100%;justify-content:center}
+  .dm-context-hint{bottom:calc(88px + env(safe-area-inset-bottom));max-width:calc(100vw - 34px);font-size:9.5px}
+}
+
+/* Лёгкое обучение */
+.dm-light-tutorial{position:fixed;inset:0;z-index:700;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(7,10,18,.32);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.dm-light-tutorial.is-open{display:flex}
+.dm-light-tutorial-card{width:min(560px,94vw);max-height:min(82vh,720px);overflow:auto;border:1px solid rgba(255,255,255,.34);border-radius:28px;background:rgba(249,250,253,.96);box-shadow:0 30px 110px rgba(5,13,36,.25);color:#111216;padding:20px}
+body.dark .dm-light-tutorial-card{background:linear-gradient(145deg,#101d37,#0d172c);border-color:rgba(125,185,255,.18);color:#f5f8ff;box-shadow:0 34px 120px rgba(0,0,0,.42)}
+.dm-light-tutorial-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.dm-light-tutorial-progress{display:flex;gap:5px;align-items:center}
+.dm-light-tutorial-progress i{width:19px;height:3px;border-radius:99px;background:currentColor;opacity:.13}
+.dm-light-tutorial-progress i.on{width:31px;opacity:.62}
+.dm-light-tutorial-close{border:0;background:transparent;color:inherit;opacity:.52;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer}
+.dm-light-tutorial-close:hover{background:rgba(127,127,127,.08);opacity:.9}
+.dm-light-tutorial-body{padding:22px 4px 10px}
+.dm-light-kicker{font-size:9px;letter-spacing:.15em;text-transform:uppercase;opacity:.46;margin-bottom:9px}
+.dm-light-title{font-size:clamp(28px,6vw,42px);line-height:1.02;letter-spacing:-.05em;margin:0 0 11px}
+.dm-light-copy{font-size:13px;line-height:1.6;opacity:.64;margin:0;max-width:500px}
+.dm-light-demo{margin:18px 0 5px;padding:14px;border-radius:20px;border:1px solid rgba(20,32,64,.09);background:rgba(255,255,255,.56)}
+body.dark .dm-light-demo{border-color:rgba(135,188,255,.13);background:rgba(255,255,255,.035)}
+.dm-light-demo-line{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid rgba(20,32,64,.07);font-size:11px}
+body.dark .dm-light-demo-line{border-color:rgba(255,255,255,.08)}
+.dm-light-demo-line:last-child{border-bottom:0}
+.dm-light-demo-chip{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:12px;background:linear-gradient(135deg,#173f9a,#5a43c9);color:#fff;font-size:10px;font-weight:700;box-shadow:0 7px 18px rgba(49,73,178,.18)}
+.dm-light-demo-orb{width:58px;height:58px;border-radius:50%;border:1px solid rgba(82,132,230,.42);position:relative;margin:2px auto 8px;display:grid;place-items:center}
+.dm-light-demo-orb:before,.dm-light-demo-orb:after{content:"";position:absolute;border:1px solid rgba(82,132,230,.30);border-radius:50%;animation:dmLightOrbSpin 5.5s linear infinite}
+.dm-light-demo-orb:before{inset:5px}.dm-light-demo-orb:after{inset:-5px;opacity:.55;animation-duration:7s;animation-direction:reverse}
+.dm-light-demo-orb b{width:18px;height:18px;border:1px solid currentColor;transform:rotate(45deg);display:block;border-radius:5px;color:#315bd0}
+body.dark .dm-light-demo-orb b{color:#8bc8ff}
+.dm-light-joke{margin-top:12px;font-size:10px;line-height:1.5;opacity:.48}
+.dm-light-tutorial-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:15px}
+.dm-light-tutorial-next{border:0;border-radius:14px;padding:11px 15px;background:linear-gradient(135deg,#173f9a,#5a43c9);color:#fff;font-weight:800;box-shadow:0 10px 24px rgba(43,68,174,.22);cursor:pointer}
+.dm-light-tutorial-prev{border:0;background:transparent;color:inherit;opacity:.5;padding:10px;cursor:pointer}
+@keyframes dmLightOrbSpin{to{transform:rotate(360deg)}}
+@media(max-width:520px){.dm-light-tutorial{padding:12px}.dm-light-tutorial-card{border-radius:24px;padding:16px}.dm-light-title{font-size:30px}.dm-light-copy{font-size:12px}.dm-light-tutorial-bottom{position:sticky;bottom:0;background:inherit;padding-top:10px}}
+@media(prefers-reduced-motion:reduce){.dm-light-demo-orb:before,.dm-light-demo-orb:after{animation:none!important}}
+</style>
+
+
+<script id="light-learning-and-hints-v67-js">
+(function(){
+  const tips=[
+    ['Подсказка','Нажми на ромб — пишем. Зажми — говорим. Да, у нас даже кнопка умеет слушать.'],
+    ['Следующий шаг','Нажми на важную карточку — управляющий проведёт тебя глубже, без квеста по меню.'],
+    ['Главное','Главная сама собирает главное. Остальное не пропало — просто не шумит без приглашения.'],
+    ['Настройки','Здесь задаются мои границы. Чем лучше договорились — тем меньше мне хочется задавать лишних вопросов.']
+  ];
+  let hintIndex=0, hintTimer=null;
+  const HINTS_KEY='db-hints-enabled';
+  function hintsEnabled(){
+    try{ return localStorage.getItem(HINTS_KEY)!=='0'; }catch(e){ return true; }
+  }
+  function syncHintsToggle(){
+    const t=document.getElementById('managerHintsToggle');
+    if(t) t.setAttribute('aria-checked', hintsEnabled()?'true':'false');
+  }
+  window.toggleManagerHints=function(btn){
+    const next=!hintsEnabled();
+    try{ localStorage.setItem(HINTS_KEY, next?'1':'0'); }catch(e){}
+    if(btn) btn.setAttribute('aria-checked', next?'true':'false');
+    if(next) startHints(); else stopHints();
+  };
+  function ensureHint(){
+    if(document.getElementById('dmContextHint')) return document.getElementById('dmContextHint');
+    const el=document.createElement('div');
+    el.id='dmContextHint'; el.className='dm-context-hint'; el.setAttribute('role','status');
+    document.body.appendChild(el);
+    return el;
+  }
+  function renderHint(){
+    const el=ensureHint();
+    const t=tips[hintIndex%tips.length];
+    el.innerHTML='<span class="dm-hint-dot" aria-hidden="true"></span><b>'+t[0]+'</b> · '+t[1];
+  }
+  function startHints(){
+    if(!hintsEnabled()){ stopHints(); syncHintsToggle(); return; }
+    renderHint();
+    clearInterval(hintTimer);
+    hintTimer=setInterval(()=>{
+      if(document.body.classList.contains('dm-text-mode')||document.body.classList.contains('modal-open')) return;
+      const el=ensureHint(); el.classList.add('is-hidden');
+      setTimeout(()=>{hintIndex=(hintIndex+1)%tips.length;renderHint();el.classList.remove('is-hidden')},260);
+    },8000);
+  }
+  function stopHints(){clearInterval(hintTimer);hintTimer=null;document.getElementById('dmContextHint')?.remove();syncHintsToggle()}
+
+  const tutorialSteps=[
+    {k:'01 · Главное',t:'Смотри на важное, а не на меню.',c:'Главная сама поднимает то, что сейчас требует внимания. Нажми на карточку — и я поведу тебя к причине или следующему действию.',d:'<div class="dm-light-demo"><div class="dm-light-demo-line"><span>Продажи сегодня</span><span class="dm-light-demo-chip">↓ 18% · нажми</span></div><div class="dm-light-demo-line"><span>Причина</span><span style="opacity:.48">Сайт</span></div></div><div class="dm-light-joke">Если придётся искать кнопку «где же тут продажи?» — это уже моя плохая работа.</div>'},
+    {k:'02 · Помощник',t:'Ромб — это короткий путь.',c:'Коротко нажал — появляется поле для текста. Зажал — говоришь. Отпустил — я понял, что ты закончил.',d:'<div class="dm-light-demo"><div class="dm-light-demo-orb"><b></b></div><div style="text-align:center;font-size:11px;opacity:.62">тап · писать &nbsp;&nbsp; / &nbsp;&nbsp; удержание · говорить</div></div><div class="dm-light-joke">Никаких экзаменов на правильное произношение. Я не филолог, я управляющий.</div>'},
+    {k:'03 · Проваливание',t:'Нажал — ушёл глубже.',c:'Не нужно помнить путь «Продажи → Конверсия → Сайт». Ты просто нажимаешь на то, что тебя заинтересовало, а интерфейс раскрывает следующий слой.',d:'<div class="dm-light-demo"><div class="dm-light-demo-line"><span>Продажи ↓</span><span>→</span></div><div class="dm-light-demo-line"><span>Конверсия ↓</span><span>→</span></div><div class="dm-light-demo-line"><span>Страница товара</span><span style="color:#315bd0;font-weight:700">Причина найдена</span></div></div><div class="dm-light-joke">Меню существует. Просто ему необязательно постоянно маячить перед глазами.</div>'},
+    {k:'04 · Настройки',t:'Здесь мы договариваемся.',c:'Самостоятельность, деньги, общение и автопилот задают мои границы. Настроил один раз — дальше я их помню.',d:'<div class="dm-light-demo"><div class="dm-light-demo-line"><span>Самостоятельность</span><span>●</span></div><div class="dm-light-demo-line"><span>Деньги</span><span>●</span></div><div class="dm-light-demo-line"><span>Автопилот</span><span>●</span></div></div><div class="dm-light-joke">Слово «договорились» в моём случае буквально записывается в систему.</div>'},
+    {k:'05 · Подсказки',t:'Я буду объяснять по ходу.',c:'Подсказки остаются включёнными: маленькие и спокойные. Они подсказывают, куда нажать и зачем — но не превращают приложение в инструкцию к микроволновке.',d:'<div class="dm-light-demo"><div style="font-size:11px;line-height:1.5"><span style="opacity:.46">Подсказка</span><br><b>Нажми на ромб — напиши. Зажми — скажи.</b></div></div><div class="dm-light-joke">Пять минут знакомства — и дальше я постараюсь не приставать. Почти.</div>'}
+  ];
+  let step=0;
+  function ensureTutorial(){
+    if(document.getElementById('dmLightTutorial')) return document.getElementById('dmLightTutorial');
+    const root=document.createElement('div');
+    root.id='dmLightTutorial';root.className='dm-light-tutorial';root.setAttribute('aria-hidden','true');
+    root.innerHTML='<div class="dm-light-tutorial-card" role="dialog" aria-modal="true" aria-labelledby="dmLightTutorialTitle"><div class="dm-light-tutorial-top"><div class="dm-light-tutorial-progress" id="dmLightTutProgress"></div><button class="dm-light-tutorial-close" type="button" aria-label="Закрыть">×</button></div><div class="dm-light-tutorial-body" id="dmLightTutBody"></div><div class="dm-light-tutorial-bottom"><button class="dm-light-tutorial-prev" type="button">← Назад</button><button class="dm-light-tutorial-next" type="button">Дальше →</button></div></div>';
+    document.body.appendChild(root);
+    root.querySelector('.dm-light-tutorial-close').addEventListener('click',close);
+    root.addEventListener('click',e=>{if(e.target===root)close()});
+    root.querySelector('.dm-light-tutorial-prev').addEventListener('click',()=>{step=Math.max(0,step-1);render()});
+    root.querySelector('.dm-light-tutorial-next').addEventListener('click',()=>{if(step<tutorialSteps.length-1){step++;render()}else close()});
+    return root;
+  }
+  function render(){
+    const root=ensureTutorial(); const item=tutorialSteps[step];
+    root.querySelector('#dmLightTutProgress').innerHTML=Array.from({length:tutorialSteps.length},(_,i)=>'<i class="'+(i<=step?'on':'')+'"></i>').join('');
+    root.querySelector('#dmLightTutBody').innerHTML='<div class="dm-light-kicker">'+item.k+'</div><h2 class="dm-light-title" id="dmLightTutorialTitle">'+item.t+'</h2><p class="dm-light-copy">'+item.c+'</p>'+item.d;
+    root.querySelector('.dm-light-tutorial-prev').style.visibility=step===0?'hidden':'visible';
+    root.querySelector('.dm-light-tutorial-next').textContent=step===tutorialSteps.length-1?'Понятно →':'Дальше →';
+  }
+  function close(){
+    const root=document.getElementById('dmLightTutorial');if(!root)return;
+    root.classList.remove('is-open');root.setAttribute('aria-hidden','true');document.body.classList.remove('modal-open');
+  }
+  window.openLightTutorial=function(){
+    closeControl?.();
+    const root=ensureTutorial();step=0;render();root.classList.add('is-open');root.setAttribute('aria-hidden','false');document.body.classList.add('modal-open');
+  };
+  window.closeLightTutorial=close;
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',()=>{syncHintsToggle();startHints()},{once:true}); else {syncHintsToggle();startHints();}
+})();
+</script>
+
+
+
+
+<style id="assistant-final-position-animation-v70">
+/* v70 — только помощник. Настройки и остальной дизайн не меняем. */
+@media(max-width:900px){
+  /* Обычное состояние — строго по центру */
+  .mobile-manager.dm-signature-manager-button{
+    left:50%!important;
+    right:auto!important;
+    bottom:calc(22px + env(safe-area-inset-bottom))!important;
+    transform:translateX(-50%)!important;
+    transition:left .36s cubic-bezier(.2,.8,.2,1),right .36s cubic-bezier(.2,.8,.2,1),transform .36s cubic-bezier(.2,.8,.2,1)!important;
+  }
+  /* Короткий тап — кнопка вправо, поле слева */
+  body.dm-write-mode .mobile-manager.dm-signature-manager-button{
+    left:auto!important;
+    right:14px!important;
+    transform:none!important;
+  }
+  body.dm-write-mode #dmWritePanel{
+    left:14px!important;
+    right:108px!important;
+    bottom:calc(28px + env(safe-area-inset-bottom))!important;
+    width:auto!important;
+    max-width:none!important;
+  }
+  /* Долгое удержание — кнопка остаётся по центру */
+  body.dm-voice-active .mobile-manager.dm-signature-manager-button{
+    left:50%!important;
+    right:auto!important;
+    transform:translateX(-50%)!important;
+  }
+}
+
+/* Одна надпись и одно кольцо — без старых псевдоэлементов */
+.mobile-manager.dm-signature-manager-button::before,
+.mobile-manager.dm-signature-manager-button::after{content:none!important;display:none!important}
+#dmListeningRing{
+  display:block!important;
+  position:absolute!important;
+  inset:-9px!important;
+  border:1px solid rgba(74,154,255,.52)!important;
+  border-radius:50%!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  transform:scale(.86)!important;
+}
+#dmListeningLabel{
+  display:block!important;
+  position:absolute!important;
+  left:50%!important;
+  bottom:calc(100% + 10px)!important;
+  top:auto!important;
+  transform:translate(-50%,4px)!important;
+  opacity:0!important;
+  padding:6px 10px!important;
+  border-radius:999px!important;
+  white-space:nowrap!important;
+  color:#2f56bf!important;
+  background:rgba(248,250,255,.95)!important;
+  border:1px solid rgba(49,86,199,.13)!important;
+  box-shadow:0 8px 20px rgba(21,36,84,.10)!important;
+  font:700 10px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif!important;
+  pointer-events:none!important;
+  z-index:50!important;
+  transition:opacity .2s ease,transform .2s ease!important;
+}
+body.dm-voice-active #dmListeningRing{
+  opacity:1!important;
+  animation:dmFinalListenRingV70 1.55s ease-out infinite!important;
+}
+body.dm-voice-active #dmListeningLabel{
+  opacity:1!important;
+  transform:translate(-50%,0)!important;
+}
+body.dark #dmListeningRing{border-color:rgba(110,168,255,.62)!important}
+body.dark #dmListeningLabel{
+  color:#eaf1ff!important;
+  background:rgba(20,28,55,.96)!important;
+  border-color:rgba(110,168,255,.25)!important;
+  box-shadow:0 8px 20px rgba(0,0,0,.30)!important;
+}
+@keyframes dmFinalListenRingV70{
+  0%{transform:scale(.86);opacity:.72}
+  72%{transform:scale(1.13);opacity:0}
+  100%{transform:scale(1.13);opacity:0}
+}
+
+/* Сфера помощника: вращается в обеих темах. Старые sigOrbit-анимации больше не перебивают её. */
+.dm-signature-button-logo .sig-orbit.o1{
+  animation:sigSphereO1 7.8s linear infinite!important;
+}
+.dm-signature-button-logo .sig-orbit.o2{
+  animation:sigSphereO2 9.6s linear infinite reverse!important;
+}
+.dm-signature-button-logo .sig-orbit.o3{
+  animation:sigSphereO3 11.4s linear infinite!important;
+}
+body.dark .dm-signature-button-logo .sig-orbit.o1{
+  animation:sigSphereO1 7.8s linear infinite!important;
+}
+body.dark .dm-signature-button-logo .sig-orbit.o2{
+  animation:sigSphereO2 9.6s linear infinite reverse!important;
+}
+body.dark .dm-signature-button-logo .sig-orbit.o3{
+  animation:sigSphereO3 11.4s linear infinite!important;
+}
+</style>
+
+<style id="assistant-final-align-v72">
+/* v72 — только выравнивание помощника в режиме долгого удержания. */
+@media(max-width:900px){
+  /* Сферу чуть ниже, чтобы она визуально сидела ниже относительно поля ввода. */
+  body.dm-longpress-active .mobile-manager.dm-signature-manager-button{
+    bottom:calc(6px + env(safe-area-inset-bottom))!important;
+  }
+  /* Подсказки немного выше, само поле ввода не двигаем. */
+  body.dm-longpress-active .dm-quick-suggests{
+    transform:translateY(-8px)!important;
+  }
+}
+</style>
+
+<style id="assistant-final-write-align-v74">
+/* v75 — сфера выше и подсказки ещё выше в режиме письма. */
+@media(max-width:900px){
+  /* Сфера ниже относительно окна ввода. */
+  body.dm-write-mode .mobile-manager.dm-signature-manager-button{
+    bottom:calc(6px + env(safe-area-inset-bottom))!important;
+  }
+  /* Подсказки выше, само поле не двигаем. */
+  body.dm-write-mode #dmWriteHints{
+    transform:translateY(-24px)!important;
+  }
+}
+</style>
+<style id="context-hint-align-v76">
+/* v76 — поднимаем именно постоянную подсказку «Нажми на ромб…», не быстрые вопросы над полем. */
+@media(max-width:520px){
+  .dm-context-hint{
+    bottom:calc(118px + env(safe-area-inset-bottom))!important;
+  }
+}
+</style>
+
+<style id="assistant-final-position-animation-v77">
+@media(max-width:900px){
+  /* Ромб выше */
+  body.dm-write-mode .mobile-manager.dm-signature-manager-button{
+    bottom:calc(76px + env(safe-area-inset-bottom))!important;
+  }
+  /* Инструкция «Нажми на ромб…» — вдвое выше */
+  body.dm-write-mode #dmListeningLabel{
+    bottom:calc(132px + env(safe-area-inset-bottom))!important;
+  }
+  /* Быстрые подсказки «Что важнее?» возвращаем вниз */
+  body.dm-write-mode #dmWritePanel .dm-write-suggestions,
+  body.dm-write-mode #dmWritePanel .dm-suggestions,
+  body.dm-write-mode #dmWritePanel [class*="suggest"]{
+    transform:translateY(8px)!important;
+  }
+}
+</style>
+
+<style id="assistant-symmetry-v78">
+/* v78 — только симметрия блока письма. Ничего больше не двигаем. */
+@media(max-width:900px){
+  body.dm-write-mode #dmWriteHints{
+    justify-content:center!important;
+    overflow:visible!important;
+    width:100%!important;
+    padding-left:0!important;
+    padding-right:0!important;
+  }
+  body.dm-write-mode #dmWriteHints button{
+    flex:0 0 auto!important;
+  }
+}
+</style>
+
+<style id="assistant-sphere-send-align-v79">
+/* v79 — в режиме письма сфера стоит ровно рядом с кнопкой «Отправить»: одна горизонталь, общий центр. */
+@media(max-width:900px){
+  body.dm-write-mode .mobile-manager.dm-signature-manager-button{
+    right:18px!important;
+    left:auto!important;
+    bottom:calc(20px + env(safe-area-inset-bottom))!important;
+    transform:none!important;
+  }
+}
+@media(max-width:420px){
+  body.dm-write-mode .mobile-manager.dm-signature-manager-button{
+    right:18px!important;
+    bottom:calc(16px + env(safe-area-inset-bottom))!important;
+  }
+}
+</style>
+
+<style id="assistant-sphere-lower-v80">
+/* v80 — сферу немного опускаем, кнопку отправки и остальную композицию не трогаем. */
+@media(max-width:900px){
+  body.dm-write-mode .mobile-manager.dm-signature-manager-button{
+    bottom:calc(14px + env(safe-area-inset-bottom))!important;
+  }
+}
+@media(max-width:420px){
+  body.dm-write-mode .mobile-manager.dm-signature-manager-button{
+    bottom:calc(10px + env(safe-area-inset-bottom))!important;
+  }
+}
+</style>
+<style id="assistant-write-hints-lower-v81">
+/* v81 — только три быстрые подсказки опускаем ниже. Сферу, кнопку и поле не трогаем. */
+@media(max-width:900px){
+  body.dm-write-mode #dmWriteHints{
+    transform:translateY(18px)!important;
+  }
+}
+</style>
+<style id="assistant-write-hints-raise-v82">
+/* v82 — быстрые всплывающие подсказки поднимаем выше, чтобы они стояли прямо над панелью ввода. */
+@media(max-width:900px){
+  body.dm-write-mode #dmWriteHints{
+    transform:translateY(-4px)!important;
+  }
+}
+</style>
+<style id="context-hint-align-v83">
+/* v83 — постоянная подсказка «Да, у нас даже кнопка умеет слушать» заметно выше панели отправки. */
+@media(max-width:520px){
+  .dm-context-hint{
+    bottom:calc(205px + env(safe-area-inset-bottom))!important;
+  }
+}
+</style>
+<style id="context-hint-raise-v85">
+/* v85 — подсказку «Да, у нас даже кнопка умеет слушать» поднимаем ещё выше, не меняя отправку и сферу. */
+@media(max-width:520px){
+  .dm-context-hint{
+    bottom:calc(430px + env(safe-area-inset-bottom))!important;
+  }
+}
+</style>
+<style id="context-hint-raise-v87">
+/* v87 — возвращаем циклическую подсказку ближе к сфере, немного выше неё. */
+.dm-context-hint{
+  bottom:calc(150px + env(safe-area-inset-bottom))!important;
 }
 </style>
