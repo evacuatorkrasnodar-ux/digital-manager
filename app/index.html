@@ -5794,7 +5794,7 @@ body.dark .future-autopilot-modal .auto-save{
 </div>
 </div>
 <section class="clients-page unified-page" id="clientsPage">
-<div class="clients-head"><div><div class="clients-title">Клиенты</div><div class="clients-sub">Я помню, кто к нам пришёл, что покупал и кому пора ответить.</div></div><button class="task-back" id="clientsBack" type="button">← Главная</button></div>
+<div class="clients-head"><div><div class="clients-title">Клиенты</div><div class="clients-sub">Здесь все разговоры, отзывы и клиенты, которым пора ответить.</div></div><button class="task-back" id="clientsBack" type="button">← Главная</button></div>
 <div class="clients-stats"><div class="client-stat"><span>Новые заявки</span><b>14</b></div><div class="client-stat"><span>Ждут ответа</span><b>3</b></div><div class="client-stat"><span>Новых клиентов</span><b>8</b></div></div>
 <div class="client-list">
 <div class="client-row"><div class="client-avatar">АК</div><div class="client-main"><div class="client-name">Алексей К.</div><div class="client-info">Новая заявка · услуга «Доставка» · сегодня 08:42</div></div><span class="client-status wait">Нужно ответить</span><button class="client-action" type="button">Открыть</button></div>
@@ -5804,7 +5804,7 @@ body.dark .future-autopilot-modal .auto-save{
 <div class="clients-empty"><b>Цифровой управляющий следит за клиентами.</b><br>Когда подключим источники, я соберу здесь всю историю клиента сам. Никаких поисков по пяти системам — я уже побежал.</br></div>
 </section>
 <section class="tasks-page unified-page" id="tasksPage">
-<div class="tasks-head"><div><div class="tasks-title">Что я делаю</div><div class="tasks-sub">Не список дел. Здесь видно, что управляющий делает, что ждёт вас и что уже закончил.</div></div><button class="task-back" id="tasksBack" type="button">← Главная</button></div>
+<div class="tasks-head"><div><div class="tasks-title">Что я делаю</div><div class="tasks-sub">Здесь видно, что я делаю сам, чего жду от тебя и что уже закончил.</div></div><button class="task-back" id="tasksBack" type="button">← Главная</button></div>
 <div class="task-command"><div class="task-command-kicker">Сейчас</div><h2>Я уже работаю. От вас нужен только один ответ.</h2><p>На странице заказа что-то изменилось. Я нашёл связь с падением конверсии и подготовил вариант исправления.</p><button class="sales-primary" onclick="openManager()" type="button">Посмотреть, что я нашёл →</button></div><div class="task-list">
 <div class="task-row"><span class="task-state red"></span><div class="task-row-main"><div class="task-row-title">Разобраться, почему сайт продаёт хуже</div><div class="task-row-text">Изменение на странице заказа найдено вчера вечером. Требуется подтверждение.</div></div><span class="task-tag">Нужно подтвердить</span></div>
 <div class="task-row"><span class="task-state orange"></span><div class="task-row-main"><div class="task-row-title">Подготовить ответы на отзывы</div><div class="task-row-text">Варианты ответов подготовлены цифровым управляющим.</div></div><span class="task-tag">Сегодня</span></div>
@@ -5817,7 +5817,7 @@ body.dark .future-autopilot-modal .auto-save{
 <div class="sales-hero-copy">
 <div class="eyebrow">Продажи · <span class="sales-live-dot"></span> данные обновлены</div>
 <h2>Продажи под контролем.</h2>
-<p>Я собрал всё важное в одном месте и уже нашёл, где сегодня можно вернуть деньги.</p>
+<p>Здесь видно, что можно продать сегодня и где сейчас теряются деньги.</p>
 </div>
 <div class="sales-hero-controls">
 <select aria-label="Период" class="sales-period" id="salesPeriod">
@@ -5918,7 +5918,7 @@ body.dark .future-autopilot-modal .auto-save{
 <div class="finance-head">
 <div>
 <div class="finance-title">Финансы</div>
-<div class="finance-sub">Я слежу за деньгами и объясняю, что происходит с бизнесом.</div>
+<div class="finance-sub">Показываю деньги без фокусов: сколько пришло, сколько ушло и что осталось.</div>
 </div>
 <select aria-label="Период" class="finance-period" id="financePeriod">
 <option value="7">Последние 7 дней</option>
@@ -6003,7 +6003,7 @@ body.dark .future-autopilot-modal .auto-save{
 <div class="promo-head">
 <div>
 <div class="promo-title">Продвижение</div>
-<div class="promo-sub">Я смотрю, откуда приходят люди, заявки и деньги — и сравниваю каналы между собой.</div>
+<div class="promo-sub">Сайт, соцсети, контент и реклама — всё, что приводит людей в бизнес.</div>
 </div>
 <select aria-label="Период" class="promo-period" id="promoPeriod">
 <option>Последние 7 дней</option><option selected="">Последние 30 дней</option><option>Последние 90 дней</option>
@@ -6220,8 +6220,8 @@ function openSettingsPanel(){
     </div>`).join('');
 
   openControl(`<div class="control-kicker">Настройки управляющего</div>
-    <div class="control-title">Настройки без путаницы.</div>
-    <div class="control-sub">Здесь только то, как я работаю и что показываю на Главной.</div>
+    <div class="control-title">Настройки без квеста.</div>
+    <div class="control-sub">Здесь можно включить нужные разделы. Остальное не лезет под руку без приглашения.</div>
 
     <div class="settings-theme-box"><div><b>Экран</b><small>Светлая или тёмная тема.</small></div><div class="theme-mode-row"><button class="theme-mode-btn" data-mode="light" onclick="setThemeMode('light')">☀ Светлая</button><button class="theme-mode-btn" data-mode="dark" onclick="setThemeMode('dark')">◐ Тёмная</button></div></div>
 
@@ -6236,7 +6236,7 @@ function openSettingsPanel(){
     <button class="control-action settings-autopilot-action" onclick="closeControl();openAutopilot()">Настроить автопилот →</button>
 
     <div class="settings-section-title">2 · Что показывать на Главной</div>
-    <div class="settings-section-note">Переключатель справа — добавить короткую карточку на Главную. Нажми название — открыть полный раздел отдельно.</div>
+    <div class="settings-section-note">Включил — компактная карточка появилась на Главной. Нажал на карточку — провалился в подробности.</div>
     <div class="settings-clean-list">${html}</div>
 
     <div class="settings-create-card">
@@ -6428,7 +6428,7 @@ document.querySelectorAll('[data-finance-action]').forEach(btn=>{
 
 document.getElementById('financePeriod')?.addEventListener('change',e=>{
   const sub=document.querySelector('.finance-sub');
-  if(sub)sub.textContent=e.target.value==='7'?'Я слежу за деньгами за последнюю неделю и объясняю изменения.':e.target.value==='90'?'Я анализирую финансовую картину за последние 90 дней.':'Я слежу за деньгами и объясняю, что происходит с бизнесом.';
+  if(sub)sub.textContent=e.target.value==='7'?'Я слежу за деньгами за последнюю неделю и объясняю изменения.':e.target.value==='90'?'Я анализирую финансовую картину за последние 90 дней.':'Показываю деньги без фокусов: сколько пришло, сколько ушло и что осталось.';
 });
 
 
@@ -11601,6 +11601,231 @@ body:not(.dark) .dm-signature-button-logo{
   filter:drop-shadow(0 7px 16px rgba(41,36,107,.20)) !important;
 }
 </style>
+
+
+<style id="business-os-v2-css">
+/* BUSINESS OS v2 — строгие зоны, компактные карточки, простая речь и немного характера. */
+.business-os-title{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:800;margin:14px 0 7px}
+.business-os-note{font-size:10px;line-height:1.45;color:var(--muted);margin:0 0 10px}
+.business-os-list{display:grid;gap:7px}
+.business-os-row{display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:center;gap:9px;padding:10px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.48)}
+.business-os-row.is-on{border-color:rgba(39,168,102,.17);background:rgba(39,168,102,.045)}
+.business-os-icon{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:rgba(20,54,130,.075);color:var(--text);font-size:12px;font-weight:800}
+.business-os-copy{min-width:0}.business-os-copy b{display:block;font-size:12px;letter-spacing:-.01em}.business-os-copy small{display:block;margin-top:3px;color:var(--muted);font-size:8.8px;line-height:1.32}
+.business-os-switch{position:relative!important;display:block!important;width:42px!important;height:22px!important;min-width:42px!important;padding:2px!important;border:0!important;border-radius:999px!important;background:rgba(20,20,24,.1)!important;box-shadow:inset 0 0 0 1px rgba(20,20,24,.06)!important;overflow:hidden!important}
+.business-os-switch i{position:absolute!important;left:2px!important;top:2px!important;width:18px!important;height:18px!important;margin:0!important;border-radius:50%!important;background:#fff!important;box-shadow:0 1px 4px rgba(20,20,25,.18)!important;transform:none!important;transition:left .22s cubic-bezier(.2,.8,.2,1),background .18s ease!important}
+.business-os-switch.is-on{background:rgba(39,168,102,.75)!important}
+.business-os-switch.is-on i{left:22px!important}
+body.dark .business-os-row{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09)}
+body.dark .business-os-row.is-on{background:rgba(39,168,102,.09);border-color:rgba(39,168,102,.18)}
+body.dark .business-os-icon{background:rgba(255,255,255,.07)}
+body.dark .business-os-switch{background:rgba(255,255,255,.12)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)!important}
+body.dark .business-os-switch.is-on{background:#37b96f!important}
+
+/* Карточки подключаемых разделов: одна мысль, несколько цифр, один следующий шаг. */
+#homeSectionPreviews.business-os-previews{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px!important;margin:10px 0 14px!important;overflow:visible!important}
+.business-os-card{position:relative;overflow:hidden;min-height:176px;padding:16px!important;border:1px solid var(--line)!important;border-radius:22px!important;background:var(--panel)!important;box-shadow:var(--shadow)!important;cursor:pointer;transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s ease,border-color .28s ease}
+.business-os-card::before{content:"";position:absolute;width:150px;height:150px;right:-70px;top:-78px;border-radius:50%;background:radial-gradient(circle,rgba(72,91,190,.12),transparent 68%);pointer-events:none}
+.business-os-card:hover{transform:translateY(-2px);box-shadow:0 24px 65px rgba(30,35,50,.12)!important}
+.business-os-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;position:relative;z-index:1}
+.business-os-kicker{font-size:8px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--muted)}
+.business-os-card h3{font-size:20px;line-height:1.05;letter-spacing:-.045em;margin:4px 0 5px}
+.business-os-signal{width:9px;height:9px;border-radius:50%;margin-top:2px;flex:none;background:#32c759;box-shadow:0 0 0 5px rgba(50,199,89,.10)}
+.business-os-signal.warn{background:#ff9500;box-shadow:0 0 0 5px rgba(255,149,0,.10)}
+.business-os-signal.red{background:#ff3b30;box-shadow:0 0 0 5px rgba(255,59,48,.09)}
+.business-os-desc{margin:0;color:var(--muted);font-size:10.5px;line-height:1.42;position:relative;z-index:1}
+.business-os-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin-top:12px;position:relative;z-index:1}
+.business-os-metric{padding:8px 9px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.38)}
+.business-os-metric b{display:block;font-size:16px;letter-spacing:-.04em}.business-os-metric small{display:block;margin-top:2px;font-size:7.5px;color:var(--muted);line-height:1.25}
+.business-os-foot{display:grid;gap:6px;margin-top:11px;position:relative;z-index:1}.business-os-footline{display:flex;gap:7px;align-items:flex-start;font-size:9px;line-height:1.3}.business-os-footline span{flex:none;font-size:8px;font-weight:850;letter-spacing:.08em;color:var(--muted)}.business-os-footline b{font-size:9px}
+.business-os-open{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:9px;font-weight:800;color:var(--text);position:relative;z-index:1}
+.business-os-open em{font-style:normal;color:var(--muted);font-size:14px;line-height:1}
+body.dark .business-os-card{background:rgba(255,255,255,.045)!important;box-shadow:0 20px 55px rgba(0,0,0,.2)!important;border-color:rgba(255,255,255,.09)!important}
+body.dark .business-os-card::before{opacity:.45}.dark .business-os-metric{background:rgba(255,255,255,.035)}
+body.dark .business-os-metric{background:rgba(255,255,255,.035)}
+@media(max-width:700px){
+  #homeSectionPreviews.business-os-previews{grid-template-columns:1fr!important;gap:9px!important}
+  .business-os-card{min-height:0;padding:14px!important;border-radius:20px!important}
+  .business-os-card h3{font-size:18px}.business-os-desc{font-size:10px}.business-os-metrics{margin-top:9px}.business-os-foot{margin-top:9px}.business-os-open{margin-top:9px;padding-top:8px}
+}
+
+/* Большой информационный лист. */
+.db-detail-shell{display:grid;gap:14px}
+.db-detail-hero{position:relative;overflow:hidden;padding:18px;border-radius:23px;background:linear-gradient(135deg,rgba(28,42,80,.97),rgba(61,79,131,.95));color:#fff;border:1px solid rgba(255,255,255,.12);box-shadow:0 22px 70px rgba(28,42,80,.20)}
+.db-detail-hero::after{content:"";position:absolute;right:-50px;top:-80px;width:190px;height:190px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.13),transparent 67%);pointer-events:none}
+.db-detail-kicker{font-size:9px;letter-spacing:.13em;text-transform:uppercase;opacity:.62;font-weight:800}.db-detail-title{font-size:30px;line-height:.98;letter-spacing:-.055em;margin:6px 0}.db-detail-sub{font-size:11px;line-height:1.45;opacity:.78;max-width:550px}
+.db-detail-spark{height:28px;margin-top:14px;display:flex;align-items:end;gap:5px}.db-detail-spark i{display:block;flex:1;border-radius:999px 999px 2px 2px;background:rgba(255,255,255,.72);animation:dbSpark .9s ease both}.db-detail-spark i:nth-child(1){height:34%}.db-detail-spark i:nth-child(2){height:48%;animation-delay:.05s}.db-detail-spark i:nth-child(3){height:42%;animation-delay:.1s}.db-detail-spark i:nth-child(4){height:68%;animation-delay:.15s}.db-detail-spark i:nth-child(5){height:54%;animation-delay:.2s}.db-detail-spark i:nth-child(6){height:82%;animation-delay:.25s}.db-detail-spark i:nth-child(7){height:92%;animation-delay:.3s}
+@keyframes dbSpark{from{transform:scaleY(.25);opacity:.2}to{transform:scaleY(1);opacity:1}}
+.db-detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.db-detail-box{padding:14px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}.db-detail-box small{display:block;color:var(--muted);font-size:8px;letter-spacing:.09em;text-transform:uppercase;font-weight:800}.db-detail-box b{display:block;font-size:16px;margin-top:6px;letter-spacing:-.025em}.db-detail-box p{margin:4px 0 0;color:var(--muted);font-size:10px;line-height:1.4}
+.db-detail-section{padding:14px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}.db-detail-section h4{margin:0;font-size:13px}.db-detail-list{display:grid;gap:8px;margin-top:10px}.db-detail-item{display:flex;gap:9px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--line)}.db-detail-item:first-child{border-top:0;padding-top:0}.db-detail-mark{width:20px;height:20px;border-radius:7px;display:grid;place-items:center;background:rgba(39,168,102,.1);color:#27a866;font-size:11px;font-weight:900;flex:none}.db-detail-item b{font-size:11px}.db-detail-item span{display:block;margin-top:2px;font-size:9.5px;color:var(--muted);line-height:1.4}
+.db-detail-joke{padding:12px 14px;border-radius:17px;background:rgba(114,87,255,.065);border:1px solid rgba(114,87,255,.11);color:var(--muted);font-size:10px;line-height:1.45}.db-detail-joke b{color:var(--purple)}
+.db-detail-actions{display:flex;gap:8px}.db-detail-actions button{flex:1;min-height:44px}.db-detail-actions .primary{border:0;border-radius:14px;background:var(--text);color:var(--bg);font-size:11px;font-weight:800}.db-detail-actions .secondary{border:1px solid var(--line);border-radius:14px;background:transparent;color:var(--text);font-size:11px;font-weight:700}
+body.dark .db-detail-hero{background:linear-gradient(135deg,#17191d,#24262c);border-color:rgba(255,255,255,.10);box-shadow:0 25px 75px rgba(0,0,0,.34)}
+body.dark .db-detail-section,body.dark .db-detail-box{background:rgba(255,255,255,.035)}
+body.dark .db-detail-joke{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.08)}
+body.dark .db-detail-actions .primary{background:#f5f6f7;color:#17181b}
+@media(max-width:700px){.db-detail-grid{grid-template-columns:1fr 1fr}.db-detail-title{font-size:27px}.db-detail-hero{padding:16px}.db-detail-section,.db-detail-box{padding:13px}.db-detail-actions{position:sticky;bottom:0;padding-top:3px;background:transparent}}
+@media(max-width:390px){.db-detail-grid{grid-template-columns:1fr}.db-detail-title{font-size:25px}}
+
+/* Тексты интерфейса — меньше канцелярита. */
+.business-os-plain{font-size:9px;color:var(--muted);margin-top:3px}
+</style>
+
+
+<script id="business-os-v2-js">
+(function(){
+  const KEY='db-home-section-switches-v2';
+  const OLD='db-home-section-switches-v1';
+  const defs={sales:false,finance:false,clients:false,promo:false,operations:false,reports:false};
+  const sections={
+    promo:{
+      icon:'↗',title:'Продвижение',desc:'Сайт, соцсети, контент и реклама',kicker:'ПРИВОДИМ ЛЮДЕЙ',
+      headline:'Смотрю, откуда приходят люди.',desc2:'Сайт, соцсети, публикации и реклама — всё в одном месте. Без охоты за цифрами по десяти вкладкам.',
+      metrics:[['184','людей сегодня'],['14','заявок']],
+      done:'Обновил 2 публикации и сравнил рекламные каналы.',need:'Проверить сегмент, где заявок стало меньше.',
+      inside:['Сайт и страницы','VK · Telegram · MAX · OK · Дзен','Контент и публикации','Реклама и стоимость заявки','Откуда пришли люди и что сработало'],
+      joke:'Если пост набрал три лайка и ушёл в закат — я хотя бы скажу, почему.'
+    },
+    sales:{
+      icon:'₽',title:'Продажи',desc:'Заявки, сделки и откуда приходят деньги',kicker:'ПРЕВРАЩАЕМ ИНТЕРЕС В ДЕНЬГИ',
+      headline:'Вижу путь клиента до оплаты.',desc2:'Кто написал, кто думает, кто почти купил и где мы сами случайно поставили паузу.',
+      metrics:[['42','заявки'],['11','продаж']],
+      done:'Подготовил следующий шаг для 3 горячих клиентов.',need:'Вернуть 3 клиента, которые остановились после предложения.',
+      inside:['Обращения и лиды','Воронка: обращение → сделка → продажа','Источники заявок','Потери и причины отказа','Сумма продаж и связь с деньгами'],
+      joke:'Иногда клиент не пропал. Он просто ждёт, пока ему кто-нибудь ответит.'
+    },
+    clients:{
+      icon:'○',title:'Клиенты',desc:'Сообщения, отзывы и повторные покупки',kicker:'НЕ ТЕРЯЕМ ЛЮДЕЙ',
+      headline:'Помню, кому пора ответить.',desc2:'Сообщения, отзывы, история покупок и клиенты, которых можно вернуть без магии и раскопок.',
+      metrics:[['3','ждут ответа'],['2','отзыва']],
+      done:'Собрал людей, которым нужен ответ сегодня.',need:'Ответить 3 клиентам и разобрать 2 новых отзыва.',
+      inside:['Сообщения из подключённых каналов','Новые и постоянные клиенты','Отзывы и ответы на них','Повторные покупки','Возврат клиентов, которые давно молчат'],
+      joke:'«Мы вам перезвоним» — прекрасная фраза. Но лучше ещё и реально перезвонить.'
+    },
+    finance:{
+      icon:'₽',title:'Деньги',desc:'Выручка, расходы, прибыль и куда всё уходит',kicker:'ДЕНЬГИ БЕЗ ТУМАНА',
+      headline:'Знаю, что пришло и куда ушло.',desc2:'Показываю не только цифры, но и что на них повлияло. И да, расходы тоже будут у нас как на ладони.',
+      metrics:[['184 000 ₽','сегодня'],['+8%','прибыль']],
+      done:'Сверил основные расходы и посмотрел, что съедает бюджет.',need:'Проверить окупаемость рекламы перед новым расходом.',
+      inside:['Выручка и прибыль','Расходы и обязательства','Денег сейчас','Откуда приходит выручка','Прогноз и крупные платежи'],
+      joke:'Деньги любят счёт. А лишние расходы — когда их никто не замечает.'
+    },
+    operations:{
+      icon:'⌁',title:'Работа бизнеса',desc:'Задачи, товары, остатки, поставщики и процессы',kicker:'ЧТОБЫ ВСЁ НЕ ДЕРЖАЛОСЬ НА ПАМЯТИ',
+      headline:'Слежу, чтобы бизнес не спотыкался.',desc2:'Задачи, запасы, поставщики и внутренние процессы. Всё, что должно просто работать — и желательно без аврала.',
+      metrics:[['4','важных задачи'],['2','поставщика']],
+      done:'Обновил список задач и отметил то, что уже сделано.',need:'Подтвердить следующую закупку и один важный процесс.',
+      inside:['Задачи и сроки','Товары и остатки','Поставщики и закупки','Процессы и узкие места','Что можно автоматизировать'],
+      joke:'Если всё держится в голове у одного человека — это уже не система, это экстремальный спорт.'
+    },
+    reports:{
+      icon:'▥',title:'Отчёты',desc:'Что изменилось и что с этим делать',kicker:'НЕ ПРОСТО ЦИФРЫ',
+      headline:'Объясняю, что всё это значит.',desc2:'Собираю главные изменения за период и показываю, где проблема, где рост и куда лучше смотреть дальше.',
+      metrics:[['7 дней','разбор'],['3','главных вывода']],
+      done:'Собрал недельный разбор и связал изменения между разделами.',need:'Посмотреть одну точку роста и одну проблему.',
+      inside:['Что выросло','Что просело','Почему это произошло','Что уже сделал управляющий','Что стоит сделать дальше'],
+      joke:'Отчёт на 47 страниц никого счастливее не сделал. Я попробую уложиться в главное.'
+    }
+  };
+  
+  function loadPrefs(){
+    try{
+      const v=JSON.parse(localStorage.getItem(KEY)||'null');
+      if(v&&typeof v==='object') return Object.assign({},defs,v);
+      const old=JSON.parse(localStorage.getItem(OLD)||'null');
+      return Object.assign({},defs,old&&typeof old==='object'?old:{});
+    }catch(e){return Object.assign({},defs)}
+  }
+  function savePrefs(v){try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){}}
+  
+  function detailHtml(id){
+    const s=sections[id]; if(!s)return '';
+    return `<div class="db-detail-shell">
+      <div class="db-detail-hero">
+        <div class="db-detail-kicker">${s.kicker}</div>
+        <div class="db-detail-title">${s.headline}</div>
+        <div class="db-detail-sub">${s.desc2}</div>
+        <div class="db-detail-spark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="db-detail-grid">${s.metrics.map(m=>`<div class="db-detail-box"><small>${m[1]}</small><b>${m[0]}</b><p>Сейчас</p></div>`).join('')}</div>
+      <div class="db-detail-section"><h4>Сейчас</h4><div class="db-detail-list">
+        <div class="db-detail-item"><span class="db-detail-mark">✓</span><div><b>Что происходит</b><span>${s.desc2}</span></div></div>
+        <div class="db-detail-item"><span class="db-detail-mark">→</span><div><b>Что сделал я</b><span>${s.done}</span></div></div>
+        <div class="db-detail-item"><span class="db-detail-mark">!</span><div><b>Что нужно от тебя</b><span>${s.need}</span></div></div>
+      </div></div>
+      <div class="db-detail-section"><h4>Что входит</h4><div class="db-detail-list">${s.inside.map(x=>`<div class="db-detail-item"><span class="db-detail-mark">•</span><div><b>${x}</b></div></div>`).join('')}</div></div>
+      <div class="db-detail-joke"><b>Человеческим языком:</b> ${s.joke}</div>
+      <div class="db-detail-actions"><button class="secondary" type="button" onclick="closeControl()">Закрыть</button><button class="primary" type="button" onclick="closeControl();${id==='reports'?'openMonthReport()':`showSection('${id==='operations'?'home':id}')`} ">${id==='reports'?'Открыть разбор':'Открыть раздел'} →</button></div>
+    </div>`;
+  }
+  window.openBusinessSectionDetail=function(id){const s=sections[id];if(!s)return;openControl(detailHtml(id));document.body.classList.add('db-detail-open')};
+  
+  function cardHtml(id){
+    const s=sections[id];
+    const attention=['promo','sales','clients','finance','operations'].includes(id) ? (id==='finance'?'warn':(id==='sales'||id==='clients'||id==='operations'?'red':'warn')) : '';
+    return `<article class="business-os-card" data-business-section="${id}" tabindex="0" role="button" aria-label="Открыть ${s.title}" onclick="openBusinessSectionDetail('${id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openBusinessSectionDetail('${id}')}">
+      <div class="business-os-head"><div><div class="business-os-kicker">${s.kicker}</div><h3>${s.title}</h3></div><span class="business-os-signal ${attention}"></span></div>
+      <p class="business-os-desc">${s.desc2}</p>
+      <div class="business-os-metrics">${s.metrics.map(m=>`<div class="business-os-metric"><b>${m[0]}</b><small>${m[1]}</small></div>`).join('')}</div>
+      <div class="business-os-foot">
+        <div class="business-os-footline"><span>СДЕЛАНО</span><b>${s.done}</b></div>
+        <div class="business-os-footline"><span>ДАЛЬШЕ</span><b>${s.need}</b></div>
+      </div>
+      <div class="business-os-open"><span>Открыть всё</span><em>→</em></div>
+    </article>`;
+  }
+  
+  function renderPreviews(){
+    const shell=document.querySelector('.future-shell'); if(!shell)return;
+    let wrap=document.getElementById('homeSectionPreviews');
+    if(!wrap){wrap=document.createElement('div');wrap.id='homeSectionPreviews';wrap.className='home-section-previews business-os-previews';const state=shell.querySelector('[data-home-block="state"]');if(state)state.insertAdjacentElement('afterend',wrap);else shell.prepend(wrap)}
+    wrap.classList.add('business-os-previews');
+    const p=loadPrefs();
+    wrap.innerHTML=Object.keys(sections).filter(id=>p[id]).map(cardHtml).join('');
+    wrap.style.display=Object.keys(sections).some(id=>p[id])?'grid':'none';
+  }
+  window.renderHomeSectionPreviews=renderPreviews;
+  
+  function settingsHtml(){
+    const p=loadPrefs();
+    const rows=Object.keys(sections).map(id=>{const s=sections[id],on=!!p[id];return `<div class="business-os-row ${on?'is-on':''}">
+      <span class="business-os-icon" aria-hidden="true">${s.icon}</span>
+      <div class="business-os-copy"><b>${s.title}</b><small>${s.desc}</small></div>
+      <button type="button" class="business-os-switch ${on?'is-on':''}" data-business-home-switch="${id}" aria-label="${on?'Убрать':'Добавить'} ${s.title} ${on?'с':'на'} Главной" aria-pressed="${on}"><i></i></button>
+    </div>`}).join('');
+    return `<div class="business-os-title">Что должно быть на Главной</div>
+      <p class="business-os-note">Поставь галочку — появится компактная карточка. Нажми её — и она раскроется в полный разбор. Никакого интерфейсного леса.</p>
+      <div class="business-os-list">${rows}</div>
+      <div class="business-os-title">Как со мной разговаривать</div>
+      <div class="business-os-row is-on"><span class="business-os-icon">А</span><div class="business-os-copy"><b>Простыми словами</b><small>Без «оптимизации синергии». Говорю так, чтобы понял человек, а не совет директоров.</small></div><span class="business-os-icon" style="background:rgba(39,168,102,.10);color:#27a866">✓</span></div>
+      <div class="business-os-row is-on"><span class="business-os-icon">☺</span><div class="business-os-copy"><b>Юмор по делу</b><small>Могу подколоть рекламу или забытый процесс. Когда всё горит — сначала тушим, потом шутим.</small></div><span class="business-os-icon" style="background:rgba(39,168,102,.10);color:#27a866">✓</span></div>`;
+  }
+  
+  function openSettingsV2(){
+    closeMore();
+    const oldPanels=`<div class="settings-theme-box"><div><b>Экран</b><small>Светлая или тёмная тема.</small></div><div class="theme-mode-row"><button class="theme-mode-btn" data-mode="light" onclick="setThemeMode('light')">☀ Светлая</button><button class="theme-mode-btn" data-mode="dark" onclick="setThemeMode('dark')">◐ Тёмная</button></div></div>`;
+    const managerPart=`<div class="settings-section-title">1 · Как я работаю</div><div class="settings-section-note">Показываю главное, не прячусь за умными словами и не делаю важные денежные шаги молча.</div><div class="rule-list settings-rules-list">
+      <div class="rule-row settings-rule-row"><div><b>Самостоятельность</b><small>Советую → ты подтверждаешь важные действия.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="independence" role="switch" aria-checked="true" aria-label="Самостоятельность"><i></i></button></div>
+      <div class="rule-row settings-rule-row"><div><b>Деньги</b><small>Траты и изменения бюджета — сначала спросить тебя.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="money" role="switch" aria-checked="true" aria-label="Деньги"><i></i></button></div>
+      <div class="rule-row settings-rule-row"><div><b>Автопилот</b><small>Хочешь больше самостоятельности — включишь здесь. Сюрпризов не будет.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="autopilot" role="switch" aria-checked="false" aria-label="Автопилот"><i></i></button></div>
+    </div>`;
+    openControl(`<div class="control-kicker">Цифровой управляющий</div><div class="control-title">Главная без хаоса.</div><div class="control-sub">Выбираешь нужное — я собираю это в компактные карточки. Остальное тихо сидит в своём разделе.</div>${oldPanels}${managerPart}${settingsHtml()}<div class="settings-section-title">3 · Мои инструменты</div><div class="settings-create-card"><div><span>ПАМЯТЬ</span><b>Память бизнеса</b><small>Что я знаю о твоих целях, клиентах и правилах.</small></div><button type="button" onclick="closeControl();openBusinessMemory()">Открыть →</button></div><div class="settings-create-card"><div><span>ИСТОРИЯ</span><b>Эволюция</b><small>Что я уже изменил и чему научился.</small></div><button type="button" onclick="closeControl();openEvolution()">Смотреть →</button></div><div class="dm-learning-card"><div class="dm-learning-copy"><div class="dm-learning-kicker">Лёгкое обучение</div><b>Покажу, что здесь куда.</b><small>За минуту объясню Главную и мои разделы. Без лекции. Обещаю.</small></div><button type="button" class="control-action dm-learning-button" onclick="openLightTutorial()">Пройти обучение →</button></div>`);
+    try{if(window.syncManagerSettings)window.syncManagerSettings()}catch(e){}
+    document.querySelectorAll('[data-business-home-switch]').forEach(btn=>btn.addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();const id=this.dataset.businessHomeSwitch;const p=loadPrefs();p[id]=!p[id];savePrefs(p);renderPreviews();openSettingsV2();
+    }));
+  }
+  window.openSettingsPanel=openSettingsV2;
+  
+  function boot(){
+    // Migrate existing v1 preferences into v2 on first run, so nothing the user enabled disappears.
+    try{if(!localStorage.getItem(KEY)){const old=JSON.parse(localStorage.getItem(OLD)||'null');if(old&&typeof old==='object')savePrefs(Object.assign({},defs,old))}}catch(e){}
+    setTimeout(renderPreviews,30);
+  }
+  document.addEventListener('DOMContentLoaded',boot);
+  setTimeout(renderPreviews,120);
+})();
+</script>
 
 </body>
 
