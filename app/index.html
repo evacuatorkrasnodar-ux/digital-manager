@@ -6223,7 +6223,7 @@ function openSettingsPanel(){
     <div class="control-title">Настройки без путаницы.</div>
     <div class="control-sub">Здесь только то, как я работаю и что показываю на Главной.</div>
 
-    <div class="settings-theme-box"><div><b>Экран</b><small>Светлая или тёмная тема.</small></div><div class="theme-mode-row"><button class="theme-mode-btn" data-mode="light" onclick="setThemeMode(&quot;light&quot;)">☀ Светлая</button><button class="theme-mode-btn" data-mode="dark" onclick="setThemeMode(&quot;dark&quot;)">◐ Тёмная</button></div></div>
+    <div class="settings-theme-box"><div><b>Экран</b><small>Светлая или тёмная тема.</small></div><div class="theme-mode-row"><button class="theme-mode-btn" data-mode="light" onclick="setThemeMode('light')">☀ Светлая</button><button class="theme-mode-btn" data-mode="dark" onclick="setThemeMode('dark')">◐ Тёмная</button></div></div>
 
     <div class="settings-section-title">1 · Как работает управляющий</div>
     <div class="settings-section-note">Здесь задаются мои границы, стиль общения и уровень самостоятельности.</div>
@@ -12104,685 +12104,91 @@ body.dark .dm-living-dots .dm-menu-logo .sig-diamond{fill:#111216!important;stro
 body.dark .dm-living-dots .dm-menu-logo .sig-core{fill:#f5f5f7!important;}
 </style>
 
-
-<style id="wow-business-os-v3-css">
-/* WOW v3: структура бизнеса понятнее, а родные карточки Главной остаются нетронутыми. */
-.business-map-strip{margin:0 0 12px;padding:11px 13px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.42);display:flex;align-items:center;gap:8px;overflow:auto;scrollbar-width:none;white-space:nowrap}
-.business-map-strip::-webkit-scrollbar{display:none}
-.business-map-strip span{font-size:9px;font-weight:800;letter-spacing:.05em;color:var(--muted)}
-.business-map-strip i{font-style:normal;color:var(--muted);opacity:.6;font-size:12px}
-.business-map-strip .live{color:var(--text)}
-body.dark .business-map-strip{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09)}
-
-/* Новая компактная карточка использует ту же геометрию, что и родные future-card. */
-#homeSectionPreviews .home-added-card{cursor:pointer}
-#homeSectionPreviews .home-added-card:hover{transform:translateY(-2px)}
-#homeSectionPreviews .module-mini-joke{margin-top:9px;font-size:10px;line-height:1.4;color:var(--muted)}
-#homeSectionPreviews .module-mini-joke b{color:var(--text)}
-#homeSectionPreviews .module-flow{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:10px}
-#homeSectionPreviews .module-flow span{padding:6px 8px;border-radius:999px;background:rgba(20,20,24,.045);font-size:9px;color:var(--muted);font-weight:700}
-#homeSectionPreviews .module-flow i{font-style:normal;color:var(--muted);opacity:.5;font-size:10px}
-body.dark #homeSectionPreviews .module-flow span{background:rgba(255,255,255,.06)}
-
-/* Большой лист при нажатии на карточку. */
-.wow-module-sheet{position:fixed;inset:0;z-index:100060;display:none;align-items:flex-end;justify-content:center;background:rgba(6,8,13,.36);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
-.wow-module-sheet.is-open{display:flex}
-.wow-module-panel{width:min(820px,100%);max-height:min(88vh,820px);overflow:auto;padding:20px 20px calc(22px + env(safe-area-inset-bottom));border:1px solid rgba(255,255,255,.34);border-radius:30px 30px 0 0;background:rgba(249,250,253,.97);color:#17171a;box-shadow:0 -20px 90px rgba(9,15,35,.25);transform:translateY(18px);opacity:0;animation:wowModuleIn .28s cubic-bezier(.2,.8,.2,1) forwards}
-@keyframes wowModuleIn{to{transform:translateY(0);opacity:1}}
-body.dark .wow-module-panel{background:rgba(27,28,33,.98);border-color:rgba(255,255,255,.10);color:#f5f5f7;box-shadow:0 -24px 90px rgba(0,0,0,.45)}
-.wow-module-top{display:flex;align-items:flex-start;justify-content:space-between;gap:15px}
-.wow-module-kicker{font-size:9px;font-weight:850;letter-spacing:.14em;text-transform:uppercase;color:#7e7f86}
-body.dark .wow-module-kicker{color:#a6a7ad}
-.wow-module-title{font-size:34px;line-height:1.02;letter-spacing:-.06em;margin:6px 50px 8px 0}
-.wow-module-sub{margin:0;max-width:650px;color:#777981;font-size:13px;line-height:1.55}
-body.dark .wow-module-sub{color:#aaaab1}
-.wow-module-close{width:40px;height:40px;border:0;border-radius:14px;background:rgba(20,20,24,.06);color:inherit;font-size:23px;line-height:1;flex:none}
-body.dark .wow-module-close{background:rgba(255,255,255,.07)}
-.wow-module-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:18px}
-.wow-module-stat{padding:13px 14px;border:1px solid rgba(20,20,24,.08);border-radius:17px;background:rgba(255,255,255,.58)}
-body.dark .wow-module-stat{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09)}
-.wow-module-stat small{display:block;color:#8a8b92;font-size:9px;line-height:1.2}
-.wow-module-stat b{display:block;font-size:22px;letter-spacing:-.04em;margin-top:6px}
-.wow-module-sections{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:14px}
-.wow-module-block{padding:15px;border-radius:19px;border:1px solid rgba(20,20,24,.08);background:rgba(255,255,255,.50)}
-body.dark .wow-module-block{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.09)}
-.wow-module-block span{display:block;font-size:9px;letter-spacing:.12em;font-weight:850;color:#8c8d94}
-.wow-module-block b{display:block;font-size:14px;margin-top:6px;line-height:1.25}
-.wow-module-block p{margin:5px 0 0;color:#777981;font-size:11px;line-height:1.5}
-body.dark .wow-module-block p{color:#aaaab1}
-.wow-module-joke{margin-top:12px;padding:12px 14px;border-radius:16px;background:rgba(114,87,255,.06);border:1px solid rgba(114,87,255,.11);color:#6f7078;font-size:11px;line-height:1.45}
-body.dark .wow-module-joke{background:rgba(114,87,255,.08);color:#b5b5bd;border-color:rgba(150,130,255,.14)}
-.wow-module-actions{display:flex;gap:9px;margin-top:13px}
-.wow-module-primary,.wow-module-secondary{min-height:46px;border-radius:14px;padding:0 16px;font-size:11px;font-weight:800;border:0}
-.wow-module-primary{background:var(--text);color:var(--bg);flex:1}
-.wow-module-secondary{background:rgba(20,20,24,.06);color:var(--text)}
-body.dark .wow-module-primary{background:#f4f4f5;color:#17171a}
-body.dark .wow-module-secondary{background:rgba(255,255,255,.07);color:#f4f4f5}
+<!-- V55 — порядок Главной и Настроек: пять самостоятельных карточек -->
+<style id="v55-home-order">
+/* Главная: оставляем спокойный заголовок + только включённые карточки. */
+.future-shell>.home-block[data-home-block="evolution"],
+.future-shell>.home-block[data-home-block="attention"],
+.future-shell>.home-block[data-home-block="command"],
+.future-shell>.home-block[data-home-block="intent"],
+.future-shell>.home-block[data-home-block="twin"],
+.future-shell>.home-block[data-home-block="simulator"],
+.future-shell>.home-block[data-home-block="memory"],
+.future-shell>.home-block[data-home-block="contract"],
+.future-shell>.home-block[data-home-block="blindspot"],
+.future-shell>.home-block[data-home-block="create"]{display:none!important}
+#homeSectionPreviews{display:grid!important;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0 0!important}
+#homeSectionPreviews .home-added-card{margin:0!important;min-width:0!important}
+#homeSectionPreviews .home-added-card[data-preview-section="reports"]{grid-column:1/-1}
 @media(max-width:700px){
-  .business-map-strip{margin-bottom:9px}
-  .business-map-strip span{font-size:8px}
-  .wow-module-panel{max-height:92vh;padding:17px 15px calc(18px + env(safe-area-inset-bottom));border-radius:28px 28px 0 0}
-  .wow-module-title{font-size:29px}
-  .wow-module-grid{grid-template-columns:1fr 1fr}
-  .wow-module-sections{grid-template-columns:1fr}
-  .wow-module-actions{flex-direction:column}
-  .wow-module-primary,.wow-module-secondary{width:100%}
+ #homeSectionPreviews{grid-template-columns:1fr!important;gap:8px!important;margin-top:8px!important}
+ #homeSectionPreviews .home-added-card[data-preview-section="reports"]{grid-column:auto}
 }
+
+/* Настройки: единый спокойный список без смешивания карточек и правил. */
+#controlContent .v55-settings-home-list{display:grid;gap:8px;margin-top:10px}
+#controlContent .v55-settings-home-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;padding:12px 13px;border:1px solid var(--line);border-radius:17px;background:var(--panel);box-shadow:0 7px 22px rgba(20,20,25,.025)}
+#controlContent .v55-settings-home-open{display:grid;grid-template-columns:34px minmax(0,1fr);gap:10px;align-items:center;border:0;background:transparent;color:var(--text);text-align:left;padding:0;cursor:pointer;min-width:0}
+#controlContent .v55-settings-home-icon{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:#eef0f5;color:#182447;font-size:14px;font-weight:800}
+#controlContent .v55-settings-home-copy b{display:block;font-size:12px;letter-spacing:-.02em}
+#controlContent .v55-settings-home-copy small{display:block;margin-top:3px;color:var(--muted);font-size:9px;line-height:1.35}
+#controlContent .v55-settings-home-switch{width:42px;height:22px;border:0;border-radius:999px;background:#d9dbe1;padding:2px;position:relative;cursor:pointer;flex:0 0 42px}
+#controlContent .v55-settings-home-switch i{display:block;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.15);position:absolute;left:2px;top:2px;transition:left .2s ease}
+#controlContent .v55-settings-home-switch.is-on{background:#182447}
+#controlContent .v55-settings-home-switch.is-on i{left:22px}
+body.dark #controlContent .v55-settings-home-row{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09)}
+body.dark #controlContent .v55-settings-home-icon{background:rgba(255,255,255,.08);color:#fff}
+body.dark #controlContent .v55-settings-home-switch{background:#30343c}
+body.dark #controlContent .v55-settings-home-switch.is-on{background:#f4f4f5}
+body.dark #controlContent .v55-settings-home-switch.is-on i{background:#17181b}
 </style>
-
-<script id="wow-business-os-v3-js">
+<script id="v55-home-order-js">
 (function(){
-  const KEY='db-home-section-switches-v1';
-  const defaults={sales:false,finance:false,clients:false,promo:false,operations:false,reports:false,evolution:true,memory:true,rules:true};
-  const data={
-    promo:{
-      kicker:'ПРОДВИЖЕНИЕ',title:'Чтобы тебя находили, а не вспоминали случайно.',
-      sub:'Сайт, соцсети, контент и реклама. Всё, что приводит внимание и новых людей.',
-      status:'ТРЕБУЕТ ВНИМАНИЯ',signal:'red',
-      stats:[['Люди','184'],['Заявки','14'],['Цена заявки','−12%'],['Каналы','6']],
-      flow:['Сайт','Соцсети','Контент','Реклама'],
-      now:'Реклама работает лучше в одном из каналов.',
-      done:'Проверил кампании и нашёл место, где можно не тратить лишнее.',
-      need:'Проверить страницы сайта, откуда обычно приходят заявки.',
-      joke:'Контент тоже хочет внимания. Он просто делает вид, что ему всё равно.',
-      cta:'Открыть продвижение'
-    },
-    sales:{
-      kicker:'ПРОДАЖИ',title:'Заявки должны превращаться в деньги.',
-      sub:'Здесь живут обращения, сделки, воронка и простой ответ на вопрос: откуда пришла выручка.',
-      status:'ТРЕБУЕТ РЕШЕНИЯ',signal:'red',
-      stats:[['Обращения','27'],['Продажи','8'],['Выручка','184k ₽'],['Конверсия','29,6%']],
-      flow:['Обращение','Квалификация','Предложение','Продажа'],
-      now:'Три обращения застряли после предложения.',
-      done:'Разложил воронку и нашёл место, где теряем людей.',
-      need:'Ответить трём клиентам и проверить два зависших предложения.',
-      joke:'Заявка не обязана превращаться в продажу. Но желательно, а то зачем мы тут собрались 😄',
-      cta:'Открыть продажи'
-    },
-    clients:{
-      kicker:'КЛИЕНТЫ',title:'Люди, а не строчки в таблице.',
-      sub:'Сообщения, история общения, отзывы, повторные покупки и те, кому пора напомнить о себе.',
-      status:'ТРЕБУЕТ РЕШЕНИЯ',signal:'red',
-      stats:[['Новые','14'],['Ждут ответа','3'],['Повторные','8'],['Отзывы','3']],
-      flow:['Сообщения','История','Отзывы','Возврат'],
-      now:'Три человека ждут ответа.',
-      done:'Собрал тех, кому нужен следующий шаг, а не ещё один красивый список.',
-      need:'Ответить на 3 сообщения и посмотреть 3 новых отзыва.',
-      joke:'Клиенты любят внимание. Желательно человеческое. Я тоже за.',
-      cta:'Открыть клиентов'
-    },
-    finance:{
-      kicker:'ФИНАНСЫ',title:'Деньги любят порядок. И чтобы их не теряли.',
-      sub:'Выручка, расходы, прибыль, движение денег и места, где бюджет начинает вести себя подозрительно.',
-      status:'ВСЁ ПОД КОНТРОЛЕМ',signal:'green',
-      stats:[['Выручка','4,86 млн ₽'],['Расходы','3,59 млн ₽'],['Прибыль','1,27 млн ₽'],['Денег сейчас','2,18 млн ₽']],
-      flow:['Пришло','Потрачено','Заработано','Осталось'],
-      now:'Расходы растут чуть быстрее, чем хочется.',
-      done:'Сверил движение денег и уже посмотрел рекламу.',
-      need:'Проверить, что именно подорожало.',
-      joke:'Деньги не исчезают. Они просто иногда очень творчески находят новые места.',
-      cta:'Открыть финансы'
-    },
-    operations:{
-      kicker:'РАБОТА БИЗНЕСА',title:'Чтобы всё работало, когда ты не смотришь.',
-      sub:'Задачи, товары, остатки, поставщики и процессы. То самое закулисье, без которого шоу не начнётся.',
-      status:'СМОТРЮ',signal:'green',
-      stats:[['Задачи','7'],['Товаров мало','2'],['Поставщики','5'],['Процессы','11']],
-      flow:['Задачи','Товар','Поставщик','Процесс'],
-      now:'Один товар закончится примерно через 4 дня.',
-      done:'Поднял этот риск наверх, чтобы он не превратился в сюрприз.',
-      need:'Подтвердить закупку товара X.',
-      joke:'Если всё работает само — это автоматизация. Если всё держится на одном человеке — это храбрый эксперимент.',
-      cta:'Открыть работу бизнеса'
-    },
-    reports:{
-      kicker:'ОТЧЁТЫ',title:'Не просто цифры. Что они нам говорят.',
-      sub:'Собираю изменения из всех блоков и объясняю простыми словами: что выросло, что просело и что с этим делать.',
-      status:'ГОТОВ К РАЗБОРУ',signal:'green',
-      stats:[['Продвижение','+12%'],['Продажи','−7%'],['Клиенты','+8'],['Прибыль','+12,7%']],
-      flow:['Что было','Что изменилось','Почему','Что делать'],
-      now:'Главная проблема сейчас — не привлечение, а обработка части обращений.',
-      done:'Связал данные из продвижения, продаж и клиентов.',
-      need:'Нажать «Показать разбор» — и я объясню всё без таблицы на 48 вкладок.',
-      joke:'Отчёт без вывода — это просто длинная цифра с хорошей самооценкой.',
-      cta:'Показать разбор'
-    }
-  };
+ const KEY='db-home-section-switches-v1';
+ const ids=['sales','finance','clients','promo','reports'];
+ const defaults={sales:true,finance:true,clients:true,promo:true,reports:true};
+ function prefs(){try{const raw=localStorage.getItem(KEY);const old=raw?JSON.parse(raw):null;return Object.assign({},defaults,old&&typeof old==='object'?old:{}, {reports:old&&typeof old==='object'&&'reports' in old?!!old.reports:true})}catch(e){return {...defaults}}}
+ function save(x){try{localStorage.setItem(KEY,JSON.stringify(x))}catch(e){}}
+ function openReport(){
+   const el=document.getElementById('monthReportOverlay');
+   if(el){el.classList.add('show');el.setAttribute('aria-hidden','false');}
+ }
+ window.openHomeReports=openReport;
+ function render(){
+   const shell=document.querySelector('.future-shell');if(!shell)return;
+   let wrap=document.getElementById('homeSectionPreviews');
+   if(!wrap){wrap=document.createElement('div');wrap.id='homeSectionPreviews';shell.appendChild(wrap)}
+   const p=prefs();
+   const data={
+    sales:{k:'ПРОДАЖИ',title:'Есть 8 клиентов, которые почти купили.',text:'Заявки, сделки, конверсия и воронка — только то, что связано с продажей.',status:'red',action:"showSection('sales')",label:'Открыть продажи'},
+    finance:{k:'ДЕНЬГИ',title:'Деньги в порядке, но расходы растут.',text:'Выручка, расходы, прибыль, остаток и прогноз — отдельно от продаж.',status:'blue',action:"showSection('finance')",label:'Открыть деньги'},
+    clients:{k:'КЛИЕНТЫ',title:'3 клиента ждут следующего шага.',text:'Новые заявки, история общения, постоянные клиенты и те, о ком давно не слышно.',status:'red',action:"showSection('clients')",label:'Открыть клиентов'},
+    promo:{k:'ПРОДВИЖЕНИЕ',title:'Нашёл канал, который работает лучше.',text:'Реклама, каналы, стоимость заявки и куда разумнее перенести бюджет.',status:'green',action:"showSection('promo')",label:'Открыть продвижение'},
+    reports:{k:'ОТЧЁТЫ',title:'Главное за период — в одном месте.',text:'Короткий разбор того, что произошло с продажами, деньгами и продвижением.',status:'blue',action:'openHomeReports()',label:'Открыть отчёт'}
+   };
+   wrap.innerHTML=ids.filter(id=>p[id]).map(id=>{const d=data[id];return `<article class="future-card home-added-card" data-preview-section="${id}"><div class="card-top"><div><span class="future-label">${d.k}</span><h3>${d.title}</h3></div><span class="signal ${d.status}"></span></div><p class="future-desc">${d.text}</p><div class="home-added-open"><button type="button" class="future-link" onclick="${d.action}">${d.label} →</button></div></article>`}).join('');
+   wrap.style.display=wrap.children.length?'grid':'none';
+ }
+ window.renderHomeSectionPreviews=render;
+ window.toggleSettingsHomeSection=function(id){const p=prefs();p[id]=!p[id];save(p);render();if(document.body.dataset.currentSection==='home'&&typeof showSection==='function')showSection('home');if(typeof syncSettingsHomeSwitches==='function')syncSettingsHomeSwitches()};
+ window.__v55HomePrefs=prefs;
+ document.addEventListener('DOMContentLoaded',()=>setTimeout(render,50));
+ setTimeout(render,120);
 
-  function prefs(){
-    try{const x=JSON.parse(localStorage.getItem(KEY)||'null');return Object.assign({},defaults,x&&typeof x==='object'?x:{})}
-    catch(e){return Object.assign({},defaults)}
-  }
-  function save(x){try{localStorage.setItem(KEY,JSON.stringify(x))}catch(e){}}
-
-  function ensureSheet(){
-    let s=document.getElementById('wowBusinessModuleSheet');
-    if(s)return s;
-    s=document.createElement('div');
-    s.id='wowBusinessModuleSheet';
-    s.className='wow-module-sheet';
-    s.innerHTML='<section class="wow-module-panel" role="dialog" aria-modal="true" aria-labelledby="wowModuleTitle"><div id="wowModuleContent"></div></section>';
-    s.addEventListener('click',e=>{if(e.target===s)closeModule()});
-    document.body.appendChild(s);
-    return s;
-  }
-  function closeModule(){const s=document.getElementById('wowBusinessModuleSheet');if(s)s.classList.remove('is-open')}
-  window.closeBusinessModule=closeModule;
-  window.openBusinessModule=function(id){
-    const d=data[id]; if(!d)return;
-    const s=ensureSheet(),c=document.getElementById('wowModuleContent');
-    const stats=d.stats.map(x=>'<div class="wow-module-stat"><small>'+x[0]+'</small><b>'+x[1]+'</b></div>').join('');
-    const flow=d.flow.map((x,i)=>'<span>'+x+'</span>'+(i<d.flow.length-1?'<i>→</i>':'')).join('');
-    c.innerHTML='<div class="wow-module-top"><div><div class="wow-module-kicker">'+d.kicker+' · '+d.status+'</div><h2 id="wowModuleTitle" class="wow-module-title">'+d.title+'</h2><p class="wow-module-sub">'+d.sub+'</p></div><button class="wow-module-close" type="button" onclick="closeBusinessModule()" aria-label="Закрыть">×</button></div>'+
-      '<div class="wow-module-grid">'+stats+'</div>'+
-      '<div class="module-flow">'+flow+'</div>'+
-      '<div class="wow-module-sections">'+
-        '<div class="wow-module-block"><span>СЕЙЧАС</span><b>'+d.now+'</b><p>Я держу это в поле зрения.</p></div>'+
-        '<div class="wow-module-block"><span>Я УЖЕ СДЕЛАЛ</span><b>'+d.done+'</b><p>Это не обещание. Это то, что уже произошло.</p></div>'+
-        '<div class="wow-module-block"><span>ОТ ТЕБЯ НУЖНО</span><b>'+d.need+'</b><p>Один понятный следующий шаг.</p></div>'+
-        '<div class="wow-module-block"><span>ЗДЕСЬ ЖИВЁТ</span><b>'+d.sub+'</b><p>Никакой мешанины: у каждого блока своя работа.</p></div>'+ 
-      '</div>'+
-      '<div class="wow-module-joke">'+d.joke+'</div>'+
-      '<div class="wow-module-actions"><button class="wow-module-primary" type="button" onclick="closeBusinessModule();'+(id==='operations'||id==='reports'?'':'showSection(\''+id+'\')')+'">'+d.cta+' →</button><button class="wow-module-secondary" type="button" onclick="closeBusinessModule()">Оставить здесь</button></div>';
-    s.classList.add('is-open');
-  };
-
-  function render(){
-    const shell=document.querySelector('.future-shell'); if(!shell)return;
-    let wrap=document.getElementById('homeSectionPreviews');
-    if(!wrap){wrap=document.createElement('div');wrap.id='homeSectionPreviews';wrap.className='home-section-previews';const state=shell.querySelector('[data-home-block="state"]');if(state)state.insertAdjacentElement('afterend',wrap);else shell.prepend(wrap)}
-    const p=prefs();
-    const ids=['promo','sales','clients','finance','operations','reports'];
-    wrap.innerHTML=ids.filter(id=>p[id]).map(id=>{
-      const d=data[id], decision=d.signal==='red';
-      const statHtml=d.stats.slice(0,2).map(x=>'<div><b>'+x[1]+'</b><span>'+x[0]+'</span></div>').join('');
-      return '<article class="future-card home-added-card '+(decision?'attention ':'')+'module-preview-'+id+'" data-preview-section="'+id+'" onclick="openBusinessModule(\''+id+'\')">'+
-        '<div class="card-top"><div><span class="future-label">'+d.kicker+'</span><h3>'+d.title+'</h3></div><span class="signal '+d.signal+'"></span></div>'+
-        '<p class="future-desc">'+d.sub+'</p>'+ 
-        '<div class="mini-result">'+statHtml+'</div>'+ 
-        '<div class="quiet-note"><span class="check">'+(decision?'!':'✓')+'</span> '+(decision?'Есть что решить.':'Я уже держу это под контролем.')+'</div>'+ 
-        '<div class="module-mini-joke">'+d.joke+'</div>'+ 
-        '<div class="action-row">'+
-          (decision?'<button type="button" class="future-btn primary" onclick="event.stopPropagation();openBusinessModule(\''+id+'\')">Разобраться</button><button type="button" class="future-btn ghost" onclick="event.stopPropagation();openBusinessModule(\''+id+'\')">Почему?</button>':'<button type="button" class="future-btn primary" onclick="event.stopPropagation();openBusinessModule(\''+id+'\')">Открыть</button><button type="button" class="future-btn ghost" onclick="event.stopPropagation();openBusinessModule(\''+id+'\')">Подробнее</button>')+
-        '</div></article>';
-    }).join('');
-    wrap.style.display=wrap.children.length?'grid':'none';
-    ['salesPage','financePage','clientsPage','promoPage'].forEach(pid=>{const el=document.getElementById(pid);if(el&&document.body.dataset.currentSection==='home')el.style.display='none'});
-  }
-  window.renderHomeSectionPreviews=render;
-
-  function settingsSections(){
-    return [
-      {id:'promo',icon:'⌁',title:'Продвижение',desc:'Сайт, соцсети, контент и реклама.'},
-      {id:'sales',icon:'↗',title:'Продажи',desc:'Заявки, сделки и откуда пришли деньги.'},
-      {id:'clients',icon:'○',title:'Клиенты',desc:'Общение, отзывы и возврат клиентов.'},
-      {id:'finance',icon:'₽',title:'Финансы',desc:'Выручка, расходы и прибыль.'},
-      {id:'operations',icon:'□',title:'Работа бизнеса',desc:'Задачи, товары, остатки и поставщики.'},
-      {id:'reports',icon:'≋',title:'Отчёты',desc:'Что выросло, что просело и почему.'}
-    ];
-  }
-
-  window.toggleSettingsHomeSection=function(id,btn){
-    const x=prefs();x[id]=!x[id];save(x);if(typeof window.syncSettingsHomeSwitches==='function')window.syncSettingsHomeSwitches();render();if(typeof showSection==='function')showSection('home');setTimeout(render,30);
-  };
-
-  const originalOpenSettings=window.openSettingsPanel;
-  window.openSettingsPanel=function(){
-    closeMore();
-    const rows=settingsSections().map(s=>'<div class="settings-clean-row" data-setting-section="'+s.id+'"><button type="button" class="settings-clean-open" onclick="closeControl();openBusinessModule(\''+s.id+'\')"><span class="settings-clean-icon">'+s.icon+'</span><span class="settings-clean-copy"><b>'+s.title+'</b><small>'+s.desc+'</small></span></button><button type="button" class="rule-toggle settings-rule-toggle settings-home-switch" data-section-id="'+s.id+'" aria-label="Показывать '+s.title+' на Главной" aria-pressed="false"><i></i></button></div>').join('');
-    openControl('<div class="control-kicker">Настройки управляющего</div><div class="control-title">Настройки без квеста.</div><div class="control-sub">Включи нужные карточки на Главной. Нажал на карточку — получил весь разбор. У каждого блока своя работа, а не «всё обо всём».</div><div class="settings-theme-box"><div><b>Экран</b><small>Светлая или тёмная тема.</small></div><div class="theme-mode-row"><button class="theme-mode-btn" data-mode="light" onclick="setThemeMode(&quot;light&quot;)">☀ Светлая</button><button class="theme-mode-btn" data-mode="dark" onclick="setThemeMode(&quot;dark&quot;)">◐ Тёмная</button></div></div><div class="business-map-strip"><span class="live">Продвижение</span><i>→</i><span class="live">Продажи</span><i>→</i><span class="live">Клиенты</span><i>→</i><span class="live">Финансы</span><i>→</i><span class="live">Работа бизнеса</span><i>→</i><span class="live">Отчёты</span></div><div class="settings-section-title">1 · Как работает управляющий</div><div class="settings-section-note">Границы, деньги, стиль общения и автопилот остаются как были.</div><div class="rule-list settings-rules-list"><div class="rule-row settings-rule-row"><div><b>Самостоятельность</b><small>Советую → вы подтверждаете важные действия.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="independence" role="switch" aria-checked="true" aria-label="Самостоятельность"><i></i></button></div><div class="rule-row settings-rule-row"><div><b>Деньги</b><small>Расходы и изменения бюджета — сначала спросить вас.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="money" role="switch" aria-checked="true" aria-label="Деньги"><i></i></button></div><div class="rule-row settings-rule-row"><div><b>Общение</b><small>Просто, коротко и по делу. Шутки — когда всё спокойно.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="communication" role="switch" aria-checked="true" aria-label="Общение"><i></i></button></div><div class="rule-row settings-rule-row"><div><b>Автопилот</b><small>Расширяет мои границы, когда ты сам этого хочешь.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="autopilot" role="switch" aria-checked="false" aria-label="Автопилот"><i></i></button></div></div><button class="control-action settings-autopilot-action" onclick="closeControl();openAutopilot()">Настроить автопилот →</button><div class="settings-section-title">2 · Что показывать на Главной</div><div class="settings-section-note">Галочка = компактная карточка на Главной. Нажал карточку = большой разбор. Всё по своим полкам.</div><div class="settings-clean-list">'+rows+'</div><div class="settings-create-card"><div><span>ДОПОЛНИТЕЛЬНО</span><b>Нужен новый инструмент?</b><small>Скажи, чего не хватает. Я попробую собрать.</small></div><button type="button" onclick="closeControl();openBuildModal()">Создать →</button></div><div class="settings-section-title">3 · Сам управляющий</div><div class="settings-create-card"><div><span>Я САМ НАШЁЛ</span><b>Что можно улучшить</b><small>Я ищу проблемы и возможности, которые легко пропустить.</small></div><button type="button" onclick="closeControl();openBlindspot()">Показать →</button></div><div class="settings-create-card"><div><span>Я ПОМНЮ</span><b>Память бизнеса</b><small>Решения, цели и правила, которые не хочется объяснять заново.</small></div><button type="button" onclick="closeControl();openBusinessMemory()">Открыть →</button></div><div class="settings-create-card"><div><span>Я МОГУ САМ</span><b>Правила и автопилот</b><small>Здесь решаем, где я действую сам, а где сначала спрашиваю.</small></div><button type="button" onclick="closeControl();openBusinessRules()">Настроить →</button></div><div class="settings-section-title">4 · Помощь</div><div class="rule-list settings-rules-list"><div class="rule-row settings-rule-row settings-hints-row"><div><b>Подсказки</b><small>Показывать маленькие подсказки по ходу работы.</small></div><button type="button" class="rule-toggle settings-rule-toggle" id="managerHintsToggle" role="switch" aria-checked="true"><i></i></button></div></div><div class="dm-learning-card"><div class="dm-learning-copy"><div class="dm-learning-kicker">Лёгкое обучение</div><b>Покажу, что здесь куда.</b><small>Коротко и с примерами. Без лекции на два сезона.</small></div><button type="button" class="control-action dm-learning-button" onclick="openLightTutorial()">Пройти обучение →</button></div>');
-    if(typeof window.syncManagerSettings==='function')window.syncManagerSettings();
-    if(typeof window.syncSettingsHomeSwitches==='function')window.syncSettingsHomeSwitches();
-  };
-
-  document.addEventListener('click',function(e){
-    const sw=e.target.closest&&e.target.closest('#controlContent .settings-home-switch[data-section-id]');
-    if(sw){e.preventDefault();e.stopImmediatePropagation();window.toggleSettingsHomeSection(sw.dataset.sectionId,sw);return;}
-  },true);
-
-  document.addEventListener('DOMContentLoaded',()=>setTimeout(render,100));
-  setTimeout(render,120);
+ /* Полностью заменяем старое окно настроек: разделы больше не смешаны. */
+ window.openSettingsPanel=function(){
+   closeMore();
+   const p=prefs();
+   const cards=[
+    ['sales','🛒','Продажи','Заявки, сделки, конверсия, воронка и те, кто почти купил.'],
+    ['finance','₽','Деньги','Выручка, расходы, прибыль, счета, движение и прогноз.'],
+    ['clients','👥','Клиенты','Новые заявки, история общения и следующий шаг по человеку.'],
+    ['promo','📣','Продвижение','Реклама, каналы, стоимость заявки и бюджет.'],
+    ['reports','📊','Отчёты','Периоды, выводы и главное изменение в бизнесе.']
+   ];
+   const list=cards.map(([id,icon,title,desc])=>`<div class="v55-settings-home-row"><button type="button" class="v55-settings-home-open" onclick="closeControl();${id==='reports'?'openHomeReports()':`showSection('${id}')`}"><span class="v55-settings-home-icon">${icon}</span><span class="v55-settings-home-copy"><b>${title}</b><small>${desc}</small></span></button><button type="button" class="v55-settings-home-switch ${p[id]?'is-on':''}" data-section-id="${id}" aria-pressed="${!!p[id]}" aria-label="Показывать ${title} на Главной" onclick="event.preventDefault();event.stopPropagation();window.toggleSettingsHomeSection('${id}')"><i></i></button></div>`).join('');
+   openControl(`<div class="control-kicker">НАСТРОЙКИ</div><div class="control-title">Главная без каши.</div><div class="control-sub">Здесь управляются только пять главных карточек. Переключатель показывает или убирает карточку с Главной. Нажми название — откроется её полный раздел.</div><div class="settings-section-title">Карточки на Главной</div><div class="settings-section-note">Пять самостоятельных блоков. Ничего лишнего.</div><div class="v55-settings-home-list">${list}</div><div class="settings-section-title">Как работает управляющий</div><div class="settings-section-note">Границы самостоятельности, деньги, общение и автопилот.</div><div class="rule-list settings-rules-list"><div class="rule-row settings-rule-row"><div><b>Самостоятельность</b><small>Советую → вы подтверждаете важные действия.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="independence" onclick="toggleManagerRule('independence',this)"><i></i></button></div><div class="rule-row settings-rule-row"><div><b>Деньги</b><small>Расходы и изменения бюджета — сначала спросить вас.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="money" onclick="toggleManagerRule('money',this)"><i></i></button></div><div class="rule-row settings-rule-row"><div><b>Общение</b><small>Коротко, спокойно и по делу.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="communication" onclick="toggleManagerRule('communication',this)"><i></i></button></div><div class="rule-row settings-rule-row"><div><b>Автопилот</b><small>Расширяет границы, когда вы готовы доверить мне больше.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="autopilot" onclick="toggleManagerRule('autopilot',this)"><i></i></button></div></div><div class="settings-section-title">Помощь</div><div class="settings-create-card"><div><span>ДОПОЛНИТЕЛЬНО</span><b>Создать новый инструмент</b><small>Скажи помощнику, чего не хватает бизнесу.</small></div><button type="button" onclick="closeControl();openBuildModal()">Создать →</button></div>`);
+   syncManagerSettings();
+ };
 })();
 </script>
-
-
-<style id="visual-unification-final-v1">
-/* FINAL VISUAL UNIFICATION — только внешний вид, JS/логику не меняем. */
-:root{
-  --ui-accent-1:#203a83;
-  --ui-accent-2:#4a5bb0;
-  --ui-accent-3:#6a58ba;
-  --ui-accent-soft:rgba(43,70,155,.10);
-  --ui-accent-line:rgba(43,70,155,.18);
-  --ui-dark:#17181c;
-}
-
-/* ---------- Единый язык основных CTA в светлой теме ---------- */
-body:not(.dark) .future-btn.primary,
-body:not(.dark) .future-create-btn,
-body:not(.dark) .evo-open,
-body:not(.dark) .sales-primary,
-body:not(.dark) .sales-wide-action,
-body:not(.dark) .manager-primary,
-body:not(.dark) .report-main-action,
-body:not(.dark) .recovery-main,
-body:not(.dark) .recovery-actions .send,
-body:not(.dark) .finance-action,
-body:not(.dark) .promo-action,
-body:not(.dark) .control-action,
-body:not(.dark) .build-action,
-body:not(.dark) .home-section-preview .preview-open,
-body:not(.dark) .settings-autopilot-action,
-body:not(.dark) .settings-create-card button,
-body:not(.dark) .wow-module-primary{
-  background:linear-gradient(135deg,var(--ui-accent-1) 0%,var(--ui-accent-2) 56%,var(--ui-accent-3) 100%) !important;
-  color:#fff !important;
-  -webkit-text-fill-color:#fff !important;
-  border:1px solid rgba(51,75,157,.28) !important;
-  box-shadow:0 10px 26px rgba(41,61,130,.15),inset 0 1px 0 rgba(255,255,255,.16) !important;
-  text-shadow:none !important;
-}
-body:not(.dark) .future-btn.primary:hover,
-body:not(.dark) .future-create-btn:hover,
-body:not(.dark) .evo-open:hover,
-body:not(.dark) .sales-primary:hover,
-body:not(.dark) .sales-wide-action:hover,
-body:not(.dark) .manager-primary:hover,
-body:not(.dark) .report-main-action:hover,
-body:not(.dark) .recovery-main:hover,
-body:not(.dark) .recovery-actions .send:hover,
-body:not(.dark) .finance-action:hover,
-body:not(.dark) .promo-action:hover,
-body:not(.dark) .control-action:hover,
-body:not(.dark) .build-action:hover,
-body:not(.dark) .home-section-preview .preview-open:hover,
-body:not(.dark) .settings-autopilot-action:hover,
-body:not(.dark) .settings-create-card button:hover,
-body:not(.dark) .wow-module-primary:hover{
-  filter:brightness(1.045) saturate(1.02) !important;
-  box-shadow:0 13px 30px rgba(41,61,130,.19),inset 0 1px 0 rgba(255,255,255,.18) !important;
-}
-
-/* Вторичные кнопки — одна спокойная форма во всём приложении. */
-body:not(.dark) .future-btn.ghost,
-body:not(.dark) .wow-module-secondary,
-body:not(.dark) .theme-mode-btn,
-body:not(.dark) .sales-ask-btn,
-body:not(.dark) .task-back,
-body:not(.dark) #tasksBack,
-body:not(.dark) #clientsBack,
-body:not(.dark) .mini-help,
-body:not(.dark) .more-close,
-body:not(.dark) .control-close,
-body:not(.dark) .pulse-top button,
-body:not(.dark) .wow-module-close{
-  background:rgba(255,255,255,.58) !important;
-  color:#51545c !important;
-  border:1px solid rgba(26,29,35,.09) !important;
-  box-shadow:0 7px 18px rgba(25,30,42,.055),inset 0 1px 0 rgba(255,255,255,.65) !important;
-}
-body:not(.dark) .future-btn.ghost:hover,
-body:not(.dark) .wow-module-secondary:hover,
-body:not(.dark) .theme-mode-btn:hover,
-body:not(.dark) .sales-ask-btn:hover,
-body:not(.dark) .task-back:hover,
-body:not(.dark) #tasksBack:hover,
-body:not(.dark) #clientsBack:hover,
-body:not(.dark) .mini-help:hover,
-body:not(.dark) .more-close:hover,
-body:not(.dark) .control-close:hover,
-body:not(.dark) .pulse-top button:hover,
-body:not(.dark) .wow-module-close:hover{
-  background:rgba(255,255,255,.82) !important;
-  color:#202329 !important;
-  border-color:rgba(26,29,35,.13) !important;
-}
-
-/* ---------- Кнопки светлой темы внутри фокусных карточек ---------- */
-body:not(.dark) .action-row .future-btn{
-  min-height:42px !important;
-  border-radius:13px !important;
-  padding:0 15px !important;
-  font-weight:760 !important;
-  letter-spacing:-.01em !important;
-}
-body:not(.dark) .action-row .future-btn.ghost{
-  background:rgba(240,242,247,.86) !important;
-  border-color:rgba(28,31,37,.07) !important;
-  color:#6a6d76 !important;
-  box-shadow:none !important;
-}
-
-/* ---------- Тёмная тема: единый материал, без случайно белых/синих кнопок ---------- */
-body.dark .future-btn.primary,
-body.dark .future-create-btn,
-body.dark .evo-open,
-body.dark .sales-primary,
-body.dark .sales-wide-action,
-body.dark .manager-primary,
-body.dark .report-main-action,
-body.dark .recovery-main,
-body.dark .recovery-actions .send,
-body.dark .finance-action,
-body.dark .promo-action,
-body.dark .control-action,
-body.dark .build-action,
-body.dark .home-section-preview .preview-open,
-body.dark .settings-autopilot-action,
-body.dark .settings-create-card button,
-body.dark .wow-module-primary{
-  background:rgba(255,255,255,.075) !important;
-  color:#f7f8fa !important;
-  -webkit-text-fill-color:#f7f8fa !important;
-  border:1px solid rgba(255,255,255,.12) !important;
-  box-shadow:0 10px 28px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.045) !important;
-  text-shadow:none !important;
-}
-body.dark .future-btn.primary:hover,
-body.dark .future-create-btn:hover,
-body.dark .evo-open:hover,
-body.dark .sales-primary:hover,
-body.dark .sales-wide-action:hover,
-body.dark .manager-primary:hover,
-body.dark .report-main-action:hover,
-body.dark .recovery-main:hover,
-body.dark .recovery-actions .send:hover,
-body.dark .finance-action:hover,
-body.dark .promo-action:hover,
-body.dark .control-action:hover,
-body.dark .build-action:hover,
-body.dark .home-section-preview .preview-open:hover,
-body.dark .settings-autopilot-action:hover,
-body.dark .settings-create-card button:hover,
-body.dark .wow-module-primary:hover{
-  background:rgba(255,255,255,.105) !important;
-  border-color:rgba(255,255,255,.17) !important;
-  box-shadow:0 13px 32px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.06) !important;
-}
-body.dark .future-btn.ghost,
-body.dark .wow-module-secondary,
-body.dark .theme-mode-btn,
-body.dark .sales-ask-btn,
-body.dark .task-back,
-body.dark #tasksBack,
-body.dark #clientsBack,
-body.dark .mini-help,
-body.dark .more-close,
-body.dark .control-close,
-body.dark .pulse-top button,
-body.dark .wow-module-close{
-  background:rgba(255,255,255,.045) !important;
-  color:#c9cbd1 !important;
-  border:1px solid rgba(255,255,255,.09) !important;
-  box-shadow:none !important;
-}
-body.dark .future-btn.ghost:hover,
-body.dark .wow-module-secondary:hover,
-body.dark .theme-mode-btn:hover,
-body.dark .sales-ask-btn:hover,
-body.dark .task-back:hover,
-body.dark #tasksBack:hover,
-body.dark #clientsBack:hover,
-body.dark .mini-help:hover,
-body.dark .more-close:hover,
-body.dark .control-close:hover,
-body.dark .pulse-top button:hover,
-body.dark .wow-module-close:hover{
-  background:rgba(255,255,255,.07) !important;
-  color:#f4f5f7 !important;
-  border-color:rgba(255,255,255,.14) !important;
-}
-
-/* Тёмная тема: не делаем все текстовые действия белыми плашками. */
-body.dark .sales-text-action,
-body.dark .settings-developer-link,
-body.dark .settings-company-footer button{
-  background:transparent !important;
-  box-shadow:none !important;
-}
-
-/* ---------- НАСТРОЙКИ: превращаем скучный список в аккуратный центр управления ---------- */
-#controlContent .settings-theme-box{
-  position:relative !important;
-  overflow:hidden !important;
-  margin-top:18px !important;
-  padding:14px 15px !important;
-  border-radius:20px !important;
-  border:1px solid var(--line) !important;
-  background:linear-gradient(145deg,rgba(255,255,255,.72),rgba(245,247,251,.64)) !important;
-  box-shadow:0 16px 34px rgba(25,30,40,.06),inset 0 1px 0 rgba(255,255,255,.72) !important;
-}
-#controlContent .settings-theme-box:after{
-  content:"";
-  position:absolute;
-  width:140px;height:140px;
-  right:-56px;top:-72px;
-  border-radius:50%;
-  background:radial-gradient(circle,rgba(76,103,196,.10),transparent 66%);
-  pointer-events:none;
-}
-body.dark #controlContent .settings-theme-box{
-  background:linear-gradient(145deg,rgba(255,255,255,.052),rgba(255,255,255,.028)) !important;
-  border-color:rgba(255,255,255,.09) !important;
-  box-shadow:0 18px 42px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.035) !important;
-}
-body.dark #controlContent .settings-theme-box:after{background:radial-gradient(circle,rgba(255,255,255,.055),transparent 66%)}
-#controlContent .theme-mode-row{position:relative;z-index:1;display:flex !important;gap:7px !important}
-#controlContent .theme-mode-btn{
-  flex:1 1 0 !important;
-  min-width:0 !important;
-  min-height:40px !important;
-  height:40px !important;
-  padding:0 11px !important;
-  border-radius:13px !important;
-  font-size:10px !important;
-  font-weight:760 !important;
-  transition:transform .2s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease !important;
-}
-body:not(.dark) #controlContent .theme-mode-btn.active{
-  background:linear-gradient(135deg,#1f3475,#4355a6) !important;
-  color:#fff !important;
-  border-color:rgba(39,61,132,.28) !important;
-  box-shadow:0 8px 20px rgba(35,55,125,.15),inset 0 1px 0 rgba(255,255,255,.15) !important;
-}
-body:not(.dark) #controlContent .theme-mode-btn:not(.active){background:rgba(255,255,255,.64)!important;color:#62656d!important}
-body.dark #controlContent .theme-mode-btn.active{
-  background:rgba(255,255,255,.10) !important;
-  color:#fff !important;
-  border-color:rgba(255,255,255,.16) !important;
-  box-shadow:0 8px 20px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.05) !important;
-}
-body.dark #controlContent .theme-mode-btn:not(.active){background:rgba(255,255,255,.035)!important;color:#b8bac1!important}
-
-#controlContent .settings-section-title{
-  position:relative !important;
-  display:flex !important;
-  align-items:center !important;
-  gap:8px !important;
-  margin:22px 0 8px !important;
-  padding-left:0 !important;
-  font-size:10px !important;
-  letter-spacing:.13em !important;
-  color:var(--muted) !important;
-}
-#controlContent .settings-section-title:after{
-  content:"";
-  flex:1;
-  height:1px;
-  background:var(--line);
-  opacity:.85;
-}
-#controlContent .settings-section-note{
-  margin:-1px 0 10px !important;
-  max-width:620px !important;
-  font-size:10px !important;
-  line-height:1.42 !important;
-  color:var(--muted) !important;
-}
-
-#controlContent .settings-rules-list,
-#controlContent .settings-clean-list{
-  gap:8px !important;
-  margin-top:9px !important;
-}
-#controlContent .settings-rules-list .settings-rule-row,
-#controlContent .settings-clean-list .settings-clean-row{
-  min-height:56px !important;
-  padding:9px 10px !important;
-  border-radius:17px !important;
-  border:1px solid var(--line) !important;
-  background:rgba(255,255,255,.47) !important;
-  box-shadow:0 7px 22px rgba(24,28,38,.035),inset 0 1px 0 rgba(255,255,255,.55) !important;
-  transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease !important;
-}
-#controlContent .settings-rules-list .settings-rule-row:hover,
-#controlContent .settings-clean-list .settings-clean-row:hover{
-  transform:translateY(-1px) !important;
-  border-color:rgba(43,70,155,.16) !important;
-  box-shadow:0 10px 26px rgba(24,28,38,.055),inset 0 1px 0 rgba(255,255,255,.62) !important;
-}
-body.dark #controlContent .settings-rules-list .settings-rule-row,
-body.dark #controlContent .settings-clean-list .settings-clean-row{
-  background:rgba(255,255,255,.042) !important;
-  border-color:rgba(255,255,255,.085) !important;
-  box-shadow:0 10px 26px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.025) !important;
-}
-body.dark #controlContent .settings-rules-list .settings-rule-row:hover,
-body.dark #controlContent .settings-clean-list .settings-clean-row:hover{
-  background:rgba(255,255,255,.055) !important;
-  border-color:rgba(255,255,255,.13) !important;
-}
-
-#controlContent .settings-clean-open{border-radius:13px !important}
-#controlContent .settings-clean-icon{
-  width:34px !important;height:34px !important;
-  border-radius:11px !important;
-  background:linear-gradient(145deg,rgba(31,57,133,.10),rgba(94,84,180,.08)) !important;
-  border:1px solid rgba(43,70,155,.10) !important;
-  color:#253b85 !important;
-  font-size:13px !important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.55) !important;
-}
-#controlContent .settings-clean-row[data-setting-section="promo"] .settings-clean-icon{background:linear-gradient(145deg,rgba(42,83,170,.12),rgba(74,102,205,.07))!important;color:#2f56a0!important}
-#controlContent .settings-clean-row[data-setting-section="sales"] .settings-clean-icon{background:linear-gradient(145deg,rgba(24,106,190,.10),rgba(71,116,224,.07))!important;color:#2b69ad!important}
-#controlContent .settings-clean-row[data-setting-section="clients"] .settings-clean-icon{background:linear-gradient(145deg,rgba(32,126,122,.10),rgba(74,168,152,.07))!important;color:#227b79!important}
-#controlContent .settings-clean-row[data-setting-section="finance"] .settings-clean-icon{background:linear-gradient(145deg,rgba(39,129,91,.11),rgba(77,168,121,.07))!important;color:#287c5b!important}
-#controlContent .settings-clean-row[data-setting-section="operations"] .settings-clean-icon{background:linear-gradient(145deg,rgba(126,92,40,.10),rgba(198,150,62,.07))!important;color:#8b6932!important}
-#controlContent .settings-clean-row[data-setting-section="reports"] .settings-clean-icon{background:linear-gradient(145deg,rgba(95,74,150,.11),rgba(133,103,198,.07))!important;color:#6d56a8!important}
-body.dark #controlContent .settings-clean-icon{
-  background:rgba(255,255,255,.055)!important;
-  border-color:rgba(255,255,255,.08)!important;
-  color:#dfe5ef!important;
-  box-shadow:none!important;
-}
-body.dark #controlContent .settings-clean-row[data-setting-section] .settings-clean-icon{color:#e4e7ec!important;background:rgba(255,255,255,.055)!important}
-
-#controlContent .settings-clean-copy b{font-size:12px !important;line-height:1.18 !important}
-#controlContent .settings-clean-copy small{font-size:9.5px !important;line-height:1.3 !important;margin-top:3px !important}
-
-/* Переключатели — единый премиальный механизм. */
-#controlContent .settings-home-switch,
-#controlContent .settings-rule-toggle{
-  width:42px !important;height:24px !important;
-  min-width:42px !important;min-height:24px !important;
-  max-width:42px !important;max-height:24px !important;
-  padding:3px !important;border:0 !important;border-radius:999px !important;
-  box-shadow:none !important;
-}
-#controlContent .settings-home-switch i,
-#controlContent .settings-rule-toggle i{
-  width:18px !important;height:18px !important;
-  min-width:18px !important;min-height:18px !important;
-  max-width:18px !important;max-height:18px !important;
-  left:3px !important;top:3px !important;
-  transform:none !important;
-  border-radius:50% !important;
-  transition:left .22s cubic-bezier(.2,.8,.2,1),transform .22s cubic-bezier(.2,.8,.2,1) !important;
-}
-#controlContent .settings-home-switch.is-on i,
-#controlContent .settings-rule-toggle.is-on i{left:21px !important;transform:none !important}
-body:not(.dark) #controlContent .settings-home-switch,
-body:not(.dark) #controlContent .settings-rule-toggle{background:rgba(28,31,38,.10)!important}
-body:not(.dark) #controlContent .settings-home-switch.is-on,
-body:not(.dark) #controlContent .settings-rule-toggle.is-on{background:linear-gradient(135deg,#234185,#5262b5)!important;box-shadow:0 5px 12px rgba(36,62,139,.12)!important}
-body:not(.dark) #controlContent .settings-home-switch i,
-body:not(.dark) #controlContent .settings-rule-toggle i{background:#fff!important;box-shadow:0 1px 4px rgba(16,24,48,.18)!important}
-body.dark #controlContent .settings-home-switch,
-body.dark #controlContent .settings-rule-toggle{background:rgba(255,255,255,.10)!important}
-body.dark #controlContent .settings-home-switch.is-on,
-body.dark #controlContent .settings-rule-toggle.is-on{background:rgba(255,255,255,.18)!important}
-body.dark #controlContent .settings-home-switch i,
-body.dark #controlContent .settings-rule-toggle i{background:#f5f6f7!important;box-shadow:0 1px 5px rgba(0,0,0,.28)!important}
-
-/* Карточки «Создать / Я сам нашёл / Память / Правила» — теперь выглядят как часть системы. */
-#controlContent .settings-create-card{
-  position:relative !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:space-between !important;
-  gap:14px !important;
-  margin-top:9px !important;
-  padding:14px !important;
-  border:1px solid var(--line) !important;
-  border-radius:18px !important;
-  background:linear-gradient(145deg,rgba(255,255,255,.55),rgba(248,249,252,.42)) !important;
-  box-shadow:0 8px 24px rgba(25,30,42,.035),inset 0 1px 0 rgba(255,255,255,.58) !important;
-  overflow:hidden !important;
-}
-#controlContent .settings-create-card:before{
-  content:"";
-  position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:3px;
-  background:linear-gradient(180deg,#3452a3,#6b5ac4);
-  opacity:.8;
-}
-#controlContent .settings-create-card span{font-size:7.5px !important;letter-spacing:.16em !important;font-weight:850 !important;color:var(--muted) !important}
-#controlContent .settings-create-card b{font-size:13px !important;line-height:1.15 !important;margin-top:4px !important}
-#controlContent .settings-create-card small{font-size:9.5px !important;line-height:1.35 !important;margin-top:4px !important;max-width:420px !important}
-body.dark #controlContent .settings-create-card{
-  background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.025)) !important;
-  border-color:rgba(255,255,255,.085) !important;
-  box-shadow:0 10px 26px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.024) !important;
-}
-body.dark #controlContent .settings-create-card:before{background:linear-gradient(180deg,#dfe3eb,#8c919b);opacity:.55}
-
-/* Помощь/обучение — не отдельный цвет, а тот же язык интерфейса. */
-#controlContent .dm-learning-card{
-  margin-top:12px !important;
-  padding:14px !important;
-  border-radius:18px !important;
-  background:linear-gradient(145deg,rgba(255,255,255,.55),rgba(247,248,251,.40)) !important;
-  border:1px solid var(--line) !important;
-  box-shadow:0 8px 24px rgba(25,30,42,.035),inset 0 1px 0 rgba(255,255,255,.58) !important;
-}
-body.dark #controlContent .dm-learning-card{
-  background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.025)) !important;
-  border-color:rgba(255,255,255,.085) !important;
-}
-#controlContent .dm-learning-button{
-  min-height:42px !important;height:42px !important;padding:0 14px !important;border-radius:13px !important;
-  font-weight:780 !important;
-}
-
-/* Карточки Главной: чуть больше воздуха и единая кнопочная геометрия. */
-#homeSectionPreviews .home-added-card{
-  overflow:hidden !important;
-  box-shadow:0 14px 36px rgba(24,30,48,.065),inset 0 1px 0 rgba(255,255,255,.52) !important;
-}
-body.dark #homeSectionPreviews .home-added-card{
-  box-shadow:0 18px 44px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.028) !important;
-}
-#homeSectionPreviews .mini-result > div b{letter-spacing:-.03em !important}
-
-@media(max-width:700px){
-  #controlContent .settings-theme-box{padding:12px !important;border-radius:18px !important}
-  #controlContent .settings-section-title{margin-top:19px !important}
-  #controlContent .settings-clean-row,#controlContent .settings-rules-list .settings-rule-row{min-height:54px !important;padding:8px 9px !important;border-radius:16px !important}
-  #controlContent .settings-clean-icon{width:32px !important;height:32px !important;border-radius:10px !important}
-  #controlContent .settings-clean-copy b{font-size:11.5px !important}
-  #controlContent .settings-clean-copy small{font-size:9px !important}
-  #controlContent .settings-create-card{padding:13px !important;border-radius:17px !important}
-  #controlContent .dm-learning-card{display:grid !important;gap:10px !important}
-  #controlContent .dm-learning-button{width:100% !important}
-  #homeSectionPreviews .action-row .future-btn{min-height:40px !important}
-}
-</style>
