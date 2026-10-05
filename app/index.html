@@ -5794,7 +5794,7 @@ body.dark .future-autopilot-modal .auto-save{
 </div>
 </div>
 <section class="clients-page unified-page" id="clientsPage">
-<div class="clients-head"><div><div class="clients-title">Клиенты</div><div class="clients-sub">Здесь все разговоры, отзывы и клиенты, которым пора ответить.</div></div><button class="task-back" id="clientsBack" type="button">← Главная</button></div>
+<div class="clients-head"><div><div class="clients-title">Клиенты</div><div class="clients-sub">Я помню, кто к нам пришёл, что покупал и кому пора ответить.</div></div><button class="task-back" id="clientsBack" type="button">← Главная</button></div>
 <div class="clients-stats"><div class="client-stat"><span>Новые заявки</span><b>14</b></div><div class="client-stat"><span>Ждут ответа</span><b>3</b></div><div class="client-stat"><span>Новых клиентов</span><b>8</b></div></div>
 <div class="client-list">
 <div class="client-row"><div class="client-avatar">АК</div><div class="client-main"><div class="client-name">Алексей К.</div><div class="client-info">Новая заявка · услуга «Доставка» · сегодня 08:42</div></div><span class="client-status wait">Нужно ответить</span><button class="client-action" type="button">Открыть</button></div>
@@ -5804,7 +5804,7 @@ body.dark .future-autopilot-modal .auto-save{
 <div class="clients-empty"><b>Цифровой управляющий следит за клиентами.</b><br>Когда подключим источники, я соберу здесь всю историю клиента сам. Никаких поисков по пяти системам — я уже побежал.</br></div>
 </section>
 <section class="tasks-page unified-page" id="tasksPage">
-<div class="tasks-head"><div><div class="tasks-title">Что я делаю</div><div class="tasks-sub">Здесь видно, что я делаю сам, чего жду от тебя и что уже закончил.</div></div><button class="task-back" id="tasksBack" type="button">← Главная</button></div>
+<div class="tasks-head"><div><div class="tasks-title">Что я делаю</div><div class="tasks-sub">Не список дел. Здесь видно, что управляющий делает, что ждёт вас и что уже закончил.</div></div><button class="task-back" id="tasksBack" type="button">← Главная</button></div>
 <div class="task-command"><div class="task-command-kicker">Сейчас</div><h2>Я уже работаю. От вас нужен только один ответ.</h2><p>На странице заказа что-то изменилось. Я нашёл связь с падением конверсии и подготовил вариант исправления.</p><button class="sales-primary" onclick="openManager()" type="button">Посмотреть, что я нашёл →</button></div><div class="task-list">
 <div class="task-row"><span class="task-state red"></span><div class="task-row-main"><div class="task-row-title">Разобраться, почему сайт продаёт хуже</div><div class="task-row-text">Изменение на странице заказа найдено вчера вечером. Требуется подтверждение.</div></div><span class="task-tag">Нужно подтвердить</span></div>
 <div class="task-row"><span class="task-state orange"></span><div class="task-row-main"><div class="task-row-title">Подготовить ответы на отзывы</div><div class="task-row-text">Варианты ответов подготовлены цифровым управляющим.</div></div><span class="task-tag">Сегодня</span></div>
@@ -5817,13 +5817,13 @@ body.dark .future-autopilot-modal .auto-save{
 <div class="sales-hero-copy">
 <div class="eyebrow">Продажи · <span class="sales-live-dot"></span> данные обновлены</div>
 <h2>Продажи под контролем.</h2>
-<p>Здесь видно, что можно продать сегодня и где сейчас теряются деньги.</p>
+<p>Я собрал всё важное в одном месте и уже нашёл, где сегодня можно вернуть деньги.</p>
 </div>
 <div class="sales-hero-controls">
 <select aria-label="Период" class="sales-period" id="salesPeriod">
 <option>Сегодня</option><option selected="">Последние 7 дней</option><option>Последние 30 дней</option>
 </select>
-<button class="sales-ask-btn" id="salesAskBtn" type="button">Спросить меня <span>⌘K</span></button>
+
 </div>
 </div>
 <div class="sales-command">
@@ -5918,7 +5918,7 @@ body.dark .future-autopilot-modal .auto-save{
 <div class="finance-head">
 <div>
 <div class="finance-title">Финансы</div>
-<div class="finance-sub">Показываю деньги без фокусов: сколько пришло, сколько ушло и что осталось.</div>
+<div class="finance-sub">Я слежу за деньгами и объясняю, что происходит с бизнесом.</div>
 </div>
 <select aria-label="Период" class="finance-period" id="financePeriod">
 <option value="7">Последние 7 дней</option>
@@ -6003,7 +6003,7 @@ body.dark .future-autopilot-modal .auto-save{
 <div class="promo-head">
 <div>
 <div class="promo-title">Продвижение</div>
-<div class="promo-sub">Сайт, соцсети, контент и реклама — всё, что приводит людей в бизнес.</div>
+<div class="promo-sub">Я смотрю, откуда приходят люди, заявки и деньги — и сравниваю каналы между собой.</div>
 </div>
 <select aria-label="Период" class="promo-period" id="promoPeriod">
 <option>Последние 7 дней</option><option selected="">Последние 30 дней</option><option>Последние 90 дней</option>
@@ -6220,10 +6220,10 @@ function openSettingsPanel(){
     </div>`).join('');
 
   openControl(`<div class="control-kicker">Настройки управляющего</div>
-    <div class="control-title">Настройки без квеста.</div>
-    <div class="control-sub">Здесь можно включить нужные разделы. Остальное не лезет под руку без приглашения.</div>
+    <div class="control-title">Настройки без путаницы.</div>
+    <div class="control-sub">Здесь только то, как я работаю и что показываю на Главной.</div>
 
-    <div class="settings-theme-box"><div><b>Экран</b><small>Светлая или тёмная тема.</small></div><div class="theme-mode-row"><button class="theme-mode-btn" data-mode="light" onclick="setThemeMode('light')">☀ Светлая</button><button class="theme-mode-btn" data-mode="dark" onclick="setThemeMode('dark')">◐ Тёмная</button></div></div>
+    <div class="settings-theme-box"><div><b>Экран</b><small>Светлая или тёмная тема.</small></div><div class="theme-mode-row"><button class="theme-mode-btn" data-mode="light" onclick="setThemeMode(&quot;light&quot;)">☀ Светлая</button><button class="theme-mode-btn" data-mode="dark" onclick="setThemeMode(&quot;dark&quot;)">◐ Тёмная</button></div></div>
 
     <div class="settings-section-title">1 · Как работает управляющий</div>
     <div class="settings-section-note">Здесь задаются мои границы, стиль общения и уровень самостоятельности.</div>
@@ -6236,7 +6236,7 @@ function openSettingsPanel(){
     <button class="control-action settings-autopilot-action" onclick="closeControl();openAutopilot()">Настроить автопилот →</button>
 
     <div class="settings-section-title">2 · Что показывать на Главной</div>
-    <div class="settings-section-note">Включил — компактная карточка появилась на Главной. Нажал на карточку — провалился в подробности.</div>
+    <div class="settings-section-note">Переключатель справа — добавить короткую карточку на Главную. Нажми название — открыть полный раздел отдельно.</div>
     <div class="settings-clean-list">${html}</div>
 
     <div class="settings-create-card">
@@ -6381,7 +6381,6 @@ function openSalesAsk(){
   if(input){input.focus();input.placeholder='Например: почему сегодня меньше продаж?';}
   document.querySelector('.ask')?.scrollIntoView({behavior:'smooth',block:'center'});
 }
-document.getElementById('salesAskBtn')?.addEventListener('click',openSalesAsk);
 document.getElementById('salesAskBottom')?.addEventListener('click',openSalesAsk);
 
 document.getElementById('salesFinanceBtn')?.addEventListener('click',()=>showSection('finance'));
@@ -6428,7 +6427,7 @@ document.querySelectorAll('[data-finance-action]').forEach(btn=>{
 
 document.getElementById('financePeriod')?.addEventListener('change',e=>{
   const sub=document.querySelector('.finance-sub');
-  if(sub)sub.textContent=e.target.value==='7'?'Я слежу за деньгами за последнюю неделю и объясняю изменения.':e.target.value==='90'?'Я анализирую финансовую картину за последние 90 дней.':'Показываю деньги без фокусов: сколько пришло, сколько ушло и что осталось.';
+  if(sub)sub.textContent=e.target.value==='7'?'Я слежу за деньгами за последнюю неделю и объясняю изменения.':e.target.value==='90'?'Я анализирую финансовую картину за последние 90 дней.':'Я слежу за деньгами и объясняю, что происходит с бизнесом.';
 });
 
 
@@ -11603,230 +11602,303 @@ body:not(.dark) .dm-signature-button-logo{
 </style>
 
 
-<style id="business-os-v2-css">
-/* BUSINESS OS v2 — строгие зоны, компактные карточки, простая речь и немного характера. */
-.business-os-title{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:800;margin:14px 0 7px}
-.business-os-note{font-size:10px;line-height:1.45;color:var(--muted);margin:0 0 10px}
-.business-os-list{display:grid;gap:7px}
-.business-os-row{display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:center;gap:9px;padding:10px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.48)}
-.business-os-row.is-on{border-color:rgba(39,168,102,.17);background:rgba(39,168,102,.045)}
-.business-os-icon{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:rgba(20,54,130,.075);color:var(--text);font-size:12px;font-weight:800}
-.business-os-copy{min-width:0}.business-os-copy b{display:block;font-size:12px;letter-spacing:-.01em}.business-os-copy small{display:block;margin-top:3px;color:var(--muted);font-size:8.8px;line-height:1.32}
-.business-os-switch{position:relative!important;display:block!important;width:42px!important;height:22px!important;min-width:42px!important;padding:2px!important;border:0!important;border-radius:999px!important;background:rgba(20,20,24,.1)!important;box-shadow:inset 0 0 0 1px rgba(20,20,24,.06)!important;overflow:hidden!important}
-.business-os-switch i{position:absolute!important;left:2px!important;top:2px!important;width:18px!important;height:18px!important;margin:0!important;border-radius:50%!important;background:#fff!important;box-shadow:0 1px 4px rgba(20,20,25,.18)!important;transform:none!important;transition:left .22s cubic-bezier(.2,.8,.2,1),background .18s ease!important}
-.business-os-switch.is-on{background:rgba(39,168,102,.75)!important}
-.business-os-switch.is-on i{left:22px!important}
-body.dark .business-os-row{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09)}
-body.dark .business-os-row.is-on{background:rgba(39,168,102,.09);border-color:rgba(39,168,102,.18)}
-body.dark .business-os-icon{background:rgba(255,255,255,.07)}
-body.dark .business-os-switch{background:rgba(255,255,255,.12)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)!important}
-body.dark .business-os-switch.is-on{background:#37b96f!important}
+<style id="final-ui-order-fix-v1">
+/* Финальная точечная правка: один стиль возврата, единые кнопки карточек, тёмное обучение. */
 
-/* Карточки подключаемых разделов: одна мысль, несколько цифр, один следующий шаг. */
-#homeSectionPreviews.business-os-previews{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px!important;margin:10px 0 14px!important;overflow:visible!important}
-.business-os-card{position:relative;overflow:hidden;min-height:176px;padding:16px!important;border:1px solid var(--line)!important;border-radius:22px!important;background:var(--panel)!important;box-shadow:var(--shadow)!important;cursor:pointer;transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s ease,border-color .28s ease}
-.business-os-card::before{content:"";position:absolute;width:150px;height:150px;right:-70px;top:-78px;border-radius:50%;background:radial-gradient(circle,rgba(72,91,190,.12),transparent 68%);pointer-events:none}
-.business-os-card:hover{transform:translateY(-2px);box-shadow:0 24px 65px rgba(30,35,50,.12)!important}
-.business-os-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;position:relative;z-index:1}
-.business-os-kicker{font-size:8px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--muted)}
-.business-os-card h3{font-size:20px;line-height:1.05;letter-spacing:-.045em;margin:4px 0 5px}
-.business-os-signal{width:9px;height:9px;border-radius:50%;margin-top:2px;flex:none;background:#32c759;box-shadow:0 0 0 5px rgba(50,199,89,.10)}
-.business-os-signal.warn{background:#ff9500;box-shadow:0 0 0 5px rgba(255,149,0,.10)}
-.business-os-signal.red{background:#ff3b30;box-shadow:0 0 0 5px rgba(255,59,48,.09)}
-.business-os-desc{margin:0;color:var(--muted);font-size:10.5px;line-height:1.42;position:relative;z-index:1}
-.business-os-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin-top:12px;position:relative;z-index:1}
-.business-os-metric{padding:8px 9px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.38)}
-.business-os-metric b{display:block;font-size:16px;letter-spacing:-.04em}.business-os-metric small{display:block;margin-top:2px;font-size:7.5px;color:var(--muted);line-height:1.25}
-.business-os-foot{display:grid;gap:6px;margin-top:11px;position:relative;z-index:1}.business-os-footline{display:flex;gap:7px;align-items:flex-start;font-size:9px;line-height:1.3}.business-os-footline span{flex:none;font-size:8px;font-weight:850;letter-spacing:.08em;color:var(--muted)}.business-os-footline b{font-size:9px}
-.business-os-open{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:9px;font-weight:800;color:var(--text);position:relative;z-index:1}
-.business-os-open em{font-style:normal;color:var(--muted);font-size:14px;line-height:1}
-body.dark .business-os-card{background:rgba(255,255,255,.045)!important;box-shadow:0 20px 55px rgba(0,0,0,.2)!important;border-color:rgba(255,255,255,.09)!important}
-body.dark .business-os-card::before{opacity:.45}.dark .business-os-metric{background:rgba(255,255,255,.035)}
-body.dark .business-os-metric{background:rgba(255,255,255,.035)}
+/* Возврат на Главную — один язык и одна сторона (справа). */
+#deepSectionBack,
+#controlOverlay .control-close,
+#businessPulse .pulse-top .pulse-home-button,
+.evolution-home-button,
+#tasksBack,
+#clientsBack,
+.task-back{
+  box-sizing:border-box!important;
+  min-width:112px!important;
+  height:38px!important;
+  min-height:38px!important;
+  padding:0 13px!important;
+  border-radius:13px!important;
+  font:700 10px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif!important;
+  letter-spacing:-.01em!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:6px!important;
+  white-space:nowrap!important;
+}
+#deepSectionBack{
+  left:auto!important;
+  right:max(14px,env(safe-area-inset-right))!important;
+  top:max(14px,env(safe-area-inset-top))!important;
+  position:fixed!important;
+  z-index:100050!important;
+}
+#controlOverlay .control-close{right:18px!important;left:auto!important;top:18px!important;position:absolute!important}
+.evolution-home-button{margin-left:auto!important;flex:0 0 auto!important}
+body:not(.dark) #deepSectionBack,
+body:not(.dark) #controlOverlay .control-close,
+body:not(.dark) #businessPulse .pulse-top .pulse-home-button,
+body:not(.dark) .evolution-home-button,
+body:not(.dark) #tasksBack,
+body:not(.dark) #clientsBack,
+body:not(.dark) .task-back{
+  background:rgba(255,255,255,.66)!important;
+  color:#4c4f56!important;
+  border:1px solid rgba(25,28,35,.09)!important;
+  box-shadow:0 8px 22px rgba(25,30,42,.07),inset 0 1px 0 rgba(255,255,255,.72)!important;
+}
+body:not(.dark) #deepSectionBack:hover,
+body:not(.dark) #controlOverlay .control-close:hover,
+body:not(.dark) #businessPulse .pulse-top .pulse-home-button:hover,
+body:not(.dark) .evolution-home-button:hover,
+body:not(.dark) #tasksBack:hover,
+body:not(.dark) #clientsBack:hover,
+body:not(.dark) .task-back:hover{
+  background:rgba(255,255,255,.86)!important;
+  color:#202329!important;
+}
+body.dark #deepSectionBack,
+body.dark #controlOverlay .control-close,
+body.dark #businessPulse .pulse-top .pulse-home-button,
+body.dark .evolution-home-button,
+body.dark #tasksBack,
+body.dark #clientsBack,
+body.dark .task-back{
+  background:rgba(255,255,255,.055)!important;
+  color:#f5f7fa!important;
+  border:1px solid rgba(255,255,255,.11)!important;
+  box-shadow:0 9px 26px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.035)!important;
+}
+body.dark #deepSectionBack:hover,
+body.dark #controlOverlay .control-close:hover,
+body.dark #businessPulse .pulse-top .pulse-home-button:hover,
+body.dark .evolution-home-button:hover,
+body.dark #tasksBack:hover,
+body.dark #clientsBack:hover,
+body.dark .task-back:hover{
+  background:rgba(255,255,255,.085)!important;
+  color:#fff!important;
+}
+#deepSectionBack .back-x{font-size:18px!important;opacity:.9!important;margin-top:-1px!important}
 @media(max-width:700px){
-  #homeSectionPreviews.business-os-previews{grid-template-columns:1fr!important;gap:9px!important}
-  .business-os-card{min-height:0;padding:14px!important;border-radius:20px!important}
-  .business-os-card h3{font-size:18px}.business-os-desc{font-size:10px}.business-os-metrics{margin-top:9px}.business-os-foot{margin-top:9px}.business-os-open{margin-top:9px;padding-top:8px}
+  #deepSectionBack{right:12px!important;left:auto!important;top:max(12px,env(safe-area-inset-top))!important;height:36px!important;min-height:36px!important;min-width:108px!important;border-radius:12px!important;font-size:9px!important}
+  #controlOverlay .control-close,.evolution-home-button,#tasksBack,#clientsBack,.task-back,#businessPulse .pulse-top .pulse-home-button{height:36px!important;min-height:36px!important;min-width:108px!important;border-radius:12px!important}
 }
 
-/* Большой информационный лист. */
-.db-detail-shell{display:grid;gap:14px}
-.db-detail-hero{position:relative;overflow:hidden;padding:18px;border-radius:23px;background:linear-gradient(135deg,rgba(28,42,80,.97),rgba(61,79,131,.95));color:#fff;border:1px solid rgba(255,255,255,.12);box-shadow:0 22px 70px rgba(28,42,80,.20)}
-.db-detail-hero::after{content:"";position:absolute;right:-50px;top:-80px;width:190px;height:190px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.13),transparent 67%);pointer-events:none}
-.db-detail-kicker{font-size:9px;letter-spacing:.13em;text-transform:uppercase;opacity:.62;font-weight:800}.db-detail-title{font-size:30px;line-height:.98;letter-spacing:-.055em;margin:6px 0}.db-detail-sub{font-size:11px;line-height:1.45;opacity:.78;max-width:550px}
-.db-detail-spark{height:28px;margin-top:14px;display:flex;align-items:end;gap:5px}.db-detail-spark i{display:block;flex:1;border-radius:999px 999px 2px 2px;background:rgba(255,255,255,.72);animation:dbSpark .9s ease both}.db-detail-spark i:nth-child(1){height:34%}.db-detail-spark i:nth-child(2){height:48%;animation-delay:.05s}.db-detail-spark i:nth-child(3){height:42%;animation-delay:.1s}.db-detail-spark i:nth-child(4){height:68%;animation-delay:.15s}.db-detail-spark i:nth-child(5){height:54%;animation-delay:.2s}.db-detail-spark i:nth-child(6){height:82%;animation-delay:.25s}.db-detail-spark i:nth-child(7){height:92%;animation-delay:.3s}
-@keyframes dbSpark{from{transform:scaleY(.25);opacity:.2}to{transform:scaleY(1);opacity:1}}
-.db-detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.db-detail-box{padding:14px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}.db-detail-box small{display:block;color:var(--muted);font-size:8px;letter-spacing:.09em;text-transform:uppercase;font-weight:800}.db-detail-box b{display:block;font-size:16px;margin-top:6px;letter-spacing:-.025em}.db-detail-box p{margin:4px 0 0;color:var(--muted);font-size:10px;line-height:1.4}
-.db-detail-section{padding:14px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}.db-detail-section h4{margin:0;font-size:13px}.db-detail-list{display:grid;gap:8px;margin-top:10px}.db-detail-item{display:flex;gap:9px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--line)}.db-detail-item:first-child{border-top:0;padding-top:0}.db-detail-mark{width:20px;height:20px;border-radius:7px;display:grid;place-items:center;background:rgba(39,168,102,.1);color:#27a866;font-size:11px;font-weight:900;flex:none}.db-detail-item b{font-size:11px}.db-detail-item span{display:block;margin-top:2px;font-size:9.5px;color:var(--muted);line-height:1.4}
-.db-detail-joke{padding:12px 14px;border-radius:17px;background:rgba(114,87,255,.065);border:1px solid rgba(114,87,255,.11);color:var(--muted);font-size:10px;line-height:1.45}.db-detail-joke b{color:var(--purple)}
-.db-detail-actions{display:flex;gap:8px}.db-detail-actions button{flex:1;min-height:44px}.db-detail-actions .primary{border:0;border-radius:14px;background:var(--text);color:var(--bg);font-size:11px;font-weight:800}.db-detail-actions .secondary{border:1px solid var(--line);border-radius:14px;background:transparent;color:var(--text);font-size:11px;font-weight:700}
-body.dark .db-detail-hero{background:linear-gradient(135deg,#17191d,#24262c);border-color:rgba(255,255,255,.10);box-shadow:0 25px 75px rgba(0,0,0,.34)}
-body.dark .db-detail-section,body.dark .db-detail-box{background:rgba(255,255,255,.035)}
-body.dark .db-detail-joke{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.08)}
-body.dark .db-detail-actions .primary{background:#f5f6f7;color:#17181b}
-@media(max-width:700px){.db-detail-grid{grid-template-columns:1fr 1fr}.db-detail-title{font-size:27px}.db-detail-hero{padding:16px}.db-detail-section,.db-detail-box{padding:13px}.db-detail-actions{position:sticky;bottom:0;padding-top:3px;background:transparent}}
-@media(max-width:390px){.db-detail-grid{grid-template-columns:1fr}.db-detail-title{font-size:25px}}
+/* Кнопки в Ozon/Главном сигнале — точно тот же материал, что и остальные карточки. */
+body:not(.dark) .future-grid .future-card .future-btn.primary,
+body:not(.dark) #homeSectionPreviews .home-added-card .future-btn.primary{
+  background:linear-gradient(135deg,var(--ui-accent-1) 0%,var(--ui-accent-2) 56%,var(--ui-accent-3) 100%)!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  border:1px solid rgba(51,75,157,.28)!important;
+  box-shadow:0 10px 26px rgba(41,61,130,.15),inset 0 1px 0 rgba(255,255,255,.16)!important;
+}
+body:not(.dark) .future-grid .future-card .future-btn.ghost,
+body:not(.dark) #homeSectionPreviews .home-added-card .future-btn.ghost{
+  background:rgba(240,242,247,.86)!important;
+  color:#666a73!important;
+  -webkit-text-fill-color:#666a73!important;
+  border:1px solid rgba(28,31,37,.07)!important;
+  box-shadow:none!important;
+}
+body.dark .future-grid .future-card .future-btn.primary,
+body.dark #homeSectionPreviews .home-added-card .future-btn.primary{
+  background:rgba(255,255,255,.075)!important;
+  color:#f7f8fa!important;
+  -webkit-text-fill-color:#f7f8fa!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.045)!important;
+}
+body.dark .future-grid .future-card .future-btn.ghost,
+body.dark #homeSectionPreviews .home-added-card .future-btn.ghost{
+  background:rgba(255,255,255,.045)!important;
+  color:#c9cbd1!important;
+  -webkit-text-fill-color:#c9cbd1!important;
+  border:1px solid rgba(255,255,255,.09)!important;
+  box-shadow:none!important;
+}
 
-/* Тексты интерфейса — меньше канцелярита. */
-.business-os-plain{font-size:9px;color:var(--muted);margin-top:3px}
+/* В тёмной теме обучение не должно светиться белым прямоугольником. */
+body.dark #controlContent .dm-learning-button,
+body.dark #controlContent button.dm-learning-button{
+  background:rgba(255,255,255,.055)!important;
+  color:#f7f9ff!important;
+  -webkit-text-fill-color:#f7f9ff!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.035)!important;
+}
+body.dark #controlContent .dm-learning-button:hover,
+body.dark #controlContent button.dm-learning-button:hover{
+  background:rgba(255,255,255,.085)!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+}
 </style>
-
-
-<script id="business-os-v2-js">
+<script id="final-settings-switch-fix-v1">
 (function(){
-  const KEY='db-home-section-switches-v2';
-  const OLD='db-home-section-switches-v1';
-  const defs={sales:false,finance:false,clients:false,promo:false,operations:false,reports:false};
-  const sections={
-    promo:{
-      icon:'↗',title:'Продвижение',desc:'Сайт, соцсети, контент и реклама',kicker:'ПРИВОДИМ ЛЮДЕЙ',
-      headline:'Смотрю, откуда приходят люди.',desc2:'Сайт, соцсети, публикации и реклама — всё в одном месте. Без охоты за цифрами по десяти вкладкам.',
-      metrics:[['184','людей сегодня'],['14','заявок']],
-      done:'Обновил 2 публикации и сравнил рекламные каналы.',need:'Проверить сегмент, где заявок стало меньше.',
-      inside:['Сайт и страницы','VK · Telegram · MAX · OK · Дзен','Контент и публикации','Реклама и стоимость заявки','Откуда пришли люди и что сработало'],
-      joke:'Если пост набрал три лайка и ушёл в закат — я хотя бы скажу, почему.'
-    },
-    sales:{
-      icon:'₽',title:'Продажи',desc:'Заявки, сделки и откуда приходят деньги',kicker:'ПРЕВРАЩАЕМ ИНТЕРЕС В ДЕНЬГИ',
-      headline:'Вижу путь клиента до оплаты.',desc2:'Кто написал, кто думает, кто почти купил и где мы сами случайно поставили паузу.',
-      metrics:[['42','заявки'],['11','продаж']],
-      done:'Подготовил следующий шаг для 3 горячих клиентов.',need:'Вернуть 3 клиента, которые остановились после предложения.',
-      inside:['Обращения и лиды','Воронка: обращение → сделка → продажа','Источники заявок','Потери и причины отказа','Сумма продаж и связь с деньгами'],
-      joke:'Иногда клиент не пропал. Он просто ждёт, пока ему кто-нибудь ответит.'
-    },
-    clients:{
-      icon:'○',title:'Клиенты',desc:'Сообщения, отзывы и повторные покупки',kicker:'НЕ ТЕРЯЕМ ЛЮДЕЙ',
-      headline:'Помню, кому пора ответить.',desc2:'Сообщения, отзывы, история покупок и клиенты, которых можно вернуть без магии и раскопок.',
-      metrics:[['3','ждут ответа'],['2','отзыва']],
-      done:'Собрал людей, которым нужен ответ сегодня.',need:'Ответить 3 клиентам и разобрать 2 новых отзыва.',
-      inside:['Сообщения из подключённых каналов','Новые и постоянные клиенты','Отзывы и ответы на них','Повторные покупки','Возврат клиентов, которые давно молчат'],
-      joke:'«Мы вам перезвоним» — прекрасная фраза. Но лучше ещё и реально перезвонить.'
-    },
-    finance:{
-      icon:'₽',title:'Деньги',desc:'Выручка, расходы, прибыль и куда всё уходит',kicker:'ДЕНЬГИ БЕЗ ТУМАНА',
-      headline:'Знаю, что пришло и куда ушло.',desc2:'Показываю не только цифры, но и что на них повлияло. И да, расходы тоже будут у нас как на ладони.',
-      metrics:[['184 000 ₽','сегодня'],['+8%','прибыль']],
-      done:'Сверил основные расходы и посмотрел, что съедает бюджет.',need:'Проверить окупаемость рекламы перед новым расходом.',
-      inside:['Выручка и прибыль','Расходы и обязательства','Денег сейчас','Откуда приходит выручка','Прогноз и крупные платежи'],
-      joke:'Деньги любят счёт. А лишние расходы — когда их никто не замечает.'
-    },
-    operations:{
-      icon:'⌁',title:'Работа бизнеса',desc:'Задачи, товары, остатки, поставщики и процессы',kicker:'ЧТОБЫ ВСЁ НЕ ДЕРЖАЛОСЬ НА ПАМЯТИ',
-      headline:'Слежу, чтобы бизнес не спотыкался.',desc2:'Задачи, запасы, поставщики и внутренние процессы. Всё, что должно просто работать — и желательно без аврала.',
-      metrics:[['4','важных задачи'],['2','поставщика']],
-      done:'Обновил список задач и отметил то, что уже сделано.',need:'Подтвердить следующую закупку и один важный процесс.',
-      inside:['Задачи и сроки','Товары и остатки','Поставщики и закупки','Процессы и узкие места','Что можно автоматизировать'],
-      joke:'Если всё держится в голове у одного человека — это уже не система, это экстремальный спорт.'
-    },
-    reports:{
-      icon:'▥',title:'Отчёты',desc:'Что изменилось и что с этим делать',kicker:'НЕ ПРОСТО ЦИФРЫ',
-      headline:'Объясняю, что всё это значит.',desc2:'Собираю главные изменения за период и показываю, где проблема, где рост и куда лучше смотреть дальше.',
-      metrics:[['7 дней','разбор'],['3','главных вывода']],
-      done:'Собрал недельный разбор и связал изменения между разделами.',need:'Посмотреть одну точку роста и одну проблему.',
-      inside:['Что выросло','Что просело','Почему это произошло','Что уже сделал управляющий','Что стоит сделать дальше'],
-      joke:'Отчёт на 47 страниц никого счастливее не сделал. Я попробую уложиться в главное.'
-    }
+  const KEY='db-home-section-switches-v1';
+  const DEFAULTS={sales:false,finance:false,clients:false,promo:false,operations:false,reports:false,evolution:true,memory:true,rules:true};
+  function load(){try{const x=JSON.parse(localStorage.getItem(KEY)||'null');return Object.assign({},DEFAULTS,x&&typeof x==='object'?x:{})}catch(e){return Object.assign({},DEFAULTS)}}
+  function paint(){
+    const x=load();
+    document.querySelectorAll('#controlContent .settings-home-switch[data-section-id]').forEach(function(btn){
+      const on=!!x[btn.dataset.sectionId];
+      btn.classList.toggle('is-on',on);
+      btn.setAttribute('aria-pressed',String(on));
+      const k=btn.querySelector('i');
+      if(k){k.style.setProperty('left',on?'21px':'3px','important');k.style.setProperty('transform','none','important')}
+    });
+  }
+  window.__paintHomeSwitches=paint;
+  // Функция вызывается существующей системой кликов, но больше не закрывает настройки.
+  window.toggleSettingsHomeSection=function(id,btn){
+    const x=load();
+    x[id]=!x[id];
+    try{localStorage.setItem(KEY,JSON.stringify(x))}catch(e){}
+    paint();
+    try{if(window.renderHomeSectionPreviews)window.renderHomeSectionPreviews()}catch(e){}
+    setTimeout(paint,30);
   };
-  
-  function loadPrefs(){
-    try{
-      const v=JSON.parse(localStorage.getItem(KEY)||'null');
-      if(v&&typeof v==='object') return Object.assign({},defs,v);
-      const old=JSON.parse(localStorage.getItem(OLD)||'null');
-      return Object.assign({},defs,old&&typeof old==='object'?old:{});
-    }catch(e){return Object.assign({},defs)}
+  const oldOpen=window.openSettingsPanel;
+  if(typeof oldOpen==='function'){
+    window.openSettingsPanel=function(){oldOpen.apply(this,arguments);setTimeout(paint,0)};
   }
-  function savePrefs(v){try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){}}
-  
-  function detailHtml(id){
-    const s=sections[id]; if(!s)return '';
-    return `<div class="db-detail-shell">
-      <div class="db-detail-hero">
-        <div class="db-detail-kicker">${s.kicker}</div>
-        <div class="db-detail-title">${s.headline}</div>
-        <div class="db-detail-sub">${s.desc2}</div>
-        <div class="db-detail-spark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      </div>
-      <div class="db-detail-grid">${s.metrics.map(m=>`<div class="db-detail-box"><small>${m[1]}</small><b>${m[0]}</b><p>Сейчас</p></div>`).join('')}</div>
-      <div class="db-detail-section"><h4>Сейчас</h4><div class="db-detail-list">
-        <div class="db-detail-item"><span class="db-detail-mark">✓</span><div><b>Что происходит</b><span>${s.desc2}</span></div></div>
-        <div class="db-detail-item"><span class="db-detail-mark">→</span><div><b>Что сделал я</b><span>${s.done}</span></div></div>
-        <div class="db-detail-item"><span class="db-detail-mark">!</span><div><b>Что нужно от тебя</b><span>${s.need}</span></div></div>
-      </div></div>
-      <div class="db-detail-section"><h4>Что входит</h4><div class="db-detail-list">${s.inside.map(x=>`<div class="db-detail-item"><span class="db-detail-mark">•</span><div><b>${x}</b></div></div>`).join('')}</div></div>
-      <div class="db-detail-joke"><b>Человеческим языком:</b> ${s.joke}</div>
-      <div class="db-detail-actions"><button class="secondary" type="button" onclick="closeControl()">Закрыть</button><button class="primary" type="button" onclick="closeControl();${id==='reports'?'openMonthReport()':`showSection('${id==='operations'?'home':id}')`} ">${id==='reports'?'Открыть разбор':'Открыть раздел'} →</button></div>
-    </div>`;
+  const mo=new MutationObserver(function(){paint()});
+  mo.observe(document.body,{subtree:true,childList:true});
+  setTimeout(function(){mo.disconnect()},30000);
+  setTimeout(paint,0);
+})();
+</script>
+<script>
+(function(){
+  function normalizeHomeBackLabels(){
+    [['tasksBack','← На главную'],['clientsBack','← На главную']].forEach(function(x){const b=document.getElementById(x[0]);if(b)b.textContent=x[1]});
   }
-  window.openBusinessSectionDetail=function(id){const s=sections[id];if(!s)return;openControl(detailHtml(id));document.body.classList.add('db-detail-open')};
-  
-  function cardHtml(id){
-    const s=sections[id];
-    const attention=['promo','sales','clients','finance','operations'].includes(id) ? (id==='finance'?'warn':(id==='sales'||id==='clients'||id==='operations'?'red':'warn')) : '';
-    return `<article class="business-os-card" data-business-section="${id}" tabindex="0" role="button" aria-label="Открыть ${s.title}" onclick="openBusinessSectionDetail('${id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openBusinessSectionDetail('${id}')}">
-      <div class="business-os-head"><div><div class="business-os-kicker">${s.kicker}</div><h3>${s.title}</h3></div><span class="business-os-signal ${attention}"></span></div>
-      <p class="business-os-desc">${s.desc2}</p>
-      <div class="business-os-metrics">${s.metrics.map(m=>`<div class="business-os-metric"><b>${m[0]}</b><small>${m[1]}</small></div>`).join('')}</div>
-      <div class="business-os-foot">
-        <div class="business-os-footline"><span>СДЕЛАНО</span><b>${s.done}</b></div>
-        <div class="business-os-footline"><span>ДАЛЬШЕ</span><b>${s.need}</b></div>
-      </div>
-      <div class="business-os-open"><span>Открыть всё</span><em>→</em></div>
-    </article>`;
-  }
-  
-  function renderPreviews(){
-    const shell=document.querySelector('.future-shell'); if(!shell)return;
-    let wrap=document.getElementById('homeSectionPreviews');
-    if(!wrap){wrap=document.createElement('div');wrap.id='homeSectionPreviews';wrap.className='home-section-previews business-os-previews';const state=shell.querySelector('[data-home-block="state"]');if(state)state.insertAdjacentElement('afterend',wrap);else shell.prepend(wrap)}
-    wrap.classList.add('business-os-previews');
-    const p=loadPrefs();
-    wrap.innerHTML=Object.keys(sections).filter(id=>p[id]).map(cardHtml).join('');
-    wrap.style.display=Object.keys(sections).some(id=>p[id])?'grid':'none';
-  }
-  window.renderHomeSectionPreviews=renderPreviews;
-  
-  function settingsHtml(){
-    const p=loadPrefs();
-    const rows=Object.keys(sections).map(id=>{const s=sections[id],on=!!p[id];return `<div class="business-os-row ${on?'is-on':''}">
-      <span class="business-os-icon" aria-hidden="true">${s.icon}</span>
-      <div class="business-os-copy"><b>${s.title}</b><small>${s.desc}</small></div>
-      <button type="button" class="business-os-switch ${on?'is-on':''}" data-business-home-switch="${id}" aria-label="${on?'Убрать':'Добавить'} ${s.title} ${on?'с':'на'} Главной" aria-pressed="${on}"><i></i></button>
-    </div>`}).join('');
-    return `<div class="business-os-title">Что должно быть на Главной</div>
-      <p class="business-os-note">Поставь галочку — появится компактная карточка. Нажми её — и она раскроется в полный разбор. Никакого интерфейсного леса.</p>
-      <div class="business-os-list">${rows}</div>
-      <div class="business-os-title">Как со мной разговаривать</div>
-      <div class="business-os-row is-on"><span class="business-os-icon">А</span><div class="business-os-copy"><b>Простыми словами</b><small>Без «оптимизации синергии». Говорю так, чтобы понял человек, а не совет директоров.</small></div><span class="business-os-icon" style="background:rgba(39,168,102,.10);color:#27a866">✓</span></div>
-      <div class="business-os-row is-on"><span class="business-os-icon">☺</span><div class="business-os-copy"><b>Юмор по делу</b><small>Могу подколоть рекламу или забытый процесс. Когда всё горит — сначала тушим, потом шутим.</small></div><span class="business-os-icon" style="background:rgba(39,168,102,.10);color:#27a866">✓</span></div>`;
-  }
-  
-  function openSettingsV2(){
-    closeMore();
-    const oldPanels=`<div class="settings-theme-box"><div><b>Экран</b><small>Светлая или тёмная тема.</small></div><div class="theme-mode-row"><button class="theme-mode-btn" data-mode="light" onclick="setThemeMode('light')">☀ Светлая</button><button class="theme-mode-btn" data-mode="dark" onclick="setThemeMode('dark')">◐ Тёмная</button></div></div>`;
-    const managerPart=`<div class="settings-section-title">1 · Как я работаю</div><div class="settings-section-note">Показываю главное, не прячусь за умными словами и не делаю важные денежные шаги молча.</div><div class="rule-list settings-rules-list">
-      <div class="rule-row settings-rule-row"><div><b>Самостоятельность</b><small>Советую → ты подтверждаешь важные действия.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="independence" role="switch" aria-checked="true" aria-label="Самостоятельность"><i></i></button></div>
-      <div class="rule-row settings-rule-row"><div><b>Деньги</b><small>Траты и изменения бюджета — сначала спросить тебя.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="money" role="switch" aria-checked="true" aria-label="Деньги"><i></i></button></div>
-      <div class="rule-row settings-rule-row"><div><b>Автопилот</b><small>Хочешь больше самостоятельности — включишь здесь. Сюрпризов не будет.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="autopilot" role="switch" aria-checked="false" aria-label="Автопилот"><i></i></button></div>
-    </div>`;
-    openControl(`<div class="control-kicker">Цифровой управляющий</div><div class="control-title">Главная без хаоса.</div><div class="control-sub">Выбираешь нужное — я собираю это в компактные карточки. Остальное тихо сидит в своём разделе.</div>${oldPanels}${managerPart}${settingsHtml()}<div class="settings-section-title">3 · Мои инструменты</div><div class="settings-create-card"><div><span>ПАМЯТЬ</span><b>Память бизнеса</b><small>Что я знаю о твоих целях, клиентах и правилах.</small></div><button type="button" onclick="closeControl();openBusinessMemory()">Открыть →</button></div><div class="settings-create-card"><div><span>ИСТОРИЯ</span><b>Эволюция</b><small>Что я уже изменил и чему научился.</small></div><button type="button" onclick="closeControl();openEvolution()">Смотреть →</button></div><div class="dm-learning-card"><div class="dm-learning-copy"><div class="dm-learning-kicker">Лёгкое обучение</div><b>Покажу, что здесь куда.</b><small>За минуту объясню Главную и мои разделы. Без лекции. Обещаю.</small></div><button type="button" class="control-action dm-learning-button" onclick="openLightTutorial()">Пройти обучение →</button></div>`);
-    try{if(window.syncManagerSettings)window.syncManagerSettings()}catch(e){}
-    document.querySelectorAll('[data-business-home-switch]').forEach(btn=>btn.addEventListener('click',function(e){
-      e.preventDefault();e.stopPropagation();const id=this.dataset.businessHomeSwitch;const p=loadPrefs();p[id]=!p[id];savePrefs(p);renderPreviews();openSettingsV2();
-    }));
-  }
-  window.openSettingsPanel=openSettingsV2;
-  
-  function boot(){
-    // Migrate existing v1 preferences into v2 on first run, so nothing the user enabled disappears.
-    try{if(!localStorage.getItem(KEY)){const old=JSON.parse(localStorage.getItem(OLD)||'null');if(old&&typeof old==='object')savePrefs(Object.assign({},defs,old))}}catch(e){}
-    setTimeout(renderPreviews,30);
-  }
-  document.addEventListener('DOMContentLoaded',boot);
-  setTimeout(renderPreviews,120);
+  normalizeHomeBackLabels();
+  const mo=new MutationObserver(normalizeHomeBackLabels);
+  mo.observe(document.body,{subtree:true,childList:true});
+  setTimeout(function(){mo.disconnect()},30000);
 })();
 </script>
 
+
+<style id="visual-system-aligned-v2">
+/* Визуальный финальный слой: новые разделы должны выглядеть так, будто они всегда жили в этом приложении. */
+#homeSectionPreviews{
+  display:grid!important;
+  grid-template-columns:1.15fr .85fr!important;
+  gap:14px!important;
+  margin:0 0 14px!important;
+}
+#homeSectionPreviews .home-added-card{
+  position:relative!important;
+  width:100%!important;
+  min-width:0!important;
+  padding:27px!important;
+  border:1px solid var(--f-line)!important;
+  border-radius:27px!important;
+  background:var(--f-card)!important;
+  color:var(--f-ink)!important;
+  box-shadow:0 10px 35px rgba(20,20,25,.035)!important;
+  backdrop-filter:blur(18px)!important;
+  -webkit-backdrop-filter:blur(18px)!important;
+  overflow:hidden!important;
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease!important;
+}
+#homeSectionPreviews .home-added-card:hover{transform:translateY(-2px)!important;box-shadow:0 18px 45px rgba(20,20,25,.07)!important}
+#homeSectionPreviews .home-added-card.attention{grid-row:span 2!important}
+#homeSectionPreviews .home-added-card .card-top{align-items:flex-start!important}
+#homeSectionPreviews .home-added-card h3{font-size:18px!important;line-height:1.2!important;letter-spacing:-.035em!important;margin:10px 0 0!important;max-width:490px!important}
+#homeSectionPreviews .home-added-card .future-desc{font-size:11px!important;line-height:1.55!important;color:var(--f-muted)!important;margin:12px 0 0!important}
+#homeSectionPreviews .home-added-card .mini-result{margin-top:25px!important;border-top:1px solid var(--f-line)!important;border-bottom:1px solid var(--f-line)!important}
+#homeSectionPreviews .home-added-card .mini-result div{padding:16px 0!important}
+#homeSectionPreviews .home-added-card .mini-result div+div{border-left:1px solid var(--f-line)!important;padding-left:18px!important}
+#homeSectionPreviews .home-added-card .mini-result b{font-size:18px!important;color:var(--f-ink)!important}
+#homeSectionPreviews .home-added-card .mini-result span{font-size:9px!important;color:var(--f-soft)!important}
+#homeSectionPreviews .home-added-card .quiet-note{font-size:9px!important;color:var(--f-muted)!important;margin-top:15px!important}
+#homeSectionPreviews .home-added-card .module-mini-joke{
+  margin-top:11px!important;padding-top:10px!important;border-top:1px solid var(--f-line)!important;
+  font-size:9px!important;line-height:1.45!important;color:var(--f-muted)!important;
+}
+#homeSectionPreviews .home-added-card .action-row{display:flex!important;gap:8px!important;margin-top:14px!important}
+#homeSectionPreviews .home-added-card .future-btn{height:38px!important;min-height:38px!important;padding:0 17px!important;border-radius:11px!important;font-size:10px!important;font-weight:650!important;box-shadow:none!important;border:0!important}
+body:not(.dark) #homeSectionPreviews .home-added-card .future-btn.primary{background:#101012!important;color:#fff!important}
+body:not(.dark) #homeSectionPreviews .home-added-card .future-btn.ghost{background:#eeeef0!important;color:#65656c!important}
+body.dark #homeSectionPreviews .home-added-card{
+  background:rgba(255,255,255,.045)!important;
+  color:#f5f5f7!important;
+  border-color:rgba(255,255,255,.09)!important;
+  box-shadow:none!important;
+}
+body.dark #homeSectionPreviews .home-added-card .mini-result b{color:#f5f5f7!important}
+body.dark #homeSectionPreviews .home-added-card .future-btn.primary{background:#f4f4f5!important;color:#17171a!important}
+body.dark #homeSectionPreviews .home-added-card .future-btn.ghost{background:rgba(255,255,255,.07)!important;color:#e7e8eb!important}
+body.dark #homeSectionPreviews .home-added-card .module-mini-joke{color:rgba(255,255,255,.58)!important}
+
+/* Большой лист раздела — продолжение того же материала, а не отдельное приложение внутри приложения. */
+.wow-module-panel{
+  background:rgba(249,249,251,.97)!important;
+  border:1px solid rgba(20,20,24,.08)!important;
+  box-shadow:0 -20px 90px rgba(9,15,35,.18)!important;
+}
+.wow-module-stat,.wow-module-block{border-color:var(--line)!important;background:rgba(255,255,255,.48)!important}
+.wow-module-joke{background:rgba(20,20,24,.035)!important;border-color:var(--line)!important;color:var(--muted)!important}
+.wow-module-actions{align-items:stretch!important}
+.wow-module-primary{background:#101012!important;color:#fff!important}
+.wow-module-secondary{background:#eeeef0!important;color:#65656c!important;border:0!important}
+body.dark .wow-module-panel{background:rgba(27,28,33,.98)!important;border-color:rgba(255,255,255,.10)!important;box-shadow:0 -24px 90px rgba(0,0,0,.45)!important}
+body.dark .wow-module-stat,body.dark .wow-module-block{background:rgba(255,255,255,.04)!important;border-color:rgba(255,255,255,.09)!important}
+body.dark .wow-module-joke{background:rgba(255,255,255,.045)!important;border-color:rgba(255,255,255,.09)!important;color:rgba(255,255,255,.62)!important}
+body.dark .wow-module-primary{background:#f4f4f5!important;color:#17171a!important}
+body.dark .wow-module-secondary{background:rgba(255,255,255,.07)!important;color:#e7e8eb!important}
+
+/* Настройки: та же архитектура, что и у родных карточек — стекло, тонкая рамка, тихая глубина. */
+#controlContent .settings-clean-row,
+#controlContent .settings-rules-list .settings-rule-row{
+  min-height:58px!important;
+  padding:10px 11px!important;
+  border-radius:18px!important;
+  border:1px solid var(--line)!important;
+  background:rgba(255,255,255,.56)!important;
+  box-shadow:0 10px 30px rgba(20,25,35,.045),inset 0 1px 0 rgba(255,255,255,.62)!important;
+}
+#controlContent .settings-clean-row:hover,
+#controlContent .settings-rules-list .settings-rule-row:hover{transform:translateY(-1px)!important}
+#controlContent .settings-clean-icon{
+  width:36px!important;height:36px!important;min-width:36px!important;
+  border-radius:12px!important;
+  display:grid!important;place-items:center!important;
+  background:rgba(20,20,24,.045)!important;
+  border:1px solid rgba(20,20,24,.07)!important;
+  color:#17171a!important;
+  font-size:0!important;
+  box-shadow:none!important;
+}
+#controlContent .settings-clean-icon svg{width:18px!important;height:18px!important;display:block!important;fill:none!important;stroke:currentColor!important;stroke-width:1.45!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+body.dark #controlContent .settings-clean-row,
+body.dark #controlContent .settings-rules-list .settings-rule-row{background:rgba(255,255,255,.045)!important;border-color:rgba(255,255,255,.09)!important;box-shadow:none!important}
+body.dark #controlContent .settings-clean-icon{background:rgba(255,255,255,.06)!important;border-color:rgba(255,255,255,.10)!important;color:#f4f4f5!important}
+#controlContent .settings-clean-copy b{font-size:12.5px!important;letter-spacing:-.02em!important}
+#controlContent .settings-clean-copy small{font-size:9.5px!important;line-height:1.35!important}
+#controlContent .settings-theme-box{
+  border-radius:20px!important;
+  border:1px solid var(--line)!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.64),rgba(247,248,251,.44))!important;
+  box-shadow:0 12px 34px rgba(20,25,35,.045),inset 0 1px 0 rgba(255,255,255,.62)!important;
+}
+body.dark #controlContent .settings-theme-box{background:rgba(255,255,255,.045)!important;border-color:rgba(255,255,255,.09)!important;box-shadow:none!important}
+@media(max-width:700px){
+  #homeSectionPreviews{grid-template-columns:1fr!important;gap:9px!important;margin-bottom:12px!important}
+  #homeSectionPreviews .home-added-card{padding:18px!important;border-radius:22px!important}
+  #homeSectionPreviews .home-added-card.attention{grid-row:auto!important}
+  #homeSectionPreviews .home-added-card h3{font-size:17px!important}
+  #homeSectionPreviews .home-added-card .future-desc{font-size:10.5px!important}
+  #homeSectionPreviews .home-added-card .future-btn{height:38px!important;min-height:38px!important;font-size:9px!important;padding:0 13px!important}
+  #controlContent .settings-clean-row,#controlContent .settings-rules-list .settings-rule-row{min-height:56px!important}
+}
+</style>
 </body>
 
 <style id="clients-single-home-v38">
@@ -12327,4 +12399,714 @@ body:not(.dark) .dm-living-dots .dm-menu-logo .sig-diamond{fill:#fff!important;s
 body:not(.dark) .dm-living-dots .dm-menu-logo .sig-core{fill:#111216!important;}
 body.dark .dm-living-dots .dm-menu-logo .sig-diamond{fill:#111216!important;stroke:#f5f5f7!important;}
 body.dark .dm-living-dots .dm-menu-logo .sig-core{fill:#f5f5f7!important;}
+</style>
+
+
+<style id="wow-business-os-v3-css">
+/* WOW v3: структура бизнеса понятнее, а родные карточки Главной остаются нетронутыми. */
+.business-map-strip{margin:0 0 12px;padding:11px 13px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.42);display:flex;align-items:center;gap:8px;overflow:auto;scrollbar-width:none;white-space:nowrap}
+.business-map-strip::-webkit-scrollbar{display:none}
+.business-map-strip span{font-size:9px;font-weight:800;letter-spacing:.05em;color:var(--muted)}
+.business-map-strip i{font-style:normal;color:var(--muted);opacity:.6;font-size:12px}
+.business-map-strip .live{color:var(--text)}
+body.dark .business-map-strip{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09)}
+
+/* Новая компактная карточка использует ту же геометрию, что и родные future-card. */
+#homeSectionPreviews .home-added-card{cursor:pointer}
+#homeSectionPreviews .home-added-card:hover{transform:translateY(-2px)}
+#homeSectionPreviews .module-mini-joke{margin-top:9px;font-size:10px;line-height:1.4;color:var(--muted)}
+#homeSectionPreviews .module-mini-joke b{color:var(--text)}
+#homeSectionPreviews .module-flow{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:10px}
+#homeSectionPreviews .module-flow span{padding:6px 8px;border-radius:999px;background:rgba(20,20,24,.045);font-size:9px;color:var(--muted);font-weight:700}
+#homeSectionPreviews .module-flow i{font-style:normal;color:var(--muted);opacity:.5;font-size:10px}
+body.dark #homeSectionPreviews .module-flow span{background:rgba(255,255,255,.06)}
+
+/* Большой лист при нажатии на карточку. */
+.wow-module-sheet{position:fixed;inset:0;z-index:100060;display:none;align-items:flex-end;justify-content:center;background:rgba(6,8,13,.36);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.wow-module-sheet.is-open{display:flex}
+.wow-module-panel{width:min(820px,100%);max-height:min(88vh,820px);overflow:auto;padding:20px 20px calc(22px + env(safe-area-inset-bottom));border:1px solid rgba(255,255,255,.34);border-radius:30px 30px 0 0;background:rgba(249,250,253,.97);color:#17171a;box-shadow:0 -20px 90px rgba(9,15,35,.25);transform:translateY(18px);opacity:0;animation:wowModuleIn .28s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes wowModuleIn{to{transform:translateY(0);opacity:1}}
+body.dark .wow-module-panel{background:rgba(27,28,33,.98);border-color:rgba(255,255,255,.10);color:#f5f5f7;box-shadow:0 -24px 90px rgba(0,0,0,.45)}
+.wow-module-top{display:flex;align-items:flex-start;justify-content:space-between;gap:15px}
+.wow-module-kicker{font-size:9px;font-weight:850;letter-spacing:.14em;text-transform:uppercase;color:#7e7f86}
+body.dark .wow-module-kicker{color:#a6a7ad}
+.wow-module-title{font-size:34px;line-height:1.02;letter-spacing:-.06em;margin:6px 50px 8px 0}
+.wow-module-sub{margin:0;max-width:650px;color:#777981;font-size:13px;line-height:1.55}
+body.dark .wow-module-sub{color:#aaaab1}
+.wow-module-close{width:40px;height:40px;border:0;border-radius:14px;background:rgba(20,20,24,.06);color:inherit;font-size:23px;line-height:1;flex:none}
+body.dark .wow-module-close{background:rgba(255,255,255,.07)}
+.wow-module-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:18px}
+.wow-module-stat{padding:13px 14px;border:1px solid rgba(20,20,24,.08);border-radius:17px;background:rgba(255,255,255,.58)}
+body.dark .wow-module-stat{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09)}
+.wow-module-stat small{display:block;color:#8a8b92;font-size:9px;line-height:1.2}
+.wow-module-stat b{display:block;font-size:22px;letter-spacing:-.04em;margin-top:6px}
+.wow-module-sections{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:14px}
+.wow-module-block{padding:15px;border-radius:19px;border:1px solid rgba(20,20,24,.08);background:rgba(255,255,255,.50)}
+body.dark .wow-module-block{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.09)}
+.wow-module-block span{display:block;font-size:9px;letter-spacing:.12em;font-weight:850;color:#8c8d94}
+.wow-module-block b{display:block;font-size:14px;margin-top:6px;line-height:1.25}
+.wow-module-block p{margin:5px 0 0;color:#777981;font-size:11px;line-height:1.5}
+body.dark .wow-module-block p{color:#aaaab1}
+.wow-module-joke{margin-top:12px;padding:12px 14px;border-radius:16px;background:rgba(114,87,255,.06);border:1px solid rgba(114,87,255,.11);color:#6f7078;font-size:11px;line-height:1.45}
+body.dark .wow-module-joke{background:rgba(114,87,255,.08);color:#b5b5bd;border-color:rgba(150,130,255,.14)}
+.wow-module-actions{display:flex;gap:9px;margin-top:13px}
+.wow-module-primary,.wow-module-secondary{min-height:46px;border-radius:14px;padding:0 16px;font-size:11px;font-weight:800;border:0}
+.wow-module-primary{background:var(--text);color:var(--bg);flex:1}
+.wow-module-secondary{background:rgba(20,20,24,.06);color:var(--text)}
+body.dark .wow-module-primary{background:#f4f4f5;color:#17171a}
+body.dark .wow-module-secondary{background:rgba(255,255,255,.07);color:#f4f4f5}
+@media(max-width:700px){
+  .business-map-strip{margin-bottom:9px}
+  .business-map-strip span{font-size:8px}
+  .wow-module-panel{max-height:92vh;padding:17px 15px calc(18px + env(safe-area-inset-bottom));border-radius:28px 28px 0 0}
+  .wow-module-title{font-size:29px}
+  .wow-module-grid{grid-template-columns:1fr 1fr}
+  .wow-module-sections{grid-template-columns:1fr}
+  .wow-module-actions{flex-direction:column}
+  .wow-module-primary,.wow-module-secondary{width:100%}
+}
+</style>
+
+<script id="wow-business-os-v3-js">
+(function(){
+  const KEY='db-home-section-switches-v1';
+  const defaults={sales:false,finance:false,clients:false,promo:false,operations:false,reports:false,evolution:true,memory:true,rules:true};
+  const data={
+    promo:{
+      kicker:'ПРОДВИЖЕНИЕ',title:'Чтобы тебя находили, а не вспоминали случайно.',
+      sub:'Сайт, соцсети, контент и реклама. Всё, что приводит внимание и новых людей.',
+      status:'ТРЕБУЕТ ВНИМАНИЯ',signal:'red',
+      stats:[['Люди','184'],['Заявки','14'],['Цена заявки','−12%'],['Каналы','6']],
+      flow:['Сайт','Соцсети','Контент','Реклама'],
+      now:'Реклама работает лучше в одном из каналов.',
+      done:'Проверил кампании и нашёл место, где можно не тратить лишнее.',
+      need:'Проверить страницы сайта, откуда обычно приходят заявки.',
+      joke:'Контент тоже хочет внимания. Он просто делает вид, что ему всё равно.',
+      cta:'Открыть продвижение'
+    },
+    sales:{
+      kicker:'ПРОДАЖИ',title:'Заявки должны превращаться в деньги.',
+      sub:'Здесь живут обращения, сделки, воронка и простой ответ на вопрос: откуда пришла выручка.',
+      status:'ТРЕБУЕТ РЕШЕНИЯ',signal:'red',
+      stats:[['Обращения','27'],['Продажи','8'],['Выручка','184k ₽'],['Конверсия','29,6%']],
+      flow:['Обращение','Квалификация','Предложение','Продажа'],
+      now:'Три обращения застряли после предложения.',
+      done:'Разложил воронку и нашёл место, где теряем людей.',
+      need:'Ответить трём клиентам и проверить два зависших предложения.',
+      joke:'Заявка не обязана превращаться в продажу. Но желательно, а то зачем мы тут собрались 😄',
+      cta:'Открыть продажи'
+    },
+    clients:{
+      kicker:'КЛИЕНТЫ',title:'Люди, а не строчки в таблице.',
+      sub:'Сообщения, история общения, отзывы, повторные покупки и те, кому пора напомнить о себе.',
+      status:'ТРЕБУЕТ РЕШЕНИЯ',signal:'red',
+      stats:[['Новые','14'],['Ждут ответа','3'],['Повторные','8'],['Отзывы','3']],
+      flow:['Сообщения','История','Отзывы','Возврат'],
+      now:'Три человека ждут ответа.',
+      done:'Собрал тех, кому нужен следующий шаг, а не ещё один красивый список.',
+      need:'Ответить на 3 сообщения и посмотреть 3 новых отзыва.',
+      joke:'Клиенты любят внимание. Желательно человеческое. Я тоже за.',
+      cta:'Открыть клиентов'
+    },
+    finance:{
+      kicker:'ФИНАНСЫ',title:'Деньги любят порядок. И чтобы их не теряли.',
+      sub:'Выручка, расходы, прибыль, движение денег и места, где бюджет начинает вести себя подозрительно.',
+      status:'ВСЁ ПОД КОНТРОЛЕМ',signal:'green',
+      stats:[['Выручка','4,86 млн ₽'],['Расходы','3,59 млн ₽'],['Прибыль','1,27 млн ₽'],['Денег сейчас','2,18 млн ₽']],
+      flow:['Пришло','Потрачено','Заработано','Осталось'],
+      now:'Расходы растут чуть быстрее, чем хочется.',
+      done:'Сверил движение денег и уже посмотрел рекламу.',
+      need:'Проверить, что именно подорожало.',
+      joke:'Деньги не исчезают. Они просто иногда очень творчески находят новые места.',
+      cta:'Открыть финансы'
+    },
+    operations:{
+      kicker:'РАБОТА БИЗНЕСА',title:'Чтобы всё работало, когда ты не смотришь.',
+      sub:'Задачи, товары, остатки, поставщики и процессы. То самое закулисье, без которого шоу не начнётся.',
+      status:'СМОТРЮ',signal:'green',
+      stats:[['Задачи','7'],['Товаров мало','2'],['Поставщики','5'],['Процессы','11']],
+      flow:['Задачи','Товар','Поставщик','Процесс'],
+      now:'Один товар закончится примерно через 4 дня.',
+      done:'Поднял этот риск наверх, чтобы он не превратился в сюрприз.',
+      need:'Подтвердить закупку товара X.',
+      joke:'Если всё работает само — это автоматизация. Если всё держится на одном человеке — это храбрый эксперимент.',
+      cta:'Открыть работу бизнеса'
+    },
+    reports:{
+      kicker:'ОТЧЁТЫ',title:'Не просто цифры. Что они нам говорят.',
+      sub:'Собираю изменения из всех блоков и объясняю простыми словами: что выросло, что просело и что с этим делать.',
+      status:'ГОТОВ К РАЗБОРУ',signal:'green',
+      stats:[['Продвижение','+12%'],['Продажи','−7%'],['Клиенты','+8'],['Прибыль','+12,7%']],
+      flow:['Что было','Что изменилось','Почему','Что делать'],
+      now:'Главная проблема сейчас — не привлечение, а обработка части обращений.',
+      done:'Связал данные из продвижения, продаж и клиентов.',
+      need:'Нажать «Показать разбор» — и я объясню всё без таблицы на 48 вкладок.',
+      joke:'Отчёт без вывода — это просто длинная цифра с хорошей самооценкой.',
+      cta:'Показать разбор'
+    }
+  };
+
+  function prefs(){
+    try{const x=JSON.parse(localStorage.getItem(KEY)||'null');return Object.assign({},defaults,x&&typeof x==='object'?x:{})}
+    catch(e){return Object.assign({},defaults)}
+  }
+  function save(x){try{localStorage.setItem(KEY,JSON.stringify(x))}catch(e){}}
+
+  function ensureSheet(){
+    let s=document.getElementById('wowBusinessModuleSheet');
+    if(s)return s;
+    s=document.createElement('div');
+    s.id='wowBusinessModuleSheet';
+    s.className='wow-module-sheet';
+    s.innerHTML='<section class="wow-module-panel" role="dialog" aria-modal="true" aria-labelledby="wowModuleTitle"><div id="wowModuleContent"></div></section>';
+    s.addEventListener('click',e=>{if(e.target===s)closeModule()});
+    document.body.appendChild(s);
+    return s;
+  }
+  function closeModule(){const s=document.getElementById('wowBusinessModuleSheet');if(s)s.classList.remove('is-open')}
+  window.closeBusinessModule=closeModule;
+  window.openBusinessModule=function(id){
+    const d=data[id]; if(!d)return;
+    const s=ensureSheet(),c=document.getElementById('wowModuleContent');
+    const stats=d.stats.map(x=>'<div class="wow-module-stat"><small>'+x[0]+'</small><b>'+x[1]+'</b></div>').join('');
+    const flow=d.flow.map((x,i)=>'<span>'+x+'</span>'+(i<d.flow.length-1?'<i>→</i>':'')).join('');
+    c.innerHTML='<div class="wow-module-top"><div><div class="wow-module-kicker">'+d.kicker+' · '+d.status+'</div><h2 id="wowModuleTitle" class="wow-module-title">'+d.title+'</h2><p class="wow-module-sub">'+d.sub+'</p></div><button class="wow-module-close" type="button" onclick="closeBusinessModule()" aria-label="Закрыть">×</button></div>'+
+      '<div class="wow-module-grid">'+stats+'</div>'+
+      '<div class="module-flow">'+flow+'</div>'+
+      '<div class="wow-module-sections">'+
+        '<div class="wow-module-block"><span>СЕЙЧАС</span><b>'+d.now+'</b><p>Я держу это в поле зрения.</p></div>'+
+        '<div class="wow-module-block"><span>Я УЖЕ СДЕЛАЛ</span><b>'+d.done+'</b><p>Это не обещание. Это то, что уже произошло.</p></div>'+
+        '<div class="wow-module-block"><span>ОТ ТЕБЯ НУЖНО</span><b>'+d.need+'</b><p>Один понятный следующий шаг.</p></div>'+
+        '<div class="wow-module-block"><span>ЗДЕСЬ ЖИВЁТ</span><b>'+d.sub+'</b><p>Никакой мешанины: у каждого блока своя работа.</p></div>'+ 
+      '</div>'+
+      '<div class="wow-module-joke">'+d.joke+'</div>'+
+      '<div class="wow-module-actions"><button class="wow-module-primary" type="button" onclick="closeBusinessModule();'+(id==='operations'||id==='reports'?'':'showSection(\''+id+'\')')+'">'+d.cta+' →</button><button class="wow-module-secondary" type="button" onclick="closeBusinessModule()">Оставить здесь</button></div>';
+    s.classList.add('is-open');
+  };
+
+  function render(){
+    const shell=document.querySelector('.future-shell'); if(!shell)return;
+    let wrap=document.getElementById('homeSectionPreviews');
+    if(!wrap){wrap=document.createElement('div');wrap.id='homeSectionPreviews';wrap.className='home-section-previews';const state=shell.querySelector('[data-home-block="state"]');if(state)state.insertAdjacentElement('afterend',wrap);else shell.prepend(wrap)}
+    const p=prefs();
+    const ids=['promo','sales','clients','finance','operations','reports'];
+    wrap.innerHTML=ids.filter(id=>p[id]).map(id=>{
+      const d=data[id], decision=d.signal==='red';
+      const statHtml=d.stats.slice(0,2).map(x=>'<div><b>'+x[1]+'</b><span>'+x[0]+'</span></div>').join('');
+      return '<article class="future-card home-added-card '+(decision?'attention ':'')+'module-preview-'+id+'" data-preview-section="'+id+'" onclick="openBusinessModule(\''+id+'\')">'+
+        '<div class="card-top"><div><span class="future-label">'+d.kicker+'</span><h3>'+d.title+'</h3></div><span class="signal '+d.signal+'"></span></div>'+
+        '<p class="future-desc">'+d.sub+'</p>'+ 
+        '<div class="mini-result">'+statHtml+'</div>'+ 
+        '<div class="quiet-note"><span class="check">'+(decision?'!':'✓')+'</span> '+(decision?'Есть что решить.':'Я уже держу это под контролем.')+'</div>'+ 
+        '<div class="module-mini-joke">'+d.joke+'</div>'+ 
+        '<div class="action-row">'+
+          (decision?'<button type="button" class="future-btn primary" onclick="event.stopPropagation();openBusinessModule(\''+id+'\')">Разобраться</button><button type="button" class="future-btn ghost" onclick="event.stopPropagation();openBusinessModule(\''+id+'\')">Почему?</button>':'<button type="button" class="future-btn primary" onclick="event.stopPropagation();openBusinessModule(\''+id+'\')">Открыть</button><button type="button" class="future-btn ghost" onclick="event.stopPropagation();openBusinessModule(\''+id+'\')">Подробнее</button>')+
+        '</div></article>';
+    }).join('');
+    wrap.style.display=wrap.children.length?'grid':'none';
+    ['salesPage','financePage','clientsPage','promoPage'].forEach(pid=>{const el=document.getElementById(pid);if(el&&document.body.dataset.currentSection==='home')el.style.display='none'});
+  }
+  window.renderHomeSectionPreviews=render;
+
+  function settingsSections(){
+    const I={
+      promo:'<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 12h16M7 7h10M7 17h10\"/></svg>',
+      sales:'<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 17 10 12l3 3 6-7\"/><path d=\"M14 8h5v5\"/></svg>',
+      clients:'<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"9\" cy=\"8\" r=\"3\"/><path d=\"M3.5 19c.7-3.1 2.5-4.7 5.5-4.7s4.8 1.6 5.5 4.7\"/><path d=\"M16 11.5c2.2.1 3.8 1.3 4.5 3.5\"/></svg>',
+      finance:'<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 3v18M16 7.5c0-1.4-1.5-2.5-4-2.5S8 6.1 8 7.5s1.5 2.5 4 2.5 4 1.1 4 2.5-1.5 2.5-4 2.5-4-1.1-4-2.5\"/></svg>',
+      operations:'<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"4\"/><path d=\"M8 9h8M8 13h5M8 17h3\"/></svg>',
+      reports:'<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 18V6M10 18v-8M15 18V4M20 18v-5\"/></svg>'
+    };
+    return [
+      {id:'promo',icon:I.promo,title:'Продвижение',desc:'Сайт, соцсети, контент и реклама.'},
+      {id:'sales',icon:I.sales,title:'Продажи',desc:'Заявки, сделки и откуда пришли деньги.'},
+      {id:'clients',icon:I.clients,title:'Клиенты',desc:'Общение, отзывы и возврат клиентов.'},
+      {id:'finance',icon:I.finance,title:'Финансы',desc:'Выручка, расходы и прибыль.'},
+      {id:'operations',icon:I.operations,title:'Работа бизнеса',desc:'Задачи, товары, остатки и поставщики.'},
+      {id:'reports',icon:I.reports,title:'Отчёты',desc:'Что выросло, что просело и почему.'}
+    ];
+  }
+
+  window.toggleSettingsHomeSection=function(id,btn){
+    const x=prefs();
+    x[id]=!x[id];
+    save(x);
+    if(btn){
+      btn.classList.toggle('is-on',!!x[id]);
+      btn.setAttribute('aria-pressed',String(!!x[id]));
+      const knob=btn.querySelector('i');
+      if(knob){knob.style.setProperty('left',x[id]?'21px':'3px','important');knob.style.setProperty('transform','none','important');}
+    }
+    render();
+    setTimeout(function(){
+      try{if(window.renderHomeSectionPreviews)window.renderHomeSectionPreviews()}catch(e){}
+      document.querySelectorAll('#controlContent .settings-home-switch[data-section-id]').forEach(function(b){
+        const on=!!prefs()[b.dataset.sectionId];
+        b.classList.toggle('is-on',on);
+        b.setAttribute('aria-pressed',String(on));
+        const knob=b.querySelector('i');
+        if(knob){knob.style.setProperty('left',on?'21px':'3px','important');knob.style.setProperty('transform','none','important');}
+      });
+    },20);
+  };
+
+  const originalOpenSettings=window.openSettingsPanel;
+  window.openSettingsPanel=function(){
+    closeMore();
+    const rows=settingsSections().map(s=>'<div class="settings-clean-row" data-setting-section="'+s.id+'"><button type="button" class="settings-clean-open" onclick="closeControl();openBusinessModule(\''+s.id+'\')"><span class="settings-clean-icon">'+s.icon+'</span><span class="settings-clean-copy"><b>'+s.title+'</b><small>'+s.desc+'</small></span></button><button type="button" class="rule-toggle settings-rule-toggle settings-home-switch" data-section-id="'+s.id+'" aria-label="Показывать '+s.title+' на Главной" aria-pressed="false"><i></i></button></div>').join('');
+    openControl('<div class="control-kicker">Настройки управляющего</div><div class="control-title">Настройки без квеста.</div><div class="control-sub">Включи нужные карточки на Главной. Нажал на карточку — получил весь разбор. У каждого блока своя работа, а не «всё обо всём».</div><div class="settings-theme-box"><div><b>Экран</b><small>Светлая или тёмная тема.</small></div><div class="theme-mode-row"><button class="theme-mode-btn" data-mode="light" onclick="setThemeMode(&quot;light&quot;)">☀ Светлая</button><button class="theme-mode-btn" data-mode="dark" onclick="setThemeMode(&quot;dark&quot;)">◐ Тёмная</button></div></div><div class="settings-section-title">1 · Как работает управляющий</div><div class="settings-section-note">Границы, деньги, стиль общения и автопилот остаются как были.</div><div class="rule-list settings-rules-list"><div class="rule-row settings-rule-row"><div><b>Самостоятельность</b><small>Советую → вы подтверждаете важные действия.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="independence" role="switch" aria-checked="true" aria-label="Самостоятельность"><i></i></button></div><div class="rule-row settings-rule-row"><div><b>Деньги</b><small>Расходы и изменения бюджета — сначала спросить вас.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="money" role="switch" aria-checked="true" aria-label="Деньги"><i></i></button></div><div class="rule-row settings-rule-row"><div><b>Общение</b><small>Просто, коротко и по делу. Шутки — когда всё спокойно.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="communication" role="switch" aria-checked="true" aria-label="Общение"><i></i></button></div><div class="rule-row settings-rule-row"><div><b>Автопилот</b><small>Расширяет мои границы, когда ты сам этого хочешь.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="autopilot" role="switch" aria-checked="false" aria-label="Автопилот"><i></i></button></div></div><button class="control-action settings-autopilot-action" onclick="closeControl();openAutopilot()">Настроить автопилот →</button><div class="settings-section-title">2 · Что показывать на Главной</div><div class="settings-section-note">Галочка = компактная карточка на Главной. Нажал карточку = большой разбор. Всё по своим полкам.</div><div class="settings-clean-list">'+rows+'</div><div class="settings-create-card"><div><span>ДОПОЛНИТЕЛЬНО</span><b>Нужен новый инструмент?</b><small>Скажи, чего не хватает. Я попробую собрать.</small></div><button type="button" onclick="closeControl();openBuildModal()">Создать →</button></div><div class="settings-section-title">3 · Сам управляющий</div><div class="settings-create-card"><div><span>Я САМ НАШЁЛ</span><b>Что можно улучшить</b><small>Я ищу проблемы и возможности, которые легко пропустить.</small></div><button type="button" onclick="closeControl();openBlindspot()">Показать →</button></div><div class="settings-create-card"><div><span>Я ПОМНЮ</span><b>Память бизнеса</b><small>Решения, цели и правила, которые не хочется объяснять заново.</small></div><button type="button" onclick="closeControl();openBusinessMemory()">Открыть →</button></div><div class="settings-create-card"><div><span>Я МОГУ САМ</span><b>Правила и автопилот</b><small>Здесь решаем, где я действую сам, а где сначала спрашиваю.</small></div><button type="button" onclick="closeControl();openBusinessRules()">Настроить →</button></div><div class="settings-section-title">4 · Помощь</div><div class="rule-list settings-rules-list"><div class="rule-row settings-rule-row settings-hints-row"><div><b>Подсказки</b><small>Показывать маленькие подсказки по ходу работы.</small></div><button type="button" class="rule-toggle settings-rule-toggle" id="managerHintsToggle" role="switch" aria-checked="true"><i></i></button></div></div><div class="dm-learning-card"><div class="dm-learning-copy"><div class="dm-learning-kicker">Лёгкое обучение</div><b>Покажу, что здесь куда.</b><small>Коротко и с примерами. Без лекции на два сезона.</small></div><button type="button" class="control-action dm-learning-button" onclick="openLightTutorial()">Пройти обучение →</button></div>');
+    if(typeof window.syncManagerSettings==='function')window.syncManagerSettings();
+    if(typeof window.syncSettingsHomeSwitches==='function')window.syncSettingsHomeSwitches();
+  };
+
+  document.addEventListener('click',function(e){
+    const sw=e.target.closest&&e.target.closest('#controlContent .settings-home-switch[data-section-id]');
+    if(sw){e.preventDefault();e.stopImmediatePropagation();window.toggleSettingsHomeSection(sw.dataset.sectionId,sw);return;}
+  },true);
+
+  document.addEventListener('DOMContentLoaded',()=>setTimeout(render,100));
+  setTimeout(render,120);
+})();
+</script>
+
+
+<style id="visual-unification-final-v1">
+/* FINAL VISUAL UNIFICATION — только внешний вид, JS/логику не меняем. */
+:root{
+  --ui-accent-1:#203a83;
+  --ui-accent-2:#4a5bb0;
+  --ui-accent-3:#6a58ba;
+  --ui-accent-soft:rgba(43,70,155,.10);
+  --ui-accent-line:rgba(43,70,155,.18);
+  --ui-dark:#17181c;
+}
+
+/* ---------- Единый язык основных CTA в светлой теме ---------- */
+body:not(.dark) .future-btn.primary,
+body:not(.dark) .future-create-btn,
+body:not(.dark) .evo-open,
+body:not(.dark) .sales-primary,
+body:not(.dark) .sales-wide-action,
+body:not(.dark) .manager-primary,
+body:not(.dark) .report-main-action,
+body:not(.dark) .recovery-main,
+body:not(.dark) .recovery-actions .send,
+body:not(.dark) .finance-action,
+body:not(.dark) .promo-action,
+body:not(.dark) .control-action,
+body:not(.dark) .build-action,
+body:not(.dark) .home-section-preview .preview-open,
+body:not(.dark) .settings-autopilot-action,
+body:not(.dark) .settings-create-card button,
+body:not(.dark) .wow-module-primary{
+  background:linear-gradient(135deg,var(--ui-accent-1) 0%,var(--ui-accent-2) 56%,var(--ui-accent-3) 100%) !important;
+  color:#fff !important;
+  -webkit-text-fill-color:#fff !important;
+  border:1px solid rgba(51,75,157,.28) !important;
+  box-shadow:0 10px 26px rgba(41,61,130,.15),inset 0 1px 0 rgba(255,255,255,.16) !important;
+  text-shadow:none !important;
+}
+body:not(.dark) .future-btn.primary:hover,
+body:not(.dark) .future-create-btn:hover,
+body:not(.dark) .evo-open:hover,
+body:not(.dark) .sales-primary:hover,
+body:not(.dark) .sales-wide-action:hover,
+body:not(.dark) .manager-primary:hover,
+body:not(.dark) .report-main-action:hover,
+body:not(.dark) .recovery-main:hover,
+body:not(.dark) .recovery-actions .send:hover,
+body:not(.dark) .finance-action:hover,
+body:not(.dark) .promo-action:hover,
+body:not(.dark) .control-action:hover,
+body:not(.dark) .build-action:hover,
+body:not(.dark) .home-section-preview .preview-open:hover,
+body:not(.dark) .settings-autopilot-action:hover,
+body:not(.dark) .settings-create-card button:hover,
+body:not(.dark) .wow-module-primary:hover{
+  filter:brightness(1.045) saturate(1.02) !important;
+  box-shadow:0 13px 30px rgba(41,61,130,.19),inset 0 1px 0 rgba(255,255,255,.18) !important;
+}
+
+/* Вторичные кнопки — одна спокойная форма во всём приложении. */
+body:not(.dark) .future-btn.ghost,
+body:not(.dark) .wow-module-secondary,
+body:not(.dark) .theme-mode-btn,
+body:not(.dark) .sales-ask-btn,
+body:not(.dark) .task-back,
+body:not(.dark) #tasksBack,
+body:not(.dark) #clientsBack,
+body:not(.dark) .mini-help,
+body:not(.dark) .more-close,
+body:not(.dark) .control-close,
+body:not(.dark) .pulse-top button,
+body:not(.dark) .wow-module-close{
+  background:rgba(255,255,255,.58) !important;
+  color:#51545c !important;
+  border:1px solid rgba(26,29,35,.09) !important;
+  box-shadow:0 7px 18px rgba(25,30,42,.055),inset 0 1px 0 rgba(255,255,255,.65) !important;
+}
+body:not(.dark) .future-btn.ghost:hover,
+body:not(.dark) .wow-module-secondary:hover,
+body:not(.dark) .theme-mode-btn:hover,
+body:not(.dark) .sales-ask-btn:hover,
+body:not(.dark) .task-back:hover,
+body:not(.dark) #tasksBack:hover,
+body:not(.dark) #clientsBack:hover,
+body:not(.dark) .mini-help:hover,
+body:not(.dark) .more-close:hover,
+body:not(.dark) .control-close:hover,
+body:not(.dark) .pulse-top button:hover,
+body:not(.dark) .wow-module-close:hover{
+  background:rgba(255,255,255,.82) !important;
+  color:#202329 !important;
+  border-color:rgba(26,29,35,.13) !important;
+}
+
+/* ---------- Кнопки светлой темы внутри фокусных карточек ---------- */
+body:not(.dark) .action-row .future-btn{
+  min-height:42px !important;
+  border-radius:13px !important;
+  padding:0 15px !important;
+  font-weight:760 !important;
+  letter-spacing:-.01em !important;
+}
+body:not(.dark) .action-row .future-btn.ghost{
+  background:rgba(240,242,247,.86) !important;
+  border-color:rgba(28,31,37,.07) !important;
+  color:#6a6d76 !important;
+  box-shadow:none !important;
+}
+
+/* ---------- Тёмная тема: единый материал, без случайно белых/синих кнопок ---------- */
+body.dark .future-btn.primary,
+body.dark .future-create-btn,
+body.dark .evo-open,
+body.dark .sales-primary,
+body.dark .sales-wide-action,
+body.dark .manager-primary,
+body.dark .report-main-action,
+body.dark .recovery-main,
+body.dark .recovery-actions .send,
+body.dark .finance-action,
+body.dark .promo-action,
+body.dark .control-action,
+body.dark .build-action,
+body.dark .home-section-preview .preview-open,
+body.dark .settings-autopilot-action,
+body.dark .settings-create-card button,
+body.dark .wow-module-primary{
+  background:rgba(255,255,255,.075) !important;
+  color:#f7f8fa !important;
+  -webkit-text-fill-color:#f7f8fa !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+  box-shadow:0 10px 28px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.045) !important;
+  text-shadow:none !important;
+}
+body.dark .future-btn.primary:hover,
+body.dark .future-create-btn:hover,
+body.dark .evo-open:hover,
+body.dark .sales-primary:hover,
+body.dark .sales-wide-action:hover,
+body.dark .manager-primary:hover,
+body.dark .report-main-action:hover,
+body.dark .recovery-main:hover,
+body.dark .recovery-actions .send:hover,
+body.dark .finance-action:hover,
+body.dark .promo-action:hover,
+body.dark .control-action:hover,
+body.dark .build-action:hover,
+body.dark .home-section-preview .preview-open:hover,
+body.dark .settings-autopilot-action:hover,
+body.dark .settings-create-card button:hover,
+body.dark .wow-module-primary:hover{
+  background:rgba(255,255,255,.105) !important;
+  border-color:rgba(255,255,255,.17) !important;
+  box-shadow:0 13px 32px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.06) !important;
+}
+body.dark .future-btn.ghost,
+body.dark .wow-module-secondary,
+body.dark .theme-mode-btn,
+body.dark .sales-ask-btn,
+body.dark .task-back,
+body.dark #tasksBack,
+body.dark #clientsBack,
+body.dark .mini-help,
+body.dark .more-close,
+body.dark .control-close,
+body.dark .pulse-top button,
+body.dark .wow-module-close{
+  background:rgba(255,255,255,.045) !important;
+  color:#c9cbd1 !important;
+  border:1px solid rgba(255,255,255,.09) !important;
+  box-shadow:none !important;
+}
+body.dark .future-btn.ghost:hover,
+body.dark .wow-module-secondary:hover,
+body.dark .theme-mode-btn:hover,
+body.dark .sales-ask-btn:hover,
+body.dark .task-back:hover,
+body.dark #tasksBack:hover,
+body.dark #clientsBack:hover,
+body.dark .mini-help:hover,
+body.dark .more-close:hover,
+body.dark .control-close:hover,
+body.dark .pulse-top button:hover,
+body.dark .wow-module-close:hover{
+  background:rgba(255,255,255,.07) !important;
+  color:#f4f5f7 !important;
+  border-color:rgba(255,255,255,.14) !important;
+}
+
+/* Тёмная тема: не делаем все текстовые действия белыми плашками. */
+body.dark .sales-text-action,
+body.dark .settings-developer-link,
+body.dark .settings-company-footer button{
+  background:transparent !important;
+  box-shadow:none !important;
+}
+
+/* ---------- НАСТРОЙКИ: превращаем скучный список в аккуратный центр управления ---------- */
+#controlContent .settings-theme-box{
+  position:relative !important;
+  overflow:hidden !important;
+  margin-top:18px !important;
+  padding:14px 15px !important;
+  border-radius:20px !important;
+  border:1px solid var(--line) !important;
+  background:linear-gradient(145deg,rgba(255,255,255,.72),rgba(245,247,251,.64)) !important;
+  box-shadow:0 16px 34px rgba(25,30,40,.06),inset 0 1px 0 rgba(255,255,255,.72) !important;
+}
+#controlContent .settings-theme-box:after{
+  content:"";
+  position:absolute;
+  width:140px;height:140px;
+  right:-56px;top:-72px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(76,103,196,.10),transparent 66%);
+  pointer-events:none;
+}
+body.dark #controlContent .settings-theme-box{
+  background:linear-gradient(145deg,rgba(255,255,255,.052),rgba(255,255,255,.028)) !important;
+  border-color:rgba(255,255,255,.09) !important;
+  box-shadow:0 18px 42px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.035) !important;
+}
+body.dark #controlContent .settings-theme-box:after{background:radial-gradient(circle,rgba(255,255,255,.055),transparent 66%)}
+#controlContent .theme-mode-row{position:relative;z-index:1;display:flex !important;gap:7px !important}
+#controlContent .theme-mode-btn{
+  flex:1 1 0 !important;
+  min-width:0 !important;
+  min-height:40px !important;
+  height:40px !important;
+  padding:0 11px !important;
+  border-radius:13px !important;
+  font-size:10px !important;
+  font-weight:760 !important;
+  transition:transform .2s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease !important;
+}
+body:not(.dark) #controlContent .theme-mode-btn.active{
+  background:linear-gradient(135deg,#1f3475,#4355a6) !important;
+  color:#fff !important;
+  border-color:rgba(39,61,132,.28) !important;
+  box-shadow:0 8px 20px rgba(35,55,125,.15),inset 0 1px 0 rgba(255,255,255,.15) !important;
+}
+body:not(.dark) #controlContent .theme-mode-btn:not(.active){background:rgba(255,255,255,.64)!important;color:#62656d!important}
+body.dark #controlContent .theme-mode-btn.active{
+  background:rgba(255,255,255,.10) !important;
+  color:#fff !important;
+  border-color:rgba(255,255,255,.16) !important;
+  box-shadow:0 8px 20px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.05) !important;
+}
+body.dark #controlContent .theme-mode-btn:not(.active){background:rgba(255,255,255,.035)!important;color:#b8bac1!important}
+
+#controlContent .settings-section-title{
+  position:relative !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:8px !important;
+  margin:22px 0 8px !important;
+  padding-left:0 !important;
+  font-size:10px !important;
+  letter-spacing:.13em !important;
+  color:var(--muted) !important;
+}
+#controlContent .settings-section-title:after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:var(--line);
+  opacity:.85;
+}
+#controlContent .settings-section-note{
+  margin:-1px 0 10px !important;
+  max-width:620px !important;
+  font-size:10px !important;
+  line-height:1.42 !important;
+  color:var(--muted) !important;
+}
+
+#controlContent .settings-rules-list,
+#controlContent .settings-clean-list{
+  gap:8px !important;
+  margin-top:9px !important;
+}
+#controlContent .settings-rules-list .settings-rule-row,
+#controlContent .settings-clean-list .settings-clean-row{
+  min-height:56px !important;
+  padding:9px 10px !important;
+  border-radius:17px !important;
+  border:1px solid var(--line) !important;
+  background:rgba(255,255,255,.47) !important;
+  box-shadow:0 7px 22px rgba(24,28,38,.035),inset 0 1px 0 rgba(255,255,255,.55) !important;
+  transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease !important;
+}
+#controlContent .settings-rules-list .settings-rule-row:hover,
+#controlContent .settings-clean-list .settings-clean-row:hover{
+  transform:translateY(-1px) !important;
+  border-color:rgba(43,70,155,.16) !important;
+  box-shadow:0 10px 26px rgba(24,28,38,.055),inset 0 1px 0 rgba(255,255,255,.62) !important;
+}
+body.dark #controlContent .settings-rules-list .settings-rule-row,
+body.dark #controlContent .settings-clean-list .settings-clean-row{
+  background:rgba(255,255,255,.042) !important;
+  border-color:rgba(255,255,255,.085) !important;
+  box-shadow:0 10px 26px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.025) !important;
+}
+body.dark #controlContent .settings-rules-list .settings-rule-row:hover,
+body.dark #controlContent .settings-clean-list .settings-clean-row:hover{
+  background:rgba(255,255,255,.055) !important;
+  border-color:rgba(255,255,255,.13) !important;
+}
+
+#controlContent .settings-clean-open{border-radius:13px !important}
+#controlContent .settings-clean-icon{
+  width:34px !important;height:34px !important;
+  border-radius:11px !important;
+  background:linear-gradient(145deg,rgba(31,57,133,.10),rgba(94,84,180,.08)) !important;
+  border:1px solid rgba(43,70,155,.10) !important;
+  color:#253b85 !important;
+  font-size:13px !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55) !important;
+}
+#controlContent .settings-clean-row[data-setting-section="promo"] .settings-clean-icon{background:linear-gradient(145deg,rgba(42,83,170,.12),rgba(74,102,205,.07))!important;color:#2f56a0!important}
+#controlContent .settings-clean-row[data-setting-section="sales"] .settings-clean-icon{background:linear-gradient(145deg,rgba(24,106,190,.10),rgba(71,116,224,.07))!important;color:#2b69ad!important}
+#controlContent .settings-clean-row[data-setting-section="clients"] .settings-clean-icon{background:linear-gradient(145deg,rgba(32,126,122,.10),rgba(74,168,152,.07))!important;color:#227b79!important}
+#controlContent .settings-clean-row[data-setting-section="finance"] .settings-clean-icon{background:linear-gradient(145deg,rgba(39,129,91,.11),rgba(77,168,121,.07))!important;color:#287c5b!important}
+#controlContent .settings-clean-row[data-setting-section="operations"] .settings-clean-icon{background:linear-gradient(145deg,rgba(126,92,40,.10),rgba(198,150,62,.07))!important;color:#8b6932!important}
+#controlContent .settings-clean-row[data-setting-section="reports"] .settings-clean-icon{background:linear-gradient(145deg,rgba(95,74,150,.11),rgba(133,103,198,.07))!important;color:#6d56a8!important}
+body.dark #controlContent .settings-clean-icon{
+  background:rgba(255,255,255,.055)!important;
+  border-color:rgba(255,255,255,.08)!important;
+  color:#dfe5ef!important;
+  box-shadow:none!important;
+}
+body.dark #controlContent .settings-clean-row[data-setting-section] .settings-clean-icon{color:#e4e7ec!important;background:rgba(255,255,255,.055)!important}
+
+#controlContent .settings-clean-copy b{font-size:12px !important;line-height:1.18 !important}
+#controlContent .settings-clean-copy small{font-size:9.5px !important;line-height:1.3 !important;margin-top:3px !important}
+
+/* Переключатели — единый премиальный механизм. */
+#controlContent .settings-home-switch,
+#controlContent .settings-rule-toggle{
+  width:42px !important;height:24px !important;
+  min-width:42px !important;min-height:24px !important;
+  max-width:42px !important;max-height:24px !important;
+  padding:3px !important;border:0 !important;border-radius:999px !important;
+  box-shadow:none !important;
+}
+#controlContent .settings-home-switch i,
+#controlContent .settings-rule-toggle i{
+  width:18px !important;height:18px !important;
+  min-width:18px !important;min-height:18px !important;
+  max-width:18px !important;max-height:18px !important;
+  left:3px !important;top:3px !important;
+  transform:none !important;
+  border-radius:50% !important;
+  transition:left .22s cubic-bezier(.2,.8,.2,1),transform .22s cubic-bezier(.2,.8,.2,1) !important;
+}
+#controlContent .settings-home-switch.is-on i,
+#controlContent .settings-rule-toggle.is-on i{left:21px !important;transform:none !important}
+body:not(.dark) #controlContent .settings-home-switch,
+body:not(.dark) #controlContent .settings-rule-toggle{background:rgba(28,31,38,.10)!important}
+body:not(.dark) #controlContent .settings-home-switch.is-on,
+body:not(.dark) #controlContent .settings-rule-toggle.is-on{background:linear-gradient(135deg,#234185,#5262b5)!important;box-shadow:0 5px 12px rgba(36,62,139,.12)!important}
+body:not(.dark) #controlContent .settings-home-switch i,
+body:not(.dark) #controlContent .settings-rule-toggle i{background:#fff!important;box-shadow:0 1px 4px rgba(16,24,48,.18)!important}
+body.dark #controlContent .settings-home-switch,
+body.dark #controlContent .settings-rule-toggle{background:rgba(255,255,255,.10)!important}
+body.dark #controlContent .settings-home-switch.is-on,
+body.dark #controlContent .settings-rule-toggle.is-on{background:rgba(255,255,255,.18)!important}
+body.dark #controlContent .settings-home-switch i,
+body.dark #controlContent .settings-rule-toggle i{background:#f5f6f7!important;box-shadow:0 1px 5px rgba(0,0,0,.28)!important}
+
+/* Карточки «Создать / Я сам нашёл / Память / Правила» — теперь выглядят как часть системы. */
+#controlContent .settings-create-card{
+  position:relative !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:14px !important;
+  margin-top:9px !important;
+  padding:14px !important;
+  border:1px solid var(--line) !important;
+  border-radius:18px !important;
+  background:linear-gradient(145deg,rgba(255,255,255,.55),rgba(248,249,252,.42)) !important;
+  box-shadow:0 8px 24px rgba(25,30,42,.035),inset 0 1px 0 rgba(255,255,255,.58) !important;
+  overflow:hidden !important;
+}
+#controlContent .settings-create-card:before{
+  content:"";
+  position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:3px;
+  background:linear-gradient(180deg,#3452a3,#6b5ac4);
+  opacity:.8;
+}
+#controlContent .settings-create-card span{font-size:7.5px !important;letter-spacing:.16em !important;font-weight:850 !important;color:var(--muted) !important}
+#controlContent .settings-create-card b{font-size:13px !important;line-height:1.15 !important;margin-top:4px !important}
+#controlContent .settings-create-card small{font-size:9.5px !important;line-height:1.35 !important;margin-top:4px !important;max-width:420px !important}
+body.dark #controlContent .settings-create-card{
+  background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.025)) !important;
+  border-color:rgba(255,255,255,.085) !important;
+  box-shadow:0 10px 26px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.024) !important;
+}
+body.dark #controlContent .settings-create-card:before{background:linear-gradient(180deg,#dfe3eb,#8c919b);opacity:.55}
+
+/* Помощь/обучение — не отдельный цвет, а тот же язык интерфейса. */
+#controlContent .dm-learning-card{
+  margin-top:12px !important;
+  padding:14px !important;
+  border-radius:18px !important;
+  background:linear-gradient(145deg,rgba(255,255,255,.55),rgba(247,248,251,.40)) !important;
+  border:1px solid var(--line) !important;
+  box-shadow:0 8px 24px rgba(25,30,42,.035),inset 0 1px 0 rgba(255,255,255,.58) !important;
+}
+body.dark #controlContent .dm-learning-card{
+  background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.025)) !important;
+  border-color:rgba(255,255,255,.085) !important;
+}
+#controlContent .dm-learning-button{
+  min-height:42px !important;height:42px !important;padding:0 14px !important;border-radius:13px !important;
+  font-weight:780 !important;
+}
+
+/* Карточки Главной: чуть больше воздуха и единая кнопочная геометрия. */
+#homeSectionPreviews .home-added-card{
+  overflow:hidden !important;
+  box-shadow:0 14px 36px rgba(24,30,48,.065),inset 0 1px 0 rgba(255,255,255,.52) !important;
+}
+body.dark #homeSectionPreviews .home-added-card{
+  box-shadow:0 18px 44px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.028) !important;
+}
+#homeSectionPreviews .mini-result > div b{letter-spacing:-.03em !important}
+
+@media(max-width:700px){
+  #controlContent .settings-theme-box{padding:12px !important;border-radius:18px !important}
+  #controlContent .settings-section-title{margin-top:19px !important}
+  #controlContent .settings-clean-row,#controlContent .settings-rules-list .settings-rule-row{min-height:54px !important;padding:8px 9px !important;border-radius:16px !important}
+  #controlContent .settings-clean-icon{width:32px !important;height:32px !important;border-radius:10px !important}
+  #controlContent .settings-clean-copy b{font-size:11.5px !important}
+  #controlContent .settings-clean-copy small{font-size:9px !important}
+  #controlContent .settings-create-card{padding:13px !important;border-radius:17px !important}
+  #controlContent .dm-learning-card{display:grid !important;gap:10px !important}
+  #controlContent .dm-learning-button{width:100% !important}
+  #homeSectionPreviews .action-row .future-btn{min-height:40px !important}
+}
 </style>
