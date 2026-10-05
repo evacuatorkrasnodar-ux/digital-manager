@@ -51,6 +51,11 @@ body.dark .finance-source-track{background:rgba(255,255,255,.08)}
 .promo-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:20px}
 .promo-title{font-size:32px;font-weight:760;letter-spacing:-.045em}.promo-sub{font-size:13px;color:var(--muted);margin-top:5px}
 .promo-period{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:13px;padding:10px 13px;font-size:12px}
+.promo-head-actions{display:flex;align-items:center;gap:9px;flex:none}
+.promo-done{min-width:82px;height:38px;padding:0 15px;border:1px solid rgba(93,112,166,.42);border-radius:13px;background:linear-gradient(135deg,#203a83 0%,#4a5bb0 56%,#6a58ba 100%);color:#fff;-webkit-text-fill-color:#fff;font:700 11px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;box-shadow:0 10px 26px rgba(41,61,130,.15),inset 0 1px 0 rgba(255,255,255,.16);cursor:pointer}
+.promo-done:hover{filter:brightness(1.045) saturate(1.02);box-shadow:0 13px 30px rgba(41,61,130,.19),inset 0 1px 0 rgba(255,255,255,.18)}
+.promo-done:active{transform:scale(.98)}
+@media(max-width:600px){.promo-head-actions{width:100%;justify-content:flex-end}.promo-done{min-width:82px}.promo-period{display:none}}
 .promo-health{display:flex;align-items:center;gap:13px;padding:16px 18px;margin-bottom:18px;border:1px solid rgba(114,87,255,.14);border-radius:20px;background:rgba(114,87,255,.055);box-shadow:var(--shadow)}
 .promo-health-icon{width:34px;height:34px;border-radius:12px;background:rgba(114,87,255,.11);color:var(--purple);display:grid;place-items:center;font-weight:800;flex:none}
 .promo-health-main{flex:1;min-width:0;font-size:12px}.promo-health-main b{font-size:13px}.promo-health-main div{color:var(--muted);margin-top:3px;line-height:1.45}
@@ -4397,7 +4402,6 @@ body.dark .future-evolution .evo-icon{
   .top-banner-settings-icon{font-size:13px}
 }
 </style>
-
 <style id="polish-mobile-v27">
 /* Финальная полировка: не меняет существующую тему, только читаемость и управление. */
 .top-banner-settings{
@@ -4427,7 +4431,6 @@ body.dark .future-evolution .evo-icon{
  .settings-theme-box{display:block}.theme-mode-row{margin-top:12px}.theme-mode-btn{flex:1;font-size:11px;padding:11px 9px}
 }
 </style>
-
 <style id="cleanup-v69">
 /* v69 — cleanup: one source of truth for settings + assistant. */
 
@@ -4589,7 +4592,6 @@ body.dark #dmWriteSend{background:linear-gradient(135deg,#234eae 0%,#4558cf 55%,
 /* The mobile manager stays visible only where the mobile shell is used. */
 @media(min-width:901px){.mobile-manager.dm-signature-manager-button{display:none!important}}
 </style>
-
 <style id="light-sapphire-unification-v2">
 /* Светлая тема: последние оставшиеся тёмные смысловые блоки → тот же sapphire-indigo.
    Тёмную тему, текстовые цвета и композицию не меняем. */
@@ -4639,7 +4641,6 @@ body:not(.dark) .future-state .state-copy:before{
 }
 /* Чёрный фирменный квадрат оставляем фирменным знаком; остальные смысловые блоки уже sapphire. */
 </style>
-
 <style id="home-preview-dots-v5">
 /* Индикатор точками для добавленных через Настройки блоков Главной. */
 @media(max-width:700px){
@@ -4717,7 +4718,6 @@ body:not(.dark) .future-state .state-copy:before{
 @keyframes previewPulseRed{0%,100%{box-shadow:0 0 0 0 rgba(230,83,92,.10);transform:scale(.94)}50%{box-shadow:0 0 0 7px rgba(230,83,92,0);transform:scale(1.04)}}
 @keyframes previewPulseGreen{0%,100%{box-shadow:0 0 0 0 rgba(39,168,102,.10);transform:scale(.94)}50%{box-shadow:0 0 0 7px rgba(39,168,102,0);transform:scale(1.04)}}
 </style>
-
 <style id="home-added-cards-native-v7">
 /* Добавленные через Настройки карточки используют ту же систему, что и родные карточки Главной. */
 .home-section-previews{
@@ -4791,7 +4791,6 @@ body[data-current-section="home"] #homeSectionPreviews{
   window.__hideFullPagesOnHome=hideFullPagesOnHome;
 })();
 </script>
-
 <style id="dark-readability-final-v9">
 /* V9 — финальная проверка читаемости тёмной темы.
    Не меняет геометрию и полностью исключает сферу/кнопку помощника. */
@@ -4880,7 +4879,6 @@ body.dark #clientsBack{
 /* Не трогаем помощника: .mobile-manager, его оболочку, сферу, listening UI и composer
    намеренно не переопределяем этим блоком. */
 </style>
-
 <style id="automation-page-v33">
 /* V33 — Автоматизация: единый премиальный экран в обеих темах. */
 #controlOverlay .control-panel:has(.control-kicker:first-child) {
@@ -4979,7 +4977,6 @@ body.dark #controlOverlay .control-panel .control-action{
   #controlOverlay .control-panel .rule-row{min-height:64px!important;padding:14px!important}
 }
 </style>
-
 <style id="autopilot-polish-v34">
 /* V34 — Автопилот: единый премиальный стиль для светлой и тёмной темы. */
 .future-autopilot-modal{
@@ -5153,7 +5150,6 @@ body.dark .future-autopilot-modal .auto-save{
   }
 }
 </style>
-
 <style id="wow-module-native-cards-v3">
 /* Внутренние карточки используют ТОЧНО тот же визуальный язык, что и .future-card на Главной. */
 .wow-module-panel .wow-module-sections{
@@ -5242,7 +5238,6 @@ body.dark .wow-module-panel > .module-flow span{
   .wow-module-panel .wow-module-block b{font-size:16px!important}
 }
 </style>
-
 <style id="settings-final-polish-v1">
 /* Final settings polish: one visual language in light mode, no redundant map strip, visible company/developer footer. */
 body:not(.dark) #controlContent .settings-rules-list .settings-rule-toggle.is-on,
@@ -5272,7 +5267,6 @@ body:not(.dark) #controlContent .settings-developer-link{
   border-color:var(--line)!important;
 }
 </style>
-
 <style id="settings-company-developer-absolute-final">
 /* FINAL: company identity + developer contact in Settings */
 #controlContent .settings-company-footer-v2{
@@ -5365,7 +5359,6 @@ body.dark #controlContent .settings-company-footer-v2 .settings-developer-link{b
   #controlContent .settings-company-footer-v2{grid-template-columns:1fr!important}
 }
 </style>
-
 <style id="company-footer-final-fix">
 /* FINAL: compact Settings company/developer pair + stable company logo. */
 #controlContent .settings-company-footer-v2{
@@ -5452,7 +5445,6 @@ body.dark .company-product{background:rgba(255,255,255,.055)!important;color:var
 body.dark .company-hero{background:var(--text)!important;color:var(--bg)!important}
 body.dark .company-hero p{color:rgba(11,12,15,.64)!important}
 </style>
-
 <style id="footer-company-developer-one-row-final">
 /* Финальная компоновка: компания и связь с разработчиками в одной строке. */
 #controlContent .settings-company-footer-v2{
@@ -5489,205 +5481,13 @@ body.dark .company-hero p{color:rgba(11,12,15,.64)!important}
   #controlContent .settings-company-footer-v2 .settings-developer-link>span:nth-child(2) small{font-size:7.5px!important}
 }
 </style>
-
-
-<style id="digital-manager-blue-theme-final">
-/* =========================================================
-   ЦИФРОВОЙ УПРАВЛЯЮЩИЙ — ЕДИНАЯ СИНЯЯ ТЕМА
-   Финальный слой поверх старых визуальных патчей.
-   Логику JS не меняем.
-   ========================================================= */
-
-:root{
-  --dm-brand:#315bd0;
-  --dm-brand-2:#4d7cff;
-  --dm-brand-soft:rgba(49,91,208,.09);
-  --dm-brand-line:rgba(49,91,208,.16);
-  --dm-brand-shadow:0 14px 38px rgba(49,91,208,.12);
-}
-
-/* Светлая тема: синий — главный акцент приложения */
-body:not(.dark){
-  --blue:#315bd0;
-  --purple:#5b5ce2;
-}
-
-body:not(.dark) .mark,
-body:not(.dark) .settings-company-logo,
-body:not(.dark) .company-logo.dm-company-mark{
-  background:linear-gradient(145deg,var(--dm-brand),var(--dm-brand-2)) !important;
-  color:#fff !important;
-  border-color:transparent !important;
-  box-shadow:0 9px 24px rgba(49,91,208,.18) !important;
-}
-
-/* Основные CTA больше не чёрные */
-body:not(.dark) .send,
-body:not(.dark) .confirm-action,
-body:not(.dark) .finance-action,
-body:not(.dark) .promo-action,
-body:not(.dark) .sales-action,
-body:not(.dark) .sales-primary,
-body:not(.dark) .sales-wide-action,
-body:not(.dark) .future-create-btn,
-body:not(.dark) .manager-send,
-body:not(.dark) .control-action,
-body:not(.dark) .build-action,
-body:not(.dark) .home-order-actions button.primary,
-body:not(.dark) .settings-autopilot-action{
-  background:linear-gradient(135deg,var(--dm-brand),var(--dm-brand-2)) !important;
-  color:#fff !important;
-  border-color:transparent !important;
-  box-shadow:0 10px 25px rgba(49,91,208,.18) !important;
-}
-
-/* Кнопки закрытия/завершения: именно «Готово», не крестик */
-#controlOverlay .control-close{
-  min-width:96px !important;
-  height:38px !important;
-  padding:0 16px !important;
-  border-radius:13px !important;
-  display:inline-flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  background:var(--dm-brand) !important;
-  color:#fff !important;
-  border:0 !important;
-  box-shadow:0 9px 22px rgba(49,91,208,.18) !important;
-}
-#controlOverlay .control-close::before{
-  content:"Готово" !important;
-  font-size:11px !important;
-  font-weight:750 !important;
-}
-#controlOverlay .control-close span,
-#controlOverlay .control-close svg{
-  display:none !important;
-}
-
-/* Уже существующие кнопки «Готово» — в фирменной синей системе */
-.company-close.company-done,
-.wow-module-close{
-  min-width:76px !important;
-  min-height:38px !important;
-  padding:0 15px !important;
-  border-radius:13px !important;
-  background:var(--dm-brand) !important;
-  color:#fff !important;
-  border:0 !important;
-  box-shadow:0 9px 22px rgba(49,91,208,.16) !important;
-}
-
-/* Верх/модальные панели: никакого чужого чёрного материала */
-body:not(.dark) .company-panel,
-body:not(.dark) .wow-module-panel,
-body:not(.dark) .intent-sheet,
-body:not(.dark) .future-build-sheet,
-body:not(.dark) .autopilot-sheet,
-body:not(.dark) .blindspot-sheet,
-body:not(.dark) .twin-sheet,
-body:not(.dark) .sim-sheet,
-body:not(.dark) .memory-sheet-v11,
-body:not(.dark) .evo-modal-sheet{
-  background:rgba(248,250,255,.96) !important;
-  color:var(--text) !important;
-  border-color:var(--dm-brand-line) !important;
-}
-
-/* Главные информационные панели */
-body:not(.dark) .company-hero{
-  background:
-    radial-gradient(circle at 100% 0,rgba(77,124,255,.20),transparent 40%),
-    linear-gradient(135deg,#315bd0,#4d7cff) !important;
-  color:#fff !important;
-  border:0 !important;
-  box-shadow:var(--dm-brand-shadow) !important;
-}
-body:not(.dark) .company-hero p{
-  color:rgba(255,255,255,.78) !important;
-}
-
-/* Активные состояния и ссылки */
-body:not(.dark) .nav button.active,
-body:not(.dark) .mobile-nav button.active{
-  color:var(--dm-brand) !important;
-  background:rgba(49,91,208,.09) !important;
-  box-shadow:none !important;
-}
-body:not(.dark) .action,
-body:not(.dark) .sales-text-action,
-body:not(.dark) .future-link,
-body:not(.dark) .settings-developer-link{
-  color:var(--dm-brand) !important;
-}
-
-/* Переключатели */
-body:not(.dark) #controlContent .settings-rules-list .settings-rule-toggle.is-on,
-body:not(.dark) #controlContent .settings-sections-v2 .settings-home-switch.is-on,
-body:not(.dark) #controlContent .settings-clean-list .settings-home-switch.is-on{
-  background:var(--dm-brand) !important;
-  border-color:var(--dm-brand) !important;
-}
-body:not(.dark) #controlContent .settings-rules-list .settings-rule-toggle.is-on i,
-body:not(.dark) #controlContent .settings-sections-v2 .settings-home-switch.is-on i,
-body:not(.dark) #controlContent .settings-clean-list .settings-home-switch.is-on i{
-  background:#fff !important;
-}
-
-/* Нижние карточки «Цифровой бизнес» / «Нашли баг» */
-body:not(.dark) #controlContent .settings-company-footer-v2 .settings-company-brand-button,
-body:not(.dark) #controlContent .settings-company-footer-v2 .settings-developer-link{
-  background:rgba(49,91,208,.045) !important;
-  border-color:var(--dm-brand-line) !important;
-}
-body:not(.dark) #controlContent .settings-company-footer-v2 .settings-developer-dot{
-  background:var(--dm-brand-2) !important;
-}
-body:not(.dark) #controlContent .settings-company-footer-v2 .settings-company-arrow,
-body:not(.dark) #controlContent .settings-company-footer-v2 .settings-developer-arrow{
-  color:var(--dm-brand) !important;
-  opacity:.85 !important;
-}
-
-/* Поля ввода и маленькие интерактивные элементы */
-body:not(.dark) .ask-input:focus,
-body:not(.dark) .manager-form input:focus{
-  border-color:rgba(49,91,208,.35) !important;
-  box-shadow:0 0 0 4px rgba(49,91,208,.08) !important;
-}
-
-/* Мобильный помощник — не чёрная кнопка */
-body:not(.dark) .mobile-manager.dm-signature-manager-button{
-  background:linear-gradient(145deg,#315bd0,#4d7cff) !important;
-  color:#fff !important;
-  box-shadow:0 15px 36px rgba(49,91,208,.25) !important;
-}
-
-/* На маленьком экране всё остаётся компактным */
-@media(max-width:700px){
-  #controlOverlay .control-close{
-    min-width:86px !important;
-    height:36px !important;
-    border-radius:12px !important;
-  }
-
-  .company-close.company-done,
-  .wow-module-close{
-    min-height:36px !important;
-    padding:0 13px !important;
-  }
-}
-</style>
-
 </head>
 <body>
 <div class="app">
-
 <main class="content">
-<div class="home-swipe-hint" aria-hidden="true"><span>←</span><span>Свайп — следующий блок</span><span>→</span></div>
+<div aria-hidden="true" class="home-swipe-hint"><span>←</span><span>Свайп — следующий блок</span><span>→</span></div>
 <div class="premium-home">
 <div class="future-shell">
-
 <section class="future-state home-block" data-home-block="state" data-home-title="Состояние бизнеса">
 <div class="state-greeting">
 <div class="future-kicker"><span class="pulse"></span> ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</div>
@@ -5759,690 +5559,11 @@ body:not(.dark) .mobile-manager.dm-signature-manager-button{
 <small>Карточка и реклама работают нормально — проверяю, что мешает продажам.</small>
 </div>
 </div>
-<div class="marketplace-mini-list" aria-label="Подключённые маркетплейсы">
+<div aria-label="Подключённые маркетплейсы" class="marketplace-mini-list">
 <span>Ozon</span><span>Wildberries</span><span>Яндекс Маркет</span><span>Мегамаркет</span>
 </div>
 <div class="action-row">
-<button class="future-btn primary" type="button" onclick="event.stopPropagation();this.closest('.future-card').classList.add('resolved');this.textContent='Исправляю…';setTimeout(()=>{this.textContent='Исправлено ✓'},700)">Исправить</button>
-<button class="future-btn ghost" type="button" onclick="event.stopPropagation();alert('Здесь откроется разбор по площадкам: Ozon, Wildberries, Яндекс Маркет и другим подключённым каналам.')">Подробнее →</button>
-</div>
-</article>
-<article class="future-card">
-<div class="card-top">
-<div>
-<span class="future-label">Я УЖЕ СДЕЛАЛ</span>
-<h3>Перераспределил рекламный бюджет.</h3>
-</div>
-<span class="signal green"></span>
-</div>
-<p class="future-desc">Остановил неэффективное направление и перенёс бюджет туда, где сегодня выше результат.</p>
-<div class="mini-result">
-<div><b>− 3 400 ₽</b><span>лишних расходов</span></div>
-<div><b>+ 18%</b><span>ожидаемая эффективность</span></div>
-</div>
-<div class="quiet-note"><span class="check">✓</span> Сделано автоматически по твоим правилам</div>
-</article>
-<article class="future-card opportunity">
-<div class="card-top">
-<div>
-<span class="future-label">ВОЗМОЖНОСТЬ</span>
-<h3>Я нашёл новый канал продаж.</h3>
-</div>
-<span class="signal blue"></span>
-</div>
-<p class="future-desc">Твои товары подходят для нового сценария продаж. Я уже собрал концепцию, страницу и предложение.</p>
-<div class="opportunity-preview">
-<div class="preview-orb"></div>
-<div>
-<span>ГОТОВО К ЗАПУСКУ</span>
-<strong>Новый канал</strong>
-</div>
-</div>
-<button class="future-link" onclick="alert('Здесь откроется подготовленный план нового канала.')">Посмотреть, что я придумал →</button>
-</article>
-<article class="future-card">
-<div class="card-top">
-<div>
-<span class="future-label">ТВОЙ ДЕНЬ</span>
-<h3>От тебя сегодня нужно только одно решение.</h3>
-</div>
-</div>
-<div class="timeline">
-<div><time>10:30</time><span>Созвон с клиентом</span></div>
-<div><time>13:00</time><span>Проверка нового товара</span></div>
-<div><time>17:40</time><span>Я пришлю итог дня</span></div>
-</div>
-<button class="future-link" onclick="alert('Календарь и задачи откроются здесь.')">Открыть день →</button>
-</article>
-</section>
-<section class="future-command home-block" data-home-block="command" data-home-title="Команда управляющему">
-<div class="command-glow"></div>
-<div class="command-copy">
-<span class="future-label">НАМЕРЕНИЕ</span>
-<h2>Куда ты хочешь прийти?</h2>
-<p>Скажи, чего хочешь добиться. Я сам разберусь, что для этого потребуется.</p>
-</div>
-<div class="command-form">
-<input id="futureCommandInput" placeholder="Например: хочу увеличить прибыль, не увеличивая расходы"/>
-<button class="mic" onclick="alert('Голосовой режим будет подключён сюда.')" type="button">
-<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M12 15.5a3.5 3.5 0 0 0 3.5-3.5V7a3.5 3.5 0 0 0-7 0v5a3.5 3.5 0 0 0 3.5 3.5Z"></path><path d="M19 11.5a7 7 0 0 1-14 0M12 18.5V22M9 22h6"></path></svg>
-</button>
-<button class="send" onclick="sendHomeManagerCommand()" type="button">
-<svg aria-hidden="true" viewbox="0 0 24 24"><path d="m4 12 16-8-5 16-3-7-8-1Z"></path><path d="m12 13 8-9"></path></svg>
-</button>
-</div>
-<div class="command-suggestions">
-<button onclick="document.getElementById('futureCommandInput').value='Хочу увеличить прибыль без роста расходов'">Увеличить прибыль</button>
-<button onclick="document.getElementById('futureCommandInput').value='Покажи, чего не хватает бизнесу'">Что я не вижу?</button>
-<button onclick="document.getElementById('futureCommandInput').value='Найди следующий шаг для роста'">Найди следующий шаг</button>
-</div>
-</section>
-<section class="future-intent home-block" data-home-block="intent" data-home-title="Цель бизнеса">
-<div class="intent-copy">
-<span class="future-label">НАМЕРЕНИЕ</span>
-<h2>Скажи, куда хочешь прийти.<br/><span>Остальное — моя работа.</span></h2>
-<p>Не нужно превращать цель в десятки задач. Я сам построю путь, найду недостающие элементы и покажу, где тебе нужно принять решение.</p>
-</div>
-<div class="intent-command">
-<div class="intent-command-label">ТВОЯ ЦЕЛЬ</div>
-<div class="intent-text" id="intentText">«Хочу увеличить прибыль без роста постоянных расходов»</div>
-<button onclick="openIntent()" type="button">Изменить цель →</button>
-</div>
-<div class="intent-flow">
-<span>ЦЕЛЬ</span><i>→</i><span>МОДЕЛЬ</span><i>→</i><span>ГИПОТЕЗЫ</span><i>→</i><span>ДЕЙСТВИЯ</span><i>→</i><span>РЕЗУЛЬТАТ</span>
-</div>
-</section>
-<section class="future-twin home-block" data-home-block="twin" data-home-title="Цифровой двойник">
-<div class="twin-head">
-<div>
-<span class="future-label">ЦИФРОВОЙ ДВОЙНИК</span>
-<h2>Я вижу бизнес<br/><span>как одну систему.</span></h2>
-<p>Связываю то, что обычно разбросано по десяткам сервисов: клиентов, рекламу, товары, деньги, сайт и процессы.</p>
-</div>
-<button class="twin-open" onclick="openTwin()" type="button">Открыть модель →</button>
-</div>
-<div aria-label="Карта цифрового двойника" class="twin-map">
-<div class="twin-node node-client"><small>КЛИЕНТЫ</small><b>1 284</b><span>+12%</span></div>
-<div class="twin-node node-sales"><small>ПРОДАЖИ</small><b>742k ₽</b><span>+8.4%</span></div>
-<div class="twin-node node-ads"><small>РЕКЛАМА</small><b>63k ₽</b><span>−4.1%</span></div>
-<div class="twin-node node-product"><small>ТОВАРЫ</small><b>86</b><span>7 требуют внимания</span></div>
-<div class="twin-core"><span></span><b>БИЗНЕС</b><small>LIVE MODEL</small></div>
-<svg aria-hidden="true" class="twin-lines" preserveaspectratio="none" viewbox="0 0 900 260">
-<path d="M130 70 C280 70 320 120 450 130"></path><path d="M130 190 C280 190 320 145 450 130"></path>
-<path d="M770 70 C620 70 580 120 450 130"></path><path d="M770 190 C620 190 580 145 450 130"></path>
-</svg>
-</div>
-<div class="twin-insight"><span>СЕЙЧАС</span><b>Главная точка напряжения — скорость ответа вечером.</b><small>Она связывает рекламу, заявки и потерю части клиентов. Я проверяю её влияние.</small></div>
-</section>
-<section class="future-simulator home-block" data-home-block="simulator" data-home-title="Симулятор">
-<div class="sim-copy">
-<span class="future-label">СИМУЛЯТОР</span>
-<h2>Покажи, что будет,<br/><span>если я изменю это.</span></h2>
-<p>До реального действия я могу просчитать несколько сценариев и показать последствия.</p>
-</div>
-<div class="sim-controls">
-<button class="sim-option active" onclick="selectScenario(this,'Цена +5%','Оцениваю влияние на спрос и прибыль')" type="button"><span>01</span><b>Цена +5%</b><small>что изменится?</small></button>
-<button class="sim-option" onclick="selectScenario(this,'Реклама +20%','Оцениваю прирост и стоимость привлечения')" type="button"><span>02</span><b>Реклама +20%</b><small>что изменится?</small></button>
-<button class="sim-option" onclick="selectScenario(this,'Новый канал','Оцениваю потенциальный поток')" type="button"><span>03</span><b>Новый канал</b><small>что изменится?</small></button>
-</div>
-<div class="sim-result">
-<div><small id="simLabel">ЦЕНА +5%</small><b id="simHeadline">Возможная прибыль</b><strong id="simValue">+6.8%</strong></div>
-<div class="sim-meter"><span style="width:68%"></span></div>
-<p id="simDescription">Предварительная модель показывает рост маржи при умеренном снижении спроса. Это сценарий, не обещание результата.</p>
-<button onclick="openSimulator()" type="button">Показать расчёт →</button>
-</div>
-</section>
-<section class="future-memory home-block" data-home-block="memory" data-home-title="Память бизнеса">
-<div class="memory-head">
-<div><span class="future-label">ПАМЯТЬ БИЗНЕСА</span><h2>Я помню не только данные.<br/><span>Я помню решения.</span></h2></div>
-<button onclick="openMemory()" type="button">Открыть память →</button>
-</div>
-<div class="memory-strip">
-<div><small>14 ИЮН</small><b>Не снижать цену ниже 18% маржи</b><span>Решение владельца</span></div>
-<div><small>28 АВГ</small><b>Тестировать рекламу малым бюджетом</b><span>Правило управляющего</span></div>
-<div><small>03 ОКТ</small><b>Вечерние заявки — отдельный сценарий</b><span>Вывод из наблюдений</span></div>
-</div>
-</section>
-
-<section class="future-contract home-block" data-home-block="contract" data-home-title="Правила работы">
-<div class="contract-top">
-<div>
-<span class="future-label">КОНТРАК С УПРАВЛЯЮЩИМ</span>
-<h2>Ты задаёшь направление.<br/><span>Я работаю внутри твоих границ.</span></h2>
-<p>Однажды задаёшь цель, ограничения и уровень самостоятельности. Дальше я использую их в каждом решении.</p>
-</div>
-<button class="contract-edit" onclick="openAutopilot()" type="button">Настроить →</button>
-</div>
-<div class="contract-grid">
-<div class="contract-item"><small>ЦЕЛЬ</small><b>Увеличить прибыль</b><span>без роста постоянных расходов</span></div>
-<div class="contract-item"><small>ГРАНИЦА</small><b>До 5 000 ₽</b><span>могу решать самостоятельно</span></div>
-<div class="contract-item"><small>СПРАШИВАЮ</small><b>Крупные изменения</b><span>цены, новые расходы, новые каналы</span></div>
-<div class="contract-item contract-trust"><small>АВТОПИЛОТ</small><b><span id="autopilotLevel">72</span>%</b><span>уровень самостоятельности</span></div>
-</div>
-<div class="contract-status">
-<span class="status-pulse"></span>
-<span>Управляющий активен</span>
-<button onclick="openAutopilot()" type="button">Посмотреть правила →</button>
-</div>
-</section>
-<section class="future-blindspot home-block" data-home-block="blindspot" data-home-title="Что можно улучшить">
-<div class="blindspot-copy">
-<span class="future-label">НЕЗАМЕЧЕННОЕ</span>
-<h2>Что я вижу,<br/>а ты пока нет?</h2>
-<p>Я постоянно сравниваю реальное поведение бизнеса с его целью. Если нахожу отклонение или возможность — поднимаю её сам.</p>
-<button class="blindspot-btn" onclick="openBlindspot()" type="button">Показать →</button>
-</div>
-<div aria-hidden="true" class="blindspot-scan">
-<div class="scan-ring r1"></div><div class="scan-ring r2"></div><div class="scan-ring r3"></div>
-<div class="scan-core"><span></span></div>
-<div class="scan-label">LIVE<br/>BUSINESS<br/>MODEL</div>
-</div>
-</section>
-<section class="future-create future-create-v7 home-block" data-home-block="create" data-home-title="Создать новое" onclick="openBuildModal()">
-<div class="create-visual">
-<div class="create-ring"></div>
-<div class="create-plus">+</div>
-</div>
-<div class="create-copy">
-<span class="future-label">КОГДА ЧЕГО-ТО НЕ ХВАТАЕТ</span>
-<h2>Нужен новый инструмент? Я его создам.</h2>
-<p>Опиши задачу обычными словами. Я спроектирую нужный инструмент, подключу данные и подготовлю его к работе.</p>
-<button class="future-create-btn" onclick="event.stopPropagation();openBuildModal()" type="button">Создать <span>→</span></button>
-</div>
-</section>
-</div>
-</div>
-<div aria-hidden="true" class="future-intent-modal" id="futureIntentModal" onclick="if(event.target===this)closeIntent()">
-<div aria-modal="true" class="intent-sheet" role="dialog">
-<div class="modal-top"><div><span class="future-label">НАМЕРЕНИЕ</span><h2>Куда ты хочешь прийти?</h2><p>Опиши результат своими словами. Я сам разложу его на путь, гипотезы и действия.</p></div><button class="build-close" onclick="closeIntent()">×</button></div>
-<textarea id="intentInput" placeholder="Например: хочу увеличить прибыль на 20% без увеличения штата…">Хочу увеличить прибыль без роста постоянных расходов</textarea>
-<div class="intent-suggestions"><button onclick="setIntent('Хочу открыть новый канал продаж')">Новый канал</button><button onclick="setIntent('Хочу сократить ручную работу')">Меньше ручной работы</button><button onclick="setIntent('Хочу запустить новый продукт')">Новый продукт</button></div>
-<button class="intent-save" onclick="saveIntent()">Построить путь →</button>
-</div>
-</div>
-<div aria-hidden="true" class="future-twin-modal" id="futureTwinModal" onclick="if(event.target===this)closeTwin()">
-<div aria-modal="true" class="twin-sheet" role="dialog">
-<div class="modal-top"><div><span class="future-label">ЦИФРОВОЙ ДВОЙНИК · LIVE</span><h2>Я вижу бизнес целиком.</h2><p>Клиенты, продажи, деньги, реклама и товары связаны между собой. Нажми на любой узел — покажу, что на него влияет.</p></div><button class="build-close" onclick="closeTwin()">×</button></div>
-<div class="twin-detail-grid">
-<button onclick="twinFocus('Клиенты','1 284','вечерние заявки снижают повторный контакт')"><b>Клиенты</b><strong>1 284</strong><small>активные связи</small></button>
-<button onclick="twinFocus('Продажи','742k ₽','маржа растёт быстрее выручки')"><b>Продажи</b><strong>742k ₽</strong><small>за текущий период</small></button>
-<button onclick="twinFocus('Реклама','63k ₽','один сегмент требует проверки')"><b>Реклама</b><strong>63k ₽</strong><small>расход за период</small></button>
-<button onclick="twinFocus('Товары','86','7 карточек требуют внимания')"><b>Товары</b><strong>86</strong><small>активных позиций</small></button>
-</div>
-<div class="twin-focus"><span>ВЫБЕРИ УЗЕЛ</span><b id="twinFocusTitle">Клиенты</b><p id="twinFocusText">вечерние заявки снижают повторный контакт</p></div>
-</div>
-</div>
-<div aria-hidden="true" class="future-sim-modal" id="futureSimModal" onclick="if(event.target===this)closeSimulator()">
-<div aria-modal="true" class="sim-sheet" role="dialog">
-<div class="modal-top"><div><span class="future-label">СИМУЛЯЦИЯ</span><h2>До действия — можно посмотреть последствия.</h2><p>Модель использует текущие данные и допущения. Это не прогноз с гарантированным результатом.</p></div><button class="build-close" onclick="closeSimulator()">×</button></div>
-<div class="sim-chart"><div class="chart-row"><span>Сейчас</span><i style="width:61%"></i><b>100</b></div><div class="chart-row"><span>Сценарий</span><i style="width:74%"></i><b id="simModalValue">106.8</b></div></div>
-<div class="sim-notes"><div><small>ВОЗМОЖНЫЙ ЭФФЕКТ</small><b>Рост прибыли</b><span>при сохранении текущих условий</span></div><div><small>ГЛАВНЫЙ РИСК</small><b>Снижение спроса</b><span>проверить экспериментом</span></div></div>
-<button class="intent-save" onclick="closeSimulator()">Вернуться к решению</button>
-</div>
-</div>
-<div aria-hidden="true" class="future-memory-modal" id="futureMemoryModal" onclick="if(event.target===this)closeMemory()">
-<div aria-modal="true" class="memory-sheet-v11" role="dialog">
-<div class="modal-top"><div><span class="future-label">ПАМЯТЬ БИЗНЕСА</span><h2>Почему мы приняли эти решения.</h2><p>Здесь живут правила, решения и выводы, которые управляющий использует в новых ситуациях.</p></div><button class="build-close" onclick="closeMemory()">×</button></div>
-<div class="memory-cards"><article><small>ПРАВИЛО</small><b>Не снижать цену ниже 18% маржи.</b><span>Создано владельцем · 14 июня</span></article><article><small>ВЫВОД</small><b>Вечерние заявки требуют отдельного сценария.</b><span>Добавлено управляющим · сегодня</span></article><article><small>РЕШЕНИЕ</small><b>Рекламу тестировать небольшими бюджетами.</b><span>Принято после эксперимента · 28 августа</span></article></div>
-<div class="memory-footer-v11"><span>Я буду учитывать это автоматически.</span><button onclick="closeMemory()">Закрыть</button></div>
-</div>
-</div>
-<div aria-hidden="true" class="future-evolution-modal" id="futureEvolutionModal" onclick="if(event.target===this)closeEvolution()">
-<div aria-labelledby="evolutionTitle" aria-modal="true" class="evolution-sheet" role="dialog">
-<div class="evo-modal-head">
-<div><span class="future-label">ЭВОЛЮЦИЯ · ПОСЛЕДНИЕ 7 ДНЕЙ</span><h2 id="evolutionTitle">Как изменился твой бизнес.</h2><p>Это история не задач, а изменений. Здесь видно, что управляющий обнаружил, создал, проверил и чему научился.</p></div>
-<button aria-label="На главную" class="build-close evolution-home-button" onclick="closeEvolution();if(window.showSection)window.showSection('home')" type="button">Готово</button>
-</div>
-<div class="evo-summary">
-<div><small>ИЗМЕНЕНИЙ</small><b>14</b><span>за 7 дней</span></div>
-<div><small>САМОСТОЯТЕЛЬНО</small><b>11</b><span>без твоего участия</span></div>
-<div><small>РЕЗУЛЬТАТ</small><b>+18%</b><span>по отслеживаемым показателям</span></div>
-</div>
-<div class="evo-full-list">
-<article><time>03 ОКТ · 05:42</time><div class="evo-full-mark">01</div><div><b>Создал сценарий повторной продажи</b><p>63 клиента были вне повторного контакта. Управляющий собрал сценарий и подготовил его к запуску.</p><label>СОЗДАНО АВТОМАТИЧЕСКИ</label></div></article>
-<article><time>02 ОКТ · 21:18</time><div class="evo-full-mark">02</div><div><b>Изменил распределение рекламного бюджета</b><p>Перенёс 3 400 ₽ между сегментами в рамках заданного лимита.</p><label>РЕШЕНО САМОСТОЯТЕЛЬНО</label></div></article>
-<article><time>02 ОКТ · 14:07</time><div class="evo-full-mark">03</div><div><b>Запустил наблюдение за новым сегментом</b><p>Вместо немедленного масштабирования оставил эксперимент на 72 часа, чтобы получить больше данных.</p><label>ЭКСПЕРИМЕНТ</label></div></article>
-<article><time>01 ОКТ · 09:26</time><div class="evo-full-mark">04</div><div><b>Обнаружил задержку в обработке заявок</b><p>Вечером среднее время ответа выросло до 24 минут. Сейчас проверяю причину.</p><label>НАБЛЮДЕНИЕ</label></div></article>
-</div>
-<div class="evo-learning"><span>ЧЕМУ Я НАУЧИЛСЯ</span><b>Вечерние заявки требуют отдельного сценария.</b><p>Я добавил это правило в память бизнеса и буду учитывать его в следующих решениях.</p></div>
-</div>
-</div>
-<div aria-hidden="true" class="future-autopilot-modal" id="futureAutopilotModal" onclick="if(event.target===this)closeAutopilot()">
-<div aria-labelledby="autopilotTitle" aria-modal="true" class="autopilot-sheet" role="dialog">
-<div class="auto-head">
-<div><span class="future-label">АВТОПИЛОТ</span><h2 id="autopilotTitle">Насколько самостоятельно мне работать?</h2><p>Ты не отдаёшь контроль. Ты задаёшь границы, внутри которых я могу действовать сам.</p></div>
-<button aria-label="Закрыть" class="build-close" onclick="closeAutopilot()" type="button">×</button>
-</div>
-<div class="auto-level">
-<div><span>УРОВЕНЬ САМОСТОЯТЕЛЬНОСТИ</span><strong id="autoLevelValue">72%</strong></div>
-<input id="autoRange" max="100" min="0" oninput="updateAutoLevel(this.value)" type="range" value="72"/>
-<div class="auto-scale"><span>Спрашивать обо всём</span><span>Решать самому</span></div>
-</div>
-<div class="auto-rules">
-<button class="auto-rule is-on" onclick="toggleAutoRule(this)" type="button"><span>Реклама</span><b>До 5 000 ₽</b><i>✓</i></button>
-<button class="auto-rule is-on" onclick="toggleAutoRule(this)" type="button"><span>Инструменты</span><b>Создавать самому</b><i>✓</i></button>
-<button class="auto-rule" onclick="toggleAutoRule(this)" type="button"><span>Цены</span><b>Всегда спрашивать</b><i>—</i></button>
-<button class="auto-rule" onclick="toggleAutoRule(this)" type="button"><span>Новые расходы</span><b>Всегда спрашивать</b><i>—</i></button>
-</div>
-<button class="auto-save" onclick="saveAutopilot()" type="button">Сохранить правила</button>
-</div>
-</div>
-<div aria-hidden="true" class="future-blindspot-modal" id="futureBlindspotModal" onclick="if(event.target===this)closeBlindspot()">
-<div aria-modal="true" class="blindspot-sheet" role="dialog">
-<div class="auto-head">
-<div><span class="future-label">Я НАШЁЛ</span><h2>Четыре вещи, которые сейчас легко не заметить.</h2><p>Это не задачи. Это изменения, которые могут повлиять на движение бизнеса.</p></div>
-<button aria-label="Закрыть" class="build-close" onclick="closeBlindspot()" type="button">×</button>
-</div>
-<div class="blind-list">
-<div><span>01</span><div><b>Вечером теряются заявки</b><small>Среднее время ответа после 20:00 — 24 минуты.</small></div><em>Проблема</em></div>
-<div><span>02</span><div><b>Есть свободный канал роста</b><small>Я нашёл сегмент с более дешёвым привлечением.</small></div><em>Возможность</em></div>
-<div><span>03</span><div><b>Один процесс пора создать заново</b><small>Менеджеры вручную делают расчёт, который можно автоматизировать.</small></div><em>Инструмент</em></div>
-<div><span>04</span><div><b>Изменилось поведение клиентов</b><small>Я уже начал наблюдение, чтобы понять причину.</small></div><em>Наблюдаю</em></div>
-</div>
-<button class="auto-save" onclick="closeBlindspot()" type="button">Понятно</button>
-</div>
-</div>
-<div aria-hidden="true" class="future-build-modal" id="futureBuildModal" onclick="if(event.target===this)closeBuildModal()">
-<div aria-labelledby="buildTitle" aria-modal="true" class="future-build-sheet" role="dialog">
-<div class="build-head">
-<div><div class="build-kicker">СОЗДАТЬ</div><h2 id="buildTitle">Чего не хватает?</h2><p>Опиши результат. Я сам решу, нужен ли инструмент, автоматизация, страница или целый новый процесс.</p></div>
-<button aria-label="Закрыть" class="build-close" onclick="closeBuildModal()" type="button">×</button>
-</div>
-<div class="build-input-wrap"><textarea class="build-input" id="buildInput" placeholder="Например: создай калькулятор стоимости доставки для сайта"></textarea></div>
-<div class="build-examples">
-<button class="build-example" onclick="setBuildExample('Создай калькулятор стоимости доставки для сайта')">Калькулятор</button>
-<button class="build-example" onclick="setBuildExample('Сделай форму для новых заявок')">Форма</button>
-<button class="build-example" onclick="setBuildExample('Создай мини-кабинет клиента')">Кабинет клиента</button>
-<button class="build-example" onclick="setBuildExample('Сделай инструмент для расчёта прибыли по товарам')">Расчёт прибыли</button>
-</div>
-<button class="build-action" onclick="startBuild()" type="button">Начать создание →</button>
-<div class="build-status" id="buildStatus">
-<div class="build-status-line"><span class="build-status-dot"></span>Понимаю задачу</div>
-<div class="build-status-line"><span class="build-status-dot"></span>Проверяю данные бизнеса</div>
-<div class="build-status-line"><span class="build-status-dot"></span>Собираю логику инструмента</div>
-<div class="build-status-line"><span class="build-status-dot"></span>Готовлю подключение</div>
-</div>
-<div class="build-result" id="buildResult"><small>ГОТОВО</small><strong id="buildResultTitle">Инструмент создан.</strong><p>Я подготовил основу и могу подключить её к нужному разделу бизнеса.</p><button onclick="closeBuildModal()" type="button">Открыть инструмент →</button></div>
-</div>
-</div>
-<section class="clients-page unified-page" id="clientsPage">
-<div class="clients-head"><div><div class="clients-title">Клиенты</div><div class="clients-sub">Я помню, кто к нам пришёл, что покупал и кому пора ответить.</div></div><button class="task-back" id="clientsBack" type="button">Готово</button></div>
-<div class="clients-stats"><div class="client-stat"><span>Новые заявки</span><b>14</b></div><div class="client-stat"><span>Ждут ответа</span><b>3</b></div><div class="client-stat"><span>Новых клиентов</span><b>8</b></div></div>
-<div class="client-list">
-<div class="client-row"><div class="client-avatar">АК</div><div class="client-main"><div class="client-name">Алексей К.</div><div class="client-info">Новая заявка · услуга «Доставка» · сегодня 08:42</div></div><span class="client-status wait">Нужно ответить</span><button class="client-action" type="button">Открыть</button></div>
-<div class="client-row"><div class="client-avatar">ИВ</div><div class="client-main"><div class="client-name">Иванов И.</div><div class="client-info">Встреча сегодня в 14:00 · есть контекст разговора</div></div><span class="client-status wait">Сегодня</span><button class="client-action" type="button">Открыть</button></div>
-<div class="client-row"><div class="client-avatar">МС</div><div class="client-main"><div class="client-name">Мария С.</div><div class="client-info">Покупка вчера · 18 500 ₽ · постоянный клиент</div></div><span class="client-status">Клиент</span><button class="client-action" type="button">Открыть</button></div>
-</div>
-<div class="clients-empty"><b>Цифровой управляющий следит за клиентами.</b><br>Когда подключим источники, я соберу здесь всю историю клиента сам. Никаких поисков по пяти системам — я уже побежал.</br></div>
-</section>
-<section class="tasks-page unified-page" id="tasksPage">
-<div class="tasks-head"><div><div class="tasks-title">Что я делаю</div><div class="tasks-sub">Не список дел. Здесь видно, что управляющий делает, что ждёт вас и что уже закончил.</div></div><button class="task-back" id="tasksBack" type="button">Готово</button></div>
-<div class="task-command"><div class="task-command-kicker">Сейчас</div><h2>Я уже работаю. От вас нужен только один ответ.</h2><p>На странице заказа что-то изменилось. Я нашёл связь с падением конверсии и подготовил вариант исправления.</p><button class="sales-primary" onclick="openManager()" type="button">Посмотреть, что я нашёл →</button></div><div class="task-list">
-<div class="task-row"><span class="task-state red"></span><div class="task-row-main"><div class="task-row-title">Разобраться, почему сайт продаёт хуже</div><div class="task-row-text">Изменение на странице заказа найдено вчера вечером. Требуется подтверждение.</div></div><span class="task-tag">Нужно подтвердить</span></div>
-<div class="task-row"><span class="task-state orange"></span><div class="task-row-main"><div class="task-row-title">Подготовить ответы на отзывы</div><div class="task-row-text">Варианты ответов подготовлены цифровым управляющим.</div></div><span class="task-tag">Сегодня</span></div>
-<div class="task-row"><span class="task-state orange"></span><div class="task-row-main"><div class="task-row-title">Позвонить Иванову</div><div class="task-row-text">Сегодня в 14:00. В календаре есть контекст встречи.</div></div><span class="task-tag">14:00</span></div>
-<div class="task-row"><span class="task-state green"></span><div class="task-row-main"><div class="task-row-title">Перераспределить рекламный бюджет</div><div class="task-row-text">Выполнено: бюджет перераспределён между двумя кампаниями.</div></div><span class="task-tag">Выполнено</span></div>
-</div>
-</section>
-<section class="sales-page unified-page" id="salesPage">
-<div class="sales-hero">
-<div class="sales-hero-copy">
-<div class="eyebrow">Продажи · <span class="sales-live-dot"></span> данные обновлены</div>
-<h2>Продажи под контролем.</h2>
-<p>Я собрал всё важное в одном месте и уже нашёл, где сегодня можно вернуть деньги.</p>
-</div>
-<div class="sales-hero-controls">
-<select aria-label="Период" class="sales-period" id="salesPeriod">
-<option>Сегодня</option><option selected="">Последние 7 дней</option><option>Последние 30 дней</option>
-</select>
-<button class="sales-ask-btn" id="salesAskBtn" type="button">Спросить меня <span>⌘K</span></button>
-</div>
-</div>
-<div class="sales-command">
-<div class="sales-command-icon">◈</div>
-<div class="sales-command-copy">
-<div class="sales-command-label">Что происходит</div>
-<h3>Заявок больше, но 8 клиентов остановились после предложения.</h3>
-<p>Похоже, проблема сейчас не в рекламе. Клиенты уже проявили интерес — им просто не сделали следующий шаг.</p>
-<div class="sales-command-meta">
-<span>42 заявки</span><span>11 продаж</span><span>184 000 ₽ выручки</span>
-</div>
-</div>
-<button class="sales-primary" id="salesAnalyze" type="button">Показать, кого вернуть <span>→</span></button>
-</div>
-<div class="sales-tip-row">
-<div class="sales-tip"><span>💡</span><div><b>Простыми словами</b><small>Воронка — это путь клиента от первого сообщения до оплаты.</small></div></div>
-<div class="sales-tip"><span>⚡</span><div><b>Главное сейчас</b><small>Не ищем больше заявок — сначала забираем уже готовые.</small></div></div>
-<div class="sales-tip"><span>✓</span><div><b>Можно делегировать</b><small>Я могу подготовить ответы, задачи и предложения.</small></div></div>
-</div>
-<div class="sales-stats sales-stats-premium">
-<div class="sales-stat sales-stat-featured" data-tip="Все новые обращения за выбранный период."><span>Новые заявки <i>?</i></span><b>42</b><div class="sales-change sales-good">↑ 18%</div><small>к прошлому периоду</small></div>
-<div class="sales-stat" data-tip="Заявки, которые дошли до реальной сделки."><span>Продажи <i>?</i></span><b>11</b><div class="sales-change sales-warn">− 2</div><small>к прошлому периоду</small></div>
-<div class="sales-stat" data-tip="Деньги от закрытых продаж за выбранный период."><span>Выручка <i>?</i></span><b>184 000 ₽</b><div class="sales-change sales-good">↑ 8,4%</div><small>за день</small></div>
-<div class="sales-stat" data-tip="Средняя сумма одной закрытой продажи."><span>Средний чек <i>?</i></span><b>16 700 ₽</b><div class="sales-change sales-good">↑ 5,2%</div><small>к прошлому периоду</small></div>
-</div>
-<div class="sales-grid sales-grid-v2">
-<article class="sales-card sales-funnel-card">
-<div class="sales-card-head">
-<div><div class="sales-card-title">Путь клиента</div><div class="sales-card-sub">Где люди сейчас находятся</div></div>
-<button class="mini-help" title="Нажми на этап — я объясню, что он значит" type="button">?</button>
-</div>
-<div class="sales-funnel sales-funnel-v2">
-<button class="sales-funnel-row" data-funnel="42 заявки" type="button">
-<span class="sales-funnel-bar" style="width:100%"></span><div class="sales-funnel-main"><span>Обращение</span><b>42</b></div><em>100%</em>
-</button>
-<button class="sales-funnel-row" data-funnel="27 квалифицированных клиентов" type="button">
-<span class="sales-funnel-bar" style="width:64%"></span><div class="sales-funnel-main"><span>Подходят</span><b>27</b></div><em>64%</em>
-</button>
-<button class="sales-funnel-row" data-funnel="19 отправленных предложений" type="button">
-<span class="sales-funnel-bar" style="width:45%"></span><div class="sales-funnel-main"><span>Предложение</span><b>19</b></div><em>45%</em>
-</button>
-<button class="sales-funnel-row is-final" data-funnel="11 продаж" type="button">
-<span class="sales-funnel-bar" style="width:26%"></span><div class="sales-funnel-main"><span>Оплата</span><b>11</b></div><em>26%</em>
-</button>
-</div>
-<div class="sales-explain"><span>↳</span><div><b>Самое слабое место</b><p>После предложения пропадает слишком много клиентов. Здесь сейчас больше всего денег для возврата.</p></div></div>
-</article>
-<article class="sales-card sales-recovery-card">
-<div class="sales-card-head">
-<div><div class="sales-card-title">Можно вернуть сегодня</div><div class="sales-card-sub">Клиенты уже были близки к покупке</div></div>
-<span class="recovery-count">8</span>
-</div>
-<div class="recovery-total"><b>до 74 000 ₽</b><span>потенциальной выручки</span></div>
-<div class="recovery-list">
-<div class="recovery-row"><div class="avatar">МС</div><div><b>Мария С.</b><small>Предложение · 18 500 ₽ · вчера</small></div><button data-sales-client="remind">Напомнить</button></div>
-<div class="recovery-row"><div class="avatar">АК</div><div><b>Алексей К.</b><small>Новая заявка · сегодня 08:42</small></div><button data-sales-client="reply">Ответить</button></div>
-<div class="recovery-row"><div class="avatar">АИ</div><div><b>Андрей И.</b><small>Просил предложение · горячий</small></div><button data-sales-client="offer">Предложение</button></div>
-</div>
-<button class="sales-wide-action" id="salesRecoveryBtn" type="button">Разобрать всех 8 клиентов →</button>
-</article>
-<article class="sales-card">
-<div class="sales-card-head">
-<div><div class="sales-card-title">Откуда приходят деньги</div><div class="sales-card-sub">Не просто заявки — реальные продажи</div></div>
-</div>
-<div class="sales-source-list sales-source-v2">
-<div class="sales-source-row"><div class="sales-source-icon">TG</div><div class="sales-source-main"><div class="sales-source-name">Telegram</div><div class="sales-source-meta">7 заявок · 3 продажи</div></div><div class="sales-source-value"><b>46 000 ₽</b><div class="source-best">лучше всего</div></div></div>
-<div class="sales-source-row"><div class="sales-source-icon">WEB</div><div class="sales-source-main"><div class="sales-source-name">Сайт</div><div class="sales-source-meta">12 заявок · 3 продажи</div></div><div class="sales-source-value"><b>226 000 ₽</b><div>высокий чек</div></div></div>
-<div class="sales-source-row"><div class="sales-source-icon">VK</div><div class="sales-source-main"><div class="sales-source-name">VK</div><div class="sales-source-meta">9 заявок · 2 продажи</div></div><div class="sales-source-value"><b>31 000 ₽</b><div>8,1% в продажу</div></div></div>
-<div class="sales-source-row"><div class="sales-source-icon">MAX</div><div class="sales-source-main"><div class="sales-source-name">MAX</div><div class="sales-source-meta">5 заявок · 1 продажа</div></div><div class="sales-source-value"><b>15 000 ₽</b><div>подключён</div></div></div>
-</div>
-<button class="sales-text-action" id="salesFinanceBtn" type="button">Открыть связь с деньгами →</button>
-</article>
-<article class="sales-card sales-manager-card">
-<div class="manager-orb">◈</div>
-<div class="sales-card-title">Я бы сделал вот что</div>
-<div class="sales-card-sub">Без сложных отчётов — один понятный следующий шаг.</div>
-<div class="manager-recommendation">
-<div class="manager-step"><span>1</span><b>Вернуть 3 горячих клиентов</b></div>
-<div class="manager-step"><span>2</span><b>Проверить ещё 5 предложений</b></div>
-<div class="manager-step"><span>3</span><b>Только потом увеличивать рекламу</b></div>
-</div>
-<button class="sales-primary manager-main-action" id="salesManagerAction" type="button">Начать с первого шага <span>→</span></button>
-<div class="sales-action-response" id="salesActionResponse"><b>Цифровой управляющий</b><div>Я подготовлю всё необходимое и покажу перед отправкой.</div></div>
-</article>
-</div>
-<div class="sales-bottom-note" data-legacy-hidden="true">
-<span>⌘</span><div><b>Подсказка</b> — можно просто спросить: «Почему сегодня меньше продаж?» или «Кому нужно позвонить?»</div>
-<button id="salesAskBottom" type="button">Спросить →</button>
-</div>
-</section>
-<section class="finance-page" id="financePage">
-<div class="finance-head">
-<div>
-<div class="finance-title">Финансы</div>
-<div class="finance-sub">Я слежу за деньгами и объясняю, что происходит с бизнесом.</div>
-</div>
-<select aria-label="Период" class="finance-period" id="financePeriod">
-<option value="7">Последние 7 дней</option>
-<option selected="" value="30">Последние 30 дней</option>
-<option value="90">Последние 90 дней</option>
-</select>
-</div>
-<div class="finance-health">
-<div class="finance-health-icon">✓</div>
-<div class="finance-health-main">
-<b>Финансовое состояние: стабильно</b>
-<div id="financeHealthText">Оборот и прибыль растут быстрее расходов. Денежного запаса достаточно для текущих обязательств.</div>
-</div>
-<span class="finance-health-tag">Низкий риск</span>
-</div>
-<div class="finance-stats" id="financeStats">
-<div class="finance-stat"><span>Оборот</span><b data-finance="revenue">4 860 000 ₽</b><div class="finance-change finance-good">↑ 8,4% к прошлому периоду</div></div>
-<div class="finance-stat"><span>Расходы</span><b data-finance="expenses">3 594 200 ₽</b><div class="finance-change finance-warn">↑ 5,1% к прошлому периоду</div></div>
-<div class="finance-stat"><span>Прибыль</span><b data-finance="profit">1 265 800 ₽</b><div class="finance-change finance-good">↑ 12,7% к прошлому периоду</div></div>
-<div class="finance-stat"><span>Денег сейчас</span><b data-finance="cash">2 184 000 ₽</b><div class="finance-change finance-good">Достаточно для обязательств</div></div>
-</div>
-<div class="finance-manager-note"><span>Мой вывод</span><b>Деньги в порядке. Но расходы растут чуть быстрее, чем мне хотелось бы.</b><p>Я уже смотрю, что именно подорожало. Если найду лишнее — покажу, а не просто нарисую красивый график.</p></div><div class="finance-grid">
-<article class="finance-card">
-<div class="finance-card-title">Движение денег</div>
-<div class="finance-card-sub">Выручка и расходы за последние 7 дней</div>
-<div class="finance-chart" id="financeChart"></div>
-<div class="finance-labels" id="financeLabels"></div>
-<div class="finance-legend"><span><i></i>Выручка</span><span><i class="exp"></i>Расходы</span></div>
-<div class="finance-insight">
-<b>Что изменилось</b>
-<div id="financeInsight">Вчера оборот составил 184 000 ₽. Прибыль выросла на 8%, хотя расходы на рекламу увеличились на 14%. Стоимость заявки снизилась на 12%, поэтому дополнительный бюджет пока окупается.</div>
-</div>
-</article>
-<aside class="finance-card">
-<div class="finance-card-title">Куда уходят деньги</div>
-<div class="finance-card-sub">Основные расходы за 30 дней</div>
-<div class="finance-list" id="expenseList">
-<div class="finance-row"><span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Реклама</div><div class="finance-row-text">Google / Яндекс / соцсети</div></div><div class="finance-row-value">684 000 ₽</div></div>
-<div class="finance-row"><span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Закупки</div><div class="finance-row-text">Товары и материалы</div></div><div class="finance-row-value">1 420 000 ₽</div></div>
-<div class="finance-row"><span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Зарплаты</div><div class="finance-row-text">Команда</div></div><div class="finance-row-value">920 000 ₽</div></div>
-<div class="finance-row"><span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Прочее</div><div class="finance-row-text">Сервисы, аренда, связь</div></div><div class="finance-row-value">570 200 ₽</div></div>
-</div>
-<div class="finance-warning">
-<b>Вот что важно</b>
-<div>Расходы на рекламу растут быстрее остальных. Но стоимость заявки снижается на 12%, поэтому я не предлагаю сокращать бюджет вслепую.</div>
-<button class="finance-action" id="financeCheck" type="button">Проверить окупаемость →</button>
-<div class="finance-result" id="financeResult"></div>
-</div>
-</aside>
-<article class="finance-card">
-<div class="finance-card-title">Откуда приходит выручка</div>
-<div class="finance-card-sub">Распределение оборота по источникам</div>
-<div class="finance-source">
-<div class="finance-source-row"><span class="finance-source-name">Сайт</span><span class="finance-source-track"><span class="finance-source-fill" style="width:72%"></span></span><span class="finance-source-value">2,34 млн ₽</span></div>
-<div class="finance-source-row"><span class="finance-source-name">Повторные</span><span class="finance-source-track"><span class="finance-source-fill" style="width:54%"></span></span><span class="finance-source-value">1,46 млн ₽</span></div>
-<div class="finance-source-row"><span class="finance-source-name">Реклама</span><span class="finance-source-track"><span class="finance-source-fill" style="width:31%"></span></span><span class="finance-source-value">720 тыс. ₽</span></div>
-<div class="finance-source-row"><span class="finance-source-name">Другое</span><span class="finance-source-track"><span class="finance-source-fill" style="width:15%"></span></span><span class="finance-source-value">340 тыс. ₽</span></div>
-</div>
-</article>
-<article class="finance-card">
-<div class="finance-card-title">Финансовый мозг</div>
-<div class="finance-card-sub">Что требует внимания прямо сейчас</div>
-<div class="finance-list">
-<button class="finance-row finance-clickable" data-finance-action="ads" type="button">
-<span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Проверить окупаемость рекламы</div><div class="finance-row-text">Расходы растут, но CPL снижается.</div></div><span>›</span>
-</button>
-<button class="finance-row finance-clickable" data-finance-action="forecast" type="button">
-<span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Подготовить прогноз на 14 дней</div><div class="finance-row-text">С учётом текущих продаж и обязательств.</div></div><span>›</span>
-</button>
-<button class="finance-row finance-clickable" data-finance-action="payments" type="button">
-<span class="finance-dot"></span><div class="finance-row-main"><div class="finance-row-title">Проверить крупные платежи</div><div class="finance-row-text">Ближайшие обязательства ещё не влияют на остаток.</div></div><span>›</span>
-</button>
-</div>
-<div class="finance-manager-response" id="financeManagerResponse">
-<b>Спроси цифрового управляющего о деньгах</b>
-<div>Например: «Почему прибыль выросла?» или «Хватит ли денег на ближайшие две недели?»</div>
-</div>
-</article>
-</div>
-</section>
-<section class="promo-page unified-page" id="promoPage">
-<div class="promo-head">
-<div>
-<div class="promo-title">Продвижение</div>
-<div class="promo-sub">Я смотрю, откуда приходят люди, заявки и деньги — и сравниваю каналы между собой.</div>
-</div>
-<select aria-label="Период" class="promo-period" id="promoPeriod">
-<option>Последние 7 дней</option><option selected="">Последние 30 дней</option><option>Последние 90 дней</option>
-</select>
-</div>
-<div class="promo-health">
-<div class="promo-health-icon">◈</div>
-<div class="promo-health-main">
-<b>Главный вывод за период</b>
-<div>Telegram и VK дают больше качественных обращений, а сайт закрывает большую часть продаж. Я бы не оценивал каналы только по заявкам — важнее, сколько денег они реально приносят.</div>
-</div>
-<span class="promo-tag">Анализ готов</span>
-</div>
-<div class="promo-stats">
-<div class="promo-stat"><span>Все обращения</span><b>83</b><div class="promo-change promo-good">↑ 16% к прошлому периоду</div></div>
-<div class="promo-stat"><span>Продажи</span><b>23</b><div class="promo-change promo-good">↑ 9% к прошлому периоду</div></div>
-<div class="promo-stat"><span>Выручка из каналов</span><b>1,29 млн ₽</b><div class="promo-change promo-good">↑ 13,2%</div></div>
-<div class="promo-stat"><span>Средний чек</span><b>56 100 ₽</b><div class="promo-change promo-warn">− 3,1%</div></div>
-</div>
-<div class="promo-manager-note"><span>Мой вывод</span><b>Не гонимся за дешёвыми заявками. Нам нужны люди, которые покупают.</b><p>Я сравниваю каналы по деньгам на выходе. Охваты пусть пока немного понервничают.</p></div><div class="promo-grid">
-<article class="promo-card">
-<div class="promo-card-title">Каналы</div>
-<div class="promo-card-sub">Смотрим не охваты, а реальные продажи</div>
-<div class="channel-list">
-<div class="channel-row"><div class="channel-icon">VK</div><div class="channel-main"><div class="channel-name">VK</div><div class="channel-meta">31 обращение · 8 продаж</div></div><div class="channel-value"><b>418 000 ₽</b><div>13 100 ₽ / заявка</div></div><span class="channel-status">Подключён</span></div>
-<div class="channel-row"><div class="channel-icon">TG</div><div class="channel-main"><div class="channel-name">Telegram</div><div class="channel-meta">19 обращений · 6 продаж</div></div><div class="channel-value"><b>362 000 ₽</b><div>лучшая конверсия</div></div><span class="channel-status">Подключён</span></div>
-<div class="channel-row"><div class="channel-icon">MAX</div><div class="channel-main"><div class="channel-name">MAX</div><div class="channel-meta">Пока нет данных о продажах</div></div><div class="channel-value"><b>—</b><div>нужно подключение</div></div><span class="channel-status demo">Подключить</span></div>
-<div class="channel-row"><div class="channel-icon">OK</div><div class="channel-main"><div class="channel-name">Одноклассники</div><div class="channel-meta">14 обращений · 4 продажи</div></div><div class="channel-value"><b>196 000 ₽</b><div>стабильный канал</div></div><span class="channel-status">Подключён</span></div>
-<div class="channel-row"><div class="channel-icon">ДЗ</div><div class="channel-main"><div class="channel-name">Дзен</div><div class="channel-meta">7 обращений · 2 продажи</div></div><div class="channel-value"><b>88 000 ₽</b><div>контентный канал</div></div><span class="channel-status">Подключён</span></div>
-<div class="channel-row"><div class="channel-icon">WEB</div><div class="channel-main"><div class="channel-name">Сайт</div><div class="channel-meta">12 обращений · 3 продажи</div></div><div class="channel-value"><b>226 000 ₽</b><div>самый высокий чек</div></div><span class="channel-status">Подключён</span></div>
-</div>
-</article>
-<aside class="promo-card">
-<div class="promo-card-title">Как заявки превращаются в деньги</div>
-<div class="promo-card-sub">Что произошло с обращениями</div>
-<div class="promo-funnel">
-<div class="funnel-row"><span>Обращения</span><b>83</b></div>
-<div class="funnel-row"><span>Квалифицированы</span><b>49</b></div>
-<div class="funnel-row"><span>Предложения</span><b>31</b></div>
-<div class="funnel-row"><span>Продажи</span><b>23</b></div>
-</div>
-<div class="promo-insight">
-<b>Вот что важно</b>
-<div>Telegram конвертирует обращения в продажи лучше остальных каналов. VK даёт больше объёма. Поэтому я бы не переносил весь бюджет в один канал — сначала проверил прибыль на клиента.</div>
-<button class="promo-action" id="promoCheck" type="button">Проверить прибыльность каналов →</button>
-<div class="promo-result" id="promoResult"></div>
-</div>
-</aside>
-<article class="promo-card">
-<div class="promo-card-title">Что сделать сегодня</div>
-<div class="promo-card-sub">Что я предлагаю</div>
-<div class="channel-list">
-<button class="channel-row promo-click" data-promo-action="telegram" type="button"><div class="channel-icon">TG</div><div class="channel-main"><div class="channel-name">Усилить Telegram</div><div class="channel-meta">Высокая конверсия в продажу</div></div><span>›</span></button>
-<button class="channel-row promo-click" data-promo-action="vk" type="button"><div class="channel-icon">VK</div><div class="channel-main"><div class="channel-name">Проверить контент VK</div><div class="channel-meta">Объём хороший, но нужно сравнить стоимость продаж</div></div><span>›</span></button>
-<button class="channel-row promo-click" data-promo-action="connect" type="button"><div class="channel-icon">+</div><div class="channel-main"><div class="channel-name">Подключить новый канал</div><div class="channel-meta">Чтобы управляющий видел больше продаж</div></div><span>›</span></button>
-</div>
-<div class="manager-insight" id="promoAi"><b>Спроси цифрового управляющего о продвижении</b><div>Например: «Откуда пришло больше всего денег?» или «Куда лучше перенести рекламный бюджет?»</div></div>
-</article>
-<article class="promo-card">
-<div class="promo-card-title">Откуда я беру данные</div>
-<div class="promo-card-sub">Источники, которые управляющий может анализировать</div>
-<div class="channel-list">
-<div class="channel-row"><div class="channel-icon">CRM</div><div class="channel-main"><div class="channel-name">Продажи / CRM</div><div class="channel-meta">Связывает обращения с реальными сделками</div></div><span class="channel-status">Подключён</span></div>
-<div class="channel-row"><div class="channel-icon">ADS</div><div class="channel-main"><div class="channel-name">Реклама</div><div class="channel-meta">Расходы, заявки, стоимость привлечения</div></div><span class="channel-status">Подключён</span></div>
-<div class="channel-row"><div class="channel-icon">WEB</div><div class="channel-main"><div class="channel-name">Сайт и аналитика</div><div class="channel-meta">Трафик, конверсия и продажи</div></div><span class="channel-status">Подключён</span></div>
-</div>
-</article>
-</div>
-</section>
-</main></div>
-<nav aria-label="Основная навигация" class="mobile-nav">
-<button class="active" data-section="home" type="button"><span class="dm-icon dm-icon--live"><svg viewbox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5z"></path><path d="M9.5 20v-5.5h5V20"></path></svg></span><small>Главная</small></button>
-<button data-section="tasks" type="button"><span class="dm-icon dm-icon--success"><svg viewbox="0 0 24 24"><path d="M5 12.5 9.2 17 19 7"></path></svg></span><small>Действия</small><em>7</em></button>
-<button data-section="sales" type="button"><span class="dm-icon dm-icon--return"><svg viewbox="0 0 24 24"><path d="M5 17 19 5"></path><path d="M10 5h9v9"></path></svg></span><small>Продажи</small></button>
-<button data-section="finance" type="button"><span aria-hidden="true" class="dm-ruble-icon">₽</span><small>Деньги</small></button>
-</nav>
-<button aria-label="Открыть цифрового управляющего" class="mobile-manager dm-signature-manager-button" id="mobileManager" type="button">
-<span aria-hidden="true" class="dm-signature-button-aura"></span>
-<span aria-hidden="true" class="dm-signature-logo dm-signature-button-logo">
-<svg viewbox="0 0 120 120">
-<g class="sig-orbits">
-<ellipse class="sig-orbit o1" cx="60" cy="60" rx="48" ry="30" transform="rotate(-8 60 60)"></ellipse>
-<ellipse class="sig-orbit o2" cx="60" cy="60" rx="48" ry="30" transform="rotate(28 60 60)"></ellipse>
-<ellipse class="sig-orbit o3" cx="60" cy="60" rx="42" ry="42" transform="rotate(-20 60 60)"></ellipse>
-</g>
-<g class="sig-diamond-wrap">
-<rect class="sig-diamond" height="42" rx="10" transform="rotate(45 60 60)" width="42" x="39" y="39"></rect>
-<rect class="sig-core" height="10" transform="rotate(45 60 60)" width="10" x="55" y="55"></rect>
-</g>
-</svg>
-</span>
-</button>
-<div aria-hidden="true" class="company-sheet" id="companySheet">
-<div class="company-backdrop" onclick="closeCompanySheet()"></div>
-<section aria-labelledby="companyTitle" aria-modal="true" class="company-panel" role="dialog">
-<div class="company-handle"></div>
-<div class="company-head">
-<div class="company-brandline">
-<span aria-hidden="true" class="mark dm-company-mark company-logo">ЦБ</span>
-<div><div class="company-kicker">Компания</div><h2 id="companyTitle">Цифровой бизнес</h2><p>IT · AI · AUTOMATION</p></div>
-</div>
-<button aria-label="Готово" class="company-close company-done" onclick="closeCompanySheet()" type="button">Готово</button>
-</div>
-<div class="company-hero"><span class="dm-icon dm-icon--live"><svg viewbox="0 0 24 24"><path d="M4 15.5C7 7 17 7 20 15.5"></path><path d="M5 18c4.5-4 9.5-4 14 0"></path><circle cx="12" cy="9" r="2"></circle></svg></span><div><b>Мы создаём технологии, которые работают на будущее.</b><p>Собственные цифровые продукты, программные решения и системы автоматизации для бизнеса и организаций.</p></div></div>
-<div class="company-section"><span>Наш подход</span><h3>Не просто разрабатываем программы — создаём цифровую инфраструктуру нового поколения.</h3></div>
-<div class="company-tags"><span>AI / Искусственный интеллект</span><span>Автоматизация</span><span>IT-разработка</span><span>Цифровые продукты</span></div>
-<div class="company-values">
-<article><span class="dm-icon dm-icon--live"><svg viewbox="0 0 24 24"><path d="M12 4v16M4 12h16"></path><circle cx="12" cy="12" r="7"></circle></svg></span><div><b>Передовые технологии</b><p>Следим за развитием технологий и применяем современные инструменты там, где они дают реальную пользу.</p></div></article>
-<article><span class="dm-icon dm-icon--pulse"><svg viewbox="0 0 24 24"><path d="M4 13h4l2-5 4 9 2-4h4"></path></svg></span><div><b>AI в реальных процессах</b><p>Внедряем искусственный интеллект не ради моды, а для автоматизации, анализа и интеллектуальной работы с данными.</p></div></article>
-<article><span class="dm-icon dm-icon--return"><svg viewbox="0 0 24 24"><path d="M5 12a7 7 0 0 1 12-5l2 2"></path><path d="M19 5v5h-5"></path><path d="M19 12a7 7 0 0 1-12 5l-2-2"></path><path d="M5 19v-5h5"></path></svg></span><div><b>Собственные продукты</b><p>Создаём решения, которые могут развиваться вместе с бизнесом и превращаться в полноценные цифровые экосистемы.</p></div></article>
-</div>
-<div class="company-product"><div><span>Продукт</span><b>Цифровой управляющий</b><p>Ваш личный цифровой управляющий для бизнеса.</p></div><span class="dm-icon dm-icon--live"><svg viewbox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle><path d="M12 8v8M8 12h8"></path></svg></span></div>
-</section>
-</div>
-<div aria-hidden="true" class="more-sheet" id="moreSheet">
-<div class="more-backdrop" onclick="closeMore()"></div>
-<section aria-labelledby="moreTitle" aria-modal="true" class="more-panel" role="dialog">
-<div class="more-head">
-<div><div class="manager-kicker">Цифровой управляющий</div><h2 id="moreTitle">Ещё немного будущего.</h2><p>Здесь не прячется свалка настроек. Здесь живёт то, что помогает мне понимать и развивать бизнес.</p></div>
-<button class="more-close" onclick="closeMore()">×</button>
-</div>
-<div class="pulse-card" onclick="openBusinessPulse()">
-<div class="pulse-orb"><i></i></div><div><span>Состояние бизнеса</span><b>Есть рост. И одна точка, где сегодня лежат деньги.</b><small>Продажи растут · стоимость заявки снижается · сайт теряет часть клиентов</small></div><em>›</em>
-</div>
-<div class="more-grid">
-<div class="mobile-theme-card" hidden="" id="mobileThemeCard">
-<div aria-hidden="true" class="mobile-theme-icon">
-<svg class="mobile-theme-sun" viewbox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.8v2.1M12 19.1v2.1M21.2 12h-2.1M4.9 12H2.8M18.5 5.5l-1.5 1.5M7 17l-1.5 1.5M18.5 18.5L17 17M7 7L5.5 5.5"></path></svg>
-<svg class="mobile-theme-moon" viewbox="0 0 24 24"><path d="M18.8 15.6A7.7 7.7 0 0 1 8.4 5.2 7.7 7.7 0 1 0 18.8 15.6z"></path></svg>
-</div>
-<div class="mobile-theme-copy"><b>Тема оформления</b><small id="mobileThemeText">Тёмная</small></div>
-<button aria-label="Переключить тему" class="mobile-theme-toggle" id="mobileThemeToggle" type="button">
-<span></span>
-</button>
-</div>
-<button onclick="closeMore();openTwin()"><span>◌</span><b>Цифровой двойник</b><small>Живая карта бизнеса</small></button>
-<button onclick="closeMore();openEvolution()"><span>✦</span><b>Эволюция</b><small>Что бизнес уже научился делать</small></button>
-<button onclick="openBusinessMemory()"><span>◉</span><b>Память бизнеса</b><small>Что я помню и почему это важно</small></button>
-<button onclick="openBusinessRules()"><span>⌁</span><b>Правила</b><small>Где я решаю сам, а где спрашиваю</small></button>
-<button onclick="openSettingsPanel()"><span>⚙</span><b>Характер управляющего</b><small>Как со мной работать</small></button>
-</div>
-</section>
-</div>
-<div aria-hidden="true" class="control-overlay" id="controlOverlay">
-<div class="control-backdrop" onclick="closeControl()"></div>
-<section aria-modal="true" class="control-panel" role="dialog">
-<button class="control-close" onclick="closeControl();if(window.showSection)window.showSection('home')">Готово</button>
-<div id="controlContent"></div>
-</section>
-</div>
-<div aria-hidden="true" class="business-pulse" id="businessPulse">
-<div class="pulse-backdrop" onclick="closeBusinessPulse()"></div>
-<section aria-modal="true" class="pulse-panel" role="dialog">
-<div class="pulse-top"><div><span>Цифровой управляющий</span><h2>Что происходит<br>с бизнесом?</br></h2></div><button class="pulse-home-button" onclick="closeBusinessPulse();if(window.showSection)window.showSection('home')" aria-label="На главную">Готово</button></div>
-<div class="pulse-hero"><div class="pulse-orb big"><i></i></div><div><b>Сегодня бизнес чувствует себя хорошо.</b><p>Но часть денег остаётся на столе: клиенты получают предложение и не получают повторного контакта.</p></div></div>
-<div class="pulse-links">
-<div><span>Продажи</span><b>184 000 ₽</b><em>вчера · +8%</em></div>
-<div><span>Деньги</span><b>1 265 800 ₽</b><em>прибыль за период</em></div>
-<div><span>Продвижение</span><b>−12%</b><em>стоимость заявки</em></div>
-<div><span>Сайт</span><b>−18%</b><em>конверсия</em></div>
-</div>
-<div class="pulse-bottom" data-legacy-hidden="true"><b>Мой вывод</b><p>Сейчас не время просто покупать больше рекламы. Сначала вернём тех, кто уже почти купил.</p><button onclick="closeBusinessPulse();openRecovery()">Вернуть клиентов</button></div>
-</section>
-</div>
-<script>
-
-function openMore(){document.getElementById('moreSheet').classList.add('show')}
+<button class="future-btn primary" onclick="event.stopPropagation();this.closest('.future-card').classList.add('resolved');this.textContent='Исправляю…';setTimeout(()=&gt;{this.textContent='Исправлено ✓'}
 function closeMore(){document.getElementById('moreSheet').classList.remove('show')}
 function openControl(html){document.getElementById('controlContent').innerHTML=html;document.getElementById('controlOverlay').classList.add('show')}
 function closeControl(){document.getElementById('controlOverlay').classList.remove('show')}
@@ -6718,6 +5839,10 @@ promoCheck?.addEventListener('click',()=>{
     promoResult.classList.add('show');
   },900);
 });
+document.getElementById('promoDone')?.addEventListener('click',function(){
+  if(window.showSection) window.showSection('home');
+});
+
 document.querySelectorAll('[data-promo-action]').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const response=document.getElementById('promoAi');
@@ -7402,7 +6527,6 @@ body.dark .manager-personality-mark{background:#f4f4f5;color:#111214}
   else render();
 })();
 </script>
-
 <style id="dm-dark-final-polish-v2">
 /* FINAL DARK THEME POLISH — only overrides conflicting legacy rules */
 body.dark{
@@ -7577,7 +6701,6 @@ body.dark .home-organize-bar{background:rgba(29,30,34,.78);border-color:rgba(255
 </div>
 </div>
 <div class="home-toast" id="homeToast" role="status"></div>
-
 <style id="home-blocks-order-swipe-v1">
 /* Порядок блоков + горизонтальный просмотр на телефоне. Визуальную тему не меняем. */
 @media (max-width:700px){
@@ -7641,12 +6764,7 @@ body.dark .home-organize-bar{background:rgba(29,30,34,.78);border-color:rgba(255
     let drag=null, placeholder=null, pointerId=null, timer=null, active=false, startY=0, startX=0;
     const mobile=()=>window.matchMedia('(max-width:700px)').matches;
     const clear=()=>{clearTimeout(timer);timer=null;document.body.classList.remove('home-longpress-mode');blocks().forEach(el=>el.classList.remove('is-dragging','is-drop-target','is-drop-before','is-drop-after'));};
-    function ensureBar(){
-      let bar=document.getElementById('homeEditBar');
-      if(bar)return bar;
-      bar=document.createElement('div');bar.id='homeEditBar';bar.innerHTML='<span class="home-edit-live"><i></i> Режим Главной</span><b id="homeEditName">Перемещай блок пальцем</b><button type="button" id="homeEditHide">Убрать</button><button type="button" id="homeEditDone">Готово</button>';
-      document.body.appendChild(bar);
-      bar.querySelector('#homeEditDone').onclick=()=>{clear();bar.classList.remove('is-open');};
+    function ensureBar(){;
       bar.querySelector('#homeEditHide').onclick=()=>{if(!drag)return;const id=drag.dataset.homeBlock;const x=layout.find(v=>v.id===id);if(x)x.hidden=true;apply();render();toast('Блок убран. Я сохраню его — вернуть можно в настройке Главной.');clear();drag=null;bar.classList.remove('is-open');};
       return bar;
     }
@@ -8064,7 +7182,6 @@ body.dark .future-card .watch-spark{color:#9ba6ff}
 }
 @media(max-width:390px){.future-state{padding:18px 14px}.state-greeting h1{font-size:23px!important}.state-orbit{width:116px;height:116px}.future-state .assistant-core{width:72px!important;height:72px!important}.future-state .assistant-core .dm-signature-logo{width:72px!important;height:72px!important}.watch-complication b{font-size:12px}.future-card{padding:14px}}
 </style>
-
 <style id="home-longpress-future-v18">
 /* Карточки Главной — никаких постоянных кнопок. Управление появляется только после долгого нажатия. */
 .home-block[data-home-block] .home-block-menu,.home-block[data-home-block] .home-drag-hint{display:none!important}
@@ -8096,8 +7213,6 @@ body.dark .home-drag-placeholder{background:linear-gradient(135deg,rgba(130,145,
 body.dark .home-block.is-dragging{box-shadow:0 30px 80px rgba(0,0,0,.42)!important}
 @media(prefers-reduced-motion:reduce){.home-block,#homeEditBar{transition:none!important}.home-edit-live i{animation:none!important}}
 </style>
-
-
 <style id="settings-home-switches-v41">
 .settings-section-note{margin:-2px 0 9px;color:var(--muted);font-size:10px;line-height:1.4}
 .settings-sections-v2{display:grid;gap:8px;margin-top:8px}
@@ -8171,7 +7286,6 @@ body.dark .rule-toggle i{background:#17181b!important}
   
 }
 </style>
-
 <script id="assistant-clean-v69-js">
 (function(){
   const btn=document.getElementById('mobileManager');
@@ -8322,7 +7436,6 @@ body.dark .rule-toggle i{background:#17181b!important}
   ensureUi();
 })();
 </script>
-
 <script>
 (function(){
  function addDots(){
@@ -8338,7 +7451,6 @@ body.dark .rule-toggle i{background:#17181b!important}
  setTimeout(addDots,500);
 })();
 </script>
-
 <style id="settings-sections-compact-v44">
 /* v44: Разделы на Главной — компактное продолжение настроек поведения. Темы не меняем. */
 .settings-sections-v2{
@@ -8517,9 +7629,6 @@ body.dark .settings-sections-v2 .settings-section-row:hover{
   .future-desc,.future-card.attention .future-desc{font-size:12px!important}
 }
 </style>
-
-
-
 <style id="settings-clean-final-v47">
 /* v47 — чистый финальный слой настроек. Темы не меняем. */
 .control-panel{overflow-x:hidden!important}
@@ -8660,9 +7769,6 @@ body.dark .settings-rules-list .settings-rule-toggle.is-on i{
   .settings-rules-list .settings-rule-toggle{width:48px!important;height:28px!important;min-width:48px!important}
 }
 </style>
-
-
-
 <style id="v50-settings-autopilot-and-manager-sidepanel">
 /* v50 — точечная правка: автопилот и long-press помощника. Остальной дизайн не меняем. */
 body:not(.dark) .settings-autopilot-action{
@@ -8708,7 +7814,6 @@ body.dark .settings-autopilot-action{
   .dm-quick-menu .dm-quick-foot{font-size:8px !important;margin-top:8px !important;}
 }
 </style>
-
 <script id="settings-real-controls-v92">
 (function(){
   function sync(){
@@ -8737,7 +7842,6 @@ body.dark .settings-autopilot-action{
   setTimeout(sync,0);
 })();
 </script>
-
 <style id="home-section-preview-v110">
 /* Включённый раздел на Главной = компактный предпросмотр. Полная страница открывается только по действию. */
 .home-section-previews{display:grid;gap:10px;margin:0 0 12px}
@@ -8841,7 +7945,6 @@ body.dark .home-section-preview .preview-open{background:#f4f4f5;color:#17181b}
  setTimeout(render,80);
 })();
 </script>
-
 <style id="deep-section-back-v120">
 /* Возврат из большого раздела: всегда доступен, не зависит от нижнего меню. */
 #deepSectionBack{
@@ -8886,7 +7989,7 @@ body.dark .home-section-preview .preview-open{background:#f4f4f5;color:#17181b}
   }
   function syncBack(section){
     const b=ensureBack();
-    b.classList.toggle('show',section && section!=='home' && section!=='more');
+    b.classList.toggle('show',section && section!=='home' && section!=='more' && section!=='promo');
   }
   const oldShow=window.showSection;
   if(typeof oldShow==='function'){
@@ -8902,7 +8005,6 @@ body.dark .home-section-preview .preview-open{background:#f4f4f5;color:#17181b}
   setTimeout(function(){syncBack(document.body.dataset.currentSection||'home')},100);
 })();
 </script>
-
 <style id="dark-buttons-material-v40">
 /* V40 — тёмная тема: кнопки остаются тёмными, подписи — светлыми.
    Кнопку помощника и её внутренние элементы не меняем. */
@@ -8986,7 +8088,6 @@ body.dark .promo-health{
 
 /* Вспомогательные кнопки управляющего и его панели — НЕ ТРОГАЕМ. */
 </style>
-
 <style id="dark-sales-explain-v15">
 /* V15 — пояснение «Самое слабое место» в тёмной теме */
 body.dark .sales-explain{
@@ -9000,7 +8101,6 @@ body.dark .sales-explain>span{color:#ffb340!important;-webkit-text-fill-color:#f
 body.dark .sales-explain b{color:#fff!important;-webkit-text-fill-color:#fff!important;}
 body.dark .sales-explain p{color:rgba(247,249,255,.82)!important;-webkit-text-fill-color:rgba(247,249,255,.82)!important;}
 </style>
-
 <style id="v18-living-settings-dots-final">
 /* V18: убираем старую шестерёнку из верхнего блока. Настройки открываются через живые точки рядом с приветствием. */
 .top-banner-settings{display:none!important}
@@ -9054,7 +8154,6 @@ body.dark .dm-living-dots i:nth-child(3){color:#dfe7ff!important}
  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',go); else go();
 })();
 </script>
-
 <style id="v20-dark-dots-clean">
 /* V20 — в тёмной теме точки выглядят ровно так же, как в светлой:
    без овальной подложки, без отдельной кнопочной плашки. */
@@ -9079,9 +8178,6 @@ body.dark .dm-living-dots i{
   opacity:.48!important;
 }
 </style>
-
-
-
 <style id="v22-dots-old-gear-position">
 /* V22 — возвращаем точки ровно в место, где раньше была шестерёнка. */
 #managerGreeting{
@@ -9106,7 +8202,6 @@ body.dark .dm-living-dots i{
   }
 }
 </style>
-
 <style id="final-mobile-readable-fix-v30">
 /* Финальная точечная правка: верхний баннер, логотип, радары и читаемость. */
 
@@ -9230,7 +8325,6 @@ body.dark .dm-living-dots i{
   .future-header h1{font-size:34px !important}
 }
 </style>
-
 <style id="final-v34-home-stability">
 /* V34 — стабильная мобильная Главная + компактная иерархия */
 
@@ -9408,8 +8502,6 @@ body.dark .future-state .state-eyebrow{
   .state-copy{padding-top:12px !important}
 }
 </style>
-
-
 <style id="settings-refinement-v40">
 /* v40 — только настройки: цвета переключателей, разделы и блок разработчиков. */
 body:not(.dark) .rule-toggle{
@@ -9436,7 +8528,6 @@ body.dark .settings-sections button span{background:linear-gradient(135deg,#183d
   .settings-sections{grid-template-columns:1fr}
 }
 </style>
-
 <style id="theme-material-v35">
 /* V35 — только цветовой материал. Геометрию, размеры и JS не меняем. */
 
@@ -9563,7 +8654,6 @@ body:not(.dark) .manager-primary:hover{
 
 /* Остальные кнопки остаются нейтральными — акцент не расползается по интерфейсу. */
 </style>
-
 <style id="dark-material-exact-v36">
 /* V36: в тёмной теме возвращаем ТОТ ЖЕ материал, что у исходного верхнего блока.
    Геометрию, размеры, светлую тему и JS не меняем. */
@@ -9701,7 +8791,6 @@ body.dark .future-state{
   border-color:rgba(127,181,255,.18) !important;
 }
 </style>
-
 <style id="manager-button-glow-v37">
 /* Финальная подстройка свечения кнопки управляющего под цвет верхнего тёмного блока. */
 .mobile-manager.dm-signature-manager-button{
@@ -9737,7 +8826,6 @@ body.dark .future-state{
   fill:#6ea0ff!important;
 }
 </style>
-
 <style id="manager-button-diamond-dark-v39">
 /* V39: меняем именно ромб внутри кнопки голосового помощника.
    Центральная точка остаётся белой. Верхний большой логотип не затрагиваем. */
@@ -9750,9 +8838,6 @@ body.dark .mobile-manager.dm-signature-manager-button .dm-signature-button-logo 
   fill:#ffffff !important;
 }
 </style>
-
-
-
 <style id="settings-sections-final-v45">
 /* v45: Разделы на Главной — ровный компактный список. Экран/темы не затрагиваем. */
 .settings-sections-v2{
@@ -9893,7 +8978,6 @@ body.dark .settings-sections-v2 .settings-home-switch.is-on i{
   
 }
 </style>
-
 <style id="settings-sections-match-rules-v46">
 /* v46: Разделы на Главной визуально один в один с блоками Самостоятельность / Деньги / Общение / Автопилот. */
 .settings-sections-v2{
@@ -9957,10 +9041,6 @@ body.dark .settings-sections-v2 .settings-section-rule-row{
   .settings-sections-v2 .settings-section-open-v46 small{font-size:9.5px!important}
 }
 </style>
-
-
-
-
 <style id="final-stable-settings-and-assistant-v58">
 /* v58 — финальная стабилизация. Никакой новой компоновки, только возвращаем согласованный вид. */
 
@@ -10136,10 +9216,6 @@ body.dark .mobile-manager.dm-signature-manager-button.listening::after{
   .mobile-manager.dm-signature-manager-button.listening::before,.mobile-manager.dm-signature-manager-button.listening::after{animation:none!important}
 }
 </style>
-
-
-
-
 <style id="signature-sphere-v63">
 /* v63 — логотип не «дышит», а создаёт иллюзию вращающейся 3D-сферы. */
 .dm-signature-logo .sig-orbit{
@@ -10196,15 +9272,6 @@ body.dark .mobile-manager.dm-signature-manager-button.listening::after{
   .dm-signature-logo .sig-orbit,.dm-signature-button-logo .sig-orbit{animation:none!important}
 }
 </style>
-
-
-
-
-
-
-
-
-
 <style id="light-learning-and-hints-v67-css">
 /* v67 — лёгкое обучение + ненавязчивые постоянные подсказки. */
 .dm-learning-card{
@@ -10282,7 +9349,6 @@ body.dark .dm-light-demo-orb b{color:#8bc8ff}
 @media(max-width:520px){.dm-light-tutorial{padding:12px}.dm-light-tutorial-card{border-radius:24px;padding:16px}.dm-light-title{font-size:30px}.dm-light-copy{font-size:12px}.dm-light-tutorial-bottom{position:sticky;bottom:0;background:inherit;padding-top:10px}}
 @media(prefers-reduced-motion:reduce){.dm-light-demo-orb:before,.dm-light-demo-orb:after{animation:none!important}}
 </style>
-
 <script id="light-learning-and-hints-v67-js">
 (function(){
   const tips=[
@@ -10370,9 +9436,6 @@ body.dark .dm-light-demo-orb b{color:#8bc8ff}
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',()=>{syncHintsToggle();startHints()},{once:true}); else {syncHintsToggle();startHints();}
 })();
 </script>
-
-
-
 <style id="assistant-final-position-animation-v70">
 /* v70 — только помощник. Настройки и остальной дизайн не меняем. */
 @media(max-width:900px){
@@ -10478,7 +9541,6 @@ body.dark .dm-signature-button-logo .sig-orbit.o3{
   animation:sigSphereO3 11.4s linear infinite!important;
 }
 </style>
-
 <style id="assistant-final-align-v72">
 /* v72 — только выравнивание помощника в режиме долгого удержания. */
 @media(max-width:900px){
@@ -10492,7 +9554,6 @@ body.dark .dm-signature-button-logo .sig-orbit.o3{
   }
 }
 </style>
-
 <style id="assistant-final-write-align-v74">
 /* v75 — сфера выше и подсказки ещё выше в режиме письма. */
 @media(max-width:900px){
@@ -10524,7 +9585,6 @@ body.dark .dm-signature-button-logo .sig-orbit.o3{
   }
 }
 </style>
-
 <style id="assistant-symmetry-v78">
 /* v78 — только симметрия блока письма. Ничего больше не двигаем. */
 @media(max-width:900px){
@@ -10540,7 +9600,6 @@ body.dark .dm-signature-button-logo .sig-orbit.o3{
   }
 }
 </style>
-
 <style id="assistant-sphere-send-align-v79">
 /* v79 — в режиме письма сфера стоит ровно рядом с кнопкой «Отправить»: одна горизонталь, общий центр. */
 @media(max-width:900px){
@@ -10558,7 +9617,6 @@ body.dark .dm-signature-button-logo .sig-orbit.o3{
   }
 }
 </style>
-
 <style id="assistant-sphere-lower-v80">
 /* v80 — сферу немного опускаем, кнопку отправки и остальную композицию не трогаем. */
 @media(max-width:900px){
@@ -10619,7 +9677,6 @@ body:not(.dark) .state-control-meta i{background:#8992a1}
   .state-control-card{margin-top:0}
 }
 </style>
-
 <style id="settings-light-switch-fix-v93">
 /* v93: светлая тема — переключатель обязан визуально различать ВКЛ / ВЫКЛ */
 @media(max-width:700px){
@@ -10642,7 +9699,6 @@ body:not(.dark) .state-control-meta i{background:#8992a1}
   }
 }
 </style>
-
 <style id="theme-mode-buttons-v94">
 /* v94 — fix theme choice contrast in both themes */
 .theme-mode-btn{
@@ -10685,7 +9741,6 @@ body.dark .theme-mode-btn.active{
   },true);
 })();
 </script>
-
 <style id="mobile-width-adaptive-v101">
 /* v101 — адаптация ширины контента под телефоны. Сферу помощника не трогаем. */
 @media(max-width:700px){
@@ -10698,7 +9753,6 @@ body.dark .theme-mode-btn.active{
   main,.content,.page,.section,.shell{padding-left:10px!important;padding-right:10px!important;}
 }
 </style>
-
 <style id="settings-fullpage-v102">
 /* v102 — настройки открываются как полноценный экран: без большого верхнего зазора, blur на всю страницу. */
 #controlOverlay{
@@ -10729,7 +9783,6 @@ body.dark .theme-mode-btn.active{
 }
 body.dark #controlOverlay{background:rgba(0,0,0,.34)!important}
 </style>
-
 <style id="settings-order-v1">
 /* Новая логика настроек: разделы на Главной используют существующие полноценные страницы. */
 .settings-clean-list{display:grid;gap:7px;margin-top:8px}
@@ -10746,7 +9799,6 @@ body.dark .settings-clean-icon{background:rgba(255,255,255,.07)}
 body.dark .settings-create-card{background:rgba(255,255,255,.035)}
 @media(max-width:700px){.settings-clean-row{min-height:54px;padding:7px 8px;border-radius:15px}.settings-clean-open{grid-template-columns:27px minmax(0,1fr);gap:8px}.settings-clean-icon{width:27px;height:27px;border-radius:9px;font-size:11px}.settings-clean-copy b{font-size:11px}.settings-clean-copy small{font-size:8.5px}.settings-create-card{padding:12px}.settings-create-card small{max-width:210px}}
 </style>
-
 <style id="premium-consistency-fix-v121">
 /* Только визуальная доводка существующих элементов. Функциональность не меняем. */
 #controlContent .settings-sections-v2 .settings-home-switch,
@@ -10832,7 +9884,6 @@ body.dark .settings-create-card{background:rgba(255,255,255,.035)}
   setTimeout(function(){mo.disconnect()},12000);
 })();
 </script>
-
 <style id="dark-buttons-final-v41">
 /* V41 — финальный материал тёмной темы.
    Все ОСНОВНЫЕ кнопки приложения — тёмные, подписи светлые.
@@ -10925,7 +9976,6 @@ body.dark .home-order-actions button.primary{
   color:#fff!important;
 }
 </style>
-
 <style id="v24-settings-real-final">
 /* Настройки — финальная точечная правка. */
 
@@ -11012,7 +10062,6 @@ body.dark #controlContent .settings-rule-toggle.is-on i{
   #controlOverlay .control-close::before{font-size:18px!important}
 }
 </style>
-
 <style id="button-language-v26">
 /* V26 — единый стиль действий: спокойные чёрные кнопки без лишнего стекла. */
 .settings-create-card button{
@@ -11073,7 +10122,6 @@ body.dark #controlContent .settings-rule-toggle.is-on i{
   #deepSectionBack{height:38px!important;min-height:38px!important;padding:0 14px 0 11px!important;border-radius:14px!important;font-size:9.5px!important}
 }
 </style>
-
 <style id="v28-assistant-sapphire">
 /* V28 — помощник в том же сапфировом индиго, что и основные кнопки.
    Тёмную тему не меняем. */
@@ -11102,7 +10150,6 @@ body:not(.dark) .mobile-manager.dm-signature-manager-button:hover{
   filter:brightness(1.06)!important;
 }
 </style>
-
 <style id="v29-assistant-remove-circle">
 /* V29 — убираем только внешнюю круглую оболочку помощника.
    Логотип и остальной интерфейс не меняем. */
@@ -11112,7 +10159,6 @@ body:not(.dark) .mobile-manager.dm-signature-manager-button{
   box-shadow:none!important;
 }
 </style>
-
 <style id="v30-assistant-theme-swap">
 /* V30 — меняем местами оформление помощника между светлой и тёмной темами. */
 /* Светлая тема получает прежний вид тёмной темы. */
@@ -11160,7 +10206,6 @@ body.dark .dm-signature-button-logo .sig-core{
   fill:#263968!important;
 }
 </style>
-
 <style id="evolution-page-v32">
 /* V32 — Эволюция: единый премиальный экран для светлой и тёмной темы. */
 .future-evolution-modal{
@@ -11319,7 +10364,6 @@ body.dark .future-evolution-modal .evo-learning{
   .evo-learning p{font-size:10px !important;line-height:1.5 !important}
 }
 </style>
-
 <style id="developer-contact-premium-v35">
 /* v35 — developer contact: same premium language as the other settings screens */
 #controlContent .developer-contact-shell{
@@ -11376,7 +10420,6 @@ body.dark #controlContent .developer-contact-note{
   }
 }
 </style>
-
 <style id="developer-back-home-v36">
 #controlOverlay .control-close{
   width:auto!important;
@@ -11419,7 +10462,6 @@ body.dark #controlOverlay .control-close{
   }
 }
 </style>
-
 <style id="dark-manager-no-disc-final">
 /* Финальная точечная правка: на тёмной теме у кнопки управляющего
    остаётся только фирменный знак без круглого синего диска. */
@@ -11434,7 +10476,6 @@ body.dark .dm-signature-button-logo{
   filter:drop-shadow(0 5px 12px rgba(255,255,255,.08))!important;
 }
 </style>
-
 <script id="home-switches-final-clean-fix-v5-js">
 (function(){
   const KEY='db-home-section-switches-v3';
@@ -11471,7 +10512,6 @@ body.dark .dm-signature-button-logo{
   setTimeout(paint,0);
 })();
 </script>
-
 <style id="light-manager-deep-indigo-v8">
 /* Светлая тема v8: глубокий индиго + едва заметная тёплая искра. */
 body:not(.dark) .mobile-manager.dm-signature-manager-button::after{
@@ -11500,7 +10540,6 @@ body:not(.dark) .dm-signature-button-logo{
   filter:drop-shadow(0 7px 16px rgba(41,36,107,.20)) !important;
 }
 </style>
-
 <style id="digital-manager-intelligence-v1">
 /* DIGITAL MANAGER — intelligence-first Home. Existing assistant/input untouched. */
 #homeSectionPreviews.dm-intelligence-home{
@@ -11609,7 +10648,7 @@ body.dark .dm-fix-confirm{background:#f4f4f5;color:#17171a}.body.dark .dm-fix-ca
     const c=document.getElementById('wowModuleContent');
     const stats=d.chips.slice(0,4).map((x,i)=>'<div class="wow-module-stat"><small>В КОНТУРЕ</small><b>'+x+'</b></div>').join('');
     const chips=d.chips.map(x=>'<span>'+x+'</span>').join('');
-    c.innerHTML='<div class="wow-module-top"><div><div class="wow-module-kicker">'+d.kicker+' · '+d.status+'</div><h2 id="wowModuleTitle" class="wow-module-title">'+d.title+'</h2><p class="wow-module-sub">'+d.sub+'</p></div><button class="wow-module-close" type="button" onclick="closeBusinessModule()" aria-label="Готово">Готово</button></div>'+
+    c.innerHTML='<div class="wow-module-top"><div><div class="wow-module-kicker">'+d.kicker+' · '+d.status+'</div><h2 id="wowModuleTitle" class="wow-module-title">'+d.title+'</h2><p class="wow-module-sub">'+d.sub+'</p></div><button class="wow-module-close done-etalon" type="button" onclick="closeBusinessModule()" aria-label="Готово">Готово</button></div>'+
       '<div class="wow-module-grid">'+stats+'</div><div class="module-flow">'+chips+'</div>'+
       '<div class="wow-module-sections">'+
       '<div class="wow-module-block"><span>ЧТО Я НАШЁЛ</span><b>'+d.finding+'</b><p>Я связываю сигналы из разных источников, а не смотрю на один показатель.</p></div>'+
@@ -11617,7 +10656,7 @@ body.dark .dm-fix-confirm{background:#f4f4f5;color:#17171a}.body.dark .dm-fix-ca
       '<div class="wow-module-block"><span>ОТ ТЕБЯ НУЖНО</span><b>'+d.need+'</b><p>Если решение безопасное — я могу подготовить его сам. Важные действия сначала согласую.</p></div>'+
       '<div class="wow-module-block"><span>КАК Я РАБОТАЮ</span><b>Собираю цифровой след в одну картину.</b><p>'+d.action+'</p></div>'+
       '</div><div class="wow-module-joke">'+d.joke+'</div>'+
-      '<div class="wow-module-actions"><button class="wow-module-primary" type="button" onclick="closeBusinessModule()">Готово</button></div>';
+      '';
     s.classList.add('is-open');
   }
   window.openBusinessModule=function(id){
@@ -11630,9 +10669,9 @@ body.dark .dm-fix-confirm{background:#f4f4f5;color:#17171a}.body.dark .dm-fix-ca
     if(!d){if(typeof originalOpen==='function')originalOpen(id);return}
     let s=document.getElementById('wowBusinessModuleSheet'); if(!s){detail(id);s=document.getElementById('wowBusinessModuleSheet')}
     const c=document.getElementById('wowModuleContent');
-    c.innerHTML='<div class="wow-module-top"><div><div class="wow-module-kicker">'+d.kicker+' · ДЕЙСТВИЕ</div><h2 id="wowModuleTitle" class="wow-module-title">Я могу заняться этим сам.</h2><p class="wow-module-sub">'+d.need+'</p></div><button class="wow-module-close" type="button" onclick="closeBusinessModule()" aria-label="Готово">Готово</button></div>'+
+    c.innerHTML='<div class="wow-module-top"><div><div class="wow-module-kicker">'+d.kicker+' · ДЕЙСТВИЕ</div><h2 id="wowModuleTitle" class="wow-module-title">Я могу заняться этим сам.</h2><p class="wow-module-sub">'+d.need+'</p></div><button class="wow-module-close done-etalon" type="button" onclick="closeBusinessModule()" aria-label="Готово">Готово</button></div>'+
       '<div class="dm-fix-note"><b>Что я сделаю</b><p>'+d.action+' Если действие затрагивает деньги, публикацию или необратимое изменение — я остановлюсь и спрошу.</p></div>'+
-      '<div class="dm-fix-actions"><button class="dm-fix-confirm" type="button" onclick="confirmManagerFix(\''+id+'\')">Да, исправляй</button><button class="dm-fix-cancel" type="button" onclick="closeBusinessModule()">Готово</button></div>';
+      '<div class="dm-fix-actions"><button class="dm-fix-confirm" type="button" onclick="confirmManagerFix(\''+id+'\')">Да, исправляй</button></div>';
     s.classList.add('is-open');
   };
   const LIVE_KEY='dm-live-resolved-v1';
@@ -11643,9 +10682,9 @@ body.dark .dm-fix-confirm{background:#f4f4f5;color:#17171a}.body.dark .dm-fix-ca
     const card=document.querySelector('[data-intel="'+id+'"]');
     if(card){card.classList.add('is-resolving');}
     const c=document.getElementById('wowModuleContent');
-    c.innerHTML='<div class="wow-module-top"><div><div class="wow-module-kicker">'+d.kicker+' · ГОТОВО</div><h2 id="wowModuleTitle" class="wow-module-title">Я взял это на себя.</h2><p class="wow-module-sub">'+d.done+'</p></div><button class="wow-module-close" type="button" onclick="closeBusinessModule()" aria-label="Готово">Готово</button></div>'+
+    c.innerHTML='<div class="wow-module-top"><div><div class="wow-module-kicker">'+d.kicker+' · ГОТОВО</div><h2 id="wowModuleTitle" class="wow-module-title">Я взял это на себя.</h2><p class="wow-module-sub">'+d.done+'</p></div><button class="wow-module-close done-etalon" type="button" onclick="closeBusinessModule()" aria-label="Готово">Готово</button></div>'+
       '<div class="dm-fix-note"><b>Что дальше</b><p>Я продолжу следить за результатом. Если проблема появится снова — верну карточку на Главную.</p></div>'+
-      '<div class="dm-fix-actions"><button class="dm-fix-confirm" type="button" onclick="finishLiveCard(\''+id+'\')">Готово</button></div>';
+      '';
   };
   window.finishLiveCard=function(id){
     const st=liveResolved(); st[id]=Date.now(); saveLiveState(st);
@@ -11680,8 +10719,6 @@ body.dark .dm-fix-confirm{background:#f4f4f5;color:#17171a}.body.dark .dm-fix-ca
   setTimeout(renderIntelligence,220);
 })();
 </script>
-
-
 <style id="live-intelligence-cards-v1">
 .dm-intel-card{transition:opacity .38s ease,transform .38s ease,max-height .45s ease,margin .45s ease,padding .45s ease!important;overflow:hidden!important}
 .dm-intel-card.is-resolving{opacity:.55;transform:scale(.985)}
@@ -11689,7 +10726,6 @@ body.dark .dm-fix-confirm{background:#f4f4f5;color:#17171a}.body.dark .dm-fix-ca
 .dm-live-status{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:9px;color:var(--f-muted,#777981)}
 .dm-live-status i{width:6px;height:6px;border-radius:50%;background:#20a46a;box-shadow:0 0 0 4px rgba(32,164,106,.08)}
 </style>
-
 <style id="digital-footprint-v1">
 /* Цифровой след — единая карта присутствия бизнеса. */
 .dm-footprint-sheet{position:fixed;inset:0;z-index:10050;display:none;align-items:flex-end;justify-content:center;background:rgba(8,9,12,.54);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
@@ -11700,27 +10736,12 @@ body.dark .dm-footprint-panel{background:rgba(14,15,18,.985);color:#f5f6f8;borde
 body.dark .dm-footprint-stat,body.dark .dm-source{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09)}body.dark .dm-footprint-sub,body.dark .dm-footprint-stat span,body.dark .dm-source small,body.dark .dm-opp p,body.dark .dm-footprint-note{color:#aeb1ba}body.dark .dm-opp{background:linear-gradient(145deg,rgba(23,105,255,.10),rgba(255,255,255,.03));border-color:rgba(120,150,255,.16)}body.dark .dm-opp button{background:#f4f4f5;color:#17171a}body.dark .dm-footprint-close{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.1)}
 @media(max-width:700px){.dm-footprint-panel{padding:19px 15px calc(20px + env(safe-area-inset-bottom));border-radius:28px 28px 0 0;max-height:96vh}.dm-footprint-title{font-size:29px}.dm-footprint-close{min-width:72px}.dm-footprint-overview{grid-template-columns:1fr 1fr}.dm-footprint-grid{grid-template-columns:1fr 1fr}.dm-opps{grid-template-columns:1fr}.dm-source{min-height:82px}.dm-footprint-section{margin-top:18px}}
 </style>
-
 <script id="digital-footprint-v1-js">
 (function(){
   const sources=[
     ['Сайт','Продажи, заявки, аналитика','Вижу данные'],['VK','Соцсеть и обращения','Вижу данные'],['Telegram','Канал и сообщения','Вижу данные'],['Ozon','Продажи и товары','Вижу данные'],['Wildberries','Продажи и товары','Вижу данные'],['Avito','Объявления и спрос','Проверяю'],['Яндекс Маркет','Продажи и спрос','Проверяю'],['Мегамаркет','Продажи и спрос','Проверяю'],['Реклама','Кампании и расходы','Вижу данные'],['Финансы','Выручка и расходы','Вижу данные'],['Доставка','Заказы и сроки','Вижу данные'],['Клиенты','История и повторные покупки','Вижу данные']
   ];
-  function ensure(){
-    let s=document.getElementById('dmFootprintSheet'); if(s)return s;
-    s=document.createElement('div'); s.id='dmFootprintSheet'; s.className='dm-footprint-sheet';
-    s.innerHTML='<section class="dm-footprint-panel" role="dialog" aria-modal="true" aria-labelledby="dmFootprintTitle">'+
-      '<div class="dm-footprint-head"><div><div class="dm-footprint-kicker">ЦИФРОВОЙ СЛЕД · Я СЛЕЖУ</div><h2 id="dmFootprintTitle" class="dm-footprint-title">Я вижу бизнес целиком.</h2><p class="dm-footprint-sub">Не заставляю тебя ходить по десяти сервисам. Собираю всё, что происходит вокруг бизнеса, в одну картину — и ищу проблемы и новые возможности сам.</p></div><button class="dm-footprint-close" type="button" onclick="closeDigitalFootprint()">Готово</button></div>'+
-      '<div class="dm-footprint-overview"><div class="dm-footprint-stat"><small>ИСТОЧНИКОВ В ПОЛЕ ЗРЕНИЯ</small><b>12</b><span>каналы, площадки и процессы</span></div><div class="dm-footprint-stat"><small>ПОДКЛЮЧЕНО</small><b>8</b><span>данные уже приходят</span></div><div class="dm-footprint-stat"><small>ПРОВЕРЯЮ</small><b>4</b><span>новые точки для работы</span></div><div class="dm-footprint-stat"><small>ВОЗМОЖНОСТИ</small><b>3</b><span>которые я уже нашёл</span></div></div>'+
-      '<div class="dm-footprint-section"><div class="dm-footprint-section-head"><h3>Что я сейчас вижу</h3><p>одна картина вместо десятка кабинетов</p></div><div class="dm-footprint-grid">'+sources.map(x=>'<div class="dm-source"><div class="dm-source-top"><span class="dm-source-name">'+x[0]+'</span><span class="dm-source-dot '+(x[2]==='Проверяю'?'find':'')+'"></span></div><small>'+x[1]+'</small><em>'+x[2].toUpperCase()+'</em></div>').join('')+'</div></div>'+
-      '<div class="dm-footprint-section"><div class="dm-footprint-section-head"><h3>Что я нашёл</h3><p>здесь помощник работает на опережение</p></div><div class="dm-opps">'+
-      '<article class="dm-opp"><span class="dm-opp-kicker">НОВЫЙ КАНАЛ</span><h4>Avito может дать ещё один поток покупателей.</h4><p>Я вижу подходящий товар и уже сравниваю спрос с тем, что у тебя продаётся сейчас.</p><button type="button" onclick="closeDigitalFootprint();managerFix(\'opportunity\')">Заняться этим</button></article>'+
-      '<article class="dm-opp"><span class="dm-opp-kicker">ВОЗМОЖНОСТЬ</span><h4>Яндекс Маркет и Мегамаркет стоит проверить.</h4><p>Я не говорю «продавай везде». Сначала проверю, есть ли там смысл именно для твоего товара.</p><button type="button" onclick="closeDigitalFootprint();openBusinessModule(\'opportunity\')">Подробнее →</button></article>'+
-      '<article class="dm-opp"><span class="dm-opp-kicker">СВЯЗИ</span><h4>Я сопоставляю каналы, а не смотрю на них отдельно.</h4><p>Если продажи меняются, я ищу причину сразу по рекламе, сайту, клиентам и площадкам.</p><button type="button" onclick="closeDigitalFootprint();openBusinessModule(\'radar\')">Подробнее →</button></article>'+
-      '</div></div>'+
-      '<div class="dm-footprint-note"><b>Моя задача:</b> замечать не только то, что сломалось, но и то, где можно заработать, сэкономить время или снять с тебя рутину. Если действие требует денег или важного решения — сначала спрошу.</div>'+
-      '</section>';
-    s.addEventListener('click',e=>{if(e.target===s)closeDigitalFootprint()}); document.body.appendChild(s); return s;
+  function ensure(){); document.body.appendChild(s); return s;
   }
   window.closeDigitalFootprint=function(){const s=document.getElementById('dmFootprintSheet');if(s)s.classList.remove('is-open')};
   window.openDigitalFootprint=function(){ensure().classList.add('is-open')};
@@ -11734,7 +10755,6 @@ body.dark .dm-footprint-stat,body.dark .dm-source{background:rgba(255,255,255,.0
   window.renderHomeSectionPreviews=function(){if(typeof old==='function')old();setTimeout(bind,20)};
 })();
 </script>
-
 <style id="digital-manager-native-cards-final-v1">
 /* FINAL: intelligence cards use the exact native future-card design. */
 #homeSectionPreviews.dm-intelligence-home .dm-intel-card{
@@ -11779,8 +10799,6 @@ body.dark #homeSectionPreviews.dm-intelligence-home .dm-intel-btn.ghost{backgrou
   #homeSectionPreviews.dm-intelligence-home .dm-intel-actions{gap:7px}
 }
 </style>
-
-
 <style id="theme-interface-pass-v1">
 /* Theme pass V1 — единая система поверхностей. Помощник не затрагиваем. */
 :root{
@@ -11850,7 +10868,6 @@ body.dark .company-panel .company-values p,body.dark .company-panel .company-pro
 body:not(.dark) .future-btn.primary,body:not(.dark) .control-action,body:not(.dark) .settings-autopilot-action{background:#17171a!important;color:#fff!important}
 body.dark .future-btn.primary,body.dark .control-action,body.dark .settings-autopilot-action{background:rgba(255,255,255,.075)!important;color:#fff!important;border-color:var(--ui-line)!important}
 </style>
-
 <style id="company-sheet-our-theme-final-v3">
 /* Компания: не отдельный чёрный экран — полностью в визуальной системе приложения. */
 .company-logo.dm-company-mark{
@@ -11887,10 +10904,197 @@ body.dark .company-hero p{color:var(--muted)!important}
 body.dark .company-tags span,body.dark .company-product{background:rgba(255,255,255,.045)!important;color:var(--text)!important;border-color:var(--line)!important}
 @media(max-width:600px){.company-close.company-done{min-width:72px!important;padding:0 13px!important;font-size:10.5px!important}}
 </style>
+<script id="etalon-page-done-actions">
+document.getElementById('salesDone')?.addEventListener('click',function(){if(window.showSection)window.showSection('home');});
+document.getElementById('financeDone')?.addEventListener('click',function(){if(window.showSection)window.showSection('home');});
+</script><style id="etalon-all-pages-v1">
+/* ETALON V1 — единый визуальный язык для всех основных страниц.
+   Источник: эталонная страница «Продвижение».
+   Не меняем тёмную тему и содержимое — только светлый визуальный каркас. */
+:root{
+  --et-bg:#f5f7fc;
+  --et-card:rgba(255,255,255,.86);
+  --et-card-solid:#fff;
+  --et-line:rgba(20,28,48,.10);
+  --et-text:#15161a;
+  --et-muted:#7b7f89;
+  --et-soft:#f0f1f7;
+  --et-indigo:#203a83;
+  --et-violet:#6a58ba;
+  --et-grad:linear-gradient(135deg,#203a83 0%,#4a5bb0 56%,#6a58ba 100%);
+}
+body:not(.dark){background:var(--et-bg)!important;color:var(--et-text)!important}
+body:not(.dark) .unified-page,
+body:not(.dark) .finance-page{
+  background:transparent!important;
+  color:var(--et-text)!important;
+  max-width:1180px!important;
+  margin:0 auto!important;
+  padding:18px 14px 110px!important;
+}
+/* Заголовки как на эталоне */
+body:not(.dark) .clients-title,
+body:not(.dark) .tasks-title,
+body:not(.dark) .sales-hero h2,
+body:not(.dark) .finance-title,
+body:not(.dark) .promo-title{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif!important;
+  font-weight:800!important;
+  letter-spacing:-.055em!important;
+  line-height:.98!important;
+  color:#15161a!important;
+}
+body:not(.dark) .clients-title,
+body:not(.dark) .tasks-title,
+body:not(.dark) .finance-title,
+body:not(.dark) .promo-title{font-size:clamp(38px,5.2vw,58px)!important}
+body:not(.dark) .sales-hero h2{font-size:clamp(40px,5.2vw,60px)!important;margin:0!important}
+body:not(.dark) .clients-sub,
+body:not(.dark) .tasks-sub,
+body:not(.dark) .sales-hero p,
+body:not(.dark) .finance-sub,
+body:not(.dark) .promo-sub{
+  color:#858994!important;font-size:17px!important;line-height:1.35!important;letter-spacing:-.018em!important;margin-top:12px!important
+}
+body:not(.dark) .clients-head,
+body:not(.dark) .tasks-head,
+body:not(.dark) .finance-head,
+body:not(.dark) .promo-head,
+body:not(.dark) .sales-hero{
+  display:flex!important;align-items:flex-start!important;justify-content:space-between!important;gap:20px!important;
+  padding:0 0 26px!important;margin:0!important;border:0!important;background:transparent!important
+}
+body:not(.dark) .etalon-head-actions,
+body:not(.dark) .sales-hero-controls,
+body:not(.dark) .promo-head-actions{display:flex!important;align-items:center!important;gap:10px!important;flex:none!important}
+/* «Готово» управляется единственным финальным правилом DONE_ETALON_CLEAN ниже. */
+
+/* Карточки — белые, большие, спокойные */
+body:not(.dark) .clients-stats,
+body:not(.dark) .finance-stats,
+body:not(.dark) .promo-stats,
+body:not(.dark) .sales-stats{
+  display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important;margin:0 0 12px!important
+}
+body:not(.dark) .clients-stats{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+body:not(.dark) .client-stat,
+body:not(.dark) .finance-stat,
+body:not(.dark) .promo-stat,
+body:not(.dark) .sales-stat{
+  background:var(--et-card)!important;border:1px solid var(--et-line)!important;border-radius:24px!important;
+  box-shadow:0 8px 24px rgba(48,56,82,.035)!important;padding:24px 22px!important;min-height:108px!important
+}
+body:not(.dark) .client-stat span,
+body:not(.dark) .finance-stat span,
+body:not(.dark) .promo-stat span,
+body:not(.dark) .sales-stat span{color:#8a8e98!important;font-size:13px!important}
+body:not(.dark) .client-stat b,
+body:not(.dark) .finance-stat b,
+body:not(.dark) .promo-stat b,
+body:not(.dark) .sales-stat b{font-size:31px!important;letter-spacing:-.045em!important;color:#17181c!important;margin-top:10px!important}
+/* Информационные панели */
+body:not(.dark) .finance-health,
+body:not(.dark) .promo-health,
+body:not(.dark) .finance-manager-note,
+body:not(.dark) .promo-manager-note,
+body:not(.dark) .sales-command,
+body:not(.dark) .task-command{
+  border:1px solid rgba(20,28,48,.08)!important;border-radius:30px!important;background:rgba(255,255,255,.78)!important;
+  box-shadow:0 12px 32px rgba(45,54,82,.045)!important
+}
+body:not(.dark) .finance-manager-note,
+body:not(.dark) .promo-manager-note{background:#f0effc!important;border-color:rgba(106,88,186,.18)!important}
+/* Основные сетки */
+body:not(.dark) .finance-grid,
+body:not(.dark) .promo-grid,
+body:not(.dark) .sales-grid,
+body:not(.dark) .client-list,
+body:not(.dark) .task-list{gap:18px!important}
+body:not(.dark) .finance-card,
+body:not(.dark) .promo-card,
+body:not(.dark) .sales-card,
+body:not(.dark) .client-row,
+body:not(.dark) .task-row{
+  background:var(--et-card)!important;border:1px solid var(--et-line)!important;border-radius:30px!important;
+  box-shadow:0 10px 30px rgba(45,54,82,.04)!important
+}
+body:not(.dark) .client-row,
+body:not(.dark) .task-row{padding:22px!important}
+/* Все крупные CTA — один индиго→фиолетовый градиент эталона */
+body:not(.dark) .send,
+body:not(.dark) .confirm-action,
+body:not(.dark) .finance-action,
+body:not(.dark) .promo-action,
+body:not(.dark) .sales-action,
+body:not(.dark) .sales-primary,
+body:not(.dark) .sales-wide-action,
+body:not(.dark) .manager-send,
+body:not(.dark) .control-action,
+body:not(.dark) .build-action,
+body:not(.dark) .home-order-actions button.primary,
+body:not(.dark) .home-organize-bar button,
+body:not(.dark) .dm-fix-confirm,
+body:not(.dark) .pulse-bottom button,
+body:not(.dark) .future-btn.primary,
+body:not(.dark) .future-create-btn,
+body:not(.dark) .evo-open,
+body:not(.dark) .manager-primary,
+body:not(.dark) .report-main-action,
+body:not(.dark) .recovery-main,
+body:not(.dark) .recovery-actions .send,
+body:not(.dark) .home-section-preview .preview-open,
+body:not(.dark) .settings-autopilot-action,
+body:not(.dark) .settings-create-card button,
+body:not(.dark) .wow-module-primary,
+body:not(.dark) .company-close.company-done,
+body:not(.dark) .wow-module-close{
+  background:var(--et-grad)!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+  border:1px solid rgba(71,85,164,.28)!important;box-shadow:0 12px 28px rgba(48,62,145,.18),inset 0 1px 0 rgba(255,255,255,.14)!important
+}
+/* В эталоне нижний основной CTA широкий */
+body:not(.dark) .promo-action,
+body:not(.dark) .sales-wide-action{border-radius:22px!important;min-height:64px!important;font-size:15px!important}
+/* Убираем старую плавающую «На главную» на всех страницах: возврат только через «Готово». */
+body:not(.dark) #deepSectionBack{display:none!important}
+@media(max-width:760px){
+  body:not(.dark) .unified-page,
+  body:not(.dark) .finance-page{padding:12px 12px calc(94px + env(safe-area-inset-bottom))!important}
+  body:not(.dark) .clients-head,
+  body:not(.dark) .tasks-head,
+  body:not(.dark) .finance-head,
+  body:not(.dark) .promo-head,
+  body:not(.dark) .sales-hero{gap:12px!important;padding-bottom:18px!important}
+  body:not(.dark) .clients-title,
+  body:not(.dark) .tasks-title,
+  body:not(.dark) .finance-title,
+  body:not(.dark) .promo-title{font-size:42px!important}
+  body:not(.dark) .sales-hero h2{font-size:42px!important}
+  body:not(.dark) .clients-sub,
+  body:not(.dark) .tasks-sub,
+  body:not(.dark) .sales-hero p,
+  body:not(.dark) .finance-sub,
+  body:not(.dark) .promo-sub{font-size:15px!important}
+  body:not(.dark) .clients-stats,
+  body:not(.dark) .finance-stats,
+  body:not(.dark) .promo-stats,
+  body:not(.dark) .sales-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+  body:not(.dark) .clients-stats{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  body:not(.dark) .client-stat,
+  body:not(.dark) .finance-stat,
+  body:not(.dark) .promo-stat,
+  body:not(.dark) .sales-stat{padding:17px 14px!important;border-radius:20px!important;min-height:94px!important}
+  body:not(.dark) .client-stat b,
+  body:not(.dark) .finance-stat b,
+  body:not(.dark) .promo-stat b,
+  body:not(.dark) .sales-stat b{font-size:25px!important}
+  body:not(.dark) .promo-head-actions .promo-period,
+  body:not(.dark) .sales-hero-controls .sales-period,
+  body:not(.dark) .etalon-head-actions .finance-period{display:none!important}
+  body:not(.dark) .sales-hero-controls{margin-left:auto!important}
+}
+</style>
 </body>
-
 </html>
-
 <style id="evolution-home-button-v37">
 /* V37 — в Эволюции вместо крестика единая кнопка «На главную». */
 #futureEvolutionModal .evolution-home-button{
@@ -11926,7 +11130,6 @@ body.dark #futureEvolutionModal .evolution-home-button{
   }
 }
 </style>
-
 <style id="memory-home-button-v39">
 /* V39 — «Память бизнеса»: настоящая кнопка «На главную», без крестика. */
 #controlOverlay .control-close::before{
@@ -11937,7 +11140,6 @@ body.dark #futureEvolutionModal .evolution-home-button{
   text-indent:0!important;
 }
 </style>
-
 <style id="business-pulse-home-v40">
 /* V40 — Business Pulse: единая кнопка «На главную» вместо крестика. */
 #businessPulse .pulse-top .pulse-home-button{
@@ -11963,7 +11165,6 @@ body.dark #futureEvolutionModal .evolution-home-button{
   }
 }
 </style>
-
 <style id="business-pulse-modern-v41">
 /* V41 — обновляем только внешний вид «Что происходит с бизнесом».
    Логику, данные и действия не меняем. */
@@ -12161,7 +11362,6 @@ body.dark .business-pulse .pulse-bottom p{
   }
 }
 </style>
-
 <style id="switch-position-final-v4">
 /* FINAL: settings switches use physical left/right position, not transform.
    This avoids conflicts from the many legacy switch styles in the file. */
@@ -12232,7 +11432,6 @@ body.dark .business-pulse .pulse-bottom p{
   repair();
 })();
 </script>
-
 <style id="light-manager-living-indigo-glow">
 /* Светлая тема: живое индиго-свечение вокруг знака без круглого диска. */
 body:not(.dark) .mobile-manager.dm-signature-manager-button{
@@ -12285,8 +11484,6 @@ body:not(.dark) .dm-signature-button-logo{
   
 }
 </style>
-
-
 <style id="light-manager-deep-indigo-v9-final">
 /* FINAL — глубокий индиго поверх всех предыдущих слоёв. */
 body:not(.dark) .mobile-manager.dm-signature-manager-button::after{
@@ -12335,7 +11532,6 @@ body:not(.dark) .dm-signature-button-logo{
   body:not(.dark) .mobile-manager.dm-signature-manager-button::after{animation:none!important}
 }
 </style>
-
 <style id="menu-logo-no-orbits-only">
 /* Только фирменный знак вместо троеточия. Без ореолов, свечения и орбит. */
 .dm-living-dots .dm-menu-logo{display:grid!important;place-items:center!important;width:30px!important;height:30px!important;color:currentColor!important;filter:none!important;box-shadow:none!important;background:none!important;}
@@ -12348,7 +11544,6 @@ body:not(.dark) .dm-living-dots .dm-menu-logo .sig-core{fill:#111216!important;}
 body.dark .dm-living-dots .dm-menu-logo .sig-diamond{fill:#111216!important;stroke:#f5f5f7!important;}
 body.dark .dm-living-dots .dm-menu-logo .sig-core{fill:#f5f5f7!important;}
 </style>
-
 <style id="wow-business-os-v3-css">
 /* WOW v3: структура бизнеса понятнее, а родные карточки Главной остаются нетронутыми. */
 .business-map-strip{margin:0 0 12px;padding:11px 13px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.42);display:flex;align-items:center;gap:8px;overflow:auto;scrollbar-width:none;white-space:nowrap}
@@ -12506,7 +11701,6 @@ body.dark .wow-module-panel > .module-flow span{
   .wow-module-block b{font-size:16px}
 }
 </style>
-
 <script id="wow-business-os-v3-js">
 (function(){
   const KEY='db-home-section-switches-v3';
@@ -12610,7 +11804,7 @@ body.dark .wow-module-panel > .module-flow span{
     const s=ensureSheet(),c=document.getElementById('wowModuleContent');
     const stats=d.stats.map(x=>'<div class="wow-module-stat"><small>'+x[0]+'</small><b>'+x[1]+'</b></div>').join('');
     const flow=d.flow.map((x,i)=>'<span>'+x+'</span>'+(i<d.flow.length-1?'<i>→</i>':'')).join('');
-    c.innerHTML='<div class="wow-module-top"><div><div class="wow-module-kicker">'+d.kicker+' · '+d.status+'</div><h2 id="wowModuleTitle" class="wow-module-title">'+d.title+'</h2><p class="wow-module-sub">'+d.sub+'</p></div><button class="wow-module-close" type="button" onclick="closeBusinessModule()" aria-label="Закрыть">Готово</button></div>'+
+    c.innerHTML='<div class="wow-module-top"><div><div class="wow-module-kicker">'+d.kicker+' · '+d.status+'</div><h2 id="wowModuleTitle" class="wow-module-title">'+d.title+'</h2><p class="wow-module-sub">'+d.sub+'</p></div><button class="wow-module-close done-etalon" type="button" onclick="closeBusinessModule()" aria-label="Закрыть">Готово</button></div>'+
       '<div class="wow-module-grid">'+stats+'</div>'+
       '<div class="module-flow">'+flow+'</div>'+
       '<div class="wow-module-sections">'+
@@ -12620,7 +11814,7 @@ body.dark .wow-module-panel > .module-flow span{
         '<div class="wow-module-block"><span>ЗДЕСЬ ЖИВЁТ</span><b>'+d.sub+'</b><p>Никакой мешанины: у каждого блока своя работа.</p></div>'+ 
       '</div>'+
       '<div class="wow-module-joke">'+d.joke+'</div>'+
-      '<div class="wow-module-actions"><button class="wow-module-primary" type="button" onclick="closeBusinessModule();'+(id==='operations'||id==='reports'?'':'showSection(\''+id+'\')')+'">'+d.cta+' →</button><button class="wow-module-secondary" type="button" onclick="closeBusinessModule()">Готово</button></div>';
+      '<div class="wow-module-actions"><button class="wow-module-primary" type="button" onclick="closeBusinessModule();'+(id==='operations'||id==='reports'?'':'showSection(\''+id+'\')')+'">'+d.cta+' →</button></div>';
     s.classList.add('is-open');
   };
 
@@ -12660,7 +11854,14 @@ body.dark .wow-module-panel > .module-flow span{
   }
 
   window.toggleSettingsHomeSection=function(id,btn){
-    const x=prefs();x[id]=!x[id];save(x);if(typeof window.syncSettingsHomeSwitches==='function')window.syncSettingsHomeSwitches();render();if(typeof showSection==='function')showSection('home');setTimeout(render,30);
+    const x=prefs();
+    x[id]=!x[id];
+    save(x);
+    if(typeof window.syncSettingsHomeSwitches==='function')window.syncSettingsHomeSwitches();
+    render();
+    setTimeout(function(){
+      if(typeof window.syncSettingsHomeSwitches==='function')window.syncSettingsHomeSwitches();
+    },30);
   };
 
   const originalOpenSettings=window.openSettingsPanel;
@@ -12681,19 +11882,33 @@ body.dark .wow-module-panel > .module-flow span{
   setTimeout(render,120);
 })();
 </script>
-
 <style id="visual-unification-final-v1">
 /* FINAL VISUAL UNIFICATION — только внешний вид, JS/логику не меняем. */
 :root{
   --ui-accent-1:#203a83;
   --ui-accent-2:#4a5bb0;
   --ui-accent-3:#6a58ba;
+  --ui-cta-gradient:linear-gradient(135deg,#203a83 0%,#4a5bb0 56%,#6a58ba 100%);
   --ui-accent-soft:rgba(43,70,155,.10);
   --ui-accent-line:rgba(43,70,155,.18);
   --ui-dark:#17181c;
 }
 
 /* ---------- Единый язык основных CTA в светлой теме ---------- */
+body:not(.dark) .send,
+body:not(.dark) .confirm-action,
+body:not(.dark) .finance-action,
+body:not(.dark) .promo-action,
+body:not(.dark) .sales-action,
+body:not(.dark) .sales-primary,
+body:not(.dark) .sales-wide-action,
+body:not(.dark) .manager-send,
+body:not(.dark) .control-action,
+body:not(.dark) .build-action,
+body:not(.dark) .home-order-actions button.primary,
+body:not(.dark) .home-organize-bar button,
+body:not(.dark) .dm-fix-confirm,
+body:not(.dark) .pulse-bottom button,
 body:not(.dark) .future-btn.primary,
 body:not(.dark) .future-create-btn,
 body:not(.dark) .evo-open,
@@ -12710,8 +11925,11 @@ body:not(.dark) .build-action,
 body:not(.dark) .home-section-preview .preview-open,
 body:not(.dark) .settings-autopilot-action,
 body:not(.dark) .settings-create-card button,
-body:not(.dark) .wow-module-primary{
-  background:linear-gradient(135deg,var(--ui-accent-1) 0%,var(--ui-accent-2) 56%,var(--ui-accent-3) 100%) !important;
+body:not(.dark) .wow-module-primary,
+body:not(.dark) #controlOverlay .control-close,
+body:not(.dark) .company-close.company-done,
+body:not(.dark) .wow-module-close{
+  background:var(--ui-cta-gradient) !important;
   color:#fff !important;
   -webkit-text-fill-color:#fff !important;
   border:1px solid rgba(51,75,157,.28) !important;
@@ -12734,7 +11952,10 @@ body:not(.dark) .build-action:hover,
 body:not(.dark) .home-section-preview .preview-open:hover,
 body:not(.dark) .settings-autopilot-action:hover,
 body:not(.dark) .settings-create-card button:hover,
-body:not(.dark) .wow-module-primary:hover{
+body:not(.dark) .wow-module-primary:hover,
+body:not(.dark) #controlOverlay .control-close:hover,
+body:not(.dark) .company-close.company-done:hover,
+body:not(.dark) .wow-module-close:hover{
   filter:brightness(1.045) saturate(1.02) !important;
   box-shadow:0 13px 30px rgba(41,61,130,.19),inset 0 1px 0 rgba(255,255,255,.18) !important;
 }
@@ -12749,9 +11970,7 @@ body:not(.dark) #tasksBack,
 body:not(.dark) #clientsBack,
 body:not(.dark) .mini-help,
 body:not(.dark) .more-close,
-body:not(.dark) .control-close,
-body:not(.dark) .pulse-top button,
-body:not(.dark) .wow-module-close{
+body:not(.dark) .pulse-top button{
   background:rgba(255,255,255,.58) !important;
   color:#51545c !important;
   border:1px solid rgba(26,29,35,.09) !important;
@@ -12763,12 +11982,9 @@ body:not(.dark) .theme-mode-btn:hover,
 body:not(.dark) .sales-ask-btn:hover,
 body:not(.dark) .task-back:hover,
 body:not(.dark) #tasksBack:hover,
-body:not(.dark) #clientsBack:hover,
 body:not(.dark) .mini-help:hover,
 body:not(.dark) .more-close:hover,
-body:not(.dark) .control-close:hover,
-body:not(.dark) .pulse-top button:hover,
-body:not(.dark) .wow-module-close:hover{
+body:not(.dark) .pulse-top button:hover{
   background:rgba(255,255,255,.82) !important;
   color:#202329 !important;
   border-color:rgba(26,29,35,.13) !important;
@@ -13121,4 +12337,187 @@ body.dark #homeSectionPreviews .home-added-card{
   #controlContent .dm-learning-button{width:100% !important}
   #homeSectionPreviews .action-row .future-btn{min-height:40px !important}
 }
+</style>
+
+<style id="settings-clean-source-of-truth-v1">
+/* SETTINGS FINAL — одна визуальная система, без старых наложений. */
+body:not(.dark) #controlOverlay .control-close{
+  width:112px!important;
+  min-width:112px!important;
+  height:56px!important;
+  min-height:56px!important;
+  padding:0 22px!important;
+  border-radius:18px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:0!important;
+  font:700 14px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif!important;
+  letter-spacing:-.015em!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  background:var(--ui-cta-gradient)!important;
+  border:1px solid rgba(71,85,164,.28)!important;
+  box-shadow:0 12px 28px rgba(48,62,145,.18),inset 0 1px 0 rgba(255,255,255,.14)!important;
+  text-shadow:none!important;
+  cursor:pointer!important;
+  transition:transform .18s ease,filter .18s ease,box-shadow .18s ease!important;
+}
+body:not(.dark) #controlOverlay .control-close:hover{
+  transform:translateY(-1px)!important;
+  filter:brightness(1.045) saturate(1.02)!important;
+  background:var(--ui-cta-gradient)!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  box-shadow:0 14px 31px rgba(48,62,145,.21),inset 0 1px 0 rgba(255,255,255,.17)!important;
+}
+body:not(.dark) #controlOverlay .control-close::before{content:none!important;display:none!important}
+body:not(.dark) #controlContent .dm-learning-button,
+body:not(.dark) #controlContent button.dm-learning-button{
+  min-height:44px!important;
+  height:44px!important;
+  padding:0 16px!important;
+  border-radius:14px!important;
+  font:750 12px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif!important;
+  letter-spacing:-.01em!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  background:var(--ui-cta-gradient)!important;
+  border:1px solid rgba(71,85,164,.28)!important;
+  box-shadow:0 10px 24px rgba(48,62,145,.16),inset 0 1px 0 rgba(255,255,255,.14)!important;
+  text-shadow:none!important;
+  cursor:pointer!important;
+  transition:transform .18s ease,filter .18s ease,box-shadow .18s ease!important;
+}
+body:not(.dark) #controlContent .dm-learning-button:hover,
+body:not(.dark) #controlContent button.dm-learning-button:hover{
+  transform:translateY(-1px)!important;
+  filter:brightness(1.045) saturate(1.02)!important;
+  background:var(--ui-cta-gradient)!important;
+  box-shadow:0 13px 29px rgba(48,62,145,.19),inset 0 1px 0 rgba(255,255,255,.17)!important;
+}
+/* Switches: one geometry, one indigo state, real pointer target. */
+#controlContent .settings-rules-list .settings-rule-toggle,
+#controlContent .settings-clean-list .settings-home-switch{
+  position:relative!important;
+  display:block!important;
+  width:42px!important;
+  height:24px!important;
+  min-width:42px!important;
+  min-height:24px!important;
+  max-width:42px!important;
+  max-height:24px!important;
+  padding:3px!important;
+  margin:0!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  direction:ltr!important;
+  border-radius:999px!important;
+  border:1px solid rgba(20,28,45,.12)!important;
+  background:#d9dee8!important;
+  box-shadow:inset 0 1px 2px rgba(16,31,76,.08)!important;
+  cursor:pointer!important;
+  pointer-events:auto!important;
+  flex:none!important;
+  touch-action:manipulation!important;
+}
+#controlContent .settings-rules-list .settings-rule-toggle i,
+#controlContent .settings-clean-list .settings-home-switch i{
+  position:absolute!important;
+  left:3px!important;
+  top:3px!important;
+  right:auto!important;
+  bottom:auto!important;
+  width:18px!important;
+  height:18px!important;
+  min-width:18px!important;
+  min-height:18px!important;
+  max-width:18px!important;
+  max-height:18px!important;
+  margin:0!important;
+  display:block!important;
+  transform:none!important;
+  border-radius:50%!important;
+  background:#fff!important;
+  box-shadow:0 1px 4px rgba(16,31,76,.22)!important;
+  transition:left .22s cubic-bezier(.2,.8,.2,1)!important;
+  pointer-events:none!important;
+}
+#controlContent .settings-rules-list .settings-rule-toggle.is-on,
+#controlContent .settings-clean-list .settings-home-switch.is-on{
+  background:var(--ui-cta-gradient)!important;
+  border-color:rgba(71,85,164,.28)!important;
+  box-shadow:0 5px 12px rgba(36,62,139,.12),inset 0 1px 0 rgba(255,255,255,.12)!important;
+}
+#controlContent .settings-rules-list .settings-rule-toggle.is-on i,
+#controlContent .settings-clean-list .settings-home-switch.is-on i{
+  left:21px!important;
+  transform:none!important;
+  background:#fff!important;
+}
+#controlContent .settings-rules-list .settings-rule-toggle:active,
+#controlContent .settings-clean-list .settings-home-switch:active{transform:scale(.96)!important}
+body.dark #controlOverlay .control-close{
+  width:112px!important;
+  min-width:112px!important;
+  height:56px!important;
+  min-height:56px!important;
+  padding:0 22px!important;
+  border-radius:18px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  font:700 14px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  background:rgba(255,255,255,.075)!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.045)!important;
+}
+body.dark #controlOverlay .control-close::before{content:none!important;display:none!important}
+body.dark #controlContent .dm-learning-button,
+body.dark #controlContent button.dm-learning-button{
+  background:rgba(255,255,255,.075)!important;
+  color:#f7f8fa!important;
+  -webkit-text-fill-color:#f7f8fa!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.045)!important;
+}
+body.dark #controlContent .settings-rules-list .settings-rule-toggle,
+body.dark #controlContent .settings-clean-list .settings-home-switch{
+  background:#343a48!important;
+  border-color:rgba(255,255,255,.10)!important;
+  box-shadow:none!important;
+}
+body.dark #controlContent .settings-rules-list .settings-rule-toggle.is-on,
+body.dark #controlContent .settings-clean-list .settings-home-switch.is-on{
+  background:var(--ui-cta-gradient)!important;
+  border-color:rgba(71,85,164,.28)!important;
+}
+@media(max-width:700px){
+  body:not(.dark) #controlOverlay .control-close,
+  body.dark #controlOverlay .control-close{width:112px!important;min-width:112px!important;height:48px!important;min-height:48px!important;border-radius:16px!important;padding:0 18px!important}
+  #controlContent .dm-learning-button,
+  #controlContent button.dm-learning-button{width:100%!important;min-height:44px!important;height:44px!important;border-radius:14px!important}
+}
+</style>
+
+<style id="DONE_ETALON_SINGLE_SOURCE">
+/* ЕДИНСТВЕННЫЙ источник стиля кнопки «Готово». */
+html body button.done-etalon{
+  box-sizing:border-box!important;
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  flex:0 0 82px!important;width:82px!important;min-width:82px!important;max-width:82px!important;
+  height:38px!important;min-height:38px!important;max-height:38px!important;
+  margin:0!important;padding:0!important;border:1px solid rgba(93,112,166,.42)!important;
+  border-radius:13px!important;
+  background:linear-gradient(135deg,#203a83 0%,#4a5bb0 56%,#6a58ba 100%)!important;
+  color:#fff!important;-webkit-text-fill-color:#fff!important;
+  font:700 11px/1 -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif!important;
+  letter-spacing:-.01em!important;box-shadow:0 10px 26px rgba(41,61,130,.15),inset 0 1px 0 rgba(255,255,255,.16)!important;
+  text-shadow:none!important;cursor:pointer!important;opacity:1!important;transform:none!important;
+}
+html body button.done-etalon:hover{background:linear-gradient(135deg,#203a83 0%,#4a5bb0 56%,#6a58ba 100%)!important;color:#fff!important;-webkit-text-fill-color:#fff!important;filter:brightness(1.045) saturate(1.02)!important}
+html body button.done-etalon:active{transform:scale(.98)!important}
+#controlOverlay button.done-etalon::before{content:none!important;display:none!important}
 </style>
