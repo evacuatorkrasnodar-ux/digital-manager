@@ -5408,6 +5408,96 @@ body.dark .future-autopilot-modal .auto-save{
 }
 </style>
 
+
+<style id="wow-module-native-cards-v3">
+/* Внутренние карточки используют ТОЧНО тот же визуальный язык, что и .future-card на Главной. */
+.wow-module-panel .wow-module-sections{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:14px!important;
+  margin:18px 0 0!important;
+}
+.wow-module-panel .wow-module-block{
+  position:relative!important;
+  min-height:0!important;
+  box-sizing:border-box!important;
+  padding:27px!important;
+  border:1px solid var(--f-line,#e9e9ec)!important;
+  border-radius:27px!important;
+  background:var(--f-card,rgba(255,255,255,.72))!important;
+  backdrop-filter:blur(18px)!important;
+  -webkit-backdrop-filter:blur(18px)!important;
+  box-shadow:0 10px 35px rgba(20,20,25,.035)!important;
+  transition:transform .25s ease,box-shadow .25s ease!important;
+}
+.wow-module-panel .wow-module-block:hover{
+  transform:translateY(-2px)!important;
+  box-shadow:0 18px 45px rgba(20,20,25,.07)!important;
+}
+.wow-module-panel .wow-module-block span{
+  display:block!important;
+  font-size:8px!important;
+  line-height:1.2!important;
+  letter-spacing:.14em!important;
+  color:var(--f-soft,#a2a2a9)!important;
+  font-weight:750!important;
+}
+.wow-module-panel .wow-module-block b{
+  display:block!important;
+  margin:10px 0 0!important;
+  font-size:18px!important;
+  line-height:1.2!important;
+  letter-spacing:-.035em!important;
+  color:var(--f-ink,#0d0d10)!important;
+}
+.wow-module-panel .wow-module-block p{
+  margin:12px 0 0!important;
+  color:var(--f-muted,#77777f)!important;
+  font-size:10px!important;
+  line-height:1.55!important;
+}
+body.dark .wow-module-panel .wow-module-block{
+  background:rgba(255,255,255,.045)!important;
+  border-color:rgba(255,255,255,.10)!important;
+  box-shadow:0 10px 35px rgba(0,0,0,.10)!important;
+}
+body.dark .wow-module-panel .wow-module-block:hover{
+  box-shadow:0 18px 45px rgba(0,0,0,.22)!important;
+}
+body.dark .wow-module-panel .wow-module-block b{color:#f5f5f7!important}
+body.dark .wow-module-panel .wow-module-block p{color:#aaaab1!important}
+
+/* Цепочка — в том же спокойном стиле, без ощущения обычного текста. */
+.wow-module-panel > .module-flow{
+  display:flex!important;
+  align-items:center!important;
+  gap:7px!important;
+  flex-wrap:wrap!important;
+  margin-top:14px!important;
+}
+.wow-module-panel > .module-flow span{
+  padding:7px 10px!important;
+  border:1px solid var(--f-line,rgba(20,20,24,.07))!important;
+  border-radius:999px!important;
+  background:rgba(20,20,24,.035)!important;
+  color:var(--f-muted,#77777f)!important;
+  font-size:9px!important;
+  line-height:1.2!important;
+  font-weight:700!important;
+}
+body.dark .wow-module-panel > .module-flow span{
+  background:rgba(255,255,255,.055)!important;
+  border-color:rgba(255,255,255,.09)!important;
+  color:#b7b8be!important;
+}
+
+@media(max-width:700px){
+  .wow-module-panel .wow-module-sections{grid-template-columns:1fr!important;gap:10px!important;margin-top:14px!important}
+  .wow-module-panel .wow-module-block{padding:21px!important;border-radius:23px!important}
+  .wow-module-panel .wow-module-block b{font-size:16px!important}
+}
+</style>
+
 </head>
 <body>
 <div class="app">
@@ -5470,28 +5560,29 @@ body.dark .future-autopilot-modal .auto-save{
 </div>
 </section>
 <section class="future-grid home-block" data-home-block="attention" data-home-title="Главное внимание">
-<article class="future-card attention">
+<article class="future-card attention marketplace-card">
 <div class="card-top">
 <div>
-<span class="future-label">ТРЕБУЕТ РЕШЕНИЯ</span>
-<h3>Ozon: карточка товара стала приносить меньше заказов.</h3>
+<span class="future-label">ТРЕБУЕТ РЕШЕНИЯ · МАРКЕТПЛЕЙСЫ</span>
+<h3>Ozon, Wildberries и Яндекс Маркет — я слежу за продажами.</h3>
 </div>
 <span class="signal red"></span>
 </div>
-<p class="future-desc">Я сравнил цену, конкурентов, отзывы и изменения карточки. Нашёл наиболее вероятную причину.</p>
+<p class="future-desc">Я смотрю, где у селлеров проседают заказы, цена, остатки, отзывы и реклама. Сейчас сигнал пришёл с Ozon.</p>
 <div class="finding">
 <div class="finding-line"></div>
 <div>
-<span>Я НАШЁЛ</span>
-<strong>Цена стала выше рынка на 11%.</strong>
-<small>Карточка и реклама работают нормально.</small>
+<span>СЕЙЧАС ВАЖНО</span>
+<strong>Ozon: цена стала выше рынка на 11%.</strong>
+<small>Карточка и реклама работают нормально — проверяю, что мешает продажам.</small>
 </div>
+</div>
+<div class="marketplace-mini-list" aria-label="Подключённые маркетплейсы">
+<span>Ozon</span><span>Wildberries</span><span>Яндекс Маркет</span><span>Мегамаркет</span>
 </div>
 <div class="action-row">
-<button class="future-btn primary" onclick="this.closest('.future-card').classList.add('resolved'); this.innerHTML='Готово ✓';">
-          Исправить
-        </button>
-<button class="future-btn ghost" onclick="alert('Здесь откроется полный разбор причины и данные по конкурентам.')">Почему?</button>
+<button class="future-btn primary" type="button" onclick="event.stopPropagation();this.closest('.future-card').classList.add('resolved');this.textContent='Исправляю…';setTimeout(()=>{this.textContent='Исправлено ✓'},700)">Исправить</button>
+<button class="future-btn ghost" type="button" onclick="event.stopPropagation();alert('Здесь откроется разбор по площадкам: Ozon, Wildberries, Яндекс Маркет и другим подключённым каналам.')">Подробнее →</button>
 </div>
 </article>
 <article class="future-card">
@@ -5719,7 +5810,7 @@ body.dark .future-autopilot-modal .auto-save{
 <div aria-labelledby="evolutionTitle" aria-modal="true" class="evolution-sheet" role="dialog">
 <div class="evo-modal-head">
 <div><span class="future-label">ЭВОЛЮЦИЯ · ПОСЛЕДНИЕ 7 ДНЕЙ</span><h2 id="evolutionTitle">Как изменился твой бизнес.</h2><p>Это история не задач, а изменений. Здесь видно, что управляющий обнаружил, создал, проверил и чему научился.</p></div>
-<button aria-label="На главную" class="build-close evolution-home-button" onclick="closeEvolution();if(window.showSection)window.showSection('home')" type="button">← На главную</button>
+<button aria-label="На главную" class="build-close evolution-home-button" onclick="closeEvolution();if(window.showSection)window.showSection('home')" type="button">Готово</button>
 </div>
 <div class="evo-summary">
 <div><small>ИЗМЕНЕНИЙ</small><b>14</b><span>за 7 дней</span></div>
@@ -5794,7 +5885,7 @@ body.dark .future-autopilot-modal .auto-save{
 </div>
 </div>
 <section class="clients-page unified-page" id="clientsPage">
-<div class="clients-head"><div><div class="clients-title">Клиенты</div><div class="clients-sub">Я помню, кто к нам пришёл, что покупал и кому пора ответить.</div></div><button class="task-back" id="clientsBack" type="button">← Главная</button></div>
+<div class="clients-head"><div><div class="clients-title">Клиенты</div><div class="clients-sub">Я помню, кто к нам пришёл, что покупал и кому пора ответить.</div></div><button class="task-back" id="clientsBack" type="button">Готово</button></div>
 <div class="clients-stats"><div class="client-stat"><span>Новые заявки</span><b>14</b></div><div class="client-stat"><span>Ждут ответа</span><b>3</b></div><div class="client-stat"><span>Новых клиентов</span><b>8</b></div></div>
 <div class="client-list">
 <div class="client-row"><div class="client-avatar">АК</div><div class="client-main"><div class="client-name">Алексей К.</div><div class="client-info">Новая заявка · услуга «Доставка» · сегодня 08:42</div></div><span class="client-status wait">Нужно ответить</span><button class="client-action" type="button">Открыть</button></div>
@@ -5804,7 +5895,7 @@ body.dark .future-autopilot-modal .auto-save{
 <div class="clients-empty"><b>Цифровой управляющий следит за клиентами.</b><br>Когда подключим источники, я соберу здесь всю историю клиента сам. Никаких поисков по пяти системам — я уже побежал.</br></div>
 </section>
 <section class="tasks-page unified-page" id="tasksPage">
-<div class="tasks-head"><div><div class="tasks-title">Что я делаю</div><div class="tasks-sub">Не список дел. Здесь видно, что управляющий делает, что ждёт вас и что уже закончил.</div></div><button class="task-back" id="tasksBack" type="button">← Главная</button></div>
+<div class="tasks-head"><div><div class="tasks-title">Что я делаю</div><div class="tasks-sub">Не список дел. Здесь видно, что управляющий делает, что ждёт вас и что уже закончил.</div></div><button class="task-back" id="tasksBack" type="button">Готово</button></div>
 <div class="task-command"><div class="task-command-kicker">Сейчас</div><h2>Я уже работаю. От вас нужен только один ответ.</h2><p>На странице заказа что-то изменилось. Я нашёл связь с падением конверсии и подготовил вариант исправления.</p><button class="sales-primary" onclick="openManager()" type="button">Посмотреть, что я нашёл →</button></div><div class="task-list">
 <div class="task-row"><span class="task-state red"></span><div class="task-row-main"><div class="task-row-title">Разобраться, почему сайт продаёт хуже</div><div class="task-row-text">Изменение на странице заказа найдено вчера вечером. Требуется подтверждение.</div></div><span class="task-tag">Нужно подтвердить</span></div>
 <div class="task-row"><span class="task-state orange"></span><div class="task-row-main"><div class="task-row-title">Подготовить ответы на отзывы</div><div class="task-row-text">Варианты ответов подготовлены цифровым управляющим.</div></div><span class="task-tag">Сегодня</span></div>
@@ -6150,14 +6241,14 @@ body.dark .future-autopilot-modal .auto-save{
 <div aria-hidden="true" class="control-overlay" id="controlOverlay">
 <div class="control-backdrop" onclick="closeControl()"></div>
 <section aria-modal="true" class="control-panel" role="dialog">
-<button class="control-close" onclick="closeControl();if(window.showSection)window.showSection('home')">← На главную</button>
+<button class="control-close" onclick="closeControl();if(window.showSection)window.showSection('home')">Готово</button>
 <div id="controlContent"></div>
 </section>
 </div>
 <div aria-hidden="true" class="business-pulse" id="businessPulse">
 <div class="pulse-backdrop" onclick="closeBusinessPulse()"></div>
 <section aria-modal="true" class="pulse-panel" role="dialog">
-<div class="pulse-top"><div><span>Цифровой управляющий</span><h2>Что происходит<br>с бизнесом?</br></h2></div><button class="pulse-home-button" onclick="closeBusinessPulse();if(window.showSection)window.showSection('home')" aria-label="На главную">← На главную</button></div>
+<div class="pulse-top"><div><span>Цифровой управляющий</span><h2>Что происходит<br>с бизнесом?</br></h2></div><button class="pulse-home-button" onclick="closeBusinessPulse();if(window.showSection)window.showSection('home')" aria-label="На главную">Готово</button></div>
 <div class="pulse-hero"><div class="pulse-orb big"><i></i></div><div><b>Сегодня бизнес чувствует себя хорошо.</b><p>Но часть денег остаётся на столе: клиенты получают предложение и не получают повторного контакта.</p></div></div>
 <div class="pulse-links">
 <div><span>Продажи</span><b>184 000 ₽</b><em>вчера · +8%</em></div>
@@ -6235,9 +6326,10 @@ function openSettingsPanel(){
     </div>
     <button class="control-action settings-autopilot-action" onclick="closeControl();openAutopilot()">Настроить автопилот →</button>
 
-    <div class="settings-section-title">2 · Что показывать на Главной</div>
-    <div class="settings-section-note">Переключатель справа — добавить короткую карточку на Главную. Нажми название — открыть полный раздел отдельно.</div>
+    <div class="settings-section-title">2 · Что держать перед глазами</div>
+    <div class="settings-section-note">Выбери темы, которые хочешь видеть каждый день. Управляющий всё равно продолжит следить за остальным бизнесом и поднимет важную проблему сам.</div>
     <div class="settings-clean-list">${html}</div>
+    <div class="settings-daily-note"><span>✦</span><div><b>Главное — под тебя</b><small>Например: Деньги + Продажи. Остальное управляющий покажет сам, если там что-то действительно происходит.</small></div></div>
 
     <div class="settings-create-card">
       <div><span>ДОПОЛНИТЕЛЬНО</span><b>Создать новый инструмент</b><small>Не раздел и не настройка. Просто скажи, чего не хватает бизнесу.</small></div>
@@ -6249,7 +6341,13 @@ function openSettingsPanel(){
       <div class="rule-row settings-rule-row settings-hints-row"><div><b>Подсказки</b><small>Показывать маленькие подсказки по ходу работы.</small></div><button type="button" class="rule-toggle settings-rule-toggle" id="managerHintsToggle" role="switch" aria-checked="true" aria-label="Подсказки" onclick="event.preventDefault();event.stopPropagation();window.toggleManagerHints&&window.toggleManagerHints(this)"><i></i></button></div>
     </div>
     <div class="dm-learning-card"><div class="dm-learning-copy"><div class="dm-learning-kicker">Лёгкое обучение</div><b>Покажу, что здесь куда.</b><small>За минуту объясню Главную, разделы и управляющего — без длинной лекции.</small></div><button type="button" class="control-action dm-learning-button" onclick="openLightTutorial()">Пройти обучение →</button></div>
-    <div class="settings-company-footer"><div class="settings-company-brand"><span class="mark dm-company-mark">ЦБ</span><div><b>Цифровой бизнес</b><small>IT · AI · AUTOMATION</small></div></div><button type="button" class="settings-developer-link" onclick="openDeveloperContact()">Связаться с разработчиками <span>→</span></button></div>`);
+    <div class="settings-company-footer settings-company-footer-v2">
+  <button type="button" class="settings-company-brand settings-company-brand-button" onclick="openCompanySheet()" aria-label="Открыть информацию о компании Цифровой бизнес">
+    <span class="mark dm-company-mark settings-company-logo"><span aria-hidden="true" class="dm-signature-logo"><svg viewBox="0 0 120 120"><g class="sig-orbits"><ellipse class="sig-orbit o1" cx="60" cy="60" rx="48" ry="30" transform="rotate(-8 60 60)"></ellipse><ellipse class="sig-orbit o2" cx="60" cy="60" rx="48" ry="30" transform="rotate(28 60 60)"></ellipse><ellipse class="sig-orbit o3" cx="60" cy="60" rx="42" ry="42" transform="rotate(-20 60 60)"></ellipse></g><g class="sig-diamond-wrap"><rect class="sig-diamond" height="42" rx="10" transform="rotate(45 60 60)" width="42" x="39" y="39"></rect><rect class="sig-core" height="10" rx="2" transform="rotate(45 60 60)" width="10" x="55" y="55"></rect></g></svg></span></span>
+    <span class="settings-company-copy"><b>Цифровой бизнес</b><small>IT · AI · AUTOMATION</small></span><span class="settings-company-arrow">→</span>
+  </button>
+  <button type="button" class="settings-developer-link" onclick="openDeveloperContact()"><span class="settings-developer-dot"></span><span>Разработчикам</span><span class="settings-developer-arrow">→</span></button>
+</div>`);
   syncSettingsHomeSwitches();
   syncManagerSettings();
 }
@@ -6289,7 +6387,7 @@ function showSection(section){
   if(section === 'more'){ openMore(); return; }
   const isKnown = Object.prototype.hasOwnProperty.call(pages, section);
   if(!isKnown) return;
-  const prefs = (()=>{try{const x=JSON.parse(localStorage.getItem('db-home-section-switches-v1')||'null');return {sales:false,finance:false,clients:false,promo:false,...(x&&typeof x==='object'?x:{})}}catch(e){return {sales:false,finance:false,clients:false,promo:false}}})();
+  const prefs = (()=>{try{const x=JSON.parse(localStorage.getItem('db-home-section-switches-v3')||'null');return {sales:false,finance:false,clients:false,promo:false,...(x&&typeof x==='object'?x:{})}}catch(e){return {sales:false,finance:false,clients:false,promo:false}}})();
   homeSections.forEach(el => { el.style.display = section === 'home' ? '' : 'none'; });
   Object.keys(pages).forEach(key=>{
     const page=pages[key]; if(!page)return;
@@ -7858,6 +7956,16 @@ body.dark .home-block.is-dragging{box-shadow:0 30px 80px rgba(0,0,0,.42)!importa
 @media(prefers-reduced-motion:reduce){.home-block,#homeEditBar{transition:none!important}.home-edit-live i{animation:none!important}}
 </style>
 
+
+<style id="settings-daily-focus-v1">
+.settings-daily-note{display:flex;align-items:flex-start;gap:9px;margin-top:8px;padding:10px 11px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.38)}
+.settings-daily-note>span{width:20px;height:20px;display:grid;place-items:center;flex:none;border-radius:7px;background:rgba(53,91,190,.10);color:#3155b8;font-size:10px}
+.settings-daily-note b{display:block;font-size:9.5px}
+.settings-daily-note small{display:block;margin-top:3px;font-size:8.5px;line-height:1.35;color:var(--muted)}
+body.dark .settings-daily-note{background:rgba(255,255,255,.035);border-color:rgba(255,255,255,.09)}
+body.dark .settings-daily-note>span{background:rgba(127,181,255,.10);color:#9cc8ff}
+@media(max-width:520px){.settings-daily-note{padding:9px 10px}.settings-daily-note small{font-size:8.3px}}
+</style>
 <style id="settings-home-switches-v41">
 .settings-section-note{margin:-2px 0 9px;color:var(--muted);font-size:10px;line-height:1.4}
 .settings-sections-v2{display:grid;gap:8px;margin-top:8px}
@@ -7886,8 +7994,8 @@ body.dark .rule-toggle i{background:#17181b!important}
 </style>
 <script id="settings-home-switches-js-v41">
 (function(){
-  const KEY='db-home-section-switches-v1';
-  const defaults={sales:false,finance:false,clients:false,promo:false,evolution:true,memory:true,rules:true};
+  const KEY='db-home-section-switches-v3';
+  const defaults={sales:true,finance:true,clients:false,promo:false,evolution:false,memory:false,rules:false};
   function load(){try{const x=JSON.parse(localStorage.getItem(KEY)||'null');return {...defaults,...(x&&typeof x==='object'?x:{})}}catch(e){return {...defaults}}}
   function save(x){try{localStorage.setItem(KEY,JSON.stringify(x))}catch(e){}}
   function sync(){
@@ -8276,6 +8384,12 @@ body.dark .settings-sections-v2 .settings-section-row:hover{
 .future-card.attention .card-top{gap:10px!important}
 .future-card.attention h3{font-size:17px!important}
 .future-card.attention .finding{margin:10px 0!important;padding:10px 0!important}
+.marketplace-card .marketplace-mini-list{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px}
+.marketplace-card .marketplace-mini-list span{font-size:9px;line-height:1;padding:7px 9px;border:1px solid var(--f-line);border-radius:999px;color:var(--f-muted);background:rgba(255,255,255,.48)}
+.marketplace-card .action-row{align-items:center}
+.marketplace-card .future-btn.primary{min-width:94px}
+.marketplace-card .future-btn.ghost{min-width:108px}
+@media(max-width:430px){.marketplace-card .marketplace-mini-list{gap:5px}.marketplace-card .marketplace-mini-list span{font-size:8px;padding:6px 8px}}
 
 @media(max-width:900px){
   .future-state{grid-template-columns:minmax(110px,.7fr) minmax(0,1fr)!important;padding:24px 26px!important;gap:20px!important;min-height:250px!important}
@@ -8604,8 +8718,8 @@ body.dark .home-section-preview .preview-open{background:#f4f4f5;color:#17181b}
 </style>
 <script id="home-section-preview-v110-js">
 (function(){
- const KEY='db-home-section-switches-v1';
- const defs={sales:false,finance:false,clients:false,promo:false};
+ const KEY='db-home-section-switches-v3';
+ const defs={sales:true,finance:true,clients:false,promo:false};
  function prefs(){try{const x=JSON.parse(localStorage.getItem(KEY)||'null');return {...defs,...(x&&typeof x==='object'?x:{})}}catch(e){return {...defs}}}
  function previewData(id){
    const data={
@@ -8637,7 +8751,7 @@ body.dark .home-section-preview .preview-open{background:#f4f4f5;color:#17181b}
        </div>
        <div class="action-row">
          <button type="button" class="future-btn primary" onclick="showSection('${id}')">Исправить</button>
-         <button type="button" class="future-btn ghost" onclick="showSection('${id}')">Почему?</button>
+         <button type="button" class="future-btn ghost" onclick="showSection('${id}')">Подробнее →</button>
        </div>
      </article>`;
      return `<article class="future-card home-added-card" data-preview-section="${id}">
@@ -8653,7 +8767,7 @@ body.dark .home-section-preview .preview-open{background:#f4f4f5;color:#17181b}
          ${d.metrics.map(m=>`<div><b>${m[0]}</b><span>${m[1]}</span></div>`).join('')}
        </div>
        <div class="quiet-note"><span class="check">✓</span> Сделано автоматически по твоим правилам</div>
-       <div class="home-added-open"><button type="button" class="future-link" onclick="showSection('${id}')">Ознакомиться →</button></div>
+       <div class="home-added-open"><button type="button" class="future-link" onclick="showSection('${id}')">Подробнее →</button></div>
      </article>`;
    }).join('');
    wrap.style.display=wrap.children.length?'grid':'none';
@@ -9403,6 +9517,28 @@ body:not(.dark) .rule-toggle i{
 .settings-company-brand small{display:block;margin-top:3px;font-size:9px;color:var(--muted)}
 .settings-developer-link{border:1px solid var(--line);background:transparent;color:var(--text);border-radius:13px;padding:10px 12px;font-size:10px;font-weight:700;white-space:nowrap;cursor:pointer}
 .settings-developer-link span{margin-left:3px;opacity:.7}
+
+.settings-company-footer-v2{align-items:stretch!important;gap:10px!important}
+.settings-company-brand-button{appearance:none;border:0;background:transparent;color:inherit;padding:0;text-align:left;cursor:pointer;display:flex;align-items:center;gap:9px;min-width:0;flex:1}
+.settings-company-logo{position:relative;display:grid!important;place-items:center;background:linear-gradient(145deg,#101114,#20232a)!important;border:1px solid rgba(100,170,255,.22)!important;box-shadow:0 7px 22px rgba(20,35,70,.12),inset 0 0 0 1px rgba(255,255,255,.04)!important;overflow:hidden}
+.settings-company-logo .dm-signature-logo{width:22px;height:22px;display:block;color:#8fd4ff;filter:drop-shadow(0 0 7px rgba(72,170,255,.38))}
+.settings-company-logo .dm-signature-logo svg{width:100%;height:100%;display:block}
+.settings-company-copy{min-width:0;display:block}
+.settings-company-copy b{display:block;font-size:11px;letter-spacing:-.01em}
+.settings-company-copy small{display:block;margin-top:3px;font-size:8.5px;color:var(--muted);letter-spacing:.05em}
+.settings-company-arrow{margin-left:auto;opacity:.45;font-size:14px;transition:transform .2s ease,opacity .2s ease}
+.settings-company-brand-button:hover .settings-company-arrow{transform:translateX(2px);opacity:.8}
+.settings-developer-link{display:flex!important;align-items:center;gap:7px!important;justify-content:center;min-width:145px}
+.settings-developer-dot{width:6px;height:6px;border-radius:50%;background:#4dbbff;box-shadow:0 0 0 5px rgba(77,187,255,.10),0 0 10px rgba(77,187,255,.45)}
+.settings-developer-link .settings-developer-arrow{margin-left:0!important;opacity:.55}
+@media(max-width:520px){
+  .settings-company-footer-v2{gap:8px!important}
+  .settings-company-brand-button{width:100%}
+  .settings-developer-link{width:auto!important;min-width:0!important;padding:9px 11px!important}
+  .settings-developer-link>span:nth-child(2){display:none}
+  .settings-developer-link .settings-developer-arrow{display:inline!important}
+}
+body.dark .settings-company-logo{background:linear-gradient(145deg,#11161e,#1b2738)!important;border-color:rgba(127,181,255,.18)!important}
 .theme-mode-btn{transition:background .2s ease,color .2s ease,border-color .2s ease,box-shadow .2s ease}
 body:not(.dark) .theme-mode-btn.active{background:linear-gradient(135deg,#123b8f 0%,#5b3fd0 100%) !important;color:#fff !important;border-color:transparent !important;box-shadow:0 8px 20px rgba(38,78,181,.18) !important}
 body.dark .settings-sections button{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09)}
@@ -11537,8 +11673,8 @@ body.dark .dm-signature-button-logo{
 </style>
 <script id="home-switches-final-clean-fix-v5-js">
 (function(){
-  const KEY='db-home-section-switches-v1';
-  const defaults={sales:false,finance:false,clients:false,promo:false,evolution:true,memory:true,rules:true};
+  const KEY='db-home-section-switches-v3';
+  const defaults={sales:true,finance:true,clients:false,promo:false,evolution:false,memory:false,rules:false};
   function load(){try{const x=JSON.parse(localStorage.getItem(KEY)||'null');return Object.assign({},defaults,x&&typeof x==='object'?x:{})}catch(e){return Object.assign({},defaults)}}
   function save(x){try{localStorage.setItem(KEY,JSON.stringify(x))}catch(e){}}
   function paint(){
@@ -11599,6 +11735,288 @@ body:not(.dark) .mobile-manager.dm-signature-manager-button::before{
 }
 body:not(.dark) .dm-signature-button-logo{
   filter:drop-shadow(0 7px 16px rgba(41,36,107,.20)) !important;
+}
+</style>
+
+<style id="digital-manager-intelligence-v1">
+/* DIGITAL MANAGER — intelligence-first Home. Existing assistant/input untouched. */
+#homeSectionPreviews.dm-intelligence-home{
+  display:grid!important;grid-template-columns:1fr!important;gap:12px!important;
+  margin:0!important;padding:0!important;overflow:visible!important;
+}
+#homeSectionPreviews.dm-intelligence-home .dm-intel-card{
+  position:relative;overflow:hidden;cursor:pointer;
+  border:1px solid var(--f-line,#e8e8ec)!important;
+  background:var(--f-card,#fff)!important;
+  border-radius:27px!important;padding:22px 23px!important;
+  box-shadow:0 10px 35px rgba(20,20,25,.035)!important;
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease!important;
+}
+#homeSectionPreviews.dm-intelligence-home .dm-intel-card:hover{transform:translateY(-2px)!important;box-shadow:0 18px 45px rgba(20,20,25,.07)!important}
+body.dark #homeSectionPreviews.dm-intelligence-home .dm-intel-card{background:rgba(255,255,255,.045)!important;border-color:rgba(255,255,255,.10)!important;box-shadow:0 18px 44px rgba(0,0,0,.20)!important}
+.dm-intel-top{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
+.dm-intel-kicker{font-size:8px;letter-spacing:.14em;font-weight:800;color:var(--f-soft,#999aa2)}
+.dm-intel-card h3{margin:9px 0 0;font-size:19px;line-height:1.18;letter-spacing:-.04em;max-width:680px}
+.dm-intel-copy{margin:10px 0 0;color:var(--f-muted,#777981);font-size:11px;line-height:1.52;max-width:700px}
+.dm-intel-signal{width:8px;height:8px;flex:0 0 auto;border-radius:50%;margin-top:3px}
+.dm-intel-signal.red{background:var(--f-red,#ed575d);box-shadow:0 0 0 6px rgba(237,87,93,.08)}
+.dm-intel-signal.green{background:var(--f-green,#20a46a);box-shadow:0 0 0 6px rgba(32,164,106,.08)}
+.dm-intel-signal.blue{background:var(--f-blue,#1769ff);box-shadow:0 0 0 6px rgba(23,105,255,.08)}
+.dm-intel-finding{margin:18px 0 0;padding:14px 0 0;border-top:1px solid var(--f-line,#e8e8ec)}
+.dm-intel-finding strong{display:block;font-size:14px;line-height:1.3;letter-spacing:-.02em}
+.dm-intel-finding small{display:block;margin-top:5px;color:var(--f-muted,#777981);font-size:10px;line-height:1.4}
+.dm-intel-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.dm-intel-chip{padding:6px 9px;border-radius:999px;background:rgba(20,20,24,.045);font-size:9px;font-weight:700;color:var(--f-muted,#777981);border:1px solid rgba(20,20,24,.055)}
+body.dark .dm-intel-chip{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.07);color:#aaaab1}
+.dm-intel-actions{display:flex;gap:8px;margin-top:17px}
+.dm-intel-btn{height:38px;padding:0 16px;border:0;border-radius:11px;font-size:10px;font-weight:750;cursor:pointer}
+.dm-intel-btn.primary{background:#101012;color:#fff}
+.dm-intel-btn.ghost{background:#eeeef0;color:#65656c}
+body.dark .dm-intel-btn.primary{background:#f4f4f5;color:#17171a}
+body.dark .dm-intel-btn.ghost{background:rgba(255,255,255,.08);color:#dddde2}
+.dm-intel-radar{display:flex;align-items:center;gap:10px;margin:0 0 10px;padding:11px 13px;border:1px solid var(--f-line,#e8e8ec);border-radius:16px;background:rgba(20,20,24,.025)}
+body.dark .dm-intel-radar{background:rgba(255,255,255,.035);border-color:rgba(255,255,255,.08)}
+.dm-intel-radar-dot{width:7px;height:7px;border-radius:50%;background:#20a46a;box-shadow:0 0 0 5px rgba(32,164,106,.08);flex:none}
+.dm-intel-radar b{font-size:10px}.dm-intel-radar span{font-size:9px;color:var(--f-muted,#777981)}
+.dm-fix-note{margin-top:16px;padding:15px;border:1px solid rgba(20,20,24,.08);border-radius:18px;background:rgba(20,20,24,.035)}
+body.dark .dm-fix-note{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09)}
+.dm-fix-note b{display:block;font-size:13px}.dm-fix-note p{margin:5px 0 0;color:var(--f-muted,#777981);font-size:11px;line-height:1.45}
+.dm-fix-actions{display:flex;gap:8px;margin-top:12px}.dm-fix-actions button{height:44px;border:0;border-radius:13px;padding:0 16px;font-size:11px;font-weight:800;cursor:pointer}.dm-fix-confirm{flex:1;background:var(--text);color:var(--bg)}.dm-fix-cancel{background:rgba(20,20,24,.06);color:var(--text)}
+body.dark .dm-fix-confirm{background:#f4f4f5;color:#17171a}.body.dark .dm-fix-cancel{background:rgba(255,255,255,.07);color:#f4f4f5}
+@media(max-width:700px){
+  #homeSectionPreviews.dm-intelligence-home .dm-intel-card{padding:19px 18px!important;border-radius:23px!important}
+  .dm-intel-card h3{font-size:18px}.dm-intel-actions{gap:7px}.dm-intel-btn{height:40px;padding:0 14px}
+  .dm-fix-actions{flex-direction:column}.dm-fix-actions button{width:100%}
+}
+</style>
+<script id="digital-manager-intelligence-v1-js">
+(function(){
+  const originalOpen=window.openBusinessModule;
+  const intelligence={
+    opportunity:{
+      kicker:'ВОЗМОЖНОСТЬ',status:'Я НАШЁЛ',signal:'blue',
+      title:'Я нашёл ещё одну точку для продаж.',
+      sub:'Ты уже работаешь через сайт и маркетплейсы. Я смотрю шире: соцсети, объявления, новые площадки и другие места, где уже есть твой покупатель.',
+      finding:'Следующий кандидат — Avito. Рядом с ним я проверяю Яндекс Маркет, Мегамаркет и подходящие социальные каналы.',
+      done:'Я собрал направления в одну картину и не заставляю тебя искать их вручную.',
+      need:'Разрешить мне подготовить первый вариант размещения.',
+      joke:'Если где-то уже ходят люди с деньгами — было бы невежливо не познакомиться.',
+      chips:['Сайт','Ozon','Wildberries','Avito','Яндекс Маркет','Мегамаркет','Соцсети'],
+      action:'Подготовлю безопасный черновик. Деньги и публикацию без твоего разрешения не трону.'
+    },
+    stuck:{
+      kicker:'ПРОДАЖИ',status:'ТРЕБУЕТ РЕШЕНИЯ',signal:'red',
+      title:'Три обращения застряли после предложения.',
+      sub:'Я вижу не только количество заявок, но и момент, где человек перестаёт двигаться к покупке.',
+      finding:'Похоже, часть людей теряется между предложением и следующим шагом.',
+      done:'Разложил воронку и поднял проблему наверх.',
+      need:'Ответить трём клиентам и проверить два зависших предложения.',
+      joke:'Заявка уже дошла до двери. Осталось не забыть её открыть.',
+      chips:['Обращения','Воронка','Предложения','Продажи'],
+      action:'Подготовлю список клиентов и следующий шаг по каждому.'
+    },
+    done:{
+      kicker:'Я УЖЕ СДЕЛАЛ',status:'ГОТОВО',signal:'green',
+      title:'Я уже забрал часть работы на себя.',
+      sub:'Проверил рекламные кампании, сопоставил результат с продажами и поднял то, что не стоит оставлять без внимания.',
+      finding:'Тебе не пришлось отдельно заходить в рекламу, продажи и отчёты.',
+      done:'Я сам собрал картину и оставил тебе только то, что действительно требует решения.',
+      need:'Ничего. Просто знай, что это уже сделано.',
+      joke:'Вот такой сотрудник мне самому нравится: приходит не с проблемой, а уже с половиной решения.',
+      chips:['Реклама','Продажи','Клиенты','Аналитика'],
+      action:'Покажу подробности, если захочешь проверить мою работу.'
+    },
+    radar:{
+      kicker:'ЦИФРОВОЙ СЛЕД',status:'Я СЛЕЖУ',signal:'blue',
+      title:'Я смотрю не в одну систему. Я смотрю на весь бизнес.',
+      sub:'Сайт, соцсети, мессенджеры, маркетплейсы, объявления, реклама, клиенты, деньги и процессы постепенно складываются в одну картину.',
+      finding:'Моя задача — самому замечать проблему, возможность или новый канал раньше, чем тебе придётся его искать.',
+      done:'Чем больше источников подключено и чем больше решений ты мне доверяешь, тем точнее я понимаю твой бизнес.',
+      need:'Подключать новые источники по мере необходимости.',
+      joke:'Я не хочу, чтобы ты работал диспетчером собственного бизнеса. Для этого есть я.',
+      chips:['Сайт','VK','Telegram','Ozon','WB','Avito','Реклама','Финансы'],
+      action:'В подключённом контуре я буду сопоставлять данные, а не смотреть на них по отдельности.'
+    }
+  };
+
+  function detail(id){
+    const d=intelligence[id]; if(!d)return;
+    let s=document.getElementById('wowBusinessModuleSheet');
+    if(!s){s=document.createElement('div');s.id='wowBusinessModuleSheet';s.className='wow-module-sheet';s.innerHTML='<section class="wow-module-panel" role="dialog" aria-modal="true"><div id="wowModuleContent"></div></section>';document.body.appendChild(s)}
+    const c=document.getElementById('wowModuleContent');
+    const stats=d.chips.slice(0,4).map((x,i)=>'<div class="wow-module-stat"><small>В КОНТУРЕ</small><b>'+x+'</b></div>').join('');
+    const chips=d.chips.map(x=>'<span>'+x+'</span>').join('');
+    c.innerHTML='<div class="wow-module-top"><div><div class="wow-module-kicker">'+d.kicker+' · '+d.status+'</div><h2 id="wowModuleTitle" class="wow-module-title">'+d.title+'</h2><p class="wow-module-sub">'+d.sub+'</p></div><button class="wow-module-close" type="button" onclick="closeBusinessModule()" aria-label="Готово">Готово</button></div>'+
+      '<div class="wow-module-grid">'+stats+'</div><div class="module-flow">'+chips+'</div>'+
+      '<div class="wow-module-sections">'+
+      '<div class="wow-module-block"><span>ЧТО Я НАШЁЛ</span><b>'+d.finding+'</b><p>Я связываю сигналы из разных источников, а не смотрю на один показатель.</p></div>'+
+      '<div class="wow-module-block"><span>Я УЖЕ СДЕЛАЛ</span><b>'+d.done+'</b><p>Это то, что уже произошло, а не обещание на будущее.</p></div>'+
+      '<div class="wow-module-block"><span>ОТ ТЕБЯ НУЖНО</span><b>'+d.need+'</b><p>Если решение безопасное — я могу подготовить его сам. Важные действия сначала согласую.</p></div>'+
+      '<div class="wow-module-block"><span>КАК Я РАБОТАЮ</span><b>Собираю цифровой след в одну картину.</b><p>'+d.action+'</p></div>'+
+      '</div><div class="wow-module-joke">'+d.joke+'</div>'+
+      '<div class="wow-module-actions"><button class="wow-module-primary" type="button" onclick="closeBusinessModule()">Готово</button></div>';
+    s.classList.add('is-open');
+  }
+  window.openBusinessModule=function(id){
+    if(intelligence[id]){detail(id);return}
+    if(typeof originalOpen==='function')originalOpen(id);
+  };
+
+  window.managerFix=function(id){
+    const d=intelligence[id];
+    if(!d){if(typeof originalOpen==='function')originalOpen(id);return}
+    let s=document.getElementById('wowBusinessModuleSheet'); if(!s){detail(id);s=document.getElementById('wowBusinessModuleSheet')}
+    const c=document.getElementById('wowModuleContent');
+    c.innerHTML='<div class="wow-module-top"><div><div class="wow-module-kicker">'+d.kicker+' · ДЕЙСТВИЕ</div><h2 id="wowModuleTitle" class="wow-module-title">Я могу заняться этим сам.</h2><p class="wow-module-sub">'+d.need+'</p></div><button class="wow-module-close" type="button" onclick="closeBusinessModule()" aria-label="Готово">Готово</button></div>'+
+      '<div class="dm-fix-note"><b>Что я сделаю</b><p>'+d.action+' Если действие затрагивает деньги, публикацию или необратимое изменение — я остановлюсь и спрошу.</p></div>'+
+      '<div class="dm-fix-actions"><button class="dm-fix-confirm" type="button" onclick="confirmManagerFix(\''+id+'\')">Да, исправляй</button><button class="dm-fix-cancel" type="button" onclick="closeBusinessModule()">Готово</button></div>';
+    s.classList.add('is-open');
+  };
+  const LIVE_KEY='dm-live-resolved-v1';
+  function liveResolved(){try{return JSON.parse(localStorage.getItem(LIVE_KEY)||'{}')}catch(e){return {}}}
+  function saveLiveState(st){try{localStorage.setItem(LIVE_KEY,JSON.stringify(st))}catch(e){}}
+  window.confirmManagerFix=function(id){
+    const d=intelligence[id]; if(!d)return;
+    const card=document.querySelector('[data-intel="'+id+'"]');
+    if(card){card.classList.add('is-resolving');}
+    const c=document.getElementById('wowModuleContent');
+    c.innerHTML='<div class="wow-module-top"><div><div class="wow-module-kicker">'+d.kicker+' · ГОТОВО</div><h2 id="wowModuleTitle" class="wow-module-title">Я взял это на себя.</h2><p class="wow-module-sub">'+d.done+'</p></div><button class="wow-module-close" type="button" onclick="closeBusinessModule()" aria-label="Готово">Готово</button></div>'+
+      '<div class="dm-fix-note"><b>Что дальше</b><p>Я продолжу следить за результатом. Если проблема появится снова — верну карточку на Главную.</p></div>'+
+      '<div class="dm-fix-actions"><button class="dm-fix-confirm" type="button" onclick="finishLiveCard(\''+id+'\')">Готово</button></div>';
+  };
+  window.finishLiveCard=function(id){
+    const st=liveResolved(); st[id]=Date.now(); saveLiveState(st);
+    const card=document.querySelector('[data-intel="'+id+'"]');
+    if(card){card.classList.remove('is-resolving');card.classList.add('is-resolved');setTimeout(()=>{if(card&&card.parentNode)card.remove()},520)}
+    closeBusinessModule();
+  };
+
+  function renderIntelligence(){
+    const shell=document.querySelector('.future-shell'); if(!shell)return;
+    let wrap=document.getElementById('homeSectionPreviews');
+    if(!wrap){wrap=document.createElement('div');wrap.id='homeSectionPreviews';const state=shell.querySelector('[data-home-block="state"]');if(state)state.insertAdjacentElement('afterend',wrap);else shell.prepend(wrap)}
+    wrap.className='home-section-previews dm-intelligence-home';
+    const resolved=liveResolved();
+    const cards=[
+      {id:'opportunity',cls:'blue',k:'ВОЗМОЖНОСТЬ',t:'Я нашёл ещё одну точку для продаж.',copy:'Ты продаёшь через несколько каналов. Я смотрю шире и ищу, где ещё есть твой покупатель.',find:'Avito · Яндекс Маркет · Мегамаркет · соцсети',chips:['Сайт','Ozon','WB','Avito','Яндекс Маркет','Мегамаркет','Соцсети'],actions:true},
+      {id:'stuck',cls:'red',k:'ТРЕБУЕТ РЕШЕНИЯ',t:'Три обращения застряли после предложения.',copy:'Я вижу момент, где люди перестают двигаться к покупке, и уже поднял это наверх.',find:'Ответить трём клиентам и проверить два зависших предложения.',chips:['Обращения','Воронка','Предложения'],actions:true},
+      {id:'done',cls:'green',k:'Я УЖЕ СДЕЛАЛ',t:'Я уже забрал часть работы на себя.',copy:'Проверил рекламу, продажи и клиентов вместе, а не по отдельности.',find:'Тебе не пришлось самому ходить по разделам.',chips:['Реклама','Продажи','Клиенты'],actions:false},
+      {id:'radar',cls:'blue',k:'ЦИФРОВОЙ СЛЕД · Я СЛЕЖУ',t:'Я смотрю на весь цифровой след бизнеса.',copy:'Сайт, соцсети, мессенджеры, маркетплейсы, объявления, реклама, деньги и процессы складываются в одну картину.',find:'Я соединяю источники между собой: так могу найти не только проблему, но и место, где можно заработать.',chips:['Сайт','VK','Telegram','Ozon','WB','Avito','Реклама','Финансы'],actions:false}
+    ];
+    wrap.innerHTML=cards.filter(d=>!(d.id==='stuck' && resolved.stuck)).map(d=>'<article class="future-card dm-intel-card" data-intel="'+d.id+'" onclick="openBusinessModule(\''+d.id+'\')">'+
+      '<div class="dm-intel-top"><div><span class="dm-intel-kicker">'+d.k+'</span><h3>'+d.t+'</h3></div><span class="dm-intel-signal '+d.cls+'"></span></div>'+
+      '<p class="dm-intel-copy">'+d.copy+'</p>'+
+      '<div class="dm-intel-finding"><strong>'+d.find+'</strong><small>Я держу это в поле зрения.</small></div>'+
+      '<div class="dm-intel-chips">'+d.chips.map(x=>'<span class="dm-intel-chip">'+x+'</span>').join('')+'</div>'+
+      '<div class="dm-intel-actions">'+(d.actions?'<button class="future-btn primary dm-intel-btn" type="button" onclick="event.stopPropagation();managerFix(\''+d.id+'\')">Исправить</button>':'')+'<button class="future-btn ghost dm-intel-btn" type="button" onclick="event.stopPropagation();openBusinessModule(\''+d.id+'\')">Подробнее →</button></div>'+
+      '</article>').join('');
+    wrap.style.display=wrap.children.length?'grid':'none';
+  }
+  window.renderHomeSectionPreviews=renderIntelligence;
+  document.addEventListener('DOMContentLoaded',()=>setTimeout(renderIntelligence,160));
+  setTimeout(renderIntelligence,220);
+})();
+</script>
+
+
+
+<style id="live-intelligence-cards-v1">
+.dm-intel-card{transition:opacity .38s ease,transform .38s ease,max-height .45s ease,margin .45s ease,padding .45s ease!important;overflow:hidden!important}
+.dm-intel-card.is-resolving{opacity:.55;transform:scale(.985)}
+.dm-intel-card.is-resolved{opacity:0;transform:translateY(-10px) scale(.98);max-height:0!important;margin-top:0!important;margin-bottom:0!important;padding-top:0!important;padding-bottom:0!important;border-width:0!important;pointer-events:none}
+.dm-live-status{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:9px;color:var(--f-muted,#777981)}
+.dm-live-status i{width:6px;height:6px;border-radius:50%;background:#20a46a;box-shadow:0 0 0 4px rgba(32,164,106,.08)}
+</style>
+
+<style id="digital-footprint-v1">
+/* Цифровой след — единая карта присутствия бизнеса. */
+.dm-footprint-sheet{position:fixed;inset:0;z-index:10050;display:none;align-items:flex-end;justify-content:center;background:rgba(8,9,12,.54);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.dm-footprint-sheet.is-open{display:flex}
+.dm-footprint-panel{width:min(1180px,100%);max-height:94vh;overflow:auto;border:1px solid rgba(255,255,255,.11);border-bottom:0;border-radius:34px 34px 0 0;background:rgba(248,248,250,.98);color:#15161a;box-shadow:0 -24px 90px rgba(0,0,0,.25);padding:26px 28px calc(28px + env(safe-area-inset-bottom))}
+body.dark .dm-footprint-panel{background:rgba(14,15,18,.985);color:#f5f6f8;border-color:rgba(255,255,255,.09)}
+.dm-footprint-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.dm-footprint-kicker{font-size:9px;letter-spacing:.17em;font-weight:850;color:#8a8b92}.dm-footprint-title{font-size:36px;line-height:.98;letter-spacing:-.055em;margin:7px 0 8px}.dm-footprint-sub{font-size:12px;line-height:1.55;color:#777981;max-width:720px;margin:0}.dm-footprint-close{height:40px;min-width:78px;border:1px solid rgba(20,20,24,.1);border-radius:14px;background:rgba(20,20,24,.055);color:inherit;font-size:11px;font-weight:800;cursor:pointer}.dm-footprint-overview{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:20px}.dm-footprint-stat{padding:14px;border:1px solid rgba(20,20,24,.08);border-radius:18px;background:rgba(255,255,255,.62)}.dm-footprint-stat small{display:block;color:#8a8b92;font-size:9px}.dm-footprint-stat b{display:block;font-size:23px;letter-spacing:-.04em;margin-top:5px}.dm-footprint-stat span{display:block;font-size:9px;color:#777981;margin-top:3px}.dm-footprint-section{margin-top:22px}.dm-footprint-section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:10px}.dm-footprint-section-head h3{font-size:17px;letter-spacing:-.03em;margin:0}.dm-footprint-section-head p{font-size:10px;color:#85868d;margin:0}.dm-footprint-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.dm-source{padding:14px;border:1px solid rgba(20,20,24,.08);border-radius:18px;background:rgba(255,255,255,.58);min-height:92px}.dm-source-top{display:flex;align-items:center;justify-content:space-between;gap:8px}.dm-source-name{font-size:12px;font-weight:800}.dm-source-dot{width:7px;height:7px;border-radius:50%;background:#20a46a;box-shadow:0 0 0 5px rgba(32,164,106,.08)}.dm-source-dot.find{background:#1769ff;box-shadow:0 0 0 5px rgba(23,105,255,.08)}.dm-source small{display:block;color:#85868d;font-size:9px;line-height:1.45;margin-top:7px}.dm-source em{display:inline-block;margin-top:8px;font-style:normal;font-size:8px;font-weight:800;letter-spacing:.08em;color:#85868d}.dm-opps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.dm-opp{padding:16px;border-radius:20px;border:1px solid rgba(23,105,255,.13);background:linear-gradient(145deg,rgba(23,105,255,.055),rgba(255,255,255,.55))}.dm-opp-kicker{font-size:8px;letter-spacing:.13em;font-weight:850;color:#1769ff}.dm-opp h4{font-size:15px;line-height:1.2;letter-spacing:-.025em;margin:7px 0 5px}.dm-opp p{font-size:10px;line-height:1.5;color:#777981;margin:0}.dm-opp button{height:36px;margin-top:11px;border:0;border-radius:11px;padding:0 13px;background:#15161a;color:#fff;font-size:9px;font-weight:800;cursor:pointer}.dm-footprint-note{margin-top:12px;padding:14px 15px;border-radius:17px;border:1px solid rgba(32,164,106,.14);background:rgba(32,164,106,.055);font-size:10px;line-height:1.5;color:#666870}.dm-footprint-note b{color:inherit}
+body.dark .dm-footprint-stat,body.dark .dm-source{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09)}body.dark .dm-footprint-sub,body.dark .dm-footprint-stat span,body.dark .dm-source small,body.dark .dm-opp p,body.dark .dm-footprint-note{color:#aeb1ba}body.dark .dm-opp{background:linear-gradient(145deg,rgba(23,105,255,.10),rgba(255,255,255,.03));border-color:rgba(120,150,255,.16)}body.dark .dm-opp button{background:#f4f4f5;color:#17171a}body.dark .dm-footprint-close{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.1)}
+@media(max-width:700px){.dm-footprint-panel{padding:19px 15px calc(20px + env(safe-area-inset-bottom));border-radius:28px 28px 0 0;max-height:96vh}.dm-footprint-title{font-size:29px}.dm-footprint-close{min-width:72px}.dm-footprint-overview{grid-template-columns:1fr 1fr}.dm-footprint-grid{grid-template-columns:1fr 1fr}.dm-opps{grid-template-columns:1fr}.dm-source{min-height:82px}.dm-footprint-section{margin-top:18px}}
+</style>
+
+
+<script id="digital-footprint-v1-js">
+(function(){
+  const sources=[
+    ['Сайт','Продажи, заявки, аналитика','Вижу данные'],['VK','Соцсеть и обращения','Вижу данные'],['Telegram','Канал и сообщения','Вижу данные'],['Ozon','Продажи и товары','Вижу данные'],['Wildberries','Продажи и товары','Вижу данные'],['Avito','Объявления и спрос','Проверяю'],['Яндекс Маркет','Продажи и спрос','Проверяю'],['Мегамаркет','Продажи и спрос','Проверяю'],['Реклама','Кампании и расходы','Вижу данные'],['Финансы','Выручка и расходы','Вижу данные'],['Доставка','Заказы и сроки','Вижу данные'],['Клиенты','История и повторные покупки','Вижу данные']
+  ];
+  function ensure(){
+    let s=document.getElementById('dmFootprintSheet'); if(s)return s;
+    s=document.createElement('div'); s.id='dmFootprintSheet'; s.className='dm-footprint-sheet';
+    s.innerHTML='<section class="dm-footprint-panel" role="dialog" aria-modal="true" aria-labelledby="dmFootprintTitle">'+
+      '<div class="dm-footprint-head"><div><div class="dm-footprint-kicker">ЦИФРОВОЙ СЛЕД · Я СЛЕЖУ</div><h2 id="dmFootprintTitle" class="dm-footprint-title">Я вижу бизнес целиком.</h2><p class="dm-footprint-sub">Не заставляю тебя ходить по десяти сервисам. Собираю всё, что происходит вокруг бизнеса, в одну картину — и ищу проблемы и новые возможности сам.</p></div><button class="dm-footprint-close" type="button" onclick="closeDigitalFootprint()">Готово</button></div>'+
+      '<div class="dm-footprint-overview"><div class="dm-footprint-stat"><small>ИСТОЧНИКОВ В ПОЛЕ ЗРЕНИЯ</small><b>12</b><span>каналы, площадки и процессы</span></div><div class="dm-footprint-stat"><small>ПОДКЛЮЧЕНО</small><b>8</b><span>данные уже приходят</span></div><div class="dm-footprint-stat"><small>ПРОВЕРЯЮ</small><b>4</b><span>новые точки для работы</span></div><div class="dm-footprint-stat"><small>ВОЗМОЖНОСТИ</small><b>3</b><span>которые я уже нашёл</span></div></div>'+
+      '<div class="dm-footprint-section"><div class="dm-footprint-section-head"><h3>Что я сейчас вижу</h3><p>одна картина вместо десятка кабинетов</p></div><div class="dm-footprint-grid">'+sources.map(x=>'<div class="dm-source"><div class="dm-source-top"><span class="dm-source-name">'+x[0]+'</span><span class="dm-source-dot '+(x[2]==='Проверяю'?'find':'')+'"></span></div><small>'+x[1]+'</small><em>'+x[2].toUpperCase()+'</em></div>').join('')+'</div></div>'+
+      '<div class="dm-footprint-section"><div class="dm-footprint-section-head"><h3>Что я нашёл</h3><p>здесь помощник работает на опережение</p></div><div class="dm-opps">'+
+      '<article class="dm-opp"><span class="dm-opp-kicker">НОВЫЙ КАНАЛ</span><h4>Avito может дать ещё один поток покупателей.</h4><p>Я вижу подходящий товар и уже сравниваю спрос с тем, что у тебя продаётся сейчас.</p><button type="button" onclick="closeDigitalFootprint();managerFix(\'opportunity\')">Заняться этим</button></article>'+
+      '<article class="dm-opp"><span class="dm-opp-kicker">ВОЗМОЖНОСТЬ</span><h4>Яндекс Маркет и Мегамаркет стоит проверить.</h4><p>Я не говорю «продавай везде». Сначала проверю, есть ли там смысл именно для твоего товара.</p><button type="button" onclick="closeDigitalFootprint();openBusinessModule(\'opportunity\')">Подробнее →</button></article>'+
+      '<article class="dm-opp"><span class="dm-opp-kicker">СВЯЗИ</span><h4>Я сопоставляю каналы, а не смотрю на них отдельно.</h4><p>Если продажи меняются, я ищу причину сразу по рекламе, сайту, клиентам и площадкам.</p><button type="button" onclick="closeDigitalFootprint();openBusinessModule(\'radar\')">Подробнее →</button></article>'+
+      '</div></div>'+
+      '<div class="dm-footprint-note"><b>Моя задача:</b> замечать не только то, что сломалось, но и то, где можно заработать, сэкономить время или снять с тебя рутину. Если действие требует денег или важного решения — сначала спрошу.</div>'+
+      '</section>';
+    s.addEventListener('click',e=>{if(e.target===s)closeDigitalFootprint()}); document.body.appendChild(s); return s;
+  }
+  window.closeDigitalFootprint=function(){const s=document.getElementById('dmFootprintSheet');if(s)s.classList.remove('is-open')};
+  window.openDigitalFootprint=function(){ensure().classList.add('is-open')};
+  function bind(){
+    const r=document.querySelector('[data-intel="radar"]');
+    if(r){r.onclick=function(e){if(e.target.closest('button'))return;openDigitalFootprint()}; const b=r.querySelector('.dm-intel-btn.ghost'); if(b)b.onclick=function(e){e.stopPropagation();openDigitalFootprint()};}
+  }
+  document.addEventListener('DOMContentLoaded',()=>setTimeout(bind,260));
+  setTimeout(bind,500);
+  const old=window.renderHomeSectionPreviews;
+  window.renderHomeSectionPreviews=function(){if(typeof old==='function')old();setTimeout(bind,20)};
+})();
+</script>
+
+
+<style id="digital-manager-native-cards-final-v1">
+/* FINAL: intelligence cards use the exact native future-card design. */
+#homeSectionPreviews.dm-intelligence-home .dm-intel-card{
+  border:1px solid var(--f-line)!important;
+  background:var(--f-card)!important;
+  border-radius:27px!important;
+  padding:27px!important;
+  backdrop-filter:blur(18px)!important;
+  -webkit-backdrop-filter:blur(18px)!important;
+  box-shadow:0 10px 35px rgba(20,20,25,.035)!important;
+  transition:transform .25s ease,box-shadow .25s ease!important;
+}
+#homeSectionPreviews.dm-intelligence-home .dm-intel-card:hover{
+  transform:translateY(-2px)!important;
+  box-shadow:0 18px 45px rgba(20,20,25,.07)!important;
+}
+body.dark #homeSectionPreviews.dm-intelligence-home .dm-intel-card{
+  background:var(--f-card)!important;
+  border-color:var(--f-line)!important;
+  box-shadow:0 10px 35px rgba(0,0,0,.18)!important;
+}
+#homeSectionPreviews.dm-intelligence-home .dm-intel-top{gap:18px}
+#homeSectionPreviews.dm-intelligence-home .dm-intel-kicker{font-size:8px;letter-spacing:.14em;color:var(--f-soft);font-weight:750}
+#homeSectionPreviews.dm-intelligence-home .dm-intel-card h3{font-size:18px;line-height:1.2;letter-spacing:-.035em;margin:10px 0 0;max-width:490px}
+#homeSectionPreviews.dm-intelligence-home .dm-intel-copy{font-size:11px;line-height:1.55;color:var(--f-muted);max-width:540px;margin:12px 0 0}
+#homeSectionPreviews.dm-intelligence-home .dm-intel-finding{margin:27px 0 23px;padding:18px 0;border-top:1px solid var(--f-line);border-bottom:1px solid var(--f-line);display:flex;gap:14px;flex-direction:column}
+#homeSectionPreviews.dm-intelligence-home .dm-intel-finding strong{font-size:14px;line-height:1.3;letter-spacing:-.02em}
+#homeSectionPreviews.dm-intelligence-home .dm-intel-finding small{font-size:10px;color:var(--f-muted);margin-top:-7px}
+#homeSectionPreviews.dm-intelligence-home .dm-intel-chips{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 2px}
+#homeSectionPreviews.dm-intelligence-home .dm-intel-chip{padding:0;border:0;border-radius:0;background:none;font-size:8px;letter-spacing:.08em;text-transform:uppercase;font-weight:750;color:var(--f-soft)}
+#homeSectionPreviews.dm-intelligence-home .dm-intel-chip:not(:last-child)::after{content:' · ';padding-left:6px;color:var(--f-soft);opacity:.55}
+body.dark #homeSectionPreviews.dm-intelligence-home .dm-intel-chip{background:none;border:0;color:var(--f-soft)}
+#homeSectionPreviews.dm-intelligence-home .dm-intel-actions{display:flex;gap:8px;margin-top:18px}
+#homeSectionPreviews.dm-intelligence-home .dm-intel-btn{height:38px;padding:0 17px;border-radius:11px;font-size:10px;font-weight:650}
+#homeSectionPreviews.dm-intelligence-home .dm-intel-btn.primary{background:#101012;color:#fff}
+#homeSectionPreviews.dm-intelligence-home .dm-intel-btn.ghost{background:#eeeef0;color:#65656c}
+body.dark #homeSectionPreviews.dm-intelligence-home .dm-intel-btn.primary{background:#f4f4f5;color:#17171a}
+body.dark #homeSectionPreviews.dm-intelligence-home .dm-intel-btn.ghost{background:#eeeef0;color:#65656c}
+@media(max-width:700px){
+  #homeSectionPreviews.dm-intelligence-home .dm-intel-card{padding:19px!important;border-radius:23px!important}
+  #homeSectionPreviews.dm-intelligence-home .dm-intel-card h3{font-size:18px}
+  #homeSectionPreviews.dm-intelligence-home .dm-intel-actions{gap:7px}
 }
 </style>
 
@@ -12136,8 +12554,11 @@ body.dark .wow-module-kicker{color:#a6a7ad}
 .wow-module-title{font-size:34px;line-height:1.02;letter-spacing:-.06em;margin:6px 50px 8px 0}
 .wow-module-sub{margin:0;max-width:650px;color:#777981;font-size:13px;line-height:1.55}
 body.dark .wow-module-sub{color:#aaaab1}
-.wow-module-close{width:40px;height:40px;border:0;border-radius:14px;background:rgba(20,20,24,.06);color:inherit;font-size:23px;line-height:1;flex:none}
-body.dark .wow-module-close{background:rgba(255,255,255,.07)}
+.wow-module-close{width:auto;min-width:62px;height:34px;padding:0 13px;border:1px solid rgba(20,20,24,.08);border-radius:999px;background:rgba(20,20,24,.045);color:#666870;font-size:10px;line-height:1;font-weight:750;letter-spacing:-.01em;flex:none;cursor:pointer;transition:background .2s ease,transform .2s ease,border-color .2s ease}
+.wow-module-close:hover{background:rgba(20,20,24,.08);transform:translateY(-1px)}
+body.dark .wow-module-close{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.09);color:#c8c9cf}
+body.dark .wow-module-close:hover{background:rgba(255,255,255,.11)}
+@media(max-width:700px){.wow-module-close{min-width:58px;height:32px;padding:0 12px;font-size:9px}}
 .wow-module-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:18px}
 .wow-module-stat{padding:13px 14px;border:1px solid rgba(20,20,24,.08);border-radius:17px;background:rgba(255,255,255,.58)}
 body.dark .wow-module-stat{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09)}
@@ -12169,11 +12590,101 @@ body.dark .wow-module-secondary{background:rgba(255,255,255,.07);color:#f4f4f5}
   .wow-module-primary,.wow-module-secondary{width:100%}
 }
 </style>
+<style id="wow-module-native-design-v2">
+/* Карточки внутри управляющего листа — тот же язык, что и Главная. */
+.wow-module-sections{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-top:18px;
+}
+.wow-module-block{
+  min-height:0;
+  padding:22px 23px;
+  border:1px solid var(--f-line, rgba(13,13,16,.075));
+  border-radius:27px;
+  background:var(--f-card, rgba(255,255,255,.72));
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:0 10px 35px rgba(20,20,25,.035);
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+}
+.wow-module-block:hover{
+  transform:translateY(-2px);
+  box-shadow:0 18px 45px rgba(20,20,25,.07);
+}
+.wow-module-block span{
+  display:block;
+  font-size:8px;
+  line-height:1.2;
+  letter-spacing:.14em;
+  font-weight:750;
+  color:var(--f-soft,#a2a2a9);
+}
+.wow-module-block b{
+  display:block;
+  margin-top:10px;
+  font-size:17px;
+  line-height:1.28;
+  letter-spacing:-.025em;
+  color:var(--f-ink,#0d0d10);
+}
+.wow-module-block p{
+  margin:9px 0 0;
+  color:var(--f-muted,#77777f);
+  font-size:10px;
+  line-height:1.5;
+}
+body.dark .wow-module-block{
+  background:rgba(255,255,255,.045);
+  border-color:rgba(255,255,255,.09);
+  box-shadow:none;
+}
+body.dark .wow-module-block:hover{
+  box-shadow:0 16px 40px rgba(0,0,0,.22);
+}
+body.dark .wow-module-block b{color:#f5f5f7}
+body.dark .wow-module-block p{color:#aaaab1}
+
+/* Цепочка процесса — тоже часть нашей карточечной системы, а не обычный текст. */
+.wow-module-panel > .module-flow{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+.wow-module-panel > .module-flow span{
+  padding:7px 10px;
+  border:1px solid rgba(20,20,24,.07);
+  border-radius:999px;
+  background:rgba(20,20,24,.035);
+  color:#777981;
+  font-size:9px;
+  font-weight:700;
+}
+.wow-module-panel > .module-flow i{
+  font-style:normal;
+  color:#a2a2a9;
+  font-size:10px;
+}
+body.dark .wow-module-panel > .module-flow span{
+  background:rgba(255,255,255,.055);
+  border-color:rgba(255,255,255,.08);
+  color:#b7b8be;
+}
+
+@media(max-width:700px){
+  .wow-module-sections{grid-template-columns:1fr;gap:10px;margin-top:14px}
+  .wow-module-block{padding:19px 20px;border-radius:23px}
+  .wow-module-block b{font-size:16px}
+}
+</style>
 
 <script id="wow-business-os-v3-js">
 (function(){
-  const KEY='db-home-section-switches-v1';
-  const defaults={sales:false,finance:false,clients:false,promo:false,operations:false,reports:false,evolution:true,memory:true,rules:true};
+  const KEY='db-home-section-switches-v3';
+  const defaults={sales:true,finance:true,clients:false,promo:false,operations:false,reports:false,evolution:false,memory:false,rules:false};
   const data={
     promo:{
       kicker:'ПРОДВИЖЕНИЕ',title:'Чтобы тебя находили, а не вспоминали случайно.',
@@ -12273,7 +12784,7 @@ body.dark .wow-module-secondary{background:rgba(255,255,255,.07);color:#f4f4f5}
     const s=ensureSheet(),c=document.getElementById('wowModuleContent');
     const stats=d.stats.map(x=>'<div class="wow-module-stat"><small>'+x[0]+'</small><b>'+x[1]+'</b></div>').join('');
     const flow=d.flow.map((x,i)=>'<span>'+x+'</span>'+(i<d.flow.length-1?'<i>→</i>':'')).join('');
-    c.innerHTML='<div class="wow-module-top"><div><div class="wow-module-kicker">'+d.kicker+' · '+d.status+'</div><h2 id="wowModuleTitle" class="wow-module-title">'+d.title+'</h2><p class="wow-module-sub">'+d.sub+'</p></div><button class="wow-module-close" type="button" onclick="closeBusinessModule()" aria-label="Закрыть">×</button></div>'+
+    c.innerHTML='<div class="wow-module-top"><div><div class="wow-module-kicker">'+d.kicker+' · '+d.status+'</div><h2 id="wowModuleTitle" class="wow-module-title">'+d.title+'</h2><p class="wow-module-sub">'+d.sub+'</p></div><button class="wow-module-close" type="button" onclick="closeBusinessModule()" aria-label="Закрыть">Готово</button></div>'+
       '<div class="wow-module-grid">'+stats+'</div>'+
       '<div class="module-flow">'+flow+'</div>'+
       '<div class="wow-module-sections">'+
@@ -12283,7 +12794,7 @@ body.dark .wow-module-secondary{background:rgba(255,255,255,.07);color:#f4f4f5}
         '<div class="wow-module-block"><span>ЗДЕСЬ ЖИВЁТ</span><b>'+d.sub+'</b><p>Никакой мешанины: у каждого блока своя работа.</p></div>'+ 
       '</div>'+
       '<div class="wow-module-joke">'+d.joke+'</div>'+
-      '<div class="wow-module-actions"><button class="wow-module-primary" type="button" onclick="closeBusinessModule();'+(id==='operations'||id==='reports'?'':'showSection(\''+id+'\')')+'">'+d.cta+' →</button><button class="wow-module-secondary" type="button" onclick="closeBusinessModule()">Оставить здесь</button></div>';
+      '<div class="wow-module-actions"><button class="wow-module-primary" type="button" onclick="closeBusinessModule();'+(id==='operations'||id==='reports'?'':'showSection(\''+id+'\')')+'">'+d.cta+' →</button><button class="wow-module-secondary" type="button" onclick="closeBusinessModule()">Готово</button></div>';
     s.classList.add('is-open');
   };
 
@@ -12303,7 +12814,7 @@ body.dark .wow-module-secondary{background:rgba(255,255,255,.07);color:#f4f4f5}
         '<div class="quiet-note"><span class="check">'+(decision?'!':'✓')+'</span> '+(decision?'Есть что решить.':'Я уже держу это под контролем.')+'</div>'+ 
         '<div class="module-mini-joke">'+d.joke+'</div>'+ 
         '<div class="action-row">'+
-          (decision?'<button type="button" class="future-btn primary" onclick="event.stopPropagation();openBusinessModule(\''+id+'\')">Разобраться</button><button type="button" class="future-btn ghost" onclick="event.stopPropagation();openBusinessModule(\''+id+'\')">Почему?</button>':'<button type="button" class="future-btn primary" onclick="event.stopPropagation();openBusinessModule(\''+id+'\')">Открыть</button><button type="button" class="future-btn ghost" onclick="event.stopPropagation();openBusinessModule(\''+id+'\')">Подробнее</button>')+
+          (decision?'<button type="button" class="future-btn primary" onclick="event.stopPropagation();openBusinessModule(\''+id+'\')">Исправить</button><button type="button" class="future-btn ghost" onclick="event.stopPropagation();openBusinessModule(\''+id+'\')">Подробнее →</button>':'<button type="button" class="future-btn primary" onclick="event.stopPropagation();openBusinessModule(\''+id+'\')">Открыть</button><button type="button" class="future-btn ghost" onclick="event.stopPropagation();openBusinessModule(\''+id+'\')">Подробнее</button>')+
         '</div></article>';
     }).join('');
     wrap.style.display=wrap.children.length?'grid':'none';
