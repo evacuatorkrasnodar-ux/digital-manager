@@ -1523,7 +1523,7 @@ body.dark .dm-company-mark{background:#f5f5f7;color:#17171a}
 .premium-kicker{display:flex;align-items:center;gap:7px}
 .premium-kicker span{color:var(--text);font-weight:700}
 .premium-kicker i{font-style:normal;opacity:.35}
-.company-logo.dm-company-mark{margin:0;width:48px;height:48px;border-radius:15px}
+.company-logo.dm-company-mark{margin:0;width:48px;height:48px;flex:0 0 48px;border-radius:15px;background:var(--text)!important;color:var(--bg)!important;display:grid;place-items:center;font-size:13px;font-weight:850;letter-spacing:-.04em;border:1px solid var(--line);box-shadow:0 8px 24px rgba(20,20,25,.08)}
 .dm-ob-product-symbol{width:72px;height:72px;border-radius:24px;position:relative;display:grid;place-items:center;margin-bottom:18px;color:var(--purple);background:rgba(114,87,255,.07);border:1px solid rgba(114,87,255,.14);box-shadow:0 18px 45px rgba(114,87,255,.10);animation:dmProductFloat 4s ease-in-out infinite}
 .dm-ob-product-symbol span{width:27px;height:27px;border:1.7px solid currentColor;border-radius:9px;transform:rotate(45deg);animation:dmProductCore 4s ease-in-out infinite}
 .dm-ob-product-symbol i{position:absolute;width:9px;height:9px;border-radius:50%;background:currentColor;box-shadow:0 0 0 6px rgba(114,87,255,.08);animation:dmProductPulse 2.2s ease-in-out infinite}
@@ -2345,57 +2345,54 @@ body.dark .mobile-nav button.active{
   }
 }
 
-/* v16 company sheet: company information is a separate layer, never part of the home flow */
+/* v16 company sheet: company information follows the main app theme. */
 .company-sheet{
   position:fixed;inset:0;z-index:100001;display:none;
   align-items:flex-end;justify-content:center;
-  background:rgba(10,10,14,.38);backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
+  background:rgba(10,10,14,.34);backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
 }
 .company-sheet.show{display:flex;}
 .company-backdrop{position:absolute;inset:0;}
 .company-panel{
   position:relative;z-index:1;width:min(820px,100%);max-height:min(88vh,820px);
-  overflow:auto;background:#f7f7f8;color:#111;border-radius:30px 30px 0 0;
+  overflow:auto;background:var(--panel);color:var(--text);border:1px solid var(--line);
+  border-radius:30px 30px 0 0;
   padding:18px 24px calc(28px + env(safe-area-inset-bottom));
-  box-shadow:0 -20px 80px rgba(0,0,0,.22);
+  box-shadow:0 -24px 80px rgba(20,25,35,.16);backdrop-filter:blur(24px);
 }
-.company-handle{width:38px;height:4px;border-radius:99px;background:#c8c8cc;margin:0 auto 20px;}
+.company-handle{width:38px;height:4px;border-radius:99px;background:var(--muted);opacity:.35;margin:0 auto 20px;}
 .company-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;}
 .company-brandline{display:flex;gap:13px;align-items:center;}
-.company-kicker{font-size:10px;color:#8a8a91;letter-spacing:.12em;text-transform:uppercase;}
-.company-head h2{margin:3px 0 2px;font-size:28px;line-height:1;letter-spacing:-.045em;}
-.company-head p{margin:0;color:#888;font-size:12px;}
-.company-close{width:40px;height:40px;border:0;border-radius:13px;background:#ededf0;color:#111;}
-.company-hero{display:flex;gap:13px;margin-top:22px;padding:18px;border-radius:20px;background:#111;color:#fff;}
+.company-kicker{font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;}
+.company-head h2{margin:3px 0 2px;font-size:28px;line-height:1;letter-spacing:-.045em;color:var(--text);}
+.company-head p{margin:0;color:var(--muted);font-size:12px;}
+.company-close{width:40px;height:40px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.5);color:var(--text);}
+.company-hero{display:flex;gap:13px;margin-top:22px;padding:18px;border-radius:20px;background:var(--text);color:var(--bg);box-shadow:var(--shadow);}
 .company-hero b{display:block;font-size:15px;line-height:1.3;}
-.company-hero p{margin:6px 0 0;color:#a6a6ad;font-size:11px;line-height:1.5;}
+.company-hero p{margin:6px 0 0;color:color-mix(in srgb,var(--bg) 64%,transparent);font-size:11px;line-height:1.5;}
 .company-section{margin-top:24px;}
-.company-section>span{font-size:9px;color:#999;text-transform:uppercase;letter-spacing:.12em;}
-.company-section h3{margin:7px 0 0;font-size:20px;line-height:1.12;letter-spacing:-.035em;}
+.company-section>span{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;}
+.company-section h3{margin:7px 0 0;font-size:20px;line-height:1.12;letter-spacing:-.035em;color:var(--text);}
 .company-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px;}
-.company-tags span{padding:8px 10px;border-radius:99px;background:#ececef;font-size:10px;color:#555;}
-.company-values{display:grid;gap:1px;margin-top:22px;border-top:1px solid #e2e2e5;}
-.company-values article{display:flex;gap:12px;padding:15px 0;border-bottom:1px solid #e2e2e5;}
-.company-values b{font-size:11px;}
-.company-values p{margin:4px 0 0;color:#777;font-size:10px;line-height:1.45;}
-.company-product{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-top:18px;padding:16px 17px;border-radius:18px;background:#ececef;}
-.company-product span:first-child{display:block;font-size:8px;color:#999;text-transform:uppercase;letter-spacing:.12em;}
-.company-product b{display:block;font-size:12px;margin-top:4px;}
-.company-product p{margin:3px 0 0;color:#777;font-size:9px;}
+.company-tags span{padding:8px 10px;border-radius:99px;background:rgba(255,255,255,.52);border:1px solid var(--line);font-size:10px;color:var(--muted);}
+.company-values{display:grid;gap:1px;margin-top:22px;border-top:1px solid var(--line);}
+.company-values article{display:flex;gap:12px;padding:15px 0;border-bottom:1px solid var(--line);}
+.company-values b{font-size:11px;color:var(--text);}
+.company-values p{margin:4px 0 0;color:var(--muted);font-size:10px;line-height:1.45;}
+.company-product{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-top:18px;padding:16px 17px;border-radius:18px;background:rgba(255,255,255,.52);border:1px solid var(--line);}
+.company-product span:first-child{display:block;font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;}
+.company-product b{display:block;font-size:12px;margin-top:4px;color:var(--text);}
+.company-product p{margin:3px 0 0;color:var(--muted);font-size:9px;}
 body.modal-open{overflow:hidden;}
-body.dark .company-panel{background:#191a1e;color:#f4f4f5;}
-body.dark .company-close,body.dark .company-tags span,body.dark .company-product{background:#292a2f;color:#f4f4f5;}
-body.dark .company-values{border-color:#33343a;}
-body.dark .company-values article{border-color:#33343a;}
-body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
+body.dark .company-close,body.dark .company-tags span,body.dark .company-product{background:rgba(255,255,255,.055);}
+body.dark .company-hero p{color:rgba(11,12,15,.66);}
 @media(max-width:600px){
   .company-panel{max-height:92vh;padding:12px 17px calc(22px + env(safe-area-inset-bottom));border-radius:28px 28px 0 0;}
   .company-head h2{font-size:25px;}
   .company-hero{padding:16px;}
   .company-section h3{font-size:18px;}
 }
-
 </style>
 <style id="future-v17-navigation">
 /* v17 — меньше меню, больше управляющего */
@@ -5414,6 +5411,274 @@ body.dark #controlContent .settings-company-footer-v2 .settings-developer-link{b
   #controlContent .settings-company-footer-v2{grid-template-columns:1fr!important;width:100%!important}
 }
 </style>
+<style id="company-sheet-theme-final-v2">
+/* Финальный визуальный слой компании: та же тема, что и у приложения. */
+.company-logo.dm-company-mark{
+  width:48px!important;height:48px!important;flex:0 0 48px!important;
+  padding:0!important;border-radius:15px!important;
+  display:grid!important;place-items:center!important;
+  background:var(--text)!important;color:var(--bg)!important;
+  border:1px solid var(--line)!important;
+  box-shadow:0 8px 24px rgba(20,25,35,.08)!important;
+  font-size:13px!important;font-weight:850!important;letter-spacing:-.04em!important;
+}
+.company-logo.dm-company-mark .dm-signature-logo{display:none!important}
+.company-panel{
+  background:var(--panel)!important;color:var(--text)!important;
+  border-color:var(--line)!important;
+  box-shadow:0 -24px 80px rgba(20,25,35,.16)!important;
+}
+.company-close{
+  background:rgba(255,255,255,.52)!important;color:var(--text)!important;
+  border-color:var(--line)!important;
+}
+.company-hero{
+  background:var(--text)!important;color:var(--bg)!important;
+  border:1px solid var(--line)!important;
+  box-shadow:var(--shadow)!important;
+}
+.company-hero p{color:rgba(255,255,255,.64)!important}
+.company-tags span,.company-product{
+  background:rgba(255,255,255,.52)!important;
+  color:var(--text)!important;
+  border-color:var(--line)!important;
+}
+.company-values,.company-values article{border-color:var(--line)!important}
+.company-values b,.company-product b,.company-section h3{color:var(--text)!important}
+.company-values p,.company-product p,.company-product span:first-child{color:var(--muted)!important}
+body.dark .company-close,
+body.dark .company-tags span,
+body.dark .company-product{background:rgba(255,255,255,.055)!important;color:var(--text)!important}
+body.dark .company-hero{background:var(--text)!important;color:var(--bg)!important}
+body.dark .company-hero p{color:rgba(11,12,15,.64)!important}
+</style>
+
+<style id="footer-company-developer-one-row-final">
+/* Финальная компоновка: компания и связь с разработчиками в одной строке. */
+#controlContent .settings-company-footer-v2{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  align-items:stretch!important;
+  gap:10px!important;
+  width:100%!important;
+}
+#controlContent .settings-company-footer-v2 .settings-company-brand-button,
+#controlContent .settings-company-footer-v2 .settings-developer-link{
+  width:100%!important;
+  min-width:0!important;
+  min-height:58px!important;
+  margin:0!important;
+  box-sizing:border-box!important;
+}
+#controlContent .settings-company-footer-v2 .settings-company-copy,
+#controlContent .settings-company-footer-v2 .settings-developer-link>span:nth-child(2){
+  min-width:0!important;
+}
+#controlContent .settings-company-footer-v2 .settings-company-copy b,
+#controlContent .settings-company-footer-v2 .settings-developer-link>span:nth-child(2) b{
+  white-space:nowrap!important;
+}
+@media(max-width:560px){
+  #controlContent .settings-company-footer-v2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:8px!important}
+  #controlContent .settings-company-footer-v2 .settings-company-brand-button,
+  #controlContent .settings-company-footer-v2 .settings-developer-link{min-height:54px!important;padding:8px 9px!important}
+  #controlContent .settings-company-footer-v2 .settings-company-logo{width:34px!important;height:34px!important;flex-basis:34px!important;font-size:11px!important}
+  #controlContent .settings-company-footer-v2 .settings-company-copy b{font-size:10px!important}
+  #controlContent .settings-company-footer-v2 .settings-company-copy small{font-size:7.5px!important}
+  #controlContent .settings-company-footer-v2 .settings-developer-link>span:nth-child(2) b{font-size:9px!important}
+  #controlContent .settings-company-footer-v2 .settings-developer-link>span:nth-child(2) small{font-size:7.5px!important}
+}
+</style>
+
+
+<style id="digital-manager-blue-theme-final">
+/* =========================================================
+   ЦИФРОВОЙ УПРАВЛЯЮЩИЙ — ЕДИНАЯ СИНЯЯ ТЕМА
+   Финальный слой поверх старых визуальных патчей.
+   Логику JS не меняем.
+   ========================================================= */
+
+:root{
+  --dm-brand:#315bd0;
+  --dm-brand-2:#4d7cff;
+  --dm-brand-soft:rgba(49,91,208,.09);
+  --dm-brand-line:rgba(49,91,208,.16);
+  --dm-brand-shadow:0 14px 38px rgba(49,91,208,.12);
+}
+
+/* Светлая тема: синий — главный акцент приложения */
+body:not(.dark){
+  --blue:#315bd0;
+  --purple:#5b5ce2;
+}
+
+body:not(.dark) .mark,
+body:not(.dark) .settings-company-logo,
+body:not(.dark) .company-logo.dm-company-mark{
+  background:linear-gradient(145deg,var(--dm-brand),var(--dm-brand-2)) !important;
+  color:#fff !important;
+  border-color:transparent !important;
+  box-shadow:0 9px 24px rgba(49,91,208,.18) !important;
+}
+
+/* Основные CTA больше не чёрные */
+body:not(.dark) .send,
+body:not(.dark) .confirm-action,
+body:not(.dark) .finance-action,
+body:not(.dark) .promo-action,
+body:not(.dark) .sales-action,
+body:not(.dark) .sales-primary,
+body:not(.dark) .sales-wide-action,
+body:not(.dark) .future-create-btn,
+body:not(.dark) .manager-send,
+body:not(.dark) .control-action,
+body:not(.dark) .build-action,
+body:not(.dark) .home-order-actions button.primary,
+body:not(.dark) .settings-autopilot-action{
+  background:linear-gradient(135deg,var(--dm-brand),var(--dm-brand-2)) !important;
+  color:#fff !important;
+  border-color:transparent !important;
+  box-shadow:0 10px 25px rgba(49,91,208,.18) !important;
+}
+
+/* Кнопки закрытия/завершения: именно «Готово», не крестик */
+#controlOverlay .control-close{
+  min-width:96px !important;
+  height:38px !important;
+  padding:0 16px !important;
+  border-radius:13px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  background:var(--dm-brand) !important;
+  color:#fff !important;
+  border:0 !important;
+  box-shadow:0 9px 22px rgba(49,91,208,.18) !important;
+}
+#controlOverlay .control-close::before{
+  content:"Готово" !important;
+  font-size:11px !important;
+  font-weight:750 !important;
+}
+#controlOverlay .control-close span,
+#controlOverlay .control-close svg{
+  display:none !important;
+}
+
+/* Уже существующие кнопки «Готово» — в фирменной синей системе */
+.company-close.company-done,
+.wow-module-close{
+  min-width:76px !important;
+  min-height:38px !important;
+  padding:0 15px !important;
+  border-radius:13px !important;
+  background:var(--dm-brand) !important;
+  color:#fff !important;
+  border:0 !important;
+  box-shadow:0 9px 22px rgba(49,91,208,.16) !important;
+}
+
+/* Верх/модальные панели: никакого чужого чёрного материала */
+body:not(.dark) .company-panel,
+body:not(.dark) .wow-module-panel,
+body:not(.dark) .intent-sheet,
+body:not(.dark) .future-build-sheet,
+body:not(.dark) .autopilot-sheet,
+body:not(.dark) .blindspot-sheet,
+body:not(.dark) .twin-sheet,
+body:not(.dark) .sim-sheet,
+body:not(.dark) .memory-sheet-v11,
+body:not(.dark) .evo-modal-sheet{
+  background:rgba(248,250,255,.96) !important;
+  color:var(--text) !important;
+  border-color:var(--dm-brand-line) !important;
+}
+
+/* Главные информационные панели */
+body:not(.dark) .company-hero{
+  background:
+    radial-gradient(circle at 100% 0,rgba(77,124,255,.20),transparent 40%),
+    linear-gradient(135deg,#315bd0,#4d7cff) !important;
+  color:#fff !important;
+  border:0 !important;
+  box-shadow:var(--dm-brand-shadow) !important;
+}
+body:not(.dark) .company-hero p{
+  color:rgba(255,255,255,.78) !important;
+}
+
+/* Активные состояния и ссылки */
+body:not(.dark) .nav button.active,
+body:not(.dark) .mobile-nav button.active{
+  color:var(--dm-brand) !important;
+  background:rgba(49,91,208,.09) !important;
+  box-shadow:none !important;
+}
+body:not(.dark) .action,
+body:not(.dark) .sales-text-action,
+body:not(.dark) .future-link,
+body:not(.dark) .settings-developer-link{
+  color:var(--dm-brand) !important;
+}
+
+/* Переключатели */
+body:not(.dark) #controlContent .settings-rules-list .settings-rule-toggle.is-on,
+body:not(.dark) #controlContent .settings-sections-v2 .settings-home-switch.is-on,
+body:not(.dark) #controlContent .settings-clean-list .settings-home-switch.is-on{
+  background:var(--dm-brand) !important;
+  border-color:var(--dm-brand) !important;
+}
+body:not(.dark) #controlContent .settings-rules-list .settings-rule-toggle.is-on i,
+body:not(.dark) #controlContent .settings-sections-v2 .settings-home-switch.is-on i,
+body:not(.dark) #controlContent .settings-clean-list .settings-home-switch.is-on i{
+  background:#fff !important;
+}
+
+/* Нижние карточки «Цифровой бизнес» / «Нашли баг» */
+body:not(.dark) #controlContent .settings-company-footer-v2 .settings-company-brand-button,
+body:not(.dark) #controlContent .settings-company-footer-v2 .settings-developer-link{
+  background:rgba(49,91,208,.045) !important;
+  border-color:var(--dm-brand-line) !important;
+}
+body:not(.dark) #controlContent .settings-company-footer-v2 .settings-developer-dot{
+  background:var(--dm-brand-2) !important;
+}
+body:not(.dark) #controlContent .settings-company-footer-v2 .settings-company-arrow,
+body:not(.dark) #controlContent .settings-company-footer-v2 .settings-developer-arrow{
+  color:var(--dm-brand) !important;
+  opacity:.85 !important;
+}
+
+/* Поля ввода и маленькие интерактивные элементы */
+body:not(.dark) .ask-input:focus,
+body:not(.dark) .manager-form input:focus{
+  border-color:rgba(49,91,208,.35) !important;
+  box-shadow:0 0 0 4px rgba(49,91,208,.08) !important;
+}
+
+/* Мобильный помощник — не чёрная кнопка */
+body:not(.dark) .mobile-manager.dm-signature-manager-button{
+  background:linear-gradient(145deg,#315bd0,#4d7cff) !important;
+  color:#fff !important;
+  box-shadow:0 15px 36px rgba(49,91,208,.25) !important;
+}
+
+/* На маленьком экране всё остаётся компактным */
+@media(max-width:700px){
+  #controlOverlay .control-close{
+    min-width:86px !important;
+    height:36px !important;
+    border-radius:12px !important;
+  }
+
+  .company-close.company-done,
+  .wow-module-close{
+    min-height:36px !important;
+    padding:0 13px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="app">
@@ -6109,10 +6374,10 @@ body.dark #controlContent .settings-company-footer-v2 .settings-developer-link{b
 <div class="company-handle"></div>
 <div class="company-head">
 <div class="company-brandline">
-<span aria-hidden="true" class="mark dm-company-mark company-logo"><span aria-hidden="true" class="dm-signature-logo"><svg viewbox="0 0 120 120"><g class="sig-orbits"><ellipse class="sig-orbit o1" cx="60" cy="60" rx="48" ry="30" transform="rotate(-8 60 60)"></ellipse><ellipse class="sig-orbit o2" cx="60" cy="60" rx="48" ry="30" transform="rotate(28 60 60)"></ellipse><ellipse class="sig-orbit o3" cx="60" cy="60" rx="42" ry="42" transform="rotate(-20 60 60)"></ellipse></g><g class="sig-diamond-wrap"><rect class="sig-diamond" height="42" rx="10" transform="rotate(45 60 60)" width="42" x="39" y="39"></rect><rect class="sig-core" height="10" transform="rotate(45 60 60)" width="10" x="55" y="55"></rect></g></svg></span></span>
+<span aria-hidden="true" class="mark dm-company-mark company-logo">ЦБ</span>
 <div><div class="company-kicker">Компания</div><h2 id="companyTitle">Цифровой бизнес</h2><p>IT · AI · AUTOMATION</p></div>
 </div>
-<button aria-label="Закрыть" class="company-close" onclick="closeCompanySheet()" type="button"><span class="dm-icon"><svg viewbox="0 0 24 24"><path d="m6 6 12 12"></path><path d="m18 6-12 12"></path></svg></span></button>
+<button aria-label="Готово" class="company-close company-done" onclick="closeCompanySheet()" type="button">Готово</button>
 </div>
 <div class="company-hero"><span class="dm-icon dm-icon--live"><svg viewbox="0 0 24 24"><path d="M4 15.5C7 7 17 7 20 15.5"></path><path d="M5 18c4.5-4 9.5-4 14 0"></path><circle cx="12" cy="9" r="2"></circle></svg></span><div><b>Мы создаём технологии, которые работают на будущее.</b><p>Собственные цифровые продукты, программные решения и системы автоматизации для бизнеса и организаций.</p></div></div>
 <div class="company-section"><span>Наш подход</span><h3>Не просто разрабатываем программы — создаём цифровую инфраструктуру нового поколения.</h3></div>
@@ -11515,6 +11780,113 @@ body.dark #homeSectionPreviews.dm-intelligence-home .dm-intel-btn.ghost{backgrou
 }
 </style>
 
+
+<style id="theme-interface-pass-v1">
+/* Theme pass V1 — единая система поверхностей. Помощник не затрагиваем. */
+:root{
+  --ui-bg:#f5f5f7;
+  --ui-surface:rgba(255,255,255,.82);
+  --ui-surface-strong:#fff;
+  --ui-surface-soft:rgba(255,255,255,.58);
+  --ui-text:#17171a;
+  --ui-muted:#74747b;
+  --ui-line:rgba(20,20,24,.09);
+  --ui-accent:#3f4fa3;
+  --ui-accent-soft:rgba(63,79,163,.09);
+}
+body:not(.dark){background:var(--ui-bg)!important;color:var(--ui-text)!important}
+body:not(.dark) .content,body:not(.dark) main{background:transparent!important}
+body:not(.dark) .sidebar{background:rgba(248,248,250,.78)!important;border-color:var(--ui-line)!important}
+body:not(.dark) .nav button{color:#666872!important}
+body:not(.dark) .nav button.active{background:#fff!important;color:var(--ui-text)!important;border:1px solid var(--ui-line)!important;box-shadow:0 8px 24px rgba(25,30,40,.055)!important}
+body:not(.dark) .theme{background:var(--ui-surface)!important;color:var(--ui-text)!important;border-color:var(--ui-line)!important}
+body:not(.dark) .theme-mode-btn.active{background:var(--ui-text)!important;color:#fff!important}
+body:not(.dark) .mobile-nav{background:rgba(255,255,255,.88)!important;border:1px solid var(--ui-line)!important}
+body:not(.dark) .mobile-nav button{color:#85858d!important}
+body:not(.dark) .mobile-nav button.active{background:rgba(20,20,24,.065)!important;color:var(--ui-text)!important}
+
+/* Light: neutral cards, accent only where action/status needs it. */
+body:not(.dark) .card,body:not(.dark) .ask,body:not(.dark) .task-row,body:not(.dark) .client-row,body:not(.dark) .finance-card,body:not(.dark) .promo-card,body:not(.dark) .sales-card,body:not(.dark) .future-card{background:var(--ui-surface)!important;border-color:var(--ui-line)!important;color:var(--ui-text)!important}
+body:not(.dark) .metric,body:not(.dark) .item,body:not(.dark) .event-box,body:not(.dark) .finance-row,body:not(.dark) .channel-row,body:not(.dark) .sales-tip,body:not(.dark) .recovery-row{background:var(--ui-surface-soft)!important;border-color:var(--ui-line)!important}
+body:not(.dark) .settings-create-card,body:not(.dark) .settings-clean-row,body:not(.dark) .rule-row{border-color:var(--ui-line)!important}
+
+/* Dark: near-black, not blue-grey. Blue is reserved for accents. */
+body.dark{
+  --ui-bg:#090a0c;--ui-surface:rgba(255,255,255,.045);--ui-surface-strong:#15161a;
+  --ui-surface-soft:rgba(255,255,255,.032);--ui-text:#f5f5f7;--ui-muted:#a0a1a8;
+  --ui-line:rgba(255,255,255,.09);--ui-accent:#8ea4ff;--ui-accent-soft:rgba(142,164,255,.10);
+  background:var(--ui-bg)!important;color:var(--ui-text)!important}
+body.dark .content,body.dark main,body.dark .premium-home,body.dark .future-shell{background:transparent!important;color:var(--ui-text)!important}
+body.dark .sidebar{background:rgba(12,13,15,.82)!important;border-color:var(--ui-line)!important}
+body.dark .nav button{color:rgba(255,255,255,.58)!important}
+body.dark .nav button.active{background:rgba(255,255,255,.075)!important;color:#fff!important;border:1px solid var(--ui-line)!important;box-shadow:none!important}
+body.dark .theme{background:var(--ui-surface)!important;color:var(--ui-text)!important;border-color:var(--ui-line)!important}
+body.dark .theme-mode-btn.active{background:#f5f5f7!important;color:#111217!important}
+body.dark .mobile-nav{background:rgba(18,19,23,.92)!important;border:1px solid var(--ui-line)!important}
+body.dark .mobile-nav button{color:rgba(255,255,255,.55)!important}
+body.dark .mobile-nav button.active{background:rgba(255,255,255,.08)!important;color:#fff!important}
+
+body.dark .card,body.dark .ask,body.dark .task-row,body.dark .client-row,body.dark .finance-card,body.dark .promo-card,body.dark .sales-card,body.dark .future-card{background:var(--ui-surface)!important;border-color:var(--ui-line)!important;color:var(--ui-text)!important}
+body.dark .metric,body.dark .item,body.dark .event-box,body.dark .finance-row,body.dark .channel-row,body.dark .sales-tip,body.dark .recovery-row{background:var(--ui-surface-soft)!important;border-color:var(--ui-line)!important}
+body.dark .settings-create-card,body.dark .settings-clean-row,body.dark .rule-row{border-color:var(--ui-line)!important;background:var(--ui-surface)!important}
+body.dark .settings-company-footer-v2 .settings-company-brand-button{background:rgba(255,255,255,.045)!important;border-color:var(--ui-line)!important}
+body.dark .settings-company-footer-v2 .settings-developer-link{background:rgba(255,255,255,.035)!important;border-color:var(--ui-line)!important}
+
+/* Sheets/modals follow the selected theme. */
+body:not(.dark) .control-panel,body:not(.dark) .more-panel,body:not(.dark) .pulse-panel{background:rgba(250,250,252,.97)!important;color:var(--ui-text)!important;border-color:var(--ui-line)!important}
+body.dark .control-panel,body.dark .more-panel,body.dark .pulse-panel{background:rgba(20,21,25,.97)!important;color:var(--ui-text)!important;border-color:var(--ui-line)!important}
+body.dark .control-panel .control-title,body.dark .more-panel h2,body.dark .pulse-top h2{color:#f5f5f7!important}
+body.dark .control-panel .control-sub,body.dark .more-panel p,body.dark .pulse-panel p{color:rgba(255,255,255,.62)!important}
+
+/* Company sheet follows theme too. */
+body:not(.dark) .company-panel{background:#f7f7f8!important;color:#111!important}
+body.dark .company-panel{background:#17181c!important;color:#f5f5f7!important}
+body.dark .company-panel .company-close,body.dark .company-panel .company-tags span,body.dark .company-panel .company-product{background:#25262b!important;color:#f5f5f7!important}
+body.dark .company-panel .company-values{border-color:rgba(255,255,255,.10)!important}
+body.dark .company-panel .company-values article{border-color:rgba(255,255,255,.10)!important}
+body.dark .company-panel .company-values p,body.dark .company-panel .company-product p{color:rgba(255,255,255,.60)!important}
+
+/* Primary action language. */
+body:not(.dark) .future-btn.primary,body:not(.dark) .control-action,body:not(.dark) .settings-autopilot-action{background:#17171a!important;color:#fff!important}
+body.dark .future-btn.primary,body.dark .control-action,body.dark .settings-autopilot-action{background:rgba(255,255,255,.075)!important;color:#fff!important;border-color:var(--ui-line)!important}
+</style>
+
+<style id="company-sheet-our-theme-final-v3">
+/* Компания: не отдельный чёрный экран — полностью в визуальной системе приложения. */
+.company-logo.dm-company-mark{
+  background:var(--text)!important;color:var(--bg)!important;
+  border-color:var(--line)!important;
+}
+.company-close.company-done{
+  width:auto!important;min-width:76px!important;height:40px!important;
+  padding:0 15px!important;border-radius:13px!important;
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  font-size:11px!important;font-weight:700!important;
+  letter-spacing:-.01em!important;
+  background:var(--panel)!important;color:var(--text)!important;
+  border:1px solid var(--line)!important;
+  box-shadow:none!important;
+}
+.company-hero{
+  background:linear-gradient(135deg,rgba(101,87,217,.105),rgba(10,103,255,.055))!important;
+  color:var(--text)!important;border:1px solid var(--line)!important;
+  box-shadow:none!important;
+}
+.company-hero p{color:var(--muted)!important}
+.company-tags span,.company-product{
+  background:var(--panel-soft,rgba(255,255,255,.72))!important;
+  color:var(--text)!important;border-color:var(--line)!important;
+}
+body.dark .company-panel{background:var(--panel)!important;color:var(--text)!important}
+body.dark .company-close.company-done{background:rgba(255,255,255,.055)!important;color:var(--text)!important;border-color:var(--line)!important}
+body.dark .company-hero{
+  background:linear-gradient(135deg,rgba(101,87,217,.16),rgba(10,103,255,.07))!important;
+  color:var(--text)!important;border-color:var(--line)!important;
+}
+body.dark .company-hero p{color:var(--muted)!important}
+body.dark .company-tags span,body.dark .company-product{background:rgba(255,255,255,.045)!important;color:var(--text)!important;border-color:var(--line)!important}
+@media(max-width:600px){.company-close.company-done{min-width:72px!important;padding:0 13px!important;font-size:10.5px!important}}
+</style>
 </body>
 
 </html>
