@@ -162,7 +162,6 @@ button:focus-visible,input:focus-visible,select:focus-visible{
   background:rgba(22,119,255,.18);
 }
 
-
 /* Sales v2 — premium management experience */
 .sales-hero{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;margin-bottom:24px}
 .sales-hero-copy h2{font-size:42px;letter-spacing:-1.8px;margin:7px 0 8px;line-height:1.05}
@@ -235,7 +234,6 @@ body.dark .sales-manager-card .sales-primary{background:#fff;color:#111827}
 body.dark .sales-bottom-note>span{background:rgba(255,255,255,.07)}
 @media(max-width:900px){.sales-hero{align-items:flex-start;flex-direction:column}.sales-hero-controls{width:100%}.sales-ask-btn{margin-left:auto}.sales-command{grid-template-columns:auto 1fr}.sales-command .sales-primary{grid-column:1/-1;width:100%}.sales-tip-row{grid-template-columns:1fr}.sales-grid-v2{grid-template-columns:1fr}}
 @media(max-width:600px){.sales-hero-copy h2{font-size:32px}.sales-hero-controls{display:none}.sales-command{padding:18px;border-radius:22px}.sales-command-icon{width:43px;height:43px;border-radius:14px}.sales-command h3{font-size:18px}.sales-command-meta span{font-size:10px}.sales-bottom-note{align-items:flex-start}.sales-bottom-note button{display:none}}
-
 
 /* Mobile-first product layer */
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -902,7 +900,6 @@ body.dark{
 }
 .icon-action .dm-icon{margin-left:1px}
 
-
 .return-cycle{max-width:1280px;margin:0 auto 18px;padding:22px;border:1px solid var(--line);border-radius:26px;background:var(--panel);backdrop-filter:blur(22px);box-shadow:var(--shadow);overflow:hidden;position:relative}
 .return-cycle:before{content:"";position:absolute;width:180px;height:180px;right:-70px;top:-80px;border-radius:50%;border:1px solid var(--icon-line);opacity:.35}
 .return-cycle-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}
@@ -923,7 +920,6 @@ body.dark .return-cycle-live,.dark .return-client-icon{background:rgba(255,255,2
   .return-cycle-row{align-items:flex-start;flex-direction:column}
   .return-cycle-btn{width:100%;justify-content:center}
 }
-
 
 /* Premium living navigation */
 .sidebar nav, .side-nav, .nav-list{
@@ -1090,7 +1086,6 @@ body.dark .memory-sheet{background:rgba(28,28,30,.94)}
   .memory-sheet{bottom:0;border-radius:30px 30px 0 0;width:100%;max-height:88vh;padding:20px}
   .memory-grid{grid-template-columns:1fr}
 }
-
 
 /* === Digital Manager: first-launch onboarding === */
 .dm-onboarding{
@@ -1263,11 +1258,6 @@ body.dark .dm-ob-switch{background:rgba(255,255,255,.15)}body.dark .dm-ob-switch
   .dm-onboarding *{animation:none!important;transition:none!important}
 }
 
-
-.dm-brand-logo{width:38px;height:38px;display:inline-grid;place-items:center;color:var(--icon,#111216);flex:none}
-.dm-brand-logo svg{width:100%;height:100%}
-
-
 /* =========================================================
    DIGITAL MANAGER — GLOBAL PREMIUM VISUAL LANGUAGE
    One visual system across onboarding + app
@@ -1347,7 +1337,7 @@ main h3,.main h3{letter-spacing:-.03em!important}
 /* Cards become quiet premium surfaces */
 .card,.panel,.metric-card,.stat-card,.glass-card,.task-card,.client-card,
 .finance-card,.promo-card,.sales-card,.insight-card,.action-card,
-.analysis-card,.health-card,.calendar-card,.source-card{
+.source-card{
   border:1px solid var(--dm-line)!important;
   background:var(--dm-glass)!important;
   backdrop-filter:blur(24px) saturate(110%);
@@ -1507,10 +1497,6 @@ td:last-child{border-right:1px solid var(--dm-line)!important;border-radius:0 14
   *,*:before,*:after{animation:none!important;transition:none!important}
 }
 
-
-.dm-global-logo{display:inline-grid;place-items:center;width:36px;height:36px;color:inherit;vertical-align:middle;margin-right:8px}
-.dm-global-logo svg{width:100%;height:100%}
-
 .sidebar .theme{display:none!important}
 </style>
 <style>
@@ -1525,78 +1511,8 @@ body.dark .more-panel,body.dark .control-panel,body.dark .pulse-panel{background
 @media(max-width:700px){.more-panel{bottom:0;width:100%;border-radius:28px 28px 0 0;padding:18px 15px calc(18px + env(safe-area-inset-bottom))}.more-head h2{font-size:27px}.control-panel{top:auto;bottom:0;transform:translateX(-50%);width:100%;border-radius:28px 28px 0 0;padding:20px 15px calc(20px + env(safe-area-inset-bottom));max-height:86vh}.control-title{font-size:30px}.pulse-panel{top:auto!important;bottom:0;transform:translateX(-50%)!important;width:100%!important;border-radius:28px 28px 0 0!important;padding:20px 15px calc(20px + env(safe-area-inset-bottom))!important}.pulse-top h2{font-size:34px}.pulse-links{grid-template-columns:1fr 1fr}.pulse-hero{align-items:flex-start}.pulse-orb.big{width:56px;height:56px;border-radius:18px}}
 </style>
 <style id="premium-home-v1">
-/* ===== Premium morning dashboard v1 ===== */
+/* Legacy dashboard styles retained only for the live wrapper. */
 .premium-home{max-width:1180px;margin:0 auto}
-.premium-top{display:flex;justify-content:space-between;gap:24px;align-items:flex-end;margin-bottom:22px}
-.premium-kicker{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--purple);margin-bottom:8px}
-.premium-top h1{margin:0;font-size:clamp(38px,5vw,58px);letter-spacing:-.065em;line-height:.95}
-.premium-top p{margin:12px 0 0;color:var(--muted);font-size:14px;max-width:600px;line-height:1.5}
-.premium-date{color:var(--muted);font-size:11px;white-space:nowrap;padding-bottom:7px}
-.premium-status{display:flex;align-items:center;gap:8px;margin-top:14px;color:var(--muted);font-size:11px}
-.premium-status i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(39,168,102,.1)}
-.premium-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(320px,.8fr);gap:16px}
-.premium-card{background:var(--panel);border:1px solid var(--line);border-radius:28px;box-shadow:0 22px 70px rgba(30,35,50,.075);backdrop-filter:blur(22px);overflow:hidden}
-.premium-card-pad{padding:22px}
-.premium-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px}
-.premium-card-title{font-size:16px;font-weight:760;letter-spacing:-.02em}
-.premium-card-sub{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4}
-.premium-help{border:0;width:30px;height:30px;border-radius:50%;background:rgba(114,87,255,.08);color:var(--purple);font-weight:800;cursor:help}
-.premium-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:19px 0 17px}
-.premium-metric{padding:14px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.38)}
-.premium-metric span{display:block;color:var(--muted);font-size:10px}
-.premium-metric b{display:block;font-size:23px;letter-spacing:-.045em;margin-top:6px}
-.premium-metric em{display:block;font-style:normal;font-size:10px;margin-top:4px}
-.premium-feed{display:grid;gap:9px}
-.premium-event{display:grid;grid-template-columns:10px 1fr auto;gap:11px;align-items:start;padding:14px;border:1px solid var(--line);border-radius:19px;background:rgba(255,255,255,.34);transition:.2s}
-.premium-event:hover{transform:translateY(-1px);box-shadow:0 13px 30px rgba(30,35,50,.06)}
-.premium-event-dot{width:9px;height:9px;border-radius:50%;margin-top:5px}
-.premium-event-dot.red{background:var(--red)}.premium-event-dot.orange{background:var(--orange)}.premium-event-dot.green{background:var(--green)}
-.premium-event b{display:block;font-size:13px;line-height:1.35}
-.premium-event p{margin:4px 0 0;color:var(--muted);font-size:11px;line-height:1.45}
-.premium-event button{border:0;background:transparent;color:var(--blue);font-size:11px;font-weight:750;padding:5px 0;white-space:nowrap}
-.premium-hint{margin-top:10px;padding:11px 13px;border-radius:15px;background:rgba(114,87,255,.055);border:1px solid rgba(114,87,255,.1);color:var(--muted);font-size:10px;line-height:1.45}
-.premium-hint b{color:var(--text)}
-.premium-side{display:grid;gap:16px}
-.premium-done{display:grid;gap:10px;margin-top:17px}
-.premium-done-row{display:flex;gap:10px;align-items:flex-start;font-size:12px;line-height:1.4}
-.premium-check{width:20px;height:20px;min-width:20px;border-radius:7px;display:grid;place-items:center;background:rgba(39,168,102,.1);color:var(--green);font-size:11px;font-weight:900}
-.premium-decision{margin-top:18px;padding:15px;border-radius:20px;background:linear-gradient(135deg,rgba(114,87,255,.09),rgba(22,119,255,.055));border:1px solid rgba(114,87,255,.12)}
-.premium-decision-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--purple);font-weight:850}
-.premium-decision b{display:block;font-size:13px;margin-top:5px}
-.premium-decision p{margin:5px 0 12px;color:var(--muted);font-size:11px;line-height:1.45}
-.premium-decision-actions{display:flex;gap:8px}
-.premium-decision-actions button{border:0;border-radius:12px;padding:10px 12px;font-size:11px;font-weight:750;cursor:pointer}
-.premium-primary{background:var(--text);color:#fff}.premium-secondary{background:rgba(255,255,255,.58);color:var(--text);border:1px solid var(--line)!important}
-.premium-day{display:grid;gap:8px;margin-top:17px}
-.premium-event-time{display:grid;grid-template-columns:43px 1fr;gap:10px;align-items:center}
-.premium-event-time span{font-size:10px;color:var(--muted)}
-.premium-event-time div{padding:10px 11px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.34);font-size:11px}
-.premium-focus{grid-column:1/-1;padding:21px;border-radius:26px;background:linear-gradient(135deg,#17171a,#282a31);color:#fff;position:relative;overflow:hidden;box-shadow:0 25px 75px rgba(20,20,25,.16)}
-.premium-focus:after{content:"";position:absolute;width:320px;height:320px;border-radius:50%;right:-100px;top:-180px;background:radial-gradient(circle,rgba(114,87,255,.45),transparent 68%);pointer-events:none}
-.premium-focus-top{display:flex;justify-content:space-between;gap:20px;align-items:center;position:relative;z-index:1}
-.premium-focus-label{font-size:10px;color:rgba(255,255,255,.52);text-transform:uppercase;letter-spacing:.09em;font-weight:800}
-.premium-focus h2{margin:7px 0 5px;font-size:25px;letter-spacing:-.04em}
-.premium-focus p{margin:0;max-width:650px;color:rgba(255,255,255,.62);font-size:12px;line-height:1.5}
-.premium-focus-action{border:0;border-radius:14px;background:#fff;color:#17171a;padding:12px 15px;font-size:11px;font-weight:800;white-space:nowrap;position:relative;z-index:1}
-.premium-ask{grid-column:1/-1;padding:20px;border-radius:28px;background:linear-gradient(135deg,rgba(114,87,255,.095),rgba(22,119,255,.065));border:1px solid rgba(114,87,255,.12);box-shadow:0 22px 70px rgba(30,35,50,.06)}
-.premium-ask-head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}
-.premium-ask-title{font-size:19px;font-weight:780;letter-spacing:-.025em}
-.premium-ask-sub{margin-top:4px;color:var(--muted);font-size:11px;line-height:1.45}
-.premium-manager{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:10px;white-space:nowrap}
-.premium-manager i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(39,168,102,.1)}
-.premium-ask-form{display:grid;grid-template-columns:1fr 48px auto;gap:8px;margin-top:15px}
-.premium-ask-input{min-width:0;border:1px solid var(--line);background:rgba(255,255,255,.76);border-radius:16px;padding:13px 15px;outline:0;color:var(--text)}
-.premium-ask-input:focus{border-color:rgba(114,87,255,.35);box-shadow:0 0 0 4px rgba(114,87,255,.07)}
-.premium-voice,.premium-send{border:0;border-radius:15px;cursor:pointer;font-weight:800}
-.premium-voice{background:#fff;color:var(--purple);border:1px solid var(--line);font-size:18px}
-.premium-send{padding:0 17px;background:var(--text);color:#fff;font-size:11px}
-.premium-examples{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
-.premium-example{border:1px solid var(--line);background:rgba(255,255,255,.46);color:var(--muted);border-radius:999px;padding:7px 10px;font-size:10px;cursor:pointer}
-body.dark .premium-card,body.dark .premium-ask{box-shadow:0 24px 75px rgba(0,0,0,.22)}
-body.dark .premium-metric,body.dark .premium-event,body.dark .premium-event-time div,body.dark .premium-secondary,body.dark .premium-example{background:rgba(255,255,255,.045)}
-body.dark .premium-ask-input{background:rgba(255,255,255,.055)}
-@media(max-width:850px){.premium-grid{grid-template-columns:1fr}.premium-focus,.premium-ask{grid-column:auto}.premium-focus-top{align-items:flex-start;flex-direction:column}.premium-focus-action{width:100%}}
-@media(max-width:600px){.premium-top{display:block}.premium-date{display:none}.premium-top h1{font-size:40px}.premium-metrics{grid-template-columns:1fr 1fr}.premium-metric:last-child{grid-column:1/-1}.premium-event{grid-template-columns:9px 1fr}.premium-event button{grid-column:2;text-align:left}.premium-ask-form{grid-template-columns:1fr 48px}.premium-send{grid-column:1/-1;height:47px}.premium-ask-head{display:block}.premium-manager{margin-top:12px}.premium-focus{border-radius:22px}.premium-card{border-radius:23px}}
 </style>
 <style id="premium-v3-fixes">
 /* ===== PREMIUM V3: one company logo, no duplicate product logos ===== */
@@ -1617,10 +1533,6 @@ body.dark .dm-company-mark{background:#f5f5f7;color:#17171a}
 @keyframes dmProductPulse{0%,100%{transform:scale(.9);opacity:.72}50%{transform:scale(1.08);opacity:1}}
 @media(prefers-reduced-motion:reduce){.dm-company-mark,.dm-ob-product-symbol,.dm-ob-product-symbol span,.dm-ob-product-symbol i{animation:none!important;transition:none!important}}
 @media(max-width:600px){.premium-kicker{flex-wrap:wrap;gap:5px}.premium-kicker i{display:none}.premium-kicker span{display:block;width:100%;margin-bottom:1px}.dm-company-mark{width:38px;height:38px;border-radius:12px;font-size:12px}.brand{gap:10px}}
-</style>
-<style id="premium-v3-legacy-neutralize">
-.dm-ob-logo{display:none!important}
-.dm-global-logo,.dm-brand-logo{display:none!important}
 </style>
 <style id="premium-v4">
 /* =========================================================
@@ -2158,8 +2070,8 @@ body{font-synthesis:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smooth
 h1,.tasks-title,.clients-title,.finance-title,.promo-title,.future-title,.future-intent h2,.future-twin h2,.future-simulator h2,.future-memory h2{font-weight:700;letter-spacing:-.052em;line-height:1.03}
 .top h1{font-size:clamp(36px,4.2vw,52px);letter-spacing:-.058em}
 .lead,.future-lead{font-size:15px;line-height:1.48;letter-spacing:-.012em}
-.eyebrow,.future-kicker,.future-eyebrow,.manager-kicker{font-weight:600;letter-spacing:.015em}
-.title,.finance-card-title,.promo-card-title,.future-card-title{font-weight:650;letter-spacing:-.018em}
+.eyebrow,.future-kicker,.manager-kicker{font-weight:600;letter-spacing:.015em}
+.title,.finance-card-title,.promo-card-title{font-weight:650;letter-spacing:-.018em}
 .desc,.finance-card-sub,.promo-card-sub,.tasks-sub,.clients-sub,.finance-sub,.promo-sub{line-height:1.45;letter-spacing:-.005em}
 .mv,.finance-stat b,.promo-stat b,.client-stat b,.future-metric-value{font-variant-numeric:tabular-nums;letter-spacing:-.045em;font-weight:700}
 .send,.confirm-action,.finance-action,.promo-action,.future-primary,.future-button{font-weight:650;letter-spacing:-.012em}
@@ -2433,7 +2345,6 @@ body.dark .mobile-nav button.active{
   }
 }
 
-
 /* v16 company sheet: company information is a separate layer, never part of the home flow */
 .company-sheet{
   position:fixed;inset:0;z-index:100001;display:none;
@@ -2596,7 +2507,7 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
   .future-header h1{font-size:29px}
   .future-state{padding:14px}
   .state-copy h2{font-size:18px}
-  .future-card{padding:14px}
+  
 }
 </style>
 <style id="personality-v20">
@@ -2872,8 +2783,6 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
   border-radius:24px!important;
   box-shadow:none!important;
 }
-.finance-chart-card,
-.finance-list-card{box-shadow:none!important}
 .finance-manager-response{
   border:0!important;
   background:#111114!important;
@@ -3092,7 +3001,7 @@ body.dark .company-values p,body.dark .company-product p{color:#a0a1a8;}
   font-size:8px!important;
   margin-top:8px!important;
 }
-.future-grid{gap:10px!important}
+
 @media(max-width:600px){
   .future-shell{padding:12px 10px 90px!important}
   .future-state{
@@ -4063,12 +3972,11 @@ body.dark .dm-intel-hero p,body.dark .dm-live-transcript{color:rgba(255,255,255,
 @keyframes sigDiamond{0%,100%{transform:rotate(0deg) scale(1)}50%{transform:rotate(3deg) scale(1.035)}}
 
 /* Sidebar / company marks */
-.dm-company-mark.dm-signature-holder,.company-logo.dm-company-mark{
+.company-logo.dm-company-mark{
   background:transparent!important;box-shadow:none!important;border-radius:0!important;
   width:48px!important;height:48px!important;padding:0!important;color:var(--text)!important;
 }
 .dm-company-mark .dm-signature-logo,.company-logo .dm-signature-logo{width:48px;height:48px}
-body.dark .dm-company-mark.dm-signature-holder,
 body.dark .company-logo.dm-company-mark{color:#f5f5f5!important}
 
 /* Onboarding uses the exact same identity, just larger. */
@@ -4185,7 +4093,7 @@ body.dark .dm-signature-button-logo .sig-core{fill:#f5f5f7!important}
   .mobile-manager.dm-signature-manager-button{width:78px!important;height:78px!important;right:13px!important;bottom:calc(86px + env(safe-area-inset-bottom))!important}
   .dm-signature-button-logo{width:78px!important;height:78px!important}
 }
-@media(min-width:901px){.mobile-manager.dm-signature-manager-button{display:none!important}}
+
 @media(prefers-reduced-motion:reduce){
   .dm-signature-manager-button::before,.dm-signature-button-logo .sig-orbit,.dm-signature-button-logo .sig-diamond-wrap{animation:none!important}
 }
@@ -4350,77 +4258,6 @@ body.dark .future-evolution .evo-next button{color:#f7f8fa !important;}
   .future-evolution .evo-next button{grid-column:2 !important; justify-self:end !important;}
 }
 </style>
-<style id="home-organize-theme-v2">
-.home-organize-bar{
-  max-width:1280px!important;
-  min-height:58px!important;
-  margin:0 auto 12px!important;
-  padding:9px 11px 9px 14px!important;
-  border-radius:18px!important;
-  display:flex!important;
-  align-items:center!important;
-  gap:12px!important;
-}
-.home-organize-copy{min-width:0;flex:1}
-.home-organize-copy .home-organize-kicker{font-size:7px!important;letter-spacing:.16em!important;margin-bottom:2px!important}
-.home-organize-copy b{font-size:11px!important;line-height:1.2!important}
-.home-organize-copy small{font-size:9px!important;line-height:1.25!important;margin-top:2px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.home-organize-actions{display:flex!important;align-items:center!important;gap:7px!important;flex:none}
-.home-organize-actions button{height:34px!important;border-radius:12px!important;padding:0 11px!important;font-size:9px!important;font-weight:700!important;white-space:nowrap!important;cursor:pointer!important}
-.home-organize-open{border:1px solid var(--line)!important;background:var(--text)!important;color:var(--bg)!important}
-.home-organize-theme{display:inline-flex!important;align-items:center!important;gap:6px!important;border:1px solid var(--line)!important;background:rgba(255,255,255,.58)!important;color:var(--text)!important;backdrop-filter:blur(12px)!important}
-.home-theme-icon{width:15px;height:15px;display:grid;place-items:center}
-.home-theme-icon svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.home-theme-moon{display:none}
-body.dark .home-organize-theme{background:rgba(255,255,255,.07)!important;border-color:rgba(255,255,255,.12)!important;color:#f7f8fa!important}
-body.dark .home-theme-sun{display:none}
-body.dark .home-theme-moon{display:block}
-@media(max-width:700px){
-  .home-organize-bar{min-height:54px!important;margin:0 0 10px!important;padding:8px 9px 8px 11px!important;border-radius:16px!important;gap:8px!important}
-  .home-organize-copy b{font-size:10px!important}
-  .home-organize-copy small{font-size:8px!important;max-width:190px}
-  .home-organize-actions{gap:5px!important}
-  .home-organize-actions button{height:31px!important;padding:0 8px!important;font-size:8px!important;border-radius:10px!important}
-  .home-organize-theme{min-width:92px!important;justify-content:center!important}
-}
-</style>
-<style id="home-organizer-compact-v2">
-/* Компактный контрол Главной — по высоте и плотности как обычная карточка. */
-.home-organize-bar{
-  max-width:1280px !important;
-  min-height:58px !important;
-  height:58px !important;
-  margin:0 auto 14px !important;
-  padding:9px 12px !important;
-  border-radius:18px !important;
-  gap:12px !important;
-}
-.home-organize-copy{display:flex !important;align-items:center !important;gap:9px !important;min-width:0 !important;}
-.home-organize-kicker{margin:0 !important;font-size:7px !important;white-space:nowrap !important;}
-.home-organize-bar b{font-size:11px !important;white-space:nowrap !important;}
-.home-organize-bar small{margin:0 !important;font-size:9px !important;white-space:nowrap !important;color:var(--muted) !important;}
-.home-organize-actions{display:flex !important;align-items:center !important;gap:6px !important;flex:none !important;}
-.home-organize-bar button{min-height:36px !important;height:36px !important;padding:0 10px !important;border-radius:11px !important;font-size:9px !important;}
-.home-organize-theme{min-width:94px !important;}
-.home-organize-open{min-width:76px !important;}
-@media(max-width:700px){
-  .home-organize-bar{min-height:54px !important;height:54px !important;padding:8px 9px !important;border-radius:16px !important;gap:7px !important;}
-  .home-organize-copy{gap:6px !important;overflow:hidden !important;}
-  .home-organize-kicker{display:none !important;}
-  .home-organize-bar b{font-size:10px !important;overflow:hidden !important;text-overflow:ellipsis !important;}
-  .home-organize-bar small{display:none !important;}
-  .home-organize-actions{gap:5px !important;}
-  .home-organize-bar button{min-height:34px !important;height:34px !important;padding:0 8px !important;font-size:8px !important;}
-  .home-organize-theme{min-width:82px !important;}
-  .home-organize-open{min-width:63px !important;}
-}
-@media(max-width:390px){
-  .home-organize-bar{height:52px !important;min-height:52px !important;}
-  .home-organize-bar b{max-width:120px !important;}
-  .home-organize-theme{min-width:76px !important;}
-  .home-organize-open{min-width:58px !important;}
-}
-</style>
 <style id="evo-timeline-visibility-final">
 /* FINAL VISIBILITY FIX — evolution activity block */
 .future-evolution .evo-timeline,
@@ -4514,18 +4351,6 @@ body.dark .future-evolution .evo-icon{
 }
 .future-evolution .evo-next button{
   color:#111216 !important;
-}
-body.dark .future-evolution .evo-next .future-label{
-  color:#aeb1ba !important;
-}
-body.dark .future-evolution .evo-next > div > b{
-  color:#f7f8fa !important;
-}
-body.dark .future-evolution .evo-next > div > span{
-  color:#b7bac3 !important;
-}
-body.dark .future-evolution .evo-next button{
-  color:#f7f8fa !important;
 }
 </style><style id="clean-home-stability">
 /* Clean working baseline: Home cards must not shake, zoom, blur or jump. */
@@ -4656,8 +4481,7 @@ body.dark .future-evolution .evo-next button{
   margin:0!important;transform:translateX(0)!important;transition:transform .18s ease,background .18s ease!important;
   background:#fff!important;box-shadow:0 1px 4px rgba(16,31,76,.22)!important;
 }
-#controlContent .settings-rules-list .settings-rule-toggle.is-on i,
-#controlContent .settings-sections-v2 .settings-home-switch.is-on i{transform:translateX(18px)!important}
+
 body:not(.dark) #controlContent .settings-rules-list .settings-rule-toggle.is-on,
 body:not(.dark) #controlContent .settings-sections-v2 .settings-home-switch.is-on{
   background:linear-gradient(135deg,#123b8f 0%,#3850c9 55%,#5b3fd0 100%)!important;border-color:transparent!important;
@@ -4822,7 +4646,6 @@ body:not(.dark) .future-state .state-copy:before{
 /* Чёрный фирменный квадрат оставляем фирменным знаком; остальные смысловые блоки уже sapphire. */
 </style>
 
-
 <style id="light-sapphire-buttons-v2">
 /* Светлая тема — кнопки в том же глубоком сапфирово-индиго. */
 body:not(.dark) .send,
@@ -4860,17 +4683,6 @@ body:not(.dark) .build-action:hover{
 }
 </style>
 
-
-<style id="home-preview-sapphire-v4">
-/* Светлая тема — кнопки новых компактных блоков Главной в едином сапфировом стиле. */
-body:not(.dark) .home-section-preview .preview-open{
- background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%) !important;
- color:#fff !important;
- border:1px solid rgba(93,112,166,.42) !important;
- box-shadow:0 8px 22px rgba(30,48,91,.16) !important;
-}
-body:not(.dark) .home-section-preview .preview-open span{color:#fff !important}
-</style>
 <style id="home-preview-dots-v5">
 /* Индикатор точками для добавленных через Настройки блоков Главной. */
 @media(max-width:700px){
@@ -5385,7 +5197,6 @@ body.dark .future-autopilot-modal .auto-save{
 }
 </style>
 
-
 <style id="dark-manager-no-circle-v1">
 /* Только тёмная тема: убираем внешний круг/ореол вокруг плавающего помощника.
    Сам фирменный знак внутри кнопки не меняем. */
@@ -5407,7 +5218,6 @@ body.dark .future-autopilot-modal .auto-save{
   }
 }
 </style>
-
 
 <style id="wow-module-native-cards-v3">
 /* Внутренние карточки используют ТОЧНО тот же визуальный язык, что и .future-card на Главной. */
@@ -5498,6 +5308,106 @@ body.dark .wow-module-panel > .module-flow span{
 }
 </style>
 
+<style id="settings-final-polish-v1">
+/* Final settings polish: one visual language in light mode, no redundant map strip, visible company/developer footer. */
+body:not(.dark) #controlContent .settings-rules-list .settings-rule-toggle.is-on,
+body:not(.dark) #controlContent .settings-sections-v2 .settings-home-switch.is-on,
+body:not(.dark) #controlContent .settings-clean-list .settings-home-switch.is-on{
+  background:var(--text)!important;
+  border-color:var(--text)!important;
+  box-shadow:none!important;
+}
+body:not(.dark) #controlContent .settings-rules-list .settings-rule-toggle.is-on i,
+body:not(.dark) #controlContent .settings-sections-v2 .settings-home-switch.is-on i,
+body:not(.dark) #controlContent .settings-clean-list .settings-home-switch.is-on i{
+  background:var(--panel)!important;
+  box-shadow:0 1px 4px rgba(0,0,0,.16)!important;
+}
+body:not(.dark) #controlContent .theme-mode-btn.active{
+  background:var(--text)!important;
+  color:var(--panel)!important;
+  border-color:var(--text)!important;
+}
+body:not(.dark) #controlContent .settings-developer-link,
+body:not(.dark) #controlContent .settings-company-brand-button{
+  color:var(--text)!important;
+}
+body:not(.dark) #controlContent .settings-developer-link{
+  background:rgba(20,20,24,.025)!important;
+  border-color:var(--line)!important;
+}
+</style>
+
+<style id="settings-company-developer-absolute-final">
+/* FINAL: company identity + developer contact in Settings */
+#controlContent .settings-company-footer-v2{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  width:100%!important;
+  box-sizing:border-box!important;
+  gap:10px!important;
+  margin:22px 0 4px!important;
+  padding:18px 0 0!important;
+  border-top:1px solid var(--line)!important;
+}
+#controlContent .settings-company-footer-v2 .settings-company-brand-button,
+#controlContent .settings-company-footer-v2 .settings-developer-link{
+  display:flex!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:56px!important;
+  box-sizing:border-box!important;
+  align-items:center!important;
+  text-align:left!important;
+  white-space:normal!important;
+}
+#controlContent .settings-company-footer-v2 .settings-company-brand-button{
+  gap:10px!important;
+  padding:9px 12px!important;
+  border:1px solid var(--line)!important;
+  border-radius:16px!important;
+  background:rgba(255,255,255,.55)!important;
+}
+#controlContent .settings-company-footer-v2 .settings-company-logo{
+  display:grid!important;
+  place-items:center!important;
+  width:38px!important;height:38px!important;
+  flex:0 0 38px!important;
+  border-radius:11px!important;
+  background:#17171a!important;
+  color:#fff!important;
+  border:0!important;
+  box-shadow:none!important;
+  font-size:12px!important;
+  font-weight:850!important;
+}
+#controlContent .settings-company-footer-v2 .settings-company-copy{
+  display:flex!important;
+  flex-direction:column!important;
+  min-width:0!important;
+  flex:1 1 auto!important;
+}
+#controlContent .settings-company-footer-v2 .settings-company-copy b{font-size:11px!important;line-height:1.15!important}
+#controlContent .settings-company-footer-v2 .settings-company-copy small{font-size:8.5px!important;line-height:1.2!important;margin-top:3px!important;color:var(--muted)!important}
+#controlContent .settings-company-footer-v2 .settings-company-arrow{margin-left:auto!important;opacity:.45!important}
+#controlContent .settings-company-footer-v2 .settings-developer-link{
+  gap:10px!important;
+  justify-content:flex-start!important;
+  padding:9px 12px!important;
+  border:1px solid var(--line)!important;
+  border-radius:16px!important;
+  background:rgba(20,20,24,.025)!important;
+  color:var(--text)!important;
+}
+#controlContent .settings-company-footer-v2 .settings-developer-dot{width:7px!important;height:7px!important;flex:0 0 7px!important;border-radius:50%!important;background:#4dbbff!important}
+#controlContent .settings-company-footer-v2 .settings-developer-link>span:nth-child(2){display:flex!important;flex:1 1 auto!important;flex-direction:column!important;gap:3px!important;min-width:0!important}
+#controlContent .settings-company-footer-v2 .settings-developer-link>span:nth-child(2) b{display:block!important;font-size:10.5px!important;line-height:1.15!important}
+#controlContent .settings-company-footer-v2 .settings-developer-link>span:nth-child(2) small{display:block!important;font-size:8.5px!important;line-height:1.2!important;color:var(--muted)!important;opacity:1!important}
+#controlContent .settings-company-footer-v2 .settings-developer-arrow{display:block!important;margin-left:auto!important;opacity:.45!important}
+body.dark #controlContent .settings-company-footer-v2 .settings-company-brand-button{background:rgba(255,255,255,.045)!important;border-color:rgba(255,255,255,.10)!important}
+body.dark #controlContent .settings-company-footer-v2 .settings-company-logo{background:#f4f6fa!important;color:#111!important}
+body.dark #controlContent .settings-company-footer-v2 .settings-developer-link{background:rgba(255,255,255,.035)!important;border-color:rgba(255,255,255,.10)!important}
+</style>
 </head>
 <body>
 <div class="app">
@@ -5506,6 +5416,7 @@ body.dark .wow-module-panel > .module-flow span{
 <div class="home-swipe-hint" aria-hidden="true"><span>←</span><span>Свайп — следующий блок</span><span>→</span></div>
 <div class="premium-home">
 <div class="future-shell">
+
 <section class="future-state home-block" data-home-block="state" data-home-title="Состояние бизнеса">
 <div class="state-greeting">
 <div class="future-kicker"><span class="pulse"></span> ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</div>
@@ -5721,7 +5632,6 @@ body.dark .wow-module-panel > .module-flow span{
 <div><small>03 ОКТ</small><b>Вечерние заявки — отдельный сценарий</b><span>Вывод из наблюдений</span></div>
 </div>
 </section>
-
 
 <section class="future-contract home-block" data-home-block="contract" data-home-title="Правила работы">
 <div class="contract-top">
@@ -6343,15 +6253,15 @@ function openSettingsPanel(){
     <div class="dm-learning-card"><div class="dm-learning-copy"><div class="dm-learning-kicker">Лёгкое обучение</div><b>Покажу, что здесь куда.</b><small>За минуту объясню Главную, разделы и управляющего — без длинной лекции.</small></div><button type="button" class="control-action dm-learning-button" onclick="openLightTutorial()">Пройти обучение →</button></div>
     <div class="settings-company-footer settings-company-footer-v2">
   <button type="button" class="settings-company-brand settings-company-brand-button" onclick="openCompanySheet()" aria-label="Открыть информацию о компании Цифровой бизнес">
-    <span class="mark dm-company-mark settings-company-logo"><span aria-hidden="true" class="dm-signature-logo"><svg viewBox="0 0 120 120"><g class="sig-orbits"><ellipse class="sig-orbit o1" cx="60" cy="60" rx="48" ry="30" transform="rotate(-8 60 60)"></ellipse><ellipse class="sig-orbit o2" cx="60" cy="60" rx="48" ry="30" transform="rotate(28 60 60)"></ellipse><ellipse class="sig-orbit o3" cx="60" cy="60" rx="42" ry="42" transform="rotate(-20 60 60)"></ellipse></g><g class="sig-diamond-wrap"><rect class="sig-diamond" height="42" rx="10" transform="rotate(45 60 60)" width="42" x="39" y="39"></rect><rect class="sig-core" height="10" rx="2" transform="rotate(45 60 60)" width="10" x="55" y="55"></rect></g></svg></span></span>
+    <span class="mark dm-company-mark settings-company-logo">ЦБ</span>
     <span class="settings-company-copy"><b>Цифровой бизнес</b><small>IT · AI · AUTOMATION</small></span><span class="settings-company-arrow">→</span>
   </button>
-  <button type="button" class="settings-developer-link" onclick="openDeveloperContact()"><span class="settings-developer-dot"></span><span>Разработчикам</span><span class="settings-developer-arrow">→</span></button>
+  <button type="button" class="settings-developer-link" onclick="openDeveloperContact()"><span class="settings-developer-dot"></span><span><b>Нашли баг или есть идея?</b><small>Пожаловаться разработчикам</small></span><span class="settings-developer-arrow">→</span></button>
 </div>`);
   syncSettingsHomeSwitches();
   syncManagerSettings();
 }
-function openDeveloperContact(){openControl(`<div class="developer-contact-shell"><div class="control-kicker">Цифровой бизнес · IT · AI · AUTOMATION</div><div class="control-title">Связь с разработчиками</div><div class="control-sub">Канал для предложений по продукту, багов и идей. Подключение к почте добавим следующим шагом.</div><div class="developer-contact-note"><b>Есть идея или что-то работает не так?</b><span>Расскажи — это место именно для связи с командой, которая развивает «Цифровой управляющий».</span></div><button class="control-action" onclick="closeControl()">Понятно</button></div>`) }
+function openDeveloperContact(){openControl(`<div class="developer-contact-shell"><div class="control-kicker">Цифровой бизнес · IT · AI · AUTOMATION</div><div class="control-title">Нашли баг или есть идея?</div><div class="control-sub">Пожаловаться разработчикам →</div><div class="developer-contact-note"><b>Что-то пошло не так?</b><span>Расскажи — это место именно для связи с командой, которая развивает «Цифровой управляющий».</span></div><button class="control-action" onclick="closeControl()">Понятно</button></div>`) }
 function openBusinessPulse(){closeMore();document.getElementById('businessPulse').classList.add('show')}
 function closeBusinessPulse(){document.getElementById('businessPulse').classList.remove('show')}
 function closeControlAndMore(){closeControl();closeMore()}
@@ -6412,7 +6322,6 @@ document.querySelectorAll('[data-section]').forEach(btn => {
 });
 document.getElementById('tasksBack')?.addEventListener('click',()=>showSection('home'));
 document.getElementById('clientsBack')?.addEventListener('click',()=>showSection('home'));
-
 
 const salesAnalyze=document.getElementById('salesAnalyze'),salesResult=document.getElementById('salesResult');
 salesAnalyze?.addEventListener('click',()=>{
@@ -6528,7 +6437,6 @@ document.getElementById('financePeriod')?.addEventListener('change',e=>{
   const sub=document.querySelector('.finance-sub');
   if(sub)sub.textContent=e.target.value==='7'?'Я слежу за деньгами за последнюю неделю и объясняю изменения.':e.target.value==='90'?'Я анализирую финансовую картину за последние 90 дней.':'Я слежу за деньгами и объясняю, что происходит с бизнесом.';
 });
-
 
 const promoCheck=document.getElementById('promoCheck'),promoResult=document.getElementById('promoResult');
 promoCheck?.addEventListener('click',()=>{
@@ -6955,7 +6863,6 @@ document.addEventListener('keydown',function(e){
 <script id="future-v7-js">
 
 
-
 function showV11Modal(id){const m=document.getElementById(id);if(!m)return;m.classList.add('is-open');m.setAttribute('aria-hidden','false')}
 function hideV11Modal(id){const m=document.getElementById(id);if(!m)return;m.classList.remove('is-open');m.setAttribute('aria-hidden','true')}
 function openIntent(){showV11Modal('futureIntentModal')}
@@ -7224,7 +7131,6 @@ body.dark .manager-personality-mark{background:#f4f4f5;color:#111214}
   else render();
 })();
 </script>
-
 
 <style id="dm-dark-final-polish-v2">
 /* FINAL DARK THEME POLISH — only overrides conflicting legacy rules */
@@ -7677,7 +7583,6 @@ body:not(.dark) .future-intent .intent-command button{background:#fff !important
 body:not(.dark) .future-command .create-visual{background:rgba(255,255,255,.10) !important}
 body:not(.dark) .future-command .future-create-btn{background:#fff !important;color:#182447 !important}
 body:not(.dark) .future-command .future-create-btn span{color:#69789e !important}
-body:not(.dark) .future-contract .contract-row,
 body:not(.dark) .future-contract .contract-item{border-color:rgba(255,255,255,.10) !important}
 body:not(.dark) .sim-result .sim-meter{background:rgba(255,255,255,.16) !important}
 body:not(.dark) .sim-result .sim-meter span{background:#fff !important}
@@ -7802,8 +7707,7 @@ body:not(.dark) .build-result button{background:#fff !important;color:#182447 !i
   background:linear-gradient(90deg,transparent,#6177c4,transparent);
   box-shadow:0 0 18px rgba(80,104,190,.35);z-index:35;pointer-events:none;
 }
-.home-block.is-drop-before::before{top:-7px}
-.home-block.is-drop-after::after{bottom:-7px}
+
 .home-drag-placeholder{
   min-height:74px;border-radius:22px;
   border:1px dashed rgba(75,96,165,.32);
@@ -7844,40 +7748,6 @@ body.dark .home-drag-hint{background:rgba(24,26,31,.62);color:#c7cbd5;border-col
   .home-block.is-dragging{transform:scale(1.012) !important}
 }
 </style>
-<style id="home-organize-mobile-bottom-v14">
-/* На десктопе «ТВОЯ ГЛАВНАЯ» не занимает место на Главной. Первый блок — приветствие. */
-@media(min-width:701px){
-  #homeOrganizeBar{display:none!important;}
-}
-/* На телефоне — компактный управляющий контрол внизу, рядом с зоной статуса/темы. */
-@media(max-width:700px){
-  #homeOrganizeBar{
-    position:fixed!important;
-    left:10px!important;
-    right:10px!important;
-    bottom:calc(76px + env(safe-area-inset-bottom))!important;
-    z-index:180!important;
-    width:auto!important;
-    max-width:none!important;
-    min-height:52px!important;
-    margin:0!important;
-    padding:7px 8px!important;
-    border-radius:17px!important;
-    background:rgba(255,255,255,.82)!important;
-    backdrop-filter:blur(24px) saturate(1.35)!important;
-    -webkit-backdrop-filter:blur(24px) saturate(1.35)!important;
-    box-shadow:0 18px 46px rgba(18,22,30,.14), inset 0 1px 0 rgba(255,255,255,.9)!important;
-  }
-  body.dark #homeOrganizeBar{
-    background:rgba(20,22,27,.86)!important;
-    box-shadow:0 18px 46px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.08)!important;
-  }
-}
-@media(max-width:390px){
-  #homeOrganizeBar{left:7px!important;right:7px!important;bottom:calc(73px + env(safe-area-inset-bottom))!important;}
-}
-</style>
-
 <style id="future-watch-dashboard-v16">
 /* v16 — Apple-Watch-inspired information language: compact, glanceable, alive. */
 .future-state{min-height:270px;padding:30px 34px;grid-template-columns:260px minmax(0,1fr);border-radius:30px}
@@ -7956,7 +7826,6 @@ body.dark .home-block.is-dragging{box-shadow:0 30px 80px rgba(0,0,0,.42)!importa
 @media(prefers-reduced-motion:reduce){.home-block,#homeEditBar{transition:none!important}.home-edit-live i{animation:none!important}}
 </style>
 
-
 <style id="settings-daily-focus-v1">
 .settings-daily-note{display:flex;align-items:flex-start;gap:9px;margin-top:8px;padding:10px 11px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.38)}
 .settings-daily-note>span{width:20px;height:20px;display:grid;place-items:center;flex:none;border-radius:7px;background:rgba(53,91,190,.10);color:#3155b8;font-size:10px}
@@ -8010,18 +7879,6 @@ body.dark .rule-toggle i{background:#17181b!important}
   sync();
 })();
 </script>
-<style id="settings-sections-home-block-v41">
-.settings-sections-home-block{padding:16px 18px;border:1px solid var(--line);border-radius:20px;background:var(--panel);box-shadow:var(--shadow)}
-.settings-sections-home-head span{display:block;font-size:8px;letter-spacing:.14em;font-weight:800;color:var(--muted)}
-.settings-sections-home-head b{display:block;margin-top:4px;font-size:13px;letter-spacing:-.01em}
-.settings-sections-home-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
-.settings-sections-home-grid button{display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:7px 11px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.45);color:var(--text);font-size:10px;font-weight:700;cursor:pointer}
-.settings-sections-home-grid button span{width:21px;height:21px;border-radius:7px;display:grid;place-items:center;background:linear-gradient(135deg,#153c8f,#5a40cc);color:#fff;font-size:9px}
-body.dark .settings-sections-home-block{background:rgba(255,255,255,.035);border-color:rgba(255,255,255,.09)}
-body.dark .settings-sections-home-grid button{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.10)}
-@media(max-width:700px){.settings-sections-home-block{padding:14px;border-radius:18px}.settings-sections-home-grid{gap:7px}.settings-sections-home-grid button{font-size:10px;flex:0 1 auto}}
-</style>
-
 <style id="settings-layout-v43">
 /* v43: структура настроек как на референсе — правила крупно, разделы компактно. */
 .settings-section-title{margin:18px 0 8px!important;font-size:11px!important;font-weight:800!important;letter-spacing:-.01em!important}
@@ -8045,11 +7902,11 @@ body.dark .settings-sections-home-grid button{background:rgba(255,255,255,.045);
   .settings-rules-list .settings-rule-row{min-height:61px!important;padding:12px!important}
   .settings-sections-v2{grid-template-columns:1fr!important;gap:6px!important}
   .settings-sections-v2 .settings-section-row{min-height:46px!important;padding:7px 9px!important}
-  .settings-sections-v2 .settings-section-copy b{font-size:11px!important}
-  .settings-sections-v2 .settings-section-copy small{font-size:8.5px!important}
+  
+  
   .settings-sections-v2 .settings-home-switch{width:44px!important;height:26px!important}
   .settings-sections-v2 .settings-home-switch i{width:22px!important;height:22px!important}
-  .settings-sections-v2 .settings-home-switch.is-on i{transform:translateX(18px)!important}
+  
 }
 </style>
 
@@ -8204,14 +8061,6 @@ body.dark .settings-sections-home-grid button{background:rgba(255,255,255,.045);
 })();
 </script>
 
-<style id="living-manager-dots-v1">
-.dm-living-dots{display:inline-flex;align-items:center;gap:5px;margin-left:9px;padding:6px 5px;border:0;background:transparent;color:inherit;cursor:pointer;vertical-align:middle;border-radius:999px;}
-.dm-living-dots i{display:block;width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.34;animation:dmDotPulse 2.4s ease-in-out infinite;}
-.dm-living-dots i:nth-child(2){animation-delay:.28s}.dm-living-dots i:nth-child(3){animation-delay:.56s}
-@keyframes dmDotPulse{0%,100%{transform:scale(.72);opacity:.25}35%{transform:scale(1.35);opacity:.9}55%{transform:scale(.9);opacity:.5}}
-body.dark .dm-living-dots{color:#f7f9ff}
-@media(prefers-reduced-motion:reduce){.dm-living-dots i{animation:none;opacity:.65}}
-</style>
 <script>
 (function(){
  function addDots(){
@@ -8227,7 +8076,6 @@ body.dark .dm-living-dots{color:#f7f9ff}
  setTimeout(addDots,500);
 })();
 </script>
-
 
 <style id="settings-sections-compact-v44">
 /* v44: Разделы на Главной — компактное продолжение настроек поведения. Темы не меняем. */
@@ -8289,13 +8137,7 @@ body.dark .dm-living-dots{color:#f7f9ff}
   width:19px!important;
   height:19px!important;
 }
-.settings-sections-v2 .settings-home-switch.is-on i{
-  transform:translateX(18px)!important;
-}
-body.dark .settings-sections-v2 .settings-section-row{
-  background:rgba(255,255,255,.045)!important;
-  border-color:rgba(255,255,255,.09)!important;
-}
+
 body.dark .settings-sections-v2 .settings-section-row:hover{
   background:rgba(255,255,255,.08)!important;
   border-color:rgba(255,255,255,.16)!important;
@@ -8307,8 +8149,8 @@ body.dark .settings-sections-v2 .settings-section-row:hover{
     padding:8px 10px!important;
     border-radius:15px!important;
   }
-  .settings-sections-v2 .settings-section-copy b{font-size:11px!important}
-  .settings-sections-v2 .settings-section-copy small{font-size:8.5px!important}
+  
+  
 }
 </style>
 <style id="final-compact-future-polish-v31">
@@ -8416,7 +8258,6 @@ body.dark .settings-sections-v2 .settings-section-row:hover{
 
 
 
-
 <style id="settings-clean-final-v47">
 /* v47 — чистый финальный слой настроек. Темы не меняем. */
 .control-panel{overflow-x:hidden!important}
@@ -8474,14 +8315,7 @@ body.dark .control-action{
   text-align:left!important;
   cursor:pointer!important;
 }
-.settings-sections-v2 .settings-section-open-v46 b{
-  display:block!important;
-  font-size:12px!important;
-  line-height:1.15!important;
-  white-space:nowrap!important;
-  overflow:hidden!important;
-  text-overflow:ellipsis!important;
-}
+
 .settings-sections-v2 .settings-section-open-v46 small{
   display:block!important;
   margin-top:4px!important;
@@ -8569,8 +8403,6 @@ body.dark .settings-rules-list .settings-rule-toggle.is-on i{
 
 
 
-
-
 <style id="v50-settings-autopilot-and-manager-sidepanel">
 /* v50 — точечная правка: автопилот и long-press помощника. Остальной дизайн не меняем. */
 body:not(.dark) .settings-autopilot-action{
@@ -8617,40 +8449,6 @@ body.dark .settings-autopilot-action{
 }
 </style>
 
-<style id="premium-send-button-v52">
-/* Premium send action */
-.dm-quick-form button{
-  width:44px !important;
-  height:44px !important;
-  flex:0 0 44px !important;
-  border:1px solid rgba(255,255,255,.22) !important;
-  border-radius:14px !important;
-  background:linear-gradient(135deg,#123b8f 0%,#4b3fc4 100%) !important;
-  color:#fff !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  box-shadow:0 8px 22px rgba(34,60,150,.28), inset 0 1px 0 rgba(255,255,255,.24) !important;
-  transition:transform .18s ease,box-shadow .18s ease,filter .18s ease !important;
-}
-.dm-quick-form button:hover{
-  transform:translateY(-1px) !important;
-  box-shadow:0 11px 26px rgba(34,60,150,.34), inset 0 1px 0 rgba(255,255,255,.28) !important;
-  filter:saturate(1.08) !important;
-}
-.dm-quick-form button:active{transform:scale(.95) !important;}
-.dm-quick-form button svg{width:18px !important;height:18px !important;display:block !important;}
-.dm-quick-form button svg path{stroke:#fff !important;stroke-width:2.2 !important;fill:none !important;stroke-linecap:round !important;stroke-linejoin:round !important;}
-body.dark .dm-quick-form button{
-  background:linear-gradient(135deg,#173f91 0%,#5a43c9 100%) !important;
-  border-color:rgba(255,255,255,.18) !important;
-  box-shadow:0 9px 24px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.22) !important;
-}
-@media(max-width:520px){
-  .dm-quick-form button{width:40px !important;height:40px !important;flex-basis:40px !important;border-radius:13px !important;}
-  .dm-quick-form button svg{width:17px !important;height:17px !important;}
-}
-</style>
 <script id="settings-real-controls-v92">
 (function(){
   function sync(){
@@ -9017,24 +8815,6 @@ body.dark #controlContent .settings-autopilot-action *{
 /* Переключатели остаются отдельными системными элементами — их белый бегунок не меняем. */
 </style>
 
-<style id="dark-sales-explain-v14">
-/* V14 — блок «Самое слабое место»: в тёмной теме не засвечиваем текст белым фоном. */
-body.dark .sales-explain{
-  background:rgba(255,149,0,.075) !important;
-  border:1px solid rgba(255,149,0,.12) !important;
-  color:#f4f6fb !important;
-}
-body.dark .sales-explain>span{
-  color:#ffb340 !important;
-}
-body.dark .sales-explain b{
-  color:#ffffff !important;
-}
-body.dark .sales-explain p{
-  color:rgba(244,246,251,.72) !important;
-}
-</style>
-
 <style id="dark-sales-explain-v15">
 /* V15 — пояснение «Самое слабое место» в тёмной теме */
 body.dark .sales-explain{
@@ -9128,7 +8908,6 @@ body.dark .dm-living-dots i{
 }
 </style>
 
-
 <style id="v21-dots-right-corner">
 /* V21 — точки остаются такими же, но уходят в правый край блока приветствия. */
 #managerGreeting{
@@ -9152,7 +8931,6 @@ body.dark .dm-living-dots i{
   }
 }
 </style>
-
 
 <style id="v22-dots-old-gear-position">
 /* V22 — возвращаем точки ровно в место, где раньше была шестерёнка. */
@@ -9178,7 +8956,6 @@ body.dark .dm-living-dots i{
   }
 }
 </style>
-
 
 <style id="final-mobile-readable-fix-v30">
 /* Финальная точечная правка: верхний баннер, логотип, радары и читаемость. */
@@ -9301,15 +9078,6 @@ body.dark .dm-living-dots i{
   .state-copy p{font-size:13.5px !important}
   .state-greeting h1{font-size:24px !important}
   .future-header h1{font-size:34px !important}
-}
-</style>
-
-<style id="repair-layout-v33">
-@media(max-width:700px){
-  .mobile-manager.dm-signature-manager-button{
-    left:18px !important;
-    right:auto !important;
-  }
 }
 </style>
 
@@ -9492,7 +9260,6 @@ body.dark .future-state .state-eyebrow{
 </style>
 
 
-
 <style id="settings-refinement-v40">
 /* v40 — только настройки: цвета переключателей, разделы и блок разработчиков. */
 body:not(.dark) .rule-toggle{
@@ -9510,49 +9277,15 @@ body:not(.dark) .rule-toggle i{
 .settings-sections button span{grid-row:1 / span 2;width:25px;height:25px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,#153c8f,#5a40cc);color:#fff;font-size:11px;font-weight:800;box-shadow:0 5px 14px rgba(35,62,153,.16)}
 .settings-sections button b{font-size:11px;line-height:1.1}
 .settings-sections button small{font-size:9px;line-height:1.3;color:var(--muted)}
-.settings-company-footer{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:24px;padding-top:17px;border-top:1px solid var(--line)}
-.settings-company-brand{display:flex;align-items:center;gap:10px;min-width:0}
-.settings-company-brand .mark{width:36px;height:36px;border-radius:11px;font-size:12px;flex:none}
-.settings-company-brand b{display:block;font-size:11px}
-.settings-company-brand small{display:block;margin-top:3px;font-size:9px;color:var(--muted)}
-.settings-developer-link{border:1px solid var(--line);background:transparent;color:var(--text);border-radius:13px;padding:10px 12px;font-size:10px;font-weight:700;white-space:nowrap;cursor:pointer}
-.settings-developer-link span{margin-left:3px;opacity:.7}
-
-.settings-company-footer-v2{align-items:stretch!important;gap:10px!important}
-.settings-company-brand-button{appearance:none;border:0;background:transparent;color:inherit;padding:0;text-align:left;cursor:pointer;display:flex;align-items:center;gap:9px;min-width:0;flex:1}
-.settings-company-logo{position:relative;display:grid!important;place-items:center;background:linear-gradient(145deg,#101114,#20232a)!important;border:1px solid rgba(100,170,255,.22)!important;box-shadow:0 7px 22px rgba(20,35,70,.12),inset 0 0 0 1px rgba(255,255,255,.04)!important;overflow:hidden}
-.settings-company-logo .dm-signature-logo{width:22px;height:22px;display:block;color:#8fd4ff;filter:drop-shadow(0 0 7px rgba(72,170,255,.38))}
-.settings-company-logo .dm-signature-logo svg{width:100%;height:100%;display:block}
-.settings-company-copy{min-width:0;display:block}
-.settings-company-copy b{display:block;font-size:11px;letter-spacing:-.01em}
-.settings-company-copy small{display:block;margin-top:3px;font-size:8.5px;color:var(--muted);letter-spacing:.05em}
-.settings-company-arrow{margin-left:auto;opacity:.45;font-size:14px;transition:transform .2s ease,opacity .2s ease}
-.settings-company-brand-button:hover .settings-company-arrow{transform:translateX(2px);opacity:.8}
-.settings-developer-link{display:flex!important;align-items:center;gap:7px!important;justify-content:center;min-width:145px}
-.settings-developer-dot{width:6px;height:6px;border-radius:50%;background:#4dbbff;box-shadow:0 0 0 5px rgba(77,187,255,.10),0 0 10px rgba(77,187,255,.45)}
-.settings-developer-link .settings-developer-arrow{margin-left:0!important;opacity:.55}
-@media(max-width:520px){
-  .settings-company-footer-v2{gap:8px!important}
-  .settings-company-brand-button{width:100%}
-  .settings-developer-link{width:auto!important;min-width:0!important;padding:9px 11px!important}
-  .settings-developer-link>span:nth-child(2){display:none}
-  .settings-developer-link .settings-developer-arrow{display:inline!important}
-}
-body.dark .settings-company-logo{background:linear-gradient(145deg,#11161e,#1b2738)!important;border-color:rgba(127,181,255,.18)!important}
 .theme-mode-btn{transition:background .2s ease,color .2s ease,border-color .2s ease,box-shadow .2s ease}
 body:not(.dark) .theme-mode-btn.active{background:linear-gradient(135deg,#123b8f 0%,#5b3fd0 100%) !important;color:#fff !important;border-color:transparent !important;box-shadow:0 8px 20px rgba(38,78,181,.18) !important}
 body.dark .settings-sections button{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09)}
 body.dark .settings-sections button:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16)}
 body.dark .settings-sections button span{background:linear-gradient(135deg,#183d88,#5842c7)}
-body.dark .settings-company-footer{border-color:rgba(255,255,255,.09)}
-body.dark .settings-developer-link{border-color:rgba(255,255,255,.11)}
 @media(max-width:520px){
   .settings-sections{grid-template-columns:1fr}
-  .settings-company-footer{align-items:flex-start;flex-direction:column}
-  .settings-developer-link{width:100%}
 }
 </style>
-
 
 <style id="theme-material-v35">
 /* V35 — только цветовой материал. Геометрию, размеры и JS не меняем. */
@@ -9870,7 +9603,6 @@ body.dark .mobile-manager.dm-signature-manager-button .dm-signature-button-logo 
 
 
 
-
 <style id="settings-sections-final-v45">
 /* v45: Разделы на Главной — ровный компактный список. Экран/темы не затрагиваем. */
 .settings-sections-v2{
@@ -10008,7 +9740,7 @@ body.dark .settings-sections-v2 .settings-home-switch.is-on i{
   .settings-sections-v2 .settings-section-copy small{font-size:8.5px!important}
   .settings-sections-v2 .settings-home-switch{width:42px!important;height:24px!important}
   .settings-sections-v2 .settings-home-switch i{width:20px!important;height:20px!important}
-  .settings-sections-v2 .settings-home-switch.is-on i{transform:translateX(18px)!important}
+  
 }
 </style>
 
@@ -10075,8 +9807,6 @@ body.dark .settings-sections-v2 .settings-section-rule-row{
   .settings-sections-v2 .settings-section-open-v46 small{font-size:9.5px!important}
 }
 </style>
-
-
 
 
 
@@ -10260,8 +9990,6 @@ body.dark .mobile-manager.dm-signature-manager-button.listening::after{
 
 
 
-
-
 <style id="signature-sphere-v63">
 /* v63 — логотип не «дышит», а создаёт иллюзию вращающейся 3D-сферы. */
 .dm-signature-logo .sig-orbit{
@@ -10318,10 +10046,6 @@ body.dark .mobile-manager.dm-signature-manager-button.listening::after{
   .dm-signature-logo .sig-orbit,.dm-signature-button-logo .sig-orbit{animation:none!important}
 }
 </style>
-
-
-
-
 
 
 
@@ -10408,7 +10132,6 @@ body.dark .dm-light-demo-orb b{color:#8bc8ff}
 @media(max-width:520px){.dm-light-tutorial{padding:12px}.dm-light-tutorial-card{border-radius:24px;padding:16px}.dm-light-title{font-size:30px}.dm-light-copy{font-size:12px}.dm-light-tutorial-bottom{position:sticky;bottom:0;background:inherit;padding-top:10px}}
 @media(prefers-reduced-motion:reduce){.dm-light-demo-orb:before,.dm-light-demo-orb:after{animation:none!important}}
 </style>
-
 
 <script id="light-learning-and-hints-v67-js">
 (function(){
@@ -10500,7 +10223,6 @@ body.dark .dm-light-demo-orb b{color:#8bc8ff}
 
 
 
-
 <style id="assistant-final-position-animation-v70">
 /* v70 — только помощник. Настройки и остальной дизайн не меняем. */
 @media(max-width:900px){
@@ -10534,8 +10256,7 @@ body.dark .dm-light-demo-orb b{color:#8bc8ff}
 }
 
 /* Одна надпись и одно кольцо — без старых псевдоэлементов */
-.mobile-manager.dm-signature-manager-button::before,
-.mobile-manager.dm-signature-manager-button::after{content:none!important;display:none!important}
+
 #dmListeningRing{
   display:block!important;
   position:absolute!important;
@@ -10635,15 +10356,6 @@ body.dark .dm-signature-button-logo .sig-orbit.o3{
   }
 }
 </style>
-<style id="context-hint-align-v76">
-/* v76 — поднимаем именно постоянную подсказку «Нажми на ромб…», не быстрые вопросы над полем. */
-@media(max-width:520px){
-  .dm-context-hint{
-    bottom:calc(118px + env(safe-area-inset-bottom))!important;
-  }
-}
-</style>
-
 <style id="assistant-final-position-animation-v77">
 @media(max-width:900px){
   /* Ромб выше */
@@ -10710,35 +10422,11 @@ body.dark .dm-signature-button-logo .sig-orbit.o3{
   }
 }
 </style>
-<style id="assistant-write-hints-lower-v81">
-/* v81 — только три быстрые подсказки опускаем ниже. Сферу, кнопку и поле не трогаем. */
-@media(max-width:900px){
-  body.dm-write-mode #dmWriteHints{
-    transform:translateY(18px)!important;
-  }
-}
-</style>
 <style id="assistant-write-hints-raise-v82">
 /* v82 — быстрые всплывающие подсказки поднимаем выше, чтобы они стояли прямо над панелью ввода. */
 @media(max-width:900px){
   body.dm-write-mode #dmWriteHints{
     transform:translateY(-4px)!important;
-  }
-}
-</style>
-<style id="context-hint-align-v83">
-/* v83 — постоянная подсказка «Да, у нас даже кнопка умеет слушать» заметно выше панели отправки. */
-@media(max-width:520px){
-  .dm-context-hint{
-    bottom:calc(205px + env(safe-area-inset-bottom))!important;
-  }
-}
-</style>
-<style id="context-hint-raise-v85">
-/* v85 — подсказку «Да, у нас даже кнопка умеет слушать» поднимаем ещё выше, не меняя отправку и сферу. */
-@media(max-width:520px){
-  .dm-context-hint{
-    bottom:calc(430px + env(safe-area-inset-bottom))!important;
   }
 }
 </style>
@@ -10868,7 +10556,6 @@ body.dark .theme-mode-btn.active{
 }
 </style>
 
-
 <style id="settings-fullpage-v102">
 /* v102 — настройки открываются как полноценный экран: без большого верхнего зазора, blur на всю страницу. */
 #controlOverlay{
@@ -10916,7 +10603,6 @@ body.dark .settings-clean-icon{background:rgba(255,255,255,.07)}
 body.dark .settings-create-card{background:rgba(255,255,255,.035)}
 @media(max-width:700px){.settings-clean-row{min-height:54px;padding:7px 8px;border-radius:15px}.settings-clean-open{grid-template-columns:27px minmax(0,1fr);gap:8px}.settings-clean-icon{width:27px;height:27px;border-radius:9px;font-size:11px}.settings-clean-copy b{font-size:11px}.settings-clean-copy small{font-size:8.5px}.settings-create-card{padding:12px}.settings-create-card small{max-width:210px}}
 </style>
-
 
 <style id="premium-consistency-fix-v121">
 /* Только визуальная доводка существующих элементов. Функциональность не меняем. */
@@ -11003,7 +10689,6 @@ body.dark .settings-create-card{background:rgba(255,255,255,.035)}
   setTimeout(function(){mo.disconnect()},12000);
 })();
 </script>
-
 
 <style id="dark-buttons-final-v41">
 /* V41 — финальный материал тёмной темы.
@@ -11207,7 +10892,6 @@ body.dark #controlContent .settings-rule-toggle.is-on i{
 }
 </style>
 
-
 <style id="button-language-v26">
 /* V26 — единый стиль действий: спокойные чёрные кнопки без лишнего стекла. */
 .settings-create-card button{
@@ -11256,7 +10940,7 @@ body.dark #controlContent .settings-rule-toggle.is-on i{
   transform:translateY(-1px)!important;
   box-shadow:0 12px 28px rgba(17,17,19,.19)!important;
 }
-#deepSectionBack:active{transform:scale(.97)!important}
+
 #deepSectionBack .back-x{
   font-size:18px!important;
   line-height:1!important;
@@ -11355,7 +11039,6 @@ body.dark .dm-signature-button-logo .sig-core{
   fill:#263968!important;
 }
 </style>
-
 
 <style id="v31-remove-duplicate-home-back">
 /* V31 — на внутренних страницах оставляем одну кнопку «На главную».
@@ -11582,7 +11265,6 @@ body.dark #controlContent .developer-contact-note{
 }
 </style>
 
-
 <style id="developer-back-home-v36">
 #controlOverlay .control-close{
   width:auto!important;
@@ -11625,7 +11307,6 @@ body.dark #controlOverlay .control-close{
   }
 }
 </style>
-
 
 <style id="dark-manager-no-disc-final">
 /* Финальная точечная правка: на тёмной теме у кнопки управляющего
@@ -11707,7 +11388,6 @@ body.dark .dm-signature-button-logo{
   setTimeout(paint,0);
 })();
 </script>
-
 
 <style id="light-manager-deep-indigo-v8">
 /* Светлая тема v8: глубокий индиго + едва заметная тёплая искра. */
@@ -11919,7 +11599,6 @@ body.dark .dm-fix-confirm{background:#f4f4f5;color:#17171a}.body.dark .dm-fix-ca
 </script>
 
 
-
 <style id="live-intelligence-cards-v1">
 .dm-intel-card{transition:opacity .38s ease,transform .38s ease,max-height .45s ease,margin .45s ease,padding .45s ease!important;overflow:hidden!important}
 .dm-intel-card.is-resolving{opacity:.55;transform:scale(.985)}
@@ -11938,7 +11617,6 @@ body.dark .dm-footprint-panel{background:rgba(14,15,18,.985);color:#f5f6f8;borde
 body.dark .dm-footprint-stat,body.dark .dm-source{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09)}body.dark .dm-footprint-sub,body.dark .dm-footprint-stat span,body.dark .dm-source small,body.dark .dm-opp p,body.dark .dm-footprint-note{color:#aeb1ba}body.dark .dm-opp{background:linear-gradient(145deg,rgba(23,105,255,.10),rgba(255,255,255,.03));border-color:rgba(120,150,255,.16)}body.dark .dm-opp button{background:#f4f4f5;color:#17171a}body.dark .dm-footprint-close{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.1)}
 @media(max-width:700px){.dm-footprint-panel{padding:19px 15px calc(20px + env(safe-area-inset-bottom));border-radius:28px 28px 0 0;max-height:96vh}.dm-footprint-title{font-size:29px}.dm-footprint-close{min-width:72px}.dm-footprint-overview{grid-template-columns:1fr 1fr}.dm-footprint-grid{grid-template-columns:1fr 1fr}.dm-opps{grid-template-columns:1fr}.dm-source{min-height:82px}.dm-footprint-section{margin-top:18px}}
 </style>
-
 
 <script id="digital-footprint-v1-js">
 (function(){
@@ -11973,7 +11651,6 @@ body.dark .dm-footprint-stat,body.dark .dm-source{background:rgba(255,255,255,.0
   window.renderHomeSectionPreviews=function(){if(typeof old==='function')old();setTimeout(bind,20)};
 })();
 </script>
-
 
 <style id="digital-manager-native-cards-final-v1">
 /* FINAL: intelligence cards use the exact native future-card design. */
@@ -12031,7 +11708,6 @@ body.dark #homeSectionPreviews.dm-intelligence-home .dm-intel-btn.ghost{backgrou
 
 </html>
 
-
 <style id="evolution-home-button-v37">
 /* V37 — в Эволюции вместо крестика единая кнопка «На главную». */
 #futureEvolutionModal .evolution-home-button{
@@ -12068,7 +11744,6 @@ body.dark #futureEvolutionModal .evolution-home-button{
 }
 </style>
 
-
 <style id="memory-home-button-v39">
 /* V39 — «Память бизнеса»: настоящая кнопка «На главную», без крестика. */
 #controlOverlay .control-close::before{
@@ -12079,7 +11754,6 @@ body.dark #futureEvolutionModal .evolution-home-button{
   text-indent:0!important;
 }
 </style>
-
 
 <style id="business-pulse-home-v40">
 /* V40 — Business Pulse: единая кнопка «На главную» вместо крестика. */
@@ -12106,7 +11780,6 @@ body.dark #futureEvolutionModal .evolution-home-button{
   }
 }
 </style>
-
 
 <style id="business-pulse-modern-v41">
 /* V41 — обновляем только внешний вид «Что происходит с бизнесом».
@@ -12426,8 +12099,7 @@ body:not(.dark) .dm-signature-button-logo{
   50%{opacity:.92;transform:scale(1.08)}
 }
 @media(prefers-reduced-motion:reduce){
-  body:not(.dark) .mobile-manager.dm-signature-manager-button::before,
-  body:not(.dark) .mobile-manager.dm-signature-manager-button::after{animation:none!important}
+  
 }
 </style>
 <style id="light-manager-visible-indigo-orbit-v7">
@@ -12458,7 +12130,6 @@ body:not(.dark) .mobile-manager.dm-signature-manager-button::before{
   body:not(.dark) .mobile-manager.dm-signature-manager-button::after{animation:none!important}
 }
 </style>
-
 
 <style id="light-manager-deep-indigo-v9-final">
 /* FINAL — глубокий индиго поверх всех предыдущих слоёв. */
@@ -12522,7 +12193,6 @@ body.dark .dm-living-dots .dm-menu-logo .sig-diamond{fill:#111216!important;stro
 body.dark .dm-living-dots .dm-menu-logo .sig-core{fill:#f5f5f7!important;}
 </style>
 
-
 <style id="wow-business-os-v3-css">
 /* WOW v3: структура бизнеса понятнее, а родные карточки Главной остаются нетронутыми. */
 .business-map-strip{margin:0 0 12px;padding:11px 13px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.42);display:flex;align-items:center;gap:8px;overflow:auto;scrollbar-width:none;white-space:nowrap}
@@ -12570,7 +12240,7 @@ body.dark .wow-module-block{background:rgba(255,255,255,.04);border-color:rgba(2
 .wow-module-block span{display:block;font-size:9px;letter-spacing:.12em;font-weight:850;color:#8c8d94}
 .wow-module-block b{display:block;font-size:14px;margin-top:6px;line-height:1.25}
 .wow-module-block p{margin:5px 0 0;color:#777981;font-size:11px;line-height:1.5}
-body.dark .wow-module-block p{color:#aaaab1}
+
 .wow-module-joke{margin-top:12px;padding:12px 14px;border-radius:16px;background:rgba(114,87,255,.06);border:1px solid rgba(114,87,255,.11);color:#6f7078;font-size:11px;line-height:1.45}
 body.dark .wow-module-joke{background:rgba(114,87,255,.08);color:#b5b5bd;border-color:rgba(150,130,255,.14)}
 .wow-module-actions{display:flex;gap:9px;margin-top:13px}
@@ -12841,7 +12511,7 @@ body.dark .wow-module-panel > .module-flow span{
   window.openSettingsPanel=function(){
     closeMore();
     const rows=settingsSections().map(s=>'<div class="settings-clean-row" data-setting-section="'+s.id+'"><button type="button" class="settings-clean-open" onclick="closeControl();openBusinessModule(\''+s.id+'\')"><span class="settings-clean-icon">'+s.icon+'</span><span class="settings-clean-copy"><b>'+s.title+'</b><small>'+s.desc+'</small></span></button><button type="button" class="rule-toggle settings-rule-toggle settings-home-switch" data-section-id="'+s.id+'" aria-label="Показывать '+s.title+' на Главной" aria-pressed="false"><i></i></button></div>').join('');
-    openControl('<div class="control-kicker">Настройки управляющего</div><div class="control-title">Настройки без квеста.</div><div class="control-sub">Включи нужные карточки на Главной. Нажал на карточку — получил весь разбор. У каждого блока своя работа, а не «всё обо всём».</div><div class="settings-theme-box"><div><b>Экран</b><small>Светлая или тёмная тема.</small></div><div class="theme-mode-row"><button class="theme-mode-btn" data-mode="light" onclick="setThemeMode(&quot;light&quot;)">☀ Светлая</button><button class="theme-mode-btn" data-mode="dark" onclick="setThemeMode(&quot;dark&quot;)">◐ Тёмная</button></div></div><div class="business-map-strip"><span class="live">Продвижение</span><i>→</i><span class="live">Продажи</span><i>→</i><span class="live">Клиенты</span><i>→</i><span class="live">Финансы</span><i>→</i><span class="live">Работа бизнеса</span><i>→</i><span class="live">Отчёты</span></div><div class="settings-section-title">1 · Как работает управляющий</div><div class="settings-section-note">Границы, деньги, стиль общения и автопилот остаются как были.</div><div class="rule-list settings-rules-list"><div class="rule-row settings-rule-row"><div><b>Самостоятельность</b><small>Советую → вы подтверждаете важные действия.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="independence" role="switch" aria-checked="true" aria-label="Самостоятельность"><i></i></button></div><div class="rule-row settings-rule-row"><div><b>Деньги</b><small>Расходы и изменения бюджета — сначала спросить вас.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="money" role="switch" aria-checked="true" aria-label="Деньги"><i></i></button></div><div class="rule-row settings-rule-row"><div><b>Общение</b><small>Просто, коротко и по делу. Шутки — когда всё спокойно.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="communication" role="switch" aria-checked="true" aria-label="Общение"><i></i></button></div><div class="rule-row settings-rule-row"><div><b>Автопилот</b><small>Расширяет мои границы, когда ты сам этого хочешь.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="autopilot" role="switch" aria-checked="false" aria-label="Автопилот"><i></i></button></div></div><button class="control-action settings-autopilot-action" onclick="closeControl();openAutopilot()">Настроить автопилот →</button><div class="settings-section-title">2 · Что показывать на Главной</div><div class="settings-section-note">Галочка = компактная карточка на Главной. Нажал карточку = большой разбор. Всё по своим полкам.</div><div class="settings-clean-list">'+rows+'</div><div class="settings-create-card"><div><span>ДОПОЛНИТЕЛЬНО</span><b>Нужен новый инструмент?</b><small>Скажи, чего не хватает. Я попробую собрать.</small></div><button type="button" onclick="closeControl();openBuildModal()">Создать →</button></div><div class="settings-section-title">3 · Сам управляющий</div><div class="settings-create-card"><div><span>Я САМ НАШЁЛ</span><b>Что можно улучшить</b><small>Я ищу проблемы и возможности, которые легко пропустить.</small></div><button type="button" onclick="closeControl();openBlindspot()">Показать →</button></div><div class="settings-create-card"><div><span>Я ПОМНЮ</span><b>Память бизнеса</b><small>Решения, цели и правила, которые не хочется объяснять заново.</small></div><button type="button" onclick="closeControl();openBusinessMemory()">Открыть →</button></div><div class="settings-create-card"><div><span>Я МОГУ САМ</span><b>Правила и автопилот</b><small>Здесь решаем, где я действую сам, а где сначала спрашиваю.</small></div><button type="button" onclick="closeControl();openBusinessRules()">Настроить →</button></div><div class="settings-section-title">4 · Помощь</div><div class="rule-list settings-rules-list"><div class="rule-row settings-rule-row settings-hints-row"><div><b>Подсказки</b><small>Показывать маленькие подсказки по ходу работы.</small></div><button type="button" class="rule-toggle settings-rule-toggle" id="managerHintsToggle" role="switch" aria-checked="true"><i></i></button></div></div><div class="dm-learning-card"><div class="dm-learning-copy"><div class="dm-learning-kicker">Лёгкое обучение</div><b>Покажу, что здесь куда.</b><small>Коротко и с примерами. Без лекции на два сезона.</small></div><button type="button" class="control-action dm-learning-button" onclick="openLightTutorial()">Пройти обучение →</button></div>');
+    openControl('<div class="control-kicker">Настройки управляющего</div><div class="control-title">Настройки без квеста.</div><div class="control-sub">Включи нужные карточки на Главной. Нажал на карточку — получил весь разбор. У каждого блока своя работа, а не «всё обо всём».</div><div class="settings-theme-box"><div><b>Экран</b><small>Светлая или тёмная тема.</small></div><div class="theme-mode-row"><button class="theme-mode-btn" data-mode="light" onclick="setThemeMode(&quot;light&quot;)">☀ Светлая</button><button class="theme-mode-btn" data-mode="dark" onclick="setThemeMode(&quot;dark&quot;)">◐ Тёмная</button></div></div><div class="settings-section-title">1 · Как работает управляющий</div><div class="settings-section-note">Границы, деньги, стиль общения и автопилот остаются как были.</div><div class="rule-list settings-rules-list"><div class="rule-row settings-rule-row"><div><b>Самостоятельность</b><small>Советую → вы подтверждаете важные действия.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="independence" role="switch" aria-checked="true" aria-label="Самостоятельность"><i></i></button></div><div class="rule-row settings-rule-row"><div><b>Деньги</b><small>Расходы и изменения бюджета — сначала спросить вас.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="money" role="switch" aria-checked="true" aria-label="Деньги"><i></i></button></div><div class="rule-row settings-rule-row"><div><b>Общение</b><small>Просто, коротко и по делу. Шутки — когда всё спокойно.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="communication" role="switch" aria-checked="true" aria-label="Общение"><i></i></button></div><div class="rule-row settings-rule-row"><div><b>Автопилот</b><small>Расширяет мои границы, когда ты сам этого хочешь.</small></div><button type="button" class="rule-toggle settings-rule-toggle" data-rule-id="autopilot" role="switch" aria-checked="false" aria-label="Автопилот"><i></i></button></div></div><button class="control-action settings-autopilot-action" onclick="closeControl();openAutopilot()">Настроить автопилот →</button><div class="settings-section-title">2 · Что показывать на Главной</div><div class="settings-section-note">Галочка = компактная карточка на Главной. Нажал карточку = большой разбор. Всё по своим полкам.</div><div class="settings-clean-list">'+rows+'</div><div class="settings-create-card"><div><span>ДОПОЛНИТЕЛЬНО</span><b>Нужен новый инструмент?</b><small>Скажи, чего не хватает. Я попробую собрать.</small></div><button type="button" onclick="closeControl();openBuildModal()">Создать →</button></div><div class="settings-section-title">3 · Сам управляющий</div><div class="settings-create-card"><div><span>Я САМ НАШЁЛ</span><b>Что можно улучшить</b><small>Я ищу проблемы и возможности, которые легко пропустить.</small></div><button type="button" onclick="closeControl();openBlindspot()">Показать →</button></div><div class="settings-create-card"><div><span>Я ПОМНЮ</span><b>Память бизнеса</b><small>Решения, цели и правила, которые не хочется объяснять заново.</small></div><button type="button" onclick="closeControl();openBusinessMemory()">Открыть →</button></div><div class="settings-create-card"><div><span>Я МОГУ САМ</span><b>Правила и автопилот</b><small>Здесь решаем, где я действую сам, а где сначала спрашиваю.</small></div><button type="button" onclick="closeControl();openBusinessRules()">Настроить →</button></div><div class="settings-section-title">4 · Помощь</div><div class="rule-list settings-rules-list"><div class="rule-row settings-rule-row settings-hints-row"><div><b>Подсказки</b><small>Показывать маленькие подсказки по ходу работы.</small></div><button type="button" class="rule-toggle settings-rule-toggle" id="managerHintsToggle" role="switch" aria-checked="true"><i></i></button></div></div><div class="dm-learning-card"><div class="dm-learning-copy"><div class="dm-learning-kicker">Лёгкое обучение</div><b>Покажу, что здесь куда.</b><small>Коротко и с примерами. Без лекции на два сезона.</small></div><button type="button" class="control-action dm-learning-button" onclick="openLightTutorial()">Пройти обучение →</button></div>');
     if(typeof window.syncManagerSettings==='function')window.syncManagerSettings();
     if(typeof window.syncSettingsHomeSwitches==='function')window.syncSettingsHomeSwitches();
   };
@@ -12855,7 +12525,6 @@ body.dark .wow-module-panel > .module-flow span{
   setTimeout(render,120);
 })();
 </script>
-
 
 <style id="visual-unification-final-v1">
 /* FINAL VISUAL UNIFICATION — только внешний вид, JS/логику не меняем. */
