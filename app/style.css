@@ -32,7 +32,6 @@ body:not(.dark) .wow-module-close:hover{
   box-shadow:0 13px 30px rgba(41,61,130,.19),inset 0 1px 0 rgba(255,255,255,.18) !important;
 }
 
-
 body:not(.dark) .future-btn.ghost,
 body:not(.dark) .wow-module-secondary,
 body:not(.dark) .theme-mode-btn,
@@ -62,7 +61,6 @@ body:not(.dark) .pulse-top button:hover{
   border-color:rgba(26,29,35,.13) !important;
 }
 
-
 body:not(.dark) .action-row .future-btn{
   min-height:42px !important;
   border-radius:13px !important;
@@ -76,7 +74,6 @@ body:not(.dark) .action-row .future-btn.ghost{
   color:#6a6d76 !important;
   box-shadow:none !important;
 }
-
 
 body.dark .future-btn.primary,
 body.dark .future-create-btn,
@@ -157,14 +154,12 @@ body.dark .wow-module-close:hover{
   border-color:rgba(255,255,255,.14) !important;
 }
 
-
 body.dark .sales-text-action,
 body.dark .settings-developer-link,
 body.dark .settings-company-footer button{
   background:transparent !important;
   box-shadow:none !important;
 }
-
 
 #controlContent .settings-theme-box{
   position:relative !important;
@@ -304,7 +299,6 @@ body.dark #controlContent .settings-clean-row[data-setting-section] .settings-cl
 #controlContent .settings-clean-copy b{font-size:12px !important;line-height:1.18 !important}
 #controlContent .settings-clean-copy small{font-size:9.5px !important;line-height:1.3 !important;margin-top:3px !important}
 
-
 #controlContent .settings-home-switch,
 #controlContent .settings-rule-toggle{
   width:42px !important;height:24px !important;
@@ -338,7 +332,6 @@ body.dark #controlContent .settings-rule-toggle.is-on{background:rgba(255,255,25
 body.dark #controlContent .settings-home-switch i,
 body.dark #controlContent .settings-rule-toggle i{background:#f5f6f7!important;box-shadow:0 1px 5px rgba(0,0,0,.28)!important}
 
-
 #controlContent .settings-create-card{
   position:relative !important;
   display:flex !important;
@@ -369,7 +362,6 @@ body.dark #controlContent .settings-create-card{
 }
 body.dark #controlContent .settings-create-card:before{background:linear-gradient(180deg,#dfe3eb,#8c919b);opacity:.55}
 
-
 #controlContent .dm-learning-card{
   margin-top:12px !important;
   padding:14px !important;
@@ -386,7 +378,6 @@ body.dark #controlContent .dm-learning-card{
   min-height:42px !important;height:42px !important;padding:0 14px !important;border-radius:13px !important;
   font-weight:780 !important;
 }
-
 
 #homeSectionPreviews .home-added-card{
   overflow:hidden !important;
@@ -409,6 +400,3 @@ body.dark #homeSectionPreviews .home-added-card{
   #controlContent .dm-learning-button{width:100% !important}
   #homeSectionPreviews .action-row .future-btn{min-height:40px !important}
 }
-</style>
-</body>
-</html>
