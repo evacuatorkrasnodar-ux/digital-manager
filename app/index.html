@@ -80,7 +80,7 @@ body.dark .finance-source-track{background:rgba(255,255,255,.08)}
 @media(max-width:900px){.promo-grid{grid-template-columns:1fr}.promo-stats{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.promo-health{align-items:flex-start}.promo-tag{display:none}.promo-stats{grid-template-columns:1fr}.promo-head{align-items:flex-start}.promo-period{display:none}}
 
-/* SALES */
+
 .sales-page{display:none;max-width:1280px;margin:0 auto}.sales-page.show{display:block}
 .sales-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:20px}
 .sales-title{font-size:32px;font-weight:760;letter-spacing:-.045em}.sales-sub{font-size:13px;color:var(--muted);margin-top:5px}
@@ -125,7 +125,7 @@ body.dark .sales-source-row,body.dark .sales-client-row,body.dark .sales-action-
 @media(max-width:900px){.sales-grid{grid-template-columns:1fr}.sales-stats{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.sales-head{align-items:flex-start}.sales-period{display:none}.sales-health{align-items:flex-start}.sales-tag{display:none}.sales-stats{grid-template-columns:1fr}.sales-title{font-size:29px}.sales-card{padding:18px}.sales-client-action{display:inline-flex;min-height:42px;align-items:center}}
 
-/* Premium product layer — спокойный, тактильный интерфейс */
+
 html{
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
@@ -167,7 +167,7 @@ button:focus-visible,input:focus-visible,select:focus-visible{
   background:rgba(22,119,255,.18);
 }
 
-/* Sales v2 — premium management experience */
+
 .sales-hero{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;margin-bottom:24px}
 .sales-hero-copy h2{font-size:42px;letter-spacing:-1.8px;margin:7px 0 8px;line-height:1.05}
 .sales-hero-copy p{margin:0;max-width:680px;color:var(--muted);font-size:16px;line-height:1.55}
@@ -240,7 +240,7 @@ body.dark .sales-bottom-note>span{background:rgba(255,255,255,.07)}
 @media(max-width:900px){.sales-hero{align-items:flex-start;flex-direction:column}.sales-hero-controls{width:100%}.sales-ask-btn{margin-left:auto}.sales-command{grid-template-columns:auto 1fr}.sales-command .sales-primary{grid-column:1/-1;width:100%}.sales-tip-row{grid-template-columns:1fr}.sales-grid-v2{grid-template-columns:1fr}}
 @media(max-width:600px){.sales-hero-copy h2{font-size:32px}.sales-hero-controls{display:none}.sales-command{padding:18px;border-radius:22px}.sales-command-icon{width:43px;height:43px;border-radius:14px}.sales-command h3{font-size:18px}.sales-command-meta span{font-size:10px}.sales-bottom-note{align-items:flex-start}.sales-bottom-note button{display:none}}
 
-/* Mobile-first product layer */
+
 button,input{touch-action:manipulation}
 @media(max-width:700px){
   :root{--mobile-pad:14px;--mobile-bottom:88px}
@@ -354,7 +354,7 @@ button,input{touch-action:manipulation}
   .mobile-manager,.manager-sheet{display:none!important}
 }
 
-/* Premium clarity pass — mobile first */
+
 @media(max-width:700px){
   :root{
     --premium-radius:24px;
@@ -388,7 +388,7 @@ button,input{touch-action:manipulation}
     font-size:13px;
   }
 
-  /* Turn generic cards into calm product surfaces */
+  
   .card,.ask,.sales-card,.finance-card,.promo-card{
     border-radius:var(--premium-radius);
     box-shadow:0 10px 35px rgba(25,30,40,.055);
@@ -405,7 +405,7 @@ button,input{touch-action:manipulation}
     line-height:1.45;
   }
 
-  /* Make the first business signal visually dominant */
+  
   .grid > .card:first-child{
     background:
       radial-gradient(circle at 100% 0%,rgba(114,87,255,.08),transparent 34%),
@@ -425,7 +425,7 @@ button,input{touch-action:manipulation}
   .metric:first-child .ml{color:var(--green)}
   .mv{font-size:24px}
 
-  /* Actions should look like decisions, not links */
+  
   .action{
     display:inline-flex;
     align-items:center;
@@ -438,7 +438,7 @@ button,input{touch-action:manipulation}
     color:var(--blue);
   }
 
-  /* Ask card */
+  
   .ask{
     background:
       radial-gradient(circle at 0 0,rgba(114,87,255,.11),transparent 38%),
@@ -447,7 +447,7 @@ button,input{touch-action:manipulation}
   .ask-title{font-size:18px;letter-spacing:-.035em}
   .ask-sub{max-width:290px;line-height:1.45}
 
-  /* Sales hero */
+  
   .sales-title{font-size:34px!important;line-height:.98;letter-spacing:-.065em}
   .sales-hero{padding:3px 2px 5px}
   .sales-sub{max-width:315px;line-height:1.45}
@@ -464,7 +464,7 @@ button,input{touch-action:manipulation}
   .sales-command-stat{border-radius:15px!important;padding:11px!important}
   .sales-command-stat b{font-size:18px!important}
 
-  /* Funnel becomes a clear journey */
+  
   .sales-funnel-row{
     min-height:58px;
     border-radius:17px!important;
@@ -477,7 +477,7 @@ button,input{touch-action:manipulation}
     margin-left:auto;
   }
 
-  /* Recovery is the action card */
+  
   .sales-recovery{
     background:
       radial-gradient(circle at 100% 0,rgba(39,168,102,.11),transparent 40%),
@@ -492,7 +492,7 @@ button,input{touch-action:manipulation}
     border-radius:12px!important;
   }
 
-  /* Hide decorative secondary copy on very small screens */
+  
   .sales-tip-row .sales-tip:nth-child(3){display:none}
 }
 @media(max-width:390px){
@@ -507,7 +507,7 @@ body.dark .ask,
 body.dark .sales-command,
 body.dark .sales-recovery{background-color:rgba(255,255,255,.045)!important}
 
-/* ULTIMATE DIGITAL MANAGER — mobile-first premium layer */
+
 .manager-orbit{
   position:relative;
   overflow:hidden;
@@ -719,7 +719,7 @@ body.dark .report-main-action{background:#fff;color:#111217}
   .report-footer button{flex:1}
 }
 
-/* Refined report CTA */
+
 .report-trigger{
   display:flex;
   align-items:center;
@@ -772,7 +772,7 @@ body.dark .report-trigger::after{background:rgba(120,150,255,.12)}
   }
 }
 
-/* Client recovery flow */
+
 .recovery-overlay{
   position:fixed;inset:0;z-index:10001;
   display:none;align-items:flex-end;justify-content:center;
@@ -862,7 +862,7 @@ body.dark .recovery-main,body.dark .recovery-actions .send{background:#fff;color
   .recovery-sheet{border-radius:30px;max-height:88vh}
 }
 
-/* Living minimal icon system */
+
 :root{
   --icon: #111216;
   --icon-muted: rgba(17,18,22,.58);
@@ -925,7 +925,7 @@ body.dark .return-cycle-live,.dark .return-client-icon{background:rgba(255,255,2
   .return-cycle-btn{width:100%;justify-content:center}
 }
 
-/* Premium living navigation */
+
 .sidebar nav, .side-nav, .nav-list{
   position:relative;
 }
@@ -994,7 +994,7 @@ body.dark .nav-list a::before{
   right:35%;
 }
 
-/* Business memory CTA */
+
 .business-memory{
   max-width:1280px;
   margin:0 auto 18px;
@@ -1054,7 +1054,7 @@ body.dark .business-memory-mark{background:rgba(255,255,255,.04)}
 @keyframes memoryOrbit{0%,100%{transform:rotate(0deg) scale(1)}50%{transform:rotate(7deg) scale(1.04)}}
 @keyframes memoryMark{0%{transform:rotate(0) scale(1)}45%{transform:rotate(-7deg) scale(1.1)}100%{transform:rotate(0) scale(1)}}
 
-/* Memory bottom sheet */
+
 .memory-sheet-backdrop{
   position:fixed;inset:0;background:rgba(0,0,0,.22);
   backdrop-filter:blur(7px);z-index:9990;opacity:0;pointer-events:none;
@@ -1091,7 +1091,7 @@ body.dark .memory-sheet{background:rgba(28,28,30,.94)}
   .memory-grid{grid-template-columns:1fr}
 }
 
-/* === Digital Manager: first-launch onboarding === */
+
 .dm-onboarding{
   position:fixed;inset:0;z-index:10050;
   background:#f6f6f4;
@@ -1262,10 +1262,7 @@ body.dark .dm-ob-switch{background:rgba(255,255,255,.15)}body.dark .dm-ob-switch
   .dm-onboarding *{animation:none!important;transition:none!important}
 }
 
-/* =========================================================
-   DIGITAL MANAGER — GLOBAL PREMIUM VISUAL LANGUAGE
-   One visual system across onboarding + app
-   ========================================================= */
+
 :root{
   --dm-black:#101114;
   --dm-paper:#f6f6f4;
@@ -1299,7 +1296,7 @@ body.dark{
   color:#f7f7f5;
 }
 
-/* App shell */
+
 .sidebar{
   background:rgba(246,246,244,.70)!important;
   backdrop-filter:blur(28px) saturate(120%);
@@ -1327,7 +1324,7 @@ body.dark .nav-list a.active{
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.035),0 8px 25px rgba(0,0,0,.18)!important;
 }
 
-/* Main content typography */
+
 main h1,.main h1,.page-title{
   font-size:clamp(34px,4vw,54px)!important;
   line-height:1!important;
@@ -1338,7 +1335,7 @@ main h2,.main h2{letter-spacing:-.045em!important}
 main h3,.main h3{letter-spacing:-.03em!important}
 .subtitle,.muted,.section-subtitle{color:var(--dm-muted)!important}
 
-/* Cards become quiet premium surfaces */
+
 .card,.panel,.metric-card,.stat-card,.glass-card,.task-card,.client-card,
 .finance-card,.promo-card,.sales-card,.insight-card,.action-card,
 .source-card{
@@ -1355,7 +1352,7 @@ main h3,.main h3{letter-spacing:-.03em!important}
   transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s ease;
 }
 
-/* Buttons */
+
 button,.btn,.button,.action-button{
   border-radius:16px!important;
   font-weight:650!important;
@@ -1377,7 +1374,7 @@ body.dark .action-button.primary,body.dark .primary-btn{
   background:#f5f5f3!important;color:#101114!important;border-color:#f5f5f3!important;
 }
 
-/* Inputs */
+
 input,textarea,select{
   border:1px solid var(--dm-line-strong)!important;
   border-radius:16px!important;
@@ -1398,7 +1395,7 @@ body.dark input:focus,body.dark textarea:focus,body.dark select:focus{
   box-shadow:0 0 0 4px rgba(255,255,255,.035)!important;
 }
 
-/* Monochrome icon system */
+
 .dm-icon svg,.icon svg,.sidebar svg{
   fill:none;
   stroke:currentColor;
@@ -1413,7 +1410,7 @@ body.dark input:focus,body.dark textarea:focus,body.dark select:focus{
 body:not(.dark) .sidebar .dm-icon{color:#17181b}
 body.dark .sidebar .dm-icon{color:#f4f4f2}
 
-/* Replace visual noise from legacy colorful accents */
+
 .badge,.status,.pill{
   border:1px solid var(--dm-line)!important;
   background:rgba(127,127,127,.055)!important;
@@ -1424,13 +1421,13 @@ body.dark .sidebar .dm-icon{color:#f4f4f2}
   color:inherit!important;
 }
 
-/* Premium section dividers */
+
 .section,.block,.module{
   border-color:var(--dm-line)!important;
 }
 hr{border:0;border-top:1px solid var(--dm-line)!important}
 
-/* Manager / hero area */
+
 .hero,.manager-hero,.command-card,.business-hero{
   position:relative;
   overflow:hidden;
@@ -1458,13 +1455,13 @@ body.dark .hero,body.dark .manager-hero,body.dark .command-card,body.dark .busin
   50%{transform:rotate(8deg) scale(1.045)}
 }
 
-/* KPI numbers — quiet, large */
+
 .metric-value,.stat-value,.kpi-value{
   letter-spacing:-.055em!important;
   font-weight:700!important;
 }
 
-/* Tables become airy */
+
 table{border-collapse:separate!important;border-spacing:0 6px!important}
 th{
   color:var(--dm-muted)!important;
@@ -1481,7 +1478,7 @@ td{
 td:first-child{border-left:1px solid var(--dm-line)!important;border-radius:14px 0 0 14px}
 td:last-child{border-right:1px solid var(--dm-line)!important;border-radius:0 14px 14px 0}
 
-/* Mobile: preserve the same calm composition */
+
 @media(max-width:700px){
   body{font-size:14px}
   main h1,.main h1,.page-title{font-size:36px!important}
@@ -1496,7 +1493,7 @@ td:last-child{border-right:1px solid var(--dm-line)!important;border-radius:0 14
   }
 }
 
-/* Reduced motion */
+
 @media(prefers-reduced-motion:reduce){
   *,*:before,*:after{animation:none!important;transition:none!important}
 }
@@ -1515,7 +1512,7 @@ body.dark .more-panel,body.dark .control-panel,body.dark .pulse-panel{background
 @media(max-width:700px){.more-panel{bottom:0;width:100%;border-radius:28px 28px 0 0;padding:18px 15px calc(18px + env(safe-area-inset-bottom))}.more-head h2{font-size:27px}.control-panel{top:auto;bottom:0;transform:translateX(-50%);width:100%;border-radius:28px 28px 0 0;padding:20px 15px calc(20px + env(safe-area-inset-bottom));max-height:86vh}.control-title{font-size:30px}.pulse-panel{top:auto!important;bottom:0;transform:translateX(-50%)!important;width:100%!important;border-radius:28px 28px 0 0!important;padding:20px 15px calc(20px + env(safe-area-inset-bottom))!important}.pulse-top h2{font-size:34px}.pulse-links{grid-template-columns:1fr 1fr}.pulse-hero{align-items:flex-start}.pulse-orb.big{width:56px;height:56px;border-radius:18px}}
 </style>
 <style id="premium-v3-fixes">
-/* ===== PREMIUM V3: one company logo, no duplicate product logos ===== */
+
 .dm-company-mark{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:#17171a;color:#fff;font-size:13px;font-weight:800;letter-spacing:-.04em;box-shadow:0 8px 22px rgba(20,20,25,.12);flex:none;transition:transform .28s ease,box-shadow .28s ease;}
 .brand-button:hover .dm-company-mark{transform:translateY(-1px) scale(1.02);box-shadow:0 12px 28px rgba(20,20,25,.16);}
 .brand-sub{color:var(--muted)!important;}
@@ -1532,10 +1529,7 @@ body.dark .more-panel,body.dark .control-panel,body.dark .pulse-panel{background
 @media(max-width:600px){.premium-kicker{flex-wrap:wrap;gap:5px;}.premium-kicker i{display:none;}.premium-kicker span{display:block;width:100%;margin-bottom:1px;}.dm-company-mark{width:38px;height:38px;border-radius:12px;font-size:12px;}.brand{gap:10px;}}
 </style>
 <style id="premium-v4">
-/* =========================================================
-   ЦИФРОВОЙ БИЗНЕС — PREMIUM V4
-   Calm / editorial / Apple-like product studio direction.
-   ========================================================= */
+
 
 :root{
   --bg:#f5f5f7;
@@ -1899,7 +1893,7 @@ body{
   *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important;}
 }
 </style><style id="future-v5">
-/* ========================= FUTURE V5 ========================= */
+
 :root{
   --f-bg:#f4f4f6;--f-ink:#0d0d10;--f-muted:#77777f;--f-soft:#a2a2a9;
   --f-line:rgba(13,13,16,.075);--f-card:rgba(255,255,255,.72);
@@ -2002,17 +1996,17 @@ body{background:var(--f-bg)!important;}
 }
 @media(prefers-reduced-motion:reduce){.orbit-ring,.create-ring{animation:none;}}
 </style><style id="future-v6-fix">
-/* FUTURE V6 — cleanup / bug fix */
+
 [data-legacy-hidden="true"]{display:none!important;}
 
 .future-shell{padding-bottom:55px;}
 .future-footer{display:none!important;}
 
-/* Keep the new shell above legacy decorative layers. */
+
 .future-shell{z-index:2;}
 .future-command,.future-state,.future-card,.future-create{isolation:isolate;}
 
-/* Cleaner bottom navigation on small screens. */
+
 @media(max-width:700px){
   .mobile-nav{z-index:40;}
 }
@@ -2040,7 +2034,7 @@ body{background:var(--f-bg)!important;}
 @media(max-width:700px){.contract-top{display:block;}.contract-edit{margin-top:17px;}.contract-grid{grid-template-columns:1fr 1fr;}.contract-item:nth-child(2){border-right:0;margin-right:0;}.contract-item:nth-child(3),.contract-item:nth-child(4){border-top:1px solid rgba(255,255,255,.09);padding-top:15px;}.future-blindspot{grid-template-columns:1fr;padding:24px;}.blindspot-scan{height:140px;}.autopilot-sheet,.blindspot-sheet{border-radius:28px 28px 0 0;padding:23px 18px;}.auto-head h2{font-size:27px;}.blind-list>div{grid-template-columns:24px 1fr;}.blind-list em{display:none;}}
 </style>
 <style id="future-create-v7">
-/* FUTURE V7 — build anything */
+
 .future-build-modal{position:fixed;inset:0;z-index:200;background:rgba(10,10,12,.48);backdrop-filter:blur(18px);display:none;align-items:flex-end;justify-content:center;padding:18px}
 .future-build-modal.is-open{display:flex}
 .future-build-sheet{width:min(760px,100%);background:#f7f7f8;color:#101012;border-radius:30px;padding:30px;box-shadow:0 30px 100px rgba(0,0,0,.25);transform:translateY(18px);animation:buildIn .35s ease forwards}
@@ -2052,7 +2046,7 @@ body{background:var(--f-bg)!important;}
 @media(max-width:620px){.future-build-modal{padding:0}.future-build-sheet{border-radius:28px 28px 0 0;padding:24px 18px 22px}.build-head h2{font-size:29px}.build-input{font-size:14px}}
 </style>
 <style id="premium-typography-v13">
-/* Premium editorial typography — calm, precise, Apple-like without copying Apple */
+
 :root{--font-ui:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue","Segoe UI",sans-serif;--font-mono:"SF Mono",ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;}
 html,body,button,input,select,textarea{font-family:var(--font-ui);}
 body{font-synthesis:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;}
@@ -2082,7 +2076,7 @@ h1,.tasks-title,.clients-title,.finance-title,.promo-title,.future-title,.future
 }
 </style>
 <style id="v15-mobile-system">
-/* V15 — clean mobile system: iPhone + Android */
+
 :root{
   --mobile-text:16px;
   --mobile-muted:14px;
@@ -2119,7 +2113,7 @@ button{
     max-width:none;
   }
 
-  /* Readable body copy */
+  
   .future-lead,.lead,.desc,.item-text,.task-row-text,.clients-sub,
   .finance-sub,.promo-sub,.sales-hero p,.sales-command p,
   .manager-command p,.manager-personality-copy,.needs div{
@@ -2135,7 +2129,7 @@ button{
     line-height:1.3 !important;
   }
 
-  /* Large, comfortable headings */
+  
   h1,.top h1{
     font-size:clamp(36px,9.5vw,46px) !important;
     line-height:1.03 !important;
@@ -2150,7 +2144,7 @@ button{
     line-height:1.06 !important;
   }
 
-  /* Inputs and controls never smaller than comfortable touch size */
+  
   input,select,textarea,
   .ask-input,.sales-period{
     min-height:48px !important;
@@ -2167,7 +2161,7 @@ button{
     height:48px !important;
   }
 
-  /* Bottom navigation: exactly 5 columns, safe-area aware, no legacy overlap */
+  
   .mobile-nav{
     position:fixed !important;
     z-index:100000 !important;
@@ -2247,13 +2241,13 @@ button{
     pointer-events:none !important;
   }
 
-  /* Do not let the floating manager cover navigation or content. */
+  
   .mobile-manager{
     bottom:calc(88px + env(safe-area-inset-bottom)) !important;
     z-index:99990 !important;
   }
 
-  /* Cards breathe on narrow screens */
+  
   .pad,.finance-card,.promo-card{
     padding:20px !important;
   }
@@ -2322,7 +2316,7 @@ body.dark .mobile-nav button.active{
   
 }
 
-/* Legacy mobile layers must never sit above the primary navigation. */
+
 @media(max-width:900px){
   .mobile-nav{isolation:isolate;}
   .company-sheet,.more-sheet,.control-overlay,.business-pulse,
@@ -2332,7 +2326,7 @@ body.dark .mobile-nav button.active{
   }
 }
 
-/* v16 company sheet: company information follows the main app theme. */
+
 .company-sheet{
   position:fixed;inset:0;z-index:100001;display:none;
   align-items:flex-end;justify-content:center;
@@ -2381,7 +2375,7 @@ body.dark .company-close,body.dark .company-tags span,body.dark .company-product
 }
 </style>
 <style id="future-v17-navigation">
-/* v17 — меньше меню, больше управляющего */
+
 .sidebar .nav{gap:5px;}
 .sidebar .nav button[data-section="more"]{margin-top:8px;border-top:1px solid var(--line);border-radius:0 0 14px 14px;padding-top:18px;}
 .more-panel{max-width:760px;}
@@ -2414,7 +2408,7 @@ body.dark .company-close,body.dark .company-tags span,body.dark .company-product
 }
 </style>
 <style id="mobile-compact-v19">
-/* V19 — mobile compact pass */
+
 @media (max-width: 600px){
   body{overflow-x:hidden;}
   .future-shell{padding:18px 12px 92px;}
@@ -2504,7 +2498,7 @@ body.dark .company-close,body.dark .company-tags span,body.dark .company-product
 }
 </style>
 <style id="unified-sections-v21">
-/* V21 — all sections speak the same visual language as Home */
+
 .unified-page,
 .sales-page,
 .finance-page,
@@ -2910,7 +2904,7 @@ body.dark .company-close,body.dark .company-tags span,body.dark .company-product
 }
 </style>
 <style id="compact-hero-v22">
-/* V22 — one compact hero: greeting + business control */
+
 .future-header{display:none!important;}
 .future-state{
   
@@ -3037,7 +3031,7 @@ body.dark .company-close,body.dark .company-tags span,body.dark .company-product
 }
 </style>
 <style id="wow-home-v23">
-/* V23 — cinematic / premium home layer */
+
 :root{
   --wow-ink:#0c0c0f;
   --wow-muted:#77777f;
@@ -3161,9 +3155,9 @@ body.dark .company-close,body.dark .company-tags span,body.dark .company-product
 }
 </style>
 <style id="precision-fixes-v24">
-/* Только точечные исправления — основной дизайн не меняем. */
 
-/* Верхний блок: один материал в обеих темах. */
+
+
 body.dark .future-state{
   
   
@@ -3178,7 +3172,7 @@ body.dark .future-shell:before{
 body.dark .state-copy:before{background:#fff;opacity:.55;}
 body.dark .state-orbit{filter:drop-shadow(0 12px 24px rgba(0,0,0,.35));}
 
-/* Новый значок помощника: тонкий, монохромный, без эмодзи. */
+
 .assistant-orbit{
   
   
@@ -3212,7 +3206,7 @@ body.dark .assistant-core{
 @keyframes assistantSpin{to{transform:rotate(360deg);}}
 @keyframes assistantFloat{0%,100%{transform:translateY(0) scale(1);opacity:.88;}50%{transform:translateY(-2px) scale(1.04);opacity:1;}}
 
-/* Переключатель темы — аккуратный чёрно-белый контрол. */
+
 .theme{align-items:center;gap:10px;transition:background .25s ease,border-color .25s ease,transform .25s ease;}
 .theme:hover{transform:translateY(-1px);}
 .theme-left{display:flex;align-items:center;gap:9px;}
@@ -3232,9 +3226,9 @@ body.dark .theme-moon{display:block;}
 }
 </style>
 <style id="theme-text-stability-v25">
-/* Точечная стабилизация тем: существующий дизайн не меняем. */
 
-/* Светлая тема: верхний герой НЕ должен содержать белого текста на светлом фоне. */
+
+
 body:not(.dark) .future-state{
   
 }
@@ -3262,7 +3256,7 @@ body:not(.dark) .future-state .state-copy:before{
   
 }
 
-/* Тёмная тема: сохраняем белую типографику именно внутри тёмного героя. */
+
 body.dark .future-state{
   color:#f7f7f5 !important;
 }
@@ -3287,13 +3281,13 @@ body.dark .future-state .state-copy:before{
   background:#fff !important;
 }
 
-/* Переключатель темы не зависит от ошибочного чтения localStorage. */
+
 .theme{color:var(--text)!important;}
 .theme-icon{color:var(--text)!important;}
 .theme-icon svg{stroke:currentColor!important;}
 </style>
 <style id="theme-complete-stability-v26">
-/* Финальная починка тем: только цветовые слои, без изменения композиции. */
+
 
 body.dark{
   --bg:#090a0c;
@@ -3331,7 +3325,7 @@ body.dark .nav button.active{
   
 }
 
-/* Все обычные поверхности становятся действительно тёмными. */
+
 body.dark .future-card,
 body.dark .card,
 body.dark .ask,
@@ -3399,7 +3393,7 @@ body.dark .sales-source-name{
   color:#f5f5f7 !important;
 }
 
-/* Поля, кнопки и селекторы в тёмной теме. */
+
 body.dark .ask-input,
 body.dark .manager-form input,
 body.dark .finance-period,
@@ -3440,7 +3434,7 @@ body.dark .future-kicker{
   color:rgba(255,255,255,.48) !important;
 }
 
-/* Мобильная панель и плавающий управляющий. */
+
 body.dark .mobile-nav{
   
   
@@ -3449,14 +3443,14 @@ body.dark .mobile-nav{
 }
 
 
-/* Нейтральные элементы бренда/иконок остаются монохромными. */
+
 body.dark .dm-company-mark{background:#f5f5f7 !important;color:#17171a !important;}
 body.dark .dm-icon{color:#f5f5f7 !important;}
 </style>
 <style id="final-dark-text-and-manager-v27">
-/* Только точечные исправления тёмной темы и плавающего помощника. */
 
-/* Убираем остатки светлой типографики/поверхностей из тёмной темы. */
+
+
 body.dark .future-shell,
 body.dark .future-shell *{
   text-shadow:none;
@@ -3480,7 +3474,7 @@ body.dark .future-shell label,
 body.dark .future-shell time{
   color:rgba(255,255,255,.64) !important;
 }
-/* Возвращаем смысловые акценты поверх общего белого текста. */
+
 body.dark .future-shell .future-link,
 body.dark .future-shell .action,
 body.dark .future-shell .sales-text-action,
@@ -3498,7 +3492,7 @@ body.dark .future-shell .sales-warn,
 body.dark .future-shell .finance-warn,
 body.dark .future-shell .promo-warn{color:#f1bd67 !important}
 
-/* Светлые вложенные карточки/панели больше не светятся белым в тёмной теме. */
+
 body.dark .future-shell .future-card .opportunity-preview,
 body.dark .future-shell .opportunity-preview,
 body.dark .future-shell .future-create,
@@ -3545,7 +3539,7 @@ body.dark .future-shell .recovery-row small{
   color:rgba(255,255,255,.58) !important;
 }
 
-/* Модальные окна, которые исторически имели белый фон. */
+
 body.dark .future-autopilot-modal .autopilot-sheet,
 body.dark .future-blindspot-modal .blindspot-sheet,
 body.dark .future-build-modal .future-build-sheet,
@@ -3568,7 +3562,7 @@ body.dark .future-build-modal .build-close{
   border-color:rgba(255,255,255,.09) !important;
 }
 
-/* Плавающий управляющий: тот же знак, что и в основном экране помощника. */
+
 .mobile-manager{
   overflow:visible !important;
 }
@@ -3611,7 +3605,7 @@ body:not(.dark) .mobile-manager{color:#17181b !important}
 }
 </style>
 <style id="dark-surfaces-v28">
-/* DARK V28 — только исправление оставшихся светлых поверхностей. */
+
 body.dark .future-evolution,
 body.dark .future-twin,
 body.dark .future-simulator,
@@ -3646,7 +3640,7 @@ body.dark .premium-ask-input{
   box-shadow:none !important;
 }
 
-/* Вложенные карты и схемы тоже должны быть тёмными. */
+
 body.dark .future-shell .twin-map{
   background:rgba(255,255,255,.025) !important;
 }
@@ -3693,7 +3687,7 @@ body.dark .future-shell .evo-summary{
 }
 body.dark .future-shell .twin-lines path{stroke:rgba(255,255,255,.15) !important}
 
-/* Тёмные поля и подсказки в модальных экранах. */
+
 body.dark .future-shell .build-input,
 body.dark .future-shell .intent-sheet textarea,
 body.dark .future-shell .command-form input{
@@ -3710,7 +3704,7 @@ body.dark .future-shell .sim-option.active{
   background:rgba(255,255,255,.09) !important;
 }
 
-/* Оставляем белыми только сознательные контрастные CTA-кнопки. */
+
 body.dark .future-shell .twin-open,
 body.dark .future-shell .memory-head button,
 body.dark .future-shell .build-result button,
@@ -3722,7 +3716,7 @@ body.dark .future-shell .future-primary{
   color:#111216 !important;
 }
 
-/* Бренд в боковой панели — никакого серого прямоугольника. */
+
 body.dark .brand-button,
 body.dark .brand-button:hover,
 body.dark .brand-button:focus-visible{
@@ -3730,8 +3724,7 @@ body.dark .brand-button:focus-visible{
   color:#f5f5f7 !important;
 }
 
-/* Если где-то осталась старая белая поверхность внутри тёмного кабинета,
-   она получает нейтральную тёмную подложку, не затрагивая чёрные/контрастные CTA. */
+
 body.dark .future-shell .future-card > .future-card-inner,
 body.dark .future-shell .future-card .card-inner,
 body.dark .future-shell .future-card .surface,
@@ -3742,8 +3735,8 @@ body.dark .future-shell .future-card .sub-card{
   border-color:rgba(255,255,255,.09) !important;
 }
 
-/* Company brand — technology signature */
-/* Company brand button — plain brand, no card / glass frame */
+
+
 .brand.brand-button,.brand.brand-button:hover,.brand.brand-button:focus,.brand.brand-button:focus-visible,.brand.brand-button:active{
   appearance:none;
   -webkit-appearance:none;
@@ -3764,17 +3757,14 @@ body.dark .future-shell .future-card .sub-card{
 @media(max-width:600px){.brand-sub{font-size:8px!important;letter-spacing:.08em}}
 </style>
 <style id="dm-premium-wow-v1">
-/* =========================================================
-   DIGITAL MANAGER — PREMIUM WOW LAYER
-   Visual-only override. Existing application logic untouched.
-   ========================================================= */
 
-/* ---------- premium surfaces ---------- */
+
+
 body{overflow-x:hidden;}
 .sidebar,.mobile-nav,.theme,.pad,.metric,.item,.event-box,.ask-input,.reply,.round,.task-row,.client-row,.finance-card,.finance-row,.promo-card,.channel-row,.sales-card,.sales-hero,.sales-command,.sales-funnel,.sales-source,.sales-loss,.report-card,.memory-card,.business-memory,.control-card,.settings-card,.more-card{transition:background .35s ease,border-color .35s ease,box-shadow .35s ease,color .25s ease,transform .35s ease;}
 .pad,.metric,.item,.event-box,.reply,.round,.finance-card,.promo-card,.sales-card,.sales-hero,.sales-command,.sales-funnel,.sales-source,.sales-loss,.report-card,.memory-card,.business-memory,.control-card,.settings-card,.more-card{backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);}
 
-/* ---------- light theme refinement ---------- */
+
 :root{
   --dm-glass:rgba(255,255,255,.72);
   --dm-glass-strong:rgba(255,255,255,.88);
@@ -3783,7 +3773,7 @@ body{overflow-x:hidden;}
 .pad,.metric,.item,.event-box,.reply,.round,.finance-card,.promo-card,.sales-card,.sales-hero,.sales-command,.sales-funnel,.sales-source,.sales-loss,.report-card,.memory-card,.business-memory,.control-card,.settings-card,.more-card{box-shadow:0 16px 45px rgba(20,24,35,.055),inset 0 1px 0 rgba(255,255,255,.7);}
 .pad:hover,.metric:hover,.item:hover,.finance-card:hover,.promo-card:hover,.sales-card:hover,.report-card:hover{transform:translateY(-2px);box-shadow:0 22px 55px rgba(20,24,35,.08),inset 0 1px 0 rgba(255,255,255,.8);}
 
-/* ---------- dark theme: one coherent material ---------- */
+
 body.dark{
   --bg:#08090b;
   --panel:rgba(22,23,28,.78);
@@ -3818,7 +3808,7 @@ body.dark .company-kicker,body.dark .manager-kicker{color:#b5a9ff;}
 body.dark .channel-status,body.dark .status{background:rgba(255,255,255,.07)!important;color:#dfe1e7!important;border-color:rgba(255,255,255,.09)!important;}
 body.dark .future-state,body.dark .future-grid{color:#fff;}
 
-/* ---------- FIRE BUTTON ---------- */
+
 .dm-fire-manager{
   width:66px!important;height:66px!important;border-radius:23px!important;
   right:17px!important;
@@ -3861,13 +3851,13 @@ body.dark .future-state,body.dark .future-grid{color:#fff;}
 @keyframes dmSparkB{0%{opacity:0;transform:translate(0,7px) scale(.3);}100%{opacity:0;transform:translate(9px,-14px) scale(1);}}
 @keyframes dmSparkC{0%{opacity:0;transform:translate(0,-4px) scale(.3);}25%{opacity:1;}100%{opacity:0;transform:translate(12px,-18px) scale(.9);}}
 
-/* ---------- onboarding stays premium in both themes ---------- */
+
 .dm-onboarding{background:#f6f6f4!important;color:#101114;}
 body.dark .dm-onboarding{background:#07080a!important;color:#f7f7f5;}
 body.dark .dm-ob-screen,body.dark .dm-ob-stage,body.dark .dm-ob-bottom,body.dark .dm-ob-field,body.dark .dm-ob-choice,body.dark .dm-ob-analysis,body.dark .dm-ob-result,body.dark .dm-ob-rule{background:rgba(255,255,255,.045)!important;border-color:rgba(255,255,255,.1)!important;color:#f7f7f8!important;}
 body.dark .dm-ob-input{background:rgba(255,255,255,.055)!important;color:#fff!important;border-color:rgba(255,255,255,.13)!important;}
 
-/* ---------- motion accessibility ---------- */
+
 @media(prefers-reduced-motion:reduce){
   .dm-fire-manager::before,.dm-fire-manager::after,.dm-fire-ring,.dm-fire-core,.dm-fire-spark{animation:none!important;}
   .pad,.metric,.item,.finance-card,.promo-card,.sales-card,.report-card{transition:none!important;}
@@ -3877,7 +3867,7 @@ body.dark .dm-ob-input{background:rgba(255,255,255,.055)!important;color:#fff!im
 }
 </style>
 <style id="dm-intelligence-v2">
-/* ЦИФРОВОЙ УПРАВЛЯЮЩИЙ — живое интеллектуальное ядро */
+
 .mobile-manager.dm-intelligence-button{width:68px!important;height:68px!important;border-radius:24px!important;border:1px solid rgba(255,255,255,.22)!important;background:rgba(18,19,23,.88)!important;color:#fff!important;box-shadow:0 18px 50px rgba(0,0,0,.28),0 0 0 1px rgba(255,255,255,.06) inset!important;backdrop-filter:blur(18px)!important;overflow:visible!important;isolation:isolate!important;}
 .dm-intelligence-aura{position:absolute;inset:-18px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.18),transparent 64%);filter:blur(7px);opacity:.65;animation:dmAura 3.8s ease-in-out infinite;z-index:-1;}
 .dm-intelligence-orbit{position:absolute;border:1px solid rgba(255,255,255,.46);border-radius:50%;pointer-events:none;}
@@ -3910,10 +3900,7 @@ body.dark .dm-intel-hero p,body.dark .dm-live-transcript{color:rgba(255,255,255,
 @media(prefers-reduced-motion:reduce){.dm-intelligence-aura,.dm-intelligence-orbit,.dm-intel-orb-large:before,.dm-intel-orb-large:after,.dm-intel-orb-large b,.dm-talk-ripple{animation:none!important;}}
 </style>
 <style id="dm-signature-identity-v1">
-/* =========================================================
-   ЦИФРОВОЙ УПРАВЛЯЮЩИЙ — SIGNATURE IDENTITY
-   One symbol everywhere: three loose orbits + rounded diamond + core.
-   ========================================================= */
+
 .dm-signature-logo{
   width:96px;height:96px;position:relative;display:grid;place-items:center;
   color:#111216;flex:none;overflow:visible;
@@ -3931,14 +3918,14 @@ body.dark .dm-intel-hero p,body.dark .dm-live-transcript{color:rgba(255,255,255,
 @keyframes sigOrbit3{0%,100%{transform:rotate(-8deg) scale(.99);}50%{transform:rotate(6deg) scale(1.01);}}
 @keyframes sigDiamond{0%,100%{transform:rotate(0deg) scale(1);}50%{transform:rotate(3deg) scale(1.035);}}
 
-/* Sidebar / company marks */
+
 .company-logo.dm-company-mark{
   
 }
 .dm-company-mark .dm-signature-logo,.company-logo .dm-signature-logo{width:48px;height:48px;}
 body.dark .company-logo.dm-company-mark{color:#f5f5f5!important;}
 
-/* Onboarding uses the exact same identity, just larger. */
+
 .dm-ob-product-symbol.dm-signature-logo{
   width:132px!important;height:132px!important;margin:0 auto 20px!important;
   color:#111216!important;background:transparent!important;border:0!important;
@@ -3946,7 +3933,7 @@ body.dark .company-logo.dm-company-mark{color:#f5f5f5!important;}
 }
 body.dark .dm-ob-product-symbol.dm-signature-logo{color:#f5f5f5!important;}
 
-/* Top banner: preserve the banner, replace only its central symbol. */
+
 .assistant-core{
   border:0!important;
   width:150px!important;height:150px!important;display:grid!important;place-items:center!important;
@@ -3956,7 +3943,7 @@ body.dark .dm-ob-product-symbol.dm-signature-logo{color:#f5f5f5!important;}
 .assistant-core .dm-signature-logo .sig-diamond{fill:rgba(255,255,255,.035);}
 @media(max-width:700px){.assistant-core{width:132px!important;height:132px!important;}.assistant-core .dm-signature-logo{width:132px;height:132px;}}
 
-/* Floating intelligence button: same symbol, no unrelated fire icon. */
+
 .dm-intelligence-button{
   background:rgba(248,248,248,.92)!important;color:#111216!important;
   border:1px solid rgba(17,18,22,.12)!important;border-radius:24px!important;
@@ -3982,7 +3969,7 @@ body.dark .dm-intelligence-button .dm-intelligence-aura{background:radial-gradie
 body.dark .dm-intelligence-button .dm-intelligence-core{color:#f5f5f5!important;}
 body.dark .dm-intelligence-button .dm-intelligence-core::after{filter:invert(1);}
 
-/* Voice panel orb: same mark, not a second visual identity. */
+
 .dm-intel-orb-large{color:var(--text)!important;}
 .dm-intel-orb-large:before,.dm-intel-orb-large:after,.dm-intel-orb-large span,.dm-intel-orb-large b{display:none!important;}
 .dm-intel-orb-large i{
@@ -4002,7 +3989,7 @@ body.dark .dm-intel-orb-large i:before{filter:invert(1);}
 }
 </style>
 <style id="dm-signature-manager-button-final">
-/* The floating manager button uses the exact same signature as the approved banner. */
+
 .mobile-manager.dm-signature-manager-button{
   
   border:0!important;border-radius:50%!important;
@@ -4045,7 +4032,7 @@ body.dark .dm-signature-manager-button::after{border-color:rgba(255,255,255,.12)
 }
 </style>
 <style id="mobile-theme-and-stability-v1">
-/* Только точечная мобильная настройка. Основной дизайн приложения не переписываем. */
+
 .mobile-theme-card{
   grid-column:1 / -1;
   display:flex;align-items:center;gap:13px;
@@ -4076,7 +4063,7 @@ body.dark .mobile-theme-moon{display:block;}
 }
 </style>
 <style id="evolution-business-final-visibility-v5">
-/* EVOLUTION BUSINESS — final readable layer */
+
 .future-evolution{
   color:#111216 !important;
   background:#fff !important;
@@ -4191,7 +4178,7 @@ body.dark .future-evolution .evo-next button{color:#f7f8fa !important;}
 }
 </style>
 <style id="evo-timeline-visibility-final">
-/* FINAL VISIBILITY FIX — evolution activity block */
+
 .future-evolution .evo-timeline,
 .future-evolution .evo-event,
 .future-evolution .evo-event-main,
@@ -4265,7 +4252,7 @@ body.dark .future-evolution .evo-icon{
   opacity:1 !important;
   text-shadow:none !important;
 }
-/* The NEXT block: keep every line and the action visible */
+
 .future-evolution .evo-next,
 .future-evolution .evo-next > *,
 .future-evolution .evo-next > div > *{
@@ -4285,7 +4272,7 @@ body.dark .future-evolution .evo-icon{
   color:#111216 !important;
 }
 </style><style id="clean-home-stability">
-/* Clean working baseline: Home cards must not shake, zoom, blur or jump. */
+
 .premium-home .home-block{
   animation:none!important;
   will-change:auto!important;
@@ -4294,7 +4281,7 @@ body.dark .future-evolution .evo-icon{
   animation:none!important;
 }
 </style><style id="home-stability-final-v2">
-/* Controlled Home baseline: keep card geometry fixed outside edit mode. */
+
 .premium-home .home-block,
 .premium-home .future-grid .future-card{
   animation:none !important;
@@ -4311,10 +4298,10 @@ body.dark .future-evolution .evo-icon{
 }
 </style>
 <style id="final-context-nav-fix">
-/* Точечная правка: мобильное нижнее меню больше не показываем. Тему/остальной дизайн не меняем. */
+
 .mobile-nav{display:none!important;}
 
-/* Настройки — аккуратная кнопка прямо в верхнем баннере. */
+
 .future-state{position:relative;}
 .top-banner-settings{
   position:absolute;z-index:8;
@@ -4333,7 +4320,7 @@ body.dark .future-evolution .evo-icon{
 }
 </style>
 <style id="polish-mobile-v27">
-/* Финальная полировка: не меняет существующую тему, только читаемость и управление. */
+
 .top-banner-settings{
   right:20px!important;top:18px!important;height:42px!important;padding:0 15px!important;
   border:1px solid rgba(255,255,255,.24)!important;
@@ -4347,7 +4334,7 @@ body.dark .future-evolution .evo-icon{
 .settings-theme-box{margin-top:18px;padding:16px;border:1px solid var(--line);border-radius:18px;background:color-mix(in srgb,var(--panel) 82%,transparent);display:flex;justify-content:space-between;align-items:center;gap:15px}
 .settings-theme-box b{display:block;font-size:13px}.settings-theme-box small{display:block;margin-top:4px;color:var(--muted);font-size:10px;line-height:1.35}
 .theme-mode-row{display:flex;gap:7px;flex-shrink:0}.theme-mode-btn{border:1px solid var(--line);background:transparent;color:var(--text);border-radius:12px;padding:10px 12px;font-size:10px;font-weight:650;cursor:pointer}.theme-mode-btn.active{background:var(--text);color:var(--panel);border-color:var(--text)}
-/* Карточки чуть плотнее, но без потери воздуха. */
+
 .future-card{padding:22px!important;border-radius:23px!important}.future-desc{font-size:1future-label{font-size:9px!important}.finding strong{font-size:1rtant}.action-row .future-btn{font-size:10px!important}
 .state-greeting p{font-size:14px!important}.state-time strong{font-size-size:12px!important}
 .future-lead{font-size .top-banner-settings{right:12px!important;top:12px!important;height:40px!important;padding:0 13px!important;font-size:11px!important;border-radius:13px!important}
@@ -4359,9 +4346,9 @@ body.dark .future-evolution .evo-icon{
 }
 </style>
 <style id="cleanup-v69">
-/* v69 — cleanup: one source of truth for settings + assistant. */
 
-/* ===== SETTINGS: compact and symmetric ===== */
+
+
 #controlContent .settings-rules-list,
 #controlContent .settings-sections-v2{display:grid!important;grid-template-columns:1fr!important;gap:6px!important;}
 #controlContent .settings-rules-list .settings-rule-row,
@@ -4430,11 +4417,11 @@ body.dark #controlContent .settings-toggle-legend .legend-off{background:#596273
   #controlContent .settings-sections-v2 .settings-section-rule-row{height:48px!important;min-height:48px!important;}
 }
 
-/* ===== REMOVE THE OLD SIDE/QUICK MENU COMPLETELY ===== */
+
 #dmQuickMenu,.dm-quick-menu,.dm-quick-menu.is-open{display:none!important;visibility:hidden!important;pointer-events:none!important;}
 .more-sheet{display:none!important;visibility:hidden!important;pointer-events:none!important;}
 
-/* ===== ASSISTANT: tap = write, hold = voice ===== */
+
 .mobile-manager.dm-signature-manager-button{
   left:50%!important;right:auto!important;bottom:calc(6px + env(safe-area-inset-bottom))!important;
   width:78px!important;height:78px!important;padding:0!important;
@@ -4447,7 +4434,7 @@ body.dm-write-mode .mobile-manager.dm-signature-manager-button{
   left:auto!important;right:18px!important;transform:none!important;
 }
 
-/* The old large quick-panel is gone. This is the only text composer. */
+
 #dmWritePanel{
   position:fixed!important;z-index:100000!important;left:16px!important;right:112px!important;
   bottom:calc(37px + env(safe-area-inset-bottom))!important;
@@ -4480,7 +4467,7 @@ body.dm-write-mode #dmWritePanel{opacity:1!important;visibility:visible!importan
 #dmWriteSend:active{transform:scale(.94)!important;box-shadow:0 5px 14px rgba(36,62,161,.18)!important;}
 #dmWriteSend svg{width:18px!important;height:18px!important;fill:none!important;stroke:currentColor!important;stroke-width:2.2!important;stroke-linecap:round!important;stroke-linejoin:round!important;}
 
-/* Voice: one clean label and one living ring. */
+
 #dmListeningLabel{
   letter-spacing:.01em!important;
 }
@@ -4498,12 +4485,11 @@ body.dark #dmWriteSend{background:linear-gradient(135deg,#234eae 0%,#4558cf 55%,
   #dmListeningLabel{font-size:9px!important;}
 }
 
-/* The mobile manager stays visible only where the mobile shell is used. */
+
 @media(min-width:901px){.mobile-manager.dm-signature-manager-button{display:none!important;}}
 </style>
 <style id="light-sapphire-unification-v2">
-/* Светлая тема: последние оставшиеся тёмные смысловые блоки → тот же sapphire-indigo.
-   Тёмную тему, текстовые цвета и композицию не меняем. */
+
 body:not(.dark){
   --light-sapphire-1:#182447;
   --light-sapphire-2:#263968;
@@ -4548,10 +4534,10 @@ body:not(.dark) .build-result{
 body:not(.dark) .future-state .state-copy:before{
   
 }
-/* Чёрный фирменный квадрат оставляем фирменным знаком; остальные смысловые блоки уже sapphire. */
+
 </style>
 <style id="home-preview-dots-v5">
-/* Индикатор точками для добавленных через Настройки блоков Главной. */
+
 @media(max-width:700px){
   #homeSectionPreviews{position:relative;display:flex!important;overflow-x:auto!important;overflow-y:visible!important;flex-wrap:nowrap!important;scroll-snap-type:x mandatory!important;scrollbar-width:none!important;margin:0 0 4px!important;-webkit-overflow-scrolling:touch!important;}
   #homeSectionPreviews::-webkit-scrollbar{display:none!important;}
@@ -4563,7 +4549,7 @@ body:not(.dark) .future-state .state-copy:before{
 @media(min-width:701px){#homeSectionPreviewDots{display:none!important;}}
 </style>
 <style id="home-preview-copy-cards-v6">
-/* v6 — карточки подключаемых разделов повторяют язык реальных карточек Главной. */
+
 @media(max-width:700px){
   #homeSectionPreviews{gap:10px!important;padding:0 0 3px!important;margin-bottom:3px!important}
   #homeSectionPreviews .home-section-preview{
@@ -4626,7 +4612,7 @@ body:not(.dark) .future-state .state-copy:before{
 @keyframes previewPulseGreen{0%,100%{box-shadow:0 0 0 0 rgba(39,168,102,.10);transform:scale(.94)}50%{box-shadow:0 0 0 7px rgba(39,168,102,0);transform:scale(1.04)}}
 </style>
 <style id="home-added-cards-native-v7">
-/* Добавленные через Настройки карточки используют ту же систему, что и родные карточки Главной. */
+
 .home-section-previews{
   display:grid!important;
   grid-template-columns:1.15fr .85fr!important;
@@ -4657,8 +4643,7 @@ body:not(.dark) .home-section-previews .home-added-card .future-btn.primary{
 }
 </style>
 <style id="home-only-cards-v8">
-/* На Главной подключённые разделы показываются только как карточки.
-   Полные страницы открываются исключительно после нажатия на карточку. */
+
 body[data-current-section="home"] #tasksPage,
 body[data-current-section="home"] #clientsPage,
 body[data-current-section="home"] #salesPage,
@@ -4699,8 +4684,7 @@ body[data-current-section="home"] #homeSectionPreviews{
 })();
 </script>
 <style id="dark-readability-final-v9">
-/* V9 — финальная проверка читаемости тёмной темы.
-   Не меняет геометрию и полностью исключает сферу/кнопку помощника. */
+
 body.dark .tasks-title,
 body.dark .clients-title,
 body.dark .finance-title,
@@ -4722,7 +4706,7 @@ body.dark .sales-sub{
   color:rgba(235,238,245,.70)!important;
 }
 
-/* Основные действия страниц — в тёмной теме белые, как единый премиальный CTA. */
+
 body.dark .task-back,
 body.dark #tasksBack,
 body.dark #clientsBack,
@@ -4755,7 +4739,7 @@ body.dark .future-btn.ghost:hover{
   color:#0d0f14!important;
 }
 
-/* Вторичные кнопки и маленькие CTA: белые, но визуально спокойнее. */
+
 body.dark .mini-help{
   background:#f7f7f5!important;
   color:#111217!important;
@@ -4763,8 +4747,7 @@ body.dark .mini-help{
 }
 body.dark .mini-help *{color:#111217!important}
 
-/* В карточках действий оставляем сами карточки тёмными — белыми становятся только CTA,
-   чтобы не превратить строки данных в белые панели. */
+
 body.dark .sales-action-row button,
 body.dark .finance-row,
 body.dark .channel-row{
@@ -4774,8 +4757,7 @@ body.dark .channel-row{
   box-shadow:none!important;
 }
 
-/* Назад к Главной — компактная белая кнопка. Отдельный deepSectionBack сохраняет свою
-   плавающую навигацию и не конфликтует с CTA. */
+
 body.dark .task-back,
 body.dark #tasksBack,
 body.dark #clientsBack{
@@ -4783,11 +4765,10 @@ body.dark #clientsBack{
   color:#111217!important;
 }
 
-/* Не трогаем помощника: .mobile-manager, его оболочку, сферу, listening UI и composer
-   намеренно не переопределяем этим блоком. */
+
 </style>
 <style id="automation-page-v33">
-/* V33 — Автоматизация: единый премиальный экран в обеих темах. */
+
 #controlOverlay .control-panel:has(.control-kicker:first-child) {
   border:1px solid rgba(24,36,71,.10)!important;
   box-shadow:0 28px 90px rgba(18,27,55,.16)!important;
@@ -4885,7 +4866,7 @@ body.dark #controlOverlay .control-panel .control-action{
 }
 </style>
 <style id="autopilot-polish-v34">
-/* V34 — Автопилот: единый премиальный стиль для светлой и тёмной темы. */
+
 .future-autopilot-modal{
   padding:18px!important;
   align-items:flex-end!important;
@@ -4982,7 +4963,7 @@ body.dark #controlOverlay .control-panel .control-action{
   box-shadow:0 10px 25px rgba(38,57,104,.20)!important;
 }
 
-/* Тёмная тема — без белой панели и белых карточек. */
+
 body.dark .future-autopilot-modal{
   background:rgba(5,8,18,.62)!important;
 }
@@ -5058,7 +5039,7 @@ body.dark .future-autopilot-modal .auto-save{
 }
 </style>
 <style id="wow-module-native-cards-v3">
-/* Внутренние карточки используют ТОЧНО тот же визуальный язык, что и .future-card на Главной. */
+
 .wow-module-panel .wow-module-sections{
   display:grid!important;
   grid-template-columns:1fr 1fr!important;
@@ -5115,7 +5096,7 @@ body.dark .wow-module-panel .wow-module-block:hover{
 body.dark .wow-module-panel .wow-module-block b{color:#f5f5f7!important}
 body.dark .wow-module-panel .wow-module-block p{color:#aaaab1!important}
 
-/* Цепочка — в том же спокойном стиле, без ощущения обычного текста. */
+
 .wow-module-panel > .module-flow{
   display:flex!important;
   align-items:center!important;
@@ -5146,7 +5127,7 @@ body.dark .wow-module-panel > .module-flow span{
 }
 </style>
 <style id="settings-final-polish-v1">
-/* Final settings polish: one visual language in light mode, no redundant map strip, visible company/developer footer. */
+
 body:not(.dark) #controlContent .settings-rules-list .settings-rule-toggle.is-on,
 body:not(.dark) #controlContent .settings-sections-v2 .settings-home-switch.is-on,
 body:not(.dark) #controlContent .settings-clean-list .settings-home-switch.is-on{
@@ -5175,7 +5156,7 @@ body:not(.dark) #controlContent .settings-developer-link{
 }
 </style>
 <style id="settings-company-developer-absolute-final">
-/* FINAL: company identity + developer contact in Settings */
+
 #controlContent .settings-company-footer-v2{
   
   
@@ -5237,7 +5218,7 @@ body.dark #controlContent .settings-company-footer-v2 .settings-developer-link{b
 }
 </style>
 <style id="settings-company-developer-final-layout">
-/* Final compact two-column footer: company + developer side by side. */
+
 #controlContent .settings-company-footer-v2{
   
   
@@ -5252,7 +5233,7 @@ body.dark #controlContent .settings-company-footer-v2 .settings-developer-link{b
 }
 </style>
 <style id="company-footer-final-fix">
-/* FINAL: compact Settings company/developer pair + stable company logo. */
+
 #controlContent .settings-company-footer-v2{
   
   
@@ -5297,7 +5278,7 @@ body.dark #controlContent .settings-company-footer-v2 .settings-developer-link{b
 }
 </style>
 <style id="company-sheet-theme-final-v2">
-/* Финальный визуальный слой компании: та же тема, что и у приложения. */
+
 .company-logo.dm-company-mark{
   width:48px!important;height:48px!important;flex:0 0 48px!important;
   padding:0!important;border-radius:15px!important;
@@ -5332,7 +5313,7 @@ body.dark .company-tags span,
 body.dark .company-product{background:rgba(255,255,255,.055)!important;color:var(--text)!important;}
 </style>
 <style id="footer-company-developer-one-row-final">
-/* Финальная компоновка: компания и связь с разработчиками в одной строке. */
+
 #controlContent .settings-company-footer-v2{
   display:grid!important;
   grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
@@ -6857,7 +6838,7 @@ function startBuild(){const i=document.getElementById('buildInput'),status=docum
 window.addEventListener('keydown',e=>{if(e.key==='Escape')closeBuildModal()});
 </script>
 <style id="manager-personality-v12">
-/* Управляющий: характер, а не набор случайных шуток */
+
 .manager-personality{display:flex;align-items:flex-start;gap:11px;margin-top:13px;padding:12px 14px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.48);transition:opacity .25s,transform .25s}
 .manager-personality.is-changing{opacity:.25;transform:translateY(3px)}
 .manager-personality-mark{width:28px;height:28px;border-radius:10px;background:var(--text);color:var(--bg);display:grid;place-items:center;font-size:11px;font-weight:800;flex:none}
@@ -7095,7 +7076,7 @@ body.dark .manager-personality-mark{background:#f4f4f5;color:#111214}
 })();
 </script>
 <style id="dm-dark-final-polish-v2">
-/* FINAL DARK THEME POLISH — only overrides conflicting legacy rules */
+
 body.dark{
   --bg:#0b0c0f!important;
   --panel:#15171b!important;
@@ -7123,7 +7104,7 @@ body.dark input,body.dark textarea,body.dark select{color:#f7f8fa!important;care
 body.dark input::placeholder,body.dark textarea::placeholder{color:rgba(235,237,242,.42)!important;}
 body.dark .mobile-nav,body.dark .sidebar{color:#f5f6f8!important;}
 
-/* The approved signature button: identical motion in both themes. */
+
 body.dark .mobile-manager.dm-signature-manager-button{
   
 }
@@ -7141,7 +7122,7 @@ body.dark .dm-signature-manager-button::after{
 body.dark .dm-signature-button-logo .sig-diamond-wrap{animation:sigDiamond 4.8s ease-in-out infinite!important;}
 @keyframes dmSignatureButtonHalo{0%,100%{transform:scale(.98);opacity:.72;}50%{transform:scale(1.045);opacity:1;}}
 
-/* Dark manager panel: clean contrast, no washed-out text. */
+
 body.dark .dm-intelligence-panel,body.dark .manager-panel{
   background:rgba(13,14,18,.985)!important;color:#f7f8fa!important;
   border-color:rgba(255,255,255,.12)!important;
@@ -7154,7 +7135,7 @@ body.dark .dm-intel-suggestions button,body.dark .manager-suggestions button{
 }
 body.dark .dm-intel-form input{background:rgba(255,255,255,.055)!important;color:#f7f8fa!important;border-color:rgba(255,255,255,.12)!important;}
 
-/* Dark theme switch in mobile More: clearly visible and animated. */
+
 body.dark .mobile-theme-card{background:rgba(255,255,255,.055)!important;border-color:rgba(255,255,255,.11)!important;color:#f7f8fa!important;}
 body.dark .mobile-theme-card *{color:inherit;}
 body.dark .mobile-theme-copy small{color:rgba(235,237,242,.58)!important;}
@@ -7163,7 +7144,7 @@ body.dark .mobile-theme-toggle{background:#f4f5f7!important;box-shadow:inset 0 0
 body.dark .mobile-theme-toggle span{background:#111318!important;box-shadow:0 2px 8px rgba(0,0,0,.32)!important;}
 </style>
 <style id="dm-twin-insight-visibility-final">
-/* Точка напряжения: текст всегда читаем в обеих темах. */
+
 .twin-insight{
   color:#111216 !important;
   background:#f6f6f7 !important;
@@ -7187,7 +7168,7 @@ body.dark .twin-insight small{color:#b4b7c0 !important; opacity:1 !important; te
 }
 </style>
 <style id="dm-final-readability-v3">
-/* Финальная читаемость блока «СЛЕДУЮЩЕЕ» */
+
 .evo-next{
   color:#111216 !important;
 }
@@ -7211,7 +7192,7 @@ body.dark .evo-next > div > span{
   color:#b4b7c0 !important;
 }
 
-/* Понятный знак рубля в нижнем мобильном меню */
+
 .mobile-nav .dm-ruble-icon{
   display:grid !important;
   place-items:center !important;
@@ -7260,7 +7241,7 @@ body.dark .home-organize-bar{background:rgba(29,30,34,.78);border-color:rgba(255
 </div>
 <div class="home-toast" id="homeToast" role="status"></div>
 <style id="home-blocks-order-swipe-v1">
-/* Порядок блоков + горизонтальный просмотр на телефоне. Визуальную тему не меняем. */
+
 @media (max-width:700px){
   .future-shell{
     
@@ -7380,8 +7361,7 @@ body.dark .home-organize-bar{background:rgba(29,30,34,.78);border-color:rgba(255
 })();
 </script>
 <style id="premium-light-blocks-v10">
-/* Светлая тема: премиальные цветные акценты вместо чёрных блоков.
-   Тёмную тему и верхний главный баннер не трогаем. */
+
 body:not(.dark) .home-organize-bar{
   width:max-content!important;
   max-width:min(100%,760px)!important;
@@ -7403,7 +7383,7 @@ body:not(.dark) .home-organize-open{
   border-color:#33478f!important;
 }
 
-/* Чёрные смысловые карточки Главной — фирменный глубокий сапфировый акцент. */
+
 body:not(.dark) .future-command,
 body:not(.dark) .future-intent,
 body:not(.dark) .future-memory,
@@ -7481,7 +7461,7 @@ body:not(.dark) .evo-open{
 }
 </style>
 <style id="light-premium-blocks-v3">
-/* Светлая тема: только крупные смысловые блоки. Тёмную тему не затрагиваем. */
+
 body:not(.dark) .future-command,
 body:not(.dark) .future-intent,
 body:not(.dark) .future-contract,
@@ -7538,7 +7518,7 @@ body:not(.dark) .sim-result .sim-meter span{background:#fff !important}
 body:not(.dark) .sim-result button{color:#fff !important}
 body:not(.dark) .build-result button{background:#fff !important;color:#182447 !important}
 
-/* «ТВОЯ ГЛАВНАЯ»: компактная карточка, но весь текст возвращён. */
+
 .home-organize-bar{
   width:100% !important;
   max-width:none !important;
@@ -7583,7 +7563,7 @@ body:not(.dark) .build-result button{background:#fff !important;color:#182447 !i
 }
 </style>
 <style id="home-drag-wow-v12">
-/* Премиальные контролы и прямое перетаскивание блоков Главной. */
+
 .home-block[data-home-block]{
   transition:transform .38s cubic-bezier(.2,.8,.2,1),filter .38s ease,box-shadow .38s ease,opacity .25s ease;
 }
@@ -7697,7 +7677,7 @@ body.dark .home-drag-hint{background:rgba(24,26,31,.62);color:#c7cbd5;border-col
 }
 </style>
 <style id="future-watch-dashboard-v16">
-/* v16 — Apple-Watch-inspired information language: compact, glanceable, alive. */
+
 .future-state{min-height:270px;padding:30px 34px;grid-template-columns:260px minmax(0,1fr);border-radius:30px;}
 .state-orbit{width:210px;height:210px;}
 .state-copy h2{font-size:31px;}
@@ -7712,13 +7692,13 @@ body.dark .home-drag-hint{background:rgba(24,26,31,.62);color:#c7cbd5;border-col
 .future-card{box-shadow:0 14px 42px rgba(20,20,25,.035);}.future-desc{margin-top:9px;}.mini-result{gap:8px;}.mini-result>div{padding:10px 11px;border-radius:14px;}
 .future-evolution,.future-twin,.future-simulator,.future-memory,.future-blindspot{padding:24px;border-radius:25px;}
 .twin-map{height:220px;border-radius:18px;}.twin-node{width:94px;padding:10px;}.twin-node b{font-size:13px;}.twin-core{transform:scale(.88);}
-/* Small live graph under important metrics. */
+
 .watch-spark{height:25px;margin-top:12px;position:relative;overflow:hidden;border-radius:8px;background:linear-gradient(180deg,rgba(20,20,25,.025),transparent);}
 .watch-spark svg{width:100%;height:100%;display:block;overflow:visible;}.watch-spark path{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:180;stroke-dashoffset:180;animation:drawSpark 1.6s cubic-bezier(.2,.7,.2,1) forwards;}
 .watch-spark:after{content:"";position:absolute;top:3px;bottom:3px;width:1px;background:currentColor;opacity:.15;animation:sparkScan 3.8s ease-in-out infinite;}
 @keyframes drawSpark{to{stroke-dashoffset:0;}}@keyframes sparkScan{0%,100%{left:5%;opacity:.05;}50%{left:94%;opacity:.2;}}
 .future-card .watch-spark{color:#6d78ff;}.future-card.attention .watch-spark{color:#ed575d;}.future-card.opportunity .watch-spark{color:#4f8cff;}
-/* Compact insight pills: more like Watch complications than dashboard buttons. */
+
 .watch-complications{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;}
 .watch-complication{padding:11px 12px;border-radius:15px;background:rgba(255,255,255,.58);border:1px solid var(--f-line);min-width:0;}
 .watch-complication small{display:block;font-size:6px;letter-spacing:.12em;color:var(--f-soft);margin-bottom:4px;}.watch-complication b{font-size:15px;letter-spacing:-.04em;}.watch-complication span{display:block;font-size:7px;color:var(--f-muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -7738,7 +7718,7 @@ body.dark .future-card .watch-spark{color:#9ba6ff;}
 @media(max-width:390px){.future-state{padding:18px 14px;}.state-greeting h1{font-size:23px!important;}.state-orbit{width:116px;height:116px;}.future-state .assistant-core{width:72px!important;height:72px!important;}.future-state .assistant-core .dm-signature-logo{width:72px!important;height:72px!important;}.watch-complication b{font-size:12px;}.future-card{padding:14px;}}
 </style>
 <style id="home-longpress-future-v18">
-/* Карточки Главной — никаких постоянных кнопок. Управление появляется только после долгого нажатия. */
+
 .home-block[data-home-block] .home-block-menu,.home-block[data-home-block] .home-drag-hint{display:none!important}
 .home-block{transition:transform .32s cubic-bezier(.2,.8,.2,1),filter .32s ease,box-shadow .32s ease}
 .home-block.is-dragging{transform:scale(.985) translateY(-4px);filter:saturate(1.06);box-shadow:0 26px 70px rgba(20,30,60,.18)!important;position:relative;z-index:40}
@@ -7810,7 +7790,7 @@ body.dark .rule-toggle i{background:#17181b!important;}
 })();
 </script>
 <style id="settings-layout-v43">
-/* v43: структура настроек как на референсе — правила крупно, разделы компактно. */
+
 .settings-section-title{margin:18px 0 8px!important;font-size:11px!important;font-weight:800!important;letter-spacing:-.01em!important;}
 .settings-section-note{margin:-2px 0 9px!important;font-size:9.5px!important;line-height:1.45!important;}
 .settings-rules-list{display:grid;gap:7px!important;margin-top:0!important;}
@@ -7993,7 +7973,7 @@ body.dark .rule-toggle i{background:#17181b!important;}
 })();
 </script>
 <style id="settings-sections-compact-v44">
-/* v44: Разделы на Главной — компактное продолжение настроек поведения. Темы не меняем. */
+
 .settings-sections-v2{
   
   
@@ -8050,7 +8030,7 @@ body.dark .settings-sections-v2 .settings-section-row:hover{
 }
 </style>
 <style id="final-compact-future-polish-v31">
-/* 1. Верхний блок: одинаково надёжный на светлой/тёмной теме и при любом сжатии. */
+
 .future-state{
   box-sizing:border-box!important;
   width:100%!important;
@@ -8066,7 +8046,7 @@ body.dark .settings-sections-v2 .settings-section-row:hover{
 .future-state .state-time strong{color:#fff!important;}
 .future-state .future-kicker,.future-state .state-eyebrow,.future-state .state-meta,.future-state .state-time span{color:rgba(255,255,255,.58)!important;}
 
-/* 2. Кнопка помощника — тот же живой холодный свет, что и логотип. */
+
 .mobile-manager.dm-signature-manager-button{
   
   
@@ -8085,12 +8065,11 @@ body.dark .settings-sections-v2 .settings-section-row:hover{
 @keyframes dmSignatureButtonGlowV31{0%,100%{transform:scale(.92);opacity:.55;}50%{transform:scale(1.08);opacity:1;}}
 @keyframes dmSignatureButtonHaloV31{0%,100%{transform:scale(.985);opacity:.72;}50%{transform:scale(1.045);opacity:1;}}
 
-/* 3. Убираем устаревший блок «Куда ты хочешь прийти?» — цель приложение понимает из состояния бизнеса.
-   Никаких полей для заполнения на главном экране. */
+
 .future-intent.home-block,
 .future-command.home-block{display:none!important;}
 
-/* 4. Главная становится компактнее: меньше воздуха, больше структуры. */
+
 .future-grid{gap:10px!important;}
 .future-card{
   padding:16px!important;
@@ -8100,11 +8079,11 @@ body.dark .settings-sections-v2 .settings-section-row:hover{
 .finding{margin:12px 0!important;padding:12px 0!important;}
 .action-row{gap:7px!important;margin-top:10px!important;}
 .future-btn{min-height:38px!important;padding:0 12px!important;border-radius:12px!important;}
-.future-grid .future-card:nth-child(n/**/+3){padding:14px!important;}
-.future-grid .future-card:nth-child(n/**/+3) h3{font-size:16px!important;}
-.future-grid .future-card:nth-child(n/**/+3) .future-desc{font-size:12px!important;}
+.future-grid .future-card:nth-child(n+3){padding:14px!important;}
+.future-grid .future-card:nth-child(n+3) h3{font-size:16px!important;}
+.future-grid .future-card:nth-child(n+3) .future-desc{font-size:12px!important;}
 
-/* Ozon — главный сигнал, но не огромная панель. */
+
 .future-card.attention{
   padding:15px!important;
   border-radius:19px!important;
@@ -8136,12 +8115,12 @@ body.dark .settings-sections-v2 .settings-section-row:hover{
 }
 </style>
 <style id="settings-clean-final-v47">
-/* v47 — чистый финальный слой настроек. Темы не меняем. */
+
 .control-panel{overflow-x:hidden!important;}
 #controlContent{box-sizing:border-box!important;}
 #controlContent *{box-sizing:border-box;}
 
-/* Никаких невидимых белых кнопок в тёмной теме. */
+
 body:not(.dark) .control-action{
   background:#111217!important;
   color:#fff!important;
@@ -8152,7 +8131,7 @@ body.dark .control-action{
   border-color:transparent!important;
 }
 
-/* Правила и разделы — один и тот же визуальный язык. */
+
 .settings-rules-list .settings-rule-row,
 .settings-sections-v2 .settings-section-rule-row{
   display:flex!important;
@@ -8246,7 +8225,7 @@ body.dark .settings-rules-list .settings-rule-toggle.is-on i{
   background:#17181b!important;
 }
 
-/* Формат общения — компактный и без горизонтального переполнения. */
+
 .settings-communication{min-width:0!important;}
 .settings-communication button{min-width:0!important;overflow:hidden!important;}
 
@@ -8259,7 +8238,7 @@ body.dark .settings-rules-list .settings-rule-toggle.is-on i{
 }
 </style>
 <style id="v50-settings-autopilot-and-manager-sidepanel">
-/* v50 — точечная правка: автопилот и long-press помощника. Остальной дизайн не меняем. */
+
 body:not(.dark) .settings-autopilot-action{
   background:linear-gradient(135deg,#0f3b93 0%,#264eb5 48%,#5b3fd0 100%) !important;
   color:#fff !important;
@@ -8271,7 +8250,7 @@ body.dark .settings-autopilot-action{
   background:#fff !important; color:#17181b !important; border-color:transparent !important;
 }
 
-/* По умолчанию помощник живёт по центру. При долгом нажатии освобождаем справа место под панель. */
+
 @media(max-width:900px){
   .mobile-manager.dm-signature-manager-button{
     
@@ -8324,7 +8303,7 @@ body.dark .settings-autopilot-action{
 })();
 </script>
 <style id="home-section-preview-v110">
-/* Включённый раздел на Главной = компактный предпросмотр. Полная страница открывается только по действию. */
+
 .home-section-previews{display:grid;gap:10px;margin:0 0 12px}
 .home-section-preview{position:relative;overflow:hidden;padding:16px 16px 14px;border:1px solid var(--line);border-radius:20px;background:var(--panel);box-shadow:var(--shadow)}
 .home-section-preview::after{content:"";position:absolute;right:-34px;top:-42px;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(72,91,190,.13),transparent 68%);pointer-events:none}
@@ -8350,7 +8329,7 @@ body.dark .home-section-preview .preview-open{background:#f4f4f5;color:#17181b}
  .home-section-preview .preview-actions{margin-top:10px}
 }
 
-/* Переключатели настроек: маленькие, спокойные, без ощущения огромной кнопки. */
+
 #controlContent .rule-toggle,#controlContent .settings-home-switch{width:38px!important;height:22px!important;padding:2px!important;border-radius:999px!important;flex:0 0 38px!important}
 #controlContent .rule-toggle i,#controlContent .settings-home-switch i{width:18px!important;height:18px!important}
 #controlContent .rule-toggle.is-on i,#controlContent .settings-home-switch.is-on i{transform:translateX(16px)!important}
@@ -8427,7 +8406,7 @@ body.dark .home-section-preview .preview-open{background:#f4f4f5;color:#17181b}
 })();
 </script>
 <style id="deep-section-back-v120">
-/* Возврат из большого раздела: всегда доступен, не зависит от нижнего меню. */
+
 #deepSectionBack{
   position:fixed!important;
   z-index:100050!important;
@@ -8483,8 +8462,7 @@ body.dark .home-section-preview .preview-open{background:#f4f4f5;color:#17181b}
 })();
 </script>
 <style id="dark-buttons-material-v40">
-/* V40 — тёмная тема: кнопки остаются тёмными, подписи — светлыми.
-   Кнопку помощника и её внутренние элементы не меняем. */
+
 body.dark .sales-primary,
 body.dark .sales-wide-action,
 body.dark .sales-manager-card .sales-primary,
@@ -8527,7 +8505,7 @@ body.dark .future-create-btn:hover{
   border-color:rgba(127,181,255,.24) !important;
 }
 
-/* В тёмной теме подписи основных действий всегда белые. */
+
 body.dark .sales-primary *,
 body.dark .sales-wide-action *,
 body.dark .sales-manager-card .sales-primary *,
@@ -8546,12 +8524,12 @@ body.dark .future-create-btn *{
   color:#f8fbff !important;
 }
 
-/* Нейтральные кнопки интерфейса — тот же тёмный материал. */
+
 body.dark button:not(.mobile-manager):not(.settings-home-switch):not(.settings-rule-toggle):not(.theme-mode-btn):not(.dm-quick-item):not(.dm-quick-close):not(#dmWriteSend):not(.dm-learning-button):not(.dm-light-tutorial-next):not(.dm-ob-button){
   color:#f8fbff;
 }
 
-/* Не даём старым правилам вернуть белый фон отдельным action-кнопкам. */
+
 body.dark .task-command,
 body.dark .control-action,
 body.dark .client-action,
@@ -8563,10 +8541,10 @@ body.dark .promo-health{
   color:#f8fbff !important;
 }
 
-/* Вспомогательные кнопки управляющего и его панели — НЕ ТРОГАЕМ. */
+
 </style>
 <style id="dark-sales-explain-v15">
-/* V15 — пояснение «Самое слабое место» в тёмной теме */
+
 body.dark .sales-explain{
   background:rgba(255,149,0,.075)!important;
   border:1px solid rgba(255,149,0,.12)!important;
@@ -8579,7 +8557,7 @@ body.dark .sales-explain b{color:#fff!important;-webkit-text-fill-color:#fff!imp
 body.dark .sales-explain p{color:rgba(247,249,255,.82)!important;-webkit-text-fill-color:rgba(247,249,255,.82)!important;}
 </style>
 <style id="v18-living-settings-dots-final">
-/* V18: убираем старую шестерёнку из верхнего блока. Настройки открываются через живые точки рядом с приветствием. */
+
 .top-banner-settings{display:none!important;}
 .dm-living-dots{
   display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:6px!important;
@@ -8632,8 +8610,7 @@ body.dark .dm-living-dots i:nth-child(3){color:#dfe7ff!important;}
 })();
 </script>
 <style id="v20-dark-dots-clean">
-/* V20 — в тёмной теме точки выглядят ровно так же, как в светлой:
-   без овальной подложки, без отдельной кнопочной плашки. */
+
 .dm-living-dots,
 body.dark .dm-living-dots{
   background:transparent!important;
@@ -8656,7 +8633,7 @@ body.dark .dm-living-dots i{
 }
 </style>
 <style id="v22-dots-old-gear-position">
-/* V22 — возвращаем точки ровно в место, где раньше была шестерёнка. */
+
 #managerGreeting{
   position:static!important;
   padding-right:0!important;
@@ -8680,9 +8657,9 @@ body.dark .dm-living-dots i{
 }
 </style>
 <style id="final-mobile-readable-fix-v30">
-/* Финальная точечная правка: верхний баннер, логотип, радары и читаемость. */
 
-/* Верхний баннер всегда остаётся тёмным материалом — и на светлой теме, и при сужении. */
+
+
 .future-state{
   background:
     radial-gradient(circle at 82% 18%,rgba(36,112,255,.16),transparent 28%),
@@ -8703,7 +8680,7 @@ body.dark .dm-living-dots i{
 .future-state .future-kicker{color:rgba(255,255,255,.55) !important;}
 .future-state .state-meta{color:rgba(255,255,255,.55) !important;}
 
-/* Верхняя кнопка настроек: заметная, но не кричащая. */
+
 .top-banner-settings{
   color:#f8fbff !important;
   background:rgba(255,255,255,.09) !important;
@@ -8713,7 +8690,7 @@ body.dark .dm-living-dots i{
 .top-banner-settings:hover{background:rgba(75,145,255,.16) !important;border-color:rgba(112,190,255,.68) !important;}
 .top-banner-settings-icon{color:#73c7ff !important;text-shadow:0 0 12px rgba(70,176,255,.8);}
 
-/* Дышащий логотип: тонкий холодный сине-голубой свет, видимый и в тёмной теме. */
+
 .assistant-orbit{
   color:#72c9ff !important;
   filter:drop-shadow(0 0 13px rgba(55,166,255,.24)) !important;
@@ -8730,7 +8707,7 @@ body.dark .dm-living-dots i{
 .assistant-core .dm-signature-logo .sig-orbit{opacity:.68 !important;stroke:#75caff !important;}
 .assistant-core .dm-signature-logo .sig-diamond{filter:drop-shadow(0 0 7px rgba(74,183,255,.65));stroke:#dff5ff !important;}
 
-/* Радары/орбиты: чуть больше глубины и аккуратные цветные точки. */
+
 .state-orbit{filter:drop-shadow(0 0 18px rgba(44,147,255,.10));}
 .orbit-ring{border-color:rgba(116,196,255,.25) !important;}
 .ring-b{border-color:rgba(53,214,182,.22) !important;}
@@ -8739,10 +8716,10 @@ body.dark .dm-living-dots i{
 .orbit-core{background:radial-gradient(circle at 35% 30%,rgba(82,168,255,.16),rgba(255,255,255,.035) 62%) !important;border-color:rgba(112,198,255,.3) !important;box-shadow:0 0 26px rgba(42,137,255,.13) !important;}
 .core-dot{background:#55d7b2 !important;box-shadow:0 0 22px rgba(63,219,177,.9) !important;}
 
-/* Убираем действительно дублирующий блок «Что я вижу, а ты пока нет?» — его смысл уже раскрывается управляющим и карточками внимания. */
+
 .future-blindspot{display:none !important;}
 
-/* Больше не прячем текст в мелкие 7–10px кегли на телефонах. */
+
 .future-lead{font-size:16px !important;line-height:1.45 !important;}
 .future-time span{font-size:13px !important;line-height:1.35 !important;}
 .future-time strong{font-size:20px !important;}
@@ -8761,7 +8738,7 @@ body.dark .dm-living-dots i{
 .state-meta{font-size:12px !important;}
 .state-eyebrow{font-size:11px !important;}
 
-/* На узком телефоне — не сжимаем содержимое, а перестраиваем баннер. */
+
 @media(max-width:700px){
   .future-header{display:block !important;margin-bottom:18px !important;}
   .future-header h1{font-size:38px !important;line-height:1 !important;max-width:100% !important;}
@@ -8802,9 +8779,9 @@ body.dark .dm-living-dots i{
 }
 </style>
 <style id="final-v34-home-stability">
-/* V34 — стабильная мобильная Главная + компактная иерархия */
 
-/* На телефоне Главная больше не превращается в горизонтальную ленту. */
+
+
 @media(max-width:700px){
   .future-shell{
     display:block !important;
@@ -8830,8 +8807,7 @@ body.dark .dm-living-dots i{
   .home-swipe-hint{display:none !important}
 }
 
-/* Главная должна быть тихой: оставляем состояние + главное внимание.
-   Глубокие разделы открываются долгим нажатием на управляющего. */
+
 .future-shell>.home-block[data-home-block="evolution"],
 .future-shell>.home-block[data-home-block="command"],
 .future-shell>.home-block[data-home-block="intent"],
@@ -8844,7 +8820,7 @@ body.dark .dm-living-dots i{
   display:none !important;
 }
 
-/* Внутри «Главного внимания» оставляем две действительно важные истории. */
+
 .future-shell>.home-block[data-home-block="attention"] .future-card:nth-child(n+3){
   display:none !important;
 }
@@ -8882,7 +8858,7 @@ body.dark .dm-living-dots i{
   font-size:18px !important;
 }
 
-/* Чёткий верхний баннер на светлой теме: всегда тёмная поверхность + белая типографика. */
+
 body:not(.dark) .future-state,
 body.dark .future-state{
   background:
@@ -8926,7 +8902,7 @@ body.dark .future-state .state-eyebrow{
   color:rgba(228,240,255,.66) !important;
 }
 
-/* Настройки не должны съедать приветствие на узком экране. */
+
 @media(max-width:700px){
   .future-state{min-width:0 !important;overflow:hidden !important}
   .future-state>*{min-width:0 !important}
@@ -8936,7 +8912,7 @@ body.dark .future-state .state-eyebrow{
   .top-banner-settings span:last-child{display:none !important}
 }
 
-/* Надёжная перестройка героя на мобильном: ни перекрытий, ни горизонтального развала. */
+
 @media(max-width:600px){
   .future-state{
     display:grid !important;
@@ -8978,7 +8954,7 @@ body.dark .future-state .state-eyebrow{
 }
 </style>
 <style id="settings-refinement-v40">
-/* v40 — только настройки: цвета переключателей, разделы и блок разработчиков. */
+
 body:not(.dark) .rule-toggle{
   background:linear-gradient(135deg,#123b8f 0%,#264eb5 48%,#5b3fd0 100%) !important;
   box-shadow:0 5px 14px rgba(38,78,181,.20),inset 0 1px 0 rgba(255,255,255,.18) !important;
@@ -9004,12 +8980,9 @@ body.dark .settings-sections button span{background:linear-gradient(135deg,#183d
 }
 </style>
 <style id="theme-material-v35">
-/* V35 — только цветовой материал. Геометрию, размеры и JS не меняем. */
 
-/* =========================
-   ТЁМНАЯ ТЕМА
-   Один глубокий материал, как у главного верхнего блока.
-   ========================= */
+
+
 body.dark{
   --bg:#101012 !important;
   --panel:rgba(16,16,18,.92) !important;
@@ -9054,11 +9027,7 @@ body.dark .dm-quick-menu{
   border-color:rgba(255,255,255,.10) !important;
 }
 
-/* =========================
-   СВЕТЛАЯ ТЕМА
-   Верхний блок — очень светлый холодный оттенок,
-   заметный относительно белого фона, но остаётся светлым.
-   ========================= */
+
 body:not(.dark) .future-state{
   background:
     radial-gradient(circle at 84% 12%,rgba(74,91,170,.09),transparent 29%),
@@ -9088,7 +9057,7 @@ body:not(.dark) .future-state .state-copy:before{
   opacity:.22 !important;
 }
 
-/* Настройки — одна из акцентных кнопок. */
+
 body:not(.dark) .top-banner-settings{
   background:linear-gradient(135deg,#233b82 0%,#4053a7 52%,#5a4eb5 100%) !important;
   color:#fff !important;
@@ -9105,7 +9074,7 @@ body:not(.dark) .top-banner-settings-icon{
   text-shadow:none !important;
 }
 
-/* Глубокий сапфирово-синий / индиго — только для основных действий. */
+
 body:not(.dark) .future-btn.primary,
 body:not(.dark) .future-create-btn,
 body:not(.dark) .evo-open,
@@ -9127,11 +9096,10 @@ body:not(.dark) .manager-primary:hover{
   box-shadow:0 13px 30px rgba(49,65,145,.22) !important;
 }
 
-/* Остальные кнопки остаются нейтральными — акцент не расползается по интерфейсу. */
+
 </style>
 <style id="dark-material-exact-v36">
-/* V36: в тёмной теме возвращаем ТОТ ЖЕ материал, что у исходного верхнего блока.
-   Геометрию, размеры, светлую тему и JS не меняем. */
+
 :root{
   --dm-dark-hero:radial-gradient(circle at 84% 18%,rgba(65,120,255,.22),transparent 25%),radial-gradient(circle at 13% 84%,rgba(48,213,180,.10),transparent 22%),linear-gradient(145deg,#141b31 0%,#101526 58%,#0d111d 100%);
 }
@@ -9146,7 +9114,7 @@ body.dark .sidebar{
   color:#f8fbff !important;
 }
 
-/* Все основные поверхности получают тот же материал, а не отдельные серые оттенки. */
+
 body.dark .future-state,
 body.dark .future-card,
 body.dark .future-evolution,
@@ -9192,7 +9160,7 @@ body.dark .sales-command{
   border-color:rgba(127,181,255,.14) !important;
 }
 
-/* Вложенные модальные/быстрые панели — тот же материал. */
+
 body.dark .future-autopilot-modal .autopilot-sheet,
 body.dark .future-blindspot-modal .blindspot-sheet,
 body.dark .future-build-modal .future-build-sheet,
@@ -9207,7 +9175,7 @@ body.dark .dm-quick-menu{
   border-color:rgba(127,181,255,.16) !important;
 }
 
-/* Текст остаётся хорошо читаемым на тёмно-синем материале. */
+
 body.dark .future-card p,
 body.dark .future-card small,
 body.dark .future-card .future-desc,
@@ -9247,7 +9215,7 @@ body.dark .dm-quick-suggest{
   color:#f8fbff !important;
 }
 
-/* Иконки/кнопки с нейтральным материалом не становятся серыми. */
+
 body.dark .theme,
 body.dark .dm-quick-close,
 body.dark .dm-quick-item,
@@ -9260,14 +9228,14 @@ body.dark .dm-quick-item:hover{
   background:rgba(255,255,255,.085) !important;
 }
 
-/* Сам верхний блок — буквально тот же фон, без изменений. */
+
 body.dark .future-state{
   background:var(--dm-dark-hero) !important;
   border-color:rgba(127,181,255,.18) !important;
 }
 </style>
 <style id="manager-button-glow-v37">
-/* Финальная подстройка свечения кнопки управляющего под цвет верхнего тёмного блока. */
+
 .mobile-manager.dm-signature-manager-button{
   color:#8fb8ff!important;
   filter:drop-shadow(0 0 12px rgba(62,132,255,.28))!important;
@@ -9302,8 +9270,7 @@ body.dark .future-state{
 }
 </style>
 <style id="manager-button-diamond-dark-v39">
-/* V39: меняем именно ромб внутри кнопки голосового помощника.
-   Центральная точка остаётся белой. Верхний большой логотип не затрагиваем. */
+
 body.dark .mobile-manager.dm-signature-manager-button .dm-signature-button-logo .sig-diamond{
   fill:#101526 !important;
   stroke:rgba(127,181,255,.58) !important;
@@ -9314,7 +9281,7 @@ body.dark .mobile-manager.dm-signature-manager-button .dm-signature-button-logo 
 }
 </style>
 <style id="settings-sections-final-v45">
-/* v45: Разделы на Главной — ровный компактный список. Экран/темы не затрагиваем. */
+
 .settings-sections-v2{
   
   
@@ -9453,7 +9420,7 @@ body.dark .settings-sections-v2 .settings-home-switch.is-on i{
 }
 </style>
 <style id="settings-sections-match-rules-v46">
-/* v46: Разделы на Главной визуально один в один с блоками Самостоятельность / Деньги / Общение / Автопилот. */
+
 .settings-sections-v2{
   display:grid!important;
   grid-template-columns:1fr!important;
@@ -9516,9 +9483,9 @@ body.dark .settings-sections-v2 .settings-section-rule-row{
 }
 </style>
 <style id="final-stable-settings-and-assistant-v58">
-/* v58 — финальная стабилизация. Никакой новой компоновки, только возвращаем согласованный вид. */
 
-/* ---------- НАСТРОЙКИ: компактные, как единая система ---------- */
+
+
 #controlContent{min-width:0!important;overflow-x:hidden!important;}
 #controlContent .control-kicker{font-size:10px!important;line-height:1.2!important;letter-spacing:.10em!important;}
 #controlContent .control-title{font-size:28px!important;line-height:1.06!important;letter-spacing:-.045em!important;margin:6px 42px 6px 0!important;max-width:560px!important;}
@@ -9602,7 +9569,7 @@ body.dark #controlContent .settings-autopilot-action{
 #controlContent .settings-company-brand small{font-size:8.5px!important;margin-top:2px!important;}
 #controlContent .settings-developer-link{padding:8px 10px!important;border-radius:11px!important;font-size:9px!important;}
 
-/* Тёмная тема: карточки настроек с тем же глубоким сине-графитовым материалом. */
+
 body.dark #controlOverlay .control-panel{
   background:var(--dm-dark-hero)!important;color:#f8fbff!important;border-color:rgba(127,181,255,.16)!important;
   box-shadow:0 30px 100px rgba(0,0,0,.45)!important;
@@ -9622,7 +9589,7 @@ body.dark #controlContent .settings-sections-v2 .settings-section-open-v46 b{col
 body.dark #controlContent .settings-rules-list .settings-rule-row small,
 body.dark #controlContent .settings-sections-v2 .settings-section-open-v46 small{color:rgba(248,251,255,.68)!important;}
 
-/* ---------- ПОМОЩНИК: обычный тап = голос, долгий = ручной ввод слева ---------- */
+
 .mobile-manager.dm-signature-manager-button{
   touch-action:none!important;
 }
@@ -9654,7 +9621,7 @@ body.dark .mobile-manager.dm-signature-manager-button.listening::after{
 }
 @keyframes dmListeningLabelFinal{from{opacity:0;transform:translate(-50%,4px);}to{opacity:1;transform:translate(-50%,0);}}
 
-/* Долгий режим: кнопка вправо, поле слева, подсказки над ним. */
+
 @media(max-width:900px){
   body.dm-longpress-active .mobile-manager.dm-signature-manager-button{
     left:auto!important;right:14px!important;
@@ -9689,7 +9656,7 @@ body.dark .mobile-manager.dm-signature-manager-button.listening::after{
 }
 </style>
 <style id="signature-sphere-v63">
-/* v63 — логотип не «дышит», а создаёт иллюзию вращающейся 3D-сферы. */
+
 .dm-signature-logo .sig-orbit{
   transform-box:fill-box!important;
   transform-origin:center center!important;
@@ -9742,7 +9709,7 @@ body.dark .mobile-manager.dm-signature-manager-button.listening::after{
 }
 </style>
 <style id="light-learning-and-hints-v67-css">
-/* v67 — лёгкое обучение + ненавязчивые постоянные подсказки. */
+
 .dm-learning-card{
   margin-top:16px;padding:15px 16px;border:1px solid rgba(16,17,20,.09);border-radius:18px;
   background:rgba(255,255,255,.52);display:flex;align-items:center;justify-content:space-between;gap:16px;
@@ -9763,7 +9730,7 @@ body.dark .dm-learning-button{background:linear-gradient(135deg,#173f91,#4f43bf)
 .settings-hints-row{margin-top:10px}
 .settings-hints-row .settings-rule-row{min-height:62px}
 .settings-hints-row .settings-rule-row small{max-width:560px}
-/* Постоянная мягкая подсказка: не мешает, но всегда рядом. */
+
 .dm-context-hint{
   position:fixed;left:50%;bottom:calc(78px + env(safe-area-inset-bottom));transform:translate(-50%,8px);z-index:420;
   max-width:min(84vw,360px);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.35);
@@ -9784,7 +9751,7 @@ body.dm-text-mode .dm-context-hint,.dm-context-hint.is-hidden{opacity:0;transfor
   .dm-context-hint{bottom:calc(88px + env(safe-area-inset-bottom));max-width:calc(100vw - 34px);font-size:9.5px}
 }
 
-/* Лёгкое обучение */
+
 .dm-light-tutorial{position:fixed;inset:0;z-index:700;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(7,10,18,.32);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 .dm-light-tutorial.is-open{display:flex}
 .dm-light-tutorial-card{width:min(560px,94vw);max-height:min(82vh,720px);overflow:auto;border:1px solid rgba(255,255,255,.34);border-radius:28px;background:rgba(249,250,253,.96);box-shadow:0 30px 110px rgba(5,13,36,.25);color:#111216;padding:20px}
@@ -9906,9 +9873,9 @@ body.dark .dm-light-demo-orb b{color:#8bc8ff}
 })();
 </script>
 <style id="assistant-final-position-animation-v70">
-/* v70 — только помощник. Настройки и остальной дизайн не меняем. */
+
 @media(max-width:900px){
-  /* Обычное состояние — строго по центру */
+  
   .mobile-manager.dm-signature-manager-button{
     left:50%!important;
     right:auto!important;
@@ -9916,7 +9883,7 @@ body.dark .dm-light-demo-orb b{color:#8bc8ff}
     transform:translateX(-50%)!important;
     transition:left .36s cubic-bezier(.2,.8,.2,1),right .36s cubic-bezier(.2,.8,.2,1),transform .36s cubic-bezier(.2,.8,.2,1)!important;
   }
-  /* Короткий тап — кнопка вправо, поле слева */
+  
   body.dm-write-mode .mobile-manager.dm-signature-manager-button{
     
   }
@@ -9927,7 +9894,7 @@ body.dark .dm-light-demo-orb b{color:#8bc8ff}
     width:auto!important;
     max-width:none!important;
   }
-  /* Долгое удержание — кнопка остаётся по центру */
+  
   body.dm-voice-active .mobile-manager.dm-signature-manager-button{
     left:50%!important;
     right:auto!important;
@@ -9935,7 +9902,7 @@ body.dark .dm-light-demo-orb b{color:#8bc8ff}
   }
 }
 
-/* Одна надпись и одно кольцо — без старых псевдоэлементов */
+
 
 #dmListeningRing{
   display:block!important;
@@ -9988,7 +9955,7 @@ body.dark #dmListeningLabel{
   100%{transform:scale(1.13);opacity:0;}
 }
 
-/* Сфера помощника: вращается в обеих темах. Старые sigOrbit-анимации больше не перебивают её. */
+
 .dm-signature-button-logo .sig-orbit.o1{
   animation:sigSphereO1 7.8s linear infinite!important;
 }
@@ -10009,13 +9976,13 @@ body.dark .dm-signature-button-logo .sig-orbit.o3{
 }
 </style>
 <style id="assistant-final-align-v72">
-/* v72 — только выравнивание помощника в режиме долгого удержания. */
+
 @media(max-width:900px){
-  /* Сферу чуть ниже, чтобы она визуально сидела ниже относительно поля ввода. */
+  
   body.dm-longpress-active .mobile-manager.dm-signature-manager-button{
     bottom:calc(6px + env(safe-area-inset-bottom))!important;
   }
-  /* Подсказки немного выше, само поле ввода не двигаем. */
+  
   body.dm-longpress-active .dm-quick-suggests{
     transform:translateY(-8px)!important;
   }
@@ -10023,15 +9990,15 @@ body.dark .dm-signature-button-logo .sig-orbit.o3{
 </style>
 <style id="assistant-final-position-animation-v77">
 @media(max-width:900px){
-  /* Ромб выше */
+  
   body.dm-write-mode .mobile-manager.dm-signature-manager-button{
     
   }
-  /* Инструкция «Нажми на ромб…» — вдвое выше */
+  
   body.dm-write-mode #dmListeningLabel{
     bottom:calc(132px + env(safe-area-inset-bottom))!important;
   }
-  /* Быстрые подсказки «Что важнее?» возвращаем вниз */
+  
   body.dm-write-mode #dmWritePanel .dm-write-suggestions,
   body.dm-write-mode #dmWritePanel .dm-suggestions,
   body.dm-write-mode #dmWritePanel [class*="suggest"]{
@@ -10040,7 +10007,7 @@ body.dark .dm-signature-button-logo .sig-orbit.o3{
 }
 </style>
 <style id="assistant-symmetry-v78">
-/* v78 — только симметрия блока письма. Ничего больше не двигаем. */
+
 @media(max-width:900px){
   body.dm-write-mode #dmWriteHints{
     justify-content:center!important;
@@ -10055,7 +10022,7 @@ body.dark .dm-signature-button-logo .sig-orbit.o3{
 }
 </style>
 <style id="assistant-sphere-send-align-v79">
-/* v79 — в режиме письма сфера стоит ровно рядом с кнопкой «Отправить»: одна горизонталь, общий центр. */
+
 @media(max-width:900px){
   body.dm-write-mode .mobile-manager.dm-signature-manager-button{
     right:18px!important;
@@ -10072,7 +10039,7 @@ body.dark .dm-signature-button-logo .sig-orbit.o3{
 }
 </style>
 <style id="assistant-sphere-lower-v80">
-/* v80 — сферу немного опускаем, кнопку отправки и остальную композицию не трогаем. */
+
 @media(max-width:900px){
   body.dm-write-mode .mobile-manager.dm-signature-manager-button{
     bottom:calc(14px + env(safe-area-inset-bottom))!important;
@@ -10085,7 +10052,7 @@ body.dark .dm-signature-button-logo .sig-orbit.o3{
 }
 </style>
 <style id="assistant-write-hints-raise-v82">
-/* v82 — быстрые всплывающие подсказки поднимаем выше, чтобы они стояли прямо над панелью ввода. */
+
 @media(max-width:900px){
   body.dm-write-mode #dmWriteHints{
     transform:translateY(-4px)!important;
@@ -10093,7 +10060,7 @@ body.dark .dm-signature-button-logo .sig-orbit.o3{
 }
 </style>
 <style id="top-hero-brand-cleanup-v88">
-/* v88 — верхний блок: убираем знак помощника из шапки, чтобы он не путался с управляющим. Заполняем освободившееся место смысловым статусом. */
+
 .state-control-card{
   grid-area:orbit;
   width:210px;
@@ -10132,7 +10099,7 @@ body:not(.dark) .state-control-meta i{background:#8992a1}
 }
 </style>
 <style id="settings-light-switch-fix-v93">
-/* v93: светлая тема — переключатель обязан визуально различать ВКЛ / ВЫКЛ */
+
 @media(max-width:700px){
   body:not(.dark) #controlContent .settings-rules-list .settings-rule-toggle,
   body:not(.dark) #controlContent .settings-sections-v2 .settings-home-switch{
@@ -10154,7 +10121,7 @@ body:not(.dark) .state-control-meta i{background:#8992a1}
 }
 </style>
 <style id="theme-mode-buttons-v94">
-/* v94 — fix theme choice contrast in both themes */
+
 .theme-mode-btn{
   color:var(--text)!important;
   background:transparent!important;
@@ -10196,7 +10163,7 @@ body.dark .theme-mode-btn.active{
 })();
 </script>
 <style id="mobile-width-adaptive-v101">
-/* v101 — адаптация ширины контента под телефоны. Сферу помощника не трогаем. */
+
 @media(max-width:700px){
   html,body{width:100%;max-width:100%;overflow-x:hidden!important;}
   .app,main,.content,.page,.section,.shell{width:100%!important;max-width:none!important;box-sizing:border-box!important;}
@@ -10208,7 +10175,7 @@ body.dark .theme-mode-btn.active{
 }
 </style>
 <style id="settings-fullpage-v102">
-/* v102 — настройки открываются как полноценный экран: без большого верхнего зазора, blur на всю страницу. */
+
 #controlOverlay{
   position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;
   margin:0!important;padding:0!important;box-sizing:border-box!important;
@@ -10238,7 +10205,7 @@ body.dark .theme-mode-btn.active{
 body.dark #controlOverlay{background:rgba(0,0,0,.34)!important}
 </style>
 <style id="settings-order-v1">
-/* Новая логика настроек: разделы на Главной используют существующие полноценные страницы. */
+
 .settings-clean-list{display:grid;gap:7px;margin-top:8px;}
 .settings-clean-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px;min-height:58px;padding:7px 9px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.48);}
 .settings-clean-open{display:grid;grid-template-columns:30px minmax(0,1fr);align-items:center;gap:9px;min-width:0;border:0;background:none;color:var(--text);text-align:left;padding:2px 0;cursor:pointer;}
@@ -10254,7 +10221,7 @@ body.dark .settings-create-card{background:rgba(255,255,255,.035);}
 @media(max-width:700px){.settings-clean-row{min-height:54px;padding:7px 8px;border-radius:15px;}.settings-clean-open{grid-template-columns:27px minmax(0,1fr);gap:8px;}.settings-clean-icon{width:27px;height:27px;border-radius:9px;font-size:11px;}.settings-clean-copy b{font-size:11px;}.settings-clean-copy small{font-size:8.5px;}.settings-create-card{padding:12px;}.settings-create-card small{max-width:210px;}}
 </style>
 <style id="premium-consistency-fix-v121">
-/* Только визуальная доводка существующих элементов. Функциональность не меняем. */
+
 #controlContent .settings-sections-v2 .settings-home-switch,
 #controlContent .settings-clean-list .settings-home-switch{
   width:38px!important;
@@ -10288,7 +10255,7 @@ body.dark .settings-create-card{background:rgba(255,255,255,.035);}
 }
 #controlContent .settings-clean-copy b{letter-spacing:-.01em!important;}
 
-/* Единая кнопка возврата для глубоких разделов — в языке существующего интерфейса. */
+
 #deepSectionBack{
   left:max(14px,env(safe-area-inset-left))!important;
   top:max(14px,env(safe-area-inset-top))!important;
@@ -10333,9 +10300,7 @@ body.dark .settings-create-card{background:rgba(255,255,255,.035);}
 })();
 </script>
 <style id="dark-buttons-final-v41">
-/* V41 — финальный материал тёмной темы.
-   Все ОСНОВНЫЕ кнопки приложения — тёмные, подписи светлые.
-   Переключатели и плавающий помощник намеренно не трогаем. */
+
 body.dark .sales-primary,
 body.dark .sales-wide-action,
 body.dark .sales-manager-card .sales-primary,
@@ -10383,7 +10348,7 @@ body.dark .sales-ask-btn:hover{
   -webkit-text-fill-color:#fff!important;
   border-color:rgba(255,255,255,.18)!important;
 }
-/* Автопилот: никаких синих градиентов в тёмной теме. */
+
 body.dark .settings-autopilot-action,
 body.dark #controlContent .settings-autopilot-action{
   background:rgba(255,255,255,.055)!important;
@@ -10412,7 +10377,7 @@ body.dark .sales-ask-btn *{
   color:#f7f9ff!important;
   -webkit-text-fill-color:#f7f9ff!important;
 }
-/* Кнопки редактора Главной внутри тёмной панели. */
+
 body.dark .home-order-actions button,
 body.dark .home-block-row button{
   background:#202126!important;
@@ -10425,7 +10390,7 @@ body.dark .home-order-actions button.primary{
 }
 </style>
 <style id="v24-settings-real-final">
-/* Настройки — финальная точечная правка. */
+
 
 #controlOverlay .control-close{
   font-size:0!important;
@@ -10448,7 +10413,7 @@ body.dark #controlOverlay .control-close{
   
 }
 
-/* Обучение — сапфир, а не голубая кнопка. */
+
 #controlContent .dm-learning-button,
 #controlContent button.dm-learning-button{
   background:linear-gradient(135deg,#182447 0%,#263968 52%,#3d4f83 100%)!important;
@@ -10457,7 +10422,7 @@ body.dark #controlOverlay .control-close{
   box-shadow:0 8px 22px rgba(30,48,91,.16)!important;
 }
 
-/* Переключатели. */
+
 #controlContent .settings-home-switch,
 #controlContent .settings-rule-toggle{
   background:#d9dee8!important;
@@ -10510,7 +10475,7 @@ body.dark #controlContent .settings-rule-toggle.is-on i{
 }
 </style>
 <style id="button-language-v26">
-/* V26 — единый стиль действий: спокойные чёрные кнопки без лишнего стекла. */
+
 .settings-create-card button{
   height:40px!important;
   min-height:40px!important;
@@ -10534,7 +10499,7 @@ body.dark #controlContent .settings-rule-toggle.is-on i{
 }
 .settings-create-card button:active{transform:scale(.97)!important;box-shadow:0 5px 14px rgba(17,17,19,.12)!important}
 
-/* Кнопка возврата — в том же языке, что и основные действия на Главной. */
+
 #deepSectionBack{
   height:40px!important;
   min-height:40px!important;
@@ -10570,8 +10535,7 @@ body.dark #controlContent .settings-rule-toggle.is-on i{
 }
 </style>
 <style id="v28-assistant-sapphire">
-/* V28 — помощник в том же сапфировом индиго, что и основные кнопки.
-   Тёмную тему не меняем. */
+
 body:not(.dark) .mobile-manager.dm-signature-manager-button{
   
   
@@ -10597,14 +10561,13 @@ body:not(.dark) .mobile-manager.dm-signature-manager-button:hover{
 }
 </style>
 <style id="v29-assistant-remove-circle">
-/* V29 — убираем только внешнюю круглую оболочку помощника.
-   Логотип и остальной интерфейс не меняем. */
+
 body:not(.dark) .mobile-manager.dm-signature-manager-button{
 }
 </style>
 <style id="v30-assistant-theme-swap">
-/* V30 — меняем местами оформление помощника между светлой и тёмной темами. */
-/* Светлая тема получает прежний вид тёмной темы. */
+
+
 body:not(.dark) .mobile-manager.dm-signature-manager-button{
   
   border-color:transparent!important;
@@ -10625,7 +10588,7 @@ body:not(.dark) .dm-signature-button-logo .sig-orbit{stroke:#f7f8fa!important;op
 body:not(.dark) .dm-signature-button-logo .sig-diamond{fill:rgba(17,18,22,.96)!important;stroke:#f5f5f7!important;}
 body:not(.dark) .dm-signature-button-logo .sig-core{fill:#f5f6f7!important;}
 
-/* Тёмная тема получает прежний светлый/сапфировый вид. */
+
 body.dark .mobile-manager.dm-signature-manager-button{
   
   
@@ -10649,7 +10612,7 @@ body.dark .dm-signature-button-logo .sig-core{
 }
 </style>
 <style id="evolution-page-v32">
-/* V32 — Эволюция: единый премиальный экран для светлой и тёмной темы. */
+
 .future-evolution-modal{
   padding:16px !important;
   background:rgba(8,12,24,.48) !important;
@@ -10717,7 +10680,7 @@ body.dark .dm-signature-button-logo .sig-core{
 .evo-learning span{color:rgba(255,255,255,.62) !important}
 .evo-learning p{color:rgba(255,255,255,.70) !important}
 
-/* Тёмная тема — исправляем старый селектор evo-modal-sheet и делаем весь экран единым. */
+
 body.dark .future-evolution-modal{
   background:rgba(2,5,12,.64) !important;
 }
@@ -10807,7 +10770,7 @@ body.dark .future-evolution-modal .evo-learning{
 }
 </style>
 <style id="developer-contact-premium-v35">
-/* v35 — developer contact: same premium language as the other settings screens */
+
 #controlContent .developer-contact-shell{
   display:flex;
   flex-direction:column;
@@ -10905,8 +10868,7 @@ body.dark #controlOverlay .control-close{
 }
 </style>
 <style id="dark-manager-no-disc-final">
-/* Финальная точечная правка: на тёмной теме у кнопки управляющего
-   остаётся только фирменный знак без круглого синего диска. */
+
 body.dark .mobile-manager.dm-signature-manager-button{
   background:transparent!important;
   border:0!important;
@@ -10955,7 +10917,7 @@ body.dark .dm-signature-button-logo{
 })();
 </script>
 <style id="digital-manager-intelligence-v1">
-/* DIGITAL MANAGER — intelligence-first Home. Existing assistant/input untouched. */
+
 #homeSectionPreviews.dm-intelligence-home{
   display:grid!important;grid-template-columns:1fr!important;gap:12px!important;
   margin:0!important;padding:0!important;overflow:visible!important;
@@ -11136,7 +11098,7 @@ body.dark .dm-fix-confirm{background:#f4f4f5;color:#17171a;}.body.dark .dm-fix-c
 .dm-live-status i{width:6px;height:6px;border-radius:50%;background:#20a46a;box-shadow:0 0 0 4px rgba(32,164,106,.08)}
 </style>
 <style id="digital-footprint-v1">
-/* Цифровой след — единая карта присутствия бизнеса. */
+
 .dm-footprint-sheet{position:fixed;inset:0;z-index:10050;display:none;align-items:flex-end;justify-content:center;background:rgba(8,9,12,.54);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 .dm-footprint-sheet.is-open{display:flex}
 .dm-footprint-panel{width:min(1180px,100%);max-height:94vh;overflow:auto;border:1px solid rgba(255,255,255,.11);border-bottom:0;border-radius:34px 34px 0 0;background:rgba(248,248,250,.98);color:#15161a;box-shadow:0 -24px 90px rgba(0,0,0,.25);padding:26px 28px calc(28px + env(safe-area-inset-bottom))}
@@ -11179,7 +11141,7 @@ body.dark .dm-footprint-stat,body.dark .dm-source{background:rgba(255,255,255,.0
 })();
 </script>
 <style id="digital-manager-native-cards-final-v1">
-/* FINAL: intelligence cards use the exact native future-card design. */
+
 #homeSectionPreviews.dm-intelligence-home .dm-intel-card{
   border:1px solid var(--f-line)!important;
   background:var(--f-card)!important;
@@ -11223,7 +11185,7 @@ body.dark #homeSectionPreviews.dm-intelligence-home .dm-intel-btn.ghost{backgrou
 }
 </style>
 <style id="theme-interface-pass-v1">
-/* Theme pass V1 — единая система поверхностей. Помощник не затрагиваем. */
+
 :root{
   --ui-bg:#f5f5f7;
   --ui-surface:rgba(255,255,255,.82);
@@ -11245,12 +11207,12 @@ body:not(.dark) .mobile-nav{background:rgba(255,255,255,.88)!important;border:1p
 body:not(.dark) .mobile-nav button{color:#85858d!important}
 body:not(.dark) .mobile-nav button.active{background:rgba(20,20,24,.065)!important;color:var(--ui-text)!important}
 
-/* Light: neutral cards, accent only where action/status needs it. */
+
 body:not(.dark) .card,body:not(.dark) .ask,body:not(.dark) .task-row,body:not(.dark) .client-row,body:not(.dark) .finance-card,body:not(.dark) .promo-card,body:not(.dark) .sales-card,body:not(.dark) .future-card{background:var(--ui-surface)!important;border-color:var(--ui-line)!important;color:var(--ui-text)!important}
 body:not(.dark) .metric,body:not(.dark) .item,body:not(.dark) .event-box,body:not(.dark) .finance-row,body:not(.dark) .channel-row,body:not(.dark) .sales-tip,body:not(.dark) .recovery-row{background:var(--ui-surface-soft)!important;border-color:var(--ui-line)!important}
 body:not(.dark) .settings-create-card,body:not(.dark) .settings-clean-row,body:not(.dark) .rule-row{border-color:var(--ui-line)!important}
 
-/* Dark: near-black, not blue-grey. Blue is reserved for accents. */
+
 body.dark{
   --ui-bg:#090a0c;--ui-surface:rgba(255,255,255,.045);--ui-surface-strong:#15161a;
   --ui-surface-soft:rgba(255,255,255,.032);--ui-text:#f5f5f7;--ui-muted:#a0a1a8;
@@ -11272,25 +11234,25 @@ body.dark .settings-create-card,body.dark .settings-clean-row,body.dark .rule-ro
 body.dark .settings-company-footer-v2 .settings-company-brand-button{background:rgba(255,255,255,.045)!important;border-color:var(--ui-line)!important}
 body.dark .settings-company-footer-v2 .settings-developer-link{background:rgba(255,255,255,.035)!important;border-color:var(--ui-line)!important}
 
-/* Sheets/modals follow the selected theme. */
+
 body:not(.dark) .control-panel,body:not(.dark) .more-panel,body:not(.dark) .pulse-panel{background:rgba(250,250,252,.97)!important;color:var(--ui-text)!important;border-color:var(--ui-line)!important}
 body.dark .control-panel,body.dark .more-panel,body.dark .pulse-panel{background:rgba(20,21,25,.97)!important;color:var(--ui-text)!important;border-color:var(--ui-line)!important}
 body.dark .control-panel .control-title,body.dark .more-panel h2,body.dark .pulse-top h2{color:#f5f5f7!important}
 body.dark .control-panel .control-sub,body.dark .more-panel p,body.dark .pulse-panel p{color:rgba(255,255,255,.62)!important}
 
-/* Company sheet follows theme too. */
+
 body:not(.dark) .company-panel{background:#f7f7f8!important;color:#111!important}
 body.dark .company-panel .company-close,body.dark .company-panel .company-tags span,body.dark .company-panel .company-product{background:#25262b!important;color:#f5f5f7!important}
 body.dark .company-panel .company-values{border-color:rgba(255,255,255,.10)!important}
 body.dark .company-panel .company-values article{border-color:rgba(255,255,255,.10)!important}
 body.dark .company-panel .company-values p,body.dark .company-panel .company-product p{color:rgba(255,255,255,.60)!important}
 
-/* Primary action language. */
+
 body:not(.dark) .future-btn.primary,body:not(.dark) .control-action,body:not(.dark) .settings-autopilot-action{background:#17171a!important;color:#fff!important}
 body.dark .future-btn.primary,body.dark .control-action,body.dark .settings-autopilot-action{background:rgba(255,255,255,.075)!important;color:#fff!important;border-color:var(--ui-line)!important}
 </style>
 <style id="company-sheet-our-theme-final-v3">
-/* Компания: не отдельный чёрный экран — полностью в визуальной системе приложения. */
+
 .company-logo.dm-company-mark{
   background:var(--text)!important;color:var(--bg)!important;
   border-color:var(--line)!important;
@@ -11329,9 +11291,7 @@ body.dark .company-tags span,body.dark .company-product{background:rgba(255,255,
 document.getElementById('salesDone')?.addEventListener('click',function(){if(window.showSection)window.showSection('home');});
 document.getElementById('financeDone')?.addEventListener('click',function(){if(window.showSection)window.showSection('home');});
 </script><style id="etalon-all-pages-v1">
-/* ETALON V1 — единый визуальный язык для всех основных страниц.
-   Источник: эталонная страница «Продвижение».
-   Не меняем тёмную тему и содержимое — только светлый визуальный каркас. */
+
 :root{
   --et-bg:#f5f7fc;
   --et-card:rgba(255,255,255,.86);
@@ -11353,7 +11313,7 @@ body:not(.dark) .finance-page{
   margin:0 auto!important;
   padding:18px 14px 110px!important;
 }
-/* Заголовки как на эталоне */
+
 body:not(.dark) .clients-title,
 body:not(.dark) .tasks-title,
 body:not(.dark) .sales-hero h2,
@@ -11388,7 +11348,7 @@ body:not(.dark) .sales-hero{
 body:not(.dark) .etalon-head-actions,
 body:not(.dark) .sales-hero-controls,
 body:not(.dark) .promo-head-actions{display:flex!important;align-items:center!important;gap:10px!important;flex:none!important}
-/* Эталонная кнопка «Готово»: белая в шапке */
+
 body:not(.dark) .etalon-done,
 body:not(.dark) .promo-done,
 body:not(.dark) .task-back{
@@ -11402,7 +11362,7 @@ body:not(.dark) .task-back{
 body:not(.dark) .etalon-done:hover,
 body:not(.dark) .promo-done:hover,
 body:not(.dark) .task-back:hover{transform:translateY(-1px)!important;background:#fff!important}
-/* Карточки — белые, большие, спокойные */
+
 body:not(.dark) .clients-stats,
 body:not(.dark) .finance-stats,
 body:not(.dark) .promo-stats,
@@ -11424,7 +11384,7 @@ body:not(.dark) .client-stat b,
 body:not(.dark) .finance-stat b,
 body:not(.dark) .promo-stat b,
 body:not(.dark) .sales-stat b{font-size:31px!important;letter-spacing:-.045em!important;color:#17181c!important;margin-top:10px!important}
-/* Информационные панели */
+
 body:not(.dark) .finance-health,
 body:not(.dark) .promo-health,
 body:not(.dark) .finance-manager-note,
@@ -11436,7 +11396,7 @@ body:not(.dark) .task-command{
 }
 body:not(.dark) .finance-manager-note,
 body:not(.dark) .promo-manager-note{background:#f0effc!important;border-color:rgba(106,88,186,.18)!important}
-/* Основные сетки */
+
 body:not(.dark) .finance-grid,
 body:not(.dark) .promo-grid,
 body:not(.dark) .sales-grid,
@@ -11452,7 +11412,7 @@ body:not(.dark) .task-row{
 }
 body:not(.dark) .client-row,
 body:not(.dark) .task-row{padding:22px!important}
-/* Все крупные CTA — один индиго→фиолетовый градиент эталона */
+
 body:not(.dark) .send,
 body:not(.dark) .confirm-action,
 body:not(.dark) .finance-action,
@@ -11483,10 +11443,10 @@ body:not(.dark) .wow-module-close{
   background:var(--et-grad)!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
   border:1px solid rgba(71,85,164,.28)!important;box-shadow:0 12px 28px rgba(48,62,145,.18),inset 0 1px 0 rgba(255,255,255,.14)!important
 }
-/* В эталоне нижний основной CTA широкий */
+
 body:not(.dark) .promo-action,
 body:not(.dark) .sales-wide-action{border-radius:22px!important;min-height:64px!important;font-size:15px!important}
-/* Убираем старую плавающую «На главную» на всех страницах: возврат только через «Готово». */
+
 body:not(.dark) #deepSectionBack{display:none!important}
 @media(max-width:760px){
   body:not(.dark) .unified-page,
@@ -11529,7 +11489,7 @@ body:not(.dark) #deepSectionBack{display:none!important}
 }
 </style>
 <style id="evolution-home-button-v37">
-/* V37 — в Эволюции вместо крестика единая кнопка «На главную». */
+
 #futureEvolutionModal .evolution-home-button{
   width:auto!important;
   min-width:118px!important;
@@ -11564,7 +11524,7 @@ body.dark #futureEvolutionModal .evolution-home-button{
 }
 </style>
 <style id="memory-home-button-v39">
-/* V39 — «Память бизнеса»: настоящая кнопка «На главную», без крестика. */
+
 #controlOverlay .control-close::before{
   content:none!important;
   display:none!important;
@@ -11574,7 +11534,7 @@ body.dark #futureEvolutionModal .evolution-home-button{
 }
 </style>
 <style id="business-pulse-home-v40">
-/* V40 — Business Pulse: единая кнопка «На главную» вместо крестика. */
+
 #businessPulse .pulse-top .pulse-home-button{
   width:auto!important;
   min-width:118px!important;
@@ -11599,8 +11559,7 @@ body.dark #futureEvolutionModal .evolution-home-button{
 }
 </style>
 <style id="business-pulse-modern-v41">
-/* V41 — обновляем только внешний вид «Что происходит с бизнесом».
-   Логику, данные и действия не меняем. */
+
 .business-pulse .pulse-backdrop{
   background:rgba(7,10,18,.58)!important;
   backdrop-filter:blur(18px)!important;
@@ -11715,7 +11674,7 @@ body.dark #futureEvolutionModal .evolution-home-button{
   box-shadow:0 8px 20px rgba(30,48,91,.16)!important;
 }
 
-/* Тёмная тема — отдельный современный материал, без белых старых карточек. */
+
 body.dark .business-pulse .pulse-panel{
   background:rgba(16,18,24,.985)!important;
   border-color:rgba(255,255,255,.09)!important;
@@ -11796,8 +11755,7 @@ body.dark .business-pulse .pulse-bottom p{
 }
 </style>
 <style id="switch-position-final-v4">
-/* FINAL: settings switches use physical left/right position, not transform.
-   This avoids conflicts from the many legacy switch styles in the file. */
+
 #controlContent .settings-sections-v2 .settings-home-switch,
 #controlContent .settings-rules-list .settings-rule-toggle{
   position:relative!important;
@@ -11866,7 +11824,7 @@ body.dark .business-pulse .pulse-bottom p{
 })();
 </script>
 <style id="light-manager-living-indigo-glow">
-/* Светлая тема: живое индиго-свечение вокруг знака без круглого диска. */
+
 body:not(.dark) .mobile-manager.dm-signature-manager-button{
   background:transparent!important;
   border:0!important;
@@ -11916,7 +11874,7 @@ body:not(.dark) .dm-signature-button-logo{
 }
 </style>
 <style id="light-manager-deep-indigo-v9-final">
-/* FINAL — глубокий индиго поверх всех предыдущих слоёв. */
+
 body:not(.dark) .mobile-manager.dm-signature-manager-button::after{
   inset:-11px!important;
   background:
@@ -11964,7 +11922,7 @@ body:not(.dark) .dm-signature-button-logo{
 }
 </style>
 <style id="menu-logo-no-orbits-only">
-/* Только фирменный знак вместо троеточия. Без ореолов, свечения и орбит. */
+
 .dm-living-dots .dm-menu-logo{display:grid!important;place-items:center!important;width:30px!important;height:30px!important;color:currentColor!important;filter:none!important;box-shadow:none!important;background:none!important;}
 .dm-living-dots .dm-menu-logo svg{width:30px!important;height:30px!important;display:block!important;overflow:visible!important;filter:none!important;}
 .dm-living-dots .dm-menu-logo .sig-diamond{fill:#fff!important;stroke:currentColor!important;stroke-width:1.45!important;filter:none!important;}
@@ -11976,7 +11934,7 @@ body.dark .dm-living-dots .dm-menu-logo .sig-diamond{fill:#111216!important;stro
 body.dark .dm-living-dots .dm-menu-logo .sig-core{fill:#f5f5f7!important;}
 </style>
 <style id="wow-business-os-v3-css">
-/* WOW v3: структура бизнеса понятнее, а родные карточки Главной остаются нетронутыми. */
+
 .business-map-strip{margin:0 0 12px;padding:11px 13px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.42);display:flex;align-items:center;gap:8px;overflow:auto;scrollbar-width:none;white-space:nowrap;}
 .business-map-strip::-webkit-scrollbar{display:none;}
 .business-map-strip span{font-size:9px;font-weight:800;letter-spacing:.05em;color:var(--muted);}
@@ -11984,7 +11942,7 @@ body.dark .dm-living-dots .dm-menu-logo .sig-core{fill:#f5f5f7!important;}
 .business-map-strip .live{color:var(--text);}
 body.dark .business-map-strip{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09);}
 
-/* Новая компактная карточка использует ту же геометрию, что и родные future-card. */
+
 #homeSectionPreviews .home-added-card{cursor:pointer;}
 #homeSectionPreviews .home-added-card:hover{transform:translateY(-2px);}
 #homeSectionPreviews .module-mini-joke{margin-top:9px;font-size:10px;line-height:1.4;color:var(--muted);}
@@ -11994,7 +11952,7 @@ body.dark .business-map-strip{background:rgba(255,255,255,.045);border-color:rgb
 #homeSectionPreviews .module-flow i{font-style:normal;color:var(--muted);opacity:.5;font-size:10px;}
 body.dark #homeSectionPreviews .module-flow span{background:rgba(255,255,255,.06);}
 
-/* Большой лист при нажатии на карточку. */
+
 .wow-module-sheet{position:fixed;inset:0;z-index:100060;display:none;align-items:flex-end;justify-content:center;background:rgba(6,8,13,.36);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);}
 .wow-module-sheet.is-open{display:flex;}
 .wow-module-panel{width:min(820px,100%);max-height:min(88vh,820px);overflow:auto;padding:20px 20px calc(22px + env(safe-area-inset-bottom));border:1px solid rgba(255,255,255,.34);border-radius:30px 30px 0 0;background:rgba(249,250,253,.97);color:#17171a;box-shadow:0 -20px 90px rgba(9,15,35,.25);transform:translateY(18px);opacity:0;animation:wowModuleIn .28s cubic-bezier(.2,.8,.2,1) forwards;}
@@ -12036,7 +11994,7 @@ body.dark .wow-module-secondary{background:rgba(255,255,255,.07);color:#f4f4f5;}
 }
 </style>
 <style id="wow-module-native-design-v2">
-/* Карточки внутри управляющего листа — тот же язык, что и Главная. */
+
 .wow-module-sections{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -12091,7 +12049,7 @@ body.dark .wow-module-block:hover{
 body.dark .wow-module-block b{color:#f5f5f7}
 body.dark .wow-module-block p{color:#aaaab1}
 
-/* Цепочка процесса — тоже часть нашей карточечной системы, а не обычный текст. */
+
 .wow-module-panel > .module-flow{
   display:flex;
   align-items:center;
@@ -12300,7 +12258,7 @@ body.dark .wow-module-panel > .module-flow span{
 })();
 </script>
 <style id="visual-unification-final-v1">
-/* FINAL VISUAL UNIFICATION — только внешний вид, JS/логику не меняем. */
+
 :root{
   --ui-accent-1:#203a83;
   --ui-accent-2:#4a5bb0;
@@ -12311,7 +12269,7 @@ body.dark .wow-module-panel > .module-flow span{
   --ui-dark:#17181c;
 }
 
-/* ---------- Единый язык основных CTA в светлой теме ---------- */
+
 body:not(.dark) .send,
 body:not(.dark) .confirm-action,
 body:not(.dark) .finance-action,
@@ -12377,7 +12335,7 @@ body:not(.dark) .wow-module-close:hover{
   box-shadow:0 13px 30px rgba(41,61,130,.19),inset 0 1px 0 rgba(255,255,255,.18) !important;
 }
 
-/* Вторичные кнопки — одна спокойная форма во всём приложении. */
+
 body:not(.dark) .future-btn.ghost,
 body:not(.dark) .wow-module-secondary,
 body:not(.dark) .theme-mode-btn,
@@ -12407,7 +12365,7 @@ body:not(.dark) .pulse-top button:hover{
   border-color:rgba(26,29,35,.13) !important;
 }
 
-/* ---------- Кнопки светлой темы внутри фокусных карточек ---------- */
+
 body:not(.dark) .action-row .future-btn{
   min-height:42px !important;
   border-radius:13px !important;
@@ -12422,7 +12380,7 @@ body:not(.dark) .action-row .future-btn.ghost{
   box-shadow:none !important;
 }
 
-/* ---------- Тёмная тема: единый материал, без случайно белых/синих кнопок ---------- */
+
 body.dark .future-btn.primary,
 body.dark .future-create-btn,
 body.dark .evo-open,
@@ -12502,7 +12460,7 @@ body.dark .wow-module-close:hover{
   border-color:rgba(255,255,255,.14) !important;
 }
 
-/* Тёмная тема: не делаем все текстовые действия белыми плашками. */
+
 body.dark .sales-text-action,
 body.dark .settings-developer-link,
 body.dark .settings-company-footer button{
@@ -12510,7 +12468,7 @@ body.dark .settings-company-footer button{
   box-shadow:none !important;
 }
 
-/* ---------- НАСТРОЙКИ: превращаем скучный список в аккуратный центр управления ---------- */
+
 #controlContent .settings-theme-box{
   position:relative !important;
   overflow:hidden !important;
@@ -12649,7 +12607,7 @@ body.dark #controlContent .settings-clean-row[data-setting-section] .settings-cl
 #controlContent .settings-clean-copy b{font-size:12px !important;line-height:1.18 !important}
 #controlContent .settings-clean-copy small{font-size:9.5px !important;line-height:1.3 !important;margin-top:3px !important}
 
-/* Переключатели — единый премиальный механизм. */
+
 #controlContent .settings-home-switch,
 #controlContent .settings-rule-toggle{
   width:42px !important;height:24px !important;
@@ -12683,7 +12641,7 @@ body.dark #controlContent .settings-rule-toggle.is-on{background:rgba(255,255,25
 body.dark #controlContent .settings-home-switch i,
 body.dark #controlContent .settings-rule-toggle i{background:#f5f6f7!important;box-shadow:0 1px 5px rgba(0,0,0,.28)!important}
 
-/* Карточки «Создать / Я сам нашёл / Память / Правила» — теперь выглядят как часть системы. */
+
 #controlContent .settings-create-card{
   position:relative !important;
   display:flex !important;
@@ -12714,7 +12672,7 @@ body.dark #controlContent .settings-create-card{
 }
 body.dark #controlContent .settings-create-card:before{background:linear-gradient(180deg,#dfe3eb,#8c919b);opacity:.55}
 
-/* Помощь/обучение — не отдельный цвет, а тот же язык интерфейса. */
+
 #controlContent .dm-learning-card{
   margin-top:12px !important;
   padding:14px !important;
@@ -12732,7 +12690,7 @@ body.dark #controlContent .dm-learning-card{
   font-weight:780 !important;
 }
 
-/* Карточки Главной: чуть больше воздуха и единая кнопочная геометрия. */
+
 #homeSectionPreviews .home-added-card{
   overflow:hidden !important;
   box-shadow:0 14px 36px rgba(24,30,48,.065),inset 0 1px 0 rgba(255,255,255,.52) !important;
