@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#000000"><meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="description" content="Мой мир — семья, память, финансы и утренний брифинг Цифрового управляющего.">
+  <link rel="manifest" href="./manifest.json"><link rel="icon" href="./assets/icon-192.png" type="image/png">
+  <link rel="stylesheet" href="./myday.css?v=248"><link rel="stylesheet" href="./world.css?v=249"><link rel="stylesheet" href="./system-ui.css?v=247">
+  <script src="./world.js?v=249" defer></script><script src="./system-ui.js?v=247" defer></script>
+  <title>Мой мир — Цифровой управляющий</title>
+</head>
+<body>
+ <div class="day-shell world-shell">
+  <header class="day-header">
+    <a class="day-back" href="./myday.html" aria-label="Мой день"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></a>
+    <div class="day-heading"><span>ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h1>Мой мир <span aria-hidden="true">✦</span></h1></div>
+    <a class="day-today world-back-main" href="./index.html">Главная</a>
+  </header>
+  <div class="world-intro"><p class="day-eyebrow">DIGITAL MANAGER OS</p><h2>Жизнь. Под контролем.</h2><p>Не сотня приложений, а одно место для того, что действительно важно.</p></div>
+  <nav class="world-tabs" aria-label="Разделы Моего мира">
+    <button data-world="morning" class="world-tab active" aria-pressed="true" type="button">☀ Брифинг</button>
+    <button data-world="family" class="world-tab" aria-pressed="false" type="button">♡ Семья</button>
+    <button data-world="memory" class="world-tab" aria-pressed="false" type="button">✦ Память</button>
+    <button data-world="finance" class="world-tab" aria-pressed="false" type="button">₽ Финансы</button>
+    <button data-world="assistant" class="world-tab" aria-pressed="false" type="button">◈ Помощник</button>
+  </nav>
+  <main>
+    <section data-world-view="morning" class="world-view">
+      <div class="world-spotlight">
+        <div class="world-spotlight-icon" aria-hidden="true">☀</div>
+        <span class="world-kicker">ТВОЙ УТРЕННИЙ БРИФИНГ</span>
+        <h2 id="briefHello">Доброе утро!</h2>
+        <p id="briefQuote">Важные дела не должны теряться среди иконок.</p>
+        <div class="world-facts" id="briefStats"></div>
+      </div>
+      <div class="world-head"><h2>Что важно сегодня</h2><button type="button" class="world-mini" id="briefRefresh">Обновить ↻</button></div>
+      <div id="briefList" class="world-list"></div>
+      <p class="world-hint">Брифинг читает только календарь «Мой день», даты семьи и личные финансы. Содержимое «Заботы ♡» и медицинской папки в него не попадает.</p>
+    </section>
+    <section data-world-view="family" class="world-view" hidden>
+      <div class="world-head"><div><p class="day-eyebrow">САМЫЕ ВАЖНЫЕ ЛЮДИ</p><h2>Моя семья</h2></div><button id="addFamily" class="day-add" type="button">+ Человек</button></div>
+      <p class="world-hint">Дни рождения, важные даты и маленькие поводы порадовать близких.</p>
+      <div id="familyList" class="world-list"></div>
+    </section>
+    <section data-world-view="memory" class="world-view" hidden>
+      <div class="world-head"><div><p class="day-eyebrow">ТО, ЧТО СТОИТ ПОМНИТЬ</p><h2>Умная память</h2></div><button id="addMemory" class="day-add" type="button">+ Сохранить</button></div>
+      <label class="search-wrap"><span class="sr-only">Поиск по памяти</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.2"/><path d="m16 16 4.3 4.3"/></svg><input id="memorySearch" type="search" placeholder="Имя, мысль, важное слово…" autocomplete="off"></label>
+      <div id="memoryList" class="world-list"></div>
+      <p class="world-hint">Помощник помнит только то, что ты сохранил здесь сам. Никакого скрытого сбора сведений.</p>
+    </section>
+    <section data-world-view="finance" class="world-view" hidden>
+      <div class="world-head"><div><p class="day-eyebrow">ЛИЧНОЕ, НЕ БИЗНЕС</p><h2>Мои финансы</h2></div><button id="addFinance" class="day-add" type="button">+ Запись</button></div>
+      <div class="world-finance-summary"><div><span>Доходы за месяц</span><strong id="finIncome">0 ₽</strong></div><div><span>Расходы за месяц</span><strong id="finExpense">0 ₽</strong></div><div><span>Разница за месяц</span><strong id="finBalance">0 ₽</strong></div></div>
+      <div class="world-head"><h3>История операций</h3></div><div id="financeList" class="world-list"></div>
+      <p class="world-hint">Данные вводятся вручную. Банки не подключены, суммы и остатки не являются банковскими выписками. Для подписок укажи ближайшую дату платежа.</p>
+    </section>
+    <section data-world-view="assistant" class="world-view" hidden>
+      <div class="world-assistant-hero"><span class="world-assistant-symbol">◈</span><h2>Мой управляющий</h2><p>Спросить о планах, близких, памятных записях или личных финансах можно обычным текстом.</p></div>
+      <div class="world-suggestions">
+        <button type="button" data-ask="Что у меня сегодня?">Что у меня сегодня?</button>
+        <button type="button" data-ask="Когда ближайшие дни рождения?">Когда дни рождения?</button>
+        <button type="button" data-ask="Как мои расходы?">Как мои расходы?</button>
+        <button type="button" data-ask="Что ты обо мне помнишь?">Что ты помнишь?</button>
+      </div>
+      <div id="worldChat" class="world-chat" role="log" aria-live="polite"><div class="world-msg bot">Привет, шеф! Я пока работаю локально: разбираю понятные запросы и обращаюсь только к сохранённым тобой данным. Настоящий ИИ подключим позже. 😄</div></div>
+      <form id="worldAskForm" class="world-chat-form"><label class="sr-only" for="worldQuestion">Вопрос помощнику</label><input id="worldQuestion" required maxlength="250" placeholder="Спроси что-нибудь…" autocomplete="off"><button type="submit" aria-label="Отправить">➜</button></form>
+      <p class="world-hint">Это локальный помощник с правилами, а не нейросеть. Он не читает медицинские записи, другие приложения или банковские счета.</p>
+    </section>
+  </main>
+  <div class="world-bottom"><a href="./myday.html">◷ Мой день</a><a href="./care.html">♡ Забота</a><button id="exportWorld" type="button">↓ Сохранить копию</button></div>
+  <p class="world-privacy">Записи остаются в этом браузере и пока не зашифрованы. При удалении данных сайта они могут исчезнуть. Экспорт JSON содержит личные сведения — храни его осторожно.</p>
+ </div>
+ <dialog id="worldFormDialog" class="day-dialog world-dialog" aria-labelledby="worldDialogTitle">
+  <form id="worldForm">
+    <div class="dialog-top"><h2 id="worldDialogTitle">Новая запись</h2><button type="button" class="dialog-x" id="worldFormClose" aria-label="Закрыть">×</button></div>
+    <input type="hidden" id="worldEntryId"><input type="hidden" id="worldEntryType">
+    <div id="worldFamilyFields" class="world-form-fields" hidden>
+      <label>Имя<input id="familyName" maxlength="70" placeholder="Имя близкого человека"></label>
+      <label>Кто это?<input id="familyRelation" maxlength="65" placeholder="Мама, супруг, друг…"></label>
+      <label>День рождения <small>год необязателен</small><input id="familyBirthday" type="date"></label>
+      <label>Другая важная дата <small>необязательно</small><input id="familyOccasion" type="date"></label>
+      <label>Название события <small>необязательно</small><input id="familyOccasionName" maxlength="70" placeholder="Годовщина, праздник…"></label>
+      <label>Что любит? <small>необязательно</small><textarea id="familyNotes" maxlength="1500" rows="3" placeholder="Идея для подарка, интересы…"></textarea></label>
+    </div>
+    <div id="worldMemoryFields" class="world-form-fields" hidden>
+      <label>Что запомнить?<input id="memoryTitle" maxlength="100" placeholder="Например: любимый кофе папы"></label>
+      <label>Подробности<textarea id="memoryText" maxlength="8000" rows="5" placeholder="Запиши только то, что сам хочешь сохранить."></textarea></label>
+      <label>Метка <small>необязательно</small><input id="memoryTag" maxlength="40" placeholder="Работа, семья, идеи…"></label>
+      <label class="world-inline-label"><input id="memoryImportant" type="checkbox"> Важное — показывать в брифинге</label>
+    </div>
+    <div id="worldFinanceFields" class="world-form-fields" hidden>
+      <label>Описание<input id="finTitle" maxlength="100" placeholder="Продукты, зарплата, подписка…"></label>
+      <div class="form-row">
+       <label>Вид<select id="finType"><option value="expense">Расход</option><option value="income">Доход</option><option value="subscription">Подписка / платёж</option></select></label>
+       <label>Сумма, ₽<input id="finAmount" type="number" min="0.01" max="999999999" step="0.01" inputmode="decimal"></label>
+      </div>
+      <div class="form-row"><label>Дата<input id="finDate" type="date"></label><label>Категория<input id="finCategory" maxlength="45" placeholder="Дом, еда, связь…"></label></div>
+      <p class="world-hint">Подписка сохраняется как отдельный платёж. Автоматического списания или повторения пока нет.</p>
+    </div>
+    <div class="form-actions"><button type="button" id="worldFormCancel" class="secondary-btn">Отмена</button><button type="submit" class="primary-btn">Сохранить</button></div>
+  </form>
+ </dialog>
+ <div class="day-toast" id="worldToast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
