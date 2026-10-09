@@ -98,7 +98,7 @@
   document.querySelectorAll('[data-ring-preview]').forEach(b=>b.addEventListener('click',()=>setRingMode(b.dataset.ringPreview,b.dataset.ringPreview==='idle'?0:4200)));
   document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
   document.querySelectorAll('[data-period]').forEach(b=>b.addEventListener('click',()=>updatePeriod(b.dataset.period)));
-  byId('openDates').addEventListener('click',datesModal);
+  byId('openDates').addEventListener('click',()=>window.location.assign('./myday.html'));
   byId('openBrand').addEventListener('click',toggleBrandCard);
   byId('openBrandCard').addEventListener('click',()=>{hideBrandCard();brandModal();});
   document.addEventListener('click',event=>{if(!byId('openBrandCard').hidden && !event.target.closest('#openBrand, #openBrandCard'))hideBrandCard();});
@@ -118,5 +118,10 @@
   document.querySelectorAll('[data-question]').forEach(b=>b.addEventListener('click',()=>chat(b.dataset.question)));
   byId('chatForm').addEventListener('submit',e=>{e.preventDefault();const i=byId('chatInput');const q=i.value.trim();if(!q)return;chat(q);i.value='';});
   applyUser();updatePeriod('day');setTab('home');setRingMode('idle');
+  // Preserve the original analytics date picker through My Day's report link.
+  if(new URLSearchParams(window.location.search).has('analyticsDate')){
+    window.history.replaceState(null,'',window.location.pathname);
+    datesModal();
+  }
   if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js',{scope:'./'}).catch(err=>console.warn('PWA offline unavailable:',err)));
 })();
