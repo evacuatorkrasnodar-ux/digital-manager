@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="Мой день — календарь и блокнот приложения «Цифровой управляющий». Разработчик: Цифровой бизнес.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./assets/icon-192.png" type="image/png">
+  <link rel="stylesheet" href="./myday.css?v=246">
+  <script src="./myday.js?v=246" defer></script>
+  <title>Мой день — Цифровой управляющий</title>
+</head>
+<body>
+  <div class="day-shell">
+    <header class="day-header">
+      <a class="day-back" href="./index.html" aria-label="Вернуться в приложение"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></a>
+      <div class="day-heading"><span>ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h1>Мой день <span aria-hidden="true">✦</span></h1></div>
+      <button class="day-today" id="goToday" type="button">Сегодня</button>
+    </header>
+    <section class="day-intro" aria-label="Приветствие">
+      <p class="day-eyebrow">ДЕЛА • МЫСЛИ • ПЛАНЫ</p>
+      <p id="dayGreeting">Важное — под рукой. Остальное пусть подождёт кофе.</p>
+    </section>
+    <nav class="day-tabs" aria-label="Разделы моего дня">
+      <button class="day-tab active" type="button" data-view="calendar" aria-selected="true">Календарь</button>
+      <button class="day-tab" type="button" data-view="notes" aria-selected="false">Блокнот <span id="notesCount" class="day-count" hidden></span></button>
+    </nav>
+    <main>
+      <section id="calendarView" class="day-view" aria-label="Календарь">
+        <div class="day-panel calendar-panel">
+          <div class="calendar-toolbar">
+            <button type="button" id="prevMonth" class="month-arrow" aria-label="Предыдущий месяц">‹</button>
+            <h2 id="calendarMonth" aria-live="polite"></h2>
+            <button type="button" id="nextMonth" class="month-arrow" aria-label="Следующий месяц">›</button>
+          </div>
+          <div class="weekdays" aria-hidden="true"><span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span></div>
+          <div class="month-grid" id="monthGrid" role="group" aria-label="Дни месяца"></div>
+          <div class="calendar-legend"><span><i class="legend-event"></i> События</span><span><i class="legend-note"></i> Заметки</span></div>
+        </div>
+        <div class="day-section-heading">
+          <div><p class="day-eyebrow">ПЛАН НА ДЕНЬ</p><h2 id="selectedDateLabel"></h2></div>
+          <button class="day-add" id="addEvent" type="button">+ Событие</button>
+        </div>
+        <div id="eventsList" class="event-list" aria-live="polite"></div>
+        <div class="day-section-heading notes-in-day">
+          <div><p class="day-eyebrow">НА ПАМЯТЬ</p><h2>Заметки за день</h2></div>
+          <button class="day-add subtle" id="addNoteForDay" type="button">+ Запись</button>
+        </div>
+        <div id="dayNotesList" class="day-notes-list"></div>
+      </section>
+      <section id="notesView" class="day-view" hidden aria-label="Блокнот">
+        <div class="day-section-heading notebook-title">
+          <div><p class="day-eyebrow">НЕ ДЕРЖИ ВСЁ В ГОЛОВЕ</p><h2>Мой блокнот</h2></div>
+          <button type="button" id="addNote" class="day-add">+ Запись</button>
+        </div>
+        <label class="search-wrap"><span class="sr-only">Поиск по заметкам</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.2"/><path d="m16 16 4.3 4.3"/></svg><input id="noteSearch" type="search" placeholder="Найти мысль, идею, план…" autocomplete="off"></label>
+        <div id="notesList" class="notebook-list" aria-live="polite"></div>
+        <p class="day-coming">🎙️ Диктовку, фото и документы добавим на следующем этапе.</p>
+      </section>
+    </main>
+    <footer class="day-footer"><span>🔒</span> Записи хранятся на этом устройстве. При очистке данных браузера они могут исчезнуть. Синхронизации пока нет.
+      <div><a href="./index.html?analyticsDate=1">Выбрать дату для аналитики</a><button type="button" id="exportDay">Сохранить копию JSON</button></div>
+    </footer>
+  </div>
+  <dialog id="eventDialog" class="day-dialog" aria-labelledby="eventDialogTitle">
+    <form id="eventForm">
+      <div class="dialog-top"><h2 id="eventDialogTitle">Новое событие</h2><button type="button" class="dialog-x" data-close="eventDialog" aria-label="Закрыть">×</button></div>
+      <input id="eventId" type="hidden">
+      <label>Название<input id="eventTitle" maxlength="100" required placeholder="Что нельзя забыть?"></label>
+      <div class="form-row"><label>Дата<input id="eventDate" type="date" required></label><label>Время <span class="optional">необязательно</span><input id="eventTime" type="time"></label></div>
+      <label>Тип<select id="eventKind"><option value="task">Дело</option><option value="meeting">Встреча</option><option value="personal">Личное</option><option value="business">Бизнес</option></select></label>
+      <label>Подробности <span class="optional">необязательно</span><textarea id="eventDetail" maxlength="2500" rows="3" placeholder="Адрес, телефон, важные детали…"></textarea></label>
+      <div class="form-actions"><button type="button" class="secondary-btn" data-close="eventDialog">Отмена</button><button type="submit" class="primary-btn">Сохранить</button></div>
+    </form>
+  </dialog>
+  <dialog id="noteDialog" class="day-dialog" aria-labelledby="noteDialogTitle">
+    <form id="noteForm">
+      <div class="dialog-top"><h2 id="noteDialogTitle">Новая запись</h2><button type="button" class="dialog-x" data-close="noteDialog" aria-label="Закрыть">×</button></div>
+      <input id="noteId" type="hidden">
+      <label>Заголовок<input id="noteTitle" maxlength="100" required placeholder="Идея, план, важная мысль…"></label>
+      <div class="form-row"><label>Дата<input id="noteDate" type="date" required></label><label>Раздел<select id="noteKind"><option value="personal">Личное</option><option value="business">Работа</option></select></label></div>
+      <label>Текст<textarea id="noteText" required maxlength="20000" rows="7" placeholder="Запиши сейчас — завтра себе спасибо скажешь."></textarea></label>
+      <div class="form-actions"><button type="button" class="secondary-btn" data-close="noteDialog">Отмена</button><button type="submit" class="primary-btn">Сохранить</button></div>
+    </form>
+  </dialog>
+  <div class="day-toast" id="dayToast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
