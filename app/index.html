@@ -11,13 +11,17 @@
   <link rel="manifest" href="./manifest.json">
   <link rel="apple-touch-icon" href="./assets/icon-192.png">
   <link rel="icon" type="image/png" href="./assets/icon-192.png">
-  <link rel="preload" href="./assets/architecture-hero.webp" as="image">
+  <link rel="preload" href="./assets/architecture-hero.png" as="image">
   <link rel="stylesheet" href="./style.css">
   <title>Цифровой управляющий — Black Velvet</title>
 </head>
 <body>
 <!-- All pictograms are real independent SVG elements, not fragments of the reference picture. -->
 <svg class="icon-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <!-- Single source of truth for the asymmetric developer-card outline. -->
+  <clipPath id="developerCardClip" clipPathUnits="objectBoundingBox"><path d="M .087 .006 C .036 .006 .006 .049 .006 .113 L .006 .442 C .006 .506 .029 .547 .088 .56 C .151 .572 .169 .61 .169 .685 L .169 .891 C .169 .964 .209 .994 .276 .994 L .915 .994 C .966 .994 .994 .964 .994 .904 L .994 .107 C .994 .043 .958 .006 .911 .006 Z"/></clipPath>
+  <symbol id="ic-cube" viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7zM3 7l9 5 9-5M12 12v10"/></symbol>
+  <symbol id="ic-crown" viewBox="0 0 24 24"><path d="M2.5 7.5 6.5 12l5.5-7 5.5 7 4-4.5-2 12h-15zM5.5 21h13"/></symbol>
   <symbol id="ic-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
   <symbol id="ic-x" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></symbol>
   <symbol id="ic-home" viewBox="0 0 24 24"><path d="m2.8 10 9.2-7.3 9.2 7.3v10.6H14v-7h-4v7H2.8z"/></symbol>
@@ -45,11 +49,15 @@
     <section class="hero" aria-label="Приветствие и информация о компании">
       <div class="hero-photo" aria-hidden="true"></div>
       <header class="masthead">
-        <button class="brand-button" id="openBrand" type="button" aria-label="О приложении и разработчике Цифровой бизнес">
-          <img src="./assets/brand-logo.png" class="brand-icon" alt="">
-          <span class="brand-copy"><strong>Цифровой управляющий</strong><small>Ваш бизнес. Под вашим контролем.</small></span>
-          <svg class="ico brand-arrow"><use href="#ic-chevron"/></svg>
-        </button>
+        <div class="brand-identity">
+          <button class="brand-button" id="openBrand" type="button" aria-label="О приложении, разработчике и лицензии">
+            <img src="./assets/brand-logo.png" class="brand-icon" alt="">
+          </button>
+          <div class="brand-copy">
+            <strong>Цифровой управляющий</strong>
+            <small>Ваш бизнес. Под контролем.</small>
+          </div>
+        </div>
         <div class="header-actions">
           <button class="round-action" id="openNotifications" type="button" aria-label="Уведомления"><svg class="ico"><use href="#ic-bell"/></svg></button>
           <button class="round-action" id="openProfile" type="button" aria-label="Профиль"><svg class="ico"><use href="#ic-person"/></svg></button>
@@ -60,17 +68,19 @@
           <h1>Доброе утро,<br><span id="greetingName">Алексей</span></h1>
           <p>Спокойный фокус<br>сегодня создаёт<br>большие результаты<br>завтра.</p>
         </div>
-        <button id="openBrandCard" type="button" class="license-preview" aria-label="О разработчике и лицензии">
+        <button id="openBrandCard" type="button" class="license-preview" aria-label="Digital Business: пример оформления лицензии, открыть реальные сведения о доступе">
+          <svg class="developer-card-outline" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true"><path d="{shape}" fill="none" stroke="rgba(184,210,227,.76)" stroke-width="1.15" vector-effect="non-scaling-stroke"/></svg>
           <div class="license-top">
             <img src="./assets/brand-logo.png" alt="" class="license-mini-logo">
-            <div><strong>Digital Business</strong><small>Разработка и AI-решения<br>для вашего роста</small></div>
-            <svg class="ico mini-chevron"><use href="#ic-chevron"/></svg>
+            <div class="license-brand-text"><strong>Digital Business</strong><small>IT · AI Automation</small></div>
+            <span class="license-arrow"><svg class="ico mini-chevron"><use href="#ic-chevron"/></svg></span>
           </div>
           <div class="license-lines">
-            <span><svg class="ico"><use href="#ic-building"/></svg> <span>Версия</span><b id="versionPreview">1.0.0</b></span>
-            <span><svg class="ico gold"><use href="#ic-shield"/></svg> <span>Лицензия</span><b id="licensePreview">Демо</b></span>
-            <span class="status-line"><i class="status-dot"></i><span id="subscriptionPreview">Ожидает активации</span></span>
+            <span><svg class="ico"><use href="#ic-cube"/></svg><span>Версия <b id="versionPreview">1.0.0</b></span></span>
+            <span><svg class="ico gold"><use href="#ic-crown"/></svg><span>Лицензия <b id="licensePreview">Pro</b></span></span>
+            <span class="status-line active-preview"><i class="status-dot"></i><span id="subscriptionPreview">Подписка активна</span></span>
           </div>
+          <span class="license-example" aria-hidden="true">образец</span>
         </button>
       </div>
       <div class="timebar" role="group" aria-label="Период аналитики">
@@ -159,12 +169,12 @@
           <feGaussianBlur stdDeviation="3"/>
         </filter>
       </defs>
-      <!-- Rounded edges continue into one shallow centered rise. Keep every trace on the same curve. -->
-      <path id="navCrest" d="M0 33 C2 23 37 16 79 15 H144 C173 15 190 12 201 6 C211 2 219 2 229 6 C240 12 257 15 286 15 H351 C393 16 428 23 430 33 V116 H0 Z" fill="url(#navSurface)"/>
-      <path d="M0 33 C2 23 37 16 79 15 H144 C173 15 190 12 201 6 C211 2 219 2 229 6 C240 12 257 15 286 15 H351 C393 16 428 23 430 33 V116 H0 Z" fill="url(#navAmbient)"/>
-      <path d="M0 33 C2 23 37 16 79 15 H144 C173 15 190 12 201 6 C211 2 219 2 229 6 C240 12 257 15 286 15 H351 C393 16 428 23 430 33" fill="none" stroke="url(#navLightTrace)" stroke-width="6" opacity=".33" filter="url(#navDiffusedRim)" vector-effect="non-scaling-stroke"/>
-      <path d="M0 33 C2 23 37 16 79 15 H144 C173 15 190 12 201 6 C211 2 219 2 229 6 C240 12 257 15 286 15 H351 C393 16 428 23 430 33" fill="none" stroke="url(#navTopRim)" stroke-width="1.05" vector-effect="non-scaling-stroke"/>
-      <path d="M0 33 C2 23 37 16 79 15 H144 C173 15 190 12 201 6 C211 2 219 2 229 6 C240 12 257 15 286 15 H351 C393 16 428 23 430 33" fill="none" stroke="url(#navLightTrace)" stroke-width=".8" vector-effect="non-scaling-stroke"/>
+      <!-- A wider, slightly higher centre crest and stronger side curl share one unbroken silhouette. -->
+      <path id="navCrest" d="M0 45 C0 22 42 16 93 16 H126 C160 16 181 10 195 1 C206 -6 224 -6 235 1 C249 10 270 16 304 16 H337 C388 16 430 22 430 45 V116 H0 Z" fill="url(#navSurface)"/>
+      <path d="M0 45 C0 22 42 16 93 16 H126 C160 16 181 10 195 1 C206 -6 224 -6 235 1 C249 10 270 16 304 16 H337 C388 16 430 22 430 45 V116 H0 Z" fill="url(#navAmbient)"/>
+      <path d="M0 45 C0 22 42 16 93 16 H126 C160 16 181 10 195 1 C206 -6 224 -6 235 1 C249 10 270 16 304 16 H337 C388 16 430 22 430 45" fill="none" stroke="url(#navLightTrace)" stroke-width="6" opacity=".33" filter="url(#navDiffusedRim)" vector-effect="non-scaling-stroke"/>
+      <path d="M0 45 C0 22 42 16 93 16 H126 C160 16 181 10 195 1 C206 -6 224 -6 235 1 C249 10 270 16 304 16 H337 C388 16 430 22 430 45" fill="none" stroke="url(#navTopRim)" stroke-width="1.05" vector-effect="non-scaling-stroke"/>
+      <path d="M0 45 C0 22 42 16 93 16 H126 C160 16 181 10 195 1 C206 -6 224 -6 235 1 C249 10 270 16 304 16 H337 C388 16 430 22 430 45" fill="none" stroke="url(#navLightTrace)" stroke-width=".8" vector-effect="non-scaling-stroke"/>
     </svg>
     <button class="nav-item active" id="tabHome" data-tab="home" type="button" aria-current="page">
       <svg class="ico nav-ico"><use href="#ic-home"/></svg>
