@@ -2,141 +2,173 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f6f7f8">
-  <meta name="color-scheme" content="light dark">
-  <title>Цифровой управляющий — Управление</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#07111c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Цифровой управляющий">
+  <meta name="description" content="Цифровой управляющий — панель управления бизнесом. Разработчик: Цифровой бизнес.">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./assets/icon-192.png">
+  <link rel="icon" type="image/png" href="./assets/icon-192.png">
+  <link rel="preload" href="./assets/architecture-hero.webp" as="image">
+  <link rel="stylesheet" href="./style.css">
+  <title>Цифровой управляющий — Black Velvet</title>
 </head>
-<body data-theme="light">
-  <main class="app" id="app">
-    <section class="hero" aria-label="Управление">
-      <div class="hero-media" aria-hidden="true"></div>
-      <div class="hero-scrim" aria-hidden="true"></div>
-
-      <header class="topbar">
-        <button class="brand" data-close-management aria-label="Вернуться на главную">
-          <span class="brand-mark" aria-hidden="true"></span>
-          <span class="brand-copy">
-            <strong>Цифровой управляющий</strong>
-            <small>Ваш бизнес. Под вашим контролем.</small>
-          </span>
+<body>
+<!-- All pictograms are real independent SVG elements, not fragments of the reference picture. -->
+<svg class="icon-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="ic-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+  <symbol id="ic-x" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></symbol>
+  <symbol id="ic-home" viewBox="0 0 24 24"><path d="m2.8 10 9.2-7.3 9.2 7.3v10.6H14v-7h-4v7H2.8z"/></symbol>
+  <symbol id="ic-grid" viewBox="0 0 24 24"><rect x="2.7" y="2.7" width="7.3" height="7.3" rx="1.35"/><rect x="14" y="2.7" width="7.3" height="7.3" rx="1.35"/><rect x="2.7" y="14" width="7.3" height="7.3" rx="1.35"/><rect x="14" y="14" width="7.3" height="7.3" rx="1.35"/></symbol>
+  <symbol id="ic-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-2.5 8-2.5 9.5h17C20.5 16 18 15 18 8zM10 21h4"/></symbol>
+  <symbol id="ic-person" viewBox="0 0 24 24"><circle cx="12" cy="7.2" r="4"/><path d="M4.5 21v-2.1c0-3.4 3.3-5.5 7.5-5.5s7.5 2.1 7.5 5.5V21z"/></symbol>
+  <symbol id="ic-users" viewBox="0 0 24 24"><circle cx="9" cy="7" r="3.5"/><path d="M2.7 20v-2c0-2.8 2.8-4.6 6.3-4.6s6.3 1.8 6.3 4.6v2zM16.7 4.5a3.1 3.1 0 0 1 0 5.8M17.3 13.5c3 .15 4.3 1.7 4.3 4.1V20"/></symbol>
+  <symbol id="ic-cart" viewBox="0 0 24 24"><path d="M2 3h3l2.6 12h11.7l2.1-8H6"/><circle cx="9.2" cy="20" r="1.15"/><circle cx="18.4" cy="20" r="1.15"/></symbol>
+  <symbol id="ic-coins" viewBox="0 0 24 24"><ellipse cx="9" cy="5" rx="6" ry="2.3"/><path d="M3 5v5c0 1.3 2.7 2.5 6 2.5s6-1.2 6-2.5V5M3 10v5c0 1.3 2.7 2.5 6 2.5 1.4-.1 2-.2M13 14v5c0 1.2 2 2.2 4.5 2.2S22 20.2 22 19v-5"/><ellipse cx="17.5" cy="14" rx="4.5" ry="2.2"/></symbol>
+  <symbol id="ic-bars" viewBox="0 0 24 24"><path d="M5 20v-5M10 20V9M15 20V4M20 20v-8" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="ic-spark" viewBox="0 0 24 24"><path d="M12 1.5 14.8 9 22.5 12l-7.7 3-2.8 7.5L9.2 15 1.5 12l7.7-3z"/></symbol>
+  <symbol id="ic-file" viewBox="0 0 24 24"><path d="M5 2.5h9l5 5V21H5zM14 2.5v5h5M8 12h8M8 16h8"/></symbol>
+  <symbol id="ic-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="m10 2.8-.6 2.1a7.8 7.8 0 0 0-2.1.9l-2-.9-2.5 2.5.9 2a8 8 0 0 0-.9 2.1l-2.1.6v3.5l2.1.6a8 8 0 0 0 .9 2.1l-.9 2 2.5 2.5 2-.9a8 8 0 0 0 2.1.9l.6 2.1h3.5l.6-2.1a8 8 0 0 0 2.1-.9l2 .9 2.5-2.5-.9-2a8 8 0 0 0 .9-2.1l2.1-.6v-3.5l-2.1-.6a8 8 0 0 0-.9-2.1l.9-2-2.5-2.5-2 .9a8 8 0 0 0-2.1-.9l-.6-2.1z" transform="translate(.25 .25) scale(.95)"/></symbol>
+  <symbol id="ic-calendar" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16.5" rx="2.4"/><path d="M7.5 2v5M16.5 2v5M3 10h18M8 14h.1M12 14h.1M16 14h.1M8 17.5h.1M12 17.5h.1"/></symbol>
+  <symbol id="ic-target" viewBox="0 0 24 24"><circle cx="11" cy="13" r="8"/><circle cx="11" cy="13" r="4"/><path d="m11 13 10-10M16.5 3H21v4.5"/></symbol>
+  <symbol id="ic-building" viewBox="0 0 24 24"><path d="M4 21V4l10-2v19M14 9h6v12M2 21h20M7.5 7h3M7.5 11h3M7.5 15h3M17 13h1M17 17h1"/></symbol>
+  <symbol id="ic-pin" viewBox="0 0 24 24"><path d="M19 10c0 5-7 11.5-7 11.5S5 15 5 10a7 7 0 0 1 14 0z"/><circle cx="12" cy="10" r="2.6"/></symbol>
+  <symbol id="ic-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-7-7 7 7-7 7"/></symbol>
+  <symbol id="ic-shield" viewBox="0 0 24 24"><path d="m12 2 8.5 3v6.5c0 5.2-3.2 8.8-8.5 10.5-5.3-1.7-8.5-5.3-8.5-10.5V5zM9 12.2l2.2 2.2 4.5-4.7"/></symbol>
+  <symbol id="ic-check" viewBox="0 0 24 24"><path d="M4.2 12.2 9.5 17l10.3-10"/></symbol>
+  <symbol id="ic-plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></symbol>
+</svg>
+<div id="app" class="app-shell">
+  <div class="screen" id="homeScreen">
+    <section class="hero" aria-label="Приветствие и информация о компании">
+      <div class="hero-photo" aria-hidden="true"></div>
+      <header class="masthead">
+        <button class="brand-button" id="openBrand" type="button" aria-label="О приложении и разработчике Цифровой бизнес">
+          <img src="./assets/brand-logo.png" class="brand-icon" alt="">
+          <span class="brand-copy"><strong>Цифровой управляющий</strong><small>Ваш бизнес. Под вашим контролем.</small></span>
+          <svg class="ico brand-arrow"><use href="#ic-chevron"/></svg>
         </button>
-        <div class="topbar-actions">
-          <button class="icon-button" id="themeToggle" aria-label="Сменить тему">☼</button>
-          <button class="icon-button" data-toast="Уведомлений пока нет" aria-label="Уведомления">⌁</button>
+        <div class="header-actions">
+          <button class="round-action" id="openNotifications" type="button" aria-label="Уведомления"><svg class="ico"><use href="#ic-bell"/></svg></button>
+          <button class="round-action" id="openProfile" type="button" aria-label="Профиль"><svg class="ico"><use href="#ic-person"/></svg></button>
         </div>
       </header>
-
-      <div class="hero-content">
-        <div class="hero-copy">
-          <span class="eyebrow">УПРАВЛЕНИЕ</span>
-          <h1>Настройте бизнес<br>и управляющего <span>под себя.</span></h1>
-          <p>Всё важное — в одном месте. Остальное можно оставить ему.</p>
+      <div class="hero-intro">
+        <div class="welcome">
+          <h1>Доброе утро,<br><span id="greetingName">Алексей</span></h1>
+          <p>Спокойный фокус<br>сегодня создаёт<br>большие результаты<br>завтра.</p>
         </div>
-
-        <button class="manager-stage" data-toast="Управляющий рядом" aria-label="Цифровой управляющий">
-          <canvas class="manager-canvas" aria-hidden="true"></canvas>
+        <button id="openBrandCard" type="button" class="license-preview" aria-label="О разработчике и лицензии">
+          <div class="license-top">
+            <img src="./assets/brand-logo.png" alt="" class="license-mini-logo">
+            <div><strong>Digital Business</strong><small>Разработка и AI-решения<br>для вашего роста</small></div>
+            <svg class="ico mini-chevron"><use href="#ic-chevron"/></svg>
+          </div>
+          <div class="license-lines">
+            <span><svg class="ico"><use href="#ic-building"/></svg> <span>Версия</span><b id="versionPreview">1.0.0</b></span>
+            <span><svg class="ico gold"><use href="#ic-shield"/></svg> <span>Лицензия</span><b id="licensePreview">Демо</b></span>
+            <span class="status-line"><i class="status-dot"></i><span id="subscriptionPreview">Ожидает активации</span></span>
+          </div>
         </button>
       </div>
+      <div class="timebar" role="group" aria-label="Период аналитики">
+        <div class="periods">
+          <button class="period selected" data-period="day" type="button" aria-pressed="true">Сегодня</button>
+          <button class="period" data-period="week" type="button" aria-pressed="false">Неделя</button>
+          <button class="period" data-period="month" type="button" aria-pressed="false">Месяц</button>
+          <button class="period" data-period="year" type="button" aria-pressed="false">Год</button>
+        </div>
+        <button class="date-button" id="openDates" type="button" aria-label="Выбрать дату"><svg class="ico"><use href="#ic-calendar"/></svg></button>
+      </div>
     </section>
-
-    <section class="content" aria-label="Настройки">
-      <section class="group group-appearance">
-        <div class="section-intro">
-          <span class="eyebrow">ОФОРМЛЕНИЕ</span>
-          <h2>Свет и атмосфера</h2>
-          <p>Одна система. Два состояния.</p>
-        </div>
-        <div class="theme-control" role="group" aria-label="Тема приложения">
-          <button class="theme-choice" data-set-theme="light"><span class="theme-dot theme-dot-light"></span><strong>Светлая</strong></button>
-          <button class="theme-choice" data-set-theme="dark"><span class="theme-dot theme-dot-dark"></span><strong>Тёмная</strong></button>
-        </div>
+    <main class="dashboard">
+      <section class="metric-card revenue-card" aria-label="Выручка">
+        <div class="revenue-top"><div><h2 id="revenueLabel">Выручка сегодня</h2><strong class="big-number" id="revenueValue">12 600 000 ₽</strong><div class="delta"><span>▲ +12%</span> <small id="revenueCompare">к вчера</small></div></div><button class="icon-circle metric-link" data-detail="revenue" aria-label="Подробнее о выручке" type="button"><svg class="ico"><use href="#ic-bars"/></svg></button></div>
+        <div class="chart-wrap"><svg id="revenueChart" role="img" aria-label="График выручки" viewBox="0 0 650 124" preserveAspectRatio="none"><defs><linearGradient id="revenueArea" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#178dff" stop-opacity=".39"/><stop offset="1" stop-color="#0b519d" stop-opacity="0"/></linearGradient><filter id="lineGlow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g class="gridlines"><path d="M0 31H650M0 65H650M0 99H650"/><path d="M92 0V124M185 0V124M279 0V124M371 0V124M463 0V124M558 0V124"/></g><path id="revArea" fill="url(#revenueArea)" d=""/><path id="revLine" class="blue-line" d=""/><path id="revFocus" class="focus-stem" d=""/><circle id="revDotGlow" fill="#52b1ff" opacity=".35" r="10"/><circle id="revDot" fill="#dffbff" r="4.6"/></svg><div class="chart-tooltip" id="chartTooltip">12,6 млн ₽</div></div>
+        <div class="chart-axis" id="chartAxis"><span>00:00</span><span>04:00</span><span>08:00</span><span>12:00</span><span>16:00</span><span>20:00</span></div>
       </section>
-
-      <section class="group">
-        <button class="setting-row" data-toast="Откроем данные компании">
-          <span class="row-icon">⌂</span>
-          <span class="row-copy"><b>Компания</b><small>Название, форма, деятельность</small><em id="companyLine">Digital Business · ООО</em></span>
-          <span class="row-arrow">→</span>
+      <div class="metric-grid">
+        <button class="metric-card clients-card" id="clientsCard" type="button" aria-label="Открыть клиентов">
+          <div class="tile-heading"><svg class="ico tile-symbol"><use href="#ic-users"/></svg><span>Клиенты</span><span class="tile-chevron"><svg class="ico"><use href="#ic-chevron"/></svg></span></div>
+          <div class="clients-inner"><div class="donut"><div class="donut-core"><strong id="clientTotal">248</strong><small>+8%</small></div></div><div class="donut-legend"><div><i class="legend-dot new"></i><span>Новые</span><b>68</b></div><div><i class="legend-dot active"></i><span>Активные</span><b>142</b></div><div><i class="legend-dot repeat"></i><span>Вернувшиеся</span><b>38</b></div></div></div>
         </button>
-
-        <div class="setting-row setting-row-open manager-setting">
-          <span class="row-icon">◇</span>
-          <span class="row-copy"><b>Мой управляющий</b><small>Имя, стиль общения и поведение</small><em id="managerLine">Цифровой управляющий</em></span>
-          <span class="manager-mini" aria-hidden="true"><canvas class="manager-canvas"></canvas></span>
-        </div>
-
-        <div class="manager-edit">
-          <label for="managerName">Имя управляющего</label>
-          <div class="input-wrap">
-            <input id="managerName" maxlength="36" value="Цифровой управляющий" autocomplete="off">
-            <button id="saveManagerName" aria-label="Сохранить имя">Сохранить</button>
-          </div>
-        </div>
-      </section>
-
-      <section class="feature-card" id="autopilotCard" role="button" tabindex="0" aria-label="Автопилот">
-        <div class="feature-top">
-          <div class="feature-icon">✦</div>
-          <div>
-            <span class="eyebrow">АВТОПИЛОТ</span>
-            <h2>Самостоятельность действий</h2>
-          </div>
-          <span class="status" id="autopilotStatus">Включён</span>
-        </div>
-        <p>Ты задаёшь границы, внутри которых управляющий может действовать сам.</p>
-        <div class="feature-bottom">
-          <span>Спрашивать обо всём <i></i> Решать самому</span>
-          <button class="quiet-action" data-toast="Открываем правила автопилота">Настроить <b>→</b></button>
-        </div>
-      </section>
-
-      <section class="group">
-        <div class="setting-row setting-row-expanded">
-          <span class="row-icon">○</span>
-          <span class="row-copy"><b>Главная</b><small>Что показывать на первом экране</small></span>
-          <span class="row-arrow">→</span>
-          <div class="selection-list" aria-label="Разделы главной">
-            <button class="selection is-on">Продажи</button>
-            <button class="selection is-on">Деньги</button>
-            <button class="selection is-on">Клиенты</button>
-            <button class="selection">Картина</button>
-            <button class="selection is-on">Мои дела</button>
-          </div>
-        </div>
-
-        <button class="setting-row" data-toast="Открываем связи">
-          <span class="row-icon">⌘</span>
-          <span class="row-copy"><b>Связи</b><small>Почта · календарь · банк · продажи · маркетплейсы</small></span>
-          <span class="row-arrow">→</span>
+        <button class="metric-card orders-card" id="ordersCard" type="button" aria-label="Открыть заказы">
+          <div class="tile-heading"><svg class="ico tile-symbol"><use href="#ic-cart"/></svg><span>Заказы</span><span class="tile-chevron"><svg class="ico"><use href="#ic-chevron"/></svg></span></div>
+          <div class="orders-inner"><div><strong class="tile-number" id="ordersValue">1 284</strong><div class="delta small">▲ +11%</div></div><div class="bargraph" aria-hidden="true"><i style="--h:22%"></i><i style="--h:30%"></i><i style="--h:39%"></i><i style="--h:47%"></i><i style="--h:54%"></i><i style="--h:64%"></i><i style="--h:76%"></i><i style="--h:91%"></i></div></div>
         </button>
-
-        <button class="setting-row" data-toast="Открываем дополнительные возможности">
-          <span class="row-icon">＋</span>
-          <span class="row-copy"><b>Дополнительно</b><small>Документы · платежи · помощь · обучение</small></span>
-          <span class="row-arrow">→</span>
+        <button class="metric-card profit-card" data-detail="profit" type="button" aria-label="Подробнее о прибыли">
+          <div class="tile-heading"><svg class="ico tile-symbol gold"><use href="#ic-coins"/></svg><span>Прибыль</span><span class="tile-chevron"><svg class="ico"><use href="#ic-chevron"/></svg></span></div>
+          <strong class="profit-number" id="profitValue">4 890 000 ₽</strong><div class="delta small">▲ +7% <small>к вчера</small></div>
+          <svg class="profit-chart" viewBox="0 0 260 85" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="goldArea" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ed9b4b" stop-opacity=".48"/><stop offset="1" stop-color="#c98236" stop-opacity="0"/></linearGradient></defs><path d="M0 77 Q23 69 40 65T76 64 Q100 70 121 58T166 49 Q191 47 209 27T260 9 L260 85 H0Z" fill="url(#goldArea)"/><path d="M0 77 Q23 69 40 65T76 64 Q100 70 121 58T166 49 Q191 47 209 27T260 9" stroke="#ffd18f" stroke-width="2.3" fill="none"/><circle cx="260" cy="9" r="5" fill="#fff3cf"/></svg>
         </button>
-      </section>
-
-      <section class="closing-note">
-        <span class="closing-mark">✦</span>
-        <div><strong id="closingName">Цифровой управляющий</strong><p>Остальное можно изменить в любой момент.</p></div>
-      </section>
-    </section>
-
-    <nav class="bottom-nav" aria-label="Основная навигация">
-      <button class="nav-item" data-close-management><span>⌂</span><small>Главная</small></button>
-      <button class="nav-item" data-toast="Раздел «Дела»"><span>□</span><small>Дела</small></button>
-      <button class="nav-item" data-toast="Открываем помощника"><span>◇</span><small>Помощник</small></button>
-      <button class="nav-item" data-toast="Раздел «Клиенты»"><span>○</span><small>Клиенты</small></button>
-      <button class="nav-item active"><span>⌘</span><small>Управление</small></button>
-    </nav>
-
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  </main>
-
-  <script src="manager-3d.js"></script>
-  <script src="main.js"></script>
+        <section class="metric-card recommendation-card" aria-label="Рекомендация управляющего">
+          <div class="recommendation-waves" aria-hidden="true"></div>
+          <div class="recommendation-top"><svg class="ico spark-icon"><use href="#ic-spark"/></svg><span>Рекомендация<br>от управляющего</span><button class="tile-chevron rec-chevron" data-detail="advice" aria-label="Открыть рекомендацию" type="button"><svg class="ico"><use href="#ic-chevron"/></svg></button></div>
+          <p class="advice-head">Есть потенциал для роста<br>в рекламных каналах.</p><p class="advice-body">Увеличьте бюджет на 20% — прогнозируемый рост выручки до +35% в течение 30 дней.</p>
+          <button class="advice-cta" id="openAdvice" type="button">Посмотреть план <svg class="ico"><use href="#ic-arrow"/></svg></button>
+        </section>
+      </div>
+      <section class="shortcuts" aria-label="Быстрые действия"><h2>Быстрые действия</h2><div class="shortcut-grid">
+        <button class="shortcut" data-action="strategy" type="button"><svg class="ico shortcut-icon blue"><use href="#ic-target"/></svg><span>Создать<br>стратегию</span></button>
+        <button class="shortcut" data-action="clients" type="button"><svg class="ico shortcut-icon blue"><use href="#ic-users"/></svg><span>Работа<br>с клиентами</span></button>
+        <button class="shortcut" data-action="finance" type="button"><svg class="ico shortcut-icon cyan"><use href="#ic-file"/></svg><span>Финансовый<br>анализ</span></button>
+        <button class="shortcut" data-action="automation" type="button"><svg class="ico shortcut-icon gold"><use href="#ic-settings"/></svg><span>Автоматизация<br>процессов</span></button>
+      </div></section>
+      <p class="demo-disclaimer">Демонстрационные показатели. Подключение реальных данных — следующий этап.</p>
+    </main>
+  </div>
+  <div class="screen secondary-screen" id="assistantScreen" hidden><header class="subhead"><img src="./assets/brand-logo.png" alt=""><div><small>Цифровой управляющий</small><h1>Помощник</h1></div></header><div class="assistant-welcome"><div class="assistant-orb"><img src="./assets/brand-logo.png" alt=""></div><h2>Ваш цифровой помощник</h2><p>Пока это демонстрационный помощник. Он работает с примерами задач, без подключения к ИИ или вашим реальным данным.</p></div><div class="assistant-suggestions"><button data-question="Как увеличить выручку?">Как увеличить выручку? <svg class="ico"><use href="#ic-chevron"/></svg></button><button data-question="Как улучшить работу с клиентами?">Как улучшить работу с клиентами? <svg class="ico"><use href="#ic-chevron"/></svg></button><button data-question="Как контролировать расходы?">Как контролировать расходы? <svg class="ico"><use href="#ic-chevron"/></svg></button></div><div id="chatLog" class="chat-log" role="log" aria-live="polite"></div><form id="chatForm" class="chat-form"><label for="chatInput" class="sr-only">Написать помощнику</label><input id="chatInput" autocomplete="off" placeholder="Спросите о бизнесе…"><button type="submit" aria-label="Отправить"><svg class="ico"><use href="#ic-arrow"/></svg></button></form></div>
+  <div class="screen secondary-screen" id="managementScreen" hidden><header class="subhead"><img src="./assets/brand-logo.png" alt=""><div><small>Цифровой управляющий</small><h1>Управление</h1></div></header><div class="management-intro"><h2>Бизнес под контролем.</h2><p>Компания, клиенты, заказы и настройки — в одном месте.</p></div><div class="manage-list"><button data-manage="company" type="button"><span class="manage-icon"><svg class="ico"><use href="#ic-building"/></svg></span><span><strong>Карточка бизнеса</strong><small id="manageCompanyName">Моя компания</small></span><svg class="ico"><use href="#ic-chevron"/></svg></button><button data-manage="clients" type="button"><span class="manage-icon"><svg class="ico"><use href="#ic-users"/></svg></span><span><strong>Клиенты</strong><small>Список клиентов и добавление новых</small></span><svg class="ico"><use href="#ic-chevron"/></svg></button><button data-manage="orders" type="button"><span class="manage-icon"><svg class="ico"><use href="#ic-cart"/></svg></span><span><strong>Заказы</strong><small>Учёт тестовых заказов</small></span><svg class="ico"><use href="#ic-chevron"/></svg></button><button data-manage="license" type="button"><span class="manage-icon"><svg class="ico"><use href="#ic-shield"/></svg></span><span><strong>Подписка и лицензия</strong><small>Статус версии и активации</small></span><svg class="ico"><use href="#ic-chevron"/></svg></button><button data-manage="profile" type="button"><span class="manage-icon"><svg class="ico"><use href="#ic-person"/></svg></span><span><strong>Мой профиль</strong><small>Имя владельца кабинета</small></span><svg class="ico"><use href="#ic-chevron"/></svg></button></div><div class="management-foot"><span>Оформление</span><strong>Black Velvet · Тёмная тема</strong><small>Светлую тему добавим следующим этапом.</small></div></div>
+  <nav class="bottom-nav" aria-label="Главная навигация">
+    <!-- One continuous matte plinth, with a shallow elevation at the assistant socket. -->
+    <svg class="nav-shell" viewBox="0 0 430 116" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="navSurface" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#101e2a"/>
+          <stop offset=".45" stop-color="#07121d"/>
+          <stop offset="1" stop-color="#03080e"/>
+        </linearGradient>
+        <linearGradient id="navTopRim" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#dfedfa" stop-opacity=".56"/>
+          <stop offset="1" stop-color="#5d809d" stop-opacity=".12"/>
+        </linearGradient>
+      </defs>
+      <path d="M0 30 C22 14 51 13 82 13 H146 C173 13 183 10 195 5 C205 0 225 0 235 5 C248 11 260 13 282 13 H349 C384 13 410 16 430 29 V116 H0 Z" fill="url(#navSurface)"/>
+      <path d="M0 30 C22 14 51 13 82 13 H146 C173 13 183 10 195 5 C205 0 225 0 235 5 C248 11 260 13 282 13 H349 C384 13 410 16 430 29" fill="none" stroke="url(#navTopRim)" stroke-width="1.15" vector-effect="non-scaling-stroke"/>
+    </svg>
+    <button class="nav-item active" id="tabHome" data-tab="home" type="button" aria-current="page">
+      <svg class="ico nav-ico"><use href="#ic-home"/></svg>
+      <span class="nav-label">Главная</span>
+      <i class="nav-underline" aria-hidden="true"></i>
+    </button>
+    <button class="nav-item assistant-tab" id="tabAssistant" data-tab="assistant" type="button">
+      <span class="assistant-socket" aria-hidden="true">
+        <span class="assistant-ring">
+          <span class="assistant-core">
+            <svg class="nav-mark" viewBox="0 0 60 60" aria-hidden="true">
+              <defs>
+                <linearGradient id="navSilver" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#a2caff"/></linearGradient>
+                <linearGradient id="navBlue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d1f1ff"/><stop offset="1" stop-color="#3b8fff"/></linearGradient>
+              </defs>
+              <path d="M10 35 38 7v17L10 52Z" fill="url(#navSilver)"/>
+              <path d="M29 44 51 22v17L29 60Z" fill="url(#navBlue)"/>
+            </svg>
+          </span>
+        </span>
+      </span>
+      <span class="nav-label">Помощник</span>
+    </button>
+    <button class="nav-item" id="tabManagement" data-tab="management" type="button">
+      <svg class="ico nav-ico"><use href="#ic-grid"/></svg>
+      <span class="nav-label">Управление</span>
+      <i class="nav-underline" aria-hidden="true"></i>
+    </button>
+  </nav>
+</div>
+<dialog id="modal" aria-labelledby="dialogTitle"><div class="dialog-inner"><div class="dialog-head"><div><span class="dialog-eyebrow">ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h2 id="dialogTitle">Информация</h2></div><button class="dialog-close" id="closeDialog" type="button" aria-label="Закрыть"><svg class="ico"><use href="#ic-x"/></svg></button></div><div id="dialogContent"></div></div></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<script src="./app.js" defer></script>
 </body>
 </html>
