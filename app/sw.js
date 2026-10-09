@@ -1,9 +1,68 @@
-/* Only the /app/ subdirectory belongs to this service worker. Root advertising site is untouched. */
-const CACHE='digital-manager-black-velvet-v228-20261009';
-const OFFLINE=['./','./index.html','./style.css','./app.js','./manifest.json','./assets/architecture-hero.png','./assets/brand-logo.svg','./assets/assistant-mark.svg','./assets/icon-192.png','./assets/icon-512.png'];
-self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(OFFLINE)).then(()=>self.skipWaiting()));});
-self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('digital-manager-black-velvet-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
-self.addEventListener('fetch',event=>{const req=event.request;if(req.method!=='GET'||new URL(req.url).origin!==self.location.origin)return;const url=new URL(req.url);if(!url.pathname.startsWith(new URL(self.registration.scope).pathname))return;
-  if(req.mode==='navigate'){event.respondWith(fetch(req).catch(()=>caches.match('./index.html')));return;}
-  event.respondWith(caches.match(req).then(cached=>cached||fetch(req).then(res=>{if(res.ok){const clone=res.clone();caches.open(CACHE).then(cache=>cache.put(req,clone));}return res;})));
+/* App-only service worker: fresh documents, styles and scripts; cached offline assets. */
+const CACHE = 'digital-manager-black-velvet-v229-20261009';
+const CACHE_PREFIX = 'digital-manager-black-velvet-';
+const OFFLINE_FILES = [
+  './index.html',
+  './style.css?v=229',
+  './app.js?v=226',
+  './manifest.json',
+  './assets/architecture-hero.png',
+  './assets/brand-logo.svg',
+  './assets/assistant-mark.svg',
+  './assets/icon-192.png',
+  './assets/icon-512.png'
+];
+
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE)
+      .then(cache => cache.addAll(OFFLINE_FILES))
+      .then(() => self.skipWaiting())
+  );
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys()
+      .then(names => Promise.all(
+        names.filter(name => name.startsWith(CACHE_PREFIX) && name !== CACHE)
+          .map(name => caches.delete(name))
+      ))
+      .then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener('fetch', event => {
+  const request = event.request;
+  if (request.method !== 'GET') return;
+
+  const url = new URL(request.url);
+  const scopePath = new URL(self.registration.scope).pathname;
+  if (url.origin !== self.location.origin || !url.pathname.startsWith(scopePath)) return;
+
+  const documentRequest = request.mode === 'navigate' || request.destination === 'document';
+  const freshRequest = documentRequest || request.destination === 'style' || request.destination === 'script';
+
+  event.respondWith((async () => {
+    const cache = await caches.open(CACHE);
+    if (freshRequest) {
+      try {
+        const response = await fetch(request, { cache: 'no-store' });
+        if (response.ok) event.waitUntil(cache.put(request, response.clone()));
+        return response;
+      } catch (_) {
+        const saved = await cache.match(request, { ignoreSearch: true });
+        if (saved) return saved;
+        return documentRequest
+          ? (await cache.match('./index.html') || Response.error())
+          : Response.error();
+      }
+    }
+
+    const saved = await cache.match(request);
+    if (saved) return saved;
+    const response = await fetch(request);
+    if (response.ok) event.waitUntil(cache.put(request, response.clone()));
+    return response;
+  })());
 });
