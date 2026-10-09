@@ -2,6 +2,7 @@
 (() => {
   'use strict';
   const DB_NAME='digital-manager-my-day-v1';
+  const ru=window.DMRuCalendar;
   const EVENTS='events',NOTES='notes';
   const $=id=>document.getElementById(id);
   const pad=n=>String(n).padStart(2,'0');
@@ -72,7 +73,7 @@
     $('selectedDateLabel').textContent=dayLabel(selected);
     $('notesCount').textContent=notes.length;
     $('notesCount').hidden=notes.length===0;
-    renderMonth();renderEvents();renderDayNotes();renderNotes();
+    renderMonth();renderEvents();renderDayNotes();renderNotes();renderRuStatus();
   }
   function renderMonth(){
     const grid=$('monthGrid');grid.replaceChildren();
@@ -87,7 +88,12 @@
       if(d.getMonth()!==first.getMonth())button.classList.add('outside');
       if(key===today())button.classList.add('today');
       if(key===selected)button.classList.add('selected');
-      button.setAttribute('aria-label',new Intl.DateTimeFormat('ru-RU',{day:'numeric',month:'long',year:'numeric'}).format(d));
+      const calendarDay=ru.getDay(key);
+      if(calendarDay.weekend)button.classList.add('ru-weekend');
+      if(calendarDay.holiday)button.classList.add('ru-holiday');
+      if(calendarDay.transferred)button.classList.add('ru-transferred');
+      if(calendarDay.off)button.title=calendarDay.label+(calendarDay.confirmed?' · нерабочий день':' · предварительно');
+      button.setAttribute('aria-label',new Intl.DateTimeFormat('ru-RU',{day:'numeric',month:'long',year:'numeric'}).format(d)+(calendarDay.off?', '+calendarDay.label+', нерабочий день':''));
       button.setAttribute('aria-pressed',String(key===selected));
       const markers=elem('span','markers');markers.setAttribute('aria-hidden','true');
       if(eventDates.has(key))markers.append(elem('i','event'));
@@ -156,6 +162,29 @@
       card.append(meta);list.append(card);
     }
   }
+  function renderRuStatus(){
+    const status=$('ruSelectedStatus'),day=ru.getDay(selected);
+    if(day.off){
+      status.hidden=false;
+      const count=events.filter(e=>e.date===selected&&!e.done&&e.kind!=='personal').length;
+      status.textContent='✦ '+day.label+' — нерабочий день'+(day.confirmed?'':' (переносы на этот год ещё не подтверждены)')+(count?'. Запланировано рабочих дел: '+count:'')+'.';
+    }else status.hidden=true;
+    const next=new Date();next.setDate(next.getDate()+1);const date=dateKey(next);
+    const tomorrow=ru.getDay(date),banner=$('ruTomorrowWarning');
+    const scheduled=events.filter(e=>e.date===date&&!e.done&&e.kind!=='personal').length;
+    if(tomorrow.off){
+      banner.hidden=false;
+      banner.textContent='☀ Шеф, завтра '+(tomorrow.holiday||tomorrow.transferred?tomorrow.label.toLowerCase():'выходной')+'.'+(scheduled?' А у тебя на этот день запланировано рабочих дел: '+scheduled+'. Проверь график.':' Отдых — тоже важная часть плана!')+(tomorrow.confirmed?'':' (переносы предварительные)');
+    }else banner.hidden=true;
+  }
+  function updateRuAdvice(){
+    const date=$('eventDate').value,kind=$('eventKind').value,day=ru.getDay(date),box=$('ruEventAdvice');
+    if(!day.valid||!day.off||kind==='personal'){box.hidden=true;return;}
+    box.hidden=false;
+    $('ruEventAdviceText').textContent='⚠ '+day.label+' — нерабочий день'+(day.confirmed?'':' (переносы могут измениться)')+'. Можно оставить дату или выбрать ближайший рабочий день.';
+    const next=ru.nextWorkingDay(date);$('ruMoveWorking').hidden=!next;
+    $('ruMoveWorking').dataset.next=next||'';
+  }
   function openEvent(item){
     $('eventForm').reset();$('eventId').value=item?.id||'';
     $('eventDialogTitle').textContent=item?'Изменить событие':'Новое событие';
@@ -164,7 +193,7 @@
     $('eventTime').value=item?.time||'';
     $('eventKind').value=item?.kind||'task';
     $('eventDetail').value=item?.detail||'';
-    $('eventDialog').showModal();$('eventTitle').focus();
+    updateRuAdvice();$('eventDialog').showModal();$('eventTitle').focus();
   }
   function openNote(item){
     $('noteForm').reset();$('noteId').value=item?.id||'';
@@ -185,6 +214,8 @@
     if(!storageOk){toast('Хранилище недоступно: не удалось сохранить.');return;}
     const id=$('eventId').value,old=events.find(x=>x.id===id),title=$('eventTitle').value.trim(),date=$('eventDate').value;
     if(!title||!(/^\d{4}-\d{2}-\d{2}$/).test(date))return;
+    const dayOff=ru.getDay(date);
+    if(dayOff.off&&$('eventKind').value!=='personal'&&!window.confirm('Шеф, '+ru.formatDate(date)+' — '+dayOff.label+' (нерабочий день). Всё равно сохранить дело на эту дату?'))return;
     const item={
       id:id||uid(),title,date,time:$('eventTime').value,kind:$('eventKind').value,
       detail:$('eventDetail').value.trim(),done:old?.done||false,
@@ -231,6 +262,12 @@
     $('nextMonth').addEventListener('click',()=>{month=new Date(month.getFullYear(),month.getMonth()+1,1);render();});
     $('goToday').addEventListener('click',()=>{selected=today();const d=new Date();month=new Date(d.getFullYear(),d.getMonth(),1);setView('calendar');render();});
     $('addEvent').addEventListener('click',()=>openEvent());
+    $('eventDate').addEventListener('change',updateRuAdvice);
+    $('eventKind').addEventListener('change',updateRuAdvice);
+    $('ruMoveWorking').addEventListener('click',()=>{
+      const next=$('ruMoveWorking').dataset.next;
+      if(next){$('eventDate').value=next;updateRuAdvice();toast('Ближайший рабочий день: '+ru.formatDate(next));}
+    });
     $('addNote').addEventListener('click',()=>openNote());
     $('addNoteForDay').addEventListener('click',()=>openNote());
     $('noteSearch').addEventListener('input',renderNotes);
