@@ -18,3 +18,17 @@
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 /* Personal OS entry; only this unique element is added to My Day. */
 .world-entry{display:flex;align-items:center;gap:11px;padding:12px 13px;margin:0 0 16px;border-radius:15px;border:1px solid rgba(149,192,230,.32);background:radial-gradient(ellipse at 0% 0%,rgba(139,194,243,.11),transparent 70%),linear-gradient(145deg,#152538,#08131d);text-decoration:none;color:#eaf5ff;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}.world-entry-symbol{display:grid;place-items:center;flex:none;width:34px;height:34px;background:linear-gradient(145deg,#254362,#101f31);border-radius:12px;border:1px solid rgba(173,211,243,.27);font-size:21px;color:#c9e8ff}.world-entry>span:nth-child(2){min-width:0;flex:1}.world-entry strong{display:block;font-size:13px;font-weight:500}.world-entry small{display:block;font-size:10px;line-height:1.35;color:#9dbbd3;margin-top:4px}.world-entry-arrow{font-size:17px;color:#b9d8ed}
+
+/* Russian 2026 holidays: new calendar markers and advisories, original Black Velvet untouched. */
+.calendar-day.ru-weekend:not(.selected){color:#d2b3c1}
+.calendar-day.ru-holiday:not(.selected){color:#ffdba8;background:radial-gradient(ellipse at 50% 100%,rgba(226,174,93,.12),transparent 90%);border-color:rgba(232,188,126,.22)}
+.calendar-day.ru-transferred:not(.selected){color:#f6d9a6;border-color:rgba(226,174,93,.25)}
+.calendar-day.ru-holiday::after,.calendar-day.ru-transferred::after{content:"";position:absolute;right:7px;top:5px;width:4px;height:4px;border-radius:50%;background:#ffd08a;box-shadow:0 0 6px rgba(248,198,131,.65)}
+.calendar-legend{flex-wrap:wrap;row-gap:6px;column-gap:13px}
+.calendar-legend .legend-holiday{background:#f3c789;width:5px;height:5px}
+.ru-calendar-caption{text-align:center;color:#93a6ba;font-size:10px;line-height:1.45;margin:10px 0 0}
+.ru-selected-status,.ru-tomorrow-warning,.ru-event-advice{border:1px solid rgba(226,186,131,.28);border-radius:13px;padding:11px 12px;margin-top:10px;background:radial-gradient(ellipse at 0% 0%,rgba(218,153,94,.12),transparent 80%),linear-gradient(145deg,#201e1c,#0b121c);color:#e9d7ba;font-size:11px;line-height:1.5}
+.ru-selected-status[hidden],.ru-tomorrow-warning[hidden],.ru-event-advice[hidden]{display:none}
+.ru-tomorrow-warning{background:linear-gradient(145deg,#102b45,#0a1522);border-color:rgba(132,187,226,.3);color:#dbecf9}
+.ru-event-advice{display:grid;gap:8px}
+.ru-event-advice button{justify-self:start;padding:8px 11px;border:1px solid rgba(226,186,131,.32);border-radius:9px;background:#2d2b28;color:#ffe4c5;font-size:11px}
