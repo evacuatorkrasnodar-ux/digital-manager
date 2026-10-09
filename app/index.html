@@ -12,7 +12,7 @@
   <link rel="apple-touch-icon" href="./assets/icon-192.png">
   <link rel="icon" type="image/png" href="./assets/icon-192.png">
   <link rel="preload" href="./assets/architecture-hero.png" as="image">
-  <link rel="stylesheet" href="./style.css?v=221">
+  <link rel="stylesheet" href="./style.css?v=222">
   <title>Цифровой управляющий — Black Velvet</title>
 </head>
 <body>
@@ -184,12 +184,12 @@
           <feGaussianBlur stdDeviation="3"/>
         </filter>
       </defs>
-      <!-- Mirror-symmetric, broad central crest: visible without an exaggerated bump. -->
-      <path id="navCrest" d="M0 49 C0 21 41 13 96 13 H125 C155 13 179 8 195 1 C206 -4 224 -4 235 1 C251 8 275 13 305 13 H334 C389 13 430 21 430 49 V116 H0 Z" fill="url(#navSurface)"/>
-      <path d="M0 49 C0 21 41 13 96 13 H125 C155 13 179 8 195 1 C206 -4 224 -4 235 1 C251 8 275 13 305 13 H334 C389 13 430 21 430 49 V116 H0 Z" fill="url(#navAmbient)"/>
-      <path d="M0 49 C0 21 41 13 96 13 H125 C155 13 179 8 195 1 C206 -4 224 -4 235 1 C251 8 275 13 305 13 H334 C389 13 430 21 430 49" fill="none" stroke="url(#navLightTrace)" stroke-width="6" opacity=".33" filter="url(#navDiffusedRim)" vector-effect="non-scaling-stroke"/>
-      <path d="M0 49 C0 21 41 13 96 13 H125 C155 13 179 8 195 1 C206 -4 224 -4 235 1 C251 8 275 13 305 13 H334 C389 13 430 21 430 49" fill="none" stroke="url(#navTopRim)" stroke-width="1.05" vector-effect="non-scaling-stroke"/>
-      <path d="M0 49 C0 21 41 13 96 13 H125 C155 13 179 8 195 1 C206 -4 224 -4 235 1 C251 8 275 13 305 13 H334 C389 13 430 21 430 49" fill="none" stroke="url(#navLightTrace)" stroke-width=".8" vector-effect="non-scaling-stroke"/>
+      <!-- Balanced, gently taller crest with mirrored left/right geometry. -->
+      <path id="navCrest" d="M0 49 C0 21 41 13 96 13 H125 C155 13 179 7 195 -3 C206 -9 224 -9 235 -3 C251 7 275 13 305 13 H334 C389 13 430 21 430 49 V116 H0 Z" fill="url(#navSurface)"/>
+      <path d="M0 49 C0 21 41 13 96 13 H125 C155 13 179 7 195 -3 C206 -9 224 -9 235 -3 C251 7 275 13 305 13 H334 C389 13 430 21 430 49 V116 H0 Z" fill="url(#navAmbient)"/>
+      <path d="M0 49 C0 21 41 13 96 13 H125 C155 13 179 7 195 -3 C206 -9 224 -9 235 -3 C251 7 275 13 305 13 H334 C389 13 430 21 430 49" fill="none" stroke="url(#navLightTrace)" stroke-width="6" opacity=".33" filter="url(#navDiffusedRim)" vector-effect="non-scaling-stroke"/>
+      <path d="M0 49 C0 21 41 13 96 13 H125 C155 13 179 7 195 -3 C206 -9 224 -9 235 -3 C251 7 275 13 305 13 H334 C389 13 430 21 430 49" fill="none" stroke="url(#navTopRim)" stroke-width="1.05" vector-effect="non-scaling-stroke"/>
+      <path d="M0 49 C0 21 41 13 96 13 H125 C155 13 179 7 195 -3 C206 -9 224 -9 235 -3 C251 7 275 13 305 13 H334 C389 13 430 21 430 49" fill="none" stroke="url(#navLightTrace)" stroke-width=".8" vector-effect="non-scaling-stroke"/>
     </svg>
     <button class="nav-item active" id="tabHome" data-tab="home" type="button" aria-current="page">
       <svg class="ico nav-ico"><use href="#ic-home"/></svg>
@@ -215,6 +215,6 @@
 </div>
 <dialog id="modal" aria-labelledby="dialogTitle"><div class="dialog-inner"><div class="dialog-head"><div><span class="dialog-eyebrow">ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h2 id="dialogTitle">Информация</h2></div><button class="dialog-close" id="closeDialog" type="button" aria-label="Закрыть"><svg class="ico"><use href="#ic-x"/></svg></button></div><div id="dialogContent"></div></div></dialog>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-<script src="./app.js?v=221" defer></script>
+<script src="./app.js?v=222" defer></script>
 </body>
 </html>
