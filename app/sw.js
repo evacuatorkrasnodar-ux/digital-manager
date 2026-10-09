@@ -1,5 +1,5 @@
 /* Only the /app/ subdirectory belongs to this service worker. Root advertising site is untouched. */
-const CACHE='digital-manager-black-velvet-v227-20261009';
+const CACHE='digital-manager-black-velvet-v228-20261009';
 const OFFLINE=['./','./index.html','./style.css','./app.js','./manifest.json','./assets/architecture-hero.png','./assets/brand-logo.svg','./assets/assistant-mark.svg','./assets/icon-192.png','./assets/icon-512.png'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(OFFLINE)).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('digital-manager-black-velvet-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
