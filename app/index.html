@@ -12,7 +12,7 @@
   <link rel="apple-touch-icon" href="./assets/icon-192.png">
   <link rel="icon" type="image/png" href="./assets/icon-192.png">
   <link rel="preload" href="./assets/architecture-hero.png" as="image">
-  <link rel="stylesheet" href="./style.css?v=225">
+  <link rel="stylesheet" href="./style.css?v=226">
   <title>Цифровой управляющий — Black Velvet</title>
 </head>
 <body>
@@ -35,6 +35,7 @@
 <path d="M42.0 73.8 79.7 36.4 79.7 63.5 56.5 88.0 42.0 88.0Z" fill="url(#blue)" stroke="#8fcbff" stroke-opacity=".55" stroke-width=".85" stroke-linejoin="round"/></symbol>
   <!-- Single source of truth for the asymmetric developer-card outline. -->
   <clipPath id="developerCardClip" clipPathUnits="objectBoundingBox"><path d="M .087 .006 C .036 .006 .006 .049 .006 .113 L .006 .442 C .006 .506 .029 .547 .088 .56 C .151 .572 .169 .61 .169 .685 L .169 .891 C .169 .964 .209 .994 .276 .994 L .915 .994 C .966 .994 .994 .964 .994 .904 L .994 .107 C .994 .043 .958 .006 .911 .006 Z"/></clipPath>
+  <clipPath id="profileCardClip" clipPathUnits="objectBoundingBox"><path d="M .087 .006 C .036 .006 .006 .049 .006 .113 L .006 .442 C .006 .506 .029 .547 .088 .56 C .151 .572 .169 .61 .169 .685 L .169 .891 C .169 .964 .209 .994 .276 .994 L .915 .994 C .966 .994 .994 .964 .994 .904 L .994 .107 C .994 .043 .958 .006 .911 .006 Z" transform="translate(1 0) scale(-1 1)"/></clipPath>
   <symbol id="ic-cube" viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7zM3 7l9 5 9-5M12 12v10"/></symbol>
   <symbol id="ic-crown" viewBox="0 0 24 24"><path d="M2.5 7.5 6.5 12l5.5-7 5.5 7 4-4.5-2 12h-15zM5.5 21h13"/></symbol>
   <symbol id="ic-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
@@ -74,7 +75,7 @@
           </div>
         </div>
         <div class="header-actions">
-          <button class="round-action" id="openProfile" type="button" aria-label="Профиль"><svg class="ico"><use href="#ic-person"/></svg></button>
+          <button class="round-action" id="openProfile" type="button" aria-label="Показать карточку владельца и организации" aria-expanded="false" aria-controls="openProfileCard"><svg class="ico"><use href="#ic-person"/></svg></button>
         </div>
       </header>
       <div class="hero-intro">
@@ -95,6 +96,20 @@
             <span class="status-line active-preview"><i class="status-dot"></i><span id="subscriptionPreview">Подписка активна</span></span>
           </div>
           <span class="license-example" aria-hidden="true">образец</span>
+        </button>
+        <button id="openProfileCard" class="profile-preview" type="button" hidden aria-label="Открыть сведения об организации и владельце">
+          <svg class="profile-card-outline" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true"><path d="M .087 .006 C .036 .006 .006 .049 .006 .113 L .006 .442 C .006 .506 .029 .547 .088 .56 C .151 .572 .169 .61 .169 .685 L .169 .891 C .169 .964 .209 .994 .276 .994 L .915 .994 C .966 .994 .994 .964 .994 .904 L .994 .107 C .994 .043 .958 .006 .911 .006 Z" transform="translate(1 0) scale(-1 1)"/></svg>
+          <span class="profile-top">
+            <span class="profile-mini-logo" aria-hidden="true"><svg class="ico"><use href="#ic-building"/></svg></span>
+            <span class="profile-brand-text"><strong id="profilePreviewCompany">Моя компания</strong><small>Карточка организации</small></span>
+            <span class="profile-arrow" aria-hidden="true"><svg class="ico"><use href="#ic-chevron"/></svg></span>
+          </span>
+          <span class="profile-lines">
+            <span><svg class="ico" aria-hidden="true"><use href="#ic-person"/></svg><span id="profilePreviewOwner">Алексей</span></span>
+            <span><svg class="ico" aria-hidden="true"><use href="#ic-building"/></svg><span id="profilePreviewIndustry">Услуги</span></span>
+            <span class="profile-open-hint">Подробнее о компании <svg class="ico" aria-hidden="true"><use href="#ic-chevron"/></svg></span>
+          </span>
+          <span class="profile-example">данные устройства</span>
         </button>
       </div>
       <div class="timebar" role="group" aria-label="Период аналитики">
@@ -214,6 +229,6 @@
 </div>
 <dialog id="modal" aria-labelledby="dialogTitle"><div class="dialog-inner"><div class="dialog-head"><div><span class="dialog-eyebrow">ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h2 id="dialogTitle">Информация</h2></div><button class="dialog-close" id="closeDialog" type="button" aria-label="Закрыть"><svg class="ico"><use href="#ic-x"/></svg></button></div><div id="dialogContent"></div></div></dialog>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-<script src="./app.js?v=225" defer></script>
+<script src="./app.js?v=226" defer></script>
 </body>
 </html>
