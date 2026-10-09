@@ -119,42 +119,63 @@
       <p class="demo-disclaimer">Демонстрационные показатели. Подключение реальных данных — следующий этап.</p>
     </main>
   </div>
-  <div class="screen secondary-screen" id="assistantScreen" hidden><header class="subhead"><img src="./assets/brand-logo.png" alt=""><div><small>Цифровой управляющий</small><h1>Помощник</h1></div></header><div class="assistant-welcome"><div class="assistant-orb"><img src="./assets/brand-logo.png" alt=""></div><h2>Ваш цифровой помощник</h2><p>Пока это демонстрационный помощник. Он работает с примерами задач, без подключения к ИИ или вашим реальным данным.</p></div><div class="assistant-suggestions"><button data-question="Как увеличить выручку?">Как увеличить выручку? <svg class="ico"><use href="#ic-chevron"/></svg></button><button data-question="Как улучшить работу с клиентами?">Как улучшить работу с клиентами? <svg class="ico"><use href="#ic-chevron"/></svg></button><button data-question="Как контролировать расходы?">Как контролировать расходы? <svg class="ico"><use href="#ic-chevron"/></svg></button></div><div id="chatLog" class="chat-log" role="log" aria-live="polite"></div><form id="chatForm" class="chat-form"><label for="chatInput" class="sr-only">Написать помощнику</label><input id="chatInput" autocomplete="off" placeholder="Спросите о бизнесе…"><button type="submit" aria-label="Отправить"><svg class="ico"><use href="#ic-arrow"/></svg></button></form></div>
+  <div class="screen secondary-screen" id="assistantScreen" hidden><header class="subhead"><img src="./assets/brand-logo.png" alt=""><div><small>Цифровой управляющий</small><h1>Помощник</h1></div></header><div class="assistant-welcome"><div class="assistant-orb"><img src="./assets/brand-logo.png" alt=""></div><h2>Ваш цифровой помощник</h2><p>Пока это демонстрационный помощник. Он работает с примерами задач, без подключения к ИИ или вашим реальным данным.</p></div><section class="ring-preview" aria-label="Проверка анимации кнопки">
+    <div class="ring-preview-head"><span>Живое кольцо</span><small>Предпросмотр подсветки · демонстрация</small></div>
+    <div class="ring-preview-controls" role="group" aria-label="Демонстрационные состояния кольца">
+      <button type="button" data-ring-preview="idle" aria-pressed="true">Спокоен</button>
+      <button type="button" data-ring-preview="thinking" aria-pressed="false">Думает</button>
+      <button type="button" data-ring-preview="speaking" aria-pressed="false">Говорит</button>
+      <button type="button" data-ring-preview="attention" aria-pressed="false">Совет</button>
+    </div>
+    <p id="ringStateDescription" role="status" aria-live="polite">Белое кольцо: помощник готов к работе.</p>
+  </section><div class="assistant-suggestions"><button data-question="Как увеличить выручку?">Как увеличить выручку? <svg class="ico"><use href="#ic-chevron"/></svg></button><button data-question="Как улучшить работу с клиентами?">Как улучшить работу с клиентами? <svg class="ico"><use href="#ic-chevron"/></svg></button><button data-question="Как контролировать расходы?">Как контролировать расходы? <svg class="ico"><use href="#ic-chevron"/></svg></button></div><div id="chatLog" class="chat-log" role="log" aria-live="polite"></div><form id="chatForm" class="chat-form"><label for="chatInput" class="sr-only">Написать помощнику</label><input id="chatInput" autocomplete="off" placeholder="Спросите о бизнесе…"><button type="submit" aria-label="Отправить"><svg class="ico"><use href="#ic-arrow"/></svg></button></form></div>
   <div class="screen secondary-screen" id="managementScreen" hidden><header class="subhead"><img src="./assets/brand-logo.png" alt=""><div><small>Цифровой управляющий</small><h1>Управление</h1></div></header><div class="management-intro"><h2>Бизнес под контролем.</h2><p>Компания, клиенты, заказы и настройки — в одном месте.</p></div><div class="manage-list"><button data-manage="company" type="button"><span class="manage-icon"><svg class="ico"><use href="#ic-building"/></svg></span><span><strong>Карточка бизнеса</strong><small id="manageCompanyName">Моя компания</small></span><svg class="ico"><use href="#ic-chevron"/></svg></button><button data-manage="clients" type="button"><span class="manage-icon"><svg class="ico"><use href="#ic-users"/></svg></span><span><strong>Клиенты</strong><small>Список клиентов и добавление новых</small></span><svg class="ico"><use href="#ic-chevron"/></svg></button><button data-manage="orders" type="button"><span class="manage-icon"><svg class="ico"><use href="#ic-cart"/></svg></span><span><strong>Заказы</strong><small>Учёт тестовых заказов</small></span><svg class="ico"><use href="#ic-chevron"/></svg></button><button data-manage="license" type="button"><span class="manage-icon"><svg class="ico"><use href="#ic-shield"/></svg></span><span><strong>Подписка и лицензия</strong><small>Статус версии и активации</small></span><svg class="ico"><use href="#ic-chevron"/></svg></button><button data-manage="profile" type="button"><span class="manage-icon"><svg class="ico"><use href="#ic-person"/></svg></span><span><strong>Мой профиль</strong><small>Имя владельца кабинета</small></span><svg class="ico"><use href="#ic-chevron"/></svg></button></div><div class="management-foot"><span>Оформление</span><strong>Black Velvet · Тёмная тема</strong><small>Светлую тему добавим следующим этапом.</small></div></div>
-  <nav class="bottom-nav" aria-label="Главная навигация">
-    <!-- One continuous matte plinth, with a shallow elevation at the assistant socket. -->
+  <nav class="bottom-nav" data-mode="idle" aria-label="Главная навигация">
+    <!-- Single continuous velvet dock: low, softly curved crest from the approved reference. -->
     <svg class="nav-shell" viewBox="0 0 430 116" preserveAspectRatio="none" aria-hidden="true">
       <defs>
         <linearGradient id="navSurface" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#101e2a"/>
-          <stop offset=".45" stop-color="#07121d"/>
-          <stop offset="1" stop-color="#03080e"/>
+          <stop offset="0" stop-color="#101820"/>
+          <stop offset=".42" stop-color="#060c13"/>
+          <stop offset="1" stop-color="#010408"/>
         </linearGradient>
+        <radialGradient id="navAmbient" gradientUnits="userSpaceOnUse" cx="215" cy="12" r="142" gradientTransform="translate(0,-4) scale(1,.52)">
+          <stop offset="0" class="nav-glow-stop" stop-opacity=".12"/>
+          <stop offset=".52" class="nav-glow-stop" stop-opacity=".035"/>
+          <stop offset="1" class="nav-glow-stop" stop-opacity="0"/>
+        </radialGradient>
         <linearGradient id="navTopRim" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#dfedfa" stop-opacity=".56"/>
-          <stop offset="1" stop-color="#5d809d" stop-opacity=".12"/>
+          <stop offset="0" stop-color="#b9d3e5" stop-opacity=".43"/>
+          <stop offset="1" stop-color="#728ca4" stop-opacity=".08"/>
         </linearGradient>
+        <linearGradient id="navLightTrace" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" class="nav-glow-stop" stop-opacity="0"/>
+          <stop offset=".3" class="nav-glow-stop" stop-opacity=".10"/>
+          <stop offset=".5" class="nav-glow-stop" stop-opacity=".62"/>
+          <stop offset=".7" class="nav-glow-stop" stop-opacity=".10"/>
+          <stop offset="1" class="nav-glow-stop" stop-opacity="0"/>
+        </linearGradient>
+        <filter id="navDiffusedRim" x="-10%" y="-300%" width="120%" height="700%">
+          <feGaussianBlur stdDeviation="3"/>
+        </filter>
       </defs>
-      <path d="M0 30 C22 14 51 13 82 13 H146 C173 13 183 10 195 5 C205 0 225 0 235 5 C248 11 260 13 282 13 H349 C384 13 410 16 430 29 V116 H0 Z" fill="url(#navSurface)"/>
-      <path d="M0 30 C22 14 51 13 82 13 H146 C173 13 183 10 195 5 C205 0 225 0 235 5 C248 11 260 13 282 13 H349 C384 13 410 16 430 29" fill="none" stroke="url(#navTopRim)" stroke-width="1.15" vector-effect="non-scaling-stroke"/>
+      <!-- Rounded edges continue into one shallow centered rise. Keep every trace on the same curve. -->
+      <path id="navCrest" d="M0 33 C2 23 37 16 79 15 H144 C173 15 190 12 201 6 C211 2 219 2 229 6 C240 12 257 15 286 15 H351 C393 16 428 23 430 33 V116 H0 Z" fill="url(#navSurface)"/>
+      <path d="M0 33 C2 23 37 16 79 15 H144 C173 15 190 12 201 6 C211 2 219 2 229 6 C240 12 257 15 286 15 H351 C393 16 428 23 430 33 V116 H0 Z" fill="url(#navAmbient)"/>
+      <path d="M0 33 C2 23 37 16 79 15 H144 C173 15 190 12 201 6 C211 2 219 2 229 6 C240 12 257 15 286 15 H351 C393 16 428 23 430 33" fill="none" stroke="url(#navLightTrace)" stroke-width="6" opacity=".33" filter="url(#navDiffusedRim)" vector-effect="non-scaling-stroke"/>
+      <path d="M0 33 C2 23 37 16 79 15 H144 C173 15 190 12 201 6 C211 2 219 2 229 6 C240 12 257 15 286 15 H351 C393 16 428 23 430 33" fill="none" stroke="url(#navTopRim)" stroke-width="1.05" vector-effect="non-scaling-stroke"/>
+      <path d="M0 33 C2 23 37 16 79 15 H144 C173 15 190 12 201 6 C211 2 219 2 229 6 C240 12 257 15 286 15 H351 C393 16 428 23 430 33" fill="none" stroke="url(#navLightTrace)" stroke-width=".8" vector-effect="non-scaling-stroke"/>
     </svg>
     <button class="nav-item active" id="tabHome" data-tab="home" type="button" aria-current="page">
       <svg class="ico nav-ico"><use href="#ic-home"/></svg>
       <span class="nav-label">Главная</span>
       <i class="nav-underline" aria-hidden="true"></i>
     </button>
-    <button class="nav-item assistant-tab" id="tabAssistant" data-tab="assistant" type="button">
+    <button class="nav-item assistant-tab" id="tabAssistant" data-tab="assistant" data-mode="idle" type="button" aria-label="Помощник — готов">
       <span class="assistant-socket" aria-hidden="true">
         <span class="assistant-ring">
           <span class="assistant-core">
-            <svg class="nav-mark" viewBox="0 0 60 60" aria-hidden="true">
-              <defs>
-                <linearGradient id="navSilver" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#a2caff"/></linearGradient>
-                <linearGradient id="navBlue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d1f1ff"/><stop offset="1" stop-color="#3b8fff"/></linearGradient>
-              </defs>
-              <path d="M10 35 38 7v17L10 52Z" fill="url(#navSilver)"/>
-              <path d="M29 44 51 22v17L29 60Z" fill="url(#navBlue)"/>
-            </svg>
+<img class="nav-mark" src="./assets/assistant-mark.png" alt="">
           </span>
         </span>
       </span>
