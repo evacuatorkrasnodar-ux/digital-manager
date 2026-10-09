@@ -14,13 +14,17 @@
 .header-actions{display:flex;gap:6px}.round-action,.icon-circle{border:1px solid rgba(163,199,226,.35);border-radius:50%;background:linear-gradient(140deg,#112338cf,#06101bcc);display:grid;place-items:center;box-shadow:inset 0 1px #ffffff0d,0 5px 15px #0004}.round-action{width:39px;height:39px}.round-action .ico{width:21px;height:21px;color:#f4f8ff}
 .hero-intro{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-top:16px;min-height:167px}.welcome{flex:1;min-width:0;padding:0 0 0 4px;text-shadow:0 2px 15px #03101b88}.welcome h1{font-size:clamp(23px,6.3vw,29px);font-weight:690;letter-spacing:-.85px;line-height:1.08;margin:1px 0 12px}.welcome p{font-size:clamp(12px,3.3vw,15px);line-height:1.3;color:#d9e8f4;margin:0}/* Developer card: one shared asymmetric silhouette, matching the approved photo.
    The indented left edge below the logomark is intentional, not a border-radius trick. */
+/* One identical dark-glass surface for the developer and mirrored owner cards. */
+.license-preview,.profile-preview{
+  background:linear-gradient(145deg,rgba(17,30,40,.78),rgba(7,18,28,.84) 54%,rgba(4,12,21,.88));
+  -webkit-backdrop-filter:blur(12px) brightness(62%) saturate(100%);
+  backdrop-filter:blur(12px) brightness(62%) saturate(100%);
+}
 .license-preview{
   position:absolute;z-index:5;isolation:isolate;display:block;flex:none;right:12px;top:78px;width:49%;max-width:190px;
   height:157px;min-height:0;margin-top:0;padding:9px 9px 8px 10px;
   text-align:left;border:0;border-radius:0;overflow:hidden;
   -webkit-clip-path:url(#developerCardClip);clip-path:url(#developerCardClip);
-  background:linear-gradient(145deg,rgba(17,30,40,.78),rgba(7,18,28,.84) 54%,rgba(4,12,21,.88));
-  -webkit-backdrop-filter:blur(12px) brightness(62%) saturate(100%);backdrop-filter:blur(12px) brightness(62%) saturate(100%);
   box-shadow:none;
 }
 .license-preview[hidden]{display:none}
@@ -52,9 +56,7 @@
   text-align:left;color:#f3f7fb;cursor:pointer;
   border:0;border-radius:0;
   -webkit-clip-path:url(#profileCardClip);clip-path:url(#profileCardClip);
-  /* Shape and dark fill are drawn by the single SVG below, not by backdrop filters. */
-  background:transparent;
-  box-shadow:inset 0 1px 0 rgba(190,220,245,.10),inset 0 -1px 0 rgba(255,255,255,.02);
+  box-shadow:none;
 }
 .profile-preview[hidden]{display:none}
 .profile-card-outline{
