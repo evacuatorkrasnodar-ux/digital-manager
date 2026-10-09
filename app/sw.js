@@ -1,77 +1,9 @@
-const CACHE_NAME = 'digital-manager-v3';
-
-const FILES = [
-  './',
-  './index.html',
-  './manifest.json'
-];
-
-// Устанавливаем новый Service Worker и сразу переводим его в активное состояние.
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(FILES))
-      .then(() => self.skipWaiting())
-  );
-});
-
-// Удаляем старые версии кэша и сразу подключаем новый SW ко всем открытым вкладкам.
-self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys()
-      .then(keys =>
-        Promise.all(
-          keys
-            .filter(key =>
-              key.startsWith('digital-manager-') &&
-              key !== CACHE_NAME
-            )
-            .map(key => caches.delete(key))
-        )
-      )
-      .then(() => self.clients.claim())
-  );
-});
-
-// index.html всегда сначала проверяем в сети.
-// Для остальных GET-запросов используем network-first,
-// чтобы обновления GitHub Pages появлялись без Ctrl+Shift+R.
-self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') return;
-
-  const url = new URL(event.request.url);
-
-  // HTML-документы: сеть -> кэш.
-  if (
-    event.request.mode === 'navigate' ||
-    url.pathname.endsWith('.html') ||
-    url.pathname === '/' ||
-    url.pathname.endsWith('/')
-  ) {
-    event.respondWith(
-      fetch(event.request, { cache: 'no-cache' })
-        .then(response => {
-          const copy = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
-          return response;
-        })
-        .catch(() => caches.match(event.request).then(
-          cached => cached || caches.match('./index.html')
-        ))
-    );
-    return;
-  }
-
-  // Остальные ресурсы: сеть -> кэш -> ошибка сети.
-  event.respondWith(
-    fetch(event.request)
-      .then(response => {
-        if (response.ok) {
-          const copy = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
-        }
-        return response;
-      })
-      .catch(() => caches.match(event.request))
-  );
+/* Only the /app/ subdirectory belongs to this service worker. Root advertising site is untouched. */
+const CACHE='digital-manager-black-velvet-v21-20261009';
+const OFFLINE=['./','./index.html','./style.css','./app.js','./manifest.json','./assets/architecture-hero.webp','./assets/brand-logo.png','./assets/icon-192.png','./assets/icon-512.png'];
+self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(OFFLINE)).then(()=>self.skipWaiting()));});
+self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('digital-manager-black-velvet-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
+self.addEventListener('fetch',event=>{const req=event.request;if(req.method!=='GET'||new URL(req.url).origin!==self.location.origin)return;const url=new URL(req.url);if(!url.pathname.startsWith(new URL(self.registration.scope).pathname))return;
+  if(req.mode==='navigate'){event.respondWith(fetch(req).catch(()=>caches.match('./index.html')));return;}
+  event.respondWith(caches.match(req).then(cached=>cached||fetch(req).then(res=>{if(res.ok){const clone=res.clone();caches.open(CACHE).then(cache=>cache.put(req,clone));}return res;})));
 });
