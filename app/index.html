@@ -12,7 +12,7 @@
   <link rel="apple-touch-icon" href="./assets/icon-192.png">
   <link rel="icon" type="image/png" href="./assets/icon-192.png">
   <link rel="preload" href="./assets/architecture-hero.png" as="image">
-  <link rel="stylesheet" href="./style.css?v=223">
+  <link rel="stylesheet" href="./style.css?v=225">
   <title>Цифровой управляющий — Black Velvet</title>
 </head>
 <body>
@@ -65,7 +65,7 @@
       <div class="hero-photo" aria-hidden="true"></div>
       <header class="masthead">
         <div class="brand-identity">
-          <button class="brand-button" id="openBrand" type="button" aria-label="О приложении, разработчике и лицензии">
+          <button class="brand-button" id="openBrand" type="button" aria-label="Показать карточку Digital Business" aria-expanded="false" aria-controls="openBrandCard">
             <svg class="brand-icon" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#brand-badge"/></svg>
           </button>
           <div class="brand-copy">
@@ -82,7 +82,7 @@
           <h1>Доброе утро,<br><span id="greetingName">Алексей</span></h1>
           <p>Спокойный фокус<br>сегодня создаёт<br>большие результаты<br>завтра.</p>
         </div>
-        <button id="openBrandCard" type="button" class="license-preview" aria-label="Digital Business: пример оформления лицензии, открыть реальные сведения о доступе">
+        <button id="openBrandCard" type="button" class="license-preview" hidden aria-label="Digital Business: пример оформления лицензии, открыть реальные сведения о доступе">
           <svg class="developer-card-outline" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true"><path d="{shape}" fill="none" stroke="rgba(184,210,227,.76)" stroke-width="1.15" vector-effect="non-scaling-stroke"/></svg>
           <div class="license-top">
             <svg class="license-mini-logo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#brand-badge"/></svg>
@@ -214,6 +214,6 @@
 </div>
 <dialog id="modal" aria-labelledby="dialogTitle"><div class="dialog-inner"><div class="dialog-head"><div><span class="dialog-eyebrow">ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h2 id="dialogTitle">Информация</h2></div><button class="dialog-close" id="closeDialog" type="button" aria-label="Закрыть"><svg class="ico"><use href="#ic-x"/></svg></button></div><div id="dialogContent"></div></div></dialog>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-<script src="./app.js?v=224" defer></script>
+<script src="./app.js?v=225" defer></script>
 </body>
 </html>
