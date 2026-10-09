@@ -226,6 +226,7 @@
       }
     }
     document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+    if(new URLSearchParams(location.search).get('view')==='notes')setView('notes');
     $('prevMonth').addEventListener('click',()=>{month=new Date(month.getFullYear(),month.getMonth()-1,1);render();});
     $('nextMonth').addEventListener('click',()=>{month=new Date(month.getFullYear(),month.getMonth()+1,1);render();});
     $('goToday').addEventListener('click',()=>{selected=today();const d=new Date();month=new Date(d.getFullYear(),d.getMonth(),1);setView('calendar');render();});
