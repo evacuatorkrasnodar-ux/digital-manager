@@ -106,8 +106,13 @@
   }
   function periodFor(key){
     for(const p of periods){
-      const end=p.end||addDays(p.start,settings.length-1);
-      if(key>=p.start&&key<=end)return p;
+      if(key===p.start||(p.end&&key>=p.start&&key<=p.end))return p;
+    }
+    return null;
+  }
+  function approximatePeriod(key){
+    for(const p of periods){
+      if(!p.end&&key>p.start&&key<=addDays(p.start,settings.length-1))return p;
     }
     return null;
   }
@@ -127,12 +132,13 @@
       if(d.getMonth()!==begin.getMonth())cell.classList.add('outside');
       if(key===today())cell.classList.add('today');
       if(key===selected)cell.classList.add('selected');
-      if(periodFor(key))cell.classList.add('recorded');else if(predicted(key))cell.classList.add('forecast');
+      const actual=Boolean(periodFor(key)),estimate=Boolean(approximatePeriod(key)),future=Boolean(predicted(key));
+      if(actual)cell.classList.add('recorded');else if(estimate||future)cell.classList.add('forecast');
       const markers=el('span','markers');markers.setAttribute('aria-hidden','true');
-      if(periodFor(key))markers.append(el('i','event'));
+      if(actual)markers.append(el('i','event'));
       if(marked.has(key))markers.append(el('i','note'));
       cell.append(markers);
-      cell.setAttribute('aria-label',full(key)+(periodFor(key)?', отмечена менструация':predicted(key)?', предварительный прогноз':'')+(marked.has(key)?', отметка самочувствия':''));
+      cell.setAttribute('aria-label',full(key)+(actual?', отмечена менструация':estimate?', примерная длительность, не подтверждена':future?', предварительный прогноз':'')+(marked.has(key)?', отметка самочувствия':''));
       cell.setAttribute('aria-pressed',String(key===selected));
       cell.addEventListener('click',()=>{selected=key;month=new Date(d.getFullYear(),d.getMonth(),1);renderMonth();renderDetails();});
       grid.append(cell);
@@ -147,6 +153,7 @@
     const list=$('careDayDetails');list.replaceChildren();
     const period=periodFor(selected);
     if(period)list.append(detail('Отмечена менструация','Начало: '+nice(period.start)+' · '+(period.end?'конец: '+nice(period.end):'длительность пока приблизительная'),'❀'));
+    else if(approximatePeriod(selected))list.append(detail('Возможное продолжение','Ориентировочно по настройкам — не подтверждено отметкой','✧'));
     else if(predicted(selected))list.append(detail('Прогнозируемые дни','Только ориентир — не фактическая запись','✧'));
     const mood=diary.find(x=>x.date===selected);
     if(mood){
@@ -156,7 +163,7 @@
       const del=el('button','care-history-edit','×');del.type='button';del.setAttribute('aria-label','Удалить отметку самочувствия');
       del.addEventListener('click',async()=>{if(!confirm('Удалить запись самочувствия за '+full(selected)+'?'))return;try{await txn(MOODS,'readwrite',s=>s.delete(selected));await load();toast('Отметка удалена');}catch(e){error(e);}});card.append(del);
     }
-    if(!period&&!predicted(selected)&&!mood)list.append(el('p','care-quiet','Здесь пока нет отметок. И это тоже нормально. ♡'));
+    if(!period&&!approximatePeriod(selected)&&!predicted(selected)&&!mood)list.append(el('p','care-quiet','Здесь пока нет отметок. И это тоже нормально. ♡'));
   }
   function renderHistory(){
     const list=$('carePeriodHistory');list.replaceChildren();
