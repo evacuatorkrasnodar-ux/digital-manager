@@ -9,9 +9,10 @@
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" href="./assets/icon-192.png" type="image/png">
-  <link rel="stylesheet" href="./myday.css?v=249">
+  <link rel="stylesheet" href="./myday.css?v=250">
   <link rel="stylesheet" href="./system-ui.css?v=247">
-  <script src="./myday.js?v=248" defer></script>
+  <script src="./russia-calendar.js?v=250" defer></script>
+  <script src="./myday.js?v=250" defer></script>
   <script src="./system-ui.js?v=247" defer></script>
   <title>Мой день — Цифровой управляющий</title>
 </head>
@@ -42,8 +43,11 @@
           </div>
           <div class="weekdays" aria-hidden="true"><span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span></div>
           <div class="month-grid" id="monthGrid" role="group" aria-label="Дни месяца"></div>
-          <div class="calendar-legend"><span><i class="legend-event"></i> События</span><span><i class="legend-note"></i> Заметки</span></div>
+          <div class="calendar-legend"><span><i class="legend-event"></i> События</span><span><i class="legend-note"></i> Заметки</span><span><i class="legend-holiday"></i> Праздники РФ</span></div>
+          <p class="ru-calendar-caption">Пятидневка РФ · переносы 2026 подтверждены, другие годы предварительно</p>
         </div>
+        <div id="ruSelectedStatus" class="ru-selected-status" role="status" hidden></div>
+        <div id="ruTomorrowWarning" class="ru-tomorrow-warning" role="status" hidden></div>
         <div class="day-section-heading">
           <div><p class="day-eyebrow">ПЛАН НА ДЕНЬ</p><h2 id="selectedDateLabel"></h2></div>
           <button class="day-add" id="addEvent" type="button">+ Событие</button>
@@ -75,6 +79,7 @@
       <input id="eventId" type="hidden">
       <label>Название<input id="eventTitle" maxlength="100" required placeholder="Что нельзя забыть?"></label>
       <div class="form-row"><label>Дата<input id="eventDate" type="date" required></label><label>Время <span class="optional">необязательно</span><input id="eventTime" type="time"></label></div>
+      <div id="ruEventAdvice" class="ru-event-advice" role="status" aria-live="polite" hidden><span id="ruEventAdviceText"></span><button type="button" id="ruMoveWorking">На рабочий день →</button></div>
       <label>Тип<select id="eventKind"><option value="task">Дело</option><option value="meeting">Встреча</option><option value="personal">Личное</option><option value="business">Бизнес</option></select></label>
       <label>Подробности <span class="optional">необязательно</span><textarea id="eventDetail" maxlength="2500" rows="3" placeholder="Адрес, телефон, важные детали…"></textarea></label>
       <div class="form-actions"><button type="button" class="secondary-btn" data-close="eventDialog">Отмена</button><button type="submit" class="primary-btn">Сохранить</button></div>
