@@ -216,6 +216,15 @@
     toast('Копия создана. JSON содержит личные данные без шифрования.');
   }
   async function init(){
+    // Calendar links from the notification center open the actual event date.
+    const dateParam=new URLSearchParams(location.search).get('date');
+    if(dateParam && /^\d{4}-\d{2}-\d{2}$/.test(dateParam)){
+      const d=parseDate(dateParam);
+      if(dateKey(d)===dateParam){
+        selected=dateParam;
+        month=new Date(d.getFullYear(),d.getMonth(),1);
+      }
+    }
     document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
     $('prevMonth').addEventListener('click',()=>{month=new Date(month.getFullYear(),month.getMonth()-1,1);render();});
     $('nextMonth').addEventListener('click',()=>{month=new Date(month.getFullYear(),month.getMonth()+1,1);render();});
