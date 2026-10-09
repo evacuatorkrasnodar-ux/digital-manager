@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Digital Business">
+<defs>
+ <linearGradient id="surface" x1=".05" y1="0" x2=".89" y2="1"><stop stop-color="#1b344b"/><stop offset=".52" stop-color="#0c1e2e"/><stop offset="1" stop-color="#06111c"/></linearGradient>
+ <linearGradient id="silver" x1=".13" y1=".05" x2=".94" y2=".98"><stop stop-color="#ffffff"/><stop offset=".34" stop-color="#e9f2ff"/><stop offset=".67" stop-color="#b4d3f6"/><stop offset="1" stop-color="#6f9bd9"/></linearGradient>
+ <linearGradient id="blue" x1=".07" y1=".0" x2=".96" y2=".99"><stop stop-color="#f7fbff"/><stop offset=".25" stop-color="#c0dbfc"/><stop offset=".65" stop-color="#6eaaff"/><stop offset="1" stop-color="#2182f7"/></linearGradient>
+</defs>
+<rect x="1.5" y="1.5" width="97" height="97" rx="22.5" fill="url(#surface)" stroke="#6b94b6" stroke-width="1.8"/>
+<path d="M14 9Q7 13 7 28" fill="none" stroke="#bbd6e9" stroke-opacity=".11" stroke-width="1"/>
+
+  <path d="M24.4 48.0 62.5 10.0 62.5 37.7 24.4 76.8Z" fill="url(#silver)" stroke="#cedef1" stroke-opacity=".48" stroke-width=".85" stroke-linejoin="round"/>
+  <path d="M42.0 73.8 79.7 36.4 79.7 63.5 56.5 88.0 42.0 88.0Z" fill="url(#blue)" stroke="#8fcbff" stroke-opacity=".55" stroke-width=".85" stroke-linejoin="round"/>
+</svg>
