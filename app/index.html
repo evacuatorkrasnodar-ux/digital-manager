@@ -12,12 +12,27 @@
   <link rel="apple-touch-icon" href="./assets/icon-192.png">
   <link rel="icon" type="image/png" href="./assets/icon-192.png">
   <link rel="preload" href="./assets/architecture-hero.png" as="image">
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style.css?v=220">
   <title>Цифровой управляющий — Black Velvet</title>
 </head>
 <body>
 <!-- All pictograms are real independent SVG elements, not fragments of the reference picture. -->
 <svg class="icon-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <!-- Inline vector marks: remain visible even if an external SVG was not uploaded to GitHub. -->
+  <symbol id="brand-badge" viewBox="0 0 100 100">
+<defs>
+ <linearGradient id="surface" x1=".05" y1="0" x2=".89" y2="1"><stop stop-color="#1b344b"/><stop offset=".52" stop-color="#0c1e2e"/><stop offset="1" stop-color="#06111c"/></linearGradient>
+ <linearGradient id="silver" x1=".13" y1=".05" x2=".94" y2=".98"><stop stop-color="#ffffff"/><stop offset=".34" stop-color="#e9f2ff"/><stop offset=".67" stop-color="#b4d3f6"/><stop offset="1" stop-color="#6f9bd9"/></linearGradient>
+ <linearGradient id="blue" x1=".07" y1=".0" x2=".96" y2=".99"><stop stop-color="#f7fbff"/><stop offset=".25" stop-color="#c0dbfc"/><stop offset=".65" stop-color="#6eaaff"/><stop offset="1" stop-color="#2182f7"/></linearGradient>
+</defs>
+<rect x="1.5" y="1.5" width="97" height="97" rx="22.5" fill="url(#surface)" stroke="#6b94b6" stroke-width="1.8"/>
+<path d="M14 9Q7 13 7 28" fill="none" stroke="#bbd6e9" stroke-opacity=".11" stroke-width="1"/>
+
+  <path d="M24.4 48.0 62.5 10.0 62.5 37.7 24.4 76.8Z" fill="url(#silver)" stroke="#cedef1" stroke-opacity=".48" stroke-width=".85" stroke-linejoin="round"/>
+  <path d="M42.0 73.8 79.7 36.4 79.7 63.5 56.5 88.0 42.0 88.0Z" fill="url(#blue)" stroke="#8fcbff" stroke-opacity=".55" stroke-width=".85" stroke-linejoin="round"/>
+</symbol>
+  <symbol id="assistant-brand-mark" viewBox="16 5 68 88"><path d="M24.4 48.0 62.5 10.0 62.5 37.7 24.4 76.8Z" fill="url(#silver)" stroke="#cedef1" stroke-opacity=".48" stroke-width=".85" stroke-linejoin="round"/>
+<path d="M42.0 73.8 79.7 36.4 79.7 63.5 56.5 88.0 42.0 88.0Z" fill="url(#blue)" stroke="#8fcbff" stroke-opacity=".55" stroke-width=".85" stroke-linejoin="round"/></symbol>
   <!-- Single source of truth for the asymmetric developer-card outline. -->
   <clipPath id="developerCardClip" clipPathUnits="objectBoundingBox"><path d="M .087 .006 C .036 .006 .006 .049 .006 .113 L .006 .442 C .006 .506 .029 .547 .088 .56 C .151 .572 .169 .61 .169 .685 L .169 .891 C .169 .964 .209 .994 .276 .994 L .915 .994 C .966 .994 .994 .964 .994 .904 L .994 .107 C .994 .043 .958 .006 .911 .006 Z"/></clipPath>
   <symbol id="ic-cube" viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7zM3 7l9 5 9-5M12 12v10"/></symbol>
@@ -51,7 +66,7 @@
       <header class="masthead">
         <div class="brand-identity">
           <button class="brand-button" id="openBrand" type="button" aria-label="О приложении, разработчике и лицензии">
-            <img src="./assets/brand-logo.png" class="brand-icon" alt="">
+            <svg class="brand-icon" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#brand-badge"/></svg>
           </button>
           <div class="brand-copy">
             <strong>Цифровой управляющий</strong>
@@ -71,7 +86,7 @@
         <button id="openBrandCard" type="button" class="license-preview" aria-label="Digital Business: пример оформления лицензии, открыть реальные сведения о доступе">
           <svg class="developer-card-outline" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true"><path d="{shape}" fill="none" stroke="rgba(184,210,227,.76)" stroke-width="1.15" vector-effect="non-scaling-stroke"/></svg>
           <div class="license-top">
-            <img src="./assets/brand-logo.png" alt="" class="license-mini-logo">
+            <svg class="license-mini-logo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#brand-badge"/></svg>
             <div class="license-brand-text"><strong>Digital Business</strong><small>IT · AI Automation</small></div>
             <span class="license-arrow"><svg class="ico mini-chevron"><use href="#ic-chevron"/></svg></span>
           </div>
@@ -129,7 +144,7 @@
       <p class="demo-disclaimer">Демонстрационные показатели. Подключение реальных данных — следующий этап.</p>
     </main>
   </div>
-  <div class="screen secondary-screen" id="assistantScreen" hidden><header class="subhead"><img src="./assets/brand-logo.png" alt=""><div><small>Цифровой управляющий</small><h1>Помощник</h1></div></header><div class="assistant-welcome"><div class="assistant-orb"><img src="./assets/brand-logo.png" alt=""></div><h2>Ваш цифровой помощник</h2><p>Пока это демонстрационный помощник. Он работает с примерами задач, без подключения к ИИ или вашим реальным данным.</p></div><section class="ring-preview" aria-label="Проверка анимации кнопки">
+  <div class="screen secondary-screen" id="assistantScreen" hidden><header class="subhead"><svg class="brand-icon" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#brand-badge"/></svg><div><small>Цифровой управляющий</small><h1>Помощник</h1></div></header><div class="assistant-welcome"><div class="assistant-orb"><svg class="brand-icon" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#brand-badge"/></svg></div><h2>Ваш цифровой помощник</h2><p>Пока это демонстрационный помощник. Он работает с примерами задач, без подключения к ИИ или вашим реальным данным.</p></div><section class="ring-preview" aria-label="Проверка анимации кнопки">
     <div class="ring-preview-head"><span>Живое кольцо</span><small>Предпросмотр подсветки · демонстрация</small></div>
     <div class="ring-preview-controls" role="group" aria-label="Демонстрационные состояния кольца">
       <button type="button" data-ring-preview="idle" aria-pressed="true">Спокоен</button>
@@ -139,7 +154,7 @@
     </div>
     <p id="ringStateDescription" role="status" aria-live="polite">Белое кольцо: помощник готов к работе.</p>
   </section><div class="assistant-suggestions"><button data-question="Как увеличить выручку?">Как увеличить выручку? <svg class="ico"><use href="#ic-chevron"/></svg></button><button data-question="Как улучшить работу с клиентами?">Как улучшить работу с клиентами? <svg class="ico"><use href="#ic-chevron"/></svg></button><button data-question="Как контролировать расходы?">Как контролировать расходы? <svg class="ico"><use href="#ic-chevron"/></svg></button></div><div id="chatLog" class="chat-log" role="log" aria-live="polite"></div><form id="chatForm" class="chat-form"><label for="chatInput" class="sr-only">Написать помощнику</label><input id="chatInput" autocomplete="off" placeholder="Спросите о бизнесе…"><button type="submit" aria-label="Отправить"><svg class="ico"><use href="#ic-arrow"/></svg></button></form></div>
-  <div class="screen secondary-screen" id="managementScreen" hidden><header class="subhead"><img src="./assets/brand-logo.png" alt=""><div><small>Цифровой управляющий</small><h1>Управление</h1></div></header><div class="management-intro"><h2>Бизнес под контролем.</h2><p>Компания, клиенты, заказы и настройки — в одном месте.</p></div><div class="manage-list"><button data-manage="company" type="button"><span class="manage-icon"><svg class="ico"><use href="#ic-building"/></svg></span><span><strong>Карточка бизнеса</strong><small id="manageCompanyName">Моя компания</small></span><svg class="ico"><use href="#ic-chevron"/></svg></button><button data-manage="clients" type="button"><span class="manage-icon"><svg class="ico"><use href="#ic-users"/></svg></span><span><strong>Клиенты</strong><small>Список клиентов и добавление новых</small></span><svg class="ico"><use href="#ic-chevron"/></svg></button><button data-manage="orders" type="button"><span class="manage-icon"><svg class="ico"><use href="#ic-cart"/></svg></span><span><strong>Заказы</strong><small>Учёт тестовых заказов</small></span><svg class="ico"><use href="#ic-chevron"/></svg></button><button data-manage="license" type="button"><span class="manage-icon"><svg class="ico"><use href="#ic-shield"/></svg></span><span><strong>Подписка и лицензия</strong><small>Статус версии и активации</small></span><svg class="ico"><use href="#ic-chevron"/></svg></button><button data-manage="profile" type="button"><span class="manage-icon"><svg class="ico"><use href="#ic-person"/></svg></span><span><strong>Мой профиль</strong><small>Имя владельца кабинета</small></span><svg class="ico"><use href="#ic-chevron"/></svg></button></div><div class="management-foot"><span>Оформление</span><strong>Black Velvet · Тёмная тема</strong><small>Светлую тему добавим следующим этапом.</small></div></div>
+  <div class="screen secondary-screen" id="managementScreen" hidden><header class="subhead"><svg class="brand-icon" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#brand-badge"/></svg><div><small>Цифровой управляющий</small><h1>Управление</h1></div></header><div class="management-intro"><h2>Бизнес под контролем.</h2><p>Компания, клиенты, заказы и настройки — в одном месте.</p></div><div class="manage-list"><button data-manage="company" type="button"><span class="manage-icon"><svg class="ico"><use href="#ic-building"/></svg></span><span><strong>Карточка бизнеса</strong><small id="manageCompanyName">Моя компания</small></span><svg class="ico"><use href="#ic-chevron"/></svg></button><button data-manage="clients" type="button"><span class="manage-icon"><svg class="ico"><use href="#ic-users"/></svg></span><span><strong>Клиенты</strong><small>Список клиентов и добавление новых</small></span><svg class="ico"><use href="#ic-chevron"/></svg></button><button data-manage="orders" type="button"><span class="manage-icon"><svg class="ico"><use href="#ic-cart"/></svg></span><span><strong>Заказы</strong><small>Учёт тестовых заказов</small></span><svg class="ico"><use href="#ic-chevron"/></svg></button><button data-manage="license" type="button"><span class="manage-icon"><svg class="ico"><use href="#ic-shield"/></svg></span><span><strong>Подписка и лицензия</strong><small>Статус версии и активации</small></span><svg class="ico"><use href="#ic-chevron"/></svg></button><button data-manage="profile" type="button"><span class="manage-icon"><svg class="ico"><use href="#ic-person"/></svg></span><span><strong>Мой профиль</strong><small>Имя владельца кабинета</small></span><svg class="ico"><use href="#ic-chevron"/></svg></button></div><div class="management-foot"><span>Оформление</span><strong>Black Velvet · Тёмная тема</strong><small>Светлую тему добавим следующим этапом.</small></div></div>
   <nav class="bottom-nav" data-mode="idle" aria-label="Главная навигация">
     <!-- Single continuous velvet dock: low, softly curved crest from the approved reference. -->
     <svg class="nav-shell" viewBox="0 0 430 116" preserveAspectRatio="none" aria-hidden="true">
@@ -169,12 +184,12 @@
           <feGaussianBlur stdDeviation="3"/>
         </filter>
       </defs>
-      <!-- A wider, slightly higher centre crest and stronger side curl share one unbroken silhouette. -->
-      <path id="navCrest" d="M0 45 C0 22 42 16 93 16 H126 C160 16 181 10 195 1 C206 -6 224 -6 235 1 C249 10 270 16 304 16 H337 C388 16 430 22 430 45 V116 H0 Z" fill="url(#navSurface)"/>
-      <path d="M0 45 C0 22 42 16 93 16 H126 C160 16 181 10 195 1 C206 -6 224 -6 235 1 C249 10 270 16 304 16 H337 C388 16 430 22 430 45 V116 H0 Z" fill="url(#navAmbient)"/>
-      <path d="M0 45 C0 22 42 16 93 16 H126 C160 16 181 10 195 1 C206 -6 224 -6 235 1 C249 10 270 16 304 16 H337 C388 16 430 22 430 45" fill="none" stroke="url(#navLightTrace)" stroke-width="6" opacity=".33" filter="url(#navDiffusedRim)" vector-effect="non-scaling-stroke"/>
-      <path d="M0 45 C0 22 42 16 93 16 H126 C160 16 181 10 195 1 C206 -6 224 -6 235 1 C249 10 270 16 304 16 H337 C388 16 430 22 430 45" fill="none" stroke="url(#navTopRim)" stroke-width="1.05" vector-effect="non-scaling-stroke"/>
-      <path d="M0 45 C0 22 42 16 93 16 H126 C160 16 181 10 195 1 C206 -6 224 -6 235 1 C249 10 270 16 304 16 H337 C388 16 430 22 430 45" fill="none" stroke="url(#navLightTrace)" stroke-width=".8" vector-effect="non-scaling-stroke"/>
+      <!-- Balanced low crest: mirror-symmetric side contours retained from v2.19. -->
+      <path id="navCrest" d="M0 49 C0 21 41 13 96 13 H128 C163 13 186 12 200 6 C210 2 220 2 230 6 C244 12 267 13 302 13 H334 C389 13 430 21 430 49 V116 H0 Z" fill="url(#navSurface)"/>
+      <path d="M0 49 C0 21 41 13 96 13 H128 C163 13 186 12 200 6 C210 2 220 2 230 6 C244 12 267 13 302 13 H334 C389 13 430 21 430 49 V116 H0 Z" fill="url(#navAmbient)"/>
+      <path d="M0 49 C0 21 41 13 96 13 H128 C163 13 186 12 200 6 C210 2 220 2 230 6 C244 12 267 13 302 13 H334 C389 13 430 21 430 49" fill="none" stroke="url(#navLightTrace)" stroke-width="6" opacity=".33" filter="url(#navDiffusedRim)" vector-effect="non-scaling-stroke"/>
+      <path d="M0 49 C0 21 41 13 96 13 H128 C163 13 186 12 200 6 C210 2 220 2 230 6 C244 12 267 13 302 13 H334 C389 13 430 21 430 49" fill="none" stroke="url(#navTopRim)" stroke-width="1.05" vector-effect="non-scaling-stroke"/>
+      <path d="M0 49 C0 21 41 13 96 13 H128 C163 13 186 12 200 6 C210 2 220 2 230 6 C244 12 267 13 302 13 H334 C389 13 430 21 430 49" fill="none" stroke="url(#navLightTrace)" stroke-width=".8" vector-effect="non-scaling-stroke"/>
     </svg>
     <button class="nav-item active" id="tabHome" data-tab="home" type="button" aria-current="page">
       <svg class="ico nav-ico"><use href="#ic-home"/></svg>
@@ -185,7 +200,7 @@
       <span class="assistant-socket" aria-hidden="true">
         <span class="assistant-ring">
           <span class="assistant-core">
-<img class="nav-mark" src="./assets/assistant-mark.png" alt="">
+<svg class="nav-mark" viewBox="16 5 68 88" aria-hidden="true" focusable="false"><use href="#assistant-brand-mark"/></svg>
           </span>
         </span>
       </span>
@@ -200,6 +215,6 @@
 </div>
 <dialog id="modal" aria-labelledby="dialogTitle"><div class="dialog-inner"><div class="dialog-head"><div><span class="dialog-eyebrow">ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h2 id="dialogTitle">Информация</h2></div><button class="dialog-close" id="closeDialog" type="button" aria-label="Закрыть"><svg class="ico"><use href="#ic-x"/></svg></button></div><div id="dialogContent"></div></div></dialog>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-<script src="./app.js" defer></script>
+<script src="./app.js?v=219" defer></script>
 </body>
 </html>
