@@ -255,7 +255,7 @@
   height: 25px;
   flex: none;
   object-fit: contain;
-  transform: translate(6px, 1px);
+  transform: translate(4px, 1px);
   filter: drop-shadow(0 1px 1px rgba(0,0,0,.32));
 }
 .assistant-tab[data-mode="thinking"] { --rim:#9ed2ff; --halo:rgba(62,147,255,.50); --sheen:rgba(107,183,255,.33); }
