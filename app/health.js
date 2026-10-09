@@ -185,7 +185,21 @@
  }
  async function eraseOne(store,item){
   if(!confirm('Удалить «'+(item.name||item.date)+'»? Без резервной копии не восстановить.'))return;
-  try{await tx(store,'readwrite',s=>s.delete(item.id));await reload();toast('Удалено');}catch(e){error(e);}
+  try{
+   if(store==='meds'){
+    // Erasing a medication must also erase its administration history.
+    await new Promise((resolve,reject)=>{
+     const transaction=db.transaction(['meds','logs'],'readwrite');
+     transaction.objectStore('meds').delete(item.id);
+     const logsStore=transaction.objectStore('logs');
+     for(const log of logs.filter(entry=>entry.medId===item.id))logsStore.delete(log.id);
+     transaction.oncomplete=resolve;
+     transaction.onerror=()=>reject(transaction.error||new Error('Medication deletion failed'));
+     transaction.onabort=()=>reject(transaction.error||new Error('Medication deletion aborted'));
+    });
+   }else await tx(store,'readwrite',s=>s.delete(item.id));
+   await reload();toast('Удалено');
+  }catch(e){error(e);}
  }
  function exportRecords(){
   if(!db||!enabled)return;
