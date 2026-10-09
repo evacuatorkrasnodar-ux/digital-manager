@@ -112,7 +112,7 @@
   byId('openAdvice').addEventListener('click',adviceModal);
   document.querySelectorAll('[data-detail]').forEach(b=>b.addEventListener('click',()=>b.dataset.detail==='advice'?adviceModal():detailModal(b.dataset.detail)));
   document.querySelectorAll('[data-action]').forEach(b=>b.addEventListener('click',()=>{const a=b.dataset.action;if(a==='clients')clientsModal();else generalModal(a);}));
-  document.querySelectorAll('[data-manage]').forEach(b=>b.addEventListener('click',()=>{const a=b.dataset.manage;({company:companyModal,clients:clientsModal,orders:ordersModal,license:brandModal,profile:profileModal}[a])();}));
+  document.querySelectorAll('[data-manage]').forEach(b=>b.addEventListener('click',()=>{const a=b.dataset.manage;({company:companyModal,clients:clientsModal,orders:ordersModal,license:brandModal,profile:profileModal,world:()=>window.location.assign('./world.html')}[a])();}));
   byId('closeDialog').addEventListener('click',closeModal);
   byId('modal').addEventListener('click',e=>{if(e.target===byId('modal'))closeModal();});
   document.querySelectorAll('[data-question]').forEach(b=>b.addEventListener('click',()=>chat(b.dataset.question)));
