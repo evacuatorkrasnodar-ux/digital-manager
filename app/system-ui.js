@@ -124,7 +124,9 @@
       const [h,m]=event.time.split(':').map(Number);d.setHours(h,m,0,0);
       const at=d.getTime();if(at<start||at>end)continue;
       const key=event.id+':'+event.date+':'+event.time;
-      if(sessionStorage.getItem('os-due-'+key)==='1')continue;
+      let alreadyShown=false;
+      try{alreadyShown=sessionStorage.getItem('os-due-'+key)==='1';}catch(_){}
+      if(alreadyShown)continue;
       try{sessionStorage.setItem('os-due-'+key,'1');}catch(_){}
       showBanner('Скоро: '+event.title+' · '+event.time,eventLink(event.date));break;
     }
