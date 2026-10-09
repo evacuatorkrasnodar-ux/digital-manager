@@ -15,7 +15,7 @@
   function error(e){console.error('My World data:',e);toast('Не удалось сохранить запись. Проверь настройки браузера.');}
   function openDB(){
     return new Promise((resolve,reject)=>{
-      if(!indexedDB){reject(new Error('IndexedDB unavailable'));return;}
+      if(!('indexedDB' in window)){reject(new Error('IndexedDB unavailable'));return;}
       const r=indexedDB.open(DB,1);
       r.onupgradeneeded=()=>{for(const s of STORES)if(!r.result.objectStoreNames.contains(s))r.result.createObjectStore(s,{keyPath:'id'});};
       r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error||new Error('DB open error'));r.onblocked=()=>reject(new Error('Close other tabs'));
