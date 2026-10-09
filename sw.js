@@ -45,6 +45,11 @@ self.addEventListener('fetch', event => {
 
   if (url.origin !== self.location.origin) return;
 
+  // The advertising-site worker must never cache or serve app files.
+  // /app/ has its own dedicated service worker and offline cache.
+  const appPath = new URL('./app/', self.registration.scope).pathname;
+  if (url.pathname.startsWith(appPath)) return;
+
   // Страницы: сначала сеть, при ошибке — кэш.
   if (
     request.mode === 'navigate' ||
