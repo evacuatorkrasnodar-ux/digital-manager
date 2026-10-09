@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#000000"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="description" content="Личный журнал лекарств, сна и медицинских документов — Цифровой управляющий.">
+<link rel="manifest" href="./manifest.json"><link rel="icon" href="./assets/icon-192.png" type="image/png">
+<link rel="stylesheet" href="./myday.css?v=248"><link rel="stylesheet" href="./care.css?v=248"><link rel="stylesheet" href="./health.css?v=249"><link rel="stylesheet" href="./system-ui.css?v=247">
+<script src="./health.js?v=249" defer></script><script src="./system-ui.js?v=247" defer></script>
+<title>Моё здоровье — Цифровой управляющий</title>
+</head>
+<body>
+<div class="day-shell health-shell">
+ <header class="day-header">
+  <a class="day-back" href="./care.html" aria-label="Вернуться в Заботу"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></a>
+  <div class="day-heading"><span>ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h1>Моё здоровье <span aria-hidden="true">♡</span></h1></div>
+  <a class="day-today care-home" href="./index.html">Главная</a>
+ </header>
+ <section class="health-head"><span class="day-eyebrow">МОЯ ЗАБОТА ♡</span><h2>Хорошее самочувствие — тоже план.</h2><p>Лекарства, сон и важные документы — только там, где им место.</p></section>
+ <section id="healthConsentPanel" class="care-panel care-onboard" hidden>
+  <div class="care-onboard-icon">♡</div><h2>Личное пространство</h2>
+  <p>Здесь можно вести список назначенных лекарств, отмечать фактический приём, записывать сон и сохранять фотографии или документы.</p>
+  <p class="care-privacy-note">Важно: информация сохраняется локально в браузере, без облака и **без шифрования или PIN-кода**. Любой с доступом к профилю браузера может её просмотреть. На общем устройстве не рекомендуем хранить медицинские документы.</p>
+  <label class="care-consent"><input type="checkbox" id="healthConsent"> Я понимаю ограничения хранения и хочу добровольно включить личный раздел.</label>
+  <button class="care-primary" id="healthEnable" type="button" disabled>Открыть моё пространство ♡</button>
+ </section>
+ <section id="healthMain" hidden>
+  <nav class="health-tabs" aria-label="Разделы здоровья">
+   <button class="active" data-health="meds" aria-pressed="true" type="button">◈ Лекарства</button>
+   <button data-health="sleep" aria-pressed="false" type="button">☾ Сон</button>
+   <button data-health="files" aria-pressed="false" type="button">▤ Документы</button>
+  </nav>
+  <section class="health-view" data-health-view="meds">
+   <div class="day-section-heading"><div><p class="day-eyebrow">ПРИЁМ ПО НАЗНАЧЕНИЮ</p><h2>Мои лекарства</h2></div><button class="day-add" id="healthAddMed" type="button">+ Добавить</button></div>
+   <p class="health-hint">Напоминаем только о графике, который ты ввёл. Не назначаем препараты и не меняем дозировки.</p>
+   <div id="healthToday" class="health-list"></div>
+   <div class="day-section-heading"><h2>Мой список</h2></div><div id="healthMeds" class="health-list"></div>
+   <p class="health-hint">Небольшие напоминания работают только пока эта страница открыта. Настоящие push при закрытом приложении ещё не подключены. Отметка «Принято» означает только твоё подтверждение.</p>
+  </section>
+  <section class="health-view" data-health-view="sleep" hidden>
+   <div class="day-section-heading"><div><p class="day-eyebrow">ОТДЫХ — НЕ РОСКОШЬ</p><h2>Дневник сна</h2></div><button class="day-add" id="healthAddSleep" type="button">+ Запись</button></div>
+   <div id="healthSleepSummary" class="health-summary"></div>
+   <div id="healthSleep" class="health-list"></div>
+   <p class="health-hint">Это журнал твоих записей, не медицинский анализ качества сна.</p>
+  </section>
+  <section class="health-view" data-health-view="files" hidden>
+   <div class="day-section-heading"><div><p class="day-eyebrow">ВАЖНОЕ ПОД РУКОЙ</p><h2>Медицинская папка</h2></div><button class="day-add" type="button" id="healthChooseFile">+ Документ</button></div>
+   <input id="healthFileInput" type="file" accept=".pdf,.jpg,.jpeg,.png,.webp,.txt,.doc,.docx" hidden>
+   <p class="health-hint">Фото рецептов, результаты анализов, PDF или документы — только на этом устройстве. Максимум 8 МБ на файл. Файлы не отправляются на сервер, но не зашифрованы.</p>
+   <div id="healthDocuments" class="health-list"></div>
+   <p class="health-hint">Резервная копия обычных заметок не включает медицинские файлы. Их нужно отдельно скачать, если хочешь сохранить копии.</p>
+  </section>
+  <div class="health-danger"><p>Список лекарств и журнал сна можно экспортировать в JSON. Медицинские документы в этот экспорт не входят.</p><div><button type="button" id="healthExport">↓ Копия записей</button><button type="button" id="healthDeleteAll">Удалить всё медицинское</button></div></div>
+ </section>
+ <p class="care-disclaimer">Это личный органайзер, не медицинская услуга. Если пропустил назначенную дозу, следуй инструкции к препарату или рекомендации врача; приложение не подсказывает, сколько принять. При экстренных симптомах обратись за медицинской помощью.</p>
+ <footer class="day-footer">♡ <a href="./care.html">Женский календарь</a> · <a href="./myday.html">Мой день</a> · <a href="./world.html">Мой мир</a></footer>
+</div>
+<dialog id="healthMedDialog" class="day-dialog" aria-labelledby="healthMedTitle">
+ <form id="healthMedForm"><div class="dialog-top"><h2 id="healthMedTitle">Моё лекарство</h2><button type="button" class="dialog-x" data-health-close="healthMedDialog" aria-label="Закрыть">×</button></div>
+  <input type="hidden" id="healthMedId">
+  <label>Название<input id="healthMedName" maxlength="100" required placeholder="По назначению врача"></label>
+  <label>Дозировка как в назначении<input id="healthMedDose" maxlength="100" required placeholder="Например: 1 таблетка (по назначению)"></label>
+  <label>Время приёма <small>через запятую: 08:00, 20:00</small><input id="healthMedTimes" maxlength="100" required placeholder="08:00, 20:00"></label>
+  <div class="form-row"><label>С даты<input id="healthMedStart" type="date" required></label><label>По дату <span class="optional">необязательно</span><input id="healthMedEnd" type="date"></label></div>
+  <label>Моя заметка <span class="optional">необязательно</span><textarea id="healthMedNote" maxlength="1200" rows="3" placeholder="Из инструкции или назначения, не менять самостоятельно."></textarea></label>
+  <div class="form-actions"><button type="button" class="secondary-btn" data-health-close="healthMedDialog">Отмена</button><button type="submit" class="primary-btn">Сохранить</button></div>
+ </form>
+</dialog>
+<dialog id="healthSleepDialog" class="day-dialog" aria-labelledby="healthSleepTitle">
+ <form id="healthSleepForm"><div class="dialog-top"><h2 id="healthSleepTitle">Запись сна</h2><button type="button" class="dialog-x" data-health-close="healthSleepDialog" aria-label="Закрыть">×</button></div>
+  <label>Дата пробуждения<input id="healthSleepDate" type="date" required></label>
+  <div class="form-row"><label>Спал(а), часов<input id="healthSleepHours" type="number" min="0" max="24" step=".25" required placeholder="7.5"></label>
+  <label>Как спалось<select id="healthSleepQuality"><option value="great">Отлично</option><option value="normal">Нормально</option><option value="poor">Беспокойно</option></select></label></div>
+  <label>Заметка <span class="optional">необязательно</span><textarea id="healthSleepNote" maxlength="1200" rows="3" placeholder="Что повлияло на сон?"></textarea></label>
+  <div class="form-actions"><button type="button" class="secondary-btn" data-health-close="healthSleepDialog">Отмена</button><button type="submit" class="primary-btn">Сохранить</button></div>
+ </form>
+</dialog>
+<div id="healthToast" class="day-toast" role="status" aria-live="polite" hidden></div>
+</body></html>
