@@ -43,7 +43,7 @@
     document.querySelectorAll('[data-ring-preview]').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.ringPreview===mode)));
     if(resetAfter>0) ringResetTimer=setTimeout(()=>setRingMode('idle'),resetAfter);
   }
-  function setTab(next){tab=next;['home','assistant','management'].forEach(x=>{byId(x+'Screen').hidden=x!==next;const button=byId('tab'+x[0].toUpperCase()+x.slice(1));button.classList.toggle('active',x===next);if(x===next)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');});window.scrollTo({top:0,behavior:'instant'});}
+  function setTab(next){hideBrandCard();tab=next;['home','assistant','management'].forEach(x=>{byId(x+'Screen').hidden=x!==next;const button=byId('tab'+x[0].toUpperCase()+x.slice(1));button.classList.toggle('active',x===next);if(x===next)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');});window.scrollTo({top:0,behavior:'instant'});}
   function applyUser(){byId('greetingName').textContent=state.name;byId('manageCompanyName').textContent=state.company;}
   function renderChart(){
     // Independent, resolution-independent SVG lines generated from numeric data.
@@ -62,6 +62,8 @@
     byId('revDotGlow').setAttribute('cx',fp[0]);byId('revDotGlow').setAttribute('cy',fp[1]);
   }
   function updatePeriod(next){period=next;chosenDate='';document.querySelectorAll('.period').forEach(b=>{const is=b.dataset.period===next;b.classList.toggle('selected',is);b.setAttribute('aria-pressed',String(is));});const d=demo[next];byId('revenueLabel').textContent=d.label;byId('revenueValue').textContent=money(d.revenue);byId('profitValue').textContent=money(d.profit);byId('ordersValue').textContent=new Intl.NumberFormat('ru-RU').format(d.orders);document.querySelector('.revenue-card .delta span').textContent='▲ '+d.revChange;byId('revenueCompare').textContent=d.compare;document.querySelector('.profit-card .delta').innerHTML=`▲ ${d.profitChange} <small>${safe(d.compare)}</small>`;byId('chartTooltip').textContent=new Intl.NumberFormat('ru-RU',{maximumFractionDigits:1}).format(d.revenue/1000000)+' млн ₽';byId('chartAxis').replaceChildren(...d.axis.map(s=>{const el=document.createElement('span');el.textContent=s;return el;}));renderChart();}
+  function hideBrandCard(){byId('openBrandCard').hidden=true;byId('openBrand').setAttribute('aria-expanded','false');}
+  function toggleBrandCard(){const card=byId('openBrandCard');const isOpening=card.hidden;card.hidden=!isOpening;byId('openBrand').setAttribute('aria-expanded',String(isOpening));}
   function closeModal(){const el=byId('modal');if(el.open)el.close();}
   function modal(title,html,init){byId('dialogTitle').textContent=title;byId('dialogContent').innerHTML=html;if(!byId('modal').open)byId('modal').showModal();if(init)init();}
   function brandModal(){modal('О продукте и лицензии',`
@@ -95,7 +97,10 @@
   document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
   document.querySelectorAll('[data-period]').forEach(b=>b.addEventListener('click',()=>updatePeriod(b.dataset.period)));
   byId('openDates').addEventListener('click',datesModal);
-  ['openBrand','openBrandCard'].forEach(id=>byId(id).addEventListener('click',brandModal));
+  byId('openBrand').addEventListener('click',toggleBrandCard);
+  byId('openBrandCard').addEventListener('click',()=>{hideBrandCard();brandModal();});
+  document.addEventListener('click',event=>{if(!byId('openBrandCard').hidden && !event.target.closest('#openBrand, #openBrandCard'))hideBrandCard();});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape' && !byId('openBrandCard').hidden)hideBrandCard();});
   byId('openProfile').addEventListener('click',profileModal);
   byId('clientsCard').addEventListener('click',clientsModal);
   byId('ordersCard').addEventListener('click',ordersModal);
