@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="description" content="Личный календарь заботы о себе в приложении «Цифровой управляющий».">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./assets/icon-192.png" type="image/png">
+  <link rel="stylesheet" href="./myday.css?v=248">
+  <link rel="stylesheet" href="./care.css?v=248">
+  <link rel="stylesheet" href="./system-ui.css?v=247">
+  <script src="./care.js?v=248" defer></script>
+  <script src="./system-ui.js?v=247" defer></script>
+  <title>Забота о себе — Цифровой управляющий</title>
+</head>
+<body>
+  <div class="day-shell care-shell">
+    <header class="day-header">
+      <a class="day-back" href="./myday.html" aria-label="Вернуться в календарь"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></a>
+      <div class="day-heading"><span>ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h1>Мой день <span aria-hidden="true">✦</span></h1></div>
+      <a class="day-today care-home" href="./index.html">Главная</a>
+    </header>
+    <nav class="day-tabs" aria-label="Разделы моего дня">
+      <a class="day-tab" href="./myday.html">Календарь</a>
+      <a class="day-tab" href="./myday.html?view=notes">Блокнот</a>
+      <span class="day-tab active care-active" aria-current="page">Забота ♡</span>
+    </nav>
+    <main class="care-main">
+      <section class="care-hero" aria-label="Личное пространство">
+        <span class="care-eyebrow">✦ ТОЛЬКО ДЛЯ ТЕБЯ</span>
+        <div class="care-hero-line"><div><h2>Забота о себе<span class="care-heart">♡</span></h2><p>Твой ритм. Твои правила.</p></div><span class="care-moon" aria-hidden="true">☾</span></div>
+        <p class="care-hero-note">Планы подстраиваются под тебя, а не наоборот. Даже управляющий это понимает.</p>
+      </section>
+      <section id="careSetup" class="care-panel care-onboard" aria-labelledby="careSetupTitle" hidden>
+        <div class="care-onboard-icon" aria-hidden="true">✿</div>
+        <h2 id="careSetupTitle">Знакомься: календарь цикла</h2>
+        <p>Можно отмечать начало менструации, самочувствие и вести собственную историю. Прогнозы будут приблизительными, без лишнего драматизма.</p>
+        <p class="care-privacy-note">🔒 Раздел включается только по желанию. Записи остаются в браузере этого устройства, без облака и без публикации в общих уведомлениях. Другой человек с доступом к устройству и браузеру сможет увидеть записи: PIN-защиты пока нет.</p>
+        <label class="care-consent"><input type="checkbox" id="careConsent"> Я понимаю, как хранятся мои чувствительные данные, и хочу включить этот раздел.</label>
+        <button type="button" class="care-primary" id="careEnable" disabled>Включить мой календарь ♡</button>
+      </section>
+      <section id="careEnabled" hidden>
+        <div id="careEmpty" class="care-panel care-empty-state" hidden>
+          <div class="care-onboard-icon" aria-hidden="true">✧</div>
+          <h2>Начнём с одной даты?</h2>
+          <p>Укажи, когда началась последняя менструация. Остальное можно добавлять постепенно — без анкет на сорок вопросов.</p>
+          <button type="button" class="care-primary" id="careFirstPeriod">+ Отметить начало</button>
+        </div>
+        <div id="careDashboard" hidden>
+          <div class="care-stats">
+            <article class="care-stat care-stat-main">
+              <p>СЕГОДНЯ</p><strong id="careCycleDay">—</strong><span id="careCycleCaption">День цикла</span>
+            </article>
+            <article class="care-stat care-stat-next">
+              <p>СЛЕДУЮЩЕЕ НАЧАЛО</p><strong id="careNextDate">—</strong><span id="careNextCaption">Ориентировочно</span>
+            </article>
+          </div>
+          <p class="care-prediction-notice" id="careForecastNote">Ориентировочный расчёт, а не медицинское заключение.</p>
+        </div>
+        <section class="care-panel care-calendar-panel" aria-label="Календарь цикла">
+          <div class="calendar-toolbar">
+            <button type="button" id="carePrevMonth" class="month-arrow" aria-label="Предыдущий месяц">‹</button>
+            <h2 id="careMonthTitle" aria-live="polite"></h2>
+            <button type="button" id="careNextMonth" class="month-arrow" aria-label="Следующий месяц">›</button>
+          </div>
+          <div class="weekdays" aria-hidden="true"><span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span></div>
+          <div id="careCalendarGrid" class="month-grid care-grid" role="group" aria-label="Дни календаря цикла"></div>
+          <div class="care-legend"><span><i class="care-dot logged"></i> Отмечено</span><span><i class="care-dot forecast"></i> Прогноз</span><span><i class="care-dot mood"></i> Самочувствие</span></div>
+        </section>
+        <div class="day-section-heading care-controls-title">
+          <div><p class="day-eyebrow">ЛИЧНЫЕ ОТМЕТКИ</p><h2 id="careChosenTitle">Сегодня</h2></div>
+        </div>
+        <div class="care-actions">
+          <button type="button" class="care-action rose" id="careAddPeriod">+ Начало цикла</button>
+          <button type="button" class="care-action" id="careAddMood">♡ Самочувствие</button>
+        </div>
+        <div id="careDayDetails" class="care-day-details" aria-live="polite"></div>
+        <section class="care-panel care-settings-panel" aria-labelledby="careSettingsTitle">
+          <div class="care-panel-heading"><span class="care-setting-glyph">⚙</span><h2 id="careSettingsTitle">Мой ритм</h2></div>
+          <form id="careSettingsForm">
+            <div class="form-row">
+              <label>Длина цикла <small>дней</small><input type="number" min="21" max="45" step="1" id="careCycleLength" required value="28"></label>
+              <label>Менструация <small>дней</small><input type="number" min="2" max="10" step="1" id="carePeriodLength" required value="5"></label>
+            </div>
+            <p>Это личные ориентиры, а не норма для всех. При нерегулярном цикле прогноз может заметно ошибаться.</p>
+            <button type="submit" class="care-secondary">Сохранить параметры</button>
+          </form>
+        </section>
+        <section class="care-history-wrap" aria-labelledby="careHistoryTitle">
+          <div class="day-section-heading"><div><p class="day-eyebrow">ИСТОРИЯ</p><h2 id="careHistoryTitle">Мои записи</h2></div></div>
+          <div id="carePeriodHistory" class="care-history"></div>
+        </section>
+        <section class="care-data-settings">
+          <p>Записи находятся только на этом устройстве. Не сохраняй конфиденциальную копию на общем компьютере.</p>
+          <div class="care-data-buttons"><button type="button" id="careExport">Скачать личную копию</button><button type="button" id="careErase">Удалить мои данные</button></div>
+        </section>
+      </section>
+      <p class="care-disclaimer">Календарь предназначен только для личных заметок. Он не диагностирует заболевания, не определяет безопасные дни и не подходит для контрацепции или установления беременности. При необычных симптомах лучше обратиться к врачу.</p>
+    </main>
+    <footer class="day-footer"><span>♡</span> Забота о себе — по собственному выбору. Без принудительных напоминаний и публичных уведомлений.</footer>
+  </div>
+  <dialog class="day-dialog care-dialog" id="carePeriodDialog" aria-labelledby="carePeriodDialogTitle">
+    <form id="carePeriodForm">
+      <div class="dialog-top"><h2 id="carePeriodDialogTitle">Начало цикла</h2><button type="button" class="dialog-x" data-care-close="carePeriodDialog" aria-label="Закрыть">×</button></div>
+      <input type="hidden" id="carePeriodId">
+      <label>Первый день менструации<input type="date" id="carePeriodDate" required></label>
+      <label>Последний день <span class="optional">если известен</span><input type="date" id="carePeriodEnd"></label>
+      <p class="care-form-help">Если последний день пока неизвестен, отметим только начало, а примерную длительность возьмём из параметров.</p>
+      <div class="form-actions"><button type="button" class="secondary-btn" data-care-close="carePeriodDialog">Отмена</button><button type="submit" class="primary-btn">Сохранить</button></div>
+    </form>
+  </dialog>
+  <dialog class="day-dialog care-dialog" id="careMoodDialog" aria-labelledby="careMoodDialogTitle">
+    <form id="careMoodForm">
+      <div class="dialog-top"><h2 id="careMoodDialogTitle">Как самочувствие?</h2><button type="button" class="dialog-x" data-care-close="careMoodDialog" aria-label="Закрыть">×</button></div>
+      <label>Дата<input type="date" id="careMoodDate" required></label>
+      <label>Сегодня чувствую себя…<select id="careMoodValue">
+        <option value="great">✨ Прекрасно</option><option value="calm">🌿 Спокойно</option><option value="tired">☕ Устала</option><option value="sensitive">♡ Чувствительно</option><option value="pain">☾ Дискомфорт</option><option value="other">✎ По-разному</option>
+      </select></label>
+      <label>Моя заметка <span class="optional">необязательно</span><textarea rows="4" maxlength="2000" id="careMoodNote" placeholder="Сон, энергия, ощущения — только то, чем хочется поделиться с собой."></textarea></label>
+      <div class="form-actions"><button type="button" class="secondary-btn" data-care-close="careMoodDialog">Отмена</button><button type="submit" class="primary-btn">Сохранить</button></div>
+    </form>
+  </dialog>
+  <div id="careToast" class="day-toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
