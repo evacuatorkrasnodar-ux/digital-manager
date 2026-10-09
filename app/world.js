@@ -69,8 +69,8 @@
   function familyDates(){
     const all=[];
     for(const person of data.family){
-      if(person.birthday){const date=upcomingYearDate(person.birthday);if(date)all.push({date,name:person.name,kind:'birthday',title:'День рождения: '+person.name});}
-      if(person.occasion){const date=upcomingYearDate(person.occasion);if(date)all.push({date,name:person.name,kind:'occasion',title:(person.occasionName||'Важная дата')+' · '+person.name});}
+      if(person.birthday){const date=upcomingYearDate(person.birthday);if(date)all.push({date,personId:person.id,name:person.name,kind:'birthday',title:'День рождения: '+person.name});}
+      if(person.occasion){const date=upcomingYearDate(person.occasion);if(date)all.push({date,personId:person.id,name:person.name,kind:'occasion',title:(person.occasionName||'Важная дата')+' · '+person.name});}
     }
     return all.sort((a,b)=>a.date.localeCompare(b.date));
   }
@@ -78,7 +78,7 @@
     const list=$('familyList');list.replaceChildren();
     if(!data.family.length){empty(list,'Добавь близких людей и памятные даты. Об их праздниках больше не придётся вспоминать в последний момент. ♡');return;}
     for(const person of data.family){
-      const next=familyDates().filter(e=>e.name===person.name)[0];
+      const next=familyDates().filter(e=>e.personId===person.id)[0];
       const description=[person.relation||'',person.notes||''].filter(Boolean).join(' · ');
       list.append(item('♡',person.name,description,next?'Ближайшее: '+shortDate(next.date)+' · '+next.title:'Важные даты пока не указаны',()=>openForm('family',person),()=>remove('family',person),'rose'));
     }
