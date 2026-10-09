@@ -43,8 +43,8 @@
     document.querySelectorAll('[data-ring-preview]').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.ringPreview===mode)));
     if(resetAfter>0) ringResetTimer=setTimeout(()=>setRingMode('idle'),resetAfter);
   }
-  function setTab(next){hideBrandCard();tab=next;['home','assistant','management'].forEach(x=>{byId(x+'Screen').hidden=x!==next;const button=byId('tab'+x[0].toUpperCase()+x.slice(1));button.classList.toggle('active',x===next);if(x===next)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');});window.scrollTo({top:0,behavior:'instant'});}
-  function applyUser(){byId('greetingName').textContent=state.name;byId('manageCompanyName').textContent=state.company;}
+  function setTab(next){hideBrandCard();hideProfileCard();tab=next;['home','assistant','management'].forEach(x=>{byId(x+'Screen').hidden=x!==next;const button=byId('tab'+x[0].toUpperCase()+x.slice(1));button.classList.toggle('active',x===next);if(x===next)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');});window.scrollTo({top:0,behavior:'instant'});}
+  function applyUser(){byId('greetingName').textContent=state.name;byId('manageCompanyName').textContent=state.company;byId('profilePreviewCompany').textContent=state.company||'Моя компания';byId('profilePreviewOwner').textContent=state.name||'Не указано';byId('profilePreviewIndustry').textContent=state.industry||'Направление не указано';}
   function renderChart(){
     // Independent, resolution-independent SVG lines generated from numeric data.
     const data={day:[8,12,16,13,19,18,33,21,25,38,34,57,52,68,83,57,74,79],week:[13,22,19,32,35,30,40,49,46,55,44,61,57,71,68,83,76,91],month:[13,21,28,23,38,36,53,43,61,53,68,62,75,69,82,73,86,96],year:[9,16,21,25,36,29,43,39,56,51,61,67,62,75,72,87,80,99]}[period];
@@ -63,7 +63,9 @@
   }
   function updatePeriod(next){period=next;chosenDate='';document.querySelectorAll('.period').forEach(b=>{const is=b.dataset.period===next;b.classList.toggle('selected',is);b.setAttribute('aria-pressed',String(is));});const d=demo[next];byId('revenueLabel').textContent=d.label;byId('revenueValue').textContent=money(d.revenue);byId('profitValue').textContent=money(d.profit);byId('ordersValue').textContent=new Intl.NumberFormat('ru-RU').format(d.orders);document.querySelector('.revenue-card .delta span').textContent='▲ '+d.revChange;byId('revenueCompare').textContent=d.compare;document.querySelector('.profit-card .delta').innerHTML=`▲ ${d.profitChange} <small>${safe(d.compare)}</small>`;byId('chartTooltip').textContent=new Intl.NumberFormat('ru-RU',{maximumFractionDigits:1}).format(d.revenue/1000000)+' млн ₽';byId('chartAxis').replaceChildren(...d.axis.map(s=>{const el=document.createElement('span');el.textContent=s;return el;}));renderChart();}
   function hideBrandCard(){byId('openBrandCard').hidden=true;byId('openBrand').setAttribute('aria-expanded','false');}
-  function toggleBrandCard(){const card=byId('openBrandCard');const isOpening=card.hidden;card.hidden=!isOpening;byId('openBrand').setAttribute('aria-expanded',String(isOpening));}
+  function toggleBrandCard(){const card=byId('openBrandCard');const isOpening=card.hidden;if(isOpening)hideProfileCard();card.hidden=!isOpening;byId('openBrand').setAttribute('aria-expanded',String(isOpening));}
+  function hideProfileCard(){byId('openProfileCard').hidden=true;byId('openProfile').setAttribute('aria-expanded','false');}
+  function toggleProfileCard(){const card=byId('openProfileCard');const isOpening=card.hidden;if(isOpening)hideBrandCard();card.hidden=!isOpening;byId('openProfile').setAttribute('aria-expanded',String(isOpening));}
   function closeModal(){const el=byId('modal');if(el.open)el.close();}
   function modal(title,html,init){byId('dialogTitle').textContent=title;byId('dialogContent').innerHTML=html;if(!byId('modal').open)byId('modal').showModal();if(init)init();}
   function brandModal(){modal('О продукте и лицензии',`
@@ -101,7 +103,10 @@
   byId('openBrandCard').addEventListener('click',()=>{hideBrandCard();brandModal();});
   document.addEventListener('click',event=>{if(!byId('openBrandCard').hidden && !event.target.closest('#openBrand, #openBrandCard'))hideBrandCard();});
   document.addEventListener('keydown',event=>{if(event.key==='Escape' && !byId('openBrandCard').hidden)hideBrandCard();});
-  byId('openProfile').addEventListener('click',profileModal);
+  byId('openProfile').addEventListener('click',toggleProfileCard);
+  byId('openProfileCard').addEventListener('click',()=>{hideProfileCard();companyModal();});
+  document.addEventListener('click',event=>{if(!byId('openProfileCard').hidden && !event.target.closest('#openProfile, #openProfileCard'))hideProfileCard();});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape' && !byId('openProfileCard').hidden)hideProfileCard();});
   byId('clientsCard').addEventListener('click',clientsModal);
   byId('ordersCard').addEventListener('click',ordersModal);
   byId('openAdvice').addEventListener('click',adviceModal);
