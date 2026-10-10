@@ -47,7 +47,7 @@
   color:#e9f5ff!important;
   transition:background .18s ease,border-color .18s ease!important;
 }
-.health-shell .health-provider-row .health-provider-open > span:first-child{
+.health-shell .health-provider-row .health-provider-open > span{
   color:inherit!important;
   font-size:11px!important;
   font-weight:500!important;
@@ -80,7 +80,7 @@
     padding:0 6px!important;
     gap:5px!important;
   }
-  .health-shell .health-provider-row .health-provider-open > span:first-child{
+  .health-shell .health-provider-row .health-provider-open > span{
     font-size:10px!important;
   }
 }
