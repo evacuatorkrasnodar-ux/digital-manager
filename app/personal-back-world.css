@@ -69,6 +69,10 @@ body > .day-shell.day-shell > a.world-entry{
   border-radius:16px!important;
   transform:none!important;
 }
+/* Respect router visibility in Health and Cycle; never show a duplicate link. */
+body > .day-shell.day-shell > a.world-entry[hidden]{
+  display:none!important;
+}
 body > .day-shell.day-shell > a.world-entry > .world-entry-symbol{
   box-sizing:border-box!important;
   width:32px!important;
