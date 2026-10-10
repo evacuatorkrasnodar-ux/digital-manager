@@ -1,0 +1,77 @@
+/* v1 — the Calendar / Notebook / Health rail keeps one vertical anchor.
+   Only mobile portrait uses the pinned calendar geometry. Other layouts
+   keep their existing spacing and design. */
+@media (max-width:700px) and (orientation:portrait) and (min-height:551px){
+  /* Notebook remains scrollable; only its heading and greeting become as
+     compact as the pinned calendar's heading and greeting. */
+  .day-shell.notebook-active{
+    padding-top:calc(7px + env(safe-area-inset-top,0px))!important;
+  }
+  .day-shell.notebook-active > .day-header{
+    height:42px!important;
+    min-height:42px!important;
+    max-height:42px!important;
+    gap:7px!important;
+  }
+  .day-shell.notebook-active .day-back{
+    width:39px!important;
+    height:42px!important;
+    background-size:98% auto!important;
+  }
+  .day-shell.notebook-active .day-heading h1{font-size:clamp(19px,5.8vw,23px)!important}
+  .day-shell.notebook-active .day-heading>span{font-size:9px!important}
+  .day-shell.notebook-active > .day-intro{
+    box-sizing:border-box;
+    min-height:0!important;
+    padding:3px 2px 4px!important;
+  }
+  .day-shell.notebook-active .day-intro .polish-hello{
+    margin:0!important;
+    font-size:clamp(12px,3.65vw,15px)!important;
+    line-height:1.15!important;
+    font-weight:430!important;
+    white-space:normal!important;
+  }
+  .day-shell.notebook-active .day-intro :is(#dayGreeting,.day-eyebrow){display:none!important}
+  /* Calendar already uses these dimensions. Match them for both destinations. */
+  .day-shell.notebook-active > nav.day-tabs,
+  .day-shell.health-shell > nav.day-tabs{
+    box-sizing:border-box!important;
+    height:38px!important;
+    min-height:38px!important;
+    max-height:38px!important;
+    padding:3px!important;
+    margin-bottom:6px!important;
+  }
+  .day-shell.notebook-active > nav.day-tabs{margin-top:3px!important}
+  .day-shell.notebook-active > nav.day-tabs > .day-tab,
+  .day-shell.health-shell > nav.day-tabs > .day-tab{
+    height:30px!important;
+    min-height:30px!important;
+    max-height:30px!important;
+    border-radius:17px!important;
+  }
+  .day-shell.health-shell{
+    padding-top:calc(7px + env(safe-area-inset-top,0px))!important;
+  }
+  .day-shell.health-shell > .day-header{
+    box-sizing:border-box;
+    height:42px!important;
+    min-height:42px!important;
+    max-height:42px!important;
+    gap:7px!important;
+  }
+  .day-shell.health-shell .day-back{
+    width:39px!important;
+    height:42px!important;
+    background-size:98% auto!important;
+  }
+  /* Health has no greeting block; reserve exactly the calendar's compact
+     greeting + margin (22px + 3px) before its navigation. */
+  .day-shell.health-shell > nav.day-tabs{margin-top:25px!important}
+}
+@media (max-width:700px) and (orientation:portrait) and (min-height:551px) and (max-height:715px){
+  /* On short screens the pinned calendar omits the greeting entirely. */
+  .day-shell.notebook-active > .day-intro{display:none!important}
+  .day-shell.health-shell > nav.day-tabs{margin-top:3px!important}
+}
