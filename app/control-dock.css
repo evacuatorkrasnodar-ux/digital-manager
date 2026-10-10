@@ -1,0 +1,193 @@
+/* Digital Manager v291 — ONE premium segmented-dock language.
+   Calendar / Notebook / Health inherit the glossy "Сегодня" highlight
+   from the main dashboard. The dashboard keeps its existing 4 period buttons
+   and calendar action but places all five in one continuous glass dock.
+   Style only: no click behavior, storage, or layout sections are changed. */
+
+/* Shared Black Velvet materials */
+:root{
+ --dm-control-surface:
+   radial-gradient(ellipse at 18% -42%,rgba(105,173,237,.15),transparent 61%),
+   linear-gradient(133deg,rgba(13,38,65,.85),rgba(4,18,37,.93) 60%,rgba(2,11,25,.95));
+ --dm-control-gloss:
+   radial-gradient(ellipse 67% 145% at 31% 3%,
+     rgba(255,255,255,.96) 0%,rgba(244,251,255,.94) 27%,
+     rgba(213,231,251,.73) 50%,transparent 94%),
+   linear-gradient(110deg,#c9e2f7,#9ebfdf 68%,#6b94b5);
+ --dm-control-active-shadow:
+   inset 0 1px 1px rgba(255,255,255,1),
+   inset 0 -3px 8px rgba(43,82,122,.22),
+   0 0 3px rgba(211,235,255,.43),
+   0 0 10px rgba(110,174,237,.19);
+}
+
+/* Main dashboard: ONE dock for all 5 actions, not 4 separate dark pills. */
+#homeScreen .timebar{
+ box-sizing:border-box;
+ display:flex;
+ align-items:center;
+ gap:3px;
+ width:auto;
+ min-width:0;
+ min-height:45px;
+ height:45px;
+ margin:0 1px 9px;
+ padding:3px 4px;
+ border:1px solid rgba(150,207,248,.60);
+ border-radius:24px;
+ background:var(--dm-control-surface);
+ box-shadow:inset 0 1px rgba(245,253,255,.29),0 7px 19px rgba(0,3,15,.40);
+ -webkit-backdrop-filter:blur(18px);
+ backdrop-filter:blur(18px);
+}
+#homeScreen .timebar .periods{
+ box-sizing:border-box;
+ display:grid;
+ grid-template-columns:repeat(4,minmax(0,1fr));
+ flex:1 1 auto;
+ width:auto;
+ min-width:0;
+ min-height:37px;
+ height:37px;
+ gap:0;
+ padding:0;
+ margin:0;
+ border:0;
+ border-radius:21px;
+ background:transparent;
+ box-shadow:none;
+}
+#homeScreen .timebar .period{
+ box-sizing:border-box;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ position:relative;
+ z-index:1;
+ min-width:0;
+ min-height:37px;
+ height:37px;
+ margin:0;
+ padding:0 2px;
+ border:1px solid transparent;
+ border-radius:20px;
+ background:transparent;
+ box-shadow:none;
+ color:#d9edff;
+ text-shadow:0 1px 4px rgba(0,6,19,.45);
+ font-size:clamp(10px,2.82vw,12px);
+ font-weight:440;
+ letter-spacing:-.018em;
+ white-space:nowrap;
+ overflow:visible;
+ -webkit-tap-highlight-color:transparent;
+}
+#homeScreen .timebar .period.selected{
+ z-index:3;
+ color:#0a2744;
+ border:1px solid rgba(219,244,255,.99);
+ background:var(--dm-control-gloss);
+ box-shadow:var(--dm-control-active-shadow);
+ text-shadow:0 1px rgba(255,255,255,.57);
+ font-weight:520;
+}
+#homeScreen .timebar .period:not(.selected):not(:first-child)::before{
+ content:"";
+ display:block;
+ position:absolute;
+ top:-2px;
+ bottom:-2px;
+ left:-19px;
+ width:25px;
+ z-index:0;
+ pointer-events:none;
+ border-right:1px solid rgba(164,211,249,.37);
+ border-radius:50%;
+}
+#homeScreen .timebar .period.selected+.period::before{
+ content:none;
+ display:none;
+}
+#homeScreen .timebar .period:not(.selected):hover{
+ color:#f6fbff;
+ background:rgba(89,152,204,.12);
+}
+#homeScreen .timebar .date-button{
+ box-sizing:border-box;
+ display:grid;
+ place-items:center;
+ flex:0 0 36px;
+ width:36px;
+ min-width:36px;
+ height:36px;
+ min-height:36px;
+ margin:0;
+ padding:0;
+ border:1px solid rgba(174,224,255,.68);
+ border-radius:50%;
+ color:#ebf8ff;
+ background:
+   radial-gradient(ellipse at 24% 5%,rgba(222,245,255,.27),transparent 69%),
+   linear-gradient(148deg,rgba(43,100,149,.91),rgba(7,35,65,.97));
+ box-shadow:inset 0 1px rgba(255,255,255,.36),0 4px 10px rgba(0,6,20,.32);
+ -webkit-tap-highlight-color:transparent;
+}
+#homeScreen .timebar .date-button .ico{
+ width:17px;
+ height:17px;
+ stroke:currentColor;
+ stroke-width:1.8;
+}
+#homeScreen .timebar .date-button:hover{
+ border-color:#d9f3ff;
+ box-shadow:inset 0 1px rgba(255,255,255,.43),0 0 12px rgba(101,185,255,.40);
+}
+
+/* Day, Care, Health: same outer rail as Home, same glossy active pill. */
+.day-shell.day-shell.day-shell > nav.day-tabs{
+ border-color:rgba(150,207,248,.60)!important;
+ background:var(--dm-control-surface)!important;
+ box-shadow:inset 0 1px rgba(245,253,255,.29),0 7px 19px rgba(0,3,15,.40)!important;
+}
+.day-shell.day-shell.day-shell > nav.day-tabs > .day-tab.active{
+ color:#0a2744!important;
+ border:1px solid rgba(219,244,255,.99)!important;
+ background:var(--dm-control-gloss)!important;
+ box-shadow:var(--dm-control-active-shadow)!important;
+ text-shadow:0 1px rgba(255,255,255,.57)!important;
+ font-weight:520!important;
+}
+.day-shell.day-shell.day-shell > nav.day-tabs > .day-tab.active > svg.day-tab-icon{
+ stroke:#0a2744!important;
+}
+.day-shell.day-shell.day-shell > nav.day-tabs > .day-tab:not(.active){
+ color:#d9edff!important;
+}
+#homeScreen .timebar .period:focus-visible,
+#homeScreen .timebar .date-button:focus-visible{
+ outline:2px solid #dbf4ff;
+ outline-offset:3px;
+}
+@media(max-width:350px){
+ #homeScreen .timebar{
+   padding:3px;
+   gap:2px;
+ }
+ #homeScreen .timebar .period{font-size:10px;padding:0 1px}
+ #homeScreen .timebar .date-button{
+   flex-basis:33px;
+   width:33px;
+   min-width:33px;
+   height:33px;
+   min-height:33px;
+ }
+}
+/* Do not stretch fixed-height My Day calendar; styling is limited to colors,
+   highlights, and glass. Its existing responsive rail dimensions are retained. */
+@media(prefers-reduced-motion:reduce){
+ #homeScreen .timebar .period,
+ #homeScreen .timebar .date-button,
+ .day-shell.day-shell.day-shell > nav.day-tabs > .day-tab{
+   transition:none!important;
+ }
+}
