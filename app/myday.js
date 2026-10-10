@@ -16,6 +16,18 @@
   let month=new Date(new Date().getFullYear(),new Date().getMonth(),1),toastTimeout;
   let eventFromNote=false;
   function elem(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;}
+  function dmTrashGlyph(){
+    const ns='http://www.w3.org/2000/svg';
+    const svg=document.createElementNS(ns,'svg');
+    svg.setAttribute('viewBox','0 0 24 24');
+    svg.setAttribute('aria-hidden','true');
+    for(const d of ['M4 7h16','M9 7V4h6v3','M6 7l1 13h10l1-13','M10 11v6','M14 11v6']){
+      const path=document.createElementNS(ns,'path');
+      path.setAttribute('d',d);
+      svg.append(path);
+    }
+    return svg;
+  }
   function toast(message){const t=$('dayToast');t.textContent=message;t.hidden=false;clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>t.hidden=true,3300);}
   function fail(e){console.error('My Day storage:',e);toast('Не удалось сохранить. Проверьте настройки браузера и свободное место.');}
   function openDatabase(){
@@ -167,7 +179,10 @@
       main.append(elem('div','event-meta',item.done?'Выполнено':'Запланировано'));
       if(item.detail)main.append(elem('p','event-detail',item.detail));
       const controls=elem('div','item-actions');
-      controls.append(action('✎','Изменить событие',()=>openEvent(item)),action('×','Удалить событие',()=>remove(EVENTS,item)));
+      const del=action('','Удалить событие',()=>remove(EVENTS,item));
+      del.classList.add('dm-delete-action');
+      del.append(dmTrashGlyph());
+      controls.append(action('✎','Изменить событие',()=>openEvent(item)),del);
       row.append(clock,checkbox,main,controls);list.append(row);
     }
   }
@@ -205,7 +220,10 @@
     for(const item of matches){
       const card=elem('article','note-card'),head=elem('div','note-card-header');
       const controls=elem('div','item-actions');
-      controls.append(action('✎','Изменить заметку',()=>openNote(item)),action('×','Удалить заметку',()=>remove(NOTES,item)));
+      const del=action('','Удалить заметку',()=>remove(NOTES,item));
+      del.classList.add('dm-delete-action');
+      del.append(dmTrashGlyph());
+      controls.append(action('✎','Изменить заметку',()=>openNote(item)),del);
       head.append(elem('div','note-card-title',item.title),controls);card.append(head,elem('p','note-card-content',item.text));
       const meta=elem('div','note-card-meta');
       const toPlan=action('','Создать событие из заметки «'+item.title+'»',()=>openEventFromNote(item));
