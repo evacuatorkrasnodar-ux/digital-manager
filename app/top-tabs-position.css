@@ -119,25 +119,8 @@
   }
 }
 
-/* The Health tab opens a separate HTML document. Keep the shared rail as
-   a continuous visual element during same-origin page navigation in Chromium,
-   rather than tearing down and instantly redrawing the entire screen. */
-@media (prefers-reduced-motion:no-preference){
-  @view-transition{navigation:auto}
-  body > .day-shell > nav.day-tabs{
-    view-transition-name:personal-day-rail;
-  }
-  ::view-transition-old(personal-day-rail),
-  ::view-transition-new(personal-day-rail){
-    animation-duration:.24s;
-    animation-timing-function:cubic-bezier(.22,1,.36,1);
-  }
-  ::view-transition-old(root),
-  ::view-transition-new(root){
-    animation-duration:.18s;
-    animation-timing-function:ease-in-out;
-  }
-}
+/* v13: Native cross-document navigation only. The top rail keeps its
+   fixed layout, without a View Transition opt-in or snapshot animation. */
 
 /* Windows: all three personal pages now reserve the EXACT same top geometry.
    The calendar greeting was content-sized, while Health/Cycle had a guessed
@@ -172,13 +155,7 @@
     margin-top:5px!important;
   }
 }
-/* Keep the rail stationary during navigation. Only the page content fades. */
-@media (prefers-reduced-motion:no-preference){
-  ::view-transition-old(personal-day-rail),
-  ::view-transition-new(personal-day-rail){
-    animation:none!important;
-  }
-}
+/* No cross-document animation: avoids aborted transition promises. */
 
 /* Health and Cycle now use the same REAL greeting block as Calendar.
    The former empty spacer caused their humorous text to appear only below
