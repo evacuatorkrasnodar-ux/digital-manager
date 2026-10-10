@@ -1,0 +1,107 @@
+/* Consistent Back controls and one stable My World card, v1.
+   Apply only to inner personal pages, never to the dashboard home. */
+
+/* All four personal pages: one visible circular Back arrow at the very
+   top-left of the existing header. No extra floating buttons. */
+body > .day-shell.day-shell > header.day-header > a.day-back{
+  box-sizing:border-box!important;
+  display:grid!important;
+  place-items:center!important;
+  position:relative!important;
+  top:0!important;
+  left:0!important;
+  align-self:flex-start!important;
+  flex:0 0 42px!important;
+  width:42px!important;
+  height:42px!important;
+  min-width:42px!important;
+  min-height:42px!important;
+  max-width:42px!important;
+  max-height:42px!important;
+  margin:0!important;
+  padding:0!important;
+  border:1px solid rgba(165,205,235,.64)!important;
+  border-radius:50%!important;
+  background:linear-gradient(145deg,rgba(31,54,73,.97),rgba(5,17,29,.98))!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.17),0 3px 10px rgba(0,0,0,.28)!important;
+  color:#e9f6ff!important;
+  filter:none!important;
+  transform:none!important;
+  text-decoration:none!important;
+  z-index:4!important;
+}
+body > .day-shell.day-shell > header.day-header > a.day-back > svg{
+  display:block!important;
+  width:19px!important;
+  height:19px!important;
+  opacity:1!important;
+  visibility:visible!important;
+  fill:none!important;
+  stroke:currentColor!important;
+  stroke-width:1.9!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+}
+body > .day-shell.day-shell > header.day-header > a.day-back:is(:hover,:focus-visible){
+  border-color:rgba(221,241,255,.9)!important;
+  background:linear-gradient(145deg,rgba(47,79,105,.98),rgba(13,31,47,.99))!important;
+}
+body > .day-shell.day-shell > header.day-header > a.day-back:focus-visible{
+  outline:2px solid #d3efff!important;
+  outline-offset:2px!important;
+}
+
+/* My World is one link in the calendar shell. Keep its height unchanged
+   between Calendar and Notebook, mobile and desktop, and short screens. */
+body > .day-shell.day-shell > a.world-entry{
+  box-sizing:border-box!important;
+  display:grid!important;
+  grid-template-columns:32px minmax(0,1fr)!important;
+  align-items:center!important;
+  column-gap:9px!important;
+  flex:0 0 48px!important;
+  width:100%!important;
+  height:48px!important;
+  min-height:48px!important;
+  max-height:48px!important;
+  padding:5px 10px!important;
+  margin:0 0 8px!important;
+  border-radius:16px!important;
+  transform:none!important;
+}
+body > .day-shell.day-shell > a.world-entry > .world-entry-symbol{
+  box-sizing:border-box!important;
+  width:32px!important;
+  height:32px!important;
+  min-width:32px!important;
+  min-height:32px!important;
+  font-size:17px!important;
+}
+body > .day-shell.day-shell > a.world-entry > span:nth-child(2){
+  min-width:0!important;
+  overflow:hidden!important;
+}
+body > .day-shell.day-shell > a.world-entry strong{
+  font-size:13px!important;
+  line-height:1.2!important;
+}
+body > .day-shell.day-shell > a.world-entry small{
+  display:block!important;
+  font-size:10px!important;
+  line-height:1.15!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+body > .day-shell.day-shell > a.world-entry > .world-entry-arrow{
+  display:none!important;
+}
+/* Override compact-height legacy rules that shrink the same link to 37px. */
+@media(max-width:700px) and (orientation:portrait){
+  body > .day-shell.day-shell > a.world-entry{
+    flex-basis:48px!important;
+    height:48px!important;
+    min-height:48px!important;
+    max-height:48px!important;
+  }
+}
