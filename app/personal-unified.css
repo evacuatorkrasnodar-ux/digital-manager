@@ -569,3 +569,73 @@
 @media(prefers-reduced-motion:reduce){
   .care-shell .day-tab,.world-shell .world-tab,.health-shell .health-tabs>button{transition:none!important}
 }
+
+/* v279 — Care calendar arrows and weekend emphasis, consistent with My Day. */
+.care-shell .care-calendar-panel .calendar-toolbar{
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr) 34px;
+  align-items:center;
+  width:100%;
+  gap:6px;
+  padding:0 3px 7px;
+}
+.care-shell .care-calendar-panel .calendar-toolbar h2{
+  min-width:0;
+  margin:0;
+  text-align:center;
+  font-size:clamp(17px,4.5vw,20px);
+  font-weight:455;
+  line-height:1.15;
+}
+.care-shell .care-calendar-panel .month-arrow{
+  box-sizing:border-box;
+  display:grid;
+  place-items:center;
+  width:34px;
+  height:34px;
+  min-width:34px;
+  min-height:34px;
+  padding:0;
+  border:1px solid rgba(155,209,250,.65);
+  border-radius:50%;
+  color:#eaf8ff;
+  background:
+    radial-gradient(ellipse at 22% 0%,rgba(226,245,255,.19),transparent 70%),
+    linear-gradient(145deg,rgba(34,80,122,.84),rgba(7,26,48,.93));
+  box-shadow:inset 0 1px rgba(255,255,255,.22),0 5px 13px rgba(0,7,20,.31);
+  -webkit-backdrop-filter:blur(15px);
+  backdrop-filter:blur(15px);
+  transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease;
+}
+.care-shell .care-calendar-panel .month-arrow svg{
+  display:block;
+  width:17px;
+  height:17px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.85;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.care-shell .care-calendar-panel .month-arrow:hover{
+  border-color:rgba(205,236,255,.9);
+  box-shadow:inset 0 1px rgba(255,255,255,.28),0 0 12px rgba(65,170,255,.25);
+}
+.care-shell .care-calendar-panel .month-arrow:active{transform:scale(.97)}
+.care-shell .care-calendar-panel .month-arrow:focus-visible{outline:2px solid #d6efff;outline-offset:3px}
+.care-shell .care-calendar-panel .weekdays>span:nth-child(6){color:#a8ceff;font-weight:570}
+.care-shell .care-calendar-panel .weekdays>span:nth-child(7){color:#f2b8d6;font-weight:570}
+.care-shell .care-grid .calendar-day:nth-child(7n+6):not(.selected):not(.outside){
+  color:#bad7ff;
+  background:linear-gradient(155deg,rgba(67,127,209,.16),rgba(9,23,42,.07));
+}
+.care-shell .care-grid .calendar-day:nth-child(7n):not(.selected):not(.outside){
+  color:#f4bfdb;
+  background:linear-gradient(155deg,rgba(177,94,148,.16),rgba(29,20,44,.07));
+}
+.care-shell .care-grid .calendar-day.outside:not(.selected){
+  color:#657c97;
+  background:transparent;
+}
+.care-shell .care-grid .calendar-day.selected{color:#fff}
+.care-shell .care-grid .calendar-day:focus-visible{outline:2px solid #d5efff;outline-offset:1px}
