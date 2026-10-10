@@ -55,6 +55,7 @@
          typeof adapter.requestReadAuthorization!=='function'||
          typeof adapter.readDailyMeasurements!=='function')throw new Error('Invalid or already registered provider');
       registered.set(name,adapter);
+      window.dispatchEvent(new Event('dm-health-provider-registered'));
     },
     async readOnUserAction(name,from,to){
       const adapter=registered.get(name);
