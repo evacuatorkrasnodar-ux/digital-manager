@@ -1015,3 +1015,19 @@
   width:13px!important;
   height:13px!important;
 }
+
+/* Use recommendation card as the single positioning reference for all four arrows. */
+#homeScreen .metric-grid .clients-card .tile-heading .tile-chevron,
+#homeScreen .metric-grid .orders-card .tile-heading .tile-chevron,
+#homeScreen .metric-grid .profit-card .tile-heading .tile-chevron,
+#homeScreen .recommendation-card .recommendation-top .rec-chevron{
+  position:absolute!important;
+  top:0!important;
+  right:0!important;
+  margin:0!important;
+  transform:none!important;
+  width:25px!important;
+  height:25px!important;
+  min-width:25px!important;
+  z-index:30!important;
+}
