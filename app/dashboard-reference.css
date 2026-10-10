@@ -886,3 +886,13 @@
     --bv-gold-h:132px;
   }
 }
+
+/* v345 — clear the signature corner without moving the card or altering
+   its SVG shape. The legend's last value no longer crowds the bend. */
+#homeScreen .metric-grid .clients-card .clients-inner{
+  transform:translateY(-5px);
+}
+#homeScreen .metric-grid .clients-card .donut-legend{
+  transform:translateY(-3px);
+  margin-right:2px;
+}
