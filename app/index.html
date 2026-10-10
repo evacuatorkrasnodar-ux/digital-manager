@@ -49,8 +49,6 @@
   <!-- Card contours use the same proven objectBoundingBox SVG method as
        the original Digital Business developerCardClip. -->
   <clipPath id="metricClientsClip" clipPathUnits="objectBoundingBox"><path d="M .080 .008 H .916 C .970 .008 .992 .048 .992 .101 V .778 C .992 .808 .981 .828 .960 .835 L .928 .835 C .892 .835 .871 .846 .852 .873 C .832 .901 .826 .933 .815 .955 C .804 .979 .785 .992 .758 .992 H .084 C .035 .992 .008 .955 .008 .913 V .107 C .008 .048 .030 .008 .080 .008 Z"/></clipPath>
-  <!-- Mirror of the approved Clients geometry: only the horizontal axis flips. -->
-  <clipPath id="metricClientsMirrorClip" clipPathUnits="objectBoundingBox"><path d="M .080 .008 H .916 C .970 .008 .992 .048 .992 .101 V .778 C .992 .808 .981 .828 .960 .835 L .928 .835 C .892 .835 .871 .846 .852 .873 C .832 .901 .826 .933 .815 .955 C .804 .979 .785 .992 .758 .992 H .084 C .035 .992 .008 .955 .008 .913 V .107 C .008 .048 .030 .008 .080 .008 Z" transform="translate(1 0) scale(-1 1)"/></clipPath>
   <clipPath id="metricAdviceClip" clipPathUnits="objectBoundingBox"><path d="M .080 .008 H .916 C .970 .008 .992 .048 .992 .101 V .903 C .992 .962 .964 .992 .908 .992 H .084 C .035 .992 .008 .955 .008 .913 V .107 C .008 .048 .030 .008 .080 .008 Z"/></clipPath>
   <!-- Single source of truth for the asymmetric developer-card outline. -->
   <clipPath id="developerCardClip" clipPathUnits="objectBoundingBox"><path d="M .087 .006 C .036 .006 .006 .049 .006 .113 L .006 .442 C .006 .506 .029 .547 .088 .56 C .151 .572 .169 .61 .169 .685 L .169 .891 C .169 .964 .209 .994 .276 .994 L .915 .994 C .966 .994 .994 .964 .994 .904 L .994 .107 C .994 .043 .958 .006 .911 .006 Z"/></clipPath>
@@ -148,11 +146,6 @@
         <div class="chart-wrap"><svg id="revenueChart" role="img" aria-label="График выручки" viewBox="0 0 650 124" preserveAspectRatio="none"><defs><linearGradient id="revenueArea" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#178dff" stop-opacity=".39"/><stop offset="1" stop-color="#0b519d" stop-opacity="0"/></linearGradient><filter id="lineGlow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g class="gridlines"><path d="M0 31H650M0 65H650M0 99H650"/><path d="M92 0V124M185 0V124M279 0V124M371 0V124M463 0V124M558 0V124"/></g><path id="revArea" fill="url(#revenueArea)" d=""/><path id="revLine" class="blue-line" d=""/><path id="revFocus" class="focus-stem" d=""/><circle id="revDotGlow" fill="#52b1ff" opacity=".35" r="10"/><circle id="revDot" fill="#dffbff" r="4.6"/></svg><div class="chart-tooltip" id="chartTooltip">12,6 млн ₽</div></div>
         <div class="chart-axis" id="chartAxis"><span>00:00</span><span>04:00</span><span>08:00</span><span>12:00</span><span>16:00</span><span>20:00</span></div>
       </section>
-      <!-- New empty right-hand card, exact mirror of Clients. Revenue remains parked. -->
-      <div class="mirror-revenue-slot">
-        <section class="metric-card mirror-clients-card" aria-label="Карточка с зеркальным изгибом"></section>
-        <svg class="mirror-clients-edge" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M .080 .008 H .916 C .970 .008 .992 .048 .992 .101 V .778 C .992 .808 .981 .828 .960 .835 L .928 .835 C .892 .835 .871 .846 .852 .873 C .832 .901 .826 .933 .815 .955 C .804 .979 .785 .992 .758 .992 H .084 C .035 .992 .008 .955 .008 .913 V .107 C .008 .048 .030 .008 .080 .008 Z" transform="translate(1 0) scale(-1 1)" fill="none" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>
-      </div>
       <div class="metric-grid">
         <button class="metric-card clients-card" id="clientsCard" type="button" aria-label="Открыть клиентов">
           <div class="tile-heading"><svg class="ico tile-symbol"><use href="#ic-users"/></svg><span>Клиенты</span><span class="tile-chevron"><svg class="ico"><use href="#ic-chevron"/></svg></span></div>
