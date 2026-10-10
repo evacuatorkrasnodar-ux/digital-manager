@@ -129,7 +129,7 @@
    const day=node('div','health-chart-day');
    day.dataset.empty=String(!row);
    const track=node('div','health-chart-track'),bar=node('span','health-chart-bar');
-   bar.style.height=row?Math.max(3,Math.round((row.steps/max)*100))+'%':'0%';
+   bar.style.height=row&&row.steps>0?Math.max(3,Math.round((row.steps/max)*100))+'%':'0%';
    track.append(bar);
    const label=node('small','',new Intl.DateTimeFormat('ru-RU',{weekday:'short'}).format(d));
    day.append(track,label);
@@ -143,7 +143,7 @@
   const rows=metrics.filter(m=>filter==='all'||filter===m.type).slice(0,60);
   if(!rows.length){blank(container,'Измерений пока нет. Нажми «+ Запись», чтобы сохранить своё первое значение.');return;}
   for(const entry of rows){
-   const {row}=card(entry.type==='pressure'?'♡':entry.type==='pulse'?'◡':'↟',
+   const {row}=card(entry.type==='pressure'?'♡':entry.type==='pulse'?'◡':'◈',
     metricNames[entry.type]+' · '+metricValue(entry),
     entry.note||'',nice(entry.date)+(entry.type==='steps'?'':' · '+entry.time)+' · '+metricOrigin(entry));
    if(entry.source==='manual')controls(row,()=>openMetric(entry),()=>eraseOne('metrics',entry));
