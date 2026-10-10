@@ -45,9 +45,6 @@
   }
   function setTab(next){
     hideBrandCard();hideProfileCard();tab=next;
-    const home=next==='home';
-    document.documentElement.classList.toggle('home-dashboard-locked',home);
-    byId('app').classList.toggle('home-fixed',home);
     ['home','assistant','management'].forEach(x=>{
       byId(x+'Screen').hidden=x!==next;
       const button=byId('tab'+x[0].toUpperCase()+x.slice(1));
@@ -55,7 +52,6 @@
       if(x===next)button.setAttribute('aria-current','page');
       else button.removeAttribute('aria-current');
     });
-    if(home)byId('homeScreen').querySelector('.dashboard').scrollTop=0;
     window.scrollTo({top:0,behavior:'instant'});
   }
   function applyUser(){byId('greetingName').textContent=state.name;byId('manageCompanyName').textContent=state.company;byId('profilePreviewCompany').textContent=state.company||'Моя компания';byId('profilePreviewOwner').textContent=state.name||'Не указано';byId('profilePreviewIndustry').textContent=state.industry||'Направление не указано';}
