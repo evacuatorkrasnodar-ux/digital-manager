@@ -115,6 +115,8 @@
   ]){
    const entry=latestFor(kind);
    $(valueId).textContent=entry?(kind==='pressure'?entry.systolic+'/'+entry.diastolic:kind==='pulse'?String(entry.bpm):niceNum(entry.steps)):'—';
+   // The animated artwork is decorative; it must never suggest a live sensor.
+   $(valueId).closest('.health-metric-tile').dataset.reading=entry?'saved':'empty';
    $(metaId).textContent=entry?nice(entry.date)+(kind==='steps'?'':' · '+entry.time)+' · '+metricOrigin(entry):'Нет записей';
   }
   const chart=$('healthStepsChart');chart.replaceChildren();
