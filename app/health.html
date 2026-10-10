@@ -42,6 +42,7 @@
   <link rel="stylesheet" href="./health-tabs-theme.css?v=1">
   <link rel="stylesheet" href="./personal-embedded.css?v=2">
   <link rel="stylesheet" href="./navigation-gestures.css?v=2">
+  <link rel="stylesheet" href="./quiet-navigation.css?v=1">
   <script src="./navigation-gestures.js?v=3" defer></script>
 </head>
 <body>
@@ -129,11 +130,11 @@
     <p>Apple Health / Apple Watch и Health Connect / Android: интерфейс подключения подготовлен. В веб-версии прямой доступ к данным часов отсутствует.</p>
     <div class="health-provider-row health-provider-link-row">
      <div class="health-provider-info"><strong>Apple Health</strong><span id="healthAppleStatus">Синхронизация не подключена</span></div>
-     <a class="health-provider-open" href="https://apps.apple.com/app/apple-health/id1242545199" target="_blank" rel="noopener noreferrer" aria-label="Открыть Apple Health в App Store"><span>App Store</span><span class="health-provider-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></a>
+     <a class="health-provider-open" href="https://apps.apple.com/app/apple-health/id1242545199" target="_blank" rel="noopener noreferrer" aria-label="Открыть Apple Health в App Store"><svg class="health-store-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 4.2 18.6 20M14.8 4.2 5.4 20M4.3 15.8h15.4"/></svg><span>App Store</span></a>
     </div>
     <div class="health-provider-row health-provider-link-row">
      <div class="health-provider-info"><strong>Health Connect</strong><span id="healthAndroidStatus">Синхронизация не подключена</span></div>
-     <a class="health-provider-open" href="https://play.google.com/store/apps/details?id=com.google.android.apps.healthdata" target="_blank" rel="noopener noreferrer" aria-label="Открыть Health Connect в Google Play"><span>Google Play</span><span class="health-provider-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></a>
+     <a class="health-provider-open" href="https://play.google.com/store/apps/details?id=com.google.android.apps.healthdata" target="_blank" rel="noopener noreferrer" aria-label="Открыть Health Connect в Google Play"><svg class="health-store-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 3.5v17l14-8.5z"/></svg><span>Google Play</span></a>
     </div>
     <p class="health-device-platform-help">На iPhone приложение «Здоровье» обычно уже установлено. На Android 14 и новее Health Connect находится в настройках телефона. <a href="https://support.google.com/android/answer/12201227?hl=ru" target="_blank" rel="noopener noreferrer">Где найти в Android</a></p>
     <button type="button" class="health-native-sync" id="healthSync" hidden>Получить разрешённые показатели</button>
