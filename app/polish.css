@@ -1,0 +1,54 @@
+/* Black Velvet · cinematic personal screens v252 — additive, no data code changes */
+:root{--polish-glass:linear-gradient(150deg,rgba(17,31,50,.9),rgba(6,13,24,.92) 68%,rgba(2,6,12,.96));--polish-line:rgba(145,196,241,.34)}
+.day-shell{position:relative;isolation:isolate;overflow:hidden;background:#02060b;color:#f2f8ff}
+.day-shell::before{content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;background:linear-gradient(180deg,rgba(1,5,12,.07),rgba(2,8,18,.21) 19%,rgba(1,6,14,.59) 49%,rgba(1,4,9,.72) 76%,rgba(0,1,4,.94)),url('./assets/architecture-hero.png') 62% top/auto 810px no-repeat,url('./assets/architecture-hero.png') 59% center/auto 100% no-repeat;filter:contrast(1.04) saturate(1.12)}
+.day-shell::after{content:"";position:absolute;inset:38% 0 0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(2,5,11,.13) 26%,rgba(0,2,6,.42) 68%,rgba(0,0,3,.78));-webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px)}
+.day-shell>*{position:relative;z-index:1}
+.day-header{min-height:59px;gap:9px}
+.day-back{width:53px;height:55px;flex:none;border:0;border-radius:0;box-shadow:none;background:url('./assets/logo-air.png') center/99% auto no-repeat;filter:drop-shadow(0 2px 9px rgba(77,175,255,.28))}
+.day-back svg{opacity:0}
+.day-heading>span{font-size:clamp(9px,2.65vw,11px);letter-spacing:.065em;color:#dceafa}
+.day-heading h1{font-size:clamp(23px,6.7vw,30px);font-weight:430;line-height:1.05;letter-spacing:-.043em;color:#fff}
+.day-heading h1 span{color:#d4ebff;text-shadow:0 0 14px #72bcffa0}
+.day-today{flex:none;padding:11px 13px;border-radius:18px;border-color:#b0d4fa74;background:linear-gradient(153deg,rgba(33,65,94,.88),rgba(8,20,35,.84));box-shadow:inset 0 1px #ffffff20,0 10px 20px #0006}
+.day-intro{padding:28px 4px 21px;min-height:159px;text-shadow:0 2px 12px #000a}
+.day-intro .day-eyebrow{display:none}
+.day-intro .polish-hello{margin:0 0 11px;font-size:clamp(28px,8.2vw,37px);letter-spacing:-.05em;line-height:1.04;font-weight:430;white-space:pre-line;color:white}
+.day-intro #dayGreeting{font-size:clamp(13px,3.7vw,15px);line-height:1.42;max-width:305px;color:#dce9f4}
+.day-tabs{grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid #95c8ed57;border-radius:22px;gap:4px;padding:4px;background:linear-gradient(156deg,rgba(9,22,38,.85),rgba(4,10,20,.85));box-shadow:inset 0 1px #ffffff18,0 14px 28px #0006;-webkit-backdrop-filter:blur(15px);backdrop-filter:blur(15px)}
+.day-tab{min-width:0;min-height:45px;border-radius:18px;font-size:clamp(11px,3.1vw,13px);color:#e7f2ff;font-weight:430}
+.day-tab.active{color:white;border:1px solid #b6e8ffb8;background:radial-gradient(circle at 12% 20%,#ffffff66,transparent 38%),linear-gradient(150deg,rgba(63,142,233,.98),rgba(16,71,143,.98));box-shadow:inset 0 1px #ffffff79,0 0 19px #5cb1ff70,0 8px 20px #0f539f6b}
+.world-entry{min-height:80px;border-radius:21px;gap:12px;padding:12px 14px;background:radial-gradient(ellipse at 92% 35%,rgba(250,175,96,.19),transparent 36%),radial-gradient(ellipse at 27% 100%,rgba(38,128,255,.2),transparent 68%),var(--polish-glass);border:1px solid #9cd3fb6b;box-shadow:inset 0 1px #ffffff1b,0 16px 34px #0007;-webkit-backdrop-filter:blur(15px);backdrop-filter:blur(15px)}
+.world-entry-symbol{flex:none;width:46px;height:46px;border-radius:50%;font-size:23px;color:#ffe2aa;background:radial-gradient(circle at 31% 25%,#a9e7ff8b,transparent 27%),radial-gradient(circle at 50% 46%,#2461a3,#09172d 76%);border:1px solid #91ccffa6;box-shadow:inset 0 1px #ffffff55,0 0 21px #55b1ff67;text-shadow:0 0 10px #fbd58a}
+.world-entry strong{font-size:15px;font-weight:450}.world-entry small{font-size:11px;line-height:1.45;color:#c6dcea}
+.day-panel,.day-event,.note-card,.day-empty{border:1px solid var(--polish-line);border-radius:22px;background:var(--polish-glass);box-shadow:inset 0 1px #ffffff14,0 18px 36px #0008;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.calendar-panel{padding:15px 10px 14px;background:radial-gradient(ellipse at 86% 8%,rgba(244,180,114,.15),transparent 24%),radial-gradient(ellipse at 6% 94%,rgba(60,139,246,.12),transparent 46%),var(--polish-glass)}
+.calendar-toolbar h2{font-size:clamp(17px,5.1vw,20px);font-weight:470;letter-spacing:-.025em}
+.month-arrow{width:38px;height:38px;border-radius:50%;background:linear-gradient(147deg,#213f5b,#081526);border-color:#9ac9ec6b;font-size:26px}
+.weekdays{color:#b1c9e2}
+.calendar-day{min-height:44px;border-radius:12px;font-weight:440}
+.calendar-day.selected{background:linear-gradient(151deg,#58b2ff,#2264c0);border:1px solid #b9eaffac;color:white;box-shadow:inset 0 1px #ffffff83,0 0 18px #479dff80}
+.calendar-day.ru-weekend:not(.selected){color:#e1b9c8}
+.calendar-day.ru-holiday:not(.selected),.calendar-day.ru-transferred:not(.selected){color:#ffdb9a;background:rgba(178,120,63,.13)}
+.day-section-heading h2{font-size:20px;font-weight:460;letter-spacing:-.03em}
+.day-add{border-radius:15px;border-color:#9fcaf28a;background:linear-gradient(148deg,#24415d,#0c1b2d);box-shadow:inset 0 1px #ffffff18}
+.day-event{background:radial-gradient(ellipse at 95% 65%,#419df429,transparent 45%),var(--polish-glass)}
+.note-mini{border-radius:16px;background:radial-gradient(ellipse at 91% 72%,#eaa95728,transparent 45%),var(--polish-glass);border-color:var(--polish-line)}
+.note-card{background:radial-gradient(ellipse at 92% 78%,#f0b57d25,transparent 46%),var(--polish-glass)}
+.day-footer{margin-top:21px}
+.polish-dock{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;align-items:end;margin:28px -15px 0;padding:16px 7px calc(12px + env(safe-area-inset-bottom,0px));border:1px solid rgba(153,204,245,.39);border-radius:35px 35px 13px 13px;background:radial-gradient(ellipse at 50% 0%,#4da3e435,transparent 57%),linear-gradient(157deg,rgba(11,27,45,.97),rgba(2,8,17,.99));box-shadow:inset 0 1px #ffffff1e,0 -12px 38px #0009;-webkit-backdrop-filter:blur(17px);backdrop-filter:blur(17px)}
+.polish-dock-link{position:relative;display:flex;flex-direction:column;align-items:center;gap:7px;min-width:0;padding:5px 0 8px;color:#c2d5e9;text-decoration:none;text-align:center}
+.polish-dock-link svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+.polish-dock-link small{font-size:10px;line-height:1.1;white-space:nowrap}
+.polish-dock-link.is-active{color:#fff}.polish-dock-link.is-active::after{content:"";position:absolute;bottom:0;width:29px;height:2px;border-radius:9px;background:#dfedff;box-shadow:0 0 8px #a7d8ff}
+.polish-dock-link.polish-assistant{transform:translateY(-7px)}
+.polish-assistant-orb{display:block;width:45px;height:45px;border-radius:50%;border:1px solid #b1e7ffc0;background:url('./assets/logo-air.png') center/66% no-repeat,radial-gradient(circle at 40% 33%,#4a9bcf,#102643 75%);box-shadow:inset 0 1px #ffffff66,0 0 18px #4aa6f98c}
+.care-shell::before,.health-shell::before{background-image:linear-gradient(180deg,rgba(8,5,12,.08),rgba(9,6,15,.37) 24%,rgba(8,5,14,.69) 54%,#03040ae9 100%),url('./assets/architecture-hero.png'),url('./assets/architecture-hero.png')}
+.care-shell .day-tab.active,.health-shell .health-tabs button.active{border-color:#f1c6deae!important;background:radial-gradient(circle at 16% 26%,#ffe3f05f,transparent 42%),linear-gradient(153deg,#83517c,#38253e)!important;box-shadow:inset 0 1px #ffffff73,0 0 16px #e2a2c26a}
+.care-shell .care-hero{border-radius:22px;border-color:#f0bdda6e;background:radial-gradient(ellipse at 94% 7%,#eb9cbe32,transparent 70%),var(--polish-glass)}
+.care-shell .care-calendar-panel,.care-shell .care-panel,.health-shell .health-card,.health-shell .health-summary{box-shadow:inset 0 1px #ffffff1b,0 16px 29px #0008;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.world-shell .world-spotlight,.world-shell .world-item{border-color:#b1d9f458;box-shadow:inset 0 1px #ffffff1b,0 16px 27px #0007}
+.world-shell .world-spotlight{background:radial-gradient(ellipse at 95% 8%,#b5d8ff2b,transparent 60%),var(--polish-glass)}
+.world-shell .world-item{background:radial-gradient(ellipse at 95% 55%,#4d9ce529,transparent 58%),var(--polish-glass)}
+@media(max-width:370px){.day-shell{padding-left:10px;padding-right:10px}.day-back{width:45px;height:49px}.day-heading>span{font-size:9px}.day-heading h1{font-size:24px}.day-today{padding:9px 10px;font-size:11px}.polish-dock{margin-left:-10px;margin-right:-10px;padding:15px 4px 12px}.polish-dock-link small{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.calendar-day,.day-tab,.polish-dock-link{transition:none!important}}
