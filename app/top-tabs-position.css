@@ -1,4 +1,4 @@
-/* v1 — the Calendar / Notebook / Health rail keeps one vertical anchor.
+/* v2 — the Calendar / Notebook / Health rail keeps one vertical anchor.
    Only mobile portrait uses the pinned calendar geometry. Other layouts
    keep their existing spacing and design. */
 @media (max-width:700px) and (orientation:portrait) and (min-height:551px){
@@ -68,10 +68,12 @@
   }
   /* Health has no greeting block; reserve exactly the calendar's compact
      greeting + margin (22px + 3px) before its navigation. */
-  .day-shell.health-shell > nav.day-tabs{margin-top:25px!important}
+  /* Override the more specific shared top-tabs rule. Match the pinned calendar's
+     compact greeting height (about 23px) plus its 4px rail gap. */
+  .day-shell.health-shell.day-shell.day-shell > nav.day-tabs{margin-top:27px!important}
 }
 @media (max-width:700px) and (orientation:portrait) and (min-height:551px) and (max-height:715px){
   /* On short screens the pinned calendar omits the greeting entirely. */
   .day-shell.notebook-active > .day-intro{display:none!important}
-  .day-shell.health-shell > nav.day-tabs{margin-top:3px!important}
+  .day-shell.health-shell.day-shell.day-shell > nav.day-tabs{margin-top:4px!important}
 }
