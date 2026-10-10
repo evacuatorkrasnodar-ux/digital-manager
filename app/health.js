@@ -121,7 +121,7 @@
   const now=new Date();
   let description=[];
   const todayDate=new Date(now.getFullYear(),now.getMonth(),now.getDate());
-  const max=Math.max(1,...metrics.filter(m=>m.type==='steps'&&m.date<=today()).map(m=>Number(m.steps)||0));
+  const max=Math.max(1,...metrics.filter(m=>m.type==='steps'&&m.date<=today()&&m.date>=key(new Date(todayDate.getFullYear(),todayDate.getMonth(),todayDate.getDate()-6))).map(m=>Number(m.steps)||0));
   for(let offset=6;offset>=0;offset--){
    const d=new Date(todayDate);d.setDate(todayDate.getDate()-offset);
    const date=key(d),samples=metrics.filter(m=>m.type==='steps'&&m.date===date);
@@ -189,7 +189,7 @@
  async function saveMetric(e){
   e.preventDefault();
   const type=$('healthMetricType').value,date=$('healthMetricDate').value,time=$('healthMetricTime').value;
-  if(!metricNames[type]||!dateOk(date)||date>today()||!/^([01]\\d|2[0-3]):[0-5]\\d$/.test(time)){
+  if(!metricNames[type]||!dateOk(date)||date>today()||!/^([01][0-9]|2[0-3]):[0-5][0-9]$/.test(time)){
    toast('Проверь дату, время и тип измерения');return;
   }
   if(date===today()&&time>timeNow()){toast('Время измерения не может быть в будущем');return;}
