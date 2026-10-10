@@ -1,20 +1,20 @@
-/* v294 — modest extra room on iPhone Home, approved Black Velvet preserved.
+/* v296 — slightly wider edge-to-edge Home on iPhone Home, approved Black Velvet preserved.
    Only horizontal spacing: no card height, chart scale, typography, app data,
    bottom navigation, modal layout or personal calendars are changed.
    Preserve hardware safe-area insets, especially on notched devices. */
 @media (pointer:coarse) and (max-width:700px) and (orientation:portrait){
   body .app-shell #homeScreen .hero{
-    padding-left:max(4px,env(safe-area-inset-left,0px));
-    padding-right:max(4px,env(safe-area-inset-right,0px));
+    padding-left:max(2px,env(safe-area-inset-left,0px));
+    padding-right:max(2px,env(safe-area-inset-right,0px));
   }
   body .app-shell #homeScreen .dashboard{
-    padding-left:max(4px,env(safe-area-inset-left,0px));
-    padding-right:max(4px,env(safe-area-inset-right,0px));
+    padding-left:max(2px,env(safe-area-inset-left,0px));
+    padding-right:max(2px,env(safe-area-inset-right,0px));
   }
   /* The period dock keeps one continuous glass body; do not inflate it. */
   #homeScreen .timebar{
-    margin-left:2px;
-    margin-right:2px;
+    margin-left:0;
+    margin-right:0;
   }
   /* The two-column business cards get a few useful pixels for their values. */
   #homeScreen .metric-grid{
