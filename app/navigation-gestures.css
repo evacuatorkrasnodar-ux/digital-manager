@@ -53,3 +53,14 @@ body > .day-shell > .day-header > .dm-back-circle{
   .dm-back-circle{width:37px!important;height:37px!important;min-width:37px!important;min-height:37px!important}
 }
 @media(prefers-reduced-motion:reduce){.dm-back-circle{transition:none!important}}
+
+/* Home: place the arrow next to the existing profile button, not on top of it. */
+#homeScreen .masthead .header-actions > .dm-back-circle{
+  position:relative!important;
+  top:auto!important;
+  right:auto!important;
+  flex:0 0 39px!important;
+}
+@media(max-width:700px){
+  #homeScreen .masthead .header-actions > .dm-back-circle{flex-basis:37px!important}
+}
