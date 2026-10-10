@@ -1,0 +1,487 @@
+/* v298 — reference-matched working dashboard, Black Velvet.
+   Only the four real interactive business cards. Based on the user's sample:
+   silver + ice blue donut, vertical blue bars, amber profit glow, liquid
+   gold ribbon recommendation. Existing demo values and click behavior stay. */
+#homeScreen .metric-grid{
+  display:grid;
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  grid-template-rows:176px 210px;
+  align-items:start;
+  gap:9px 11px;
+  margin-top:10px;
+  isolation:isolate;
+}
+#homeScreen .metric-grid>.metric-card{
+  box-sizing:border-box;
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  min-width:0;
+  width:100%;
+  margin:0;
+  border:1px solid rgba(136,172,200,.34);
+  border-radius:19px;
+  background:
+    radial-gradient(ellipse 110% 72% at 8% 0%,rgba(103,163,204,.09),transparent 66%),
+    linear-gradient(153deg,#0c1824 0%,#080f17 48%,#02080f 100%);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.11),
+    inset 0 -1px rgba(0,0,0,.68),
+    0 9px 23px rgba(0,1,5,.42);
+  -webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);
+  transition:border-color .18s ease;
+}
+#homeScreen .metric-grid>.metric-card:hover{
+  filter:none!important;
+  background:
+    radial-gradient(ellipse 110% 72% at 8% 0%,rgba(103,163,204,.09),transparent 66%),
+    linear-gradient(153deg,#0c1824 0%,#080f17 48%,#02080f 100%)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.11),inset 0 -1px rgba(0,0,0,.68),0 9px 23px rgba(0,1,5,.42)!important;
+}
+#homeScreen .metric-grid .clients-card{
+  grid-column:1/span 7;
+  grid-row:1;
+  height:176px;
+  min-height:176px;
+  padding:10px 13px 8px!important;
+}
+#homeScreen .metric-grid .orders-card{
+  grid-column:8/span 5;
+  grid-row:1;
+  height:151px;
+  min-height:151px;
+  padding:11px 14px 9px!important;
+}
+#homeScreen .metric-grid .profit-card{
+  grid-column:1/span 6;
+  grid-row:2;
+  height:194px;
+  min-height:194px;
+  padding:11px 14px!important;
+}
+#homeScreen .metric-grid .recommendation-card{
+  grid-column:7/span 6;
+  grid-row:2;
+  top:-24px;
+  height:226px;
+  min-height:226px;
+  padding:12px 15px 11px!important;
+  border-color:rgba(211,141,71,.44)!important;
+  background:
+    radial-gradient(ellipse 112% 63% at 102% 105%,rgba(154,73,21,.13),transparent 72%),
+    linear-gradient(154deg,#16191a 0%,#090c0f 48%,#050505 100%)!important;
+  box-shadow:inset 0 1px rgba(255,230,192,.13),0 0 25px rgba(195,98,29,.08),0 10px 25px rgba(0,0,0,.43)!important;
+}
+#homeScreen .metric-grid .recommendation-card:hover{
+  background:
+    radial-gradient(ellipse 112% 63% at 102% 105%,rgba(154,73,21,.13),transparent 72%),
+    linear-gradient(154deg,#16191a 0%,#090c0f 48%,#050505 100%)!important;
+  box-shadow:inset 0 1px rgba(255,230,192,.13),0 0 25px rgba(195,98,29,.08),0 10px 25px rgba(0,0,0,.43)!important;
+}
+#homeScreen .metric-grid .tile-heading{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  position:relative;
+  z-index:2;
+  min-height:29px;
+  font-size:clamp(12px,2.3vw,17px);
+  font-weight:430;
+  letter-spacing:-.027em;
+  line-height:1.16;
+  text-shadow:0 1px 4px rgba(0,0,0,.35);
+}
+#homeScreen .metric-grid .tile-symbol{
+  width:26px;
+  height:26px;
+  stroke-width:1.65;
+  color:#f2f7fb;
+  filter:drop-shadow(0 0 3px rgba(221,237,251,.15));
+}
+#homeScreen .metric-grid .tile-symbol.gold{
+  color:#ffd18b;
+  filter:drop-shadow(0 0 5px rgba(243,168,71,.24));
+}
+#homeScreen .metric-grid .tile-chevron,
+#homeScreen .recommendation-card .tile-chevron{
+  box-sizing:border-box;
+  width:34px;
+  height:34px;
+  min-width:34px;
+  padding:0;
+  display:grid;
+  place-items:center;
+  margin-left:auto;
+  color:#ebf6ff;
+  border:1px solid rgba(146,176,199,.15);
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 28% 11%,rgba(154,200,227,.09),transparent 72%),
+    linear-gradient(148deg,rgba(20,37,49,.91),rgba(5,14,24,.99));
+  box-shadow:inset 0 1px rgba(255,255,255,.08),0 3px 12px rgba(0,0,0,.36);
+}
+#homeScreen .metric-grid .tile-chevron .ico{
+  width:17px;
+  height:17px;
+  stroke-width:1.75;
+  color:#edf7ff;
+}
+/* Clients: raised metallic ring and a crisp figure in its centre. */
+#homeScreen .clients-card .clients-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:5px;
+  width:100%;
+}
+#homeScreen .clients-card .donut{
+  position:relative;
+  isolation:isolate;
+  display:grid;
+  place-items:center;
+  flex:none;
+  width:116px;
+  height:116px;
+  border:1px solid rgba(176,215,247,.25);
+  border-radius:50%;
+  background:conic-gradient(from -45deg,
+    #d4e2ec 0%,#8bafcb 10%,#73c9ff 19%,#439bfa 33%,
+    #245a92 39%,#081825 49%,#223b50 59%,#68869d 70%,
+    #fee5c5 80%,#b5c7d2 91%,#d4e2ec 100%);
+  box-shadow:0 0 17px rgba(80,170,239,.14),inset 0 1px rgba(255,255,255,.34),0 4px 11px rgba(0,0,0,.39);
+}
+#homeScreen .clients-card .donut::before{
+  content:"";
+  position:absolute;
+  inset:11px;
+  z-index:0;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 50% 14%,rgba(36,69,93,.44),transparent 75%),
+    linear-gradient(160deg,#0c151f,#02070d 75%);
+  box-shadow:inset 0 1px 8px rgba(0,0,0,.86),inset 0 0 0 1px rgba(210,234,249,.11);
+}
+#homeScreen .clients-card .donut::after{
+  content:"";
+  position:absolute;
+  inset:2px;
+  pointer-events:none;
+  border:1px solid rgba(213,235,249,.24);
+  border-radius:50%;
+  box-shadow:inset 0 2px 6px rgba(255,255,255,.15),0 1px 2px rgba(0,0,0,.26);
+}
+#homeScreen .clients-card .donut-core{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+  padding-top:2px;
+}
+#homeScreen .clients-card .donut-people{
+  display:block;
+  width:32px;
+  height:27px;
+  margin-bottom:0;
+  fill:#f0f6fc;
+  stroke:#f0f6fc;
+  stroke-width:2.1;
+  stroke-linecap:round;
+  filter:drop-shadow(0 1px 2px rgba(128,205,254,.2));
+}
+#homeScreen .clients-card .donut-core strong{
+  font-size:clamp(24px,4.5vw,31px);
+  font-weight:480;
+  line-height:1.0;
+  letter-spacing:-.035em;
+  color:#f8fbfe;
+}
+#homeScreen .clients-card .donut-core small{
+  color:#5ed6f4;
+  font-size:15px;
+  line-height:1.25;
+  font-weight:540;
+}
+#homeScreen .clients-card .donut-legend{
+  display:grid;
+  align-content:center;
+  flex:1 1 auto;
+  gap:12px;
+  min-width:0;
+}
+#homeScreen .clients-card .donut-legend>div{
+  display:flex;
+  align-items:center;
+  min-width:0;
+  gap:9px;
+  font-size:clamp(10px,2.15vw,13px);
+  font-weight:390;
+}
+#homeScreen .clients-card .donut-legend .legend-dot{
+  width:13px;
+  height:13px;
+  flex:none;
+  box-shadow:inset 0 1px rgba(255,255,255,.28),0 0 5px rgba(121,186,243,.10);
+}
+#homeScreen .clients-card .donut-legend .legend-dot.new{background:#4a9ef8}
+#homeScreen .clients-card .donut-legend .legend-dot.active{background:#9dbdd6}
+#homeScreen .clients-card .donut-legend .legend-dot.repeat{background:#ffd398}
+#homeScreen .clients-card .donut-legend span{
+  color:#bacbda;
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+#homeScreen .clients-card .donut-legend b{
+  color:#f3f8fb;
+  font-size:clamp(12px,2.4vw,16px);
+  font-weight:510;
+  margin-left:auto;
+  font-variant-numeric:tabular-nums;
+}
+/* Orders: tall thin columns with luminous rounded icy caps. */
+#homeScreen .orders-card .orders-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  min-width:0;
+  gap:6px;
+  margin-top:19px;
+}
+#homeScreen .orders-card .tile-number{
+  display:block;
+  white-space:nowrap;
+  font-size:clamp(32px,5.5vw,41px);
+  line-height:1;
+  letter-spacing:-.03em;
+  font-weight:420;
+  color:#f8fcff;
+}
+#homeScreen .metric-grid .delta.small{
+  font-size:clamp(12px,2.5vw,16px);
+  line-height:1.15;
+  margin-top:9px;
+  color:#74d9ff;
+  font-weight:470;
+}
+#homeScreen .orders-card .bargraph{
+  flex:1 1 auto;
+  display:flex;
+  align-items:flex-end;
+  gap:5px;
+  min-width:0;
+  width:auto;
+  max-width:50%;
+  height:72px;
+  margin:0;
+  padding:0 0 2px;
+}
+#homeScreen .orders-card .bargraph i{
+  flex:1 1 0;
+  min-width:3px;
+  height:var(--h);
+  border-radius:4px 4px 1px 1px;
+  background:linear-gradient(180deg,#a7d9f6 0%,#70b2e9 30%,#2b7bc9 72%,rgba(15,50,91,.28) 100%);
+  box-shadow:0 0 7px rgba(80,166,239,.21);
+}
+/* Profit: refined champagne light trails and a larger luminous chart. */
+#homeScreen .profit-card{
+  background:
+    radial-gradient(ellipse 70% 84% at 105% 83%,rgba(248,161,75,.10),transparent 75%),
+    linear-gradient(153deg,#101923,#060d14 53%,#030607 100%)!important;
+}
+#homeScreen .profit-card:hover{
+  background:
+    radial-gradient(ellipse 70% 84% at 105% 83%,rgba(248,161,75,.10),transparent 75%),
+    linear-gradient(153deg,#101923,#060d14 53%,#030607 100%)!important;
+}
+#homeScreen .profit-card .profit-number{
+  display:block;
+  margin-top:9px;
+  position:relative;
+  z-index:2;
+  font-size:clamp(21px,4.4vw,30px);
+  letter-spacing:-.03em;
+  font-weight:440;
+  color:#f9fcff;
+  white-space:nowrap;
+}
+#homeScreen .profit-card .profit-chart{
+  position:absolute;
+  z-index:1;
+  width:calc(100% - 18px);
+  height:88px;
+  left:9px;
+  right:9px;
+  bottom:7px;
+  overflow:visible;
+  filter:drop-shadow(0 0 3px rgba(247,155,60,.10));
+}
+#homeScreen .profit-card .delta{z-index:2;margin-top:8px}
+#homeScreen .profit-card .delta small{color:#cbd7e0}
+/* Recommendation: warm chrome frame and layered flowing gold ribbons.
+   The entire panel remains HTML text + working buttons. */
+#homeScreen .recommendation-card::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  inset:-20% -20% -28% 42%;
+  pointer-events:none;
+  background:radial-gradient(ellipse at 87% 68%,rgba(253,174,90,.22),transparent 73%);
+  opacity:.70;
+}
+#homeScreen .recommendation-card .recommendation-waves{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  opacity:.93;
+  pointer-events:none;
+  z-index:0;
+}
+#homeScreen .recommendation-card .recommendation-top{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-size:clamp(11px,2.25vw,15px);
+  line-height:1.15;
+  font-weight:440;
+  position:relative;
+  z-index:2;
+  flex:none;
+}
+#homeScreen .recommendation-card .spark-icon{
+  width:39px;
+  height:39px;
+  fill:#ffe1a5;
+  stroke:#fff5dc;
+  filter:drop-shadow(0 0 7px rgba(255,181,90,.80));
+}
+#homeScreen .recommendation-card .advice-head{
+  position:relative;
+  z-index:2;
+  font-size:clamp(12px,2.7vw,17px);
+  line-height:1.31;
+  font-weight:480;
+  margin:8px 0 7px;
+  letter-spacing:-.025em;
+  color:#f8fafb;
+}
+#homeScreen .recommendation-card .advice-body{
+  position:relative;
+  z-index:2;
+  font-size:clamp(10px,2.16vw,14px);
+  line-height:1.40;
+  font-weight:360;
+  margin:0 0 10px;
+  color:#b7c9d9;
+}
+#homeScreen .recommendation-card .advice-cta{
+  position:relative;
+  z-index:3;
+  display:inline-flex;
+  flex:none;
+  align-items:center;
+  gap:10px;
+  margin-top:auto;
+  align-self:flex-start;
+  padding:8px 14px;
+  min-height:37px;
+  border:1px solid rgba(255,245,214,.68);
+  border-radius:23px;
+  font-size:clamp(11px,2.2vw,15px);
+  font-weight:480;
+  color:#2b1a0d;
+  background:linear-gradient(155deg,#fff3d8 0%,#ffe3af 54%,#ffecc6 100%);
+  box-shadow:inset 0 1px rgba(255,255,255,.8),0 0 14px rgba(255,170,78,.18);
+}
+#homeScreen .recommendation-card .advice-cta .ico{
+  width:17px;
+  height:17px;
+  color:#382116;
+  padding:0;
+  border:0;
+  background:none;
+  box-shadow:none;
+}
+#homeScreen .recommendation-card .advice-cta:hover{
+  background:linear-gradient(155deg,#fff3d8 0%,#ffe3af 54%,#ffecc6 100%);
+  box-shadow:inset 0 1px rgba(255,255,255,.8),0 0 14px rgba(255,170,78,.18);
+}
+#homeScreen .metric-grid :is(button,.advice-cta):focus-visible{
+  outline:2px solid #d8eeff;
+  outline-offset:2px;
+}
+/* Actual iPhones: 2 columns remain usable and compact; no clipped labels. */
+@media(max-width:539px){
+ #homeScreen .metric-grid{
+   grid-template-columns:repeat(2,minmax(0,1fr));
+   grid-template-rows:158px 206px;
+   gap:9px 8px;
+ }
+ #homeScreen .metric-grid .clients-card{
+   grid-column:1;grid-row:1;
+   height:158px;min-height:158px;padding:9px 8px!important;
+ }
+ #homeScreen .metric-grid .orders-card{
+   grid-column:2;grid-row:1;
+   height:151px;min-height:151px;padding:9px 10px!important;
+ }
+ #homeScreen .metric-grid .profit-card{
+   grid-column:1;grid-row:2;
+   height:195px;min-height:195px;padding:9px!important;
+ }
+ #homeScreen .metric-grid .recommendation-card{
+   grid-column:2;grid-row:2;
+   top:-6px;height:212px;min-height:212px;
+   padding:9px 10px 10px!important;
+ }
+ #homeScreen .metric-grid .tile-heading{font-size:clamp(11px,3.05vw,13px);gap:5px}
+ #homeScreen .metric-grid .tile-symbol{width:21px;height:21px}
+ #homeScreen .metric-grid .tile-chevron{
+   width:29px;height:29px;min-width:29px;
+ }
+ #homeScreen .metric-grid .tile-chevron .ico{width:15px;height:15px}
+ #homeScreen .clients-card .clients-inner{gap:6px;margin-top:12px}
+ #homeScreen .clients-card .donut{width:81px;height:81px}
+ #homeScreen .clients-card .donut::before{inset:8px}
+ #homeScreen .clients-card .donut-people{width:21px;height:18px}
+ #homeScreen .clients-card .donut-core strong{font-size:21px}
+ #homeScreen .clients-card .donut-core small{font-size:11px}
+ #homeScreen .clients-card .donut-legend{gap:9px}
+ #homeScreen .clients-card .donut-legend>div{gap:4px;font-size:9px}
+ #homeScreen .clients-card .donut-legend .legend-dot{width:8px;height:8px}
+ #homeScreen .clients-card .donut-legend b{font-size:10px}
+ #homeScreen .orders-card .orders-inner{margin-top:17px;gap:3px}
+ #homeScreen .orders-card .tile-number{font-size:clamp(26px,7vw,34px)}
+ #homeScreen .orders-card .bargraph{height:66px;gap:3px;max-width:43%}
+ #homeScreen .orders-card .bargraph i{min-width:2px}
+ #homeScreen .profit-card .profit-number{font-size:clamp(18px,5vw,23px);margin-top:12px}
+ #homeScreen .profit-card .profit-chart{height:85px;bottom:5px}
+ #homeScreen .recommendation-card .spark-icon{width:26px;height:26px}
+ #homeScreen .recommendation-card .recommendation-top{font-size:10px;gap:5px}
+ #homeScreen .recommendation-card .advice-head{font-size:clamp(11px,2.9vw,13px);margin:8px 0 6px}
+ #homeScreen .recommendation-card .advice-body{font-size:clamp(9px,2.40vw,11px);line-height:1.36;margin-bottom:6px}
+ #homeScreen .recommendation-card .advice-cta{font-size:11px;min-height:32px;padding:5px 9px;gap:5px}
+ #homeScreen .recommendation-card .advice-cta .ico{width:13px;height:13px}
+}
+@media(max-width:360px){
+ #homeScreen .metric-grid{gap:8px 6px;grid-template-rows:151px 207px}
+ #homeScreen .metric-grid .clients-card{height:151px;min-height:151px;padding:8px 6px!important}
+ #homeScreen .metric-grid .orders-card{height:148px;min-height:148px;padding:8px!important}
+ #homeScreen .metric-grid .profit-card{height:192px;min-height:192px}
+ #homeScreen .metric-grid .recommendation-card{height:211px;min-height:211px;padding:8px!important}
+ #homeScreen .clients-card .donut{width:72px;height:72px}
+ #homeScreen .clients-card .donut::before{inset:7px}
+ #homeScreen .clients-card .donut-legend>div{gap:3px;font-size:8px}
+ #homeScreen .clients-card .donut-legend .legend-dot{width:7px;height:7px}
+ #homeScreen .recommendation-card .recommendation-top{font-size:9.3px;gap:4px}
+ #homeScreen .recommendation-card .spark-icon{width:23px;height:23px}
+}
+@media(prefers-reduced-motion:reduce){
+ #homeScreen .metric-grid>.metric-card{transition:none!important}
+}
