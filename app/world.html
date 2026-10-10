@@ -5,20 +5,23 @@
   <meta name="theme-color" content="#000000"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="description" content="Мой мир — семья, память, финансы и утренний брифинг Цифрового управляющего.">
   <link rel="manifest" href="./manifest.json"><link rel="icon" href="./assets/icon-192.png" type="image/png">
-  <link rel="stylesheet" href="./myday.css?v=248"><link rel="stylesheet" href="./world.css?v=249"><link rel="stylesheet" href="./system-ui.css?v=283">
+  <link rel="stylesheet" href="./myday.css?v=250"><link rel="stylesheet" href="./world.css?v=249"><link rel="stylesheet" href="./system-ui.css?v=283">
   <link rel="stylesheet" href="./polish.css?v=260">
   <link rel="stylesheet" href="./dock.css?v=295">
-  <link rel="stylesheet" href="./personal-unified.css?v=284">
+  <link rel="stylesheet" href="./personal-unified.css?v=283">
   <link rel="stylesheet" href="./voice-hints.css?v=290">
   <script src="./world.js?v=283" defer></script>
   <script src="./voice-hints.js?v=290" defer></script><script src="./system-ui.js?v=283" defer></script>
-  <script src="./polish.js?v=259" defer></script>
+  <script src="./polish.js?v=260" defer></script>
   <title>Мой мир — Цифровой управляющий</title>
   <link rel="stylesheet" href="./black-velvet-premium.css?v=292">
   <link rel="stylesheet" href="./unified-quiet-glass.css?v=293">
   <link rel="stylesheet" href="./card-outline-theme.css?v=336">
+  <link rel="stylesheet" href="./top-tabs-position.css?v=12">
+  <link rel="stylesheet" href="./personal-shell-stability.css?v=2">
   <link rel="stylesheet" href="./navigation-gestures.css?v=2">
   <link rel="stylesheet" href="./quiet-navigation.css?v=2">
+  <link rel="stylesheet" href="./world-layout-stability.css?v=1">
   <script src="./navigation-gestures.js?v=4" defer></script>
 </head>
 <body>
@@ -27,7 +30,7 @@
     <a class="day-back" href="./myday.html" aria-label="Мой день"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></a>
     <div class="day-heading"><span>ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h1>Мой мир <span aria-hidden="true">✦</span></h1></div>
   </header>
-  <div class="world-intro"><p class="day-eyebrow">DIGITAL MANAGER OS</p><h2>Жизнь — штука интересная. Запишем главное.</h2><p>Всё важное рядом. Даже то, что вчера было «точно не забуду».</p></div>
+  <div class="world-intro"><p class="day-eyebrow">DIGITAL MANAGER OS</p><h2>Жизнь — штука интересная. Запишем главное.</h2><p>Всё важное рядом. Даже то, что вчера было «точно не забуду».</p><p class="world-intro-compact" aria-hidden="true">Мой мир. Всё важное рядом.</p></div>
   <nav class="world-tabs" aria-label="Разделы Моего мира">
     <button data-world="morning" class="world-tab active" aria-pressed="true" type="button">☀ Брифинг</button>
     <button data-world="family" class="world-tab" aria-pressed="false" type="button">♡ Семья</button>
@@ -77,9 +80,9 @@
       <form id="worldAskForm" class="world-chat-form"><label class="sr-only" for="worldQuestion">Вопрос помощнику</label><input id="worldQuestion" required maxlength="250" placeholder="Спроси что-нибудь…" autocomplete="off"><button type="submit" aria-label="Отправить">➜</button></form>
       <p class="world-hint">Это локальный помощник с правилами, а не нейросеть. Он не читает медицинские записи, другие приложения или банковские счета.</p>
     </section>
-  </main>
   <div class="world-bottom"><a href="./myday.html">◷ Мой день</a><a href="./care.html">♡ Забота</a><button id="exportWorld" type="button">↓ Сохранить копию</button></div>
   <p class="world-privacy">Записи остаются в этом браузере и пока не зашифрованы. При удалении данных сайта они могут исчезнуть. Экспорт JSON содержит личные сведения — храни его осторожно.</p>
+  </main>
  </div>
  <dialog id="worldFormDialog" class="day-dialog world-dialog" aria-labelledby="worldDialogTitle">
   <form id="worldForm">
