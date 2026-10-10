@@ -205,17 +205,8 @@
 .day-shell:not(.care-shell,.world-shell,.health-shell) #monthGrid .calendar-day.selected .markers i.note{
  background:#f1c98e;
 }
-/* Do NOT recolor weekend and Russian holiday cells; their meanings matter. */
-.day-shell:not(.care-shell,.world-shell,.health-shell) #monthGrid .calendar-day:not(.selected):hover{
- background:transparent;
- filter:none;
- box-shadow:none;
-}
-/* Weekend and holiday rules in personal-unified.css remain authoritative. */
-.day-shell:not(.care-shell,.world-shell,.health-shell) #monthGrid .calendar-day.ru-holiday:not(.selected):hover,
-.day-shell:not(.care-shell,.world-shell,.health-shell) #monthGrid .calendar-day.ru-transferred:not(.selected):hover{
- background:inherit;
-}
+/* Weekends, transfers and statutory holidays retain their existing
+   semantic backgrounds even on desktop pointer hover. */
 
 /* Compact details and notebook: darker action buttons with restrained metallic rim. */
 .day-shell:not(.care-shell,.world-shell,.health-shell) :is(.day-add,.notebook-export),
