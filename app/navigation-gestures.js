@@ -22,7 +22,8 @@
   function insertBack(){
     if(embedded)return;
     const header=document.querySelector('body > .day-shell > .day-header');
-    const holder=header||document.body;
+    const homeActions=document.querySelector('#homeScreen .masthead .header-actions');
+    const holder=header||homeActions||document.body;
     if(holder.querySelector('.dm-back-circle'))return;
     const button=document.createElement('button');
     button.type='button';
