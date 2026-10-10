@@ -14,7 +14,8 @@
 #assistantScreen :is(.ring-preview,.assistant-suggestions button,.chat-bubble,.chat-form),
 #managementScreen :is(.manage-list>button,.management-foot),
 .app-shell .secondary-screen :is(.metric-card,.detail-card,.management-card),
-.app-shell #modal:not(.developer-dialog){
+#modal:not(.developer-dialog),
+dialog.day-dialog{
   border-color:var(--dm-card-hairline)!important;
 }
 /* The Clients outline lives outside the clip: don't add a second border. */
