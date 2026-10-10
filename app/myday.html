@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="./system-ui.css?v=247">
   <link rel="stylesheet" href="./polish.css?v=260">
   <link rel="stylesheet" href="./dock.css?v=258">
-  <link rel="stylesheet" href="./myday-finish.css?v=270">
+  <link rel="stylesheet" href="./myday-finish.css?v=271">
   <script src="./russia-calendar.js?v=250" defer></script>
   <script src="./myday.js?v=270" defer></script>
   <script src="./system-ui.js?v=247" defer></script>
@@ -67,14 +67,13 @@
           <div><p class="day-eyebrow">НЕ ДЕРЖИ ВСЁ В ГОЛОВЕ</p><h2>Мой блокнот</h2></div>
           <button type="button" id="addNote" class="day-add">+ Запись</button>
         </div>
-        <label class="search-wrap"><span class="sr-only">Поиск по заметкам</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.2"/><path d="m16 16 4.3 4.3"/></svg><input id="noteSearch" type="search" placeholder="Найти мысль, идею, план…" autocomplete="off"></label>
+        <div class="notebook-tools">
+          <label class="search-wrap"><span class="sr-only">Поиск по заметкам</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.2"/><path d="m16 16 4.3 4.3"/></svg><input id="noteSearch" type="search" placeholder="Найти мысль, идею, план…" autocomplete="off"></label>
+          <button type="button" id="exportDay" class="notebook-export" aria-label="Сохранить резервную копию заметок и событий в JSON" title="Резервная копия: записи хранятся только на этом устройстве"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m-4-4 4 4 4-4M4 16v4h16v-4"/></svg></button>
+        </div>
         <div id="notesList" class="notebook-list" aria-live="polite"></div>
-        <p class="day-coming">🎙️ Диктовку, фото и документы добавим на следующем этапе.</p>
       </section>
     </main>
-    <footer class="day-footer"><span>🔒</span> Записи хранятся на этом устройстве. При очистке данных браузера они могут исчезнуть. Синхронизации пока нет.
-      <div><a href="./index.html?analyticsDate=1">Выбрать дату для аналитики</a><button type="button" id="exportDay">Сохранить копию JSON</button></div>
-    </footer>
   </div>
   <dialog id="eventDialog" class="day-dialog" aria-labelledby="eventDialogTitle">
     <form id="eventForm">
