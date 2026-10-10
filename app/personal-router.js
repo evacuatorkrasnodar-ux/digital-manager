@@ -16,7 +16,10 @@
     for(const kind of ['health','cycle']){
       const frame=frames[kind],panel=panels[kind];
       if(!frame||!panel||panel.hidden)continue;
-      const available=window.innerHeight-frame.getBoundingClientRect().top-90;
+      const main=panel.closest('main');
+      if(!main)continue;
+      // The main panel scrolls; the header and both docks never do.
+      const available=main.clientHeight-(frame.getBoundingClientRect().top-main.getBoundingClientRect().top);
       frame.style.height=Math.max(220,Math.floor(available))+'px';
     }
   }
@@ -76,11 +79,12 @@
       else url.searchParams.set('view',view);
       if(url.href!==location.href)history.pushState({personalView:view},'',url);
     }
-    requestAnimationFrame(sizeFrames);
-    if(changed&&medical.has(view)){
-      // Switching views does not replace the document or move the upper dock.
-      window.scrollTo({top:0,behavior:'instant'});
+    if(changed){
+      // Reset only the content scroller. Never scroll the page or move the dock.
+      const main=shell?.querySelector('main');
+      if(main)main.scrollTop=0;
     }
+    requestAnimationFrame(sizeFrames);
   }
   function init(){
     const shell=document.querySelector('body > .day-shell');
