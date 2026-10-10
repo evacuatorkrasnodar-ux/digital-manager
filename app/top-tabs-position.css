@@ -1,4 +1,4 @@
-/* v10 — one mobile geometry for Calendar, Notebook and Health.
+/* v11 — one mobile geometry for Calendar, Notebook and Health.
    Keep the approved rail appearance; eliminate differences in width, header,
    greeting insertion and view-dependent top margins. */
 @media (max-width:700px) and (orientation:portrait){
@@ -203,5 +203,23 @@
     font-size:12px!important;
     line-height:1.35!important;
     color:#dce9f4!important;
+  }
+}
+
+/* Health/Cycle: typography must match the Calendar and Notebook exactly.
+   The personal-unified heading was 21–26px instead of My Day's 24–30px,
+   and the greeting was 23–28px instead of 24–29px on Windows. */
+@media (min-width:701px){
+  body > :is(.day-shell.health-shell,.day-shell.care-shell) .day-heading h1{
+    font-size:clamp(24px,6.8vw,30px)!important;
+    line-height:1!important;
+    font-weight:435!important;
+    letter-spacing:-.047em!important;
+  }
+  body > :is(.day-shell.health-shell,.day-shell.care-shell) > .day-intro .polish-hello{
+    font-size:clamp(24px,6.7vw,29px)!important;
+    font-weight:420!important;
+    line-height:1.04!important;
+    letter-spacing:-.045em!important;
   }
 }
