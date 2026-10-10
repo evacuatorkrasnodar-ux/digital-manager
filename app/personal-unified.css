@@ -773,3 +773,24 @@
     height:32px;
   }
 }
+
+/* v282 — weekends in the main month as in Care.
+   Both month grids start on Monday (column 6 = Saturday; column 7 = Sunday).
+   Selection remains cobalt; Russian statutory holidays/transferred days keep
+   their existing gold styling; adjacent-month cells remain subdued. */
+.day-shell:not(.care-shell,.world-shell,.health-shell) #calendarView .weekdays>span:nth-child(6){
+  color:#a8ceff;
+  font-weight:570;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) #calendarView .weekdays>span:nth-child(7){
+  color:#f2b8d6;
+  font-weight:570;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) #monthGrid .calendar-day:nth-child(7n+6):not(.selected):not(.outside):not(.ru-holiday):not(.ru-transferred){
+  color:#bad7ff;
+  background:linear-gradient(155deg,rgba(67,127,209,.16),rgba(9,23,42,.07));
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) #monthGrid .calendar-day:nth-child(7n):not(.selected):not(.outside):not(.ru-holiday):not(.ru-transferred){
+  color:#f4bfdb;
+  background:linear-gradient(155deg,rgba(177,94,148,.16),rgba(29,20,44,.07));
+}
