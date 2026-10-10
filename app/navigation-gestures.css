@@ -64,3 +64,11 @@ body > .day-shell > .day-header > .dm-back-circle{
 @media(max-width:700px){
   #homeScreen .masthead .header-actions > .dm-back-circle{flex-basis:37px!important}
 }
+
+/* Assistant and Management dashboard tabs also have the same round Back. */
+.secondary-screen > .subhead{position:relative!important}
+.secondary-screen > .subhead > .dm-back-circle{
+  top:4px!important;
+  right:0!important;
+}
+.secondary-screen > .subhead > div{padding-right:43px!important}
