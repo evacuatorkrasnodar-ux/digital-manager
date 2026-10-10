@@ -1,38 +1,92 @@
-/* Digital Manager OS — shared shell: one stylesheet for home and My Day. */
-/* Native iOS / Android system indicators are always owned by the device. */
-.masthead .header-actions .os-app-notifications{
-  position:relative;
-  display:grid;place-items:center;
+/* Digital Manager OS v273 — the handset owns the native status bar. */
+/* Real in-app calendar reminder, shown only while this PWA is open. */
+.os-banner{
+  position:fixed;
+  z-index:1500;
+  top:calc(12px + env(safe-area-inset-top,0px));
+  left:50%;
+  transform:translateX(-50%);
+  width:min(92vw,412px);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  border:1px solid rgba(176,212,242,.44);
+  background:linear-gradient(145deg,rgba(30,54,77,.97),rgba(8,20,33,.98));
+  border-radius:15px;
+  padding:12px 14px;
+  color:#eef8ff;
+  box-shadow:0 12px 38px rgba(0,0,0,.65);
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+  font-size:12px;
+  line-height:1.3;
+}
+.os-banner[hidden]{display:none!important}
+.os-banner>span{flex:1;min-width:0;overflow-wrap:anywhere}
+.os-banner-x{
   flex:none;
-  width:var(--brand-mark-size,42px);
-  height:var(--brand-mark-size,42px);
-  padding:0;
-  border:1px solid rgba(145,194,235,.44);
-  border-radius:50%;
-  background:linear-gradient(145deg,rgba(28,52,75,.84),rgba(4,15,28,.93));
-  box-shadow:inset 0 1px rgba(255,255,255,.17),0 6px 17px rgba(0,0,0,.3);
-  color:#edf8ff;
+  border:0;
+  background:transparent;
+  color:#bed8ee;
+  padding:1px 3px;
+  font-size:19px;
+  line-height:1;
 }
-.os-app-notifications svg{
-  display:block;width:20px;height:20px;
-  fill:none;stroke:currentColor;stroke-width:1.7;
-  stroke-linecap:round;stroke-linejoin:round;
-}
-.os-bell-count{
-  position:absolute;top:-5px;right:-5px;
-  display:grid;place-items:center;
-  min-width:17px;height:17px;padding:0 3px;
-  border-radius:10px;border:1px solid #0c1b2b;
-  background:#aed6fb;color:#071625;font-size:10px;font-weight:700;
-}
-.os-bell-count[hidden]{display:none}
-.os-center{color:#ecf5ff;box-sizing:border-box;width:min(94vw,420px);max-height:min(82dvh,760px);padding:0;border:1px solid rgba(147,179,208,.42);border-radius:24px;background:linear-gradient(153deg,#172738 0%,#09121d 50%,#030609 100%);box-shadow:0 22px 80px rgba(0,0,0,.75),inset 0 1px 0 rgba(240,250,255,.09);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI",Arial,sans-serif;overflow:hidden}.os-center::backdrop{background:rgba(0,0,0,.73);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}.os-center *{box-sizing:border-box}.os-center-header{display:flex;align-items:start;justify-content:space-between;gap:12px;padding:18px 17px 13px;border-bottom:1px solid rgba(151,186,215,.17)}.os-center-eyebrow{display:block;color:#83add3;font-size:10px;letter-spacing:.13em;margin-bottom:5px}.os-center-header h2{font-size:21px;font-weight:470;letter-spacing:-.03em;margin:0;line-height:1.2}.os-center-close{display:grid;place-items:center;flex:none;width:31px;height:31px;padding:0;border:1px solid rgba(153,190,223,.25);border-radius:50%;background:rgba(16,31,46,.9);color:#f2f7ff;font-size:22px;line-height:1}.os-center-scroll{overflow:auto;max-height:calc(82dvh - 90px);padding:15px 17px 20px}.os-center-summary{font-size:12px;line-height:1.5;color:#bdd1e3;margin:0 0 16px}.os-center-section{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:15px 0 10px}.os-center-section h3{font-size:13px;font-weight:520;margin:0}.os-center-link,.os-center-read{border:0;background:transparent;padding:3px 0;color:#acd4fb;font-size:11px;text-decoration:none}.os-center-read{color:#b9d4e9}.os-center-read[disabled]{opacity:.5;cursor:default}.os-status-list{display:grid;gap:8px}.os-notice{display:flex;align-items:flex-start;gap:10px;padding:11px 10px;border-radius:14px;border:1px solid rgba(150,186,219,.19);background:radial-gradient(ellipse at 0% 0%,rgba(162,203,245,.07),transparent 80%),linear-gradient(145deg,rgba(20,35,51,.92),rgba(6,12,20,.95));min-width:0}.os-notice-graphic{flex:none;display:grid;place-items:center;width:29px;height:29px;border-radius:10px;background:rgba(70,123,170,.18);color:#b0d5f7;font-size:15px}.os-notice-content{flex:1;min-width:0}.os-notice-title{display:block;font-size:12px;font-weight:510;line-height:1.3;overflow-wrap:anywhere}.os-notice-meta{display:block;color:#94adc4;font-size:10px;margin-top:4px}.os-notice-action{display:inline-block;color:#b8dfff;text-decoration:none;font-size:11px;margin-top:7px}.os-notice-check{flex:none;display:grid;place-items:center;padding:0;width:26px;height:26px;border-radius:9px;border:1px solid rgba(155,197,231,.22);background:#142436;color:#d0e8fc;font-size:17px}.os-notice.is-read{opacity:.68}.os-notice.is-read .os-notice-check{color:#78aacd}.os-center-empty{padding:20px 12px;border:1px dashed rgba(152,182,211,.2);border-radius:14px;color:#9eafc2;font-size:12px;line-height:1.45;text-align:center}.os-device-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid rgba(154,184,213,.13);font-size:12px;color:#bbcfe0}.os-device-row strong{font-size:11px;text-align:right;font-weight:520;color:#e2f2ff;max-width:59%}.os-center-help{color:#899db1;font-size:10px;line-height:1.5;margin:13px 0 0}.os-banner{position:fixed;z-index:1500;top:calc(12px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);width:min(92vw,412px);display:flex;align-items:center;gap:10px;text-decoration:none;border:1px solid rgba(176,212,242,.44);background:linear-gradient(145deg,rgba(30,54,77,.97),rgba(8,20,33,.98));border-radius:15px;padding:12px 14px;color:#eef8ff;box-shadow:0 12px 38px #000a;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);font-size:12px;line-height:1.3}.os-banner[hidden]{display:none}.os-banner>span{flex:1}.os-banner-x{border:0;background:transparent;color:#bed8ee;padding:1px 3px;font-size:19px;line-height:1}.os-center button:focus-visible,.os-app-notifications:focus-visible,.os-banner button:focus-visible{outline:2px solid #d6ebff;outline-offset:2px}
-@media(max-width:350px){.os-status-right{gap:5px}.os-center-header{padding:15px 12px 12px}.os-center-scroll{padding:12px}}
-@media(prefers-reduced-motion:reduce){.os-center,.os-banner{scroll-behavior:auto}}
-/* Allow safe landscape insets on phones with side camera cutouts. */
-@supports (padding-left:max(12px,env(safe-area-inset-left,0px))){
-  #app .hero{
-    padding-left:max(12px,env(safe-area-inset-left,0px));
-    padding-right:max(12px,env(safe-area-inset-right,0px));
+.os-banner button:focus-visible{outline:2px solid #d6ebff;outline-offset:2px}
+
+/* Mobile full-bleed shells. On iPhone X landscape, the old 430px limit made
+   thick empty gutters. Content stays padded inside the notch/home-indicator safe area. */
+@media (pointer:coarse) and (max-width:1100px){
+  html,body{
+    width:100%;
+    min-width:0;
+    margin:0;
+    background:#000;
+  }
+  body .app-shell,
+  body .day-shell.day-shell{
+    box-sizing:border-box;
+    width:100%;
+    max-width:none;
+    margin-left:0;
+    margin-right:0;
+    border-left:0;
+    border-right:0;
+  }
+  body .bottom-nav{
+    left:0;
+    right:0;
+    transform:none;
+    width:100%;
+    max-width:none;
+    padding-left:max(10px,env(safe-area-inset-left,0px));
+    padding-right:max(10px,env(safe-area-inset-right,0px));
+  }
+  body .app-shell .hero{
+    padding-left:max(8px,env(safe-area-inset-left,0px));
+    padding-right:max(8px,env(safe-area-inset-right,0px));
+  }
+  body .app-shell .dashboard{
+    padding-left:max(8px,env(safe-area-inset-left,0px));
+    padding-right:max(8px,env(safe-area-inset-right,0px));
+  }
+  body .app-shell .secondary-screen{
+    padding-left:max(8px,env(safe-area-inset-left,0px));
+    padding-right:max(8px,env(safe-area-inset-right,0px));
+  }
+  body .day-shell.day-shell{
+    padding-left:max(8px,env(safe-area-inset-left,0px));
+    padding-right:max(8px,env(safe-area-inset-right,0px));
   }
 }
+@media (pointer:coarse) and (max-width:1100px) and (orientation:landscape){
+  /* On a side notch the hardware-safe gutters should never be below 16px. */
+  body .app-shell .hero,
+  body .app-shell .dashboard,
+  body .app-shell .secondary-screen,
+  body .day-shell.day-shell{
+    padding-left:max(16px,env(safe-area-inset-left,0px));
+    padding-right:max(16px,env(safe-area-inset-right,0px));
+  }
+}
+@media(prefers-reduced-motion:reduce){.os-banner{scroll-behavior:auto}}
