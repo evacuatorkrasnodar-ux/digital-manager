@@ -1,13 +1,13 @@
-/* Digital Manager OS · shared floating glass dock v257. Same three buttons on every screen. */
+/* Digital Manager OS · shared floating glass dock v258. Compact dock and centered assistant logo on every screen. */
 .bottom-nav {
   position: fixed;
   left: 50%;
-  bottom: 0;
+  bottom: -2px;
   transform: translateX(-50%);
   width: 100%;
   max-width: 430px;
-  height: calc(83px + env(safe-area-inset-bottom, 0px));
-  padding: 0 9px calc(8px + env(safe-area-inset-bottom, 0px));
+  height: calc(72px + env(safe-area-inset-bottom, 0px));
+  padding: 0 10px calc(5px + env(safe-area-inset-bottom, 0px));
   display: grid;
   grid-template-columns: repeat(3, minmax(0,1fr));
   isolation: isolate;
@@ -25,10 +25,10 @@
 .nav-glow-stop { stop-color:var(--dock-glow); }
 .nav-shell {
   position: absolute;
-  top: -16px;
+  top: -10px;
   left: 0;
   width: 100%;
-  height: calc(100% + 16px);
+  height: calc(100% + 10px);
   z-index: -1;
   overflow: visible;
   pointer-events: none;
@@ -51,14 +51,14 @@
   touch-action: manipulation;
 }
 .nav-ico {
-  width: 23px;
-  height: 23px;
-  stroke-width: 1.55;
+  width: 21px;
+  height: 21px;
+  stroke-width: 1.45;
   color: #f0f4fa;
   filter: drop-shadow(0 0 3px rgba(236,244,255,.27));
 }
 .nav-item .nav-label {
-  font-size: 11px;font-weight:390;
+  font-size: 10px;font-weight:390;
   white-space: nowrap;
   line-height: 1.2;letter-spacing:0;text-shadow:none;
 }
@@ -77,7 +77,7 @@
   box-shadow: 0 0 5px rgba(255,255,255,.66), 0 0 10px rgba(236,243,255,.21);
 }
 /* The two side buttons sit slightly higher to balance the lifted assistant label. */
-#tabHome, #tabManagement { transform: translateY(-4px); }
+#tabHome, #tabManagement { transform: translateY(-2px); }
 /* The recessed ring sits below the crest; the glossed centre sits just proud of it. */
 .assistant-tab {
   --rim: #91caff;
@@ -86,17 +86,17 @@
   min-height: 0;
   padding: 0;
   gap: 2px;
-  transform: translateY(-13px);
+  transform: translateY(-9px);
   justify-content: flex-start;
   align-self: stretch;
 }
 .assistant-tab > .nav-label {
   position: relative;
-  top: -6px;
+  top: -4px;
 }
 .assistant-socket {
-  width: 58px;
-  height: 58px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   position: relative;
   isolation: isolate;
@@ -106,12 +106,12 @@
   background: radial-gradient(circle at 50% 48%, #040506 63%, #15171a 82%, #030405 100%);
   border: 1px solid rgba(151,188,222,.12);
   box-shadow: inset 0 3px 7px rgba(0,0,0,.86), inset 0 -1px 2px rgba(145,185,212,.13);
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   transition: transform .17s ease;
 }
 .assistant-ring {
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -156,8 +156,8 @@
   transform: scale(.96);
 }
 .assistant-core {
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -197,15 +197,16 @@
   59% { transform: translate3d(-1px,0,0) rotate(-23deg); opacity: .70; }
 }
 .nav-mark {
-  position: relative;
+  position: static;
   z-index: 1;
   display: block;
-  /* Single clean vector logomark; no screenshot margins or baked-in background. */
-  width: 24px;
-  height: 30px;
+  /* Optical center: PNG artwork is centered; no manual offset. */
+  width: 21px;
+  height: 26px;
   flex: none;
   object-fit: contain;
-  transform: translate(4px, 1px);
+  transform: none;
+  margin: 0;
   filter: drop-shadow(0 1px 1px rgba(0,0,0,.32));
 }
 .assistant-tab[data-mode="thinking"] { --rim:#9ed2ff; --halo:rgba(62,147,255,.50); --sheen:rgba(107,183,255,.33); }
@@ -224,7 +225,7 @@
   .assistant-ring,.assistant-socket { transition:none; }
   .assistant-ring::after, .assistant-core::before { animation:none; }
 }
-.assistant-tab:active .assistant-socket { transform:translateY(-6px) scale(.97); }
+.assistant-tab:active .assistant-socket { transform:translateY(-4px) scale(.97); }
 @media (max-width:350px) { .bottom-nav { padding-left:9px; padding-right:9px; } }
 
 /* One familiar fixed glass dock on every page. */
