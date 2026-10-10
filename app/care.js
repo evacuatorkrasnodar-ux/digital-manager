@@ -20,6 +20,18 @@
   const moods={great:'✨ Прекрасно',calm:'🌿 Спокойно',tired:'☕ Устала',sensitive:'♡ Чувствительно',pain:'☾ Дискомфорт',other:'✎ По-разному'};
   let db,enabled=false,settings={cycle:28,length:5},periods=[],diary=[],selected=today();
   let month=new Date(new Date().getFullYear(),new Date().getMonth(),1),toastTimer;
+  function dmTrashGlyph(){
+    const ns='http://www.w3.org/2000/svg';
+    const svg=document.createElementNS(ns,'svg');
+    svg.setAttribute('viewBox','0 0 24 24');
+    svg.setAttribute('aria-hidden','true');
+    for(const d of ['M4 7h16','M9 7V4h6v3','M6 7l1 13h10l1-13','M10 11v6','M14 11v6']){
+      const path=document.createElementNS(ns,'path');
+      path.setAttribute('d',d);
+      svg.append(path);
+    }
+    return svg;
+  }
   function toast(message){const t=$('careToast');t.textContent=message;t.hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.hidden=true,3600);}
   function openDB(){
     return new Promise((resolve,reject)=>{
@@ -160,7 +172,7 @@
       const card=detail(moods[mood.value]||'Мои ощущения',mood.note||'Без заметки','♡');
       const edit=el('button','care-history-edit','✎');edit.type='button';edit.setAttribute('aria-label','Изменить самочувствие');
       edit.addEventListener('click',()=>openMood(selected));card.append(edit);list.append(card);
-      const del=el('button','care-history-edit','×');del.type='button';del.setAttribute('aria-label','Удалить отметку самочувствия');
+      const del=el('button','care-history-edit dm-delete-action');del.type='button';del.append(dmTrashGlyph());del.setAttribute('aria-label','Удалить отметку самочувствия');
       del.addEventListener('click',async()=>{if(!confirm('Удалить запись самочувствия за '+full(selected)+'?'))return;try{await txn(MOODS,'readwrite',s=>s.delete(selected));await load();toast('Отметка удалена');}catch(e){error(e);}});card.append(del);
     }
     if(!period&&!approximatePeriod(selected)&&!predicted(selected)&&!mood)list.append(el('p','care-quiet','Здесь пока нет отметок. И это тоже нормально. ♡'));
@@ -172,7 +184,7 @@
       const row=el('article','care-history-item'),copy=el('div','care-history-content','✿ '+full(p.start));
       copy.append(el('small','',p.end?'По '+full(p.end):'Продолжительность не указана'));
       const edit=el('button','','✎');edit.type='button';edit.setAttribute('aria-label','Изменить начало '+p.start);edit.addEventListener('click',()=>openPeriod(p));
-      const del=el('button','','×');del.type='button';del.setAttribute('aria-label','Удалить начало '+p.start);
+      const del=el('button','dm-delete-action');del.type='button';del.append(dmTrashGlyph());del.setAttribute('aria-label','Удалить начало '+p.start);
       del.addEventListener('click',async()=>{
         if(!confirm('Удалить отметку начала цикла '+full(p.start)+'?'))return;
         try{await txn(PERIODS,'readwrite',s=>s.delete(p.id));await load();toast('Дата удалена');}catch(e){error(e);}
