@@ -1,0 +1,290 @@
+/* v292 • BLACK VELVET / PLATINUM
+   The main dashboard cards are our material reference: graphite, muted platinum
+   edges, slight light-source sheen, blue / warm highlights only as accents.
+   All rules are visual; no changes to app flows, storage or pinned calendar. */
+:root{
+ --bv-platinum-edge:rgba(148,170,190,.31);
+ --bv-platinum-strong:rgba(198,219,234,.64);
+ --bv-graphite:linear-gradient(154deg,rgba(17,27,38,.97) 0%,rgba(7,13,21,.985) 49%,rgba(2,6,11,.99) 100%);
+ --bv-glass-rail:linear-gradient(153deg,rgba(18,28,39,.94) 0%,rgba(7,16,26,.965) 52%,rgba(2,8,15,.98) 100%);
+ --bv-quiet-ice:linear-gradient(148deg,#dce8f0 0%,#a8c0d2 55%,#7893aa 100%);
+ --bv-quiet-glow:inset 0 1px rgba(255,255,255,.84),inset 0 -2px 5px rgba(33,57,77,.26),0 1px 5px rgba(171,205,230,.13);
+}
+
+/* HOME: give the segmented dock its original discreet scale.
+   The four period buttons and date shortcut still share ONE rail. */
+#homeScreen .timebar{
+ box-sizing:border-box;
+ width:auto;
+ height:36px;
+ min-height:36px;
+ max-height:36px;
+ margin:0 5px 8px;
+ padding:3px;
+ gap:3px;
+ border:1px solid var(--bv-platinum-edge);
+ border-radius:19px;
+ background:var(--bv-glass-rail);
+ box-shadow:inset 0 1px rgba(247,251,255,.13),0 5px 12px rgba(0,0,0,.29);
+ -webkit-backdrop-filter:blur(12px);
+ backdrop-filter:blur(12px);
+}
+#homeScreen .timebar .periods{
+ height:28px;min-height:28px;max-height:28px;
+ border-radius:16px;
+}
+#homeScreen .timebar .period{
+ height:28px;min-height:28px;max-height:28px;
+ border-radius:16px;
+ font-size:clamp(9.8px,2.72vw,11px);
+ color:#d4dde6;
+ text-shadow:none;
+ background:transparent;
+ border-color:transparent;
+ box-shadow:none;
+ filter:none;
+}
+#homeScreen .timebar .period.selected{
+ color:#102536;
+ font-weight:520;
+ border-color:rgba(226,240,248,.84);
+ background:var(--bv-quiet-ice);
+ box-shadow:var(--bv-quiet-glow);
+ text-shadow:0 1px rgba(255,255,255,.32);
+}
+#homeScreen .timebar .date-button{
+ flex:0 0 28px;
+ width:28px;min-width:28px;
+ height:28px;min-height:28px;
+ border-radius:50%;
+ border-color:rgba(161,189,210,.48);
+ background:linear-gradient(146deg,rgba(37,60,81,.83),rgba(6,19,31,.94));
+ box-shadow:inset 0 1px rgba(246,252,255,.14),0 2px 6px rgba(0,0,0,.25);
+ color:#e7f3fb;
+ filter:none;
+}
+#homeScreen .timebar .date-button .ico{width:15px;height:15px}
+#homeScreen .timebar .period:not(.selected):not(:first-child)::before{
+ border-right-color:rgba(181,198,212,.24);
+}
+#homeScreen .timebar :is(.period,.date-button):hover{
+ background:transparent!important;
+ color:inherit;
+ filter:none!important;
+ box-shadow:none!important;
+}
+#homeScreen .timebar .period.selected:hover{
+ color:#102536!important;
+ background:var(--bv-quiet-ice)!important;
+ box-shadow:var(--bv-quiet-glow)!important;
+}
+#homeScreen .timebar .date-button:hover{
+ background:linear-gradient(146deg,rgba(37,60,81,.83),rgba(6,19,31,.94))!important;
+ box-shadow:inset 0 1px rgba(246,252,255,.14),0 2px 6px rgba(0,0,0,.25)!important;
+}
+#homeScreen .timebar .period:not(.selected):hover{color:#d4dde6!important}
+
+/* ALL PERSONAL ROOT TABS: same refined platinum style and compact dimensions. */
+.day-shell.day-shell.day-shell > nav.day-tabs{
+ height:41px!important;
+ min-height:41px!important;
+ max-height:41px!important;
+ margin-top:5px!important;
+ margin-bottom:8px!important;
+ padding:3px!important;
+ border:1px solid var(--bv-platinum-edge)!important;
+ border-radius:22px!important;
+ background:var(--bv-glass-rail)!important;
+ box-shadow:inset 0 1px rgba(247,251,255,.13),0 5px 12px rgba(0,0,0,.29)!important;
+ -webkit-backdrop-filter:blur(12px);
+ backdrop-filter:blur(12px);
+}
+.day-shell.day-shell.day-shell > nav.day-tabs > .day-tab{
+ height:33px!important;min-height:33px!important;max-height:33px!important;
+ border-radius:19px!important;
+ font-size:clamp(10px,2.9vw,12px)!important;
+ color:#d4dde6!important;
+ font-weight:440!important;
+ text-shadow:none!important;
+ filter:none!important;
+}
+.day-shell.day-shell.day-shell > nav.day-tabs > .day-tab.active{
+ color:#102536!important;
+ border-color:rgba(226,240,248,.84)!important;
+ background:var(--bv-quiet-ice)!important;
+ box-shadow:var(--bv-quiet-glow)!important;
+ text-shadow:0 1px rgba(255,255,255,.32)!important;
+ font-weight:530!important;
+}
+.day-shell.day-shell.day-shell > nav.day-tabs > .day-tab.active > .day-tab-icon{
+ stroke:#102536!important;
+}
+.day-shell.day-shell.day-shell > nav.day-tabs > .day-tab:not(.active):not(:first-child)::before{
+ border-right-color:rgba(181,198,212,.24)!important;
+}
+.day-shell.day-shell.day-shell > nav.day-tabs > .day-tab:not(.active):hover{
+ background:transparent!important;
+ color:#d4dde6!important;
+ box-shadow:none!important;
+ filter:none!important;
+}
+.day-shell.day-shell.day-shell > nav.day-tabs > .day-tab.active:hover{
+ background:var(--bv-quiet-ice)!important;
+ box-shadow:var(--bv-quiet-glow)!important;
+ color:#102536!important;
+ filter:none!important;
+}
+.day-shell.day-shell.day-shell > nav.day-tabs > .day-tab:hover::after{content:none!important;display:none!important}
+
+/* Preserve a slightly smaller pinned dock, not one extra pixel of calendar height. */
+@media(max-width:700px) and (orientation:portrait) and (min-height:551px){
+ .day-shell.calendar-fixed.day-shell.day-shell > nav.day-tabs{
+   flex:0 0 38px!important;
+   height:38px!important;
+   min-height:38px!important;
+   max-height:38px!important;
+   margin:3px 0 6px!important;
+   padding:3px!important;
+ }
+ .day-shell.calendar-fixed.day-shell.day-shell > nav.day-tabs > .day-tab{
+   height:30px!important;min-height:30px!important;max-height:30px!important;
+   border-radius:17px!important;
+ }
+}
+
+/* The photographic personal header remains, but the CARDS now speak the same
+   dark graphite language as Revenue / Clients / Orders / Profit on Home. */
+.day-shell:not(.care-shell,.world-shell,.health-shell) .calendar-panel,
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-compact-empty,
+.day-shell:not(.care-shell,.world-shell,.health-shell) :is(.day-event,.note-mini,.note-card,.day-empty),
+.day-shell #notesView .note-card{
+ border:1px solid var(--bv-platinum-edge);
+ background:
+   radial-gradient(ellipse 90% 65% at 2% 0%,rgba(147,191,230,.053),transparent 65%),
+   var(--bv-graphite);
+ box-shadow:inset 0 1px rgba(255,255,255,.095),0 7px 20px rgba(0,0,0,.35);
+ -webkit-backdrop-filter:blur(12px);
+ backdrop-filter:blur(12px);
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .calendar-panel{
+ border-radius:19px;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .calendar-panel::after{
+ opacity:.06;
+ filter:saturate(.4);
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) :is(.day-event,.note-mini,.day-compact-empty)::after,
+.day-shell #notesView .note-card::before{
+ opacity:.08;
+ filter:saturate(.48);
+}
+
+/* Date selection: light graphite and platinum rim, NOT a bright blue blob. */
+.day-shell:not(.care-shell,.world-shell,.health-shell) #monthGrid .calendar-day.selected{
+ color:#f9fcff!important;
+ font-weight:565;
+ border:1px solid rgba(214,232,244,.82)!important;
+ background:
+   radial-gradient(ellipse at 18% 0%,rgba(204,228,244,.20),transparent 80%),
+   linear-gradient(155deg,rgba(56,77,96,.96),rgba(16,34,51,.97) 72%,rgba(8,21,34,.98))!important;
+ box-shadow:
+   inset 0 1px rgba(255,255,255,.37),
+   inset 0 -1px rgba(2,9,16,.30),
+   0 0 0 1px rgba(105,144,174,.13),
+   0 2px 9px rgba(6,12,23,.42)!important;
+ text-shadow:0 1px 2px rgba(0,0,0,.36);
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) #monthGrid .calendar-day.today:not(.selected){
+ border-color:rgba(177,204,223,.52);
+ box-shadow:inset 0 0 0 1px rgba(184,208,224,.08);
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) #monthGrid .calendar-day.selected .markers i{
+ background:#83cffa;
+ box-shadow:0 0 4px rgba(100,181,235,.24);
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) #monthGrid .calendar-day.selected .markers i.note{
+ background:#f1c98e;
+}
+/* Do NOT recolor weekend and Russian holiday cells; their meanings matter. */
+.day-shell:not(.care-shell,.world-shell,.health-shell) #monthGrid .calendar-day:not(.selected):hover{
+ background:transparent;
+ filter:none;
+ box-shadow:none;
+}
+/* Weekend and holiday rules in personal-unified.css remain authoritative. */
+.day-shell:not(.care-shell,.world-shell,.health-shell) #monthGrid .calendar-day.ru-holiday:not(.selected):hover,
+.day-shell:not(.care-shell,.world-shell,.health-shell) #monthGrid .calendar-day.ru-transferred:not(.selected):hover{
+ background:inherit;
+}
+
+/* Compact details and notebook: darker action buttons with restrained metallic rim. */
+.day-shell:not(.care-shell,.world-shell,.health-shell) :is(.day-add,.notebook-export),
+.day-shell:is(.care-shell,.world-shell,.health-shell) :is(.day-add,.world-mini,.care-secondary,.care-action){
+ border-color:rgba(161,191,212,.44)!important;
+ background:linear-gradient(148deg,rgba(36,57,76,.87),rgba(7,21,34,.96))!important;
+ color:#edf7ff;
+ box-shadow:inset 0 1px rgba(255,255,255,.15),0 3px 9px rgba(0,0,0,.23)!important;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) :is(.day-add,.notebook-export):hover,
+.day-shell:is(.care-shell,.world-shell,.health-shell) :is(.day-add,.world-mini,.care-secondary,.care-action):hover{
+ filter:none!important;
+ background:linear-gradient(148deg,rgba(36,57,76,.87),rgba(7,21,34,.96))!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.15),0 3px 9px rgba(0,0,0,.23)!important;
+}
+
+/* Personal modules: preserve their own information hierarchy / rosy cycle marks,
+   but use the same graphite material, contrast and fine platinum edges. */
+.day-shell:is(.care-shell,.world-shell,.health-shell) :is(
+ .care-panel,.care-hero,.care-stat,.care-day-item,.care-history-item,
+ .world-spotlight,.world-item,.world-empty,.world-assistant-hero,
+ .health-card,.health-summary,.health-empty,
+ .health-week-panel,.health-device-panel,.health-metric-tile
+){
+ border-color:var(--bv-platinum-edge);
+ background:
+   radial-gradient(ellipse at 3% 0%,rgba(131,175,211,.057),transparent 62%),
+   var(--bv-graphite);
+ box-shadow:inset 0 1px rgba(255,255,255,.095),0 7px 20px rgba(0,0,0,.35);
+}
+.day-shell:is(.care-shell,.world-shell,.health-shell) :is(.care-hero,.health-metric-tile){
+ /* Keep rose/cyan illustration colors, but stop tinting the entire surface. */
+ isolation:isolate;
+}
+.care-shell .care-grid .calendar-day.selected{
+ color:#f9fcff;
+ border-color:rgba(214,232,244,.82);
+ background:linear-gradient(155deg,#354d61,#122a40 78%,#0b1a2c);
+ box-shadow:inset 0 1px rgba(255,255,255,.31),0 2px 9px rgba(6,12,23,.32);
+}
+/* Same restrained chrome for the secondary module tab rails. */
+.world-shell .world-tabs,
+.health-shell .health-tabs,
+.care-shell .health-cycle-nav{
+ border-color:var(--bv-platinum-edge);
+ background:var(--bv-glass-rail);
+ box-shadow:inset 0 1px rgba(247,251,255,.12),0 5px 12px rgba(0,0,0,.28);
+}
+.world-shell .world-tab.active,
+.health-shell .health-tabs>.active,
+.care-shell .health-cycle-nav>.active{
+ color:#102536!important;
+ border-color:rgba(226,240,248,.84)!important;
+ background:var(--bv-quiet-ice)!important;
+ box-shadow:var(--bv-quiet-glow)!important;
+ font-weight:530;
+ text-shadow:none!important;
+}
+.world-shell .world-tab:not(.active):hover,
+.health-shell .health-tabs>:is(button,a):not(.active):hover,
+.care-shell .health-cycle-nav>a:not(.active):hover{
+ background:transparent!important;
+ filter:none!important;
+ box-shadow:none!important;
+}
+/* Preserve icon standards: slim white SVG inside round dark glass for travel
+   and delete icon semantics remain unchanged. */
+@media(prefers-reduced-motion:reduce){
+ #homeScreen .timebar :is(.period,.date-button),
+ .day-shell > nav.day-tabs > .day-tab,
+ .day-shell .calendar-day{transition:none!important}
+}
