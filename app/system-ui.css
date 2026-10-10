@@ -90,3 +90,16 @@
   }
 }
 @media(prefers-reduced-motion:reduce){.os-banner{scroll-behavior:auto}}
+
+/* v283 — rounded reminder dismiss, same approved arrow style. */
+.os-banner .os-banner-x{
+  display:grid;place-items:center;box-sizing:border-box;
+  width:28px;height:28px;min-width:28px;padding:0;
+  border:1px solid rgba(154,203,244,.62);border-radius:50%;
+  background:linear-gradient(145deg,rgba(37,82,122,.86),rgba(7,27,47,.93));
+  color:#f1faff;
+}
+.os-banner .os-banner-x svg{
+  display:block;width:16px;height:16px;fill:none;stroke:currentColor;
+  stroke-width:1.85;stroke-linecap:round;stroke-linejoin:round;
+}
