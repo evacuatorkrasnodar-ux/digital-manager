@@ -818,7 +818,7 @@
     --bv-ref-top:clamp(116px,29.8vw,128px);
     --bv-ref-order:clamp(105px,28vw,119px);
     --bv-ref-profit:clamp(150px,40vw,172px);
-    --bv-ref-advice:clamp(168px,43vw,185px);
+    --bv-ref-advice:clamp(178px,46vw,198px);
     grid-template-columns:repeat(20,minmax(0,1fr));
     grid-template-rows:var(--bv-ref-top) var(--bv-ref-advice);
     column-gap:0!important;
@@ -845,7 +845,7 @@
   #homeScreen .metric-grid .recommendation-card{
     height:var(--bv-ref-advice);
     min-height:var(--bv-ref-advice);
-    top:-10px;
+    top:-20px;
     padding:8px 9px 7px!important;
     margin-left:4px!important;
   }
@@ -976,6 +976,7 @@
     --bv-ref-profit:150px;
     --bv-ref-advice:177px;
   }
+  #homeScreen .metric-grid .recommendation-card{top:-18px}
   #homeScreen .metric-grid .clients-card{padding:6px 5px!important;margin-right:3px!important}
   #homeScreen .metric-grid .orders-card{padding:7px 6px!important;margin-left:3px!important}
   #homeScreen .metric-grid .profit-card{padding:7px 6px!important;margin-right:3px!important}
