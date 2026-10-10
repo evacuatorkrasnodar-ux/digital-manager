@@ -1031,3 +1031,28 @@
   min-width:25px!important;
   z-index:30!important;
 }
+
+/* Align four dashboard arrows to card edges, not heading baselines. */
+#homeScreen .metric-grid .clients-card,
+#homeScreen .metric-grid .orders-card,
+#homeScreen .metric-grid .profit-card,
+#homeScreen .metric-grid .recommendation-card{
+  position:relative;
+}
+#homeScreen .metric-grid .clients-card .tile-heading,
+#homeScreen .metric-grid .orders-card .tile-heading,
+#homeScreen .metric-grid .profit-card .tile-heading,
+#homeScreen .metric-grid .recommendation-card .recommendation-top{
+  position:static;
+}
+#homeScreen .metric-grid .clients-card .tile-heading .tile-chevron,
+#homeScreen .metric-grid .orders-card .tile-heading .tile-chevron,
+#homeScreen .metric-grid .profit-card .tile-heading .tile-chevron,
+#homeScreen .metric-grid .recommendation-card .recommendation-top .rec-chevron{
+  position:absolute!important;
+  top:8px!important;
+  right:8px!important;
+  margin:0!important;
+  transform:none!important;
+  z-index:30!important;
+}
