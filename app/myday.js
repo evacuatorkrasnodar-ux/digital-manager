@@ -276,13 +276,7 @@
     $('exportDay').addEventListener('click',exportBackup);
     document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>$(b.dataset.close).close()));
     for(const id of ['eventDialog','noteDialog'])$(id).addEventListener('click',e=>{if(e.target===$(id))$(id).close();});
-    const greetings=[
-      'Напоминать — моя работа. Успевать всё — не обязательно.',
-      'Планы на день есть. Главное — не забыть про себя.',
-      'Хорошие идеи любят блокнот. И иногда кофе.',
-      'Пусть важные дела будут под рукой, а нервы — в отпуске.'
-    ];
-    $('dayGreeting').textContent=greetings[new Date().getDate()%greetings.length];
+    $('dayGreeting').textContent='Планы на день есть. Главное — не забыть про себя.';
     render();
     try{db=await openDatabase();storageOk=true;await refresh();}
     catch(e){
