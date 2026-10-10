@@ -1,0 +1,171 @@
+/* v287 — Health replaces Care in the main My Day rail.
+   The cycle tracker is a subsection of Health. It keeps its own local DB. */
+.health-shell .health-main-tabs,
+.care-shell .health-main-tabs{
+  box-sizing:border-box;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:0;
+  min-height:45px;
+  margin:8px 0 9px;
+  padding:3px;
+  border:1px solid rgba(145,204,250,.52);
+  border-radius:25px;
+  background:linear-gradient(130deg,rgba(13,35,56,.83),rgba(3,15,29,.92));
+  box-shadow:inset 0 1px rgba(255,255,255,.20),0 6px 19px rgba(0,4,16,.31);
+  -webkit-backdrop-filter:blur(17px);
+  backdrop-filter:blur(17px);
+}
+.health-shell .health-main-tabs>.day-tab,
+.care-shell .health-main-tabs>.day-tab{
+  box-sizing:border-box;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  min-width:0;
+  min-height:37px;
+  padding:5px 3px;
+  border:1px solid transparent;
+  border-radius:22px;
+  background:transparent;
+  text-decoration:none;
+  color:#e4f2fe;
+  font-size:clamp(11px,3.1vw,13px);
+  font-weight:440;
+  white-space:nowrap;
+}
+.health-shell .health-main-tabs>.day-tab.active,
+.care-shell .health-main-tabs>.day-tab.active{
+  z-index:2;
+  color:#fff;
+  border-color:rgba(193,233,255,.92);
+  background:radial-gradient(ellipse at 14% 0%,rgba(233,249,255,.46),transparent 77%),
+    linear-gradient(149deg,rgba(79,164,243,.97),rgba(12,100,195,.96));
+  box-shadow:inset 0 1px rgba(255,255,255,.63),0 0 13px rgba(54,157,252,.37);
+}
+.health-shell .health-main-tabs>.day-tab:not(.active):not(:first-child)::before,
+.care-shell .health-main-tabs>.day-tab:not(.active):not(:first-child)::before{
+  content:"";
+  position:absolute;
+  pointer-events:none;
+  z-index:0;
+  top:-3px;
+  bottom:-3px;
+  left:-27px;
+  width:39px;
+  border-right:1px solid rgba(154,208,251,.36);
+  border-radius:50%;
+}
+.health-shell .health-main-tabs>.day-tab.active+.day-tab::before,
+.care-shell .health-main-tabs>.day-tab.active+.day-tab::before{display:none}
+/* The five Health subsections use a compact, sideways-scrollable glass rail
+   on iPhone SE / iPhone X. Never squeeze labels until they overlap. */
+.health-shell .health-tabs,
+.care-shell .health-cycle-nav{
+  box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  gap:2px;
+  flex-wrap:nowrap;
+  overflow-x:auto;
+  overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-x:contain;
+  scrollbar-width:none;
+  min-height:44px;
+  margin:0 0 9px;
+  padding:3px;
+  border:1px solid rgba(148,202,244,.51);
+  border-radius:24px;
+  background:linear-gradient(125deg,rgba(11,34,57,.84),rgba(3,16,31,.9));
+  box-shadow:inset 0 1px rgba(249,253,255,.19),0 6px 18px rgba(0,4,15,.30);
+  -webkit-backdrop-filter:blur(17px);
+  backdrop-filter:blur(17px);
+}
+.health-shell .health-tabs::-webkit-scrollbar,
+.care-shell .health-cycle-nav::-webkit-scrollbar{display:none}
+.health-shell .health-tabs>:is(button,a,span),
+.care-shell .health-cycle-nav>:is(button,a,span){
+  box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  flex:0 0 auto;
+  width:auto;
+  min-width:70px;
+  min-height:36px;
+  height:36px;
+  margin:0;
+  padding:5px 9px;
+  border:1px solid transparent;
+  border-radius:20px;
+  background:transparent;
+  text-decoration:none;
+  white-space:nowrap;
+  color:#dceefa;
+  font-size:clamp(10px,2.7vw,11px);
+  font-weight:460;
+  line-height:1.1;
+}
+.health-shell .health-tabs>:is(button,a,span):first-child,
+.care-shell .health-cycle-nav>:is(button,a,span):first-child{min-width:86px}
+.health-shell .health-tabs>:is(button,a,span):nth-child(3),
+.care-shell .health-cycle-nav>:is(button,a,span):nth-child(3){min-width:56px}
+.health-shell .health-tabs>:is(button,a,span):nth-child(4),
+.care-shell .health-cycle-nav>:is(button,a,span):nth-child(4){min-width:86px}
+.health-shell .health-tabs>:is(button,a,span):nth-child(5),
+.care-shell .health-cycle-nav>:is(button,a,span):nth-child(5){min-width:62px}
+.health-shell .health-tabs>.active,
+.care-shell .health-cycle-nav>.active{
+  z-index:2;
+  border-color:rgba(190,232,255,.91)!important;
+  color:#fff!important;
+  background:radial-gradient(ellipse at 15% 0%,rgba(234,249,255,.45),transparent 75%),
+    linear-gradient(148deg,rgba(65,152,238,.95),rgba(13,97,187,.95))!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.60),0 0 12px rgba(59,155,255,.40)!important;
+}
+.health-shell .health-tabs>:is(button,a,span):not(.active):not(:first-child)::before,
+.care-shell .health-cycle-nav>:is(button,a,span):not(.active):not(:first-child)::before{
+  content:"";
+  position:absolute;
+  top:-2px;bottom:-2px;left:-23px;width:32px;
+  border:0;border-right:1px solid rgba(164,209,247,.34);
+  border-radius:50%;
+  pointer-events:none;
+}
+.health-shell .health-tabs>.active+:is(button,a,span)::before,
+.care-shell .health-cycle-nav>.active+:is(button,a,span)::before{display:none}
+.health-shell .health-tabs>:is(button,a):focus-visible,
+.care-shell .health-cycle-nav>a:focus-visible,
+.health-shell .health-main-tabs>a:focus-visible,
+.care-shell .health-main-tabs>a:focus-visible{
+  outline:2px solid #c7eaff;
+  outline-offset:2px;
+}
+.care-shell .care-main{padding:0 1px}
+.care-shell .care-cycle-hero{
+  padding:12px 13px;
+  margin:0 0 9px;
+  border-radius:17px;
+}
+.care-shell .care-cycle-hero .care-eyebrow{font-size:9px}
+.care-shell .care-cycle-hero .care-hero-line{margin-top:4px}
+.care-shell .care-cycle-hero h2{
+  font-size:clamp(19px,5.8vw,24px);
+  letter-spacing:-.03em;
+}
+.care-shell .care-cycle-hero .care-hero-line p{font-size:11px;margin:3px 0 0}
+.care-shell .care-cycle-hero .care-moon{
+  width:36px;height:36px;font-size:23px;
+}
+.care-shell .care-cycle-hero .care-hero-note{
+  max-width:none;margin:7px 0 0;
+  font-size:10.5px;line-height:1.35;
+}
+@media(max-width:360px){
+  .health-shell .health-main-tabs>.day-tab,
+  .care-shell .health-main-tabs>.day-tab{font-size:11px}
+  .care-shell .care-cycle-hero .care-moon{width:30px;height:30px}
+}
