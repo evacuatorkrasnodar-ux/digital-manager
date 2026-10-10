@@ -521,18 +521,6 @@
   vector-effect:non-scaling-stroke;
   fill:none;
 }
-/* Align the outline exactly with the clipped silhouette.
-   No fractional transform or glow: those produce stair-step fringes on the bend. */
-#homeScreen .metric-grid .bv-clients-shape-outline{
-  stroke:rgba(173,198,216,.74);
-  filter:none;
-  shape-rendering:geometricPrecision;
-}
-#homeScreen .metric-grid .bv-clients-shape-outline path{
-  stroke-width:1.08;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-}
 #homeScreen .metric-grid .bv-gold-shape-outline{
   stroke:rgba(222,159,99,.73);
   filter:drop-shadow(0 0 1.3px rgba(251,160,73,.2));
