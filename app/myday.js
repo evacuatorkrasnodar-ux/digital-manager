@@ -108,15 +108,31 @@
     wrapper.append(elem('span','empty-icon',symbol),elem('span','',message));
     list.replaceChildren(wrapper);
   }
+  // Shared thin line-icons for real, accessible notebook controls.
+  function strokeSvg(paths){
+    const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');
+    svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('aria-hidden','true');
+    for(const d of paths){
+      const p=document.createElementNS(ns,'path');p.setAttribute('d',d);svg.append(p);
+    }
+    return svg;
+  }
+  function noteOutline(){return strokeSvg([
+    'M7 3.5h8.5l3.2 3.2v12.1c0 1-.8 1.7-1.7 1.7H7c-1 0-1.7-.7-1.7-1.7V5.2c0-1 .7-1.7 1.7-1.7Z',
+    'M15.5 3.5v3.4h3.2','M8.4 10.9h7.2','M8.4 13.9h7.2','M8.4 16.9h5.1'
+  ]);}
+  function littleChevron(){return strokeSvg(['m9 5 7 7-7 7']);}
   // Compact interactive empty cards, without fabricating appointments or notes.
   function compactDayEmpty(list,type,title,message,open){
     const row=elem('div','day-compact-empty '+type);
-    const symbol=elem('span','compact-empty-symbol',type==='compact-note'?'▤':'✦');
+    const symbol=elem('span','compact-empty-symbol',type==='compact-note'?'':'✦');
+    if(type==='compact-note')symbol.append(noteOutline());
     symbol.setAttribute('aria-hidden','true');
     const body=elem('div','compact-empty-content');
     body.append(elem('strong','',title),elem('small','',message));
-    const arrow=action('›',type==='compact-note'?'Создать заметку':'Добавить событие',open);
+    const arrow=action('',type==='compact-note'?'Создать заметку':'Добавить событие',open);
     arrow.classList.add('compact-empty-action');
+    arrow.append(littleChevron());
     row.append(symbol,body,arrow);
     list.replaceChildren(row);
   }
@@ -156,7 +172,7 @@
     if(!items.length){compactDayEmpty(list,'compact-note','Заметок пока нет','Мысли этого дня пока не записаны.',()=>openNote());return;}
     for(const item of items.slice(0,4)){
       const row=elem('div','note-mini');
-      const symbol=elem('span','note-mini-symbol','▤');
+      const symbol=elem('span','note-mini-symbol');symbol.append(noteOutline());
       symbol.setAttribute('aria-hidden','true');
       const button=elem('button','note-mini-body');
       button.type='button';
@@ -165,8 +181,9 @@
         elem('small','',item.text?.trim().slice(0,110)||'Открыть запись')
       );
       button.addEventListener('click',()=>openNote(item));
-      const arrow=action('›','Открыть запись «'+item.title+'»',()=>openNote(item));
+      const arrow=action('','Открыть запись «'+item.title+'»',()=>openNote(item));
       arrow.classList.add('note-mini-chevron');
+      arrow.append(littleChevron());
       row.append(symbol,button,arrow);
       list.append(row);
     }

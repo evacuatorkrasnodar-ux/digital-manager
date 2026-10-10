@@ -1,4 +1,4 @@
-/* Digital Manager OS · My Day Black Velvet v267
+/* Digital Manager OS · My Day Black Velvet v268
    Authentic long photographic sunset. No image processing, cropping, or fake UI.
    Overrides only visual styling of the personal calendar, not storage/navigation. */
 .day-shell:not(.care-shell,.world-shell,.health-shell){
@@ -679,4 +679,66 @@
   .day-shell:not(.care-shell,.world-shell,.health-shell) .day-event{grid-template-columns:42px 14px minmax(0,1fr) auto;column-gap:5px}
   .day-shell:not(.care-shell,.world-shell,.health-shell) .day-event .item-actions{gap:2px}
   .day-shell:not(.care-shell,.world-shell,.health-shell) .day-event .item-actions button{width:23px;height:25px}
+}
+
+/* v268 — gold outline notebook glyph and precise, restrained glass details. */
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-compact-empty.compact-note,
+.day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini{
+  min-height:65px;padding:7px 10px;
+  border-color:rgba(146,201,247,.46);
+  background:radial-gradient(ellipse at 92% 43%,rgba(40,101,154,.10),transparent 47%),
+    linear-gradient(138deg,rgba(11,30,49,.67),rgba(3,14,27,.75));
+  box-shadow:inset 0 1px rgba(238,251,255,.17),0 9px 23px rgba(0,4,15,.42);
+  -webkit-backdrop-filter:blur(21px) saturate(1.06);
+  backdrop-filter:blur(21px) saturate(1.06);
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-compact-empty.compact-note::after,
+.day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini::after{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent 20%,rgba(217,129,63,.35) 56%,#ffd08d 84%,rgba(233,137,73,.68));
+  -webkit-mask-image:url('./assets/glass-waves.svg');
+  mask-image:url('./assets/glass-waves.svg');
+  -webkit-mask-position:right bottom;mask-position:right bottom;
+  -webkit-mask-size:70% auto;mask-size:70% auto;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  filter:none;opacity:.83;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-compact-empty.compact-note>*,
+.day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini>*{position:relative;z-index:1}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .compact-note .compact-empty-symbol,
+.day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini>.note-mini-symbol{
+  display:grid;place-items:center;
+  width:38px;height:38px;border-radius:50%;
+  border:1px solid rgba(222,170,101,.47);
+  color:#ffdc93;font-size:0;text-shadow:none;
+  background:radial-gradient(circle at 30% 24%,rgba(253,204,124,.18),transparent 48%),
+    linear-gradient(145deg,rgba(45,38,32,.80),rgba(12,17,25,.83));
+  box-shadow:inset 0 1px rgba(255,225,180,.17),0 0 12px rgba(255,165,66,.14);
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .compact-note .compact-empty-symbol svg,
+.day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini>.note-mini-symbol svg{
+  display:block;width:21px;height:21px;fill:none;stroke:currentColor;
+  stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .compact-note .compact-empty-action,
+.day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini>.note-mini-chevron{
+  display:grid;place-items:center;flex:none;
+  padding:0;width:30px;height:30px;border-radius:50%;
+  border:1px solid rgba(141,195,245,.41);
+  background:linear-gradient(145deg,rgba(19,43,70,.63),rgba(5,16,31,.79));
+  box-shadow:inset 0 1px rgba(255,255,255,.13);
+  color:#eef8ff;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .compact-note .compact-empty-action svg,
+.day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini>.note-mini-chevron svg{
+  display:block;width:17px;height:17px;fill:none;stroke:currentColor;
+  stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+}
+@media(max-width:350px){
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .compact-note .compact-empty-symbol,
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini>.note-mini-symbol{width:33px;height:33px}
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .compact-note .compact-empty-symbol svg,
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini>.note-mini-symbol svg{width:19px;height:19px}
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .compact-note .compact-empty-action,
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini>.note-mini-chevron{width:29px;height:29px}
 }
