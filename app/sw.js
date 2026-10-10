@@ -1,9 +1,9 @@
 /* App-only service worker: fresh documents, styles and scripts; cached offline assets. */
-const CACHE = 'digital-manager-black-velvet-v345-20261010';
+const CACHE = 'digital-manager-black-velvet-v346-20261010';
 const CACHE_PREFIX = 'digital-manager-black-velvet-';
 const OFFLINE_FILES = [
   './index.html',
-  './style.css?v=284',
+  './style.css?v=285',
   './dock.css?v=295',
   './app.js?v=278',
   './myday.html',
