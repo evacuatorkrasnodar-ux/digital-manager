@@ -459,8 +459,7 @@
   min-height:var(--bv-client-h);
   margin-right:3px!important;
   padding:8px 7px 6px!important;
-  /* Keep the Clients contour visible where the gold card overlaps its bend. */
-  z-index:4;
+  z-index:1;
   border:0!important;
   border-radius:0!important;
   -webkit-clip-path:url(#metricClientsClip);
