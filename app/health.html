@@ -59,8 +59,15 @@
    <section class="health-device-panel" aria-labelledby="healthDeviceTitle">
     <div class="health-device-heading"><h3 id="healthDeviceTitle">Телефон и смарт-часы</h3><span class="health-device-label">Подготовка</span></div>
     <p>Apple Health / Apple Watch и Health Connect / Android: интерфейс подключения подготовлен. В веб-версии прямой доступ к данным часов отсутствует.</p>
-    <div class="health-provider-row"><span>Apple Health</span><span id="healthAppleStatus">Требуется приложение iOS</span></div>
-    <div class="health-provider-row"><span>Health Connect</span><span id="healthAndroidStatus">Требуется приложение Android</span></div>
+    <div class="health-provider-row health-provider-link-row">
+     <div class="health-provider-info"><strong>Apple Health</strong><span id="healthAppleStatus">Синхронизация не подключена</span></div>
+     <a class="health-provider-open" href="https://apps.apple.com/app/apple-health/id1242545199" target="_blank" rel="noopener noreferrer" aria-label="Открыть Apple Health в App Store"><span>App Store</span><span class="health-provider-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></a>
+    </div>
+    <div class="health-provider-row health-provider-link-row">
+     <div class="health-provider-info"><strong>Health Connect</strong><span id="healthAndroidStatus">Синхронизация не подключена</span></div>
+     <a class="health-provider-open" href="https://play.google.com/store/apps/details?id=com.google.android.apps.healthdata" target="_blank" rel="noopener noreferrer" aria-label="Открыть Health Connect в Google Play"><span>Google Play</span><span class="health-provider-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></a>
+    </div>
+    <p class="health-device-platform-help">На iPhone приложение «Здоровье» обычно уже установлено. На Android 14 и новее Health Connect находится в настройках телефона. <a href="https://support.google.com/android/answer/12201227?hl=ru" target="_blank" rel="noopener noreferrer">Где найти в Android</a></p>
     <button type="button" class="health-native-sync" id="healthSync" hidden>Получить разрешённые показатели</button>
     <p class="health-device-foot">Только с вашего разрешения. Облачная синхронизация и отображение на часах пока не реализованы.</p>
    </section>
