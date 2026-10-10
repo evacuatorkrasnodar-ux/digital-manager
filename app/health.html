@@ -1,6 +1,20 @@
 <!doctype html>
 <html lang="ru">
 <head>
+<script>
+/* Direct links also enter the single My Day shell; embedded content stays local. */
+(() => {
+  const params=new URLSearchParams(location.search);
+  if(window.parent===window){
+    const target=new URL('./myday.html',location.href);
+    target.searchParams.set('view','health');
+    if(params.has('view'))target.searchParams.set('healthView',params.get('view'));
+    location.replace(target.href);
+  }else if(params.get('embedded')==='1'){
+    document.documentElement.classList.add('personal-embedded');
+  }
+})();
+</script>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#000000"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="description" content="Личный журнал давления, пульса, шагов, лекарств, сна и документов — Цифровой управляющий.">
@@ -26,6 +40,7 @@
   <link rel="prefetch" href="./myday.html">
   <link rel="prefetch" href="./care.html">
   <link rel="stylesheet" href="./health-tabs-theme.css?v=1">
+  <link rel="stylesheet" href="./personal-embedded.css?v=1">
 </head>
 <body>
 <div class="day-shell health-shell">
