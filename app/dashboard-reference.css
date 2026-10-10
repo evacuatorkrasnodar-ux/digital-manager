@@ -728,7 +728,7 @@
     width:calc(100% - 8px);
     max-width:calc(100% - 8px);
     margin:8px 4px 0;
-    row-gap:6px;
+    row-gap:8px;
   }
   #homeScreen .metric-grid .clients-card{
     padding:5px 6px 3px!important;
@@ -742,7 +742,7 @@
     padding:6px 7px!important;
   }
   #homeScreen .metric-grid .recommendation-card{
-    top:-20px;
+    top:-12px;
     padding:6px 8px 6px!important;
   }
   /* Small title badges echo the original Digital Business card's details. */
