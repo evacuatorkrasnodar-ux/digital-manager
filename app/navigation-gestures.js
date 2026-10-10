@@ -30,6 +30,13 @@
   function insertBack(){
     if(embedded)return;
     const header=document.querySelector('body > .day-shell > .day-header');
+    // Personal pages already have a round Back in the header.
+    // Reuse it instead of adding a second arrow on the opposite side.
+    const existingBack=header?.querySelector('.day-back');
+    if(existingBack){
+      existingBack.addEventListener('click',event=>{event.preventDefault();goBack();});
+      return;
+    }
     const homeActions=document.querySelector('#homeScreen .masthead .header-actions');
     const holders=header?[header]:homeActions?
       [homeActions,...document.querySelectorAll('.secondary-screen > .subhead')]:[document.body];
