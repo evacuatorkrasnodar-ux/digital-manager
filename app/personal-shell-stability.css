@@ -1,4 +1,4 @@
-/* Shared personal header v2: one scene and one rail across Calendar, Health, Cycle.
+/* Shared personal header v3: one scene and one rail across Calendar, Health, Cycle.
    Keep view-specific content below the rail; do not alter forms or stored data. */
 body > .day-shell.day-shell{
   background:#01040b!important;
@@ -90,24 +90,6 @@ body > .day-shell.day-shell > .day-intro .polish-hello{
     max-height:34px!important;
   }
 }
-/* Don't crossfade the whole page and show two superimposed wallpapers. */
-@media(prefers-reduced-motion:no-preference){
-  ::view-transition-old(root),
-  ::view-transition-new(root){
-    animation:none!important;
-  }
-}
-
-/* Opt in to same-origin cross-document transitions. The three shared regions
-   keep their own visual identities while only the page-specific content swaps. */
-@view-transition{navigation:auto}
-@media(prefers-reduced-motion:no-preference){
-  body > .day-shell > .day-header{view-transition-name:personal-day-header}
-  body > .day-shell > .day-intro{view-transition-name:personal-day-greeting}
-  ::view-transition-old(personal-day-header),
-  ::view-transition-new(personal-day-header),
-  ::view-transition-old(personal-day-greeting),
-  ::view-transition-new(personal-day-greeting){
-    animation:none!important;
-  }
-}
+/* v3: Cross-document View Transitions disabled.
+   Native links remain intact; avoids Chromium InvalidStateError when a
+   transition starts after navigation opt-in becomes unavailable. */
