@@ -61,7 +61,10 @@
     render();
   }
   function setView(view){
-    $('calendarView').hidden=view!=='calendar';
+    const calendar=view==='calendar';
+    document.documentElement.classList.toggle('myday-calendar-locked',calendar);
+    document.querySelector('.day-shell')?.classList.toggle('calendar-fixed',calendar);
+    $('calendarView').hidden=!calendar;
     $('notesView').hidden=view!=='notes';
     document.querySelectorAll('[data-view]').forEach(btn=>{
       const active=btn.dataset.view===view;
@@ -82,6 +85,7 @@
     const offset=(first.getDay()+6)%7;
     const days=new Date(first.getFullYear(),first.getMonth()+1,0).getDate();
     const count=Math.max(35,Math.ceil((offset+days)/7)*7);
+    grid.dataset.weeks=String(count/7);
     const eventDates=new Set(events.map(e=>e.date)),noteDates=new Set(notes.map(n=>n.date));
     for(let i=0;i<count;i++){
       const d=new Date(first.getFullYear(),first.getMonth(),i-offset+1),key=dateKey(d);
@@ -327,7 +331,7 @@
       }
     }
     document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
-    if(new URLSearchParams(location.search).get('view')==='notes')setView('notes');
+    setView(new URLSearchParams(location.search).get('view')==='notes'?'notes':'calendar');
     $('prevMonth').addEventListener('click',()=>{month=new Date(month.getFullYear(),month.getMonth()-1,1);render();});
     $('nextMonth').addEventListener('click',()=>{month=new Date(month.getFullYear(),month.getMonth()+1,1);render();});
     $('goToday')?.addEventListener('click',()=>{selected=today();const d=new Date();month=new Date(d.getFullYear(),d.getMonth(),1);setView('calendar');render();});
