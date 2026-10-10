@@ -14,6 +14,7 @@
   const category={task:'Дело',meeting:'Встреча',personal:'Личное',business:'Бизнес'};
   let db=null,storageOk=false,events=[],notes=[],selected=today();
   let month=new Date(new Date().getFullYear(),new Date().getMonth(),1),toastTimeout;
+  let eventFromNote=false;
   function elem(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;}
   function toast(message){const t=$('dayToast');t.textContent=message;t.hidden=false;clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>t.hidden=true,3300);}
   function fail(e){console.error('My Day storage:',e);toast('Не удалось сохранить. Проверьте настройки браузера и свободное место.');}
@@ -181,10 +182,13 @@
         elem('small','',item.text?.trim().slice(0,110)||'Открыть запись')
       );
       button.addEventListener('click',()=>openNote(item));
+      const toPlan=action('','Создать событие из заметки «'+item.title+'»',()=>openEventFromNote(item));
+      toPlan.classList.add('note-to-plan');
+      toPlan.append(strokeSvg(['M4 12h15','m13 6 6 6-6 6']),elem('span','','В план'));
       const arrow=action('','Открыть запись «'+item.title+'»',()=>openNote(item));
       arrow.classList.add('note-mini-chevron');
       arrow.append(littleChevron());
-      row.append(symbol,button,arrow);
+      row.append(symbol,button,toPlan,arrow);
       list.append(row);
     }
     if(items.length>4){const more=elem('button','day-add subtle','Все записи: '+items.length);more.type='button';more.addEventListener('click',()=>setView('notes'));list.append(more);}
@@ -200,7 +204,10 @@
       controls.append(action('✎','Изменить заметку',()=>openNote(item)),action('×','Удалить заметку',()=>remove(NOTES,item)));
       head.append(elem('div','note-card-title',item.title),controls);card.append(head,elem('p','note-card-content',item.text));
       const meta=elem('div','note-card-meta');
-      meta.append(elem('span','',item.date.split('-').reverse().join('.')),elem('span','',item.kind==='business'?'Работа':'Личное'));
+      const toPlan=action('','Создать событие из заметки «'+item.title+'»',()=>openEventFromNote(item));
+      toPlan.classList.add('note-card-to-plan');
+      toPlan.append(strokeSvg(['M4 12h15','m13 6 6 6-6 6']),elem('span','','В план'));
+      meta.append(elem('span','',item.date.split('-').reverse().join('.')),elem('span','',item.kind==='business'?'Работа':'Личное'),toPlan);
       card.append(meta);list.append(card);
     }
   }
@@ -228,6 +235,8 @@
     $('ruMoveWorking').dataset.next=next||'';
   }
   function openEvent(item){
+    eventFromNote=false;
+    $('eventFromNoteHint').hidden=true;
     $('eventForm').reset();$('eventId').value=item?.id||'';
     $('eventDialogTitle').textContent=item?'Изменить событие':'Новое событие';
     $('eventTitle').value=item?.title||'';
@@ -236,6 +245,23 @@
     $('eventKind').value=item?.kind||'task';
     $('eventDetail').value=item?.detail||'';
     updateRuAdvice();$('eventDialog').showModal();$('eventTitle').focus();
+  }
+  // Prefill the regular event editor from a saved note without modifying that note.
+  function openEventFromNote(note){
+    openEvent();
+    eventFromNote=true;
+    $('eventDialogTitle').textContent='Событие из заметки';
+    $('eventTitle').value=String(note.title||'').slice(0,100);
+    $('eventDate').value=note.date||selected;
+    $('eventKind').value=note.kind==='business'?'business':'personal';
+    const original=String(note.text||'');
+    $('eventDetail').value=original.slice(0,2500);
+    const hint=$('eventFromNoteHint');
+    hint.textContent='Поля заполнены из заметки. Выберите дату и время. Заметка останется в блокноте.'+
+      (original.length>2500?' В событие перенесены первые 2500 символов; полный текст сохранён в заметке.':'');
+    hint.hidden=false;
+    updateRuAdvice();
+    $('eventTitle').focus();
   }
   function openNote(item){
     $('noteForm').reset();$('noteId').value=item?.id||'';
@@ -266,6 +292,8 @@
     try{
       await query(EVENTS,'readwrite',s=>s.put(item));$('eventDialog').close();
       selected=date;const d=parseDate(date);month=new Date(d.getFullYear(),d.getMonth(),1);
+      if(eventFromNote)setView('calendar');
+      eventFromNote=false;
       await refresh();toast('Событие сохранено');
     }catch(error){fail(error);}
   }
