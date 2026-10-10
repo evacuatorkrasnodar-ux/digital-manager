@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="./system-ui.css?v=273">
   <link rel="stylesheet" href="./polish.css?v=260">
   <link rel="stylesheet" href="./dock.css?v=258">
-  <link rel="stylesheet" href="./personal-unified.css?v=277">
+  <link rel="stylesheet" href="./personal-unified.css?v=279">
   <script src="./care.js?v=248" defer></script>
   <script src="./system-ui.js?v=273" defer></script>
   <script src="./polish.js?v=257" defer></script>
@@ -25,7 +25,6 @@
     <header class="day-header">
       <a class="day-back" href="./myday.html" aria-label="Вернуться в календарь"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></a>
       <div class="day-heading"><span>ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h1>Мой день <span aria-hidden="true">✦</span></h1></div>
-      <a class="day-today care-home" href="./index.html">Главная</a>
     </header>
     <nav class="day-tabs" aria-label="Разделы моего дня">
       <a class="day-tab" href="./myday.html">Календарь</a>
@@ -67,9 +66,9 @@
         </div>
         <section class="care-panel care-calendar-panel" aria-label="Календарь цикла">
           <div class="calendar-toolbar">
-            <button type="button" id="carePrevMonth" class="month-arrow" aria-label="Предыдущий месяц">‹</button>
+            <button type="button" id="carePrevMonth" class="month-arrow" aria-label="Предыдущий месяц"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></button>
             <h2 id="careMonthTitle" aria-live="polite"></h2>
-            <button type="button" id="careNextMonth" class="month-arrow" aria-label="Следующий месяц">›</button>
+            <button type="button" id="careNextMonth" class="month-arrow" aria-label="Следующий месяц"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5 7 7-7 7"/></svg></button>
           </div>
           <div class="weekdays" aria-hidden="true"><span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span></div>
           <div id="careCalendarGrid" class="month-grid care-grid" role="group" aria-label="Дни календаря цикла"></div>
