@@ -108,6 +108,18 @@
     wrapper.append(elem('span','empty-icon',symbol),elem('span','',message));
     list.replaceChildren(wrapper);
   }
+  // Compact interactive empty cards, without fabricating appointments or notes.
+  function compactDayEmpty(list,type,title,message,open){
+    const row=elem('div','day-compact-empty '+type);
+    const symbol=elem('span','compact-empty-symbol',type==='compact-note'?'▤':'✦');
+    symbol.setAttribute('aria-hidden','true');
+    const body=elem('div','compact-empty-content');
+    body.append(elem('strong','',title),elem('small','',message));
+    const arrow=action('›',type==='compact-note'?'Создать заметку':'Добавить событие',open);
+    arrow.classList.add('compact-empty-action');
+    row.append(symbol,body,arrow);
+    list.replaceChildren(row);
+  }
   function action(symbol,label,callback){
     const button=elem('button','',symbol);button.type='button';
     button.setAttribute('aria-label',label);button.title=label;button.addEventListener('click',callback);
@@ -116,9 +128,11 @@
   function renderEvents(){
     const list=$('eventsList');list.replaceChildren();
     const items=events.filter(e=>e.date===selected);
-    if(!items.length){empty(list,'✦','План свободен. Самое время придумать что-нибудь хорошее.');return;}
+    if(!items.length){compactDayEmpty(list,'compact-event','Событий пока нет','Добавьте событие на выбранный день',()=>openEvent());return;}
     for(const item of items){
       const row=elem('article','day-event'+(item.done?' done':''));
+      const clock=elem('span','event-clock');
+      clock.append(elem('strong','',item.time||'На день'));
       const checkbox=elem('input','event-check');checkbox.type='checkbox';checkbox.checked=Boolean(item.done);
       checkbox.setAttribute('aria-label','Выполнено: '+item.title);
       checkbox.addEventListener('change',async()=>{
@@ -129,21 +143,32 @@
       });
       const main=elem('div','event-main'),head=elem('div','event-head');
       head.append(elem('span','event-title',item.title),elem('span','event-tag '+item.kind,category[item.kind]||'Дело'));main.append(head);
-      main.append(elem('div','event-meta',(item.time?item.time+' · ':'')+(item.done?'Выполнено':'Запланировано')));
+      main.append(elem('div','event-meta',item.done?'Выполнено':'Запланировано'));
       if(item.detail)main.append(elem('p','event-detail',item.detail));
       const controls=elem('div','item-actions');
       controls.append(action('✎','Изменить событие',()=>openEvent(item)),action('×','Удалить событие',()=>remove(EVENTS,item)));
-      row.append(checkbox,main,controls);list.append(row);
+      row.append(clock,checkbox,main,controls);list.append(row);
     }
   }
   function renderDayNotes(){
     const list=$('dayNotesList');list.replaceChildren();
     const items=notes.filter(n=>n.date===selected);
-    if(!items.length){empty(list,'✎','Мысли этого дня пока не записаны.');return;}
+    if(!items.length){compactDayEmpty(list,'compact-note','Заметок пока нет','Мысли этого дня пока не записаны.',()=>openNote());return;}
     for(const item of items.slice(0,4)){
       const row=elem('div','note-mini');
-      const button=elem('button','',item.title);button.type='button';button.addEventListener('click',()=>openNote(item));
-      row.append(elem('span','','✎'),button,elem('small','',item.kind==='business'?'Работа':'Личное'));list.append(row);
+      const symbol=elem('span','note-mini-symbol','▤');
+      symbol.setAttribute('aria-hidden','true');
+      const button=elem('button','note-mini-body');
+      button.type='button';
+      button.append(
+        elem('strong','',item.title),
+        elem('small','',item.text?.trim().slice(0,110)||'Открыть запись')
+      );
+      button.addEventListener('click',()=>openNote(item));
+      const arrow=action('›','Открыть запись «'+item.title+'»',()=>openNote(item));
+      arrow.classList.add('note-mini-chevron');
+      row.append(symbol,button,arrow);
+      list.append(row);
     }
     if(items.length>4){const more=elem('button','day-add subtle','Все записи: '+items.length);more.type='button';more.addEventListener('click',()=>setView('notes'));list.append(more);}
   }

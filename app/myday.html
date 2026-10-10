@@ -13,9 +13,9 @@
   <link rel="stylesheet" href="./system-ui.css?v=247">
   <link rel="stylesheet" href="./polish.css?v=260">
   <link rel="stylesheet" href="./dock.css?v=258">
-  <link rel="stylesheet" href="./myday-finish.css?v=266">
+  <link rel="stylesheet" href="./myday-finish.css?v=267">
   <script src="./russia-calendar.js?v=250" defer></script>
-  <script src="./myday.js?v=262" defer></script>
+  <script src="./myday.js?v=267" defer></script>
   <script src="./system-ui.js?v=247" defer></script>
   <script src="./polish.js?v=257" defer></script>
   <title>Мой день — Цифровой управляющий</title>
@@ -52,12 +52,12 @@
         <div id="ruSelectedStatus" class="ru-selected-status" role="status" hidden></div>
         <div id="ruTomorrowWarning" class="ru-tomorrow-warning" role="status" hidden></div>
         <div class="day-section-heading">
-          <div><p class="day-eyebrow">ПЛАН НА ДЕНЬ</p><h2 id="selectedDateLabel"></h2></div>
+          <div><h2>План на день <span class="sr-only" id="selectedDateLabel"></span></h2></div>
           <button class="day-add" id="addEvent" type="button">+ Событие</button>
         </div>
         <div id="eventsList" class="event-list" aria-live="polite"></div>
         <div class="day-section-heading notes-in-day">
-          <div><p class="day-eyebrow">НА ПАМЯТЬ</p><h2>Заметки за день</h2></div>
+          <div><h2>Заметки за день</h2></div>
           <button class="day-add subtle" id="addNoteForDay" type="button">+ Запись</button>
         </div>
         <div id="dayNotesList" class="day-notes-list"></div>
