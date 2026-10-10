@@ -1,4 +1,4 @@
-/* v7 — one mobile geometry for Calendar, Notebook and Health.
+/* v8 — one mobile geometry for Calendar, Notebook and Health.
    Keep the approved rail appearance; eliminate differences in width, header,
    greeting insertion and view-dependent top margins. */
 @media (max-width:700px) and (orientation:portrait){
@@ -74,14 +74,14 @@
     border-radius:19px!important;
   }
   /* Health has no greeting element: reserve the identical 26px slot. */
-  body > .day-shell.health-shell.day-shell.day-shell > nav.day-tabs{
+  body > :is(.day-shell.health-shell,.day-shell.care-shell).day-shell.day-shell > nav.day-tabs{
     margin-top:29px!important;
   }
 }
 @media (max-width:700px) and (orientation:portrait) and (max-height:715px){
   /* Compact screens: all three pages omit the greeting slot together. */
   body > .day-shell.day-shell > .day-intro{display:none!important}
-  body > .day-shell.health-shell.day-shell.day-shell > nav.day-tabs{
+  body > :is(.day-shell.health-shell,.day-shell.care-shell).day-shell.day-shell > nav.day-tabs{
     margin-top:3px!important;
   }
 }
@@ -91,7 +91,7 @@
    a horizontal jump between the scroll-locked calendar and long pages. */
 @media (min-width:701px){
   html{scrollbar-gutter:stable}
-  body > .day-shell.health-shell{
+  body > :is(.day-shell.health-shell,.day-shell.care-shell){
     box-sizing:border-box;
     width:min(100%,430px);
     max-width:430px;
@@ -106,9 +106,9 @@
    Its 91px spacer compensates for that gap and the 7px difference in
    header height plus 7px difference in top padding. On mobile, keep the
    existing compact navigation spacing and hide the spacer entirely. */
-.day-shell.health-shell > .health-nav-spacer{display:none}
+:is(.day-shell.health-shell,.day-shell.care-shell) > .health-nav-spacer{display:none}
 @media (min-width:701px){
-  body > .day-shell.health-shell > .health-nav-spacer{
+  body > :is(.day-shell.health-shell,.day-shell.care-shell) > .health-nav-spacer{
     display:block;
     box-sizing:border-box;
     flex:0 0 91px;
