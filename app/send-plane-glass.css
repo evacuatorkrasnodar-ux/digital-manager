@@ -1,27 +1,87 @@
-/* Premium frosted glass send button, adapted from approved concept.
-   The entire button remains a real HTML submit control. */
+/* v2 — Frosted-glass Send control. Visible SVG is the icon source:
+   never hide the real plane behind an unreliable background image. */
 body > .day-shell.world-shell [data-world-view="assistant"] > form#worldAskForm > button[type="submit"]{
-  background-color:#173049!important;
-  background-image:url("data:image/webp;base64,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")!important;
+  box-sizing:border-box!important;
+  position:relative!important;
+  isolation:isolate!important;
+  display:grid!important;
+  place-items:center!important;
+  flex:0 0 41px!important;
+  width:41px!important;
+  min-width:41px!important;
+  max-width:41px!important;
+  height:41px!important;
+  min-height:41px!important;
+  max-height:41px!important;
+  margin:0!important;
+  padding:0!important;
+  border:1px solid rgba(236,250,255,.83)!important;
+  border-radius:13px!important;
+  background-color:#a5c5d9!important;
+  background-image:
+    radial-gradient(ellipse 115% 78% at 24% 3%,rgba(255,255,255,.88),transparent 72%),
+    linear-gradient(146deg,#d8edf8 0%,#a8c9de 48%,#709dbb 100%)!important;
+  background-size:cover!important;
   background-position:center!important;
   background-repeat:no-repeat!important;
-  background-size:cover!important;
-  border:0!important;
-  border-radius:13px!important;
-  box-shadow:0 2px 9px rgba(0,0,0,.32),0 0 10px rgba(105,183,244,.13)!important;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.82),
+    inset 0 -2px 4px rgba(20,61,91,.17),
+    0 3px 9px rgba(0,0,0,.33),
+    0 0 12px rgba(112,196,255,.17)!important;
+  color:#173b56!important;
+  opacity:1!important;
   overflow:hidden!important;
+  cursor:pointer!important;
+  transform:none!important;
+  transition:filter .16s ease,box-shadow .16s ease,transform .16s ease!important;
+}
+body > .day-shell.world-shell [data-world-view="assistant"] > form#worldAskForm > button[type="submit"]::before{
+  content:""!important;
+  position:absolute!important;
+  inset:2px 3px auto!important;
+  height:35%!important;
+  border-radius:12px 12px 50% 50%!important;
+  background:linear-gradient(to bottom,rgba(255,255,255,.35),rgba(255,255,255,0))!important;
+  pointer-events:none!important;
+  z-index:0!important;
 }
 body > .day-shell.world-shell [data-world-view="assistant"] > form#worldAskForm > button[type="submit"] > svg{
-  opacity:0!important;
+  display:block!important;
+  position:relative!important;
+  z-index:1!important;
+  width:21px!important;
+  height:21px!important;
+  opacity:1!important;
+  visibility:visible!important;
+  fill:none!important;
+  stroke:#173b56!important;
+  stroke-width:1.95!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+  filter:drop-shadow(0 1px 0 rgba(255,255,255,.34))!important;
+}
+body > .day-shell.world-shell [data-world-view="assistant"] > form#worldAskForm > button[type="submit"] > svg > path{
+  opacity:1!important;
+  visibility:visible!important;
+  fill:none!important;
+  stroke:#173b56!important;
+  stroke-width:1.95!important;
 }
 body > .day-shell.world-shell [data-world-view="assistant"] > form#worldAskForm > button[type="submit"]:hover{
-  filter:brightness(1.12)!important;
-  box-shadow:0 3px 12px rgba(0,0,0,.32),0 0 14px rgba(125,204,255,.25)!important;
+  filter:brightness(1.08)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.9),0 4px 12px rgba(0,0,0,.32),0 0 17px rgba(132,208,255,.27)!important;
 }
 body > .day-shell.world-shell [data-world-view="assistant"] > form#worldAskForm > button[type="submit"]:active{
-  filter:brightness(.93)!important;
-  transform:scale(.96);
+  transform:scale(.96)!important;
+  filter:brightness(.95)!important;
+}
+body > .day-shell.world-shell [data-world-view="assistant"] > form#worldAskForm > button[type="submit"]:focus-visible{
+  outline:2px solid #f0fbff!important;
+  outline-offset:2px!important;
 }
 @media(prefers-reduced-motion:reduce){
-  body > .day-shell.world-shell [data-world-view="assistant"] > form#worldAskForm > button[type="submit"]{transform:none!important}
+  body > .day-shell.world-shell [data-world-view="assistant"] > form#worldAskForm > button[type="submit"]{
+    transition:none!important;
+  }
 }
