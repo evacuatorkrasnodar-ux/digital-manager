@@ -639,3 +639,75 @@
 }
 .care-shell .care-grid .calendar-day.selected{color:#fff}
 .care-shell .care-grid .calendar-day:focus-visible{outline:2px solid #d5efff;outline-offset:1px}
+
+/* v280 — bowed semicircle tab separators, matching the approved My Day v265 rail.
+   These are decorative curves, never straight borders or extra clickable elements.
+   The selected blue pill supplies its own rounded boundary. */
+.care-shell .day-tabs,
+.world-shell .world-tabs,
+.health-shell .health-tabs{
+  position:relative;
+  gap:0;
+  overflow:visible;
+}
+.care-shell .day-tab,
+.world-shell .world-tab,
+.health-shell .health-tabs>button{
+  position:relative;
+  box-sizing:border-box;
+  min-width:0;
+  overflow:visible;
+  z-index:1;
+}
+/* Keep the curved seams restrained and translucent, never white vertical rules. */
+.care-shell .day-tab:not(.active):not(:first-child)::before,
+.world-shell .world-tab:not(.active):not(:first-child)::before,
+.health-shell .health-tabs>button:not(.active):not(:first-child)::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  pointer-events:none;
+  top:-3px;
+  bottom:-3px;
+  left:-30px;
+  width:43px;
+  border:0;
+  border-right:1px solid rgba(162,209,250,.35);
+  border-radius:50%;
+  background:transparent;
+  box-shadow:2px 0 10px -9px rgba(89,174,247,.44);
+}
+/* Don't draw through the active glass button: it is already a curved lens. */
+.care-shell .day-tab.active + .day-tab::before,
+.world-shell .world-tab.active + .world-tab::before,
+.health-shell .health-tabs>button.active + button::before{
+  opacity:0;
+}
+.care-shell .day-tab.active,
+.world-shell .world-tab.active,
+.health-shell .health-tabs>button.active{
+  position:relative;
+  z-index:3;
+  isolation:isolate;
+  overflow:hidden;
+}
+/* Five-way My World tabs have less horizontal room: a smaller half-arc. */
+.world-shell .world-tab:not(.active):not(:first-child)::before{
+  width:32px;
+  left:-22px;
+  top:-2px;
+  bottom:-2px;
+  border-right-color:rgba(165,208,245,.33);
+}
+/* On narrow phones the curves stay between labels, not over the text. */
+@media(max-width:359px){
+  .care-shell .day-tab:not(.active):not(:first-child)::before,
+  .health-shell .health-tabs>button:not(.active):not(:first-child)::before{
+    width:35px;
+    left:-24px;
+  }
+  .world-shell .world-tab:not(.active):not(:first-child)::before{
+    width:25px;
+    left:-18px;
+  }
+}
