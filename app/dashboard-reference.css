@@ -806,3 +806,185 @@
 #homeScreen .recommendation-card :is(.recommendation-top,.advice-head,.advice-body,.advice-cta){
   z-index:2;
 }
+
+
+/* v302 — reference proportions measured from the approved 613 x 381 example.
+   v301 geometry / SVG shaped contours are correct. The only correction here
+   is MOBILE SCALE: shorten the vertical space ~20-30%, retain the exact
+   11:9 / 9:11 stepped widths and a readable, uncut content hierarchy.
+   Never force content outside its own curved silhouette. */
+@media (min-width:321px) and (max-width:539px){
+  #homeScreen .metric-grid{
+    --bv-ref-top:clamp(116px,29.8vw,128px);
+    --bv-ref-order:clamp(105px,28vw,119px);
+    --bv-ref-profit:clamp(150px,40vw,172px);
+    --bv-ref-advice:clamp(168px,43vw,185px);
+    grid-template-columns:repeat(20,minmax(0,1fr));
+    grid-template-rows:var(--bv-ref-top) var(--bv-ref-advice);
+    column-gap:0!important;
+    row-gap:8px;
+  }
+  #homeScreen .metric-grid .clients-card{
+    height:var(--bv-ref-top);
+    min-height:var(--bv-ref-top);
+    padding:6px 8px 5px!important;
+    margin-right:4px!important;
+  }
+  #homeScreen .metric-grid .orders-card{
+    height:var(--bv-ref-order);
+    min-height:var(--bv-ref-order);
+    padding:7px 8px 6px!important;
+    margin-left:4px!important;
+  }
+  #homeScreen .metric-grid .profit-card{
+    height:var(--bv-ref-profit);
+    min-height:var(--bv-ref-profit);
+    padding:8px 9px!important;
+    margin-right:4px!important;
+  }
+  #homeScreen .metric-grid .recommendation-card{
+    height:var(--bv-ref-advice);
+    min-height:var(--bv-ref-advice);
+    top:-10px;
+    padding:8px 9px 7px!important;
+    margin-left:4px!important;
+  }
+  #homeScreen .metric-grid .tile-heading{
+    min-height:22px;
+    gap:5px;
+    font-size:clamp(10px,2.75vw,12px);
+    line-height:1.14;
+  }
+  #homeScreen .metric-grid .tile-symbol{
+    width:18px;height:18px;
+  }
+  #homeScreen .metric-grid .tile-chevron{
+    width:25px;height:25px;min-width:25px;
+  }
+  #homeScreen .metric-grid .tile-chevron .ico{
+    width:14px;height:14px;
+  }
+  /* Tight top-left content, but preserve the 3 genuine legend rows. */
+  #homeScreen .clients-card .clients-inner{
+    gap:5px;
+    margin-top:3px;
+  }
+  #homeScreen .clients-card .donut{
+    width:clamp(57px,16vw,68px);
+    height:clamp(57px,16vw,68px);
+  }
+  #homeScreen .clients-card .donut::before{inset:6px}
+  #homeScreen .clients-card .donut-people{
+    width:18px;height:15px;
+  }
+  #homeScreen .clients-card .donut-core strong{
+    font-size:clamp(17px,4.7vw,20px);
+  }
+  #homeScreen .clients-card .donut-core small{
+    font-size:10px;
+    line-height:1.14;
+  }
+  #homeScreen .clients-card .donut-legend{
+    gap:6px;
+  }
+  #homeScreen .clients-card .donut-legend>div{
+    gap:3px;
+    font-size:clamp(8px,2.25vw,9px);
+    white-space:nowrap;
+  }
+  #homeScreen .clients-card .donut-legend b{
+    font-size:clamp(9px,2.4vw,10px);
+  }
+  #homeScreen .clients-card .donut-legend .legend-dot{
+    width:7px;height:7px;
+  }
+  /* Order columns must end INSIDE their panel, not below the clipped edge. */
+  #homeScreen .orders-card .orders-inner{
+    margin-top:10px;
+    min-height:48px;
+  }
+  #homeScreen .orders-card .tile-number{
+    font-size:clamp(24px,6.85vw,31px);
+    line-height:1;
+  }
+  #homeScreen .orders-card .delta.small{
+    font-size:11px;
+    margin-top:6px;
+  }
+  #homeScreen .orders-card .bargraph{
+    right:0;
+    bottom:-3px;
+    width:43%;
+    max-width:53px;
+    height:50px;
+    gap:2px;
+    opacity:.97;
+  }
+  #homeScreen .orders-card .bargraph i{min-width:2px}
+  /* Profit's line occupies the bottom half as in the reference. */
+  #homeScreen .profit-card .profit-number{
+    font-size:clamp(16px,4.45vw,20px);
+    margin-top:6px;
+    white-space:nowrap;
+    letter-spacing:-.035em;
+  }
+  #homeScreen .profit-card .delta.small{
+    margin-top:5px;
+    font-size:clamp(10px,2.58vw,12px);
+  }
+  #homeScreen .profit-card .profit-chart{
+    height:clamp(54px,17vw,68px);
+    bottom:3px;
+  }
+  /* Reference's raised gold card is compact, with the full text visible. */
+  #homeScreen .recommendation-card .recommendation-top{
+    gap:5px;
+    font-size:clamp(9px,2.38vw,10.6px);
+    min-height:23px;
+    line-height:1.1;
+  }
+  #homeScreen .recommendation-card .spark-icon{
+    width:23px;height:23px;
+  }
+  #homeScreen .recommendation-card .advice-head{
+    margin:5px 0 4px;
+    font-size:clamp(10.5px,2.7vw,12.2px);
+    line-height:1.20;
+    letter-spacing:-.02em;
+  }
+  #homeScreen .recommendation-card .advice-body{
+    font-size:clamp(8.7px,2.28vw,10.2px);
+    line-height:1.26;
+    margin:0 0 4px;
+  }
+  #homeScreen .recommendation-card .advice-cta{
+    min-height:28px;
+    padding:4px 8px;
+    gap:5px;
+    font-size:clamp(9.5px,2.45vw,10.8px);
+  }
+  #homeScreen .recommendation-card .advice-cta .ico{
+    width:13px;height:13px;
+  }
+}
+/* iPhone X (375px) and other narrow widths retain readable chart typography.
+   At extreme width the original stacked fallback under 321px stays intact. */
+@media (min-width:321px) and (max-width:360px){
+  #homeScreen .metric-grid{
+    --bv-ref-top:118px;
+    --bv-ref-order:108px;
+    --bv-ref-profit:150px;
+    --bv-ref-advice:177px;
+  }
+  #homeScreen .metric-grid .clients-card{padding:6px 5px!important;margin-right:3px!important}
+  #homeScreen .metric-grid .orders-card{padding:7px 6px!important;margin-left:3px!important}
+  #homeScreen .metric-grid .profit-card{padding:7px 6px!important;margin-right:3px!important}
+  #homeScreen .metric-grid .recommendation-card{padding:7px 7px 6px!important;margin-left:3px!important}
+  #homeScreen .clients-card .donut{width:54px;height:54px}
+  #homeScreen .clients-card .donut::before{inset:5px}
+  #homeScreen .clients-card .donut-core strong{font-size:17px}
+  #homeScreen .clients-card .donut-legend>div{font-size:7.8px}
+  #homeScreen .clients-card .donut-legend b{font-size:8.5px}
+  #homeScreen .profit-card .profit-number{font-size:clamp(15px,4.55vw,17px)}
+  #homeScreen .recommendation-card .recommendation-top{font-size:9px}
+}
