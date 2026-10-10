@@ -11,6 +11,18 @@
  const fmtSize=n=>n<1024*1024?Math.round(n/1024)+' КБ':(n/1024/1024).toFixed(1)+' МБ';
  let db=null,enabled=false,meds=[],logs=[],sleep=[],docs=[],timer,active='meds';
  const notified=new Set();
+  function dmTrashGlyph(){
+    const ns='http://www.w3.org/2000/svg';
+    const svg=document.createElementNS(ns,'svg');
+    svg.setAttribute('viewBox','0 0 24 24');
+    svg.setAttribute('aria-hidden','true');
+    for(const d of ['M4 7h16','M9 7V4h6v3','M6 7l1 13h10l1-13','M10 11v6','M14 11v6']){
+      const path=document.createElementNS(ns,'path');
+      path.setAttribute('d',d);
+      svg.append(path);
+    }
+    return svg;
+  }
  function toast(msg){const t=$('healthToast');t.textContent=msg;t.hidden=false;clearTimeout(timer);timer=setTimeout(()=>t.hidden=true,4200);}
  function error(e){console.error('Health private store:',e);toast('Не удалось сохранить запись. Проверь настройки браузера.');}
  function openDB(){
@@ -59,7 +71,7 @@
  function controls(row,edit,remove){
   const a=node('div','health-actions');
   const b=node('button','','✎');b.type='button';b.setAttribute('aria-label','Изменить');b.addEventListener('click',edit);
-  const c=node('button','','×');c.type='button';c.setAttribute('aria-label','Удалить');c.addEventListener('click',remove);
+  const c=node('button','dm-delete-action');c.type='button';c.append(dmTrashGlyph());c.setAttribute('aria-label','Удалить');c.addEventListener('click',remove);
   a.append(b,c);row.append(a);
  }
  function medicationTimes(src){return src.split(/[,\s;]+/).map(x=>x.trim()).filter(Boolean);}
@@ -129,7 +141,7 @@
    const {row,body}=card('▤',doc.name,'Сохранено на устройстве',fmtSize(doc.size)+' · '+nice(doc.date));
    const open=node('button','health-doc-link','↓ Скачать документ');open.type='button';
    open.addEventListener('click',()=>downloadDoc(doc));body.append(open);
-   const del=node('div','health-actions'),b=node('button','','×');b.type='button';
+   const del=node('div','health-actions'),b=node('button','dm-delete-action');b.type='button';b.append(dmTrashGlyph());
    b.setAttribute('aria-label','Удалить документ '+doc.name);b.addEventListener('click',()=>eraseOne('docs',doc));
    del.append(b);row.append(del);host.append(row);
   }
