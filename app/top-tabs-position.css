@@ -1,4 +1,4 @@
-/* v11 — one mobile geometry for Calendar, Notebook and Health.
+/* v12 — one mobile geometry for Calendar, Notebook and Health.
    Keep the approved rail appearance; eliminate differences in width, header,
    greeting insertion and view-dependent top margins. */
 @media (max-width:700px) and (orientation:portrait){
@@ -222,4 +222,24 @@
     line-height:1.04!important;
     letter-spacing:-.045em!important;
   }
+}
+
+/* Cycle was missing the section heading below the main personal rail.
+   Mirror the Health heading, without changing the upper dock geometry. */
+body > .day-shell.care-shell > .care-section-intro{
+  box-sizing:border-box;
+  padding:13px 3px 9px;
+}
+body > .day-shell.care-shell > .care-section-intro h2{
+  margin:0 0 6px;
+  font-size:clamp(21px,5.8vw,25px);
+  font-weight:450;
+  line-height:1.18;
+  color:#f7fbff;
+}
+body > .day-shell.care-shell > .care-section-intro > p:last-child{
+  margin:0;
+  font-size:11px;
+  line-height:1.38;
+  color:#c4def3;
 }
