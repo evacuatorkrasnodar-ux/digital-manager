@@ -1,0 +1,199 @@
+/* My World / Calendar alignment v1.
+   Calendar is the geometry reference. Only the World page is affected.
+   Header and tab rail remain stationary; World content scrolls underneath. */
+
+/* Match the calendar's centered 430px column and fixed viewport.
+   The existing shared top-tabs-position.css owns the top padding. */
+html:has(body > .world-shell),
+html:has(body > .world-shell) body{
+  box-sizing:border-box!important;
+  height:100%!important;
+  overflow:hidden!important;
+  overscroll-behavior:none!important;
+}
+body > .day-shell.world-shell.world-shell{
+  box-sizing:border-box!important;
+  display:flex!important;
+  flex-direction:column!important;
+  width:min(100%,430px)!important;
+  max-width:430px!important;
+  height:100dvh!important;
+  min-height:0!important;
+  max-height:100dvh!important;
+  margin:0 auto!important;
+  padding-bottom:calc(77px + env(safe-area-inset-bottom,0px))!important;
+  overflow:hidden!important;
+}
+body > .day-shell.world-shell > .day-header{
+  box-sizing:border-box!important;
+  flex:0 0 52px!important;
+  height:52px!important;
+  min-height:52px!important;
+  max-height:52px!important;
+  gap:10px!important;
+  margin:0!important;
+}
+body > .day-shell.world-shell > .day-header .day-back{
+  box-sizing:border-box!important;
+  flex:0 0 45px!important;
+  width:45px!important;
+  height:52px!important;
+  background-size:99% auto!important;
+}
+body > .day-shell.world-shell > .day-header .day-heading h1{
+  font-size:clamp(24px,6.8vw,30px)!important;
+  line-height:1!important;
+}
+body > .day-shell.world-shell > .day-header .day-heading>span{
+  font-size:clamp(9px,2.6vw,11px)!important;
+}
+body > .day-shell.world-shell > .day-header .day-heading{
+  padding-right:0!important;
+}
+
+/* Same reserved greeting area as Calendar, so the tabs never shift on entry. */
+body > .day-shell.world-shell > .world-intro{
+  box-sizing:border-box!important;
+  flex:0 0 110px!important;
+  height:110px!important;
+  min-height:110px!important;
+  max-height:110px!important;
+  margin:0!important;
+  padding:8px 3px 6px!important;
+  overflow:hidden!important;
+  view-transition-name:personal-day-greeting;
+}
+body > .day-shell.world-shell > .world-intro .day-eyebrow{
+  margin:0 0 4px!important;
+  font-size:9px!important;
+  line-height:1.15!important;
+}
+body > .day-shell.world-shell > .world-intro h2{
+  margin:0 0 5px!important;
+  font-size:clamp(20px,5.4vw,23px)!important;
+  line-height:1.08!important;
+  font-weight:435!important;
+  letter-spacing:-.035em!important;
+}
+body > .day-shell.world-shell > .world-intro > p:not(.day-eyebrow,.world-intro-compact){
+  margin:0!important;
+  font-size:11px!important;
+  line-height:1.3!important;
+}
+body > .day-shell.world-shell > .world-intro .world-intro-compact{
+  display:none!important;
+}
+
+/* Same 42px rail / 34px buttons as Calendar. Five World destinations
+   necessarily have narrower labels, but identical height, glass and radius. */
+body > .day-shell.world-shell > nav.world-tabs{
+  box-sizing:border-box!important;
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  align-items:center!important;
+  flex:0 0 42px!important;
+  width:100%!important;
+  height:42px!important;
+  min-height:42px!important;
+  max-height:42px!important;
+  padding:3px!important;
+  margin:5px 0 9px!important;
+  gap:0!important;
+  border:1px solid rgba(106,139,161,.52)!important;
+  border-radius:22px!important;
+  background:linear-gradient(153deg,#121c27,#07101a 55%,#02080f)!important;
+  box-shadow:inset 0 1px rgba(247,251,255,.12),0 5px 12px rgba(0,0,0,.28)!important;
+  transform:none!important;
+}
+body > .day-shell.world-shell > nav.world-tabs > .world-tab{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  height:34px!important;
+  min-height:34px!important;
+  max-height:34px!important;
+  padding:0 2px!important;
+  margin:0!important;
+  border-radius:19px!important;
+  font-size:clamp(9px,2.4vw,11px)!important;
+  line-height:1.1!important;
+  transform:none!important;
+}
+body > .day-shell.world-shell > main{
+  box-sizing:border-box!important;
+  display:block!important;
+  flex:1 1 auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  overscroll-behavior-y:contain!important;
+  scrollbar-width:none;
+  padding:0!important;
+  margin:0!important;
+}
+body > .day-shell.world-shell > main::-webkit-scrollbar{display:none}
+
+/* Never let an obsolete right-hand back control return alongside the
+   existing logo/back button when an old cached script is still running. */
+body > .day-shell.world-shell > .day-header > .dm-back-circle{
+  display:none!important;
+}
+
+@media(max-width:700px) and (orientation:portrait){
+  body > .day-shell.world-shell.world-shell{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+  }
+  body > .day-shell.world-shell > .day-header{
+    flex:0 0 42px!important;
+    height:42px!important;
+    min-height:42px!important;
+    max-height:42px!important;
+    gap:7px!important;
+  }
+  body > .day-shell.world-shell > .day-header .day-back{
+    flex:0 0 39px!important;
+    width:39px!important;
+    height:42px!important;
+    background-size:98% auto!important;
+  }
+  body > .day-shell.world-shell > .day-header .day-heading h1{
+    font-size:clamp(19px,5.8vw,23px)!important;
+  }
+  body > .day-shell.world-shell > .day-header .day-heading>span{
+    font-size:9px!important;
+  }
+  body > .day-shell.world-shell > .world-intro{
+    flex:0 0 26px!important;
+    height:26px!important;
+    min-height:26px!important;
+    max-height:26px!important;
+    padding:3px 2px 4px!important;
+  }
+  body > .day-shell.world-shell > .world-intro > :not(.world-intro-compact){
+    display:none!important;
+  }
+  body > .day-shell.world-shell > .world-intro .world-intro-compact{
+    display:block!important;
+    margin:0!important;
+    color:#f7fbff!important;
+    font-size:clamp(12px,3.65vw,15px)!important;
+    font-weight:430!important;
+    line-height:1.15!important;
+    white-space:nowrap!important;
+  }
+  body > .day-shell.world-shell > nav.world-tabs{
+    margin:3px 0 6px!important;
+  }
+}
+@media(max-width:700px) and (orientation:portrait) and (max-height:715px){
+  body > .day-shell.world-shell > .world-intro{display:none!important}
+}
+@media(prefers-reduced-motion:no-preference){
+  ::view-transition-old(personal-day-greeting),
+  ::view-transition-new(personal-day-greeting){
+    animation:none!important;
+  }
+}
