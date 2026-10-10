@@ -1,7 +1,7 @@
 /* Health diary — explicit local opt-in, no server, no medical prescribing, no system push. */
 (() => {
  'use strict';
- const DB='digital-manager-private-health-v1',STORES=['settings','meds','logs','sleep','docs'];
+ const DB='digital-manager-private-health-v1',STORES=['settings','meds','logs','sleep','docs','metrics'];
  const $=id=>document.getElementById(id),pad=n=>String(n).padStart(2,'0');
  const key=d=>[d.getFullYear(),pad(d.getMonth()+1),pad(d.getDate())].join('-');
  const today=()=>key(new Date());
@@ -9,7 +9,7 @@
  const node=(tag,cls,txt)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(txt!==undefined)el.textContent=String(txt);return el;};
  const nice=date=>dateOk(date)?new Intl.DateTimeFormat('ru-RU',{day:'numeric',month:'short'}).format(new Date(date+'T12:00:00')):'—';
  const fmtSize=n=>n<1024*1024?Math.round(n/1024)+' КБ':(n/1024/1024).toFixed(1)+' МБ';
- let db=null,enabled=false,meds=[],logs=[],sleep=[],docs=[],timer,active='meds';
+ let db=null,enabled=false,meds=[],logs=[],sleep=[],docs=[],metrics=[],timer,active='metrics';
  const notified=new Set();
   function dmTrashGlyph(){
     const ns='http://www.w3.org/2000/svg';
@@ -28,7 +28,7 @@
  function openDB(){
   return new Promise((resolve,reject)=>{
    if(!('indexedDB' in window)){reject(new Error('IndexedDB unavailable'));return;}
-   const r=indexedDB.open(DB,1);
+   const r=indexedDB.open(DB,2);
    r.onupgradeneeded=()=>{for(const name of STORES)if(!r.result.objectStoreNames.contains(name))r.result.createObjectStore(name,{keyPath:'id'});};
    r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error||new Error('DB unavailable'));
    r.onblocked=()=>reject(new Error('Close other tabs'));
@@ -47,10 +47,11 @@
  async function reload(){
   const [settings,...lists]=await Promise.all([tx('settings','readonly',s=>s.get('consent')),...STORES.slice(1).map(n=>tx(n,'readonly',s=>s.getAll()))]);
   enabled=settings?.enabled===true;
-  [meds,logs,sleep,docs]=lists;
+  [meds,logs,sleep,docs,metrics]=lists;
   meds.sort((a,b)=>(a.name||'').localeCompare(b.name||'','ru'));
   sleep.sort((a,b)=>b.date.localeCompare(a.date));
   docs.sort((a,b)=>b.updatedAt-a.updatedAt);
+  metrics.sort((a,b)=>b.date.localeCompare(a.date)||String(b.time||'').localeCompare(String(a.time||''))||Number(b.updatedAt||0)-Number(a.updatedAt||0));
   render();
  }
  function setView(next){
@@ -82,8 +83,172 @@
  function render(){
   $('healthConsentPanel').hidden=enabled;$('healthMain').hidden=!enabled;
   if(!enabled)return;
-  renderMeds();renderSleep();renderDocs();
+  renderMetrics();renderMeds();renderSleep();renderDocs();
  }
+
+ // Metrics are opt-in and local, stored separately from medications and cycle data.
+ // Pressure and pulse may have multiple readings per day; manual steps represent
+ // one total per day. Imported steps must already be daily aggregated totals.
+ const metricNames={pressure:'Давление',pulse:'Пульс',steps:'Шаги'};
+ const metricOrigin=entry=>entry.source==='apple-health'?'Apple Health':entry.source==='health-connect'?'Health Connect':'Ручная запись';
+ const timeNow=()=>{const d=new Date();return pad(d.getHours())+':'+pad(d.getMinutes());};
+ const niceNum=n=>new Intl.NumberFormat('ru-RU').format(n);
+ function metricValue(entry){
+  if(entry.type==='pressure')return entry.systolic+'/'+entry.diastolic+' мм рт. ст.';
+  if(entry.type==='pulse')return entry.bpm+' уд/мин';
+  return niceNum(entry.steps)+' шагов';
+ }
+ function latestFor(type){
+  // Prefer the manually entered step count if multiple sources report one day.
+  const rows=metrics.filter(m=>m.type===type);
+  if(type==='steps'&&rows.length){
+   const same=rows.filter(m=>m.date===rows[0].date);
+   return same.find(m=>m.source==='manual')||same[0];
+  }
+  return rows[0]||null;
+ }
+ function renderMetrics(){
+  for(const [kind,valueId,metaId] of [
+   ['pressure','healthPressureValue','healthPressureMeta'],
+   ['pulse','healthPulseValue','healthPulseMeta'],
+   ['steps','healthStepsValue','healthStepsMeta']
+  ]){
+   const entry=latestFor(kind);
+   $(valueId).textContent=entry?(kind==='pressure'?entry.systolic+'/'+entry.diastolic:kind==='pulse'?String(entry.bpm):niceNum(entry.steps)):'—';
+   $(metaId).textContent=entry?nice(entry.date)+(kind==='steps'?'':' · '+entry.time)+' · '+metricOrigin(entry):'Нет записей';
+  }
+  const chart=$('healthStepsChart');chart.replaceChildren();
+  const now=new Date();
+  let description=[];
+  const todayDate=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  const max=Math.max(1,...metrics.filter(m=>m.type==='steps'&&m.date<=today()).map(m=>Number(m.steps)||0));
+  for(let offset=6;offset>=0;offset--){
+   const d=new Date(todayDate);d.setDate(todayDate.getDate()-offset);
+   const date=key(d),samples=metrics.filter(m=>m.type==='steps'&&m.date===date);
+   const row=samples.find(m=>m.source==='manual')||samples[0];
+   const day=node('div','health-chart-day');
+   day.dataset.empty=String(!row);
+   const track=node('div','health-chart-track'),bar=node('span','health-chart-bar');
+   bar.style.height=row?Math.max(3,Math.round((row.steps/max)*100))+'%':'0%';
+   track.append(bar);
+   const label=node('small','',new Intl.DateTimeFormat('ru-RU',{weekday:'short'}).format(d));
+   day.append(track,label);
+   day.title=nice(date)+': '+(row?niceNum(row.steps)+' шагов':'нет данных');
+   chart.append(day);
+   description.push((offset===0?'Сегодня':nice(date))+': '+(row?row.steps+' шагов':'нет данных'));
+  }
+  chart.setAttribute('aria-label','Шаги за 7 дней. '+description.join('; '));
+  const container=$('healthMetricsHistory');container.replaceChildren();
+  const filter=$('healthMetricFilter').value;
+  const rows=metrics.filter(m=>filter==='all'||filter===m.type).slice(0,60);
+  if(!rows.length){blank(container,'Измерений пока нет. Нажми «+ Запись», чтобы сохранить своё первое значение.');return;}
+  for(const entry of rows){
+   const {row}=card(entry.type==='pressure'?'♡':entry.type==='pulse'?'◡':'↟',
+    metricNames[entry.type]+' · '+metricValue(entry),
+    entry.note||'',nice(entry.date)+(entry.type==='steps'?'':' · '+entry.time)+' · '+metricOrigin(entry));
+   if(entry.source==='manual')controls(row,()=>openMetric(entry),()=>eraseOne('metrics',entry));
+   else{
+    const actions=node('div','health-actions');
+    const del=node('button','dm-delete-action');del.type='button';
+    del.setAttribute('aria-label','Удалить импортированное измерение');
+    del.append(dmTrashGlyph());del.addEventListener('click',()=>eraseOne('metrics',entry));
+    actions.append(del);row.append(actions);
+   }
+   container.append(row);
+  }
+  if(metrics.length>60)container.append(node('p','health-hint','Показаны последние 60 записей. Вся история входит в резервную копию.'));
+ }
+ function metricFields(){
+  const kind=$('healthMetricType').value;
+  document.querySelectorAll('[data-metric-fields]').forEach(e=>{
+   const active=e.dataset.metricFields===kind;
+   e.hidden=!active;
+   e.querySelectorAll('input').forEach(input=>{input.disabled=!active;input.required=active;});
+  });
+ }
+ function openMetric(entry){
+  const editing=Boolean(entry);
+  $('healthMetricForm').reset();
+  $('healthMetricTitle').textContent=editing?'Изменить измерение':'Новое измерение';
+  $('healthMetricId').value=entry?.id||'';
+  $('healthMetricType').value=entry?.type||'pressure';
+  $('healthMetricDate').value=entry?.date||today();
+  $('healthMetricDate').max=today();
+  $('healthMetricTime').value=entry?.time||timeNow();
+  $('healthMetricSys').value=entry?.systolic??'';
+  $('healthMetricDia').value=entry?.diastolic??'';
+  $('healthMetricBpm').value=entry?.bpm??'';
+  $('healthMetricSteps').value=entry?.steps??'';
+  $('healthMetricNote').value=entry?.note||'';
+  metricFields();
+  $('healthMetricDialog').showModal();
+ }
+ function validMetricNumber(value,min,max){
+  const n=Number(value);return value.trim()!==''&&Number.isInteger(n)&&n>=min&&n<=max?n:null;
+ }
+ async function saveMetric(e){
+  e.preventDefault();
+  const type=$('healthMetricType').value,date=$('healthMetricDate').value,time=$('healthMetricTime').value;
+  if(!metricNames[type]||!dateOk(date)||date>today()||!/^([01]\\d|2[0-3]):[0-5]\\d$/.test(time)){
+   toast('Проверь дату, время и тип измерения');return;
+  }
+  if(date===today()&&time>timeNow()){toast('Время измерения не может быть в будущем');return;}
+  const previousId=$('healthMetricId').value;
+  const prev=metrics.find(m=>m.id===previousId&&m.source==='manual');
+  if(previousId&&!prev){toast('Импортированные данные нельзя менять вручную');return;}
+  const id=type==='steps'?'manual:steps:'+date:(prev?.type===type?prev.id:uid());
+  const row={id,type,date,time,source:'manual',note:$('healthMetricNote').value.trim().slice(0,500),
+   updatedAt:Date.now(),createdAt:prev?.createdAt||Date.now()};
+  if(type==='pressure'){
+   row.systolic=validMetricNumber($('healthMetricSys').value,50,300);
+   row.diastolic=validMetricNumber($('healthMetricDia').value,30,200);
+   if(row.systolic===null||row.diastolic===null||row.systolic<=row.diastolic){toast('Проверь верхнее и нижнее давление');return;}
+  }else if(type==='pulse'){
+   row.bpm=validMetricNumber($('healthMetricBpm').value,25,250);
+   if(row.bpm===null){toast('Проверь пульс');return;}
+  }else{
+   row.steps=validMetricNumber($('healthMetricSteps').value,0,200000);
+   if(row.steps===null){toast('Проверь количество шагов');return;}
+  }
+  try{
+   if(prev&&previousId!==id){
+    await new Promise((resolve,reject)=>{
+     const transaction=db.transaction('metrics','readwrite'),store=transaction.objectStore('metrics');
+     store.delete(previousId);store.put(row);
+     transaction.oncomplete=resolve;transaction.onerror=()=>reject(transaction.error||new Error('Update failed'));
+     transaction.onabort=()=>reject(transaction.error||new Error('Update canceled'));
+    });
+   }else await tx('metrics','readwrite',store=>store.put(row));
+   $('healthMetricDialog').close();
+   await reload();toast('Измерение сохранено на этом устройстве');
+  }catch(err){error(err);}
+ }
+ function updateProviders(){
+  const bridge=window.DMHealthBridge;
+  const list=bridge?.providers?.()||[];
+  const apple=list.find(p=>p.name==='apple-health');
+  const android=list.find(p=>p.name==='health-connect');
+  $('healthAppleStatus').textContent=apple?.available?'Доступен нативный адаптер':'Требуется приложение iOS';
+  $('healthAndroidStatus').textContent=android?.available?'Доступен нативный адаптер':'Требуется приложение Android';
+  const ready=list.find(p=>p.available);
+  $('healthSync').hidden=!ready;
+  if(ready)$('healthSync').dataset.provider=ready.name;
+ }
+ async function importOnUserAction(){
+  if(!enabled)return;
+  const bridge=window.DMHealthBridge,provider=$('healthSync').dataset.provider;
+  if(!bridge||!provider){toast('Нужна нативная интеграция. В веб-версии доступ к часам отсутствует.');return;}
+  const btn=$('healthSync');btn.disabled=true;
+  const from=new Date();from.setDate(from.getDate()-29);
+  try{
+   const rows=await bridge.readOnUserAction(provider,key(from),today());
+   // Validation and permission checking are performed by the bridge.
+   await tx('metrics','readwrite',store=>{for(const row of rows)store.put(row);return null;});
+   await reload();toast(rows.length?'Получено записей: '+rows.length:'Новых измерений нет');
+  }catch(e){console.warn('Health device import:',e);toast('Импорт не выполнен: '+(e?.message||'ошибка разрешений'));}
+  finally{btn.disabled=false;updateProviders();}
+ }
+
  function renderMeds(){
   const list=$('healthMeds');list.replaceChildren();
   if(!meds.length)blank(list,'Препаратов пока нет. Добавь назначенный график — и будем следить за отметками, без самолечения.');
@@ -215,7 +380,7 @@
  }
  function exportRecords(){
   if(!db||!enabled)return;
-  const out={format:'digital-manager-health-journal',version:1,exportedAt:new Date().toISOString(),meds,logs,sleep,documentsExcluded:true};
+  const out={format:'digital-manager-health-journal',version:2,exportedAt:new Date().toISOString(),meds,logs,sleep,metrics,documentsExcluded:true,metricsNote:'Ручные измерения или явно разрешённый локальный импорт из нативного приложения'};
   const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});
   const url=URL.createObjectURL(blob),a=node('a');a.href=url;a.download='zhurnal-zdorovya-'+today()+'.json';
   document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),5000);
@@ -255,6 +420,12 @@
    if(!$('healthConsent').checked||!db)return;
    try{await tx('settings','readwrite',s=>s.put({id:'consent',enabled:true,createdAt:Date.now()}));await reload();toast('Личный журнал включён');}catch(e){error(e);}
   });
+  $('healthAddMetric').addEventListener('click',()=>openMetric());
+  $('healthMetricType').addEventListener('change',metricFields);
+  $('healthMetricFilter').addEventListener('change',renderMetrics);
+  $('healthMetricForm').addEventListener('submit',saveMetric);
+  $('healthSync').addEventListener('click',importOnUserAction);
+  updateProviders();
   $('healthAddMed').addEventListener('click',()=>openMed());
   $('healthAddSleep').addEventListener('click',()=>openSleep());
   $('healthChooseFile').addEventListener('click',()=>$('healthFileInput').click());
@@ -264,7 +435,7 @@
   $('healthExport').addEventListener('click',exportRecords);
   $('healthDeleteAll').addEventListener('click',eraseAll);
   document.querySelectorAll('[data-health-close]').forEach(btn=>btn.addEventListener('click',()=>$(btn.dataset.healthClose).close()));
-  for(const x of ['healthMedDialog','healthSleepDialog'])$(x).addEventListener('click',e=>{if(e.target===$(x))$(x).close();});
+  for(const x of ['healthMetricDialog','healthMedDialog','healthSleepDialog'])$(x).addEventListener('click',e=>{if(e.target===$(x))$(x).close();});
   openDB().then(async result=>{db=result;await reload();reminderCheck();}).catch(e=>{
    console.error('Health IndexedDB:',e);$('healthConsentPanel').hidden=false;$('healthMain').hidden=true;
    $('healthConsent').disabled=true;$('healthEnable').disabled=true;
