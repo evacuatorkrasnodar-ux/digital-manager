@@ -424,7 +424,7 @@
    Gold recommendation rises into the concave lower-right client contour. */
 #homeScreen .metric-grid{
   --bv-client-h:clamp(108px,29vw,126px);
-  --bv-order-h:calc(var(--bv-client-h) * 0.778);
+  --bv-order-h:calc(var(--bv-client-h) * 0.85);
   --bv-profit-h:clamp(126px,34vw,146px);
   --bv-gold-h:clamp(152px,41vw,177px);
   display:grid;
@@ -737,7 +737,7 @@
     use their actual card dimensions, not the browser's full window width. */
  #homeScreen .metric-grid{
   --bv-client-h:128px;
-  --bv-order-h:calc(var(--bv-client-h) * 0.778);
+  --bv-order-h:calc(var(--bv-client-h) * 0.85);
   --bv-profit-h:153px;
   --bv-gold-h:180px;
  }
@@ -756,7 +756,7 @@
 @media (min-width:360px) and (max-width:539px){
   #homeScreen .metric-grid{
     --bv-client-h:clamp(106px,calc(26.15vw + 10px),121px);
-    --bv-order-h:calc(var(--bv-client-h) * 0.778);
+    --bv-order-h:calc(var(--bv-client-h) * 0.85);
     --bv-profit-h:clamp(108px,29.35vw,126px);
     --bv-gold-h:clamp(133px,36vw,155px);
     width:calc(100% - 8px);
@@ -881,7 +881,7 @@
      and keep profit/CTA from disappearing beneath the silhouette. */
   #homeScreen .metric-grid{
     --bv-client-h:110px;
-    --bv-order-h:calc(var(--bv-client-h) * 0.778);
+    --bv-order-h:calc(var(--bv-client-h) * 0.85);
     --bv-profit-h:111px;
     --bv-gold-h:132px;
   }
