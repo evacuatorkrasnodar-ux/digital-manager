@@ -228,8 +228,8 @@
   const list=bridge?.providers?.()||[];
   const apple=list.find(p=>p.name==='apple-health');
   const android=list.find(p=>p.name==='health-connect');
-  $('healthAppleStatus').textContent=apple?.available?'Доступен нативный адаптер':'Требуется приложение iOS';
-  $('healthAndroidStatus').textContent=android?.available?'Доступен нативный адаптер':'Требуется приложение Android';
+  $('healthAppleStatus').textContent=apple?.available?'Модуль подключения доступен':'Синхронизация не подключена';
+  $('healthAndroidStatus').textContent=android?.available?'Модуль подключения доступен':'Синхронизация не подключена';
   const ready=list.find(p=>p.available);
   $('healthSync').hidden=!ready;
   if(ready)$('healthSync').dataset.provider=ready.name;
