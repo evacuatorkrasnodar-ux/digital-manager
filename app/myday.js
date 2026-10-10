@@ -78,11 +78,7 @@
     const dayShell=document.querySelector('.day-shell');
     dayShell?.classList.toggle('calendar-fixed',calendar);
     dayShell?.classList.toggle('notebook-active',view==='notes');
-    // A different, short joke for each tab; no geometry or storage changes.
-    const greeting=$('dayGreeting');
-    if(greeting)greeting.textContent=calendar
-      ? 'Планы строим смело. Главное — не назначить отдых на прошлую пятницу.'
-      : 'Гениальные мысли — сюда. В голове и так очередь.';
+    // Shared top greeting stays unchanged while the personal views switch.
     $('calendarView').hidden=!calendar;
     $('notesView').hidden=view!=='notes';
     document.querySelectorAll('[data-view]').forEach(btn=>{
