@@ -1,0 +1,52 @@
+/* Isolated medical content inside the persistent My Day shell.
+   Standalone Health/Cycle pages are unaffected. */
+html.personal-embedded{
+  height:100%;
+  min-height:0!important;
+  overflow-y:auto!important;
+  scrollbar-width:none;
+  overscroll-behavior:contain;
+  background:transparent!important;
+}
+html.personal-embedded::-webkit-scrollbar,
+html.personal-embedded body::-webkit-scrollbar{display:none}
+html.personal-embedded body{
+  margin:0!important;
+  height:auto!important;
+  min-height:100%!important;
+  min-width:0!important;
+  overflow:visible!important;
+  background:transparent!important;
+  overscroll-behavior:contain;
+}
+html.personal-embedded body > .day-shell.day-shell{
+  box-sizing:border-box!important;
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  min-height:100%!important;
+  height:auto!important;
+  margin:0!important;
+  padding:0 1px 22px!important;
+  overflow:visible!important;
+  background:transparent!important;
+  isolation:isolate;
+}
+html.personal-embedded body > .day-shell.day-shell::before,
+html.personal-embedded body > .day-shell.day-shell::after{
+  display:none!important;
+  content:none!important;
+}
+html.personal-embedded body > .day-shell.day-shell > .day-header,
+html.personal-embedded body > .day-shell.day-shell > .day-intro,
+html.personal-embedded body > .day-shell.day-shell > nav.day-tabs,
+html.personal-embedded body > .bottom-nav{
+  display:none!important;
+}
+html.personal-embedded body > .day-shell.day-shell > .health-head,
+html.personal-embedded body > .day-shell.day-shell > .care-section-intro{
+  padding-top:5px!important;
+}
+html.personal-embedded body > .day-shell.day-shell > .health-tabs{
+  margin-top:0!important;
+}
