@@ -191,3 +191,60 @@
 @media(min-width:480px){body{background:#000}.app-shell{border-left:1px solid #7b8ea24d;border-right:1px solid #7b8ea24d}.hero-intro{min-height:153px}.hero{min-height:275px}}
 @media(max-width:350px){:root{--brand-mark-size:34px}.hero{padding-left:8px;padding-right:8px}.dashboard{padding-left:7px;padding-right:7px}.welcome h1{font-size:22px}.welcome p{font-size:12px}.license-preview{flex-basis:49%;padding:9px 7px 7px 8px;height:151px}.license-brand-text strong{font-size:9px}.license-brand-text small{font-size:7.2px}.license-lines>span{font-size:8.5px;gap:4px}.license-lines{margin-left:17%;gap:9px}.donut{width:64px;height:64px}.donut-legend{gap:5px}.metric-grid{gap:6px}.shortcut-grid{gap:5px}.hero-intro{min-height:163px}.recommendation-card{padding:8px!important}.advice-body{font-size:8px}.profit-number{font-size:19px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* v275 — pinned home dashboard on portrait phones.
+   Remove the unused 79px shell tail, stop page scrolling,
+   and scroll dashboard cards only when their full content cannot fit.
+   The dock itself is unchanged and has a reserved non-overlapping space. */
+@media (max-width:700px) and (orientation:portrait) and (min-height:560px){
+  html.home-dashboard-locked,
+  html.home-dashboard-locked body{
+    height:100%;
+    overflow:hidden;
+    overscroll-behavior:none;
+  }
+  .app-shell.home-fixed{
+    box-sizing:border-box;
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    height:100dvh;
+    min-height:0;
+    max-height:100dvh;
+    padding:0;
+    overflow:hidden;
+    border:0;
+    background:#000;
+  }
+  .app-shell.home-fixed #homeScreen:not([hidden]){
+    box-sizing:border-box;
+    display:flex;
+    flex-direction:column;
+    flex:1 1 auto;
+    min-height:0;
+    max-height:100%;
+  }
+  .app-shell.home-fixed #homeScreen>.hero{
+    flex:0 0 auto;
+  }
+  .app-shell.home-fixed #homeScreen>.dashboard{
+    box-sizing:border-box;
+    flex:1 1 auto;
+    min-height:0;
+    width:100%;
+    overflow-x:hidden;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    margin:0 0 calc(76px + env(safe-area-inset-bottom,0px));
+    padding-top:0;
+    padding-bottom:6px;
+  }
+  .app-shell.home-fixed #homeScreen>.dashboard::-webkit-scrollbar{display:none}
+  .app-shell.home-fixed #homeScreen .demo-disclaimer{
+    margin-bottom:0;
+    padding-bottom:0;
+  }
+}
+/* Short screens and landscape retain natural page scrolling so no business card is trapped. */
