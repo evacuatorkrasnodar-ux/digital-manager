@@ -1,4 +1,4 @@
-/* Persistent personal views v6: medical sections live below the same top rail. */
+/* Persistent personal views v7: medical sections live below the same top rail. */
 body > .day-shell .world-entry[hidden]{display:none!important}
 body > .day-shell main > .personal-embedded-view[hidden]{display:none!important}
 body > .day-shell main > .personal-embedded-view{
@@ -327,7 +327,9 @@ body > .day-shell.day-shell > nav.personal-health-tabs > button.active + button:
   body > .day-shell.day-shell > nav.personal-health-tabs > button:nth-child(3),
   body > .day-shell.day-shell > nav.personal-health-tabs > button:nth-child(4),
   body > .day-shell.day-shell > nav.personal-health-tabs > button:nth-child(5){
-    flex:0 0 auto!important;
+    /* Distribute leftover width instead of leaving a blank strip after Cycle.
+       The max-content minimum still permits horizontal scrolling on tiny phones. */
+    flex:1 1 auto!important;
     width:auto!important;
     min-width:max-content!important;
     padding:5px 9px!important;
