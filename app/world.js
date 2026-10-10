@@ -11,6 +11,18 @@
   const tomorrow=()=>{const d=new Date();d.setDate(d.getDate()+1);return localDate(d);};
   const node=(tag,cls,txt)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(txt!==undefined)n.textContent=String(txt);return n;};
   let db=null,data={family:[],memory:[],finance:[]},calendarEvents=[],view='morning',timer;
+  function dmTrashGlyph(){
+    const ns='http://www.w3.org/2000/svg';
+    const svg=document.createElementNS(ns,'svg');
+    svg.setAttribute('viewBox','0 0 24 24');
+    svg.setAttribute('aria-hidden','true');
+    for(const d of ['M4 7h16','M9 7V4h6v3','M6 7l1 13h10l1-13','M10 11v6','M14 11v6']){
+      const path=document.createElementNS(ns,'path');
+      path.setAttribute('d',d);
+      svg.append(path);
+    }
+    return svg;
+  }
   function toast(t){const el=$('worldToast');el.textContent=t;el.hidden=false;clearTimeout(timer);timer=setTimeout(()=>el.hidden=true,3600);}
   function error(e){console.error('My World data:',e);toast('Не удалось сохранить запись. Проверь настройки браузера.');}
   function openDB(){
@@ -52,7 +64,7 @@
     if(edit||del){
       const actions=node('div','world-item-actions');
       if(edit){const b=node('button','','✎');b.type='button';b.setAttribute('aria-label','Изменить '+title);b.addEventListener('click',edit);actions.append(b);}
-      if(del){const b=node('button','','×');b.type='button';b.setAttribute('aria-label','Удалить '+title);b.addEventListener('click',del);actions.append(b);}
+      if(del){const b=node('button','dm-delete-action');b.type='button';b.append(dmTrashGlyph());b.setAttribute('aria-label','Удалить '+title);b.addEventListener('click',del);actions.append(b);}
       card.append(actions);
     }
     return card;
