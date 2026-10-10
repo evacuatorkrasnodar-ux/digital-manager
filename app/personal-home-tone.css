@@ -1,0 +1,48 @@
+/* v1 — Home Black Velvet is the color reference for personal screens.
+   Keep the original sunset photo intact: no blue color wash, hue shift,
+   saturation filter or extra pseudo-element overlay.
+   This stylesheet changes paint only, never sizes, layout or interactions. */
+body > .day-shell.day-shell{
+  background-color:#020203!important;
+}
+/* The single photographic layer on Calendar, My World, Health and Cycle.
+   A neutral black contrast veil replaces the former blue-black veil. */
+body > .day-shell.day-shell::before{
+  background:
+    linear-gradient(180deg,
+      rgba(0,0,0,.35) 0%,
+      rgba(0,0,0,.22) 105px,
+      rgba(0,0,0,.06) 230px,
+      rgba(0,0,0,.04) 475px,
+      transparent 720px),
+    url('./assets/myday-long-v263.avif') center top/100% auto no-repeat,
+    #020203!important;
+  opacity:1!important;
+  filter:none!important;
+  -webkit-filter:none!important;
+  mix-blend-mode:normal!important;
+}
+body > .day-shell.day-shell::after{
+  display:none!important;
+  content:none!important;
+}
+/* Home graphite material, without recoloring semantic/selected controls. */
+body > .day-shell.day-shell{
+  --personal-glass:linear-gradient(154deg,rgba(17,27,38,.97),rgba(7,13,21,.985) 49%,rgba(2,6,11,.99))!important;
+  --personal-shadow:inset 0 1px rgba(255,255,255,.095),0 7px 20px rgba(0,0,0,.35)!important;
+}
+/* Calendar and personal content panels share the Home graphite tint.
+   Do not override highlighted days, active tabs, send buttons or illustrations. */
+body > .day-shell.day-shell :is(
+  .calendar-panel,.day-compact-empty,.day-event,.note-mini,.note-card,
+  .world-spotlight,.world-item,.world-empty,.world-assistant-hero,
+  .care-panel,.care-stat,.care-day-item,.care-history-item,
+  .health-card,.health-summary,.health-empty,
+  .health-week-panel,.health-device-panel,.health-metric-tile
+){
+  background:
+    radial-gradient(ellipse 90% 65% at 2% 0%,rgba(175,190,202,.045),transparent 65%),
+    linear-gradient(154deg,rgba(17,27,38,.97),rgba(7,13,21,.985) 49%,rgba(2,6,11,.99))!important;
+}
+/* Keep the photo and the same neutral contrast at every viewport width.
+   Existing responsive layout rules continue to control all geometry. */
