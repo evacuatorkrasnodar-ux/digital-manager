@@ -1,5 +1,6 @@
-/* Digital Manager OS — shared back navigation and touch paging v1.
-   Swipe only across page content, never inputs, dialogs, charts or navigation docks. */
+/* Digital Manager OS — touch paging v5.
+   Back arrows are explicit page links: Calendar -> Home; World/Health/Cycle -> Calendar.
+   Never inject another arrow beside Profile or into dashboard subheads. */
 (() => {
   'use strict';
   const file=location.pathname.split('/').pop()||'index.html';
@@ -7,51 +8,6 @@
   const personal=['calendar','notes','health','cycle'];
   const world=['morning','family','memory','finance','assistant'];
   const dashboard=['home','assistant','management'];
-  const svg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5 7.5 12l7 7"/></svg>';
-  function fallback(){
-    if(file==='world.html')return './myday.html';
-    if(file==='health.html')return './myday.html?view=health';
-    if(file==='care.html')return './myday.html?view=cycle';
-    return './index.html';
-  }
-  function goBack(){
-    // Within the dashboard, Back first returns from Assistant/Management to Home.
-    if(file==='index.html'){
-      const active=document.querySelector('.bottom-nav [data-tab].active')?.dataset.tab;
-      if(active&&active!=='home'){
-        document.querySelector('.bottom-nav [data-tab="home"]')?.click();
-        return;
-      }
-    }
-    // Native history preserves the user's actual path through tabs and pages.
-    if(history.length>1){history.back();return;}
-    if(file!=='index.html')location.assign(fallback());
-  }
-  function insertBack(){
-    if(embedded)return;
-    const header=document.querySelector('body > .day-shell > .day-header');
-    // Personal pages already have a round Back in the header.
-    // Reuse it instead of adding a second arrow on the opposite side.
-    const existingBack=header?.querySelector('.day-back');
-    if(existingBack){
-      existingBack.addEventListener('click',event=>{event.preventDefault();goBack();});
-      return;
-    }
-    const homeActions=document.querySelector('#homeScreen .masthead .header-actions');
-    const holders=header?[header]:homeActions?
-      [homeActions,...document.querySelectorAll('.secondary-screen > .subhead')]:[document.body];
-    for(const holder of holders){
-      if(holder.querySelector('.dm-back-circle'))continue;
-      const button=document.createElement('button');
-      button.type='button';
-      button.className='dm-back-circle';
-      button.setAttribute('aria-label','Назад');
-      button.setAttribute('title','Вернуться назад');
-      button.innerHTML=svg;
-      button.addEventListener('click',goBack);
-      holder.append(button);
-    }
-  }
   function nextTab(direction){
     let names,selected,activate;
     if(file==='myday.html'){
@@ -101,7 +57,6 @@
     }else nextTab(direction);
   }
   function init(){
-    insertBack();
     document.addEventListener('touchstart',touchStart,{passive:true});
     document.addEventListener('touchend',touchEnd,{passive:true});
     document.addEventListener('touchcancel',()=>{start=null},{passive:true});
