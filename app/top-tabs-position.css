@@ -1,4 +1,4 @@
-/* v4 — one mobile geometry for Calendar, Notebook and Health.
+/* v5 — one mobile geometry for Calendar, Notebook and Health.
    Keep the approved rail appearance; eliminate differences in width, header,
    greeting insertion and view-dependent top margins. */
 @media (max-width:700px) and (orientation:portrait){
@@ -83,5 +83,20 @@
   body > .day-shell.day-shell > .day-intro{display:none!important}
   body > .day-shell.health-shell.day-shell.day-shell > nav.day-tabs{
     margin-top:3px!important;
+  }
+}
+
+/* Windows / desktop: Health used width:100% while My Day is max 430px.
+   Keep the same centered app column and reserve scrollbar space to prevent
+   a horizontal jump between the scroll-locked calendar and long pages. */
+@media (min-width:701px){
+  html{scrollbar-gutter:stable}
+  body > .day-shell.health-shell{
+    box-sizing:border-box;
+    width:min(100%,430px);
+    max-width:430px;
+    margin-left:auto;
+    margin-right:auto;
+    padding-top:calc(18px + env(safe-area-inset-top,0px));
   }
 }
