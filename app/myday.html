@@ -49,6 +49,18 @@
       <button class="day-tab" type="button" data-view="notes" aria-selected="false"><svg class="day-tab-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h11l3 3v15H5z"/><path d="M16 3v4h3M8 12h8M8 16h5"/></svg>Блокнот <span id="notesCount" class="day-count" hidden></span></button>
       <a class="day-tab" data-view="health" href="./health.html" aria-label="Открыть Моё здоровье"><svg class="day-tab-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 5a5.5 5.5 0 0 0-7.8 0L12 6l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.2A5.5 5.5 0 0 0 20.8 5z"/></svg>Здоровье</a>
     </nav>
+    <section id="personalHealthIntro" class="personal-health-intro" aria-label="Раздел здоровья" hidden>
+      <span class="day-eyebrow" id="personalHealthEyebrow">МОЁ ЗДОРОВЬЕ ♡</span>
+      <h2 id="personalHealthTitle">Здоровье любит внимание. И выходные.</h2>
+      <p id="personalHealthDescription">Пульс, сон и записи — всё под рукой. Без очереди в регистратуру.</p>
+    </section>
+    <nav id="personalHealthTabs" class="personal-health-tabs" aria-label="Разделы здоровья" hidden>
+      <button type="button" data-personal-health="metrics" class="active" aria-pressed="true">♡ Показатели</button>
+      <button type="button" data-personal-health="meds" aria-pressed="false">◈ Лекарства</button>
+      <button type="button" data-personal-health="sleep" aria-pressed="false">☾ Сон</button>
+      <button type="button" data-personal-health="files" aria-pressed="false">▤ Документы</button>
+      <button type="button" data-personal-health="cycle" aria-pressed="false">♡ Цикл</button>
+    </nav>
     <a class="world-entry" href="./world.html"><span class="world-entry-symbol">✦</span><span><strong>Мой мир</strong><small>Ваше пространство для планов, мыслей и баланса.</small></span><span class="world-entry-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></a>
     <main>
       <section id="calendarView" class="day-view" aria-label="Календарь">
