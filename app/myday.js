@@ -78,14 +78,18 @@
     const dayShell=document.querySelector('.day-shell');
     dayShell?.classList.toggle('calendar-fixed',calendar);
     dayShell?.classList.toggle('notebook-active',view==='notes');
-    // Shared top greeting stays unchanged while the personal views switch.
+    dayShell?.setAttribute('data-personal-view',view);
+    // The header, greeting and upper rail stay mounted for all four views.
     $('calendarView').hidden=!calendar;
     $('notesView').hidden=view!=='notes';
-    document.querySelectorAll('[data-view]').forEach(btn=>{
-      const active=btn.dataset.view===view;
+    const worldEntry=document.querySelector('.world-entry');
+    if(worldEntry)worldEntry.hidden=view==='health'||view==='cycle';
+    document.querySelectorAll('nav.day-tabs [data-view]').forEach(btn=>{
+      const active=btn.dataset.view===view||(btn.dataset.view==='health'&&view==='cycle');
       btn.classList.toggle('active',active);
       btn.setAttribute('aria-selected',String(active));
     });
+    window.dispatchEvent(new CustomEvent('dm-personal-view',{detail:{view}}));
   }
   function render(){
     $('calendarMonth').textContent=monthLabel(month);
@@ -351,8 +355,10 @@
         month=new Date(d.getFullYear(),d.getMonth(),1);
       }
     }
-    document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
-    setView(new URLSearchParams(location.search).get('view')==='notes'?'notes':'calendar');
+    document.querySelectorAll('nav.day-tabs [data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+    window.addEventListener('dm-personal-route',e=>{if(['calendar','notes','health','cycle'].includes(e.detail?.view))setView(e.detail.view);});
+    const initialView=new URLSearchParams(location.search).get('view');
+    setView(['notes','health','cycle'].includes(initialView)?initialView:'calendar');
     $('prevMonth').addEventListener('click',()=>{month=new Date(month.getFullYear(),month.getMonth()-1,1);render();});
     $('nextMonth').addEventListener('click',()=>{month=new Date(month.getFullYear(),month.getMonth()+1,1);render();});
     $('goToday')?.addEventListener('click',()=>{selected=today();const d=new Date();month=new Date(d.getFullYear(),d.getMonth(),1);setView('calendar');render();});
