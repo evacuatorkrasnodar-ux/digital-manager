@@ -3,13 +3,15 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#000000"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="description" content="Личный журнал лекарств, сна и медицинских документов — Цифровой управляющий.">
+<meta name="description" content="Личный журнал давления, пульса, шагов, лекарств, сна и документов — Цифровой управляющий.">
 <link rel="manifest" href="./manifest.json"><link rel="icon" href="./assets/icon-192.png" type="image/png">
 <link rel="stylesheet" href="./myday.css?v=248"><link rel="stylesheet" href="./care.css?v=248"><link rel="stylesheet" href="./health.css?v=249"><link rel="stylesheet" href="./system-ui.css?v=283">
   <link rel="stylesheet" href="./polish.css?v=260">
   <link rel="stylesheet" href="./dock.css?v=258">
   <link rel="stylesheet" href="./personal-unified.css?v=283">
-<script src="./health.js?v=283" defer></script><script src="./system-ui.js?v=283" defer></script>
+  <link rel="stylesheet" href="./health-metrics.css?v=286">
+<script src="./health-bridge.js?v=286" defer></script>
+<script src="./health.js?v=286" defer></script><script src="./system-ui.js?v=283" defer></script>
   <script src="./polish.js?v=257" defer></script>
 <title>Моё здоровье — Цифровой управляющий</title>
 </head>
@@ -19,21 +21,42 @@
   <a class="day-back" href="./care.html" aria-label="Вернуться в Заботу"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></a>
   <div class="day-heading"><span>ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h1>Моё здоровье <span aria-hidden="true">♡</span></h1></div>
  </header>
- <section class="health-head"><span class="day-eyebrow">МОЯ ЗАБОТА ♡</span><h2>Хорошее самочувствие — тоже план.</h2><p>Лекарства, сон и важные документы — только там, где им место.</p></section>
+ <section class="health-head"><span class="day-eyebrow">МОЯ ЗАБОТА ♡</span><h2>Хорошее самочувствие — тоже план.</h2><p>Давление, пульс, шаги, сон и важные записи — в одном месте.</p></section>
  <section id="healthConsentPanel" class="care-panel care-onboard" hidden>
   <div class="care-onboard-icon">♡</div><h2>Личное пространство</h2>
-  <p>Здесь можно вести список назначенных лекарств, отмечать фактический приём, записывать сон и сохранять фотографии или документы.</p>
+  <p>Здесь можно записывать давление, пульс и шаги, вести список назначенных лекарств, отмечать приём, сон и хранить документы.</p>
   <p class="care-privacy-note">Важно: информация сохраняется локально в браузере, без облака и без шифрования или PIN-кода. Любой с доступом к профилю браузера может её просмотреть. На общем устройстве не рекомендуем хранить медицинские документы.</p>
   <label class="care-consent"><input type="checkbox" id="healthConsent"> Я понимаю ограничения хранения и хочу добровольно включить личный раздел.</label>
   <button class="care-primary" id="healthEnable" type="button" disabled>Открыть моё пространство ♡</button>
  </section>
  <section id="healthMain" hidden>
   <nav class="health-tabs" aria-label="Разделы здоровья">
-   <button class="active" data-health="meds" aria-pressed="true" type="button">◈ Лекарства</button>
+   <button class="active" data-health="metrics" aria-pressed="true" type="button">♡ Показатели</button>
+   <button data-health="meds" aria-pressed="false" type="button">◈ Лекарства</button>
    <button data-health="sleep" aria-pressed="false" type="button">☾ Сон</button>
    <button data-health="files" aria-pressed="false" type="button">▤ Документы</button>
   </nav>
-  <section class="health-view" data-health-view="meds">
+  <section class="health-view health-metrics-view" data-health-view="metrics">
+   <div class="day-section-heading"><div><p class="day-eyebrow">МОИ ИЗМЕРЕНИЯ</p><h2>Показатели здоровья</h2></div><button class="day-add" type="button" id="healthAddMetric">+ Запись</button></div>
+   <p class="health-hint">Только введённые или разрешённые измерения. Личный журнал, не диагноз и не медицинский мониторинг.</p>
+   <div class="health-metric-grid">
+    <article class="health-metric-tile"><div class="health-metric-caption"><span>♡</span> Давление</div><strong id="healthPressureValue">—</strong><small>мм рт. ст.</small><p id="healthPressureMeta">Нет измерений</p></article>
+    <article class="health-metric-tile"><div class="health-metric-caption"><span>◡</span> Пульс</div><strong id="healthPulseValue">—</strong><small>уд/мин</small><p id="healthPulseMeta">Нет измерений</p></article>
+    <article class="health-metric-tile"><div class="health-metric-caption"><span>↟</span> Шаги</div><strong id="healthStepsValue">—</strong><small>шагов за день</small><p id="healthStepsMeta">Нет записей</p></article>
+   </div>
+   <div class="health-week-panel"><div class="health-week-heading"><h3>Шаги за 7 дней</h3><span>По сохранённым данным</span></div><div id="healthStepsChart" class="health-week-chart" role="img" aria-label="Шаги за последние семь дней"></div></div>
+   <div class="day-section-heading health-history-heading"><h2>История измерений</h2><label class="health-filter-label"><span class="sr-only">Фильтр измерений</span><select id="healthMetricFilter"><option value="all">Все</option><option value="pressure">Давление</option><option value="pulse">Пульс</option><option value="steps">Шаги</option></select></label></div>
+   <div id="healthMetricsHistory" class="health-list"></div>
+   <section class="health-device-panel" aria-labelledby="healthDeviceTitle">
+    <div class="health-device-heading"><h3 id="healthDeviceTitle">Телефон и смарт-часы</h3><span class="health-device-label">Подготовка</span></div>
+    <p>Apple Health / Apple Watch и Health Connect / Android: интерфейс подключения подготовлен. В веб-версии прямой доступ к данным часов отсутствует.</p>
+    <div class="health-provider-row"><span>Apple Health</span><span id="healthAppleStatus">Требуется приложение iOS</span></div>
+    <div class="health-provider-row"><span>Health Connect</span><span id="healthAndroidStatus">Требуется приложение Android</span></div>
+    <button type="button" class="health-native-sync" id="healthSync" hidden>Получить разрешённые показатели</button>
+    <p class="health-device-foot">Только с вашего разрешения. Облачная синхронизация и отображение на часах пока не реализованы.</p>
+   </section>
+  </section>
+  <section class="health-view" data-health-view="meds" hidden>
    <div class="day-section-heading"><div><p class="day-eyebrow">ПРИЁМ ПО НАЗНАЧЕНИЮ</p><h2>Мои лекарства</h2></div><button class="day-add" id="healthAddMed" type="button">+ Добавить</button></div>
    <p class="health-hint">Напоминаем только о графике, который ты ввёл. Не назначаем препараты и не меняем дозировки.</p>
    <div id="healthToday" class="health-list"></div>
@@ -53,11 +76,25 @@
    <div id="healthDocuments" class="health-list"></div>
    <p class="health-hint">Резервная копия обычных заметок не включает медицинские файлы. Их нужно отдельно скачать, если хочешь сохранить копии.</p>
   </section>
-  <div class="health-danger"><p>Список лекарств и журнал сна можно экспортировать в JSON. Медицинские документы в этот экспорт не входят.</p><div><button type="button" id="healthExport">↓ Копия записей</button><button type="button" id="healthDeleteAll">Удалить всё медицинское</button></div></div>
+  <div class="health-danger"><p>Показатели, лекарства и журнал сна можно экспортировать в JSON. Медицинские документы в копию не входят.</p><div><button type="button" id="healthExport">↓ Копия записей</button><button type="button" id="healthDeleteAll">Удалить всё медицинское</button></div></div>
  </section>
  <p class="care-disclaimer">Это личный органайзер, не медицинская услуга. Если пропустил назначенную дозу, следуй инструкции к препарату или рекомендации врача; приложение не подсказывает, сколько принять. При экстренных симптомах обратись за медицинской помощью.</p>
  <footer class="day-footer">♡ <a href="./care.html">Женский календарь</a> · <a href="./myday.html">Мой день</a> · <a href="./world.html">Мой мир</a></footer>
 </div>
+<dialog id="healthMetricDialog" class="day-dialog" aria-labelledby="healthMetricTitle">
+ <form id="healthMetricForm">
+  <div class="dialog-top"><h2 id="healthMetricTitle">Новое измерение</h2><button type="button" class="dialog-x" data-health-close="healthMetricDialog" aria-label="Вернуться к показателям"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></button></div>
+  <input id="healthMetricId" type="hidden">
+  <label>Что записываем<select id="healthMetricType"><option value="pressure">Давление</option><option value="pulse">Пульс</option><option value="steps">Шаги за день</option></select></label>
+  <div class="form-row"><label>Дата<input type="date" id="healthMetricDate" required></label><label>Время<input type="time" id="healthMetricTime" required></label></div>
+  <div class="form-row" data-metric-fields="pressure"><label>Верхнее, мм рт. ст.<input type="number" id="healthMetricSys" min="50" max="300" step="1" inputmode="numeric" placeholder="120"></label><label>Нижнее, мм рт. ст.<input type="number" id="healthMetricDia" min="30" max="200" step="1" inputmode="numeric" placeholder="80"></label></div>
+  <div data-metric-fields="pulse" hidden><label>Пульс, уд/мин<input type="number" id="healthMetricBpm" min="25" max="250" step="1" inputmode="numeric" placeholder="72"></label></div>
+  <div data-metric-fields="steps" hidden><label>Шагов за день<input type="number" id="healthMetricSteps" min="0" max="200000" step="1" inputmode="numeric" placeholder="6500"></label></div>
+  <label>Заметка <span class="optional">необязательно</span><textarea id="healthMetricNote" maxlength="500" rows="2" placeholder="Например: после прогулки"></textarea></label>
+  <p class="health-hint">Записывай фактически измеренные значения. Приложение не определяет норму и не ставит диагноз.</p>
+  <div class="form-actions"><button type="button" class="secondary-btn" data-health-close="healthMetricDialog">Отмена</button><button type="submit" class="primary-btn">Сохранить</button></div>
+ </form>
+</dialog>
 <dialog id="healthMedDialog" class="day-dialog" aria-labelledby="healthMedTitle">
  <form id="healthMedForm"><div class="dialog-top"><h2 id="healthMedTitle">Моё лекарство</h2><button type="button" class="dialog-x" data-health-close="healthMedDialog" aria-label="Закрыть"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></button></div>
   <input type="hidden" id="healthMedId">
