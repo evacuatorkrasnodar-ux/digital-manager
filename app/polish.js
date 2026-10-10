@@ -11,18 +11,13 @@ function greeting(shell){
  const hour=new Date().getHours();intro.prepend(el('h2','polish-hello',(hour<12?'Доброе утро':hour<18?'Добрый день':'Добрый вечер')+',\n'+name));
  const desc=intro.querySelector('#dayGreeting');if(desc)desc.textContent='Планы на день есть. Главное — не забыть про себя.';
 }
-const items=[
-['index.html','Главная','<path d="m3 10 9-7 9 7v10h-6v-7H9v7H3z"/>'],
-['myday.html','Мой день','<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 2v6M17 2v6M3 10h18"/>'],
-['world.html?tab=assistant','Помощник',''],
-['world.html','Мой мир','<path d="M12 2l2.3 7.7L22 12l-7.7 2.3L12 22l-2.3-7.7L2 12l7.7-2.3z"/>'],
-['care.html','Забота','<path d="M20.8 5a5.5 5.5 0 0 0-7.8 0L12 6l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.2A5.5 5.5 0 0 0 20.8 5z"/>']];
+const items=[["index.html","Главная","<path d=\"m3 10 9-7 9 7v10h-6v-7H9v7H3z\"/>"],["index.html?analyticsDate=1","Аналитика","<path d=\"M4 20V12M9 20V9M14 20V5M19 20V2\"/>"],["index.html?jump=assistant","Помощник",""],["index.html?jump=management","Управление","<rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/>"],["index.html?jump=profile","Профиль","<circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M4 22v-2a8 8 0 0 1 16 0v2\"/>"]];
 function addDock(shell){
  if(shell.querySelector('.polish-dock'))return;
  const dock=el('nav','polish-dock');dock.setAttribute('aria-label','Навигация по личным разделам');
  for(const [href,label,source] of items){
   const a=el('a','polish-dock-link');a.href='./'+href;const section=href.split('?')[0];
-  const active=page==='health.html'?section==='care.html':page==='world.html'?(new URLSearchParams(location.search).get('tab')==='assistant'?href==='world.html?tab=assistant':href==='world.html'):page===section;
+  const active=label==='Главная';
   if(active){a.classList.add('is-active');a.setAttribute('aria-current','page');}
   if(label==='Помощник'){a.classList.add('polish-assistant');a.append(el('span','polish-assistant-orb'));}
   else{

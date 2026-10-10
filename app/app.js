@@ -118,6 +118,11 @@
   document.querySelectorAll('[data-question]').forEach(b=>b.addEventListener('click',()=>chat(b.dataset.question)));
   byId('chatForm').addEventListener('submit',e=>{e.preventDefault();const i=byId('chatInput');const q=i.value.trim();if(!q)return;chat(q);i.value='';});
   applyUser();updatePeriod('day');setTab('home');setRingMode('idle');
+  // Internal deep links from the unified personal OS dock.
+  const jump=new URLSearchParams(window.location.search).get('jump');
+  if(['assistant','management'].includes(jump))setTab(jump);
+  else if(jump==='profile'){setTab('management');profileModal();}
+  if(jump)window.history.replaceState(null,'',window.location.pathname);
   // Preserve the original analytics date picker through My Day's report link.
   if(new URLSearchParams(window.location.search).has('analyticsDate')){
     window.history.replaceState(null,'',window.location.pathname);

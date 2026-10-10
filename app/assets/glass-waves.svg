@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 130" fill="none">
+ <defs><linearGradient id="blue" x1="0" x2="1" y1=".5" y2="1"><stop stop-color="#1579d9" stop-opacity="0"/><stop offset=".6" stop-color="#74baf7" stop-opacity=".96"/><stop offset=".9" stop-color="#d5eefd" stop-opacity=".2"/><stop offset="1" stop-color="#2f7ddc" stop-opacity="0"/></linearGradient>
+ <linearGradient id="gold" x1="0" x2="1" y1="0" y2=".7"><stop stop-color="#f4b16e" stop-opacity="0"/><stop offset=".52" stop-color="#ffd6a2" stop-opacity=".96"/><stop offset="1" stop-color="#bc6f35" stop-opacity="0"/></linearGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="4"/></filter></defs>
+ <path d="M0 119C114 97 188 133 275 95S435 54 600 2" stroke="url(#blue)" stroke-width="8" opacity=".48" filter="url(#glow)"/>
+ <path d="M0 105C123 94 196 122 291 88S470 50 600 7" stroke="url(#blue)" stroke-width="1.8"/>
+ <path d="M0 125C140 107 238 132 330 91S475 50 600 16" stroke="url(#blue)" stroke-width=".8" opacity=".8"/>
+ <path d="M65 126C148 112 250 130 348 90S493 42 600 26" stroke="url(#gold)" stroke-width="6" opacity=".43" filter="url(#glow)"/>
+ <path d="M65 126C148 112 250 130 348 90S493 42 600 26" stroke="url(#gold)" stroke-width="1.5"/>
+ <path d="M98 124C224 108 281 130 368 82S515 43 592 24" stroke="url(#gold)" stroke-width=".65" opacity=".75"/>
+</svg>
