@@ -843,3 +843,17 @@
   stroke-linecap:round;stroke-linejoin:round;
 }
 .day-shell .dm-delete-action:hover{border-color:rgba(245,200,218,.64)}
+
+/* v284 — The curved seam before My World / Assistant used to cross the
+   leading diamond glyph. Keep the half-arc, but finish it at the button
+   boundary rather than 10px inside the Assistant label. */
+.world-shell .world-tabs > .world-tab[data-world="assistant"]:not(.active)::before{
+  left:-30px;
+  width:30px;
+}
+@media(max-width:359px){
+  .world-shell .world-tabs > .world-tab[data-world="assistant"]:not(.active)::before{
+    left:-25px;
+    width:25px;
+  }
+}
