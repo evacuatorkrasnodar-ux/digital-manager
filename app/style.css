@@ -280,3 +280,15 @@
   padding:3px;
   stroke:#f2fbff;
 }
+
+/* v283 — main dialog chevron matches all other blue glass navigation. */
+#modal .dialog-close{
+ display:grid;place-items:center;box-sizing:border-box;
+ width:34px;height:34px;min-width:34px;padding:0;
+ border:1px solid rgba(156,208,249,.64);border-radius:50%;
+ background:radial-gradient(ellipse at 26% 3%,rgba(231,248,255,.22),transparent 75%),
+ linear-gradient(148deg,rgba(39,83,121,.85),rgba(8,27,47,.94));
+ box-shadow:inset 0 1px rgba(255,255,255,.26),0 4px 12px rgba(0,7,20,.30);
+ color:#f2faff;
+}
+#modal .dialog-close .ico{width:18px;height:18px;stroke:currentColor;stroke-width:1.85}
