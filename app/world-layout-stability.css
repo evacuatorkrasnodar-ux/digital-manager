@@ -197,3 +197,75 @@ body > .day-shell.world-shell > .day-header > .dm-back-circle{
     animation:none!important;
   }
 }
+
+/* v2 — Memory search is ONE control, not a frame containing a second
+   rectangular input. The shared dark-form theme was painting both layers. */
+body > .day-shell.world-shell [data-world-view="memory"] > label.search-wrap{
+  box-sizing:border-box!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:11px!important;
+  width:100%!important;
+  height:44px!important;
+  min-height:44px!important;
+  max-height:44px!important;
+  padding:0 14px!important;
+  margin:7px 0 12px!important;
+  border:1px solid rgba(151,184,208,.38)!important;
+  border-radius:20px!important;
+  background:linear-gradient(150deg,rgba(17,30,43,.95),rgba(5,13,23,.98))!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.065)!important;
+  overflow:hidden!important;
+}
+body > .day-shell.world-shell [data-world-view="memory"] > label.search-wrap > svg{
+  display:block!important;
+  flex:0 0 18px!important;
+  width:18px!important;
+  height:18px!important;
+  stroke:#a5bfd3!important;
+}
+body > .day-shell.world-shell [data-world-view="memory"] > label.search-wrap > input#memorySearch{
+  box-sizing:border-box!important;
+  display:block!important;
+  flex:1 1 auto!important;
+  width:100%!important;
+  min-width:0!important;
+  height:100%!important;
+  min-height:0!important;
+  max-height:100%!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  outline:0!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  color:#eef6ff!important;
+  font-size:13px!important;
+  line-height:1.3!important;
+  appearance:none;
+  -webkit-appearance:none;
+}
+body > .day-shell.world-shell [data-world-view="memory"] > label.search-wrap > input#memorySearch::placeholder{
+  color:#8ea5b8!important;
+  opacity:1!important;
+}
+body > .day-shell.world-shell [data-world-view="memory"] > label.search-wrap:focus-within{
+  border-color:rgba(181,208,229,.75)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.10),0 0 0 2px rgba(150,193,223,.10)!important;
+}
+/* The empty-state below search should not resemble another giant input. */
+body > .day-shell.world-shell [data-world-view="memory"] #memoryList > .world-empty{
+  box-sizing:border-box!important;
+  padding:18px 14px!important;
+  margin:0!important;
+  border:1px solid rgba(142,170,190,.23)!important;
+  border-radius:16px!important;
+  background:rgba(7,16,26,.63)!important;
+  box-shadow:none!important;
+  color:#aabfce!important;
+  font-size:12px!important;
+  line-height:1.45!important;
+}
