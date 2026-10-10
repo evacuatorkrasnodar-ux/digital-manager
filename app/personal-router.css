@@ -1,4 +1,4 @@
-/* Persistent personal views v3: medical sections live below the same top rail. */
+/* Persistent personal views v4: medical sections live below the same top rail. */
 body > .day-shell .world-entry[hidden]{display:none!important}
 body > .day-shell main > .personal-embedded-view[hidden]{display:none!important}
 body > .day-shell main > .personal-embedded-view{
@@ -220,4 +220,51 @@ body > .day-shell.day-shell > nav.personal-health-tabs > button:focus-visible{
 }
 @media(prefers-reduced-motion:reduce){
   body > .day-shell.day-shell > nav.personal-health-tabs > button{transition:none!important}
+}
+
+/* ONE immutable top dock for all four in-page sections.
+   Legacy .calendar-fixed rules in black-velvet-premium.css carry higher
+   specificity and were shrinking the rail from 42px to 38px on portrait
+   screens (buttons 34px -> 30px). Keep its geometry identical in every view.
+   #healthEmbedded is a stable child of the shared shell, not the active view. */
+body > .day-shell.day-shell.day-shell:has(#healthEmbedded) > nav.day-tabs{
+  box-sizing:border-box!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  align-items:center!important;
+  gap:0!important;
+  flex:0 0 42px!important;
+  width:100%!important;
+  height:42px!important;
+  min-height:42px!important;
+  max-height:42px!important;
+  margin:5px 0 9px!important;
+  padding:3px!important;
+  border-radius:22px!important;
+  transform:none!important;
+  transition:none!important;
+}
+body > .day-shell.day-shell.day-shell:has(#healthEmbedded) > nav.day-tabs > .day-tab{
+  box-sizing:border-box!important;
+  flex:0 1 auto!important;
+  width:100%!important;
+  min-width:0!important;
+  height:34px!important;
+  min-height:34px!important;
+  max-height:34px!important;
+  margin:0!important;
+  padding:0 3px!important;
+  border-radius:19px!important;
+  transform:none!important;
+  transition:background-color .19s ease,box-shadow .19s ease,color .19s ease,border-color .19s ease!important;
+}
+@media(max-width:700px) and (orientation:portrait){
+  body > .day-shell.day-shell.day-shell:has(#healthEmbedded) > nav.day-tabs{
+    margin:3px 0 6px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  body > .day-shell.day-shell.day-shell:has(#healthEmbedded) > nav.day-tabs > .day-tab{
+    transition:none!important;
+  }
 }
