@@ -1,4 +1,4 @@
-/* v5 — one mobile geometry for Calendar, Notebook and Health.
+/* v6 — one mobile geometry for Calendar, Notebook and Health.
    Keep the approved rail appearance; eliminate differences in width, header,
    greeting insertion and view-dependent top margins. */
 @media (max-width:700px) and (orientation:portrait){
@@ -98,5 +98,23 @@
     margin-left:auto;
     margin-right:auto;
     padding-top:calc(18px + env(safe-area-inset-top,0px));
+  }
+}
+
+/* Desktop/Windows: My Day has a two-line greeting between its header and
+   the top rail (about 106px including padding). Health has no greeting.
+   Its 91px spacer compensates for that gap and the 7px difference in
+   header height plus 7px difference in top padding. On mobile, keep the
+   existing compact navigation spacing and hide the spacer entirely. */
+.day-shell.health-shell > .health-nav-spacer{display:none}
+@media (min-width:701px){
+  body > .day-shell.health-shell > .health-nav-spacer{
+    display:block;
+    box-sizing:border-box;
+    flex:0 0 91px;
+    height:91px;
+    min-height:91px;
+    max-height:91px;
+    pointer-events:none;
   }
 }
