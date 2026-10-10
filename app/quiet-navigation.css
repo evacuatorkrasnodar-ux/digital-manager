@@ -1,0 +1,89 @@
+/* Digital Manager OS — quiet navigation v1.
+   One back control; no repeated forward chevrons on already-clickable cards.
+   Functional calendar navigation and chat send controls remain visible. */
+
+/* Decorative forward arrows do not need their own visual button. */
+#homeScreen .license-arrow,
+#homeScreen .profile-arrow,
+#homeScreen .profile-open-hint > .ico,
+#homeScreen .tile-heading > .tile-chevron,
+#homeScreen .advice-cta > .ico,
+#assistantScreen .assistant-suggestions button > .ico,
+#assistantScreen .assistant-world-link .dm-inline-chevron,
+#managementScreen .manage-list > button > .ico,
+.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry-arrow,
+.care-shell .care-health-entry > .care-health-entry-arrow{
+  display:none!important;
+}
+
+/* Preserve the actual destination text and its entire clickable surface. */
+.care-shell .care-health-entry{
+  grid-template-columns:33px minmax(0,1fr)!important;
+}
+@media(max-width:350px){
+  .care-shell .care-health-entry{
+    grid-template-columns:30px minmax(0,1fr)!important;
+  }
+}
+
+/* App Store / Google Play: two matching full-surface, arrow-free buttons. */
+.health-shell .health-provider-row .health-provider-open{
+  box-sizing:border-box!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex:0 0 120px!important;
+  width:120px!important;
+  min-width:120px!important;
+  height:39px!important;
+  min-height:39px!important;
+  padding:0 9px!important;
+  gap:7px!important;
+  border:1px solid rgba(159,201,229,.56)!important;
+  border-radius:15px!important;
+  background:linear-gradient(145deg,rgba(37,59,77,.88),rgba(7,20,33,.94))!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.15),0 3px 9px rgba(0,0,0,.24)!important;
+  text-decoration:none!important;
+  color:#e9f5ff!important;
+  transition:background .18s ease,border-color .18s ease!important;
+}
+.health-shell .health-provider-row .health-provider-open > span:first-child{
+  color:inherit!important;
+  font-size:11px!important;
+  font-weight:500!important;
+  white-space:nowrap!important;
+  text-align:left!important;
+}
+.health-shell .health-provider-row .health-provider-open .health-store-icon{
+  display:block!important;
+  flex:0 0 16px!important;
+  width:16px!important;
+  height:16px!important;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.9;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.health-shell .health-provider-row .health-provider-open .health-provider-chevron{
+  display:none!important;
+}
+.health-shell .health-provider-row .health-provider-open:is(:hover,:focus-visible){
+  border-color:rgba(207,234,250,.87)!important;
+  background:linear-gradient(145deg,rgba(49,78,101,.93),rgba(13,33,50,.96))!important;
+}
+@media(max-width:380px){
+  .health-shell .health-provider-row .health-provider-open{
+    flex-basis:108px!important;
+    width:108px!important;
+    min-width:108px!important;
+    padding:0 6px!important;
+    gap:5px!important;
+  }
+  .health-shell .health-provider-row .health-provider-open > span:first-child{
+    font-size:10px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .health-shell .health-provider-row .health-provider-open{transition:none!important}
+}
