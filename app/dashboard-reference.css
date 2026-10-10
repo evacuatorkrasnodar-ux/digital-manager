@@ -931,3 +931,39 @@
   height:15px;
   stroke-width:1.8;
 }
+
+/* Keep navigation buttons anchored to the upper-right, independently of title width. */
+#homeScreen .metric-grid .clients-card .tile-heading,
+#homeScreen .metric-grid .orders-card .tile-heading,
+#homeScreen .metric-grid .profit-card .tile-heading{
+  position:relative;
+  padding-right:34px;
+}
+#homeScreen .metric-grid .clients-card .tile-heading .tile-chevron,
+#homeScreen .metric-grid .orders-card .tile-heading .tile-chevron,
+#homeScreen .metric-grid .profit-card .tile-heading .tile-chevron{
+  position:absolute!important;
+  right:0!important;
+  top:0!important;
+  z-index:30!important;
+  display:grid!important;
+  width:28px!important;
+  height:28px!important;
+  min-width:28px!important;
+  margin:0!important;
+  opacity:1!important;
+  visibility:visible!important;
+  transform:none!important;
+  pointer-events:none;
+  border-radius:50%;
+  background:linear-gradient(145deg,#1b2a37,#08121b)!important;
+  border:1px solid rgba(151,181,202,.20)!important;
+}
+#homeScreen .metric-grid .tile-heading .tile-chevron svg{
+  display:block!important;
+  width:15px!important;
+  height:15px!important;
+  stroke:#f3f8ff!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
