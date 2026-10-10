@@ -742,8 +742,8 @@
     padding:6px 7px!important;
   }
   #homeScreen .metric-grid .recommendation-card{
-    /* Compensate the +10px Clients grid row: gold stays at its former screen position. */
-    top:-25px;
+    /* v323: lower the gold card 8px to inspect the seam against Clients. */
+    top:-17px;
     padding:6px 8px 6px!important;
   }
   /* Small title badges echo the original Digital Business card's details. */
