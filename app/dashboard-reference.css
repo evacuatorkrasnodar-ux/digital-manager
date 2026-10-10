@@ -886,3 +886,8 @@
     --bv-gold-h:132px;
   }
 }
+
+/* Clients only: raise inner metrics, leave card silhouette and neighbors untouched. */
+#homeScreen .metric-grid .clients-card .clients-inner{
+  transform:translateY(-5px);
+}
