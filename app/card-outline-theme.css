@@ -1,0 +1,47 @@
+/* Shared quiet hairline — October 2026.
+   One blue-grey border tone for cards and panels throughout the app.
+   This changes only edge colour: no dimensions, clipping, radii, shadows,
+   card backgrounds, text, or selected-state accents are modified. */
+:root{
+  --dm-card-hairline:rgba(106,139,161,.52);
+  --dm-card-hairline-soft:rgba(106,139,161,.40);
+}
+
+/* Home: preserve the bespoke clipped Clients silhouette and gold accent. */
+#homeScreen .metric-card:not(.clients-card):not(.recommendation-card),
+#homeScreen .shortcut,
+#homeScreen .ring-preview,
+#assistantScreen :is(.ring-preview,.assistant-suggestions button,.chat-bubble,.chat-form),
+#managementScreen :is(.manage-list>button,.management-foot),
+.app-shell .secondary-screen :is(.metric-card,.detail-card,.management-card),
+.app-shell #modal:not(.developer-dialog){
+  border-color:var(--dm-card-hairline)!important;
+}
+/* The Clients outline lives outside the clip: don't add a second border. */
+#homeScreen .metric-grid>.bv-clients-edge{
+  stroke:var(--dm-card-hairline);
+}
+
+/* Personal calendar, notes, World, Health and Cycle: same subtle edge. */
+.day-shell :is(
+  .day-panel,.calendar-panel,.day-event,.day-empty,.note-card,.note-mini,
+  .world-entry,.world-spotlight,.world-item,.world-empty,.world-assistant-hero,
+  .world-fact,.world-finance-summary>div,.world-chat-form,.world-msg.bot,
+  .care-panel,.care-hero,.care-stat,.care-day-item,.care-history-item,
+  .care-health-entry,.care-calendar-panel,
+  .health-card,.health-summary,.health-empty,.health-metric-tile,
+  .health-week-panel,.health-device-panel,.health-chart-panel,
+  .health-chart-day,.health-history-card,
+  .search-wrap,.day-dialog
+){
+  border-color:var(--dm-card-hairline)!important;
+}
+/* Grouped navigation is a panel; active tabs retain their bright indicators. */
+.day-shell :is(.day-tabs,.world-tabs,.health-tabs){
+  border-color:var(--dm-card-hairline)!important;
+}
+
+/* Muted borders for small inset controls, without changing their states. */
+.day-shell :is(.health-metric-art,.world-mini,.care-secondary):not(.active){
+  border-color:var(--dm-card-hairline-soft)!important;
+}
