@@ -1,4 +1,4 @@
-/* v2 — the Calendar / Notebook / Health rail keeps one vertical anchor.
+/* v3 — the Calendar / Notebook / Health rail keeps one vertical anchor.
    Only mobile portrait uses the pinned calendar geometry. Other layouts
    keep their existing spacing and design. */
 @media (max-width:700px) and (orientation:portrait) and (min-height:551px){
@@ -33,23 +33,29 @@
     white-space:normal!important;
   }
   .day-shell.notebook-active .day-intro :is(#dayGreeting,.day-eyebrow){display:none!important}
-  /* Calendar already uses these dimensions. Match them for both destinations. */
-  .day-shell.notebook-active > nav.day-tabs,
-  .day-shell.health-shell > nav.day-tabs{
+  /* top-tabs.css uses three .day-shell classes, so earlier weaker
+     overrides never applied. Set exactly the pinned Calendar's 42/34
+     dimensions for all three views at the same cascade specificity. */
+  .day-shell.calendar-fixed.day-shell.day-shell > nav.day-tabs,
+  .day-shell.notebook-active.day-shell.day-shell > nav.day-tabs,
+  .day-shell.health-shell.day-shell.day-shell > nav.day-tabs{
     box-sizing:border-box!important;
-    height:38px!important;
-    min-height:38px!important;
-    max-height:38px!important;
+    flex:0 0 42px!important;
+    height:42px!important;
+    min-height:42px!important;
+    max-height:42px!important;
     padding:3px!important;
     margin-bottom:6px!important;
   }
-  .day-shell.notebook-active > nav.day-tabs{margin-top:3px!important}
-  .day-shell.notebook-active > nav.day-tabs > .day-tab,
-  .day-shell.health-shell > nav.day-tabs > .day-tab{
-    height:30px!important;
-    min-height:30px!important;
-    max-height:30px!important;
-    border-radius:17px!important;
+  .day-shell.notebook-active.day-shell.day-shell > nav.day-tabs{margin-top:4px!important}
+  .day-shell.calendar-fixed.day-shell.day-shell > nav.day-tabs > .day-tab,
+  .day-shell.notebook-active.day-shell.day-shell > nav.day-tabs > .day-tab,
+  .day-shell.health-shell.day-shell.day-shell > nav.day-tabs > .day-tab{
+    box-sizing:border-box!important;
+    height:34px!important;
+    min-height:34px!important;
+    max-height:34px!important;
+    border-radius:19px!important;
   }
   .day-shell.health-shell{
     padding-top:calc(7px + env(safe-area-inset-top,0px))!important;
