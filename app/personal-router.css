@@ -1,4 +1,4 @@
-/* Persistent personal views v4: medical sections live below the same top rail. */
+/* Persistent personal views v5: medical sections live below the same top rail. */
 body > .day-shell .world-entry[hidden]{display:none!important}
 body > .day-shell main > .personal-embedded-view[hidden]{display:none!important}
 body > .day-shell main > .personal-embedded-view{
@@ -266,5 +266,68 @@ body > .day-shell.day-shell.day-shell:has(#healthEmbedded) > nav.day-tabs > .day
 @media(prefers-reduced-motion:reduce){
   body > .day-shell.day-shell.day-shell:has(#healthEmbedded) > nav.day-tabs > .day-tab{
     transition:none!important;
+  }
+}
+
+/* v5: restore the original half-circle seams and make the fifth button
+   finish at the rounded edge. Never change the permanent dock's geometry. */
+body > .day-shell.day-shell > nav.personal-health-tabs{
+  gap:0!important;
+  overflow-x:hidden!important;
+  overflow-y:hidden!important;
+}
+body > .day-shell.day-shell > nav.personal-health-tabs > button,
+body > .day-shell.day-shell > nav.personal-health-tabs > button:first-child,
+body > .day-shell.day-shell > nav.personal-health-tabs > button:nth-child(3),
+body > .day-shell.day-shell > nav.personal-health-tabs > button:nth-child(4),
+body > .day-shell.day-shell > nav.personal-health-tabs > button:nth-child(5){
+  flex:1 1 0%!important;
+  width:0!important;
+  min-width:0!important;
+  max-width:none!important;
+  padding:5px 3px!important;
+}
+body > .day-shell.day-shell > nav.personal-health-tabs > button{
+  isolation:isolate;
+  overflow:visible!important;
+}
+body > .day-shell.day-shell > nav.personal-health-tabs > button.active{
+  z-index:3;
+  overflow:hidden!important;
+}
+body > .day-shell.day-shell > nav.personal-health-tabs > button:not(.active):not(:first-child)::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  pointer-events:none;
+  top:-2px;
+  bottom:-2px;
+  left:-24px;
+  width:36px;
+  border:0;
+  border-right:1px solid rgba(162,209,250,.35);
+  border-radius:50%;
+  background:transparent;
+  box-shadow:2px 0 10px -9px rgba(89,174,247,.44);
+}
+body > .day-shell.day-shell > nav.personal-health-tabs > button.active + button::before{
+  display:none!important;
+}
+/* On narrow screens, preserve readable labels via horizontal scrolling
+   rather than crushing text or changing the dock height. */
+@media(max-width:520px){
+  body > .day-shell.day-shell > nav.personal-health-tabs{
+    overflow-x:auto!important;
+    gap:0!important;
+  }
+  body > .day-shell.day-shell > nav.personal-health-tabs > button,
+  body > .day-shell.day-shell > nav.personal-health-tabs > button:first-child,
+  body > .day-shell.day-shell > nav.personal-health-tabs > button:nth-child(3),
+  body > .day-shell.day-shell > nav.personal-health-tabs > button:nth-child(4),
+  body > .day-shell.day-shell > nav.personal-health-tabs > button:nth-child(5){
+    flex:0 0 auto!important;
+    width:auto!important;
+    min-width:max-content!important;
+    padding:5px 9px!important;
   }
 }
