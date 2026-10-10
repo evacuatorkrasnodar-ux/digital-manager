@@ -49,7 +49,13 @@
     render();
   }
   function show(type){
+    const changed=view!==type;
     view=type;
+    // World has its own content scroller; never move the shared header/rail.
+    if(changed){
+      const content=document.querySelector('body > .world-shell > main');
+      if(content)content.scrollTop=0;
+    }
     document.querySelectorAll('[data-world]').forEach(b=>{const active=b.dataset.world===type;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});
     document.querySelectorAll('[data-world-view]').forEach(s=>s.hidden=s.dataset.worldView!==type);
     if(type==='morning')loadCalendar().then(renderBrief).catch(()=>renderBrief());
