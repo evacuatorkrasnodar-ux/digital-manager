@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="./personal-shell-stability.css?v=2">
   <link rel="stylesheet" href="./navigation-gestures.css?v=2">
   <link rel="stylesheet" href="./quiet-navigation.css?v=2">
-  <link rel="stylesheet" href="./world-layout-stability.css?v=2">
+  <link rel="stylesheet" href="./world-layout-stability.css?v=3">
   <script src="./navigation-gestures.js?v=4" defer></script>
 </head>
 <body>
@@ -77,7 +77,7 @@
         <button type="button" data-ask="Что ты обо мне помнишь?">Что ты помнишь?</button>
       </div>
       <div id="worldChat" class="world-chat" role="log" aria-live="polite"><div class="world-msg bot">Привет, шеф! Я пока работаю локально: разбираю понятные запросы и обращаюсь только к сохранённым тобой данным. Настоящий ИИ подключим позже. 😄</div></div>
-      <form id="worldAskForm" class="world-chat-form"><label class="sr-only" for="worldQuestion">Вопрос помощнику</label><input id="worldQuestion" required maxlength="250" placeholder="Спроси что-нибудь…" autocomplete="off"><button type="submit" aria-label="Отправить">➜</button></form>
+      <form id="worldAskForm" class="world-chat-form"><label class="sr-only" for="worldQuestion">Вопрос помощнику</label><input id="worldQuestion" required maxlength="250" placeholder="Спроси что-нибудь…" autocomplete="off"><button type="submit" aria-label="Отправить сообщение"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11.5 20.5 3.5 14 20.5l-3.3-7.2-7.2-1.8Z"/><path d="m10.7 13.3 9.8-9.8"/></svg></button></form>
       <p class="world-hint">Это локальный помощник с правилами, а не нейросеть. Он не читает медицинские записи, другие приложения или банковские счета.</p>
     </section>
   <div class="world-bottom"><a href="./myday.html">◷ Мой день</a><a href="./care.html">♡ Забота</a><button id="exportWorld" type="button">↓ Сохранить копию</button></div>
