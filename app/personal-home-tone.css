@@ -46,3 +46,15 @@ body > .day-shell.day-shell :is(
 }
 /* Keep the photo and the same neutral contrast at every viewport width.
    Existing responsive layout rules continue to control all geometry. */
+
+/* Business subpages use the same neutral Home foundation, too.
+   The Home screen (#homeScreen) and its architectural hero stay untouched. */
+.app-shell .secondary-screen{
+  background:
+    linear-gradient(180deg,
+      rgba(0,0,0,.52) 0%,
+      rgba(0,0,0,.74) 230px,
+      #020203 650px),
+    url('./assets/myday-long-v263.avif') center top/100% auto no-repeat,
+    #020203!important;
+}
