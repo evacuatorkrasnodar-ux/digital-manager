@@ -947,3 +947,262 @@
   .day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini>.note-mini-chevron{display:none}
   .day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini>.note-to-plan{padding-inline:7px}
 }
+
+/* v271 — compact balanced My Day. Only this screen: leave the shared dock untouched. */
+.day-shell:not(.care-shell,.world-shell,.health-shell){
+  box-sizing:border-box;
+  padding:calc(11px + env(safe-area-inset-top,0px)) 12px calc(79px + env(safe-area-inset-bottom,0px));
+}
+/* The greeting retains both lines without reserving excessive empty space. */
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-header{min-height:49px}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-intro{
+  min-height:0;
+  padding:12px 3px 11px;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-intro .polish-hello{
+  font-size:clamp(24px,6.7vw,29px);
+  line-height:1.04;
+  margin-bottom:6px;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-intro #dayGreeting{
+  font-size:clamp(11px,3vw,12px);
+  line-height:1.35;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-tabs{
+  min-height:45px;
+  margin-bottom:9px;
+  padding:3px;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-tab{min-height:37px}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry{
+  height:63px;
+  min-height:63px;
+  max-height:63px;
+  margin-bottom:10px;
+  border-radius:18px;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry-symbol{
+  height:38px;width:38px;
+  font-size:20px;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry-arrow{
+  width:31px;height:31px;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .calendar-panel{
+  padding:10px 9px 9px;
+  border-radius:18px;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .calendar-toolbar{padding:0 2px 6px}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .calendar-toolbar h2{font-size:clamp(17px,4.6vw,19px)}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .month-arrow{width:31px;height:31px;font-size:24px}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .weekdays{
+  margin:0 0 2px;
+  font-size:10px;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .weekdays>span{padding:4px 0}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .month-grid{gap:1px}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .calendar-day{
+  min-height:38px;
+  gap:2px;
+  padding:2px 0 1px;
+  border-radius:11px;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .calendar-legend{
+  margin-top:6px;
+  gap:4px 10px;
+  font-size:9px;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .ru-calendar-caption{
+  margin:4px 2px 0;
+  font-size:8.5px;
+  line-height:1.25;
+}
+/* Match section heading baselines and identical glass-pills at the right edge. */
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-section-heading{
+  box-sizing:border-box;
+  width:100%;
+  gap:8px;
+  margin:11px 0 7px;
+  align-items:center;
+  justify-content:space-between;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-section-heading h2{
+  font-size:clamp(16px,4.5vw,19px);
+  line-height:1.15;
+  font-weight:465;
+  letter-spacing:-.03em;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .notes-in-day{margin-top:13px}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-section-heading .day-add{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  box-sizing:border-box;
+  width:104px;
+  min-width:104px;
+  height:36px;
+  min-height:36px;
+  max-height:36px;
+  padding:0 10px;
+  border:1px solid rgba(142,199,245,.58);
+  border-radius:19px;
+  background:
+    radial-gradient(ellipse 85% 70% at 25% 0%,rgba(221,244,255,.20),transparent 80%),
+    linear-gradient(148deg,rgba(33,75,117,.76),rgba(9,32,56,.83) 68%,rgba(5,18,34,.88));
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.26),
+    inset 0 -1px rgba(80,154,223,.13),
+    0 5px 12px rgba(0,5,16,.28);
+  color:#f1faff;
+  -webkit-backdrop-filter:blur(17px);
+  backdrop-filter:blur(17px);
+  font-size:12px;
+  font-weight:460;
+  letter-spacing:-.01em;
+  line-height:1;
+  white-space:nowrap;
+  text-shadow:0 1px 3px rgba(2,9,20,.5);
+  transition:background-color .16s ease,border-color .16s ease,transform .16s ease;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-section-heading .day-add.subtle{
+  border-color:rgba(148,196,238,.52);
+  background:
+    radial-gradient(ellipse 85% 70% at 25% 0%,rgba(210,231,248,.15),transparent 80%),
+    linear-gradient(148deg,rgba(28,65,100,.73),rgba(9,29,50,.82) 68%,rgba(5,17,32,.88));
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-section-heading .day-add:hover{
+  border-color:rgba(191,228,253,.85);
+  background:linear-gradient(145deg,rgba(48,97,143,.86),rgba(11,39,69,.89));
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-section-heading .day-add:active{transform:translateY(1px)}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-section-heading .day-add:focus-visible{
+  outline:2px solid #d0edff;
+  outline-offset:2px;
+}
+/* Consistent full-width cards and equal-height empty states. */
+.day-shell:not(.care-shell,.world-shell,.health-shell) .event-list,
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-notes-list{
+  box-sizing:border-box;
+  width:100%;
+  min-width:0;
+  margin:0;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-compact-empty{
+  box-sizing:border-box;
+  width:100%;
+  min-width:0;
+  min-height:64px;
+  border-radius:17px;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-compact-empty.compact-event,
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-compact-empty.compact-note{
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr) 32px;
+  align-items:center;
+  gap:9px;
+  width:100%;
+  height:64px;
+  min-height:64px;
+  max-height:64px;
+  padding:7px 10px;
+  border-radius:17px;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-compact-empty.compact-event::before{
+  left:61px;
+  top:13px;
+  bottom:13px;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .compact-event>.compact-empty-symbol,
+.day-shell:not(.care-shell,.world-shell,.health-shell) .compact-note>.compact-empty-symbol{
+  justify-self:center;
+  width:36px;
+  height:36px;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .compact-event>.compact-empty-content{
+  padding-left:18px;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .compact-event>.compact-empty-content::before{left:2px}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .compact-event>.compact-empty-action,
+.day-shell:not(.care-shell,.world-shell,.health-shell) .compact-note>.compact-empty-action{
+  box-sizing:border-box;
+  width:31px;
+  height:31px;
+  justify-self:end;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .compact-empty-content{gap:3px}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .compact-empty-content strong{
+  font-size:clamp(11px,3.1vw,13px);
+  line-height:1.2;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .compact-empty-content small{
+  font-size:clamp(9px,2.65vw,11px);
+  line-height:1.2;
+}
+/* Created items are tight but can grow naturally with their real contents. */
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-event,
+.day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini{
+  box-sizing:border-box;
+  width:100%;
+  min-height:64px;
+  border-radius:17px;
+  margin-bottom:6px;
+  padding-top:8px;
+  padding-bottom:8px;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-event{column-gap:7px}
+/* Re-home the important local backup action into the notebook toolbar, not the page footer. */
+.day-shell:not(.care-shell,.world-shell,.health-shell) .notebook-title{margin-top:9px}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .notebook-tools{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:10px;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .notebook-tools .search-wrap{
+  box-sizing:border-box;
+  flex:1;
+  min-width:0;
+  height:38px;
+  margin:0;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .notebook-export{
+  box-sizing:border-box;
+  width:38px;height:38px;
+  flex:none;
+  display:grid;place-items:center;
+  border:1px solid rgba(137,195,239,.52);
+  border-radius:14px;
+  background:linear-gradient(148deg,rgba(32,73,112,.78),rgba(6,24,44,.88));
+  color:#d8f0ff;
+  box-shadow:inset 0 1px rgba(255,255,255,.2);
+  cursor:pointer;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .notebook-export svg{
+  display:block;width:17px;height:17px;
+  fill:none;stroke:currentColor;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+@media(max-width:350px){
+  .day-shell:not(.care-shell,.world-shell,.health-shell){
+    padding-left:10px;padding-right:10px;
+  }
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .calendar-day{min-height:36px}
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .day-section-heading h2{font-size:16px}
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .day-section-heading .day-add{
+    width:97px;min-width:97px;height:34px;min-height:34px;max-height:34px;font-size:11px;
+  }
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .day-compact-empty.compact-event,
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .day-compact-empty.compact-note{
+    grid-template-columns:36px minmax(0,1fr) 29px;
+    gap:7px;
+    padding:6px 8px;
+    height:62px;min-height:62px;max-height:62px;
+  }
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .day-compact-empty.compact-event::before{left:49px}
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .compact-event>.compact-empty-symbol,
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .compact-note>.compact-empty-symbol{width:32px;height:32px}
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .compact-event>.compact-empty-action,
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .compact-note>.compact-empty-action{width:29px;height:29px}
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .compact-event>.compact-empty-content{padding-left:16px}
+}
