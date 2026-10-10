@@ -1,23 +1,45 @@
-/* Consistent Back controls and one stable My World card, v2.
-   Apply only to inner personal pages, never to the dashboard home. */
+/* Consistent personal navigation v3.
+   One 34px Back button at top-right on inner pages only.
+   Keep the brand logo at left without using the back button as a logo. */
 
-/* All four personal pages: one visible circular Back arrow at the very
-   top-left of the existing header. No extra floating buttons. */
+body > .day-shell.day-shell > header.day-header{
+  box-sizing:border-box!important;
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  padding-right:43px!important;
+}
+
+/* Decorative brand mark remains at the left on all inner pages. */
+body > .day-shell.day-shell > header.day-header::before{
+  content:""!important;
+  box-sizing:border-box!important;
+  display:block!important;
+  flex:0 0 37px!important;
+  width:37px!important;
+  height:42px!important;
+  background:url('./assets/logo-air.png') center/contain no-repeat!important;
+  pointer-events:none!important;
+}
+
+/* Back is an independent control: never push the title or dock around. */
 body > .day-shell.day-shell > header.day-header > a.day-back{
   box-sizing:border-box!important;
   display:grid!important;
   place-items:center!important;
-  position:relative!important;
+  position:absolute!important;
   top:0!important;
-  left:0!important;
-  align-self:flex-start!important;
-  flex:0 0 42px!important;
-  width:42px!important;
-  height:42px!important;
-  min-width:42px!important;
-  min-height:42px!important;
-  max-width:42px!important;
-  max-height:42px!important;
+  right:0!important;
+  left:auto!important;
+  bottom:auto!important;
+  align-self:auto!important;
+  flex:none!important;
+  width:34px!important;
+  height:34px!important;
+  min-width:34px!important;
+  min-height:34px!important;
+  max-width:34px!important;
+  max-height:34px!important;
   margin:0!important;
   padding:0!important;
   border:1px solid rgba(165,205,235,.64)!important;
@@ -32,16 +54,16 @@ body > .day-shell.day-shell > header.day-header > a.day-back{
   filter:none!important;
   transform:none!important;
   text-decoration:none!important;
-  z-index:4!important;
+  z-index:5!important;
 }
 body > .day-shell.day-shell > header.day-header > a.day-back > svg{
   display:block!important;
-  width:19px!important;
-  height:19px!important;
-  opacity:1!important;
-  visibility:visible!important;
   position:relative!important;
   z-index:2!important;
+  width:16px!important;
+  height:16px!important;
+  opacity:1!important;
+  visibility:visible!important;
   fill:none!important;
   stroke:currentColor!important;
   stroke-width:1.9!important;
@@ -55,6 +77,15 @@ body > .day-shell.day-shell > header.day-header > a.day-back:is(:hover,:focus-vi
 body > .day-shell.day-shell > header.day-header > a.day-back:focus-visible{
   outline:2px solid #d3efff!important;
   outline-offset:2px!important;
+}
+@media(max-width:350px){
+  body > .day-shell.day-shell > header.day-header::before{
+    flex-basis:31px!important;
+    width:31px!important;
+  }
+  body > .day-shell.day-shell > header.day-header{
+    padding-right:39px!important;
+  }
 }
 
 /* My World is one link in the calendar shell. Keep its height unchanged
