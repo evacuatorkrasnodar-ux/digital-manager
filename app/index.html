@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="./black-velvet-premium.css?v=292">
   <link rel="stylesheet" href="./unified-quiet-glass.css?v=293">
   <link rel="stylesheet" href="./home-width.css?v=297">
-  <link rel="stylesheet" href="./dashboard-reference.css?v=300">
+  <link rel="stylesheet" href="./dashboard-reference.css?v=301">
 </head>
 <body>
 <!-- All pictograms are real independent SVG elements, not fragments of the reference picture. -->
@@ -45,6 +45,10 @@
 </symbol>
   <symbol id="assistant-brand-mark" viewBox="16 5 68 88"><path d="M24.4 48.0 62.5 10.0 62.5 37.7 24.4 76.8Z" fill="url(#silver)" stroke="#cedef1" stroke-opacity=".48" stroke-width=".85" stroke-linejoin="round"/>
 <path d="M42.0 73.8 79.7 36.4 79.7 63.5 56.5 88.0 42.0 88.0Z" fill="url(#blue)" stroke="#8fcbff" stroke-opacity=".55" stroke-width=".85" stroke-linejoin="round"/></symbol>
+  <!-- Card contours use the same proven objectBoundingBox SVG method as
+       the original Digital Business developerCardClip. -->
+  <clipPath id="metricClientsClip" clipPathUnits="objectBoundingBox"><path d="M .068 .008 H .932 C .971 .008 .992 .040 .992 .084 V .813 C .992 .861 .966 .895 .925 .901 L .902 .903 C .854 .909 .843 .951 .802 .978 C .785 .990 .760 .992 .720 .992 H .070 C .029 .992 .008 .958 .008 .916 V .084 C .008 .037 .034 .008 .068 .008 Z"/></clipPath>
+  <clipPath id="metricAdviceClip" clipPathUnits="objectBoundingBox"><path d="M .080 .008 H .916 C .970 .008 .992 .048 .992 .101 V .903 C .992 .962 .964 .992 .908 .992 H .084 C .035 .992 .008 .955 .008 .913 V .107 C .008 .048 .030 .008 .080 .008 Z"/></clipPath>
   <!-- Single source of truth for the asymmetric developer-card outline. -->
   <clipPath id="developerCardClip" clipPathUnits="objectBoundingBox"><path d="M .087 .006 C .036 .006 .006 .049 .006 .113 L .006 .442 C .006 .506 .029 .547 .088 .56 C .151 .572 .169 .61 .169 .685 L .169 .891 C .169 .964 .209 .994 .276 .994 L .915 .994 C .966 .994 .994 .964 .994 .904 L .994 .107 C .994 .043 .958 .006 .911 .006 Z"/></clipPath>
   <clipPath id="profileCardClip" clipPathUnits="objectBoundingBox"><path d="M .087 .006 C .036 .006 .006 .049 .006 .113 L .006 .442 C .006 .506 .029 .547 .088 .56 C .151 .572 .169 .61 .169 .685 L .169 .891 C .169 .964 .209 .994 .276 .994 L .915 .994 C .966 .994 .994 .964 .994 .904 L .994 .107 C .994 .043 .958 .006 .911 .006 Z" transform="translate(1 0) scale(-1 1)"/></clipPath>
@@ -143,6 +147,7 @@
       </section>
       <div class="metric-grid">
         <button class="metric-card clients-card" id="clientsCard" type="button" aria-label="Открыть клиентов">
+           <svg class="bv-metric-shape-outline" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M .068 .008 H .932 C .971 .008 .992 .040 .992 .084 V .813 C .992 .861 .966 .895 .925 .901 L .902 .903 C .854 .909 .843 .951 .802 .978 C .785 .990 .760 .992 .720 .992 H .070 C .029 .992 .008 .958 .008 .916 V .084 C .008 .037 .034 .008 .068 .008 Z" fill="none" stroke-width="1" vector-effect="non-scaling-stroke"/></svg>
           <div class="tile-heading"><svg class="ico tile-symbol"><use href="#ic-users"/></svg><span>Клиенты</span><span class="tile-chevron"><svg class="ico"><use href="#ic-chevron"/></svg></span></div>
           <div class="clients-inner"><div class="donut"><div class="donut-core"><svg class="donut-people" viewBox="0 0 40 32" aria-hidden="true" focusable="false"><circle cx="20" cy="7" r="4.5"/><circle cx="9" cy="12" r="3.4"/><circle cx="31" cy="12" r="3.4"/><path d="M11 29c0-7 3.8-11 9-11s9 4 9 11Z"/><path d="M5 28c0-5.3 2.1-8.5 6.9-9.1M35 28c0-5.3-2.1-8.5-6.9-9.1"/></svg><strong id="clientTotal">248</strong><small>+8%</small></div></div><div class="donut-legend"><div><i class="legend-dot new"></i><span>Новые</span><b>68</b></div><div><i class="legend-dot active"></i><span>Активные</span><b>142</b></div><div><i class="legend-dot repeat"></i><span>Вернувшиеся</span><b>38</b></div></div></div>
         </button>
@@ -156,6 +161,7 @@
           <svg class="profit-chart" viewBox="0 0 260 95" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="goldArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffaa55" stop-opacity=".62"/><stop offset=".56" stop-color="#e7a35d" stop-opacity=".16"/><stop offset="1" stop-color="#e59542" stop-opacity="0"/></linearGradient><filter id="profitGoldBloom" x="-15%" y="-45%" width="140%" height="190%"><feGaussianBlur stdDeviation="3.7"/></filter></defs><path d="M0 87 C21 84 38 68 61 72 S87 83 109 73 C128 62 143 66 160 59 S189 48 207 37 C230 21 233 9 260 6 L260 95H0Z" fill="url(#goldArea)"/><path d="M0 87 C21 84 38 68 61 72 S87 83 109 73 C128 62 143 66 160 59 S189 48 207 37 C230 21 233 9 260 6" stroke="#ffb759" stroke-width="8" opacity=".63" fill="none" filter="url(#profitGoldBloom)"/><path d="M0 87 C21 84 38 68 61 72 S87 83 109 73 C128 62 143 66 160 59 S189 48 207 37 C230 21 233 9 260 6" stroke="#ffcf8d" stroke-width="2.15" stroke-linecap="round" fill="none"/><circle cx="260" cy="6" r="6.1" fill="#ffe6b9"/><circle cx="260" cy="6" r="11" opacity=".35" fill="#ffad61" filter="url(#profitGoldBloom)"/></svg>
         </button>
         <section class="metric-card recommendation-card" aria-label="Рекомендация управляющего">
+          <svg class="bv-metric-shape-outline bv-gold-shape-outline" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M .080 .008 H .916 C .970 .008 .992 .048 .992 .101 V .903 C .992 .962 .964 .992 .908 .992 H .084 C .035 .992 .008 .955 .008 .913 V .107 C .008 .048 .030 .008 .080 .008 Z" fill="none" stroke-width="1" vector-effect="non-scaling-stroke"/></svg>
           <svg class="recommendation-waves" viewBox="0 0 320 225" preserveAspectRatio="none" aria-hidden="true" focusable="false">
  <defs>
   <linearGradient id="recSilkGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7b411e" stop-opacity="0"/><stop offset=".42" stop-color="#f6ba75" stop-opacity=".35"/><stop offset=".74" stop-color="#fff0c6" stop-opacity=".99"/><stop offset="1" stop-color="#dc7d35" stop-opacity=".10"/></linearGradient>
