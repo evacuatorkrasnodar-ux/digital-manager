@@ -19,7 +19,8 @@
   <link rel="stylesheet" href="./voice-hints.css?v=290">
   <link rel="stylesheet" href="./control-dock.css?v=291">
   <script src="./russia-calendar.js?v=250" defer></script>
-  <script src="./myday.js?v=286" defer></script>
+  <script src="./myday.js?v=287" defer></script>
+  <script src="./personal-router.js?v=1" defer></script>
   <script src="./voice-hints.js?v=290" defer></script>
   <script src="./system-ui.js?v=283" defer></script>
   <script src="./polish.js?v=260" defer></script>
@@ -29,6 +30,7 @@
   <link rel="stylesheet" href="./card-outline-theme.css?v=336">
   <link rel="stylesheet" href="./top-tabs-position.css?v=12">
   <link rel="stylesheet" href="./personal-shell-stability.css?v=2">
+  <link rel="stylesheet" href="./personal-router.css?v=1">
   <link rel="prefetch" href="./health.html">
 </head>
 <body>
@@ -45,7 +47,7 @@
     <nav class="day-tabs" aria-label="Разделы моего дня">
       <button class="day-tab active" type="button" data-view="calendar" aria-selected="true"><svg class="day-tab-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 2v6M17 2v6M3 10h18"/></svg>Календарь</button>
       <button class="day-tab" type="button" data-view="notes" aria-selected="false"><svg class="day-tab-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h11l3 3v15H5z"/><path d="M16 3v4h3M8 12h8M8 16h5"/></svg>Блокнот <span id="notesCount" class="day-count" hidden></span></button>
-      <a class="day-tab" href="./health.html" aria-label="Открыть Моё здоровье"><svg class="day-tab-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 5a5.5 5.5 0 0 0-7.8 0L12 6l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.2A5.5 5.5 0 0 0 20.8 5z"/></svg>Здоровье</a>
+      <a class="day-tab" data-view="health" href="./health.html" aria-label="Открыть Моё здоровье"><svg class="day-tab-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 5a5.5 5.5 0 0 0-7.8 0L12 6l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.2A5.5 5.5 0 0 0 20.8 5z"/></svg>Здоровье</a>
     </nav>
     <a class="world-entry" href="./world.html"><span class="world-entry-symbol">✦</span><span><strong>Мой мир</strong><small>Ваше пространство для планов, мыслей и баланса.</small></span><span class="world-entry-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></a>
     <main>
@@ -86,6 +88,14 @@
           <button type="button" id="exportDay" class="notebook-export" aria-label="Сохранить резервную копию заметок и событий в JSON" title="Резервная копия: записи хранятся только на этом устройстве"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m-4-4 4 4 4-4M4 16v4h16v-4"/></svg></button>
         </div>
         <div id="notesList" class="notebook-list" aria-live="polite"></div>
+      </section>
+      <section id="healthEmbedded" class="personal-embedded-view" aria-label="Моё здоровье" hidden>
+        <p class="personal-frame-loading" role="status">Открываем журнал здоровья…</p>
+        <iframe id="healthFrame" title="Моё здоровье" loading="eager" referrerpolicy="same-origin"></iframe>
+      </section>
+      <section id="cycleEmbedded" class="personal-embedded-view" aria-label="Женский календарь" hidden>
+        <p class="personal-frame-loading" role="status">Открываем женский календарь…</p>
+        <iframe id="cycleFrame" title="Женский календарь" loading="eager" referrerpolicy="same-origin"></iframe>
       </section>
     </main>
   </div>
