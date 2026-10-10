@@ -465,6 +465,33 @@
   -webkit-clip-path:url(#metricClientsClip);
   clip-path:url(#metricClientsClip);
 }
+/* Clients: one dark blue-grey hairline outside the clipped button.
+   The line is never clipped by its own card and the gold card stays above it. */
+#homeScreen .metric-grid>.bv-clients-edge{
+  grid-column:1/span 11;
+  grid-row:1;
+  display:block;
+  box-sizing:border-box;
+  align-self:start;
+  justify-self:stretch;
+  min-width:0;
+  width:auto;
+  height:var(--bv-client-h);
+  margin:0 3px 0 0;
+  overflow:visible;
+  pointer-events:none;
+  z-index:2;
+  fill:none;
+  stroke:rgba(106,139,161,.68);
+  filter:none;
+}
+#homeScreen .metric-grid>.bv-clients-edge path{
+  fill:none;
+  stroke:inherit;
+  stroke-width:1;
+  stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+}
 #homeScreen .metric-grid .orders-card{
   grid-column:12/span 9;
   grid-row:1;
@@ -692,6 +719,13 @@
   top:0;
  }
  #homeScreen .metric-grid .clients-card{grid-row:1;min-height:132px}
+ #homeScreen .metric-grid>.bv-clients-edge{
+   grid-column:1/-1;
+   grid-row:1;
+   height:100%;
+   margin:0;
+   align-self:stretch;
+ }
  #homeScreen .metric-grid .orders-card{grid-row:2;min-height:115px}
  #homeScreen .metric-grid .profit-card{grid-row:3;min-height:155px}
  #homeScreen .metric-grid .recommendation-card{grid-row:4;min-height:165px}
