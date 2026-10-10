@@ -78,6 +78,11 @@
     const dayShell=document.querySelector('.day-shell');
     dayShell?.classList.toggle('calendar-fixed',calendar);
     dayShell?.classList.toggle('notebook-active',view==='notes');
+    // A different, short joke for each tab; no geometry or storage changes.
+    const greeting=$('dayGreeting');
+    if(greeting)greeting.textContent=calendar
+      ? 'Планы строим смело. Главное — не назначить отдых на прошлую пятницу.'
+      : 'Гениальные мысли — сюда. В голове и так очередь.';
     $('calendarView').hidden=!calendar;
     $('notesView').hidden=view!=='notes';
     document.querySelectorAll('[data-view]').forEach(btn=>{
@@ -370,7 +375,6 @@
     $('exportDay').addEventListener('click',exportBackup);
     document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>$(b.dataset.close).close()));
     for(const id of ['eventDialog','noteDialog'])$(id).addEventListener('click',e=>{if(e.target===$(id))$(id).close();});
-    $('dayGreeting').textContent='Планы на день есть. Главное — не забыть про себя.';
     render();
     try{db=await openDatabase();storageOk=true;await refresh();}
     catch(e){
