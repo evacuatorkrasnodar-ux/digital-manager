@@ -13,9 +13,9 @@
   <link rel="stylesheet" href="./system-ui.css?v=273">
   <link rel="stylesheet" href="./polish.css?v=260">
   <link rel="stylesheet" href="./dock.css?v=258">
-  <link rel="stylesheet" href="./myday-finish.css?v=271">
+  <link rel="stylesheet" href="./myday-finish.css?v=274">
   <script src="./russia-calendar.js?v=250" defer></script>
-  <script src="./myday.js?v=270" defer></script>
+  <script src="./myday.js?v=274" defer></script>
   <script src="./system-ui.js?v=273" defer></script>
   <script src="./polish.js?v=257" defer></script>
   <title>Мой день — Цифровой управляющий</title>
@@ -49,7 +49,8 @@
           <div class="calendar-legend"><span><i class="legend-event"></i> События</span><span><i class="legend-note"></i> Заметки</span><span><i class="legend-holiday"></i> Праздники РФ</span></div>
           <p class="ru-calendar-caption">Пятидневка РФ · переносы 2026 подтверждены, другие годы предварительно</p>
         </div>
-        <div id="ruSelectedStatus" class="ru-selected-status" role="status" hidden></div>
+        <div class="calendar-day-details" tabindex="0" role="region" aria-label="События и заметки выбранного дня">
+          <div id="ruSelectedStatus" class="ru-selected-status" role="status" hidden></div>
         <div id="ruTomorrowWarning" class="ru-tomorrow-warning" role="status" hidden></div>
         <div class="day-section-heading">
           <div><h2>План на день <span class="sr-only" id="selectedDateLabel"></span></h2></div>
@@ -61,6 +62,7 @@
           <button class="day-add subtle" id="addNoteForDay" type="button">+ Запись</button>
         </div>
         <div id="dayNotesList" class="day-notes-list"></div>
+        </div>
       </section>
       <section id="notesView" class="day-view" hidden aria-label="Блокнот">
         <div class="day-section-heading notebook-title">
