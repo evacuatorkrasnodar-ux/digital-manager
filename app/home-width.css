@@ -1,4 +1,4 @@
-/* v296 — slightly wider edge-to-edge Home on iPhone Home, approved Black Velvet preserved.
+/* v297 — wider Home spacing and neutral velvet backdrop; approved Black Velvet preserved.
    Only horizontal spacing: no card height, chart scale, typography, app data,
    bottom navigation, modal layout or personal calendars are changed.
    Preserve hardware safe-area insets, especially on notched devices. */
@@ -31,4 +31,19 @@
     padding-right:max(3px,env(safe-area-inset-right,0px));
   }
   #homeScreen .metric-grid{column-gap:6px}
+}
+
+/* v297 — neutral velvet below Home cards.
+   The underlying app shell was #01050a (blue-green). The calendar is the
+   established design reference; only Home's exposed gaps become neutral black.
+   Leave revenue, client, order and profit cards, their cyan/gold charts,
+   the entire photographic hero and bottom dock unchanged. */
+body .app-shell #homeScreen{
+  background:#020203;
+}
+body .app-shell #homeScreen .dashboard{
+  background:#020203!important;
+}
+body .app-shell #homeScreen .shortcuts{
+  background:transparent!important;
 }
