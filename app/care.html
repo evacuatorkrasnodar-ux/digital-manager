@@ -102,7 +102,7 @@
         </div>
         <section class="care-panel care-calendar-panel" aria-label="Календарь цикла">
           <div class="calendar-toolbar">
-            <button type="button" id="carePrevMonth" class="month-arrow" aria-label="Предыдущий месяц"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></button>
+            <button type="button" id="carePrevMonth" class="month-arrow" aria-label="Предыдущий месяц"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button>
             <h2 id="careMonthTitle" aria-live="polite"></h2>
             <button type="button" id="careNextMonth" class="month-arrow" aria-label="Следующий месяц"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5 7 7-7 7"/></svg></button>
           </div>
@@ -144,7 +144,7 @@
   </div>
   <dialog class="day-dialog care-dialog" id="carePeriodDialog" aria-labelledby="carePeriodDialogTitle">
     <form id="carePeriodForm">
-      <div class="dialog-top"><h2 id="carePeriodDialogTitle">Начало цикла</h2><button type="button" class="dialog-x" data-care-close="carePeriodDialog" aria-label="Закрыть"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></button></div>
+      <div class="dialog-top"><h2 id="carePeriodDialogTitle">Начало цикла</h2><button type="button" class="dialog-x" data-care-close="carePeriodDialog" aria-label="Закрыть"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button></div>
       <input type="hidden" id="carePeriodId">
       <label>Первый день менструации<input type="date" id="carePeriodDate" required></label>
       <label>Последний день <span class="optional">если известен</span><input type="date" id="carePeriodEnd"></label>
@@ -154,7 +154,7 @@
   </dialog>
   <dialog class="day-dialog care-dialog" id="careMoodDialog" aria-labelledby="careMoodDialogTitle">
     <form id="careMoodForm">
-      <div class="dialog-top"><h2 id="careMoodDialogTitle">Как самочувствие?</h2><button type="button" class="dialog-x" data-care-close="careMoodDialog" aria-label="Закрыть"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></button></div>
+      <div class="dialog-top"><h2 id="careMoodDialogTitle">Как самочувствие?</h2><button type="button" class="dialog-x" data-care-close="careMoodDialog" aria-label="Закрыть"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button></div>
       <label>Дата<input type="date" id="careMoodDate" required></label>
       <label>Сегодня чувствую себя…<select id="careMoodValue">
         <option value="great">✨ Прекрасно</option><option value="calm">🌿 Спокойно</option><option value="tired">☕ Устала</option><option value="sensitive">♡ Чувствительно</option><option value="pain">☾ Дискомфорт</option><option value="other">✎ По-разному</option>
