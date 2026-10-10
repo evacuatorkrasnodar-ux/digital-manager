@@ -15,6 +15,14 @@
     return './index.html';
   }
   function goBack(){
+    // Within the dashboard, Back first returns from Assistant/Management to Home.
+    if(file==='index.html'){
+      const active=document.querySelector('.bottom-nav [data-tab].active')?.dataset.tab;
+      if(active&&active!=='home'){
+        document.querySelector('.bottom-nav [data-tab="home"]')?.click();
+        return;
+      }
+    }
     // Native history preserves the user's actual path through tabs and pages.
     if(history.length>1){history.back();return;}
     if(file!=='index.html')location.assign(fallback());
@@ -23,16 +31,19 @@
     if(embedded)return;
     const header=document.querySelector('body > .day-shell > .day-header');
     const homeActions=document.querySelector('#homeScreen .masthead .header-actions');
-    const holder=header||homeActions||document.body;
-    if(holder.querySelector('.dm-back-circle'))return;
-    const button=document.createElement('button');
-    button.type='button';
-    button.className='dm-back-circle';
-    button.setAttribute('aria-label','Назад');
-    button.setAttribute('title','Вернуться назад');
-    button.innerHTML=svg;
-    button.addEventListener('click',goBack);
-    holder.append(button);
+    const holders=header?[header]:homeActions?
+      [homeActions,...document.querySelectorAll('.secondary-screen > .subhead')]:[document.body];
+    for(const holder of holders){
+      if(holder.querySelector('.dm-back-circle'))continue;
+      const button=document.createElement('button');
+      button.type='button';
+      button.className='dm-back-circle';
+      button.setAttribute('aria-label','Назад');
+      button.setAttribute('title','Вернуться назад');
+      button.innerHTML=svg;
+      button.addEventListener('click',goBack);
+      holder.append(button);
+    }
   }
   function nextTab(direction){
     let names,selected,activate;
