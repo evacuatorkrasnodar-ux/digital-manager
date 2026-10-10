@@ -1,0 +1,29 @@
+/* Health subsections: the same restrained graphite / platinum palette as My Day.
+   Visual-only: preserve the existing horizontal scroll, sizes and tab logic. */
+.day-shell.health-shell nav.health-tabs{
+  background:var(--bv-glass-rail,linear-gradient(153deg,#121c27,#07101a 55%,#02080f))!important;
+  border-color:var(--dm-card-hairline,rgba(106,139,161,.52))!important;
+  box-shadow:inset 0 1px rgba(247,251,255,.12),0 5px 12px rgba(0,0,0,.28)!important;
+}
+.day-shell.health-shell nav.health-tabs > :is(button,a){
+  color:#cbd7e2!important;
+  text-shadow:none!important;
+}
+.day-shell.health-shell nav.health-tabs > :is(button,a).active{
+  color:#102536!important;
+  border-color:rgba(226,240,248,.84)!important;
+  background:var(--bv-quiet-ice,linear-gradient(148deg,#dce8f0,#a8c0d2 55%,#7893aa))!important;
+  box-shadow:var(--bv-quiet-glow,inset 0 1px rgba(255,255,255,.84),0 1px 5px rgba(171,205,230,.13))!important;
+  font-weight:530!important;
+  text-shadow:none!important;
+  filter:none!important;
+}
+.day-shell.health-shell nav.health-tabs > :is(button,a):not(.active):hover{
+  background:transparent!important;
+  box-shadow:none!important;
+  filter:none!important;
+}
+.day-shell.health-shell nav.health-tabs > :is(button,a):not(.active):not(:first-child)::before{
+  border-right-color:rgba(148,170,190,.28)!important;
+  box-shadow:none!important;
+}
