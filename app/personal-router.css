@@ -1,4 +1,4 @@
-/* Persistent personal views v1: medical sections live below the same top rail. */
+/* Persistent personal views v2: medical sections live below the same top rail. */
 body > .day-shell .world-entry[hidden]{display:none!important}
 body > .day-shell main > .personal-embedded-view[hidden]{display:none!important}
 body > .day-shell main > .personal-embedded-view{
@@ -33,4 +33,77 @@ body > .day-shell main > .personal-embedded-view:not(.loaded) > .personal-frame-
 }
 body > .day-shell.personal-medical-open{
   min-height:100dvh;
+}
+
+/* One fixed viewport for every tab. Before this, Calendar locked the document
+   while Health/Notes scrolled the document, moving both navigation docks. */
+html:has(body > .day-shell #healthEmbedded),
+html.myday-calendar-locked:has(body > .day-shell #healthEmbedded){
+  box-sizing:border-box!important;
+  height:100%!important;
+  overflow:hidden!important;
+  overscroll-behavior:none!important;
+}
+html:has(body > .day-shell #healthEmbedded) body{
+  box-sizing:border-box!important;
+  height:100%!important;
+  min-height:0!important;
+  overflow:hidden!important;
+  overscroll-behavior:none!important;
+}
+body > .day-shell.day-shell:has(#healthEmbedded){
+  box-sizing:border-box!important;
+  display:flex!important;
+  flex-direction:column!important;
+  height:100dvh!important;
+  min-height:0!important;
+  max-height:100dvh!important;
+  overflow:hidden!important;
+  padding-bottom:calc(77px + env(safe-area-inset-bottom,0px))!important;
+}
+body > .day-shell.day-shell:has(#healthEmbedded) > :is(.day-header,.day-intro,nav.day-tabs){
+  flex-shrink:0!important;
+}
+body > .day-shell.day-shell:has(#healthEmbedded) > .world-entry:not([hidden]){
+  flex-shrink:0!important;
+}
+body > .day-shell.day-shell:has(#healthEmbedded) > main{
+  box-sizing:border-box!important;
+  display:block!important;
+  flex:1 1 auto!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  overscroll-behavior-y:contain!important;
+  scrollbar-width:none;
+}
+body > .day-shell.day-shell:has(#healthEmbedded) > main::-webkit-scrollbar{
+  display:none;
+}
+body > .day-shell.day-shell:has(#healthEmbedded) > main > .personal-embedded-view{
+  min-height:100%;
+}
+body > .day-shell.day-shell:has(#healthEmbedded) > main > .personal-embedded-view > iframe{
+  height:100%!important;
+  min-height:220px;
+}
+/* Animate only the changing content. Never transform the header, rail or dock. */
+@media(prefers-reduced-motion:no-preference){
+  @keyframes personal-panel-arrive{
+    from{opacity:.45;transform:translateY(5px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  body > .day-shell.day-shell:has(#healthEmbedded) > main > :is(#calendarView,#notesView,.personal-embedded-view):not([hidden]){
+    animation:personal-panel-arrive .20s cubic-bezier(.2,.7,.3,1) both;
+  }
+  body > .day-shell.day-shell:has(#healthEmbedded) > main > .personal-embedded-view:not(.loaded) > .personal-frame-loading{
+    animation:personal-panel-arrive .16s ease-out both;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  body > .day-shell.day-shell:has(#healthEmbedded) > main > *{
+    animation:none!important;
+  }
 }
