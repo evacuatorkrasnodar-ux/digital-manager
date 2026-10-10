@@ -1,73 +1,156 @@
-/* My Day v261 — true image pixel rendering, illuminated real glass controls. */
-.day-shell:not(.care-shell,.world-shell,.health-shell){--dm-scene:url('./assets/architecture-hero.png');background:#01040a}
-.day-shell:not(.care-shell,.world-shell,.health-shell)::before{background-image:
-linear-gradient(180deg,#01060e11,#01061119 20%,#0107104d 42%,#000309c9 75%,#000207),
-var(--dm-scene);
-background-position:center top,center -10px;
-background-size:100% 755px,100% auto;
-background-repeat:no-repeat;filter:none}
-.day-shell:not(.care-shell,.world-shell,.health-shell)::after{inset:278px -12px -2px;background-image:
-linear-gradient(180deg,#00040c30,#01050c96 32%,#000307d9 65%,#000206),
-var(--dm-scene);
-background-size:100% 100%,130% auto;background-position:center top,center top;
-background-repeat:no-repeat;filter:blur(17px);opacity:.56;
--webkit-mask-image:linear-gradient(180deg,transparent,black 13%,black);
-mask-image:linear-gradient(180deg,transparent,black 13%,black)}
-.day-shell:not(.care-shell,.world-shell,.health-shell) #goToday[hidden]{display:none!important}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .day-header{min-height:53px;gap:9px}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .day-back{width:47px;height:52px}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .day-heading h1{font-size:clamp(24px,6.65vw,29px);font-weight:450}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .day-heading>span{font-size:clamp(9px,2.58vw,11px);letter-spacing:.055em}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .day-intro{padding:23px 4px 20px;min-height:142px}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .day-intro .polish-hello{font-size:clamp(28px,7.7vw,34px);font-weight:445;line-height:1.03;letter-spacing:-.044em;margin:0 0 10px;text-shadow:0 2px 17px #000c}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .day-intro #dayGreeting{color:#e7f5ff;font-size:clamp(13px,3.6vw,15px);max-width:290px;line-height:1.44;text-shadow:0 2px 10px #000e}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .day-tabs{position:relative;isolation:isolate;
-min-height:58px;margin-bottom:12px;padding:4px;gap:3px;border-radius:31px;
-border:1px solid #9acffb80;background:linear-gradient(165deg,#051223d6,#010a15df);
-box-shadow:inset 0 1px #ebfaff3d,0 11px 30px #000b;
--webkit-backdrop-filter:blur(22px) saturate(1.13);backdrop-filter:blur(22px) saturate(1.13)}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .day-tab{position:relative;min-height:48px;gap:8px;border-radius:26px;
-color:#e5f2ff;font-size:clamp(11px,3.1vw,14px);font-weight:460;
-border:1px solid transparent;text-shadow:0 1px 3px #0005}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .day-tab-icon{width:clamp(17px,4.7vw,22px);height:clamp(17px,4.7vw,22px);
-stroke-width:1.75;filter:drop-shadow(0 1px 3px #0005)}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .day-tab.active{isolation:isolate;overflow:hidden;color:#fff;border:1px solid #bbebff;
-background:radial-gradient(ellipse at 23% 1%,#c4edffbf,transparent 59%),
-linear-gradient(157deg,#449aef,#176bbf 54%,#06468c);
-box-shadow:inset 0 1px 2px #ffffffe9,inset 0 -3px 10px #082d738c,
-0 0 0 1px #1a95ff2b,0 0 19px 3px #2593ff87,0 7px 22px #004d9d8a}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .day-tab.active::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-background:url('./assets/glass-refraction.svg') center/cover no-repeat;opacity:.85}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .day-tab.active::after{content:"";position:absolute;left:8%;right:8%;bottom:-7px;height:14px;
-pointer-events:none;border-radius:50%;background:radial-gradient(ellipse,#bdf4ffea,transparent 71%);
-filter:blur(5px);opacity:.72}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry{min-height:78px;padding:12px 14px;gap:12px;margin-bottom:14px;
-border-radius:23px;border:1px solid #87c4f7a3;
-background:linear-gradient(105deg,#07182ce8 12%,#05162bb0 50%,#0713248c 100%),
-var(--dm-scene) center 61%/auto 190px no-repeat;
-box-shadow:inset 0 1px #e8f9ff4f,0 13px 31px #0009;
--webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-background:url('./assets/world-lightflow.svg') right bottom/75% 100% no-repeat;
-opacity:.96;-webkit-mask-image:none;mask-image:none}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-background:radial-gradient(ellipse at 84% 30%,#fbbd6b47,transparent 45%);opacity:1}
+/* My Day v262 — repaired real-image composition and optically accurate glass controls.
+   Last stylesheet on My Day only. No rules for the confirmed fixed 3-button dock. */
+.day-shell:not(.care-shell,.world-shell,.health-shell){--dm-scene:url('./assets/architecture-hero.png');background:#020611}
+.day-shell:not(.care-shell,.world-shell,.health-shell)::before{
+ content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;
+ background:
+  linear-gradient(180deg,rgba(0,5,15,.12) 0px,rgba(1,7,17,.05) 120px,rgba(2,7,17,.20) 210px,
+  rgba(1,6,15,.34) 295px,rgba(0,5,14,.57) 385px,rgba(0,4,12,.84) 505px,#01040b 710px),
+  var(--dm-scene) center top / 100% clamp(420px,121vw,520px) no-repeat,
+  linear-gradient(#071727,#01040b);
+ background-repeat:no-repeat;filter:none;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell)::after{
+ content:"";position:absolute;inset:340px -12px -4px;z-index:-1;pointer-events:none;
+ background:var(--dm-scene) 50% 20% / 113% auto no-repeat;
+ filter:blur(22px) saturate(1.04);opacity:.28;
+ -webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 19%,black 55%,transparent 91%);
+ mask-image:linear-gradient(to bottom,transparent 0%,black 19%,black 55%,transparent 91%);
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-header{gap:10px;min-height:55px}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-back{width:50px;height:54px}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-heading>span{font-size:clamp(10px,2.68vw,11px);letter-spacing:.045em;color:#d5edff}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-heading h1{font-size:clamp(26px,7.2vw,30px);font-weight:440;letter-spacing:-.048em}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-intro{padding:25px 4px 22px;min-height:154px;text-shadow:0 2px 12px rgba(0,0,0,.75)}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-intro .polish-hello{font-size:clamp(28px,8vw,35px);font-weight:430;line-height:1.065;margin-bottom:13px}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-intro #dayGreeting{font-size:clamp(13px,3.7vw,15px);line-height:1.45;max-width:295px;color:#d5ebfa}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-today{display:none!important}
+/* Entire capsule: one continuous, light outlined, midnight-blue crystal surface. */
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-tabs{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;
+ padding:3px;min-height:54px;margin:0 0 13px;border-radius:28px;overflow:visible;
+ border:1px solid rgba(142,195,241,.54);
+ background:linear-gradient(115deg,rgba(9,30,51,.91) 0%,rgba(4,15,28,.94) 57%,rgba(3,11,21,.97));
+ box-shadow:inset 0 1px rgba(232,250,255,.22),0 8px 22px rgba(0,2,9,.60);
+ -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-tab{
+ position:relative;min-height:46px;gap:6px;border:1px solid transparent;
+ border-radius:24px;padding:4px 2px;font-size:clamp(11px,3.15vw,13px);font-weight:460;
+ color:#edf6ff;text-shadow:0 1px 4px rgba(0,0,0,.50);
+ display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:visible;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-tab-icon{width:clamp(17px,4.5vw,20px);height:clamp(17px,4.5vw,20px);flex:none;stroke-width:1.8}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-tab:not(:last-child):not(.active)::after{
+ content:"";position:absolute;right:-2px;top:8px;bottom:8px;width:1px;
+ background:linear-gradient(transparent,rgba(160,217,255,.16),transparent);
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-tab.active{
+ z-index:1;isolation:isolate;overflow:hidden;color:#fff;
+ border:1px solid rgba(183,233,255,.96);border-radius:24px;
+ background:
+  radial-gradient(ellipse 68% 115% at 4% 15%,rgba(224,255,255,.56),rgba(119,211,255,.31) 42%,transparent 100%),
+  linear-gradient(153deg,rgba(91,167,237,.90),rgba(17,99,184,.92) 76%,rgba(4,59,118,.93));
+ box-shadow:inset 0 1px rgba(255,255,255,.88),inset 0 -2px 8px rgba(6,51,124,.45),
+  0 0 0 1px rgba(29,157,254,.23),0 0 17px rgba(59,173,255,.54),0 4px 10px rgba(10,73,143,.48);
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-tab.active::before{
+ content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+ background:url('./assets/glass-refraction.svg') -3px 50%/110% 100% no-repeat;opacity:.91;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-tab.active::after{
+ content:"";position:absolute;left:5%;right:11%;bottom:0;height:2px;z-index:1;pointer-events:none;
+ border-radius:50%;background:linear-gradient(90deg,transparent,#bdffff 20%,#efffff 48%,transparent 92%);
+ box-shadow:0 0 9px 3px rgba(81,225,255,.71);
+}
+/* My World: a real scenic panorama under legible navy glass, not blown-out room lights. */
+.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry{
+ position:relative;isolation:isolate;overflow:hidden;
+ min-height:81px;margin:0 0 15px;padding:11px 12px;gap:11px;
+ border-radius:22px;border:1px solid rgba(127,185,239,.61);
+ background:
+  linear-gradient(102deg,rgba(6,23,40,.96) 0%,rgba(5,22,39,.90) 46%,rgba(6,22,39,.45) 100%),
+  url('./assets/architecture-hero.png') 46% 52%/100% auto no-repeat;
+ box-shadow:inset 0 1px rgba(233,251,255,.24),0 13px 29px rgba(0,2,9,.64);
+ -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry::before{
+ content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+ background:url('./assets/world-lightflow.svg') right bottom/79% 100% no-repeat;
+ opacity:.87;-webkit-mask-image:none;mask-image:none;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry::after{
+ content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+ background:radial-gradient(ellipse 29% 80% at 79% 27%,rgba(253,175,81,.25),transparent 100%);
+ opacity:1;
+}
 .day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry>*{position:relative;z-index:1}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry-symbol{width:48px;height:48px;flex:none;border:1px solid #a6dcff;
-border-radius:50%;font-size:23px;
-background:radial-gradient(circle at 34% 18%,#addfffaa,transparent 24%),
-radial-gradient(circle at 50% 50%,#1e5a92,#07162b 70%);
-box-shadow:inset 0 1px #ffffff88,0 0 18px #3a9dff85,0 0 3px 1px #a1daff50;
-text-shadow:0 0 12px #ffcc84}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry strong{font-weight:465;color:#fff;font-size:15px;text-shadow:0 2px 8px #001}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry small{color:#c5e5fa;font-size:11px}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry-arrow{display:grid;place-items:center;width:35px;height:35px;border-radius:50%;
-border:1px solid #99cff96b;background:linear-gradient(145deg,#2039529e,#061222b5);
-font-size:20px;color:#fff}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .calendar-panel{background:radial-gradient(ellipse at 79% -6%,#ffb36b33,transparent 31%),
-linear-gradient(154deg,#0b2136d1,#04101fe6 67%,#010812f2);
-border-color:#7dc2fd94;box-shadow:inset 0 1px #ffffff40,0 0 0 .5px #4494e140,0 17px 35px #000a}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .calendar-day.selected{border-color:#c4ecff;color:#fff;
-background:linear-gradient(147deg,#65c0ff,#1679da 66%,#0757a6);
-box-shadow:inset 0 1px #ffffffbb,0 0 16px #259effab}
-@media(max-width:365px){.day-shell:not(.care-shell,.world-shell,.health-shell) .day-tab{gap:4px;font-size:11px}.day-shell:not(.care-shell,.world-shell,.health-shell) .day-tab-icon{width:16px;height:16px}.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry{padding:11px 10px;gap:9px}.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry small{font-size:10px}}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry-symbol{
+ width:47px;height:47px;flex:none;display:grid;place-items:center;border-radius:50%;
+ border:1px solid rgba(152,217,255,.97);
+ background:radial-gradient(circle at 28% 20%,rgba(214,248,255,.58),transparent 33%),
+ radial-gradient(circle at 50% 55%,#245e99,#07172b 73%);
+ box-shadow:inset 0 1px rgba(255,255,255,.63),0 0 16px rgba(49,155,255,.72),0 0 0 2px rgba(30,116,221,.16);
+ text-shadow:0 0 13px #ffcd82;color:#fff1cc;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry strong{color:#f7fcff;font-size:15px;font-weight:465}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry small{color:#b9dcf3;font-size:clamp(10px,2.8vw,11.5px)}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry-arrow{
+ display:grid;place-items:center;flex:none;width:36px;height:36px;
+ border-radius:50%;border:1px solid rgba(129,185,233,.54);
+ background:linear-gradient(145deg,rgba(25,52,79,.75),rgba(3,15,30,.89));
+ box-shadow:inset 0 1px rgba(232,250,255,.13);font-size:22px;color:#f1f8ff;
+}
+/* Event and notebook cards: actual interactions, luminous line art on glass. */
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-add{
+ border-radius:17px;border-color:rgba(153,209,251,.69);
+ background:linear-gradient(148deg,rgba(34,68,101,.86),rgba(8,27,49,.92));
+ color:#f3f9ff;box-shadow:inset 0 1px rgba(255,255,255,.25),0 0 12px rgba(71,154,230,.12);
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-event,.day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini,.day-shell:not(.care-shell,.world-shell,.health-shell) .day-empty{
+ position:relative;isolation:isolate;overflow:hidden;
+ border:1px solid rgba(129,187,237,.56);border-radius:19px;
+ background:linear-gradient(149deg,rgba(13,36,58,.91),rgba(3,14,28,.96));
+ box-shadow:inset 0 1px rgba(253,255,255,.15),0 12px 27px rgba(0,0,0,.52);
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-event::after{
+ content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+ background:url('./assets/glass-waves.svg') right bottom/73% auto no-repeat;opacity:.73;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini::after{
+ content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+ background:url('./assets/glass-waves.svg') right bottom/70% auto no-repeat;
+ filter:hue-rotate(160deg) saturate(1.4);opacity:.77;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-event>*,.day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini>*{position:relative;z-index:1}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .item-actions{display:flex;gap:5px;align-self:center}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .day-event .item-actions button{
+ width:31px;height:31px;display:grid;place-items:center;
+ border-radius:50%;border:1px solid rgba(154,209,248,.44);
+ background:linear-gradient(145deg,rgba(21,51,81,.75),rgba(4,19,35,.85));
+ color:#d5ebfc;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini>span{
+ display:grid;place-items:center;flex:none;width:34px;height:34px;
+ border-radius:50%;border:1px solid rgba(255,198,119,.49);
+ background:radial-gradient(circle at 31% 25%,rgba(255,220,149,.24),rgba(29,28,27,.91) 70%);
+ color:#ffdaa2;box-shadow:0 0 10px rgba(255,163,75,.17);
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .calendar-panel{
+ border:1px solid rgba(136,190,245,.53);border-radius:21px;
+ background:radial-gradient(ellipse 34% 17% at 80% 0%,rgba(255,191,117,.15),transparent),
+ linear-gradient(153deg,rgba(13,33,53,.88),rgba(3,13,29,.95));
+ box-shadow:inset 0 1px rgba(245,254,255,.17),0 13px 28px rgba(0,0,0,.57);
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .calendar-panel::after{background:url('./assets/glass-waves.svg') right bottom/74% auto no-repeat;opacity:.29}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .calendar-day.selected{
+ background:linear-gradient(151deg,#58b4f9,#126aca);color:#fff;border-color:#b8edff;
+ box-shadow:inset 0 1px rgba(255,255,255,.73),0 0 14px rgba(61,165,255,.61);
+}
+@media(max-width:350px){
+ .day-shell:not(.care-shell,.world-shell,.health-shell) .day-tab{gap:4px;font-size:11px}
+ .day-shell:not(.care-shell,.world-shell,.health-shell) .day-tab-icon{width:16px;height:16px}
+ .day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry{gap:8px;padding:10px}
+ .day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry small{font-size:9.6px}
+}
+/* The 3-button bottom dock remains governed solely by dock.css v258. */

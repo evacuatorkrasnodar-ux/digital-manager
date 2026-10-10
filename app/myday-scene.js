@@ -19,9 +19,9 @@
        let r=d[k]/255,g=d[k+1]/255,b=d[k+2]/255;
        const lum=.2126*r+.7152*g+.0722*b;
        const lit=clamp((lum-.12)/.22)*sky;
-       const warm=lit*gauss(xx,yy,422,176,282,113)*.82;
+       const warm=lit*gauss(xx,yy,452,176,230,107)*.76;
        r=r*(1-warm)+warm;g=g*(1-warm)+.19*warm;b=b*(1-warm)+.028*warm;
-       const cool=gauss(xx,yy,50,37,295,195)*clamp((310-yy)/280)*.43;
+       const cool=gauss(xx,yy,50,37,295,195)*clamp((310-yy)/280)*.52;
        r=r*(1-cool)+.015*cool;g=g*(1-cool)+.10*cool;b=b*(1-cool)+.27*cool;
        const l1=gauss(xx,yy,430,181,150,75)*lit*.55,l2=gauss(xx,yy,430,187,88,36)*lit*.37,l3=gauss(xx,yy,430,184,27,13)*lit*.31;
        r=1-(1-r)*(1-l1);g=1-(1-g)*(1-.32*l1);b=1-(1-b)*(1-.04*l1);
@@ -37,12 +37,30 @@
       }
      }
      ctx.putImageData(frame,0,0);
-     canvas.toBlob(blob=>{
+     // Extend the scene with a blurred reflection so that the photograph
+     // does not abruptly end between the greeting and the glass tabs.
+     const extended=document.createElement('canvas');
+     extended.width=w;extended.height=780;
+     const ec=extended.getContext('2d');
+     if(!ec)return;
+     ec.drawImage(canvas,0,0);
+     ec.save();
+     ec.translate(0,h*2);ec.scale(1,-1);
+     ec.filter='blur(15px) saturate(.93)';
+     ec.drawImage(canvas,0,0);
+     ec.restore();
+     const fade=ec.createLinearGradient(0,h-60,0,780);
+     fade.addColorStop(0,'rgba(1,6,15,0)');
+     fade.addColorStop(.25,'rgba(1,6,15,.30)');
+     fade.addColorStop(.62,'rgba(0,4,11,.83)');
+     fade.addColorStop(1,'#01040b');
+     ec.fillStyle=fade;ec.fillRect(0,h-60,w,780-h+60);
+     extended.toBlob(blob=>{
       if(!blob)return;
       const url=URL.createObjectURL(blob);
       shell.style.setProperty('--dm-scene','url("'+url+'")');
       window.addEventListener('pagehide',()=>URL.revokeObjectURL(url),{once:true});
-     },'image/webp',.86);
+     },'image/webp',.88);
     }catch(_){/* retain original photograph */}
    };
    img.src='./assets/architecture-hero.png';

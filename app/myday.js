@@ -260,7 +260,7 @@
     if(new URLSearchParams(location.search).get('view')==='notes')setView('notes');
     $('prevMonth').addEventListener('click',()=>{month=new Date(month.getFullYear(),month.getMonth()-1,1);render();});
     $('nextMonth').addEventListener('click',()=>{month=new Date(month.getFullYear(),month.getMonth()+1,1);render();});
-    $('goToday').addEventListener('click',()=>{selected=today();const d=new Date();month=new Date(d.getFullYear(),d.getMonth(),1);setView('calendar');render();});
+    $('goToday')?.addEventListener('click',()=>{selected=today();const d=new Date();month=new Date(d.getFullYear(),d.getMonth(),1);setView('calendar');render();});
     $('addEvent').addEventListener('click',()=>openEvent());
     $('eventDate').addEventListener('change',updateRuAdvice);
     $('eventKind').addEventListener('change',updateRuAdvice);
