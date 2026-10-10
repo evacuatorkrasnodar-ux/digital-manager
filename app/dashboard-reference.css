@@ -886,3 +886,6 @@
     --bv-gold-h:132px;
   }
 }
+
+/* Temporarily park the Revenue chart card; keep its markup and chart logic intact. */
+#homeScreen .dashboard>.revenue-card{display:none!important}
