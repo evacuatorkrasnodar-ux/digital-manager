@@ -1,4 +1,4 @@
-/* v2 — Frosted-glass Send control. Visible SVG is the icon source:
+/* v3 — Frosted-glass Send control. Visible SVG is the icon source:
    never hide the real plane behind an unreliable background image. */
 body > .day-shell.world-shell [data-world-view="assistant"] > form#worldAskForm > button[type="submit"]{
   box-sizing:border-box!important;
@@ -84,4 +84,27 @@ body > .day-shell.world-shell [data-world-view="assistant"] > form#worldAskForm 
   body > .day-shell.world-shell [data-world-view="assistant"] > form#worldAskForm > button[type="submit"]{
     transition:none!important;
   }
+}
+
+/* Original approved glass artwork. Only activate after the real image has
+   loaded; the visible SVG above remains a reliable offline/error fallback. */
+body > .day-shell.world-shell [data-world-view="assistant"] > form#worldAskForm > button[type="submit"].plane-art-ready{
+  background-color:transparent!important;
+  background-image:url("./assets/send-plane-glass.webp")!important;
+  background-size:100% 100%!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  border:0!important;
+  border-radius:13px!important;
+  box-shadow:0 3px 10px rgba(0,0,0,.24),0 0 9px rgba(107,188,247,.13)!important;
+}
+body > .day-shell.world-shell [data-world-view="assistant"] > form#worldAskForm > button[type="submit"].plane-art-ready::before{
+  display:none!important;
+}
+body > .day-shell.world-shell [data-world-view="assistant"] > form#worldAskForm > button[type="submit"].plane-art-ready > svg{
+  opacity:0!important;
+}
+body > .day-shell.world-shell [data-world-view="assistant"] > form#worldAskForm > button[type="submit"].plane-art-ready:hover{
+  filter:brightness(1.12)!important;
+  box-shadow:0 3px 11px rgba(0,0,0,.3),0 0 13px rgba(113,195,255,.2)!important;
 }
