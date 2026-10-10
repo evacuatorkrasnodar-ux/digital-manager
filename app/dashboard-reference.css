@@ -891,3 +891,25 @@
 #homeScreen .metric-grid .clients-card .clients-inner{
   transform:translateY(-5px);
 }
+
+/* Restore visible navigation arrows on dashboard tiles; preserve card geometry. */
+#homeScreen .metric-grid .tile-heading .tile-chevron,
+#homeScreen .recommendation-card .recommendation-top .tile-chevron{
+  position:relative;
+  z-index:12;
+  display:grid;
+  place-items:center;
+  visibility:visible;
+  opacity:1;
+  flex-shrink:0;
+}
+#homeScreen .metric-grid .tile-heading .tile-chevron .ico{
+  display:block;
+  visibility:visible;
+  opacity:1;
+  width:15px;
+  height:15px;
+  stroke:currentColor;
+  stroke-width:2;
+  fill:none;
+}
