@@ -1,4 +1,4 @@
-/* v298 — reference-matched working dashboard, Black Velvet.
+/* v303 — Signature Sculpted Cards, Black Velvet.
    Only the four real interactive business cards. Based on the user's sample:
    silver + ice blue donut, vertical blue bars, amber profit glow, liquid
    gold ribbon recommendation. Existing demo values and click behavior stay. */
@@ -417,575 +417,299 @@
   outline-offset:2px;
 }
 /* Actual iPhones: 2 columns remain usable and compact; no clipped labels. */
-@media(max-width:539px){
- #homeScreen .metric-grid{
-   grid-template-columns:repeat(2,minmax(0,1fr));
-   grid-template-rows:158px 206px;
-   gap:9px 8px;
- }
- #homeScreen .metric-grid .clients-card{
-   grid-column:1;grid-row:1;
-   height:158px;min-height:158px;padding:9px 8px!important;
- }
- #homeScreen .metric-grid .orders-card{
-   grid-column:2;grid-row:1;
-   height:151px;min-height:151px;padding:9px 10px!important;
- }
- #homeScreen .metric-grid .profit-card{
-   grid-column:1;grid-row:2;
-   height:195px;min-height:195px;padding:9px!important;
- }
- #homeScreen .metric-grid .recommendation-card{
-   grid-column:2;grid-row:2;
-   top:-6px;height:212px;min-height:212px;
-   padding:9px 10px 10px!important;
- }
- #homeScreen .metric-grid .tile-heading{font-size:clamp(11px,3.05vw,13px);gap:5px}
- #homeScreen .metric-grid .tile-symbol{width:21px;height:21px}
- #homeScreen .metric-grid .tile-chevron{
-   width:29px;height:29px;min-width:29px;
- }
- #homeScreen .metric-grid .tile-chevron .ico{width:15px;height:15px}
- #homeScreen .clients-card .clients-inner{gap:6px;margin-top:12px}
- #homeScreen .clients-card .donut{width:81px;height:81px}
- #homeScreen .clients-card .donut::before{inset:8px}
- #homeScreen .clients-card .donut-people{width:21px;height:18px}
- #homeScreen .clients-card .donut-core strong{font-size:21px}
- #homeScreen .clients-card .donut-core small{font-size:11px}
- #homeScreen .clients-card .donut-legend{gap:9px}
- #homeScreen .clients-card .donut-legend>div{gap:4px;font-size:9px}
- #homeScreen .clients-card .donut-legend .legend-dot{width:8px;height:8px}
- #homeScreen .clients-card .donut-legend b{font-size:10px}
- #homeScreen .orders-card .orders-inner{margin-top:17px;gap:3px}
- #homeScreen .orders-card .tile-number{font-size:clamp(26px,7vw,34px)}
- #homeScreen .orders-card .bargraph{height:66px;gap:3px;max-width:43%}
- #homeScreen .orders-card .bargraph i{min-width:2px}
- #homeScreen .profit-card .profit-number{font-size:clamp(18px,5vw,23px);margin-top:12px}
- #homeScreen .profit-card .profit-chart{height:85px;bottom:5px}
- #homeScreen .recommendation-card .spark-icon{width:26px;height:26px}
- #homeScreen .recommendation-card .recommendation-top{font-size:10px;gap:5px}
- #homeScreen .recommendation-card .advice-head{font-size:clamp(11px,2.9vw,13px);margin:8px 0 6px}
- #homeScreen .recommendation-card .advice-body{font-size:clamp(9px,2.40vw,11px);line-height:1.36;margin-bottom:6px}
- #homeScreen .recommendation-card .advice-cta{font-size:11px;min-height:32px;padding:5px 9px;gap:5px}
- #homeScreen .recommendation-card .advice-cta .ico{width:13px;height:13px}
-}
-@media(max-width:360px){
- #homeScreen .metric-grid{gap:8px 6px;grid-template-rows:151px 207px}
- #homeScreen .metric-grid .clients-card{height:151px;min-height:151px;padding:8px 6px!important}
- #homeScreen .metric-grid .orders-card{height:148px;min-height:148px;padding:8px!important}
- #homeScreen .metric-grid .profit-card{height:192px;min-height:192px}
- #homeScreen .metric-grid .recommendation-card{height:211px;min-height:211px;padding:8px!important}
- #homeScreen .clients-card .donut{width:72px;height:72px}
- #homeScreen .clients-card .donut::before{inset:7px}
- #homeScreen .clients-card .donut-legend>div{gap:3px;font-size:8px}
- #homeScreen .clients-card .donut-legend .legend-dot{width:7px;height:7px}
- #homeScreen .recommendation-card .recommendation-top{font-size:9.3px;gap:4px}
- #homeScreen .recommendation-card .spark-icon{width:23px;height:23px}
-}
-@media(prefers-reduced-motion:reduce){
- #homeScreen .metric-grid>.metric-card{transition:none!important}
-}
 
-/* v300 — iPhone-safe asymmetric reference layout.
-   Important fix: 20 tracks with ZERO internal column-gap. In v299 19
-   unwanted track gaps ate the available mobile width and clipped content.
-   Four cards now ALWAYS fit inside the real container (no horizontal scroll).
-   We form each visible gutter with a half-margin on the adjoining cards. */
+/* v303 — SINGLE authoritative geometry. No more v299/v300/v301/v302
+   override piles. Shared curves and ordered responsive silhouette.
+   20 columns have ZERO inner gaps. Each pair makes its own 6-8px seam.
+   Gold recommendation rises into the concave lower-right client contour. */
 #homeScreen .metric-grid{
+  --bv-client-h:clamp(108px,29vw,126px);
+  --bv-order-h:clamp(99px,26.5vw,115px);
+  --bv-profit-h:clamp(126px,34vw,146px);
+  --bv-gold-h:clamp(152px,41vw,177px);
   display:grid;
   grid-template-columns:repeat(20,minmax(0,1fr));
-  grid-template-rows:176px 222px;
+  grid-template-rows:var(--bv-client-h) var(--bv-gold-h);
   column-gap:0!important;
-  row-gap:9px;
+  row-gap:8px;
   width:100%;
-  max-width:100%;
   min-width:0;
+  max-width:100%;
+  margin:9px 0 0;
+  align-items:start;
+  isolation:isolate;
   overflow:visible;
 }
 #homeScreen .metric-grid>.metric-card{
   box-sizing:border-box;
-  justify-self:stretch;
-  width:auto!important;
+  position:relative;
   min-width:0!important;
   max-width:100%;
-  margin-top:0!important;
-  margin-bottom:0!important;
+  width:auto!important;
+  margin:0!important;
   overflow:hidden;
+  justify-self:stretch;
+  align-self:start;
+  -webkit-tap-highlight-color:transparent;
 }
 #homeScreen .metric-grid .clients-card{
-  grid-column:1 / span 11;
+  grid-column:1/span 11;
   grid-row:1;
-  margin-left:0!important;
-  margin-right:5px!important;
-  height:176px;
-  min-height:176px;
+  height:var(--bv-client-h);
+  min-height:var(--bv-client-h);
+  margin-right:3px!important;
+  padding:8px 7px 6px!important;
   z-index:1;
-}
-#homeScreen .metric-grid .orders-card{
-  grid-column:12 / span 9;
-  grid-row:1;
-  margin-left:5px!important;
-  margin-right:0!important;
-  height:159px;
-  min-height:159px;
-  z-index:1;
-}
-#homeScreen .metric-grid .profit-card{
-  grid-column:1 / span 9;
-  grid-row:2;
-  margin-left:0!important;
-  margin-right:5px!important;
-  height:198px;
-  min-height:198px;
-  z-index:1;
-}
-#homeScreen .metric-grid .recommendation-card{
-  grid-column:10 / span 11;
-  grid-row:2;
-  margin-left:5px!important;
-  margin-right:0!important;
-  top:-18px;
-  height:230px;
-  min-height:230px;
-  z-index:3;
-}
-/* Let the assistant's gold edge float gently over the left card's empty
-   bottom-right corner, never over its headings, donut, or legend. */
-#homeScreen .clients-card .clients-inner{
-  min-width:0;
-}
-#homeScreen .clients-card .donut-legend{
-  min-width:0;
-}
-#homeScreen .orders-card .orders-inner{
-  min-width:0;
-}
-#homeScreen .profit-card .profit-number{
-  white-space:nowrap;
-  font-variant-numeric:tabular-nums;
-}
-#homeScreen .metric-grid .recommendation-card :is(.recommendation-top,.advice-head,.advice-body,.advice-cta){
-  max-width:100%;
-}
-#homeScreen .recommendation-card .advice-cta{
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-/* iPhone portrait: same asymmetric shapes, compact but readable internals. */
-@media(max-width:539px){
-  #homeScreen .metric-grid{
-    grid-template-columns:repeat(20,minmax(0,1fr));
-    grid-template-rows:164px 214px;
-    column-gap:0!important;
-    row-gap:9px;
-  }
-  #homeScreen .metric-grid .clients-card{
-    grid-column:1 / span 11;
-    grid-row:1;
-    margin-right:4px!important;
-    height:164px;
-    min-height:164px;
-    padding:10px 8px!important;
-  }
-  #homeScreen .metric-grid .orders-card{
-    grid-column:12 / span 9;
-    grid-row:1;
-    margin-left:4px!important;
-    height:150px;
-    min-height:150px;
-    padding:10px 8px!important;
-  }
-  #homeScreen .metric-grid .profit-card{
-    grid-column:1 / span 9;
-    grid-row:2;
-    margin-right:4px!important;
-    height:202px;
-    min-height:202px;
-    padding:10px 8px!important;
-  }
-  #homeScreen .metric-grid .recommendation-card{
-    grid-column:10 / span 11;
-    grid-row:2;
-    margin-left:4px!important;
-    top:-17px;
-    height:231px;
-    min-height:231px;
-    padding:10px 10px 9px!important;
-  }
-  #homeScreen .metric-grid .tile-heading{
-    gap:5px;
-    font-size:clamp(10px,2.78vw,12.5px);
-    min-width:0;
-  }
-  #homeScreen .metric-grid .tile-symbol{
-    width:20px;height:20px;
-  }
-  #homeScreen .metric-grid .tile-chevron{
-    width:28px;height:28px;min-width:28px;
-  }
-  #homeScreen .clients-card .clients-inner{
-    gap:5px;
-    margin-top:11px;
-  }
-  #homeScreen .clients-card .donut{
-    width:clamp(62px,18.5vw,77px);
-    height:clamp(62px,18.5vw,77px);
-    min-width:0;
-  }
-  #homeScreen .clients-card .donut::before{inset:7px}
-  #homeScreen .clients-card .donut-people{width:19px;height:17px}
-  #homeScreen .clients-card .donut-core strong{font-size:clamp(18px,5.5vw,22px)}
-  #homeScreen .clients-card .donut-core small{font-size:11px}
-  #homeScreen .clients-card .donut-legend{gap:8px}
-  #homeScreen .clients-card .donut-legend>div{
-    gap:3px;
-    font-size:clamp(8px,2.28vw,10px);
-  }
-  #homeScreen .clients-card .donut-legend .legend-dot{width:7px;height:7px}
-  #homeScreen .clients-card .donut-legend b{font-size:clamp(9px,2.55vw,11px)}
-  #homeScreen .orders-card .orders-inner{
-    display:block;
-    position:relative;
-    margin-top:17px;
-  }
-  #homeScreen .orders-card .orders-inner>div:first-child{
-    position:relative;z-index:2;
-  }
-  #homeScreen .orders-card .tile-number{font-size:clamp(26px,7vw,34px)}
-  #homeScreen .orders-card .bargraph{
-    position:absolute;
-    z-index:1;
-    bottom:-23px;right:0;
-    display:flex;
-    width:43%;
-    max-width:55px;
-    min-width:0;
-    height:65px;
-    gap:2px;
-    margin:0;
-  }
-  #homeScreen .orders-card .bargraph i{min-width:2px}
-  #homeScreen .profit-card .profit-number{
-    font-size:clamp(17px,4.65vw,23px);
-    margin-top:12px;
-    letter-spacing:-.04em;
-  }
-  #homeScreen .profit-card .profit-chart{height:86px;bottom:6px}
-  #homeScreen .recommendation-card .recommendation-top{
-    font-size:clamp(9.5px,2.6vw,11px);
-    gap:5px;
-  }
-  #homeScreen .recommendation-card .spark-icon{
-    width:26px;height:26px;
-  }
-  #homeScreen .recommendation-card .advice-head{
-    font-size:clamp(11px,2.9vw,13px);
-    margin:9px 0 7px;
-  }
-  #homeScreen .recommendation-card .advice-body{
-    font-size:clamp(9px,2.36vw,11px);
-    line-height:1.34;
-    margin-bottom:7px;
-  }
-  #homeScreen .recommendation-card .advice-cta{
-    font-size:clamp(10px,2.75vw,12px);
-    min-height:32px;
-    padding:5px 9px;
-    gap:5px;
-  }
-  #homeScreen .recommendation-card .advice-cta .ico{width:13px;height:13px}
-}
-@media(max-width:360px){
-  #homeScreen .metric-grid{
-    grid-template-rows:159px 214px;
-    column-gap:0!important;
-    row-gap:8px;
-  }
-  #homeScreen .metric-grid .clients-card{
-    height:159px;min-height:159px;
-    margin-right:3px!important;padding:8px 5px!important;
-  }
-  #homeScreen .metric-grid .orders-card{
-    height:147px;min-height:147px;
-    margin-left:3px!important;padding:8px 6px!important;
-  }
-  #homeScreen .metric-grid .profit-card{
-    height:198px;min-height:198px;
-    margin-right:3px!important;padding:9px 6px!important;
-  }
-  #homeScreen .metric-grid .recommendation-card{
-    margin-left:3px!important;
-    top:-16px;height:229px;min-height:229px;padding:9px 7px!important;
-  }
-  #homeScreen .clients-card .donut{
-    width:61px;height:61px;
-  }
-  #homeScreen .clients-card .donut::before{inset:6px}
-  #homeScreen .clients-card .donut-people{width:17px;height:14px}
-  #homeScreen .clients-card .donut-core strong{font-size:18px}
-  #homeScreen .clients-card .donut-core small{font-size:10px}
-  #homeScreen .clients-card .clients-inner{gap:3px}
-  #homeScreen .clients-card .donut-legend>div{gap:2px;font-size:8px}
-  #homeScreen .clients-card .donut-legend b{font-size:8.5px}
-  #homeScreen .clients-card .donut-legend .legend-dot{width:6px;height:6px}
-  #homeScreen .profit-card .profit-number{font-size:clamp(15px,4.6vw,18px)}
-  #homeScreen .recommendation-card .recommendation-top{font-size:9px}
-  #homeScreen .recommendation-card .spark-icon{width:23px;height:23px}
-  #homeScreen .recommendation-card .advice-cta{font-size:10px;padding:5px 7px}
-}
-/* Don't crush the layout on ultra-small/zoomed screens. */
-@media(max-width:320px){
-  #homeScreen .metric-grid{grid-template-rows:auto auto;row-gap:9px}
-  #homeScreen .metric-grid .clients-card{grid-column:1/-1;height:150px;min-height:150px;margin:0!important}
-  #homeScreen .metric-grid .orders-card{grid-column:1/-1;grid-row:2;height:150px;min-height:150px;margin:0!important}
-  #homeScreen .metric-grid .profit-card{grid-column:1/-1;grid-row:3;height:165px;min-height:165px;margin:0!important}
-  #homeScreen .metric-grid .recommendation-card{grid-column:1/-1;grid-row:4;height:210px;min-height:210px;top:0;margin:0!important}
-  #homeScreen .clients-card .donut{width:80px;height:80px}
-}
-
-/* v301 — proven custom SVG contours from the FIRST Digital Business card.
-   The SVG clip path shapes the ACTUAL card, and an identical thin SVG stroke
-   follows its silhouette. Unlike trying to emulate a cutout with a stack of
-   rectangular cards, this keeps the contour stable on iPhone.
-   Crucially: clipPaths use objectBoundingBox; the visible outline uses
-   vector-effect:non-scaling-stroke (exactly as developerCardClip did). */
-#homeScreen .metric-grid .clients-card{
+  border:0!important;
   border-radius:0!important;
-  border-color:transparent!important;
   -webkit-clip-path:url(#metricClientsClip);
   clip-path:url(#metricClientsClip);
-  background:
-    radial-gradient(ellipse 110% 72% at 8% 0%,rgba(103,163,204,.09),transparent 66%),
-    linear-gradient(153deg,#0c1824 0%,#080f17 48%,#02080f 100%)!important;
+}
+#homeScreen .metric-grid .orders-card{
+  grid-column:12/span 9;
+  grid-row:1;
+  height:var(--bv-order-h);
+  min-height:var(--bv-order-h);
+  margin-left:3px!important;
+  padding:8px 8px 6px!important;
+  z-index:1;
+  border-radius:17px;
+}
+#homeScreen .metric-grid .profit-card{
+  grid-column:1/span 9;
+  grid-row:2;
+  height:var(--bv-profit-h);
+  min-height:var(--bv-profit-h);
+  margin-right:3px!important;
+  padding:8px!important;
+  z-index:1;
+  border-radius:17px;
 }
 #homeScreen .metric-grid .recommendation-card{
+  grid-column:10/span 11;
+  grid-row:2;
+  top:-14px;
+  height:var(--bv-gold-h);
+  min-height:var(--bv-gold-h);
+  margin-left:3px!important;
+  padding:8px 9px!important;
+  z-index:3;
+  border:0!important;
   border-radius:0!important;
-  border-color:transparent!important;
   -webkit-clip-path:url(#metricAdviceClip);
   clip-path:url(#metricAdviceClip);
 }
-#homeScreen .metric-grid .clients-card:hover{
-  background:
-    radial-gradient(ellipse 110% 72% at 8% 0%,rgba(103,163,204,.09),transparent 66%),
-    linear-gradient(153deg,#0c1824 0%,#080f17 48%,#02080f 100%)!important;
-}
+/* The outline follows the same SVG path as the clipping surface.
+   vector-effect means a consistent ~1px contour at any card size. */
 #homeScreen .metric-grid .bv-metric-shape-outline{
   position:absolute;
-  display:block;
   inset:0;
+  display:block;
   width:100%;
   height:100%;
   max-width:none;
   z-index:8;
-  pointer-events:none;
   overflow:visible;
+  pointer-events:none;
   fill:none;
-  stroke:rgba(171,200,221,.56);
-  stroke-width:1;
-  vector-effect:non-scaling-stroke;
-  filter:drop-shadow(0 0 1px rgba(163,204,235,.14));
+  stroke:rgba(173,198,216,.57);
+  filter:drop-shadow(0 0 1px rgba(161,207,236,.18));
 }
 #homeScreen .metric-grid .bv-metric-shape-outline path{
   stroke:inherit;
-  stroke-width:1.1;
+  stroke-width:1.08;
   vector-effect:non-scaling-stroke;
   fill:none;
 }
 #homeScreen .metric-grid .bv-gold-shape-outline{
-  stroke:rgba(221,165,108,.66);
-  filter:drop-shadow(0 0 2px rgba(224,141,64,.18));
+  stroke:rgba(222,159,99,.73);
+  filter:drop-shadow(0 0 1.3px rgba(251,160,73,.2));
 }
-#homeScreen .metric-grid .bv-gold-shape-outline path{
-  stroke-width:1.2;
-}
-/* The raised recommendation's background stays fully inside its OWN shaped
-   path. Its gold waves are layered in the card, never under its text. */
-#homeScreen .recommendation-card .recommendation-waves{
-  z-index:0;
-}
-#homeScreen .recommendation-card :is(.recommendation-top,.advice-head,.advice-body,.advice-cta){
+#homeScreen .metric-grid .bv-gold-shape-outline path{stroke-width:1.16}
+/* Card headings and charts: readable at iPhone X without pushing numbers
+   through the shaped edges. */
+#homeScreen .metric-grid .tile-heading{
+  position:relative;
   z-index:2;
+  display:flex;
+  align-items:center;
+  gap:5px;
+  min-height:23px;
+  font-size:clamp(10px,2.8vw,12.4px);
+  line-height:1.12;
+  white-space:nowrap;
 }
-
-
-/* v302 — reference proportions measured from the approved 613 x 381 example.
-   v301 geometry / SVG shaped contours are correct. The only correction here
-   is MOBILE SCALE: shorten the vertical space ~20-30%, retain the exact
-   11:9 / 9:11 stepped widths and a readable, uncut content hierarchy.
-   Never force content outside its own curved silhouette. */
-@media (min-width:321px) and (max-width:539px){
-  #homeScreen .metric-grid{
-    --bv-ref-top:clamp(116px,29.8vw,128px);
-    --bv-ref-order:clamp(105px,28vw,119px);
-    --bv-ref-profit:clamp(150px,40vw,172px);
-    --bv-ref-advice:clamp(178px,46vw,198px);
-    grid-template-columns:repeat(20,minmax(0,1fr));
-    grid-template-rows:var(--bv-ref-top) var(--bv-ref-advice);
-    column-gap:0!important;
-    row-gap:8px;
-  }
-  #homeScreen .metric-grid .clients-card{
-    height:var(--bv-ref-top);
-    min-height:var(--bv-ref-top);
-    padding:6px 8px 5px!important;
-    margin-right:4px!important;
-  }
-  #homeScreen .metric-grid .orders-card{
-    height:var(--bv-ref-order);
-    min-height:var(--bv-ref-order);
-    padding:7px 8px 6px!important;
-    margin-left:4px!important;
-  }
-  #homeScreen .metric-grid .profit-card{
-    height:var(--bv-ref-profit);
-    min-height:var(--bv-ref-profit);
-    padding:8px 9px!important;
-    margin-right:4px!important;
-  }
-  #homeScreen .metric-grid .recommendation-card{
-    height:var(--bv-ref-advice);
-    min-height:var(--bv-ref-advice);
-    top:-20px;
-    padding:8px 9px 7px!important;
-    margin-left:4px!important;
-  }
-  #homeScreen .metric-grid .tile-heading{
-    min-height:22px;
-    gap:5px;
-    font-size:clamp(10px,2.75vw,12px);
-    line-height:1.14;
-  }
-  #homeScreen .metric-grid .tile-symbol{
-    width:18px;height:18px;
-  }
-  #homeScreen .metric-grid .tile-chevron{
-    width:25px;height:25px;min-width:25px;
-  }
-  #homeScreen .metric-grid .tile-chevron .ico{
-    width:14px;height:14px;
-  }
-  /* Tight top-left content, but preserve the 3 genuine legend rows. */
-  #homeScreen .clients-card .clients-inner{
-    gap:5px;
-    margin-top:3px;
-  }
-  #homeScreen .clients-card .donut{
-    width:clamp(57px,16vw,68px);
-    height:clamp(57px,16vw,68px);
-  }
-  #homeScreen .clients-card .donut::before{inset:6px}
-  #homeScreen .clients-card .donut-people{
-    width:18px;height:15px;
-  }
-  #homeScreen .clients-card .donut-core strong{
-    font-size:clamp(17px,4.7vw,20px);
-  }
-  #homeScreen .clients-card .donut-core small{
-    font-size:10px;
-    line-height:1.14;
-  }
-  #homeScreen .clients-card .donut-legend{
-    gap:6px;
-  }
-  #homeScreen .clients-card .donut-legend>div{
-    gap:3px;
-    font-size:clamp(8px,2.25vw,9px);
-    white-space:nowrap;
-  }
-  #homeScreen .clients-card .donut-legend b{
-    font-size:clamp(9px,2.4vw,10px);
-  }
-  #homeScreen .clients-card .donut-legend .legend-dot{
-    width:7px;height:7px;
-  }
-  /* Order columns must end INSIDE their panel, not below the clipped edge. */
-  #homeScreen .orders-card .orders-inner{
-    margin-top:10px;
-    min-height:48px;
-  }
-  #homeScreen .orders-card .tile-number{
-    font-size:clamp(24px,6.85vw,31px);
-    line-height:1;
-  }
-  #homeScreen .orders-card .delta.small{
-    font-size:11px;
-    margin-top:6px;
-  }
-  #homeScreen .orders-card .bargraph{
-    right:0;
-    bottom:-3px;
-    width:43%;
-    max-width:53px;
-    height:50px;
-    gap:2px;
-    opacity:.97;
-  }
-  #homeScreen .orders-card .bargraph i{min-width:2px}
-  /* Profit's line occupies the bottom half as in the reference. */
-  #homeScreen .profit-card .profit-number{
-    font-size:clamp(16px,4.45vw,20px);
-    margin-top:6px;
-    white-space:nowrap;
-    letter-spacing:-.035em;
-  }
-  #homeScreen .profit-card .delta.small{
-    margin-top:5px;
-    font-size:clamp(10px,2.58vw,12px);
-  }
-  #homeScreen .profit-card .profit-chart{
-    height:clamp(54px,17vw,68px);
-    bottom:3px;
-  }
-  /* Reference's raised gold card is compact, with the full text visible. */
-  #homeScreen .recommendation-card .recommendation-top{
-    gap:5px;
-    font-size:clamp(9px,2.38vw,10.6px);
-    min-height:23px;
-    line-height:1.1;
-  }
-  #homeScreen .recommendation-card .spark-icon{
-    width:23px;height:23px;
-  }
-  #homeScreen .recommendation-card .advice-head{
-    margin:5px 0 4px;
-    font-size:clamp(10.5px,2.7vw,12.2px);
-    line-height:1.20;
-    letter-spacing:-.02em;
-  }
-  #homeScreen .recommendation-card .advice-body{
-    font-size:clamp(8.7px,2.28vw,10.2px);
-    line-height:1.26;
-    margin:0 0 4px;
-  }
-  #homeScreen .recommendation-card .advice-cta{
-    min-height:28px;
-    padding:4px 8px;
-    gap:5px;
-    font-size:clamp(9.5px,2.45vw,10.8px);
-  }
-  #homeScreen .recommendation-card .advice-cta .ico{
-    width:13px;height:13px;
-  }
+#homeScreen .metric-grid .tile-symbol{width:20px;height:20px;flex:none}
+#homeScreen .metric-grid .tile-chevron{
+  width:25px;height:25px;min-width:25px;flex:none;
+  margin-left:auto;
 }
-/* iPhone X (375px) and other narrow widths retain readable chart typography.
-   At extreme width the original stacked fallback under 321px stays intact. */
-@media (min-width:321px) and (max-width:360px){
-  #homeScreen .metric-grid{
-    --bv-ref-top:118px;
-    --bv-ref-order:108px;
-    --bv-ref-profit:150px;
-    --bv-ref-advice:177px;
-  }
-  #homeScreen .metric-grid .recommendation-card{top:-18px}
-  #homeScreen .metric-grid .clients-card{padding:6px 5px!important;margin-right:3px!important}
-  #homeScreen .metric-grid .orders-card{padding:7px 6px!important;margin-left:3px!important}
-  #homeScreen .metric-grid .profit-card{padding:7px 6px!important;margin-right:3px!important}
-  #homeScreen .metric-grid .recommendation-card{padding:7px 7px 6px!important;margin-left:3px!important}
-  #homeScreen .clients-card .donut{width:54px;height:54px}
-  #homeScreen .clients-card .donut::before{inset:5px}
-  #homeScreen .clients-card .donut-core strong{font-size:17px}
-  #homeScreen .clients-card .donut-legend>div{font-size:7.8px}
-  #homeScreen .clients-card .donut-legend b{font-size:8.5px}
-  #homeScreen .profit-card .profit-number{font-size:clamp(15px,4.55vw,17px)}
-  #homeScreen .recommendation-card .recommendation-top{font-size:9px}
+#homeScreen .metric-grid .tile-chevron .ico{width:14px;height:14px}
+#homeScreen .clients-card .clients-inner{
+  min-width:0;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:5px;
+  margin-top:4px;
+}
+#homeScreen .clients-card .donut{
+  width:clamp(58px,16.2vw,69px);
+  height:clamp(58px,16.2vw,69px);
+  flex:none;
+}
+#homeScreen .clients-card .donut::before{inset:6px}
+#homeScreen .clients-card .donut-people{width:17px;height:15px}
+#homeScreen .clients-card .donut-core strong{font-size:clamp(18px,4.9vw,21px)}
+#homeScreen .clients-card .donut-core small{font-size:10px;line-height:1.14}
+#homeScreen .clients-card .donut-legend{
+  display:grid;
+  gap:6px;
+  min-width:0;
+  flex:1;
+}
+#homeScreen .clients-card .donut-legend>div{
+  gap:3px;
+  min-width:0;
+  white-space:nowrap;
+  font-size:clamp(8.2px,2.35vw,10px);
+}
+#homeScreen .clients-card .donut-legend .legend-dot{
+  width:7px;height:7px;flex:none;
+}
+#homeScreen .clients-card .donut-legend b{
+  font-size:clamp(9px,2.53vw,11px);
+  margin-left:auto;
+}
+#homeScreen .orders-card .orders-inner{
+  position:relative;
+  display:block;
+  margin-top:8px;
+  min-height:51px;
+}
+#homeScreen .orders-card .orders-inner>div:first-child{
+  position:relative;z-index:2;
+}
+#homeScreen .orders-card .tile-number{
+  font-size:clamp(24px,6.95vw,32px);
+  line-height:1;
+  white-space:nowrap;
+}
+#homeScreen .orders-card .delta.small{
+  margin-top:6px;
+  font-size:clamp(10px,2.75vw,12px);
+}
+#homeScreen .orders-card .bargraph{
+  position:absolute;
+  z-index:1;
+  right:0;
+  bottom:-4px;
+  width:45%;
+  max-width:60px;
+  min-width:0;
+  height:49px;
+  display:flex;
+  gap:2px;
+  margin:0;
+}
+#homeScreen .orders-card .bargraph i{min-width:2px}
+#homeScreen .profit-card .profit-number{
+  font-size:clamp(17px,4.65vw,22px);
+  margin-top:8px;
+  line-height:1.06;
+  white-space:nowrap;
+  letter-spacing:-.035em;
+}
+#homeScreen .profit-card .delta.small{
+  margin-top:6px;
+  font-size:clamp(10.5px,2.67vw,12px);
+}
+#homeScreen .profit-card .profit-chart{
+  width:calc(100% - 12px);
+  left:6px;right:6px;
+  height:clamp(55px,15.8vw,68px);
+  bottom:4px;
+}
+#homeScreen .recommendation-card::before,
+#homeScreen .recommendation-card .recommendation-waves{z-index:0}
+#homeScreen .recommendation-card :is(.recommendation-top,.advice-head,.advice-body,.advice-cta){
+  position:relative;
+  z-index:2;
+  min-width:0;
+  max-width:100%;
+}
+#homeScreen .recommendation-card .recommendation-top{
+  min-height:22px;
+  gap:5px;
+  font-size:clamp(9.2px,2.42vw,10.7px);
+  line-height:1.13;
+  flex:none;
+}
+#homeScreen .recommendation-card .spark-icon{
+  width:24px;height:24px;flex:none;
+}
+#homeScreen .recommendation-card .advice-head{
+  font-size:clamp(10.5px,2.81vw,12.5px);
+  line-height:1.19;
+  font-weight:460;
+  margin:5px 0 4px;
+}
+#homeScreen .recommendation-card .advice-body{
+  font-size:clamp(9px,2.34vw,10.5px);
+  line-height:1.24;
+  margin:0 0 4px;
+}
+#homeScreen .recommendation-card .advice-cta{
+  min-height:28px;
+  margin-top:auto;
+  padding:4px 8px;
+  gap:6px;
+  font-size:clamp(9.5px,2.45vw,11px);
+  line-height:1.15;
+  max-width:100%;
+}
+#homeScreen .recommendation-card .advice-cta .ico{
+  width:13px;height:13px;
+}
+/* Shape appears for compact and big viewports; ensure min content dimensions
+   on extremely narrow/zoomed phone screens. */
+@media(max-width:359px){
+ #homeScreen .metric-grid{
+  grid-template-columns:1fr;
+  grid-template-rows:none;
+  grid-auto-rows:auto;
+  row-gap:8px;
+ }
+ #homeScreen .metric-grid .clients-card,
+ #homeScreen .metric-grid .orders-card,
+ #homeScreen .metric-grid .profit-card,
+ #homeScreen .metric-grid .recommendation-card{
+  grid-column:1/-1;
+  height:auto;
+  min-height:0;
+  margin:0!important;
+  top:0;
+ }
+ #homeScreen .metric-grid .clients-card{grid-row:1;min-height:132px}
+ #homeScreen .metric-grid .orders-card{grid-row:2;min-height:115px}
+ #homeScreen .metric-grid .profit-card{grid-row:3;min-height:155px}
+ #homeScreen .metric-grid .recommendation-card{grid-row:4;min-height:165px}
+ #homeScreen .clients-card .donut{width:70px;height:70px}
+ #homeScreen .orders-card .bargraph{max-width:90px}
+}
+@media(min-width:540px){
+ /* Desktop app shell remains max-width:430px; the four shapes must still
+    use their actual card dimensions, not the browser's full window width. */
+ #homeScreen .metric-grid{
+  --bv-client-h:128px;
+  --bv-order-h:118px;
+  --bv-profit-h:153px;
+  --bv-gold-h:180px;
+ }
+ #homeScreen .clients-card .donut{width:72px;height:72px}
+ #homeScreen .recommendation-card .advice-body{font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){
+ #homeScreen .metric-grid>.metric-card{transition:none!important}
 }
