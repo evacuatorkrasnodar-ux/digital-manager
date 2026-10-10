@@ -355,7 +355,7 @@
         month=new Date(d.getFullYear(),d.getMonth(),1);
       }
     }
-    document.querySelectorAll('nav.day-tabs [data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+    document.querySelectorAll('nav.day-tabs [data-view]').forEach(b=>b.addEventListener('click',e=>{if(b.tagName==='A')e.preventDefault();setView(b.dataset.view);}));
     window.addEventListener('dm-personal-route',e=>{if(['calendar','notes','health','cycle'].includes(e.detail?.view))setView(e.detail.view);});
     const initialView=new URLSearchParams(location.search).get('view');
     setView(['notes','health','cycle'].includes(initialView)?initialView:'calendar');
