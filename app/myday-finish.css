@@ -875,3 +875,75 @@
   .day-shell:not(.care-shell,.world-shell,.health-shell) .compact-event>.compact-empty-symbol{width:32px;height:32px}
   .day-shell:not(.care-shell,.world-shell,.health-shell) .compact-event>.compact-empty-action{width:28px;height:28px}
 }
+
+/* v270 — a small note-to-event action; existing note data is never altered. */
+.day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini{
+  grid-template-columns:38px minmax(0,1fr) auto 30px;
+  gap:7px;
+  padding:8px 9px;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini>.note-to-plan,
+.day-shell:not(.care-shell,.world-shell,.health-shell) .note-card-to-plan{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  height:30px;
+  min-width:0;
+  padding:0 9px;
+  border-radius:16px;
+  border:1px solid rgba(129,194,247,.47);
+  background:linear-gradient(145deg,rgba(31,78,119,.65),rgba(8,33,57,.68));
+  box-shadow:inset 0 1px rgba(224,246,255,.12);
+  color:#d4efff;
+  font-size:10px;
+  line-height:1;
+  font-weight:450;
+  white-space:nowrap;
+  cursor:pointer;
+  flex:none;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini>.note-to-plan svg,
+.day-shell:not(.care-shell,.world-shell,.health-shell) .note-card-to-plan svg{
+  width:13px;
+  height:13px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  flex:none;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini>.note-to-plan:hover,
+.day-shell:not(.care-shell,.world-shell,.health-shell) .note-card-to-plan:hover{
+  border-color:rgba(166,218,255,.83);
+  background:linear-gradient(145deg,rgba(49,104,151,.77),rgba(12,47,82,.82));
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .note-card-meta{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:6px 10px;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .note-card-to-plan{margin-left:auto}
+.day-dialog .event-from-note-hint{
+  margin:0;
+  padding:9px 11px;
+  border:1px solid rgba(134,197,245,.30);
+  border-radius:12px;
+  background:rgba(20,57,90,.37);
+  color:#badff9;
+  font-size:11px;
+  line-height:1.4;
+}
+.day-dialog .event-from-note-hint[hidden]{display:none!important}
+@media(max-width:350px){
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini{
+    grid-template-columns:34px minmax(0,1fr) auto;
+    gap:6px;
+    padding-inline:7px;
+  }
+  /* Editing remains accessible by tapping note text at narrow widths. */
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini>.note-mini-chevron{display:none}
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .note-mini>.note-to-plan{padding-inline:7px}
+}
