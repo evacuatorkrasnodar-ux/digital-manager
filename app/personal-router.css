@@ -88,6 +88,15 @@ body > .day-shell.day-shell:has(#healthEmbedded) > main > .personal-embedded-vie
 body > .day-shell.day-shell:has(#healthEmbedded) > main > .personal-embedded-view > iframe{
   min-height:220px;
 }
+/* Keep the approved fixed calendar grid on portrait phones.
+   Only Notes, Health and Cycle use the independent content scroller. */
+@media(max-width:700px) and (orientation:portrait) and (min-height:551px){
+  body > .day-shell.day-shell.calendar-fixed:has(#healthEmbedded) > main{
+    display:flex!important;
+    flex-direction:column!important;
+    overflow:hidden!important;
+  }
+}
 /* Animate only the changing content. Never transform the header, rail or dock. */
 @media(prefers-reduced-motion:no-preference){
   @keyframes personal-panel-arrive{
