@@ -1,12 +1,13 @@
-/* Digital Manager OS · shared floating glass dock v258. Compact dock and centered assistant logo on every screen. */
+/* Digital Manager OS · shared floating glass dock v295. Identical fixed geometry on every screen. */
 .bottom-nav {
   position: fixed;
   left: 50%;
-  bottom: -2px;
+  /* Drop the curved dock lower, but keep labels above the iPhone gesture bar. */
+  bottom: calc(-4px - min(10px, env(safe-area-inset-bottom, 0px)));
   transform: translateX(-50%);
   width: 100%;
   max-width: 430px;
-  height: calc(72px + env(safe-area-inset-bottom, 0px));
+  height: calc(65px + env(safe-area-inset-bottom, 0px));
   padding: 0 10px calc(5px + env(safe-area-inset-bottom, 0px));
   display: grid;
   grid-template-columns: repeat(3, minmax(0,1fr));
