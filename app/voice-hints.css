@@ -1,0 +1,221 @@
+/* v290 — contextual, honest voice-dictation tips, Black Velvet style.
+   The phone keyboard (not our web assistant) supplies dictation.
+   No audio recording or microphone permission is requested by these cards. */
+.dm-voice-tip{
+  --dm-tip-glow:rgba(78,175,255,.30);
+  box-sizing:border-box;
+  isolation:isolate;
+  position:relative;
+  display:grid;
+  grid-template-columns:49px minmax(0,1fr);
+  gap:10px;
+  width:100%;
+  min-width:0;
+  margin:8px 0 11px;
+  padding:11px 12px 11px 10px;
+  border:1px solid rgba(151,206,255,.61);
+  border-radius:19px;
+  overflow:hidden;
+  color:#f0faff;
+  background:
+    radial-gradient(ellipse at 7% 15%,rgba(93,163,224,.24),transparent 52%),
+    linear-gradient(145deg,rgba(20,49,76,.91),rgba(4,20,39,.94) 79%);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.28),
+    0 7px 21px rgba(0,4,17,.39),
+    0 0 17px rgba(57,122,188,.13);
+  -webkit-backdrop-filter:blur(17px);
+  backdrop-filter:blur(17px);
+}
+.dm-voice-tip::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  width:120px;
+  height:125%;
+  top:-10%;
+  right:-25px;
+  pointer-events:none;
+  opacity:.46;
+  border:1px solid rgba(145,206,253,.41);
+  border-radius:50%;
+  transform:rotate(-20deg);
+}
+.dm-voice-tip__orb{
+  box-sizing:border-box;
+  width:47px;
+  height:47px;
+  position:relative;
+  display:grid;
+  place-items:center;
+  align-self:start;
+  border-radius:50%;
+  border:1px solid rgba(169,218,255,.72);
+  color:#eefaff;
+  background:
+    radial-gradient(circle at 24% 8%,rgba(235,252,255,.43),transparent 65%),
+    linear-gradient(146deg,rgba(60,131,193,.84),rgba(11,44,79,.95));
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.38),
+    0 0 16px rgba(73,164,250,.34),
+    0 5px 12px rgba(0,7,18,.38);
+}
+.dm-voice-tip__orb::before{
+  content:"";
+  pointer-events:none;
+  position:absolute;
+  inset:-4px;
+  border-radius:50%;
+  border:1px solid rgba(133,211,255,.51);
+  animation:dmVoiceBreathe 5s ease-in-out infinite;
+}
+.dm-voice-tip__mic{
+  display:block;
+  width:22px;
+  height:22px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linejoin:round;
+  stroke-linecap:round;
+}
+.dm-voice-tip__wave{
+  position:absolute;
+  inset:auto -3px -8px auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+  width:29px;
+  height:18px;
+  border:1px solid rgba(168,228,255,.47);
+  border-radius:10px;
+  background:rgba(7,30,56,.91);
+  box-shadow:0 3px 10px rgba(0,7,20,.35);
+}
+.dm-voice-tip__wave i{
+  display:block;
+  width:2px;
+  height:6px;
+  border-radius:3px;
+  background:#b9eeff;
+  animation:dmVoiceBars 1.85s ease-in-out infinite;
+}
+.dm-voice-tip__wave i:nth-child(2){height:11px;animation-delay:-.26s}
+.dm-voice-tip__wave i:nth-child(3){height:8px;animation-delay:-.72s}
+.dm-voice-tip__wave i:nth-child(4){height:12px;animation-delay:-1.02s}
+.dm-voice-tip__wave i:nth-child(5){height:5px;animation-delay:-.45s}
+.dm-voice-tip__content{min-width:0}
+.dm-voice-tip__kicker{
+  display:block;
+  margin:1px 0 4px;
+  color:#a6dafb;
+  font-size:9px;
+  font-weight:590;
+  letter-spacing:.09em;
+  line-height:1.15;
+}
+.dm-voice-tip__title{
+  display:block;
+  margin:0 0 5px;
+  color:#f9fdff;
+  font-size:clamp(13px,3.6vw,15px);
+  font-weight:530;
+  line-height:1.22;
+  letter-spacing:-.023em;
+}
+.dm-voice-tip__description{
+  margin:0;
+  color:#c4e1f4;
+  font-size:11px;
+  line-height:1.44;
+  overflow-wrap:anywhere;
+}
+.dm-voice-tip__actions{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px 11px;
+  margin-top:9px;
+}
+.dm-voice-tip__go{
+  box-sizing:border-box;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-height:33px;
+  padding:1px 5px 1px 12px;
+  border:1px solid rgba(163,219,255,.65);
+  border-radius:18px;
+  color:#f6fcff;
+  background:
+    radial-gradient(ellipse at 16% 0%,rgba(224,247,255,.24),transparent 75%),
+    linear-gradient(144deg,rgba(53,118,183,.86),rgba(11,58,100,.92));
+  box-shadow:inset 0 1px rgba(255,255,255,.28),0 4px 10px rgba(0,8,22,.28);
+  font-size:11px;
+  font-weight:480;
+}
+.dm-voice-tip__chevron{
+  display:grid;
+  place-items:center;
+  flex:none;
+  width:25px;
+  height:25px;
+  border:1px solid rgba(189,234,255,.65);
+  border-radius:50%;
+  background:linear-gradient(147deg,rgba(72,140,200,.91),rgba(10,60,112,.95));
+}
+.dm-voice-tip__chevron svg{
+  display:block;
+  width:14px;
+  height:14px;
+  fill:none;
+  stroke:#fff;
+  stroke-width:1.9;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.dm-voice-tip__dismiss{
+  box-sizing:border-box;
+  min-height:30px;
+  padding:2px 4px;
+  border:0;
+  background:transparent;
+  color:#a4c6de;
+  font-size:10px;
+  text-decoration:underline;
+  text-decoration-color:rgba(151,197,230,.4);
+  text-underline-offset:3px;
+}
+.dm-voice-tip__go:focus-visible,
+.dm-voice-tip__dismiss:focus-visible{
+  outline:2px solid #d1f1ff;
+  outline-offset:2px;
+}
+.dm-voice-tip__go:hover{border-color:rgba(229,249,255,.94)}
+.dm-voice-tip__meta{
+  display:block;
+  color:#90b1c8;
+  font-size:9px;
+  margin-top:6px;
+  line-height:1.3;
+}
+@keyframes dmVoiceBreathe{
+  0%,100%{transform:scale(.97);opacity:.35}
+  50%{transform:scale(1.07);opacity:.85}
+}
+@keyframes dmVoiceBars{
+  0%,100%{transform:scaleY(.5);opacity:.52}
+  45%{transform:scaleY(1.25);opacity:1}
+}
+@media(max-width:359px){
+  .dm-voice-tip{grid-template-columns:40px minmax(0,1fr);gap:8px;padding:9px}
+  .dm-voice-tip__orb{width:39px;height:39px}
+  .dm-voice-tip__title{font-size:12px}
+  .dm-voice-tip__description{font-size:10px}
+  .dm-voice-tip__wave{transform:scale(.85);transform-origin:right bottom}
+}
+@media(prefers-reduced-motion:reduce){
+  .dm-voice-tip__orb::before,
+  .dm-voice-tip__wave i{animation:none!important}
+}
