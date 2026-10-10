@@ -168,7 +168,7 @@
 </div>
 <dialog id="healthMetricDialog" class="day-dialog" aria-labelledby="healthMetricTitle">
  <form id="healthMetricForm">
-  <div class="dialog-top"><h2 id="healthMetricTitle">Новое измерение</h2><button type="button" class="dialog-x" data-health-close="healthMetricDialog" aria-label="Вернуться к показателям"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></button></div>
+  <div class="dialog-top"><h2 id="healthMetricTitle">Новое измерение</h2><button type="button" class="dialog-x" data-health-close="healthMetricDialog" aria-label="Закрыть"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button></div>
   <input id="healthMetricId" type="hidden">
   <label>Что записываем<select id="healthMetricType"><option value="pressure">Давление</option><option value="pulse">Пульс</option><option value="steps">Шаги за день</option></select></label>
   <div class="form-row"><label>Дата<input type="date" id="healthMetricDate" required></label><label>Время<input type="time" id="healthMetricTime" required></label></div>
@@ -181,7 +181,7 @@
  </form>
 </dialog>
 <dialog id="healthMedDialog" class="day-dialog" aria-labelledby="healthMedTitle">
- <form id="healthMedForm"><div class="dialog-top"><h2 id="healthMedTitle">Моё лекарство</h2><button type="button" class="dialog-x" data-health-close="healthMedDialog" aria-label="Закрыть"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></button></div>
+ <form id="healthMedForm"><div class="dialog-top"><h2 id="healthMedTitle">Моё лекарство</h2><button type="button" class="dialog-x" data-health-close="healthMedDialog" aria-label="Закрыть"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button></div>
   <input type="hidden" id="healthMedId">
   <label>Название<input id="healthMedName" maxlength="100" required placeholder="По назначению врача"></label>
   <label>Дозировка как в назначении<input id="healthMedDose" maxlength="100" required placeholder="Например: 1 таблетка (по назначению)"></label>
@@ -192,7 +192,7 @@
  </form>
 </dialog>
 <dialog id="healthSleepDialog" class="day-dialog" aria-labelledby="healthSleepTitle">
- <form id="healthSleepForm"><div class="dialog-top"><h2 id="healthSleepTitle">Запись сна</h2><button type="button" class="dialog-x" data-health-close="healthSleepDialog" aria-label="Закрыть"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></button></div>
+ <form id="healthSleepForm"><div class="dialog-top"><h2 id="healthSleepTitle">Запись сна</h2><button type="button" class="dialog-x" data-health-close="healthSleepDialog" aria-label="Закрыть"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button></div>
   <label>Дата пробуждения<input id="healthSleepDate" type="date" required></label>
   <div class="form-row"><label>Спал(а), часов<input id="healthSleepHours" type="number" min="0" max="24" step=".25" required placeholder="7.5"></label>
   <label>Как спалось<select id="healthSleepQuality"><option value="great">Отлично</option><option value="normal">Нормально</option><option value="poor">Беспокойно</option></select></label></div>
