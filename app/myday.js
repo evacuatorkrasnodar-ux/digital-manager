@@ -75,7 +75,9 @@
   function setView(view){
     const calendar=view==='calendar';
     document.documentElement.classList.toggle('myday-calendar-locked',calendar);
-    document.querySelector('.day-shell')?.classList.toggle('calendar-fixed',calendar);
+    const dayShell=document.querySelector('.day-shell');
+    dayShell?.classList.toggle('calendar-fixed',calendar);
+    dayShell?.classList.toggle('notebook-active',view==='notes');
     $('calendarView').hidden=!calendar;
     $('notesView').hidden=view!=='notes';
     document.querySelectorAll('[data-view]').forEach(btn=>{
