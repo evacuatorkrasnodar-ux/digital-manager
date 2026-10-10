@@ -21,7 +21,14 @@
   const dismiss=document.createElement('button');
   dismiss.type='button';
   dismiss.className='os-banner-x';
-  dismiss.textContent='×';
+  const ns='http://www.w3.org/2000/svg';
+  const chevron=document.createElementNS(ns,'svg');
+  chevron.setAttribute('viewBox','0 0 24 24');
+  chevron.setAttribute('aria-hidden','true');
+  const stroke=document.createElementNS(ns,'path');
+  stroke.setAttribute('d','m14.5 5-7 7 7 7');
+  chevron.append(stroke);
+  dismiss.append(chevron);
   dismiss.setAttribute('aria-label','Скрыть напоминание');
   banner.append(message,dismiss);
   document.body.append(banner);
