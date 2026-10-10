@@ -1206,3 +1206,294 @@
   .day-shell:not(.care-shell,.world-shell,.health-shell) .compact-note>.compact-empty-action{width:29px;height:29px}
   .day-shell:not(.care-shell,.world-shell,.health-shell) .compact-event>.compact-empty-content{padding-left:16px}
 }
+
+/* v274 — pinned calendar for portrait phones: the whole page never slides.
+   Calendar month is fixed. Only long daily lists can scroll in their own region.
+   Notebook is intentionally not locked, and landscape can scroll normally. */
+@media (max-width:700px) and (orientation:portrait) and (min-height:551px){
+  html.myday-calendar-locked,
+  html.myday-calendar-locked body{
+    height:100%;
+    overflow:hidden;
+    overscroll-behavior:none;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell){
+    --dm-day-cell:clamp(27px,calc(31px + (100dvh - 800px)*.04),33px);
+    display:flex;
+    flex-direction:column;
+    height:100dvh;
+    min-height:0;
+    max-height:100dvh;
+    overflow:hidden;
+    padding-top:calc(7px + env(safe-area-inset-top,0px));
+    padding-bottom:calc(79px + env(safe-area-inset-bottom,0px));
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .day-header{
+    flex:0 0 42px;
+    min-height:42px;
+    max-height:42px;
+    gap:7px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .day-back{
+    width:39px;height:42px;
+    background-size:98% auto;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .day-heading h1{
+    font-size:clamp(19px,5.8vw,23px);
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .day-heading>span{
+    font-size:9px;
+  }
+  /* Fold tall greeting into a single unobtrusive line; content is still visible. */
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .day-intro{
+    flex:none;
+    min-height:0;
+    padding:3px 2px 4px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .day-intro .polish-hello{
+    margin:0;
+    font-size:clamp(12px,3.65vw,15px);
+    line-height:1.15;
+    font-weight:430;
+    white-space:normal;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .day-intro #dayGreeting,
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .day-intro .day-eyebrow{
+    display:none;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .day-tabs{
+    flex:0 0 39px;
+    min-height:39px;
+    height:39px;
+    padding:2px;
+    margin:0 0 6px;
+    border-radius:22px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .day-tab{
+    min-height:33px;
+    height:33px;
+    border-radius:20px;
+    padding:2px;
+    font-size:clamp(10px,2.85vw,12px);
+    gap:3px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .day-tab-icon{
+    width:16px;height:16px;
+  }
+  /* Retain navigation to My World without the large card stealing screen height. */
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .world-entry{
+    flex:0 0 42px;
+    box-sizing:border-box;
+    display:grid;
+    grid-template-columns:32px minmax(0,1fr) 27px;
+    column-gap:8px;
+    height:42px;
+    min-height:42px;
+    max-height:42px;
+    margin:0 0 6px;
+    padding:4px 8px;
+    border-radius:15px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .world-entry-symbol{
+    width:30px;height:30px;font-size:17px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .world-entry-arrow{
+    width:27px;height:27px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .world-entry strong{
+    font-size:12px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .world-entry small{
+    font-size:10px;
+    line-height:1.1;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell)>main{
+    flex:1 1 auto;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) #calendarView:not([hidden]){
+    display:flex;
+    flex-direction:column;
+    flex:1 1 auto;
+    min-height:0;
+    overflow:hidden;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) #calendarView[hidden]{display:none}
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .calendar-panel{
+    flex:0 0 auto;
+    min-height:0;
+    padding:6px 8px 5px;
+    border-radius:16px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .calendar-toolbar{
+    padding:0 0 4px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .calendar-toolbar h2{
+    font-size:clamp(15px,4.2vw,18px);
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .month-arrow{
+    width:28px;height:28px;
+    font-size:22px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .weekdays{
+    margin:0 0 2px;
+    font-size:10px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .weekdays>span{
+    padding:2px 0;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .month-grid{
+    gap:0;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .month-grid[data-weeks="5"]{
+    --dm-day-cell:clamp(29px,calc(33px + (100dvh - 800px)*.035),36px);
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .calendar-day{
+    box-sizing:border-box;
+    min-height:0;
+    height:var(--dm-day-cell);
+    max-height:var(--dm-day-cell);
+    gap:1px;
+    padding:1px 0 0;
+    border-radius:9px;
+    font-size:clamp(11px,3vw,12px);
+    line-height:1.1;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .calendar-day .markers{
+    height:3px;
+    gap:3px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .calendar-legend{
+    margin-top:3px;
+    gap:3px 9px;
+    font-size:9px;
+    line-height:1.1;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .ru-calendar-caption{
+    margin:3px 1px 0;
+    font-size:8px;
+    line-height:1.1;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+  }
+  /* A self-contained scroll area protects every saved event and note. */
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .calendar-day-details{
+    flex:1 1 auto;
+    min-height:0;
+    width:100%;
+    overflow-x:hidden;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior:contain;
+    scrollbar-width:none;
+    padding:0 1px 4px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .calendar-day-details::-webkit-scrollbar{
+    display:none;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .day-section-heading{
+    height:30px;
+    min-height:30px;
+    margin:5px 0 3px;
+    gap:6px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .notes-in-day{
+    margin-top:6px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .day-section-heading h2{
+    font-size:clamp(15px,4vw,17px);
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .day-section-heading .day-add{
+    width:98px;
+    min-width:98px;
+    height:30px;
+    min-height:30px;
+    max-height:30px;
+    padding:0 7px;
+    font-size:11px;
+    border-radius:16px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .day-compact-empty.compact-event,
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .day-compact-empty.compact-note{
+    height:49px;
+    min-height:49px;
+    max-height:49px;
+    padding:5px 9px;
+    border-radius:15px;
+    grid-template-columns:35px minmax(0,1fr) 28px;
+    gap:7px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .day-compact-empty.compact-event::before{
+    left:51px;
+    top:9px;
+    bottom:9px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .compact-event>.compact-empty-symbol,
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .compact-note>.compact-empty-symbol{
+    height:29px;
+    width:29px;
+    font-size:17px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .compact-event>.compact-empty-content{
+    padding-left:14px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .compact-event>.compact-empty-content::before{
+    left:0;
+    width:6px;height:6px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .compact-event>.compact-empty-action,
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .compact-note>.compact-empty-action{
+    width:27px;height:27px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .compact-empty-content strong{
+    font-size:clamp(11px,3vw,12.5px);
+    line-height:1.15;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .compact-empty-content small{
+    font-size:clamp(9px,2.55vw,10px);
+    line-height:1.15;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .day-event,
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .note-mini{
+    min-height:52px;
+    margin-bottom:5px;
+    padding-top:6px;
+    padding-bottom:6px;
+    border-radius:15px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .ru-selected-status,
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .ru-tomorrow-warning{
+    padding:5px 8px;
+    margin-top:4px;
+    font-size:9px;
+    line-height:1.2;
+  }
+}
+/* Compact screen heights: remove only decorative greeting, not navigation. */
+@media (max-width:700px) and (orientation:portrait) and (min-height:551px) and (max-height:715px){
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .day-intro{
+    display:none;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .world-entry{
+    flex-basis:37px;height:37px;min-height:37px;max-height:37px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .world-entry-symbol{
+    width:27px;height:27px;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .world-entry small{
+    display:none;
+  }
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .calendar-panel{
+    padding-top:5px;padding-bottom:4px;
+  }
+}
+/* Keyboard, landscape and unusually short viewports must remain navigable:
+   never trap the user behind a fixed viewport in those cases. */
+@media (max-width:700px) and (orientation:portrait) and (max-height:550px){
+  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .calendar-day-details{
+    overflow:visible;
+  }
+}
