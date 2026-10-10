@@ -172,14 +172,13 @@
 /* Main business Home: keep the original approved architecture hero and
    chart artwork. Only blue-saturated background shells become dark graphite. */
 .app-shell{
- --dm-dusk-line:var(--dm-dusk-line);
  background:#01050a;
 }
 #homeScreen .dashboard,
 #homeScreen .shortcuts{
  background:transparent!important;
 }
-#homeScreen :is(.metric-card,.shortcut,.ring-preview),
+#homeScreen :is(.shortcut,.ring-preview),
 #managementScreen :is(.manage-list>button,.management-foot),
 #assistantScreen :is(.assistant-welcome,.chat-log,.assistant-suggestions button,.ring-preview),
 .app-shell .secondary-screen :is(.metric-card,.detail-card,.management-card){
