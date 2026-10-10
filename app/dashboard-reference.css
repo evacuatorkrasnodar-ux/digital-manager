@@ -63,7 +63,7 @@
 #homeScreen .metric-grid .recommendation-card{
   grid-column:7/span 6;
   grid-row:2;
-  top:-16px;
+  top:-17px;
   height:226px;
   min-height:226px;
   padding:12px 15px 11px!important;
@@ -515,7 +515,7 @@
 #homeScreen .metric-grid .recommendation-card{
   grid-column:10/span 11;
   grid-row:2;
-  top:-6px;
+  top:-7px;
   height:var(--bv-gold-h);
   min-height:var(--bv-gold-h);
   margin-left:3px!important;
@@ -728,7 +728,7 @@
  }
  #homeScreen .metric-grid .orders-card{grid-row:2;min-height:115px}
  #homeScreen .metric-grid .profit-card{grid-row:3;min-height:155px}
- #homeScreen .metric-grid .recommendation-card{grid-row:4;min-height:165px;top:8px}
+ #homeScreen .metric-grid .recommendation-card{grid-row:4;min-height:165px;top:7px}
  #homeScreen .clients-card .donut{width:70px;height:70px}
  #homeScreen .orders-card .bargraph{max-width:90px}
 }
@@ -777,7 +777,7 @@
   }
   #homeScreen .metric-grid .recommendation-card{
     /* Original recommendation position; no silhouette changes. */
-    top:-17px;
+    top:-18px;
     padding:6px 8px 6px!important;
   }
   /* Small title badges echo the original Digital Business card's details. */
