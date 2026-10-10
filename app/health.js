@@ -426,6 +426,7 @@
   $('healthMetricForm').addEventListener('submit',saveMetric);
   $('healthSync').addEventListener('click',importOnUserAction);
   updateProviders();
+  window.addEventListener('dm-health-provider-registered',updateProviders);
   $('healthAddMed').addEventListener('click',()=>openMed());
   $('healthAddSleep').addEventListener('click',()=>openSleep());
   $('healthChooseFile').addEventListener('click',()=>$('healthFileInput').click());
