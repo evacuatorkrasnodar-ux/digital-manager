@@ -1,4 +1,4 @@
-/* Digital Manager OS · shared floating glass dock v255. Single source for 3 and 5 buttons. */
+/* Digital Manager OS · shared floating glass dock v257. Same three buttons on every screen. */
 .bottom-nav {
   position: fixed;
   left: 50%;
@@ -227,26 +227,8 @@
 .assistant-tab:active .assistant-socket { transform:translateY(-6px) scale(.97); }
 @media (max-width:350px) { .bottom-nav { padding-left:9px; padding-right:9px; } }
 
-/* Both dock layouts share the exact same SVG wave and glass geometry. */
+/* One familiar fixed glass dock on every page. */
 .bottom-nav{--dock-glow:#a3d1ff}
 .bottom-nav .nav-ico{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
 .bottom-nav .nav-item{font-family:inherit;text-decoration:none}
-.bottom-nav[data-layout="five"]{grid-template-columns:repeat(5,minmax(0,1fr));padding-inline:4px}
-.bottom-nav[data-layout="five"] .nav-item:not(.assistant-tab){transform:translateY(-3px)}
-.bottom-nav[data-layout="five"] .nav-item .nav-label{font-size:clamp(9px,2.45vw,10.5px);letter-spacing:-.01em}
-.bottom-nav[data-layout="five"] .nav-ico{width:21px;height:21px}
-.bottom-nav[data-layout="five"] .nav-underline{width:27px}
-.bottom-nav[data-layout="five"] .assistant-tab{transform:translateY(-13px)}
-.bottom-nav[data-layout="five"] .assistant-socket{width:55px;height:55px}
-.bottom-nav[data-layout="five"] .assistant-ring{width:49px;height:49px}
-.bottom-nav[data-layout="five"] .assistant-core{width:41px;height:41px}
-.bottom-nav[data-layout="five"] .nav-mark{width:23px;height:29px;transform:translate(2px,0)}
-.bottom-nav[data-layout="five"] .assistant-tab>.nav-label{top:-7px}
 .day-shell{padding-bottom:calc(127px + env(safe-area-inset-bottom,0px))}
-@media(max-width:350px){
- .bottom-nav[data-layout="five"]{padding-inline:2px}
- .bottom-nav[data-layout="five"] .nav-item .nav-label{font-size:9px}
- .bottom-nav[data-layout="five"] .assistant-socket{width:51px;height:51px}
- .bottom-nav[data-layout="five"] .assistant-ring{width:45px;height:45px}
- .bottom-nav[data-layout="five"] .assistant-core{width:37px;height:37px}
-}
