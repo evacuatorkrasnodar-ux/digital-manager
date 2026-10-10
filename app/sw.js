@@ -1,9 +1,9 @@
 /* App-only service worker: fresh documents, styles and scripts; cached offline assets. */
-const CACHE = 'digital-manager-black-velvet-v280-20261010';
+const CACHE = 'digital-manager-black-velvet-v281-20261010';
 const CACHE_PREFIX = 'digital-manager-black-velvet-';
 const OFFLINE_FILES = [
   './index.html',
-  './style.css?v=278',
+  './style.css?v=281',
   './dock.css?v=258',
   './app.js?v=278',
   './myday.html',
@@ -23,7 +23,7 @@ const OFFLINE_FILES = [
   './system-ui.js?v=273',
   './polish.css?v=260',
   './myday-finish.css?v=274',
-  './personal-unified.css?v=280',
+  './personal-unified.css?v=281',
   './assets/myday-long-v263.avif',
   './assets/glass-refraction.svg',
   './assets/world-lightflow.svg',
