@@ -1,4 +1,4 @@
-/* Persistent personal views v5: medical sections live below the same top rail. */
+/* Persistent personal views v6: medical sections live below the same top rail. */
 body > .day-shell .world-entry[hidden]{display:none!important}
 body > .day-shell main > .personal-embedded-view[hidden]{display:none!important}
 body > .day-shell main > .personal-embedded-view{
@@ -302,8 +302,10 @@ body > .day-shell.day-shell > nav.personal-health-tabs > button:not(.active):not
   pointer-events:none;
   top:-2px;
   bottom:-2px;
-  left:-24px;
-  width:36px;
+  /* The rightmost point of the semicircle must stop BEFORE this button.
+     Old left:-24px + width:36px protruded 12px into its icon/text. */
+  left:-36px;
+  width:34px;
   border:0;
   border-right:1px solid rgba(162,209,250,.35);
   border-radius:50%;
