@@ -66,7 +66,10 @@
   }
   function isBlocked(element){
     if(!(element instanceof Element))return true;
-    if(element.closest('input,textarea,select,button,a,[role="button"],[contenteditable="true"],dialog,nav,canvas,video,audio,[data-no-swipe],.month-grid,.calendar-panel,.timebar,.chart-wrap'))return true;
+    // Calendar day cells are the main touch surface: allow a deliberate
+    // horizontal page swipe over them, but preserve ordinary taps.
+    if(element.closest('.calendar-day'))return !!document.querySelector('dialog[open]');
+    if(element.closest('input,textarea,select,button,a,[role="button"],[contenteditable="true"],dialog,nav,canvas,video,audio,[data-no-swipe],.timebar,.chart-wrap'))return true;
     if(document.querySelector('dialog[open]'))return true;
     return false;
   }
