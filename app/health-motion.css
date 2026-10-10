@@ -1,0 +1,256 @@
+/* v289 — animated Black Velvet health icons.
+   Custom SVG artwork and ambient motion (not sensor output / not live BPM).
+   Figures continue to come ONLY from stored user measurements.
+   Honors iOS Reduce Motion and reduced CPU on smaller devices. */
+.health-shell .health-metric-tile{
+  --metric-light:#89caff;
+  --metric-soft:rgba(88,157,255,.21);
+  --metric-bright:#e1f5ff;
+  isolation:isolate;
+  overflow:hidden;
+  position:relative;
+  min-height:190px;
+  padding:11px 7px 10px;
+  align-items:center;
+  text-align:center;
+  border-color:rgba(135,194,248,.55);
+  background:
+    radial-gradient(circle at 50% 37%,var(--metric-soft),transparent 57%),
+    linear-gradient(151deg,rgba(24,48,76,.89) 0%,rgba(7,22,43,.96) 76%);
+  box-shadow:
+    inset 0 1px rgba(252,254,255,.24),
+    0 9px 22px rgba(0,4,17,.41);
+}
+.health-shell .health-metric-tile--pressure{
+  --metric-light:#77ccff;
+  --metric-soft:rgba(53,155,250,.26);
+  --metric-bright:#dff7ff;
+}
+.health-shell .health-metric-tile--pulse{
+  --metric-light:#ff8aa8;
+  --metric-soft:rgba(231,83,146,.23);
+  --metric-bright:#ffe0eb;
+}
+.health-shell .health-metric-tile--steps{
+  --metric-light:#7fe9d6;
+  --metric-soft:rgba(42,201,177,.21);
+  --metric-bright:#ddfff6;
+}
+.health-shell .health-metric-tile::before{
+  content:"";
+  position:absolute;
+  inset:-20px;
+  pointer-events:none;
+  border-radius:inherit;
+  background:radial-gradient(circle at 50% 24%,rgba(255,255,255,.11),transparent 48%);
+  z-index:-1;
+}
+.health-shell .health-metric-tile .health-metric-caption{
+  align-self:stretch;
+  justify-content:center;
+  min-height:17px;
+  color:#d2eaff;
+  font-size:clamp(10px,2.8vw,12px);
+  font-weight:480;
+  letter-spacing:.01em;
+}
+.health-shell .health-metric-tile .health-metric-art{
+  width:clamp(61px,19.2vw,79px);
+  height:clamp(61px,19.2vw,79px);
+  position:relative;
+  display:grid;
+  place-items:center;
+  flex:none;
+  margin:5px auto 2px;
+  border:1px solid rgba(206,236,255,.27);
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 28% 15%,rgba(255,255,255,.19),transparent 35%),
+    radial-gradient(circle at 55% 64%,var(--metric-soft),transparent 62%),
+    linear-gradient(143deg,rgba(32,69,103,.63),rgba(5,22,44,.95));
+  box-shadow:
+    inset 0 2px 8px rgba(255,255,255,.11),
+    inset 0 -8px 14px rgba(0,5,19,.51),
+    0 7px 17px rgba(0,8,29,.34),
+    0 0 17px var(--metric-soft);
+}
+.health-shell .health-metric-halo{
+  position:absolute;
+  inset:-5px;
+  pointer-events:none;
+  border-radius:50%;
+  border:1px solid var(--metric-light);
+  box-shadow:0 0 10px var(--metric-soft),inset 0 0 9px var(--metric-soft);
+  opacity:.38;
+  animation:dmMetricHalo 5s ease-in-out infinite;
+}
+.health-shell .health-metric-orbit{
+  position:absolute;
+  inset:-4px;
+  pointer-events:none;
+  border-radius:50%;
+  border:2px solid transparent;
+  border-top-color:var(--metric-light);
+  border-right-color:rgba(221,248,255,.22);
+  filter:drop-shadow(0 0 4px var(--metric-light));
+  opacity:.66;
+  animation:dmMetricOrbit 9s linear infinite;
+}
+.health-shell .health-art-icon{
+  position:relative;
+  z-index:1;
+  display:block;
+  width:72%;
+  height:72%;
+  overflow:visible;
+  color:var(--metric-light);
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  filter:drop-shadow(0 0 5px var(--metric-soft));
+}
+.health-shell .health-pressure-arc{stroke-width:3;stroke:var(--metric-bright)}
+.health-shell .health-pressure-graduation{stroke-width:2.6;opacity:.62}
+.health-shell .health-pressure-needle{
+  stroke-width:3.5;
+  stroke:var(--metric-light);
+  transform-box:view-box;
+  transform-origin:32px 35px;
+  animation:dmPressureNeedle 4.5s ease-in-out infinite;
+}
+.health-shell .health-pressure-base{stroke-width:2.6;opacity:.72}
+.health-shell .health-art-pressure circle{fill:var(--metric-bright);stroke:none}
+.health-shell .health-art-heart{
+  stroke-width:2.8;
+  transform-origin:50% 50%;
+  animation:dmHeartGlow 2.8s ease-in-out infinite;
+}
+.health-shell .health-heart-shape{
+  fill:rgba(234,92,147,.23);
+  stroke:var(--metric-bright);
+}
+.health-shell .health-heart-trace{
+  stroke:var(--metric-light);
+  stroke-width:3;
+  stroke-dasharray:74;
+  stroke-dashoffset:74;
+  animation:dmHeartTrace 3.6s ease-in-out infinite;
+}
+.health-shell .health-art-steps{
+  fill:rgba(109,235,210,.41);
+  stroke:var(--metric-bright);
+  stroke-width:2;
+}
+.health-shell .health-step-left{
+  transform-box:fill-box;
+  transform-origin:center;
+  animation:dmStepLeft 3s ease-in-out infinite;
+}
+.health-shell .health-step-right{
+  transform-box:fill-box;
+  transform-origin:center;
+  animation:dmStepRight 3s ease-in-out infinite;
+}
+.health-shell .health-metric-tile strong{
+  width:100%;
+  margin:7px 0 2px;
+  color:#f7fcff;
+  font-size:clamp(18px,4.7vw,24px);
+  line-height:1.1;
+  letter-spacing:-.035em;
+  font-weight:550;
+  font-variant-numeric:tabular-nums;
+  overflow-wrap:normal;
+}
+.health-shell .health-metric-tile small{
+  font-size:9px;
+  line-height:1.2;
+  color:#b5d6ef;
+}
+.health-shell .health-metric-tile p{
+  align-self:stretch;
+  margin:auto 0 0;
+  padding:8px 0 0;
+  font-size:9px;
+  line-height:1.24;
+  color:#9fc0da;
+  overflow-wrap:anywhere;
+}
+.health-shell .health-metric-tile[data-reading="saved"]{
+  border-color:rgba(180,218,250,.65);
+}
+.health-shell .health-metric-tile[data-reading="saved"] .health-metric-halo{
+  opacity:.66;
+}
+.health-shell .health-metric-tile[data-reading="empty"] .health-metric-art{
+  filter:saturate(.7);
+}
+.health-shell .health-metric-tile[data-reading="empty"] .health-art-icon{
+  opacity:.75;
+}
+/* Saved readings glow, but the motion is decorative, not real-time sensing. */
+.health-shell .health-metric-tile[data-reading="empty"] .health-heart-trace{
+  animation-duration:6s;
+}
+.health-shell .health-chart-bar{
+  transform-origin:center bottom;
+  animation:dmStepsGrow .85s cubic-bezier(.2,.75,.25,1) both;
+}
+@keyframes dmMetricOrbit{
+  to{transform:rotate(360deg)}
+}
+@keyframes dmMetricHalo{
+  0%,100%{transform:scale(.97);opacity:.34}
+  50%{transform:scale(1.05);opacity:.72}
+}
+@keyframes dmPressureNeedle{
+  0%,100%{transform:rotate(-10deg)}
+  50%{transform:rotate(9deg)}
+}
+@keyframes dmHeartGlow{
+  0%,100%{transform:scale(.95);filter:drop-shadow(0 0 2px rgba(244,105,157,.2))}
+  48%{transform:scale(1.045);filter:drop-shadow(0 0 7px rgba(255,110,159,.55))}
+  58%{transform:scale(.985)}
+}
+@keyframes dmHeartTrace{
+  0%,12%{stroke-dashoffset:74;opacity:.1}
+  42%,69%{stroke-dashoffset:0;opacity:1}
+  100%{stroke-dashoffset:-74;opacity:.1}
+}
+@keyframes dmStepLeft{
+  0%,100%{opacity:.64;translate:0 1px}
+  38%{opacity:1;translate:0 -3px}
+}
+@keyframes dmStepRight{
+  0%,100%{opacity:1;translate:0 -2px}
+  62%{opacity:.58;translate:0 2px}
+}
+@keyframes dmStepsGrow{
+  from{transform:scaleY(.03);opacity:.2}
+  to{transform:scaleY(1);opacity:1}
+}
+@media(max-width:370px){
+  .health-shell .health-metric-tile{min-height:177px;padding:9px 5px 8px}
+  .health-shell .health-metric-tile .health-metric-art{
+    width:clamp(54px,18.6vw,67px);height:clamp(54px,18.6vw,67px);
+    margin:5px auto 2px;
+  }
+  .health-shell .health-metric-tile strong{font-size:clamp(16px,4.7vw,21px)}
+  .health-shell .health-metric-tile p{font-size:8.5px}
+}
+@media(prefers-reduced-motion:reduce){
+  .health-shell .health-metric-halo,
+  .health-shell .health-metric-orbit,
+  .health-shell .health-pressure-needle,
+  .health-shell .health-art-heart,
+  .health-shell .health-heart-trace,
+  .health-shell .health-step-left,
+  .health-shell .health-step-right,
+  .health-shell .health-chart-bar{
+    animation:none!important;
+    transition:none!important;
+  }
+  .health-shell .health-heart-trace{stroke-dashoffset:0;opacity:1}
+}
