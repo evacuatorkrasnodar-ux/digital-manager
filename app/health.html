@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="./health-metrics.css?v=288">
   <link rel="stylesheet" href="./health-navigation.css?v=287">
   <link rel="stylesheet" href="./top-tabs.css?v=288">
+  <link rel="stylesheet" href="./health-motion.css?v=289">
 <script src="./health-bridge.js?v=286" defer></script>
 <script src="./health.js?v=288" defer></script><script src="./system-ui.js?v=283" defer></script>
   <script src="./polish.js?v=257" defer></script>
@@ -49,9 +50,48 @@
    <div class="day-section-heading"><div><p class="day-eyebrow">МОИ ИЗМЕРЕНИЯ</p><h2>Показатели здоровья</h2></div><button class="day-add" type="button" id="healthAddMetric">+ Запись</button></div>
    <p class="health-hint">Только введённые или разрешённые измерения. Личный журнал, не диагноз и не медицинский мониторинг.</p>
    <div class="health-metric-grid">
-    <article class="health-metric-tile"><div class="health-metric-caption"><span>♡</span> Давление</div><strong id="healthPressureValue">—</strong><small>мм рт. ст.</small><p id="healthPressureMeta">Нет измерений</p></article>
-    <article class="health-metric-tile"><div class="health-metric-caption"><span>◡</span> Пульс</div><strong id="healthPulseValue">—</strong><small>уд/мин</small><p id="healthPulseMeta">Нет измерений</p></article>
-    <article class="health-metric-tile"><div class="health-metric-caption"><span>◈</span> Шаги</div><strong id="healthStepsValue">—</strong><small>шагов за день</small><p id="healthStepsMeta">Нет записей</p></article>
+    <article class="health-metric-tile health-metric-tile--pressure" data-reading="empty">
+     <div class="health-metric-caption">Давление</div>
+     <div class="health-metric-art" aria-hidden="true">
+      <span class="health-metric-halo"></span><span class="health-metric-orbit"></span>
+      <svg class="health-art-icon health-art-pressure" viewBox="0 0 64 64">
+       <path class="health-pressure-arc" d="M16 44a21 21 0 1 1 32 0"/>
+       <path class="health-pressure-graduation" d="M17 38l-4 2M18 24l-4-3M32 17v-5M46 24l4-3M47 38l4 2"/>
+       <path class="health-pressure-needle" d="M32 35l12-14"/>
+       <circle cx="32" cy="35" r="3.4"/>
+       <path class="health-pressure-base" d="M20 49h24"/>
+      </svg>
+     </div>
+     <strong id="healthPressureValue">—</strong><small>мм рт. ст.</small><p id="healthPressureMeta">Нет измерений</p>
+    </article>
+    <article class="health-metric-tile health-metric-tile--pulse" data-reading="empty">
+     <div class="health-metric-caption">Пульс</div>
+     <div class="health-metric-art" aria-hidden="true">
+      <span class="health-metric-halo"></span><span class="health-metric-orbit"></span>
+      <svg class="health-art-icon health-art-heart" viewBox="0 0 64 64">
+       <path class="health-heart-shape" d="M32 52 13 33.5C4 24.5 13.5 10 24 15.2c3.3 1.6 5.5 4.7 8 7.1 2.5-2.4 4.7-5.5 8-7.1C50.5 10 60 24.5 51 33.5Z"/>
+       <path class="health-heart-trace" d="M9 33h11l5-8 7 17 7-15 4 6h12"/>
+      </svg>
+     </div>
+     <strong id="healthPulseValue">—</strong><small>уд/мин</small><p id="healthPulseMeta">Нет измерений</p>
+    </article>
+    <article class="health-metric-tile health-metric-tile--steps" data-reading="empty">
+     <div class="health-metric-caption">Шаги</div>
+     <div class="health-metric-art" aria-hidden="true">
+      <span class="health-metric-halo"></span><span class="health-metric-orbit"></span>
+      <svg class="health-art-icon health-art-steps" viewBox="0 0 64 64">
+       <g class="health-step-left" transform="rotate(-25 23 39)">
+        <ellipse cx="23" cy="39" rx="8" ry="12"/>
+        <circle cx="13" cy="24" r="2.7"/><circle cx="19" cy="21" r="3.1"/><circle cx="25" cy="20" r="2.8"/>
+       </g>
+       <g class="health-step-right" transform="rotate(20 43 24)">
+        <ellipse cx="43" cy="25" rx="7" ry="10"/>
+        <circle cx="37" cy="11" r="2.5"/><circle cx="43" cy="9" r="2.8"/><circle cx="49" cy="11" r="2.5"/>
+       </g>
+      </svg>
+     </div>
+     <strong id="healthStepsValue">—</strong><small>шагов за день</small><p id="healthStepsMeta">Нет записей</p>
+    </article>
    </div>
    <div class="health-week-panel"><div class="health-week-heading"><h3>Шаги за 7 дней</h3><span>По сохранённым данным</span></div><div id="healthStepsChart" class="health-week-chart" role="img" aria-label="Шаги за последние семь дней"></div></div>
    <div class="day-section-heading health-history-heading"><h2>История измерений</h2><label class="health-filter-label"><span class="sr-only">Фильтр измерений</span><select id="healthMetricFilter"><option value="all">Все</option><option value="pressure">Давление</option><option value="pulse">Пульс</option><option value="steps">Шаги</option></select></label></div>
