@@ -90,6 +90,11 @@
       frames[kind]=document.getElementById(kind==='health'?'healthFrame':'cycleFrame');
       if(!panels[kind]||!frames[kind])return;
       frames[kind].addEventListener('load',()=>{
+        // Ignore the iframe's initial about:blank event.
+        try{
+          const url=new URL(frames[kind].contentWindow.location.href);
+          if(url.searchParams.get('embedded')!=='1')return;
+        }catch(_){return;}
         connectFrame(kind);
         frames[kind].dataset.ready='true';
         panels[kind].classList.add('loaded');
