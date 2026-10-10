@@ -713,3 +713,141 @@
 @media(prefers-reduced-motion:reduce){
  #homeScreen .metric-grid>.metric-card{transition:none!important}
 }
+
+/* v304 — precision comparison with the user's approved 604×381 sample.
+   v303 has the correct silhouettes, but its photographed iPhone cards were
+   approximately 10–20% too TALL. Shorten their vertical rhythm without
+   changing their width ratios / SVG clips or data. Give the row more room
+   under its inner text, not a huge blank gap above Profit or above the CTA. */
+@media (min-width:360px) and (max-width:539px){
+  #homeScreen .metric-grid{
+    --bv-client-h:clamp(96px,26.15vw,111px);
+    --bv-order-h:clamp(87px,23.5vw,101px);
+    --bv-profit-h:clamp(108px,29.35vw,126px);
+    --bv-gold-h:clamp(133px,36vw,155px);
+    width:calc(100% - 8px);
+    max-width:calc(100% - 8px);
+    margin:8px 4px 0;
+    row-gap:6px;
+  }
+  #homeScreen .metric-grid .clients-card{
+    padding:5px 6px 3px!important;
+  }
+  #homeScreen .metric-grid .orders-card{
+    padding:5px 7px 3px!important;
+  }
+  #homeScreen .metric-grid .profit-card{
+    display:block!important;
+    align-content:start!important;
+    padding:6px 7px!important;
+  }
+  #homeScreen .metric-grid .recommendation-card{
+    top:-20px;
+    padding:6px 8px 6px!important;
+  }
+  /* Small title badges echo the original Digital Business card's details. */
+  #homeScreen .clients-card .tile-heading .tile-symbol,
+  #homeScreen .profit-card .tile-heading .tile-symbol{
+    box-sizing:border-box;
+    width:26px;height:26px;
+    padding:4px;
+    border:1px solid rgba(134,165,191,.22);
+    border-radius:50%;
+    background:linear-gradient(135deg,rgba(31,45,57,.91),rgba(7,17,27,.94));
+    box-shadow:inset 0 1px rgba(242,249,255,.11),0 0 7px rgba(102,168,215,.1);
+  }
+  #homeScreen .profit-card .tile-heading .tile-symbol.gold{
+    border-color:rgba(212,162,95,.27);
+    box-shadow:0 0 8px rgba(241,165,75,.09),inset 0 1px rgba(255,235,201,.12);
+  }
+  #homeScreen .metric-grid .tile-heading{
+    min-height:21px;
+    font-size:clamp(10px,2.7vw,12px);
+  }
+  #homeScreen .metric-grid .tile-chevron{
+    width:23px;height:23px;min-width:23px;
+  }
+  #homeScreen .clients-card .clients-inner{
+    margin-top:0;
+    gap:4px;
+  }
+  #homeScreen .clients-card .donut{
+    width:clamp(64px,17.6vw,71px);
+    height:clamp(64px,17.6vw,71px);
+  }
+  #homeScreen .clients-card .donut::before{inset:5px}
+  #homeScreen .clients-card .donut-people{width:18px;height:14px}
+  #homeScreen .clients-card .donut-core strong{font-size:clamp(17px,4.75vw,20px)}
+  #homeScreen .clients-card .donut-core small{font-size:10px}
+  #homeScreen .clients-card .donut-legend{
+    gap:5px;
+  }
+  #homeScreen .clients-card .donut-legend>div{gap:2px;font-size:clamp(8px,2.26vw,10px)}
+  #homeScreen .clients-card .donut-legend b{font-size:clamp(9px,2.48vw,11px)}
+  #homeScreen .orders-card .orders-inner{
+    margin-top:4px;
+    min-height:48px;
+  }
+  #homeScreen .orders-card .tile-number{
+    font-size:clamp(23px,6.85vw,30px);
+  }
+  #homeScreen .orders-card .delta.small{
+    margin-top:4px;
+    font-size:clamp(10px,2.56vw,11px);
+  }
+  #homeScreen .orders-card .bargraph{
+    height:47px;
+    bottom:-2px;
+  }
+  #homeScreen .profit-card .tile-heading{
+    margin:0!important;
+  }
+  #homeScreen .profit-card .profit-number{
+    margin-top:6px;
+    font-size:clamp(16px,4.38vw,20px);
+  }
+  #homeScreen .profit-card .delta.small{
+    margin-top:4px;
+  }
+  #homeScreen .profit-card .profit-chart{
+    height:clamp(48px,14.1vw,58px);
+    bottom:2px;
+  }
+  /* This CTA must not float 30–40 px below the recommendation's text. */
+  #homeScreen .recommendation-card .recommendation-top{
+    min-height:21px;
+    font-size:clamp(9px,2.28vw,10px);
+  }
+  #homeScreen .recommendation-card .spark-icon{width:23px;height:23px}
+  #homeScreen .recommendation-card .advice-head{
+    margin:3px 0 3px;
+    font-size:clamp(10px,2.68vw,12px);
+    line-height:1.18;
+  }
+  #homeScreen .recommendation-card .advice-body{
+    font-size:clamp(8.6px,2.26vw,10px);
+    line-height:1.19;
+    margin:0 0 3px;
+  }
+  #homeScreen .recommendation-card .advice-cta{
+    margin-top:auto;
+    min-height:25px;
+    padding:4px 8px;
+    font-size:clamp(9.3px,2.45vw,10.5px);
+  }
+  /* Thinner, less crossed ribbons: light should follow the shape,
+     without visually striking through the recommendation text. */
+  #homeScreen .recommendation-card .recommendation-waves{
+    opacity:.77;
+  }
+}
+@media (min-width:360px) and (max-width:385px){
+  /* iPhone X/mini safety: leave just enough room for three legend rows
+     and keep profit/CTA from disappearing beneath the silhouette. */
+  #homeScreen .metric-grid{
+    --bv-client-h:100px;
+    --bv-order-h:90px;
+    --bv-profit-h:111px;
+    --bv-gold-h:137px;
+  }
+}
