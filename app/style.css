@@ -21,7 +21,7 @@
   backdrop-filter:blur(12px) brightness(64%) saturate(94%);
 }
 .license-preview{
-  position:absolute;z-index:5;isolation:isolate;display:block;flex:none;right:12px;top:78px;width:49%;max-width:190px;
+  position:absolute;z-index:5;isolation:isolate;display:block;flex:none;right:12px;top:50px;width:49%;max-width:190px;
   height:157px;min-height:0;margin-top:0;padding:9px 9px 8px 10px;
   text-align:left;border:0;border-radius:0;overflow:hidden;
   -webkit-clip-path:url(#developerCardClip);clip-path:url(#developerCardClip);
@@ -50,7 +50,7 @@
 /* Owner/company preview: a horizontal mirror of the approved Digital Business silhouette.
    Both previews occupy the same quiet hero area, but never appear together. */
 .profile-preview{
-  position:absolute;right:12px;top:78px;z-index:6;isolation:isolate;display:block;
+  position:absolute;right:12px;top:50px;z-index:6;isolation:isolate;display:block;
   width:49%;max-width:190px;height:157px;min-height:0;
   margin:0;padding:9px 10px 8px 10px;overflow:hidden;
   text-align:left;color:#f3f7fb;cursor:pointer;
