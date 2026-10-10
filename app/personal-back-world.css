@@ -1,4 +1,4 @@
-/* Consistent Back controls and one stable My World card, v1.
+/* Consistent Back controls and one stable My World card, v2.
    Apply only to inner personal pages, never to the dashboard home. */
 
 /* All four personal pages: one visible circular Back arrow at the very
@@ -23,6 +23,10 @@ body > .day-shell.day-shell > header.day-header > a.day-back{
   border:1px solid rgba(165,205,235,.64)!important;
   border-radius:50%!important;
   background:linear-gradient(145deg,rgba(31,54,73,.97),rgba(5,17,29,.98))!important;
+  background-image:linear-gradient(145deg,rgba(31,54,73,.97),rgba(5,17,29,.98))!important;
+  background-size:cover!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
   box-shadow:inset 0 1px rgba(255,255,255,.17),0 3px 10px rgba(0,0,0,.28)!important;
   color:#e9f6ff!important;
   filter:none!important;
@@ -36,6 +40,8 @@ body > .day-shell.day-shell > header.day-header > a.day-back > svg{
   height:19px!important;
   opacity:1!important;
   visibility:visible!important;
+  position:relative!important;
+  z-index:2!important;
   fill:none!important;
   stroke:currentColor!important;
   stroke-width:1.9!important;
