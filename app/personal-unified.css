@@ -1,0 +1,571 @@
+/* Digital Manager · Personal Spaces Black Velvet v277.
+   Visual-only companion to My Day v274. Reuses real app artwork;
+   does not change calendar rendering, data, health records or dock behavior. */
+:root{
+  --personal-line:rgba(139,197,246,.52);
+  --personal-glass:linear-gradient(148deg,rgba(14,34,55,.78),rgba(4,17,32,.86) 65%,rgba(2,10,23,.92));
+  --personal-muted:#b9d7ef;
+  --personal-ink:#f1f9ff;
+  --personal-shadow:inset 0 1px rgba(245,252,255,.19),0 8px 21px rgba(0,4,15,.39);
+}
+/* The notebook belongs to My Day, so it already shares its atmospheric backdrop.
+   Refine only the notebook view, not the approved pinned calendar. */
+.day-shell #notesView:not([hidden]){
+  padding-bottom:9px;
+  min-width:0;
+}
+.day-shell #notesView .notebook-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin:10px 0 9px;
+}
+.day-shell #notesView .notebook-title .day-eyebrow{margin:0 0 4px;color:#94bee0;font-size:9px}
+.day-shell #notesView .notebook-title h2{
+  margin:0;
+  color:var(--personal-ink);
+  font-size:clamp(18px,5vw,21px);
+  font-weight:460;
+  letter-spacing:-.03em;
+}
+.day-shell #notesView .notebook-title .day-add{
+  box-sizing:border-box;
+  flex:none;
+  min-width:98px;
+  min-height:35px;
+  padding:0 12px;
+  border-radius:18px;
+  border:1px solid var(--personal-line);
+  background:radial-gradient(ellipse at 28% 0%,rgba(228,244,255,.18),transparent 70%),
+    linear-gradient(145deg,rgba(35,80,122,.77),rgba(6,27,49,.84));
+  box-shadow:var(--personal-shadow);
+  -webkit-backdrop-filter:blur(17px);backdrop-filter:blur(17px);
+  font-size:11px;
+}
+.day-shell #notesView .notebook-tools{margin:0 0 9px;gap:7px}
+.day-shell #notesView .search-wrap,
+.world-shell .search-wrap{
+  min-width:0;
+  min-height:39px;
+  height:39px;
+  margin:0;
+  border-radius:15px;
+  border:1px solid rgba(135,187,229,.43);
+  background:linear-gradient(145deg,rgba(20,45,70,.72),rgba(6,20,37,.86));
+  box-shadow:inset 0 1px rgba(232,247,255,.13);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+}
+.day-shell #notesView .notebook-export{
+  box-shadow:var(--personal-shadow);
+  border-radius:14px;
+}
+.day-shell #notesView .note-card{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  min-width:0;
+  padding:10px 11px;
+  margin:0 0 8px;
+  border:1px solid var(--personal-line);
+  border-radius:17px;
+  color:var(--personal-ink);
+  background:radial-gradient(ellipse at 95% 55%,rgba(56,126,195,.13),transparent 54%),var(--personal-glass);
+  box-shadow:var(--personal-shadow);
+  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+}
+.day-shell #notesView .note-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:url('./assets/glass-waves.svg') right bottom/65% auto no-repeat;
+  opacity:.25;
+}
+.day-shell #notesView .note-card-title{font-size:13px;color:var(--personal-ink);font-weight:480}
+.day-shell #notesView .note-card-content{font-size:11px;line-height:1.38;margin:6px 0 8px;color:#c6e0f4}
+.day-shell #notesView .note-card-meta{font-size:10px;gap:7px;color:#a6c7df}
+.day-shell #notesView .note-card-to-plan{height:29px;min-height:29px}
+
+/* Other personal areas: same full-bleed night atmosphere as the calendar.
+   Real hardware safe insets remain managed by system-ui.css. */
+.day-shell:is(.care-shell,.world-shell,.health-shell){
+  --personal-top:calc(10px + env(safe-area-inset-top,0px));
+  box-sizing:border-box;
+  width:100%;
+  min-height:100dvh;
+  padding-top:var(--personal-top);
+  padding-bottom:calc(86px + env(safe-area-inset-bottom,0px));
+  background:#01040b;
+  color:var(--personal-ink);
+  isolation:isolate;
+  position:relative;
+}
+.day-shell:is(.care-shell,.world-shell,.health-shell)::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(1,7,20,.40) 0%,rgba(1,9,21,.28) 130px,rgba(0,5,16,.50) 290px,rgba(1,5,14,.89) 530px,#01040b 820px),
+    url('./assets/myday-long-v263.avif') center top/100% auto no-repeat,
+    #01040b;
+  opacity:1;
+  filter:none;
+}
+.day-shell:is(.care-shell,.world-shell,.health-shell)::after{
+  display:none!important;
+  content:none!important;
+}
+.day-shell:is(.care-shell,.world-shell,.health-shell)>.day-header{
+  min-height:48px;
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+.day-shell:is(.care-shell,.world-shell,.health-shell) .day-back{
+  flex:none;
+  width:43px;
+  height:47px;
+  border:0;
+  background:url('./assets/logo-air.png') center/98% auto no-repeat;
+  filter:drop-shadow(0 4px 11px rgba(57,160,255,.31));
+}
+.day-shell:is(.care-shell,.world-shell,.health-shell) .day-back svg{opacity:0}
+.day-shell:is(.care-shell,.world-shell,.health-shell) .day-heading{min-width:0;flex:1}
+.day-shell:is(.care-shell,.world-shell,.health-shell) .day-heading>span{
+  color:#d9ecfc;
+  font-size:clamp(8px,2.6vw,10px);
+  letter-spacing:.045em;
+}
+.day-shell:is(.care-shell,.world-shell,.health-shell) .day-heading h1{
+  margin:3px 0 0;
+  font-size:clamp(21px,6vw,26px);
+  line-height:1.05;
+  font-weight:435;
+  letter-spacing:-.045em;
+  color:#fff;
+}
+.day-shell:is(.care-shell,.world-shell,.health-shell) .day-heading h1 span{
+  color:#c6edff;
+  text-shadow:0 0 12px rgba(110,195,255,.70);
+}
+.day-shell:is(.care-shell,.world-shell,.health-shell) .day-today{
+  flex:none;
+  padding:8px 11px;
+  min-height:34px;
+  border:1px solid var(--personal-line);
+  border-radius:17px;
+  color:#e7f5ff;
+  background:linear-gradient(145deg,rgba(34,78,117,.74),rgba(6,24,43,.88));
+  box-shadow:var(--personal-shadow);
+  font-size:11px;
+  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+}
+.day-shell:is(.care-shell,.world-shell,.health-shell) :is(.day-eyebrow,.world-kicker,.care-eyebrow){
+  color:#98c8ed;
+  font-size:9px;
+  letter-spacing:.075em;
+}
+/* Universal calendar-like cobalt glass surfaces, with authentic subtle highlights. */
+:is(.care-shell,.world-shell,.health-shell) :is(
+  .care-panel,.care-hero,.care-health-entry,.care-stat,.care-day-item,.care-history-item,
+  .world-spotlight,.world-item,.world-empty,.world-assistant-hero,
+  .health-card,.health-summary,.health-empty
+){
+  box-sizing:border-box;
+  border:1px solid rgba(135,193,246,.47);
+  border-radius:17px;
+  background:
+    radial-gradient(ellipse at 93% 30%,rgba(70,151,223,.13),transparent 53%),
+    var(--personal-glass);
+  box-shadow:var(--personal-shadow);
+  -webkit-backdrop-filter:blur(18px);
+  backdrop-filter:blur(18px);
+  color:var(--personal-ink);
+}
+.day-shell:is(.care-shell,.world-shell,.health-shell) :is(.day-section-heading,.world-head){
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  margin:13px 1px 7px;
+}
+.day-shell:is(.care-shell,.world-shell,.health-shell) :is(.day-section-heading h2,.world-head h2){
+  margin:0;
+  font-size:clamp(16px,4.5vw,19px);
+  font-weight:460;
+  letter-spacing:-.03em;
+  line-height:1.18;
+  color:#f7fbff;
+}
+.day-shell:is(.care-shell,.world-shell,.health-shell) .day-section-heading .day-eyebrow{margin:0 0 4px}
+.day-shell:is(.care-shell,.world-shell,.health-shell) :is(.day-add,.world-mini,.care-primary,.care-action,.care-secondary){
+  min-height:35px;
+  border:1px solid rgba(148,202,250,.57);
+  border-radius:17px;
+  padding:7px 11px;
+  background:
+    radial-gradient(ellipse at 25% 0%,rgba(229,247,255,.19),transparent 71%),
+    linear-gradient(146deg,rgba(36,80,124,.81),rgba(8,28,51,.87));
+  box-shadow:inset 0 1px rgba(255,255,255,.23),0 5px 12px rgba(0,5,16,.29);
+  color:#eaf7ff;
+  font-size:11px;
+  font-weight:450;
+  white-space:nowrap;
+}
+.day-shell:is(.care-shell,.world-shell,.health-shell) button:disabled{
+  opacity:.48;
+  cursor:not-allowed;
+}
+.day-shell:is(.care-shell,.world-shell,.health-shell) :is(input,select,textarea){
+  accent-color:#80caff;
+}
+.day-shell:is(.care-shell,.world-shell,.health-shell) :is(
+  .care-settings-panel input,.world-chat-form,.world-chat-form input,.health-tabs
+){color:#f2faff}
+.day-shell:is(.care-shell,.world-shell,.health-shell) :is(.care-privacy-note,.care-disclaimer,.world-privacy,.health-hint){
+  color:#a9bacb;
+  line-height:1.45;
+}
+.day-shell:is(.care-shell,.world-shell,.health-shell) :is(.day-footer,.world-bottom){
+  margin-top:14px;
+}
+
+/* Care: keep rose as a meaningful accent for tracked days, not entire screen. */
+.care-shell .day-tabs{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:0;
+  min-height:45px;
+  padding:3px;
+  margin:7px 0 11px;
+  border-radius:25px;
+  border:1px solid rgba(153,202,241,.55);
+  background:linear-gradient(115deg,rgba(8,26,44,.75),rgba(2,11,22,.82));
+  box-shadow:inset 0 1px rgba(244,250,255,.23),0 7px 19px rgba(1,5,14,.40);
+  -webkit-backdrop-filter:blur(19px);backdrop-filter:blur(19px);
+}
+.care-shell .day-tab{
+  min-height:37px;
+  padding:4px 2px;
+  gap:3px;
+  border-radius:22px;
+  font-size:clamp(11px,3.15vw,13px);
+  color:#edf7ff;
+}
+.care-shell .day-tab.active{
+  color:#fff!important;
+  border:1px solid rgba(187,237,255,.94)!important;
+  background:radial-gradient(ellipse at 11% 12%,rgba(235,253,255,.52),transparent 77%),
+    linear-gradient(146deg,rgba(65,151,233,.97),rgba(16,98,192,.94))!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.74),0 0 12px rgba(63,168,255,.46)!important;
+}
+.care-shell .care-hero{
+  padding:12px 13px;
+  margin:0;
+}
+.care-shell .care-hero-line{align-items:center;gap:8px}
+.care-shell .care-hero h2{
+  font-size:clamp(20px,5.7vw,24px);
+  margin:0 0 4px;
+  color:#f7fbff;
+}
+.care-shell .care-heart{color:#f8bad8}
+.care-shell .care-moon{
+  width:40px;height:40px;font-size:26px;
+  color:#d6edff;
+  border-color:rgba(146,198,246,.49);
+  background:linear-gradient(145deg,rgba(31,71,113,.76),rgba(6,23,42,.9));
+}
+.care-shell .care-hero-line p{margin:0;font-size:11px;color:#c6e1f4}
+.care-shell .care-hero-note{margin:7px 0 0;font-size:11px;line-height:1.35;color:#bad7ed}
+.care-shell .care-health-entry{
+  display:grid;
+  grid-template-columns:33px minmax(0,1fr) 25px;
+  align-items:center;
+  gap:9px;
+  margin:9px 0;
+  padding:9px;
+  text-decoration:none;
+}
+.care-shell .care-health-entry-icon{
+  width:33px;height:33px;border-radius:50%;
+  border:1px solid rgba(154,213,255,.60);
+  background:linear-gradient(145deg,rgba(32,80,125,.85),rgba(8,32,55,.9));
+  color:#c9ecff;
+}
+.care-shell .care-health-entry strong{font-size:12px;color:#f4fbff}
+.care-shell .care-health-entry small{font-size:10px;line-height:1.3;color:#bbd8ed}
+.care-shell .care-panel{margin-top:9px}
+.care-shell .care-onboard,.care-shell .care-empty-state{padding:13px}
+.care-shell .care-stats{gap:7px}
+.care-shell .care-stat{
+  min-height:92px;
+  padding:10px;
+}
+.care-shell .care-stat p{margin:0 0 7px;color:#accfe9}
+.care-shell .care-stat strong{font-size:clamp(18px,5vw,23px);color:#e8f8ff}
+.care-shell .care-stat span{margin-top:5px;color:#b7d9ef}
+.care-shell .care-calendar-panel{
+  padding:9px 8px 8px;
+  border-radius:18px;
+}
+.care-shell .care-calendar-panel .calendar-toolbar{padding:0 3px 5px}
+.care-shell .care-calendar-panel .calendar-toolbar h2{font-size:clamp(17px,4.7vw,20px);color:#f5fbff}
+.care-shell .care-calendar-panel .month-arrow{
+  width:32px;height:32px;border-radius:50%;
+  border:1px solid rgba(154,205,246,.54);
+  background:linear-gradient(145deg,rgba(31,67,106,.80),rgba(6,21,39,.93));
+}
+.care-shell .care-calendar-panel .weekdays{margin:1px 0 3px}
+.care-shell .care-calendar-panel .weekdays>span{padding:4px 0}
+.care-shell .care-grid{gap:1px}
+.care-shell .care-grid .calendar-day{
+  min-height:38px;
+  padding:3px 0 1px;
+  font-size:12px;
+  border-radius:11px;
+}
+.care-shell .care-grid .calendar-day.selected{
+  color:#fff;
+  border:1px solid rgba(189,234,255,.96);
+  background:linear-gradient(146deg,#69c0ff,#1874d7 74%,#0b57a8);
+  box-shadow:inset 0 1px rgba(255,255,255,.78),0 0 13px rgba(35,137,255,.6);
+}
+.care-shell .care-legend{margin-top:7px;gap:7px 12px;color:#b2d3ed}
+.care-shell .care-actions{gap:7px}
+.care-shell .care-action{white-space:normal;line-height:1.15}
+.care-shell .care-action.rose{
+  border-color:rgba(239,171,208,.53);
+  color:#ffe0f0;
+  background:linear-gradient(146deg,rgba(102,64,97,.72),rgba(30,29,52,.84));
+}
+.care-shell .care-day-details{margin:8px 0 2px}
+.care-shell .care-day-item{padding:9px;margin-bottom:6px}
+.care-shell .care-settings-panel{padding:12px}
+.care-shell .care-settings-panel form{margin-top:9px}
+.care-shell .care-history-wrap{margin-top:11px}
+.care-shell .care-history-item{padding:9px;margin-bottom:6px}
+.care-shell .care-data-settings{margin-top:14px;padding-top:11px}
+.care-shell .care-disclaimer{padding:12px 3px 0}
+.care-shell .day-footer{margin:10px 0 0;padding:10px 2px 0}
+
+/* My World: premium blue rail and compact matching content. */
+.world-shell .world-intro{padding:10px 3px 11px}
+.world-shell .world-intro h2{
+  font-size:clamp(22px,6vw,27px);
+  margin:4px 0 6px;
+  color:#f8fcff;
+  font-weight:455;
+}
+.world-shell .world-intro>p:last-child{
+  font-size:11px;
+  line-height:1.35;
+  color:#c7e2f6;
+  margin:0;
+}
+.world-shell .world-tabs{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:2px;
+  padding:3px;
+  min-height:45px;
+  margin:0 0 11px;
+  border:1px solid rgba(151,202,244,.52);
+  border-radius:24px;
+  background:linear-gradient(125deg,rgba(12,33,55,.80),rgba(4,17,32,.88));
+  box-shadow:var(--personal-shadow);
+  -webkit-backdrop-filter:blur(17px);backdrop-filter:blur(17px);
+}
+.world-shell .world-tab{
+  min-height:37px;
+  border-radius:20px;
+  font-size:clamp(9px,2.45vw,11px);
+  color:#d4eafa;
+  padding:3px 1px;
+}
+.world-shell .world-tab.active{
+  color:white;
+  border:1px solid rgba(192,232,255,.9);
+  background:radial-gradient(ellipse at 10% 12%,rgba(224,245,255,.42),transparent 78%),
+    linear-gradient(150deg,rgba(61,148,236,.97),rgba(15,94,184,.94));
+  box-shadow:inset 0 1px rgba(255,255,255,.60),0 0 12px rgba(55,151,250,.35);
+}
+.world-shell .world-spotlight{padding:13px}
+.world-shell .world-spotlight h2{font-size:clamp(20px,5.6vw,23px);margin:0 0 6px;color:#f5fcff}
+.world-shell .world-spotlight>p{font-size:11px;line-height:1.4;margin:0 30px 10px 0;color:#c3ddf0}
+.world-shell .world-kicker{margin-bottom:6px}
+.world-shell .world-spotlight-icon{top:10px;right:11px;color:#ffe0ae}
+.world-shell .world-facts{gap:6px}
+.world-shell .world-fact,
+.world-shell .world-finance-summary>div{
+  min-width:0;
+  border-radius:12px;
+  padding:8px 7px;
+  border:1px solid rgba(144,188,224,.30);
+  background:linear-gradient(145deg,rgba(26,56,85,.62),rgba(4,20,38,.77));
+  box-shadow:inset 0 1px rgba(236,248,255,.08);
+}
+.world-shell .world-fact strong{font-size:17px}
+.world-shell .world-fact span{margin-top:4px;font-size:9px}
+.world-shell .world-head{margin:13px 1px 7px}
+.world-shell .world-list{gap:7px}
+.world-shell .world-item{align-items:center;gap:9px;padding:10px}
+.world-shell .world-item-icon{
+  flex:none;
+  width:31px;height:31px;border-radius:50%;
+  border:1px solid rgba(162,208,242,.44);
+  background:linear-gradient(145deg,rgba(37,79,118,.77),rgba(9,31,53,.9));
+  color:#d9efff;
+}
+.world-shell .world-item-icon.rose{color:#ffd0e4}
+.world-shell .world-item-icon.warm{color:#ffe0b3}
+.world-shell .world-item-text strong{font-size:12px;color:#f7fcff}
+.world-shell .world-item-text p{font-size:10.5px;line-height:1.35;color:#c4dcef}
+.world-shell .world-item-actions button{
+  width:29px;min-width:29px;height:29px;
+  border:1px solid rgba(144,196,241,.39);
+  border-radius:50%;
+  background:linear-gradient(145deg,rgba(28,63,98,.78),rgba(4,21,39,.89));
+  color:#e0f2ff;
+  padding:3px;
+}
+.world-shell .world-hint{margin:8px 2px 10px;color:#afc8db;font-size:10px;line-height:1.4}
+.world-shell .world-finance-summary{gap:6px;margin-top:8px}
+.world-shell .world-finance-summary strong{margin-top:6px}
+.world-shell .world-assistant-hero{padding:13px}
+.world-shell .world-assistant-symbol{
+  width:43px;height:43px;font-size:24px;color:#e0f5ff;
+}
+.world-shell .world-assistant-hero h2{margin:9px 0 6px}
+.world-shell .world-suggestions{margin:10px 0;gap:6px}
+.world-shell .world-suggestions button,
+.world-shell .world-bottom>*{
+  border:1px solid rgba(142,197,246,.48);
+  border-radius:13px;
+  background:linear-gradient(146deg,rgba(25,58,91,.76),rgba(7,26,47,.89));
+  color:#d2eeff;
+  font-size:10px;
+  padding:8px 10px;
+}
+.world-shell .world-chat-form{
+  border:1px solid rgba(145,197,238,.46);
+  background:linear-gradient(145deg,rgba(19,47,75,.76),rgba(5,22,40,.89));
+}
+.world-shell .world-bottom{
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:7px;
+  padding-top:9px;
+}
+.world-shell .world-privacy{margin:10px 3px}
+
+/* Health: same blue glass, restrained warm highlights for sensitive context. */
+.health-shell .health-head{padding:13px 3px 9px}
+.health-shell .health-head h2{
+  margin:0 0 6px;
+  font-size:clamp(21px,5.8vw,25px);
+  font-weight:450;
+  color:#f7fbff;
+}
+.health-shell .health-head>p:last-child{
+  margin:0;
+  font-size:11px;
+  line-height:1.38;
+  color:#c4def3;
+}
+.health-shell .health-tabs{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:2px;
+  min-height:45px;
+  padding:3px;
+  margin:11px 0 9px;
+  border:1px solid rgba(146,202,247,.51);
+  border-radius:24px;
+  background:linear-gradient(125deg,rgba(11,33,55,.78),rgba(3,16,31,.87));
+  box-shadow:var(--personal-shadow);
+  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+}
+.health-shell .health-tabs>button{
+  min-height:37px;
+  padding:3px 2px;
+  border-radius:20px;
+  color:#deedfa;
+  font-size:clamp(10px,2.8vw,12px);
+}
+.health-shell .health-tabs>button.active{
+  color:#fff!important;
+  border:1px solid rgba(193,235,255,.9)!important;
+  background:radial-gradient(ellipse at 14% 10%,rgba(225,245,255,.43),transparent 79%),
+    linear-gradient(148deg,rgba(63,148,235,.97),rgba(16,96,187,.94))!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.67),0 0 12px rgba(49,153,255,.41)!important;
+}
+.health-shell .day-section-heading{margin:12px 1px 7px}
+.health-shell .health-hint{margin:7px 2px 9px;font-size:10px}
+.health-shell .health-list{gap:7px}
+.health-shell .health-card{align-items:center;padding:10px;gap:9px}
+.health-shell .health-card-icon{
+  flex:none;width:31px;height:31px;border-radius:50%;
+  border:1px solid rgba(161,206,245,.46);
+  background:linear-gradient(146deg,rgba(40,80,121,.82),rgba(7,25,46,.90));
+  color:#d4efff;
+}
+.health-shell .health-card-body strong{font-size:12px;color:#f5faff}
+.health-shell .health-card-body p{font-size:10.5px;color:#c7dcee}
+.health-shell .health-card-body small{font-size:10px;color:#a5c3d7}
+.health-shell .health-actions>button{
+  min-width:28px;min-height:28px;
+  border-radius:50%;
+  border:1px solid rgba(148,194,233,.35);
+  background:linear-gradient(145deg,rgba(29,64,99,.71),rgba(5,20,38,.87));
+  color:#e4f6ff;
+}
+.health-shell .health-take-actions{gap:5px}
+.health-shell .health-take-actions button{
+  border:1px solid rgba(151,203,242,.39);
+  background:linear-gradient(144deg,rgba(39,67,99,.74),rgba(10,26,45,.85));
+  border-radius:13px;
+  color:#e0effd;
+}
+.health-shell .health-take-actions .health-success{
+  background:linear-gradient(144deg,rgba(35,82,67,.75),rgba(10,37,33,.85));
+  color:#bdf5e1;
+}
+.health-shell .health-take-actions .health-missed{
+  background:linear-gradient(144deg,rgba(90,42,58,.78),rgba(43,19,32,.86));
+  color:#ffccd8;
+}
+.health-shell .health-summary{padding:11px;margin:10px 0}
+.health-shell .health-summary strong{font-size:21px;color:#ecfaff}
+.health-shell .health-danger{margin-top:16px;padding-top:11px}
+.health-shell .health-danger button{
+  border-radius:13px;
+  border-color:rgba(144,190,233,.42);
+  background:linear-gradient(145deg,rgba(25,54,84,.81),rgba(5,20,37,.9));
+  color:#cce8ff;
+}
+.health-shell .health-danger #healthDeleteAll{color:#ffccda;border-color:rgba(230,150,179,.39)}
+.health-shell .care-disclaimer{padding:12px 3px 0}
+.health-shell .day-footer{margin:11px 0 0;padding:9px 2px 0}
+
+/* Accessible sizing/overflow on narrower phones and different iOS text scales. */
+@media (max-width:370px){
+  .day-shell:is(.care-shell,.world-shell,.health-shell) .day-heading h1{font-size:21px}
+  .day-shell:is(.care-shell,.world-shell,.health-shell) .day-today{padding:7px 8px;font-size:10px}
+  .world-shell .world-tab{font-size:9px}
+  .world-shell .world-fact{padding:7px 5px}
+  .day-shell #notesView .notebook-title h2{font-size:18px}
+}
+@media (max-width:700px) and (orientation:landscape){
+  .day-shell:is(.care-shell,.world-shell,.health-shell){
+    padding-left:max(16px,env(safe-area-inset-left,0px));
+    padding-right:max(16px,env(safe-area-inset-right,0px));
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .care-shell .day-tab,.world-shell .world-tab,.health-shell .health-tabs>button{transition:none!important}
+}
