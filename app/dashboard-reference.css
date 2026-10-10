@@ -721,7 +721,7 @@
    under its inner text, not a huge blank gap above Profit or above the CTA. */
 @media (min-width:360px) and (max-width:539px){
   #homeScreen .metric-grid{
-    --bv-client-h:clamp(96px,26.15vw,111px);
+    --bv-client-h:clamp(106px,calc(26.15vw + 10px),121px);
     --bv-order-h:clamp(87px,23.5vw,101px);
     --bv-profit-h:clamp(108px,29.35vw,126px);
     --bv-gold-h:clamp(133px,36vw,155px);
@@ -845,7 +845,7 @@
   /* iPhone X/mini safety: leave just enough room for three legend rows
      and keep profit/CTA from disappearing beneath the silhouette. */
   #homeScreen .metric-grid{
-    --bv-client-h:100px;
+    --bv-client-h:110px;
     --bv-order-h:90px;
     --bv-profit-h:111px;
     --bv-gold-h:132px;
