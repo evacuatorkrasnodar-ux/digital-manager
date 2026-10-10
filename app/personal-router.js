@@ -12,6 +12,14 @@
   const route=(view)=>window.dispatchEvent(new CustomEvent('dm-personal-route',{detail:{view}}));
   const safeView=view=>valid.has(view)?view:'calendar';
   const getView=()=>safeView(new URLSearchParams(location.search).get('view'));
+  function sizeFrames(){
+    for(const kind of ['health','cycle']){
+      const frame=frames[kind],panel=panels[kind];
+      if(!frame||!panel||panel.hidden)continue;
+      const available=window.innerHeight-frame.getBoundingClientRect().top-90;
+      frame.style.height=Math.max(220,Math.floor(available))+'px';
+    }
+  }
   function showHealthSubsection(view){
     if(!['metrics','meds','sleep','files'].includes(view))return;
     pendingHealthView=view;
@@ -68,6 +76,7 @@
       else url.searchParams.set('view',view);
       if(url.href!==location.href)history.pushState({personalView:view},'',url);
     }
+    requestAnimationFrame(sizeFrames);
     if(changed&&medical.has(view)){
       // Switching views does not replace the document or move the upper dock.
       window.scrollTo({top:0,behavior:'instant'});
@@ -84,9 +93,12 @@
         connectFrame(kind);
         frames[kind].dataset.ready='true';
         panels[kind].classList.add('loaded');
+        requestAnimationFrame(sizeFrames);
       });
     }
     initialized=true;
+    pendingHealthView=new URLSearchParams(location.search).get('healthView')||'';
+    window.addEventListener('resize',sizeFrames);
     current='';
     activate(shell.dataset.personalView||getView());
     window.addEventListener('dm-personal-view',event=>activate(event.detail?.view));
