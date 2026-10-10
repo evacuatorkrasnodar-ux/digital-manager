@@ -1,4 +1,4 @@
-/* Digital Manager OS · My Day Black Velvet v265
+/* Digital Manager OS · My Day Black Velvet v266
    Authentic long photographic sunset. No image processing, cropping, or fake UI.
    Overrides only visual styling of the personal calendar, not storage/navigation. */
 .day-shell:not(.care-shell,.world-shell,.health-shell){
@@ -62,46 +62,158 @@
   background:linear-gradient(90deg,transparent,#aef7ff 20%,#f4ffff 52%,transparent 92%);
   box-shadow:0 0 8px 2px rgba(76,220,255,.84);
 }
-/* My World: mountain panorama and glowing blue/gold ribbons */
-.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry{
-  position:relative;isolation:isolate;overflow:hidden;
-  display:flex;align-items:center;gap:11px;min-height:78px;margin:0 0 14px;
-  padding:11px 13px;border-radius:20px;border:1px solid rgba(139,204,253,.67);
+/* v266 — My World: real existing mountain panorama. No generated card / no fake controls.
+   Compact two-line layout and an actual clickable glass chevron, as in the reference. */
+.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry {
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr) 34px;
+  align-items:center;
+  column-gap:9px;
+  box-sizing:border-box;
+  width:100%;
+  height:72px;
+  min-height:72px;
+  max-height:72px;
+  padding:8px 10px;
+  margin:0 0 13px;
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  border:1px solid rgba(121,193,251,.64);
+  border-radius:20px;
+  text-decoration:none;
+  color:#edf7ff;
   background:
-    linear-gradient(107deg,rgba(5,20,39,.97) 0%,rgba(5,21,40,.91) 48%,rgba(7,24,43,.42) 100%),
-    var(--dm-scene) center 29%/100% auto no-repeat,
-    #081b31;
-  box-shadow:inset 0 1px rgba(239,252,255,.24),0 11px 30px rgba(0,3,13,.62);
-  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+    linear-gradient(90deg,
+      rgba(4,16,31,.98) 0%,
+      rgba(5,18,33,.96) 32%,
+      rgba(5,20,38,.74) 51%,
+      rgba(6,24,44,.38) 100%),
+    url('./assets/architecture-hero.png') 48% 46% / cover no-repeat,
+    #06182b;
+  box-shadow:
+    inset 0 1px rgba(239,252,255,.23),
+    0 11px 24px rgba(0,3,13,.49);
+  -webkit-backdrop-filter:blur(16px);
+  backdrop-filter:blur(16px);
 }
 .day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry::before{
-  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:url('./assets/world-lightflow.svg') right bottom/77% 100% no-repeat;
-  opacity:.93;-webkit-mask-image:none;mask-image:none;
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    url('./assets/world-lightflow.svg') right bottom / 74% 100% no-repeat;
+  opacity:.80;
+  -webkit-mask-image:none;
+  mask-image:none;
 }
 .day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry::after{
-  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse 28% 60% at 84% 30%,rgba(255,195,94,.24),transparent);
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:radial-gradient(ellipse 24% 75% at 83% 22%,
+    rgba(255,180,88,.18),transparent 100%);
   opacity:1;
 }
-.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry>*{position:relative;z-index:1}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry > *{
+  position:relative;
+  z-index:1;
+}
 .day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry-symbol{
-  display:grid;place-items:center;flex:none;width:47px;height:47px;
-  border-radius:50%;border:1px solid rgba(157,217,255,.95);
-  background:radial-gradient(circle at 32% 20%,rgba(232,252,255,.66),transparent 31%),
-    radial-gradient(circle at 50% 51%,#20568d,#06172c 73%);
-  box-shadow:inset 0 1px rgba(255,255,255,.71),0 0 16px rgba(45,152,255,.70);
-  color:#ffe7b3;font-size:22px;text-shadow:0 0 13px rgba(255,203,117,.95);
+  display:grid;
+  place-items:center;
+  flex:none;
+  width:43px;
+  height:43px;
+  padding:0;
+  border-radius:50%;
+  border:1px solid rgba(153,225,255,.95);
+  background:
+    radial-gradient(circle at 31% 23%,rgba(218,247,255,.62),transparent 31%),
+    radial-gradient(circle at 50% 53%,#16528d,#061629 75%);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.60),
+    0 0 12px rgba(56,164,255,.74),
+    0 0 0 2px rgba(40,144,237,.10);
+  color:#ffe1a2;
+  font-size:23px;
+  text-shadow:0 0 12px rgba(255,193,90,.86);
 }
-.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry strong{color:#fff;font-size:15px;font-weight:460}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry small{font-size:clamp(10px,2.85vw,12px);line-height:1.4;color:#c8e9fb}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry > span:nth-child(2){
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:4px;
+  overflow:hidden;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry strong{
+  display:block;
+  flex:none;
+  font-size:14px;
+  font-weight:470;
+  line-height:1.1;
+  letter-spacing:-.01em;
+  color:#f7fcff;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry small{
+  display:block;
+  width:100%;
+  min-width:0;
+  margin:0;
+  font-size:clamp(9px,2.55vw,11px);
+  font-weight:400;
+  line-height:1.25;
+  color:#b9def7;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
 .day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry-arrow{
-  display:grid;place-items:center;flex:none;width:35px;height:35px;
-  border:1px solid rgba(155,204,247,.63);border-radius:50%;
-  background:linear-gradient(145deg,rgba(27,56,87,.73),rgba(5,17,32,.89));
-  box-shadow:inset 0 1px rgba(255,255,255,.16);
-  color:#f3faff;font-size:20px;
+  display:grid;
+  place-items:center;
+  flex:none;
+  width:34px;
+  height:34px;
+  border:1px solid rgba(130,188,238,.55);
+  border-radius:50%;
+  background:linear-gradient(145deg,
+    rgba(23,51,81,.76),rgba(4,15,29,.89));
+  box-shadow:inset 0 1px rgba(245,252,255,.20),
+    0 1px 8px rgba(0,5,16,.35);
+  color:#f2f9ff;
 }
+.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry-arrow svg{
+  display:block;
+  width:18px;
+  height:18px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry:focus-visible{
+  outline:2px solid #cff2ff;
+  outline-offset:3px;
+}
+@media(max-width:350px){
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry{
+    grid-template-columns:40px minmax(0,1fr) 31px;
+    column-gap:6px;
+    height:68px;min-height:68px;max-height:68px;
+    padding:7px 8px;
+  }
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry-symbol{width:40px;height:40px;font-size:21px}
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry strong{font-size:13px}
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry small{font-size:9px}
+  .day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry-arrow{width:31px;height:31px}
+}
+
 /* Sized to reference: bright rim, dark translucent body, blue/gold details */
 .day-shell:not(.care-shell,.world-shell,.health-shell) .calendar-panel{
   position:relative;isolation:isolate;overflow:hidden;
