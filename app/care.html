@@ -15,29 +15,36 @@
   <link rel="stylesheet" href="./polish.css?v=260">
   <link rel="stylesheet" href="./dock.css?v=258">
   <link rel="stylesheet" href="./personal-unified.css?v=283">
+  <link rel="stylesheet" href="./health-navigation.css?v=287">
   <script src="./care.js?v=283" defer></script>
   <script src="./system-ui.js?v=283" defer></script>
   <script src="./polish.js?v=257" defer></script>
-  <title>Забота о себе — Цифровой управляющий</title>
+  <title>Женский календарь — Моё здоровье · Цифровой управляющий</title>
 </head>
 <body>
   <div class="day-shell care-shell">
     <header class="day-header">
       <a class="day-back" href="./myday.html" aria-label="Вернуться в календарь"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></a>
-      <div class="day-heading"><span>ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h1>Мой день <span aria-hidden="true">✦</span></h1></div>
+      <div class="day-heading"><span>ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h1>Моё здоровье <span aria-hidden="true">♡</span></h1></div>
     </header>
-    <nav class="day-tabs" aria-label="Разделы моего дня">
+    <nav class="day-tabs health-main-tabs" aria-label="Основные разделы Моего дня">
       <a class="day-tab" href="./myday.html">Календарь</a>
       <a class="day-tab" href="./myday.html?view=notes">Блокнот</a>
-      <span class="day-tab active care-active" aria-current="page">Забота ♡</span>
+      <span class="day-tab active" aria-current="page">Здоровье ♡</span>
+    </nav>
+    <nav class="health-tabs health-cycle-nav" aria-label="Разделы здоровья">
+      <a href="./health.html?view=metrics">♡ Показатели</a>
+      <a href="./health.html?view=meds">◈ Лекарства</a>
+      <a href="./health.html?view=sleep">☾ Сон</a>
+      <a href="./health.html?view=files">▤ Документы</a>
+      <span class="active" aria-current="page">♡ Цикл</span>
     </nav>
     <main class="care-main">
-      <section class="care-hero" aria-label="Личное пространство">
-        <span class="care-eyebrow">✦ ТОЛЬКО ДЛЯ ТЕБЯ</span>
-        <div class="care-hero-line"><div><h2>Забота о себе<span class="care-heart">♡</span></h2><p>Твой ритм. Твои правила.</p></div><span class="care-moon" aria-hidden="true">☾</span></div>
-        <p class="care-hero-note">Планы подстраиваются под тебя, а не наоборот. Даже управляющий это понимает.</p>
+      <section class="care-hero care-cycle-hero" aria-label="Женский календарь">
+        <span class="care-eyebrow">♡ ЖЕНСКОЕ ЗДОРОВЬЕ</span>
+        <div class="care-hero-line"><div><h2>Женский календарь<span class="care-heart">♡</span></h2><p>Цикл и самочувствие.</p></div><span class="care-moon" aria-hidden="true">☾</span></div>
+        <p class="care-hero-note">Отмечай даты месячных и самочувствие. Прогноз ориентировочный и не заменяет врача.</p>
       </section>
-      <a href="./health.html" class="care-health-entry"><span class="care-health-entry-icon">✚</span><span><strong>Мои лекарства и здоровье</strong><small>Давление, пульс, шаги, лекарства и сон</small></span><span class="dm-round-chevron care-health-entry-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></a>
       <section id="careSetup" class="care-panel care-onboard" aria-labelledby="careSetupTitle" hidden>
         <div class="care-onboard-icon" aria-hidden="true">✿</div>
         <h2 id="careSetupTitle">Знакомься: календарь цикла</h2>
@@ -104,7 +111,7 @@
       </section>
       <p class="care-disclaimer">Календарь предназначен только для личных заметок. Он не диагностирует заболевания, не определяет безопасные дни и не подходит для контрацепции или установления беременности. При необычных симптомах лучше обратиться к врачу.</p>
     </main>
-    <footer class="day-footer"><span>♡</span> Забота о себе — по собственному выбору. Без принудительных напоминаний и публичных уведомлений.</footer>
+    
   </div>
   <dialog class="day-dialog care-dialog" id="carePeriodDialog" aria-labelledby="carePeriodDialogTitle">
     <form id="carePeriodForm">
