@@ -57,6 +57,18 @@
     }else nextTab(direction);
   }
   function init(){
+    // Calendar's existing arrow goes to the previous in-app page when possible.
+    // The original Home link stays as a safe fallback for direct entry.
+    if(file==='myday.html'&&!embedded){
+      const back=document.querySelector('body > .day-shell > .day-header > a.day-back');
+      back?.addEventListener('click',event=>{
+        let previous;
+        try{previous=new URL(document.referrer);}catch(_){return;}
+        if(previous.origin!==location.origin||history.length<=1)return;
+        event.preventDefault();
+        history.back();
+      });
+    }
     document.addEventListener('touchstart',touchStart,{passive:true});
     document.addEventListener('touchend',touchEnd,{passive:true});
     document.addEventListener('touchcancel',()=>{start=null},{passive:true});
