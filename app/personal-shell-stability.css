@@ -1,0 +1,99 @@
+/* Shared personal header v1: one scene and one rail across Calendar, Health, Cycle.
+   Keep view-specific content below the rail; do not alter forms or stored data. */
+body > .day-shell.day-shell{
+  background:#01040b!important;
+  position:relative;
+  isolation:isolate;
+}
+/* The same photographic scene and identical gradient/position on every page. */
+body > .day-shell.day-shell::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(1,7,20,.36) 0%,rgba(0,7,17,.22) 105px,rgba(0,4,13,.05) 230px,rgba(0,3,11,.04) 475px,transparent 720px),
+    url('./assets/myday-long-v263.avif') center top/100% auto no-repeat,
+    #01040b!important;
+  opacity:1!important;
+  filter:none!important;
+}
+body > .day-shell.day-shell::after{
+  display:none!important;
+  content:none!important;
+}
+/* Identical brand title and icon on all personal pages. */
+body > .day-shell.day-shell > .day-header{
+  gap:10px!important;
+  align-items:center;
+}
+body > .day-shell.day-shell > .day-header .day-back{
+  flex:none;
+  border:0!important;
+  background:url('./assets/logo-air.png') center/99% auto no-repeat!important;
+  filter:drop-shadow(0 5px 11px rgba(57,160,255,.36));
+}
+body > .day-shell.day-shell > .day-header .day-heading>span{
+  font-size:clamp(9px,2.6vw,11px);
+  letter-spacing:.05em;
+  line-height:1.2;
+  color:#d8ecfc;
+}
+body > .day-shell.day-shell > .day-header .day-heading h1{
+  margin:4px 0 0;
+  font-weight:435!important;
+  letter-spacing:-.047em!important;
+  line-height:1!important;
+}
+body > .day-shell.day-shell > .day-intro .polish-hello{
+  white-space:pre-line;
+  color:#fff;
+}
+@media(min-width:701px){
+  body > .day-shell.day-shell > .day-header .day-back{
+    width:45px!important;
+    height:52px!important;
+  }
+  body > .day-shell.day-shell > .day-header .day-heading h1{
+    font-size:clamp(24px,6.8vw,30px)!important;
+  }
+  body > .day-shell.day-shell > .day-intro{
+    padding:12px 3px 11px!important;
+  }
+  body > .day-shell.day-shell > .day-intro .polish-hello{
+    margin:0 0 6px!important;
+    font-size:clamp(24px,6.7vw,29px)!important;
+    line-height:1.04!important;
+    font-weight:420!important;
+    letter-spacing:-.045em!important;
+  }
+  body > .day-shell.day-shell > .day-intro #dayGreeting{
+    display:block!important;
+    margin:0!important;
+    max-width:290px;
+    font-size:12px!important;
+    line-height:1.35!important;
+    color:#dce9f4!important;
+  }
+  body > .day-shell.day-shell.day-shell > nav.day-tabs{
+    box-sizing:border-box!important;
+    height:42px!important;
+    min-height:42px!important;
+    max-height:42px!important;
+    margin:5px 0 9px!important;
+    padding:3px!important;
+  }
+  body > .day-shell.day-shell.day-shell > nav.day-tabs > .day-tab{
+    height:34px!important;
+    min-height:34px!important;
+    max-height:34px!important;
+  }
+}
+/* Don't crossfade the whole page and show two superimposed wallpapers. */
+@media(prefers-reduced-motion:no-preference){
+  ::view-transition-old(root),
+  ::view-transition-new(root){
+    animation:none!important;
+  }
+}
