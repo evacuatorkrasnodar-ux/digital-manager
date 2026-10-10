@@ -50,3 +50,12 @@ html.personal-embedded body > .day-shell.day-shell > .care-section-intro{
 html.personal-embedded body > .day-shell.day-shell > .health-tabs{
   margin-top:0!important;
 }
+
+/* v2: the five-section dock and its introduction are now one permanent
+   element in the parent shell. Never render a duplicate inside either frame. */
+html.personal-embedded body > .day-shell.day-shell > .health-head,
+html.personal-embedded body > .day-shell.day-shell > .care-section-intro,
+html.personal-embedded body > .day-shell.day-shell > nav.health-tabs,
+html.personal-embedded body > .day-shell.day-shell > nav.health-cycle-nav{
+  display:none!important;
+}
