@@ -1,4 +1,4 @@
-/* v9 — one mobile geometry for Calendar, Notebook and Health.
+/* v10 — one mobile geometry for Calendar, Notebook and Health.
    Keep the approved rail appearance; eliminate differences in width, header,
    greeting insertion and view-dependent top margins. */
 @media (max-width:700px) and (orientation:portrait){
@@ -177,5 +177,31 @@
   ::view-transition-old(personal-day-rail),
   ::view-transition-new(personal-day-rail){
     animation:none!important;
+  }
+}
+
+/* Health and Cycle now use the same REAL greeting block as Calendar.
+   The former empty spacer caused their humorous text to appear only below
+   the tabs; preserve the exact 26px mobile / 110px desktop rail geometry. */
+@media (max-width:700px) and (orientation:portrait){
+  body > :is(.day-shell.health-shell,.day-shell.care-shell).day-shell.day-shell > nav.day-tabs{
+    margin-top:3px!important;
+  }
+}
+@media (min-width:701px){
+  body > :is(.day-shell.health-shell,.day-shell.care-shell) > .day-intro{
+    padding:8px 3px 6px!important;
+  }
+  body > :is(.day-shell.health-shell,.day-shell.care-shell) > .day-intro .polish-hello{
+    margin:0 0 5px!important;
+    font-size:clamp(23px,5.5vw,28px)!important;
+    line-height:1.04!important;
+  }
+  body > :is(.day-shell.health-shell,.day-shell.care-shell) > .day-intro #dayGreeting{
+    display:block!important;
+    margin:0!important;
+    font-size:12px!important;
+    line-height:1.35!important;
+    color:#dce9f4!important;
   }
 }
