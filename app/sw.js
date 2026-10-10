@@ -1,5 +1,5 @@
 /* App-only service worker: fresh documents, styles and scripts; cached offline assets. */
-const CACHE = 'digital-manager-black-velvet-v365-20261010';
+const CACHE = 'digital-manager-black-velvet-v366-20261010';
 const CACHE_PREFIX = 'digital-manager-black-velvet-';
 const OFFLINE_FILES = [
   './index.html',
@@ -25,7 +25,7 @@ const OFFLINE_FILES = [
   './top-tabs-position.css?v=12',
   './personal-shell-stability.css?v=2',
   './personal-router.js?v=4',
-  './personal-router.css?v=3',
+  './personal-router.css?v=4',
   './personal-embedded.css?v=2',
   './health-tabs-theme.css?v=1',
   './health-metrics.css?v=288',
