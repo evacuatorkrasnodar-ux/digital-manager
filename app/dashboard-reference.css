@@ -742,8 +742,8 @@
     padding:6px 7px!important;
   }
   #homeScreen .metric-grid .recommendation-card{
-    /* v323: lower the gold card 8px to inspect the seam against Clients. */
-    top:-17px;
+    /* v324: remove the lifted position on iPhone so gold visibly sits lower. */
+    top:0px;
     padding:6px 8px 6px!important;
   }
   /* Small title badges echo the original Digital Business card's details. */
