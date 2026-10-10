@@ -147,7 +147,7 @@
   display:flex;align-items:center;gap:8px;padding:6px 11px;z-index:2;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.77),0 0 12px rgba(255,184,85,.29);
   letter-spacing:-.01em;white-space:nowrap;
-}.advice-cta .ico{width:13px;height:13px}.shortcuts h2{font-size:15px;font-weight:450;margin:11px 2px 7px;font-family:var(--font-display);letter-spacing:-.016em}.shortcut-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.shortcut{height:68px;border-radius:13px;border:1px solid rgba(118,148,178,.18);background:radial-gradient(ellipse 80% 70% at 0% 0%,rgba(112,174,236,.04),transparent 72%),linear-gradient(155deg,#0e1a27,#070d14 56%,#04070a);text-align:left;padding:9px 6px;display:flex;flex-direction:column;justify-content:space-between;min-width:0}.shortcut-icon{height:23px;width:23px}.shortcut-icon.blue{color:#7abaff;filter:drop-shadow(0 0 5px #229dffa0)}.shortcut-icon.cyan{color:#79eeec}.shortcut-icon.gold{color:#f3c683}.shortcut span{font-size:clamp(8px,2.28vw,10px);line-height:1.2;color:#d8e6f5;font-weight:350;letter-spacing:-.008em}.demo-disclaimer{color:#8093a6;text-align:center;font-size:10px;margin:11px 0 3px}
+}.advice-cta .ico{width:13px;height:13px}.shortcuts h2{font-size:15px;font-weight:450;margin:11px 2px 7px;font-family:var(--font-display);letter-spacing:-.016em}.shortcut-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.shortcut{height:68px;border-radius:13px;border:1px solid rgba(118,148,178,.18);background:radial-gradient(ellipse 80% 70% at 0% 0%,rgba(112,174,236,.04),transparent 72%),linear-gradient(155deg,#0e1a27,#070d14 56%,#04070a);text-align:left;padding:9px 6px;display:flex;flex-direction:column;justify-content:space-between;min-width:0}.shortcut-icon{height:23px;width:23px}.shortcut-icon.blue{color:#7abaff;filter:drop-shadow(0 0 5px #229dffa0)}.shortcut-icon.cyan{color:#79eeec}.shortcut-icon.gold{color:#f3c683}.shortcut span{font-size:clamp(8px,2.28vw,10px);line-height:1.2;color:#d8e6f5;font-weight:350;letter-spacing:-.008em}
 /* Navigation dock — balanced raised crest and lifted labels; v2.22. */
 .ring-preview{margin:19px 0 14px;padding:13px;border:1px solid rgba(177,185,194,.25);border-radius:15px;background:rgba(18,19,22,.72)}
 .ring-preview-head{display:flex;flex-wrap:wrap;gap:4px 9px;align-items:baseline;justify-content:space-between}
@@ -242,9 +242,53 @@
     padding-bottom:6px;
   }
   .app-shell.home-fixed #homeScreen>.dashboard::-webkit-scrollbar{display:none}
-  .app-shell.home-fixed #homeScreen .demo-disclaimer{
-    margin-bottom:0;
-    padding-bottom:0;
-  }
 }
 /* Short screens and landscape retain natural page scrolling so no business card is trapped. */
+
+/* v276 — compact quick actions and remove the black empty gap above the real dock.
+   The scroll viewport reaches the dock; its safe space is internal so the
+   final card can be scrolled completely into view without a dead exterior strip. */
+@media (max-width:700px){
+  #homeScreen .shortcuts h2{
+    margin:7px 1px 5px;
+    font-size:14px;
+    line-height:1.18;
+    letter-spacing:-.018em;
+  }
+  #homeScreen .shortcut-grid{
+    gap:5px;
+  }
+  #homeScreen .shortcut{
+    height:56px;
+    min-height:56px;
+    padding:6px 6px 5px;
+    border-radius:12px;
+  }
+  #homeScreen .shortcut-icon{
+    width:19px;
+    height:19px;
+  }
+  #homeScreen .shortcut span{
+    font-size:clamp(8px,2.2vw,9.5px);
+    line-height:1.15;
+  }
+}
+@media (max-width:700px) and (orientation:portrait) and (min-height:560px){
+  .app-shell.home-fixed #homeScreen>.dashboard{
+    display:flex;
+    flex-direction:column;
+    margin:0;
+    /* Prevent the dock from covering the last actions while leaving no dead
+       black margin outside the actual scroll area. */
+    padding-bottom:calc(84px + env(safe-area-inset-bottom,0px));
+  }
+  .app-shell.home-fixed #homeScreen>.dashboard>.revenue-card,
+  .app-shell.home-fixed #homeScreen>.dashboard>.metric-grid,
+  .app-shell.home-fixed #homeScreen>.dashboard>.shortcuts{
+    flex-shrink:0;
+  }
+  .app-shell.home-fixed #homeScreen>.dashboard>.shortcuts{
+    margin-top:auto;
+    padding-top:2px;
+  }
+}
