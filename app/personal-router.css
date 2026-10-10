@@ -86,7 +86,6 @@ body > .day-shell.day-shell:has(#healthEmbedded) > main > .personal-embedded-vie
   min-height:100%;
 }
 body > .day-shell.day-shell:has(#healthEmbedded) > main > .personal-embedded-view > iframe{
-  height:100%!important;
   min-height:220px;
 }
 /* Animate only the changing content. Never transform the header, rail or dock. */
