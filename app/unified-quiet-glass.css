@@ -1,0 +1,215 @@
+/* v293 — correct direction: MY DAY CALENDAR IS THE DESIGN REFERENCE.
+   Do not recolor the approved calendar, date selection, its background or
+   its cards. Bring every OTHER screen into the same dusk/black-glass mood,
+   removing excessive full-surface cobalt. Small cyan / gold / blush accents
+   remain functional and welcome. Visual-only and PWA-safe. */
+:root{
+ --dm-dusk-glass:
+   radial-gradient(ellipse 64% 58% at 8% 0%,rgba(163,198,225,.052),transparent 88%),
+   linear-gradient(150deg,rgba(13,23,35,.94) 0%,rgba(7,14,24,.97) 60%,rgba(3,8,16,.98) 100%);
+ --dm-dusk-line:rgba(146,176,202,.42);
+ --dm-dusk-shadow:inset 0 1px rgba(244,250,255,.13),0 7px 18px rgba(0,3,11,.37);
+ --dm-dusk-dock:
+   linear-gradient(135deg,rgba(13,25,39,.91),rgba(4,13,24,.96) 77%,rgba(2,9,19,.97));
+}
+
+/* These other personal sections should share the calendar's actual sunset,
+   not a heavy cobalt overlay. Identical positioning to the calendar background.
+   We intentionally DO NOT target the ordinary .day-shell calendar itself. */
+.day-shell:is(.world-shell,.health-shell,.care-shell){
+ --personal-line:var(--dm-dusk-line);
+ --personal-glass:var(--dm-dusk-glass);
+ --personal-shadow:var(--dm-dusk-shadow);
+ background:#01040b!important;
+}
+.day-shell:is(.world-shell,.health-shell,.care-shell)::before{
+ background:
+   linear-gradient(180deg,
+     rgba(1,7,20,.36) 0%,
+     rgba(0,7,17,.22) 105px,
+     rgba(0,4,13,.05) 230px,
+     rgba(0,3,11,.04) 475px,
+     transparent 720px),
+   url('./assets/myday-long-v263.avif') center top/100% auto no-repeat,
+   #01040b!important;
+ opacity:1!important;
+ filter:none!important;
+}
+.day-shell:is(.world-shell,.health-shell,.care-shell)::after{
+ display:none!important;
+}
+
+/* Harmonize the non-calendar content surfaces with the original calendar
+   glass material. The informational icon accent remains, but no blue fill. */
+.day-shell:is(.world-shell,.health-shell,.care-shell) :is(
+ .world-spotlight,.world-item,.world-empty,.world-assistant-hero,
+ .world-fact,.world-finance-summary>div,.world-chat-form,.world-msg.bot,
+ .care-panel,.care-hero,.care-stat,.care-day-item,.care-history-item,
+ .care-health-entry,.care-calendar-panel,
+ .health-card,.health-summary,.health-empty,.health-metric-tile,
+ .health-week-panel,.health-device-panel,
+ .health-chart-panel,.health-chart-day,.health-history-card
+){
+ border-color:var(--dm-dusk-line)!important;
+ background:var(--dm-dusk-glass)!important;
+ box-shadow:var(--dm-dusk-shadow)!important;
+}
+.day-shell:is(.world-shell,.health-shell,.care-shell) :is(.world-spotlight,.care-hero,.care-calendar-panel){
+ -webkit-backdrop-filter:blur(15px);
+ backdrop-filter:blur(15px);
+}
+/* The calendar-like World and Cycle hero should feel dimensional, without
+   turning into a cobalt rectangle. Keep the approved icons and micro-warm glow. */
+.world-shell .world-spotlight::before,
+.care-shell .care-cycle-hero::before{
+ opacity:.17!important;
+ filter:saturate(.65);
+}
+.world-shell :is(.world-fact,.world-finance-summary>div),
+.care-shell :is(.care-stat,.care-day-item,.care-history-item),
+.health-shell :is(.health-week-panel,.health-device-panel){
+ border-color:rgba(145,174,198,.32)!important;
+}
+.day-shell:is(.world-shell,.health-shell,.care-shell) :is(.day-eyebrow,.world-kicker,.care-eyebrow){
+ color:#b5c8d9;
+}
+
+/* Root three-tab dock in Health and Cycle, exactly like approved Calendar,
+   where only the chosen segment uses pale silver glass. */
+.day-shell:is(.health-shell,.care-shell) > nav.day-tabs{
+ background:var(--dm-dusk-dock)!important;
+ border-color:rgba(151,184,208,.43)!important;
+ box-shadow:inset 0 1px rgba(246,252,255,.16),0 5px 13px rgba(0,4,14,.37)!important;
+}
+.day-shell:is(.health-shell,.care-shell) > nav.day-tabs > .day-tab:not(.active):hover{
+ background:transparent!important;
+ filter:none!important;
+}
+
+/* World / Health / Cycle subtabs should not light up cobalt on hover. */
+.world-shell .world-tabs,
+.health-shell .health-tabs,
+.care-shell .health-cycle-nav{
+ background:var(--dm-dusk-dock)!important;
+ border-color:rgba(151,184,208,.43)!important;
+ box-shadow:inset 0 1px rgba(246,252,255,.12),0 4px 12px rgba(0,5,15,.31)!important;
+}
+.world-shell .world-tab.active,
+.health-shell .health-tabs>.active,
+.care-shell .health-cycle-nav>.active{
+ background:var(--bv-quiet-ice)!important;
+ color:#102536!important;
+ box-shadow:var(--bv-quiet-glow)!important;
+ border-color:rgba(221,237,248,.86)!important;
+}
+.world-shell .world-tab:not(.active):hover,
+.health-shell .health-tabs>:is(button,a):not(.active):hover,
+.care-shell .health-cycle-nav>a:not(.active):hover{
+ background:transparent!important;
+ box-shadow:none!important;
+ filter:none!important;
+}
+
+/* Health: icons keep their own rose/cyan/mint personality; the background
+   behind each SVG must no longer be a blue panel. Animations are untouched. */
+.health-shell .health-metric-tile{
+ background:
+   radial-gradient(circle at 50% 34%,var(--metric-soft),transparent 55%),
+   var(--dm-dusk-glass)!important;
+ border-color:rgba(150,175,195,.43)!important;
+}
+.health-shell .health-metric-tile .health-metric-art{
+ background:
+   radial-gradient(circle at 25% 17%,rgba(240,250,255,.17),transparent 42%),
+   linear-gradient(150deg,rgba(40,56,72,.72),rgba(8,19,32,.97))!important;
+ border-color:rgba(192,213,230,.38)!important;
+}
+.health-shell .health-chart-bar{
+ background:linear-gradient(180deg,#8ac5e8,#386c94)!important;
+ box-shadow:0 0 7px rgba(98,162,200,.13)!important;
+}
+.health-shell :is(.health-metric-actions button,.health-filter button,.health-device-link,.health-provider-open),
+.world-shell :is(.world-mini,.world-chat-form button),
+.care-shell :is(.care-action,.care-secondary){
+ border-color:rgba(160,186,205,.45)!important;
+ background:linear-gradient(145deg,rgba(36,57,77,.77),rgba(7,20,34,.95))!important;
+ box-shadow:inset 0 1px rgba(248,253,255,.13),0 3px 8px rgba(0,3,12,.29)!important;
+}
+.day-shell:is(.world-shell,.care-shell,.health-shell) :is(.search-wrap,input,select,textarea){
+ background-color:rgba(6,15,27,.83);
+ border-color:rgba(151,175,197,.34);
+}
+.world-shell .world-msg.user{
+ background:linear-gradient(148deg,#c6d6e1,#94aec2)!important;
+ color:#11283b!important;
+}
+.world-shell .world-msg.bot{
+ background:var(--dm-dusk-glass)!important;
+ color:#dceaf6!important;
+}
+
+/* Notebook: same calendar backdrop already present; ONLY its notebook cards,
+   input and button have been carrying the old brighter blue fill. */
+.day-shell #notesView :is(.note-card,.search-wrap,.day-empty){
+ border-color:var(--dm-dusk-line)!important;
+ background:var(--dm-dusk-glass)!important;
+ box-shadow:var(--dm-dusk-shadow)!important;
+}
+.day-shell #notesView .note-card::before{
+ opacity:.12!important;
+ filter:saturate(.55)!important;
+}
+.day-shell #notesView :is(.day-add,.notebook-export,.note-card-to-plan){
+ background:linear-gradient(145deg,rgba(36,57,77,.77),rgba(7,20,34,.95))!important;
+ border-color:rgba(159,188,211,.47)!important;
+ box-shadow:inset 0 1px rgba(248,253,255,.15),0 3px 9px rgba(0,3,12,.26)!important;
+}
+.day-shell #notesView :is(.day-add,.notebook-export,.note-card-to-plan):hover{
+ background:linear-gradient(145deg,rgba(36,57,77,.77),rgba(7,20,34,.95))!important;
+ box-shadow:inset 0 1px rgba(248,253,255,.15),0 3px 9px rgba(0,3,12,.26)!important;
+}
+
+/* Main business Home: keep the original approved architecture hero and
+   chart artwork. Only blue-saturated background shells become dark graphite. */
+.app-shell{
+ --dm-dusk-line:var(--dm-dusk-line);
+ background:#01050a;
+}
+#homeScreen .dashboard,
+#homeScreen .shortcuts{
+ background:transparent!important;
+}
+#homeScreen :is(.metric-card,.shortcut,.ring-preview),
+#managementScreen :is(.manage-list>button,.management-foot),
+#assistantScreen :is(.assistant-welcome,.chat-log,.assistant-suggestions button,.ring-preview),
+.app-shell .secondary-screen :is(.metric-card,.detail-card,.management-card){
+ border-color:rgba(144,170,191,.33)!important;
+ background:
+   radial-gradient(ellipse at 5% 0%,rgba(170,196,219,.045),transparent 62%),
+   linear-gradient(154deg,#101a25 0%,#070d14 44%,#020406 100%)!important;
+ box-shadow:inset 0 1px rgba(242,249,255,.085),0 7px 19px rgba(0,0,0,.32)!important;
+}
+/* Secondary business tabs get the same shared scenic atmosphere behind their
+   cards, while the Home architecture photograph stays EXACTLY as before. */
+.app-shell .secondary-screen{
+ background:
+   linear-gradient(180deg,rgba(1,7,19,.55),rgba(1,6,15,.80) 230px,#01040a 650px),
+   url('./assets/myday-long-v263.avif') center top/100% auto no-repeat,
+   #01040a!important;
+}
+#homeScreen .timebar,
+#homeScreen .timebar .periods{
+ background-color:transparent;
+}
+#homeScreen .timebar .period:not(.selected):hover,
+#homeScreen .timebar .date-button:hover{
+ filter:none!important;
+}
+
+/* Accent icons and live graphs keep their cyan / amber highlights.
+   Do not recolor those meaningful visual elements. */
+@media(prefers-reduced-motion:reduce){
+ .day-shell:is(.health-shell,.world-shell,.care-shell) :is(button,a){
+   transition:none!important;
+ }
+}
