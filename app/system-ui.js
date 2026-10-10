@@ -1,5 +1,4 @@
-/* Digital Manager OS v1: live clock, optional actual battery, local event center.
-   No fake system indicators and no simulated/background push delivery. */
+/* Digital Manager OS v272: native system status icons, genuine in-app calendar notifications. */
 (() => {
   'use strict';
   const DB_NAME='digital-manager-my-day-v1';
@@ -15,37 +14,27 @@
   const dayKey=d=>[d.getFullYear(),pad(d.getMonth()+1),pad(d.getDate())].join('-');
   const safeDate=key=>{const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(String(key));if(!m)return null;const d=new Date(+m[1],+m[2]-1,+m[3]);return dayKey(d)===key?d:null;};
   const eventLink=key=>'./myday.html?date='+encodeURIComponent(key);
-  const icon=(kind)=>{
+  const bellIcon=()=>{
     const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
     svg.setAttribute('viewBox','0 0 24 24');
     svg.setAttribute('aria-hidden','true');
-    const paths=kind==='bell'?['M18 8a6 6 0 0 0-12 0c0 6-3 7-3 9h18c0-2-3-3-3-9','M10 21h4']
-      :kind==='offline'?['M2 9c5-5 15-5 20 0','M5 12.5c4-4 10-4 14 0','M8.6 16c2-2 4.8-2 6.8 0','M12 20h.01','M3 3l18 18']
-      :['M2 9c5-5 15-5 20 0','M5 12.5c4-4 10-4 14 0','M8.6 16c2-2 4.8-2 6.8 0','M12 20h.01'];
-    for(const d of paths){const p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d',d);svg.append(p);}
+    for(const d of ['M18 8a6 6 0 0 0-12 0c0 6-3 7-3 9h18c0-2-3-3-3-9','M10 21h4']){
+      const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+      path.setAttribute('d',d);svg.append(path);
+    }
     return svg;
   };
-  const status=make('div','os-status');
-  status.setAttribute('aria-label','Строка состояния приложения');
-  const left=make('div','os-status-main'),clock=make('time','os-clock','--:--');
-  clock.setAttribute('aria-label','Местное время');left.append(clock);
-  const right=make('div','os-status-right');
-  const network=make('span','os-network');const netIcon=icon('online'),netText=make('span','os-network-label','');
-  network.append(netIcon,netText);
-  const battery=make('span','os-battery');battery.hidden=true;
-  const batteryText=make('span','os-battery-text');
-  const batteryIcon=document.createElementNS('http://www.w3.org/2000/svg','svg');batteryIcon.setAttribute('viewBox','0 0 26 14');batteryIcon.setAttribute('aria-hidden','true');
-  const batteryRect=document.createElementNS('http://www.w3.org/2000/svg','rect');batteryRect.setAttribute('x','1');batteryRect.setAttribute('y','2');batteryRect.setAttribute('width','20');batteryRect.setAttribute('height','10');batteryRect.setAttribute('rx','2.1');
-  const terminal=document.createElementNS('http://www.w3.org/2000/svg','path');terminal.setAttribute('d','M23 5v4');
-  const batteryFill=document.createElementNS('http://www.w3.org/2000/svg','rect');batteryFill.setAttribute('class','os-battery-fill');batteryFill.setAttribute('x','3');batteryFill.setAttribute('y','4');batteryFill.setAttribute('width','16');batteryFill.setAttribute('height','6');batteryFill.setAttribute('rx','1');
-  batteryIcon.append(batteryRect,terminal,batteryFill);battery.append(batteryIcon,batteryText);
-  const bell=make('button','os-bell');bell.type='button';bell.setAttribute('aria-label','Открыть центр уведомлений');bell.append(icon('bell'));
-  const badge=make('span','os-bell-count');badge.hidden=true;badge.setAttribute('aria-hidden','true');bell.append(badge);
-  right.append(network,battery,bell);status.append(left,right);
+  // The phone owns the system status bar. Our notification bell belongs to the app header.
   const target=document.querySelector('.hero')||document.querySelector('.day-shell');
   if(!target)return;
-  target.insertBefore(status,target.firstElementChild?.classList.contains('hero-photo')?target.children[1]:target.firstChild);
-  // In the dashboard, this status area sits before the hero image and header.
+  const bell=make('button','os-bell os-app-notifications round-action');
+  bell.type='button';
+  bell.setAttribute('aria-label','Открыть центр уведомлений');
+  bell.append(bellIcon());
+  const badge=make('span','os-bell-count');badge.hidden=true;
+  badge.setAttribute('aria-hidden','true');bell.append(badge);
+  const headerActions=target.querySelector('.masthead .header-actions');
+  if(headerActions)headerActions.prepend(bell);
   const center=make('dialog','os-center');center.setAttribute('aria-labelledby','osCenterTitle');
   const header=make('div','os-center-header'),heading=make('div');
   heading.append(make('span','os-center-eyebrow','DIGITAL MANAGER OS'));
@@ -53,51 +42,20 @@
   const close=make('button','os-center-close','×');close.type='button';close.setAttribute('aria-label','Закрыть уведомления');
   header.append(heading,close);
   const scroller=make('div','os-center-scroll');
-  const summary=make('p','os-center-summary','Ваши настоящие дела и состояние приложения. Только то, что известно устройству.');
+  const summary=make('p','os-center-summary','Ближайшие события из вашего календаря.');
   const section=make('div','os-center-section'),sectionLabel=make('h3','','Мой день'),markAll=make('button','os-center-read','Отметить прочитанным');
   markAll.type='button';section.append(sectionLabel,markAll);
   const notices=make('div','os-status-list');
-  const deviceSection=make('div','os-center-section');deviceSection.append(make('h3','','Состояние устройства'));
-  const onlineRow=make('div','os-device-row'),onlineLabel=make('span','','Соединение'),onlineValue=make('strong','','—');onlineRow.append(onlineLabel,onlineValue);
-  const powerRow=make('div','os-device-row'),powerLabel=make('span','','Батарея'),powerValue=make('strong','','Недоступно');powerRow.append(powerLabel,powerValue);
+  // iOS and Android, not our application, display connection and battery status.
   const help=make('p','os-center-help','Это внутренний центр событий, а не системная шторка iOS или Android. Напоминания всплывают только при открытом приложении; фоновые push-уведомления ещё не подключены.');
   const link=make('a','os-center-link','Открыть «Мой день»');link.href='./myday.html';
-  scroller.append(summary,section,notices,deviceSection,onlineRow,powerRow,help,link);center.append(header,scroller);document.body.append(center);
+  scroller.append(summary,section,notices,help,link);center.append(header,scroller);document.body.append(center);
   const banner=make('div','os-banner');banner.hidden=true;banner.setAttribute('role','status');
   const bannerText=make('span',''),bannerClose=make('button','os-banner-x','×');
   bannerClose.type='button';bannerClose.setAttribute('aria-label','Скрыть уведомление');banner.append(bannerText,bannerClose);
   document.body.append(banner);
-  let currentEvents=[],batteryInfo=null,readState={},lastWarning='',bannerTimeout=null;
+  let currentEvents=[],readState={},bannerTimeout=null;
   try {const value=JSON.parse(localStorage.getItem(READ_KEY)||'{}');if(value&&typeof value==='object'&&!Array.isArray(value))readState=value;}catch(_){}
-  function clockTick(){const d=new Date();clock.textContent=pad(d.getHours())+':'+pad(d.getMinutes());clock.dateTime=d.toISOString();}
-  function networkTick(){
-    const online=navigator.onLine!==false;
-    network.classList.toggle('offline',!online);network.replaceChild(icon(online?'online':'offline'),network.firstChild);
-    netText.textContent=online?'Сеть':'Офлайн';network.title=online?'Устройство сообщает о наличии сетевого соединения; доступ в интернет не проверен':'Устройство сообщает об отсутствии сетевого соединения';
-    onlineValue.textContent=online?'Подключение есть':'Офлайн';
-    return online;
-  }
-  function batteryTick(){
-    if(!batteryInfo){battery.hidden=true;powerValue.textContent='Браузер не предоставляет данные';return;}
-    const pct=Math.max(0,Math.min(100,Math.round(batteryInfo.level*100)));
-    battery.hidden=false;batteryText.textContent=pct+'%';batteryFill.setAttribute('width',String(Math.max(0,pct/100*16)));
-    battery.classList.toggle('low',!batteryInfo.charging&&pct<=20);
-    battery.title='Реальный заряд: '+pct+'%'+(batteryInfo.charging?' · Заряжается':'');
-    powerValue.textContent=pct+'%'+(batteryInfo.charging?' · зарядка':'');
-    if(!batteryInfo.charging&&pct<=15&&lastWarning!=='low'){
-      lastWarning='low';showBanner('Батарея '+pct+'%. Зарядка не помешает, шеф. 🔋',null);
-    }
-    if(batteryInfo.charging||pct>20)lastWarning='';
-  }
-  async function setupBattery(){
-    if(typeof navigator.getBattery!=='function'){batteryTick();return;}
-    try{
-      batteryInfo=await navigator.getBattery();
-      if(!batteryInfo||typeof batteryInfo.level!=='number'){batteryInfo=null;batteryTick();return;}
-      batteryInfo.addEventListener('levelchange',batteryTick);
-      batteryInfo.addEventListener('chargingchange',batteryTick);batteryTick();
-    }catch(_){batteryInfo=null;batteryTick();}
-  }
   function readToken(e){return String(e.id)+':'+String(e.updatedAt||0);}
   function storeRead(){try{
     const keep=Object.entries(readState).slice(-180);readState=Object.fromEntries(keep);
@@ -199,7 +157,7 @@
     }
     checkDue(upcoming);
   }
-  bell.addEventListener('click',()=>{loadCalendar().finally(()=>{if(!center.open)center.showModal();});});
+  if(headerActions)bell.addEventListener('click',()=>{loadCalendar().finally(()=>{if(!center.open)center.showModal();});});
   close.addEventListener('click',()=>center.close());
   center.addEventListener('click',e=>{if(e.target===center)center.close();});
   markAll.addEventListener('click',()=>{
@@ -207,11 +165,9 @@
     storeRead();refreshNotices();
   });
   bannerClose.addEventListener('click',()=>{banner.hidden=true;clearTimeout(bannerTimeout);});
-  clockTick();networkTick();batteryTick();
-  setInterval(clockTick,1000*20);
-  setInterval(()=>{if(document.visibilityState==='visible'){loadCalendar();networkTick();}},60000);
-  window.addEventListener('online',networkTick);window.addEventListener('offline',networkTick);
-  window.addEventListener('focus',()=>{clockTick();networkTick();loadCalendar();});
-  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){clockTick();networkTick();loadCalendar();}});
-  setupBattery();loadCalendar();
+  // Real in-app reminders are checked only while this app is visible.
+  setInterval(()=>{if(document.visibilityState==='visible')loadCalendar();},60000);
+  window.addEventListener('focus',loadCalendar);
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')loadCalendar();});
+  loadCalendar();
 })();
