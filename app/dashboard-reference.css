@@ -485,3 +485,165 @@
 @media(prefers-reduced-motion:reduce){
  #homeScreen .metric-grid>.metric-card{transition:none!important}
 }
+
+/* v299 — asymmetric card silhouette from the approved screenshot.
+   THIS is the important geometry: wider upper left, narrower upper right;
+   narrower lower left, wider lower right. The gold recommendation floats
+   slightly ABOVE the profit row, making the interlocking masonry contour.
+   Use the SAME 20-column geometry on iPhone, instead of reverting to 50/50. */
+#homeScreen .metric-grid{
+  grid-template-columns:repeat(20,minmax(0,1fr));
+}
+#homeScreen .metric-grid .clients-card{
+  grid-column:1/span 11;
+  grid-row:1;
+  z-index:1;
+}
+#homeScreen .metric-grid .orders-card{
+  grid-column:12/span 9;
+  grid-row:1;
+  z-index:1;
+}
+#homeScreen .metric-grid .profit-card{
+  grid-column:1/span 9;
+  grid-row:2;
+  z-index:1;
+}
+#homeScreen .metric-grid .recommendation-card{
+  grid-column:10/span 11;
+  grid-row:2;
+  z-index:3;
+  top:-18px;
+}
+/* The raised gold panel gently covers the empty bottom-right CORNER of the
+   clients card, without masking its donut or legend, like the reference. */
+@media(max-width:539px){
+  #homeScreen .metric-grid{
+    grid-template-columns:repeat(20,minmax(0,1fr));
+    grid-template-rows:158px 206px;
+    gap:9px 8px;
+  }
+  #homeScreen .metric-grid .clients-card{
+    grid-column:1/span 11;
+    grid-row:1;
+    height:158px;
+    min-height:158px;
+  }
+  #homeScreen .metric-grid .orders-card{
+    grid-column:12/span 9;
+    grid-row:1;
+    height:150px;
+    min-height:150px;
+  }
+  #homeScreen .metric-grid .profit-card{
+    grid-column:1/span 9;
+    grid-row:2;
+    height:195px;
+    min-height:195px;
+  }
+  #homeScreen .metric-grid .recommendation-card{
+    grid-column:10/span 11;
+    grid-row:2;
+    top:-20px;
+    height:226px;
+    min-height:226px;
+  }
+  #homeScreen .clients-card .donut{
+    width:clamp(67px,20.2vw,80px);
+    height:clamp(67px,20.2vw,80px);
+  }
+  #homeScreen .clients-card .donut-people{
+    width:20px;
+    height:17px;
+  }
+  #homeScreen .clients-card .donut-core strong{
+    font-size:clamp(19px,5.4vw,22px);
+  }
+  #homeScreen .clients-card .donut-legend{
+    gap:8px;
+  }
+  #homeScreen .clients-card .donut-legend>div{
+    font-size:clamp(8px,2.32vw,9.5px);
+    gap:3px;
+  }
+  #homeScreen .clients-card .donut-legend b{
+    font-size:clamp(9px,2.5vw,10.5px);
+  }
+  #homeScreen .orders-card .orders-inner{
+    position:relative;
+    display:block;
+    margin-top:17px;
+  }
+  #homeScreen .orders-card .orders-inner>div:first-child{
+    position:relative;
+    z-index:2;
+  }
+  #homeScreen .orders-card .tile-number{
+    font-size:clamp(27px,7.2vw,33px);
+  }
+  #homeScreen .orders-card .bargraph{
+    position:absolute;
+    right:0;
+    bottom:-22px;
+    z-index:1;
+    width:clamp(48px,40%,67px);
+    max-width:45%;
+    height:66px;
+    gap:2px;
+  }
+  #homeScreen .profit-card .profit-number{
+    font-size:clamp(18px,4.7vw,22px);
+    white-space:nowrap;
+  }
+  #homeScreen .recommendation-card .advice-head{
+    font-size:clamp(11px,2.95vw,13px);
+  }
+  #homeScreen .recommendation-card .advice-body{
+    font-size:clamp(9px,2.38vw,11px);
+  }
+}
+@media(max-width:360px){
+  #homeScreen .metric-grid{
+    grid-template-rows:151px 207px;
+    gap:8px 6px;
+  }
+  #homeScreen .metric-grid .clients-card{
+    height:151px;
+    min-height:151px;
+    padding:8px 5px!important;
+  }
+  #homeScreen .metric-grid .orders-card{
+    height:148px;
+    min-height:148px;
+    padding:8px 7px!important;
+  }
+  #homeScreen .metric-grid .profit-card{
+    height:192px;
+    min-height:192px;
+    padding:9px 7px!important;
+  }
+  #homeScreen .metric-grid .recommendation-card{
+    top:-20px;
+    height:224px;
+    min-height:224px;
+    padding:9px 8px!important;
+  }
+  #homeScreen .clients-card .donut{
+    width:65px;
+    height:65px;
+  }
+  #homeScreen .clients-card .donut::before{inset:6px}
+  #homeScreen .clients-card .donut-people{width:17px;height:15px}
+  #homeScreen .clients-card .donut-core strong{font-size:19px}
+  #homeScreen .clients-card .donut-core small{font-size:10px}
+  #homeScreen .clients-card .clients-inner{gap:4px}
+  #homeScreen .clients-card .donut-legend{gap:7px}
+  #homeScreen .clients-card .donut-legend>div{font-size:7.9px;gap:3px}
+  #homeScreen .clients-card .donut-legend b{font-size:8.5px}
+  #homeScreen .clients-card .donut-legend .legend-dot{width:6px;height:6px}
+  #homeScreen .orders-card .bargraph{width:47px;max-width:40%;gap:2px}
+  #homeScreen .orders-card .tile-number{font-size:27px}
+  #homeScreen .profit-card .profit-number{font-size:clamp(16px,4.75vw,19px)}
+  #homeScreen .recommendation-card .recommendation-top{font-size:9.5px}
+  #homeScreen .recommendation-card .advice-cta{font-size:10.5px}
+}
