@@ -8,7 +8,7 @@
   const medical=new Set(['health','cycle']);
   const frames={};
   const panels={};
-  let current='',initialized=false,fromHistory=false,pendingHealthView='';
+  let current='',initialized=false,fromHistory=false,pendingHealthView='',healthSection='metrics';
   const route=(view)=>window.dispatchEvent(new CustomEvent('dm-personal-route',{detail:{view}}));
   const safeView=view=>valid.has(view)?view:'calendar';
   const getView=()=>safeView(new URLSearchParams(location.search).get('view'));
@@ -26,11 +26,34 @@
   function showHealthSubsection(view){
     if(!['metrics','meds','sleep','files'].includes(view))return;
     pendingHealthView=view;
+    healthSection=view;
+    updateMedicalDock();
     const frame=frames.health;
     try{
       const button=frame?.contentDocument?.querySelector('[data-health="'+view+'"]');
       if(button){button.click();pendingHealthView='';}
     }catch(_){}
+  }
+  function updateMedicalDock(){
+    const intro=document.getElementById('personalHealthIntro');
+    const dock=document.getElementById('personalHealthTabs');
+    if(!intro||!dock)return;
+    const medicalOpen=medical.has(current);
+    intro.hidden=!medicalOpen;
+    dock.hidden=!medicalOpen;
+    const cycle=current==='cycle';
+    const eyebrow=document.getElementById('personalHealthEyebrow');
+    const title=document.getElementById('personalHealthTitle');
+    const description=document.getElementById('personalHealthDescription');
+    if(eyebrow)eyebrow.textContent=cycle?'ЖЕНСКОЕ ЗДОРОВЬЕ ♡':'МОЁ ЗДОРОВЬЕ ♡';
+    if(title)title.textContent=cycle?'Цикл под контролем. Ну, насколько он согласен.':'Здоровье любит внимание. И выходные.';
+    if(description)description.textContent=cycle?'Даты и самочувствие — здесь. Память может взять выходной.':'Пульс, сон и записи — всё под рукой. Без очереди в регистратуру.';
+    const selected=cycle?'cycle':healthSection;
+    dock.querySelectorAll('[data-personal-health]').forEach(button=>{
+      const active=button.dataset.personalHealth===selected;
+      button.classList.toggle('active',active);
+      button.setAttribute('aria-pressed',String(active));
+    });
   }
   function connectFrame(view){
     const frame=frames[view];
@@ -73,6 +96,7 @@
     }
     const shell=document.querySelector('body > .day-shell');
     shell?.classList.toggle('personal-medical-open',medical.has(view));
+    updateMedicalDock();
     if(changed&&!fromHistory){
       const url=new URL(location.href);
       if(view==='calendar')url.searchParams.delete('view');
@@ -107,6 +131,15 @@
     }
     initialized=true;
     pendingHealthView=new URLSearchParams(location.search).get('healthView')||'';
+    if(['metrics','meds','sleep','files'].includes(pendingHealthView))healthSection=pendingHealthView;
+    document.getElementById('personalHealthTabs')?.addEventListener('click',event=>{
+      const button=event.target.closest('[data-personal-health]');
+      if(!button)return;
+      const section=button.dataset.personalHealth;
+      if(section==='cycle'){route('cycle');return;}
+      if(current!=='health')route('health');
+      showHealthSubsection(section);
+    });
     window.addEventListener('resize',sizeFrames);
     current='';
     activate(shell.dataset.personalView||getView());
