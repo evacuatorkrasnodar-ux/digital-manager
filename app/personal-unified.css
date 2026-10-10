@@ -711,3 +711,65 @@
     left:-18px;
   }
 }
+
+/* v281 — app navigation chevron standard (approved screenshot).
+   Every end-of-card forward link has a ROUND BLUE GLASS LENS with a slim
+   WHITE STROKED CHEVRON, never an unframed pink/text arrow.
+   Keep the whole surrounding link/card clickable, not just the lens. */
+.dm-round-chevron,
+.care-shell .care-health-entry>.care-health-entry-arrow,
+.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry-arrow{
+  box-sizing:border-box;
+  display:grid;
+  place-items:center;
+  flex:none;
+  width:34px;
+  height:34px;
+  padding:0;
+  border:1px solid rgba(146,201,246,.67);
+  border-radius:50%;
+  color:#f4fbff;
+  background:
+    radial-gradient(ellipse 90% 67% at 31% 4%,rgba(219,245,255,.24),transparent 85%),
+    linear-gradient(149deg,rgba(43,89,126,.84),rgba(15,45,74,.91) 68%,rgba(7,26,47,.95));
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.30),
+    inset 0 -1px rgba(108,174,224,.12),
+    0 4px 12px rgba(0,7,19,.37);
+  -webkit-backdrop-filter:blur(16px);
+  backdrop-filter:blur(16px);
+}
+.dm-round-chevron svg,
+.care-shell .care-health-entry>.care-health-entry-arrow svg,
+.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry-arrow svg{
+  display:block;
+  width:18px;
+  height:18px;
+  fill:none;
+  stroke:#f2fbff;
+  stroke-width:1.95;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.care-shell .care-health-entry{
+  grid-template-columns:33px minmax(0,1fr) 34px;
+}
+.care-shell .care-health-entry>.care-health-entry-arrow{
+  justify-self:end;
+  font-size:0; /* avoid any old inherited text-arrow metrics */
+}
+.care-shell .care-health-entry:is(:hover,:focus-visible)>.care-health-entry-arrow,
+.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry:is(:hover,:focus-visible) .world-entry-arrow{
+  border-color:rgba(203,235,255,.91);
+  box-shadow:inset 0 1px rgba(255,255,255,.33),0 0 12px rgba(75,162,247,.30);
+}
+@media(max-width:350px){
+  .care-shell .care-health-entry{
+    grid-template-columns:30px minmax(0,1fr) 32px;
+    gap:7px;
+  }
+  .care-shell .care-health-entry>.care-health-entry-arrow{
+    width:32px;
+    height:32px;
+  }
+}
