@@ -10,14 +10,14 @@
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" href="./assets/icon-192.png" type="image/png">
   <link rel="stylesheet" href="./myday.css?v=250">
-  <link rel="stylesheet" href="./system-ui.css?v=273">
+  <link rel="stylesheet" href="./system-ui.css?v=283">
   <link rel="stylesheet" href="./polish.css?v=260">
   <link rel="stylesheet" href="./dock.css?v=258">
   <link rel="stylesheet" href="./myday-finish.css?v=274">
-  <link rel="stylesheet" href="./personal-unified.css?v=282">
+  <link rel="stylesheet" href="./personal-unified.css?v=283">
   <script src="./russia-calendar.js?v=250" defer></script>
-  <script src="./myday.js?v=274" defer></script>
-  <script src="./system-ui.js?v=273" defer></script>
+  <script src="./myday.js?v=283" defer></script>
+  <script src="./system-ui.js?v=283" defer></script>
   <script src="./polish.js?v=257" defer></script>
   <title>Мой день — Цифровой управляющий</title>
 </head>
@@ -41,9 +41,9 @@
       <section id="calendarView" class="day-view" aria-label="Календарь">
         <div class="day-panel calendar-panel">
           <div class="calendar-toolbar">
-            <button type="button" id="prevMonth" class="month-arrow" aria-label="Предыдущий месяц">‹</button>
+            <button type="button" id="prevMonth" class="month-arrow" aria-label="Предыдущий месяц"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></button>
             <h2 id="calendarMonth" aria-live="polite"></h2>
-            <button type="button" id="nextMonth" class="month-arrow" aria-label="Следующий месяц">›</button>
+            <button type="button" id="nextMonth" class="month-arrow" aria-label="Следующий месяц"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5 7 7-7 7"/></svg></button>
           </div>
           <div class="weekdays" aria-hidden="true"><span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span></div>
           <div class="month-grid" id="monthGrid" role="group" aria-label="Дни месяца"></div>
@@ -80,12 +80,12 @@
   </div>
   <dialog id="eventDialog" class="day-dialog" aria-labelledby="eventDialogTitle">
     <form id="eventForm">
-      <div class="dialog-top"><h2 id="eventDialogTitle">Новое событие</h2><button type="button" class="dialog-x" data-close="eventDialog" aria-label="Закрыть">×</button></div>
+      <div class="dialog-top"><h2 id="eventDialogTitle">Новое событие</h2><button type="button" class="dialog-x" data-close="eventDialog" aria-label="Закрыть"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></button></div>
       <input id="eventId" type="hidden">
       <p id="eventFromNoteHint" class="event-from-note-hint" hidden></p>
       <label>Название<input id="eventTitle" maxlength="100" required placeholder="Что нельзя забыть?"></label>
       <div class="form-row"><label>Дата<input id="eventDate" type="date" required></label><label>Время <span class="optional">необязательно</span><input id="eventTime" type="time"></label></div>
-      <div id="ruEventAdvice" class="ru-event-advice" role="status" aria-live="polite" hidden><span id="ruEventAdviceText"></span><button type="button" id="ruMoveWorking">На рабочий день →</button></div>
+      <div id="ruEventAdvice" class="ru-event-advice" role="status" aria-live="polite" hidden><span id="ruEventAdviceText"></span><button type="button" id="ruMoveWorking">На рабочий день</button></div>
       <label>Тип<select id="eventKind"><option value="task">Дело</option><option value="meeting">Встреча</option><option value="personal">Личное</option><option value="business">Бизнес</option></select></label>
       <label>Подробности <span class="optional">необязательно</span><textarea id="eventDetail" maxlength="2500" rows="3" placeholder="Адрес, телефон, важные детали…"></textarea></label>
       <div class="form-actions"><button type="button" class="secondary-btn" data-close="eventDialog">Отмена</button><button type="submit" class="primary-btn">Сохранить</button></div>
@@ -93,7 +93,7 @@
   </dialog>
   <dialog id="noteDialog" class="day-dialog" aria-labelledby="noteDialogTitle">
     <form id="noteForm">
-      <div class="dialog-top"><h2 id="noteDialogTitle">Новая запись</h2><button type="button" class="dialog-x" data-close="noteDialog" aria-label="Закрыть">×</button></div>
+      <div class="dialog-top"><h2 id="noteDialogTitle">Новая запись</h2><button type="button" class="dialog-x" data-close="noteDialog" aria-label="Закрыть"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></button></div>
       <input id="noteId" type="hidden">
       <label>Заголовок<input id="noteTitle" maxlength="100" required placeholder="Идея, план, важная мысль…"></label>
       <div class="form-row"><label>Дата<input id="noteDate" type="date" required></label><label>Раздел<select id="noteKind"><option value="personal">Личное</option><option value="business">Работа</option></select></label></div>
