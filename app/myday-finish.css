@@ -1218,7 +1218,7 @@
     overscroll-behavior:none;
   }
   .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell){
-    --dm-day-cell:clamp(27px,calc(31px + (100dvh - 800px)*.04),33px);
+    --dm-day-cell:clamp(27px,3.9dvh,33px);
     display:flex;
     flex-direction:column;
     height:100dvh;
@@ -1348,7 +1348,7 @@
     gap:0;
   }
   .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .month-grid[data-weeks="5"]{
-    --dm-day-cell:clamp(29px,calc(33px + (100dvh - 800px)*.035),36px);
+    --dm-day-cell:clamp(29px,4.1dvh,36px);
   }
   .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .calendar-day{
     box-sizing:border-box;
