@@ -1,0 +1,129 @@
+/* Digital Manager v286: real, compact Health metrics; Black Velvet companion layer. */
+.health-shell .health-head{padding:11px 3px 8px}
+.health-shell .health-tabs{
+ grid-template-columns:repeat(4,minmax(0,1fr));
+ min-height:44px;margin:9px 0 9px;padding:3px;
+}
+.health-shell .health-tabs>button{
+ box-sizing:border-box;min-width:0;min-height:36px;height:36px;
+ padding:4px 1px;font-size:clamp(9px,2.55vw,11px);
+ letter-spacing:-.02em;white-space:nowrap;
+}
+.health-shell .health-tabs>button:not(.active):not(:first-child)::before{
+ width:34px;left:-25px;top:-2px;bottom:-2px;
+}
+.health-shell .health-tabs>button.active+button::before{opacity:0}
+.health-shell .health-metrics-view>.day-section-heading:first-child{margin:10px 1px 6px}
+.health-shell .health-metrics-view>.health-hint{margin:5px 2px 10px}
+.health-shell .health-metric-grid{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;
+}
+.health-shell .health-metric-tile,
+.health-shell .health-week-panel,
+.health-shell .health-device-panel{
+ box-sizing:border-box;
+ border:1px solid rgba(139,197,246,.50);
+ border-radius:17px;
+ background:
+  radial-gradient(ellipse at 89% 5%,rgba(77,152,218,.14),transparent 66%),
+  linear-gradient(147deg,rgba(18,41,67,.82),rgba(3,17,33,.91) 75%);
+ box-shadow:inset 0 1px rgba(249,253,255,.21),0 7px 18px rgba(0,5,16,.34);
+ -webkit-backdrop-filter:blur(17px);backdrop-filter:blur(17px);
+}
+.health-shell .health-metric-tile{
+ display:flex;flex-direction:column;
+ min-width:0;min-height:116px;padding:11px 8px 9px;
+}
+.health-shell .health-metric-caption{
+ display:flex;align-items:center;gap:4px;
+ font-size:clamp(10px,2.8vw,12px);
+ font-weight:455;color:#d0e9fc;white-space:nowrap;
+}
+.health-shell .health-metric-caption span{color:#8dccff;font-size:17px}
+.health-shell .health-metric-tile strong{
+ display:block;min-width:0;
+ margin:9px 0 2px;
+ font-size:clamp(17px,4.9vw,23px);
+ font-weight:510;letter-spacing:-.035em;
+ font-variant-numeric:tabular-nums;
+ line-height:1.12;color:#f1faff;
+}
+.health-shell .health-metric-tile small{font-size:9px;color:#96bbd9}
+.health-shell .health-metric-tile p{
+ font-size:9px;line-height:1.25;color:#a5c7e1;
+ margin:auto 0 0;padding-top:7px;
+ overflow-wrap:anywhere;
+}
+.health-shell .health-week-panel{margin-top:8px;padding:10px 10px 8px}
+.health-shell .health-week-heading{display:flex;align-items:center;justify-content:space-between;gap:7px}
+.health-shell .health-week-heading h3,
+.health-shell .health-device-heading h3{
+ margin:0;font-size:12px;font-weight:480;color:#e8f7ff;
+}
+.health-shell .health-week-heading span{font-size:9px;color:#a0c2da}
+.health-shell .health-week-chart{
+ display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
+ gap:8px;align-items:end;min-height:84px;padding-top:10px;
+}
+.health-shell .health-chart-day{
+ display:flex;align-items:center;flex-direction:column;justify-content:flex-end;
+ gap:5px;min-width:0;height:75px;
+}
+.health-shell .health-chart-track{
+ flex:1;width:100%;display:flex;align-items:flex-end;justify-content:center;
+ border-radius:8px;background:rgba(30,58,87,.37);overflow:hidden;
+}
+.health-shell .health-chart-bar{
+ display:block;width:100%;min-height:0;border-radius:7px 7px 3px 3px;
+ background:linear-gradient(180deg,#a1ddff,#2584da);
+ box-shadow:inset 0 1px rgba(255,255,255,.39);
+}
+.health-shell .health-chart-day[data-empty="true"] .health-chart-bar{background:transparent}
+.health-shell .health-chart-day small{font-size:9px;color:#b4d3e9;white-space:nowrap}
+.health-shell .health-history-heading{align-items:center;margin:13px 0 7px}
+.health-shell .health-history-heading h2{font-size:16px}
+.health-shell .health-filter-label select{
+ box-sizing:border-box;height:33px;min-width:91px;padding:0 9px;
+ border:1px solid rgba(149,202,245,.50);border-radius:16px;
+ color:#e8f8ff;background:#112d47;font-size:11px;
+}
+.health-shell .health-metrics-view .health-list{gap:6px}
+.health-shell .health-metrics-view .health-card{
+ min-width:0;padding:9px;
+}
+.health-shell .health-device-panel{padding:12px 11px;margin:12px 0 6px}
+.health-shell .health-device-heading{display:flex;justify-content:space-between;gap:6px;align-items:center}
+.health-shell .health-device-label{
+ font-size:9px;color:#b8d9f3;border:1px solid rgba(159,200,237,.37);
+ background:rgba(36,79,113,.42);border-radius:10px;padding:3px 6px;
+}
+.health-shell .health-device-panel>p{
+ margin:8px 0;line-height:1.42;color:#b9d4e8;font-size:10.5px;
+}
+.health-shell .health-provider-row{
+ display:flex;justify-content:space-between;align-items:center;
+ gap:8px;padding:8px 0;border-top:1px solid rgba(150,202,242,.13);
+ font-size:11px;color:#ecf8ff;
+}
+.health-shell .health-provider-row span:last-child{
+ color:#9dbbd3;font-size:10px;text-align:right;
+}
+.health-shell .health-device-panel .health-device-foot{margin-bottom:0;font-size:9px;color:#99b4cc}
+.health-shell .health-native-sync:not([hidden]){
+ box-sizing:border-box;display:block;width:100%;min-height:36px;
+ border:1px solid rgba(151,214,254,.52);border-radius:17px;
+ background:linear-gradient(145deg,rgba(39,105,167,.85),rgba(9,48,86,.91));
+ color:#eef9ff;font-size:11px;margin:10px 0;
+}
+.health-shell [data-metric-fields][hidden]{display:none!important}
+.health-shell #healthMetricForm .form-row>label{min-width:0}
+.health-shell .health-view[hidden]{display:none!important}
+@media(max-width:360px){
+ .health-shell .health-metric-grid{gap:5px}
+ .health-shell .health-metric-tile{padding:9px 6px;min-height:108px}
+ .health-shell .health-metric-tile strong{font-size:clamp(15px,4.5vw,18px)}
+ .health-shell .health-metric-caption{font-size:9px}
+ .health-shell .health-tabs>button{font-size:9px}
+ .health-shell .health-week-chart{gap:5px}
+}
+@media(prefers-reduced-motion:reduce){.health-shell .health-metric-tile{transition:none}}
