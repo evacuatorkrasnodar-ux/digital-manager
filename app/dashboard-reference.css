@@ -889,3 +889,71 @@
 
 /* Temporarily park the Revenue chart card; keep its markup and chart logic intact. */
 #homeScreen .dashboard>.revenue-card{display:none!important}
+
+/* Right-hand placeholder: a geometrically exact horizontal mirror of Clients.
+   The original revenue card stays hidden but is not deleted.
+   The independent SVG hairline avoids clipping on the concave left bend. */
+#homeScreen .mirror-revenue-slot{
+  position:relative;
+  isolation:isolate;
+  box-sizing:border-box;
+  width:calc(55% - 3px);
+  height:clamp(108px,29vw,126px);
+  margin:0 0 8px auto;
+  overflow:visible;
+}
+#homeScreen .mirror-revenue-slot>.mirror-clients-card{
+  display:block;
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  box-sizing:border-box;
+  padding:0;
+  margin:0;
+  border:0!important;
+  border-radius:0!important;
+  overflow:hidden;
+  -webkit-clip-path:url(#metricClientsMirrorClip);
+  clip-path:url(#metricClientsMirrorClip);
+}
+#homeScreen .mirror-revenue-slot>.mirror-clients-edge{
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%;
+  height:100%;
+  overflow:visible;
+  pointer-events:none;
+  z-index:2;
+  fill:none;
+  stroke:var(--dm-card-hairline,rgba(106,139,161,.52));
+  filter:none;
+}
+#homeScreen .mirror-revenue-slot>.mirror-clients-edge path{
+  fill:none;
+  stroke:inherit;
+  stroke-width:1;
+  stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+}
+@media (min-width:360px) and (max-width:539px){
+  #homeScreen .mirror-revenue-slot{
+    width:calc(55% - 7.4px);
+    margin-right:4px;
+    height:clamp(106px,calc(26.15vw + 10px),121px);
+  }
+}
+@media (min-width:360px) and (max-width:385px){
+  #homeScreen .mirror-revenue-slot{height:110px}
+}
+@media (max-width:359px){
+  #homeScreen .mirror-revenue-slot{
+    width:100%;
+    height:132px;
+    margin-right:0;
+  }
+}
+@media (min-width:540px){
+  #homeScreen .mirror-revenue-slot{height:128px}
+}
