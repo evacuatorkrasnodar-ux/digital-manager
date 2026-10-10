@@ -192,103 +192,42 @@
 @media(max-width:350px){:root{--brand-mark-size:34px}.hero{padding-left:8px;padding-right:8px}.dashboard{padding-left:7px;padding-right:7px}.welcome h1{font-size:22px}.welcome p{font-size:12px}.license-preview{flex-basis:49%;padding:9px 7px 7px 8px;height:151px}.license-brand-text strong{font-size:9px}.license-brand-text small{font-size:7.2px}.license-lines>span{font-size:8.5px;gap:4px}.license-lines{margin-left:17%;gap:9px}.donut{width:64px;height:64px}.donut-legend{gap:5px}.metric-grid{gap:6px}.shortcut-grid{gap:5px}.hero-intro{min-height:163px}.recommendation-card{padding:8px!important}.advice-body{font-size:8px}.profit-number{font-size:19px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 
-/* v275 — pinned home dashboard on portrait phones.
-   Remove the unused 79px shell tail, stop page scrolling,
-   and scroll dashboard cards only when their full content cannot fit.
-   The dock itself is unchanged and has a reserved non-overlapping space. */
-@media (max-width:700px) and (orientation:portrait) and (min-height:560px){
-  html.home-dashboard-locked,
-  html.home-dashboard-locked body{
-    height:100%;
-    overflow:hidden;
-    overscroll-behavior:none;
+/* v278 — natural whole-page scrolling and compact Quick Actions.
+   The bottom glass dock stays fixed, without an independently scrolling
+   analytics panel. The last card has only the safe clearance it needs. */
+@media (max-width:700px) {
+  #homeScreen .dashboard{
+    padding-bottom:0;
   }
-  .app-shell.home-fixed{
-    box-sizing:border-box;
-    display:flex;
-    flex-direction:column;
-    width:100%;
-    height:100dvh;
-    min-height:0;
-    max-height:100dvh;
-    padding:0;
-    overflow:hidden;
-    border:0;
-    background:#000;
-  }
-  .app-shell.home-fixed #homeScreen:not([hidden]){
-    box-sizing:border-box;
-    display:flex;
-    flex-direction:column;
-    flex:1 1 auto;
-    min-height:0;
-    max-height:100%;
-  }
-  .app-shell.home-fixed #homeScreen>.hero{
-    flex:0 0 auto;
-  }
-  .app-shell.home-fixed #homeScreen>.dashboard{
-    box-sizing:border-box;
-    flex:1 1 auto;
-    min-height:0;
-    width:100%;
-    overflow-x:hidden;
-    overflow-y:auto;
-    overscroll-behavior:contain;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
-    margin:0 0 calc(76px + env(safe-area-inset-bottom,0px));
-    padding-top:0;
-    padding-bottom:6px;
-  }
-  .app-shell.home-fixed #homeScreen>.dashboard::-webkit-scrollbar{display:none}
-}
-/* Short screens and landscape retain natural page scrolling so no business card is trapped. */
-
-/* v276 — compact quick actions and remove the black empty gap above the real dock.
-   The scroll viewport reaches the dock; its safe space is internal so the
-   final card can be scrolled completely into view without a dead exterior strip. */
-@media (max-width:700px){
   #homeScreen .shortcuts h2{
-    margin:7px 1px 5px;
-    font-size:14px;
-    line-height:1.18;
-    letter-spacing:-.018em;
+    margin:5px 1px 4px;
+    font-size:12px;
+    font-weight:445;
+    line-height:1.16;
+    letter-spacing:-.012em;
   }
   #homeScreen .shortcut-grid{
     gap:5px;
   }
   #homeScreen .shortcut{
-    height:56px;
-    min-height:56px;
+    height:53px;
+    min-height:53px;
     padding:6px 6px 5px;
     border-radius:12px;
   }
   #homeScreen .shortcut-icon{
-    width:19px;
-    height:19px;
+    width:18px;
+    height:18px;
   }
   #homeScreen .shortcut span{
     font-size:clamp(8px,2.2vw,9.5px);
     line-height:1.15;
   }
-}
-@media (max-width:700px) and (orientation:portrait) and (min-height:560px){
-  .app-shell.home-fixed #homeScreen>.dashboard{
-    display:flex;
-    flex-direction:column;
-    margin:0;
-    /* Prevent the dock from covering the last actions while leaving no dead
-       black margin outside the actual scroll area. */
-    padding-bottom:calc(84px + env(safe-area-inset-bottom,0px));
-  }
-  .app-shell.home-fixed #homeScreen>.dashboard>.revenue-card,
-  .app-shell.home-fixed #homeScreen>.dashboard>.metric-grid,
-  .app-shell.home-fixed #homeScreen>.dashboard>.shortcuts{
-    flex-shrink:0;
-  }
-  .app-shell.home-fixed #homeScreen>.dashboard>.shortcuts{
-    margin-top:auto;
-    padding-top:2px;
+  body .app-shell{
+    height:auto;
+    max-height:none;
+    min-height:100dvh;
+    padding-bottom:calc(72px + env(safe-area-inset-bottom,0px));
   }
 }
+/* Natural page scrolling on every main-app tab, including the Home screen. */
