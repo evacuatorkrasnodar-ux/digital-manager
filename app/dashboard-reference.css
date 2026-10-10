@@ -967,3 +967,35 @@
   opacity:1!important;
   visibility:visible!important;
 }
+
+/* Recommendation arrow: symmetric top-right alignment with other dashboard cards. */
+#homeScreen .recommendation-card .recommendation-top{
+  position:relative;
+  padding-right:34px;
+}
+#homeScreen .recommendation-card .recommendation-top .rec-chevron{
+  position:absolute!important;
+  right:0!important;
+  top:0!important;
+  z-index:30!important;
+  display:grid!important;
+  place-items:center;
+  width:28px!important;
+  height:28px!important;
+  min-width:28px!important;
+  margin:0!important;
+  padding:0!important;
+  border-radius:50%;
+  background:linear-gradient(145deg,#1b2a37,#08121b)!important;
+  border:1px solid rgba(151,181,202,.20)!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+#homeScreen .recommendation-card .recommendation-top .rec-chevron svg{
+  display:block!important;
+  width:15px!important;
+  height:15px!important;
+  stroke:#f3f8ff!important;
+  stroke-width:1.8!important;
+  fill:none!important;
+}
