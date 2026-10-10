@@ -742,7 +742,7 @@
     padding:6px 7px!important;
   }
   #homeScreen .metric-grid .recommendation-card{
-    /* v325: align gold upper-left corner under Clients' stepped contour. */
+    /* v323: lower the gold card 8px to inspect the seam against Clients. */
     top:-17px;
     padding:6px 8px 6px!important;
   }
