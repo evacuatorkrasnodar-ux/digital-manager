@@ -514,6 +514,8 @@
   const DM_MYDAY_DB='digital-manager-my-day-v1';
   const dmNotesContainer=byId('plasmaSavedNotes');
   const dmNotesToggle=byId('plasmaSavedNotesToggle');
+  const dmNotebookMenu=byId('plasmaNotebookMenu');
+  const dmNotebookTile=document.querySelector('[data-draft-action="notebook"]');
   const dmActionStatus=byId('plasmaActionStatus');
   let dmNotes=[],dmNotebookDbPromise=null;
   function dmActionMessage(message){dmActionStatus.textContent=message;dmActionStatus.hidden=false;}
@@ -656,7 +658,17 @@
     let ok=false;try{ok=document.execCommand('copy');}catch(_){}
     helper.remove();return ok;
   }
+  function dmToggleNotebookMenu(force){
+    const show=typeof force==='boolean'?force:dmNotebookMenu.hidden;
+    dmNotebookMenu.hidden=!show;
+    dmNotebookTile.setAttribute('aria-expanded',String(show));
+    if(!show){
+      dmNotesContainer.hidden=true;
+      dmNotesToggle.setAttribute('aria-expanded','false');
+    }
+  }
   async function dmDraftDestination(kind){
+    if(kind==='notebook'){dmToggleNotebookMenu();return;}
     const content=plasmaInput.value.trim();
     if(!content){dmActionMessage('Сначала напишите текст, чтобы выбрать действие.');return;}
     if(kind==='documents'){closePlasmaPanel();setTab('management');mgSettingsPage('documents');return;}
@@ -719,6 +731,7 @@
     const btn=event.target.closest('[data-draft-action]');
     if(btn)dmDraftDestination(btn.dataset.draftAction);
   });
+  byId('plasmaSaveNote').addEventListener('click',()=>{dmSaveAsNote();});
   dmNotesToggle.addEventListener('click',async()=>{
     const show=dmNotesContainer.hidden;
     dmNotesContainer.hidden=!show;dmNotesToggle.setAttribute('aria-expanded',String(show));
@@ -827,6 +840,7 @@
     },DM_COMPOSER_IDLE_MS);
   }
   function dmToggleDraftEditor(expand){
+    if(!expand)dmToggleNotebookMenu(false);
     plasmaPanel.classList.toggle('dm-chat-editor',expand);
     document.documentElement.classList.toggle('dm-compose-editor',expand&&!plasmaPanel.hidden);
     plasmaExpand.setAttribute('aria-expanded',String(expand));
@@ -877,6 +891,7 @@
   });
   function closePlasmaPanel(){
     dmCancelComposerIdle();
+    dmToggleNotebookMenu(false);
     plasmaPanel.hidden=true;
     plasmaPanel.setAttribute('aria-hidden','true');
     plasmaTriggers.forEach(button=>button.setAttribute('aria-expanded','false'));
