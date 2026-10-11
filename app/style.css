@@ -576,3 +576,20 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 /* Card-accented laser stops blend when new colored cards join the dashboard. */
 .dm-voice-waves-electric defs linearGradient stop{transition:stop-color .85s ease}
 @media(prefers-reduced-motion:reduce){.dm-voice-waves-electric defs linearGradient stop{transition:none!important}}
+
+/* The approved plasma artwork remains intact. Arc accents indicate actual
+   assistant behavior, never the permanent card-derived laser palette. */
+.bottom-nav[data-mode="idle"] .dm-dock-plasma .dm-arc-ice,#dockLauncher[data-mode="idle"] .dm-launcher-plasma .dm-arc-ice{stroke:#effaff}
+.bottom-nav[data-mode="idle"] .dm-dock-plasma .dm-arc-violet,#dockLauncher[data-mode="idle"] .dm-launcher-plasma .dm-arc-violet{stroke:#cbdcff}
+.bottom-nav[data-mode="thinking"] .dm-dock-plasma .dm-arc-ice,#dockLauncher[data-mode="thinking"] .dm-launcher-plasma .dm-arc-ice{stroke:#83d7ff}
+.bottom-nav[data-mode="thinking"] .dm-dock-plasma .dm-arc-violet,#dockLauncher[data-mode="thinking"] .dm-launcher-plasma .dm-arc-violet{stroke:#448fff}
+.bottom-nav[data-mode="speaking"] .dm-dock-plasma .dm-arc-ice,#dockLauncher[data-mode="speaking"] .dm-launcher-plasma .dm-arc-ice{stroke:#cbb2ff}
+.bottom-nav[data-mode="speaking"] .dm-dock-plasma .dm-arc-violet,#dockLauncher[data-mode="speaking"] .dm-launcher-plasma .dm-arc-violet{stroke:#a58aff}
+.bottom-nav[data-mode="attention"] .dm-dock-plasma .dm-arc-ice,#dockLauncher[data-mode="attention"] .dm-launcher-plasma .dm-arc-ice{stroke:#ffe1a1}
+.bottom-nav[data-mode="attention"] .dm-dock-plasma .dm-arc-violet,#dockLauncher[data-mode="attention"] .dm-launcher-plasma .dm-arc-violet{stroke:#f5ad57}
+.bottom-nav[data-mode="attention"] .dm-dock-plasma .dm-arc-ice,
+#dockLauncher[data-mode="attention"] .dm-launcher-plasma .dm-arc-ice{filter:drop-shadow(0 0 3px rgba(255,189,91,.95))}
+.bottom-nav[data-mode="attention"] .dm-dock-plasma .dm-arc-violet,
+#dockLauncher[data-mode="attention"] .dm-launcher-plasma .dm-arc-violet{filter:drop-shadow(0 0 3px rgba(251,169,73,.85))}
+.bottom-nav[data-mode="attention"] .dm-dock-plasma{filter:drop-shadow(0 0 6px rgba(247,176,84,.72)) drop-shadow(0 0 9px rgba(245,137,48,.24))!important}
+#dockLauncher[data-mode="attention"] .dm-launcher-plasma{filter:drop-shadow(0 0 6px rgba(247,176,84,.72)) drop-shadow(0 0 9px rgba(245,137,48,.28))!important}
