@@ -1,0 +1,67 @@
+/* One notebook entry in the expanded composer; reveal its three real
+   actions only when requested. No change to the My Day IndexedDB notes. */
+.dm-chat-panel .dm-notebook-menu[hidden]{display:none!important}
+.dm-chat-panel .dm-notebook-menu{
+  display:flex;flex-direction:column;gap:8px;
+  padding:10px;
+  border:1px solid rgba(144,179,205,.29);
+  border-radius:15px;
+  background:linear-gradient(150deg,rgba(22,40,56,.43),rgba(3,12,23,.55));
+  box-shadow:inset 0 1px rgba(239,248,255,.075);
+}
+.dm-chat-panel .dm-notebook-menu-actions{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:6px;
+  align-items:stretch;
+}
+.dm-chat-panel .dm-notebook-menu-actions :is(button,a.dm-notebook-open){
+  box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  min-height:42px;
+  margin:0;
+  padding:6px 5px;
+  border:1px solid rgba(160,192,216,.30);
+  border-radius:12px;
+  background:linear-gradient(147deg,rgba(33,56,74,.36),rgba(6,19,32,.59));
+  box-shadow:inset 0 1px rgba(247,252,255,.07);
+  color:#d9e8f4;
+  font:400 10.5px/1.25 inherit;
+  font-family:inherit;
+  font-size:10.5px;
+  line-height:1.25;
+  text-align:center;
+  text-decoration:none;
+  cursor:pointer;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  -webkit-tap-highlight-color:transparent;
+}
+.dm-chat-panel .dm-notebook-menu-actions :is(button,a.dm-notebook-open):is(:hover,:focus-visible){
+  border-color:rgba(198,224,241,.66);
+  background:rgba(64,105,135,.32);
+  color:#f7fbff;
+  text-decoration:none;
+}
+.dm-chat-panel .dm-notebook-menu-actions #plasmaSaveNote{
+  border-color:rgba(158,199,231,.44);
+  color:#ecf7ff;
+}
+.dm-chat-panel .dm-notebook-menu-actions #plasmaSavedNotesToggle[aria-expanded="true"]{
+  border-color:rgba(171,215,246,.68);
+  background:rgba(32,76,112,.39);
+}
+.dm-chat-panel .dm-notebook-menu .dm-draft-notes{
+  border-top:1px solid rgba(145,180,206,.21);
+  padding-top:8px;
+}
+.dm-chat-panel .dm-draft-actions-meta{
+  justify-content:flex-end;
+}
+@media(max-width:360px){
+  .dm-chat-panel .dm-notebook-menu-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .dm-chat-panel .dm-notebook-menu-actions a.dm-notebook-open{grid-column:1/-1}
+}
