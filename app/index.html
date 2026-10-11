@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css?v=524">
+  <link rel="stylesheet" href="./style.css?v=528">
   <link rel="stylesheet" href="./dock.css?v=297">
   <link rel="stylesheet" href="./system-ui.css?v=283">
   <link rel="stylesheet" href="./voice-hints.css?v=290">
@@ -100,7 +100,7 @@
           </div>
         </div>
         <div class="header-actions">
-          <button class="round-action home-manage-access" id="homeManageAccess" type="button" aria-label="Открыть Управление" title="Управление" aria-controls="managementScreen" hidden><svg class="ico" aria-hidden="true"><use href="#ic-settings"/></svg></button>
+          <button class="round-action home-manage-access" id="homeManageAccess" type="button" aria-label="Открыть Управление" title="Управление" aria-controls="managementScreen" hidden><svg class="ico" aria-hidden="true"><use href="#ic-grid"/></svg></button>
           <button class="round-action" id="openProfile" type="button" aria-label="Показать карточку владельца и организации" aria-expanded="false" aria-controls="openProfileCard"><svg class="ico"><use href="#ic-person"/></svg></button>
         </div>
       </header>
@@ -200,7 +200,7 @@
       </div></section>
     </main>
   </div>
-  <div class="screen secondary-screen" id="assistantScreen" hidden><header class="subhead"><img class="brand-icon" src="./assets/logo-air.png" alt="" aria-hidden="true"><div><small>Цифровой управляющий</small><h1>Помощник</h1></div></header><div class="assistant-welcome"><div class="assistant-orb"><img class="brand-icon" src="./assets/logo-air.png" alt="" aria-hidden="true"></div><h2>Ваш цифровой помощник</h2><p>Пока это демонстрационный помощник. Он работает с примерами задач, без подключения к ИИ или вашим реальным данным.</p><p><a class="assistant-world-link" href="./world.html?tab=assistant">Открыть личного помощника с доступом к моим добровольно сохранённым данным <span class="dm-inline-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></a></p></div><section class="ring-preview" aria-label="Проверка анимации кнопки">
+  <div class="screen secondary-screen" id="assistantScreen" hidden><header class="subhead"><img class="brand-icon" src="./assets/logo-air.png" alt="" aria-hidden="true"><div><small>Цифровой управляющий</small><h1>Помощник</h1></div><button id="assistantReturnHome" class="assistant-home-return" type="button" aria-label="Вернуться на главную" title="На главную"><svg class="ico" aria-hidden="true"><use href="#ic-chevron-back"/></svg></button></header><div class="assistant-welcome"><div class="assistant-orb"><img class="brand-icon" src="./assets/logo-air.png" alt="" aria-hidden="true"></div><h2>Ваш цифровой помощник</h2><p>Пока это демонстрационный помощник. Он работает с примерами задач, без подключения к ИИ или вашим реальным данным.</p><p><a class="assistant-world-link" href="./world.html?tab=assistant">Открыть личного помощника с доступом к моим добровольно сохранённым данным <span class="dm-inline-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></a></p></div><section class="ring-preview" aria-label="Проверка анимации кнопки">
     <div class="ring-preview-head"><span>Живое кольцо</span><small>Предпросмотр подсветки · демонстрация</small></div>
     <div class="ring-preview-controls" role="group" aria-label="Демонстрационные состояния кольца">
       <button type="button" data-ring-preview="idle" aria-pressed="true">Спокоен</button>
@@ -282,9 +282,9 @@
       <path d="M0 50 C0 30 36 16 94 16 H133 C170 16 183 8 198 -1 C209 -8 221 -8 232 -1 C247 8 260 16 297 16 H336 C394 16 430 30 430 50" fill="none" stroke="url(#navTopRim)" stroke-width="1.05" vector-effect="non-scaling-stroke"/>
       <path d="M0 50 C0 30 36 16 94 16 H133 C170 16 183 8 198 -1 C209 -8 221 -8 232 -1 C247 8 260 16 297 16 H336 C394 16 430 30 430 50" fill="none" stroke="url(#navLightTrace)" stroke-width=".8" vector-effect="non-scaling-stroke"/>
     </svg>
-    <button class="nav-item active" id="tabHome" data-tab="home" type="button" aria-current="page">
-      <svg class="ico nav-ico"><use href="#ic-home"/></svg>
-      <span class="nav-label">Главная</span>
+    <button class="nav-item nav-quick" id="tabClients" type="button" aria-label="Открыть клиентов">
+      <svg class="ico nav-ico" aria-hidden="true"><use href="#ic-users"/></svg>
+      <span class="nav-label">Клиенты</span>
       <i class="nav-underline" aria-hidden="true"></i>
     </button>
     <button class="nav-item nav-quick" id="tabDay" type="button" aria-label="Открыть Мой день">
@@ -311,7 +311,7 @@
   </nav>
 <dialog id="modal" aria-labelledby="dialogTitle"><div class="dialog-inner"><div class="dialog-head"><div><span class="dialog-eyebrow">ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h2 id="dialogTitle">Информация</h2></div><button class="dialog-close" id="closeDialog" type="button" aria-label="Закрыть"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button></div><div id="dialogContent"></div></div></dialog>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-<script src="./app.js?v=524" defer></script>
+<script src="./app.js?v=528" defer></script>
   <script src="./voice-hints.js?v=290" defer></script>
 <script src="./system-ui.js?v=283" defer></script>
 </body>

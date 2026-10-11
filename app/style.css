@@ -535,3 +535,15 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 .dm-voice-waves-electric .dm-electric-wave-4 .dm-laser-bloom{stroke-width:4.2;opacity:.23;filter:blur(1.8px)}
 #managementScreen .voice-mock-conversation.is-previewing .dm-voice-waves-electric .dm-laser-track{animation-duration:3.9s}
 @media(prefers-reduced-motion:reduce){.dm-voice-orb,.dm-orb-rim,.dm-orb-spectral .dm-orb-arc,.assistant-live>.dm-voice-orb::before,#managementScreen .voice-mock-conversation .dm-voice-orb::before,.dm-voice-waves path,.dm-voice-waves-electric .dm-laser-track{animation:none!important}#managementScreen .voice-switch i,#managementScreen .voice-switch i::before{transition:none!important}}
+
+/* The assistant screen has its own home return when the dock is absent. */
+#assistantScreen .assistant-home-return{
+ margin-left:auto;flex:none;display:grid;place-items:center;
+ width:34px;height:34px;padding:0;
+ border:1px solid rgba(160,201,235,.52);border-radius:50%;
+ background:linear-gradient(145deg,rgba(37,75,108,.69),rgba(7,23,40,.88));
+ color:#edf8ff;box-shadow:inset 0 1px rgba(255,255,255,.19),0 3px 10px rgba(0,0,0,.28);
+ -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+}
+#assistantScreen .assistant-home-return .ico{width:17px;height:17px;stroke-width:1.8}
+#assistantScreen .assistant-home-return:focus-visible{outline:2px solid #d4ecff;outline-offset:2px}
