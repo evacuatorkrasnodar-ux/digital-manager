@@ -510,16 +510,19 @@
         '<p class="dm-glyph-preview-status" id="dmGlyphPreviewStatus" aria-live="polite">Это предпросмотр. Реальные сигналы появятся после подключения источников событий.</p>'+
         '</div>';
       const dockConfig=document.createElement('section');
-      dockConfig.className='dm-dock-customize voice-pref';
+      dockConfig.className='dm-dock-customize';
       dockConfig.innerHTML='<div class="dm-dock-customize-title"><strong>Мой док</strong><small>Выберите четыре раздела. Плазма всегда в центре.</small></div>'+
         '<div class="dm-dock-customize-grid">'+voicePrefs.dockItems.map((selected,index)=>
           '<label class="dm-dock-customize-slot"><span>Место '+(index+1)+'</span>'+
           '<select data-dock-slot="'+index+'" aria-label="Раздел в доке, место '+(index+1)+'">'+
           Object.entries(dockTargets).map(([key,item])=>'<option value="'+key+'" '+(key===selected?'selected':'')+'>'+item.label+'</option>').join('')+
           '</select></label>').join('')+'</div>'+
-        '<p class="dm-dock-customize-hint">Значки на настоящем доке и в предпросмотре меняются сразу. Выбор сохраняется.</p>';
-      byId('mgDetail').prepend(dockConfig);
-            byId('mgDetail').prepend(settings);
+        '<p class="dm-dock-customize-hint">Изменения сразу видны на доке ниже и сохраняются.</p>';
+      // Put the selectors inside the SAME card as the live dock preview.
+      // No duplicate settings card: selections update the real dock and its clone.
+      const dockCard=byId('mgDetail').querySelector('.voice-pref');
+      dockCard.querySelector('.voice-setting-top').after(dockConfig);
+      byId('mgDetail').prepend(settings);
       dmMountGlyphShowcase();
       byId('plasmaTapMode').value=voicePrefs.tapAction;
     }
