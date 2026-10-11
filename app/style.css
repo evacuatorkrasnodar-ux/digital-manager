@@ -1038,7 +1038,7 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
 .dm-voice-orb-electric .dm-core-brand{
   position:absolute;
   left:50%;top:50%;z-index:4;
-  width:28%;height:31%;
+  width:38%;height:42%;
   display:grid;place-items:center;
   pointer-events:none;
   opacity:0;
