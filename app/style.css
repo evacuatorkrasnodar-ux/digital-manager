@@ -1172,3 +1172,9 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
 
 /* Attention centre: approved circular glass back control. */
 #dmAttentionPanel #dmAttentionClose{border-radius:50%!important;width:36px;height:36px;min-width:36px;min-height:36px}
+
+/* Approved plasma inside the legacy assistant welcome: no separate old logo. */
+#assistantScreen .assistant-orb:has(.dm-welcome-plasma){background:transparent;border:0;box-shadow:none;display:grid;place-items:center}
+#assistantScreen .assistant-orb .dm-welcome-plasma{--dm-size:90px;width:90px;height:90px;display:block;position:relative;flex:none}
+#assistantScreen .assistant-orb .dm-welcome-plasma .dm-core-brand{opacity:.17}
+#assistantScreen .assistant-orb .dm-welcome-plasma .dm-core-state-fx{opacity:0}
