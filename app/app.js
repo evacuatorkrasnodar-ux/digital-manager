@@ -126,13 +126,14 @@
     document.querySelector('.bottom-nav').hidden=!voicePrefs.dock;
     byId('dockHiddenControls').hidden=voicePrefs.dock;
     document.documentElement.classList.toggle('dock-is-hidden',!voicePrefs.dock);
+    if(voicePrefs.dock)closeDockQuickActions();
   }
   function showLiveRing(mode='listening',duration=3500){
     const el=byId('assistantLive');
     if(!el)return;
-    el.hidden=false;el.dataset.mode=mode;
+    el.hidden=false;el.dataset.mode=mode;el.classList.remove('is-ending');
     clearTimeout(liveTimer);
-    if(duration>0)liveTimer=setTimeout(()=>{el.hidden=true;},duration);
+    if(duration>0)liveTimer=setTimeout(()=>{el.classList.add('is-ending');liveTimer=setTimeout(()=>{el.hidden=true;el.classList.remove('is-ending');},300);},duration);
   }
 
   let mgCurrent='home';
@@ -162,17 +163,7 @@
         '<h2>Самостоятельность</h2>'+ '<button type="button" class="mg-row mg-auto mg-autopilot-link" data-mg-open="autopilot" aria-label="Открыть настройки Автопилота"> <span class="mg-icon mg-gold mg-zap">ϟ</span><span class="mg-copy"><strong>Автопилот</strong><small>Насколько самостоятельно мне работать?</small><small>Задайте границы, в которых я могу действовать сам.</small></span> <svg class="mg-gold-waves" viewBox="0 0 170 100" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="mgWaves" x1="0" x2="1" y1=".4" y2="1"><stop stop-color="#cc8541" stop-opacity="0"/><stop offset=".6" stop-color="#f4b96c" stop-opacity=".48"/><stop offset=".92" stop-color="#ffe2a5" stop-opacity=".9"/><stop offset="1" stop-color="#c88937" stop-opacity=".1"/></linearGradient></defs><path d="M0 110 C56 10 106 8 180 94M3 118C56 38 102 25 174 78M0 96C67 18 113 40 175 53" fill="none" stroke="url(#mgWaves)" stroke-width="2"/><path d="M10 95C70 12 110 25 172 72" fill="none" stroke="#e9a95b" stroke-width="11" opacity=".1"/></svg><span class="mg-chevron" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#ic-chevron"/></svg></span> </button>'+
         '<p class="mg-disclaimer">Предпочтения сохраняются на устройстве. Для реального наблюдения потребуется подключить сервисы и ИИ.</p>';
     }else if(page==='voice'){
-      content='<div class="voice-pref">'+
-        '<div class="voice-setting-top"><span class="mg-icon mg-blue"><svg class="ico"><use href="#ic-grid"/></svg></span><span class="mg-copy"><strong>Показывать док</strong><small>Постоянная панель внизу экрана</small></span><label class="voice-switch"><input id="voiceDock" type="checkbox" '+(voicePrefs.dock?'checked':'')+'><i></i></label></div>'+
-        '<div class="voice-mock"><div class="voice-scene"></div><div class="voice-mock-dock"><span>⌂<small>Главная</small></span><span>▢<small>Чат</small></span><span class="voice-mock-glow"></span><span>☷<small>Разделы</small></span><span>▤<small>Файлы</small></span></div></div>'+
-        '<p class="voice-caption">Отключите док, чтобы оставить главный экран свободным. Вместо него появится компактная навигация.</p></div>'+
-        '<div class="voice-pref"><div class="voice-setting-top"><span class="mg-icon mg-purple">◉</span><span class="mg-copy"><strong>Во время разговора</strong><small>Нежное кольцо без логотипа</small></span></div>'+
-        '<div class="voice-mock voice-mock-conversation"><div class="voice-scene"></div><div class="voice-mock-wave"></div><span class="voice-mock-orb"></span></div>'+
-        '<p class="voice-caption">Кольцо появляется при общении с помощником. Для проверки анимации нажмите кнопку ниже.</p>'+
-        '<button type="button" id="voicePreview" class="voice-preview-button">Посмотреть живое кольцо ↗</button></div>'+
-        '<div class="voice-setting-top voice-simple"><span class="mg-icon mg-blue">♩</span><span class="mg-copy"><strong>Голосовая активация</strong><small>Распознавание фразы — в разработке</small></span><span class="voice-coming">Скоро</span></div>'+
-        '<div class="voice-setting-top voice-simple"><span class="mg-icon mg-purple">≋</span><span class="mg-copy"><strong>Голосовые ответы</strong><small>Озвучивание — после подключения голоса</small></span><span class="voice-coming">Скоро</span></div>'+
-        '<p class="mg-disclaimer">Микрофон пока не включается автоматически: постоянное распознавание требует разрешения и поддержки браузера.</p>';
+      content="<div class=\"voice-pref\"><div class=\"voice-setting-top\"><span class=\"mg-icon mg-blue\"><svg class=\"ico\"><use href=\"#ic-grid\"/></svg></span><span class=\"mg-copy\"><strong>Показывать док</strong><small>Постоянная панель внизу экрана</small></span><label class=\"voice-switch\"><input id=\"voiceDock\" type=\"checkbox\" aria-label=\"Показывать док\"><i></i></label></div><div class=\"voice-mock voice-mock-dock-scene\" role=\"img\" aria-label=\"Предпросмотр стеклянной док-станции с центральным кольцом\"><div class=\"voice-scene\"></div><div class=\"voice-phone-frame\"><div class=\"voice-mock-dock\"><svg class=\"voice-dock-shape\" viewBox=\"0 0 430 116\" preserveAspectRatio=\"none\" aria-hidden=\"true\"><defs><linearGradient id=\"vDockGlass\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop stop-color=\"#1a354f\" stop-opacity=\".96\"/><stop offset=\".48\" stop-color=\"#0b1a2d\" stop-opacity=\".98\"/><stop offset=\"1\" stop-color=\"#02070e\" stop-opacity=\".98\"/></linearGradient></defs><path d=\"M0 50C0 30 36 16 94 16H133C170 16 183 8 198 -1C209 -8 221 -8 232 -1C247 8 260 16 297 16H336C394 16 430 30 430 50V116H0Z\" fill=\"url(#vDockGlass)\"/><path d=\"M0 50C0 30 36 16 94 16H133C170 16 183 8 198 -1C209 -8 221 -8 232 -1C247 8 260 16 297 16H336C394 16 430 30 430 50\" fill=\"none\" stroke=\"#b4d9f0\" stroke-opacity=\".75\" stroke-width=\"1.3\" vector-effect=\"non-scaling-stroke\"/></svg><div class=\"voice-dock-items\"><span>⌂<small>Главная</small></span><span>▢<small>Чат</small></span><span class=\"voice-dock-center\"><span class=\"dm-voice-orb\" aria-hidden=\"true\"><i class=\"dm-orb-halo\"></i><i class=\"dm-orb-rim\"></i><i class=\"dm-orb-edge\"></i></span></span><span>▦<small>Разделы</small></span><span>▤<small>Файлы</small></span></div></div></div></div><p class=\"voice-caption\">Док обеспечивает быстрый доступ к приложению. При выключении останется только маленькая кнопка вызова навигации.</p></div><div class=\"voice-pref\"><div class=\"voice-setting-top\"><span class=\"mg-icon mg-purple\"><span class=\"voice-ring-icon\"></span></span><span class=\"mg-copy\"><strong>Во время разговора</strong><small>Нежное кольцо без логотипа</small></span></div><div class=\"voice-mock voice-mock-conversation\" role=\"img\" aria-label=\"Предпросмотр светящегося кольца без логотипа\"><div class=\"voice-scene\"></div><div class=\"voice-phone-frame\"><svg class=\"dm-voice-waves\" viewBox=\"0 0 400 110\" preserveAspectRatio=\"none\" aria-hidden=\"true\"><path d=\"M-10 78C45 43 75 111 124 78S170 58 200 78S270 112 314 74S376 51 410 81\"/><path d=\"M-10 87C41 114 95 49 136 81S174 92 201 75S252 51 291 81S366 113 410 63\"/><path d=\"M-10 70C41 90 81 54 126 82S171 63 199 72S251 95 302 78S369 52 410 88\"/></svg><span class=\"dm-voice-orb\" aria-hidden=\"true\"><i class=\"dm-orb-halo\"></i><i class=\"dm-orb-rim\"></i><i class=\"dm-orb-edge\"></i></span></div></div><p class=\"voice-caption\">Помощник появляется в виде светового кольца и плавно исчезает после разговора.</p><button type=\"button\" id=\"voicePreview\" class=\"voice-preview-button\">Посмотреть живое кольцо ↗</button></div><div class=\"voice-setting-top voice-simple\"><span class=\"mg-icon mg-blue\"><svg class=\"ico\"><use href=\"#ic-bars\"/></svg></span><span class=\"mg-copy\"><strong>Голосовая активация</strong><small>Распознавание фразы — в разработке</small></span><span class=\"voice-coming\">Скоро</span></div><div class=\"voice-setting-top voice-simple\"><span class=\"mg-icon mg-purple\"><svg class=\"ico\"><use href=\"#ic-spark\"/></svg></span><span class=\"mg-copy\"><strong>Голосовые ответы</strong><small>Озвучивание после подключения голоса</small></span><span class=\"voice-coming\">Скоро</span></div><p class=\"mg-disclaimer\">Микрофон не включается автоматически. Голосовая активация потребует разрешения на доступ и работающего распознавания.</p>";
     }else if(page==='autopilot'){
       const choices=[['advertising','Реклама до 5 000 ₽'],['tools','Создание рабочих инструментов'],['prices','Изменение цен'],['spending','Новые расходы']];
       content='<div class="mg-auto-intro">✦ &nbsp; Насколько самостоятельно мне работать?</div>'+
@@ -222,10 +213,14 @@
     if(event.target.id==='mgAutonomy'){mgData.autonomy=Number(event.target.value);mgAutoLabel();save();}
   });
   mgApplyCards();
+  function closeDockQuickActions(){byId('dockQuickActions').hidden=true;byId('dockLauncher').setAttribute('aria-expanded','false');}
+  byId('dockLauncher').addEventListener('click',()=>{const el=byId('dockQuickActions');el.hidden=!el.hidden;byId('dockLauncher').setAttribute('aria-expanded',String(!el.hidden));});
+  document.addEventListener('click',e=>{if(!e.target.closest('#dockHiddenControls'))closeDockQuickActions();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDockQuickActions();});
   updateDock();
-  byId('dockOpenHome').addEventListener('click',()=>setTab('home'));
-  byId('dockOpenAssistant').addEventListener('click',()=>setTab('assistant'));
-  byId('dockOpenManage').addEventListener('click',()=>setTab('management'));
+  byId('dockOpenHome').addEventListener('click',()=>{closeDockQuickActions();setTab('home');});
+  byId('dockOpenAssistant').addEventListener('click',()=>{closeDockQuickActions();setTab('assistant');});
+  byId('dockOpenManage').addEventListener('click',()=>{closeDockQuickActions();setTab('management');});
   byId('mgDetail').addEventListener('click',event=>{if(event.target.closest('#voicePreview'))showLiveRing('listening',4800);});
 
   // Explicitly wire every visual action; unused marketing routes remain untouched.
