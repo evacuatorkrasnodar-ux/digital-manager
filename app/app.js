@@ -35,6 +35,7 @@
     if (!Object.hasOwn(ringDescriptions,mode)) return;
     clearTimeout(ringResetTimer);
     const button = byId('tabAssistant');
+    if(['thinking','speaking'].includes(mode))showLiveRing(mode,resetAfter||2500);
     button.dataset.mode = mode;
     document.querySelector('.bottom-nav').dataset.mode = mode;
     button.setAttribute('aria-label', 'Помощник. '+ringDescriptions[mode]);
@@ -116,9 +117,27 @@
     skills:{...mgDefaults.skills,...(mgSaved.skills||{})},
     rules:{...mgDefaults.rules,...(mgSaved.rules||{})}};
   state.management=mgData;
+
+  // Explicit opt-in preference: no hidden mic use; this is an animated UI prototype.
+  const voicePrefs={dock:mgSaved.voice&&typeof mgSaved.voice==='object'?mgSaved.voice.dock!==false:true};
+  mgData.voice=voicePrefs;
+  let liveTimer=null;
+  function updateDock(){
+    document.querySelector('.bottom-nav').hidden=!voicePrefs.dock;
+    byId('dockHiddenControls').hidden=voicePrefs.dock;
+    document.documentElement.classList.toggle('dock-is-hidden',!voicePrefs.dock);
+  }
+  function showLiveRing(mode='listening',duration=3500){
+    const el=byId('assistantLive');
+    if(!el)return;
+    el.hidden=false;el.dataset.mode=mode;
+    clearTimeout(liveTimer);
+    if(duration>0)liveTimer=setTimeout(()=>{el.hidden=true;},duration);
+  }
+
   let mgCurrent='home';
   const mgNames={manager:'Управляющий',autopilot:'Автопилот',connections:'Связи',documents:'Документы',
-    payments:'Платежи',learning:'Обучение'};
+    payments:'Платежи',learning:'Обучение',voice:'Помощник'};
   const mgInfo={
     connections:'Связи объединят ваш сайт, почту, календарь, банки, продажи, маркетплейсы и ЭДО. Реальные подключения пока не настроены.',
     documents:'Здесь будут договоры, счета, акты, накладные и шаблоны. Важные документы не будут отправляться или подписываться без разрешения.',
@@ -131,7 +150,7 @@
     byId('mgHome').hidden=page!=='home';
     byId('mgDetail').hidden=page==='home';
     byId('mgTitle').textContent=mgNames[page]||'Управление';
-    byId('mgSubtitle').textContent=({home:'Настройки приложения',manager:'Имя · навыки · общение',autopilot:'Границы самостоятельности',connections:'Сервисы и источники данных',documents:'Файлы и шаблоны',payments:'Счета и регулярные расходы',learning:'Возможности приложения'})[page]||'Настройки приложения';
+    byId('mgSubtitle').textContent=({home:'Настройки приложения',manager:'Имя · навыки · общение',autopilot:'Границы самостоятельности',connections:'Сервисы и источники данных',documents:'Файлы и шаблоны',payments:'Счета и регулярные расходы',learning:'Возможности приложения',voice:'Док · Кольцо · Голос'})[page]||'Настройки приложения';
     if(page==='home'){byId('mgDetail').innerHTML='';window.scrollTo(0,0);return;}
     let content='';
     if(page==='manager'){
@@ -142,6 +161,18 @@
         '<h2>Навыки</h2>'+choices.map(([key,label])=>'<label class="mg-choice">'+label+'<input type="checkbox" data-mg-skill="'+key+'" '+(mgData.skills[key]?'checked':'')+'></label>').join('')+
         '<h2>Самостоятельность</h2>'+ '<button type="button" class="mg-row mg-auto mg-autopilot-link" data-mg-open="autopilot" aria-label="Открыть настройки Автопилота"> <span class="mg-icon mg-gold mg-zap">ϟ</span><span class="mg-copy"><strong>Автопилот</strong><small>Насколько самостоятельно мне работать?</small><small>Задайте границы, в которых я могу действовать сам.</small></span> <svg class="mg-gold-waves" viewBox="0 0 170 100" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="mgWaves" x1="0" x2="1" y1=".4" y2="1"><stop stop-color="#cc8541" stop-opacity="0"/><stop offset=".6" stop-color="#f4b96c" stop-opacity=".48"/><stop offset=".92" stop-color="#ffe2a5" stop-opacity=".9"/><stop offset="1" stop-color="#c88937" stop-opacity=".1"/></linearGradient></defs><path d="M0 110 C56 10 106 8 180 94M3 118C56 38 102 25 174 78M0 96C67 18 113 40 175 53" fill="none" stroke="url(#mgWaves)" stroke-width="2"/><path d="M10 95C70 12 110 25 172 72" fill="none" stroke="#e9a95b" stroke-width="11" opacity=".1"/></svg><span class="mg-chevron" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#ic-chevron"/></svg></span> </button>'+
         '<p class="mg-disclaimer">Предпочтения сохраняются на устройстве. Для реального наблюдения потребуется подключить сервисы и ИИ.</p>';
+    }else if(page==='voice'){
+      content='<div class="voice-pref">'+
+        '<div class="voice-setting-top"><span class="mg-icon mg-blue"><svg class="ico"><use href="#ic-grid"/></svg></span><span class="mg-copy"><strong>Показывать док</strong><small>Постоянная панель внизу экрана</small></span><label class="voice-switch"><input id="voiceDock" type="checkbox" '+(voicePrefs.dock?'checked':'')+'><i></i></label></div>'+
+        '<div class="voice-mock"><div class="voice-scene"></div><div class="voice-mock-dock"><span>⌂<small>Главная</small></span><span>▢<small>Чат</small></span><span class="voice-mock-glow"></span><span>☷<small>Разделы</small></span><span>▤<small>Файлы</small></span></div></div>'+
+        '<p class="voice-caption">Отключите док, чтобы оставить главный экран свободным. Вместо него появится компактная навигация.</p></div>'+
+        '<div class="voice-pref"><div class="voice-setting-top"><span class="mg-icon mg-purple">◉</span><span class="mg-copy"><strong>Во время разговора</strong><small>Нежное кольцо без логотипа</small></span></div>'+
+        '<div class="voice-mock voice-mock-conversation"><div class="voice-scene"></div><div class="voice-mock-wave"></div><span class="voice-mock-orb"></span></div>'+
+        '<p class="voice-caption">Кольцо появляется при общении с помощником. Для проверки анимации нажмите кнопку ниже.</p>'+
+        '<button type="button" id="voicePreview" class="voice-preview-button">Посмотреть живое кольцо ↗</button></div>'+
+        '<div class="voice-setting-top voice-simple"><span class="mg-icon mg-blue">♩</span><span class="mg-copy"><strong>Голосовая активация</strong><small>Распознавание фразы — в разработке</small></span><span class="voice-coming">Скоро</span></div>'+
+        '<div class="voice-setting-top voice-simple"><span class="mg-icon mg-purple">≋</span><span class="mg-copy"><strong>Голосовые ответы</strong><small>Озвучивание — после подключения голоса</small></span><span class="voice-coming">Скоро</span></div>'+
+        '<p class="mg-disclaimer">Микрофон пока не включается автоматически: постоянное распознавание требует разрешения и поддержки браузера.</p>';
     }else if(page==='autopilot'){
       const choices=[['advertising','Реклама до 5 000 ₽'],['tools','Создание рабочих инструментов'],['prices','Изменение цен'],['spending','Новые расходы']];
       content='<div class="mg-auto-intro">✦ &nbsp; Насколько самостоятельно мне работать?</div>'+
@@ -153,6 +184,7 @@
     byId('mgDetail').innerHTML=content;
     if(page==='manager')byId('mgTone').value=mgData.tone;
     if(page==='autopilot')mgAutoLabel();
+    if(page==='voice')byId('mgDetail').querySelector('#voiceDock').checked=voicePrefs.dock;
     window.scrollTo(0,0);
   }
   function mgAutoLabel(){
@@ -178,7 +210,8 @@
   byId('mgDetail').addEventListener('click',event=>{const link=event.target.closest('[data-mg-open="autopilot"]');if(link)mgSettingsPage('autopilot');});
   byId('mgDetail').addEventListener('change',event=>{
     const el=event.target;
-    if(el.id==='mgManagerName'){mgData.managerName=el.value.trim()||'Цифровой управляющий';el.value=mgData.managerName;}
+    if(el.id==='voiceDock'){voicePrefs.dock=el.checked;save();updateDock();}
+    else if(el.id==='mgManagerName'){mgData.managerName=el.value.trim()||'Цифровой управляющий';el.value=mgData.managerName;}
     else if(el.id==='mgTone')mgData.tone=el.value;
     else if(el.id==='mgAutonomy'){mgData.autonomy=Number(el.value);mgAutoLabel();}
     else if(el.dataset.mgSkill)mgData.skills[el.dataset.mgSkill]=el.checked;
@@ -189,6 +222,11 @@
     if(event.target.id==='mgAutonomy'){mgData.autonomy=Number(event.target.value);mgAutoLabel();save();}
   });
   mgApplyCards();
+  updateDock();
+  byId('dockOpenHome').addEventListener('click',()=>setTab('home'));
+  byId('dockOpenAssistant').addEventListener('click',()=>setTab('assistant'));
+  byId('dockOpenManage').addEventListener('click',()=>setTab('management'));
+  byId('mgDetail').addEventListener('click',event=>{if(event.target.closest('#voicePreview'))showLiveRing('listening',4800);});
 
   // Explicitly wire every visual action; unused marketing routes remain untouched.
   document.querySelectorAll('[data-ring-preview]').forEach(b=>b.addEventListener('click',()=>setRingMode(b.dataset.ringPreview,b.dataset.ringPreview==='idle'?0:4200)));

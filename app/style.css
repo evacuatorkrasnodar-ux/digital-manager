@@ -413,3 +413,42 @@
 #managementScreen .mg-detail .mg-autopilot-link .mg-copy{position:relative;z-index:2}
 #managementScreen .mg-detail .mg-autopilot-link .mg-copy small{font-size:11px}
 #managementScreen .mg-detail .mg-autopilot-link .mg-chevron{flex:none}
+
+/* Assistant voice + dock preferences: isolated from existing Home geometry. */
+.bottom-nav[hidden],.dock-hidden-controls[hidden],.assistant-live[hidden]{display:none!important}
+.dock-hidden-controls{position:fixed;z-index:21;bottom:calc(10px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);width:min(190px,60vw);height:42px;display:flex;align-items:center;justify-content:space-around;border:1px solid rgba(154,184,215,.33);border-radius:25px;background:linear-gradient(140deg,rgba(16,25,36,.94),rgba(2,5,9,.94));box-shadow:0 7px 23px #000b;backdrop-filter:blur(14px)}
+.dock-hidden-controls button{width:38px;height:36px;border:0;display:grid;place-items:center;background:transparent;color:#deebff}
+.dock-hidden-controls .ico{width:20px;height:20px}
+.mini-live-ring{width:27px;height:27px;border:2px solid #5a9eff;border-radius:50%;box-shadow:0 0 7px #2b76f0,inset 0 0 5px #7563db;background:#050915}
+.assistant-live{position:fixed;z-index:22;bottom:calc(26px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);width:min(280px,82vw);height:93px;pointer-events:none;display:flex;align-items:center;justify-content:center;isolation:isolate}
+.assistant-live-ring{width:73px;height:73px;border-radius:50%;background:radial-gradient(circle at center,#02050c 54%,#152cff 59%,#b9e9ff 63%,#435bfd 68%,transparent 74%);filter:drop-shadow(0 0 9px #2a86ff);animation:voice-breathe 2.7s ease-in-out infinite}
+.assistant-live[data-mode="speaking"] .assistant-live-ring{filter:drop-shadow(0 0 12px #a364ff);animation-duration:1.35s}
+.assistant-live-wave{position:absolute;width:42%;height:30px;left:0;border-top:1px solid #4e98ef;border-bottom:1px solid #5544dc;border-radius:50%;transform:rotate(8deg);opacity:.65;animation:voice-wave 2.8s ease-in-out infinite}
+.assistant-live-wave.right{left:auto;right:0;transform:rotate(-8deg);animation-delay:-.8s}
+@keyframes voice-breathe{0%,100%{transform:scale(.94);opacity:.84}50%{transform:scale(1.05);opacity:1}}
+@keyframes voice-wave{0%,100%{scale:1 .7;opacity:.4}50%{scale:1 1.4;opacity:.88}}
+#managementScreen .mg-voice-entry{min-height:72px}
+#managementScreen .voice-pref{border:1px solid rgba(142,174,207,.39);border-radius:19px;padding:10px;background:linear-gradient(147deg,#142233,#03060a);display:grid;gap:11px}
+#managementScreen .voice-setting-top{display:flex;align-items:center;gap:11px;padding:3px}
+#managementScreen .voice-setting-top .mg-copy strong{font-size:16px}
+#managementScreen .voice-switch{flex:none;display:grid;place-items:center;cursor:pointer}
+#managementScreen .voice-switch input{position:absolute;opacity:0}
+#managementScreen .voice-switch i{width:58px;height:31px;border-radius:20px;border:1px solid #617e9f;background:#273548;position:relative;transition:background .2s}
+#managementScreen .voice-switch i::before{content:"";position:absolute;top:3px;left:3px;width:23px;height:23px;border-radius:50%;background:#f0f6ff;transition:transform .2s}
+#managementScreen .voice-switch input:checked+i{background:linear-gradient(135deg,#1fa1fe,#1236b9);box-shadow:0 0 9px #377ff68c}
+#managementScreen .voice-switch input:checked+i::before{transform:translateX(26px)}
+#managementScreen .voice-switch input:focus-visible+i{outline:2px solid white;outline-offset:3px}
+#managementScreen .voice-mock{height:188px;overflow:hidden;border:1px solid #9abbda60;border-radius:16px;position:relative;background:#030810}
+#managementScreen .voice-scene{position:absolute;inset:0;background:linear-gradient(0deg,#03060c 1%,#02070a11 95%),url('./assets/architecture-hero.png') center/cover}
+#managementScreen .voice-mock-dock{position:absolute;left:5%;right:5%;bottom:8px;height:64px;border:1px solid #a0cbe68a;border-radius:31px;background:linear-gradient(160deg,#182f49ed,#03080fe8);display:flex;align-items:center;justify-content:space-around;box-shadow:0 0 13px #315fa73d;backdrop-filter:blur(12px);color:#e4f2ff}
+#managementScreen .voice-mock-dock>span:not(.voice-mock-glow){font-size:22px;display:grid;justify-items:center;line-height:1;gap:3px}
+#managementScreen .voice-mock-dock small{font-size:9px}
+#managementScreen .voice-mock-glow,.voice-mock-orb{height:55px;width:55px;border-radius:50%;background:radial-gradient(circle,#020716 52%,#2e52ed 57%,#d0e7ff 62%,#5043e6 70%,transparent 75%);filter:drop-shadow(0 0 7px #4284ff);animation:voice-breathe 3s ease-in-out infinite}
+#managementScreen .voice-mock-conversation{display:grid;place-items:end center;padding-bottom:9px}
+#managementScreen .voice-mock-orb{position:relative}
+#managementScreen .voice-mock-wave{position:absolute;bottom:29px;width:100%;height:33px;background:repeating-radial-gradient(ellipse at center,transparent 0 38px,#285fde33 39px 40px,transparent 42px 70px);opacity:.8}
+#managementScreen .voice-caption{margin:0 3px;font-size:11px;color:#b3cbe0;line-height:1.5}
+#managementScreen .voice-preview-button{padding:12px;border:1px solid #648fc7;border-radius:12px;background:#0b2341;color:#dcefff}
+#managementScreen .voice-simple{border:1px solid #6684a455;border-radius:17px;padding:10px;background:linear-gradient(140deg,#102030,#05080d)}
+#managementScreen .voice-coming{color:#9aacc0;font-size:11px;white-space:nowrap}
+@media(prefers-reduced-motion:reduce){.assistant-live-ring,.assistant-live-wave,#managementScreen .voice-mock-glow,#managementScreen .voice-mock-orb{animation:none!important}}
