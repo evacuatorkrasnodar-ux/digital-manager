@@ -460,11 +460,8 @@
       if(talkPreview&&talkScene&&talkFrame){
         const device=document.createElement('div');
         device.className='voice-conversation-device';
-        const gesture=document.createElement('span');
-        gesture.className='voice-conversation-indicator';
-        gesture.setAttribute('aria-hidden','true');
         talkScene.before(device);
-        device.append(talkScene,talkFrame,gesture);
+        device.append(talkScene,talkFrame);
       }
       dmMountRealDockPreview();
       // Dedicated action preference; voice activation by name needs a real recognition
