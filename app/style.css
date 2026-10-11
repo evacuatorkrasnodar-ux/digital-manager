@@ -1159,3 +1159,7 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
  padding:0;border:0;
 }
 @media (max-width:350px){#dmAttentionPanel .dm-attention-filters{gap:4px}#dmAttentionPanel .dm-attention-filters button{padding:8px 9px;font-size:10px}}
+
+/* Approved small glass back button, same arrow language as the rest of the app. */
+#dmAttentionPanel #dmAttentionClose{display:grid;place-items:center;border-radius:12px;width:34px;height:34px;padding:0}
+#dmAttentionPanel #dmAttentionClose .ico{display:block;width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
