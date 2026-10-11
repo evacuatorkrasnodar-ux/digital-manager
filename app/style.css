@@ -438,6 +438,17 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 .dm-orb-rim{inset:4%;background:conic-gradient(from 15deg,#3b85ff,#f1fbff 27deg,#83d9ff 46deg,#2978fa 90deg,#285ce2 141deg,#b79bff 197deg,#e3bafa 217deg,#8650f5 248deg,#247af9 288deg,#b1ecff 330deg,#3b85ff);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4.6px),#000 calc(100% - 2.1px));mask:radial-gradient(farthest-side,transparent calc(100% - 4.6px),#000 calc(100% - 2.1px));animation:dm-rotate 13s linear infinite;filter:drop-shadow(0 0 2px rgba(152,212,255,.8)) drop-shadow(0 0 5px rgba(72,117,255,.6))}
 .dm-orb-edge{inset:8%;border:1px solid rgba(157,213,255,.44);box-shadow:inset 0 0 4px rgba(46,107,243,.35),0 0 4px rgba(91,132,255,.32)}
 .dm-voice-orb::after{content:"";position:absolute;inset:5%;border-radius:50%;border:1.3px solid transparent;border-top-color:rgba(239,251,255,.96);border-right-color:rgba(170,221,255,.31);filter:drop-shadow(0 0 4px rgba(138,219,255,.85));transform:rotate(-21deg);pointer-events:none}
+/* Single traveling highlight, intentionally limited to the conversation ring. */
+.assistant-live>.dm-voice-orb::before,
+#managementScreen .voice-mock-conversation .dm-voice-orb::before{
+ content:"";position:absolute;inset:3%;z-index:3;pointer-events:none;border-radius:50%;
+ background:conic-gradient(from 38deg,transparent 0 41%,rgba(111,190,255,.08) 46%,rgba(229,248,255,.94) 49%,rgba(157,209,255,.36) 52%,transparent 58% 100%);
+ -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 5px),#000 calc(100% - 3px),transparent 100%);
+ mask:radial-gradient(farthest-side,transparent calc(100% - 5px),#000 calc(100% - 3px),transparent 100%);
+ filter:drop-shadow(0 0 3px rgba(171,216,255,.75));opacity:.74;
+ animation:dm-glint-travel 9s linear infinite;
+}
+@keyframes dm-glint-travel{to{transform:rotate(360deg)}}
 .dm-voice-waves{position:absolute;left:0;bottom:0;width:100%;height:100%;z-index:1;overflow:visible;filter:drop-shadow(0 0 3px #3a7cfa55)}
 .assistant-live>.dm-voice-waves{left:50%;transform:translateX(-50%);bottom:1px;width:min(320px,91vw);height:69px;opacity:.82;mask-image:linear-gradient(90deg,transparent,black 11%,black 89%,transparent)}
 .dm-voice-waves path{fill:none;stroke-width:1.45;stroke-linecap:round;opacity:.9;transform-origin:center 88%;animation:dm-wave 6.4s ease-in-out infinite}
@@ -449,7 +460,7 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 .assistant-live[data-mode="speaking"] .dm-voice-orb{animation-duration:1.4s;filter:drop-shadow(0 0 12px #a477ffb0)}
 @keyframes dm-breathe{0%,100%{transform:scale(.95);opacity:.88}50%{transform:scale(1.055);opacity:1}}
 @keyframes dm-rotate{to{transform:rotate(360deg)}}
-@keyframes dm-wave{0%,100%{transform:scaleY(.98);opacity:.68}50%{transform:scaleY(1.02);opacity:.95}}
+@keyframes dm-wave{0%,100%{transform:translateX(-1.8px) scaleY(.97);opacity:.68}50%{transform:translateX(1.8px) scaleY(1.03);opacity:.94}}
 #managementScreen .mg-voice-entry{min-height:72px}
 #managementScreen .voice-pref{padding:10px 9px 12px;border:1px solid #9eafc355;border-radius:20px;background:linear-gradient(154deg,#142032,#030609 89%);box-shadow:inset 0 1px #ffffff15;display:grid;gap:10px}
 #managementScreen .voice-setting-top{display:flex;align-items:center;gap:10px;padding:2px 3px}
@@ -487,4 +498,4 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 #managementScreen .voice-simple{padding:10px;border:1px solid #7294b156;border-radius:16px;background:linear-gradient(145deg,#101f31,#04070a)}
 #managementScreen .voice-coming{color:#b2c5d8;font-size:11px;white-space:nowrap}
 @media(max-width:365px){#managementScreen .voice-mock{height:177px}#managementScreen .voice-phone-frame{inset:4px 5px 5px}#managementScreen .voice-dock-items small{font-size:8px}}
-@media(prefers-reduced-motion:reduce){.dm-voice-orb,.dm-orb-rim,.dm-voice-waves path{animation:none!important}#managementScreen .voice-switch i,#managementScreen .voice-switch i::before{transition:none!important}}
+@media(prefers-reduced-motion:reduce){.dm-voice-orb,.dm-orb-rim,.dm-voice-waves path,.assistant-live>.dm-voice-orb::before,#managementScreen .voice-mock-conversation .dm-voice-orb::before{animation:none!important}#managementScreen .voice-switch i,#managementScreen .voice-switch i::before{transition:none!important}}
