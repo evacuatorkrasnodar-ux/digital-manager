@@ -1235,6 +1235,49 @@
   updateDock();
   byId('dockOpenHome').addEventListener('click',()=>{closeDockQuickActions();closePlasmaPanel();setTab('home');});
   byId('dockOpenChat').addEventListener('click',()=>{closeDockQuickActions();openPlasmaPanel(true);});
+  // Single source for verified events in the attention centre.
+  const dmAttentionKey='dm-attention-events-v1';
+  let dmAttentionEvents=[];
+  try{const value=JSON.parse(localStorage.getItem(dmAttentionKey)||'[]');if(Array.isArray(value))dmAttentionEvents=value.filter(x=>x&&typeof x.title==='string').slice(0,80);}catch(_){}
+  let dmAttentionFilter='all';
+  const dmAttentionPanel=byId('dmAttentionPanel');
+  const dmAttentionDot=byId('dmAttentionDot');
+  function dmRenderAttention(){
+    const unread=dmAttentionEvents.some(x=>!x.read);
+    dmAttentionDot.hidden=!unread;
+    byId('dockOpenAttention').setAttribute('aria-label',unread?'Центр внимания: есть новые события':'Центр внимания');
+    const container=byId('dmAttentionList');
+    container.replaceChildren();
+    const visible=dmAttentionEvents.filter(x=>dmAttentionFilter==='all'||x.kind===dmAttentionFilter);
+    if(!visible.length){const empty=document.createElement('p');empty.className='dm-attention-empty';empty.textContent=dmAttentionFilter==='all'?'Пока всё спокойно. Новых событий нет.':'В этой категории пока нет событий.';container.append(empty);return;}
+    for(const event of visible){
+      const row=document.createElement('article');row.className='dm-attention-entry';
+      const info=document.createElement('div');
+      const title=document.createElement('strong');title.textContent=event.title;
+      const detail=document.createElement('p');detail.textContent=event.message||'';
+      const time=document.createElement('small');time.textContent=new Date(event.at).toLocaleString('ru-RU');
+      info.append(title,detail,time);row.append(info);
+      const action=document.createElement('button');action.type='button';action.textContent=event.read?'Просмотрено':'Понятно';action.disabled=!!event.read;
+      action.addEventListener('click',()=>{event.read=true;dmSaveAttention();dmRenderAttention();});
+      row.append(action);container.append(row);
+    }
+  }
+  function dmSaveAttention(){try{localStorage.setItem(dmAttentionKey,JSON.stringify(dmAttentionEvents.slice(0,80)));}catch(_){}}
+  function dmOpenAttention(){closeDockQuickActions();dmAttentionPanel.hidden=false;dmRenderAttention();byId('dmAttentionClose').focus();}
+  function dmCloseAttention(){dmAttentionPanel.hidden=true;}
+  byId('dockOpenAttention').addEventListener('click',dmOpenAttention);
+  byId('dmAttentionClose').addEventListener('click',dmCloseAttention);
+  dmAttentionPanel.addEventListener('click',e=>{if(e.target===dmAttentionPanel)dmCloseAttention();const filter=e.target.closest('[data-attention-filter]');if(!filter)return;dmAttentionFilter=filter.dataset.attentionFilter;dmAttentionPanel.querySelectorAll('[data-attention-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===filter)));dmRenderAttention();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!dmAttentionPanel.hidden)dmCloseAttention();});
+  document.addEventListener('dm:assistant-event',e=>{
+    const d=e.detail;if(!d||d.verified!==true||!['mail','calendar','task','attention','health'].includes(d.kind))return;
+    if(d.kind==='health'&&d.healthOptIn!==true)return;
+    const titles={mail:'Новое письмо',calendar:'Событие календаря',task:'Задача',attention:'Требует внимания',health:'Напоминание о здоровье'};
+    const title=String(d.title||titles[d.kind]).slice(0,120),message=String(d.message||'').slice(0,400);
+    dmAttentionEvents.unshift({kind:d.kind,title,message,at:Date.now(),read:false});
+    dmAttentionEvents=dmAttentionEvents.slice(0,80);dmSaveAttention();dmRenderAttention();
+  });
+  dmRenderAttention();
   byId('dockOpenManage').addEventListener('click',()=>{closeDockQuickActions();closePlasmaPanel();setTab('management');});
   byId('mgDetail').addEventListener('click',event=>{
     if(event.target.closest('#voicePreview'))previewVoiceRing();
