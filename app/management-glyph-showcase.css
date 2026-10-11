@@ -124,3 +124,21 @@
   #managementScreen .dm-glyph-stage.is-playing .dm-glyph-stage-orb>.dm-voice-orb{animation:none!important}
   #managementScreen .dm-glyph-showcase .dm-glyph-preview-actions button{transition:none!important}
 }
+
+/* Idle sign demonstration uses the same quiet silver plasma as the Home dock.
+   The real glass logo is already cloned with the orb and yields to signs. */
+#managementScreen .dm-glyph-stage-orb>.dm-dock-plasma{
+  filter:drop-shadow(0 0 5px rgba(225,240,255,.65)) drop-shadow(0 0 9px rgba(183,206,237,.21))!important;
+}
+#managementScreen .dm-glyph-stage-orb .dm-orb-rim{
+  background:conic-gradient(from 15deg,#c7d7e6,#fff 27deg,#eaf6ff 46deg,#f8fcff 90deg,#b9cfe7 141deg,#f3f4ff 197deg,#d5e1f5 217deg,#fff 248deg,#c9d9e8 288deg,#f5fbff 330deg,#c7d7e6);
+  filter:drop-shadow(0 0 3px rgba(225,240,255,.78));
+}
+#managementScreen .dm-glyph-stage-orb .dm-orb-halo{
+  background:radial-gradient(circle,transparent 38%,rgba(237,246,255,.05) 49%,rgba(229,241,255,.23) 56%,rgba(191,215,248,.11) 66%,transparent 76%);
+}
+#managementScreen .dm-glyph-stage-orb .dm-orb-spectral{
+  filter:grayscale(1) saturate(0) brightness(1.42) drop-shadow(0 0 3px rgba(232,246,255,.72));
+}
+#managementScreen .dm-glyph-stage-orb .dm-core-brand{opacity:.17}
+#managementScreen .dm-glyph-stage-orb .dm-voice-orb:has(.dm-core-glyph.is-visible) .dm-core-brand{opacity:0}
