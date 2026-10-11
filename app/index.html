@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css?v=590">
+  <link rel="stylesheet" href="./style.css?v=595">
   <link rel="stylesheet" href="./dock.css?v=297">
   <link rel="stylesheet" href="./system-ui.css?v=283">
   <link rel="stylesheet" href="./voice-hints.css?v=290">
@@ -263,19 +263,21 @@
         <button id="plasmaClearDraft" type="button">Очистить</button>
       </div>
       <section class="dm-draft-actions" aria-label="Что сделать с текстом">
-        <div class="dm-draft-actions-heading"><strong>Что сделать с текстом?</strong><small>Выбираете вы</small></div>
+        <div class="dm-draft-actions-heading"><strong>Куда отправим мысль?</strong><small>Решает автор ✦</small></div>
         <div class="dm-draft-actions-grid">
-          <button type="button" data-draft-action="note" title="В блокнот"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5.1" y="3" width="13.8" height="18" rx="2"/><path d="M9 3v18M12 8h4M12 12h4"/></svg><span>В блокнот</span></button>
-          <button type="button" data-draft-action="email" title="Почта"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.1"/><path d="m4 7 8 6 8-6"/></svg><span>Почта</span></button>
-          <button type="button" data-draft-action="share" title="Поделиться"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V3m-5 5 5-5 5 5M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg><span>Поделиться</span></button>
-          <button type="button" data-draft-action="download" title="Скачать"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4.5 17.5v2a1.5 1.5 0 0 0 1.5 1.5h12a1.5 1.5 0 0 0 1.5-1.5v-2"/></svg><span>Скачать</span></button>
-          <button type="button" data-draft-action="copy" title="Копировать"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7.5" y="7.5" width="12.5" height="13" rx="2"/><path d="M16.5 7V5.3A2.3 2.3 0 0 0 14.2 3H5.3A2.3 2.3 0 0 0 3 5.3v9a2.3 2.3 0 0 0 2.3 2.3H7"/></svg><span>Копировать</span></button>
+          <button type="button" data-draft-action="note" title="Сохранить в блокнот «Мой день»" aria-label="Сохранить в блокнот «Мой день»"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5.1" y="3" width="13.8" height="18" rx="2"/><path d="M9 3v18M12 8h4M12 12h4"/></svg><span>Блокнот</span></button>
+          <button type="button" data-draft-action="email" title="Создать письмо в почте" aria-label="Создать черновик письма"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.1"/><path d="m4 7 8 6 8-6"/></svg><span>Почта</span></button>
+          <button type="button" data-draft-action="share" title="Поделиться через приложения" aria-label="Поделиться через приложения"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V3m-5 5 5-5 5 5M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg><span>Обмен</span></button>
+          <button type="button" data-draft-action="download" title="Скачать текст файлом" aria-label="Скачать текст файлом"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4.5 17.5v2a1.5 1.5 0 0 0 1.5 1.5h12a1.5 1.5 0 0 0 1.5-1.5v-2"/></svg><span>Файл</span></button>
+          <button type="button" data-draft-action="copy" title="Копировать текст" aria-label="Копировать текст"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7.5" y="7.5" width="12.5" height="13" rx="2"/><path d="M16.5 7V5.3A2.3 2.3 0 0 0 14.2 3H5.3A2.3 2.3 0 0 0 3 5.3v9a2.3 2.3 0 0 0 2.3 2.3H7"/></svg><span>Копия</span></button>
+          <button type="button" data-draft-action="print" title="Распечатать весь текст" aria-label="Распечатать весь текст"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8V3h10v5M6 17H4.5A2.5 2.5 0 0 1 2 14.5v-4A2.5 2.5 0 0 1 4.5 8h15A2.5 2.5 0 0 1 22 10.5v4a2.5 2.5 0 0 1-2.5 2.5H18"/><path d="M7 14h10v7H7zM18 11.4h.01"/></svg><span>Печать</span></button>
         </div>
         <div class="dm-draft-actions-meta">
-          <button type="button" id="plasmaSavedNotesToggle" aria-controls="plasmaSavedNotes" aria-expanded="false">Мои записи <span id="plasmaSavedNotesCount"></span></button>
+          <button type="button" id="plasmaSavedNotesToggle" aria-controls="plasmaSavedNotes" aria-expanded="false">Мой блокнот <span id="plasmaSavedNotesCount"></span></button>
           <small>Ничего не отправляется автоматически</small>
         </div>
-        <div id="plasmaSavedNotes" class="dm-draft-notes" hidden aria-label="Локальные записи"></div>
+        <div id="plasmaSavedNotes" class="dm-draft-notes" hidden aria-label="Заметки из блокнота «Мой день»"></div>
+        <a href="./myday.html?view=notes" class="dm-notebook-open" title="Открыть блокнот в разделе «Мой день»">Открыть блокнот ↗</a>
         <p id="plasmaActionStatus" class="dm-draft-status" role="status" aria-live="polite" hidden></p>
       </section>
     </form>
@@ -353,7 +355,7 @@
   </nav>
 <dialog id="modal" aria-labelledby="dialogTitle"><div class="dialog-inner"><div class="dialog-head"><div><span class="dialog-eyebrow">ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h2 id="dialogTitle">Информация</h2></div><button class="dialog-close" id="closeDialog" type="button" aria-label="Закрыть"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button></div><div id="dialogContent"></div></div></dialog>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-<script src="./app.js?v=590" defer></script>
+<script src="./app.js?v=595" defer></script>
   <script src="./voice-hints.js?v=290" defer></script>
 <script src="./system-ui.js?v=283" defer></script>
 </body>

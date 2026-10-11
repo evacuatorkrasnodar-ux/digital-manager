@@ -690,15 +690,23 @@ html.dm-plasma-panel-open .dock-hidden-controls{
 
 /* Meaningful, compact destinations for lengthy text; no fake external integrations. */
 .dm-draft-actions{display:none}
-.dm-chat-editor .dm-draft-actions{display:flex;flex-direction:column;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(140,183,213,.19)}
+.dm-chat-editor .dm-draft-actions{display:flex;flex-direction:column;gap:9px;margin-top:12px;padding-top:11px;border-top:1px solid rgba(140,183,213,.19)}
 .dm-draft-actions-heading{display:flex;align-items:baseline;justify-content:space-between;gap:6px}
 .dm-draft-actions-heading strong{font-size:12px;font-weight:520;color:#edf7ff}
 .dm-draft-actions-heading small{font-size:10px;color:#9eb7ce}
-.dm-draft-actions-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
-.dm-draft-actions-grid button{min-width:0;min-height:61px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1px solid rgba(140,178,210,.30);border-radius:13px;padding:9px 4px;cursor:pointer;background:linear-gradient(145deg,rgba(35,61,84,.56),rgba(9,23,42,.70));color:#d9ebfb}
-.dm-draft-actions-grid button:is(:hover,:focus-visible){border-color:rgba(173,217,248,.80);background:rgba(60,105,146,.36);color:#fff}
-.dm-draft-actions-grid button svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round}
-.dm-draft-actions-grid button span{font-size:10px;line-height:1.2;text-align:center}
+.dm-draft-actions-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}
+.dm-draft-actions-grid button{
+  min-width:0;min-height:54px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  border:1px solid rgba(140,178,210,.28);border-radius:12px;padding:8px 2px;cursor:pointer;
+  background:linear-gradient(150deg,rgba(32,58,83,.55),rgba(8,22,39,.64));color:#dfedfc;
+}
+.dm-draft-actions-grid button:is(:hover,:focus-visible){border-color:rgba(198,230,250,.83);background:rgba(60,105,146,.36);color:#fff}
+.dm-draft-actions-grid button svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round}
+.dm-draft-actions-grid button span{font-size:9px;line-height:1.1;white-space:nowrap;font-weight:390}
+@media(max-width:345px){.dm-draft-actions-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.dm-notebook-open{display:none;color:#aacbe6;text-decoration:none;font-size:11px;align-self:end}
+.dm-chat-editor .dm-notebook-open{display:block}
+.dm-notebook-open:is(:hover,:focus-visible){color:#f2faff;text-decoration:underline;text-underline-offset:3px}
 .dm-draft-actions-meta{display:flex;align-items:center;justify-content:space-between;gap:9px;flex-wrap:wrap}
 .dm-draft-actions-meta button{padding:4px 2px;border:0;background:transparent;color:#b7d9f4;text-decoration:underline;text-underline-offset:3px;font-family:inherit;font-size:11px;cursor:pointer}
 .dm-draft-actions-meta small{font-size:9px;line-height:1.4;color:#8eaac2}
@@ -766,6 +774,14 @@ html.dm-plasma-panel-open .dock-hidden-controls{
 .dm-voice-orb .dm-core-glyph[data-kind="done"].is-composer-glyph{opacity:.92;color:#f3fcff}
 
 .dm-voice-orb .dm-core-glyph svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+
+/* Writing should feel quiet: switch off the side lasers while composing, not the plasma. */
+html.dm-plasma-panel-open .dock-launcher .dm-launcher-waves,
+html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
+  opacity:0!important;visibility:hidden!important;
+  animation-play-state:paused!important;pointer-events:none!important;
+}
+
 .dm-glyph-settings{margin-top:14px;padding-top:13px;border-top:1px solid rgba(154,185,213,.23)}
 .dm-glyph-settings>strong{display:block;color:#f0f8ff;font-size:13px;font-weight:520}
 .dm-glyph-settings>small{display:block;margin:6px 0 11px;color:#a8c3d8;font-size:11px;line-height:1.5}

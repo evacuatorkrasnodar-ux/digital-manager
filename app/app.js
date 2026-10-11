@@ -394,46 +394,135 @@
   const DM_DRAFT_KEY='digital-manager-plasma-draft-v1';
   let dmDraftAutoExpanded=false,dmActionGlyphKind='',dmAckTimer=null;
 
-  // Local notebook. Neither cloud storage nor a real email/social integration
-  // exists here: external actions only open the user's own system apps.
+  // ONE notebook: the IndexedDB notes store already used by myday.js.
+  // The earlier stand-alone localStorage draft notes are migrated once, never
+  // treated as a separate notebook again. All records stay on this device.
   const DM_NOTES_KEY='digital-manager-plasma-notes-v1';
+  const DM_MYDAY_DB='digital-manager-my-day-v1';
   const dmNotesContainer=byId('plasmaSavedNotes');
   const dmNotesToggle=byId('plasmaSavedNotesToggle');
   const dmActionStatus=byId('plasmaActionStatus');
-  let dmNotes=[];
-  try{
-    const stored=JSON.parse(localStorage.getItem(DM_NOTES_KEY)||'[]');
-    if(Array.isArray(stored))dmNotes=stored.filter(n=>n&&typeof n.id==='string'&&typeof n.text==='string').slice(0,30);
-  }catch(_){}
+  let dmNotes=[],dmNotebookDbPromise=null;
   function dmActionMessage(message){dmActionStatus.textContent=message;dmActionStatus.hidden=false;}
   function dmNoteTitle(value){return value.split('\n').find(line=>line.trim())?.trim().slice(0,46)||'Запись без названия';}
-  function dmPersistNotes(){
-    try{localStorage.setItem(DM_NOTES_KEY,JSON.stringify(dmNotes));return true;}
-    catch(_){dmActionMessage('Не удалось сохранить в этом браузере. Попробуйте скачать файл.');return false;}
+  function dmDayDate(t=new Date()){
+    return [t.getFullYear(),String(t.getMonth()+1).padStart(2,'0'),String(t.getDate()).padStart(2,'0')].join('-');
+  }
+  function dmOpenNotebookDb(){
+    if(!dmNotebookDbPromise){
+      dmNotebookDbPromise=new Promise((resolve,reject)=>{
+        if(!('indexedDB' in window)){reject(new Error('No IndexedDB'));return;}
+        const req=indexedDB.open(DM_MYDAY_DB,1);
+        req.onupgradeneeded=()=>{
+          const db=req.result;
+          for(const name of ['events','notes']){
+            if(!db.objectStoreNames.contains(name)){
+              const store=db.createObjectStore(name,{keyPath:'id'});
+              store.createIndex('date','date',{unique:false});
+            }
+          }
+        };
+        req.onsuccess=()=>resolve(req.result);
+        req.onerror=()=>reject(req.error||new Error('Notebook unavailable'));
+        req.onblocked=()=>reject(new Error('Notebook update blocked'));
+      });
+      dmNotebookDbPromise.catch(()=>{dmNotebookDbPromise=null;});
+    }
+    return dmNotebookDbPromise;
+  }
+  async function dmNotebookTx(mode,work){
+    const db=await dmOpenNotebookDb();
+    return new Promise((resolve,reject)=>{
+      let tx,request,result;
+      try{tx=db.transaction('notes',mode);request=work(tx.objectStore('notes'));}
+      catch(error){reject(error);return;}
+      if(request){
+        request.onsuccess=()=>{result=request.result;};
+        request.onerror=()=>reject(request.error||new Error('Notebook request failed'));
+      }
+      tx.oncomplete=()=>resolve(result);
+      tx.onerror=()=>reject(tx.error||new Error('Notebook transaction failed'));
+      tx.onabort=()=>reject(tx.error||new Error('Notebook write aborted'));
+    });
+  }
+  async function dmMigratePreviousNotes(){
+    let previous=[];
+    try{
+      const value=JSON.parse(localStorage.getItem(DM_NOTES_KEY)||'[]');
+      if(Array.isArray(value))previous=value.filter(x=>x&&typeof x.id==='string'&&typeof x.text==='string'&&x.text.trim());
+    }catch(_){}
+    if(!previous.length)return;
+    // An existing calendar note with the stable migration id wins, including
+    // any edits the user made after a previous partial migration.
+    const db=await dmOpenNotebookDb();
+    await new Promise((resolve,reject)=>{
+      let tx;
+      try{
+        tx=db.transaction('notes','readwrite');
+        const store=tx.objectStore('notes');
+        previous.forEach(item=>{
+          const id='plasma-migrated-'+item.id;
+          const check=store.get(id);
+          check.onsuccess=()=>{
+            if(check.result)return;
+            const stamp=Number(item.created)||Date.now();
+            const date=dmDayDate(new Date(stamp));
+            store.put({id,title:dmNoteTitle(item.text),date,kind:'business',
+              text:item.text,createdAt:stamp,updatedAt:stamp});
+          };
+        });
+      }catch(error){reject(error);return;}
+      tx.oncomplete=resolve;
+      tx.onerror=()=>reject(tx.error||new Error('Import failed'));
+      tx.onabort=()=>reject(tx.error||new Error('Import cancelled'));
+    });
+    try{localStorage.removeItem(DM_NOTES_KEY);}catch(_){}
+  }
+  async function dmRefreshNotes(){
+    try{
+      const rows=await dmNotebookTx('readonly',store=>store.getAll());
+      dmNotes=(rows||[]).sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0));
+      dmRenderNotes();return true;
+    }catch(error){
+      console.warn('Calendar notebook unavailable:',error);
+      dmActionMessage('Не могу открыть блокнот. Черновик не тронут; можно скачать файл.');
+      return false;
+    }
   }
   function dmRenderNotes(){
     byId('plasmaSavedNotesCount').textContent=dmNotes.length?'('+dmNotes.length+')':'';
     dmNotesContainer.replaceChildren();
-    if(!dmNotes.length){const p=document.createElement('p');p.className='dm-notes-empty';p.textContent='Пока нет сохранённых записей.';dmNotesContainer.append(p);return;}
-    for(const note of dmNotes){
+    if(!dmNotes.length){
+      const p=document.createElement('p');p.className='dm-notes-empty';
+      p.textContent='Здесь появятся записи из «Моего дня».';
+      dmNotesContainer.append(p);return;
+    }
+    for(const note of dmNotes.slice(0,18)){
       const row=document.createElement('div');row.className='dm-saved-note';
       const open=document.createElement('button');open.type='button';open.className='dm-saved-note-open';open.dataset.noteOpen=note.id;
-      const title=document.createElement('strong');title.textContent=dmNoteTitle(note.text);
-      const date=document.createElement('small');date.textContent=new Date(note.created).toLocaleDateString('ru-RU');
+      const title=document.createElement('strong');title.textContent=note.title||dmNoteTitle(note.text||'');
+      const date=document.createElement('small');date.textContent=note.date||'';
       open.append(title,date);
       const del=document.createElement('button');del.type='button';del.className='dm-saved-note-delete';del.dataset.noteDelete=note.id;
-      del.setAttribute('aria-label','Удалить запись «'+dmNoteTitle(note.text)+'»');del.textContent='×';
+      del.setAttribute('aria-label','Удалить запись «'+(note.title||'')+'»');del.textContent='×';
       row.append(open,del);dmNotesContainer.append(row);
     }
   }
-  function dmSaveAsNote(){
+  async function dmSaveAsNote(){
     const content=plasmaInput.value.trim();
-    if(!content){dmActionMessage('Сначала напишите текст.');return;}
-    const original=dmNotes.slice();
-    dmNotes.unshift({id:String(Date.now())+'-'+Math.random().toString(36).slice(2,8),text:content,created:Date.now()});
-    dmNotes=dmNotes.slice(0,30);
-    if(!dmPersistNotes()){dmNotes=original;return;}
-    dmRenderNotes();dmActionMessage('Сохранено в «Мои записи» на этом устройстве. Черновик остался на месте.');
+    if(!content){dmActionMessage('Сначала напиши мысль. Блокнот подождёт.');return;}
+    if(content.length>30000){dmActionMessage('Для блокнота слишком большой текст. Скачай файл без сокращений.');return;}
+    const now=Date.now();
+    const note={id:window.crypto?.randomUUID?.()||'md-'+now+'-'+Math.random().toString(36).slice(2),
+      title:dmNoteTitle(content),date:dmDayDate(),kind:'business',text:content,createdAt:now,updatedAt:now};
+    try{
+      await dmNotebookTx('readwrite',store=>store.put(note));
+      await dmRefreshNotes();
+      dmActionMessage('Записал в «Мой день». Память теперь официально не обязана всё помнить ✦');
+    }catch(error){
+      console.warn('Notebook save failed:',error);
+      dmActionMessage('Блокнот не сохранил запись. Черновик на месте — сохрани файлом.');
+    }
   }
   function dmMakeTextFile(content){
     const name=(dmNoteTitle(content).replace(/[<>:"/\\|?*\x00-\x1f]/g,'').slice(0,45)||'Текст')+'.txt';
@@ -457,13 +546,32 @@
   async function dmDraftDestination(kind){
     const content=plasmaInput.value.trim();
     if(!content){dmActionMessage('Сначала напишите текст, чтобы выбрать действие.');return;}
-    if(kind==='note'){dmSaveAsNote();return;}
+    if(kind==='note'){await dmSaveAsNote();return;}
     if(kind==='download'){
-      try{dmDownloadText(content);dmActionMessage('Файл подготовлен для скачивания. Черновик остался на месте.');}
+      try{dmDownloadText(content);dmActionMessage('Файл готов. Бумажная версия подождёт до печати ✦');}
       catch(_){dmActionMessage('Не удалось скачать файл. Попробуйте скопировать текст.');}
       return;
     }
-    if(kind==='copy'){dmActionMessage(await dmCopyText(content)?'Текст скопирован.':'Не удалось скопировать — выделите текст вручную.');return;}
+    if(kind==='copy'){dmActionMessage(await dmCopyText(content)?'Скопировано. Голова отдыхает — буфер работает.':'Не удалось скопировать — выдели текст вручную.');return;}
+    if(kind==='print'){
+      const paper=window.open('','_blank');
+      if(!paper){dmActionMessage('Браузер остановил окно печати. Разреши всплывающие окна или скачай файл.');return;}
+      try{
+        paper.document.open();
+        paper.document.write('<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>Печать текста</title><style>@page{size:auto;margin:18mm}body{font:12pt/1.55 Arial,sans-serif;color:#111;background:#fff;padding:0;margin:0}h1{font-size:16pt;margin:0 0 12mm}pre{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;margin:0}<\/style></head><body><h1>Текст из «Цифрового управляющего»</h1></body></html>');
+        paper.document.close();
+        const pre=paper.document.createElement('pre');
+        pre.textContent=content;
+        paper.document.body.append(pre);
+        paper.focus();paper.print();
+        dmActionMessage('Открыл печать. Бумага, держись! Сам текст не изменён.');
+      }catch(error){
+        console.warn('Print failed:',error);
+        try{paper.close();}catch(_){}
+        dmActionMessage('Не удалось открыть печать. Можно скачать текст и распечатать из файла.');
+      }
+      return;
+    }
     if(kind==='email'){
       const subject=encodeURIComponent(dmNoteTitle(content));
       let body=content;
@@ -472,7 +580,7 @@
         body='Большой текст подготовлен отдельным файлом. Прикрепите скачанный .txt к письму вручную.';
         dmActionMessage('Откроется черновик письма. Прикрепите файл вручную — письмо не отправлено.');
       }else{
-        dmActionMessage('Откроется черновик письма. Отправку подтвердите сами.');
+        dmActionMessage('Почта откроет черновик. Кнопку «Отправить» оставляю тебе ✦');
       }
       window.location.href='mailto:?subject='+subject+'&body='+encodeURIComponent(body);
       return;
@@ -496,28 +604,38 @@
     const btn=event.target.closest('[data-draft-action]');
     if(btn)dmDraftDestination(btn.dataset.draftAction);
   });
-  dmNotesToggle.addEventListener('click',()=>{
-    const show=dmNotesContainer.hidden;dmNotesContainer.hidden=!show;
-    dmNotesToggle.setAttribute('aria-expanded',String(show));if(show)dmRenderNotes();
+  dmNotesToggle.addEventListener('click',async()=>{
+    const show=dmNotesContainer.hidden;
+    dmNotesContainer.hidden=!show;dmNotesToggle.setAttribute('aria-expanded',String(show));
+    if(show)await dmRefreshNotes();
   });
-  dmNotesContainer.addEventListener('click',event=>{
+  dmNotesContainer.addEventListener('click',async event=>{
     const del=event.target.closest('[data-note-delete]');
     if(del){
-      if(!window.confirm('Удалить запись из блокнота?'))return;
-      const original=dmNotes.slice();dmNotes=dmNotes.filter(note=>note.id!==del.dataset.noteDelete);
-      if(!dmPersistNotes()){dmNotes=original;return;}
-      dmRenderNotes();dmActionMessage('Запись удалена с этого устройства.');return;
+      const record=dmNotes.find(n=>n.id===del.dataset.noteDelete);
+      if(!record||!window.confirm('Удалить «'+(record.title||'запись')+'» из общего блокнота?'))return;
+      try{
+        await dmNotebookTx('readwrite',store=>store.delete(record.id));
+        await dmRefreshNotes();
+        dmActionMessage('Запись удалена из блокнота «Мой день».');
+      }catch(error){console.warn(error);dmActionMessage('Не удалось удалить запись. Попробуй ещё раз.');}
+      return;
     }
     const open=event.target.closest('[data-note-open]');
     if(!open)return;
     const note=dmNotes.find(item=>item.id===open.dataset.noteOpen);
     if(!note)return;
-    if(plasmaInput.value.trim()&&plasmaInput.value!==note.text&&!window.confirm('Заменить текущий черновик сохранённой записью?'))return;
+    if(plasmaInput.value.trim()&&plasmaInput.value!==note.text&&!window.confirm('Заменить текущий черновик выбранной записью?'))return;
+    if(note.text.length>plasmaInput.maxLength){
+      dmActionMessage('Запись длиннее окна ввода. Открой её в блокноте «Мой день».');return;
+    }
     plasmaInput.value=note.text;dmSaveDraft();dmSyncComposer();
-    dmActionMessage('Запись загружена в редактор. Можете продолжить работу.');
+    dmActionMessage('Загрузил запись из «Моего дня». Продолжай творить ✦');
   });
-  dmRenderNotes();
-
+  dmMigratePreviousNotes().then(dmRefreshNotes).catch(error=>{
+    console.warn('Notebook migration:',error);
+    dmActionMessage('Не удалось перенести старые записи. Они сохранены, черновик не тронут.');
+  });
   try {plasmaInput.value=localStorage.getItem(DM_DRAFT_KEY)||'';}catch(_){}
   function dmSaveDraft(){
     try{
