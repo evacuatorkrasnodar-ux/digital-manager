@@ -119,7 +119,7 @@
   }
 
   // Единственный экран Управления. Удалено старое тестовое меню CRM.
-  const mgDefaults={managerName:'Цифровой управляющий',tone:'human',autonomy:0,
+  const mgDefaults={managerName:'Цифровой управляющий',tone:'auto',autonomy:0,
     cards:{promotion:true,sales:true,clients:true,money:true,inside:true,picture:true,tasks:true},
     skills:{market:true,opportunities:true,rules:true,documents:true},
     rules:{advertising:false,tools:false,prices:false,spending:false}};
