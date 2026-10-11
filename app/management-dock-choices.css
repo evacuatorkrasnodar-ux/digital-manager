@@ -73,9 +73,19 @@
 #managementScreen .dm-plasma-examples[hidden]{display:none!important}
 /* Off means no nav, sockets, icons or labels in the preview DOM. */
 #managementScreen .voice-iphone-dock-mount:has(.mg-standalone-plasma){
-  display:flex;align-items:flex-end;justify-content:flex-start;
-  bottom:10px;height:68px;padding-left:19px;box-sizing:border-box;
+  display:flex;align-items:flex-end;justify-content:center;
+  bottom:10px;height:82px;padding:0;box-sizing:border-box;
 }
+/* Side beams belong to the standalone preview, never to the real dock. */
+#managementScreen .voice-iphone-dock-mount:has(.mg-standalone-plasma)::before,
+#managementScreen .voice-iphone-dock-mount:has(.mg-standalone-plasma)::after{
+  content:"";position:absolute;bottom:25px;width:43%;height:28px;
+  opacity:.75;pointer-events:none;
+  background:radial-gradient(ellipse at 100% 100%,transparent 53%,rgba(137,200,255,.58) 57%,transparent 61%,rgba(104,159,255,.21) 68%,transparent 73%);
+  filter:drop-shadow(0 0 4px rgba(95,171,255,.4));
+}
+#managementScreen .voice-iphone-dock-mount:has(.mg-standalone-plasma)::before{left:5%}
+#managementScreen .voice-iphone-dock-mount:has(.mg-standalone-plasma)::after{right:5%;transform:scaleX(-1)}
 #managementScreen .voice-iphone-dock-mount .mg-standalone-plasma{
   position:relative;display:block;flex:none;
   --dm-size:56px;width:56px;height:56px;
