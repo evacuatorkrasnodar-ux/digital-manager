@@ -684,6 +684,10 @@
     if(!plasmaPanel.hidden){
       clearTimeout(dmAckTimer);
       dmSetComposerGlyph(text.trim()?'send':'mic');
+      if(intent==='draft'){
+        byId('dockLauncher').setAttribute('aria-label','Выбрать действие с текстом');
+        byId('dockLauncher').title='Выберите действие с текстом или спросите ИИ';
+      }
     }
   }
   function dmToggleDraftEditor(expand){
