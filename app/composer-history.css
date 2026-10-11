@@ -75,3 +75,76 @@
 @media(prefers-reduced-motion:reduce){
   .dm-chat-panel .dm-chat-history-trigger{transition:none!important}
 }
+
+
+/* Compact chat: optically centered beside the real bottom plasma.
+   This only applies to the collapsed composer. Long text / large editor
+   keep their dynamic heights and all existing document actions. */
+.dm-chat-panel:not(.dm-chat-editor){
+  bottom:calc(39px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
+  gap:0;
+}
+.dm-chat-panel:not(.dm-chat-editor) .dm-chat-compose{
+  box-sizing:border-box;
+  min-height:58px;
+  padding:7px 8px 7px 13px;
+  border-radius:20px;
+  display:flex;
+  justify-content:center;
+}
+.dm-chat-panel:not(.dm-chat-editor) .dm-chat-compose textarea{
+  box-sizing:border-box;
+  min-height:40px;
+  padding:8px 79px 6px 0;
+  margin:0;
+  font-size:13.5px;
+  line-height:1.44;
+}
+.dm-chat-panel:not(.dm-chat-editor) .dm-chat-edit-tools{
+  position:absolute;
+  top:50%;
+  right:8px;
+  transform:translateY(-50%);
+  display:flex;
+  align-items:center;
+  margin:0;
+}
+.dm-chat-panel:not(.dm-chat-editor) .dm-chat-edit-buttons{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+.dm-chat-panel:not(.dm-chat-editor) .dm-chat-edit-buttons button{
+  box-sizing:border-box;
+  width:31px;
+  height:31px;
+  min-width:31px;
+  padding:6px;
+  border-radius:50%;
+  border:1px solid rgba(165,200,226,.34);
+  background:linear-gradient(145deg,rgba(33,58,77,.39),rgba(4,17,31,.47));
+  -webkit-backdrop-filter:blur(11px);
+  backdrop-filter:blur(11px);
+  box-shadow:inset 0 1px rgba(246,252,255,.12);
+  color:#e8f6ff;
+}
+.dm-chat-panel:not(.dm-chat-editor) .dm-chat-edit-buttons button svg{
+  display:block;
+  width:16px;
+  height:16px;
+  stroke-width:1.85;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.dm-chat-panel:not(.dm-chat-editor) .dm-chat-edit-buttons button:is(:hover,:focus-visible){
+  border-color:rgba(191,231,252,.69);
+  background:rgba(50,87,116,.55);
+}
+@media(max-width:350px){
+  .dm-chat-panel:not(.dm-chat-editor) .dm-chat-compose{padding-left:10px}
+  .dm-chat-panel:not(.dm-chat-editor) .dm-chat-edit-buttons{gap:5px}
+  .dm-chat-panel:not(.dm-chat-editor) .dm-chat-edit-buttons button{
+    width:29px;height:29px;min-width:29px;
+  }
+  .dm-chat-panel:not(.dm-chat-editor) .dm-chat-compose textarea{padding-right:72px}
+}
