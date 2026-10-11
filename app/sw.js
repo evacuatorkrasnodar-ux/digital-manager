@@ -1,9 +1,9 @@
 /* App-only service worker: fresh documents, styles and scripts; cached offline assets. */
-const CACHE = 'digital-manager-black-velvet-v645-20261012';
+const CACHE = 'digital-manager-black-velvet-v646-20261012';
 const CACHE_PREFIX = 'digital-manager-black-velvet-';
 const OFFLINE_FILES = [
   './index.html',
-  './style.css?v=607',
+  './style.css?v=608',
   './dock.css?v=297',
   './app.js?v=620',
   './assets/plasma-glass-mark.webp',
