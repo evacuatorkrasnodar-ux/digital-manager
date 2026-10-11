@@ -15,7 +15,7 @@
 #managementScreen .voice-iphone-island,
 #managementScreen .voice-iphone-title{display:none}
 #managementScreen .voice-iphone-dock-mount{
-  position:absolute;left:0;right:0;bottom:-12px;height:90px;pointer-events:none;
+  position:absolute;left:0;right:0;bottom:-20px;height:90px;pointer-events:none;
 }
 #managementScreen .voice-iphone-dock-mount .mg-dock-preview.bottom-nav{
   box-sizing:border-box;position:absolute!important;
