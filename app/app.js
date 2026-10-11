@@ -462,7 +462,7 @@
   let dmSettingsGlyphTimer=null;
   function dmMountGlyphShowcase(){
     const stage=byId('dmGlyphStageOrb');
-    const source=byId('mgDetail').querySelector('.voice-mock-conversation .dm-voice-orb');
+    const source=document.querySelector('#tabAssistant .dm-dock-plasma');
     if(!stage||!source)return;
     const clone=source.cloneNode(true);
     // Unique SVG gradient IDs: the real conversation ring stays visually intact.
@@ -483,7 +483,7 @@
       }
     });
     stage.replaceChildren(clone);
-    for(const orb of [source,clone]){
+    for(const orb of [clone]){
       const glyph=document.createElement('span');
       glyph.className='dm-core-glyph dm-settings-demo-glyph';
       glyph.setAttribute('aria-hidden','true');
