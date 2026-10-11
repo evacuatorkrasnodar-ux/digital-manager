@@ -1,4 +1,4 @@
-/* Digital Manager OS · shared floating glass dock v295. Identical fixed geometry on every screen. */
+/* Digital Manager OS · shared floating glass dock v297. Identical fixed geometry on every screen. */
 .bottom-nav {
   position: fixed;
   left: 50%;
@@ -234,3 +234,32 @@
 .bottom-nav .nav-ico{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
 .bottom-nav .nav-item{font-family:inherit;text-decoration:none}
 .day-shell{padding-bottom:calc(127px + env(safe-area-inset-bottom,0px))}
+
+/* Five functional destinations in the approved raised glass shell. */
+.bottom-nav[data-layout="five"]{
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  padding-left:7px;padding-right:7px;
+}
+.bottom-nav[data-layout="five"] .nav-item:not(.assistant-tab){transform:translateY(-2px)}
+.bottom-nav[data-layout="five"] .nav-item .nav-label{font-size:9.2px;letter-spacing:-.015em}
+.bottom-nav[data-layout="five"] .nav-item .nav-ico{width:19px;height:19px}
+.bottom-nav[data-layout="five"] .assistant-tab{transform:translateY(-9px)}
+.bottom-nav[data-layout="five"] .assistant-tab>.nav-label{top:-4px}
+.bottom-nav[data-layout="five"] .nav-item:focus-visible{outline:2px solid #cfeaff;outline-offset:-2px;border-radius:10px}
+/* Scaled copy of the approved conversation plasma — no logo and no new effects. */
+.bottom-nav .assistant-socket .dm-dock-plasma{--dm-size:43px;width:43px;height:43px;position:relative;display:block;z-index:1;animation:dm-breathe 4.6s ease-in-out infinite}
+.bottom-nav .assistant-socket .dm-dock-plasma .dm-orb-halo{filter:blur(4px);opacity:.65}
+.bottom-nav .assistant-socket .dm-dock-plasma .dm-orb-spectral{overflow:visible}
+.bottom-nav .assistant-socket .dm-dock-plasma::after{inset:5%}
+@media(max-width:360px){
+  .bottom-nav[data-layout="five"]{padding-left:4px;padding-right:4px}
+  .bottom-nav[data-layout="five"] .nav-item .nav-label{font-size:8px}
+  .bottom-nav[data-layout="five"] .nav-item .nav-ico{width:18px;height:18px}
+  .bottom-nav .assistant-socket{width:46px;height:46px}
+  .bottom-nav .assistant-socket .dm-dock-plasma{--dm-size:40px;width:40px;height:40px}
+}
+@media(prefers-reduced-motion:reduce){
+  .bottom-nav .assistant-socket .dm-dock-plasma,
+  .bottom-nav .assistant-socket .dm-dock-plasma .dm-orb-rim,
+  .bottom-nav .assistant-socket .dm-dock-plasma .dm-orb-arc{animation:none!important}
+}
