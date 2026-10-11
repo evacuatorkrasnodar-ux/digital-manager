@@ -645,3 +645,9 @@ html:not(.dock-is-hidden) .dm-chat-short-nav{display:none}
 .dm-wake-info strong{display:block;font-size:12px;color:#e5f2ff}
 .dm-wake-info small{display:block;font-size:11px;line-height:1.48;color:#a1bbd0;margin-top:6px}
 @media(max-height:520px){.dm-chat-panel{bottom:calc(92px + env(safe-area-inset-bottom,0px));max-height:calc(100dvh - 107px)}.dm-chat-log{max-height:70px}}
+
+.dm-chat-panel.dm-chat-keyboard-open{
+  bottom:calc(10px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
+  max-height:max(135px,calc(100dvh - 38px - var(--dm-chat-kb,0px)));
+}
+.dm-chat-panel.dm-chat-keyboard-open .dm-chat-log{max-height:100px}

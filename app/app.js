@@ -288,17 +288,34 @@
     if(event.target.id==='mgAutonomy'){mgData.autonomy=Number(event.target.value);mgAutoLabel();save();}
   });
   mgApplyCards();
-  function closeDockQuickActions(){byId('dockQuickActions').hidden=true;byId('dockLauncher').setAttribute('aria-expanded','false');}
+  function closeDockQuickActions(){byId('dockQuickActions').hidden=true;}
   const plasmaPanel=byId('plasmaChatPanel');
   const plasmaInput=byId('plasmaChatInput');
   const plasmaHint=byId('plasmaChatHint');
   const plasmaTriggers=[byId('dockLauncher'),byId('tabAssistant')];
+  // The visual viewport shrinks when a mobile keyboard opens; keep the
+  // composer above it instead of letting the input disappear behind keys.
+  function positionPlasmaPanelForKeyboard(){
+    const viewport=window.visualViewport;
+    const occluded=viewport?Math.max(0,window.innerHeight-viewport.height-viewport.offsetTop):0;
+    const keyboardOpen=!plasmaPanel.hidden&&document.activeElement===plasmaInput&&occluded>120;
+    plasmaPanel.classList.toggle('dm-chat-keyboard-open',keyboardOpen);
+    plasmaPanel.style.setProperty('--dm-chat-kb',keyboardOpen?Math.round(occluded)+'px':'0px');
+  }
+  if(window.visualViewport){
+    window.visualViewport.addEventListener('resize',positionPlasmaPanelForKeyboard);
+    window.visualViewport.addEventListener('scroll',positionPlasmaPanelForKeyboard);
+  }
+  plasmaInput.addEventListener('focus',positionPlasmaPanelForKeyboard);
+  plasmaInput.addEventListener('blur',()=>{plasmaPanel.classList.remove('dm-chat-keyboard-open');plasmaPanel.style.setProperty('--dm-chat-kb','0px');});
   function closePlasmaPanel(){
     plasmaPanel.hidden=true;
     plasmaPanel.setAttribute('aria-hidden','true');
     plasmaTriggers.forEach(button=>button.setAttribute('aria-expanded','false'));
     plasmaHint.hidden=true;
     document.documentElement.classList.remove('dm-plasma-panel-open');
+    plasmaPanel.classList.remove('dm-chat-keyboard-open');
+    plasmaPanel.style.setProperty('--dm-chat-kb','0px');
     if(document.activeElement===plasmaInput)plasmaInput.blur();
   }
   function openPlasmaPanel(){
@@ -308,6 +325,7 @@
     }
     plasmaPanel.hidden=false;plasmaPanel.setAttribute('aria-hidden','false');
     plasmaTriggers.forEach(button=>button.setAttribute('aria-expanded','true'));
+    positionPlasmaPanelForKeyboard();
     document.documentElement.classList.add('dm-plasma-panel-open');
     plasmaHint.hidden=true;
     if(voicePrefs.tapAction==='voice'){
