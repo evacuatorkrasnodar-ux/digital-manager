@@ -782,7 +782,9 @@
     const lineHeight=parseFloat(getComputedStyle(plasmaInput).lineHeight)||22;
     plasmaInput.style.height='auto';
     const desired=Math.max(38,Math.min(plasmaInput.scrollHeight,5*lineHeight+16));
-    plasmaInput.style.height=desired+'px';
+    // The collapsed one-line bar is deliberately slender. Its content stays
+    // scrollable; opening the editor restores the full multiline input.
+    plasmaInput.style.height=(plasmaPanel.classList.contains('dm-chat-editor')?desired:30)+'px';
     if(!plasmaPanel.classList.contains('dm-chat-editor')&&!dmDraftAutoExpanded&&(text.length>850||text.split('\n').length>8)){
       dmDraftAutoExpanded=true;dmToggleDraftEditor(true);
     }
