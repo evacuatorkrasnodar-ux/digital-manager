@@ -441,6 +441,10 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 .dm-voice-orb-electric{background:#02040b!important;filter:drop-shadow(0 0 4px rgba(35,97,255,.72)) drop-shadow(0 0 13px rgba(64,74,229,.40))!important}
 .dm-voice-orb-electric .dm-orb-halo{inset:-24%;background:radial-gradient(circle,transparent 38%,rgba(7,72,231,.09) 49%,rgba(25,96,237,.28) 56%,rgba(117,54,222,.15) 66%,transparent 76%);filter:blur(8px);-webkit-mask-image:radial-gradient(circle,transparent 0 66%,#000 73%);mask-image:radial-gradient(circle,transparent 0 66%,#000 73%)}
 .dm-voice-orb-electric .dm-orb-spectral{position:absolute;inset:-13%;z-index:2;width:126%;height:126%;overflow:visible;pointer-events:none;filter:drop-shadow(0 0 2px rgba(110,175,255,.78)) drop-shadow(0 0 3px rgba(27,83,242,.58))}
+.dm-orb-spectral .dm-spectral-wave{stroke-linecap:round;stroke-linejoin:round;shape-rendering:geometricPrecision;vector-effect:non-scaling-stroke}
+.dm-orb-spectral .dm-spectral-outer{stroke-width:.82;opacity:.57}
+.dm-orb-spectral .dm-spectral-main{stroke-width:2.12;opacity:.94;filter:drop-shadow(0 0 2.2px rgba(115,177,255,.59))}
+.dm-orb-spectral .dm-spectral-inner{stroke-width:1.10;opacity:.34;filter:drop-shadow(0 0 1px rgba(103,99,229,.34))}
 .dm-voice-waves-electric{filter:none!important}
 .dm-voice-waves-electric .dm-laser-track{transform-origin:center 70%;animation:dm-electric-wave 7.1s ease-in-out infinite}
 .dm-voice-waves-electric .dm-electric-wave-1{animation-delay:-2s;animation-duration:5.8s}
