@@ -1,40 +1,28 @@
-/* World-only approved Home dock surface and state. */
-body > .bottom-nav[data-layout="five"]{z-index:46;display:flex;align-items:end;justify-content:space-around;padding:0 9px 6px;box-sizing:border-box;max-width:430px;min-height:95px}
-body > .bottom-nav[data-layout="five"][hidden]{display:none!important}
-body > .bottom-nav[data-layout="five"] .nav-shell{position:absolute;inset:-10px 0 0;width:100%;height:calc(100% + 10px);pointer-events:none;z-index:-1}
-body > .bottom-nav[data-layout="five"] .nav-item{position:relative;z-index:2;min-width:0;flex:1;display:flex;align-items:center;flex-direction:column;justify-content:end;gap:5px;padding:5px 0;background:none;border:0;color:#e4f1ff;text-decoration:none;font-size:10px;font-weight:400}
-body > .bottom-nav[data-layout="five"] .nav-label{white-space:nowrap;font-size:10px}
-body > .bottom-nav[data-layout="five"] .nav-ico{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.7}
-body > .bottom-nav[data-layout="five"] .assistant-tab{align-self:start;transform:translateY(-13px);flex:1.12}
-body > .bottom-nav[data-layout="five"] .assistant-socket{display:grid;place-items:center;width:62px;height:62px;position:relative}
-body > .bottom-nav[data-layout="five"] .dm-dock-plasma{--dm-size:62px;width:62px;height:62px}
-.dm-world-orb-menu[hidden]{display:none!important}
-.dm-world-orb-menu{position:fixed;z-index:57;bottom:calc(115px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);display:flex;gap:5px;padding:6px 9px;border-radius:18px;border:1px solid rgba(146,182,210,.4);background:linear-gradient(145deg,#142638,#060f19);box-shadow:0 8px 25px #0009;backdrop-filter:blur(15px)}
-.dm-world-orb-menu a{padding:10px 8px;color:#dceefe;text-decoration:none;font-size:11px;white-space:nowrap}
-.dm-world-standalone{position:fixed;z-index:47;bottom:calc(26px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);display:grid;place-items:center;cursor:pointer}
-
-/* World single plasma: remove global legacy orb effects, preserve approved white core. */
-body > .bottom-nav .dm-shared-plasma,
-body > .dm-world-standalone .dm-shared-plasma{
- background:radial-gradient(circle,rgba(0,2,10,.97) 0 48%,rgba(1,5,22,.93) 57%,transparent 70%)!important;
- filter:drop-shadow(0 0 5px rgba(225,240,255,.55)) drop-shadow(0 0 9px rgba(183,206,237,.18))!important;
-}
-body > .bottom-nav .dm-shared-plasma .dm-orb-rim,
-body > .dm-world-standalone .dm-shared-plasma .dm-orb-rim{
- background:conic-gradient(from 15deg,#c7d7e6,#fff 27deg,#eaf6ff 46deg,#f8fcff 90deg,#b9cfe7 141deg,#f3f4ff 197deg,#d5e1f5 217deg,#fff 248deg,#c9d9e8 288deg,#f5fbff 330deg,#c7d7e6)!important;
-}
-body > .bottom-nav .dm-shared-plasma .dm-orb-spectral,
-body > .dm-world-standalone .dm-shared-plasma .dm-orb-spectral{
- filter:grayscale(1) saturate(0) brightness(1.42) drop-shadow(0 0 3px rgba(232,246,255,.72))!important;
-}
-body > .bottom-nav .dm-shared-plasma .dm-shared-brand,
-body > .dm-world-standalone .dm-shared-plasma .dm-shared-brand{opacity:.20!important;visibility:visible!important}
-body > .bottom-nav .dm-shared-plasma .dm-orb-edge::before,
-body > .bottom-nav .dm-shared-plasma .dm-orb-edge::after,
-body > .dm-world-standalone .dm-shared-plasma .dm-orb-edge::before,
-body > .dm-world-standalone .dm-shared-plasma .dm-orb-edge::after{content:none!important}
-body > .dm-world-standalone{width:88px;height:88px;padding:0;border:0;border-radius:50%;background:transparent;box-shadow:none}
-body > .dm-world-standalone .assistant-socket{display:grid;place-items:center;width:88px;height:88px}
-body > .dm-world-standalone .dm-shared-plasma{--dm-size:62px;width:62px;height:62px}
+/* My World dock: single static dock + one isolated plasma instance. */
 html.dm-world-loading body > .bottom-nav,
 html.dm-world-loading body > .dm-world-standalone{visibility:hidden!important}
+body > .bottom-nav[data-layout="five"]{z-index:46}
+body > .bottom-nav[data-layout="five"][hidden]{display:none!important}
+body > .bottom-nav[data-layout="five"] .dm-world-socket{
+ width:50px;height:50px;display:grid;place-items:center;position:relative;
+ flex:none;background:transparent;border:0;box-shadow:none;
+}
+body > .bottom-nav[data-layout="five"] .dm-world-socket::before,
+body > .bottom-nav[data-layout="five"] .dm-world-socket::after{content:none}
+body > .bottom-nav[data-layout="five"] .dm-world-socket .dm-shared-plasma{--dm-size:43px}
+.dm-world-orb-menu[hidden]{display:none!important}
+.dm-world-orb-menu{
+ position:fixed;z-index:57;left:50%;bottom:calc(115px + env(safe-area-inset-bottom,0px));
+ transform:translateX(-50%);display:flex;gap:5px;padding:6px 9px;
+ border:1px solid rgba(146,182,210,.4);border-radius:18px;
+ background:linear-gradient(145deg,#142638,#060f19);
+ box-shadow:0 8px 25px #0009;backdrop-filter:blur(15px);
+}
+.dm-world-orb-menu a{padding:10px 8px;color:#dceefe;text-decoration:none;font-size:11px;white-space:nowrap}
+.dm-world-standalone{
+ position:fixed;z-index:47;left:50%;bottom:calc(8px + env(safe-area-inset-bottom,0px));
+ transform:translateX(-50%);display:grid;place-items:center;
+ width:114px;height:118px;padding:0;border:0;border-radius:50%;
+ background:transparent;box-shadow:none;cursor:pointer;
+}
+.dm-world-standalone .dm-shared-plasma{--dm-size:60px}
