@@ -147,6 +147,9 @@
     mail:'<rect x="3.5" y="6.6" width="17" height="11" rx="2"/><path d="m4.5 8 7.5 6 7.5-6"/>',
     health:'<path d="M12 20s-8.3-4.9-8.3-10.4c0-4.2 5.1-6 8.3-2.1 3.2-3.9 8.3-2.1 8.3 2.1 0 5.5-8.3 10.4-8.3 10.4Z"/><path d="M4.8 12h4l1.7-3.1 2.4 6.2 1.8-3.1h4.5"/>',
     task:'<rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M8 9.5l1.7 1.7 3-3.2M8 15.4h8"/>',
+    mic:'<rect x="9.2" y="3.5" width="5.6" height="11.5" rx="2.8"/><path d="M5.8 11.1a6.2 6.2 0 0 0 12.4 0M12 17.3v3.1M8.5 20.4h7"/>',
+    send:'<path d="M12 19V5.2M6.7 10.5 12 5.2l5.3 5.3"/>',
+    done:'<path d="M4.7 12.7 10 18l9.3-10.2"/>',
     calendar:'<rect x="3.3" y="5.3" width="17.4" height="15" rx="2.1"/><path d="M7.5 3.6v3.7M16.5 3.6v3.7M3.8 9.4h16.4"/><circle cx="14.7" cy="15" r="3.3"/><path d="M14.7 13.2v1.9l1.3.9"/>',
     attention:'<path d="M12 3.2 21 19H3L12 3.2Z"/><path d="M12 9v4.8M12 17.1h.01"/>',
     ambient:'<circle cx="12" cy="12" r="6.2" stroke-dasharray="7.3 4.5 3.1 6.2 9.4 4.1"/><path d="M12 3.2v3.1M12 17.7v3.1M3.2 12h3.1M17.7 12h3.1"/><circle cx="12" cy="12" r="1.1"/>'
@@ -183,6 +186,7 @@
     dmGlyphHideTimer=setTimeout(()=>{
       dmGlyphLayers.forEach(layer=>layer.classList.remove('is-visible'));
       dmGlyphHideTimer=null;
+      if(!byId('plasmaChatPanel').hidden)dmSetComposerGlyph(byId('plasmaChatInput').value.trim()?'send':'mic');
     },kind==='attention'?3100:2400);
   }
   function dmPreviewGlyph(kind){
@@ -222,8 +226,9 @@
   window.addEventListener('pagehide',()=>{clearTimeout(dmGlyphHideTimer);clearTimeout(dmGlyphAmbientTimer);});
   let liveTimer=null,liveFadeTimer=null,voicePreviewTimer=null;
   function updateDock(){
-    voiceDock.hidden=!voicePrefs.dock;
-    hiddenDock.hidden=voicePrefs.dock;
+    const composing=!byId('plasmaChatPanel').hidden;
+    voiceDock.hidden=!voicePrefs.dock||composing;
+    hiddenDock.hidden=voicePrefs.dock&&!composing;
     document.documentElement.classList.toggle('dock-is-hidden',!voicePrefs.dock);
     if(voicePrefs.dock)closeDockQuickActions();
   }
@@ -384,78 +389,173 @@
   const plasmaInput=byId('plasmaChatInput');
   const plasmaHint=byId('plasmaChatHint');
   const plasmaTriggers=[byId('dockLauncher'),byId('tabAssistant')];
-  // The visual viewport shrinks when a mobile keyboard opens; keep the
-  // composer above it instead of letting the input disappear behind keys.
+  const plasmaExpand=byId('plasmaExpandDraft');
+  const plasmaDraftInfo=byId('plasmaDraftInfo');
+  const DM_DRAFT_KEY='digital-manager-plasma-draft-v1';
+  let dmDraftAutoExpanded=false,dmActionGlyphKind='',dmAckTimer=null;
+  try {plasmaInput.value=localStorage.getItem(DM_DRAFT_KEY)||'';}catch(_){}
+  function dmSaveDraft(){
+    try{
+      if(plasmaInput.value)localStorage.setItem(DM_DRAFT_KEY,plasmaInput.value);
+      else localStorage.removeItem(DM_DRAFT_KEY);
+    }catch(_){}
+  }
+  function dmSetComposerGlyph(kind){
+    if(plasmaPanel.hidden||!Object.hasOwn(dmGlyphDrawings,kind))return;
+    if(dmActionGlyphKind===kind&&dmGlyphLayers.every(layer=>layer.classList.contains('is-composer-glyph')&&layer.dataset.kind===kind))return;
+    clearTimeout(dmGlyphHideTimer);dmGlyphHideTimer=null;
+    dmActionGlyphKind=kind;
+    dmGlyphLayers.forEach(layer=>{
+      layer.dataset.kind=kind;
+      layer.firstElementChild.innerHTML=dmGlyphDrawings[kind];
+      layer.classList.add('is-visible','is-composer-glyph');
+    });
+    byId('dockLauncher').setAttribute('aria-label',kind==='send'?'Отправить сообщение':kind==='done'?'Сообщение отправлено':'Голосовая функция — информация');
+    byId('dockLauncher').title=kind==='send'?'Отправить сообщение':kind==='done'?'Сообщение отправлено':'Голосовое общение пока недоступно';
+  }
+  function dmSyncComposer(){
+    const text=plasmaInput.value;
+    const lineHeight=parseFloat(getComputedStyle(plasmaInput).lineHeight)||22;
+    plasmaInput.style.height='auto';
+    const desired=Math.max(38,Math.min(plasmaInput.scrollHeight,5*lineHeight+16));
+    plasmaInput.style.height=desired+'px';
+    if(!plasmaPanel.classList.contains('dm-chat-editor')&&!dmDraftAutoExpanded&&(text.length>850||text.split('\n').length>8)){
+      dmDraftAutoExpanded=true;dmToggleDraftEditor(true);
+    }
+    plasmaDraftInfo.textContent=text.length?text.length.toLocaleString('ru-RU')+' зн. · Черновик на этом устройстве':'Черновик сохраняется только на этом устройстве';
+    if(!plasmaPanel.hidden){
+      clearTimeout(dmAckTimer);
+      dmSetComposerGlyph(text.trim()?'send':'mic');
+    }
+  }
+  function dmToggleDraftEditor(expand){
+    plasmaPanel.classList.toggle('dm-chat-editor',expand);
+    document.documentElement.classList.toggle('dm-compose-editor',expand&&!plasmaPanel.hidden);
+    plasmaExpand.setAttribute('aria-expanded',String(expand));
+    plasmaExpand.setAttribute('aria-label',expand?'Свернуть редактор':'Развернуть редактор');
+    plasmaExpand.title=expand?'Свернуть текст':'Развернуть текст';
+    if(expand){
+      plasmaInput.style.height='';
+    }else{
+      dmDraftAutoExpanded=false;
+      dmSyncComposer();
+    }
+    positionPlasmaPanelForKeyboard();
+  }
+  // The visualViewport moves the composer's glass and its original plasma
+  // together. This avoids a floating send button behind a mobile keyboard.
   function positionPlasmaPanelForKeyboard(){
     const viewport=window.visualViewport;
     const occluded=viewport?Math.max(0,window.innerHeight-viewport.height-viewport.offsetTop):0;
     const keyboardOpen=!plasmaPanel.hidden&&document.activeElement===plasmaInput&&occluded>120;
     plasmaPanel.classList.toggle('dm-chat-keyboard-open',keyboardOpen);
-    plasmaPanel.style.setProperty('--dm-chat-kb',keyboardOpen?Math.round(occluded)+'px':'0px');
+    const value=keyboardOpen?Math.round(occluded)+'px':'0px';
+    plasmaPanel.style.setProperty('--dm-chat-kb',value);
+    document.documentElement.style.setProperty('--dm-chat-kb',value);
   }
   if(window.visualViewport){
     window.visualViewport.addEventListener('resize',positionPlasmaPanelForKeyboard);
     window.visualViewport.addEventListener('scroll',positionPlasmaPanelForKeyboard);
   }
   plasmaInput.addEventListener('focus',positionPlasmaPanelForKeyboard);
-  plasmaInput.addEventListener('blur',()=>{plasmaPanel.classList.remove('dm-chat-keyboard-open');plasmaPanel.style.setProperty('--dm-chat-kb','0px');});
+  plasmaInput.addEventListener('blur',()=>{
+    plasmaPanel.classList.remove('dm-chat-keyboard-open');
+    plasmaPanel.style.setProperty('--dm-chat-kb','0px');
+    document.documentElement.style.setProperty('--dm-chat-kb','0px');
+  });
+  plasmaInput.addEventListener('input',()=>{dmSaveDraft();dmSyncComposer();});
+  plasmaInput.addEventListener('keydown',event=>{
+    if(event.key==='Enter'&&(event.ctrlKey||event.metaKey)){
+      event.preventDefault();byId('plasmaChatForm').requestSubmit();
+    }
+  });
+  plasmaExpand.addEventListener('click',()=>{dmToggleDraftEditor(!plasmaPanel.classList.contains('dm-chat-editor'));plasmaInput.focus();});
+  byId('plasmaClearDraft').addEventListener('click',()=>{
+    if(plasmaInput.value&&!window.confirm('Очистить сохранённый черновик?'))return;
+    plasmaInput.value='';dmSaveDraft();dmSyncComposer();plasmaInput.focus();
+  });
   function closePlasmaPanel(){
     plasmaPanel.hidden=true;
     plasmaPanel.setAttribute('aria-hidden','true');
     plasmaTriggers.forEach(button=>button.setAttribute('aria-expanded','false'));
     plasmaHint.hidden=true;
-    document.documentElement.classList.remove('dm-plasma-panel-open');
+    document.documentElement.classList.remove('dm-plasma-panel-open','dm-compose-editor');
     plasmaPanel.classList.remove('dm-chat-keyboard-open');
     plasmaPanel.style.setProperty('--dm-chat-kb','0px');
+    document.documentElement.style.setProperty('--dm-chat-kb','0px');
+    clearTimeout(dmAckTimer);dmAckTimer=null;dmActionGlyphKind='';
+    dmGlyphLayers.forEach(layer=>layer.classList.remove('is-visible','is-composer-glyph'));
+    byId('dockLauncher').setAttribute('aria-label','Открыть действия помощника');
+    byId('dockLauncher').removeAttribute('title');
     if(document.activeElement===plasmaInput)plasmaInput.blur();
+    updateDock();
   }
   function openPlasmaPanel(forceText=false){
     closeDockQuickActions();
     if(!plasmaPanel.hidden){
+      if(forceText){plasmaInput.focus();return;}
       closePlasmaPanel();return;
     }
     plasmaPanel.hidden=false;plasmaPanel.setAttribute('aria-hidden','false');
     plasmaTriggers.forEach(button=>button.setAttribute('aria-expanded','true'));
-    positionPlasmaPanelForKeyboard();
+    // Make the existing full plasma available in both dock modes.
+    updateDock();
+    void byId('dockLauncher').offsetWidth;
     document.documentElement.classList.add('dm-plasma-panel-open');
+    document.documentElement.classList.toggle('dm-compose-editor',plasmaPanel.classList.contains('dm-chat-editor'));
+    positionPlasmaPanelForKeyboard();
     plasmaHint.hidden=true;
+    dmSyncComposer();
     if(!forceText&&voicePrefs.tapAction==='voice'){
-      plasmaHint.textContent='Активация по имени и голосовые ответы появятся после подключения распознавания речи. Сейчас микрофон не используется. Пока можно написать сообщение.';
-      plasmaHint.hidden=false;
-    }else if(forceText||voicePrefs.tapAction==='text'){
+      dmExplainUnavailableVoice();
+    }else{
       plasmaInput.focus();
     }
   }
+  function dmExplainUnavailableVoice(){
+    plasmaHint.textContent='Пока диктовка не подключена: микрофон не включается. Напишите сообщение или откройте полную переписку.';
+    plasmaHint.hidden=false;
+    dmSetComposerGlyph('mic');
+  }
+  function dmSendComposerText(){
+    const question=plasmaInput.value.trim();if(!question)return false;
+    // Long documents must not be sent by one accidental tap.
+    if(question.length>750){
+      const approved=window.confirm('Отправить большой текст ('+question.length.toLocaleString('ru-RU')+' знаков) помощнику?');
+      if(!approved)return false;
+    }
+    chat(question);
+    plasmaInput.value='';dmSaveDraft();plasmaHint.hidden=true;dmDraftAutoExpanded=false;
+    dmToggleDraftEditor(false);dmSyncComposer();
+    dmSetComposerGlyph('done');
+    dmAckTimer=setTimeout(()=>{dmAckTimer=null;if(!plasmaPanel.hidden)dmSetComposerGlyph(plasmaInput.value.trim()?'send':'mic');},1300);
+    return true;
+  }
+  function dmComposerOrbClick(){
+    if(plasmaPanel.hidden){togglePlasmaQuickMenu();return;}
+    if(plasmaInput.value.trim()){dmSendComposerText();return;}
+    dmExplainUnavailableVoice();
+  }
   function togglePlasmaQuickMenu(){
-    // Optional explicit preferences still work; default tap shows three
-    // light navigation actions without covering the dashboard with a full panel.
+    if(!plasmaPanel.hidden){dmComposerOrbClick();return;}
+    // The approved compact three-action launcher remains the default idle tap.
     if(voicePrefs.tapAction!=='panel'){
-      closeDockQuickActions();
-      openPlasmaPanel();
-      return;
+      closeDockQuickActions();openPlasmaPanel();return;
     }
     const menu=byId('dockQuickActions');
     const shouldOpen=menu.hidden;
-    closePlasmaPanel();
-    closeDockQuickActions();
+    closePlasmaPanel();closeDockQuickActions();
     if(shouldOpen){
       menu.hidden=false;
       plasmaTriggers.forEach(button=>button.setAttribute('aria-expanded','true'));
     }
   }
-  byId('dockLauncher').addEventListener('click',togglePlasmaQuickMenu);
+  byId('dockLauncher').addEventListener('click',dmComposerOrbClick);
   byId('plasmaClose').addEventListener('click',closePlasmaPanel);
-  byId('plasmaVoiceStart').addEventListener('click',()=>{
-    plasmaHint.textContent='Голосовой движок пока не подключён. Когда функция появится, разрешение на микрофон будет запрашиваться отдельно. Пока можно написать сообщение.';
-    plasmaHint.hidden=false;
-  });
   byId('plasmaChatForm').addEventListener('submit',event=>{
-    event.preventDefault();
-    const question=plasmaInput.value.trim();if(!question)return;
-    chat(question);plasmaInput.value='';plasmaHint.hidden=true;
+    event.preventDefault();dmSendComposerText();
   });
-  byId('plasmaGoHome').addEventListener('click',()=>{closePlasmaPanel();setTab('home');});
-  byId('plasmaGoManage').addEventListener('click',()=>{closePlasmaPanel();setTab('management');});
+  dmSyncComposer();
   byId('plasmaOpenChat').addEventListener('click',()=>{closePlasmaPanel();setTab('assistant');});
   document.addEventListener('pointerdown',event=>{
     if(!plasmaPanel.hidden&&!event.target.closest('#plasmaChatPanel,#tabAssistant,#dockLauncher'))closePlasmaPanel();
