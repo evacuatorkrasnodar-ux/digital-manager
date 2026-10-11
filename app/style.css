@@ -417,11 +417,31 @@
 
 /* Assistant Experience v2 — one unified layer for voice previews and the live ring. */
 .bottom-nav[hidden],#dockHiddenControls[hidden],#dockQuickActions[hidden],#assistantLive[hidden]{display:none!important}
-.dock-hidden-controls{position:fixed;z-index:24;right:max(12px,calc((100vw - 430px)/2 + 12px));bottom:calc(13px + env(safe-area-inset-bottom,0px));display:grid;justify-items:end;gap:8px;pointer-events:none}
+.dock-hidden-controls{position:fixed;z-index:24;left:50%;right:auto;transform:translateX(-50%);bottom:calc(8px + env(safe-area-inset-bottom,0px));display:grid;justify-items:center;gap:8px;pointer-events:none}
 .dock-hidden-controls>*{pointer-events:auto}
-.dock-launcher{width:42px;height:42px;border-radius:50%;border:1px solid #87a9ca77;display:grid;place-items:center;background:linear-gradient(145deg,#192a3aee,#02070cef);box-shadow:inset 0 1px #fff2,0 5px 16px #000a;backdrop-filter:blur(12px)}
-.dock-launcher .dm-launcher-plasma{--dm-size:34px;width:34px;height:34px;position:relative;z-index:1;flex:none;animation:dm-breathe 4.6s ease-in-out infinite;filter:drop-shadow(0 0 2px rgba(35,97,255,.60)) drop-shadow(0 0 5px rgba(88,78,234,.35))!important}
+.dock-launcher{position:relative;width:114px;height:118px;padding:0;display:grid;place-items:center;isolation:isolate;border:0;border-radius:50%;background:transparent;box-shadow:none;backdrop-filter:none;overflow:visible;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.dock-launcher .dm-launcher-plasma{--dm-size:clamp(78px,21vw,94px);width:var(--dm-size);height:var(--dm-size);position:relative;z-index:2;flex:none;animation:dm-breathe 4.6s ease-in-out infinite;filter:drop-shadow(0 0 4px rgba(35,97,255,.65)) drop-shadow(0 0 12px rgba(88,78,234,.42))!important}
 .dock-launcher .dm-launcher-plasma .dm-orb-halo{filter:blur(4px);opacity:.72}
+/* Dock hidden: approved centered plasma, with its original five laser waves behind it. */
+.dock-launcher .dm-launcher-waves{position:absolute;left:50%;bottom:-1px;width:min(440px,100vw);height:120px;z-index:1;pointer-events:none;transform:translateX(-50%);overflow:visible;filter:none!important;opacity:.9;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.dock-launcher .dm-launcher-waves .dm-laser-track{transform-origin:center 70%;animation:dm-electric-wave 7.1s ease-in-out infinite}
+.dock-launcher .dm-launcher-waves .dm-electric-wave-1{animation-delay:-2s;animation-duration:5.8s}
+.dock-launcher .dm-launcher-waves .dm-electric-wave-2{animation-delay:-3.6s;animation-duration:6.6s}
+.dock-launcher .dm-launcher-waves .dm-electric-wave-3{animation-delay:-1.1s;animation-duration:7.2s}
+.dock-launcher .dm-launcher-waves .dm-electric-wave-4{animation-delay:-1.7s;animation-duration:9.2s}
+.dock-launcher .dm-launcher-waves .dm-laser-track path{fill:none;stroke-linecap:round;stroke-linejoin:round;animation:none;transform:none;shape-rendering:geometricPrecision;pointer-events:none}
+.dock-launcher .dm-launcher-waves .dm-laser-bloom{stroke-width:5.2;opacity:.20;filter:blur(2.15px)}
+.dock-launcher .dm-launcher-waves .dm-laser-halo{stroke-width:2.1;opacity:.37;filter:blur(.6px)}
+.dock-launcher .dm-launcher-waves .dm-laser-core{stroke-width:.80;opacity:.97;filter:none;vector-effect:non-scaling-stroke}
+.dock-launcher .dm-launcher-waves .dm-electric-wave-1 .dm-laser-core{stroke-width:.72;opacity:.82}
+.dock-launcher .dm-launcher-waves .dm-electric-wave-2 .dm-laser-core{stroke-width:.70;opacity:.88}
+.dock-launcher .dm-launcher-waves .dm-electric-wave-3 .dm-laser-core{stroke-width:.55;opacity:.55}
+.dock-launcher .dm-launcher-waves .dm-electric-wave-3 .dm-laser-halo{opacity:.23}
+.dock-launcher .dm-launcher-waves .dm-electric-wave-3 .dm-laser-bloom{opacity:.12}
+.dock-launcher .dm-launcher-waves .dm-electric-wave-4 .dm-laser-core{stroke-width:.86;opacity:.96}
+.dock-launcher .dm-launcher-waves .dm-electric-wave-4 .dm-laser-halo{opacity:.44}
+.dock-launcher .dm-launcher-waves .dm-electric-wave-4 .dm-laser-bloom{opacity:.23}
+@media(prefers-reduced-motion:reduce){.dock-launcher .dm-launcher-waves .dm-laser-track{animation:none!important}}
 .dock-launcher .dm-launcher-plasma .dm-orb-spectral{overflow:visible}
 .dock-launcher .dm-launcher-plasma::after{inset:5%}
 .dock-launcher:focus-visible{outline:2px solid #e3f4ff;outline-offset:3px}
