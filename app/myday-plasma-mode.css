@@ -119,3 +119,19 @@ html.dm-myday-no-dock body > nav.bottom-nav{display:none!important}
 
 /* Calendar: approved mark only in white idle mode, never colored ring. */
 .dm-myday-plasma-stage .dock-launcher:not([data-mode="idle"]) .dm-myday-core-brand{opacity:0!important;visibility:hidden!important}
+
+/* The calendar's dock-free waiting plasma matches the approved WHITE Home state. */
+.dm-myday-plasma-stage .dock-launcher[data-mode="idle"] .dm-launcher-plasma{
+ filter:drop-shadow(0 0 5px rgba(225,240,255,.55)) drop-shadow(0 0 9px rgba(183,206,237,.18))!important;
+}
+.dm-myday-plasma-stage .dock-launcher[data-mode="idle"] .dm-orb-rim{
+ background:conic-gradient(from 15deg,#c7d7e6,#fff 27deg,#eaf6ff 46deg,#f8fcff 90deg,#b9cfe7 141deg,#f3f4ff 197deg,#d5e1f5 217deg,#fff 248deg,#c9d9e8 288deg,#f5fbff 330deg,#c7d7e6);
+ filter:drop-shadow(0 0 3px rgba(225,240,255,.78));
+}
+.dm-myday-plasma-stage .dock-launcher[data-mode="idle"] .dm-orb-halo{
+ background:radial-gradient(circle,transparent 38%,rgba(237,246,255,.04) 49%,rgba(229,241,255,.18) 56%,rgba(191,215,248,.09) 66%,transparent 76%);
+}
+.dm-myday-plasma-stage .dock-launcher[data-mode="idle"] .dm-orb-spectral{
+ filter:grayscale(1) saturate(0) brightness(1.42) drop-shadow(0 0 3px rgba(232,246,255,.72));
+}
+.dm-myday-plasma-stage .dock-launcher[data-mode="idle"] .dm-myday-core-brand{opacity:.20;visibility:visible}
