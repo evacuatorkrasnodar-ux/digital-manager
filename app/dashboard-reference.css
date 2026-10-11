@@ -1056,3 +1056,17 @@
   transform:none!important;
   z-index:30!important;
 }
+
+/* Home spacing, 2026-10-11 — remove the visual void above "Быстрые действия".
+   The gold card is lifted inside its reserved grid track. Pull up the NEXT
+   section in normal document flow; do not translate/reposition any card. */
+@media (min-width:360px) and (max-width:539px){
+  #homeScreen .dashboard > .shortcuts{
+    margin-top:-16px;
+  }
+}
+@media (min-width:540px){
+  #homeScreen .dashboard > .shortcuts{
+    margin-top:-8px;
+  }
+}
