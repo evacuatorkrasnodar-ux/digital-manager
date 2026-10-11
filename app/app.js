@@ -546,6 +546,7 @@
   async function dmDraftDestination(kind){
     const content=plasmaInput.value.trim();
     if(!content){dmActionMessage('Сначала напишите текст, чтобы выбрать действие.');return;}
+    if(kind==='documents'){closePlasmaPanel();setTab('management');mgSettingsPage('documents');return;}
     if(kind==='ask'){dmSendComposerText();return;}
     if(kind==='note'){await dmSaveAsNote();return;}
     if(kind==='download'){
