@@ -403,10 +403,31 @@
     if(!panel)return;
     const config=panel.querySelector('.dm-dock-customize');
     const examples=panel.querySelector('.dm-plasma-examples');
-    const preview=panel.querySelector('.mg-dock-preview');
+    const mount=panel.querySelector('#mgDockPreviewMount');
     if(config)config.hidden=!voicePrefs.dock;
     if(examples)examples.hidden=voicePrefs.dock;
-    if(preview)preview.classList.toggle('mg-plasma-only',!voicePrefs.dock);
+    if(!mount)return;
+    if(voicePrefs.dock){
+      if(!mount.querySelector('.mg-dock-preview'))dmMountRealDockPreview();
+    }else if(!mount.querySelector('.mg-standalone-plasma')){
+      // Standalone assistant, not a partly hidden five-slot dock.
+      const source=document.querySelector('#tabAssistant .dm-dock-plasma');
+      if(!source)return;
+      const orb=source.cloneNode(true);
+      orb.classList.add('mg-standalone-plasma');
+      orb.setAttribute('aria-hidden','true');
+      orb.querySelectorAll('[id]').forEach((node,i)=>{
+        const before=node.id,after='mg-solo-'+i+'-'+before;
+        node.id=after;
+        orb.querySelectorAll('*').forEach(child=>{
+          for(const attr of [...child.attributes]){
+            const replaced=attr.value.replaceAll('url(#'+before+')','url(#'+after+')');
+            if(replaced!==attr.value)child.setAttribute(attr.name,replaced);
+          }
+        });
+      });
+      mount.replaceChildren(orb);
+    }
   }
   function dmMountPlasmaExamples(){
     const stage=byId('mgDetail').querySelector('.dm-plasma-examples-grid');
