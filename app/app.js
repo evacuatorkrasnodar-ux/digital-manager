@@ -147,10 +147,11 @@
     mail:'<rect x="3.5" y="6.6" width="17" height="11" rx="2"/><path d="m4.5 8 7.5 6 7.5-6"/>',
     health:'<path d="M12 20s-8.3-4.9-8.3-10.4c0-4.2 5.1-6 8.3-2.1 3.2-3.9 8.3-2.1 8.3 2.1 0 5.5-8.3 10.4-8.3 10.4Z"/><path d="M4.8 12h4l1.7-3.1 2.4 6.2 1.8-3.1h4.5"/>',
     task:'<rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M8 9.5l1.7 1.7 3-3.2M8 15.4h8"/>',
+    calendar:'<rect x="3.3" y="5.3" width="17.4" height="15" rx="2.1"/><path d="M7.5 3.6v3.7M16.5 3.6v3.7M3.8 9.4h16.4"/><circle cx="14.7" cy="15" r="3.3"/><path d="M14.7 13.2v1.9l1.3.9"/>',
     attention:'<path d="M12 3.2 21 19H3L12 3.2Z"/><path d="M12 9v4.8M12 17.1h.01"/>',
     ambient:'<circle cx="12" cy="12" r="6.2" stroke-dasharray="7.3 4.5 3.1 6.2 9.4 4.1"/><path d="M12 3.2v3.1M12 17.7v3.1M3.2 12h3.1M17.7 12h3.1"/><circle cx="12" cy="12" r="1.1"/>'
   });
-  const dmGlyphTypes=['mail','health','task','attention'];
+  const dmGlyphTypes=['mail','health','task','calendar','attention'];
   const dmGlyphLayers=[
     ...document.querySelectorAll('#dockLauncher .dm-launcher-plasma,#tabAssistant .dm-dock-plasma,#assistantLive>.dm-voice-orb')
   ].map(orb=>{
@@ -191,7 +192,7 @@
     const caption=byId('dmGlyphPreviewStatus');
     if(caption)caption.textContent='Демонстрация: '+({
       mail:'важное письмо',health:'напоминание о здоровье',
-      task:'важная задача',attention:'предупреждение'
+      task:'важная задача',calendar:'событие из календаря',attention:'предупреждение'
     })[kind]+'. Реального события сейчас нет.';
   }
   // Integration contract for the future event hub: the verified flag must
@@ -322,7 +323,7 @@
         '<div class="dm-wake-info"><strong>Обращение по имени — в разработке</strong><small>Позже можно будет обратиться к управляющему по имени, как к Алисе. Для этого понадобится поддержка распознавания речи и разрешение на микрофон. Сейчас фоновое прослушивание не запускается.</small></div>'+
         '<div class="dm-glyph-settings"><strong>Знаки внутри плазмы</strong><small>Тонкие белые символы появляются при значимых событиях. Нажмите на знак, чтобы посмотреть анимацию.</small>'+
         '<div class="dm-glyph-preview-actions">'+[
-          ['mail','Почта'],['health','Здоровье'],['task','Задача'],['attention','Внимание']
+          ['mail','Почта'],['health','Здоровье'],['task','Задача'],['calendar','Календарь'],['attention','Внимание']
         ].map(([kind,label])=>'<button type="button" data-dm-glyph-preview="'+kind+'" aria-label="Показать символ: '+label+'"><svg viewBox="0 0 24 24" aria-hidden="true">'+dmGlyphDrawings[kind]+'</svg><span>'+label+'</span></button>').join('')+'</div>'+
         '<p class="dm-glyph-preview-status" id="dmGlyphPreviewStatus" aria-live="polite">Это предпросмотр. Реальные сигналы появятся после подключения источников событий.</p>'+
         '</div>';

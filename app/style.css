@@ -676,7 +676,8 @@ html:not(.dock-is-hidden) .dm-chat-short-nav{display:none}
 .dm-glyph-settings{margin-top:14px;padding-top:13px;border-top:1px solid rgba(154,185,213,.23)}
 .dm-glyph-settings>strong{display:block;color:#f0f8ff;font-size:13px;font-weight:520}
 .dm-glyph-settings>small{display:block;margin:6px 0 11px;color:#a8c3d8;font-size:11px;line-height:1.5}
-.dm-glyph-preview-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.dm-glyph-preview-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+@media(min-width:425px){.dm-glyph-preview-actions{grid-template-columns:repeat(5,minmax(0,1fr))}}
 .dm-glyph-preview-actions button{display:grid;justify-items:center;align-content:center;gap:7px;min-height:65px;border-radius:12px;border:1px solid rgba(139,178,214,.34);background:linear-gradient(150deg,rgba(23,41,59,.79),rgba(5,15,26,.86));color:#e5f2ff;cursor:pointer;padding:7px 2px}
 .dm-glyph-preview-actions button:is(:hover,:focus-visible){border-color:rgba(190,225,248,.8);background:rgba(38,74,107,.66)}
 .dm-glyph-preview-actions button:focus-visible{outline:2px solid #c9edff;outline-offset:2px}
