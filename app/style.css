@@ -529,5 +529,9 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 .dm-voice-waves-electric .dm-electric-wave-3 .dm-laser-core{stroke-width:.55;opacity:.55}
 .dm-voice-waves-electric .dm-electric-wave-3 .dm-laser-halo{opacity:.23}
 .dm-voice-waves-electric .dm-electric-wave-3 .dm-laser-bloom{opacity:.12}
+.dm-voice-waves-electric .dm-electric-wave-4{animation-delay:-1.7s;animation-duration:9.2s;transform-origin:center 90%}
+.dm-voice-waves-electric .dm-electric-wave-4 .dm-laser-core{stroke-width:.86;opacity:.96}
+.dm-voice-waves-electric .dm-electric-wave-4 .dm-laser-halo{stroke-width:2.1;opacity:.44;filter:blur(.5px)}
+.dm-voice-waves-electric .dm-electric-wave-4 .dm-laser-bloom{stroke-width:4.2;opacity:.23;filter:blur(1.8px)}
 #managementScreen .voice-mock-conversation.is-previewing .dm-voice-waves-electric .dm-laser-track{animation-duration:3.9s}
 @media(prefers-reduced-motion:reduce){.dm-voice-orb,.dm-orb-rim,.dm-orb-spectral .dm-orb-arc,.assistant-live>.dm-voice-orb::before,#managementScreen .voice-mock-conversation .dm-voice-orb::before,.dm-voice-waves path,.dm-voice-waves-electric .dm-laser-track{animation:none!important}#managementScreen .voice-switch i,#managementScreen .voice-switch i::before{transition:none!important}}
