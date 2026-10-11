@@ -400,7 +400,7 @@
     byId('mgSubtitle').textContent=({home:'Настройки приложения',manager:'Имя · навыки · общение',autopilot:'Границы самостоятельности',connections:'Сервисы и источники данных',documents:'Файлы и шаблоны',payments:'Счета и регулярные расходы',learning:'Возможности приложения',voice:'Док · Кольцо · Голос'})[page]||'Настройки приложения';
     clearTimeout(voicePreviewTimer);
     if(dmSettingsGlyphTimer!==null){clearTimeout(dmSettingsGlyphTimer);dmSettingsGlyphTimer=null;}
-    if(page==='home'){byId('mgDetail').innerHTML='';window.scrollTo(0,0);return;}
+    if(page==='home'){byId('mgDetail').innerHTML='';window.scrollTo(0,0);requestAnimationFrame(mgSyncCarouselNav);return;}
     let content='';
     if(page==='manager'){
       const choices=[['market','Следить за рынком'],['opportunities','Замечать проблемы и возможности'],['rules','Следить за правилами'],['documents','Помогать с документами']];
