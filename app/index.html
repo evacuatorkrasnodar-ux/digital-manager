@@ -250,7 +250,7 @@
     <p id="plasmaChatHint" class="dm-chat-hint" role="status" aria-live="polite" hidden></p>
     <form id="plasmaChatForm" class="dm-chat-compose" aria-label="Написать помощнику">
       <div class="dm-chat-edit-tools">
-        <span class="dm-chat-draft-title">Черновик сообщения</span>
+        <span class="dm-chat-draft-title" id="plasmaComposerTitle">Сообщение или текст</span>
         <div class="dm-chat-edit-buttons">
           <button type="button" id="plasmaExpandDraft" aria-label="Развернуть редактор" aria-expanded="false" title="Развернуть текст"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 21h5v-5M3 3l6 6M21 21l-6-6"/></svg></button>
           <button type="button" id="plasmaClose" aria-label="Закрыть ввод" title="Закрыть"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button>
@@ -265,6 +265,7 @@
       <section class="dm-draft-actions" aria-label="Что сделать с текстом">
         <div class="dm-draft-actions-heading"><strong>Куда отправим мысль?</strong><small>Решает автор ✦</small></div>
         <div class="dm-draft-actions-grid">
+          <button type="button" data-draft-action="ask" title="Отправить текст помощнику" aria-label="Спросить ИИ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 13.9 9.1 20 11l-6.1 1.9L12 19l-1.9-6.1L4 11l6.1-1.9L12 3Z"/><path d="m19 17 .8 2.2L22 20l-2.2.8L19 23l-.8-2.2L16 20l2.2-.8L19 17Z"/></svg><span>Спросить ИИ</span></button>
           <button type="button" data-draft-action="note" title="Сохранить в блокнот «Мой день»" aria-label="Сохранить в блокнот «Мой день»"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5.1" y="3" width="13.8" height="18" rx="2"/><path d="M9 3v18M12 8h4M12 12h4"/></svg><span>Блокнот</span></button>
           <button type="button" data-draft-action="email" title="Создать письмо в почте" aria-label="Создать черновик письма"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.1"/><path d="m4 7 8 6 8-6"/></svg><span>Почта</span></button>
           <button type="button" data-draft-action="share" title="Поделиться через приложения" aria-label="Поделиться через приложения"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V3m-5 5 5-5 5 5M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg><span>Обмен</span></button>
