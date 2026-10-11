@@ -440,13 +440,7 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 /* Conversation-only electric SVG. The dock mini-orb retains its existing style. */
 .dm-voice-orb-electric{background:radial-gradient(circle,rgba(0,2,10,.97) 0 48%,rgba(1,5,22,.93) 57%,transparent 70%)!important;filter:drop-shadow(0 0 4px rgba(35,97,255,.72)) drop-shadow(0 0 13px rgba(64,74,229,.40))!important}
 .dm-voice-orb-electric .dm-orb-halo{inset:-24%;background:radial-gradient(circle,transparent 38%,rgba(7,72,231,.09) 49%,rgba(25,96,237,.28) 56%,rgba(117,54,222,.15) 66%,transparent 76%);filter:blur(8px)}
-.dm-voice-orb-electric .dm-orb-rim{opacity:.44;filter:brightness(1.12) saturate(1.1) drop-shadow(0 0 3px rgba(45,113,250,.67))}
-.dm-voice-orb-electric .dm-orb-edge{border-color:rgba(151,216,255,.44);box-shadow:inset 0 0 8px rgba(25,63,238,.48),0 0 7px rgba(93,153,255,.53)}
 .dm-voice-orb-electric .dm-orb-spectral{position:absolute;inset:-13%;z-index:2;width:126%;height:126%;overflow:visible;pointer-events:none;filter:drop-shadow(0 0 2px rgba(110,175,255,.78)) drop-shadow(0 0 3px rgba(27,83,242,.58))}
-.dm-orb-spectral .dm-orb-arc{transform-origin:60px 60px;animation:dm-electric-arc 8s linear infinite}
-.dm-orb-spectral .dm-arc-ice{animation-duration:10.4s;filter:drop-shadow(0 0 2px rgba(119,197,255,.74))}
-.dm-orb-spectral .dm-arc-violet{animation-duration:12.2s;animation-direction:reverse;filter:drop-shadow(0 0 4px #a368ff)}
-@keyframes dm-electric-arc{to{transform:rotate(360deg)}}
 .dm-voice-waves-electric{filter:drop-shadow(0 0 4px rgba(64,139,255,.88))!important}
 .dm-voice-waves-electric .dm-electric-wave{fill:none;stroke-width:1.23;stroke-linecap:round;opacity:.9;transform-origin:center 70%;animation:dm-electric-wave 7.1s ease-in-out infinite}
 .dm-voice-waves-electric .dm-electric-wave-1{stroke-width:1.02;animation-delay:-2s;animation-duration:5.8s}
@@ -459,18 +453,7 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 
 .dm-orb-edge{inset:8%;border:1px solid rgba(157,213,255,.44);box-shadow:inset 0 0 4px rgba(46,107,243,.35),0 0 4px rgba(91,132,255,.32)}
 .dm-voice-orb::after{content:"";position:absolute;inset:5%;border-radius:50%;border:1.3px solid transparent;border-top-color:rgba(239,251,255,.96);border-right-color:rgba(170,221,255,.31);filter:drop-shadow(0 0 4px rgba(138,219,255,.85));transform:rotate(-21deg);pointer-events:none}
-.dm-voice-orb-electric::after{border-top-color:#effaff;border-right-color:rgba(148,202,255,.50);filter:drop-shadow(0 0 5px #5fbaff)}
-/* Single traveling highlight, intentionally limited to the conversation ring. */
-.assistant-live>.dm-voice-orb::before,
-#managementScreen .voice-mock-conversation .dm-voice-orb::before{
- content:"";position:absolute;inset:3%;z-index:3;pointer-events:none;border-radius:50%;
- background:conic-gradient(from 38deg,transparent 0 41%,rgba(111,190,255,.08) 46%,rgba(229,248,255,.94) 49%,rgba(157,209,255,.36) 52%,transparent 58% 100%);
- -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 5px),#000 calc(100% - 3px),transparent 100%);
- mask:radial-gradient(farthest-side,transparent calc(100% - 5px),#000 calc(100% - 3px),transparent 100%);
- filter:drop-shadow(0 0 3px rgba(171,216,255,.75));opacity:.74;
- animation:dm-glint-travel 9s linear infinite;
-}
-@keyframes dm-glint-travel{to{transform:rotate(360deg)}}
+.dm-voice-orb-electric::after{content:none}
 .dm-voice-waves{position:absolute;left:0;bottom:0;width:100%;height:100%;z-index:1;overflow:visible;filter:drop-shadow(0 0 3px #3a7cfa55)}
 .assistant-live>.dm-voice-waves{left:50%;transform:translateX(-50%);bottom:1px;width:min(320px,91vw);height:69px;opacity:.82;mask-image:linear-gradient(90deg,transparent,black 11%,black 89%,transparent)}
 .dm-voice-waves path{fill:none;stroke-width:1.45;stroke-linecap:round;opacity:.9;transform-origin:center 88%;animation:dm-wave 6.4s ease-in-out infinite}
@@ -508,14 +491,12 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 #managementScreen .voice-mock-conversation .voice-phone-frame::after{content:"";position:absolute;left:50%;bottom:25px;transform:translateX(-50%);z-index:1;width:152px;height:35px;pointer-events:none;background:radial-gradient(ellipse,rgba(135,201,255,.40),rgba(96,136,253,.26) 28%,rgba(155,109,254,.13) 53%,transparent 79%);filter:blur(7px)}
 #managementScreen .voice-mock-conversation .dm-voice-waves{left:0;bottom:15px;width:100%;height:100px;opacity:.90;mask-image:linear-gradient(90deg,transparent,black 9%,black 91%,transparent);filter:drop-shadow(0 0 3.5px rgba(78,145,255,.67))}
 #managementScreen .voice-mock-conversation .dm-voice-orb{--dm-size:70px;position:absolute;bottom:22px;filter:drop-shadow(0 0 7px rgba(62,137,255,.69)) drop-shadow(0 0 11px rgba(135,92,241,.32))}
-#managementScreen .voice-mock-conversation .dm-orb-rim{filter:brightness(1.03) saturate(1.12) drop-shadow(0 0 2px rgba(159,207,255,.58))}
 #managementScreen .voice-mock-conversation.is-previewing .dm-voice-orb{animation-duration:2.9s;filter:drop-shadow(0 0 9px rgba(94,161,255,.78)) drop-shadow(0 0 11px rgba(142,106,246,.41))}
 #managementScreen .voice-mock-conversation.is-previewing .dm-voice-waves path{animation-duration:3.9s;opacity:.86}
-#managementScreen .voice-mock-conversation.is-previewing .dm-orb-rim{animation-duration:3.2s}
 #managementScreen .voice-preview-button[aria-pressed="true"]{border-color:#b4c7ff;background:linear-gradient(155deg,#18376a,#0c1330)}
 #managementScreen .voice-caption{margin:0 5px;font-size:11.5px;line-height:1.55;color:#b5cede}
 #managementScreen .voice-preview-button{width:100%;padding:12px;border:1px solid #78b7e999;border-radius:12px;background:linear-gradient(150deg,#152f51,#07182e);color:#e4f2ff;font-size:12px}
 #managementScreen .voice-simple{padding:10px;border:1px solid #7294b156;border-radius:16px;background:linear-gradient(145deg,#101f31,#04070a)}
 #managementScreen .voice-coming{color:#b2c5d8;font-size:11px;white-space:nowrap}
 @media(max-width:365px){#managementScreen .voice-mock{height:177px}#managementScreen .voice-phone-frame{inset:4px 5px 5px}#managementScreen .voice-dock-items small{font-size:8px}}
-@media(prefers-reduced-motion:reduce){.dm-voice-orb,.dm-orb-rim,.dm-voice-waves path,.dm-orb-spectral .dm-orb-arc,.dm-voice-waves-electric .dm-electric-wave,.assistant-live>.dm-voice-orb::before,#managementScreen .voice-mock-conversation .dm-voice-orb::before{animation:none!important}#managementScreen .voice-switch i,#managementScreen .voice-switch i::before{transition:none!important}}
+@media(prefers-reduced-motion:reduce){.dm-voice-orb,.dm-orb-rim,.dm-voice-waves path,.dm-voice-waves-electric .dm-electric-wave{animation:none!important}#managementScreen .voice-switch i,#managementScreen .voice-switch i::before{transition:none!important}}
