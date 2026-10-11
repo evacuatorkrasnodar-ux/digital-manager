@@ -396,6 +396,45 @@
     // The preview has its own representation of saved choices and is
     // independent from whether the real dock is enabled or hidden.
     dmSyncDockPreviewSlots();
+    dmSyncAppearanceDockMode();
+  }
+  function dmSyncAppearanceDockMode(){
+    const panel=byId('mgDetail');
+    if(!panel)return;
+    const config=panel.querySelector('.dm-dock-customize');
+    const examples=panel.querySelector('.dm-plasma-examples');
+    const preview=panel.querySelector('.mg-dock-preview');
+    if(config)config.hidden=!voicePrefs.dock;
+    if(examples)examples.hidden=voicePrefs.dock;
+    if(preview)preview.classList.toggle('mg-plasma-only',!voicePrefs.dock);
+  }
+  function dmMountPlasmaExamples(){
+    const stage=byId('mgDetail').querySelector('.dm-plasma-examples-grid');
+    const source=document.querySelector('#tabAssistant .dm-dock-plasma');
+    if(!stage||!source)return;
+    stage.replaceChildren();
+    const states=[['idle','Ожидает'],['thinking','Думает'],['speaking','Говорит'],['attention','Внимание']];
+    states.forEach(([mode,label],index)=>{
+      const tile=document.createElement('div');
+      tile.className='dm-plasma-example';
+      tile.dataset.mode=mode;
+      const orb=source.cloneNode(true);
+      orb.querySelectorAll('[id]').forEach((node,i)=>{
+        const prior=node.id,next='dm-example-'+index+'-'+i+'-'+prior;
+        node.id=next;
+        orb.querySelectorAll('*').forEach(child=>{
+          for(const attr of [...child.attributes]){
+            const value=attr.value.replaceAll('url(#'+prior+')','url(#'+next+')');
+            if(value!==attr.value)child.setAttribute(attr.name,value);
+          }
+        });
+      });
+      tile.append(orb);
+      const caption=document.createElement('span');
+      caption.textContent=label;
+      tile.append(caption);
+      stage.append(tile);
+    });
   }
   // The five settings controls demonstrate signs in a nearby real-orb preview,
   // and in the existing iPhone conversation example. These are not notifications.
@@ -555,12 +594,18 @@
           Object.entries(dockTargets).map(([key,item])=>'<option value="'+key+'" '+(key===selected?'selected':'')+'>'+item.label+'</option>').join('')+
           '</select></label>').join('')+'</div>'+
         '<p class="dm-dock-customize-hint">Изменения сразу видны на доке ниже и сохраняются.</p>';
+      const samples=document.createElement('section');
+      samples.className='dm-plasma-examples';
+      samples.hidden=true;
+      samples.innerHTML='<div class="dm-dock-customize-title"><strong>Состояния плазмы</strong><small>Четыре цвета и состояния нашего помощника.</small></div><div class="dm-plasma-examples-grid"></div>';
       // Put the selectors inside the SAME card as the live dock preview.
       // No duplicate settings card: selections update the real dock and its clone.
       const dockCard=byId('mgDetail').querySelector('.voice-pref');
-      dockCard.querySelector('.voice-setting-top').after(dockConfig);
+      dockCard.querySelector('.voice-setting-top').after(dockConfig,samples);
       byId('mgDetail').prepend(settings);
       dmMountGlyphShowcase();
+      dmMountPlasmaExamples();
+      dmSyncAppearanceDockMode();
       byId('plasmaTapMode').value=voicePrefs.tapAction;
     }
 
@@ -608,8 +653,8 @@
       voicePrefs.dock=el.checked;
       save();
       updateDock();
-      // The demo is a design preview, not the visibility state of the dock.
       dmSyncDockPreviewSlots();
+      dmSyncAppearanceDockMode();
     }
     else if(el.id==='plasmaTapMode'){voicePrefs.tapAction=el.value;save();}
     else if(el.id==='mgManagerName'){mgData.managerName=el.value.trim()||'Цифровой управляющий';el.value=mgData.managerName==='Цифровой управляющий'?'':mgData.managerName;}
