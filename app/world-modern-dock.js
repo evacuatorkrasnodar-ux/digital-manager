@@ -1,52 +1,69 @@
-/* World only: same source dock artwork as the approved Home page. */
+/* My World: configure existing dock once; no legacy injection, no re-render. */
 (()=>{
 'use strict';
 function init(){
- const old=document.querySelector('body > nav.bottom-nav');
- if(old)old.remove();
- const template=document.createElement('template');
- template.innerHTML="<svg class=\"icon-defs\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\">\n  <!-- Inline vector marks: remain visible even if an external SVG was not uploaded to GitHub. -->\n  <symbol id=\"brand-badge\" viewBox=\"0 0 100 100\">\n<defs>\n <linearGradient id=\"surface\" x1=\".05\" y1=\"0\" x2=\".89\" y2=\"1\"><stop stop-color=\"#141a20\"/><stop offset=\".52\" stop-color=\"#090d12\"/><stop offset=\"1\" stop-color=\"#040608\"/></linearGradient>\n <linearGradient id=\"silver\" x1=\".13\" y1=\".05\" x2=\".94\" y2=\".98\"><stop stop-color=\"#ffffff\"/><stop offset=\".34\" stop-color=\"#e9f2ff\"/><stop offset=\".67\" stop-color=\"#b4d3f6\"/><stop offset=\"1\" stop-color=\"#6f9bd9\"/></linearGradient>\n <linearGradient id=\"blue\" x1=\".07\" y1=\".0\" x2=\".96\" y2=\".99\"><stop stop-color=\"#f7fbff\"/><stop offset=\".25\" stop-color=\"#c0dbfc\"/><stop offset=\".65\" stop-color=\"#6eaaff\"/><stop offset=\"1\" stop-color=\"#2182f7\"/></linearGradient>\n</defs>\n<rect x=\"1.5\" y=\"1.5\" width=\"97\" height=\"97\" rx=\"22.5\" fill=\"url(#surface)\" stroke=\"#7d8fa3\" stroke-width=\"1.8\"/>\n<path d=\"M14 9Q7 13 7 28\" fill=\"none\" stroke=\"#bbd6e9\" stroke-opacity=\".11\" stroke-width=\"1\"/>\n\n  <path d=\"M24.4 48.0 62.5 10.0 62.5 37.7 24.4 76.8Z\" fill=\"url(#silver)\" stroke=\"#cedef1\" stroke-opacity=\".48\" stroke-width=\".85\" stroke-linejoin=\"round\"/>\n  <path d=\"M42.0 73.8 79.7 36.4 79.7 63.5 56.5 88.0 42.0 88.0Z\" fill=\"url(#blue)\" stroke=\"#8fcbff\" stroke-opacity=\".55\" stroke-width=\".85\" stroke-linejoin=\"round\"/>\n</symbol>\n  <!-- Card contours use the same proven objectBoundingBox SVG method as\n       the original Digital Business developerCardClip. -->\n  <clipPath id=\"metricClientsClip\" clipPathUnits=\"objectBoundingBox\"><path d=\"M .100 .008 H .900 C .955 .008 .992 .060 .992 .174 V .778 C .992 .808 .981 .828 .960 .835 L .928 .835 C .892 .835 .871 .846 .852 .873 C .832 .901 .826 .933 .815 .955 C .804 .979 .785 .992 .758 .992 H .100 C .045 .992 .008 .945 .008 .827 V .174 C .008 .060 .045 .008 .100 .008 Z\"/></clipPath>\n  <clipPath id=\"metricAdviceClip\" clipPathUnits=\"objectBoundingBox\"><path d=\"M .080 .008 H .916 C .970 .008 .992 .048 .992 .101 V .903 C .992 .962 .964 .992 .908 .992 H .084 C .035 .992 .008 .955 .008 .913 V .107 C .008 .048 .030 .008 .080 .008 Z\"/></clipPath>\n  <!-- Single source of truth for the asymmetric developer-card outline. -->\n  <clipPath id=\"developerCardClip\" clipPathUnits=\"objectBoundingBox\"><path d=\"M .087 .006 C .036 .006 .006 .049 .006 .113 L .006 .442 C .006 .506 .029 .547 .088 .56 C .151 .572 .169 .61 .169 .685 L .169 .891 C .169 .964 .209 .994 .276 .994 L .915 .994 C .966 .994 .994 .964 .994 .904 L .994 .107 C .994 .043 .958 .006 .911 .006 Z\"/></clipPath>\n  <clipPath id=\"profileCardClip\" clipPathUnits=\"objectBoundingBox\"><path d=\"M .087 .006 C .036 .006 .006 .049 .006 .113 L .006 .442 C .006 .506 .029 .547 .088 .56 C .151 .572 .169 .61 .169 .685 L .169 .891 C .169 .964 .209 .994 .276 .994 L .915 .994 C .966 .994 .994 .964 .994 .904 L .994 .107 C .994 .043 .958 .006 .911 .006 Z\" transform=\"translate(1 0) scale(-1 1)\"/></clipPath>\n  <symbol id=\"ic-cube\" viewBox=\"0 0 24 24\"><path d=\"m12 2 9 5v10l-9 5-9-5V7zM3 7l9 5 9-5M12 12v10\"/></symbol>\n  <symbol id=\"ic-crown\" viewBox=\"0 0 24 24\"><path d=\"M2.5 7.5 6.5 12l5.5-7 5.5 7 4-4.5-2 12h-15zM5.5 21h13\"/></symbol>\n  <symbol id=\"ic-chevron\" viewBox=\"0 0 24 24\"><path d=\"m9 5 7 7-7 7\"/></symbol>\n  <symbol id=\"ic-chevron-back\" viewBox=\"0 0 24 24\"><path d=\"m14.5 5-7 7 7 7\"/></symbol>\n  <symbol id=\"ic-home\" viewBox=\"0 0 24 24\"><path d=\"m2.8 10 9.2-7.3 9.2 7.3v10.6H14v-7h-4v7H2.8z\"/></symbol>\n  <symbol id=\"ic-grid\" viewBox=\"0 0 24 24\"><rect x=\"2.7\" y=\"2.7\" width=\"7.3\" height=\"7.3\" rx=\"1.35\"/><rect x=\"14\" y=\"2.7\" width=\"7.3\" height=\"7.3\" rx=\"1.35\"/><rect x=\"2.7\" y=\"14\" width=\"7.3\" height=\"7.3\" rx=\"1.35\"/><rect x=\"14\" y=\"14\" width=\"7.3\" height=\"7.3\" rx=\"1.35\"/></symbol><symbol id=\"ic-chat\" viewBox=\"0 0 24 24\"><path d=\"M20.5 11.5a8.4 8.4 0 0 1-8.6 8.3c-1.6 0-3.2-.5-4.5-1.3L3 20l1.6-4.2A8.4 8.4 0 1 1 20.5 11.5Z\"/><path d=\"M7.8 11.6h8.4M7.8 14.5h5.3\"/></symbol>\n  \n  <symbol id=\"ic-person\" viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"7.2\" r=\"4\"/><path d=\"M4.5 21v-2.1c0-3.4 3.3-5.5 7.5-5.5s7.5 2.1 7.5 5.5V21z\"/></symbol>\n  <symbol id=\"ic-users\" viewBox=\"0 0 24 24\"><circle cx=\"9\" cy=\"7\" r=\"3.5\"/><path d=\"M2.7 20v-2c0-2.8 2.8-4.6 6.3-4.6s6.3 1.8 6.3 4.6v2zM16.7 4.5a3.1 3.1 0 0 1 0 5.8M17.3 13.5c3 .15 4.3 1.7 4.3 4.1V20\"/></symbol>\n  <symbol id=\"ic-cart\" viewBox=\"0 0 24 24\"><path d=\"M2 3h3l2.6 12h11.7l2.1-8H6\"/><circle cx=\"9.2\" cy=\"20\" r=\"1.15\"/><circle cx=\"18.4\" cy=\"20\" r=\"1.15\"/></symbol>\n  <symbol id=\"ic-coins\" viewBox=\"0 0 24 24\"><ellipse cx=\"9\" cy=\"5\" rx=\"6\" ry=\"2.3\"/><path d=\"M3 5v5c0 1.3 2.7 2.5 6 2.5s6-1.2 6-2.5V5M3 10v5c0 1.3 2.7 2.5 6 2.5 1.4 0 2.5-.2 3.5-.6M13 14v5c0 1.2 2 2.2 4.5 2.2S22 20.2 22 19v-5\"/><ellipse cx=\"17.5\" cy=\"14\" rx=\"4.5\" ry=\"2.2\"/></symbol>\n  <symbol id=\"ic-bars\" viewBox=\"0 0 24 24\"><path d=\"M5 20v-5M10 20V9M15 20V4M20 20v-8\" stroke-width=\"3\" stroke-linecap=\"round\"/></symbol>\n  <symbol id=\"ic-spark\" viewBox=\"0 0 24 24\"><path d=\"M12 1.5 14.8 9 22.5 12l-7.7 3-2.8 7.5L9.2 15 1.5 12l7.7-3z\"/></symbol>\n  <symbol id=\"ic-file\" viewBox=\"0 0 24 24\"><path d=\"M5 2.5h9l5 5V21H5zM14 2.5v5h5M8 12h8M8 16h8\"/></symbol>\n  <symbol id=\"ic-settings\" viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"m10 2.8-.6 2.1a7.8 7.8 0 0 0-2.1.9l-2-.9-2.5 2.5.9 2a8 8 0 0 0-.9 2.1l-2.1.6v3.5l2.1.6a8 8 0 0 0 .9 2.1l-.9 2 2.5 2.5 2-.9a8 8 0 0 0 2.1.9l.6 2.1h3.5l.6-2.1a8 8 0 0 0 2.1-.9l2 .9 2.5-2.5-.9-2a8 8 0 0 0 .9-2.1l2.1-.6v-3.5l-2.1-.6a8 8 0 0 0-.9-2.1l.9-2-2.5-2.5-2 .9a8 8 0 0 0-2.1-.9l-.6-2.1z\" transform=\"translate(.25 .25) scale(.95)\"/></symbol>\n  <symbol id=\"ic-calendar\" viewBox=\"0 0 24 24\"><rect x=\"3\" y=\"4.5\" width=\"18\" height=\"16.5\" rx=\"2.4\"/><path d=\"M7.5 2v5M16.5 2v5M3 10h18M8 14h.1M12 14h.1M16 14h.1M8 17.5h.1M12 17.5h.1\"/></symbol>\n  <symbol id=\"ic-target\" viewBox=\"0 0 24 24\"><circle cx=\"11\" cy=\"13\" r=\"8\"/><circle cx=\"11\" cy=\"13\" r=\"4\"/><path d=\"m11 13 10-10M16.5 3H21v4.5\"/></symbol>\n  <symbol id=\"ic-building\" viewBox=\"0 0 24 24\"><path d=\"M4 21V4l10-2v19M14 9h6v12M2 21h20M7.5 7h3M7.5 11h3M7.5 15h3M17 13h1M17 17h1\"/></symbol>\n  <symbol id=\"ic-pin\" viewBox=\"0 0 24 24\"><path d=\"M19 10c0 5-7 11.5-7 11.5S5 15 5 10a7 7 0 0 1 14 0z\"/><circle cx=\"12\" cy=\"10\" r=\"2.6\"/></symbol>\n  <symbol id=\"ic-arrow\" viewBox=\"0 0 24 24\"><path d=\"M4 12h16m-7-7 7 7-7 7\"/></symbol>\n  <symbol id=\"ic-shield\" viewBox=\"0 0 24 24\"><path d=\"m12 2 8.5 3v6.5c0 5.2-3.2 8.8-8.5 10.5-5.3-1.7-8.5-5.3-8.5-10.5V5zM9 12.2l2.2 2.2 4.5-4.7\"/></symbol>\n  <symbol id=\"ic-check\" viewBox=\"0 0 24 24\"><path d=\"M4.2 12.2 9.5 17l10.3-10\"/></symbol>\n  <symbol id=\"ic-plus\" viewBox=\"0 0 24 24\"><path d=\"M12 4v16M4 12h16\"/></symbol>\n  <symbol id=\"mg-rocket\" viewBox=\"0 0 24 24\"><path d=\"M4.5 15.7 8.2 12 12 15.8l-3.7 3.7M8.2 12c.6-3.5 4.1-7.9 11.9-9.2-.5 7.8-5.2 11.5-8.1 13M14.4 9.6h.01M5.2 18.8c-1.8.7-2.6 2.1-2.6 2.1s-.1-2 1.3-3.4M8.2 19.4c-.5 1.6-1.4 2.6-1.4 2.6\" /></symbol>\n  <symbol id=\"mg-trending\" viewBox=\"0 0 24 24\"><path d=\"m3 18 7-7 4.1 4.1L22 7M15.3 7H22v6.7\"/></symbol>\n  <symbol id=\"mg-analytics\" viewBox=\"0 0 24 24\"><path d=\"M3 19V5M3 19h18M6 15l4.3-5 4.3 3.5L21 5.7M18 5.7h3v3\"/></symbol>\n  <symbol id=\"mg-tasks\" viewBox=\"0 0 24 24\"><rect x=\"4\" y=\"3\" width=\"16\" height=\"19\" rx=\"2\"/><path d=\"m7 10 2 2 3-3M13.8 11h3M7 17h10\"/></symbol>\n</svg><nav class=\"bottom-nav\" data-layout=\"five\" data-mode=\"idle\" aria-label=\"Главная навигация\">\n    <!-- Single continuous velvet dock: low, softly curved crest from the approved reference. -->\n    <svg class=\"nav-shell\" viewBox=\"0 0 430 116\" preserveAspectRatio=\"none\" aria-hidden=\"true\">\n      <defs>\n        <linearGradient id=\"navSurface\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n          <stop offset=\"0\" stop-color=\"#14202d\" stop-opacity=\".82\"/>\n          <stop offset=\".42\" stop-color=\"#07111a\" stop-opacity=\".80\"/>\n          <stop offset=\"1\" stop-color=\"#010204\" stop-opacity=\".90\"/>\n        </linearGradient>\n        <radialGradient id=\"navAmbient\" gradientUnits=\"userSpaceOnUse\" cx=\"215\" cy=\"12\" r=\"142\" gradientTransform=\"translate(0,-4) scale(1,.52)\">\n          <stop offset=\"0\" class=\"nav-glow-stop\" stop-opacity=\".19\"/>\n          <stop offset=\".52\" class=\"nav-glow-stop\" stop-opacity=\".045\"/>\n          <stop offset=\"1\" class=\"nav-glow-stop\" stop-opacity=\"0\"/>\n        </radialGradient>\n        <linearGradient id=\"navTopRim\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n          <stop offset=\"0\" stop-color=\"#d5e9fa\" stop-opacity=\".52\"/>\n          <stop offset=\"1\" stop-color=\"#8aa8c4\" stop-opacity=\".10\"/>\n        </linearGradient>\n        <linearGradient id=\"navLightTrace\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">\n          <stop offset=\"0\" class=\"nav-glow-stop\" stop-opacity=\"0\"/>\n          <stop offset=\".3\" class=\"nav-glow-stop\" stop-opacity=\".10\"/>\n          <stop offset=\".5\" class=\"nav-glow-stop\" stop-opacity=\".62\"/>\n          <stop offset=\".7\" class=\"nav-glow-stop\" stop-opacity=\".10\"/>\n          <stop offset=\"1\" class=\"nav-glow-stop\" stop-opacity=\"0\"/>\n        </linearGradient>\n        <filter id=\"navDiffusedRim\" x=\"-10%\" y=\"-300%\" width=\"120%\" height=\"700%\">\n          <feGaussianBlur stdDeviation=\"3\"/>\n        </filter>\n      </defs>\n      <!-- Balanced, gently taller crest with mirrored left/right geometry. -->\n      <path id=\"navCrest\" d=\"M0 50 C0 30 36 16 94 16 H133 C170 16 183 8 198 -1 C209 -8 221 -8 232 -1 C247 8 260 16 297 16 H336 C394 16 430 30 430 50 V116 H0 Z\" fill=\"url(#navSurface)\"/>\n      <path d=\"M0 50 C0 30 36 16 94 16 H133 C170 16 183 8 198 -1 C209 -8 221 -8 232 -1 C247 8 260 16 297 16 H336 C394 16 430 30 430 50 V116 H0 Z\" fill=\"url(#navAmbient)\"/>\n      <path d=\"M0 50 C0 30 36 16 94 16 H133 C170 16 183 8 198 -1 C209 -8 221 -8 232 -1 C247 8 260 16 297 16 H336 C394 16 430 30 430 50\" fill=\"none\" stroke=\"url(#navLightTrace)\" stroke-width=\"6\" opacity=\".33\" filter=\"url(#navDiffusedRim)\" vector-effect=\"non-scaling-stroke\"/>\n      <path d=\"M0 50 C0 30 36 16 94 16 H133 C170 16 183 8 198 -1 C209 -8 221 -8 232 -1 C247 8 260 16 297 16 H336 C394 16 430 30 430 50\" fill=\"none\" stroke=\"url(#navTopRim)\" stroke-width=\"1.05\" vector-effect=\"non-scaling-stroke\"/>\n      <path d=\"M0 50 C0 30 36 16 94 16 H133 C170 16 183 8 198 -1 C209 -8 221 -8 232 -1 C247 8 260 16 297 16 H336 C394 16 430 30 430 50\" fill=\"none\" stroke=\"url(#navLightTrace)\" stroke-width=\".8\" vector-effect=\"non-scaling-stroke\"/>\n    </svg>\n    <button class=\"nav-item nav-quick\" id=\"tabClients\" type=\"button\" aria-label=\"Открыть клиентов\">\n      <svg class=\"ico nav-ico\" aria-hidden=\"true\"><use href=\"#ic-users\"/></svg>\n      <span class=\"nav-label\">Клиенты</span>\n      <i class=\"nav-underline\" aria-hidden=\"true\"></i>\n    </button>\n    <button class=\"nav-item nav-quick\" id=\"tabDay\" type=\"button\" aria-label=\"Открыть Мой день\">\n      <svg class=\"ico nav-ico\" aria-hidden=\"true\"><use href=\"#ic-calendar\"/></svg>\n      <span class=\"nav-label\">Мой день</span>\n      <i class=\"nav-underline\" aria-hidden=\"true\"></i>\n    </button>\n    <button class=\"nav-item assistant-tab\" id=\"tabAssistant\" data-tab=\"assistant\" data-mode=\"idle\" type=\"button\" aria-label=\"Помощник — готов\" aria-expanded=\"false\" aria-controls=\"dockQuickActions plasmaChatPanel\">\n      <span class=\"assistant-socket\" aria-hidden=\"true\">\n        <span class=\"dm-voice-orb dm-voice-orb-electric dm-dock-plasma\" aria-hidden=\"true\"><i class=\"dm-orb-halo\"></i><i class=\"dm-orb-rim\"></i><i class=\"dm-orb-edge\"></i><svg class=\"dm-orb-spectral\" viewBox=\"0 0 120 120\" aria-hidden=\"true\"><defs><linearGradient id=\"dmDockElectricStroke\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#68bfff\"/><stop offset=\".22\" stop-color=\"#d7fbff\"/><stop offset=\".43\" stop-color=\"#2d82ff\"/><stop offset=\".63\" stop-color=\"#264be5\"/><stop offset=\".82\" stop-color=\"#a080ff\"/><stop offset=\"1\" stop-color=\"#5960f4\"/></linearGradient><linearGradient id=\"dmDockElectricInner\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#89ceff\"/><stop offset=\".34\" stop-color=\"#1b6af7\"/><stop offset=\".62\" stop-color=\"#0b26a7\"/><stop offset=\".87\" stop-color=\"#b394ff\"/><stop offset=\"1\" stop-color=\"#376eff\"/></linearGradient></defs><circle cx=\"60\" cy=\"60\" r=\"53\" fill=\"none\" stroke=\"#3564ec\" stroke-width=\".65\" opacity=\".42\"/><circle cx=\"60\" cy=\"60\" r=\"50.5\" fill=\"none\" stroke=\"url(#dmDockElectricStroke)\" stroke-width=\"2.1\" opacity=\".9\"/><circle cx=\"60\" cy=\"60\" r=\"47\" fill=\"none\" stroke=\"url(#dmDockElectricInner)\" stroke-width=\"1.1\" opacity=\".83\"/><circle class=\"dm-orb-arc dm-arc-ice\" cx=\"60\" cy=\"60\" r=\"50.5\" fill=\"none\" stroke=\"#c5efff\" stroke-width=\"2.05\" stroke-linecap=\"round\" stroke-dasharray=\"80 238\"/><circle class=\"dm-orb-arc dm-arc-violet\" cx=\"60\" cy=\"60\" r=\"50\" fill=\"none\" stroke=\"#d2aaff\" stroke-width=\"2.15\" stroke-linecap=\"round\" stroke-dasharray=\"53 261\"/></svg></span>\n      </span>\n      <span class=\"nav-label\">Помощник</span>\n    </button>\n    <button class=\"nav-item nav-quick\" id=\"tabDocs\" type=\"button\" aria-label=\"Открыть Документы\">\n      <svg class=\"ico nav-ico\" aria-hidden=\"true\"><use href=\"#ic-file\"/></svg>\n      <span class=\"nav-label\">Документы</span>\n      <i class=\"nav-underline\" aria-hidden=\"true\"></i>\n    </button>\n    <button class=\"nav-item nav-quick\" id=\"tabFinance\" type=\"button\" aria-label=\"Открыть финансовый анализ\">\n      <svg class=\"ico nav-ico\" aria-hidden=\"true\"><use href=\"#ic-coins\"/></svg>\n      <span class=\"nav-label\">Финансы</span>\n      <i class=\"nav-underline\" aria-hidden=\"true\"></i>\n    </button>\n  </nav>";
- document.body.append(...template.content.childNodes);
- const dock=document.querySelector('body > nav.bottom-nav');
- if(!dock)return;
- const targets={clients:['Клиенты','ic-users','./index.html?jump=clients'],day:['Мой день','ic-calendar','./myday.html'],docs:['Документы','ic-file','./index.html?jump=documents'],finance:['Финансы','ic-coins','./index.html?jump=finance'],home:['Главная','ic-grid','./index.html'],management:['Управление','ic-settings','./index.html?jump=management']};
- let prefs={};
- try{prefs=JSON.parse(localStorage.getItem('digital-manager-black-velvet-v2')||'{}')?.management?.voice||{}}catch(_){}
- const selected=Array.isArray(prefs.dockItems)?prefs.dockItems:[];
- const slots=[...dock.querySelectorAll('.nav-item.nav-quick')];
- slots.forEach((button,i)=>{
-   const key=targets[selected[i]]?selected[i]:['clients','day','docs','finance'][i];
-   const [label,icon,url]=targets[key];button.dataset.dockTarget=key;
-   button.querySelector('.nav-label').textContent=label;
-   button.querySelector('.nav-ico use').setAttribute('href','#'+icon);
+ try{
+  const dock=document.querySelector('body > nav.bottom-nav[data-layout="five"]');
+  const centre=dock?.querySelector('#tabAssistant');
+  const socket=centre?.querySelector('.dm-world-socket');
+  const factory=window.DMSharedPlasma;
+  if(!dock||!centre||!socket||!factory?.create)throw Error('World dock/plasma source missing');
+  const plasma=factory.create('world');
+  plasma.dataset.mode='idle';
+  socket.replaceChildren(plasma);
+  dock.dataset.mode='idle';centre.dataset.mode='idle';
+  const targets={
+   clients:['Клиенты','ic-users','./index.html?jump=clients'],
+   day:['Мой день','ic-calendar','./myday.html'],
+   docs:['Документы','ic-file','./index.html?jump=documents'],
+   finance:['Финансы','ic-coins','./index.html?jump=finance'],
+   home:['Главная','ic-grid','./index.html'],
+   management:['Управление','ic-settings','./index.html?jump=management']
+  };
+  let prefs={};
+  try{prefs=JSON.parse(localStorage.getItem('digital-manager-black-velvet-v2')||'{}')?.management?.voice||{}}catch(_){}
+  const choices=Array.isArray(prefs.dockItems)?prefs.dockItems:[];
+  [...dock.querySelectorAll('.nav-item.nav-quick')].forEach((button,i)=>{
+   const key=targets[choices[i]]?choices[i]:['clients','day','docs','finance'][i];
+   const [label,icon,url]=targets[key];
+   button.dataset.dockTarget=key;
+   const use=button.querySelector('.nav-ico use'),caption=button.querySelector('.nav-label');
+   if(use)use.setAttribute('href','#'+icon);
+   if(caption)caption.textContent=label;
    button.setAttribute('aria-label','Открыть '+label);
    button.addEventListener('click',()=>location.assign(url));
- });
- // The World assistant waits in the same WHITE idle state as Home.
- // The approved emblem is shown ONLY while idle, not in any colored mode.
- dock.dataset.mode='idle';
- const centre=dock.querySelector('#tabAssistant');
- centre.dataset.mode='idle';
- // Shared plasma renderer owns the inner ring and its white-only emblem.
- const menu=document.createElement('nav');menu.className='dm-world-orb-menu';menu.hidden=true;
- menu.innerHTML='<a href="./index.html">Главная</a><a href="./world.html?tab=assistant">Чат</a><a href="./index.html?jump=management">Управление</a>';
- document.body.append(menu);
- let timer;
- function close(){clearTimeout(timer);menu.hidden=true}
- centre.addEventListener('click',()=>{menu.hidden=!menu.hidden;clearTimeout(timer);if(!menu.hidden)timer=setTimeout(close,6000)});
- document.addEventListener('pointerdown',e=>{if(!menu.contains(e.target)&&!centre.contains(e.target))close()});
- document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
- if(prefs.dock===false){
+  });
+  const menu=document.createElement('nav');
+  menu.className='dm-world-orb-menu';menu.hidden=true;
+  menu.setAttribute('aria-label','Быстрые действия помощника');
+  menu.innerHTML='<a href="./index.html">Главная</a><a href="./world.html?tab=assistant">Чат</a><a href="./index.html?jump=management">Управление</a>';
+  document.body.append(menu);
+  let timer=null;
+  function close(){clearTimeout(timer);menu.hidden=true;}
+  function toggle(){
+   const next=menu.hidden;close();menu.hidden=!next;
+   if(next)timer=setTimeout(close,6000);
+  }
+  centre.addEventListener('click',toggle);
+  document.addEventListener('pointerdown',event=>{
+   if(!menu.hidden&&!menu.contains(event.target)&&!centre.contains(event.target)&&!event.target.closest('#worldStandalonePlasma'))close();
+  });
+  document.addEventListener('keydown',event=>{if(event.key==='Escape')close();});
+  if(prefs.dock===false){
    dock.hidden=true;
-   const standalone=document.createElement('button');
-   standalone.type='button';standalone.id='worldStandalonePlasma';
-   standalone.className='dm-world-standalone';standalone.dataset.mode='idle';
-   standalone.setAttribute('aria-label','Открыть действия помощника');
-   const socket=centre.querySelector('.assistant-socket').cloneNode(true);
-   standalone.append(socket);
-   document.body.append(standalone);
-   standalone.addEventListener('click',()=>centre.click());
- }
+   const launcher=document.createElement('button');
+   launcher.type='button';
+   launcher.id='worldStandalonePlasma';
+   launcher.className='dm-world-standalone';
+   launcher.setAttribute('aria-label','Открыть действия помощника');
+   launcher.dataset.mode='idle';
+   launcher.append(plasma); // MOVE the same instance: never clone the ring or SVG IDs.
+   document.body.append(launcher);
+   launcher.addEventListener('click',toggle);
+  }
+ }catch(error){console.error('My World dock:',error);}
+ finally{document.documentElement.classList.remove('dm-world-loading');}
 }
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
+else init();
 })();
