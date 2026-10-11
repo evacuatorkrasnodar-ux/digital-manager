@@ -426,7 +426,23 @@
           }
         });
       });
-      mount.replaceChildren(orb);
+      // Reuse the five real laser tracks from the assistant conversation ring.
+      const wavesSource=document.querySelector('#assistantLive > .dm-voice-waves-electric');
+      const waves=wavesSource?.cloneNode(true);
+      if(waves){
+        waves.classList.add('mg-standalone-waves');
+        waves.querySelectorAll('[id]').forEach((node,i)=>{
+          const before=node.id,after='mg-standalone-wave-'+i+'-'+before;
+          node.id=after;
+          waves.querySelectorAll('*').forEach(child=>{
+            for(const attr of [...child.attributes]){
+              const replaced=attr.value.replaceAll('url(#'+before+')','url(#'+after+')');
+              if(replaced!==attr.value)child.setAttribute(attr.name,replaced);
+            }
+          });
+        });
+      }
+      mount.replaceChildren(...(waves?[waves,orb]:[orb]));
     }
   }
   function dmMountPlasmaExamples(){
