@@ -438,13 +438,18 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 .dm-orb-rim{inset:4%;background:conic-gradient(from 15deg,#3b85ff,#f1fbff 27deg,#83d9ff 46deg,#2978fa 90deg,#285ce2 141deg,#b79bff 197deg,#e3bafa 217deg,#8650f5 248deg,#247af9 288deg,#b1ecff 330deg,#3b85ff);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4.6px),#000 calc(100% - 2.1px));mask:radial-gradient(farthest-side,transparent calc(100% - 4.6px),#000 calc(100% - 2.1px));animation:dm-rotate 13s linear infinite;filter:drop-shadow(0 0 2px rgba(152,212,255,.8)) drop-shadow(0 0 5px rgba(72,117,255,.6))}
 
 /* Conversation-only electric SVG. The dock mini-orb retains its existing style. */
-.dm-voice-orb-electric{background:radial-gradient(ellipse 84% 91% at 48% 43%,#01030a 0%,#02050e 55%,#040918 86%,#01030b 100%)!important;filter:drop-shadow(0 0 4px rgba(35,97,255,.72)) drop-shadow(0 0 13px rgba(64,74,229,.40))!important}
-.dm-voice-orb-electric .dm-orb-halo{inset:-24%;background:radial-gradient(circle,transparent 38%,rgba(7,72,231,.09) 49%,rgba(25,96,237,.28) 56%,rgba(117,54,222,.15) 66%,transparent 76%);filter:blur(8px);-webkit-mask-image:radial-gradient(circle,transparent 0 66%,#000 73%);mask-image:radial-gradient(circle,transparent 0 66%,#000 73%)}
-.dm-voice-orb-electric .dm-orb-spectral{position:absolute;inset:-13%;z-index:2;width:126%;height:126%;overflow:visible;pointer-events:none;filter:drop-shadow(0 0 2px rgba(110,175,255,.78)) drop-shadow(0 0 3px rgba(27,83,242,.58))}
+.dm-voice-orb-electric{background:radial-gradient(ellipse 84% 91% at 48% 43%,#01030a 0%,#02050e 55%,#040918 86%,#01030b 100%)!important;filter:drop-shadow(0 0 2px rgba(35,97,255,.32)) drop-shadow(0 0 5px rgba(64,74,229,.18))!important}
+.dm-voice-orb-electric .dm-orb-halo{inset:-24%;background:radial-gradient(circle,transparent 38%,rgba(7,72,231,.06) 49%,rgba(25,96,237,.18) 56%,rgba(117,54,222,.11) 66%,transparent 76%);filter:blur(5px);-webkit-mask-image:radial-gradient(circle,transparent 0 66%,#000 73%);mask-image:radial-gradient(circle,transparent 0 66%,#000 73%)}
+.dm-voice-orb-electric .dm-orb-spectral{position:absolute;inset:-13%;z-index:4;width:126%;height:126%;overflow:visible;pointer-events:none;filter:none}
 .dm-orb-spectral .dm-spectral-wave{stroke-linecap:round;stroke-linejoin:round;shape-rendering:geometricPrecision;vector-effect:non-scaling-stroke}
-.dm-orb-spectral .dm-spectral-outer{stroke-width:.64;opacity:.42}
-.dm-orb-spectral .dm-spectral-main{stroke-width:1.95;opacity:.95;filter:drop-shadow(0 0 1.75px rgba(115,177,255,.54))}
-.dm-orb-spectral .dm-spectral-inner{stroke-width:.83;opacity:.28;filter:drop-shadow(0 0 .85px rgba(103,99,229,.24))}
+.dm-orb-spectral .dm-spectral-outer{stroke-width:.68;opacity:.77;filter:none}
+.dm-orb-spectral .dm-spectral-main{stroke-width:1.08;opacity:.99;filter:drop-shadow(0 0 .85px rgba(115,177,255,.36))}
+.dm-orb-spectral .dm-spectral-inner{stroke-width:.69;opacity:.71;filter:none}
+.assistant-live[data-mode="speaking"] .dm-spectral-outer,#managementScreen .voice-mock-conversation.is-previewing .dm-spectral-outer{opacity:.91;stroke-width:.84}
+.assistant-live[data-mode="speaking"] .dm-spectral-main,#managementScreen .voice-mock-conversation.is-previewing .dm-spectral-main{opacity:1;stroke-width:1.23;filter:drop-shadow(0 0 1px rgba(115,177,255,.48))}
+.assistant-live[data-mode="speaking"] .dm-spectral-inner,#managementScreen .voice-mock-conversation.is-previewing .dm-spectral-inner{opacity:.89;stroke-width:.84}
+.assistant-live[data-mode="listening"] .dm-spectral-outer,.assistant-live[data-mode="listening"] .dm-spectral-inner{opacity:.84}
+
 .dm-voice-waves-electric{filter:none!important}
 .dm-voice-waves-electric .dm-laser-track{transform-origin:center 70%;animation:dm-electric-wave 7.1s ease-in-out infinite}
 .dm-voice-waves-electric .dm-electric-wave-1{animation-delay:-2s;animation-duration:5.8s}
@@ -453,7 +458,7 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 @keyframes dm-electric-wave{0%,100%{transform:translateY(-3px) scaleY(.92);opacity:.55}50%{transform:translateY(2px) scaleY(1.08);opacity:.95}}
 .assistant-live>.dm-voice-waves-electric{width:min(420px,100vw);height:100px;bottom:0;opacity:1}
 #managementScreen .voice-mock-conversation .dm-voice-waves-electric{left:-4%;width:108%;height:110px;bottom:8px;opacity:1}
-#managementScreen .voice-mock-conversation .dm-voice-orb-electric{filter:drop-shadow(0 0 6px rgba(40,113,255,.81)) drop-shadow(0 0 11px rgba(82,52,236,.52))!important}
+#managementScreen .voice-mock-conversation .dm-voice-orb-electric{filter:drop-shadow(0 0 2px rgba(40,113,255,.35)) drop-shadow(0 0 5px rgba(82,52,236,.23))!important}
 
 .dm-orb-edge{inset:8%;border:1px solid rgba(157,213,255,.44);box-shadow:inset 0 0 4px rgba(46,107,243,.35),0 0 4px rgba(91,132,255,.32)}
 .dm-voice-orb::after{content:"";position:absolute;inset:5%;border-radius:50%;border:1.3px solid transparent;border-top-color:rgba(239,251,255,.96);border-right-color:rgba(170,221,255,.31);filter:drop-shadow(0 0 4px rgba(138,219,255,.85));transform:rotate(-21deg);pointer-events:none}
@@ -464,7 +469,7 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 .dm-voice-waves path:nth-of-type(2){stroke-width:1.12;opacity:.82;animation-delay:-2.1s;animation-duration:7.1s}
 .dm-voice-waves path:nth-of-type(3){stroke-width:1;opacity:.7;animation-delay:-3.4s;animation-duration:8s}
 .dm-voice-waves .dm-wave-junction{fill:rgba(204,237,255,.82);opacity:.72;filter:drop-shadow(0 0 3px rgba(105,173,255,.79));pointer-events:none}
-.assistant-live[data-mode="speaking"] .dm-voice-orb{animation-duration:1.4s;filter:drop-shadow(0 0 12px #a477ffb0)}
+.assistant-live[data-mode="speaking"] .dm-voice-orb{animation-duration:1.4s;filter:drop-shadow(0 0 5px rgba(116,107,255,.48))!important}
 @keyframes dm-breathe{0%,100%{transform:scale(.95);opacity:.88}50%{transform:scale(1.055);opacity:1}}
 @keyframes dm-rotate{to{transform:rotate(360deg)}}
 @keyframes dm-wave{0%,100%{transform:translateX(-1.8px) scaleY(.97);opacity:.68}50%{transform:translateX(1.8px) scaleY(1.03);opacity:.94}}
@@ -495,7 +500,7 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 #managementScreen .voice-mock-conversation .voice-phone-frame::after{content:"";position:absolute;left:50%;bottom:25px;transform:translateX(-50%);z-index:1;width:152px;height:35px;pointer-events:none;background:radial-gradient(ellipse,rgba(135,201,255,.40),rgba(96,136,253,.26) 28%,rgba(155,109,254,.13) 53%,transparent 79%);filter:blur(7px)}
 #managementScreen .voice-mock-conversation .dm-voice-waves{left:0;bottom:15px;width:100%;height:100px;opacity:.90;mask-image:linear-gradient(90deg,transparent,black 9%,black 91%,transparent);filter:drop-shadow(0 0 3.5px rgba(78,145,255,.67))}
 #managementScreen .voice-mock-conversation .dm-voice-orb{--dm-size:70px;position:absolute;bottom:22px;filter:drop-shadow(0 0 7px rgba(62,137,255,.69)) drop-shadow(0 0 11px rgba(135,92,241,.32))}
-#managementScreen .voice-mock-conversation.is-previewing .dm-voice-orb{animation-duration:2.9s;filter:drop-shadow(0 0 9px rgba(94,161,255,.78)) drop-shadow(0 0 11px rgba(142,106,246,.41))}
+#managementScreen .voice-mock-conversation.is-previewing .dm-voice-orb{animation-duration:2.9s;filter:drop-shadow(0 0 3px rgba(94,161,255,.48)) drop-shadow(0 0 6px rgba(142,106,246,.30))!important}
 #managementScreen .voice-mock-conversation.is-previewing .dm-voice-waves path{animation-duration:3.9s;opacity:.86}
 #managementScreen .voice-preview-button[aria-pressed="true"]{border-color:#b4c7ff;background:linear-gradient(155deg,#18376a,#0c1330)}
 #managementScreen .voice-caption{margin:0 5px;font-size:11.5px;line-height:1.55;color:#b5cede}
