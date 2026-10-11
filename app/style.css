@@ -1178,3 +1178,15 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
 #assistantScreen .assistant-orb .dm-welcome-plasma{--dm-size:90px;width:90px;height:90px;display:block;position:relative;flex:none}
 #assistantScreen .assistant-orb .dm-welcome-plasma .dm-core-brand{opacity:.17}
 #assistantScreen .assistant-orb .dm-welcome-plasma .dm-core-state-fx{opacity:0}
+
+/* White idle plasma: gently reveal approved glass mark without lighting the core. */
+.bottom-nav[data-mode="idle"] .dm-dock-plasma .dm-core-brand,
+#dockLauncher[data-mode="idle"] .dm-launcher-plasma .dm-core-brand,
+#managementScreen .dm-plasma-example[data-mode="idle"] .dm-core-brand,
+#assistantScreen .assistant-orb .dm-welcome-plasma .dm-core-brand{opacity:.20}
+.bottom-nav[data-mode="idle"] .dm-dock-plasma .dm-core-brand-image,
+#dockLauncher[data-mode="idle"] .dm-launcher-plasma .dm-core-brand-image,
+#managementScreen .dm-plasma-example[data-mode="idle"] .dm-core-brand-image,
+#assistantScreen .assistant-orb .dm-welcome-plasma .dm-core-brand-image{
+ filter:brightness(.58) saturate(.35) drop-shadow(0 0 2px rgba(171,207,240,.16));
+}
