@@ -443,6 +443,8 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 .dm-voice-waves path{fill:none;stroke:#338dff;stroke-width:1.55;stroke-linecap:round;opacity:.70;transform-origin:center 78%;animation:dm-wave 6.4s ease-in-out infinite}
 .dm-voice-waves path:nth-child(2){stroke:#b18cf8;stroke-width:1.15;opacity:.58;animation-delay:-2.1s;animation-duration:7.1s}
 .dm-voice-waves path:nth-child(3){stroke:#82d2ff;stroke-width:1;opacity:.53;animation-delay:-3.4s;animation-duration:8s}
+.dm-voice-waves .dm-wave-contact{fill:rgba(149,205,255,.62);opacity:.64;filter:blur(4.5px) drop-shadow(0 0 5px rgba(89,137,255,.5));pointer-events:none}
+#managementScreen .voice-mock-conversation .dm-wave-contact{opacity:.72}
 .assistant-live[data-mode="speaking"] .dm-voice-orb{animation-duration:1.4s;filter:drop-shadow(0 0 12px #a477ffb0)}
 @keyframes dm-breathe{0%,100%{transform:scale(.95);opacity:.88}50%{transform:scale(1.055);opacity:1}}
 @keyframes dm-rotate{to{transform:rotate(360deg)}}
