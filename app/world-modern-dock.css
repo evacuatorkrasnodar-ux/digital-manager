@@ -15,4 +15,10 @@ body > .bottom-nav .dm-dock-plasma .dm-core-brand-image{display:block;width:100%
 .dm-world-orb-menu{position:fixed;z-index:57;bottom:calc(115px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);display:flex;gap:5px;padding:6px 9px;border-radius:18px;border:1px solid rgba(146,182,210,.4);background:linear-gradient(145deg,#142638,#060f19);box-shadow:0 8px 25px #0009;backdrop-filter:blur(15px)}
 .dm-world-orb-menu a{padding:10px 8px;color:#dceefe;text-decoration:none;font-size:11px;white-space:nowrap}
 .dm-world-standalone{position:fixed;z-index:47;bottom:calc(26px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);display:grid;place-items:center;cursor:pointer}
-.dm-world-standalone .dm-core-brand{opacity:.20}
+.dm-world-standalone[data-mode="idle"] .dm-core-brand{opacity:.20}
+.dm-world-standalone:not([data-mode="idle"]) .dm-core-brand{opacity:0!important}
+
+/* Logo is exclusive to WHITE idle state. Never bleed into colored plasma. */
+body > .bottom-nav:not([data-mode="idle"]) .dm-dock-plasma .dm-core-brand,
+body > .bottom-nav .assistant-tab:not([data-mode="idle"]) .dm-dock-plasma .dm-core-brand{opacity:0!important;visibility:hidden!important}
+body > .bottom-nav[data-mode="idle"] .assistant-tab[data-mode="idle"] .dm-dock-plasma .dm-core-brand{opacity:.20}
