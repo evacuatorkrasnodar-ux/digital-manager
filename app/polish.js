@@ -49,6 +49,6 @@ function addDock(shell){
  }
  document.body.append(dock);
 }
-function init(){const shell=document.querySelector('.day-shell');if(!shell)return;shell.classList.add('dm-polished');if(page!=='world.html')greeting(shell);addDock(shell);}
+function init(){const shell=document.querySelector('.day-shell');if(!shell)return;shell.classList.add('dm-polished');if(page!=='world.html'){greeting(shell);addDock(shell);}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
