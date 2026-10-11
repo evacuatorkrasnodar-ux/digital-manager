@@ -424,14 +424,21 @@
 .dock-quick-actions{display:flex;padding:4px;gap:4px;border:1px solid #92bbda66;border-radius:20px;background:linear-gradient(135deg,#15283cef,#03080def);box-shadow:0 7px 20px #000a;backdrop-filter:blur(12px)}
 .dock-quick-actions button{width:42px;height:37px;border:0;border-radius:12px;color:#d9eeff;background:transparent;display:grid;place-items:center}
 .dock-quick-actions .ico{width:20px;height:20px}
-.assistant-live{position:fixed;z-index:26;bottom:calc(15px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);width:min(390px,98vw);height:120px;pointer-events:none;display:grid;place-items:center;isolation:isolate;transition:opacity .3s ease}
+/* During an actual conversation the slim light form takes the dock's place; it does not sit on top of navigation. */
+html.assistant-conversation-active .bottom-nav,
+html.assistant-conversation-active #dockHiddenControls{visibility:hidden!important;pointer-events:none!important}
+html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-area-inset-bottom,0px))}
+.assistant-live{position:fixed;z-index:26;bottom:calc(0px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);width:min(430px,100vw);height:118px;pointer-events:none;display:grid;place-items:end center;padding-bottom:7px;isolation:isolate;transition:opacity .33s ease;overflow:hidden}
+.assistant-live::before{content:"";position:absolute;z-index:0;inset:0;background:linear-gradient(0deg,rgba(0,2,7,.97) 0%,rgba(0,4,13,.88) 38%,rgba(0,5,14,.20) 84%,transparent 100%);pointer-events:none}
 .assistant-live.is-ending{opacity:0}
+.assistant-live>.dm-voice-orb{--dm-size:70px}
 .dm-voice-orb{--dm-size:82px;width:var(--dm-size);height:var(--dm-size);display:block;position:relative;z-index:2;flex:none;border-radius:50%;background:radial-gradient(circle at 49% 48%,#01040d 51%,#020819 60%,transparent 76%);filter:drop-shadow(0 0 9px #3077f7a0);animation:dm-breathe 3.1s ease-in-out infinite}
 .dm-voice-orb i{position:absolute;display:block;pointer-events:none;border-radius:50%}
 .dm-orb-halo{inset:-16%;background:radial-gradient(circle,transparent 42%,#336ef31c 56%,#647cff62 62%,#6a4ae52b 66%,transparent 75%);filter:blur(5px)}
 .dm-orb-rim{inset:4%;background:conic-gradient(from 25deg,#467bfe,#b6edff 42deg,#4b86ff 78deg,#182cc3 142deg,#937aff 198deg,#d7b4ff 220deg,#5e3bea 260deg,#2265fb 320deg,#467bfe);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 5px),#000 calc(100% - 4px));mask:radial-gradient(farthest-side,transparent calc(100% - 5px),#000 calc(100% - 4px));animation:dm-rotate 9s linear infinite}
 .dm-orb-edge{inset:8%;border:1px solid #96c7ff85;box-shadow:inset 0 0 7px #143aba77,0 0 5px #637cff77}
-.dm-voice-waves{position:absolute;left:0;bottom:0;width:100%;height:100%;z-index:1;overflow:visible;filter:drop-shadow(0 0 4px #3a7cfa77)}
+.dm-voice-waves{position:absolute;left:0;bottom:0;width:100%;height:100%;z-index:1;overflow:visible;filter:drop-shadow(0 0 3px #3a7cfa55)}
+.assistant-live>.dm-voice-waves{left:50%;transform:translateX(-50%);bottom:2px;width:min(270px,76vw);height:85px;opacity:.64}
 .dm-voice-waves path{fill:none;stroke:#367cec;stroke-width:1;stroke-linecap:round;opacity:.43;transform-origin:center 70%;animation:dm-wave 4.8s ease-in-out infinite}
 .dm-voice-waves path:nth-child(2){stroke:#9a72f2;animation-delay:-1.8s;animation-duration:5.5s}
 .dm-voice-waves path:nth-child(3){stroke:#4c9dfc;animation-delay:-2.8s;animation-duration:6.1s}
@@ -464,6 +471,10 @@
 #managementScreen .voice-mock-conversation .voice-phone-frame{display:grid;place-items:end center}
 #managementScreen .voice-mock-conversation .dm-voice-waves{height:95px}
 #managementScreen .voice-mock-conversation .dm-voice-orb{--dm-size:75px;position:absolute;bottom:4px}
+#managementScreen .voice-mock-conversation.is-previewing .dm-voice-orb{animation-duration:1.45s;filter:drop-shadow(0 0 13px #477bff) drop-shadow(0 0 5px #9677ff)}
+#managementScreen .voice-mock-conversation.is-previewing .dm-voice-waves path{animation-duration:1.55s;opacity:.83}
+#managementScreen .voice-mock-conversation.is-previewing .dm-orb-rim{animation-duration:3.2s}
+#managementScreen .voice-preview-button[aria-pressed="true"]{border-color:#b4c7ff;background:linear-gradient(155deg,#18376a,#0c1330)}
 #managementScreen .voice-caption{margin:0 5px;font-size:11.5px;line-height:1.55;color:#b5cede}
 #managementScreen .voice-preview-button{width:100%;padding:12px;border:1px solid #78b7e999;border-radius:12px;background:linear-gradient(150deg,#152f51,#07182e);color:#e4f2ff;font-size:12px}
 #managementScreen .voice-simple{padding:10px;border:1px solid #7294b156;border-radius:16px;background:linear-gradient(145deg,#101f31,#04070a)}

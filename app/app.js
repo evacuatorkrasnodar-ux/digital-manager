@@ -36,6 +36,7 @@
     clearTimeout(ringResetTimer);
     const button = byId('tabAssistant');
     if(['thinking','speaking'].includes(mode))showLiveRing(mode,resetAfter||2500);
+    else if(mode==='idle')hideLiveRing();
     button.dataset.mode = mode;
     document.querySelector('.bottom-nav').dataset.mode = mode;
     button.setAttribute('aria-label', 'Помощник. '+ringDescriptions[mode]);
@@ -121,21 +122,60 @@
   // Explicit opt-in preference: no hidden mic use; this is an animated UI prototype.
   const voicePrefs={dock:mgSaved.voice&&typeof mgSaved.voice==='object'?mgSaved.voice.dock!==false:true};
   mgData.voice=voicePrefs;
-  let liveTimer=null;
+  // The animated ring temporarily replaces navigation only while the assistant is active.
+  // The settings preview stays INSIDE its card, never over page content.
+  const liveRing=byId('assistantLive');
+  const voiceDock=document.querySelector('.bottom-nav');
+  const hiddenDock=byId('dockHiddenControls');
+  let liveTimer=null,liveFadeTimer=null,voicePreviewTimer=null;
   function updateDock(){
-    document.querySelector('.bottom-nav').hidden=!voicePrefs.dock;
-    byId('dockHiddenControls').hidden=voicePrefs.dock;
+    voiceDock.hidden=!voicePrefs.dock;
+    hiddenDock.hidden=voicePrefs.dock;
     document.documentElement.classList.toggle('dock-is-hidden',!voicePrefs.dock);
     if(voicePrefs.dock)closeDockQuickActions();
   }
-  function showLiveRing(mode='listening',duration=3500){
-    const el=byId('assistantLive');
-    if(!el)return;
-    el.hidden=false;el.dataset.mode=mode;el.classList.remove('is-ending');
+  function hideLiveRing(immediate=false){
     clearTimeout(liveTimer);
-    if(duration>0)liveTimer=setTimeout(()=>{el.classList.add('is-ending');liveTimer=setTimeout(()=>{el.hidden=true;el.classList.remove('is-ending');},300);},duration);
+    clearTimeout(liveFadeTimer);
+    if(liveRing.hidden) {
+      document.documentElement.classList.remove('assistant-conversation-active');
+      return;
+    }
+    const finish=()=>{
+      liveRing.hidden=true;
+      liveRing.classList.remove('is-ending');
+      document.documentElement.classList.remove('assistant-conversation-active');
+    };
+    if(immediate){finish();return;}
+    liveRing.classList.add('is-ending');
+    liveFadeTimer=setTimeout(finish,330);
   }
-
+  function showLiveRing(mode='listening',duration=3500){
+    clearTimeout(liveTimer);
+    clearTimeout(liveFadeTimer);
+    liveRing.hidden=false;
+    liveRing.classList.remove('is-ending');
+    liveRing.dataset.mode=mode;
+    closeDockQuickActions();
+    document.documentElement.classList.add('assistant-conversation-active');
+    if(duration>0)liveTimer=setTimeout(()=>hideLiveRing(),duration);
+  }
+  function previewVoiceRing(){
+    const preview=byId('mgDetail').querySelector('.voice-mock-conversation');
+    const trigger=byId('mgDetail').querySelector('#voicePreview');
+    if(!preview||!trigger)return;
+    clearTimeout(voicePreviewTimer);
+    preview.classList.remove('is-previewing');
+    void preview.offsetWidth; // Restart the local preview animation only, without opening a global overlay.
+    preview.classList.add('is-previewing');
+    trigger.textContent='Кольцо оживает…';
+    trigger.setAttribute('aria-pressed','true');
+    voicePreviewTimer=setTimeout(()=>{
+      preview.classList.remove('is-previewing');
+      trigger.textContent='Посмотреть живое кольцо ↗';
+      trigger.setAttribute('aria-pressed','false');
+    },3600);
+  }
   let mgCurrent='home';
   const mgNames={manager:'Управляющий',autopilot:'Автопилот',connections:'Связи',documents:'Документы',
     payments:'Платежи',learning:'Обучение',voice:'Помощник'};
@@ -152,6 +192,7 @@
     byId('mgDetail').hidden=page==='home';
     byId('mgTitle').textContent=mgNames[page]||'Управление';
     byId('mgSubtitle').textContent=({home:'Настройки приложения',manager:'Имя · навыки · общение',autopilot:'Границы самостоятельности',connections:'Сервисы и источники данных',documents:'Файлы и шаблоны',payments:'Счета и регулярные расходы',learning:'Возможности приложения',voice:'Док · Кольцо · Голос'})[page]||'Настройки приложения';
+    clearTimeout(voicePreviewTimer);
     if(page==='home'){byId('mgDetail').innerHTML='';window.scrollTo(0,0);return;}
     let content='';
     if(page==='manager'){
@@ -221,7 +262,9 @@
   byId('dockOpenHome').addEventListener('click',()=>{closeDockQuickActions();setTab('home');});
   byId('dockOpenAssistant').addEventListener('click',()=>{closeDockQuickActions();setTab('assistant');});
   byId('dockOpenManage').addEventListener('click',()=>{closeDockQuickActions();setTab('management');});
-  byId('mgDetail').addEventListener('click',event=>{if(event.target.closest('#voicePreview'))showLiveRing('listening',4800);});
+  byId('mgDetail').addEventListener('click',event=>{if(event.target.closest('#voicePreview'))previewVoiceRing();});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)hideLiveRing(true);});
+  window.addEventListener('pagehide',()=>hideLiveRing(true));
 
   // Explicitly wire every visual action; unused marketing routes remain untouched.
   document.querySelectorAll('[data-ring-preview]').forEach(b=>b.addEventListener('click',()=>setRingMode(b.dataset.ringPreview,b.dataset.ringPreview==='idle'?0:4200)));
