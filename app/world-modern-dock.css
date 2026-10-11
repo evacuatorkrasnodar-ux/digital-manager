@@ -22,3 +22,20 @@ body > .bottom-nav .dm-dock-plasma .dm-core-brand-image{display:block;width:100%
 body > .bottom-nav:not([data-mode="idle"]) .dm-dock-plasma .dm-core-brand,
 body > .bottom-nav .assistant-tab:not([data-mode="idle"]) .dm-dock-plasma .dm-core-brand{opacity:0!important;visibility:hidden!important}
 body > .bottom-nav[data-mode="idle"] .assistant-tab[data-mode="idle"] .dm-dock-plasma .dm-core-brand{opacity:.20}
+
+/* Exact WHITE waiting treatment of Home, including standalone plasma. */
+body > .dm-world-standalone[data-mode="idle"] .dm-dock-plasma{
+ filter:drop-shadow(0 0 5px rgba(225,240,255,.55)) drop-shadow(0 0 9px rgba(183,206,237,.18))!important;
+}
+body > .dm-world-standalone[data-mode="idle"] .dm-dock-plasma .dm-orb-rim{
+ background:conic-gradient(from 15deg,#c7d7e6,#fff 27deg,#eaf6ff 46deg,#f8fcff 90deg,#b9cfe7 141deg,#f3f4ff 197deg,#d5e1f5 217deg,#fff 248deg,#c9d9e8 288deg,#f5fbff 330deg,#c7d7e6);
+ filter:drop-shadow(0 0 3px rgba(225,240,255,.78));
+}
+body > .dm-world-standalone[data-mode="idle"] .dm-dock-plasma .dm-orb-halo{
+ background:radial-gradient(circle,transparent 38%,rgba(237,246,255,.04) 49%,rgba(229,241,255,.18) 56%,rgba(191,215,248,.09) 66%,transparent 76%);
+}
+body > .dm-world-standalone[data-mode="idle"] .dm-dock-plasma .dm-orb-spectral{
+ filter:grayscale(1) saturate(0) brightness(1.42) drop-shadow(0 0 3px rgba(232,246,255,.72));
+}
+body > .dm-world-standalone[data-mode="idle"] .dm-dock-plasma .dm-core-brand{opacity:.20;visibility:visible}
+body > .dm-world-standalone:not([data-mode="idle"]) .dm-dock-plasma .dm-core-brand{opacity:0!important;visibility:hidden!important}
