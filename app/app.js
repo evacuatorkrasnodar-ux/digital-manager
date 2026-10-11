@@ -490,6 +490,31 @@
     if(event.target.id==='mgAutonomy'){mgData.autonomy=Number(event.target.value);mgAutoLabel();save();}
   });
   mgApplyCards();
+  // Main-screen card options: preserve native touch scrolling while giving
+  // the visible heading arrow a real, accessible navigation action.
+  const mgCarousel=byId('mgSwitchGrid');
+  const mgCarouselNav=byId('mgCarouselNext');
+  function mgSyncCarouselNav(){
+    const remaining=Math.max(0,mgCarousel.scrollWidth-mgCarousel.clientWidth);
+    mgCarouselNav.hidden=remaining<=4;
+    const atEnd=mgCarousel.scrollLeft>=remaining-4;
+    mgCarouselNav.dataset.direction=atEnd?'back':'forward';
+    mgCarouselNav.setAttribute('aria-label',atEnd?'Вернуться к первым карточкам':'Показать следующие карточки');
+    mgCarouselNav.title=atEnd?'К началу карточек':'Следующие карточки';
+  }
+  mgCarouselNav.addEventListener('click',()=>{
+    const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(mgCarouselNav.dataset.direction==='back'){
+      mgCarousel.scrollTo({left:0,behavior:reduceMotion?'instant':'smooth'});
+    }else{
+      const remaining=Math.max(0,mgCarousel.scrollWidth-mgCarousel.clientWidth-mgCarousel.scrollLeft);
+      mgCarousel.scrollBy({left:Math.min(remaining,Math.round(mgCarousel.clientWidth*.78)),behavior:reduceMotion?'instant':'smooth'});
+    }
+  });
+  mgCarousel.addEventListener('scroll',mgSyncCarouselNav,{passive:true});
+  window.addEventListener('resize',mgSyncCarouselNav);
+  window.addEventListener('pageshow',mgSyncCarouselNav);
+  requestAnimationFrame(mgSyncCarouselNav);
   function closeDockQuickActions(){
     byId('dockQuickActions').hidden=true;
     const stillChatOpen=!byId('plasmaChatPanel').hidden;
