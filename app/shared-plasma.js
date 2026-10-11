@@ -45,6 +45,7 @@ function sync(){
    const parent=orb.closest('[data-mode]');const mode=parent?.dataset.mode||'idle';
    orb.dataset.mode=mode;
  });
+ if(location.pathname.endsWith('/world.html'))document.documentElement.classList.remove('dm-world-loading');
 }
 function init(){sync();const observer=new MutationObserver(()=>{observer.disconnect();sync();observer.observe(document.body,{childList:true,subtree:true});});observer.observe(document.body,{childList:true,subtree:true});}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
