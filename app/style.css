@@ -1045,8 +1045,8 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
   transform:translate(-50%,-50%);
   transition:opacity .45s ease;
 }
-.dm-voice-orb-electric .dm-core-brand svg{
-  width:100%;height:100%;display:block;
+.dm-voice-orb-electric .dm-core-brand-image{
+  display:block;width:100%;height:100%;object-fit:contain;
   filter:brightness(.46) saturate(.30);
 }
 .bottom-nav[data-mode="idle"] .dm-dock-plasma .dm-core-brand,
