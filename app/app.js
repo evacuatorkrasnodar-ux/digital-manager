@@ -416,6 +416,7 @@
       if(!source)return;
       const orb=source.cloneNode(true);
       orb.classList.add('mg-standalone-plasma');
+      orb.dataset.mode='thinking'; // Large blue example uses blue inner scan art, never idle logo.
       orb.setAttribute('aria-hidden','true');
       orb.querySelectorAll('[id]').forEach((node,i)=>{
         const before=node.id,after='mg-solo-'+i+'-'+before;
@@ -446,6 +447,29 @@
       mount.replaceChildren(...(waves?[waves,orb]:[orb]));
     }
   }
+  // One approved plasma source for the legacy assistant welcome ornament.
+  // Keep the original welcome dimensions while using the real white idle core.
+  function dmSyncAssistantWelcomePlasma(){
+    const mount=document.querySelector('#assistantScreen .assistant-orb');
+    const source=document.querySelector('#tabAssistant .dm-dock-plasma');
+    if(!mount||!source)return;
+    const orb=source.cloneNode(true);
+    orb.classList.add('dm-welcome-plasma');
+    orb.dataset.mode='idle';
+    orb.querySelectorAll('[id]').forEach((node,i)=>{
+      const old=node.id,next='dm-welcome-'+i+'-'+old;
+      node.id=next;
+      orb.querySelectorAll('*').forEach(el=>{
+        for(const attr of [...el.attributes]){
+          let value=attr.value.replaceAll('url(#'+old+')','url(#'+next+')');
+          if((attr.name==='href'||attr.name==='xlink:href')&&value==='#'+old)value='#'+next;
+          if(value!==attr.value)el.setAttribute(attr.name,value);
+        }
+      });
+    });
+    mount.replaceChildren(orb);
+  }
+  dmSyncAssistantWelcomePlasma();
   function dmMountPlasmaExamples(){
     const stage=byId('mgDetail').querySelector('.dm-plasma-examples-grid');
     const source=document.querySelector('#tabAssistant .dm-dock-plasma');
