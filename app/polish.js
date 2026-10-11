@@ -40,7 +40,7 @@ function addDock(shell){
    a.dataset.mode='idle';a.setAttribute('aria-label','Открыть Помощника');
    const socket=el('span','assistant-socket'),ring=el('span','assistant-ring'),core=el('span','assistant-core');
    socket.setAttribute('aria-hidden','true');
-   const img=el('img','nav-mark');img.src='./assets/plasma-glass-mark.webp';img.alt='';img.setAttribute('aria-hidden','true');
+   const img=el('img','nav-mark');img.src='./assets/logo-air.png';img.alt='';img.setAttribute('aria-hidden','true');
    core.append(img);ring.append(core);socket.append(ring);a.append(socket);
   }else a.append(svgFrom(icons[item.icon]));
   a.append(el('span','nav-label',item.label));
