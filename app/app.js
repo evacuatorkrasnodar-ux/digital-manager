@@ -504,6 +504,8 @@
   const plasmaDraftInfo=byId('plasmaDraftInfo');
   const DM_DRAFT_KEY='digital-manager-plasma-draft-v1';
   let dmDraftAutoExpanded=false,dmActionGlyphKind='',dmAckTimer=null;
+  const DM_COMPOSER_IDLE_MS=15000;
+  let dmComposerIdleTimer=null;
 
   // ONE notebook: the IndexedDB notes store already used by myday.js.
   // The earlier stand-alone localStorage draft notes are migrated once, never
@@ -804,6 +806,26 @@
       }
     }
   }
+  // Quietly return to the original plasma after 15 s with no activity.
+  // Never dismiss an expanded editor, written draft, or an open mobile keyboard.
+  function dmCancelComposerIdle(){
+    if(dmComposerIdleTimer!==null)clearTimeout(dmComposerIdleTimer);
+    dmComposerIdleTimer=null;
+  }
+  function dmScheduleComposerIdle(){
+    dmCancelComposerIdle();
+    if(plasmaPanel.hidden||plasmaPanel.classList.contains('dm-chat-editor')||plasmaInput.value.trim())return;
+    dmComposerIdleTimer=setTimeout(()=>{
+      dmComposerIdleTimer=null;
+      if(document.visibilityState==='hidden')return;
+      if(plasmaPanel.hidden||plasmaPanel.classList.contains('dm-chat-editor')||plasmaInput.value.trim())return;
+      if(plasmaPanel.classList.contains('dm-chat-keyboard-open')){
+        dmScheduleComposerIdle();
+        return;
+      }
+      closePlasmaPanel(); // Restores the approved standalone plasma / chosen dock.
+    },DM_COMPOSER_IDLE_MS);
+  }
   function dmToggleDraftEditor(expand){
     plasmaPanel.classList.toggle('dm-chat-editor',expand);
     document.documentElement.classList.toggle('dm-compose-editor',expand&&!plasmaPanel.hidden);
@@ -817,6 +839,7 @@
       dmSyncComposer();
     }
     positionPlasmaPanelForKeyboard();
+    dmScheduleComposerIdle();
   }
   // The visualViewport moves the composer's glass and its original plasma
   // together. This avoids a floating send button behind a mobile keyboard.
@@ -839,7 +862,9 @@
     plasmaPanel.style.setProperty('--dm-chat-kb','0px');
     document.documentElement.style.setProperty('--dm-chat-kb','0px');
   });
-  plasmaInput.addEventListener('input',()=>{dmSaveDraft();dmSyncComposer();});
+  plasmaInput.addEventListener('input',()=>{dmSaveDraft();dmSyncComposer();dmScheduleComposerIdle();});
+  plasmaPanel.addEventListener('pointerdown',dmScheduleComposerIdle);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)dmCancelComposerIdle();else dmScheduleComposerIdle();});
   plasmaInput.addEventListener('keydown',event=>{
     if(event.key==='Enter'&&(event.ctrlKey||event.metaKey)){
       event.preventDefault();byId('plasmaChatForm').requestSubmit();
@@ -851,6 +876,7 @@
     plasmaInput.value='';dmSaveDraft();dmSyncComposer();plasmaInput.focus();
   });
   function closePlasmaPanel(){
+    dmCancelComposerIdle();
     plasmaPanel.hidden=true;
     plasmaPanel.setAttribute('aria-hidden','true');
     plasmaTriggers.forEach(button=>button.setAttribute('aria-expanded','false'));
@@ -887,6 +913,7 @@
     }else{
       plasmaInput.focus();
     }
+    dmScheduleComposerIdle();
   }
   function dmExplainUnavailableVoice(){
     plasmaHint.textContent='Пока диктовка не подключена: микрофон не включается. Напишите сообщение или откройте полную переписку.';
