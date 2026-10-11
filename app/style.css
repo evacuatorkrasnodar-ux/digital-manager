@@ -948,3 +948,24 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
 @media(prefers-reduced-motion:reduce){
  .dm-chat-edit-buttons button,.dm-draft-actions-grid button{transition:none!important}
 }
+
+/* Idle state: the approved electric-blue geometry is unchanged, but its
+   optical tint is silver-white. Thinking/speaking/attention remain colored.
+   Scoped to the actual dock (also used in its preview) and quiet launcher. */
+.bottom-nav[data-mode="idle"] .dm-dock-plasma,
+#dockLauncher[data-mode="idle"] .dm-launcher-plasma{
+  filter:drop-shadow(0 0 5px rgba(225,240,255,.69)) drop-shadow(0 0 9px rgba(183,206,237,.23))!important;
+}
+.bottom-nav[data-mode="idle"] .dm-dock-plasma .dm-orb-rim,
+#dockLauncher[data-mode="idle"] .dm-launcher-plasma .dm-orb-rim{
+  background:conic-gradient(from 15deg,#c7d7e6,#fff 27deg,#eaf6ff 46deg,#f8fcff 90deg,#b9cfe7 141deg,#f3f4ff 197deg,#d5e1f5 217deg,#fff 248deg,#c9d9e8 288deg,#f5fbff 330deg,#c7d7e6);
+  filter:drop-shadow(0 0 3px rgba(225,240,255,.78));
+}
+.bottom-nav[data-mode="idle"] .dm-dock-plasma .dm-orb-halo,
+#dockLauncher[data-mode="idle"] .dm-launcher-plasma .dm-orb-halo{
+  background:radial-gradient(circle,transparent 38%,rgba(237,246,255,.05) 49%,rgba(229,241,255,.23) 56%,rgba(191,215,248,.11) 66%,transparent 76%);
+}
+.bottom-nav[data-mode="idle"] .dm-dock-plasma .dm-orb-spectral,
+#dockLauncher[data-mode="idle"] .dm-launcher-plasma .dm-orb-spectral{
+  filter:grayscale(1) saturate(0) brightness(1.42) drop-shadow(0 0 3px rgba(232,246,255,.72));
+}
