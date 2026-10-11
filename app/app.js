@@ -806,8 +806,8 @@
     plasmaPanel.classList.toggle('dm-chat-editor',expand);
     document.documentElement.classList.toggle('dm-compose-editor',expand&&!plasmaPanel.hidden);
     plasmaExpand.setAttribute('aria-expanded',String(expand));
-    plasmaExpand.setAttribute('aria-label',expand?'Свернуть редактор':'Развернуть редактор');
-    plasmaExpand.title=expand?'Свернуть текст':'Развернуть текст';
+    plasmaExpand.setAttribute('aria-label',expand?'Свернуть чат':'Развернуть чат');
+    plasmaExpand.title=expand?'Свернуть чат':'Развернуть чат';
     if(expand){
       plasmaInput.style.height='';
     }else{
