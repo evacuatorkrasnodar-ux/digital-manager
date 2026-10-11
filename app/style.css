@@ -474,10 +474,11 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 #managementScreen .voice-dock-center .dm-voice-orb{--dm-size:53px}
 #managementScreen .voice-mock-conversation .voice-phone-frame{display:grid;place-items:end center}
 #managementScreen .voice-mock-conversation .voice-phone-frame::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 116px 59px at 50% calc(100% - 57px),rgba(43,98,201,.22) 0%,rgba(62,71,169,.10) 47%,transparent 81%)}
-#managementScreen .voice-mock-conversation .voice-phone-frame::after{content:"";position:absolute;left:50%;bottom:24px;transform:translateX(-50%);z-index:1;width:142px;height:28px;pointer-events:none;background:radial-gradient(ellipse,rgba(91,161,255,.31),rgba(139,97,247,.15) 45%,transparent 77%);filter:blur(7px)}
-#managementScreen .voice-mock-conversation .dm-voice-waves{left:0;bottom:15px;width:100%;height:100px;opacity:.82;mask-image:linear-gradient(90deg,transparent,black 9%,black 91%,transparent);filter:drop-shadow(0 0 2.7px rgba(54,125,253,.56))}
-#managementScreen .voice-mock-conversation .dm-voice-orb{--dm-size:78px;position:absolute;bottom:22px}
-#managementScreen .voice-mock-conversation.is-previewing .dm-voice-orb{animation-duration:2.3s;filter:drop-shadow(0 0 10px rgba(68,144,255,.85)) drop-shadow(0 0 8px rgba(149,96,253,.55))}
+#managementScreen .voice-mock-conversation .voice-phone-frame::after{content:"";position:absolute;left:50%;bottom:25px;transform:translateX(-50%);z-index:1;width:152px;height:35px;pointer-events:none;background:radial-gradient(ellipse,rgba(135,201,255,.40),rgba(96,136,253,.26) 28%,rgba(155,109,254,.13) 53%,transparent 79%);filter:blur(7px)}
+#managementScreen .voice-mock-conversation .dm-voice-waves{left:0;bottom:15px;width:100%;height:100px;opacity:.90;mask-image:linear-gradient(90deg,transparent,black 9%,black 91%,transparent);filter:drop-shadow(0 0 3.5px rgba(78,145,255,.67))}
+#managementScreen .voice-mock-conversation .dm-voice-orb{--dm-size:78px;position:absolute;bottom:22px;filter:drop-shadow(0 0 8px rgba(62,137,255,.80)) drop-shadow(0 0 16px rgba(135,92,241,.42))}
+#managementScreen .voice-mock-conversation .dm-orb-rim{filter:brightness(1.21) saturate(1.12) drop-shadow(0 0 4px rgba(159,207,255,.72))}
+#managementScreen .voice-mock-conversation.is-previewing .dm-voice-orb{animation-duration:2.7s;filter:drop-shadow(0 0 12px rgba(94,161,255,.86)) drop-shadow(0 0 13px rgba(142,106,246,.49))}
 #managementScreen .voice-mock-conversation.is-previewing .dm-voice-waves path{animation-duration:3.9s;opacity:.86}
 #managementScreen .voice-mock-conversation.is-previewing .dm-orb-rim{animation-duration:3.2s}
 #managementScreen .voice-preview-button[aria-pressed="true"]{border-color:#b4c7ff;background:linear-gradient(155deg,#18376a,#0c1330)}
