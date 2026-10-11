@@ -233,7 +233,11 @@
     emblem.decoding='async';
     emblem.draggable=false;
     brand.append(emblem);
-    orb.append(brand,layer);
+    const fx=document.createElement('span');
+    fx.className='dm-core-state-fx';
+    fx.setAttribute('aria-hidden','true');
+    fx.innerHTML='<svg class="dm-thinking-art" viewBox="0 0 100 100"><circle cx="50" cy="50" r="31" class="dm-scan-guide"/><circle cx="50" cy="50" r="22" class="dm-scan-guide"/><circle cx="50" cy="50" r="31" class="dm-scan-arc"/><circle cx="50" cy="50" r="22" class="dm-scan-arc dm-scan-arc-inner"/><circle cx="50" cy="50" r="3" class="dm-scan-dot"/></svg><svg class="dm-speaking-art" viewBox="0 0 100 100"><path class="dm-speech-wave" d="M5 50 Q16 35 27 50 T50 50 T73 50 T95 50"/><path class="dm-speech-wave dm-speech-echo" d="M5 50 Q16 63 27 50 T50 50 T73 50 T95 50"/></svg><svg class="dm-attention-art" viewBox="0 0 100 100"><circle cx="50" cy="50" r="31" class="dm-alert-ring"/><circle cx="50" cy="50" r="22" class="dm-alert-ring dm-alert-inner"/><path class="dm-alert-sign" d="M50 32 V55 M50 65 V67"/></svg>';
+    orb.append(brand,fx,layer);
     return layer;
   });
   let dmGlyphHideTimer=null;
