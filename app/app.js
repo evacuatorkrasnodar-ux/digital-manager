@@ -546,6 +546,7 @@
   async function dmDraftDestination(kind){
     const content=plasmaInput.value.trim();
     if(!content){dmActionMessage('Сначала напишите текст, чтобы выбрать действие.');return;}
+    if(kind==='ask'){dmSendComposerText();return;}
     if(kind==='note'){await dmSaveAsNote();return;}
     if(kind==='download'){
       try{dmDownloadText(content);dmActionMessage('Файл готов. Бумажная версия подождёт до печати ✦');}
@@ -656,6 +657,14 @@
     byId('dockLauncher').setAttribute('aria-label',kind==='send'?'Отправить сообщение':kind==='done'?'Сообщение отправлено':'Голосовая функция — информация');
     byId('dockLauncher').title=kind==='send'?'Отправить сообщение':kind==='done'?'Сообщение отправлено':'Голосовое общение пока недоступно';
   }
+  // A lightweight local hint, never a claim that an AI classified the message.
+  // The user can always override it using «Спросить ИИ».
+  function dmComposerIntent(value){
+    const t=value.trim();
+    if(!t)return 'empty';
+    if(/[?？]\s*$/.test(t)||/^(как|почему|зачем|когда|где|куда|кто|что|сколько|можно ли|подскажи|объясни|расскажи|помоги|посоветуй|проверь|найди|ответь|составь|придумай|напиши мне)\b/i.test(t))return 'question';
+    return 'draft';
+  }
   function dmSyncComposer(){
     const text=plasmaInput.value;
     const lineHeight=parseFloat(getComputedStyle(plasmaInput).lineHeight)||22;
@@ -665,7 +674,13 @@
     if(!plasmaPanel.classList.contains('dm-chat-editor')&&!dmDraftAutoExpanded&&(text.length>850||text.split('\n').length>8)){
       dmDraftAutoExpanded=true;dmToggleDraftEditor(true);
     }
-    plasmaDraftInfo.textContent=text.length?text.length.toLocaleString('ru-RU')+' зн. · Черновик на этом устройстве':'Черновик сохраняется только на этом устройстве';
+    const intent=dmComposerIntent(text);
+    plasmaPanel.dataset.intent=intent;
+    const heading=byId('plasmaComposerTitle');
+    if(heading)heading.textContent=intent==='question'?'Вопрос помощнику':intent==='draft'?'Ваш текст':'Сообщение или текст';
+    plasmaDraftInfo.textContent=text.length
+      ?text.length.toLocaleString('ru-RU')+' зн. · '+(intent==='question'?'Нажмите на плазму, чтобы спросить ИИ':'Выберите действие ниже или спросите ИИ')
+      :'Черновик сохраняется только на этом устройстве';
     if(!plasmaPanel.hidden){
       clearTimeout(dmAckTimer);
       dmSetComposerGlyph(text.trim()?'send':'mic');
@@ -776,7 +791,11 @@
   }
   function dmComposerOrbClick(){
     if(plasmaPanel.hidden){togglePlasmaQuickMenu();return;}
-    if(plasmaInput.value.trim()){dmSendComposerText();return;}
+    if(plasmaInput.value.trim()){
+      if(dmComposerIntent(plasmaInput.value)==='question'){dmSendComposerText();return;}
+      dmActionMessage('Текст готов ✦ Выберите действие ниже или нажмите «Спросить ИИ».');
+      return;
+    }
     dmExplainUnavailableVoice();
   }
   function togglePlasmaQuickMenu(){
@@ -796,7 +815,9 @@
   byId('dockLauncher').addEventListener('click',dmComposerOrbClick);
   byId('plasmaClose').addEventListener('click',closePlasmaPanel);
   byId('plasmaChatForm').addEventListener('submit',event=>{
-    event.preventDefault();dmSendComposerText();
+    event.preventDefault();
+    if(dmComposerIntent(plasmaInput.value)==='question')dmSendComposerText();
+    else if(plasmaInput.value.trim())dmActionMessage('Текст готов ✦ Выберите действие или «Спросить ИИ».');
   });
   dmSyncComposer();
   byId('plasmaOpenChat').addEventListener('click',()=>{closePlasmaPanel();setTab('assistant');});
