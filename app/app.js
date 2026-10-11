@@ -192,6 +192,7 @@
   function dmPreviewGlyph(kind){
     if(!dmGlyphTypes.includes(kind))return;
     dmRevealGlyph(kind);
+    dmShowGlyphInSettings(kind);
     if(kind==='attention')setRingMode('attention',3300);
     const caption=byId('dmGlyphPreviewStatus');
     if(caption)caption.textContent='Демонстрация: '+({
@@ -321,6 +322,76 @@
     });
     mount.replaceChildren(dock);
   }
+  // The five settings controls demonstrate signs in a nearby real-orb preview,
+  // and in the existing iPhone conversation example. These are not notifications.
+  let dmSettingsGlyphTimer=null;
+  function dmMountGlyphShowcase(){
+    const stage=byId('dmGlyphStageOrb');
+    const source=byId('mgDetail').querySelector('.voice-mock-conversation .dm-voice-orb');
+    if(!stage||!source)return;
+    const clone=source.cloneNode(true);
+    // Unique SVG gradient IDs: the real conversation ring stays visually intact.
+    const ids=new Map();
+    clone.querySelectorAll('[id]').forEach((node,i)=>{
+      const prior=node.id,next='dm-glyph-showcase-'+i+'-'+prior;
+      ids.set(prior,next);node.id=next;
+    });
+    clone.querySelectorAll('*').forEach(node=>{
+      for(const attr of [...node.attributes]){
+        if(attr.name==='id')continue;
+        let value=attr.value;
+        for(const [prior,next] of ids){
+          value=value.replaceAll('url(#'+prior+')','url(#'+next+')');
+          if((attr.name==='href'||attr.name==='xlink:href')&&value==='#'+prior)value='#'+next;
+        }
+        if(value!==attr.value)node.setAttribute(attr.name,value);
+      }
+    });
+    stage.replaceChildren(clone);
+    for(const orb of [source,clone]){
+      const glyph=document.createElement('span');
+      glyph.className='dm-core-glyph dm-settings-demo-glyph';
+      glyph.setAttribute('aria-hidden','true');
+      const icon=document.createElementNS('http://www.w3.org/2000/svg','svg');
+      icon.setAttribute('viewBox','0 0 24 24');
+      icon.setAttribute('aria-hidden','true');
+      glyph.append(icon);orb.append(glyph);
+    }
+  }
+  function dmShowGlyphInSettings(kind){
+    const scene=byId('dmGlyphStage');
+    if(!scene)return;
+    if(dmSettingsGlyphTimer!==null)clearTimeout(dmSettingsGlyphTimer);
+    const label=({
+      mail:'Почта',health:'Здоровье',task:'Задача',
+      calendar:'Календарь',attention:'Внимание'
+    })[kind];
+    const caption=byId('dmGlyphStageLabel');
+    if(caption)caption.textContent=label+' · демонстрация';
+    scene.setAttribute('aria-label','Демонстрация символа: '+label);
+    byId('mgDetail').querySelectorAll('[data-dm-glyph-preview]').forEach(button=>{
+      button.setAttribute('aria-pressed',String(button.dataset.dmGlyphPreview===kind));
+    });
+    const layers=byId('mgDetail').querySelectorAll('.dm-settings-demo-glyph');
+    layers.forEach(layer=>{
+      layer.dataset.kind=kind;
+      layer.firstElementChild.innerHTML=dmGlyphDrawings[kind];
+      layer.classList.remove('is-visible');
+      void layer.offsetWidth;
+      layer.classList.add('is-visible');
+    });
+    scene.classList.remove('is-playing');
+    void scene.offsetWidth;
+    scene.classList.add('is-playing');
+    dmSettingsGlyphTimer=setTimeout(()=>{
+      layers.forEach(layer=>layer.classList.remove('is-visible'));
+      scene.classList.remove('is-playing');
+      byId('mgDetail').querySelectorAll('[data-dm-glyph-preview]').forEach(button=>button.setAttribute('aria-pressed','false'));
+      if(caption)caption.textContent='Выберите знак ✦';
+      scene.setAttribute('aria-label','Плазма ждёт выбранный знак');
+      dmSettingsGlyphTimer=null;
+    },4200);
+  }
   function mgSettingsPage(page){
     mgCurrent=page;
     byId('mgHome').hidden=page!=='home';
@@ -328,6 +399,7 @@
     byId('mgTitle').textContent=mgNames[page]||'Управление';
     byId('mgSubtitle').textContent=({home:'Настройки приложения',manager:'Имя · навыки · общение',autopilot:'Границы самостоятельности',connections:'Сервисы и источники данных',documents:'Файлы и шаблоны',payments:'Счета и регулярные расходы',learning:'Возможности приложения',voice:'Док · Кольцо · Голос'})[page]||'Настройки приложения';
     clearTimeout(voicePreviewTimer);
+    if(dmSettingsGlyphTimer!==null){clearTimeout(dmSettingsGlyphTimer);dmSettingsGlyphTimer=null;}
     if(page==='home'){byId('mgDetail').innerHTML='';window.scrollTo(0,0);return;}
     let content='';
     if(page==='manager'){
@@ -351,6 +423,7 @@
     byId('mgDetail').innerHTML=content;
     if(page==='voice'){
       dmMountRealDockPreview();
+      dmMountGlyphShowcase();
       // Dedicated action preference; voice activation by name needs a real recognition
       // engine and microphone permission, so its status is explicitly informational.
       const settings=document.createElement('section');
@@ -365,9 +438,9 @@
         '<p class="dm-chat-settings-note">Режим «Голос» пока открывает панель с пояснением — микрофон не включается.</p>'+
         '<div class="dm-wake-info"><strong>Обращение по имени — в разработке</strong><small>Позже можно будет обратиться к управляющему по имени, как к Алисе. Для этого понадобится поддержка распознавания речи и разрешение на микрофон. Сейчас фоновое прослушивание не запускается.</small></div>'+
         '<div class="dm-glyph-settings"><strong>Знаки внутри плазмы</strong><small>Тонкие белые символы появляются при значимых событиях. Нажмите на знак, чтобы посмотреть анимацию.</small>'+
-        '<div class="dm-glyph-preview-actions">'+[
+        '<div class="dm-glyph-showcase"><div class="dm-glyph-preview-actions">'+[
           ['mail','Почта'],['health','Здоровье'],['task','Задача'],['calendar','Календарь'],['attention','Внимание']
-        ].map(([kind,label])=>'<button type="button" data-dm-glyph-preview="'+kind+'" aria-label="Показать символ: '+label+'"><svg viewBox="0 0 24 24" aria-hidden="true">'+dmGlyphDrawings[kind]+'</svg><span>'+label+'</span></button>').join('')+'</div>'+
+        ].map(([kind,label])=>'<button type="button" data-dm-glyph-preview="'+kind+'" aria-pressed="false" aria-label="Показать символ: '+label+'"><svg viewBox="0 0 24 24" aria-hidden="true">'+dmGlyphDrawings[kind]+'</svg><span>'+label+'</span></button>').join('')+'</div><div class="dm-glyph-stage" id="dmGlyphStage" role="img" aria-label="Плазма ждёт выбранный знак"><span class="dm-glyph-stage-demo">ДЕМО</span><div class="dm-glyph-stage-orb" id="dmGlyphStageOrb"></div><span class="dm-glyph-stage-label" id="dmGlyphStageLabel">Выберите знак ✦</span></div></div>'+
         '<p class="dm-glyph-preview-status" id="dmGlyphPreviewStatus" aria-live="polite">Это предпросмотр. Реальные сигналы появятся после подключения источников событий.</p>'+
         '</div>';
       byId('mgDetail').prepend(settings);
