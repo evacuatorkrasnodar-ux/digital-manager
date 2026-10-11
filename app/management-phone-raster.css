@@ -59,3 +59,39 @@
 }
 #managementScreen .voice-iphone-screen::after,
 #managementScreen .voice-conversation-indicator{display:none!important}
+
+/* RESTORED SIDE RAILS — the approved PNG is the sole bottom bezel.
+   Only the two slim titanium side strips are painted behind the live
+   display, joining the PNG's bright corner curves without a second rim. */
+#managementScreen .voice-iphone-device,
+#managementScreen .voice-mock-conversation .voice-conversation-device{
+  border-radius:0 0 40px 40px!important;
+  background:
+    linear-gradient(90deg,
+      #0c1119 0px,
+      rgba(195,213,229,.90) 2px,
+      rgba(88,111,129,.89) 4px,
+      #15222d 6px,
+      #07111c 9px,
+      rgba(6,14,23,0) 14px,
+      rgba(6,14,23,0) calc(100% - 14px),
+      #07111c calc(100% - 9px),
+      #15222d calc(100% - 6px),
+      rgba(88,111,129,.89) calc(100% - 4px),
+      rgba(195,213,229,.90) calc(100% - 2px),
+      #0c1119 100%)!important;
+}
+#managementScreen .voice-iphone-screen{
+  width:calc(100% - 18px);
+  height:calc(100% - var(--mg-phone-chin));
+  margin-inline:auto;
+}
+#managementScreen .voice-mock-conversation .voice-conversation-device .voice-scene,
+#managementScreen .voice-mock-conversation .voice-conversation-device .voice-phone-frame{
+  inset:0 9px var(--mg-phone-chin);
+}
+@media(max-width:350px){
+  #managementScreen .voice-iphone-screen{width:calc(100% - 16px)}
+  #managementScreen .voice-mock-conversation .voice-conversation-device .voice-scene,
+  #managementScreen .voice-mock-conversation .voice-conversation-device .voice-phone-frame{inset:0 8px var(--mg-phone-chin)}
+}
