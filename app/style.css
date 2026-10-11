@@ -572,3 +572,7 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 }
 #assistantScreen .assistant-home-return .ico{width:17px;height:17px;stroke-width:1.8}
 #assistantScreen .assistant-home-return:focus-visible{outline:2px solid #d4ecff;outline-offset:2px}
+
+/* Card-accented laser stops blend when new colored cards join the dashboard. */
+.dm-voice-waves-electric defs linearGradient stop{transition:stop-color .85s ease}
+@media(prefers-reduced-motion:reduce){.dm-voice-waves-electric defs linearGradient stop{transition:none!important}}

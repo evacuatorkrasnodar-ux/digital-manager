@@ -299,6 +299,77 @@
   byId('modal').addEventListener('click',e=>{if(e.target===byId('modal'))closeModal();});
   document.querySelectorAll('[data-question]').forEach(b=>b.addEventListener('click',()=>chat(b.dataset.question)));
   byId('chatForm').addEventListener('submit',e=>{e.preventDefault();const i=byId('chatInput');const q=i.value.trim();if(!q)return;chat(q);i.value='';});
+  // Card-to-laser palette. Every present/future dashboard card can provide
+  // data-laser-accent or --dm-card-laser-accent; a visible SVG line also works.
+  // This updates only the five side-laser gradients, never the approved orb.
+  const laserCardRoot=document.querySelector('#homeScreen .dashboard');
+  const laserSource=(raw)=>{
+    const value=String(raw||'').trim();
+    if(/^#[\da-f]{3}$/i.test(value))return [...value.slice(1)].map(x=>parseInt(x+x,16));
+    if(/^#[\da-f]{6}$/i.test(value))return [1,3,5].map(i=>parseInt(value.slice(i,i+2),16));
+    const m=value.match(/^rgba?\(\s*(\d{1,3})[,\s]+(\d{1,3})[,\s]+(\d{1,3})/i);
+    return m?[m[1],m[2],m[3]].map(Number):null;
+  };
+  const laserColorHex=(color)=>'#'+color.map(n=>Math.max(0,Math.min(255,Math.round(n))).toString(16).padStart(2,'0')).join('');
+  const laserMix=(a,b,t)=>a.map((value,i)=>value*(1-t)+b[i]*t);
+  function cardLaserColor(card){
+    const style=getComputedStyle(card);
+    const explicit=card.getAttribute('data-laser-accent')||style.getPropertyValue('--dm-card-laser-accent');
+    const marked=laserSource(explicit);
+    if(marked)return marked;
+    // Automatically detect an accent on new cards that draw their own line.
+    const strokes=card.querySelectorAll('svg path,svg polyline,svg line');
+    for(const line of strokes){
+      if(line.closest('defs'))continue;
+      const stroke=laserSource(line.getAttribute('stroke'))||laserSource(getComputedStyle(line).stroke);
+      if(stroke&&Math.max(...stroke)-Math.min(...stroke)>32)return stroke;
+    }
+    return null;
+  }
+  function updateCardLaserPalette(){
+    const cards=[...laserCardRoot.querySelectorAll('.metric-card,[data-laser-accent]')].filter(card=>
+      !card.hidden&&getComputedStyle(card).display!=='none'&&(!card.closest('.metric-card')||card.classList.contains('metric-card')));
+    const uniqueCards=[...new Set(cards)];
+    const accents=uniqueCards.map(cardLaserColor).filter(Boolean);
+    if(!accents.length)accents.push([86,182,255],[246,186,117]);
+    // Interleaved lines: cool analytics to warm recommendations; newly added
+    // green, pink, etc. become part of this mix automatically.
+    const glowIce=[137,204,255],glowViolet=[151,124,255];
+    const groups=['dmLiveElectric','dmLauncherWaveElectric','dmPreviewElectric'];
+    groups.forEach(prefix=>{
+      for(let wave=0;wave<5;wave++){
+        const gradient=document.getElementById(prefix+wave);
+        if(!gradient)continue; // settings preview is mounted on demand
+        const left=accents[wave===4?0:wave%accents.length];
+        const right=accents[wave===4?0:(accents.length-1-(wave%accents.length)+accents.length)%accents.length];
+        gradient.querySelectorAll('stop').forEach(stop=>{
+          const x=Number.parseFloat(stop.getAttribute('offset')||'0')/100;
+          let color;
+          if(x<=.36)color=laserMix(left,glowIce,x>.25?.13:.05);
+          else if(x<=.5)color=laserMix(left,glowIce,.35);
+          else if(x<=.60)color=laserMix(right,glowViolet,.32);
+          else color=laserMix(right,glowIce,x>.85?.06:.12);
+          stop.setAttribute('stop-color',laserColorHex(color));
+        });
+      }
+    });
+  }
+  if(laserCardRoot){
+    let laserRefreshQueued=false;
+    const queueLaserRefresh=()=>{
+      if(laserRefreshQueued)return;
+      laserRefreshQueued=true;
+      requestAnimationFrame(()=>{laserRefreshQueued=false;updateCardLaserPalette();});
+    };
+    const watchLaserCards=new MutationObserver(changes=>{
+      if(changes.some(change=>change.type==='childList'||change.type==='attributes'))queueLaserRefresh();
+    });
+    watchLaserCards.observe(laserCardRoot,{subtree:true,childList:true,attributes:true,
+      attributeFilter:['data-laser-accent','hidden','class','style']});
+    const previewContainer=byId('mgDetail');
+    if(previewContainer)new MutationObserver(queueLaserRefresh).observe(previewContainer,{childList:true});
+    queueLaserRefresh();
+  }
   applyUser();updatePeriod('day');setTab('home');setRingMode('idle');
   // Internal deep links from the unified personal OS dock.
   const jump=new URLSearchParams(window.location.search).get('jump');
