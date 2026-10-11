@@ -139,6 +139,86 @@
   const liveRing=byId('assistantLive');
   const voiceDock=document.querySelector('.bottom-nav');
   const hiddenDock=byId('dockHiddenControls');
+
+  // EVENT GLYPHS: a separate, weightless layer inside the approved black plasma.
+  // Only verified connected events may show event pictograms. Ambient animation
+  // uses an abstract geometric mark and is NEVER a fake notification.
+  const dmGlyphDrawings=Object.freeze({
+    mail:'<rect x="3.5" y="6.6" width="17" height="11" rx="2"/><path d="m4.5 8 7.5 6 7.5-6"/>',
+    health:'<path d="M12 20s-8.3-4.9-8.3-10.4c0-4.2 5.1-6 8.3-2.1 3.2-3.9 8.3-2.1 8.3 2.1 0 5.5-8.3 10.4-8.3 10.4Z"/><path d="M4.8 12h4l1.7-3.1 2.4 6.2 1.8-3.1h4.5"/>',
+    task:'<rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M8 9.5l1.7 1.7 3-3.2M8 15.4h8"/>',
+    attention:'<path d="M12 3.2 21 19H3L12 3.2Z"/><path d="M12 9v4.8M12 17.1h.01"/>',
+    ambient:'<circle cx="12" cy="12" r="6.2" stroke-dasharray="7.3 4.5 3.1 6.2 9.4 4.1"/><path d="M12 3.2v3.1M12 17.7v3.1M3.2 12h3.1M17.7 12h3.1"/><circle cx="12" cy="12" r="1.1"/>'
+  });
+  const dmGlyphTypes=['mail','health','task','attention'];
+  const dmGlyphLayers=[
+    ...document.querySelectorAll('#dockLauncher .dm-launcher-plasma,#tabAssistant .dm-dock-plasma,#assistantLive>.dm-voice-orb')
+  ].map(orb=>{
+    const layer=document.createElement('span');
+    layer.className='dm-core-glyph';
+    layer.setAttribute('aria-hidden','true');
+    const picture=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    picture.setAttribute('viewBox','0 0 24 24');
+    picture.setAttribute('focusable','false');
+    picture.setAttribute('aria-hidden','true');
+    layer.append(picture);
+    orb.append(layer);
+    return layer;
+  });
+  let dmGlyphHideTimer=null;
+  let dmGlyphAmbientTimer=null;
+  function dmRevealGlyph(kind){
+    if(!Object.hasOwn(dmGlyphDrawings,kind))return;
+    if(kind==='ambient'&&dmGlyphHideTimer!==null)return;
+    if(dmGlyphHideTimer!==null)clearTimeout(dmGlyphHideTimer);
+    dmGlyphLayers.forEach(layer=>{
+      layer.dataset.kind=kind;
+      layer.firstElementChild.innerHTML=dmGlyphDrawings[kind];
+      layer.classList.remove('is-visible');
+      // Reflow restarts only the inner sign, never ring/wave animations.
+      void layer.offsetWidth;
+      layer.classList.add('is-visible');
+    });
+    dmGlyphHideTimer=setTimeout(()=>{
+      dmGlyphLayers.forEach(layer=>layer.classList.remove('is-visible'));
+      dmGlyphHideTimer=null;
+    },kind==='attention'?3100:2400);
+  }
+  function dmPreviewGlyph(kind){
+    if(!dmGlyphTypes.includes(kind))return;
+    dmRevealGlyph(kind);
+    if(kind==='attention')setRingMode('attention',3300);
+    const caption=byId('dmGlyphPreviewStatus');
+    if(caption)caption.textContent='Демонстрация: '+({
+      mail:'важное письмо',health:'напоминание о здоровье',
+      task:'важная задача',attention:'предупреждение'
+    })[kind]+'. Реального события сейчас нет.';
+  }
+  // Integration contract for the future event hub: the verified flag must
+  // come from a connected event processor, not from a timer or demo data.
+  document.addEventListener('dm:assistant-event',event=>{
+    const detail=event.detail;
+    if(!detail||detail.verified!==true||!dmGlyphTypes.includes(detail.kind))return;
+    if(detail.kind==='health'&&detail.healthOptIn!==true)return;
+    dmRevealGlyph(detail.kind);
+    if(detail.kind==='attention')setRingMode('attention',3400);
+  });
+  function dmScheduleAmbientGlyph(first=false){
+    if(dmGlyphAmbientTimer!==null)clearTimeout(dmGlyphAmbientTimer);
+    const delay=first?55000+Math.random()*35000:170000+Math.random()*160000;
+    dmGlyphAmbientTimer=setTimeout(()=>{
+      dmGlyphAmbientTimer=null;
+      const quiet=document.visibilityState==='visible'
+        &&byId('tabAssistant').dataset.mode==='idle'
+        &&byId('plasmaChatPanel').hidden
+        &&byId('dockQuickActions').hidden
+        &&!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(quiet)dmRevealGlyph('ambient');
+      dmScheduleAmbientGlyph();
+    },delay);
+  }
+  dmScheduleAmbientGlyph(true);
+  window.addEventListener('pagehide',()=>{clearTimeout(dmGlyphHideTimer);clearTimeout(dmGlyphAmbientTimer);});
   let liveTimer=null,liveFadeTimer=null,voicePreviewTimer=null;
   function updateDock(){
     voiceDock.hidden=!voicePrefs.dock;
@@ -239,7 +319,13 @@
           '<option value="text">Сразу написать сообщение</option>'+
         '</select>'+
         '<p class="dm-chat-settings-note">Режим «Голос» пока открывает панель с пояснением — микрофон не включается.</p>'+
-        '<div class="dm-wake-info"><strong>Обращение по имени — в разработке</strong><small>Позже можно будет обратиться к управляющему по имени, как к Алисе. Для этого понадобится поддержка распознавания речи и разрешение на микрофон. Сейчас фоновое прослушивание не запускается.</small></div>';
+        '<div class="dm-wake-info"><strong>Обращение по имени — в разработке</strong><small>Позже можно будет обратиться к управляющему по имени, как к Алисе. Для этого понадобится поддержка распознавания речи и разрешение на микрофон. Сейчас фоновое прослушивание не запускается.</small></div>'+
+        '<div class="dm-glyph-settings"><strong>Знаки внутри плазмы</strong><small>Тонкие белые символы появляются при значимых событиях. Нажмите на знак, чтобы посмотреть анимацию.</small>'+
+        '<div class="dm-glyph-preview-actions">'+[
+          ['mail','Почта'],['health','Здоровье'],['task','Задача'],['attention','Внимание']
+        ].map(([kind,label])=>'<button type="button" data-dm-glyph-preview="'+kind+'" aria-label="Показать символ: '+label+'"><svg viewBox="0 0 24 24" aria-hidden="true">'+dmGlyphDrawings[kind]+'</svg><span>'+label+'</span></button>').join('')+'</div>'+
+        '<p class="dm-glyph-preview-status" id="dmGlyphPreviewStatus" aria-live="polite">Это предпросмотр. Реальные сигналы появятся после подключения источников событий.</p>'+
+        '</div>';
       byId('mgDetail').prepend(settings);
       byId('plasmaTapMode').value=voicePrefs.tapAction;
     }
@@ -385,7 +471,11 @@
   byId('dockOpenHome').addEventListener('click',()=>{closeDockQuickActions();closePlasmaPanel();setTab('home');});
   byId('dockOpenChat').addEventListener('click',()=>{closeDockQuickActions();openPlasmaPanel(true);});
   byId('dockOpenManage').addEventListener('click',()=>{closeDockQuickActions();closePlasmaPanel();setTab('management');});
-  byId('mgDetail').addEventListener('click',event=>{if(event.target.closest('#voicePreview'))previewVoiceRing();});
+  byId('mgDetail').addEventListener('click',event=>{
+    if(event.target.closest('#voicePreview'))previewVoiceRing();
+    const preview=event.target.closest('[data-dm-glyph-preview]');
+    if(preview)dmPreviewGlyph(preview.dataset.dmGlyphPreview);
+  });
   document.addEventListener('visibilitychange',()=>{if(document.hidden)hideLiveRing(true);});
   window.addEventListener('pagehide',()=>hideLiveRing(true));
 

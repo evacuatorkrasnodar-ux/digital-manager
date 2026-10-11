@@ -654,3 +654,35 @@ html:not(.dock-is-hidden) .dm-chat-short-nav{display:none}
   max-height:max(135px,calc(100dvh - 38px - var(--dm-chat-kb,0px)));
 }
 .dm-chat-panel.dm-chat-keyboard-open .dm-chat-log{max-height:100px}
+
+
+/* Rare, meaningful pictograms inside the existing black-matter plasma:
+   independent of the approved electric ring, five waves and touch geometry. */
+.dm-voice-orb .dm-core-glyph{
+  position:absolute;left:50%;top:50%;z-index:5;width:39%;height:39%;
+  display:grid;place-items:center;pointer-events:none;overflow:visible;
+  color:rgba(237,247,255,.90);opacity:0;
+  transform:translate(-50%,-50%) scale(.66) rotate(-8deg);
+  transition:opacity .9s ease,transform 1.35s cubic-bezier(.18,.65,.2,1);
+  filter:drop-shadow(0 0 3px rgba(179,220,255,.32));
+  will-change:opacity,transform;
+}
+.dm-voice-orb .dm-core-glyph.is-visible{
+  opacity:.78;transform:translate(-50%,-50%) scale(1) rotate(0deg);
+}
+.dm-voice-orb .dm-core-glyph[data-kind="ambient"].is-visible{opacity:.38}
+.dm-voice-orb .dm-core-glyph[data-kind="attention"]{color:rgba(255,243,222,.95);filter:drop-shadow(0 0 3px rgba(244,204,146,.45))}
+.dm-voice-orb .dm-core-glyph svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.dm-glyph-settings{margin-top:14px;padding-top:13px;border-top:1px solid rgba(154,185,213,.23)}
+.dm-glyph-settings>strong{display:block;color:#f0f8ff;font-size:13px;font-weight:520}
+.dm-glyph-settings>small{display:block;margin:6px 0 11px;color:#a8c3d8;font-size:11px;line-height:1.5}
+.dm-glyph-preview-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.dm-glyph-preview-actions button{display:grid;justify-items:center;align-content:center;gap:7px;min-height:65px;border-radius:12px;border:1px solid rgba(139,178,214,.34);background:linear-gradient(150deg,rgba(23,41,59,.79),rgba(5,15,26,.86));color:#e5f2ff;cursor:pointer;padding:7px 2px}
+.dm-glyph-preview-actions button:is(:hover,:focus-visible){border-color:rgba(190,225,248,.8);background:rgba(38,74,107,.66)}
+.dm-glyph-preview-actions button:focus-visible{outline:2px solid #c9edff;outline-offset:2px}
+.dm-glyph-preview-actions svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+.dm-glyph-preview-actions span{font-size:10px;font-weight:400;line-height:1.25}
+.dm-glyph-preview-status{margin:10px 0 0;font-size:10.5px;line-height:1.55;color:#9cb5cb}
+@media(prefers-reduced-motion:reduce){
+  .dm-voice-orb .dm-core-glyph{transition:none!important;will-change:auto}
+}
