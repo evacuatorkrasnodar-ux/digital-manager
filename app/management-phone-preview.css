@@ -7,7 +7,7 @@
 #managementScreen .voice-iphone-device,
 #managementScreen .voice-mock-conversation .voice-conversation-device{
   position:absolute;box-sizing:border-box;left:7px;right:7px;bottom:3px;
-  height:250px;padding:0;border:0;border-radius:0;background:none;
+  aspect-ratio:1672 / 941;height:auto;padding:0;border:0;border-radius:0;background:none;
   box-shadow:none;overflow:visible;isolation:isolate;
 }
 #managementScreen .voice-iphone-device::before,
@@ -22,7 +22,7 @@
 #managementScreen .voice-iphone-island,
 #managementScreen .voice-iphone-title{display:none}
 #managementScreen .voice-iphone-screen{
-  position:absolute;inset:0 17px 28px;width:auto;height:auto;margin:0;
+  position:absolute;inset:0 17px 13% 17px;width:auto;height:auto;margin:0;
   border:0;border-radius:0 0 37px 37px;overflow:hidden;isolation:isolate;
   box-shadow:none;
   background:linear-gradient(180deg,rgba(3,9,17,.16),rgba(1,4,11,.48)),
@@ -31,7 +31,7 @@
 #managementScreen .voice-iphone-screen::after,
 #managementScreen .voice-conversation-indicator{content:none;display:none}
 #managementScreen .voice-iphone-dock-mount{
-  position:absolute;left:0;right:0;bottom:-5px;height:94px;z-index:3;pointer-events:none;
+  position:absolute;left:0;right:0;bottom:1px;height:94px;z-index:3;pointer-events:none;
 }
 #managementScreen .voice-iphone-dock-mount .mg-dock-preview.bottom-nav{
   box-sizing:border-box;position:absolute!important;top:auto!important;
@@ -55,7 +55,7 @@
 }
 #managementScreen .voice-mock-conversation .voice-conversation-device .voice-scene,
 #managementScreen .voice-mock-conversation .voice-conversation-device .voice-phone-frame{
-  position:absolute;inset:0 17px 28px;border:0;border-radius:0 0 37px 37px;overflow:hidden;
+  position:absolute;inset:0 17px 13% 17px;border:0;border-radius:0 0 37px 37px;overflow:hidden;
 }
 #managementScreen .voice-mock-conversation .voice-conversation-device .voice-scene{
   background:linear-gradient(0deg,rgba(3,7,11,.4),transparent 58%),
@@ -68,7 +68,7 @@
   #managementScreen .voice-mock.voice-mock-dock-scene{height:185px}
   #managementScreen .voice-iphone-device,
   #managementScreen .voice-mock-conversation .voice-conversation-device{
-    height:237px;left:5px;right:5px;
+    left:5px;right:5px;
   }
   #managementScreen .voice-iphone-dock-mount .mg-dock-preview .nav-label{font-size:6.7px}
 }
