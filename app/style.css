@@ -954,7 +954,7 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
    Scoped to the actual dock (also used in its preview) and quiet launcher. */
 .bottom-nav[data-mode="idle"] .dm-dock-plasma,
 #dockLauncher[data-mode="idle"] .dm-launcher-plasma{
-  filter:drop-shadow(0 0 5px rgba(225,240,255,.69)) drop-shadow(0 0 9px rgba(183,206,237,.23))!important;
+  filter:drop-shadow(0 0 5px rgba(225,240,255,.55)) drop-shadow(0 0 9px rgba(183,206,237,.18))!important;
 }
 .bottom-nav[data-mode="idle"] .dm-dock-plasma .dm-orb-rim,
 #dockLauncher[data-mode="idle"] .dm-launcher-plasma .dm-orb-rim{
@@ -963,7 +963,7 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
 }
 .bottom-nav[data-mode="idle"] .dm-dock-plasma .dm-orb-halo,
 #dockLauncher[data-mode="idle"] .dm-launcher-plasma .dm-orb-halo{
-  background:radial-gradient(circle,transparent 38%,rgba(237,246,255,.05) 49%,rgba(229,241,255,.23) 56%,rgba(191,215,248,.11) 66%,transparent 76%);
+  background:radial-gradient(circle,transparent 38%,rgba(237,246,255,.04) 49%,rgba(229,241,255,.18) 56%,rgba(191,215,248,.09) 66%,transparent 76%);
 }
 .bottom-nav[data-mode="idle"] .dm-dock-plasma .dm-orb-spectral,
 #dockLauncher[data-mode="idle"] .dm-launcher-plasma .dm-orb-spectral{
