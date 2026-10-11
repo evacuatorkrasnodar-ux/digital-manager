@@ -32,6 +32,7 @@
       orb.append(brand);
     }
     const button=stage.querySelector('#mydayPlasmaLauncher');
+    button.dataset.mode='idle'; // Exactly the white waiting state, never blue-thinking.
     const menu=document.createElement('nav');
     menu.id='mydayPlasmaMenu';
     menu.className='dm-myday-plasma-menu';
