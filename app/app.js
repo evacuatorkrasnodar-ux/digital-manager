@@ -133,12 +133,49 @@
   const savedVoice=mgSaved.voice&&typeof mgSaved.voice==='object'?mgSaved.voice:{};
   const allowedPlasmaActions=['panel','voice','text'];
   const voicePrefs={dock:savedVoice.dock!==false,tapAction:allowedPlasmaActions.includes(savedVoice.tapAction)?savedVoice.tapAction:'panel'};
+  const dockTargets={
+    clients:{label:'Клиенты',icon:'ic-users'},
+    day:{label:'Мой день',icon:'ic-calendar'},
+    docs:{label:'Документы',icon:'ic-file'},
+    finance:{label:'Финансы',icon:'ic-coins'},
+    home:{label:'Главная',icon:'ic-grid'},
+    management:{label:'Управление',icon:'ic-settings'}
+  };
+  const dockDefaults=['clients','day','docs','finance'];
+  const savedDockItems=Array.isArray(savedVoice.dockItems)?savedVoice.dockItems:[];
+  voicePrefs.dockItems=dockDefaults.map((key,index)=>
+    dockTargets[savedDockItems[index]]?savedDockItems[index]:key);
+  // Four positions belong to the user; the center plasma stays fixed.
   mgData.voice=voicePrefs;
   // The animated ring temporarily replaces navigation only while the assistant is active.
   // The settings preview stays INSIDE its card, never over page content.
   const liveRing=byId('assistantLive');
   const voiceDock=document.querySelector('.bottom-nav');
   const hiddenDock=byId('dockHiddenControls');
+  const dockButtonIds=['tabClients','tabDay','tabDocs','tabFinance'];
+  function dmSyncDockItems(){
+    dockButtonIds.forEach((id,index)=>{
+      const item=byId(id);
+      const key=voicePrefs.dockItems[index];
+      const choice=dockTargets[key];
+      item.dataset.dockTarget=key;
+      item.setAttribute('aria-label','Открыть '+choice.label);
+      item.querySelector('.nav-ico use').setAttribute('href','#'+choice.icon);
+      item.querySelector('.nav-label').textContent=choice.label;
+    });
+  }
+  function dmOpenDockTarget(key){
+    closeDockQuickActions();
+    closePlasmaPanel();
+    if(key==='day'){window.location.assign('./myday.html');return;}
+    if(key==='home'){setTab('home');return;}
+    if(key==='management'){setTab('management');return;}
+    if(key==='clients'){setTab('home');clientsModal();return;}
+    if(key==='docs'){setTab('management');mgSettingsPage('documents');return;}
+    if(key==='finance'){setTab('home');detailModal('finance');}
+  }
+  dmSyncDockItems();
+
 
   // EVENT GLYPHS: a separate, weightless layer inside the approved black plasma.
   // Only verified connected events may show event pictograms. Ambient animation
@@ -451,6 +488,7 @@
     }else{content='<p class="mg-explain">'+mgInfo[page]+'</p><p class="mg-disclaimer">Этот раздел готовится. Подключённые данные и действия не имитируются.</p>';}
     byId('mgDetail').innerHTML=content;
     if(page==='voice'){
+      dmSyncDockItems();
       dmMountRealDockPreview();
       // Dedicated action preference; voice activation by name needs a real recognition
       // engine and microphone permission, so its status is explicitly informational.
@@ -463,15 +501,25 @@
           '<option value="voice">Голосовое общение</option>'+
           '<option value="text">Сразу написать сообщение</option>'+
         '</select>'+
-        '<p class="dm-chat-settings-note">Режим «Голос» пока открывает панель с пояснением — микрофон не включается.</p>'+
-        '<div class="dm-wake-info"><strong>Обращение по имени — в разработке</strong><small>Позже можно будет обратиться к управляющему по имени, как к Алисе. Для этого понадобится поддержка распознавания речи и разрешение на микрофон. Сейчас фоновое прослушивание не запускается.</small></div>'+
+        
+        
         '<div class="dm-glyph-settings"><strong>Знаки внутри плазмы</strong><small>Тонкие белые символы появляются при значимых событиях. Нажмите на знак, чтобы посмотреть анимацию.</small>'+
         '<div class="dm-glyph-showcase"><div class="dm-glyph-preview-actions">'+[
           ['mail','Почта'],['health','Здоровье'],['task','Задача'],['calendar','Календарь'],['attention','Внимание']
         ].map(([kind,label])=>'<button type="button" data-dm-glyph-preview="'+kind+'" aria-pressed="false" aria-label="Показать символ: '+label+'"><svg viewBox="0 0 24 24" aria-hidden="true">'+dmGlyphDrawings[kind]+'</svg><span>'+label+'</span></button>').join('')+'</div><div class="dm-glyph-stage" id="dmGlyphStage" role="img" aria-label="Плазма ждёт выбранный знак"><span class="dm-glyph-stage-demo">ДЕМО</span><div class="dm-glyph-stage-orb" id="dmGlyphStageOrb"></div><span class="dm-glyph-stage-label" id="dmGlyphStageLabel">Выберите знак ✦</span></div></div>'+
         '<p class="dm-glyph-preview-status" id="dmGlyphPreviewStatus" aria-live="polite">Это предпросмотр. Реальные сигналы появятся после подключения источников событий.</p>'+
         '</div>';
-      byId('mgDetail').prepend(settings);
+      const dockConfig=document.createElement('section');
+      dockConfig.className='dm-dock-customize voice-pref';
+      dockConfig.innerHTML='<div class="dm-dock-customize-title"><strong>Мой док</strong><small>Выберите четыре раздела. Плазма всегда в центре.</small></div>'+
+        '<div class="dm-dock-customize-grid">'+voicePrefs.dockItems.map((selected,index)=>
+          '<label class="dm-dock-customize-slot"><span>Место '+(index+1)+'</span>'+
+          '<select data-dock-slot="'+index+'" aria-label="Раздел в доке, место '+(index+1)+'">'+
+          Object.entries(dockTargets).map(([key,item])=>'<option value="'+key+'" '+(key===selected?'selected':'')+'>'+item.label+'</option>').join('')+
+          '</select></label>').join('')+'</div>'+
+        '<p class="dm-dock-customize-hint">Значки на настоящем доке и в предпросмотре меняются сразу. Выбор сохраняется.</p>';
+      byId('mgDetail').prepend(dockConfig);
+            byId('mgDetail').prepend(settings);
       dmMountGlyphShowcase();
       byId('plasmaTapMode').value=voicePrefs.tapAction;
     }
@@ -506,6 +554,16 @@
   byId('mgDetail').addEventListener('click',event=>{const link=event.target.closest('[data-mg-open]');if(link)mgSettingsPage(link.dataset.mgOpen);});
   byId('mgDetail').addEventListener('change',event=>{
     const el=event.target;
+    if(el.dataset.dockSlot!==undefined){
+      const index=Number(el.dataset.dockSlot);
+      if(Number.isInteger(index)&&index>=0&&index<4&&dockTargets[el.value]){
+        voicePrefs.dockItems[index]=el.value;
+        dmSyncDockItems();
+        dmMountRealDockPreview();
+        save();
+      }
+      return;
+    }
     if(el.id==='voiceDock'){voicePrefs.dock=el.checked;save();updateDock();}
     else if(el.id==='plasmaTapMode'){voicePrefs.tapAction=el.value;save();}
     else if(el.id==='mgManagerName'){mgData.managerName=el.value.trim()||'Цифровой управляющий';el.value=mgData.managerName==='Цифровой управляющий'?'':mgData.managerName;}
@@ -1062,11 +1120,11 @@
 
   // Explicitly wire every visual action; unused marketing routes remain untouched.
   document.querySelectorAll('[data-ring-preview]').forEach(b=>b.addEventListener('click',()=>setRingMode(b.dataset.ringPreview,b.dataset.ringPreview==='idle'?0:4200)));
-  byId('tabClients').addEventListener('click',()=>{setTab('home');clientsModal();});
+  byId('tabClients').addEventListener('click',()=>dmOpenDockTarget(voicePrefs.dockItems[0]));
   byId('assistantReturnHome').addEventListener('click',()=>setTab('home'));
-  byId('tabDay').addEventListener('click',()=>window.location.assign('./myday.html'));
-  byId('tabDocs').addEventListener('click',()=>{closeDockQuickActions();closePlasmaPanel();setTab('management');mgSettingsPage('documents');});
-  byId('tabFinance').addEventListener('click',()=>{closeDockQuickActions();closePlasmaPanel();setTab('home');detailModal('finance');});
+  byId('tabDay').addEventListener('click',()=>dmOpenDockTarget(voicePrefs.dockItems[1]));
+  byId('tabDocs').addEventListener('click',()=>dmOpenDockTarget(voicePrefs.dockItems[2]));
+  byId('tabFinance').addEventListener('click',()=>dmOpenDockTarget(voicePrefs.dockItems[3]));
   document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.tab==='assistant')togglePlasmaQuickMenu();else{closeDockQuickActions();closePlasmaPanel();setTab(b.dataset.tab);}}));
   document.querySelectorAll('[data-period]').forEach(b=>b.addEventListener('click',()=>updatePeriod(b.dataset.period)));
   byId('openDates').addEventListener('click',()=>window.location.assign('./myday.html'));
