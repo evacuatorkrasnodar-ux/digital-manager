@@ -116,3 +116,6 @@ html.dm-myday-no-dock body > nav.bottom-nav{display:none!important}
  display:block;width:100%;height:100%;object-fit:contain;
  filter:brightness(.58) saturate(.35) drop-shadow(0 0 2px rgba(171,207,240,.16));
 }
+
+/* Calendar: approved mark only in white idle mode, never colored ring. */
+.dm-myday-plasma-stage .dock-launcher:not([data-mode="idle"]) .dm-myday-core-brand{opacity:0!important;visibility:hidden!important}
