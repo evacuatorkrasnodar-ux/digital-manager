@@ -1,11 +1,11 @@
 /* App-only service worker: fresh documents, styles and scripts; cached offline assets. */
-const CACHE = 'digital-manager-black-velvet-v602-20261011';
+const CACHE = 'digital-manager-black-velvet-v603-20261011';
 const CACHE_PREFIX = 'digital-manager-black-velvet-';
 const OFFLINE_FILES = [
   './index.html',
   './style.css?v=600',
   './dock.css?v=297',
-  './app.js?v=601',
+  './app.js?v=603',
   './myday.html',
   './myday.css?v=250',
   './russia-calendar.js?v=250',
@@ -27,6 +27,7 @@ const OFFLINE_FILES = [
   './personal-back-world.css?v=4',
   './personal-home-tone.css?v=1',
   './home-design-sync.css?v=2',
+  './management-iphone-dock.css?v=1',
   './world-layout-stability.css?v=4',
   './send-plane-glass.css?v=3',
   './send-plane-glass.js?v=1',
