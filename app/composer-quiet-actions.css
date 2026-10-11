@@ -1,0 +1,141 @@
+/* Quiet action tray: one living assistant, seven calm glass utilities.
+   This file affects only the draft destination grid; the original plasma,
+   Home cards, dock, calendar, and all click handlers are untouched. */
+.dm-chat-editor .dm-draft-actions-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:7px;
+}
+.dm-chat-editor .dm-draft-actions-grid button{
+  position:relative;
+  isolation:isolate;
+  box-sizing:border-box;
+  min-width:0;
+  min-height:88px;
+  gap:7px;
+  padding:10px 3px 8px;
+  border:1px solid rgba(138,171,197,.24);
+  border-radius:16px;
+  background:linear-gradient(152deg,rgba(17,31,44,.60),rgba(3,10,17,.72));
+  box-shadow:inset 0 1px rgba(236,248,255,.065),0 4px 11px rgba(0,0,0,.10);
+  color:#d7e5ef;
+  -webkit-tap-highlight-color:transparent;
+  transition:border-color .18s ease,background .18s ease,transform .18s ease;
+}
+/* Remove the global electric halos from every ordinary destination. */
+.dm-chat-editor .dm-draft-actions-grid button:not([data-draft-action="ask"])::before{
+  content:none;
+  display:none;
+}
+.dm-chat-editor .dm-draft-actions-grid button:not([data-draft-action="ask"]) svg{
+  display:block;
+  box-sizing:content-box;
+  position:relative;
+  z-index:1;
+  width:20px;
+  height:20px;
+  padding:11px;
+  border:0;
+  border-radius:0;
+  background:none;
+  box-shadow:none;
+  filter:none;
+  color:#cedeea;
+  stroke:#cedeea;
+  stroke-width:1.55;
+}
+.dm-chat-editor .dm-draft-actions-grid button span{
+  position:relative;
+  z-index:2;
+  color:#d3e1ed;
+  font-size:clamp(9px,2.6vw,10.5px);
+  font-weight:420;
+  line-height:1.2;
+  text-align:center;
+  white-space:normal;
+  overflow-wrap:normal;
+  hyphens:auto;
+  width:100%;
+}
+.dm-chat-editor .dm-draft-actions-grid button:not([data-draft-action="ask"]):is(:hover,:focus-visible){
+  border-color:rgba(180,214,236,.50);
+  background:linear-gradient(152deg,rgba(30,54,74,.67),rgba(5,19,33,.78));
+  box-shadow:inset 0 1px rgba(241,251,255,.10),0 4px 13px rgba(0,0,0,.17);
+}
+.dm-chat-editor .dm-draft-actions-grid button:not([data-draft-action="ask"]):is(:hover,:focus-visible) svg{
+  stroke:#eef8ff;
+  color:#eef8ff;
+}
+/* The assistant alone has an actual black-matter core and subtle electric ring. */
+.dm-chat-editor .dm-draft-actions-grid button[data-draft-action="ask"]{
+  border-color:rgba(134,179,220,.44);
+  background:linear-gradient(149deg,rgba(27,50,71,.66),rgba(3,13,25,.81));
+  box-shadow:inset 0 1px rgba(237,250,255,.115),0 4px 13px rgba(0,0,0,.18);
+}
+.dm-chat-editor .dm-draft-actions-grid button[data-draft-action="ask"]::before{
+  content:"";
+  display:block;
+  position:absolute;
+  z-index:0;
+  left:50%;
+  top:8px;
+  width:43px;
+  height:43px;
+  box-sizing:border-box;
+  transform:translateX(-50%);
+  border-radius:50%;
+  border:1px solid rgba(169,218,255,.58);
+  background:
+    radial-gradient(circle,rgba(0,2,9,1) 0 49%,rgba(0,4,13,.98) 51%,transparent 59%),
+    conic-gradient(from -28deg,#9ddaff 0deg,#287be8 64deg,#334af0 143deg,#9279e8 206deg,#2c7ddc 277deg,#b3eaff 340deg,#9ddaff 360deg);
+  box-shadow:
+    inset 0 0 9px rgba(17,51,124,.22),
+    0 0 6px rgba(54,138,245,.35),
+    0 0 11px rgba(70,102,242,.15);
+  pointer-events:none;
+}
+.dm-chat-editor .dm-draft-actions-grid button[data-draft-action="ask"] svg.dm-assistant-plasma-mark{
+  box-sizing:content-box;
+  position:relative;
+  display:block;
+  visibility:visible;
+  z-index:1;
+  flex:none;
+  width:19px;
+  height:19px;
+  padding:12px;
+  margin:0;
+  border:0;
+  border-radius:50%;
+  background:transparent;
+  box-shadow:none;
+  filter:drop-shadow(0 0 2px rgba(205,235,255,.12));
+  fill:none;
+  stroke:#f0f9ff;
+  stroke-width:1.6;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.dm-chat-editor .dm-draft-actions-grid button[data-draft-action="ask"] span{
+  color:#f0f8ff;
+  font-weight:500;
+}
+.dm-chat-editor .dm-draft-actions-grid button[data-draft-action="ask"]:is(:hover,:focus-visible){
+  border-color:rgba(176,218,247,.73);
+  background:linear-gradient(150deg,rgba(34,63,89,.77),rgba(5,21,40,.89));
+}
+.dm-chat-editor .dm-draft-actions-grid button[data-draft-action="ask"]:is(:hover,:focus-visible)::before{
+  box-shadow:inset 0 0 10px rgba(18,57,149,.27),0 0 8px rgba(73,151,255,.45),0 0 13px rgba(78,91,227,.17);
+}
+.dm-chat-editor .dm-draft-actions-grid button:focus-visible{
+  outline:2px solid rgba(179,222,252,.69);
+  outline-offset:2px;
+}
+.dm-chat-editor .dm-draft-actions-grid button:active{transform:scale(.97)}
+@media(max-width:350px){
+  .dm-chat-editor .dm-draft-actions-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+  .dm-chat-editor .dm-draft-actions-grid button{padding:9px 2px 7px;min-height:87px}
+  .dm-chat-editor .dm-draft-actions-grid button span{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+  .dm-chat-editor .dm-draft-actions-grid button{transition:none}
+}
