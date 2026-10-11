@@ -451,6 +451,21 @@
     }else{content='<p class="mg-explain">'+mgInfo[page]+'</p><p class="mg-disclaimer">Этот раздел готовится. Подключённые данные и действия не имитируются.</p>';}
     byId('mgDetail').innerHTML=content;
     if(page==='voice'){
+      // Both previews display the same cropped physical phone base.
+      // Wrap the existing live conversation preview without recreating its
+      // plasma, waves or handlers; the shell is purely presentational.
+      const talkPreview=byId('mgDetail').querySelector('.voice-mock-conversation');
+      const talkScene=talkPreview?.querySelector('.voice-scene');
+      const talkFrame=talkPreview?.querySelector('.voice-phone-frame');
+      if(talkPreview&&talkScene&&talkFrame){
+        const device=document.createElement('div');
+        device.className='voice-conversation-device';
+        const gesture=document.createElement('span');
+        gesture.className='voice-conversation-indicator';
+        gesture.setAttribute('aria-hidden','true');
+        talkScene.before(device);
+        device.append(talkScene,talkFrame,gesture);
+      }
       dmMountRealDockPreview();
       // Dedicated action preference; voice activation by name needs a real recognition
       // engine and microphone permission, so its status is explicitly informational.
