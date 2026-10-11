@@ -143,7 +143,6 @@
   function updateDock(){
     voiceDock.hidden=!voicePrefs.dock;
     hiddenDock.hidden=voicePrefs.dock;
-    byId('homeManageAccess').hidden=voicePrefs.dock;
     document.documentElement.classList.toggle('dock-is-hidden',!voicePrefs.dock);
     if(voicePrefs.dock)closeDockQuickActions();
   }
@@ -399,7 +398,6 @@
   byId('tabDay').addEventListener('click',()=>window.location.assign('./myday.html'));
   byId('tabDocs').addEventListener('click',()=>{closeDockQuickActions();closePlasmaPanel();setTab('management');mgSettingsPage('documents');});
   byId('tabFinance').addEventListener('click',()=>{closeDockQuickActions();closePlasmaPanel();setTab('home');detailModal('finance');});
-  byId('homeManageAccess').addEventListener('click',()=>setTab('management'));
   document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.tab==='assistant')togglePlasmaQuickMenu();else{closeDockQuickActions();closePlasmaPanel();setTab(b.dataset.tab);}}));
   document.querySelectorAll('[data-period]').forEach(b=>b.addEventListener('click',()=>updatePeriod(b.dataset.period)));
   byId('openDates').addEventListener('click',()=>window.location.assign('./myday.html'));
