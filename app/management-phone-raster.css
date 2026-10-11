@@ -60,30 +60,48 @@
 #managementScreen .voice-iphone-screen::after,
 #managementScreen .voice-conversation-indicator{display:none!important}
 
-/* RESTORED SIDE RAILS — the approved PNG is the sole bottom bezel.
-   Only the two slim titanium side strips are painted behind the live
-   display, joining the PNG's bright corner curves without a second rim. */
+/* Final single-body construction. No painted lower side corners: the
+   transparent PNG alone owns the bottom rim and BOTH lower corners. */
 #managementScreen .voice-iphone-device,
 #managementScreen .voice-mock-conversation .voice-conversation-device{
-  border-radius:0 0 40px 40px!important;
-  background:
-    linear-gradient(90deg,
-      #0c1119 0px,
-      rgba(195,213,229,.90) 2px,
-      rgba(88,111,129,.89) 4px,
-      #15222d 6px,
-      #07111c 9px,
-      rgba(6,14,23,0) 14px,
-      rgba(6,14,23,0) calc(100% - 14px),
-      #07111c calc(100% - 9px),
-      #15222d calc(100% - 6px),
-      rgba(88,111,129,.89) calc(100% - 4px),
-      rgba(195,213,229,.90) calc(100% - 2px),
-      #0c1119 100%)!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+/* Side rails are deliberately truncated ABOVE the beginning of the
+   PNG's curved lower corners. They cannot create a second bottom edge. */
+#managementScreen .voice-iphone-device::before,
+#managementScreen .voice-mock-conversation .voice-conversation-device::before{
+  content:""!important;
+  display:block!important;
+  position:absolute;
+  z-index:2;
+  top:0;
+  left:0;
+  right:0;
+  bottom:64px;
+  pointer-events:none;
+  background:linear-gradient(90deg,
+    #080f18 0px,
+    rgba(209,226,241,.85) 2px,
+    #526c7e 4px,
+    #111f2c 7px,
+    transparent 10px,
+    transparent calc(100% - 10px),
+    #111f2c calc(100% - 7px),
+    #526c7e calc(100% - 4px),
+    rgba(209,226,241,.85) calc(100% - 2px),
+    #080f18 100%);
+}
+#managementScreen .voice-iphone-device::after,
+#managementScreen .voice-mock-conversation .voice-conversation-device::after{
+  left:-7px;
+  right:-7px;
 }
 #managementScreen .voice-iphone-screen{
   width:calc(100% - 18px);
-  height:calc(100% - var(--mg-phone-chin));
   margin-inline:auto;
 }
 #managementScreen .voice-mock-conversation .voice-conversation-device .voice-scene,
