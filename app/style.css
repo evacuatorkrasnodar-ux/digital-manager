@@ -593,3 +593,55 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 #dockLauncher[data-mode="attention"] .dm-launcher-plasma .dm-arc-violet{filter:drop-shadow(0 0 3px rgba(251,169,73,.85))}
 .bottom-nav[data-mode="attention"] .dm-dock-plasma{filter:drop-shadow(0 0 6px rgba(247,176,84,.72)) drop-shadow(0 0 9px rgba(245,137,48,.24))!important}
 #dockLauncher[data-mode="attention"] .dm-launcher-plasma{filter:drop-shadow(0 0 6px rgba(247,176,84,.72)) drop-shadow(0 0 9px rgba(245,137,48,.28))!important}
+
+
+/* Compact raised glass communication panel above either approved plasma.
+   Ring geometry, five side-lasers and dock outline remain completely untouched. */
+.dm-chat-panel[hidden],.dm-chat-log[hidden],.dm-chat-hint[hidden]{display:none!important}
+.dm-chat-panel{
+  position:fixed;z-index:38;left:50%;bottom:calc(128px + env(safe-area-inset-bottom,0px));
+  width:min(390px,calc(100vw - 24px));max-height:min(450px,calc(100dvh - 155px));
+  transform:translateX(-50%);display:flex;flex-direction:column;gap:10px;padding:13px 12px 10px;
+  border:1px solid rgba(152,193,226,.46);border-radius:22px;
+  color:#ecf6ff;
+  background:linear-gradient(146deg,rgba(29,47,66,.92),rgba(7,17,29,.94) 53%,rgba(4,9,17,.96));
+  -webkit-backdrop-filter:blur(25px) saturate(1.12);backdrop-filter:blur(25px) saturate(1.12);
+  box-shadow:inset 0 1px rgba(241,248,255,.16),0 14px 48px rgba(0,0,0,.65),0 0 26px rgba(54,126,244,.11);
+  isolation:isolate;
+}
+.dm-chat-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.dm-chat-head-title{display:flex;align-items:center;gap:9px;min-width:0;font-size:13px;font-weight:540}
+.dm-chat-head-title small{display:block;margin-top:3px;color:#acc0d3;font-size:10px;font-weight:380}
+.dm-chat-presence{display:block;flex:none;width:12px;height:12px;border:1px solid #d7f5ff;border-radius:50%;box-shadow:0 0 8px rgba(77,166,255,.58);background:radial-gradient(circle,#84caff 0%,#3471da 28%,#0d1a44 65%)}
+.dm-chat-head-actions{display:flex;align-items:center;gap:4px;flex:none}
+.dm-chat-head-actions button{width:29px;height:29px;display:grid;place-items:center;border:1px solid rgba(151,183,211,.26);border-radius:50%;background:rgba(10,21,34,.68);color:#d9e9fb;cursor:pointer}
+.dm-chat-head-actions .ico{height:15px;width:15px}
+html:not(.dock-is-hidden) .dm-chat-short-nav{display:none}
+.dm-chat-log{overflow-y:auto;overscroll-behavior:contain;display:grid;align-content:start;gap:7px;min-height:0;max-height:200px;padding:3px 2px;scrollbar-width:thin;scrollbar-color:#6d8dac transparent}
+.dm-chat-message{max-width:90%;padding:9px 11px;border-radius:13px;font-size:12px;line-height:1.4;overflow-wrap:anywhere}
+.dm-chat-message.user{justify-self:end;background:linear-gradient(145deg,rgba(48,102,163,.60),rgba(18,53,97,.75));border:1px solid rgba(128,189,248,.28)}
+.dm-chat-message.assistant{justify-self:start;background:rgba(15,26,39,.88);border:1px solid rgba(146,176,210,.2)}
+.dm-chat-hint{margin:0;padding:9px 11px;border:1px solid rgba(156,178,204,.29);border-radius:11px;color:#b7d1e6;background:rgba(9,22,37,.69);font-size:11px;line-height:1.42}
+.dm-chat-compose{display:flex;align-items:center;gap:7px;background:rgba(2,9,17,.71);border:1px solid rgba(138,184,218,.43);border-radius:16px;padding:5px 6px 5px 12px}
+.dm-chat-compose:focus-within{border-color:rgba(166,220,255,.84)}
+.dm-chat-compose input{border:0;background:transparent;color:#f3faff;min-width:0;flex:1;font:400 13px/1.4 inherit;outline:none;padding:7px 0}
+.dm-chat-compose input::placeholder{color:#829db5}
+.dm-chat-compose button{width:35px;height:35px;flex:none;border-radius:12px;display:grid;place-items:center;cursor:pointer}
+.dm-chat-mic{border:1px solid rgba(140,170,203,.37);background:rgba(26,43,63,.69);color:#b4d5f3}
+.dm-chat-mic svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.65}
+.dm-chat-send{border:1px solid rgba(151,204,255,.60);background:linear-gradient(145deg,rgba(55,133,227,.91),rgba(24,82,162,.93));color:#fff}
+.dm-chat-send .ico{width:18px;height:18px}
+.dm-chat-expand{border:0;background:transparent;color:#a7c9e7;font:400 11px/1.5 inherit;cursor:pointer;align-self:center;padding:0}
+.dm-chat-panel button:focus-visible{outline:2px solid #c5ebff;outline-offset:2px}
+.dm-chat-settings{padding:13px!important}
+.dm-chat-settings-title{display:flex;gap:10px;align-items:center;margin-bottom:12px;color:#f2f9ff}
+.dm-chat-settings-title .ico{width:21px;height:21px;color:#b4dbf7}
+.dm-chat-settings-title strong{display:block;font-size:13px;font-weight:520}
+.dm-chat-settings-title small{display:block;color:#a8bfd4;font-size:11px;margin-top:3px}
+.dm-chat-settings-label{display:block;font-size:11px;margin-bottom:6px;color:#b6ccdd}
+.dm-chat-settings-select{width:100%;border-radius:11px;background:#0b1b2b;color:#f5faff;border:1px solid rgba(148,189,223,.48);padding:10px 12px;font:inherit;font-size:12px}
+.dm-chat-settings-note{color:#99b2c6;font-size:11px;line-height:1.48}
+.dm-wake-info{border-top:1px solid rgba(150,189,219,.22);padding-top:11px;margin-top:12px}
+.dm-wake-info strong{display:block;font-size:12px;color:#e5f2ff}
+.dm-wake-info small{display:block;font-size:11px;line-height:1.48;color:#a1bbd0;margin-top:6px}
+@media(max-height:520px){.dm-chat-panel{bottom:calc(92px + env(safe-area-inset-bottom,0px));max-height:calc(100dvh - 107px)}.dm-chat-log{max-height:70px}}

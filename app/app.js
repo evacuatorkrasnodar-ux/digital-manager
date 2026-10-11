@@ -102,11 +102,18 @@
     const log=byId('chatLog');
     const user=document.createElement('div'); user.className='chat-bubble user'; user.textContent=q;
     const reply=document.createElement('div'); reply.className='chat-bubble'; reply.textContent='Готовлю демонстрационный ответ…';
-    log.append(user,reply); reply.scrollIntoView({behavior:'smooth',block:'nearest'});
+    log.append(user,reply);
+    if(byId('assistantScreen').hidden===false)reply.scrollIntoView({behavior:'smooth',block:'nearest'});
+    // The compact panel and full assistant share the same demo conversation.
+    const miniLog=byId('plasmaChatLog');
+    const miniUser=document.createElement('div');miniUser.className='dm-chat-message user';miniUser.textContent=q;
+    const miniReply=document.createElement('div');miniReply.className='dm-chat-message assistant';miniReply.textContent='Готовлю демонстрационный ответ…';
+    miniLog.hidden=false;miniLog.append(miniUser,miniReply);miniLog.scrollTop=miniLog.scrollHeight;
     setRingMode('thinking');
     setTimeout(()=>{
-      reply.textContent=demoAnswer(q);
-      // Text-only demo response: no "speaking" light until actual voice playback exists.
+      const answer=demoAnswer(q);reply.textContent=answer;miniReply.textContent=answer;
+      miniLog.scrollTop=miniLog.scrollHeight;
+      // Text-only demo: never imply that speech or a real AI service is connected.
       setRingMode('idle');
     },520);
   }
@@ -123,7 +130,9 @@
   state.management=mgData;
 
   // Explicit opt-in preference: no hidden mic use; this is an animated UI prototype.
-  const voicePrefs={dock:mgSaved.voice&&typeof mgSaved.voice==='object'?mgSaved.voice.dock!==false:true};
+  const savedVoice=mgSaved.voice&&typeof mgSaved.voice==='object'?mgSaved.voice:{};
+  const allowedPlasmaActions=['panel','voice','text'];
+  const voicePrefs={dock:savedVoice.dock!==false,tapAction:allowedPlasmaActions.includes(savedVoice.tapAction)?savedVoice.tapAction:'panel'};
   mgData.voice=voicePrefs;
   // The animated ring temporarily replaces navigation only while the assistant is active.
   // The settings preview stays INSIDE its card, never over page content.
@@ -218,6 +227,24 @@
         '<p class="mg-disclaimer">Настройки — прототип. Они пока не разрешают реальных платежей, отправки сообщений или других действий.</p>';
     }else{content='<p class="mg-explain">'+mgInfo[page]+'</p><p class="mg-disclaimer">Этот раздел готовится. Подключённые данные и действия не имитируются.</p>';}
     byId('mgDetail').innerHTML=content;
+    if(page==='voice'){
+      // Dedicated action preference; voice activation by name needs a real recognition
+      // engine and microphone permission, so its status is explicitly informational.
+      const settings=document.createElement('section');
+      settings.className='dm-chat-settings voice-pref';
+      settings.innerHTML='<div class="dm-chat-settings-title"><svg class="ico" aria-hidden="true"><use href="#ic-grid"/></svg><div><strong>Нажатие на плазму</strong><small>Что открывать при касании помощника</small></div></div>'+
+        '<label class="dm-chat-settings-label" for="plasmaTapMode">Действие при нажатии</label>'+
+        '<select id="plasmaTapMode" class="dm-chat-settings-select" aria-label="Действие при нажатии на плазму">'+
+          '<option value="panel">Панель общения (рекомендуем)</option>'+
+          '<option value="voice">Голосовое общение</option>'+
+          '<option value="text">Сразу написать сообщение</option>'+
+        '</select>'+
+        '<p class="dm-chat-settings-note">Режим «Голос» пока открывает панель с пояснением — микрофон не включается.</p>'+
+        '<div class="dm-wake-info"><strong>Обращение по имени — в разработке</strong><small>Позже можно будет обратиться к управляющему по имени, как к Алисе. Для этого понадобится поддержка распознавания речи и разрешение на микрофон. Сейчас фоновое прослушивание не запускается.</small></div>';
+      byId('mgDetail').prepend(settings);
+      byId('plasmaTapMode').value=voicePrefs.tapAction;
+    }
+
     if(page==='manager')byId('mgTone').value=mgData.tone;
     if(page==='autopilot')mgAutoLabel();
     if(page==='voice')byId('mgDetail').querySelector('#voiceDock').checked=voicePrefs.dock;
@@ -249,6 +276,7 @@
   byId('mgDetail').addEventListener('change',event=>{
     const el=event.target;
     if(el.id==='voiceDock'){voicePrefs.dock=el.checked;save();updateDock();}
+    else if(el.id==='plasmaTapMode'){voicePrefs.tapAction=el.value;save();}
     else if(el.id==='mgManagerName'){mgData.managerName=el.value.trim()||'Цифровой управляющий';el.value=mgData.managerName;}
     else if(el.id==='mgTone')mgData.tone=el.value;
     else if(el.id==='mgAutonomy'){mgData.autonomy=Number(el.value);mgAutoLabel();}
@@ -261,11 +289,59 @@
   });
   mgApplyCards();
   function closeDockQuickActions(){byId('dockQuickActions').hidden=true;byId('dockLauncher').setAttribute('aria-expanded','false');}
-  byId('dockLauncher').addEventListener('click',()=>{const el=byId('dockQuickActions');el.hidden=!el.hidden;byId('dockLauncher').setAttribute('aria-expanded',String(!el.hidden));});
+  const plasmaPanel=byId('plasmaChatPanel');
+  const plasmaInput=byId('plasmaChatInput');
+  const plasmaHint=byId('plasmaChatHint');
+  const plasmaTriggers=[byId('dockLauncher'),byId('tabAssistant')];
+  function closePlasmaPanel(){
+    plasmaPanel.hidden=true;
+    plasmaPanel.setAttribute('aria-hidden','true');
+    plasmaTriggers.forEach(button=>button.setAttribute('aria-expanded','false'));
+    plasmaHint.hidden=true;
+    document.documentElement.classList.remove('dm-plasma-panel-open');
+    if(document.activeElement===plasmaInput)plasmaInput.blur();
+  }
+  function openPlasmaPanel(){
+    closeDockQuickActions();
+    if(!plasmaPanel.hidden){
+      closePlasmaPanel();return;
+    }
+    plasmaPanel.hidden=false;plasmaPanel.setAttribute('aria-hidden','false');
+    plasmaTriggers.forEach(button=>button.setAttribute('aria-expanded','true'));
+    document.documentElement.classList.add('dm-plasma-panel-open');
+    plasmaHint.hidden=true;
+    if(voicePrefs.tapAction==='voice'){
+      plasmaHint.textContent='Активация по имени и голосовые ответы появятся после подключения распознавания речи. Сейчас микрофон не используется. Пока можно написать сообщение.';
+      plasmaHint.hidden=false;
+    }else if(voicePrefs.tapAction==='text'){
+      plasmaInput.focus();
+    }
+  }
+  byId('dockLauncher').addEventListener('click',openPlasmaPanel);
+  byId('plasmaClose').addEventListener('click',closePlasmaPanel);
+  byId('plasmaVoiceStart').addEventListener('click',()=>{
+    plasmaHint.textContent='Голосовой движок пока не подключён. Когда функция появится, разрешение на микрофон будет запрашиваться отдельно. Пока можно написать сообщение.';
+    plasmaHint.hidden=false;
+  });
+  byId('plasmaChatForm').addEventListener('submit',event=>{
+    event.preventDefault();
+    const question=plasmaInput.value.trim();if(!question)return;
+    chat(question);plasmaInput.value='';plasmaHint.hidden=true;
+  });
+  byId('plasmaGoHome').addEventListener('click',()=>{closePlasmaPanel();setTab('home');});
+  byId('plasmaGoManage').addEventListener('click',()=>{closePlasmaPanel();setTab('management');});
+  byId('plasmaOpenChat').addEventListener('click',()=>{closePlasmaPanel();setTab('assistant');});
+  document.addEventListener('pointerdown',event=>{
+    if(!plasmaPanel.hidden&&!event.target.closest('#plasmaChatPanel,#tabAssistant,#dockLauncher'))closePlasmaPanel();
+  });
+  document.addEventListener('keydown',event=>{
+    if(event.key==='Escape'&&!plasmaPanel.hidden){closePlasmaPanel();byId(voicePrefs.dock?'tabAssistant':'dockLauncher').focus();}
+  });
+
   document.addEventListener('click',e=>{if(!e.target.closest('#dockHiddenControls'))closeDockQuickActions();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDockQuickActions();});
   updateDock();
-  byId('dockOpenHome').addEventListener('click',()=>{closeDockQuickActions();setTab('home');});
+  byId('dockOpenHome').addEventListener('click',()=>{closeDockQuickActions();closePlasmaPanel();setTab('home');});
   byId('dockOpenAssistant').addEventListener('click',()=>{closeDockQuickActions();setTab('assistant');});
   byId('dockOpenManage').addEventListener('click',()=>{closeDockQuickActions();setTab('management');});
   byId('mgDetail').addEventListener('click',event=>{if(event.target.closest('#voicePreview'))previewVoiceRing();});
@@ -281,7 +357,7 @@
   byId('tabDay').addEventListener('click',()=>window.location.assign('./myday.html'));
   byId('tabDocs').addEventListener('click',()=>{setTab('management');mgSettingsPage('documents');});
   byId('homeManageAccess').addEventListener('click',()=>setTab('management'));
-  document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
+  document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.tab==='assistant')openPlasmaPanel();else{closePlasmaPanel();setTab(b.dataset.tab);}}));
   document.querySelectorAll('[data-period]').forEach(b=>b.addEventListener('click',()=>updatePeriod(b.dataset.period)));
   byId('openDates').addEventListener('click',()=>window.location.assign('./myday.html'));
   byId('openBrand').addEventListener('click',toggleBrandCard);
