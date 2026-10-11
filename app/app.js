@@ -36,7 +36,7 @@
     clearTimeout(ringResetTimer);
     const button = byId('tabAssistant');
     if(['thinking','speaking'].includes(mode))showLiveRing(mode,resetAfter||2500);
-    else if(mode==='idle')hideLiveRing();
+    else hideLiveRing(); // Clear the previous live animation for every non-live state.
     button.dataset.mode = mode;
     document.querySelector('.bottom-nav').dataset.mode = mode;
     byId('dockLauncher').dataset.mode = mode;
