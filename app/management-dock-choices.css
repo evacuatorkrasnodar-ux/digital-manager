@@ -1,0 +1,52 @@
+/* Management / My Manager / Appearance — real four-slot dock choices.
+   One compact card, no decorative or duplicate controls. */
+#managementScreen .dm-dock-customize{
+  display:grid;
+  gap:12px;
+  padding:15px 13px;
+  border:1px solid rgba(154,190,219,.37);
+  border-radius:20px;
+  background:linear-gradient(150deg,rgba(18,33,49,.90),rgba(4,12,23,.97));
+  box-shadow:inset 0 1px rgba(233,248,255,.09);
+}
+#managementScreen .dm-dock-customize-title{display:grid;gap:4px}
+#managementScreen .dm-dock-customize-title strong{font-size:16px;color:#f0f7ff;font-weight:550}
+#managementScreen .dm-dock-customize-title small,
+#managementScreen .dm-dock-customize-hint{font-size:11px;line-height:1.45;color:#a2bbce}
+#managementScreen .dm-dock-customize-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+}
+#managementScreen .dm-dock-customize-slot{
+  min-width:0;
+  display:grid;
+  gap:7px;
+  color:#afcce0;
+  font-size:11px;
+  padding:10px;
+  border:1px solid rgba(159,193,218,.27);
+  border-radius:13px;
+  background:rgba(2,11,21,.62);
+}
+#managementScreen .dm-dock-customize-slot select{
+  width:100%;
+  min-width:0;
+  min-height:38px;
+  font:inherit;
+  font-size:12px;
+  color:#ebf5ff;
+  padding:7px 22px 7px 8px;
+  border:1px solid rgba(155,194,223,.46);
+  border-radius:10px;
+  background:#0a1929;
+  color-scheme:dark;
+}
+#managementScreen .dm-dock-customize-slot select:focus-visible{
+  outline:2px solid #99d2fc;
+  outline-offset:2px;
+}
+#managementScreen .dm-dock-customize-hint{margin:0}
+@media(max-width:325px){
+  #managementScreen .dm-dock-customize-grid{grid-template-columns:1fr}
+}
