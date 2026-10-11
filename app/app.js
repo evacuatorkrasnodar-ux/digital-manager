@@ -505,10 +505,10 @@
   mgCarouselNav.addEventListener('click',()=>{
     const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(mgCarouselNav.dataset.direction==='back'){
-      mgCarousel.scrollTo({left:0,behavior:reduceMotion?'instant':'smooth'});
+      mgCarousel.scrollTo({left:0,behavior:reduceMotion?'auto':'smooth'});
     }else{
       const remaining=Math.max(0,mgCarousel.scrollWidth-mgCarousel.clientWidth-mgCarousel.scrollLeft);
-      mgCarousel.scrollBy({left:Math.min(remaining,Math.round(mgCarousel.clientWidth*.78)),behavior:reduceMotion?'instant':'smooth'});
+      mgCarousel.scrollBy({left:Math.min(remaining,Math.round(mgCarousel.clientWidth*.78)),behavior:reduceMotion?'auto':'smooth'});
     }
   });
   mgCarousel.addEventListener('scroll',mgSyncCarouselNav,{passive:true});
