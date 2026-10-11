@@ -145,21 +145,12 @@
     0 5px 19px rgba(0,0,0,.55),
     0 0 8px rgba(123,171,215,.07);
 }
-/* Narrow polished bottom metal is part of each device, below the glass —
-   it does not overlap the artwork or cut across rounded corners. */
+/* One gesture indicator per preview: keep the white screen marker.
+   Remove the second dark lozenge previously painted onto the metal rim. */
 #managementScreen .voice-iphone-device::after,
 #managementScreen .voice-conversation-device::after{
-  content:"";
-  position:absolute;
-  bottom:4px;
-  left:50%;
-  transform:translateX(-50%);
-  width:30px;
-  height:3px;
-  border-radius:99px;
-  pointer-events:none;
-  background:linear-gradient(180deg,rgba(2,7,13,.97),rgba(93,111,126,.67));
-  box-shadow:0 0 0 .6px rgba(163,184,202,.32);
+  content:none;
+  display:none;
 }
 #managementScreen .voice-iphone-screen{
   box-sizing:border-box;
