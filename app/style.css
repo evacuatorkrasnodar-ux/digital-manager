@@ -441,11 +441,11 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 .dm-voice-orb-electric{background:#02040b!important;filter:drop-shadow(0 0 4px rgba(35,97,255,.72)) drop-shadow(0 0 13px rgba(64,74,229,.40))!important}
 .dm-voice-orb-electric .dm-orb-halo{inset:-24%;background:radial-gradient(circle,transparent 38%,rgba(7,72,231,.09) 49%,rgba(25,96,237,.28) 56%,rgba(117,54,222,.15) 66%,transparent 76%);filter:blur(8px);-webkit-mask-image:radial-gradient(circle,transparent 0 66%,#000 73%);mask-image:radial-gradient(circle,transparent 0 66%,#000 73%)}
 .dm-voice-orb-electric .dm-orb-spectral{position:absolute;inset:-13%;z-index:2;width:126%;height:126%;overflow:visible;pointer-events:none;filter:drop-shadow(0 0 2px rgba(110,175,255,.78)) drop-shadow(0 0 3px rgba(27,83,242,.58))}
-.dm-voice-waves-electric{filter:drop-shadow(0 0 4px rgba(64,139,255,.88))!important}
-.dm-voice-waves-electric .dm-electric-wave{fill:none;stroke-width:1.23;stroke-linecap:round;opacity:.9;transform-origin:center 70%;animation:dm-electric-wave 7.1s ease-in-out infinite}
-.dm-voice-waves-electric .dm-electric-wave-1{stroke-width:1.02;animation-delay:-2s;animation-duration:5.8s}
-.dm-voice-waves-electric .dm-electric-wave-2{stroke-width:.97;animation-delay:-3.6s;animation-duration:6.6s}
-.dm-voice-waves-electric .dm-electric-wave-3{stroke-width:.57;opacity:.48;animation-delay:-1.1s;animation-duration:7.2s}
+.dm-voice-waves-electric{filter:none!important}
+.dm-voice-waves-electric .dm-laser-track{transform-origin:center 70%;animation:dm-electric-wave 7.1s ease-in-out infinite}
+.dm-voice-waves-electric .dm-electric-wave-1{animation-delay:-2s;animation-duration:5.8s}
+.dm-voice-waves-electric .dm-electric-wave-2{animation-delay:-3.6s;animation-duration:6.6s}
+.dm-voice-waves-electric .dm-electric-wave-3{animation-delay:-1.1s;animation-duration:7.2s}
 @keyframes dm-electric-wave{0%,100%{transform:translateY(-3px) scaleY(.92);opacity:.55}50%{transform:translateY(2px) scaleY(1.08);opacity:.95}}
 .assistant-live>.dm-voice-waves-electric{width:min(420px,100vw);height:100px;bottom:0;opacity:1}
 #managementScreen .voice-mock-conversation .dm-voice-waves-electric{left:-4%;width:108%;height:110px;bottom:8px;opacity:1}
@@ -499,4 +499,15 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 #managementScreen .voice-simple{padding:10px;border:1px solid #7294b156;border-radius:16px;background:linear-gradient(145deg,#101f31,#04070a)}
 #managementScreen .voice-coming{color:#b2c5d8;font-size:11px;white-space:nowrap}
 @media(max-width:365px){#managementScreen .voice-mock{height:177px}#managementScreen .voice-phone-frame{inset:4px 5px 5px}#managementScreen .voice-dock-items small{font-size:8px}}
-@media(prefers-reduced-motion:reduce){.dm-voice-orb,.dm-orb-rim,.dm-voice-waves path,.dm-voice-waves-electric .dm-electric-wave{animation:none!important}#managementScreen .voice-switch i,#managementScreen .voice-switch i::before{transition:none!important}}
+/* Laser-grade waves: crisp hairline over two independent light envelopes. */
+.dm-voice-waves-electric .dm-laser-track path{fill:none;stroke-linecap:round;stroke-linejoin:round;animation:none;transform:none;shape-rendering:geometricPrecision;pointer-events:none}
+.dm-voice-waves-electric .dm-laser-track .dm-laser-bloom{stroke-width:5.2;opacity:.20;filter:blur(2.15px)}
+.dm-voice-waves-electric .dm-laser-track .dm-laser-halo{stroke-width:2.1;opacity:.37;filter:blur(.6px)}
+.dm-voice-waves-electric .dm-laser-track .dm-laser-core{stroke-width:.80;opacity:.97;filter:none;vector-effect:non-scaling-stroke}
+.dm-voice-waves-electric .dm-electric-wave-1 .dm-laser-core{stroke-width:.72;opacity:.82}
+.dm-voice-waves-electric .dm-electric-wave-2 .dm-laser-core{stroke-width:.70;opacity:.88}
+.dm-voice-waves-electric .dm-electric-wave-3 .dm-laser-core{stroke-width:.55;opacity:.55}
+.dm-voice-waves-electric .dm-electric-wave-3 .dm-laser-halo{opacity:.23}
+.dm-voice-waves-electric .dm-electric-wave-3 .dm-laser-bloom{opacity:.12}
+#managementScreen .voice-mock-conversation.is-previewing .dm-voice-waves-electric .dm-laser-track{animation-duration:3.9s}
+@media(prefers-reduced-motion:reduce){.dm-voice-orb,.dm-orb-rim,.dm-voice-waves path,.dm-voice-waves-electric .dm-laser-track{animation:none!important}#managementScreen .voice-switch i,#managementScreen .voice-switch i::before{transition:none!important}}
