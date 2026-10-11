@@ -377,6 +377,9 @@
       element.removeAttribute('href');
     });
     mount.replaceChildren(dock);
+    // The preview has its own representation of saved choices and is
+    // independent from whether the real dock is enabled or hidden.
+    dmSyncDockPreviewSlots();
   }
   // The five settings controls demonstrate signs in a nearby real-orb preview,
   // and in the existing iPhone conversation example. These are not notifications.
@@ -585,7 +588,13 @@
       }
       return;
     }
-    if(el.id==='voiceDock'){voicePrefs.dock=el.checked;save();updateDock();}
+    if(el.id==='voiceDock'){
+      voicePrefs.dock=el.checked;
+      save();
+      updateDock();
+      // The demo is a design preview, not the visibility state of the dock.
+      dmSyncDockPreviewSlots();
+    }
     else if(el.id==='plasmaTapMode'){voicePrefs.tapAction=el.value;save();}
     else if(el.id==='mgManagerName'){mgData.managerName=el.value.trim()||'Цифровой управляющий';el.value=mgData.managerName==='Цифровой управляющий'?'':mgData.managerName;}
     else if(el.id==='mgTone')mgData.tone=el.value;
