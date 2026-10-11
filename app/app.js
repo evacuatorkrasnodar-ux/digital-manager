@@ -736,7 +736,13 @@
     if(home)home.hidden=tab==='home';
   }
   dmSyncQuickHome();
+  let dmQuickMenuTimer=null;
+  function dmScheduleQuickMenuHide(){
+    clearTimeout(dmQuickMenuTimer);
+    dmQuickMenuTimer=setTimeout(()=>closeDockQuickActions(),6000);
+  }
   function closeDockQuickActions(){
+    clearTimeout(dmQuickMenuTimer);
     byId('dockQuickActions').hidden=true;
     const stillChatOpen=!byId('plasmaChatPanel').hidden;
     byId('dockLauncher').setAttribute('aria-expanded',String(stillChatOpen));
@@ -1216,9 +1222,12 @@
     if(shouldOpen){
       dmSyncQuickHome();
       menu.hidden=false;
+      dmScheduleQuickMenuHide();
       plasmaTriggers.forEach(button=>button.setAttribute('aria-expanded','true'));
     }
   }
+  byId('dockQuickActions').addEventListener('pointerdown',dmScheduleQuickMenuHide);
+  byId('dockQuickActions').addEventListener('focusin',dmScheduleQuickMenuHide);
   byId('dockLauncher').addEventListener('click',dmComposerOrbClick);
   byId('plasmaClose').addEventListener('click',closePlasmaPanel);
   byId('plasmaChatForm').addEventListener('submit',event=>{
