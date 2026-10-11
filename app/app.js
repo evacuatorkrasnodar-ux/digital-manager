@@ -659,7 +659,7 @@
     byId('dockLauncher').title=kind==='send'?'Отправить сообщение':kind==='done'?'Сообщение отправлено':'Голосовое общение пока недоступно';
   }
   // A lightweight local hint, never a claim that an AI classified the message.
-  // The user can always override it using «Спросить ИИ».
+  // The user can always override it using «Спросить помощника».
   function dmComposerIntent(value){
     const t=value.trim();
     if(!t)return 'empty';
@@ -680,14 +680,14 @@
     const heading=byId('plasmaComposerTitle');
     if(heading)heading.textContent=intent==='question'?'Вопрос помощнику':intent==='draft'?'Ваш текст':'Сообщение или текст';
     plasmaDraftInfo.textContent=text.length
-      ?text.length.toLocaleString('ru-RU')+' зн. · '+(intent==='question'?'Нажмите на плазму, чтобы спросить ИИ':'Выберите действие ниже или спросите ИИ')
+      ?text.length.toLocaleString('ru-RU')+' зн. · '+(intent==='question'?'Нажмите на плазму, чтобы спросить помощника':'Выберите действие ниже или спросите помощника')
       :'Черновик сохраняется только на этом устройстве';
     if(!plasmaPanel.hidden){
       clearTimeout(dmAckTimer);
       dmSetComposerGlyph(text.trim()?'send':'mic');
       if(intent==='draft'){
         byId('dockLauncher').setAttribute('aria-label','Выбрать действие с текстом');
-        byId('dockLauncher').title='Выберите действие с текстом или спросите ИИ';
+        byId('dockLauncher').title='Выберите действие с текстом или спросите помощника';
       }
     }
   }
@@ -798,7 +798,7 @@
     if(plasmaPanel.hidden){togglePlasmaQuickMenu();return;}
     if(plasmaInput.value.trim()){
       if(dmComposerIntent(plasmaInput.value)==='question'){dmSendComposerText();return;}
-      dmActionMessage('Текст готов ✦ Выберите действие ниже или нажмите «Спросить ИИ».');
+      dmActionMessage('Текст готов ✦ Выберите действие ниже или нажмите «Спросить помощника».');
       return;
     }
     dmExplainUnavailableVoice();
@@ -822,7 +822,7 @@
   byId('plasmaChatForm').addEventListener('submit',event=>{
     event.preventDefault();
     if(dmComposerIntent(plasmaInput.value)==='question')dmSendComposerText();
-    else if(plasmaInput.value.trim())dmActionMessage('Текст готов ✦ Выберите действие или «Спросить ИИ».');
+    else if(plasmaInput.value.trim())dmActionMessage('Текст готов ✦ Выберите действие или «Спросить помощника».');
   });
   dmSyncComposer();
   byId('plasmaOpenChat').addEventListener('click',()=>{closePlasmaPanel();setTab('assistant');});
