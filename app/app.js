@@ -164,6 +164,24 @@
       item.querySelector('.nav-label').textContent=choice.label;
     });
   }
+  // Update ONLY the four dock slots inside the existing preview.
+  // Replacing the whole clone restarted the central plasma animation.
+  function dmSyncDockPreviewSlots(){
+    const preview=byId('mgDockPreviewMount');
+    if(!preview)return;
+    const items=preview.querySelectorAll('.nav-item.nav-quick');
+    if(items.length!==4)return;
+    items.forEach((item,index)=>{
+      const choice=dockTargets[voicePrefs.dockItems[index]];
+      if(!choice)return;
+      item.dataset.dockTarget=voicePrefs.dockItems[index];
+      item.setAttribute('aria-label','Открыть '+choice.label);
+      const use=item.querySelector('.nav-ico use');
+      const label=item.querySelector('.nav-label');
+      if(use)use.setAttribute('href','#'+choice.icon);
+      if(label)label.textContent=choice.label;
+    });
+  }
   function dmOpenDockTarget(key){
     closeDockQuickActions();
     closePlasmaPanel();
@@ -562,7 +580,7 @@
       if(Number.isInteger(index)&&index>=0&&index<4&&dockTargets[el.value]){
         voicePrefs.dockItems[index]=el.value;
         dmSyncDockItems();
-        dmMountRealDockPreview();
+        dmSyncDockPreviewSlots();
         save();
       }
       return;
