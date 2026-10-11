@@ -423,7 +423,6 @@
     byId('mgDetail').innerHTML=content;
     if(page==='voice'){
       dmMountRealDockPreview();
-      dmMountGlyphShowcase();
       // Dedicated action preference; voice activation by name needs a real recognition
       // engine and microphone permission, so its status is explicitly informational.
       const settings=document.createElement('section');
@@ -444,6 +443,7 @@
         '<p class="dm-glyph-preview-status" id="dmGlyphPreviewStatus" aria-live="polite">Это предпросмотр. Реальные сигналы появятся после подключения источников событий.</p>'+
         '</div>';
       byId('mgDetail').prepend(settings);
+      dmMountGlyphShowcase();
       byId('plasmaTapMode').value=voicePrefs.tapAction;
     }
 
