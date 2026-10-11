@@ -337,11 +337,6 @@
 #managementScreen .mg-theme-controls button{width:38px;height:30px;border:0;border-radius:25px;background:transparent;color:#b6d4e6;font-size:20px;padding:0}
 #managementScreen .mg-theme-controls button:disabled{opacity:.55;cursor:not-allowed}
 #managementScreen .mg-theme-controls button[aria-pressed=true]{color:#fff;background:linear-gradient(130deg,#277df0,#061f9d);box-shadow:inset 0 1px 2px #fff8,0 0 12px #3f83ee90}
-#managementScreen .mg-company{min-height:84px}
-#managementScreen .mg-company-photo{width:69px;height:64px;flex:none;border-radius:13px;position:relative;border:1px solid #99bdd388;background:linear-gradient(0deg,#060e17a9,transparent 70%),url('./assets/architecture-hero.png') 73% center/auto 164px no-repeat;box-shadow:inset 0 1px #ffffff55}
-#managementScreen .mg-company .mg-copy small:last-child{font-size:9.7px;opacity:.7}
-#managementScreen .mg-open-pill{padding:8px 9px;display:flex;gap:6px;align-items:center;flex:none;position:relative;z-index:2;border:1px solid rgba(174,196,211,.58);border-radius:24px;background:linear-gradient(135deg,#1e3248,#0b141f);font-size:11px}
-#managementScreen .mg-open-pill span{font-size:17px;line-height:10px}
 #managementScreen .mg-manager{min-height:87px;background:radial-gradient(ellipse at 98% 80%,rgba(19,67,162,.22),transparent 50%),linear-gradient(130deg,#101b2b,#02050a)}
 #managementScreen .mg-manager::after{content:"";position:absolute;right:-2%;bottom:-8px;width:100px;height:95px;pointer-events:none;background:repeating-radial-gradient(ellipse at 100% 100%,transparent 0 16px,rgba(54,118,232,.19) 17px 17.8px,transparent 19px 27px);transform:rotate(-19deg)}
 #managementScreen .mg-astronaut{position:relative;width:75px;height:72px;flex:none;display:grid;place-items:center;border-radius:15px;background:radial-gradient(ellipse at 46% 20%,#19335a,#050911 80%);box-shadow:inset 0 0 11px #3868b34d;overflow:hidden}
@@ -391,7 +386,6 @@
 #managementScreen .mg-scene{width:100%;height:100%;display:block}
 #managementScreen .mg-extra-payments{border-color:#af876167}
 #managementScreen .mg-extra-payments .mg-accessory{opacity:.86}
-#managementScreen .mg-extra-help .mg-accessory{opacity:.7}
 #managementScreen .mg-extra-row .mg-chevron{z-index:3}
 #managementScreen .mg-detail{display:grid;gap:10px;padding:4px 1px}
 #managementScreen .mg-detail h2{font-size:15px;margin:12px 0 0}
@@ -404,10 +398,16 @@
 #managementScreen .mg-choice input{width:19px;height:19px;flex:none;accent-color:#377ee1}
 #managementScreen .mg-auto-intro{padding:20px;border:1px solid #dda86580;border-radius:16px;background:linear-gradient(135deg,#302013,#0b0805);color:#ffd09a;font-size:16px}
 #managementScreen #mgAutonomyLabel{color:#f1ca8b}
-#managementScreen .mg-help-link{display:block;padding:15px;border:1px solid #8bacd15e;border-radius:14px;color:#b7dfff;text-decoration:none;background:#0c243a;font-size:13px}
 #homeScreen .metric-card[hidden],#homeScreen .bv-clients-edge[hidden]{display:none!important}
 .mg-brand-feedback{display:grid;gap:7px;margin:14px 0 0;border-top:1px solid #859cb344;padding:12px 0}
 .mg-brand-feedback strong{font-size:13px}.mg-brand-feedback a{font-size:13px;color:#aad8ff;text-decoration:none}.mg-brand-feedback small{font-size:10px;color:#91a7b9}
 @media(min-width:400px){#managementScreen .mg-tile{min-height:99px}#managementScreen .mg-tile-art{font-size:25px}}
-@media(max-width:365px){#managementScreen .mg-row{gap:7px;padding:8px}#managementScreen .mg-company-photo{width:53px}#managementScreen .mg-copy strong{font-size:13px}#managementScreen .mg-copy small{font-size:10px}#managementScreen .mg-connected-icons span:nth-child(n+3){display:none}#managementScreen .mg-auto .mg-copy small:last-child{display:none}}
+@media(max-width:365px){#managementScreen .mg-row{gap:7px;padding:8px}#managementScreen .mg-copy strong{font-size:13px}#managementScreen .mg-copy small{font-size:10px}#managementScreen .mg-connected-icons span:nth-child(n+3){display:none}#managementScreen .mg-auto .mg-copy small:last-child{display:none}}
 @media(prefers-reduced-motion:reduce){#managementScreen .mg-tile i::before{transition:none}}
+
+/* Автопилот располагается внутри Управляющего; чёрное стекло и золотые линии сохранены. */
+#managementScreen .mg-detail .mg-autopilot-link{width:100%;margin-top:2px;cursor:pointer;padding:12px 10px;min-height:101px;display:flex;align-items:center;text-align:left;gap:11px}
+#managementScreen .mg-detail .mg-autopilot-link .mg-zap{width:49px;height:49px;flex:none}
+#managementScreen .mg-detail .mg-autopilot-link .mg-copy{position:relative;z-index:2}
+#managementScreen .mg-detail .mg-autopilot-link .mg-copy small{font-size:11px}
+#managementScreen .mg-detail .mg-autopilot-link .mg-chevron{flex:none}
