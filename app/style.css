@@ -420,7 +420,7 @@
 .dock-hidden-controls{position:fixed;z-index:24;left:50%;right:auto;transform:translateX(-50%);bottom:calc(8px + env(safe-area-inset-bottom,0px));display:grid;justify-items:center;gap:8px;pointer-events:none}
 .dock-hidden-controls>*{pointer-events:auto}
 .dock-launcher{position:relative;width:114px;height:118px;padding:0;display:grid;place-items:center;isolation:isolate;border:0;border-radius:50%;background:transparent;box-shadow:none;backdrop-filter:none;overflow:visible;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.dock-launcher .dm-launcher-plasma{--dm-size:clamp(78px,21vw,94px);width:var(--dm-size);height:var(--dm-size);position:relative;z-index:2;flex:none;animation:dm-breathe 4.6s ease-in-out infinite;filter:drop-shadow(0 0 4px rgba(35,97,255,.65)) drop-shadow(0 0 12px rgba(88,78,234,.42))!important}
+.dock-launcher .dm-launcher-plasma{--dm-size:clamp(60px,17vw,72px);width:var(--dm-size);height:var(--dm-size);position:relative;z-index:2;flex:none;animation:dm-breathe 4.6s ease-in-out infinite;filter:drop-shadow(0 0 4px rgba(35,97,255,.65)) drop-shadow(0 0 12px rgba(88,78,234,.42))!important}
 .dock-launcher .dm-launcher-plasma .dm-orb-halo{filter:blur(4px);opacity:.72}
 /* Dock hidden: approved centered plasma, with its original five laser waves behind it. */
 .dock-launcher .dm-launcher-waves{position:absolute;left:50%;bottom:-1px;width:min(440px,100vw);height:120px;z-index:1;pointer-events:none;transform:translateX(-50%);overflow:visible;filter:none!important;opacity:.9;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
