@@ -1,9 +1,15 @@
-/* Generated hardware overlay, reused for BOTH existing live phone mockups.
-   Compressed, transparent PNG sourced from the approved metallic phone foot.
-   The underlying scenes and interactive state are unchanged. */
+/* ONE physical hardware layer for BOTH existing preview phones.
+   The old CSS case, double rim, extra border and shadows are neutralized.
+   Keep the original live dock, plasma, background and stored preferences. */
 #managementScreen .voice-iphone-device,
 #managementScreen .voice-mock-conversation .voice-conversation-device{
-  --mg-phone-chin:clamp(23px,5.4vw,32px);
+  --mg-phone-chin:clamp(22px,5vw,28px);
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
 }
 #managementScreen .voice-iphone-device::before,
 #managementScreen .voice-mock-conversation .voice-conversation-device::before{
@@ -19,8 +25,9 @@
   box-sizing:border-box;
   left:0;
   right:0;
-  bottom:-2px;
-  height:clamp(81px,24vw,123px);
+  /* PNG contains a transparent 12.5% lower margin: compensate here. */
+  bottom:-11px;
+  height:clamp(90px,20vw,116px);
   pointer-events:none;
   border:0;
   border-radius:0;
@@ -30,6 +37,25 @@
   background-size:100% 100%;
   box-shadow:none;
   opacity:1;
+}
+/* The visible display stops immediately above the single real PNG bezel.
+   No CSS lower border, no synthetic metal, no second rounded rectangle. */
+#managementScreen .voice-iphone-screen{
+  box-sizing:border-box;
+  width:calc(100% - 8px);
+  height:calc(100% - var(--mg-phone-chin));
+  margin:0 auto;
+  border-radius:0 0 30px 30px;
+  box-shadow:none!important;
+}
+#managementScreen .voice-mock-conversation .voice-conversation-device .voice-scene,
+#managementScreen .voice-mock-conversation .voice-conversation-device .voice-phone-frame{
+  inset:0 4px var(--mg-phone-chin);
+  border-radius:0 0 30px 30px;
+}
+#managementScreen .voice-mock-conversation .voice-conversation-device .voice-phone-frame{
+  border:0!important;
+  box-shadow:none!important;
 }
 #managementScreen .voice-iphone-screen::after,
 #managementScreen .voice-conversation-indicator{display:none!important}
