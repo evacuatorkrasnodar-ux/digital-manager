@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css?v=412">
+  <link rel="stylesheet" href="./style.css?v=416">
   <link rel="stylesheet" href="./dock.css?v=296">
   <link rel="stylesheet" href="./system-ui.css?v=283">
   <link rel="stylesheet" href="./voice-hints.css?v=290">
@@ -80,6 +80,10 @@
   <symbol id="ic-shield" viewBox="0 0 24 24"><path d="m12 2 8.5 3v6.5c0 5.2-3.2 8.8-8.5 10.5-5.3-1.7-8.5-5.3-8.5-10.5V5zM9 12.2l2.2 2.2 4.5-4.7"/></symbol>
   <symbol id="ic-check" viewBox="0 0 24 24"><path d="M4.2 12.2 9.5 17l10.3-10"/></symbol>
   <symbol id="ic-plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></symbol>
+  <symbol id="mg-rocket" viewBox="0 0 24 24"><path d="M4.5 15.7 8.2 12 12 15.8l-3.7 3.7M8.2 12c.6-3.5 4.1-7.9 11.9-9.2-.5 7.8-5.2 11.5-8.1 13M14.4 9.6h.01M5.2 18.8c-1.8.7-2.6 2.1-2.6 2.1s-.1-2 1.3-3.4M8.2 19.4c-.5 1.6-1.4 2.6-1.4 2.6" /></symbol>
+  <symbol id="mg-trending" viewBox="0 0 24 24"><path d="m3 18 7-7 4.1 4.1L22 7M15.3 7H22v6.7"/></symbol>
+  <symbol id="mg-analytics" viewBox="0 0 24 24"><path d="M3 19V5M3 19h18M6 15l4.3-5 4.3 3.5L21 5.7M18 5.7h3v3"/></symbol>
+  <symbol id="mg-tasks" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="19" rx="2"/><path d="m7 10 2 2 3-3M13.8 11h3M7 17h10"/></symbol>
 </svg>
 <div id="app" class="app-shell">
   <div class="screen" id="homeScreen">
@@ -216,14 +220,15 @@
       <div class="mg-row mg-theme"><span class="mg-icon mg-theme-icon">☀</span><span class="mg-copy"><strong>Тема оформления</strong><small>Светлая / Тёмная</small></span><div class="mg-theme-controls"><button type="button" disabled title="Светлая тема будет позже" aria-label="Светлая тема пока недоступна">☀</button><button type="button" aria-pressed="true" aria-label="Тёмная тема">☾</button></div></div>
       <button type="button" class="mg-row mg-manager" data-mg-open="manager"><span class="mg-astronaut"><span class="mg-orb"></span></span><span class="mg-copy"><strong>Управляющий</strong><small>Имя · навыки · стиль общения</small><small>Настройте своего цифрового управляющего.</small></span><span class="mg-chevron" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#ic-chevron"/></svg></span></button>
       <section class="mg-main" aria-labelledby="mgMainLabel">
-        <div class="mg-main-head"><span class="mg-icon mg-blue mg-grid-icon"><svg class="ico" aria-hidden="true"><use href="#ic-grid"/></svg></span><span class="mg-copy"><strong id="mgMainLabel">Главная</strong><small>Выбор и порядок постоянных карточек</small><small>Настройте, какие разделы отображать на Главной.</small></span><span class="mg-chevron" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#ic-chevron"/></svg></span></div>
-        <div class="mg-switch-grid" aria-label="Карточки главной"><label class="mg-tile mg-tile-blue"><span class="mg-tile-art">🚀</span><span class="mg-tile-caption">Продвижение</span><input type="checkbox" data-mg-card="promotion" checked><i aria-hidden="true"></i></label>
-<label class="mg-tile mg-tile-cyan"><span class="mg-tile-art">↗</span><span class="mg-tile-caption">Продажи</span><input type="checkbox" data-mg-card="sales" checked><i aria-hidden="true"></i></label>
-<label class="mg-tile mg-tile-violet"><span class="mg-tile-art">♙</span><span class="mg-tile-caption">Клиенты</span><input type="checkbox" data-mg-card="clients" checked><i aria-hidden="true"></i></label>
+        <div class="mg-main-head"><span class="mg-icon mg-blue mg-grid-icon"><svg class="ico" aria-hidden="true"><use href="#ic-grid"/></svg></span><span class="mg-copy"><strong id="mgMainLabel">Главная</strong><small>Выберите, что показывать на Главной.</small><small>Перелистывайте карточки в сторону →</small></span><span class="mg-chevron" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#ic-chevron"/></svg></span></div>
+        <div class="mg-switch-grid" aria-label="Карточки главной"><label class="mg-tile mg-tile-blue"><span class="mg-tile-art"><svg class="ico" aria-hidden="true"><use href="#mg-rocket"/></svg></span><span class="mg-tile-caption">Продвижение</span><input type="checkbox" data-mg-card="promotion" checked><i aria-hidden="true"></i></label>
+<label class="mg-tile mg-tile-cyan"><span class="mg-tile-art"><svg class="ico" aria-hidden="true"><use href="#mg-trending"/></svg></span><span class="mg-tile-caption">Продажи</span><input type="checkbox" data-mg-card="sales" checked><i aria-hidden="true"></i></label>
+<label class="mg-tile mg-tile-violet"><span class="mg-tile-art"><svg class="ico" aria-hidden="true"><use href="#ic-users"/></svg></span><span class="mg-tile-caption">Клиенты</span><input type="checkbox" data-mg-card="clients" checked><i aria-hidden="true"></i></label>
 <label class="mg-tile mg-tile-amber"><span class="mg-tile-art">₽</span><span class="mg-tile-caption">Деньги</span><input type="checkbox" data-mg-card="money" checked><i aria-hidden="true"></i></label>
-<label class="mg-tile mg-tile-silver"><span class="mg-tile-art">◇</span><span class="mg-tile-caption">Бизнес внутри</span><input type="checkbox" data-mg-card="inside" checked><i aria-hidden="true"></i></label>
-<label class="mg-tile mg-tile-blue"><span class="mg-tile-art">▥</span><span class="mg-tile-caption">Картина</span><input type="checkbox" data-mg-card="picture" checked><i aria-hidden="true"></i></label>
-<label class="mg-tile mg-tile-pink"><span class="mg-tile-art">☑</span><span class="mg-tile-caption">Мои дела</span><input type="checkbox" data-mg-card="tasks" checked><i aria-hidden="true"></i></label></div>
+<label class="mg-tile mg-tile-silver"><span class="mg-tile-art"><svg class="ico" aria-hidden="true"><use href="#ic-cube"/></svg></span><span class="mg-tile-caption">Бизнес внутри</span><input type="checkbox" data-mg-card="inside" checked><i aria-hidden="true"></i></label>
+<label class="mg-tile mg-tile-blue"><span class="mg-tile-art"><svg class="ico" aria-hidden="true"><use href="#mg-analytics"/></svg></span><span class="mg-tile-caption">Картина</span><input type="checkbox" data-mg-card="picture" checked><i aria-hidden="true"></i></label>
+<label class="mg-tile mg-tile-pink"><span class="mg-tile-art"><svg class="ico" aria-hidden="true"><use href="#mg-tasks"/></svg></span><span class="mg-tile-caption">Мои дела</span><input type="checkbox" data-mg-card="tasks" checked><i aria-hidden="true"></i></label></div>
+        <p class="mg-card-note">Пока на Главной доступны Клиенты, Продажи и Деньги. Остальные предпочтения сохраняются для новых разделов.</p>
       </section>
       <button type="button" class="mg-row mg-connections" data-mg-open="connections">
         <span class="mg-icon mg-purple mg-link-icon">↗</span><span class="mg-copy"><strong>Связи</strong><small>Связи с сервисами и источниками</small><small>Сайт, соцсети, мессенджеры, реклама, банки.</small></span>
@@ -296,7 +301,7 @@
   </nav>
 <dialog id="modal" aria-labelledby="dialogTitle"><div class="dialog-inner"><div class="dialog-head"><div><span class="dialog-eyebrow">ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h2 id="dialogTitle">Информация</h2></div><button class="dialog-close" id="closeDialog" type="button" aria-label="Закрыть"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button></div><div id="dialogContent"></div></div></dialog>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-<script src="./app.js?v=412" defer></script>
+<script src="./app.js?v=416" defer></script>
   <script src="./voice-hints.js?v=290" defer></script>
 <script src="./system-ui.js?v=283" defer></script>
 </body>

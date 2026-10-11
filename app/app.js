@@ -131,7 +131,7 @@
     byId('mgHome').hidden=page!=='home';
     byId('mgDetail').hidden=page==='home';
     byId('mgTitle').textContent=mgNames[page]||'Управление';
-    byId('mgSubtitle').textContent=page==='home'?'Настройки приложения':'Настройки управляющего';
+    byId('mgSubtitle').textContent=({home:'Настройки приложения',manager:'Имя · навыки · общение',autopilot:'Границы самостоятельности',connections:'Сервисы и источники данных',documents:'Файлы и шаблоны',payments:'Счета и регулярные расходы',learning:'Возможности приложения'})[page]||'Настройки приложения';
     if(page==='home'){byId('mgDetail').innerHTML='';window.scrollTo(0,0);return;}
     let content='';
     if(page==='manager'){
@@ -173,6 +173,7 @@
   byId('mgBack').addEventListener('click',()=>mgCurrent==='autopilot'?mgSettingsPage('manager'):(mgCurrent==='home'?setTab('home'):mgSettingsPage('home')));
   document.querySelectorAll('[data-mg-card]').forEach(el=>el.addEventListener('change',()=>{
     mgData.cards[el.dataset.mgCard]=el.checked;save();mgApplyCards();
+    if(!['clients','sales','money'].includes(el.dataset.mgCard))notify('Выбор сохранён. Эта постоянная карточка появится на Главной после подключения раздела.');
   }));
   byId('mgDetail').addEventListener('click',event=>{const link=event.target.closest('[data-mg-open="autopilot"]');if(link)mgSettingsPage('autopilot');});
   byId('mgDetail').addEventListener('change',event=>{

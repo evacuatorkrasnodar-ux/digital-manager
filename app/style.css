@@ -351,11 +351,12 @@
 #managementScreen .mg-main-head{display:flex;align-items:center;gap:10px;padding:1px 4px 8px}
 #managementScreen .mg-main-head .mg-grid-icon{width:46px;height:46px}
 #managementScreen .mg-main-head .mg-copy small:last-child{font-size:10px}
-#managementScreen .mg-switch-grid{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(45px,1fr);grid-template-columns:unset;gap:4px;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:none;padding:1px 1px 3px;scroll-snap-type:x proximity}
+#managementScreen .mg-switch-grid{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(55px,1fr);grid-template-columns:unset;gap:5px;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:none;padding:1px 1px 5px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
 #managementScreen .mg-switch-grid::-webkit-scrollbar{display:none}
-#managementScreen .mg-tile{min-width:0;min-height:91px;padding:8px 2px 7px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:3px;border:1px solid rgba(136,172,213,.5);border-radius:13px;background:radial-gradient(ellipse at 50% 12%,rgba(46,131,243,.20),transparent 66%),linear-gradient(156deg,#0e2041,#030811);color:#d9f2ff;text-align:center;position:relative;cursor:pointer;scroll-snap-align:start}
+#managementScreen .mg-tile{min-width:0;min-height:101px;padding:9px 3px 8px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:3px;border:1px solid rgba(136,172,213,.5);border-radius:13px;background:radial-gradient(ellipse at 50% 12%,rgba(46,131,243,.20),transparent 66%),linear-gradient(156deg,#0e2041,#030811);color:#d9f2ff;text-align:center;position:relative;cursor:pointer;scroll-snap-align:start}
 #managementScreen .mg-tile-art{font-size:22px;color:#81c4ff;line-height:1.25;filter:drop-shadow(0 0 3px #2d75c788)}
-#managementScreen .mg-tile-caption{flex:1;min-height:23px;font-size:clamp(8px,2.15vw,10px);line-height:1.13;color:#edf4ff;display:grid;place-items:center;overflow-wrap:anywhere}
+#managementScreen .mg-tile-art .ico{width:25px;height:25px;stroke-width:1.7;filter:drop-shadow(0 0 3px currentColor)}
+#managementScreen .mg-tile-caption{flex:1;min-height:29px;font-size:10.5px;line-height:1.14;color:#edf4ff;display:grid;place-items:center;overflow-wrap:anywhere;hyphens:auto}
 #managementScreen .mg-tile-cyan{background:radial-gradient(ellipse at 50% 15%,#04334f,transparent 75%),#041019}
 #managementScreen .mg-tile-violet{background:radial-gradient(ellipse at 50% 12%,#352277,transparent 75%),#090b1a}
 #managementScreen .mg-tile-amber{background:radial-gradient(ellipse at 50% 13%,#3b3017,transparent 70%),#080c0f}
@@ -375,6 +376,7 @@
 #managementScreen .mg-connected-icons{display:flex;align-items:center;gap:3px;position:relative;z-index:1;flex:none}
 #managementScreen .mg-connected-icons span{display:grid;place-items:center;height:20px;min-width:20px;border:1px solid #97c8ed55;background:linear-gradient(135deg,#143c71,#060e19);border-radius:5px;color:#b9dbff;font-size:12px;font-weight:bold}
 #managementScreen .mg-connected-icons span:nth-child(4){background:#43214a;border-color:#ba78c288}
+#managementScreen .mg-card-note{margin:8px 5px 1px;font-size:10.5px;line-height:1.43;color:#91a9bc}
 #managementScreen .mg-section{margin:8px 2px 0;color:#8faac5;letter-spacing:.16em;font-weight:440;font-size:10px}
 #managementScreen .mg-extras{display:grid;gap:5px}
 #managementScreen .mg-extra-row{width:100%;min-height:63px;display:flex;align-items:center;gap:10px;padding:7px 10px;text-align:left;background:linear-gradient(145deg,#131e2b,#05080b 70%)}
@@ -401,7 +403,7 @@
 #homeScreen .metric-card[hidden],#homeScreen .bv-clients-edge[hidden]{display:none!important}
 .mg-brand-feedback{display:grid;gap:7px;margin:14px 0 0;border-top:1px solid #859cb344;padding:12px 0}
 .mg-brand-feedback strong{font-size:13px}.mg-brand-feedback a{font-size:13px;color:#aad8ff;text-decoration:none}.mg-brand-feedback small{font-size:10px;color:#91a7b9}
-@media(min-width:400px){#managementScreen .mg-tile{min-height:99px}#managementScreen .mg-tile-art{font-size:25px}}
+@media(min-width:400px){#managementScreen .mg-tile{min-height:99px}#managementScreen .mg-tile-art .ico{width:27px;height:27px}}
 @media(max-width:365px){#managementScreen .mg-row{gap:7px;padding:8px}#managementScreen .mg-copy strong{font-size:13px}#managementScreen .mg-copy small{font-size:10px}#managementScreen .mg-connected-icons span:nth-child(n+3){display:none}#managementScreen .mg-auto .mg-copy small:last-child{display:none}}
 @media(prefers-reduced-motion:reduce){#managementScreen .mg-tile i::before{transition:none}}
 
