@@ -16,7 +16,14 @@ function build(id){
 }
 function sync(){
  // The main page already uses this exact source with the full event renderer.
- if((location.pathname.split('/').pop()||'index.html')==='index.html')return;
+ if((location.pathname.split('/').pop()||'index.html')==='index.html'){
+   const head=document.querySelector('#dmAttentionPanel .dm-attention-head');
+   if(head&&!head.querySelector('.dm-attention-approved-plasma')){
+     const orb=build('attention');orb.classList.add('dm-attention-approved-plasma');
+     orb.dataset.mode='idle';head.append(orb);
+   }
+   return;
+ }
  // Other personal sections used a separate antiquated logo and ring.
  document.querySelectorAll('body > .bottom-nav .assistant-ring').forEach((old,i)=>{
    const socket=old.closest('.assistant-socket');if(!socket)return;
