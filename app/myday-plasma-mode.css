@@ -105,3 +105,14 @@ html.dm-myday-no-dock body > nav.bottom-nav{display:none!important}
 .dm-voice-waves-electric .dm-electric-wave-4 .dm-laser-halo{stroke-width:2.1;opacity:.44;filter:blur(.5px)}
 .dm-voice-waves-electric .dm-electric-wave-4 .dm-laser-bloom{stroke-width:4.2;opacity:.23;filter:blur(1.8px)}
 .dock-launcher{transition:transform .28s cubic-bezier(.18,.76,.24,1)}
+
+/* Calendar: only the approved quiet glass mark inside the EXISTING orb. */
+.dm-myday-plasma-stage .dm-launcher-plasma .dm-myday-core-brand{
+ position:absolute;left:50%;top:50%;width:42%;height:46%;z-index:4;
+ transform:translate(-50%,-50%);display:grid;place-items:center;
+ pointer-events:none;opacity:.20;
+}
+.dm-myday-plasma-stage .dm-launcher-plasma .dm-myday-core-brand img{
+ display:block;width:100%;height:100%;object-fit:contain;
+ filter:brightness(.58) saturate(.35) drop-shadow(0 0 2px rgba(171,207,240,.16));
+}
