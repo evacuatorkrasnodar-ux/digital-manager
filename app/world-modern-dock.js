@@ -22,13 +22,28 @@ function init(){
    button.setAttribute('aria-label','Открыть '+label);
    button.addEventListener('click',()=>location.assign(url));
  });
- // Do not inject an idle logo into a blue/legacy plasma on this page.
+ // The World assistant waits in the same WHITE idle state as Home.
+ // The approved emblem is shown ONLY while idle, not in any colored mode.
+ dock.dataset.mode='idle';
+ const centre=dock.querySelector('#tabAssistant');
+ centre.dataset.mode='idle';
+ const orb=dock.querySelector('#tabAssistant .dm-dock-plasma');
+ if(orb){
+   const mark=document.createElement('span');
+   mark.className='dm-core-brand';
+   mark.setAttribute('aria-hidden','true');
+   const img=document.createElement('img');
+   img.className='dm-core-brand-image';
+   img.src='./assets/plasma-glass-mark.webp';
+   img.alt='';
+   mark.append(img);
+   orb.append(mark);
+ }
  const menu=document.createElement('nav');menu.className='dm-world-orb-menu';menu.hidden=true;
  menu.innerHTML='<a href="./index.html">Главная</a><a href="./world.html?tab=assistant">Чат</a><a href="./index.html?jump=management">Управление</a>';
  document.body.append(menu);
  let timer;
  function close(){clearTimeout(timer);menu.hidden=true}
- const centre=dock.querySelector('#tabAssistant');
  centre.addEventListener('click',()=>{menu.hidden=!menu.hidden;clearTimeout(timer);if(!menu.hidden)timer=setTimeout(close,6000)});
  document.addEventListener('pointerdown',e=>{if(!menu.contains(e.target)&&!centre.contains(e.target))close()});
  document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
