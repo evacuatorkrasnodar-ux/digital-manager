@@ -91,7 +91,10 @@
   --dm-size:56px;width:56px;height:56px;
   pointer-events:none;
 }
-#managementScreen .voice-iphone-dock-mount .mg-standalone-plasma .dm-core-brand{opacity:.17}
+/* The large plasma-only preview represents THINKING, not the white idle state. */
+#managementScreen .voice-iphone-dock-mount .mg-standalone-plasma .dm-core-brand{opacity:0!important}
+#managementScreen .voice-iphone-dock-mount .mg-standalone-plasma .dm-core-state-fx{opacity:.9}
+#managementScreen .voice-iphone-dock-mount .mg-standalone-plasma .dm-thinking-art{display:block}
 #managementScreen .dm-plasma-examples{padding:14px 0 6px}
 #managementScreen .dm-plasma-examples-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:13px}
 #managementScreen .dm-plasma-example{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-width:0;min-height:96px;border:1px solid rgba(128,163,203,.26);border-radius:14px;background:rgba(5,14,27,.78);overflow:hidden}
