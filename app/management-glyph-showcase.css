@@ -1,0 +1,126 @@
+/* Management / Assistant: interactive glyph showroom.
+   White symbols animate inside a cloned real plasma and the existing
+   phone conversation example. No real alerts, no changed dock behavior. */
+#managementScreen .dm-glyph-showcase{
+  display:grid;
+  grid-template-columns:minmax(0,.99fr) minmax(0,1.01fr);
+  gap:9px;
+  align-items:stretch;
+  min-width:0;
+}
+#managementScreen .dm-glyph-showcase .dm-glyph-preview-actions{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-auto-rows:minmax(62px,1fr);
+  align-items:stretch;
+  gap:7px;
+  min-width:0;
+}
+#managementScreen .dm-glyph-showcase .dm-glyph-preview-actions button{
+  width:100%;
+  min-width:0;
+  min-height:62px;
+  padding:7px 3px;
+  border:1px solid rgba(136,179,212,.35);
+  border-radius:14px;
+  background:linear-gradient(153deg,rgba(23,41,58,.70),rgba(3,12,22,.79));
+  box-shadow:inset 0 1px rgba(238,249,255,.08);
+  transition:border-color .2s ease,background .2s ease,box-shadow .2s ease;
+}
+#managementScreen .dm-glyph-showcase .dm-glyph-preview-actions button[aria-pressed="true"]{
+  border-color:rgba(153,218,255,.82);
+  background:linear-gradient(150deg,rgba(30,75,113,.80),rgba(6,20,39,.90));
+  box-shadow:inset 0 1px rgba(234,250,255,.16),0 0 11px rgba(48,142,245,.15);
+}
+#managementScreen .dm-glyph-showcase .dm-glyph-preview-actions svg{
+  width:21px;height:21px;color:#e6f4ff;
+}
+#managementScreen .dm-glyph-showcase .dm-glyph-preview-actions span{
+  font-size:clamp(9px,2.45vw,11px);
+  text-align:center;
+  white-space:normal;overflow-wrap:break-word;line-height:1.18;
+}
+#managementScreen .dm-glyph-stage{
+  position:relative;
+  isolation:isolate;
+  min-width:0;
+  min-height:200px;
+  overflow:hidden;
+  border:1px solid rgba(168,198,221,.48);
+  border-radius:21px;
+  background:
+    linear-gradient(180deg,rgba(2,8,17,.31),rgba(1,7,17,.55) 72%,rgba(1,5,13,.97)),
+    url('./assets/architecture-hero.png') 58% center / cover no-repeat,
+    #05101d;
+  box-shadow:inset 0 1px rgba(237,248,255,.15),inset 0 -3px rgba(190,215,233,.14),0 6px 16px rgba(0,0,0,.27);
+  display:grid;
+  place-items:center;
+}
+#managementScreen .dm-glyph-stage::before{
+  content:"";
+  position:absolute;z-index:0;pointer-events:none;
+  inset:15% -10% 16%;
+  background:radial-gradient(circle at 50% 48%,rgba(47,102,228,.27),transparent 59%);
+  filter:blur(9px);
+}
+#managementScreen .dm-glyph-stage::after{
+  content:"";
+  position:absolute;bottom:7px;left:50%;z-index:4;
+  width:54px;height:3px;border-radius:999px;
+  transform:translateX(-50%);
+  background:rgba(237,246,254,.82);
+  pointer-events:none;
+}
+#managementScreen .dm-glyph-stage-demo{
+  position:absolute;z-index:5;right:8px;top:8px;
+  font-size:8px;font-weight:560;letter-spacing:.10em;
+  color:rgba(199,228,249,.78);
+  border:1px solid rgba(145,190,223,.37);
+  padding:2px 5px;border-radius:99px;
+  background:rgba(2,11,25,.42);
+}
+#managementScreen .dm-glyph-stage-orb{
+  position:absolute;z-index:2;left:50%;top:44%;
+  width:91px;height:91px;
+  display:grid;place-items:center;
+  transform:translate(-50%,-50%);
+}
+#managementScreen .dm-glyph-stage-orb>.dm-voice-orb{
+  --dm-size:84px;
+  position:relative;left:auto;bottom:auto;
+  width:var(--dm-size);height:var(--dm-size);
+  filter:drop-shadow(0 0 5px rgba(57,135,255,.75)) drop-shadow(0 0 13px rgba(65,89,231,.40))!important;
+}
+#managementScreen .dm-glyph-stage.is-playing .dm-glyph-stage-orb>.dm-voice-orb{
+  animation:dm-glyph-stage-breathe 2s ease-in-out 2;
+}
+@keyframes dm-glyph-stage-breathe{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.065)}
+}
+#managementScreen .dm-glyph-stage-label{
+  position:absolute;z-index:5;left:4px;right:4px;bottom:20px;
+  display:block;text-align:center;
+  font-size:10px;line-height:1.25;color:#e3f2ff;
+  text-shadow:0 1px 5px #000,0 0 6px rgba(30,92,200,.42);
+}
+#managementScreen .dm-glyph-stage .dm-settings-demo-glyph.is-visible,
+#managementScreen .voice-mock-conversation .dm-settings-demo-glyph.is-visible{
+  opacity:.92;
+}
+#managementScreen .dm-glyph-preview-status{
+  margin-top:9px;
+  font-size:10.5px;line-height:1.45;color:#a8c4d9;
+}
+@media(max-width:350px){
+  #managementScreen .dm-glyph-showcase{gap:6px;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  #managementScreen .dm-glyph-showcase .dm-glyph-preview-actions{gap:5px}
+  #managementScreen .dm-glyph-showcase .dm-glyph-preview-actions button{min-height:58px;padding:5px 2px}
+  #managementScreen .dm-glyph-showcase .dm-glyph-preview-actions span{font-size:9px}
+  #managementScreen .dm-glyph-stage{min-height:185px}
+  #managementScreen .dm-glyph-stage-orb{top:43%}
+}
+@media(prefers-reduced-motion:reduce){
+  #managementScreen .dm-glyph-stage.is-playing .dm-glyph-stage-orb>.dm-voice-orb{animation:none!important}
+  #managementScreen .dm-glyph-showcase .dm-glyph-preview-actions button{transition:none!important}
+}
