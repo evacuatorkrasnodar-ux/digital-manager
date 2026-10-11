@@ -1031,3 +1031,38 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
     animation:none!important;
   }
 }
+
+
+/* Existing real brand mark in the black matter: barely visible at rest.
+   It is NOT another ring; all event/composer glyphs cover it cleanly. */
+.dm-voice-orb-electric .dm-core-brand{
+  position:absolute;
+  left:50%;top:50%;z-index:4;
+  width:28%;height:31%;
+  display:grid;place-items:center;
+  pointer-events:none;
+  opacity:0;
+  transform:translate(-50%,-50%);
+  transition:opacity .45s ease;
+}
+.dm-voice-orb-electric .dm-core-brand svg{
+  width:100%;height:100%;display:block;
+  filter:brightness(.46) saturate(.30);
+}
+.bottom-nav[data-mode="idle"] .dm-dock-plasma .dm-core-brand,
+#dockLauncher[data-mode="idle"] .dm-launcher-plasma .dm-core-brand{
+  opacity:.17;
+}
+/* The approved logo is an idle-only detail and disappears completely
+   whenever any important sign or compose action is visible. */
+.dm-voice-orb-electric:has(.dm-core-glyph.is-visible) .dm-core-brand{
+  opacity:0!important;
+}
+/* When the logo is present, stop drifting particles beneath it. */
+.dm-voice-orb-electric:has(.dm-core-brand) .dm-orb-edge::before{
+  opacity:0;
+  animation-play-state:paused;
+}
+@media(prefers-reduced-motion:reduce){
+  .dm-voice-orb-electric .dm-core-brand{transition:none!important}
+}
