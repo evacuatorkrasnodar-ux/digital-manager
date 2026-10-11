@@ -445,6 +445,14 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 .dm-orb-spectral .dm-spectral-outer{stroke-width:.68;opacity:.77;filter:none}
 .dm-orb-spectral .dm-spectral-main{stroke-width:1.08;opacity:.99;filter:drop-shadow(0 0 .85px rgba(115,177,255,.36))}
 .dm-orb-spectral .dm-spectral-inner{stroke-width:.69;opacity:.71;filter:none}
+.dm-orb-spectral .dm-spectral-echo{fill:none;stroke-linecap:round;stroke-linejoin:round;filter:none;transition:opacity .55s ease,stroke-width .55s ease}
+.dm-orb-spectral .dm-echo-one{stroke-width:.61;opacity:.43}
+.dm-orb-spectral .dm-echo-two{stroke-width:.63;opacity:.38}
+.dm-orb-spectral .dm-echo-three{stroke-width:.59;opacity:.28}
+.assistant-live[data-mode="listening"] .dm-spectral-echo{opacity:.56}
+.assistant-live[data-mode="speaking"] .dm-echo-one,#managementScreen .voice-mock-conversation.is-previewing .dm-echo-one{opacity:.79;stroke-width:.80}
+.assistant-live[data-mode="speaking"] .dm-echo-two,#managementScreen .voice-mock-conversation.is-previewing .dm-echo-two{opacity:.73;stroke-width:.80}
+.assistant-live[data-mode="speaking"] .dm-echo-three,#managementScreen .voice-mock-conversation.is-previewing .dm-echo-three{opacity:.65;stroke-width:.75}
 .assistant-live[data-mode="speaking"] .dm-spectral-outer,#managementScreen .voice-mock-conversation.is-previewing .dm-spectral-outer{opacity:.91;stroke-width:.84}
 .assistant-live[data-mode="speaking"] .dm-spectral-main,#managementScreen .voice-mock-conversation.is-previewing .dm-spectral-main{opacity:1;stroke-width:1.23;filter:drop-shadow(0 0 1px rgba(115,177,255,.48))}
 .assistant-live[data-mode="speaking"] .dm-spectral-inner,#managementScreen .voice-mock-conversation.is-previewing .dm-spectral-inner{opacity:.89;stroke-width:.84}
@@ -521,3 +529,4 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 #managementScreen .voice-mock-conversation.is-previewing .dm-voice-waves-electric .dm-laser-track{animation-duration:3.9s}
 @keyframes dm-matter-flow{0%,100%{opacity:.76;transform:rotate(-6deg) scale(1)}50%{opacity:1;transform:rotate(7deg) scale(1.025)}}
 @media(prefers-reduced-motion:reduce){.dm-voice-orb,.dm-voice-orb-electric::after,.dm-orb-rim,.dm-voice-waves path,.dm-voice-waves-electric .dm-laser-track{animation:none!important}#managementScreen .voice-switch i,#managementScreen .voice-switch i::before{transition:none!important}}
+@media(prefers-reduced-motion:reduce){.dm-orb-spectral .dm-spectral-echo{transition:none!important}}
