@@ -2,19 +2,19 @@
 .dm-shared-socket{display:grid!important;place-items:center}
 .dm-shared-plasma{--dm-size:60px;position:relative;display:block;flex:none;width:var(--dm-size);height:var(--dm-size);border-radius:50%;isolation:isolate;background:radial-gradient(circle,rgba(0,2,10,.97) 0 48%,rgba(1,5,22,.93) 57%,transparent 70%);filter:drop-shadow(0 0 5px rgba(225,240,255,.55)) drop-shadow(0 0 9px rgba(183,206,237,.18))}
 .dm-shared-plasma i{display:block;position:absolute;border-radius:50%;pointer-events:none}
-.dm-shared-plasma .dm-orb-halo{inset:-24%;background:radial-gradient(circle,transparent 38%,rgba(237,246,255,.04) 49%,rgba(229,241,255,.18) 56%,rgba(191,215,248,.09) 66%,transparent 76%);filter:blur(8px)}
-.dm-shared-plasma .dm-orb-rim{inset:4%;background:conic-gradient(from 15deg,#c7d7e6,#fff 27deg,#eaf6ff 46deg,#f8fcff 90deg,#b9cfe7 141deg,#f3f4ff 197deg,#d5e1f5 217deg,#fff 248deg,#c9d9e8 288deg,#f5fbff 330deg,#c7d7e6);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4.6px),#000 calc(100% - 2.1px));mask:radial-gradient(farthest-side,transparent calc(100% - 4.6px),#000 calc(100% - 2.1px));filter:drop-shadow(0 0 3px rgba(225,240,255,.78));animation:dm-shared-rotate 13s linear infinite}
-.dm-shared-plasma .dm-orb-edge{inset:8%;border:1px solid rgba(151,216,255,.44);box-shadow:inset 0 0 8px rgba(25,63,238,.48),0 0 7px rgba(93,153,255,.53)}
-.dm-shared-plasma .dm-orb-spectral{position:absolute;inset:-13%;z-index:2;width:126%;height:126%;overflow:visible;filter:grayscale(1) saturate(0) brightness(1.42) drop-shadow(0 0 3px rgba(232,246,255,.72))}
-.dm-shared-plasma .dm-orb-arc{transform-origin:60px 60px;animation:dm-shared-rotate 16s linear infinite}
-.dm-shared-plasma .dm-arc-violet{animation-direction:reverse}
+.dm-shared-plasma .dm-shared-halo{inset:-24%;background:radial-gradient(circle,transparent 38%,rgba(237,246,255,.04) 49%,rgba(229,241,255,.18) 56%,rgba(191,215,248,.09) 66%,transparent 76%);filter:blur(8px)}
+.dm-shared-plasma .dm-shared-rim{inset:4%;background:conic-gradient(from 15deg,#c7d7e6,#fff 27deg,#eaf6ff 46deg,#f8fcff 90deg,#b9cfe7 141deg,#f3f4ff 197deg,#d5e1f5 217deg,#fff 248deg,#c9d9e8 288deg,#f5fbff 330deg,#c7d7e6);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4.6px),#000 calc(100% - 2.1px));mask:radial-gradient(farthest-side,transparent calc(100% - 4.6px),#000 calc(100% - 2.1px));filter:drop-shadow(0 0 3px rgba(225,240,255,.78));animation:dm-shared-rotate 13s linear infinite}
+.dm-shared-plasma .dm-shared-edge{inset:8%;border:1px solid rgba(151,216,255,.44);box-shadow:inset 0 0 8px rgba(25,63,238,.48),0 0 7px rgba(93,153,255,.53)}
+.dm-shared-plasma .dm-shared-spectral{position:absolute;inset:-13%;z-index:2;width:126%;height:126%;overflow:visible;filter:grayscale(1) saturate(0) brightness(1.42) drop-shadow(0 0 3px rgba(232,246,255,.72))}
+.dm-shared-plasma .dm-shared-arc{transform-origin:60px 60px;animation:dm-shared-rotate 16s linear infinite}
+.dm-shared-plasma .dm-shared-violet{animation-direction:reverse}
 .dm-shared-plasma .dm-shared-brand{position:absolute;left:50%;top:50%;width:42%;height:46%;transform:translate(-50%,-50%);z-index:5;opacity:.20;display:grid;place-items:center;pointer-events:none}
 .dm-shared-plasma .dm-shared-brand img{display:block;width:100%;height:100%;object-fit:contain;filter:brightness(.58) saturate(.35) drop-shadow(0 0 2px rgba(171,207,240,.16))}
 [data-mode]:not([data-mode="idle"]) .dm-shared-plasma .dm-shared-brand{opacity:0!important;visibility:hidden!important}
 .dm-shared-plasma[data-mode]:not([data-mode="idle"]) .dm-shared-brand{opacity:0!important}
 .dm-shared-plasma[data-mode="idle"] .dm-shared-brand{opacity:.20}
 @keyframes dm-shared-rotate{to{transform:rotate(360deg)}}
-@media(prefers-reduced-motion:reduce){.dm-shared-plasma .dm-orb-rim,.dm-shared-plasma .dm-orb-arc{animation:none!important}}
+@media(prefers-reduced-motion:reduce){.dm-shared-plasma .dm-shared-rim,.dm-shared-plasma .dm-shared-arc{animation:none!important}}
 
 /* Attention screen also shows the same white waiting plasma, without creating a dock. */
 #dmAttentionPanel .dm-attention-head .dm-attention-approved-plasma{--dm-size:53px;position:absolute;right:17px;bottom:15px;z-index:2;pointer-events:none}
