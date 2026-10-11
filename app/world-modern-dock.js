@@ -36,7 +36,17 @@ function init(){
  centre.addEventListener('click',()=>{menu.hidden=!menu.hidden;clearTimeout(timer);if(!menu.hidden)timer=setTimeout(close,6000)});
  document.addEventListener('pointerdown',e=>{if(!menu.contains(e.target)&&!centre.contains(e.target))close()});
  document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
- if(prefs.dock===false){dock.hidden=true;const standalone=centre.cloneNode(true);standalone.id='worldStandalonePlasma';standalone.classList.add('dm-world-standalone');standalone.hidden=false;document.body.append(standalone);standalone.addEventListener('click',()=>centre.click());}
+ if(prefs.dock===false){
+   dock.hidden=true;
+   const standalone=document.createElement('button');
+   standalone.type='button';standalone.id='worldStandalonePlasma';
+   standalone.className='dm-world-standalone';standalone.dataset.mode='idle';
+   standalone.setAttribute('aria-label','Открыть действия помощника');
+   const socket=centre.querySelector('.assistant-socket').cloneNode(true);
+   standalone.append(socket);
+   document.body.append(standalone);
+   standalone.addEventListener('click',()=>centre.click());
+ }
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
