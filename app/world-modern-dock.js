@@ -22,12 +22,7 @@ function init(){
    button.setAttribute('aria-label','Открыть '+label);
    button.addEventListener('click',()=>location.assign(url));
  });
- const orb=dock.querySelector('#tabAssistant .dm-dock-plasma');
- if(orb){
-   const mark=document.createElement('span');mark.className='dm-core-brand';
-   const img=document.createElement('img');img.className='dm-core-brand-image';img.src='./assets/plasma-glass-mark.webp';img.alt='';
-   mark.append(img);orb.append(mark);
- }
+ // Do not inject an idle logo into a blue/legacy plasma on this page.
  const menu=document.createElement('nav');menu.className='dm-world-orb-menu';menu.hidden=true;
  menu.innerHTML='<a href="./index.html">Главная</a><a href="./world.html?tab=assistant">Чат</a><a href="./index.html?jump=management">Управление</a>';
  document.body.append(menu);
