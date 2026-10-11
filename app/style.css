@@ -1097,3 +1097,11 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
 #dmAttentionClose{width:38px;height:38px;border-radius:50%;border:1px solid #436079;background:#0c1b2c;color:#e5f4ff;font-size:24px}
 .dm-attention-filters{display:flex;gap:7px;overflow-x:auto;margin:24px 0 15px}.dm-attention-filters button{border:1px solid #324b64;border-radius:20px;background:#0e1c2c;color:#b8d1e7;padding:9px 12px;white-space:nowrap;font-size:12px}.dm-attention-filters button[aria-pressed="true"]{background:#24425f;border-color:#75afe2;color:#fff}
 .dm-attention-list{display:grid;gap:10px}.dm-attention-entry{display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(140deg,#122336,#091522);border:1px solid #2c4358;border-radius:17px;padding:15px}.dm-attention-entry strong{font-size:14px;font-weight:520}.dm-attention-entry p{font-size:12px;color:#b7cce1;line-height:1.4;margin:6px 0}.dm-attention-entry small{color:#86a9c6;font-size:10px}.dm-attention-entry button{flex:none;border:1px solid #40627b;background:#152d42;border-radius:12px;padding:9px;color:#d9eeff;font-size:11px}.dm-attention-entry button:disabled{opacity:.5}.dm-attention-empty{text-align:center;padding:50px 15px;color:#a8c5dc;font-size:14px;border:1px solid #24384d;border-radius:17px;background:#091724}.dm-attention-foot{font-size:11px;color:#8eacc5;line-height:1.5;margin-top:20px}
+
+/* Compact four-action assistant tray. Main-page Home is omitted, dock untouched. */
+.dock-quick-actions{gap:3px;padding:4px 6px;border-radius:18px}
+.dock-quick-actions button{width:39px;height:38px;border-radius:11px}
+.dock-quick-actions .ico{width:19px;height:19px}
+.dock-quick-actions #dockOpenAttention .ico{width:19px;height:19px}
+.dock-quick-actions #dockOpenHome[hidden]{display:none!important}
+.dock-quick-actions .dm-attention-dot{right:5px;top:4px}
