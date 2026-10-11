@@ -15,3 +15,6 @@
 .dm-shared-plasma[data-mode="idle"] .dm-shared-brand{opacity:.20}
 @keyframes dm-shared-rotate{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.dm-shared-plasma .dm-orb-rim,.dm-shared-plasma .dm-orb-arc{animation:none!important}}
+
+/* Attention screen also shows the same white waiting plasma, without creating a dock. */
+#dmAttentionPanel .dm-attention-head .dm-attention-approved-plasma{--dm-size:53px;position:absolute;right:17px;bottom:15px;z-index:2;pointer-events:none}
