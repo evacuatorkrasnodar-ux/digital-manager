@@ -48,6 +48,7 @@
   }
   function setTab(next){
     hideBrandCard();hideProfileCard();tab=next;
+    dmSyncQuickHome();
     if(next==='management')mgSettingsPage('home');
     ['home','assistant','management'].forEach(x=>{
       byId(x+'Screen').hidden=x!==next;
@@ -730,6 +731,11 @@
   window.addEventListener('resize',mgSyncCarouselNav);
   window.addEventListener('pageshow',mgSyncCarouselNav);
   requestAnimationFrame(mgSyncCarouselNav);
+  function dmSyncQuickHome(){
+    const home=byId('dockOpenHome');
+    if(home)home.hidden=tab==='home';
+  }
+  dmSyncQuickHome();
   function closeDockQuickActions(){
     byId('dockQuickActions').hidden=true;
     const stillChatOpen=!byId('plasmaChatPanel').hidden;
@@ -1208,6 +1214,7 @@
     const shouldOpen=menu.hidden;
     closePlasmaPanel();closeDockQuickActions();
     if(shouldOpen){
+      dmSyncQuickHome();
       menu.hidden=false;
       plasmaTriggers.forEach(button=>button.setAttribute('aria-expanded','true'));
     }
