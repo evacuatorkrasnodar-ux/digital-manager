@@ -113,3 +113,78 @@
   #managementScreen .mg-dock-preview .dm-orb-rim,
   #managementScreen .mg-dock-preview .dm-orb-arc{animation:none!important}
 }
+
+
+/* Matching two cropped phone bottoms: one for the real-dock preview,
+   one for the conversation preview. They are CSS chrome, not new images. */
+#managementScreen .voice-mock.voice-mock-dock-scene .voice-iphone-device{
+  bottom:14px;
+}
+/* Lower the copied navigation INSIDE the preview only: the live dock
+   and the user's dock preference never move. */
+#managementScreen .voice-iphone-dock-mount{
+  bottom:-11px;
+}
+#managementScreen .voice-iphone-dock-mount .mg-dock-preview.bottom-nav{
+  bottom:-7px!important;
+}
+/* Keep the existing orb, landscape and electric waves. Expose room below
+   the conversation screen for a matching physical device edge. */
+#managementScreen .voice-mock-conversation .voice-scene{
+  inset:5px 8px 17px;
+  border-radius:25px 25px 28px 28px;
+}
+#managementScreen .voice-mock-conversation .voice-phone-frame{
+  inset:5px 8px 18px;
+  border-radius:26px 26px 28px 28px;
+}
+/* A thin polished titanium/graphite bottom edge with a central dark
+   charging recess and balanced speaker perforations, repeated on both. */
+#managementScreen .voice-mock.voice-mock-dock-scene::after,
+#managementScreen .voice-mock.voice-mock-conversation::after{
+  content:"";
+  box-sizing:border-box;
+  position:absolute;
+  z-index:11;
+  left:11px;
+  right:11px;
+  bottom:4px;
+  height:20px;
+  border:1px solid rgba(159,181,198,.68);
+  border-top-color:rgba(206,227,239,.70);
+  border-radius:0 0 31px 31px;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse 20px 5.5px at 50% 51%,#02060b 62%,rgba(164,180,195,.64) 76%,transparent 87%),
+    radial-gradient(circle at 22% 50%,rgba(1,6,12,.94) 1.25px,rgba(133,157,179,.46) 1.55px,transparent 2.25px),
+    radial-gradient(circle at 25.5% 50%,rgba(1,6,12,.94) 1.25px,rgba(133,157,179,.46) 1.55px,transparent 2.25px),
+    radial-gradient(circle at 29% 50%,rgba(1,6,12,.94) 1.25px,rgba(133,157,179,.46) 1.55px,transparent 2.25px),
+    radial-gradient(circle at 32.5% 50%,rgba(1,6,12,.94) 1.25px,rgba(133,157,179,.46) 1.55px,transparent 2.25px),
+    radial-gradient(circle at 67.5% 50%,rgba(1,6,12,.94) 1.25px,rgba(133,157,179,.46) 1.55px,transparent 2.25px),
+    radial-gradient(circle at 71% 50%,rgba(1,6,12,.94) 1.25px,rgba(133,157,179,.46) 1.55px,transparent 2.25px),
+    radial-gradient(circle at 74.5% 50%,rgba(1,6,12,.94) 1.25px,rgba(133,157,179,.46) 1.55px,transparent 2.25px),
+    radial-gradient(circle at 78% 50%,rgba(1,6,12,.94) 1.25px,rgba(133,157,179,.46) 1.55px,transparent 2.25px),
+    linear-gradient(180deg,
+      rgba(194,214,227,.85) 0%,
+      rgba(72,95,112,.98) 10%,
+      #162431 31%,
+      #050b11 63%,
+      #111e2b 83%,
+      rgba(102,124,142,.89) 100%);
+  box-shadow:
+    inset 0 1px rgba(245,252,255,.23),
+    inset 0 -1px 2px rgba(0,0,0,.79),
+    0 4px 7px rgba(0,0,0,.34);
+}
+@media(max-width:350px){
+  #managementScreen .voice-mock.voice-mock-dock-scene::after,
+  #managementScreen .voice-mock.voice-mock-conversation::after{
+    left:7px;right:7px;height:18px;
+  }
+  #managementScreen .voice-mock-conversation .voice-scene{
+    inset:4px 5px 16px;
+  }
+  #managementScreen .voice-mock-conversation .voice-phone-frame{
+    inset:4px 5px 17px;
+  }
+}
