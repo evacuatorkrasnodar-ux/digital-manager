@@ -1105,3 +1105,57 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
 .dock-quick-actions #dockOpenAttention .ico{width:19px;height:19px}
 .dock-quick-actions #dockOpenHome[hidden]{display:none!important}
 .dock-quick-actions .dm-attention-dot{right:5px;top:4px}
+
+/* Centre of Attention — Black Velvet home visual language.
+   Intentional zero changes to the homepage, dock, plasma and lasers. */
+#dmAttentionPanel.dm-attention-panel{
+ background:#000;
+ padding:calc(17px + env(safe-area-inset-top,0px)) max(12px,calc((100vw - 430px)/2 + 12px)) calc(38px + env(safe-area-inset-bottom,0px));
+ color:#edf5ff;
+}
+#dmAttentionPanel .dm-attention-head{
+ position:relative;isolation:isolate;min-height:188px;overflow:hidden;
+ border:1px solid rgba(144,178,203,.32);border-radius:19px;
+ padding:17px 15px;align-items:flex-start;
+ background:linear-gradient(180deg,rgba(2,8,15,.35),rgba(0,0,0,.18) 46%,rgba(0,0,0,.77)),url('./assets/architecture-hero.png') 64% 48% /cover no-repeat;
+}
+#dmAttentionPanel .dm-attention-head:after{
+ content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+ background:linear-gradient(90deg,rgba(1,7,14,.72),rgba(1,7,14,.08));
+}
+#dmAttentionPanel .dm-attention-head>div{max-width:calc(100% - 47px);text-shadow:0 2px 10px rgba(0,0,0,.8)}
+#dmAttentionPanel .dm-attention-head small{font-size:10px;letter-spacing:.1em;color:#c6dff2;font-weight:400}
+#dmAttentionPanel .dm-attention-head h2{font-family:var(--font-display);font-weight:440;letter-spacing:-.025em;font-size:clamp(22px,6vw,26px);margin:20px 0 7px;line-height:1.1}
+#dmAttentionPanel .dm-attention-head p{font-size:12px;color:#d6e7f5;font-weight:350;line-height:1.4}
+#dmAttentionPanel #dmAttentionClose{
+ flex:none;width:34px;height:34px;font-size:23px;font-weight:350;border:1px solid rgba(167,201,225,.37);
+ background:linear-gradient(145deg,rgba(18,33,46,.77),rgba(4,10,18,.85));
+ box-shadow:inset 0 1px rgba(255,255,255,.09);backdrop-filter:blur(8px);
+}
+#dmAttentionPanel .dm-attention-filters{gap:6px;margin:17px 0 14px;padding:0 1px;scrollbar-width:none}
+#dmAttentionPanel .dm-attention-filters button{
+ font-size:11px;font-weight:400;padding:8px 12px;border-radius:12px;
+ border:1px solid rgba(134,170,199,.29);
+ background:linear-gradient(155deg,rgba(17,29,42,.7),rgba(3,9,16,.85));
+ color:#bacddd;min-height:35px;
+}
+#dmAttentionPanel .dm-attention-filters button[aria-pressed="true"]{
+ background:linear-gradient(155deg,rgba(42,67,91,.8),rgba(12,29,45,.8));
+ border-color:rgba(158,206,240,.56);color:#f4faff;
+ box-shadow:inset 0 1px rgba(255,255,255,.07);
+}
+#dmAttentionPanel .dm-attention-empty,
+#dmAttentionPanel .dm-attention-entry{
+ border:1px solid rgba(136,172,200,.34);border-radius:18px;
+ background:radial-gradient(ellipse 90% 75% at 0 0,rgba(139,198,238,.075),transparent 72%),linear-gradient(153deg,#0c1824,#080f17 48%,#02080f);
+ box-shadow:inset 0 1px rgba(255,255,255,.055);
+}
+#dmAttentionPanel .dm-attention-empty{min-height:135px;display:grid;place-items:center;padding:28px 15px;color:#b2c8d9;font-size:12px;line-height:1.5}
+#dmAttentionPanel .dm-attention-entry{padding:14px}
+#dmAttentionPanel .dm-attention-entry strong{font-size:13px;font-weight:470}
+#dmAttentionPanel .dm-attention-entry button{border-radius:11px;background:rgba(32,52,71,.55);border-color:rgba(140,178,204,.35)}
+#dmAttentionPanel .dm-attention-foot{
+ margin:17px 4px 0;font-size:10px;line-height:1.5;color:#829eb4;
+ padding:0;border:0;
+}
+@media (max-width:350px){#dmAttentionPanel .dm-attention-filters{gap:4px}#dmAttentionPanel .dm-attention-filters button{padding:8px 9px;font-size:10px}}
