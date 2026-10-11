@@ -45,6 +45,7 @@
   }
   function setTab(next){
     hideBrandCard();hideProfileCard();tab=next;
+    if(next==='management')mgSettingsPage('home');
     ['home','assistant','management'].forEach(x=>{
       byId(x+'Screen').hidden=x!==next;
       const button=byId('tab'+x[0].toUpperCase()+x.slice(1));
@@ -82,7 +83,7 @@
     <div class="modal-brand"><img src="./assets/logo-air.png" alt=""><div><strong>Цифровой бизнес</strong><small>Компания-разработчик приложения «Цифровой управляющий»</small></div></div>
     <div class="modal-rows"><div class="modal-row"><span>Приложение</span><strong>Цифровой управляющий</strong></div><div class="modal-row"><span>Установленная версия</span><strong>${VERSION}</strong></div><div class="modal-row"><span>Тип лицензии</span><span class="demo-tag">Демонстрация</span></div><div class="modal-row"><span>Покупка</span><strong>Не подтверждена</strong></div><div class="modal-row"><span>Подписка</span><strong>Не подключена</strong></div></div>
     <p class="modal-note">В этой локальной сборке нет сервера лицензирования. Мы не показываем выдуманную оплаченную подписку: после подключения системы оплаты здесь появится реальный тип лицензии, срок действия и статус.</p>
-    <div class="dialog-actions"><button class="primary-button" type="button" id="brandDone">Понятно</button></div>`,()=>byId('brandDone').addEventListener('click',closeModal));}
+    <div class="mg-brand-feedback"><strong>Нашли баг или есть идея?</strong><a target="_blank" rel="noopener noreferrer" href="https://github.com/evacuatorkrasnodar-ux/digital-manager/issues/new">Написать разработчикам →</a><small>Обращения открываются на GitHub.</small></div><div class="dialog-actions"><button class="primary-button" type="button" id="brandDone">Понятно</button></div>`,()=>byId('brandDone').addEventListener('click',closeModal));}
   function profileModal(){modal('Мой профиль',`<form id="profileForm" class="form-fields"><label>Как к вам обращаться?<input name="name" maxlength="42" required value="${safe(state.name)}" placeholder="Имя"></label><button class="primary-button" type="submit">Сохранить имя</button></form>`,()=>byId('profileForm').addEventListener('submit',e=>{e.preventDefault();const form=new FormData(e.currentTarget);const name=String(form.get('name')||'').trim();if(!name)return;state.name=name;save();applyUser();closeModal();notify('Имя сохранено на этом устройстве');}));}
   function companyModal(){modal('Карточка бизнеса',`<form id="companyForm" class="form-fields"><label>Название компании<input name="company" maxlength="70" required value="${safe(state.company)}"></label><label>Направление деятельности<input name="industry" maxlength="65" value="${safe(state.industry)}"></label><label>Город<input name="city" maxlength="45" value="${safe(state.city)}"></label><button class="primary-button" type="submit">Сохранить компанию</button></form><p class="modal-note">Данные карточки сохраняются только в браузере. В будущем они будут синхронизироваться с аккаунтом.</p>`,()=>byId('companyForm').addEventListener('submit',e=>{e.preventDefault();const data=new FormData(e.currentTarget);state.company=String(data.get('company')||'').trim()||'Моя компания';state.industry=String(data.get('industry')||'').trim();state.city=String(data.get('city')||'').trim();save();applyUser();closeModal();notify('Карточка бизнеса сохранена');}));}
   function clientsModal(){const list=state.clients.length?`<ul class="modal-list">${state.clients.map(x=>`<li><span>${safe(x.name)}</span><small>${safe(x.phone||'Без телефона')}</small></li>`).join('')}</ul>`:'<p class="empty-hint">Вы пока не добавили тестовых клиентов.</p>';modal('Работа с клиентами',`<p class="modal-note">На главной показаны примерные 248 клиентов. Ниже — ваши собственные записи, сохранённые на этом устройстве.</p>${list}<form id="clientForm" class="form-fields"><label>Имя клиента<input name="name" required maxlength="80" placeholder="Например, Мария"></label><label>Контакт<input name="phone" maxlength="70" placeholder="Телефон или e-mail"></label><button class="primary-button" type="submit">Добавить клиента</button></form>`,()=>byId('clientForm').addEventListener('submit',e=>{e.preventDefault();const d=new FormData(e.currentTarget);const name=String(d.get('name')||'').trim();if(!name)return;state.clients.unshift({name,phone:String(d.get('phone')||'').trim()});save();clientsModal();notify('Клиент добавлен');}));}
@@ -104,6 +105,91 @@
       setRingMode('idle');
     },520);
   }
+
+  // Единственный экран Управления. Удалено старое тестовое меню CRM.
+  const mgDefaults={managerName:'Цифровой управляющий',tone:'human',autonomy:0,
+    cards:{promotion:true,sales:true,clients:true,money:true,inside:true,picture:true,tasks:true},
+    skills:{market:true,opportunities:true,rules:true,documents:true},
+    rules:{advertising:false,tools:false,prices:false,spending:false}};
+  const mgSaved=state.management&&typeof state.management==='object'?state.management:{};
+  const mgData={...mgDefaults,...mgSaved,cards:{...mgDefaults.cards,...(mgSaved.cards||{})},
+    skills:{...mgDefaults.skills,...(mgSaved.skills||{})},
+    rules:{...mgDefaults.rules,...(mgSaved.rules||{})}};
+  state.management=mgData;
+  let mgCurrent='home';
+  const mgNames={manager:'Управляющий',autopilot:'Автопилот',connections:'Связи',documents:'Документы',
+    payments:'Платежи',help:'Помощь',learning:'Обучение'};
+  const mgInfo={
+    connections:'Связи объединят ваш сайт, почту, календарь, банки, продажи, маркетплейсы и ЭДО. Реальные подключения пока не настроены.',
+    documents:'Здесь будут договоры, счета, акты, накладные и шаблоны. Важные документы не будут отправляться или подписываться без разрешения.',
+    payments:'Здесь будут счета, аренда, коммунальные и регулярные платежи. Банковские функции пока не подключены.',
+    learning:'Начните с компании, затем выберите навыки управляющего и настройте самостоятельность Автопилота.'
+  };
+  function mgEsc(value){return safe(value);}
+  function mgSettingsPage(page){
+    mgCurrent=page;
+    byId('mgHome').hidden=page!=='home';
+    byId('mgDetail').hidden=page==='home';
+    byId('mgTitle').textContent=mgNames[page]||'Управление';
+    byId('mgSubtitle').textContent=page==='home'?'Настройки приложения':'Настройки управляющего';
+    if(page==='home'){byId('mgDetail').innerHTML='';window.scrollTo(0,0);return;}
+    let content='';
+    if(page==='manager'){
+      const choices=[['market','Следить за рынком'],['opportunities','Замечать проблемы и возможности'],['rules','Следить за правилами'],['documents','Помогать с документами']];
+      content='<p class="mg-explain">Выберите, как зовут вашего управляющего, как он общается и на что обращает внимание.</p>'+
+        '<label class="mg-field">Имя управляющего<input id="mgManagerName" maxlength="42" value="'+mgEsc(mgData.managerName)+'"></label>'+
+        '<label class="mg-field">Стиль общения<select id="mgTone"><option value="human">По-человечески</option><option value="brief">Кратко и по делу</option><option value="business">Деловой</option></select></label>'+
+        '<h2>Навыки</h2>'+choices.map(([key,label])=>'<label class="mg-choice">'+label+'<input type="checkbox" data-mg-skill="'+key+'" '+(mgData.skills[key]?'checked':'')+'></label>').join('')+
+        '<p class="mg-disclaimer">Предпочтения сохраняются на устройстве. Для реального наблюдения потребуется подключить сервисы и ИИ.</p>';
+    }else if(page==='autopilot'){
+      const choices=[['advertising','Реклама до 5 000 ₽'],['tools','Создание рабочих инструментов'],['prices','Изменение цен'],['spending','Новые расходы']];
+      content='<div class="mg-auto-intro">✦ &nbsp; Насколько самостоятельно мне работать?</div>'+
+        '<p class="mg-explain">Ты не отдаёшь контроль. Ты задаёшь границы, внутри которых я могу действовать сам.</p>'+
+        '<label class="mg-field">Уровень самостоятельности<input id="mgAutonomy" type="range" min="0" max="2" step="1" value="'+Number(mgData.autonomy)+'"><span id="mgAutonomyLabel"></span></label>'+
+        '<h2>Правила</h2>'+choices.map(([key,label])=>'<label class="mg-choice">'+label+'<input type="checkbox" data-mg-rule="'+key+'" '+(mgData.rules[key]?'checked':'')+'></label>').join('')+
+        '<p class="mg-disclaimer">Настройки — прототип. Они пока не разрешают реальных платежей, отправки сообщений или других действий.</p>';
+    }else if(page==='help'){
+      content='<p class="mg-explain">Помощь по работе приложения и обратная связь.</p><a class="mg-help-link" target="_blank" rel="noopener noreferrer" href="https://github.com/evacuatorkrasnodar-ux/digital-manager/issues/new">Сообщить об ошибке или предложить идею ↗</a><p class="mg-disclaimer">Откроется GitHub, для отправки обращения потребуется аккаунт.</p>';
+    }else{content='<p class="mg-explain">'+mgInfo[page]+'</p><p class="mg-disclaimer">Этот раздел готовится. Подключённые данные и действия не имитируются.</p>';}
+    byId('mgDetail').innerHTML=content;
+    if(page==='manager')byId('mgTone').value=mgData.tone;
+    if(page==='autopilot')mgAutoLabel();
+    window.scrollTo(0,0);
+  }
+  function mgAutoLabel(){
+    const el=byId('mgAutonomyLabel');
+    if(el)el.textContent=['Спрашивать обо всём','Показать план и спросить','Действовать в рамках правил'][mgData.autonomy]||'Спрашивать обо всём';
+  }
+  function mgApplyCards(){
+    document.querySelectorAll('[data-mg-card]').forEach(el=>{el.checked=mgData.cards[el.dataset.mgCard]!==false;});
+    const mapping={clients:['#clientsCard','.bv-clients-edge'],sales:['#ordersCard'],money:['.profit-card']};
+    Object.entries(mapping).forEach(([key,targets])=>targets.forEach(sel=>{
+      const el=document.querySelector('#homeScreen '+sel);
+      if(el)el.hidden=mgData.cards[key]===false;
+    }));
+  }
+  document.querySelectorAll('[data-mg-open]').forEach(el=>el.addEventListener('click',()=>{
+    if(el.dataset.mgOpen==='company'){companyModal();return;}
+    mgSettingsPage(el.dataset.mgOpen);
+  }));
+  byId('mgBack').addEventListener('click',()=>mgCurrent==='home'?setTab('home'):mgSettingsPage('home'));
+  document.querySelectorAll('[data-mg-card]').forEach(el=>el.addEventListener('change',()=>{
+    mgData.cards[el.dataset.mgCard]=el.checked;save();mgApplyCards();
+  }));
+  byId('mgDetail').addEventListener('change',event=>{
+    const el=event.target;
+    if(el.id==='mgManagerName'){mgData.managerName=el.value.trim()||'Цифровой управляющий';el.value=mgData.managerName;}
+    else if(el.id==='mgTone')mgData.tone=el.value;
+    else if(el.id==='mgAutonomy'){mgData.autonomy=Number(el.value);mgAutoLabel();}
+    else if(el.dataset.mgSkill)mgData.skills[el.dataset.mgSkill]=el.checked;
+    else if(el.dataset.mgRule)mgData.rules[el.dataset.mgRule]=el.checked;
+    save();
+  });
+  byId('mgDetail').addEventListener('input',event=>{
+    if(event.target.id==='mgAutonomy'){mgData.autonomy=Number(event.target.value);mgAutoLabel();save();}
+  });
+  mgApplyCards();
+
   // Explicitly wire every visual action; unused marketing routes remain untouched.
   document.querySelectorAll('[data-ring-preview]').forEach(b=>b.addEventListener('click',()=>setRingMode(b.dataset.ringPreview,b.dataset.ringPreview==='idle'?0:4200)));
   document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
@@ -122,7 +208,7 @@
   byId('openAdvice').addEventListener('click',adviceModal);
   document.querySelectorAll('[data-detail]').forEach(b=>b.addEventListener('click',()=>b.dataset.detail==='advice'?adviceModal():detailModal(b.dataset.detail)));
   document.querySelectorAll('[data-action]').forEach(b=>b.addEventListener('click',()=>{const a=b.dataset.action;if(a==='clients')clientsModal();else generalModal(a);}));
-  document.querySelectorAll('[data-manage]').forEach(b=>b.addEventListener('click',()=>{const a=b.dataset.manage;({company:companyModal,clients:clientsModal,orders:ordersModal,license:brandModal,profile:profileModal,world:()=>window.location.assign('./world.html')}[a])();}));
+
   byId('closeDialog').addEventListener('click',closeModal);
   byId('modal').addEventListener('click',e=>{if(e.target===byId('modal'))closeModal();});
   document.querySelectorAll('[data-question]').forEach(b=>b.addEventListener('click',()=>chat(b.dataset.question)));

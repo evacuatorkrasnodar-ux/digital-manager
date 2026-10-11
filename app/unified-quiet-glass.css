@@ -179,7 +179,6 @@
  background:transparent!important;
 }
 #homeScreen :is(.shortcut,.ring-preview),
-#managementScreen :is(.manage-list>button,.management-foot),
 #assistantScreen :is(.assistant-welcome,.chat-log,.assistant-suggestions button,.ring-preview),
 .app-shell .secondary-screen :is(.metric-card,.detail-card,.management-card){
  border-color:rgba(144,170,191,.33)!important;
