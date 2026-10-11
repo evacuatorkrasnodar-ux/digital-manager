@@ -2,12 +2,12 @@
    No simulated phone body, metal rails, overlays, or independent inner shells. */
 #managementScreen .voice-mock.voice-mock-dock-scene{height:194px}
 #managementScreen .voice-iphone-device{
-  position:absolute;inset:5px 8px 6px;width:auto;height:auto;
-  padding:0;border:1px solid #bed3e2b0;border-radius:26px;
-  overflow:hidden;background:none;box-shadow:inset 0 0 0 2px #03070c,0 0 7px #0007;
+  position:absolute;inset:0;width:auto;height:auto;
+  padding:0;border:0;border-radius:18px;
+  overflow:hidden;background:none;box-shadow:none;
 }
 #managementScreen .voice-iphone-screen{
-  position:relative;width:100%;height:100%;overflow:hidden;border-radius:25px;
+  position:relative;width:100%;height:100%;overflow:hidden;border-radius:18px;
   background:linear-gradient(0deg,#03070b66,transparent 58%),
     url('./assets/architecture-hero.png') center/cover no-repeat;
 }
@@ -37,9 +37,31 @@
 #managementScreen .voice-iphone-dock-mount .mg-dock-preview .dm-dock-plasma{
   --dm-size:42px;width:42px;height:42px;
 }
+/* Both demos share ONE uninterrupted outside contour.
+   No inner dark perimeter, inset gaps or second visible frame. */
+#managementScreen .voice-mock.voice-mock-dock-scene,
+#managementScreen .voice-mock.voice-mock-conversation{
+  box-sizing:border-box;
+  border:1px solid rgba(171,201,225,.52);
+  border-radius:19px;
+  overflow:hidden;
+  background:#03080f;
+  box-shadow:inset 0 0 0 1px rgba(237,247,255,.07);
+}
+#managementScreen .voice-mock-conversation .voice-scene{
+  inset:0;
+  border-radius:inherit;
+}
+#managementScreen .voice-mock-conversation .voice-phone-frame{
+  inset:0;
+  border:0;
+  border-radius:18px;
+  box-shadow:none;
+  overflow:hidden;
+}
 @media(max-width:365px){
   #managementScreen .voice-mock.voice-mock-dock-scene{height:177px}
-  #managementScreen .voice-iphone-device{inset:4px 5px 5px}
+  #managementScreen .voice-iphone-device{inset:0}
 }
 @media(prefers-reduced-motion:reduce){
   #managementScreen .mg-dock-preview .dm-dock-plasma,
