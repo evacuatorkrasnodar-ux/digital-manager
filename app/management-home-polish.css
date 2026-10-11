@@ -111,7 +111,7 @@
   padding:2px 1px 8px;
   overflow-x:auto;
   overflow-y:hidden;
-  touch-action:pan-x;
+  touch-action:auto; /* vertical page scrolling remains available over the row */
   scroll-snap-type:x proximity;
   scroll-padding-inline:2px;
   scrollbar-width:none;
