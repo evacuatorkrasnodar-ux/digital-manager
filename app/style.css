@@ -1169,3 +1169,6 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
 .dock-quick-actions button{width:35px;height:35px;border-radius:10px}
 .dock-quick-actions .ico,.dock-quick-actions #dockOpenAttention .ico{width:17px;height:17px}
 .dock-quick-actions .dm-attention-dot{right:4px;top:3px}
+
+/* Attention centre: approved circular glass back control. */
+#dmAttentionPanel #dmAttentionClose{border-radius:50%!important;width:36px;height:36px;min-width:36px;min-height:36px}
