@@ -240,6 +240,8 @@
   byId('mgBack').addEventListener('click',()=>mgCurrent==='autopilot'?mgSettingsPage('manager'):(mgCurrent==='home'?setTab('home'):mgSettingsPage('home')));
   document.querySelectorAll('[data-mg-card]').forEach(el=>el.addEventListener('change',()=>{
     mgData.cards[el.dataset.mgCard]=el.checked;save();mgApplyCards();
+    // Recolor the laser tracks immediately to match cards actually shown on Home.
+    requestAnimationFrame(updateCardLaserPalette);
     if(!['clients','sales','money'].includes(el.dataset.mgCard))notify('Выбор сохранён. Эта постоянная карточка появится на Главной после подключения раздела.');
   }));
   byId('mgDetail').addEventListener('click',event=>{const link=event.target.closest('[data-mg-open="autopilot"]');if(link)mgSettingsPage('autopilot');});
@@ -314,14 +316,24 @@
   const laserMix=(a,b,t)=>a.map((value,i)=>value*(1-t)+b[i]*t);
   function cardLaserColor(card){
     const style=getComputedStyle(card);
-    const explicit=card.getAttribute('data-laser-accent')||style.getPropertyValue('--dm-card-laser-accent');
+    const explicit=style.getPropertyValue('--dm-card-laser-accent').trim()||card.getAttribute('data-laser-accent');
     const marked=laserSource(explicit);
     if(marked)return marked;
     // Automatically detect an accent on new cards that draw their own line.
     const strokes=card.querySelectorAll('svg path,svg polyline,svg line');
     for(const line of strokes){
       if(line.closest('defs'))continue;
-      const stroke=laserSource(line.getAttribute('stroke'))||laserSource(getComputedStyle(line).stroke);
+      const lineStroke=line.getAttribute('stroke')||getComputedStyle(line).stroke;
+      let stroke=laserSource(lineStroke);
+      if(!stroke){
+        const ref=String(lineStroke||'').match(/^url\(["']?#([^"')]+)["']?\)$/);
+        const gradient=ref&&card.querySelector('[id="'+ref[1]+'"]');
+        if(gradient){
+          const stops=[...gradient.querySelectorAll('stop')];
+          const vivid=stops.find(stop=>Number.parseFloat(stop.getAttribute('stop-opacity')||'1')>.48&&laserSource(stop.getAttribute('stop-color')));
+          stroke=vivid&&laserSource(vivid.getAttribute('stop-color'));
+        }
+      }
       if(stroke&&Math.max(...stroke)-Math.min(...stroke)>32)return stroke;
     }
     return null;
@@ -331,24 +343,27 @@
       !card.hidden&&getComputedStyle(card).display!=='none'&&(!card.closest('.metric-card')||card.classList.contains('metric-card')));
     const uniqueCards=[...new Set(cards)];
     const accents=uniqueCards.map(cardLaserColor).filter(Boolean);
-    if(!accents.length)accents.push([86,182,255],[246,186,117]);
-    // Interleaved lines: cool analytics to warm recommendations; newly added
-    // green, pink, etc. become part of this mix automatically.
+    if(!accents.length)accents.push([86,182,255]); // neutral blue until a card is chosen
     const glowIce=[137,204,255],glowViolet=[151,124,255];
     const groups=['dmLiveElectric','dmLauncherWaveElectric','dmPreviewElectric'];
     groups.forEach(prefix=>{
       for(let wave=0;wave<5;wave++){
         const gradient=document.getElementById(prefix+wave);
-        if(!gradient)continue; // settings preview is mounted on demand
-        const left=accents[wave===4?0:wave%accents.length];
-        const right=accents[wave===4?0:(accents.length-1-(wave%accents.length)+accents.length)%accents.length];
+        if(!gradient)continue; // management preview is mounted only when opened
+        // Each visible card owns one track. If there are over five cards,
+        // the extra colors flow through the same five fine tracks instead
+        // of creating more layers or changing the approved plasma.
+        const trackAccents=accents.filter((_,i)=>i%5===wave);
+        if(!trackAccents.length)trackAccents.push(accents[wave%accents.length]);
         gradient.querySelectorAll('stop').forEach(stop=>{
-          const x=Number.parseFloat(stop.getAttribute('offset')||'0')/100;
-          let color;
-          if(x<=.36)color=laserMix(left,glowIce,x>.25?.13:.05);
-          else if(x<=.5)color=laserMix(left,glowIce,.35);
-          else if(x<=.60)color=laserMix(right,glowViolet,.32);
-          else color=laserMix(right,glowIce,x>.85?.06:.12);
+          const x=Math.max(0,Math.min(1,Number.parseFloat(stop.getAttribute('offset')||'0')/100));
+          const point=x*(trackAccents.length-1);
+          const i=Math.floor(point);
+          const base=laserMix(trackAccents[i],trackAccents[Math.min(i+1,trackAccents.length-1)],point-i);
+          // Keep the cyan/violet glow at the plasma junction subtly present,
+          // without changing the recognizable accent of the selected card.
+          const towardViolet=x>.40&&x<.64;
+          const color=laserMix(base,towardViolet?glowViolet:glowIce,towardViolet?.12:.06);
           stop.setAttribute('stop-color',laserColorHex(color));
         });
       }
