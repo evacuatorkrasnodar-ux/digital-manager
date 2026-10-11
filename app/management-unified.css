@@ -1,0 +1,149 @@
+/* Unified My Manager settings — approved 4-part architecture.
+   Scope to Management detail. Existing preference keys, voice preview,
+   dock, data and independently working Autopilot controls are retained. */
+#managementScreen .mg-unified-hub{
+  display:grid;
+  gap:9px;
+  min-width:0;
+}
+#managementScreen .mg-unified-item{
+  box-sizing:border-box;
+  display:flex;
+  width:100%;
+  min-width:0;
+  min-height:79px;
+  align-items:center;
+  gap:12px;
+  padding:12px;
+  text-align:left;
+  color:#edf5ff;
+  border:1px solid rgba(152,185,213,.37);
+  border-radius:19px;
+  background:
+    radial-gradient(ellipse 65% 125% at 100% 0%,rgba(62,109,155,.09),transparent 72%),
+    linear-gradient(152deg,rgba(19,32,45,.97),rgba(4,11,20,.99));
+  box-shadow:inset 0 1px rgba(242,250,255,.095),0 6px 16px rgba(0,0,0,.25);
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:border-color .16s,background .16s;
+}
+#managementScreen .mg-unified-item:is(:hover,:focus-visible){
+  border-color:rgba(185,223,249,.7);
+  background:linear-gradient(150deg,rgba(27,48,69,.99),rgba(5,17,29,.99));
+}
+#managementScreen .mg-unified-item:focus-visible{
+  outline:2px solid #a4d5fb;
+  outline-offset:2px;
+}
+#managementScreen .mg-unified-icon{
+  box-sizing:border-box;
+  flex:0 0 47px;
+  height:47px;
+  display:grid;
+  place-items:center;
+  border-radius:15px;
+  color:#c0e2f7;
+  border:1px solid rgba(154,194,221,.34);
+  background:linear-gradient(145deg,rgba(36,70,98,.46),rgba(4,16,31,.76));
+  box-shadow:inset 0 1px rgba(239,250,255,.13);
+}
+#managementScreen .mg-unified-icon .ico{width:23px;height:23px;fill:none}
+#managementScreen .mg-unified-item .mg-copy{flex:1;min-width:0;gap:4px}
+#managementScreen .mg-unified-item .mg-copy strong{
+  font-size:15px;
+  font-weight:520;
+  letter-spacing:-.016em;
+}
+#managementScreen .mg-unified-item .mg-copy small{
+  font-size:11px;
+  line-height:1.35;
+  color:#adc4d6;
+}
+#managementScreen .mg-unified-item .mg-chevron{margin-left:0;color:#c6dce9}
+#managementScreen .mg-unified-autopilot{
+  border-color:rgba(203,151,91,.43);
+  background:linear-gradient(148deg,#221a13,#090d10 67%,#050709);
+}
+#managementScreen .mg-unified-autopilot .mg-unified-icon{
+  color:#f7c889;
+  border-color:rgba(218,163,100,.40);
+  background:linear-gradient(143deg,rgba(91,58,27,.60),rgba(17,12,9,.85));
+}
+#managementScreen .mg-unified-autopilot .mg-copy strong{color:#ffdfab}
+#managementScreen .mg-unified-panel{
+  box-sizing:border-box;
+  display:grid;
+  gap:11px;
+  min-width:0;
+  padding:14px 13px;
+  border:1px solid rgba(150,186,213,.34);
+  border-radius:18px;
+  background:linear-gradient(155deg,rgba(17,29,42,.97),rgba(4,11,20,.98));
+  box-shadow:inset 0 1px rgba(239,249,255,.09);
+}
+#managementScreen .mg-unified-panel h2{
+  font-size:15px;
+  font-weight:510;
+  margin:0;
+  letter-spacing:-.015em;
+  color:#edf7ff;
+}
+#managementScreen .mg-unified-panel .mg-field{
+  margin:0;
+  background:rgba(3,12,22,.68);
+  border:1px solid rgba(147,181,206,.30);
+  padding:11px;
+  gap:8px;
+  font-size:12px;
+  color:#c3d8e8;
+}
+#managementScreen .mg-unified-panel .mg-field :is(input,select){
+  box-sizing:border-box;
+  max-width:100%;
+  background:#030b13;
+  border-color:rgba(152,189,214,.46);
+  color:#eef7ff;
+}
+#managementScreen .mg-unified-note{
+  margin:0;
+  font-size:11px;
+  line-height:1.49;
+  color:#9eb7c9;
+}
+#managementScreen .mg-unified-footnote{
+  padding:0 4px;
+}
+#managementScreen .mg-unified-skills{
+  gap:0;
+  padding:11px 12px;
+}
+#managementScreen .mg-unified-skills h2{
+  padding:3px 1px 11px;
+}
+#managementScreen .mg-unified-skills .mg-choice{
+  box-sizing:border-box;
+  width:100%;
+  min-height:56px;
+  margin:0;
+  padding:9px 6px;
+  gap:12px;
+  border:0;
+  border-bottom:1px solid rgba(140,171,195,.20);
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  color:#d7e7f2;
+  line-height:1.35;
+}
+#managementScreen .mg-unified-skills .mg-choice:last-child{border-bottom:0}
+#managementScreen .mg-unified-skills .mg-choice input{
+  width:18px;height:18px;accent-color:#75b7ef;
+}
+@media(max-width:350px){
+  #managementScreen .mg-unified-item{min-height:75px;padding:10px;gap:9px}
+  #managementScreen .mg-unified-icon{flex-basis:43px;height:43px}
+  #managementScreen .mg-unified-item .mg-copy strong{font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){
+  #managementScreen .mg-unified-item{transition:none}
+}
