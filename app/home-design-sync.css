@@ -93,6 +93,8 @@
 .dm-chat-message.user{background:linear-gradient(145deg,rgba(31,70,109,.84),rgba(9,33,58,.89));border-color:rgba(138,187,221,.40)}
 .dm-chat-message.assistant{background:var(--dm-home-glass);border-color:var(--dm-home-hairline)}
 @media(max-width:350px){.dm-draft-actions-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* The assistant receives the same calm black canvas as Home (not the calendar backdrop). */
+#assistantScreen{background:#020203!important}
 /* The full assistant adopts the same home cards and round navigation. */
 #assistantScreen .assistant-suggestions button,
 #assistantScreen .ring-preview,
