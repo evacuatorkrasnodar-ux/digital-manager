@@ -1037,8 +1037,8 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
    It is NOT another ring; all event/composer glyphs cover it cleanly. */
 .dm-voice-orb-electric .dm-core-brand{
   position:absolute;
-  left:54%;top:50%;z-index:4;
-  width:38%;height:42%;
+  left:50%;top:50%;z-index:4;
+  width:42%;height:46%;
   display:grid;place-items:center;
   pointer-events:none;
   opacity:0;
