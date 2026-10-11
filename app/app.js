@@ -148,7 +148,7 @@
     health:'<path d="M12 20s-8.3-4.9-8.3-10.4c0-4.2 5.1-6 8.3-2.1 3.2-3.9 8.3-2.1 8.3 2.1 0 5.5-8.3 10.4-8.3 10.4Z"/><path d="M4.8 12h4l1.7-3.1 2.4 6.2 1.8-3.1h4.5"/>',
     task:'<rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M8 9.5l1.7 1.7 3-3.2M8 15.4h8"/>',
     mic:'<rect x="9.2" y="3.5" width="5.6" height="11.5" rx="2.8"/><path d="M5.8 11.1a6.2 6.2 0 0 0 12.4 0M12 17.3v3.1M8.5 20.4h7"/>',
-    send:'<path d="M12 19V5.2M6.7 10.5 12 5.2l5.3 5.3"/>',
+    send:'<path d="M20.7 3.6 3.7 10.2c-.9.35-.87 1.57.07 1.84l6.28 1.9 2.05 6.06c.27.84 1.39.89 1.75.08L20.7 3.6ZM20.7 3.6 10.1 13.95M12.1 20l2.77-5.59"/>',
     done:'<path d="M4.7 12.7 10 18l9.3-10.2"/>',
     calendar:'<rect x="3.3" y="5.3" width="17.4" height="15" rx="2.1"/><path d="M7.5 3.6v3.7M16.5 3.6v3.7M3.8 9.4h16.4"/><circle cx="14.7" cy="15" r="3.3"/><path d="M14.7 13.2v1.9l1.3.9"/>',
     attention:'<path d="M12 3.2 21 19H3L12 3.2Z"/><path d="M12 9v4.8M12 17.1h.01"/>',
@@ -393,6 +393,131 @@
   const plasmaDraftInfo=byId('plasmaDraftInfo');
   const DM_DRAFT_KEY='digital-manager-plasma-draft-v1';
   let dmDraftAutoExpanded=false,dmActionGlyphKind='',dmAckTimer=null;
+
+  // Local notebook. Neither cloud storage nor a real email/social integration
+  // exists here: external actions only open the user's own system apps.
+  const DM_NOTES_KEY='digital-manager-plasma-notes-v1';
+  const dmNotesContainer=byId('plasmaSavedNotes');
+  const dmNotesToggle=byId('plasmaSavedNotesToggle');
+  const dmActionStatus=byId('plasmaActionStatus');
+  let dmNotes=[];
+  try{
+    const stored=JSON.parse(localStorage.getItem(DM_NOTES_KEY)||'[]');
+    if(Array.isArray(stored))dmNotes=stored.filter(n=>n&&typeof n.id==='string'&&typeof n.text==='string').slice(0,30);
+  }catch(_){}
+  function dmActionMessage(message){dmActionStatus.textContent=message;dmActionStatus.hidden=false;}
+  function dmNoteTitle(value){return value.split('\n').find(line=>line.trim())?.trim().slice(0,46)||'Запись без названия';}
+  function dmPersistNotes(){
+    try{localStorage.setItem(DM_NOTES_KEY,JSON.stringify(dmNotes));return true;}
+    catch(_){dmActionMessage('Не удалось сохранить в этом браузере. Попробуйте скачать файл.');return false;}
+  }
+  function dmRenderNotes(){
+    byId('plasmaSavedNotesCount').textContent=dmNotes.length?'('+dmNotes.length+')':'';
+    dmNotesContainer.replaceChildren();
+    if(!dmNotes.length){const p=document.createElement('p');p.className='dm-notes-empty';p.textContent='Пока нет сохранённых записей.';dmNotesContainer.append(p);return;}
+    for(const note of dmNotes){
+      const row=document.createElement('div');row.className='dm-saved-note';
+      const open=document.createElement('button');open.type='button';open.className='dm-saved-note-open';open.dataset.noteOpen=note.id;
+      const title=document.createElement('strong');title.textContent=dmNoteTitle(note.text);
+      const date=document.createElement('small');date.textContent=new Date(note.created).toLocaleDateString('ru-RU');
+      open.append(title,date);
+      const del=document.createElement('button');del.type='button';del.className='dm-saved-note-delete';del.dataset.noteDelete=note.id;
+      del.setAttribute('aria-label','Удалить запись «'+dmNoteTitle(note.text)+'»');del.textContent='×';
+      row.append(open,del);dmNotesContainer.append(row);
+    }
+  }
+  function dmSaveAsNote(){
+    const content=plasmaInput.value.trim();
+    if(!content){dmActionMessage('Сначала напишите текст.');return;}
+    const original=dmNotes.slice();
+    dmNotes.unshift({id:String(Date.now())+'-'+Math.random().toString(36).slice(2,8),text:content,created:Date.now()});
+    dmNotes=dmNotes.slice(0,30);
+    if(!dmPersistNotes()){dmNotes=original;return;}
+    dmRenderNotes();dmActionMessage('Сохранено в «Мои записи» на этом устройстве. Черновик остался на месте.');
+  }
+  function dmMakeTextFile(content){
+    const name=(dmNoteTitle(content).replace(/[<>:"/\\|?*\x00-\x1f]/g,'').slice(0,45)||'Текст')+'.txt';
+    return new File([content],name,{type:'text/plain;charset=utf-8'});
+  }
+  function dmDownloadText(content){
+    const file=dmMakeTextFile(content),link=document.createElement('a'),uri=URL.createObjectURL(file);
+    link.href=uri;link.download=file.name;document.body.append(link);link.click();link.remove();
+    setTimeout(()=>URL.revokeObjectURL(uri),30000);
+  }
+  async function dmCopyText(content){
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      try{await navigator.clipboard.writeText(content);return true;}catch(_){}
+    }
+    const helper=document.createElement('textarea');
+    helper.value=content;helper.setAttribute('readonly','');helper.style.position='fixed';helper.style.opacity='0';
+    document.body.append(helper);helper.select();
+    let ok=false;try{ok=document.execCommand('copy');}catch(_){}
+    helper.remove();return ok;
+  }
+  async function dmDraftDestination(kind){
+    const content=plasmaInput.value.trim();
+    if(!content){dmActionMessage('Сначала напишите текст, чтобы выбрать действие.');return;}
+    if(kind==='note'){dmSaveAsNote();return;}
+    if(kind==='download'){
+      try{dmDownloadText(content);dmActionMessage('Файл подготовлен для скачивания. Черновик остался на месте.');}
+      catch(_){dmActionMessage('Не удалось скачать файл. Попробуйте скопировать текст.');}
+      return;
+    }
+    if(kind==='copy'){dmActionMessage(await dmCopyText(content)?'Текст скопирован.':'Не удалось скопировать — выделите текст вручную.');return;}
+    if(kind==='email'){
+      const subject=encodeURIComponent(dmNoteTitle(content));
+      let body=content;
+      if(content.length>1700){
+        try{dmDownloadText(content);}catch(_){}
+        body='Большой текст подготовлен отдельным файлом. Прикрепите скачанный .txt к письму вручную.';
+        dmActionMessage('Откроется черновик письма. Прикрепите файл вручную — письмо не отправлено.');
+      }else{
+        dmActionMessage('Откроется черновик письма. Отправку подтвердите сами.');
+      }
+      window.location.href='mailto:?subject='+subject+'&body='+encodeURIComponent(body);
+      return;
+    }
+    if(kind==='share'){
+      if(typeof navigator.share==='function'){
+        try{
+          const file=dmMakeTextFile(content);
+          if(content.length>1800&&typeof navigator.canShare==='function'&&navigator.canShare({files:[file]}))
+            await navigator.share({title:dmNoteTitle(content),files:[file]});
+          else await navigator.share({title:dmNoteTitle(content),text:content});
+          dmActionMessage('Вы вернулись из меню обмена. Черновик сохранён.');
+        }catch(err){if(err.name!=='AbortError')dmActionMessage('Обмен недоступен. Можно скопировать или скачать текст.');}
+      }else{
+        const copied=await dmCopyText(content);
+        dmActionMessage(copied?'Системное меню обмена недоступно. Текст скопирован — вставьте его в нужное приложение.':'Обмен недоступен — можно скачать текст.');
+      }
+    }
+  }
+  byId('plasmaChatForm').addEventListener('click',event=>{
+    const btn=event.target.closest('[data-draft-action]');
+    if(btn)dmDraftDestination(btn.dataset.draftAction);
+  });
+  dmNotesToggle.addEventListener('click',()=>{
+    const show=dmNotesContainer.hidden;dmNotesContainer.hidden=!show;
+    dmNotesToggle.setAttribute('aria-expanded',String(show));if(show)dmRenderNotes();
+  });
+  dmNotesContainer.addEventListener('click',event=>{
+    const del=event.target.closest('[data-note-delete]');
+    if(del){
+      if(!window.confirm('Удалить запись из блокнота?'))return;
+      const original=dmNotes.slice();dmNotes=dmNotes.filter(note=>note.id!==del.dataset.noteDelete);
+      if(!dmPersistNotes()){dmNotes=original;return;}
+      dmRenderNotes();dmActionMessage('Запись удалена с этого устройства.');return;
+    }
+    const open=event.target.closest('[data-note-open]');
+    if(!open)return;
+    const note=dmNotes.find(item=>item.id===open.dataset.noteOpen);
+    if(!note)return;
+    if(plasmaInput.value.trim()&&plasmaInput.value!==note.text&&!window.confirm('Заменить текущий черновик сохранённой записью?'))return;
+    plasmaInput.value=note.text;dmSaveDraft();dmSyncComposer();
+    dmActionMessage('Запись загружена в редактор. Можете продолжить работу.');
+  });
+  dmRenderNotes();
+
   try {plasmaInput.value=localStorage.getItem(DM_DRAFT_KEY)||'';}catch(_){}
   function dmSaveDraft(){
     try{
