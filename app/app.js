@@ -221,7 +221,20 @@
     picture.setAttribute('focusable','false');
     picture.setAttribute('aria-hidden','true');
     layer.append(picture);
-    orb.append(layer);
+    // The existing brand mark rests quietly in black matter; verified
+    // event glyphs and the composer signs always take priority.
+    const brand=document.createElement('span');
+    brand.className='dm-core-brand';
+    brand.setAttribute('aria-hidden','true');
+    const emblem=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    emblem.setAttribute('viewBox','16 5 68 88');
+    emblem.setAttribute('focusable','false');
+    emblem.setAttribute('aria-hidden','true');
+    const mark=document.createElementNS('http://www.w3.org/2000/svg','use');
+    mark.setAttribute('href','#assistant-brand-mark');
+    emblem.append(mark);
+    brand.append(emblem);
+    orb.append(brand,layer);
     return layer;
   });
   let dmGlyphHideTimer=null;
