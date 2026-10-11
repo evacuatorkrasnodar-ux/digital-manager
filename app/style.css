@@ -438,8 +438,8 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 .dm-orb-rim{inset:4%;background:conic-gradient(from 15deg,#3b85ff,#f1fbff 27deg,#83d9ff 46deg,#2978fa 90deg,#285ce2 141deg,#b79bff 197deg,#e3bafa 217deg,#8650f5 248deg,#247af9 288deg,#b1ecff 330deg,#3b85ff);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4.6px),#000 calc(100% - 2.1px));mask:radial-gradient(farthest-side,transparent calc(100% - 4.6px),#000 calc(100% - 2.1px));animation:dm-rotate 13s linear infinite;filter:drop-shadow(0 0 2px rgba(152,212,255,.8)) drop-shadow(0 0 5px rgba(72,117,255,.6))}
 
 /* Conversation-only electric SVG. The dock mini-orb retains its existing style. */
-.dm-voice-orb-electric{background:radial-gradient(circle,rgba(0,2,10,.97) 0 48%,rgba(1,5,22,.93) 57%,transparent 70%)!important;filter:drop-shadow(0 0 4px rgba(35,97,255,.72)) drop-shadow(0 0 13px rgba(64,74,229,.40))!important}
-.dm-voice-orb-electric .dm-orb-halo{inset:-24%;background:radial-gradient(circle,transparent 38%,rgba(7,72,231,.09) 49%,rgba(25,96,237,.28) 56%,rgba(117,54,222,.15) 66%,transparent 76%);filter:blur(8px)}
+.dm-voice-orb-electric{background:#02040b!important;filter:drop-shadow(0 0 4px rgba(35,97,255,.72)) drop-shadow(0 0 13px rgba(64,74,229,.40))!important}
+.dm-voice-orb-electric .dm-orb-halo{inset:-24%;background:radial-gradient(circle,transparent 38%,rgba(7,72,231,.09) 49%,rgba(25,96,237,.28) 56%,rgba(117,54,222,.15) 66%,transparent 76%);filter:blur(8px);-webkit-mask-image:radial-gradient(circle,transparent 0 66%,#000 73%);mask-image:radial-gradient(circle,transparent 0 66%,#000 73%)}
 .dm-voice-orb-electric .dm-orb-spectral{position:absolute;inset:-13%;z-index:2;width:126%;height:126%;overflow:visible;pointer-events:none;filter:drop-shadow(0 0 2px rgba(110,175,255,.78)) drop-shadow(0 0 3px rgba(27,83,242,.58))}
 .dm-voice-waves-electric{filter:drop-shadow(0 0 4px rgba(64,139,255,.88))!important}
 .dm-voice-waves-electric .dm-electric-wave{fill:none;stroke-width:1.23;stroke-linecap:round;opacity:.9;transform-origin:center 70%;animation:dm-electric-wave 7.1s ease-in-out infinite}
@@ -453,7 +453,7 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 
 .dm-orb-edge{inset:8%;border:1px solid rgba(157,213,255,.44);box-shadow:inset 0 0 4px rgba(46,107,243,.35),0 0 4px rgba(91,132,255,.32)}
 .dm-voice-orb::after{content:"";position:absolute;inset:5%;border-radius:50%;border:1.3px solid transparent;border-top-color:rgba(239,251,255,.96);border-right-color:rgba(170,221,255,.31);filter:drop-shadow(0 0 4px rgba(138,219,255,.85));transform:rotate(-21deg);pointer-events:none}
-.dm-voice-orb-electric::after{content:none}
+.dm-voice-orb-electric::after{content:"";position:absolute;inset:0;z-index:3;border:0;border-radius:50%;background:#02040b;filter:none;transform:none;pointer-events:none}
 .dm-voice-waves{position:absolute;left:0;bottom:0;width:100%;height:100%;z-index:1;overflow:visible;filter:drop-shadow(0 0 3px #3a7cfa55)}
 .assistant-live>.dm-voice-waves{left:50%;transform:translateX(-50%);bottom:1px;width:min(320px,91vw);height:69px;opacity:.82;mask-image:linear-gradient(90deg,transparent,black 11%,black 89%,transparent)}
 .dm-voice-waves path{fill:none;stroke-width:1.45;stroke-linecap:round;opacity:.9;transform-origin:center 88%;animation:dm-wave 6.4s ease-in-out infinite}
