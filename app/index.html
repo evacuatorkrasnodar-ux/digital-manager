@@ -255,6 +255,7 @@
     <form id="plasmaChatForm" class="dm-chat-compose" aria-label="Написать помощнику">
       <div class="dm-chat-edit-tools">
         <span class="dm-chat-draft-title" id="plasmaComposerTitle">Сообщение или текст</span>
+        <button id="plasmaOpenChat" class="dm-chat-history-trigger" type="button" aria-label="История чата — открыть текущий диалог" title="Открыть текущую переписку"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 9.2a8 8 0 1 1-.2 5.7"/><path d="M4.5 4.6v4.8h4.8M12 7.6V12l3 2"/></svg><span>История чата</span></button>
         <div class="dm-chat-edit-buttons">
           <button type="button" id="plasmaExpandDraft" aria-label="Развернуть редактор" aria-expanded="false" title="Развернуть текст"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5.2" y="5.2" width="13.6" height="13.6" rx="3.2"/><path d="M9 15V9h6M9 9l6 6"/></svg></button>
           <button type="button" id="plasmaClose" aria-label="Закрыть ввод" title="Закрыть"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8l8 8M16 8l-8 8"/></svg></button>
@@ -287,7 +288,6 @@
         <p id="plasmaActionStatus" class="dm-draft-status" role="status" aria-live="polite" hidden></p>
       </section>
     </form>
-    <button id="plasmaOpenChat" class="dm-chat-expand" type="button">Вся переписка <span aria-hidden="true">↗</span></button>
   </section>
   <!-- Three compact actions above the plasma, shared by both dock modes. -->
   <div id="dockQuickActions" class="dock-quick-actions" role="group" aria-label="Быстрые действия помощника" hidden>
