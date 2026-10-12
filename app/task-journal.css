@@ -69,3 +69,28 @@
 .dm-journal-timestamp{display:block;font-size:10px;color:#9ab6cd;margin-top:8px}
 .dm-journal-entry + .dm-journal-entry{margin-top:10px}
 @media(max-width:360px){.dm-journal-entry-links button{font-size:10px;padding:9px 6px}.dm-journal-frame nav button{padding:10px 3px}}
+
+/* Explicit owner-to-assistant handoff inside existing journal only. */
+.dm-journal-transfer-launch{display:grid;gap:10px;border:1px solid rgba(162,192,221,.34);border-radius:15px;background:radial-gradient(ellipse at 100% 0,rgba(82,126,191,.15),transparent 70%),linear-gradient(140deg,#192839,#0b121d);padding:14px;margin:2px 0 12px}
+.dm-journal-transfer-launch>div{display:grid;gap:5px}
+.dm-journal-transfer-launch strong{font-weight:540;font-size:13px;color:#e4f1fb}
+.dm-journal-transfer-launch small{font-size:11px;color:#a9c2d5;line-height:1.45}
+.dm-journal-transfer-launch button{justify-self:start;min-height:36px;padding:9px 12px;border:1px solid rgba(160,198,230,.6);border-radius:10px;background:#b7d5e9;color:#0c2536;font-size:12px}
+.dm-journal-transfer-launch button:disabled{opacity:.4;cursor:default}
+.dm-journal-personal-actions [data-transfer-one]{width:32px;height:32px;color:#c9e6ff;font-size:17px;border-color:rgba(164,207,246,.5)}
+.dm-journal-handoff{display:grid;gap:13px;padding:14px;margin-bottom:15px;border:1px solid rgba(163,195,227,.55);border-radius:16px;background:linear-gradient(155deg,#1c3044,#0a111a);color:#e6f3ff}
+.dm-journal-handoff>small{font-size:9px;letter-spacing:.1em;color:#a9caeb}
+.dm-journal-handoff h3{margin:0;font-weight:540;font-size:17px}
+.dm-journal-handoff>p{margin:0;color:#c1d8e9;font-size:12px;line-height:1.6}
+.dm-journal-handoff fieldset{min-width:0;display:grid;gap:8px;margin:0;border:1px solid rgba(154,190,218,.3);border-radius:12px;padding:12px}
+.dm-journal-handoff legend{font-size:11px;color:#b4d3e9;padding:0 4px}
+.dm-journal-handoff fieldset label{display:flex;align-items:center;gap:10px;min-width:0;padding:8px;border-radius:9px;background:rgba(155,199,236,.07);font-size:12px;line-height:1.4}
+.dm-journal-handoff input[type=checkbox]{flex:none;accent-color:#9cc9eb;width:17px;height:17px}
+.dm-journal-handoff fieldset label>span{min-width:0;overflow-wrap:anywhere}
+.dm-journal-handoff fieldset label small{font-size:10px;color:#aac5d8}
+.dm-handoff-consent{display:flex;align-items:flex-start;gap:10px;color:#e0effa;font-size:11px;line-height:1.5}
+.dm-handoff-consent input{margin-top:2px}
+.dm-handoff-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.dm-handoff-buttons button{min-width:0;padding:12px 7px;border:1px solid rgba(165,198,224,.46);border-radius:11px;background:#152838;color:#e4f2fc;font-size:11px}
+.dm-handoff-buttons button[type=submit]{background:#c0dbee;color:#0b2233}
+@media(max-width:360px){.dm-journal-transfer-launch{padding:11px}.dm-journal-handoff{padding:11px}.dm-journal-personal-actions [data-transfer-one]{width:31px;height:31px}}
