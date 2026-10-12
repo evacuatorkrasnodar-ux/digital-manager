@@ -100,6 +100,13 @@ function startingPath(){
   (first?'Первый шаг — '+first.title.toLowerCase()+'. '+first.note:'')+
   ' Пока это сохранённый маршрут, а не выполненная работа.';
 }
+function selectedPlaceAnswer(){
+ const advice=window.DMBusinessJourney?.getLocationAdvice?.();
+ if(!advice?.knownLocation)return 'Место пока не выбрано. Расскажи, в каком городе или районе планируешь работать — затем проверим конкурентов, спрос и условия.';
+ return advice.observation+' Первые проверки: '+advice.evidence.slice(0,3).join('; ')+
+  '. Что можно сделать после проверки: '+advice.plan.slice(0,2).join('; ')+
+  '. Пока это план, а не исследование рынка или выполненная работа.';
+}
 function work(){
  const result=window.DMInitiative?.getSummary?.();
  return result&&typeof result.enabled==='boolean'?result:{enabled:false,prepared:0,awaitingReview:0,reviewed:0};
@@ -164,6 +171,7 @@ function answer(question){
  const q=String(question||'').trim().toLowerCase();
  if(!q)return null;
  const path=journey();
+ if(/(?:район|улиц|локаци|помещен|конкурент|где открыть|открыват.{0,18}где|соседн.{0,16}бизнес)/.test(q)&&path)return selectedPlaceAnswer();
  if(path&&/(с нуля|сво[её] дел[оа]|начать бизнес|откр[ыо].{0,18}бизнес|первые клиенты|с чего нач|что сначала|план развития|путь развития|иде[яю]|чем заняться)/i.test(q))
   return startingPath()+' Продолжить знакомство и изменить планы можно в «Управлении» → «Мой управляющий» → «Мой путь с управляющим».';
  const recognized=/(бизнес|как дела|что происходит|как идут|что нового|что успел|успел|сделал|делал|занимаешься|занимал|работаешь|поручен|мои дела|отчет|отчёт|итог|ситуаци|ошибк|проблем|что дальше|что делать|помоги|продаж|клиент|покупк|заявк|выручк|денег|деньг|доход|прибыл|финанс|расход|трат|бюджет|реклам|продвижен|задач|поручени|мои дела|дела на сегодня|какие.{0,14}дела|что по делам|что у меня|сроки|просроч|автопилот|самостоятельн|услуг|производ|склад|остатк|поставщик|доставк|график|брон|сотрудник|персонал|смены|магазин|цвет|цех|филиал|бизнес.модел)/i.test(q);
@@ -183,5 +191,5 @@ function answer(question){
  const rec=brief();
  return 'Я посмотрел текущие записи. '+rec.message;
 }
-window.DMBusinessBrain=Object.freeze({answer,brief,observations:()=>combinedSignals(facts()),getSnapshot:facts,getProgress:progressSentence,getWorkSummary:workLine});
+window.DMBusinessBrain=Object.freeze({answer,brief,observations:()=>combinedSignals(facts()),getSnapshot:facts,getProgress:progressSentence,getWorkSummary:workLine,getPlaceAdvice:selectedPlaceAnswer});
 })();
