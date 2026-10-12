@@ -350,7 +350,7 @@
     },3600);
   }
   let mgCurrent='home';
-  const mgNames={manager:'Мой управляющий',communication:'Общение',capabilities:'Возможности',
+  const mgNames={manager:'Мой управляющий',
     voice:'Внешний вид',autopilot:'Автопилот',connections:'Связи',documents:'Документы',
     payments:'Платежи',learning:'Обучение'};
   const mgInfo={
@@ -598,34 +598,12 @@
       dmSettingsGlyphTimer=null;
     },4200);
   }
-  function mgSettingsPage(page){
-    mgCurrent=page;
-    byId('mgHome').hidden=page!=='home';
-    byId('mgDetail').hidden=page==='home';
-    byId('mgTitle').textContent=mgNames[page]||'Управление';
-    byId('mgSubtitle').textContent=({home:'Настройки приложения',manager:'Все настройки одного помощника',communication:'Как звать помощника и как он общается',capabilities:'Навыки и помощь в работе',autopilot:'Границы самостоятельности',connections:'Сервисы и источники данных',documents:'Файлы и шаблоны',payments:'Счета и регулярные расходы',learning:'Возможности приложения',voice:'Плазма · Док · Знаки · Голос'})[page]||'Настройки приложения';
-    clearTimeout(voicePreviewTimer);
-    if(dmSettingsGlyphTimer!==null){clearTimeout(dmSettingsGlyphTimer);dmSettingsGlyphTimer=null;}
-    if(page==='home'){byId('mgDetail').innerHTML='';window.scrollTo(0,0);requestAnimationFrame(mgSyncCarouselNav);return;}
-    let content='';
-    if(page==='manager'){
-      const parts=[
-        ['communication','ic-chat','Общение','Имя · Стиль · Голос'],
-        ['capabilities','ic-spark','Возможности','Навыки и помощь в работе'],
-        ['voice','ic-settings','Внешний вид','Плазма · Док · Знаки'],
-        ['autopilot','ic-shield','Автопилот','Самостоятельность и разрешения']
-      ];
-      content='<div class="mg-unified-hub">'+parts.map(([key,icon,label,description])=>
-        '<button type="button" class="mg-unified-item mg-unified-'+key+'" data-mg-open="'+key+'">'+
-          '<span class="mg-unified-icon"><svg class="ico" aria-hidden="true"><use href="#'+icon+'"/></svg></span>'+
-          '<span class="mg-copy"><strong>'+label+'</strong><small>'+description+'</small></span>'+
-          '<span class="mg-chevron" aria-hidden="true"><svg class="ico"><use href="#ic-chevron"/></svg></span>'+
-        '</button>').join('')+'</div>';
-    }else if(page==='communication'){
-      // Existing stored managerName remains untouched; only the input display
+  // Original settings markup is reused in its new location; IDs and saved keys stay intact.
+  function mgCommunicationPanels(){
+    // Existing stored managerName remains untouched; only the input display
       // uses an empty hint for the long product name.
       const wakeName=mgData.managerName==='Цифровой управляющий'?'':mgData.managerName;
-      content='<section class="mg-unified-panel"><h2>Как звать помощника?</h2>'+
+      return '<section class="mg-unified-panel"><h2>Как звать помощника?</h2>'+
         '<label class="mg-field mg-wake-name">Короткое имя для обращения<input id="mgManagerName" maxlength="42" autocomplete="off" placeholder="Например, Вася" value="'+mgEsc(wakeName)+'"></label>'+
         '<p class="mg-unified-note">Название приложения остаётся «Цифровой управляющий». Обращение по имени заработает после подключения распознавания речи и разрешения на микрофон.</p>'+
         '</section>'+
@@ -638,12 +616,38 @@
         '</select></label>'+
         '<p class="mg-unified-note">Необязательная настройка манеры общения. На самостоятельные действия и права доступа не влияет; полноценная персонализация появится с подключением ИИ.</p>'+
         '</section>';
-    }else if(page==='capabilities'){
-      const choices=[['market','Следить за рынком'],['opportunities','Замечать проблемы и возможности'],['rules','Следить за правилами'],['documents','Помогать с документами']];
-      content='<section class="mg-unified-panel mg-unified-skills"><h2>Навыки управляющего</h2>'+
+  }
+  function mgSkillsPanels(){
+    const choices=[['market','Следить за рынком'],['opportunities','Замечать проблемы и возможности'],['rules','Следить за правилами'],['documents','Помогать с документами']];
+      return '<section class="mg-unified-panel mg-unified-skills"><h2>Навыки управляющего</h2>'+
         choices.map(([key,label])=>'<label class="mg-choice">'+label+'<input type="checkbox" data-mg-skill="'+key+'" '+(mgData.skills[key]?'checked':'')+'></label>').join('')+
         '</section>'+
         '<p class="mg-unified-note mg-unified-footnote">Выбор навыков сохраняется. Реальное наблюдение за рынком и документами начнётся только после подключения источников и соответствующих возможностей.</p>';
+  }
+  function mgSettingsPage(page){
+    // Preserve old links to relocated controls without rendering duplicates.
+    if(page==='communication')page='voice';
+    if(page==='capabilities')page='autopilot';
+    mgCurrent=page;
+    byId('mgHome').hidden=page!=='home';
+    byId('mgDetail').hidden=page==='home';
+    byId('mgTitle').textContent=mgNames[page]||'Управление';
+    byId('mgSubtitle').textContent=({home:'Настройки приложения',manager:'Все настройки одного помощника',autopilot:'Навыки и границы самостоятельности',connections:'Сервисы и источники данных',documents:'Файлы и шаблоны',payments:'Счета и регулярные расходы',learning:'Возможности приложения',voice:'Плазма · Док · Имя · Общение'})[page]||'Настройки приложения';
+    clearTimeout(voicePreviewTimer);
+    if(dmSettingsGlyphTimer!==null){clearTimeout(dmSettingsGlyphTimer);dmSettingsGlyphTimer=null;}
+    if(page==='home'){byId('mgDetail').innerHTML='';window.scrollTo(0,0);requestAnimationFrame(mgSyncCarouselNav);return;}
+    let content='';
+    if(page==='manager'){
+      const parts=[
+        ['voice','ic-settings','Внешний вид','Плазма · Док · Имя · Общение'],
+        ['autopilot','ic-shield','Автопилот','Навыки · Правила · Самостоятельность']
+      ];
+      content='<div class="mg-unified-hub">'+parts.map(([key,icon,label,description])=>
+        '<button type="button" class="mg-unified-item mg-unified-'+key+'" data-mg-open="'+key+'">'+
+          '<span class="mg-unified-icon"><svg class="ico" aria-hidden="true"><use href="#'+icon+'"/></svg></span>'+
+          '<span class="mg-copy"><strong>'+label+'</strong><small>'+description+'</small></span>'+
+          '<span class="mg-chevron" aria-hidden="true"><svg class="ico"><use href="#ic-chevron"/></svg></span>'+
+        '</button>').join('')+'</div>';
     }else if(page==='voice'){
       content="<div class=\"voice-pref\"><div class=\"voice-setting-top\"><span class=\"mg-icon mg-blue\"><svg class=\"ico\"><use href=\"#ic-grid\"/></svg></span><span class=\"mg-copy\"><strong>Показывать док</strong><small>Постоянная панель внизу экрана</small></span><label class=\"voice-switch\"><input id=\"voiceDock\" type=\"checkbox\" aria-label=\"Показывать док\"><i></i></label></div><div class=\"voice-mock voice-mock-dock-scene\" role=\"img\" aria-label=\"Айфон с настоящим доком главного экрана\"><div class=\"voice-iphone-device\"><div class=\"voice-iphone-screen\"><div class=\"voice-iphone-status\" aria-hidden=\"true\">9:41</div><div class=\"voice-iphone-island\" aria-hidden=\"true\"></div><div class=\"voice-iphone-title\" aria-hidden=\"true\">ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</div><div class=\"voice-iphone-dock-mount\" id=\"mgDockPreviewMount\"></div></div></div></div><p class=\"voice-caption\">Док обеспечивает быстрый доступ к приложению. При выключении останется плазма помощника с быстрыми действиями.</p></div><div class=\"voice-setting-top voice-simple\"><span class=\"mg-icon mg-blue\"><svg class=\"ico\"><use href=\"#ic-bars\"/></svg></span><span class=\"mg-copy\"><strong>Голосовая активация</strong><small>Распознавание фразы — в разработке</small></span><span class=\"voice-coming\">Скоро</span></div><div class=\"voice-setting-top voice-simple\"><span class=\"mg-icon mg-purple\"><svg class=\"ico\"><use href=\"#ic-spark\"/></svg></span><span class=\"mg-copy\"><strong>Голосовые ответы</strong><small>Озвучивание после подключения голоса</small></span><span class=\"voice-coming\">Скоро</span></div><p class=\"mg-disclaimer\">Микрофон не включается автоматически. Голосовая активация потребует разрешения на доступ и работающего распознавания.</p>";
     }else if(page==='autopilot'){
@@ -653,6 +657,7 @@
         '<label class="mg-field">Уровень самостоятельности<input id="mgAutonomy" type="range" min="0" max="2" step="1" value="'+Number(mgData.autonomy)+'"><span id="mgAutonomyLabel"></span></label>'+
         '<h2>Правила</h2>'+choices.map(([key,label])=>'<label class="mg-choice">'+label+'<input type="checkbox" data-mg-rule="'+key+'" '+(mgData.rules[key]?'checked':'')+'></label>').join('')+
         '<p class="mg-disclaimer">Настройки — прототип. Они пока не разрешают реальных платежей, отправки сообщений или других действий.</p>';
+      content+=mgSkillsPanels();
     }else{content='<p class="mg-explain">'+mgInfo[page]+'</p><p class="mg-disclaimer">Этот раздел готовится. Подключённые данные и действия не имитируются.</p>';}
     byId('mgDetail').innerHTML=content;
     if(page==='voice'){
@@ -714,13 +719,15 @@
         '<p class="dm-performance-note">Режим меняется сразу и сохраняется на всех страницах. Все функции доступны в любом режиме.</p>';
       dockCard.after(performance);
       byId('mgDetail').prepend(settings);
+      // Name and communication style belong at the very END of Appearance.
+      byId('mgDetail').insertAdjacentHTML('beforeend',mgCommunicationPanels());
       dmMountGlyphShowcase();
       dmMountPlasmaExamples();
       dmSyncAppearanceDockMode();
       byId('plasmaTapMode').value=voicePrefs.tapAction;
     }
 
-    if(page==='communication')byId('mgTone').value=mgData.tone||'human';
+    if(page==='voice')byId('mgTone').value=mgData.tone||'human';
     if(page==='autopilot')mgAutoLabel();
     if(page==='voice')byId('mgDetail').querySelector('#voiceDock').checked=voicePrefs.dock;
     window.scrollTo(0,0);
@@ -740,7 +747,7 @@
   document.querySelectorAll('[data-mg-open]').forEach(el=>el.addEventListener('click',()=>{
     mgSettingsPage(el.dataset.mgOpen);
   }));
-  byId('mgBack').addEventListener('click',()=>{if(mgCurrent==='home')setTab('home');else if(mgCurrent==='manager')mgSettingsPage('home');else if(['communication','capabilities','voice','autopilot'].includes(mgCurrent))mgSettingsPage('manager');else mgSettingsPage('home');});
+  byId('mgBack').addEventListener('click',()=>{if(mgCurrent==='home')setTab('home');else if(mgCurrent==='manager')mgSettingsPage('home');else if(['voice','autopilot'].includes(mgCurrent))mgSettingsPage('manager');else mgSettingsPage('home');});
   document.querySelectorAll('[data-mg-card]').forEach(el=>el.addEventListener('change',()=>{
     mgData.cards[el.dataset.mgCard]=el.checked;save();mgApplyCards();
     // Recolor the laser tracks immediately to match cards actually shown on Home.
