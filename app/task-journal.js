@@ -121,6 +121,86 @@ function makePanel(){
  '<div id="dmJournalContent"></div></div>';
  document.body.append(root);return root;
 }
+
+/* Owner-approved handoff is a queue, NOT an external action or blanket permission. */
+function transferable(){return personal.filter(t=>t.status!=='done'&&t.status!=='delegated')}
+function startTransfer(ids){
+ const distinct=[...new Set(ids)].filter(id=>transferable().some(t=>t.id===id));
+ if(!distinct.length){contactFeedback='Пока нечего передавать.';transferDraft=null;show('mine');return}
+ transferDraft={ids:distinct};
+ contactCheck=null;contactFeedback='';
+ show('mine');
+}
+function transferPreview(){
+ if(!transferDraft)return '';
+ const tasks=transferDraft.ids.map(id=>transferable().find(t=>t.id===id)).filter(Boolean);
+ if(!tasks.length)return '<p class="dm-journal-empty">Дела уже перенесены или выполнены. Обновите список.</p>';
+ return '<form id="dmTransferForm" class="dm-journal-handoff" aria-label="Передать дела управляющему">'+
+  '<small>ПЕРЕДАЧА ТОЛЬКО С ВАШЕГО СОГЛАСИЯ</small><h3>Что мне поручить?</h3>'+
+  '<p>Отметьте дела, которые хотите передать. Пока я только сохраню их в «Поручениях» и подготовлю очередь для дальнейшей работы. Я не буду звонить, отправлять сообщения, менять рекламу или тратить деньги.</p>'+
+  '<fieldset><legend>Выберите дела</legend>'+
+  tasks.map(t=>'<label><input type="checkbox" name="taskId" value="'+esc(t.id)+'" checked><span>'+esc(t.title)+'<small> · '+({today:'сегодня',tomorrow:'завтра',later:'позже'}[taskDay(t)]||'позже')+'</small></span></label>').join('')+
+  '</fieldset><label class="dm-handoff-consent"><input type="checkbox" name="consent" id="dmTransferApprove" required>'+
+  '<span>Согласен передать выбранные дела управляющему в очередь. Понимаю, что внешние действия ещё не выполняются.</span></label>'+
+  '<div class="dm-handoff-buttons"><button type="button" data-transfer-cancel>Отмена</button><button type="submit">Передать выбранные ↗</button></div></form>';
+}
+function persistHandoff(nextPersonal,nextDelegated){
+ // Commit both local stores only after successful writes, otherwise restore the originals.
+ if(nextPersonal.length>100||nextDelegated.length>100)return false;
+ let oldPersonal,oldDelegated;
+ try{
+  oldPersonal=localStorage.getItem(PERSONAL_KEY);
+  oldDelegated=localStorage.getItem(DELEGATED_KEY);
+  localStorage.setItem(PERSONAL_KEY,JSON.stringify(nextPersonal));
+  localStorage.setItem(DELEGATED_KEY,JSON.stringify(nextDelegated));
+  personal=nextPersonal;delegated=nextDelegated;
+  return true;
+ }catch(e){
+  try{if(oldPersonal===null)localStorage.removeItem(PERSONAL_KEY);else if(oldPersonal!==undefined)localStorage.setItem(PERSONAL_KEY,oldPersonal)}catch(_){}
+  try{if(oldDelegated===null)localStorage.removeItem(DELEGATED_KEY);else if(oldDelegated!==undefined)localStorage.setItem(DELEGATED_KEY,oldDelegated)}catch(_){}
+  console.warn('Unable to transfer tasks',e);
+  return false;
+ }
+}
+function transferSelected(ids){
+ const selected=[...new Set(ids)].map(id=>transferable().find(t=>t.id===id)).filter(Boolean);
+ if(!transferDraft||!selected.length)return false;
+ if(selected.some(t=>!transferDraft.ids.includes(t.id)))return false;
+ const stamp=Date.now(),dated=now();
+ const nextPersonal=personal.map(t=>selected.some(x=>x.id===t.id)?{...t,status:'delegated',assignedAt:stamp}:t);
+ const nextDelegated=[...selected.map(t=>({
+  id:'owner-task:'+t.id,origin:'owner-task',personalId:t.id,
+  title:t.title,status:'queued',created:dated,createdMs:stamp,
+  log:[{at:dated,ms:stamp,message:'Вы передали дело управляющему после подтверждения. Внешних действий не выполнялось.'}]
+ })),...delegated];
+ if(!persistHandoff(nextPersonal,nextDelegated)){
+  contactFeedback='Не удалось сохранить передачу. Ваши дела остаются у вас.';
+  transferDraft=null;show('mine');return false;
+ }
+ transferDraft=null;
+ contactFeedback='';
+ selected.filter(t=>t.source==='sales').forEach(t=>{
+  try{window.dispatchEvent(new CustomEvent('dm:personal-tasks-changed',{detail:{saleId:t.saleId}}))}catch(_){}
+ });
+ show('delegated');return true;
+}
+function reclaimTransfer(id){
+ const item=delegated.find(t=>t.id===id&&t.origin==='owner-task'&&t.status==='queued');
+ if(!item)return false;
+ const task=personal.find(t=>t.id===item.personalId&&t.status==='delegated');
+ if(!task)return false;
+ const stamp=Date.now(),dated=now();
+ const nextPersonal=personal.map(t=>t.id===task.id?{...t,status:'open',reclaimedAt:stamp}:t);
+ const nextDelegated=delegated.map(t=>t.id===item.id?{...t,status:'returned',returnedAt:stamp,
+  log:[...(Array.isArray(t.log)?t.log:[]),{at:dated,ms:stamp,message:'Вы забрали дело обратно в «Мои дела». Никаких внешних действий не было.'}]}:t);
+ if(!persistHandoff(nextPersonal,nextDelegated)){
+  contactFeedback='Не удалось вернуть дело. Оно по-прежнему в поручениях.';
+  show('delegated');return false;
+ }
+ if(task.source==='sales')try{window.dispatchEvent(new CustomEvent('dm:personal-tasks-changed',{detail:{saleId:task.saleId}}))}catch(_){}
+ contactFeedback='Дело снова у вас.';
+ transferDraft=null;show('mine');return true;
+}
 function personalList(){
  const active=personal.filter(t=>t.status!=='done'&&t.status!=='delegated');
  const groups=[['today','Сегодня'],['tomorrow','Завтра'],['later','Позже']];
@@ -284,6 +364,12 @@ function init(){
   else if(b.dataset.journalTab)show(b.dataset.journalTab);
   else if(b.hasAttribute('data-delegation-review'))reviewDelegation(b.dataset.delegationReview);
   else if(b.dataset.contactReached==='yes'||b.dataset.contactReached==='no')answerContact(b.dataset.contactReached==='yes');
+  else if(b.hasAttribute('data-transfer-all'))startTransfer(transferable().map(t=>t.id));
+  else if(b.dataset.transferOne)startTransfer([b.dataset.transferOne]);
+  else if(b.hasAttribute('data-transfer-cancel')){transferDraft=null;contactFeedback='Передача отменена. Дела остались у вас.';show('mine')}
+  else if(b.dataset.transferReclaim){
+   if(window.confirm('Вернуть дело обратно в «Мои дела»?'))reclaimTransfer(b.dataset.transferReclaim);
+  }
   else if(b.dataset.journalSale){
    const saleId=b.dataset.journalSale;
    close();
@@ -304,6 +390,14 @@ function init(){
  });
  document.addEventListener('submit',e=>{
   if(e.target.id==='dmPersonalTaskForm'){e.preventDefault();submitPersonal(e.target)}
+  else if(e.target.id==='dmTransferForm'){
+   e.preventDefault();
+   const data=new FormData(e.target);
+   if(data.get('consent')!=='on')return;
+   const ids=data.getAll('taskId').map(String);
+   if(!ids.length){contactFeedback='Выберите хотя бы одно дело.';transferDraft=null;show('mine');return}
+   transferSelected(ids);
+  }
  });
  document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
  document.addEventListener('click',e=>{const root=document.getElementById('dmTaskJournal');if(root&&!root.hidden&&e.target===root)close()});
