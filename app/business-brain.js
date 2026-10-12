@@ -87,6 +87,19 @@ function observations(data){
   next:'Когда появятся суммы, я пересчитаю картину.'});
  return notes.sort((a,b)=>a.priority-b.priority);
 }
+function journey(){
+ const plan=window.DMBusinessJourney?.getPlan?.();
+ return plan?.source==='owner-entered-local-plan'?plan:null;
+}
+function startingPath(){
+ const p=journey();if(!p)return '';
+ const detail=p.mode==='start'?(p.unknownIdea||!p.description?'Направление пока не выбрано. ':'Тебе интересно: '+p.description+'. '):
+  (p.description?'Твой бизнес: '+p.description+'. ':'');
+ const first=p.steps?.[0];
+ return (p.mode==='start'?'Мы создаём твоё дело с нуля. ':'Мы развиваем действующий бизнес. ')+detail+
+  (first?'Первый шаг — '+first.title.toLowerCase()+'. '+first.note:'')+
+  ' Пока это сохранённый маршрут, а не выполненная работа.';
+}
 function work(){
  const result=window.DMInitiative?.getSummary?.();
  return result&&typeof result.enabled==='boolean'?result:{enabled:false,prepared:0,awaitingReview:0,reviewed:0};
@@ -102,7 +115,13 @@ function progressSentence(){
  return 'Самостоятельная подготовка пока выключена. Могу включиться после твоего согласия.';
 }
 function brief(){
- const d=facts();
+ const d=facts(),path=journey();
+ if(path?.mode==='start'&&!d?.total){
+  const priority=workSignals()[0]||null;
+  return {headline:priority?.title||'Создадим твоё дело вместе',
+    message:startingPath()+' '+(priority?priority.body+' ':'')+workLine(),
+    priority};
+ }
  if(!d){const important=workSignals()[0]||null;
   return {headline:important?.title||'Готов разобраться с бизнесом',
    message:contextNote()+' '+(important?important.body+' ':'')+workLine()+' Данных о продажах пока нет.',
@@ -144,6 +163,9 @@ function salesAnswer(d){
 function answer(question){
  const q=String(question||'').trim().toLowerCase();
  if(!q)return null;
+ const path=journey();
+ if(path&&/(с нуля|сво[её] дел[оа]|начать бизнес|откр[ыо].{0,18}бизнес|первые клиенты|с чего нач|что сначала|план развития|путь развития|иде[яю]|чем заняться)/i.test(q))
+  return startingPath()+' Продолжить знакомство и изменить планы можно в «Управлении» → «Мой управляющий» → «Мой путь с управляющим».';
  const recognized=/(бизнес|как дела|что происходит|как идут|что нового|что успел|успел|сделал|делал|занимаешься|занимал|работаешь|поручен|мои дела|отчет|отчёт|итог|ситуаци|ошибк|проблем|что дальше|что делать|помоги|продаж|клиент|покупк|заявк|выручк|денег|деньг|доход|прибыл|финанс|расход|трат|бюджет|реклам|продвижен|задач|поручени|мои дела|дела на сегодня|какие.{0,14}дела|что по делам|что у меня|сроки|просроч|автопилот|самостоятельн|услуг|производ|склад|остатк|поставщик|доставк|график|брон|сотрудник|персонал|смены|магазин|цвет|цех|филиал|бизнес.модел)/i.test(q);
  if(!recognized)return null;
  if(/задач|поручени|мои дела|дела на сегодня|какие.{0,14}дела|что по делам|сроки|просроч/.test(q))return taskAnswer();
