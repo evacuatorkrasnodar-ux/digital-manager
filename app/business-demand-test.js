@@ -7,6 +7,7 @@ const KEY='dm-demand-test-v1',LIMIT=100,MAX_NOTE=250;
 const validTypes=new Set(['interested','question','not_interested']);
 const validSources=new Set(['conversation','message','survey','other']);
 const clean=(x,n)=>String(x??'').replace(/\s+/g,' ').trim().slice(0,n);
+const counted=(n,one,few,many)=>{const d=n%10,c=n%100;return n+' '+(c>=11&&c<=14?many:d===1?one:d>=2&&d<=4?few:many)};
 function fingerprint(plan){
  if(!plan||plan.source!=='owner-entered-local-plan'||plan.mode!=='start')return null;
  return JSON.stringify([clean(plan.description,600).toLowerCase(),clean(plan.location,180).toLowerCase(),Boolean(plan.unknownIdea)]);
@@ -64,8 +65,9 @@ function remove(plan,id){
 function report(){
  const plan=window.DMBusinessJourney?.getPlan?.(),r=summary(plan);
  if(!r.hasPlan)return null;
- return r.total?'Ты записал '+r.total+' откликов о будущей идее: заинтересовались '+r.interested+
-  ', задали вопросы '+r.questions+', не заинтересовались '+r.negative+'. Это твои собственные записи, не проверенные сообщения клиентов. '+r.note:
+ return r.total?'По твоей идее записано '+counted(r.total,'отклик','отклика','откликов')+
+  ': интерес — '+r.interested+', вопросы — '+r.questions+', без интереса — '+r.negative+
+  '. Это твои собственные записи, а не проверенные сообщения клиентов. '+r.note:
   'Мы пока не записали ни одного отклика на идею. Я подготовил вопросы, чтобы проверить интерес без больших расходов. Реальный опрос ещё не проводился.';
 }
 window.addEventListener?.('storage',e=>{if(e.key===KEY){entries=load();try{window.dispatchEvent(new CustomEvent('dm:demand-test-changed'))}catch(_){}}});
