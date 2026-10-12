@@ -1,12 +1,12 @@
 /* Digital Trace: independent full-screen Black Velvet analytics, no fabricated data. */
 #digitalTraceScreen.dm-trace-screen{position:relative;min-height:100dvh;background:#020305;color:#edf5fc;padding:0 12px calc(105px + env(safe-area-inset-bottom,0px));}
-.dm-trace-head{position:relative;padding:calc(30px + env(safe-area-inset-top,0px)) 4px 21px;border-bottom:1px solid rgba(165,190,212,.2)}
+.dm-trace-head{position:relative;padding:calc(13px + env(safe-area-inset-top,0px)) 4px 10px;border-bottom:1px solid rgba(165,190,212,.2)}
 .dm-trace-eyebrow{display:block;font-size:9px;letter-spacing:.17em;color:#a0b4c8}
-.dm-trace-head h1{font-size:26px;letter-spacing:-.035em;font-weight:510;margin:15px 0 5px}
+.dm-trace-head h1{font-size:23px;letter-spacing:-.035em;font-weight:510;margin:8px 0 3px}
 .dm-trace-head p{font-size:12px;color:#b5c9dc;line-height:1.5;margin:0;max-width:270px}
-#dmTraceBack{position:absolute;right:0;top:calc(25px + env(safe-area-inset-top,0px));width:37px;height:37px;border-radius:50%;border:1px solid rgba(192,220,241,.5);background:linear-gradient(145deg,#243746,#07121e);display:grid;place-items:center}
+#dmTraceBack{position:absolute;right:0;top:calc(12px + env(safe-area-inset-top,0px));width:37px;height:37px;border-radius:50%;border:1px solid rgba(192,220,241,.5);background:linear-gradient(145deg,#243746,#07121e);display:grid;place-items:center}
 #dmTraceBack .ico{width:18px;height:18px}
-.dm-trace-body{display:grid;gap:14px;margin-top:17px}
+.dm-trace-body{display:grid;gap:10px;margin-top:10px}
 .dm-trace-hero{padding:21px 16px;border:1px solid rgba(186,208,226,.36);border-radius:18px;background:radial-gradient(ellipse at 85% 0%,rgba(126,167,196,.14),transparent 57%),linear-gradient(148deg,#17232e,#060b11 75%)}
 .dm-trace-status{display:inline-flex;align-items:center;gap:7px;color:#d4e6f5;font-size:9px;letter-spacing:.12em}
 .dm-trace-status i{width:6px;height:6px;border-radius:50%;background:#adbdca;box-shadow:0 0 7px #b5c9da77}
@@ -28,15 +28,15 @@
 @media(max-width:350px){#digitalTraceScreen.dm-trace-screen{padding-left:8px;padding-right:8px}.dm-trace-head h1{font-size:24px}}
 
 /* Connected working panels: local source register, measurements, comparisons, decisions. */
-.dm-trace-summary{border:1px solid rgba(182,207,228,.38);border-radius:19px;padding:18px 15px;background:radial-gradient(ellipse at 85% 0%,rgba(143,179,213,.15),transparent 65%),linear-gradient(145deg,#142232,#050a11)}
+.dm-trace-summary{border:1px solid rgba(182,207,228,.38);border-radius:19px;padding:12px 13px;background:radial-gradient(ellipse at 85% 0%,rgba(143,179,213,.15),transparent 65%),linear-gradient(145deg,#142232,#050a11)}
 .dm-trace-summary>span{font-size:9px;letter-spacing:.14em;color:#b3c8da}
-.dm-trace-summary h2{font-size:18px;font-weight:520;line-height:1.35;margin:11px 0 7px}
+.dm-trace-summary h2{font-size:16px;font-weight:520;line-height:1.35;margin:6px 0 5px}
 .dm-trace-summary p,.dm-trace-panel>p{font-size:12px;line-height:1.5;color:#aebfd0;margin:0 0 12px}
-.dm-trace-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:15px}
-.dm-trace-kpis>div{padding:12px 7px;border:1px solid rgba(163,195,221,.25);border-radius:12px;background:rgba(130,159,185,.07);display:grid;gap:4px;text-align:center}
+.dm-trace-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin-top:8px}
+.dm-trace-kpis>div{padding:8px 6px;border:1px solid rgba(163,195,221,.25);border-radius:12px;background:rgba(130,159,185,.07);display:grid;gap:4px;text-align:center}
 .dm-trace-kpis strong{font-size:21px;font-weight:550;color:#f0f7ff}
 .dm-trace-kpis small{font-size:10px;color:#a8becf}
-.dm-trace-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:4px;border:1px solid rgba(182,209,231,.31);border-radius:18px;background:#07111b}
+.dm-trace-tabs{position:sticky;top:0;z-index:8;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:4px;border:1px solid rgba(182,209,231,.31);border-radius:18px;background:#07111b}
 .dm-trace-tabs button{min-width:0;border:0;border-radius:14px;padding:10px 2px;font-size:11px;color:#b7c9d9;background:transparent;cursor:pointer}
 .dm-trace-tabs button[aria-pressed="true"]{color:#0b2235;background:linear-gradient(135deg,#edf6fd,#aabed0);box-shadow:inset 0 1px rgba(255,255,255,.9)}
 .dm-trace-panel{display:grid;gap:11px;padding:15px 13px;border:1px solid rgba(154,184,208,.31);border-radius:17px;background:linear-gradient(143deg,#111c28,#050a10)}
