@@ -479,7 +479,8 @@
     const source=document.querySelector('#tabAssistant .dm-dock-plasma');
     if(!mount||!source)return;
     const orb=source.cloneNode(true);
-    orb.dataset.mode='idle';
+    // This card deliberately previews ATTENTION; the live assistant stays white at rest.
+    orb.dataset.mode='attention';
     const idMap=new Map();
     orb.querySelectorAll('[id]').forEach((node,index)=>{
       const original=node.id,unique='dm-manager-plasma-'+index+'-'+original;
