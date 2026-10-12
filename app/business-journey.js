@@ -26,6 +26,13 @@ const steps={
  ]
 };
 const titles={start:'Создаю своё дело',existing:'Уже веду бизнес'};
+function journeySteps(record=state){
+ if(!record)return [];
+ const path=steps[record.mode]||[];
+ // If an idea is already named, the next honest step is testing it,
+ // not pretending that we must look for an idea from scratch.
+ return record.mode==='start'&&!record.unknownIdea&&record.description?path.slice(1):path;
+}
 let state=read(),view='welcome',root=null,lastFocus=null,previousPage='';
 function read(){
  try{const raw=JSON.parse(localStorage.getItem(KEY)||'null');
@@ -75,7 +82,7 @@ function markup(){
   '<p>Пиши как есть. Можно коротко, без цифр и специальных слов. Это не экзамен и не анкета.</p>'+
   '<textarea id="dmJourneyHave" name="have" rows="4" maxlength="600" placeholder="Например: есть свободное время и телефон, но нет сайта и клиентов">'+escape(working.have)+'</textarea>'+
   '<div class="dm-journey-bottom"><button type="button" data-journey-back>← Назад</button><button type="submit">Построим маршрут ↗</button></div></form>';
- const mode=state?.mode||'start',roadmap=steps[mode];
+ const mode=state?.mode||'start',roadmap=journeySteps(state);
  return '<section class="dm-journey-chat dm-journey-roadmap">'+
   '<span class="dm-journey-eyebrow">МЫ В ОДНОЙ КОМАНДЕ</span>'+
   '<h2>'+(mode==='start'?'Создадим твоё дело вместе.':'Помогу развивать твой бизнес.')+'</h2>'+
@@ -161,7 +168,7 @@ function onSubmit(e){
 function getState(){return state?Object.freeze({...state}):null}
 function getPlan(){return state?Object.freeze({mode:state.mode,modeLabel:titles[state.mode],description:state.description,
  have:state.have,unknownIdea:state.unknownIdea,
- steps:steps[state.mode].map(x=>({...x,status:'planned'})),source:'owner-entered-local-plan'}):null}
+ steps:journeySteps(state).map(x=>({...x,status:'planned'})),source:'owner-entered-local-plan'}):null}
 function explain(){
  const p=getPlan();if(!p)return null;
  return p.mode==='start'
@@ -172,7 +179,7 @@ function explain(){
 }
 function oldUser(){
  if(state)return true;
- if(localStorage.getItem(SKIP)==='1')return true;
+ try{if(localStorage.getItem(SKIP)==='1')return true}catch(_){return false}
  // Important: default PWA user/name state is created for brand-new visitors.
  // Only real, prior nonempty business data indicates an existing installation.
  for(const key of ['dm-sales-records-v1','dm-personal-tasks-v1','dm-task-journal-v1']){
