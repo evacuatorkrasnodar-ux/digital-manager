@@ -18,3 +18,13 @@
 .dm-future-dialog-inner header button{height:34px;width:34px;border:1px solid #547086;border-radius:50%;background:rgba(135,170,195,.12);color:#edf5fa;font-size:20px}
 .dm-future-dialog-inner h2{font-size:20px;font-weight:540;margin:0}
 .dm-future-dialog-inner p{font-size:12px;line-height:1.6;color:#b8cede}
+
+/* One permanent assistant surface: status accents, no card geometry changes. */
+#dmFutureAssistant .dm-future-card{min-height:150px;align-content:start;transition:border-color .28s ease,background .28s ease}
+#dmFutureAssistant[data-signal="idle"] .dm-future-card{border-color:rgba(151,178,202,.27)}
+#dmFutureAssistant[data-signal="decision"] .dm-future-card{border-color:rgba(239,171,103,.58);background:radial-gradient(ellipse at 95% 0,rgba(223,151,81,.13),transparent 64%),linear-gradient(150deg,#211b19,#090b11)}
+#dmFutureAssistant[data-signal="decision"] .dm-future-card-head span{color:#f2c596}
+#dmFutureAssistant[data-signal="opportunity"] .dm-future-card{border-color:rgba(126,187,230,.55);background:radial-gradient(ellipse at 95% 0,rgba(86,155,220,.14),transparent 64%),linear-gradient(150deg,#142337,#070b12)}
+#dmFutureAssistant[data-signal="opportunity"] .dm-future-card-head span{color:#a9d9ff}
+#dmFutureAssistant[data-signal="completed"] .dm-future-card{border-color:rgba(172,159,217,.53);background:radial-gradient(ellipse at 95% 0,rgba(147,119,210,.12),transparent 64%),linear-gradient(150deg,#211c32,#080b12)}
+#dmFutureAssistant[data-signal="completed"] .dm-future-card-head span{color:#d1beff}
