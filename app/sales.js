@@ -345,6 +345,13 @@ function hide(){if(screen){screen.hidden=true;if(pictureOpen)closePicture()}}
    Only an explicit follow-up confirmation may advance a NEW lead. */
 const getClientStage=id=>records.find(x=>x.id===id)?.stage||null;
 /* Return only manually recorded facts needed for an owner-approved draft. */
+/* Read-only, bounded candidates for local proactive preparation. Never fabricate clients. */
+function getWorkCandidates(){
+ return records.filter(x=>['new','talk','offer'].includes(x.stage))
+  .slice(0,80).map(x=>({id:x.id,person:String(x.person||'').slice(0,100),
+   title:String(x.title||'').slice(0,140),stage:x.stage,
+   source:channels.includes(x.source)?x.source:'Другое',createdAt:x.createdAt||0}));
+}
 function getDraftContext(id){
  const x=records.find(item=>item.id===id);
  if(!x)return null;
@@ -367,7 +374,7 @@ function openClient(id){
  if(target){target.scrollIntoView({block:'center',behavior:'instant'});target.focus?.({preventScroll:true})}
 }
 function openPicture(){open();showPicture()}
-window.DMSalesScreen=Object.freeze({open,openPicture,openClient,confirmContact,getClientStage,getDraftContext,close,hide,getInsight,getTotals:totals,getBusinessSummary:()=>({salesRevenue:totalWon(),promotionExpenses:promotionTotal(),source:'manual-local-records'})});
+window.DMSalesScreen=Object.freeze({open,openPicture,openClient,confirmContact,getClientStage,getDraftContext,getWorkCandidates,close,hide,getInsight,getTotals:totals,getBusinessSummary:()=>({salesRevenue:totalWon(),promotionExpenses:promotionTotal(),source:'manual-local-records'})});
 window.addEventListener('dm:personal-tasks-changed',()=>{
  if(screen&&!screen.hidden&&!pictureOpen)render();
 });
