@@ -116,11 +116,13 @@ function demandProgress(){
  return window.DMDemandTest?.report?.()||'Пока нет сохранённого плана проверки спроса.';
 }
 function selectedPlaceAnswer(){
+ const record=window.DMMarketScout?.summary?.(journey());
+ const verifiedLine=record?.hasLocation?' '+(window.DMMarketScout?.report?.()||record.conclusion):'';
  const advice=window.DMBusinessJourney?.getLocationAdvice?.();
  if(!advice?.knownLocation)return 'Место пока не выбрано. Расскажи, в каком городе или районе планируешь работать — затем проверим конкурентов, спрос и условия.';
- return advice.observation+' Первые проверки: '+advice.evidence.slice(0,3).join('; ')+
+ return advice.observation+verifiedLine+' Первые проверки: '+advice.evidence.slice(0,3).join('; ')+
   '. Что можно сделать после проверки: '+advice.plan.slice(0,2).join('; ')+
-  '. Пока это план, а не исследование рынка или выполненная работа.';
+  '. Автоматическая проверка конкурентов пока не подключена: это планы и сохранённые пользователем наблюдения.';
 }
 function work(){
  const result=window.DMInitiative?.getSummary?.();
