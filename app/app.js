@@ -133,7 +133,9 @@
   // Explicit opt-in preference: no hidden mic use; this is an animated UI prototype.
   const savedVoice=mgSaved.voice&&typeof mgSaved.voice==='object'?mgSaved.voice:{};
   const allowedPlasmaActions=['panel','voice','text'];
-  const voicePrefs={dock:savedVoice.dock!==false,tapAction:allowedPlasmaActions.includes(savedVoice.tapAction)?savedVoice.tapAction:'panel'};
+  const allowedPerformanceModes=['beautiful','eco','simple'];
+  const voicePrefs={dock:savedVoice.dock!==false,tapAction:allowedPlasmaActions.includes(savedVoice.tapAction)?savedVoice.tapAction:'panel',
+    performanceMode:allowedPerformanceModes.includes(savedVoice.performanceMode)?savedVoice.performanceMode:'beautiful'};
   const dockTargets={
     clients:{label:'Клиенты',icon:'ic-users'},
     day:{label:'Мой день',icon:'ic-calendar'},
@@ -664,6 +666,25 @@
       // No duplicate settings card: selections update the real dock and its clone.
       const dockCard=byId('mgDetail').querySelector('.voice-pref');
       dockCard.querySelector('.voice-setting-top').after(dockConfig,samples);
+      // One persistent graphics setting for the entire application.
+      const performanceModes=[
+        ['beautiful','✨','Красивый','Все оригинальные свечения, стекло, живая плазма и лазеры.'],
+        ['eco','🔋','Экономичный','Меньше размытия и лишнего движения. Плазма остаётся живой.'],
+        ['simple','🍃','Простой','Статичная плазма, без движущихся лазеров и тяжёлого размытия.']
+      ];
+      const performance=document.createElement('section');
+      performance.className='dm-performance-pref voice-pref';
+      performance.innerHTML=
+        '<div><h3>Режим оформления</h3><p class="dm-performance-intro">Подберите оформление под возможности телефона.</p></div>'+
+        '<fieldset class="dm-performance-choices" aria-label="Режим оформления">'+
+        performanceModes.map(([value,icon,label,description])=>
+          '<label class="dm-performance-choice"><input type="radio" name="dmPerformanceMode" value="'+value+'" '+
+          (voicePrefs.performanceMode===value?'checked':'')+'>'+
+          '<span class="dm-performance-symbol" aria-hidden="true">'+icon+'</span>'+
+          '<span class="dm-performance-copy"><strong>'+label+'</strong><small>'+description+'</small></span></label>'
+        ).join('')+'</fieldset>'+
+        '<p class="dm-performance-note">Режим меняется сразу и сохраняется на всех страницах. Все функции доступны в любом режиме.</p>';
+      dockCard.after(performance);
       byId('mgDetail').prepend(settings);
       dmMountGlyphShowcase();
       dmMountPlasmaExamples();
@@ -701,6 +722,14 @@
   byId('mgDetail').addEventListener('click',event=>{const link=event.target.closest('[data-mg-open]');if(link)mgSettingsPage(link.dataset.mgOpen);});
   byId('mgDetail').addEventListener('change',event=>{
     const el=event.target;
+    if(el.name==='dmPerformanceMode'){
+      if(allowedPerformanceModes.includes(el.value)){
+        voicePrefs.performanceMode=el.value;
+        save();
+        window.DMPerformance?.apply(el.value);
+      }
+      return;
+    }
     if(el.dataset.dockSlot!==undefined){
       const index=Number(el.dataset.dockSlot);
       if(Number.isInteger(index)&&index>=0&&index<4&&dockTargets[el.value]){
