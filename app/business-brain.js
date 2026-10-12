@@ -103,6 +103,15 @@ function startingPath(){
 function startupMaterials(){
  return window.DMFirstResult?.describe?.()||'Пока нет подготовленных материалов.';
 }
+function ideaOptions(){
+ const plan=journey();
+ if(plan?.mode!=='start'||!plan.unknownIdea)return null;
+ const ideas=window.DMIdeaExplorer?.explore?.(plan);
+ if(!ideas?.found?.length)return null;
+ return 'По твоим интересам и возможностям я подготовил '+ideas.found.length+
+  ' идеи для проверки: '+ideas.found.map(x=>x.title).join('; ')+
+  '. Пока это гипотезы, а не доказанный спрос или обещание дохода. Посмотреть и выбрать можно в «Мой путь с управляющим».';
+}
 function demandProgress(){
  return window.DMDemandTest?.report?.()||'Пока нет сохранённого плана проверки спроса.';
 }
@@ -132,7 +141,8 @@ function brief(){
  if(path?.mode==='start'&&!d?.total){
   const priority=workSignals()[0]||null;
   return {headline:priority?.title||'Создадим твоё дело вместе',
-    message:startingPath()+' '+startupMaterials()+' '+demandProgress()+' '+(priority?priority.body+' ':'')+workLine(),
+    message:startingPath()+' '+(ideaOptions()||startupMaterials())+' '+
+    (path.unknownIdea?'':demandProgress()+' ')+(priority?priority.body+' ':'')+workLine(),
     priority};
  }
  if(!d){const important=workSignals()[0]||null;
@@ -177,6 +187,8 @@ function answer(question){
  const q=String(question||'').trim().toLowerCase();
  if(!q)return null;
  const path=journey();
+ if(path?.mode==='start'&&path.unknownIdea&&/(иде[яию]|вариант|чем заняться|первый заработ|какой бизнес|чем займёмся|чем займемся|что предлагаешь)/.test(q))
+  return ideaOptions()||'Давай сначала расскажи, что тебе интересно и какие есть возможности.';
  if(path?.mode==='start'&&/(что со спросом|проверили спрос|проверка спроса|есть спрос|первые отклики|есть отклики|реакци|что говорят люди|что думают люди|заинтересовал)/.test(q))
   return demandProgress()+' Это первые сигналы; перед значительными расходами стоит проверить реальные потребности и возможность оплачивать предложение.';
  if(path?.mode==='start'&&/(что.{0,18}подготовил|что успел|первые материалы|черновик сайта|текст сайта|проверить спрос)/.test(q))return startupMaterials()+' '+startingPath();
