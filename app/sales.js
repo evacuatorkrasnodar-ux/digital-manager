@@ -94,6 +94,7 @@ function draftPanel(title,text){
  box.innerHTML='<div class="dm-sales-draft-inner"><header><strong>'+esc(title)+'</strong><button type="button" id="dmSalesDraftClose" aria-label="Закрыть">×</button></header><p>Черновик. Ничего не отправлено.</p><textarea id="dmSalesDraftText" rows="6">'+esc(text)+'</textarea><button type="button" data-sale-copy>Скопировать текст</button><small id="dmSalesCopyStatus" role="status"></small></div>';
  document.body.append(box);
  box.querySelector('#dmSalesDraftClose').addEventListener('click',()=>box.remove());
+ box.querySelector('[data-sale-copy]').addEventListener('click',copyDraft);
  box.addEventListener('click',e=>{if(e.target===box)box.remove()});
  box.querySelector('textarea').focus();
 }
