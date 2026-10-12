@@ -10,15 +10,6 @@ body > .bottom-nav[data-layout="five"] .dm-world-socket{
 body > .bottom-nav[data-layout="five"] .dm-world-socket::before,
 body > .bottom-nav[data-layout="five"] .dm-world-socket::after{content:none}
 body > .bottom-nav[data-layout="five"] .dm-world-socket .dm-shared-plasma{--dm-size:43px}
-.dm-world-orb-menu[hidden]{display:none!important}
-.dm-world-orb-menu{
- position:fixed;z-index:57;left:50%;bottom:calc(115px + env(safe-area-inset-bottom,0px));
- transform:translateX(-50%);display:flex;gap:5px;padding:6px 9px;
- border:1px solid rgba(146,182,210,.4);border-radius:18px;
- background:linear-gradient(145deg,#142638,#060f19);
- box-shadow:0 8px 25px #0009;backdrop-filter:blur(15px);
-}
-.dm-world-orb-menu a{padding:10px 8px;color:#dceefe;text-decoration:none;font-size:11px;white-space:nowrap}
 .dm-world-standalone{
  position:fixed;z-index:47;left:50%;bottom:calc(8px + env(safe-area-inset-bottom,0px));
  transform:translateX(-50%);display:grid;place-items:center;
