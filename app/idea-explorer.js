@@ -127,7 +127,7 @@ function describe(){
  const plan=window.DMBusinessJourney?.getPlan?.(),x=explore(plan);
  if(!x)return null;
  return 'Когда ты не знаешь, с чего начать, я могу помочь выбрать дело. Уже подготовлены '+x.found.length+
-  ' разных гипотезы на основе твоих слов: '+x.found.map(i=>i.title).join('; ')+
+  ' варианта для проверки на основе твоих слов: '+x.found.map(i=>i.title).join('; ')+
   '. Это идеи для проверки, а не найденные гарантированные источники заработка.';
 }
 window.DMIdeaExplorer=Object.freeze({explore,getById,describe});
