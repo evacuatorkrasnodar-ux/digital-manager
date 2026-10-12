@@ -10,13 +10,13 @@ function facts(){
  if(!raw||raw.source!=='user-entered-local-records')return null;
  return raw;
 }
-const word=(n,one,many)=>n===1?one:many;
+const counted=(n,one,few,many)=>{const x=Math.abs(number(n)),last=x%10,last100=x%100;return String(n)+' '+(last100>=11&&last100<=14?many:last===1?one:last>=2&&last<=4?few:many)};
 function observations(data){
  if(!data||!data.total)return [];
  const notes=[];
  if(data.waitingDay>0)notes.push({
   priority:1,type:'late',title:'Клиенты долго ждут',
-  text:'По записям '+data.waitingDay+' '+word(data.waitingDay,'новое обращение не меняло','новых обращений не меняли')+' этап больше суток. Это не доказывает, что ответа не было, но стоит проверить.',
+  text:'В записях больше суток не менялся этап у '+counted(data.waitingDay,'нового обращения','новых обращений','новых обращений')+'. Это не доказывает, что ответа не было, но стоит проверить.',
   next:'Я подготовлю черновики для этих клиентов, если ты разрешил инициативу.'});
  if(data.newLeads>0)notes.push({
   priority:2,type:'new',title:'Есть новые обращения',
@@ -36,7 +36,7 @@ function observations(data){
   next:'Я бы проверил, что помогло этим клиентам купить, прежде чем масштабировать канал.'});
  if(data.unknownAmounts>0)notes.push({
   priority:5,type:'missing',title:'Есть незаполненные суммы',
-  text:'У '+data.unknownAmounts+' '+word(data.unknownAmounts,'покупки не указана','покупок не указаны')+' суммы. Денежную картину пока нельзя считать полной.',
+  text:'Для '+counted(data.unknownAmounts,'отмеченной покупки','отмеченных покупок','отмеченных покупок')+' сумма пока не указана. Денежную картину нельзя считать полной.',
   next:'Когда появятся суммы, я пересчитаю картину.'});
  return notes.sort((a,b)=>a.priority-b.priority);
 }
@@ -47,11 +47,11 @@ function work(){
 function progressSentence(){
  const w=work();
  if(w.enabled&&w.prepared>0)
-  return 'Я уже подготовил '+w.prepared+' '+word(w.prepared,'черновик','черновиков')+' по активным обращениям. '+
-   (w.awaitingReview?'Из них '+w.awaitingReview+' ждут просмотра.':'Все эти черновики просмотрены.')+
+  return 'Я уже подготовил '+counted(w.prepared,'черновик','черновика','черновиков')+' по активным обращениям. '+
+   (w.awaitingReview?'Из них '+counted(w.awaitingReview,'черновик','черновика','черновиков')+' ждут просмотра.':'Все эти черновики просмотрены.')+
    ' Ничего клиентам не отправлено.';
  if(w.enabled)return 'Самостоятельная подготовка разрешена. Новых черновиков по активным обращениям сейчас нет.';
- if(w.prepared>0)return 'Ранее сохранено '+w.prepared+' черновиков; самостоятельная подготовка сейчас выключена.';
+ if(w.prepared>0)return 'Ранее сохранено '+counted(w.prepared,'черновик','черновика','черновиков')+'; самостоятельная подготовка сейчас выключена.';
  return 'Самостоятельная подготовка пока выключена. Могу включиться после твоего согласия.';
 }
 function brief(){
@@ -59,7 +59,7 @@ function brief(){
  if(!d)return {headline:'Готов разобраться с бизнесом',message:'В этой части приложения ещё нет доступа к данным «Продаж». Ничего придумывать не стану.',priority:null};
  if(!d.total)return {headline:'Жду реальные обращения',message:'Пока в «Продажах» нет твоих записей. Поэтому я не буду изображать занятость и придумывать прибыль. '+progressSentence(),priority:null};
  const priority=observations(d)[0]||null;
- const first='По твоим записям: '+d.total+' обращений, '+d.purchases+' покупок и '+d.active+' в работе.';
+ const first='По твоим записям: '+counted(d.total,'обращение','обращения','обращений')+', '+counted(d.purchases,'покупка','покупки','покупок')+', в работе: '+d.active+'.';
  return {headline:priority?.title||'Дела под контролем по доступным записям',
   message:first+' '+(priority?priority.text+' '+priority.next:'Пока срочных сигналов из записей нет.')+' '+progressSentence(),
   priority};
@@ -80,20 +80,20 @@ function moneyAnswer(d){
 }
 function salesAnswer(d){
  if(!d.total)return 'В «Продажах» пока нет ни одного записанного обращения. Не буду выдумывать клиентов или результаты.';
- return 'Я вижу '+d.total+' обращений: '+d.newLeads+' новых, '+d.inTalk+' обсуждаются, '+
-  d.inOffer+' с предложением, '+d.purchases+' отмечены как покупки, '+d.lost+' не сложились. '+
+ return 'Я вижу '+counted(d.total,'обращение','обращения','обращений')+'. Новых: '+d.newLeads+', обсуждаются: '+d.inTalk+', с предложением: '+
+  d.inOffer+', покупки: '+d.purchases+', не сложилось: '+d.lost+'. '+
   (d.newLeads?'Мой первый приоритет — новые клиенты. ':'')+progressSentence();
 }
 function answer(question){
  const q=String(question||'').trim().toLowerCase();
  if(!q)return null;
- const recognized=/(бизнес|как дела|что происходит|как идут|что нового|что успел|сделал|занимал|работаешь|поручен|мои дела|отчет|отчёт|итог|ситуаци|ошибк|проблем|что дальше|что делать|помоги|продаж|клиент|покупк|заявк|выручк|денег|деньг|доход|прибыл|финанс|расход|трат|бюджет|реклам|продвижен|автопилот|самостоятельн)/i.test(q);
+ const recognized=/(бизнес|как дела|что происходит|как идут|что нового|что успел|успел|сделал|занимал|работаешь|поручен|мои дела|отчет|отчёт|итог|ситуаци|ошибк|проблем|что дальше|что делать|помоги|продаж|клиент|покупк|заявк|выручк|денег|деньг|доход|прибыл|финанс|расход|трат|бюджет|реклам|продвижен|автопилот|самостоятельн)/i.test(q);
  if(!recognized)return null;
  const d=facts();
  if(!d)return 'Я пока не вижу записи «Продаж». Не стану выдавать общий совет за проверку твоего бизнеса.';
  const w=work();
- if(/автопилот|самостоятельн|что успел|что сделал|чем занимал|работаешь|поручен/.test(q))return progressSentence()+
-  (d.newLeads?' По записям сейчас '+d.newLeads+' новых обращений.':'');
+ if(/автопилот|самостоятельн|успел|что сделал|чем занимал|работаешь|поручен/.test(q))return progressSentence()+
+  (d.newLeads?' Сейчас новых обращений: '+d.newLeads+'.':'');
  if(/расход|трат|бюджет|реклам|продвижен/.test(q))return spendingAnswer(d);
  if(/денег|деньг|доход|прибыл|выручк|финанс/.test(q))return moneyAnswer(d);
  if(/продаж|клиент|покупк|заявк/.test(q))return salesAnswer(d);
