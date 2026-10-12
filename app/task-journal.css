@@ -52,7 +52,9 @@
 .dm-journal-group h3{font-size:12px;letter-spacing:.02em;font-weight:500;color:#c2d8e9;margin:0}
 .dm-journal-personal{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;padding:9px 10px 9px 13px;border:1px solid rgba(159,190,213,.25);background:rgba(93,131,162,.09);border-radius:12px;font-size:13px;line-height:1.4}
 .dm-journal-personal span{min-width:0;overflow-wrap:anywhere}
-.dm-journal-personal button{flex:none;width:32px;height:32px;border:1px solid rgba(163,200,225,.46);background:#192b39;color:#d5edf8;border-radius:50%;font-size:16px}
+.dm-journal-personal-actions{display:flex;align-items:center;gap:6px;flex:none}
+.dm-journal-personal-actions button{flex:none;width:32px;height:32px;border:1px solid rgba(163,200,225,.46);background:#192b39;color:#d5edf8;border-radius:50%;font-size:16px}
+.dm-journal-personal-actions [data-journal-sale]{width:auto;max-width:110px;min-height:32px;padding:5px 8px;border-radius:10px;font-size:10px;white-space:normal;line-height:1.15}
 .dm-journal-hint{margin:16px 0 3px;color:#98b2c7;font-size:11px;line-height:1.5}
 .dm-journal-timestamp{display:block;font-size:10px;color:#9ab6cd;margin-top:8px}
 .dm-journal-entry + .dm-journal-entry{margin-top:10px}
