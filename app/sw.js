@@ -1,9 +1,9 @@
 /* App-only service worker: fresh documents, styles and scripts; cached offline assets. */
-const CACHE = 'digital-manager-black-velvet-v666-20261012';
+const CACHE = 'digital-manager-black-velvet-v667-20261012';
 const CACHE_PREFIX = 'digital-manager-black-velvet-';
 const OFFLINE_FILES = [
   './index.html',
-  './style.css?v=621',
+  './style.css?v=622',
   './dock.css?v=297',
   './app.js?v=637',
   './assets/plasma-glass-mark.webp',
@@ -58,7 +58,7 @@ const OFFLINE_FILES = [
   './health-motion.css?v=289',
   './voice-hints.css?v=290',
   './control-dock.css?v=291',
-  './black-velvet-premium.css?v=292',
+  './black-velvet-premium.css?v=293',
   './unified-quiet-glass.css?v=293',
   './card-outline-theme.css?v=336',
   './home-width.css?v=297',
