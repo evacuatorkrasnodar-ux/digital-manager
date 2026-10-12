@@ -130,5 +130,6 @@ function describe(){
   ' варианта для проверки на основе твоих слов: '+x.found.map(i=>i.title).join('; ')+
   '. Это идеи для проверки, а не найденные гарантированные источники заработка.';
 }
-window.DMIdeaExplorer=Object.freeze({explore,getById,describe});
+const categories=Object.freeze(Object.fromEntries([...catalog,...Object.values(starter)].map(x=>[x.id,x.kind])));
+window.DMIdeaExplorer=Object.freeze({explore,getById,describe,categoryFor:id=>categories[id]||null});
 })();
