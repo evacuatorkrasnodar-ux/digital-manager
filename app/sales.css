@@ -56,7 +56,7 @@
 .dm-sales-draft-inner header strong{font-size:15px}
 .dm-sales-draft-inner header button{width:34px;height:34px;border-radius:50%;border:1px solid #627e96;background:#142535;color:#e4f3ff;font-size:20px}
 .dm-sales-draft-inner p{font-size:11px;color:#a9c7dc;margin:0}
-.dm-sales-draft-inner textarea{min-width:0;box-sizing:border-box;width:100%;padding:11px;background:#0b1824;color:#e8f4fd;border:1px solid #63809a;border-radius:11px;font:13px/1.6 inherit;resize:vertical}
+.dm-sales-draft-inner textarea{min-width:0;box-sizing:border-box;width:100%;padding:11px;background:#0b1824;color:#e8f4fd;border:1px solid #63809a;border-radius:11px;font:inherit;font-size:13px;line-height:1.6;resize:vertical}
 .dm-sales-draft-inner>button{padding:12px;background:#bdd8e9;border:0;border-radius:10px;color:#102231}
 .dm-sales-draft-inner small{font-size:11px;color:#acc7d9}
 @media(max-width:360px){.dm-sales-section{padding:12px 10px}.dm-sales-metrics{gap:4px}.dm-sales-metric{padding:10px 5px}.dm-sales-step{padding:9px 2px}.dm-sales-client-top{flex-wrap:wrap}}
