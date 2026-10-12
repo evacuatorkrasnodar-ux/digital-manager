@@ -200,17 +200,17 @@ function render(){
  stages.map((s,i)=>'<div class="dm-sales-step"><span>'+statuses[s]+'</span><strong>'+tally(s)+'</strong></div>').join('')+'</div><small class="dm-sales-hint">Здесь показано, на каком этапе сейчас ваши записи, а не количество всех прошлых переходов.</small></section>'+
  '<section class="dm-sales-section"><h2>Откуда приходят</h2>'+(srcRows.length?'<div class="dm-sales-sources">'+srcRows.map(x=>'<div><span>'+esc(x.name)+'</span><strong>'+x.count+'</strong></div>').join('')+'</div>':'<p class="dm-sales-muted">Пока неизвестно. Источник можно указать, когда добавляешь обращение.</p>')+'</section>'+
  '<section class="dm-sales-section"><h2>Кому уделить внимание</h2><p class="dm-sales-muted">«Напомнить» добавляет дело на завтра. Само сообщение клиенту пока не отправляется.</p>'+
- (active.length?'<div class="dm-sales-clients">'+active.slice(0,25).map(x=>'<article class="dm-sales-client"><div class="dm-sales-client-top"><div><strong>'+esc(x.person)+'</strong><p>'+esc(x.title)+' · '+esc(x.source)+'</p></div><select data-sale-stage="'+esc(x.id)+'" aria-label="Состояние обращения: '+esc(x.person)+'">'+Object.entries(statuses).map(([k,v])=>'<option value="'+k+'"'+(k===x.stage?' selected':'')+'>'+v+'</option>').join('')+'</select></div><div class="dm-sales-client-actions">'+
+ (active.length?'<div class="dm-sales-clients">'+active.slice(0,25).map(x=>'<article class="dm-sales-client" data-sale-client-id="'+esc(x.id)+'"><div class="dm-sales-client-top"><div><strong>'+esc(x.person)+'</strong><p>'+esc(x.title)+' · '+esc(x.source)+'</p></div><select data-sale-stage="'+esc(x.id)+'" aria-label="Состояние обращения: '+esc(x.person)+'">'+Object.entries(statuses).map(([k,v])=>'<option value="'+k+'"'+(k===x.stage?' selected':'')+'>'+v+'</option>').join('')+'</select></div><div class="dm-sales-client-actions">'+
  [['remind','Напомнить'],['reply','Ответить'],['task','Создать дело'],['offer','Предложение']].map(([key,label])=>{
  const exist=(key==='remind'||key==='task')&&(window.DMTaskJournal?.forSale?.(x.id)||[]).some(t=>t.kind===(key==='remind'?'remind':'reply'));
  return '<button type="button" data-sale-action="'+key+'" data-sale-id="'+esc(x.id)+'">'+(exist?'В моих делах ✓':label)+'</button>';
 }).join('')+
  '</div>'+followupLine(x.id)+'<div class="dm-sales-result-actions"><button type="button" data-sale-outcome="won" data-sale-id="'+esc(x.id)+'">✓ Купил</button><button type="button" data-sale-outcome="lost" data-sale-id="'+esc(x.id)+'">Не сложилось</button></div></article>').join('')+'</div>':'<p class="dm-sales-muted">Сейчас нет обращений, которые ждут продолжения.</p>')+'</section>'+
  '<section class="dm-sales-section"><h2>Кто уже купил</h2>'+
- (records.some(x=>x.stage==='won')?'<div class="dm-sales-clients">'+records.filter(x=>x.stage==='won').slice(0,20).map(x=>'<article class="dm-sales-client"><div class="dm-sales-client-top"><div><strong>'+esc(x.person)+'</strong><p>'+esc(x.title)+' · '+esc(x.source)+' · '+(Number(x.amount)>0?rub(x.amount):'Сумма ещё неизвестна')+'</p></div></div><div class="dm-sales-result-actions"><button type="button" data-sale-outcome="won" data-sale-id="'+esc(x.id)+'">Изменить сумму</button><button type="button" data-sale-reopen="'+esc(x.id)+'">Вернуть в работу</button></div></article>').join('')+'</div>':'<p class="dm-sales-muted">Покупки появятся здесь, когда отметите, что клиент купил.</p>')+'</section>'+
+ (records.some(x=>x.stage==='won')?'<div class="dm-sales-clients">'+records.filter(x=>x.stage==='won').slice(0,20).map(x=>'<article class="dm-sales-client" data-sale-client-id="'+esc(x.id)+'"><div class="dm-sales-client-top"><div><strong>'+esc(x.person)+'</strong><p>'+esc(x.title)+' · '+esc(x.source)+' · '+(Number(x.amount)>0?rub(x.amount):'Сумма ещё неизвестна')+'</p></div></div><div class="dm-sales-result-actions"><button type="button" data-sale-outcome="won" data-sale-id="'+esc(x.id)+'">Изменить сумму</button><button type="button" data-sale-reopen="'+esc(x.id)+'">Вернуть в работу</button></div></article>').join('')+'</div>':'<p class="dm-sales-muted">Покупки появятся здесь, когда отметите, что клиент купил.</p>')+'</section>'+
  '<section class="dm-sales-section"><h2>Где не получилось</h2><p class="dm-sales-muted">'+(lost.length?'Отмечено как «Не сложилось»: '+lost.length+'.':'Пока нет записей о потерянных продажах.')+'</p>'+
  (lostRows.length?'<div class="dm-sales-sources">'+lostRows.map(([name,count])=>'<div><span>'+esc(name)+'</span><strong>'+count+'</strong></div>').join('')+'</div>':'')+
- (lost.length?'<div class="dm-sales-loss">'+lost.slice(0,12).map(x=>'<div class="dm-sales-loss-entry"><label>'+esc(x.person)+'<select data-sale-reason="'+esc(x.id)+'" aria-label="Почему не получилось с '+esc(x.person)+'">'+options(reasons,x.lossReason||'Не знаем')+'</select></label><button type="button" data-sale-reopen="'+esc(x.id)+'">Вернуть в работу</button></div>').join('')+'</div>':'')+'</section>'+
+ (lost.length?'<div class="dm-sales-loss">'+lost.slice(0,12).map(x=>'<div class="dm-sales-loss-entry" data-sale-client-id="'+esc(x.id)+'"><label>'+esc(x.person)+'<select data-sale-reason="'+esc(x.id)+'" aria-label="Почему не получилось с '+esc(x.person)+'">'+options(reasons,x.lossReason||'Не знаем')+'</select></label><button type="button" data-sale-reopen="'+esc(x.id)+'">Вернуть в работу</button></div>').join('')+'</div>':'')+'</section>'+
  '<section class="dm-sales-section dm-sales-insight"><span>МНЕНИЕ УПРАВЛЯЮЩЕГО · ПО ЗАПИСЯМ</span><h2>Что я заметил</h2><p>'+insight+'</p><small>Это подсказка по введённым данным, а не анализ подключённой рекламы или банков.</small></section>'+
  '<section class="dm-sales-section"><h2>Продажи и деньги</h2><strong class="dm-sales-money">'+rub(totalWon())+'</strong><p class="dm-sales-muted">Сумма покупок, которые вы отметили и для которых указали стоимость. Неизвестные суммы считаются нулём. С банковскими поступлениями пока не сверяется.</p>'+
  (legacy.length?'<details class="dm-sales-legacy"><summary>Ранее добавленные заказы ('+legacy.length+')</summary><p>Эти записи сохранены в старом разделе, но у них нет дат и источников. Поэтому мы не включаем их в показатели за сегодня.</p>'+legacy.map(x=>'<div><span>'+esc(x.title)+'</span><strong>'+rub(x.amount)+'</strong></div>').join('')+'</details>':'')+'</section>'+
@@ -338,8 +338,14 @@ function close(){
  if(target)target.focus({preventScroll:true});
 }
 function hide(){if(screen){screen.hidden=true;if(pictureOpen)closePicture()}}
+function openClient(id){
+ open();
+ if(typeof id!=='string')return;
+ const target=[...screen.querySelectorAll('[data-sale-client-id]')].find(el=>el.dataset.saleClientId===id);
+ if(target){target.scrollIntoView({block:'center',behavior:'instant'});target.focus?.({preventScroll:true})}
+}
 function openPicture(){open();showPicture()}
-window.DMSalesScreen=Object.freeze({open,openPicture,close,hide,getInsight,getTotals:totals,getBusinessSummary:()=>({salesRevenue:totalWon(),promotionExpenses:promotionTotal(),source:'manual-local-records'})});
+window.DMSalesScreen=Object.freeze({open,openPicture,openClient,close,hide,getInsight,getTotals:totals,getBusinessSummary:()=>({salesRevenue:totalWon(),promotionExpenses:promotionTotal(),source:'manual-local-records'})});
 window.addEventListener('dm:personal-tasks-changed',()=>{
  if(screen&&!screen.hidden&&!pictureOpen)render();
 });
