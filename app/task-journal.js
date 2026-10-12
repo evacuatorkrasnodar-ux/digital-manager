@@ -27,7 +27,13 @@ const taskDay=task=>{
  const tomorrowDate=new Date();tomorrowDate.setDate(tomorrowDate.getDate()+1);
  return due<=today?'today':due===dayString(tomorrowDate)?'tomorrow':'later';
 };
-const save=(key,data)=>{try{localStorage.setItem(key,JSON.stringify(data.slice(0,100)));return true}catch(e){console.warn('Task storage unavailable',e);return false}};
+const announceJournalChange=()=>queueMicrotask(()=>{
+ try{window.dispatchEvent(new CustomEvent('dm:journal-changed'))}catch(_){}
+});
+const save=(key,data)=>{try{
+ localStorage.setItem(key,JSON.stringify(data.slice(0,100)));
+ announceJournalChange();return true
+ }catch(e){console.warn('Task storage unavailable',e);return false}};
 const findAdvice=()=>delegated.find(x=>x.id===ADVICE_ID);
 let lastFocus=null,contactCheck=null,contactFeedback='',transferDraft=null;
 
@@ -154,7 +160,7 @@ function persistHandoff(nextPersonal,nextDelegated){
   localStorage.setItem(PERSONAL_KEY,JSON.stringify(nextPersonal));
   localStorage.setItem(DELEGATED_KEY,JSON.stringify(nextDelegated));
   personal=nextPersonal;delegated=nextDelegated;
-  return true;
+  announceJournalChange();return true;
  }catch(e){
   try{if(oldPersonal===null)localStorage.removeItem(PERSONAL_KEY);else if(oldPersonal!==undefined)localStorage.setItem(PERSONAL_KEY,oldPersonal)}catch(_){}
   try{if(oldDelegated===null)localStorage.removeItem(DELEGATED_KEY);else if(oldDelegated!==undefined)localStorage.setItem(DELEGATED_KEY,oldDelegated)}catch(_){}
@@ -405,8 +411,13 @@ function submitPersonal(form){
  const title=String(data.get('title')||'').trim().slice(0,120);
  const when=String(data.get('when')||'today');
  if(!title||!['today','tomorrow','later'].includes(when))return;
- personal.unshift({id:'personal-'+Date.now()+'-'+Math.random().toString(36).slice(2,9),title,when,dueDate:dueDate(when),status:'open',created:now(),createdMs:Date.now()});
- save(PERSONAL_KEY,personal);show('mine');
+ const entry={id:'personal-'+Date.now()+'-'+Math.random().toString(36).slice(2,9),title,when,dueDate:dueDate(when),status:'open',created:now(),createdMs:Date.now()};
+ personal.unshift(entry);
+ if(!save(PERSONAL_KEY,personal)){
+  personal.shift();
+  contactFeedback='Не удалось сохранить дело. Проверьте память устройства.';
+ }else contactFeedback='Новое дело записано.';
+ show('mine');
 }
 function movePersonal(id,when){
  if(!['today','tomorrow','later'].includes(when))return false;
