@@ -15,9 +15,9 @@ function normalise(item){
 function render(){
  if(!section)return;
  const entries=[...signals.values()].sort((a,b)=>b.timestamp-a.timestamp).slice(0,3);
- if(!entries.length){section.remove();section=null;return}
+ const current=entries[0]||null; section.dataset.signal=current?current.type:'idle';
  const titles={decision:'ТРЕБУЕТ РЕШЕНИЯ',opportunity:'ВОЗМОЖНОСТЬ',completed:'Я УЖЕ СДЕЛАЛ'};
- section.innerHTML='<div class="dm-future-title"><span>УПРАВЛЯЮЩИЙ РЯДОМ</span><small>Новые события</small></div>'+entries.map(x=>'<article class="dm-future-card"><div class="dm-future-card-head"><span>'+titles[x.type]+'</span><button type="button" data-future-detail="'+esc(x.id)+'" aria-label="Подробнее: '+esc(x.title)+'">↗</button></div><strong>'+esc(x.title)+'</strong><p>'+esc(x.summary)+'</p><small class="dm-future-caption">Источник: '+esc(x.source)+'</small></article>').join('');
+ section.innerHTML='<div class="dm-future-title"><span>УПРАВЛЯЮЩИЙ РЯДОМ</span><small>Новые события</small></div>'+(current?[current]:[{id:'',type:'idle',title:'Новых событий пока нет',summary:'Когда появятся подтверждённые события, управляющий расскажет о них здесь.',source:'Ожидание данных'}]).map(x=>'<article class="dm-future-card"><div class="dm-future-card-head"><span>'+(titles[x.type]||'НА СВЯЗИ')+'</span><button type="button" data-future-detail="'+esc(x.id)+'" aria-label="Подробнее: '+esc(x.title)+'">↗</button></div><strong>'+esc(x.title)+'</strong><p>'+esc(x.summary)+'</p><small class="dm-future-caption">Источник: '+esc(x.source)+'</small></article>').join('');
 }
 function ensure(){
  if(section)return;
@@ -47,11 +47,12 @@ function publish(raw){
 }
 function dismiss(id){
  if(!signals.delete(id))return;
- if(section)render();
+ render();
 }
 // Events are an in-app display channel, not proof of external API execution.
 // Integrations must verify sources and permissions before publishing here.
 function init(){
+ ensure();render();
  window.addEventListener('dm:assistant-signal',e=>publish(e.detail));
  window.addEventListener('dm:assistant-dismiss',e=>dismiss(e.detail?.id));
  window.DMAssistantSignals=Object.freeze({publish,dismiss});
