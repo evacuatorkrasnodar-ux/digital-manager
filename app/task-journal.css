@@ -1,5 +1,5 @@
 /* Task journal only: no modification of shared cards, plasma, dock, or home geometry. */
-.dm-journal-entry-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:12px 0}
+.dm-journal-entry-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:12px 0}
 .dm-journal-entry-links button{flex:1;min-width:0;display:flex;justify-content:space-between;align-items:center;gap:5px;padding:11px 8px;border:1px solid rgba(168,193,212,.3);border-radius:13px;background:linear-gradient(135deg,#15202b,#080d15);color:#e2edf6;font-size:11px;text-align:left;overflow-wrap:anywhere}
 .dm-journal-overlay[hidden]{display:none!important}
 .dm-journal-overlay{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.82);display:flex;justify-content:center;align-items:flex-start;overflow-y:auto;padding:calc(20px + env(safe-area-inset-top,0px)) 12px 25px}
