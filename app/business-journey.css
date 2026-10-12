@@ -90,3 +90,21 @@
 .dm-journey-demand-history li div small{display:block;color:#8daec4;font-size:9px}
 .dm-journey-demand-history li p{margin:4px 0;color:#b6d2e5;overflow-wrap:anywhere}
 .dm-journey-demand-history li button{position:absolute;right:0;top:0;width:26px;height:26px;border:1px solid rgba(151,193,225,.39);border-radius:50%;background:#10283c;color:#cfe9fb;font-size:16px}
+
+/* Opportunity explorer for a person without a business idea */
+.dm-journey-ideas{display:grid;gap:12px;padding:12px;border:1px solid rgba(161,199,234,.35);border-radius:15px;background:radial-gradient(ellipse at 60% 0%,rgba(50,106,174,.22),transparent 65%),rgba(8,20,37,.5)}
+.dm-journey-ideas h3{font-size:17px;line-height:1.35;color:#eaf6ff;margin:0;font-weight:550}
+.dm-journey-ideas>p{font-size:11px;line-height:1.6;margin:0;color:#b6d2e5}
+.dm-journey-idea{display:grid;gap:9px;min-width:0;padding:12px;border-radius:13px;border:1px solid rgba(154,191,226,.27);background:linear-gradient(120deg,rgba(39,73,115,.21),rgba(8,19,32,.8))}
+.dm-journey-idea>small{font-size:9px;letter-spacing:.12em;color:#9bbcd8}
+.dm-journey-idea>strong{font-size:13px;line-height:1.45;font-weight:560;color:#ebf8ff;overflow-wrap:anywhere}
+.dm-journey-idea>p{font-size:11px;line-height:1.65;color:#bed6e8;margin:0}
+.dm-journey-idea>p b{font-weight:560;color:#d2e8f7}
+.dm-journey-idea>button{justify-self:start;padding:10px 12px;border:1px solid rgba(181,221,248,.68);border-radius:10px;background:linear-gradient(130deg,#c6e5f7,#a4cde8);font-size:11px;color:#0d2b3d;font-weight:550}
+.dm-journey-idea>details{padding:9px;border-radius:10px;border:1px solid rgba(159,199,227,.2);background:rgba(16,36,57,.42)}
+.dm-journey-idea>details summary{cursor:pointer;font-size:11px;color:#d1e8fa}
+.dm-journey-idea>details p{font-size:11px;line-height:1.55;color:#b9d5e9;margin:10px 0 0}
+.dm-journey-ideas-refine{justify-self:start;background:transparent;border:0;border-bottom:1px dashed rgba(171,202,227,.55);color:#bedbf1;padding:5px;font-size:11px}
+.dm-journey-choice-note{color:#aac9df!important;font-size:11px!important;line-height:1.6!important}
+.dm-journey-choice-note button{font-size:11px;padding:4px 7px;border:1px solid rgba(141,188,224,.29);border-radius:9px;background:#122b42;color:#d9edfb}
+.dm-journey-ideas [role="alert"],.dm-journey-choice-note [role="alert"]{font-size:10px;line-height:1.5;color:#f5d2c1}
