@@ -657,12 +657,14 @@
       content="<div class=\"voice-pref\"><div class=\"voice-setting-top\"><span class=\"mg-icon mg-blue\"><svg class=\"ico\"><use href=\"#ic-grid\"/></svg></span><span class=\"mg-copy\"><strong>Показывать док</strong><small>Постоянная панель внизу экрана</small></span><label class=\"voice-switch\"><input id=\"voiceDock\" type=\"checkbox\" aria-label=\"Показывать док\"><i></i></label></div><div class=\"voice-mock voice-mock-dock-scene\" role=\"img\" aria-label=\"Айфон с настоящим доком главного экрана\"><div class=\"voice-iphone-device\"><div class=\"voice-iphone-screen\"><div class=\"voice-iphone-status\" aria-hidden=\"true\">9:41</div><div class=\"voice-iphone-island\" aria-hidden=\"true\"></div><div class=\"voice-iphone-title\" aria-hidden=\"true\">ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</div><div class=\"voice-iphone-dock-mount\" id=\"mgDockPreviewMount\"></div></div></div></div><p class=\"voice-caption\">Док обеспечивает быстрый доступ к приложению. При выключении останется плазма помощника с быстрыми действиями.</p></div><div class=\"voice-setting-top voice-simple\"><span class=\"mg-icon mg-blue\"><svg class=\"ico\"><use href=\"#ic-bars\"/></svg></span><span class=\"mg-copy\"><strong>Голосовая активация</strong><small>Распознавание фразы — в разработке</small></span><span class=\"voice-coming\">Скоро</span></div><div class=\"voice-setting-top voice-simple\"><span class=\"mg-icon mg-purple\"><svg class=\"ico\"><use href=\"#ic-spark\"/></svg></span><span class=\"mg-copy\"><strong>Голосовые ответы</strong><small>Озвучивание после подключения голоса</small></span><span class=\"voice-coming\">Скоро</span></div><p class=\"mg-disclaimer\">Микрофон не включается автоматически. Голосовая активация потребует разрешения на доступ и работающего распознавания.</p>";
     }else if(page==='autopilot'){
       const choices=[['advertising','Реклама до 5 000 ₽'],['tools','Создание рабочих инструментов'],['prices','Изменение цен'],['spending','Новые расходы']];
-      content='<div class="mg-auto-intro">✦ &nbsp; Насколько самостоятельно мне работать?</div>'+
-        '<p class="mg-explain">Ты не отдаёшь контроль. Ты задаёшь границы, внутри которых я могу действовать сам.</p>'+
+      content='<div class="mg-auto-intro">✦ &nbsp; Ты задаёшь направление. Я беру подготовку на себя.</div>'+
+        '<p class="mg-explain">Первое реальное действие — сам замечаю новые обращения из «Продаж» и готовлю ответы. Только по твоему разрешению, только на этом устройстве. Никаких отправок и трат.</p>'+
+        '<button type="button" id="mgOpenInitiative" class="mg-unified-item mg-init-active-link"><span class="mg-unified-icon"><svg class="ico" aria-hidden="true"><use href="#ic-spark"/></svg></span><span class="mg-copy"><strong>Посмотреть, что я делаю</strong><small>Включить или остановить подготовку · результаты работы</small></span><span class="mg-chevron" aria-hidden="true"><svg class="ico"><use href="#ic-chevron"/></svg></span></button>'+
+        '<details class="mg-init-future"><summary>Будущая самостоятельность и навыки</summary>'+
+        '<p class="mg-disclaimer">Настройки ниже пока только прототип. Они не дают разрешения на внешние действия. Для связи с сервисами потребуются отдельные подключения и ограничения.</p>'+
         '<label class="mg-field">Уровень самостоятельности<input id="mgAutonomy" type="range" min="0" max="2" step="1" value="'+Number(mgData.autonomy)+'"><span id="mgAutonomyLabel"></span></label>'+
-        '<h2>Правила</h2>'+choices.map(([key,label])=>'<label class="mg-choice">'+label+'<input type="checkbox" data-mg-rule="'+key+'" '+(mgData.rules[key]?'checked':'')+'></label>').join('')+
-        '<p class="mg-disclaimer">Настройки — прототип. Они пока не разрешают реальных платежей, отправки сообщений или других действий.</p>';
-      content+=mgSkillsPanels();
+        '<h2>Правила на будущее</h2>'+choices.map(([key,label])=>'<label class="mg-choice">'+label+'<input type="checkbox" data-mg-rule="'+key+'" '+(mgData.rules[key]?'checked':'')+'></label>').join('')+
+        mgSkillsPanels()+'</details>';
     }else if(page==='connections'){
       content='<p class="mg-explain">'+mgInfo[page]+'</p><button type="button" class="mg-unified-item" id="mgOpenDigitalTrace"><span class="mg-unified-icon"><svg class="ico"><use href="#ic-bars"/></svg></span><span class="mg-copy"><strong>Цифровой след</strong><small>Источники, события и выводы управляющего</small></span><span class="mg-chevron"><svg class="ico"><use href="#ic-chevron"/></svg></span></button><p class="mg-disclaimer">Реальные источники пока не подключены. Показатели не имитируются.</p>';
     }else{content='<p class="mg-explain">'+mgInfo[page]+'</p><p class="mg-disclaimer">Этот раздел готовится. Подключённые данные и действия не имитируются.</p>';}
@@ -764,6 +766,7 @@
   }));
   byId('mgDetail').addEventListener('click',event=>{
     if(event.target.closest('#mgOpenDigitalTrace')){window.DMDigitalTrace?.open('management');return;}
+    if(event.target.closest('#mgOpenInitiative')){window.DMInitiative?.open?.();return;}
     const link=event.target.closest('[data-mg-open]');if(link)mgSettingsPage(link.dataset.mgOpen);
   });
   byId('mgDetail').addEventListener('change',event=>{
