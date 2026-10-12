@@ -192,8 +192,9 @@ function consentMarkup(){
 function statusMarkup(){
  const data=summary(),all=currentItems(),insight=window.DMSalesScreen?.getInsight?.()||null;
  const brain=window.DMBusinessBrain?.brief?.()||null,priority=brain?.priority||null;
+ const workSummary=window.DMBusinessBrain?.getWorkSummary?.()||'';
  let main='<section class="dm-init-summary"><span class="dm-init-eyebrow">МОЙ ХОД · ПО РЕАЛЬНЫМ ЗАПИСЯМ</span><h3>'+esc(headline())+'</h3>'+
-  '<p>'+(all.length?'Я сам подготовил черновики по вашим обращениям. Список ниже — только текущие клиенты.': 'Как появятся обращения в «Продажах», я подготовлю ответы без отдельной команды.')+'</p>'+
+  '<p>'+(all.length?'Я сам подготовил черновики по вашим обращениям. Список ниже — только текущие клиенты.': 'Как появятся обращения в «Продажах», я подготовлю ответы без отдельной команды.')+(workSummary?' '+esc(workSummary):'')+'</p>'+
   '<div class="dm-init-metrics"><div><strong>'+data.prepared+'</strong><small>Черновиков по клиентам</small></div><div><strong>'+data.awaitingReview+'</strong><small>Нужно посмотреть</small></div><div><strong>'+data.reviewed+'</strong><small>Просмотрено</small></div></div>'+
   '<button class="dm-init-pause" type="button" data-init-pause>Приостановить подготовку</button></section>';
  if(priority)main+='<section class="dm-init-insight"><small>Я заметил · по твоим записям</small><p>'+esc(priority.text)+'</p><span>'+esc(priority.next)+' Никаких внешних действий пока не было.</span></section>';
@@ -332,6 +333,9 @@ function init(){
  });
  window.addEventListener('dm:business-context-changed',()=>{
   if(root&&!root.hidden&&view!=='editor')render();
+ });
+ window.addEventListener('dm:journal-changed',()=>{
+  if(root&&!root.hidden&&view==='board')render();
  });
  window.addEventListener('dm:sales-changed',scan);
  window.addEventListener('pageshow',scan);
