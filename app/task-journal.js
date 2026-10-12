@@ -130,7 +130,7 @@ function personalList(){
  groups.map(([key,label])=>{
   const tasks=active.filter(t=>taskDay(t)===key);
   return '<section class="dm-journal-group"><h3>'+label+(key==='today'?' <small>и просроченные</small>':'')+'</h3>'+
-    (tasks.length?tasks.map(t=>'<article class="dm-journal-personal"><span>'+esc(t.title)+(t.dueDate&&t.dueDate<dayString(Date.now())?' <small>· Давно ждёт</small>':'')+'</span><div class="dm-journal-personal-actions">'+(t.source==='sales'&&t.saleId?'<button type="button" data-journal-sale="'+esc(t.saleId)+'" aria-label="Открыть клиента из продаж">К клиенту ↗</button>':'')+'<button type="button" data-personal-done="'+esc(t.id)+'" aria-label="Отметить выполненным: '+esc(t.title)+'">✓</button></div></article>').join(''):'<p class="dm-journal-empty">Пока пусто</p>')+
+    (tasks.length?tasks.map(t=>'<article class="dm-journal-personal"><span>'+esc(t.title)+(t.dueDate&&t.dueDate<dayString(Date.now())?' <small>· Давно ждёт</small>':'')+'</span><div class="dm-journal-personal-actions"><select data-personal-when="'+esc(t.id)+'" aria-label="Перенести дело: '+esc(t.title)+'">'+[['today','Сегодня'],['tomorrow','Завтра'],['later','Позже']].map(([value,label])=>'<option value="'+value+'"'+(taskDay(t)===value?' selected':'')+'>'+label+'</option>').join('')+'</select>'+(t.source==='sales'&&t.saleId?'<button type="button" data-journal-sale="'+esc(t.saleId)+'" aria-label="Открыть клиента из продаж">К клиенту ↗</button>':'')+'<button type="button" data-personal-done="'+esc(t.id)+'" aria-label="Отметить выполненным: '+esc(t.title)+'">✓</button></div></article>').join(''):'<p class="dm-journal-empty">Пока пусто</p>')+
    '</section>';
  }).join('')+
  '<p class="dm-journal-hint">Дела сохраняются на этом устройстве. Завтрашние дела появятся в «Сегодня» в нужный день. Уведомлений на телефон пока нет. Поручения управляющему — отдельно.</p>';
@@ -146,6 +146,10 @@ function delegatedList(){
 function historyList(){
  const entries=[];
  personal.filter(t=>t.status==='done').forEach(t=>entries.push({stamp:t.completedMs||0,kind:'mine',title:t.title,info:'Вы отметили дело выполненным',date:t.completed||''}));
+ personal.forEach(t=>(Array.isArray(t.moveLog)?t.moveLog:[]).forEach(m=>{
+  const label={today:'на сегодня',tomorrow:'на завтра',later:'на потом'}[m.to]||'';
+  entries.push({stamp:m.ms||t.createdMs||0,kind:'mine',title:t.title,info:'Вы перенесли дело '+label,date:m.at||''});
+ }));
  delegated.forEach(t=>{
   (Array.isArray(t.log)?t.log:[]).forEach((l,i)=>entries.push({stamp:(t.reviewedMs&&i>0?t.reviewedMs:t.createdMs)||0,kind:'delegated',title:t.title,info:l.message,date:l.at}));
  });
@@ -184,6 +188,29 @@ function submitPersonal(form){
  if(!title||!['today','tomorrow','later'].includes(when))return;
  personal.unshift({id:'personal-'+Date.now()+'-'+Math.random().toString(36).slice(2,9),title,when,dueDate:dueDate(when),status:'open',created:now(),createdMs:Date.now()});
  save(PERSONAL_KEY,personal);show('mine');
+}
+function movePersonal(id,when){
+ if(!['today','tomorrow','later'].includes(when))return false;
+ const task=personal.find(t=>t.id===id&&t.status!=='done');
+ if(!task)return false;
+ const oldWhen=task.when,oldDate=task.dueDate,previousChanges=task.moveLog;
+ const prevDay=taskDay(task);
+ if(prevDay===when)return true;
+ task.when=when;
+ task.dueDate=dueDate(when);
+ task.moveLog=(Array.isArray(task.moveLog)?task.moveLog:[]).concat([{
+  at:now(),ms:Date.now(),from:prevDay,to:when
+ }]).slice(-12);
+ if(!save(PERSONAL_KEY,personal)){
+  task.when=oldWhen;task.dueDate=oldDate;task.moveLog=previousChanges;
+  return false;
+ }
+ if(task.source==='sales')try{
+  window.dispatchEvent(new CustomEvent('dm:personal-tasks-changed',{detail:{saleId:task.saleId}}))
+ }catch(_){}
+ contactFeedback='Дело перенесено: '+({today:'на сегодня',tomorrow:'на завтра',later:'на потом'}[when])+'.';
+ show('mine');
+ return true;
 }
 function completePersonal(id){
  const task=personal.find(t=>t.id===id&&t.status!=='done');if(!task)return;
@@ -257,6 +284,18 @@ function init(){
    close();
    window.DMSalesScreen?.openClient?.(saleId);
   }else if(b.dataset.personalDone)completePersonal(b.dataset.personalDone);
+ });
+ document.addEventListener('change',e=>{
+  const target=e.target;
+  if(target?.dataset?.personalWhen){
+   const t=personal.find(x=>x.id===target.dataset.personalWhen&&x.status!=='done');
+   if(!t)return;
+   if(!movePersonal(t.id,target.value)){
+    target.value=taskDay(t);
+    contactFeedback='Не удалось сохранить перенос. Попробуйте ещё раз.';
+    show('mine');
+   }
+  }
  });
  document.addEventListener('submit',e=>{
   if(e.target.id==='dmPersonalTaskForm'){e.preventDefault();submitPersonal(e.target)}
