@@ -48,6 +48,7 @@
   }
   function setTab(next){
     hideBrandCard();hideProfileCard();tab=next;
+    const traceScreen=byId('digitalTraceScreen');if(traceScreen)traceScreen.hidden=true;
     dmSyncQuickHome();
     if(next==='management')mgSettingsPage('home');
     ['home','assistant','management'].forEach(x=>{
@@ -661,6 +662,8 @@
         '<h2>Правила</h2>'+choices.map(([key,label])=>'<label class="mg-choice">'+label+'<input type="checkbox" data-mg-rule="'+key+'" '+(mgData.rules[key]?'checked':'')+'></label>').join('')+
         '<p class="mg-disclaimer">Настройки — прототип. Они пока не разрешают реальных платежей, отправки сообщений или других действий.</p>';
       content+=mgSkillsPanels();
+    }else if(page==='connections'){
+      content='<p class="mg-explain">'+mgInfo[page]+'</p><button type="button" class="mg-unified-item" id="mgOpenDigitalTrace"><span class="mg-unified-icon"><svg class="ico"><use href="#ic-bars"/></svg></span><span class="mg-copy"><strong>Цифровой след</strong><small>Источники, события и выводы управляющего</small></span><span class="mg-chevron"><svg class="ico"><use href="#ic-chevron"/></svg></span></button><p class="mg-disclaimer">Реальные источники пока не подключены. Показатели не имитируются.</p>';
     }else{content='<p class="mg-explain">'+mgInfo[page]+'</p><p class="mg-disclaimer">Этот раздел готовится. Подключённые данные и действия не имитируются.</p>';}
     byId('mgDetail').innerHTML=content;
     if(page==='workshop')window.DMWorkshop?.mount(byId('dmWorkshopMount'));
@@ -758,7 +761,10 @@
     requestAnimationFrame(updateCardLaserPalette);
     if(!['clients','sales','money'].includes(el.dataset.mgCard))notify('Выбор сохранён. Эта постоянная карточка появится на Главной после подключения раздела.');
   }));
-  byId('mgDetail').addEventListener('click',event=>{const link=event.target.closest('[data-mg-open]');if(link)mgSettingsPage(link.dataset.mgOpen);});
+  byId('mgDetail').addEventListener('click',event=>{
+    if(event.target.closest('#mgOpenDigitalTrace')){window.DMDigitalTrace?.open('management');return;}
+    const link=event.target.closest('[data-mg-open]');if(link)mgSettingsPage(link.dataset.mgOpen);
+  });
   byId('mgDetail').addEventListener('change',event=>{
     const el=event.target;
     if(el.name==='dmPerformanceMode'){
