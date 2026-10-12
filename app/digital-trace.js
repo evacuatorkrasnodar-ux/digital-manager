@@ -36,7 +36,7 @@ function compare(){
 function options(obj){return Object.entries(obj).map(([k,v])=>'<option value="'+E(k)+'">'+E(v)+'</option>').join('')}
 function viewMarkup(){
  const findings=compare(),s=store.sources,m=store.metrics;
- const intro='<div class="dm-trace-summary"><span>ЦИФРОВОЙ СЛЕД · МОЯ КАРТИНА</span><h2>'+(s.length?'Смотрю на факты, а не догадки':'Начнём с настоящих данных')+'</h2><p>Добавленные вручную показатели отмечены как ручные. Автоматических подключений пока нет.</p><div class="dm-trace-kpis"><div><strong>'+s.length+'</strong><small>Источников</small></div><div><strong>'+m.length+'</strong><small>Замеров</small></div><div><strong>'+findings.length+'</strong><small>Наблюдений</small></div></div></div>';
+ const intro='<div class="dm-trace-summary"><span>ЦИФРОВОЙ СЛЕД · МОЯ КАРТИНА</span><h2>'+(s.length?'Смотрю на факты, а не догадки':'Начнём с настоящих данных')+'</h2><p>Добавленные вручную показатели отмечены как ручные. Автоматических подключений пока нет.</p><button type="button" class="dm-trace-secondary" data-trace-connections>Перейти к связям ↗</button><div class="dm-trace-kpis"><div><strong>'+s.length+'</strong><small>Источников</small></div><div><strong>'+m.length+'</strong><small>Замеров</small></div><div><strong>'+findings.length+'</strong><small>Наблюдений</small></div></div></div>';
  const nav='<div class="dm-trace-tabs" role="group" aria-label="Разделы Цифрового следа">'+[['overview','Картина'],['sources','Источники'],['findings','Выводы'],['history','История']].map(([k,n])=>'<button type="button" data-trace-tab="'+k+'" aria-pressed="'+(section===k)+'">'+n+'</button>').join('')+'</div>';
  let content='';
  if(section==='overview'){
@@ -73,6 +73,7 @@ function init(){
  $('dmTraceBack')?.addEventListener('click',close);
  screen()?.addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
+  if(b.hasAttribute('data-trace-connections')){if(screen())screen().hidden=true;$('tabManagement')?.click();document.querySelector('[data-mg-open="connections"]')?.click();return;}
   if(b.dataset.traceTab){section=b.dataset.traceTab;render();return;}
   for(const [kind,key] of [['source','sources'],['metric','metrics'],['decision','decisions']]){
    const prop='traceDelete'+kind[0].toUpperCase()+kind.slice(1);
