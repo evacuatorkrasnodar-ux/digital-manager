@@ -21,9 +21,14 @@ function syncRecommendation(){
  card.dataset.taskState=planned?'accepted':'attention';
  const head=card.querySelector('.advice-head'),body=card.querySelector('.advice-body');
  const button=document.getElementById('openAdvice');
- if(head)head.textContent=planned?'Поручение принято':'Есть потенциал для роста в рекламных каналах.';
- if(body)body.textContent=planned?'Проверка рекламных каналов добавлена в план. Внешних действий пока не было.':'Увеличьте бюджет на 20% — прогнозируемый рост выручки до +35% в течение 30 дней.';
- if(button){button.textContent=planned?'Поручения ↗':'Исполнить ↗';button.setAttribute('aria-label',planned?'Посмотреть поручение управляющему':'Создать демонстрационное поручение на проверку');}
+ if(head)head.textContent=task?.status==='reviewed'?'План просмотрен':planned?'Поручение принято':'Есть потенциал для роста в рекламных каналах.';
+ if(body)body.textContent=task?.status==='reviewed'?'План сохранён в истории. Реальная проверка и изменения рекламы не выполнялись.':planned?'Проверка рекламных каналов добавлена в план. Внешних действий пока не было.':'Увеличьте бюджет на 20% — прогнозируемый рост выручки до +35% в течение 30 дней.';
+ if(button){
+  // Keep the approved arrow SVG and button geometry intact.
+  if(!button.firstChild||button.firstChild.nodeType!==3)button.prepend(document.createTextNode(''));
+  button.firstChild.textContent=planned?'Поручения ':'Исполнить ';
+  button.setAttribute('aria-label',planned?'Посмотреть поручение управляющему':'Создать демонстрационное поручение на проверку');
+ }
 }
 function addDelegation(){
  if(!findAdvice()){
