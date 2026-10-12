@@ -1,0 +1,20 @@
+/* Future V5, only new below-shortcuts surfaces. No existing card selectors overwritten. */
+#dmFutureAssistant{display:grid;gap:10px;margin:17px 12px 6px}
+#dmFutureAssistant .dm-future-title{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:0 2px;color:#dbe8f4}
+#dmFutureAssistant .dm-future-title span{font-size:11px;letter-spacing:.11em}
+#dmFutureAssistant .dm-future-title small{font-size:10px;color:#8ca7bc}
+#dmFutureAssistant .dm-future-card{display:grid;gap:7px;padding:15px;border:1px solid rgba(151,178,202,.31);border-radius:19px;background:radial-gradient(ellipse at 95% 0,rgba(117,169,207,.09),transparent 64%),linear-gradient(150deg,#172330,#070b12);box-shadow:inset 0 1px rgba(255,255,255,.045)}
+#dmFutureAssistant .dm-future-card-head{display:flex;align-items:center;justify-content:space-between;gap:9px}
+#dmFutureAssistant .dm-future-card-head span{font-size:10px;letter-spacing:.09em;color:#bfd2e3}
+#dmFutureAssistant .dm-future-card-head button{width:30px;height:30px;border:1px solid rgba(180,205,226,.4);border-radius:50%;background:rgba(142,177,206,.08);color:#e1edf7;font-size:17px}
+#dmFutureAssistant .dm-future-card>strong{font-size:15px;font-weight:530;color:#f3f7fc}
+#dmFutureAssistant .dm-future-card>p{font-size:12px;line-height:1.55;margin:0;color:#b7cada}
+#dmFutureAssistant .dm-future-caption{font-size:10px;color:#8fa9be}
+.dm-future-dialog{width:min(420px,calc(100vw - 28px));max-height:85dvh;overflow:auto;border:1px solid rgba(171,202,227,.43);border-radius:22px;background:linear-gradient(140deg,#182838,#05090e);color:#ecf5fe;padding:0;box-shadow:0 24px 90px #000}
+.dm-future-dialog::backdrop{background:rgba(0,0,0,.78)}
+.dm-future-dialog-inner{padding:20px;display:grid;gap:12px}
+.dm-future-dialog-inner header{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.dm-future-dialog-inner header span{font-size:9px;letter-spacing:.1em;color:#acc6da}
+.dm-future-dialog-inner header button{height:34px;width:34px;border:1px solid #547086;border-radius:50%;background:rgba(135,170,195,.12);color:#edf5fa;font-size:20px}
+.dm-future-dialog-inner h2{font-size:20px;font-weight:540;margin:0}
+.dm-future-dialog-inner p{font-size:12px;line-height:1.6;color:#b8cede}
