@@ -176,7 +176,7 @@ function followupLine(saleId){
  const tasks=window.DMTaskJournal?.forSale?.(saleId)||[];
  if(!tasks.length)return '';
  const byDay={today:'сегодня',tomorrow:'завтра',later:'позже'};
- return '<p class="dm-sales-follow-up">✓ В «Моих делах»: '+tasks.slice(0,2).map(t=>esc(t.kind==='remind'?'связаться':'ответить')+' '+(byDay[t.when]||'позже')).join(', ')+(tasks.length>2?' и ещё '+(tasks.length-2):'')+'</p>';
+ return '<p class="dm-sales-follow-up">✓ '+tasks.slice(0,2).map(t=>t.assigned?'У управляющего: '+esc(t.kind==='remind'?'связаться':'ответить')+' (в очереди)':'В «Моих делах»: '+esc(t.kind==='remind'?'связаться':'ответить')+' '+(byDay[t.when]||'позже')).join(', ')+(tasks.length>2?' и ещё '+(tasks.length-2):'')+'</p>';
 }
 function render(){
  if(!screen)return;
@@ -205,7 +205,8 @@ function render(){
  (active.length?'<div class="dm-sales-clients">'+active.slice(0,25).map(x=>'<article class="dm-sales-client" data-sale-client-id="'+esc(x.id)+'"><div class="dm-sales-client-top"><div><strong>'+esc(x.person)+'</strong><p>'+esc(x.title)+' · '+esc(x.source)+'</p></div><select data-sale-stage="'+esc(x.id)+'" aria-label="Состояние обращения: '+esc(x.person)+'">'+Object.entries(statuses).map(([k,v])=>'<option value="'+k+'"'+(k===x.stage?' selected':'')+'>'+v+'</option>').join('')+'</select></div><div class="dm-sales-client-actions">'+
  [['remind','Напомнить'],['reply','Ответить'],['task','Создать дело'],['offer','Предложение']].map(([key,label])=>{
  const exist=(key==='remind'||key==='task')&&(window.DMTaskJournal?.forSale?.(x.id)||[]).some(t=>t.kind===(key==='remind'?'remind':'reply'));
- return '<button type="button" data-sale-action="'+key+'" data-sale-id="'+esc(x.id)+'">'+(exist?'В моих делах ✓':label)+'</button>';
+ const handed=(key==='remind'||key==='task')&&(window.DMTaskJournal?.forSale?.(x.id)||[]).some(t=>t.kind===(key==='remind'?'remind':'reply')&&t.assigned);
+ return '<button type="button" data-sale-action="'+key+'" data-sale-id="'+esc(x.id)+'">'+(handed?'У управляющего ↗':exist?'В моих делах ✓':label)+'</button>';
 }).join('')+
  '</div>'+followupLine(x.id)+'<div class="dm-sales-result-actions"><button type="button" data-sale-outcome="won" data-sale-id="'+esc(x.id)+'">✓ Купил</button><button type="button" data-sale-outcome="lost" data-sale-id="'+esc(x.id)+'">Не сложилось</button></div></article>').join('')+'</div>':'<p class="dm-sales-muted">Сейчас нет обращений, которые ждут продолжения.</p>')+'</section>'+
  '<section class="dm-sales-section"><h2>Кто уже купил</h2>'+
