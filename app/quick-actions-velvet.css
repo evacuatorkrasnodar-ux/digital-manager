@@ -111,25 +111,26 @@ html.dock-is-hidden #dockQuickActions.dock-quick-actions > button .ico{
   width:20px;
   height:20px;
 }
-/* Extra-compact arc: four existing 44px touch targets curve around the
-   original plasma. The small-screen pair is tangential, not overlapping. */
+/* Plasma-centered, compact semicircle. Coordinates follow a ~67px radius
+   around the true centre of the 118px dock-free launcher (59px from bottom).
+   Keeps all four 44px targets separate and clear of the approved ring. */
 html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenHome{
-  left:-72px;
-  bottom:74px;
+  left:-65px;
+  bottom:53px;
 }
 html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenChat{
-  left:-24px;
-  bottom:118px;
+  left:-25px;
+  bottom:99px;
   animation-delay:.035s;
 }
 html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenAttention{
-  left:24px;
-  bottom:118px;
+  left:25px;
+  bottom:99px;
   animation-delay:.07s;
 }
 html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenManage{
-  left:72px;
-  bottom:74px;
+  left:65px;
+  bottom:53px;
   animation-delay:.105s;
 }
 html.dock-is-hidden #dockQuickActions.dock-quick-actions > button:active{
@@ -140,13 +141,26 @@ html.dock-is-hidden #dockQuickActions.dock-quick-actions > button:active{
   to{opacity:1;transform:translate(-50%,0) scale(1)}
 }
 @media(max-width:340px){
-  html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenHome{left:-66px;bottom:71px}
-  html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenChat{left:-22px;bottom:112px}
-  html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenAttention{left:22px;bottom:112px}
-  html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenManage{left:66px;bottom:71px}
+  html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenHome{left:-61px;bottom:51px}
+  html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenChat{left:-24px;bottom:95px}
+  html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenAttention{left:24px;bottom:95px}
+  html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenManage{left:61px;bottom:51px}
 }
 @media(prefers-reduced-motion:reduce){
   html.dock-is-hidden #dockQuickActions.dock-quick-actions > button{
     animation:none;
   }
+}
+/* While the plasma orbit is open, don't display the four Home shortcut
+   cards behind its navigation controls. They remain laid out and functional
+   again immediately when the short-lived orbit closes. */
+html.dock-is-hidden #homeScreen .shortcuts{
+  transition:opacity .16s ease;
+}
+html.dock-is-hidden.dm-plasma-orbit-open #homeScreen .shortcuts{
+  opacity:0;
+  pointer-events:none;
+}
+@media(prefers-reduced-motion:reduce){
+  html.dock-is-hidden #homeScreen .shortcuts{transition:none}
 }
