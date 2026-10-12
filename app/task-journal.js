@@ -242,7 +242,7 @@ function draftUpdate(id,makeChange){
   return false;
  }
  delegated=newer;
- show('delegated');return true;
+ show('delegated',id);return true;
 }
 function prepareSolution(id,refresh=false){
  const item=delegated.find(t=>t.id===id&&t.origin==='owner-task'&&t.status==='queued');
@@ -366,7 +366,7 @@ function historyList(){
  return entries.length?entries.map(t=>'<article class="dm-journal-entry"><span>'+(t.kind==='mine'?'МОЁ ДЕЛО':'ПОРУЧЕНИЕ')+'</span><h3>'+esc(t.title)+'</h3><p>'+esc(t.info)+'</p><small class="dm-journal-timestamp">'+esc(t.date)+'</small></article>').join(''):
  '<p class="dm-journal-empty">История пока пуста. Здесь будут фактические события, а не обещания выполнения.</p>';
 }
-function show(tab='mine'){
+function show(tab='mine',focusDraftId=null){
  const selected=tab==='tasks'?'delegated':(['mine','delegated','history'].includes(tab)?tab:'mine');
  if(selected!=='mine'){contactCheck=null;transferDraft=null}
  const root=makePanel(),body=root.querySelector('#dmJournalContent');
@@ -387,6 +387,11 @@ function show(tab='mine'){
  }
  root.querySelector('.dm-journal-frame').scrollTop=0;
  root.querySelector('[data-journal-tab="'+selected+'"]').focus({preventScroll:true});
+ if(selected==='delegated'&&focusDraftId){
+  const editor=[...(root.querySelectorAll('[data-assistant-editor]')||[])].find(x=>x.dataset.assistantEditor===focusDraftId);
+  editor?.scrollIntoView?.({block:'nearest',behavior:'instant'});
+  editor?.focus?.({preventScroll:true});
+ }
  if(transferDraft&&selected==='mine')root.querySelector('#dmTransferApprove')?.focus({preventScroll:true});
  else if(contactCheck&&selected==='mine')root.querySelector('[data-contact-reached="yes"]')?.focus({preventScroll:true});
 }
