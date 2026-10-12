@@ -257,3 +257,25 @@ html.dock-is-hidden.dm-plasma-orbit-open #homeScreen .shortcuts{
   outline:2px solid #d2ecff;
   outline-offset:3px;
 }
+
+/* A clean plasma-only scene identical to the owner's reference:
+   when the four-button orbit is open, mask the PAGE, not the original
+   plasma or its real laser-wave SVG. All page content reappears on close. */
+html.dm-plasma-orbit-open body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:54;
+  background:#000;
+  pointer-events:auto;
+}
+/* The actual plasma remains over the black scene; never clone/rebuild it. */
+html.dock-is-hidden.dm-plasma-orbit-open #dockHiddenControls,
+html.dm-plasma-orbit-open .dm-myday-plasma-stage,
+html.dm-plasma-orbit-open .dm-world-standalone{
+  z-index:55;
+}
+html.dm-plasma-orbit-open #dockQuickActions.dock-quick-actions,
+html.dm-plasma-orbit-open .dm-assistant-mini-menu.dm-plasma-orbit{
+  z-index:57;
+}
