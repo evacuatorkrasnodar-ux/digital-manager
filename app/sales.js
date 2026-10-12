@@ -61,6 +61,71 @@ function removePromotion(id){
 }
 function legacyOrders(){try{let obj=JSON.parse(localStorage.getItem(LEGACY)||'{}');return Array.isArray(obj.orders)?obj.orders.filter(x=>x&&typeof x.title==='string').slice(0,50):[]}catch(_){return []}}
 const options=(arr,current)=>arr.map(x=>'<option value="'+esc(x)+'"'+(x===current?' selected':'')+'>'+esc(x)+'</option>').join('');
+
+/* Short, explicit outcome confirmation; an unconfirmed select must never record a purchase. */
+function setStage(entry,stage,detail={}){
+ if(!entry||!statuses[stage])return false;
+ const stamp=Date.now(),previous=entry.stage;
+ if(stage==='won'){
+  const amount=Number(detail.amount);
+  if(!Number.isFinite(amount)||amount<0||amount>999999999)return false;
+  entry.amount=amount;
+  entry.wonAt=previous==='won'&&Number.isFinite(entry.wonAt)?entry.wonAt:stamp;
+  entry.lostAt=null;
+ }else if(stage==='lost'){
+  if(!reasons.includes(detail.reason))return false;
+  entry.lossReason=detail.reason;
+  entry.lostAt=previous==='lost'&&Number.isFinite(entry.lostAt)?entry.lostAt:stamp;
+  entry.wonAt=null;
+ }else{
+  entry.wonAt=null;entry.lostAt=null;
+ }
+ entry.stage=stage;
+ entry.changedAt=stamp;
+ save();render();
+ return true;
+}
+function outcomeDialog(entry,stage){
+ if(!entry||!['won','lost'].includes(stage))return;
+ const old=document.getElementById('dmSalesUpdate');
+ if(old)old.remove();
+ const overlay=document.createElement('div');
+ overlay.id='dmSalesUpdate';overlay.className='dm-sales-draft';
+ const title=stage==='won'?'Клиент купил':'Почему не сложилось?';
+ const amount=Number(entry.amount);
+ overlay.innerHTML='<form class="dm-sales-draft-inner dm-sales-outcome" id="dmSalesOutcomeForm" role="dialog" aria-modal="true" aria-labelledby="dmSalesOutcomeTitle">'+
+ '<header><strong id="dmSalesOutcomeTitle">'+title+'</strong><button type="button" data-sale-outcome-cancel aria-label="Закрыть">×</button></header>'+
+ '<p>'+esc(entry.person)+' · '+esc(entry.title)+'</p>'+
+ (stage==='won'?'<label>Сколько заплатил, ₽<small>Если сумма пока неизвестна, оставьте поле пустым</small><input type="number" name="amount" min="0" max="999999999" step="1" placeholder="Сумма покупки" value="'+(amount>0&&Number.isFinite(amount)?amount:'')+'"></label>':
+ '<label>Почему не купил?<select name="reason">'+options(reasons,entry.lossReason||'Не знаем')+'</select></label>')+
+ '<div class="dm-sales-outcome-actions"><button type="button" data-sale-outcome-cancel>Отмена</button><button type="submit">'+(stage==='won'?'Сохранить покупку':'Сохранить причину')+'</button></div></form>';
+ const restore=document.activeElement;
+ const dismiss=()=>{overlay.remove();if(restore?.isConnected&&typeof restore.focus==='function')restore.focus({preventScroll:true})};
+ const onKey=e=>{if(e.key==='Escape'){e.preventDefault();dismiss()}};
+ document.body.append(overlay);
+ overlay.querySelectorAll('[data-sale-outcome-cancel]').forEach(x=>x.addEventListener('click',dismiss));
+ overlay.addEventListener('click',e=>{if(e.target===overlay)dismiss()});
+ overlay.addEventListener('keydown',onKey);
+ overlay.querySelector('form').addEventListener('submit',e=>{
+  e.preventDefault();
+  const data=new FormData(e.currentTarget);
+  const ok=stage==='won'?setStage(entry,'won',{amount:data.get('amount')||0}):setStage(entry,'lost',{reason:String(data.get('reason')||'Не знаем')});
+  if(ok)dismiss();
+ });
+ (overlay.querySelector('input,select')||overlay.querySelector('[type="submit"]')).focus();
+}
+function reopenSale(id){
+ const entry=records.find(x=>x.id===id);
+ if(!entry||!['won','lost'].includes(entry.stage))return;
+ if(!window.confirm('Вернуть запись о '+entry.person+' в обсуждение? Её перестанут считать состоявшейся покупкой или отказом.'))return;
+ setStage(entry,'talk');
+}
+function goToNewSale(){
+ const form=screen?.querySelector('#dmSalesForm');
+ if(!form)return;
+ form.scrollIntoView({behavior:'smooth',block:'start'});
+ form.querySelector('[name="person"]')?.focus({preventScroll:true});
+}
 function create(){
  if(screen)return;
  screen=document.createElement('section');screen.id='salesScreen';screen.className='screen dm-sales-screen';screen.hidden=true;
@@ -86,17 +151,21 @@ function create(){
   let entry=records.find(x=>x.id===id);if(!entry)return;
   if(el.dataset.saleStage){
    if(!statuses[el.value])return;
-   if(el.value==='won'&&entry.stage!=='won')entry.wonAt=Date.now();
-   if(el.value==='lost'&&entry.stage!=='lost')entry.lostAt=Date.now();
-   entry.stage=el.value;
-  }else if(reasons.includes(el.value))entry.lossReason=el.value;
-  save();render();
+   const next=el.value;
+   el.value=entry.stage;
+   if(next==='won'||next==='lost'){outcomeDialog(entry,next);return}
+   setStage(entry,next);return;
+  }
+  if(reasons.includes(el.value)){entry.lossReason=el.value;save();render()}
  });
  screen.addEventListener('click',e=>{
   let b=e.target.closest('button');if(!b)return;
   if(b.id==='dmBusinessPictureOpen'){showPicture();return}
   if(b.dataset.expenseDelete){removePromotion(b.dataset.expenseDelete);return}
   if(b.dataset.pictureGoSales){closePicture();return}
+  if(b.id==='dmSalesNewLead'){goToNewSale();return}
+  if(b.dataset.saleOutcome){outcomeDialog(records.find(x=>x.id===b.dataset.saleId),b.dataset.saleOutcome);return}
+  if(b.dataset.saleReopen){reopenSale(b.dataset.saleReopen);return}
   if(b.dataset.saleAction){action(b.dataset.saleAction,b.dataset.saleId);return}
   if(b.dataset.saleCopy){copyDraft();return}
  });
