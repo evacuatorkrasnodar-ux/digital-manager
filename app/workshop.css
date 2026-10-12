@@ -20,3 +20,21 @@
 .dm-workshop-actions{display:flex;gap:7px}.dm-workshop-actions button{flex:1;min-width:0;padding:11px 7px;border:1px solid rgba(191,217,238,.5);border-radius:11px;color:#e9f4ff;background:#203850;font-size:11px;cursor:pointer}
 .dm-workshop-actions button+button{background:#0b1724}.dm-workshop #wsSaved{margin:0;color:#dcece3;font-size:11px}
 @media(max-width:350px){.dm-workshop-field{grid-template-columns:1fr 82px 29px}.dm-workshop-presets{gap:5px}}
+
+/* Immediate idea-to-card workflow; only Workshop elements. */
+.dm-workshop-idea{display:grid;gap:9px;padding:12px;border:1px solid rgba(174,196,215,.35);border-radius:16px;background:linear-gradient(145deg,#131e2b,#060b12)}
+.dm-workshop-idea label{font-size:14px;font-weight:550}
+.dm-workshop-idea textarea,.dm-workshop-custom textarea{resize:vertical;min-height:75px;width:100%;background:#081624;color:#eff7ff;border:1px solid rgba(167,198,222,.4);border-radius:11px;padding:11px;font:inherit;line-height:1.4}
+.dm-workshop-idea button,.dm-workshop-custom form button,.dm-workshop-custom>button{border:1px solid rgba(215,231,243,.62);border-radius:12px;background:linear-gradient(140deg,#eaf4fb,#aebfd0);color:#102536;padding:10px 12px;font-weight:560;cursor:pointer}
+.dm-workshop-hint{font-size:11px;line-height:1.5;color:#9eb6ca;margin:-5px 0 0}
+.dm-workshop-custom>h3{margin:2px 0}
+.dm-workshop-custom form{display:grid;gap:9px}
+.dm-workshop-custom .dm-workshop-name{margin:0}
+.dm-workshop-custom .dm-workshop-entry{display:flex;gap:7px;align-items:stretch}
+.dm-workshop-entry input{flex:1;min-width:0}
+.dm-workshop-custom .dm-workshop-entry button{flex:none}
+.dm-workshop-entries{display:grid;gap:6px}
+.dm-workshop-entry-row{display:flex;gap:7px;align-items:center;padding:7px;border:1px solid rgba(138,170,194,.24);border-radius:11px;background:#08121d}
+.dm-workshop-entry-row span{flex:1;min-width:0;overflow-wrap:anywhere;font-size:12px}
+.dm-workshop-entry-row .is-done{color:#a3b6c6;text-decoration:line-through}
+.dm-workshop-entry-row button{flex:none;color:#d9eaf7;background:rgba(69,99,126,.2);border:1px solid rgba(138,170,194,.28);border-radius:9px;min-width:28px;height:29px;cursor:pointer}
