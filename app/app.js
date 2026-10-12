@@ -472,6 +472,33 @@
     mount.replaceChildren(orb);
   }
   dmSyncAssistantWelcomePlasma();
+  // Use the exact SAME real white waiting plasma as the Appearance sample,
+  // not a separate decorative ring or a raster screenshot.
+  function dmMountManagerPlasmaThumbnail(){
+    const mount=document.querySelector('#managementScreen .mg-manager-plasma-thumbnail');
+    const source=document.querySelector('#tabAssistant .dm-dock-plasma');
+    if(!mount||!source)return;
+    const orb=source.cloneNode(true);
+    orb.dataset.mode='idle';
+    const idMap=new Map();
+    orb.querySelectorAll('[id]').forEach((node,index)=>{
+      const original=node.id,unique='dm-manager-plasma-'+index+'-'+original;
+      idMap.set(original,unique);node.id=unique;
+    });
+    orb.querySelectorAll('*').forEach(node=>{
+      for(const attr of [...node.attributes]){
+        if(attr.name==='id')continue;
+        let value=attr.value;
+        for(const [original,unique] of idMap){
+          value=value.replaceAll('url(#'+original+')','url(#'+unique+')');
+          if((attr.name==='href'||attr.name==='xlink:href')&&value==='#'+original)value='#'+unique;
+        }
+        if(value!==attr.value)node.setAttribute(attr.name,value);
+      }
+    });
+    mount.replaceChildren(orb);
+  }
+  dmMountManagerPlasmaThumbnail();
   function dmMountPlasmaExamples(){
     const stage=byId('mgDetail').querySelector('.dm-plasma-examples-grid');
     const source=document.querySelector('#tabAssistant .dm-dock-plasma');
