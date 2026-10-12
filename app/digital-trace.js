@@ -55,9 +55,8 @@ function viewMarkup(){
  return intro+nav+content+'<p class="dm-trace-disclaimer">Это рабочая локальная аналитика. Подключения к банкам, соцсетям и сайтам пока не настроены; данные не синхронизируются между устройствами.</p>';
 }
 function render(){
- const base=$('dmTraceFindings');if(!base)return;
- // Keep a single view; replace the old placeholder blocks, not layer more UI over them.
- const parent=base.closest('.dm-trace-body');if(!parent)return;
+ const parent=screen()?.querySelector('.dm-trace-body');if(!parent)return;
+ // Always render into the persistent screen container, even after switching tabs.
  parent.innerHTML=viewMarkup();
 }
 function open(from='management'){
