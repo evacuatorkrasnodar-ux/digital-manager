@@ -29,7 +29,7 @@ const taskDay=task=>{
 };
 const save=(key,data)=>{try{localStorage.setItem(key,JSON.stringify(data.slice(0,100)));return true}catch(e){console.warn('Task storage unavailable',e);return false}};
 const findAdvice=()=>delegated.find(x=>x.id===ADVICE_ID);
-let lastFocus=null,contactCheck=null,contactFeedback='';
+let lastFocus=null,contactCheck=null,contactFeedback='',transferDraft=null;
 
 /* One approved dashboard card, many messages; no second card and no fake execution. */
 const currentInsight=()=>{
@@ -122,26 +122,27 @@ function makePanel(){
  document.body.append(root);return root;
 }
 function personalList(){
- const active=personal.filter(t=>t.status!=='done');
+ const active=personal.filter(t=>t.status!=='done'&&t.status!=='delegated');
  const groups=[['today','Сегодня'],['tomorrow','Завтра'],['later','Позже']];
- return '<form id="dmPersonalTaskForm" class="dm-journal-add"><label for="dmTaskTitle">Новое дело</label>'+
+ return '<div class="dm-journal-transfer-launch"><div><strong>Доверь мне дела</strong><small>Выбираете сами. Пока только передача поручений, без внешних действий.</small></div><button type="button" data-transfer-all'+(active.length?'':' disabled')+'>Доверить выбранные ↗</button></div>'+
+ '<form id="dmPersonalTaskForm" class="dm-journal-add"><label for="dmTaskTitle">Новое дело</label>'+
  '<input id="dmTaskTitle" name="title" maxlength="120" required placeholder="Например, позвонить поставщику">'+
  '<div class="dm-journal-add-row"><select name="when" aria-label="Когда выполнить"><option value="today">Сегодня</option><option value="tomorrow">Завтра</option><option value="later">Позже</option></select><button type="submit">Добавить</button></div></form>'+
  groups.map(([key,label])=>{
   const tasks=active.filter(t=>taskDay(t)===key);
   return '<section class="dm-journal-group"><h3>'+label+(key==='today'?' <small>и просроченные</small>':'')+'</h3>'+
-    (tasks.length?tasks.map(t=>'<article class="dm-journal-personal"><span>'+esc(t.title)+(t.dueDate&&t.dueDate<dayString(Date.now())?' <small>· Давно ждёт</small>':'')+'</span><div class="dm-journal-personal-actions"><select data-personal-when="'+esc(t.id)+'" aria-label="Перенести дело: '+esc(t.title)+'">'+[['today','Сегодня'],['tomorrow','Завтра'],['later','Позже']].map(([value,label])=>'<option value="'+value+'"'+(taskDay(t)===value?' selected':'')+'>'+label+'</option>').join('')+'</select>'+(t.source==='sales'&&t.saleId?'<button type="button" data-journal-sale="'+esc(t.saleId)+'" aria-label="Открыть клиента из продаж">К клиенту ↗</button>':'')+'<button type="button" data-personal-done="'+esc(t.id)+'" aria-label="Отметить выполненным: '+esc(t.title)+'">✓</button></div></article>').join(''):'<p class="dm-journal-empty">Пока пусто</p>')+
+    (tasks.length?tasks.map(t=>'<article class="dm-journal-personal"><span>'+esc(t.title)+(t.dueDate&&t.dueDate<dayString(Date.now())?' <small>· Давно ждёт</small>':'')+'</span><div class="dm-journal-personal-actions"><select data-personal-when="'+esc(t.id)+'" aria-label="Перенести дело: '+esc(t.title)+'">'+[['today','Сегодня'],['tomorrow','Завтра'],['later','Позже']].map(([value,label])=>'<option value="'+value+'"'+(taskDay(t)===value?' selected':'')+'>'+label+'</option>').join('')+'</select>'+(t.source==='sales'&&t.saleId?'<button type="button" data-journal-sale="'+esc(t.saleId)+'" aria-label="Открыть клиента из продаж">К клиенту ↗</button>':'')+'<button type="button" data-transfer-one="'+esc(t.id)+'" title="Доверить управляющему" aria-label="Поручить управляющему: '+esc(t.title)+'">↗</button><button type="button" data-personal-done="'+esc(t.id)+'" aria-label="Отметить выполненным: '+esc(t.title)+'">✓</button></div></article>').join(''):'<p class="dm-journal-empty">Пока пусто</p>')+
    '</section>';
  }).join('')+
  '<p class="dm-journal-hint">Дела сохраняются на этом устройстве. Завтрашние дела появятся в «Сегодня» в нужный день. Уведомлений на телефон пока нет. Поручения управляющему — отдельно.</p>';
 }
 function delegatedList(){
- const pending=delegated.filter(t=>t.status!=='reviewed');
+ const pending=delegated.filter(t=>t.status!=='reviewed'&&t.status!=='returned');
  if(!pending.length)return '<p class="dm-journal-empty">Активных поручений управляющему пока нет.</p>';
- return pending.map(t=>'<article class="dm-journal-entry"><span>ПЛАН · ДЕМО · НЕ ВЫПОЛНЕНО</span><h3>'+esc(t.title)+'</h3>'+
- '<p>План подготовлен к проверке. Рекламные данные и реальные интеграции не подключены.</p>'+
+ return pending.map(t=>'<article class="dm-journal-entry"><span>'+(t.origin==='owner-task'?'ПЕРЕДАНО ВАМИ · ОЖИДАЕТ':'ПЛАН · ДЕМО · НЕ ВЫПОЛНЕНО')+'</span><h3>'+esc(t.title)+'</h3>'+
+ '<p>'+(t.origin==='owner-task'?'Дело передано в очередь управляющему. Я могу помочь подготовить дальнейшие шаги. Ничего вовне не отправлено, не оплачено и не выполнено.':'План подготовлен к проверке. Рекламные данные и реальные интеграции не подключены.')+'</p>'+
  '<ul>'+(Array.isArray(t.log)?t.log:[]).map(l=>'<li><small>'+esc(l.at)+'</small> '+esc(l.message)+'</li>').join('')+'</ul>'+
- (t.status==='planned'?'<button type="button" data-delegation-review="'+esc(t.id)+'">Я посмотрел план · в историю</button>':'')+'</article>').join('');
+ (t.origin==='owner-task'&&t.status==='queued'?'<button type="button" data-transfer-reclaim="'+esc(t.id)+'">Забрать себе ↩</button>':t.status==='planned'?'<button type="button" data-delegation-review="'+esc(t.id)+'">Я посмотрел план · в историю</button>':'')+'</article>').join('');
 }
 function historyList(){
  const entries=[];
@@ -151,15 +152,15 @@ function historyList(){
   entries.push({stamp:m.ms||t.createdMs||0,kind:'mine',title:t.title,info:'Вы перенесли дело '+label,date:m.at||''});
  }));
  delegated.forEach(t=>{
-  (Array.isArray(t.log)?t.log:[]).forEach((l,i)=>entries.push({stamp:(t.reviewedMs&&i>0?t.reviewedMs:t.createdMs)||0,kind:'delegated',title:t.title,info:l.message,date:l.at}));
+  (Array.isArray(t.log)?t.log:[]).forEach((l,i)=>entries.push({stamp:(l.ms||((t.reviewedMs&&i>0?t.reviewedMs:t.createdMs)||0)),kind:'delegated',title:t.title,info:l.message,date:l.at}));
  });
  entries.sort((a,b)=>b.stamp-a.stamp);
- return entries.length?entries.map(t=>'<article class="dm-journal-entry"><span>'+(t.kind==='mine'?'МОЁ ДЕЛО':'ПОРУЧЕНИЕ · ДЕМО')+'</span><h3>'+esc(t.title)+'</h3><p>'+esc(t.info)+'</p><small class="dm-journal-timestamp">'+esc(t.date)+'</small></article>').join(''):
+ return entries.length?entries.map(t=>'<article class="dm-journal-entry"><span>'+(t.kind==='mine'?'МОЁ ДЕЛО':'ПОРУЧЕНИЕ')+'</span><h3>'+esc(t.title)+'</h3><p>'+esc(t.info)+'</p><small class="dm-journal-timestamp">'+esc(t.date)+'</small></article>').join(''):
  '<p class="dm-journal-empty">История пока пуста. Здесь будут фактические события, а не обещания выполнения.</p>';
 }
 function show(tab='mine'){
  const selected=tab==='tasks'?'delegated':(['mine','delegated','history'].includes(tab)?tab:'mine');
- if(selected!=='mine')contactCheck=null;
+ if(selected!=='mine'){contactCheck=null;transferDraft=null}
  const root=makePanel(),body=root.querySelector('#dmJournalContent');
  if(root.hidden)lastFocus=document.activeElement;
  root.hidden=false;root.dataset.tab=selected;
@@ -167,6 +168,9 @@ function show(tab='mine'){
  root.querySelector('#dmJournalTitle').textContent=names[selected];
  root.querySelectorAll('[data-journal-tab]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.journalTab===selected)));
  body.innerHTML=selected==='mine'?personalList():selected==='delegated'?delegatedList():historyList();
+ if(selected==='mine'&&transferDraft){
+  body.insertAdjacentHTML('afterbegin',transferPreview());
+ }
  if(selected==='mine'&&contactCheck){
   body.insertAdjacentHTML('afterbegin','<section class="dm-journal-contact" aria-label="Результат общения с клиентом"><small>ДЕЛО ОТМЕЧЕНО ВЫПОЛНЕННЫМ</small><p>'+esc(contactCheck.title)+'</p><strong>Удалось связаться с клиентом?</strong><div><button type="button" data-contact-reached="yes">Да, общаемся</button><button type="button" data-contact-reached="no">Нет, только закрыл дело</button></div></section>');
  }else if(selected==='mine'&&contactFeedback){
@@ -174,11 +178,12 @@ function show(tab='mine'){
  }
  root.querySelector('.dm-journal-frame').scrollTop=0;
  root.querySelector('[data-journal-tab="'+selected+'"]').focus({preventScroll:true});
- if(contactCheck&&selected==='mine')root.querySelector('[data-contact-reached="yes"]')?.focus({preventScroll:true});
+ if(transferDraft&&selected==='mine')root.querySelector('#dmTransferApprove')?.focus({preventScroll:true});
+ else if(contactCheck&&selected==='mine')root.querySelector('[data-contact-reached="yes"]')?.focus({preventScroll:true});
 }
 function close(){
  const root=document.getElementById('dmTaskJournal');if(!root||root.hidden)return;
- root.hidden=true;contactCheck=null;contactFeedback='';if(lastFocus&&lastFocus.isConnected&&typeof lastFocus.focus==='function')lastFocus.focus({preventScroll:true});
+ root.hidden=true;contactCheck=null;transferDraft=null;contactFeedback='';if(lastFocus&&lastFocus.isConnected&&typeof lastFocus.focus==='function')lastFocus.focus({preventScroll:true});
  lastFocus=null;
 }
 function submitPersonal(form){
@@ -191,7 +196,7 @@ function submitPersonal(form){
 }
 function movePersonal(id,when){
  if(!['today','tomorrow','later'].includes(when))return false;
- const task=personal.find(t=>t.id===id&&t.status!=='done');
+ const task=personal.find(t=>t.id===id&&t.status!=='done'&&t.status!=='delegated');
  if(!task)return false;
  const oldWhen=task.when,oldDate=task.dueDate,previousChanges=task.moveLog;
  const prevDay=taskDay(task);
@@ -213,7 +218,7 @@ function movePersonal(id,when){
  return true;
 }
 function completePersonal(id){
- const task=personal.find(t=>t.id===id&&t.status!=='done');if(!task)return;
+ const task=personal.find(t=>t.id===id&&t.status!=='done'&&t.status!=='delegated');if(!task)return;
  task.status='done';task.completed=now();task.completedMs=Date.now();
  if(!save(PERSONAL_KEY,personal)){task.status='open';task.completed=null;task.completedMs=null;return}
  if(task.source==='sales')try{window.dispatchEvent(new CustomEvent('dm:personal-tasks-changed',{detail:{saleId:task.saleId}}))}catch(_){}
@@ -238,13 +243,13 @@ function answerContact(reached){
 /* A genuine owner task created from a deliberate button press in Sales. */
 function forSale(saleId){
  return personal.filter(t=>t.source==='sales'&&t.saleId===saleId&&t.status!=='done')
-  .map(t=>({id:t.id,title:t.title,when:taskDay(t),kind:t.kind,dueDate:t.dueDate||null}));
+  .map(t=>({id:t.id,title:t.title,when:taskDay(t),kind:t.kind,dueDate:t.dueDate||null,assigned:t.status==='delegated'}));
 }
 function createForSale({saleId,person,subject,when='today',kind='reply'}={}){
  if(typeof saleId!=='string'||!saleId.trim()||typeof person!=='string'||!person.trim()
     ||!['today','tomorrow'].includes(when)||!['reply','remind'].includes(kind))return {ok:false};
  const existing=personal.find(t=>t.source==='sales'&&t.saleId===saleId&&t.kind===kind&&t.status!=='done');
- if(existing){show('mine');return {ok:true,created:false,taskId:existing.id}}
+ if(existing){show(existing.status==='delegated'?'delegated':'mine');return {ok:true,created:false,taskId:existing.id,assigned:existing.status==='delegated'}}
  const title=(kind==='remind'?'Связаться с ':'Ответить: ')+person.trim()+' — '+String(subject||'обращение').trim();
  const created=Date.now();
  const task={id:'sale-task-'+created+'-'+Math.random().toString(36).slice(2,8),
