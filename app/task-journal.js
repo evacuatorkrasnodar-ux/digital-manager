@@ -317,12 +317,33 @@ function personalList(){
  }).join('')+
  '<p class="dm-journal-hint">Дела сохраняются на этом устройстве. Завтрашние дела появятся в «Сегодня» в нужный день. Уведомлений на телефон пока нет. Поручения управляющему — отдельно.</p>';
 }
+
+function assistantDraftControls(item){
+ if(item.origin!=='owner-task'||item.status!=='queued')return '';
+ const draft=item.draft&&typeof item.draft.text==='string'?item.draft:null;
+ if(!draft)return '<button type="button" data-assistant-prepare="'+esc(item.id)+'">Подготовить решение ✨</button>';
+ const reviewed=Number.isFinite(draft.reviewedAt)&&draft.reviewedAt>0;
+ const kind=draft.kind==='message'?'Черновик ответа клиенту':'Черновик плана';
+ return '<div class="dm-assistant-result">'+
+  '<small>ПОДГОТОВЛЕНО ПО ЗАПИСЯМ · НЕ ОТПРАВЛЕНО</small><h4>'+kind+'</h4>'+
+  '<p>'+esc(draft.description||'Шаблон, который можно исправить перед использованием.')+'</p>'+
+  '<textarea data-assistant-editor="'+esc(item.id)+'" maxlength="3000" rows="7" aria-label="'+kind+'">'+esc(draft.text)+'</textarea>'+
+  '<div class="dm-assistant-draft-actions">'+
+  '<button type="button" data-assistant-save="'+esc(item.id)+'">Сохранить правки</button>'+
+  '<button type="button" data-assistant-copy="'+esc(item.id)+'">Скопировать ↗</button>'+
+  '<button type="button" data-assistant-reviewed="'+esc(item.id)+'">'+(reviewed?'Просмотрено ✓':'Я посмотрел ✓')+'</button>'+
+  '<button type="button" data-assistant-refresh="'+esc(item.id)+'">Подготовить заново</button></div>'+
+  '<p class="dm-assistant-draft-status" role="status" data-assistant-copy-status="'+esc(item.id)+'">'+
+  (reviewed?'Вы просмотрели текст. Он не отправлен.':'Ничего не отправлено. Перед использованием проверьте имена, суммы и подробности.')+
+  '</p></div>';
+}
 function delegatedList(){
  const pending=delegated.filter(t=>t.status!=='reviewed'&&t.status!=='returned');
  if(!pending.length)return '<p class="dm-journal-empty">Активных поручений управляющему пока нет.</p>';
  return pending.map(t=>'<article class="dm-journal-entry"><span>'+(t.origin==='owner-task'?'ПЕРЕДАНО ВАМИ · ОЖИДАЕТ':'ПЛАН · ДЕМО · НЕ ВЫПОЛНЕНО')+'</span><h3>'+esc(t.title)+'</h3>'+
- '<p>'+(t.origin==='owner-task'?'Дело в очереди. Могу помочь продумать следующие шаги, но пока ничего вовне не отправлено, не оплачено и не выполнено.':'План подготовлен к проверке. Рекламные данные и реальные интеграции не подключены.')+'</p>'+
+ '<p>'+(t.origin==='owner-task'?'Могу подготовить черновик для вашего просмотра. Никаких звонков, сообщений, покупок и других внешних действий здесь не происходит.':'План подготовлен к проверке. Рекламные данные и реальные интеграции не подключены.')+'</p>'+
  '<ul>'+(Array.isArray(t.log)?t.log:[]).map(l=>'<li><small>'+esc(l.at)+'</small> '+esc(l.message)+'</li>').join('')+'</ul>'+
+ assistantDraftControls(t)+
  (t.origin==='owner-task'&&t.status==='queued'?'<button type="button" data-transfer-reclaim="'+esc(t.id)+'">Забрать себе ↩</button>':t.status==='planned'?'<button type="button" data-delegation-review="'+esc(t.id)+'">Я посмотрел план · в историю</button>':'')+'</article>').join('');
 }
 function historyList(){
@@ -349,6 +370,7 @@ function show(tab='mine'){
  root.querySelector('#dmJournalTitle').textContent=names[selected];
  root.querySelectorAll('[data-journal-tab]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.journalTab===selected)));
  body.innerHTML=selected==='mine'?personalList():selected==='delegated'?delegatedList():historyList();
+ if(selected==='delegated'&&assistantFeedback)body.insertAdjacentHTML('afterbegin','<p class="dm-journal-contact-feedback" role="status">'+esc(assistantFeedback)+'</p>');
  if(selected==='mine'&&transferDraft){
   body.insertAdjacentHTML('afterbegin',transferPreview());
  }
@@ -465,6 +487,11 @@ function init(){
   else if(b.dataset.journalTab)show(b.dataset.journalTab);
   else if(b.hasAttribute('data-delegation-review'))reviewDelegation(b.dataset.delegationReview);
   else if(b.dataset.contactReached==='yes'||b.dataset.contactReached==='no')answerContact(b.dataset.contactReached==='yes');
+  else if(b.dataset.assistantPrepare)prepareSolution(b.dataset.assistantPrepare);
+  else if(b.dataset.assistantRefresh)prepareSolution(b.dataset.assistantRefresh,true);
+  else if(b.dataset.assistantSave)saveSolution(b.dataset.assistantSave);
+  else if(b.dataset.assistantCopy)copySolution(b.dataset.assistantCopy);
+  else if(b.dataset.assistantReviewed)reviewSolution(b.dataset.assistantReviewed);
   else if(b.hasAttribute('data-transfer-all'))startTransfer(transferable().map(t=>t.id));
   else if(b.dataset.transferOne)startTransfer([b.dataset.transferOne]);
   else if(b.hasAttribute('data-transfer-cancel')){transferDraft=null;contactFeedback='Передача отменена. Дела остались у вас.';show('mine')}
