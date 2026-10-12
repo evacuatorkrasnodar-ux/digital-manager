@@ -51,6 +51,7 @@
   <script src="./digital-trace.js?v=6" defer></script>
   <link rel="stylesheet" href="./task-journal.css?v=9">
   <link rel="stylesheet" href="./sales.css?v=4">
+  <link rel="stylesheet" href="./initiative.css?v=1">
 </head>
 <body>
 <!-- All pictograms are real independent SVG elements, not fragments of the reference picture. -->
@@ -217,7 +218,7 @@
       </div></section>
     </main>
   </div>
-  <div class="screen secondary-screen" id="assistantScreen" hidden><header class="subhead"><img class="brand-icon" src="./assets/logo-air.png" alt="" aria-hidden="true"><div><small>Цифровой управляющий</small><h1>Помощник</h1></div><button id="assistantReturnHome" class="assistant-home-return" type="button" aria-label="Вернуться на главную" title="На главную"><svg class="ico" aria-hidden="true"><use href="#ic-chevron-back"/></svg></button></header><div class="assistant-welcome"><div class="assistant-orb"><img class="brand-icon" src="./assets/logo-air.png" alt="" aria-hidden="true"></div><h2>Ваш цифровой помощник</h2><p>Пока это демонстрационный помощник. Он работает с примерами задач, без подключения к ИИ или вашим реальным данным.</p><p><a class="assistant-world-link" href="./world.html?tab=assistant">Открыть личного помощника с доступом к моим добровольно сохранённым данным <span class="dm-inline-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></a></p></div><section class="ring-preview" aria-label="Проверка анимации кнопки">
+  <div class="screen secondary-screen" id="assistantScreen" hidden><header class="subhead"><img class="brand-icon" src="./assets/logo-air.png" alt="" aria-hidden="true"><div><small>Цифровой управляющий</small><h1>Помощник</h1></div><button id="assistantReturnHome" class="assistant-home-return" type="button" aria-label="Вернуться на главную" title="На главную"><svg class="ico" aria-hidden="true"><use href="#ic-chevron-back"/></svg></button></header><div class="assistant-welcome"><div class="assistant-orb"><img class="brand-icon" src="./assets/logo-air.png" alt="" aria-hidden="true"></div><h2>Ваш цифровой помощник</h2><p>Чат пока демонстрационный, без подключения к ИИ. Но управляющий уже умеет по вашему согласию работать с сохранёнными обращениями: самостоятельно готовить ответы и показывать результат.</p><p><a class="assistant-world-link" href="./world.html?tab=assistant">Открыть личного помощника с доступом к моим добровольно сохранённым данным <span class="dm-inline-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></a></p></div><section class="ring-preview" aria-label="Проверка анимации кнопки">
     <div class="ring-preview-head"><span>Живое кольцо</span><small>Предпросмотр подсветки · демонстрация</small></div>
     <div class="ring-preview-controls" role="group" aria-label="Демонстрационные состояния кольца">
       <button type="button" data-ring-preview="idle" aria-pressed="true">Спокоен</button>
@@ -415,10 +416,11 @@
   </nav>
 <dialog id="modal" aria-labelledby="dialogTitle"><div class="dialog-inner"><div class="dialog-head"><div><span class="dialog-eyebrow">ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h2 id="dialogTitle">Информация</h2></div><button class="dialog-close" id="closeDialog" type="button" aria-label="Закрыть"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button></div><div id="dialogContent"></div></div></dialog>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-<script src="./app.js?v=641" defer></script>
+<script src="./app.js?v=642" defer></script>
   <script src="./voice-hints.js?v=290" defer></script>
 <script src="./system-ui.js?v=283" defer></script>
   <script src="./task-journal.js?v=9" defer></script>
-  <script src="./sales.js?v=8" defer></script>
+  <script src="./sales.js?v=9" defer></script>
+  <script src="./initiative.js?v=1" defer></script>
 </body>
 </html>
