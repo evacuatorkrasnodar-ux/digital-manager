@@ -100,6 +100,9 @@ function startingPath(){
   (first?'Первый шаг — '+first.title.toLowerCase()+'. '+first.note:'')+
   ' Пока это сохранённый маршрут, а не выполненная работа.';
 }
+function startupMaterials(){
+ return window.DMFirstResult?.describe?.()||'Пока нет подготовленных материалов.';
+}
 function selectedPlaceAnswer(){
  const advice=window.DMBusinessJourney?.getLocationAdvice?.();
  if(!advice?.knownLocation)return 'Место пока не выбрано. Расскажи, в каком городе или районе планируешь работать — затем проверим конкурентов, спрос и условия.';
@@ -126,7 +129,7 @@ function brief(){
  if(path?.mode==='start'&&!d?.total){
   const priority=workSignals()[0]||null;
   return {headline:priority?.title||'Создадим твоё дело вместе',
-    message:startingPath()+' '+(priority?priority.body+' ':'')+workLine(),
+    message:startingPath()+' '+startupMaterials()+' '+(priority?priority.body+' ':'')+workLine(),
     priority};
  }
  if(!d){const important=workSignals()[0]||null;
@@ -171,6 +174,7 @@ function answer(question){
  const q=String(question||'').trim().toLowerCase();
  if(!q)return null;
  const path=journey();
+ if(path?.mode==='start'&&/(что.{0,18}подготовил|что успел|первые материалы|черновик сайта|текст сайта|проверить спрос)/.test(q))return startupMaterials()+' '+startingPath();
  if(/(?:район|улиц|локаци|помещен|конкурент|где открыть|открыват.{0,18}где|соседн.{0,16}бизнес)/.test(q)&&path)return selectedPlaceAnswer();
  if(path&&/(с нуля|сво[её] дел[оа]|начать бизнес|откр[ыо].{0,18}бизнес|первые клиенты|с чего нач|что сначала|план развития|путь развития|иде[яю]|чем заняться)/i.test(q))
   return startingPath()+' Продолжить знакомство и изменить планы можно в «Управлении» → «Мой управляющий» → «Мой путь с управляющим».';
