@@ -845,10 +845,10 @@
   window.addEventListener('pageshow',mgSyncCarouselNav);
   requestAnimationFrame(mgSyncCarouselNav);
   function dmSyncQuickHome(){
+    // The four quick actions are consistent on every app tab:
+    // "Главная" is always shown, including inside Management and Assistant.
     const home=byId('dockOpenHome');
-    // In dock-free plasma mode all four orbital actions stay visible,
-    // even on Home. The normal dock keeps its original redundant-Home rule.
-    if(home)home.hidden=voicePrefs.dock&&tab==='home';
+    if(home)home.hidden=false;
   }
   dmSyncQuickHome();
   let dmQuickMenuTimer=null;
