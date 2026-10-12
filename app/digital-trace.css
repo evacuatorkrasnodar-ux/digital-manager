@@ -1,0 +1,28 @@
+/* Digital Trace: independent full-screen Black Velvet analytics, no fabricated data. */
+#digitalTraceScreen.dm-trace-screen{position:relative;min-height:100dvh;background:#020305;color:#edf5fc;padding:0 12px calc(105px + env(safe-area-inset-bottom,0px));}
+.dm-trace-head{position:relative;padding:calc(30px + env(safe-area-inset-top,0px)) 4px 21px;border-bottom:1px solid rgba(165,190,212,.2)}
+.dm-trace-eyebrow{display:block;font-size:9px;letter-spacing:.17em;color:#a0b4c8}
+.dm-trace-head h1{font-size:26px;letter-spacing:-.035em;font-weight:510;margin:15px 0 5px}
+.dm-trace-head p{font-size:12px;color:#b5c9dc;line-height:1.5;margin:0;max-width:270px}
+#dmTraceBack{position:absolute;right:0;top:calc(25px + env(safe-area-inset-top,0px));width:37px;height:37px;border-radius:50%;border:1px solid rgba(192,220,241,.5);background:linear-gradient(145deg,#243746,#07121e);display:grid;place-items:center}
+#dmTraceBack .ico{width:18px;height:18px}
+.dm-trace-body{display:grid;gap:14px;margin-top:17px}
+.dm-trace-hero{padding:21px 16px;border:1px solid rgba(186,208,226,.36);border-radius:18px;background:radial-gradient(ellipse at 85% 0%,rgba(126,167,196,.14),transparent 57%),linear-gradient(148deg,#17232e,#060b11 75%)}
+.dm-trace-status{display:inline-flex;align-items:center;gap:7px;color:#d4e6f5;font-size:9px;letter-spacing:.12em}
+.dm-trace-status i{width:6px;height:6px;border-radius:50%;background:#adbdca;box-shadow:0 0 7px #b5c9da77}
+.dm-trace-hero h2{font-size:17px;font-weight:510;line-height:1.35;margin:14px 0 7px}
+.dm-trace-hero p,.dm-trace-note{color:#aabed0;font-size:12px;line-height:1.55;margin:0}
+#dmTraceConnections{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-top:17px;width:100%;padding:12px;border:1px solid rgba(192,218,240,.43);border-radius:12px;background:rgba(135,174,204,.12);font-size:12px;text-align:left}
+#dmTraceConnections .ico{width:15px;height:15px}
+.dm-trace-section-title{font-size:14px;letter-spacing:-.01em;font-weight:530;margin:8px 0 0}
+.dm-trace-sources{display:grid;gap:7px}
+.dm-trace-sources>div{display:flex;align-items:center;gap:9px;padding:12px;border:1px solid rgba(140,170,196,.23);border-radius:12px;background:linear-gradient(140deg,#111b25,#070c13)}
+.dm-trace-sources .ico{width:17px;height:17px;stroke:#bbcbd9}
+.dm-trace-sources span{font-size:12px;flex:1}
+.dm-trace-sources small{font-size:10px;color:#9aaebe}
+.dm-trace-empty{padding:24px 15px;border:1px dashed rgba(165,187,207,.33);border-radius:15px;text-align:center;color:#aabed0;font-size:12px;line-height:1.55}
+.dm-trace-finding{padding:13px;border:1px solid rgba(157,187,213,.32);border-radius:13px;background:#0b1420;margin-bottom:9px}
+.dm-trace-finding strong{display:block;font-size:13px;margin:0 0 5px}
+.dm-trace-finding p{color:#c3d4e2;font-size:12px;line-height:1.4;margin:0 0 7px}
+.dm-trace-finding small{color:#99afc3;font-size:10px}
+@media(max-width:350px){#digitalTraceScreen.dm-trace-screen{padding-left:8px;padding-right:8px}.dm-trace-head h1{font-size:24px}}
