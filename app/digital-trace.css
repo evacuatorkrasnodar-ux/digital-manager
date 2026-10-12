@@ -93,3 +93,14 @@
 .dm-trace-market-example p,.dm-trace-market-link p{font-size:11px;line-height:1.55;color:#b2c9da;margin:0}
 .dm-trace-market-link{display:grid;gap:7px;padding:4px 2px}
 .dm-trace-market-link strong{font-size:12px;font-weight:530}
+
+/* Scoped Digital Trace insight cards; other app cards are untouched. */
+#digitalTraceScreen .dm-trace-smart{display:grid;gap:8px;padding:12px;border:1px solid rgba(166,196,218,.28);border-radius:17px;background:linear-gradient(148deg,#101b27,#050a10)}
+#digitalTraceScreen .dm-trace-smart-heading{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:5px;padding:0 2px 3px}
+#digitalTraceScreen .dm-trace-smart-heading strong{font-size:13px;font-weight:540}
+#digitalTraceScreen .dm-trace-smart-heading small{font-size:9px;letter-spacing:.07em;color:#9eb7cc}
+#digitalTraceScreen .dm-trace-smart-card{display:grid;gap:7px;padding:12px;border:1px solid rgba(165,193,217,.26);border-radius:13px;background:linear-gradient(130deg,rgba(29,46,62,.55),rgba(8,14,21,.8))}
+#digitalTraceScreen .dm-trace-smart-card>span{font-size:9px;letter-spacing:.09em;color:#acc9df}
+#digitalTraceScreen .dm-trace-smart-card>strong{font-size:13px;font-weight:550}
+#digitalTraceScreen .dm-trace-smart-card>p{margin:0;font-size:11px;line-height:1.5;color:#b4c9d9}
+#digitalTraceScreen .dm-trace-smart-card>button{justify-self:start;border:1px solid rgba(174,204,227,.4);border-radius:10px;background:rgba(140,181,209,.1);color:#d9ebf8;padding:8px 11px;font-size:11px}
