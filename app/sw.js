@@ -1,11 +1,11 @@
 /* App-only service worker: fresh documents, styles and scripts; cached offline assets. */
-const CACHE = 'digital-manager-black-velvet-v708-20261012';
+const CACHE = 'digital-manager-black-velvet-v709-20261012';
 const CACHE_PREFIX = 'digital-manager-black-velvet-';
 const OFFLINE_FILES = [
   './index.html',
   './style.css?v=624',
   './dock.css?v=297',
-  './app.js?v=648',
+  './app.js?v=649',
   './sales.js?v=10',
   './business-context.js?v=2',
   './workflow-core.js?v=1',
@@ -56,12 +56,12 @@ const OFFLINE_FILES = [
   './home-design-sync.css?v=2',
   './composer-quiet-actions.css?v=2',
   './composer-history.css?v=4',
-  './quick-actions-velvet.css?v=9',
+  './quick-actions-velvet.css?v=10',
   './workshop.js?v=2',
   './workshop.css?v=2',
   './digital-trace.css?v=4',
   './digital-trace.js?v=5',
-  './assistant-quick-menu.js?v=5',
+  './assistant-quick-menu.js?v=6',
   './notebook-action-menu.css?v=1',
   './management-home-polish.css?v=3',
   './management-unified.css?v=1',
