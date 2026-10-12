@@ -329,4 +329,6 @@ function close(){
 function hide(){if(screen){screen.hidden=true;if(pictureOpen)closePicture()}}
 function openPicture(){open();showPicture()}
 window.DMSalesScreen=Object.freeze({open,openPicture,close,hide,getInsight,getTotals:totals,getBusinessSummary:()=>({salesRevenue:totalWon(),promotionExpenses:promotionTotal(),source:'manual-local-records'})});
+// Restore the living recommendation after a reload, even without a new sale.
+notifyInsight();
 })();
