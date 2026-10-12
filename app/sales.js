@@ -18,14 +18,32 @@ const uid=()=>Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8);
 let records=[];
 try{const r=JSON.parse(localStorage.getItem(KEY)||'[]');if(Array.isArray(r))records=r.filter(x=>x&&typeof x.id==='string'&&statuses[x.stage]&&typeof x.person==='string').slice(0,400)}catch(_){}
 let screen, previousFocus, pictureOpen=false;
-const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(records.slice(0,400)));window.dispatchEvent(new CustomEvent('dm:sales-changed',{detail:totals()}));return true}catch(e){console.warn(e);return false}};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(records.slice(0,400)));window.dispatchEvent(new CustomEvent('dm:sales-changed',{detail:totals()}));notifyInsight();return true}catch(e){console.warn(e);return false}};
 const totalWon=()=>records.filter(x=>x.stage==='won').reduce((n,x)=>n+(Number(x.amount)||0),0);
 const totals=()=>({sales:records.filter(x=>x.stage==='won').length,revenue:totalWon(),source:'user-entered-sales'});
 const promotionTotal=()=>promotion.reduce((sum,x)=>sum+x.amount,0);
+/* Signals derived exclusively from local entries. They are observations, never verified external AI. */
+function getInsight(){
+ const awaiting=records.filter(x=>x.stage==='new');
+ if(awaiting.length>=3)return {id:'waiting-replies',kind:'attention',title:'Люди ждут ответа',body:'По вашим записям '+awaiting.length+' обращения пока без отметки об ответе. Стоит проверить.',view:'sales'};
+ const byChannel=channels.map(source=>{
+  const leads=records.filter(x=>x.source===source);
+  return {source,leads:leads.length,bought:leads.filter(x=>x.stage==='won').length,spend:promotion.filter(x=>x.source===source).reduce((n,x)=>n+x.amount,0)};
+ });
+ const warning=byChannel.find(x=>x.spend>0&&x.leads>=2&&x.bought===0);
+ if(warning)return {id:'spend-'+warning.source,kind:'attention',title:'Проверим продвижение?',body:'На '+warning.source+' есть расходы и '+warning.leads+' обращения, но покупок пока не отмечено.',view:'picture'};
+ const possible=byChannel.find(x=>x.bought>=2);
+ if(possible)return {id:'buyers-'+possible.source,kind:'opportunity',title:'Есть хорошая зацепка',body:'Из '+possible.source+' уже '+possible.bought+' покупки по вашим записям. Посмотрим, что помогло?',view:'picture'};
+ return null;
+}
+function notifyInsight(){
+ try{window.dispatchEvent(new CustomEvent('dm:sales-insight-changed',{detail:getInsight()}))}catch(_){}
+}
 function savePromotion(){
  try{
   localStorage.setItem(PROMOTION_KEY,JSON.stringify(promotion.slice(0,200)));
   window.dispatchEvent(new CustomEvent('dm:promotion-changed',{detail:{total:promotionTotal(),source:'manual'}}));
+  notifyInsight();
   return true;
  }catch(e){console.warn('Promotion data storage unavailable',e);return false}
 }
@@ -237,5 +255,6 @@ function close(){
  if(target)target.focus({preventScroll:true});
 }
 function hide(){if(screen){screen.hidden=true;if(pictureOpen)closePicture()}}
-window.DMSalesScreen=Object.freeze({open,close,hide,getTotals:totals,getBusinessSummary:()=>({salesRevenue:totalWon(),promotionExpenses:promotionTotal(),source:'manual-local-records'})});
+function openPicture(){open();showPicture()}
+window.DMSalesScreen=Object.freeze({open,openPicture,close,hide,getInsight,getTotals:totals,getBusinessSummary:()=>({salesRevenue:totalWon(),promotionExpenses:promotionTotal(),source:'manual-local-records'})});
 })();
