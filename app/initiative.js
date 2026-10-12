@@ -156,6 +156,20 @@ function buildPanel(){
  return root;
 }
 const infoFoot='<p class="dm-init-fine">Сейчас я работаю только с вручную внесёнными записями на этом устройстве и только пока приложение открыто. Настоящие ИИ, отправка сообщений, расходы и постоянная серверная работа ещё не подключены.</p>';
+function businessProfileMarkup(){
+ const api=window.DMBusinessContext;
+ const profile=api?.getProfile?.()||{description:''};
+ const context=api?.getContext?.()||{configured:false,areas:[]};
+ return '<details class="dm-init-business-profile"><summary>'+(context.configured?'Мой бизнес · '+esc(profile.description.slice(0,60))+(profile.description.length>60?'…':''):'Расскажи, чем живёт твой бизнес')+'</summary>'+
+  '<form id="dmBusinessProfileForm" class="dm-init-business-form">'+
+  '<p>Одной фразой. Например: «цветочный магазин, букеты на заказ и доставка» или «сеть сервисных центров и ремонт техники». Можно совмещать любые направления.</p>'+
+  '<label for="dmBusinessDescription">Чем занимается компания?</label>'+
+  '<textarea id="dmBusinessDescription" name="description" rows="3" minlength="3" maxlength="600" required placeholder="Мой бизнес — …">'+esc(profile.description)+'</textarea>'+
+  '<button type="submit">Сохранить описание ↗</button>'+
+  (context.configured?'<p class="dm-init-business-areas"><strong>Что буду учитывать:</strong> '+esc(context.areas.slice(0,6).join(' · '))+'</p>':'')+
+  '<small>Это описание сохраняется только на этом устройстве. Я не получаю от него автоматически доступ к складу, персоналу или банковским данным.</small>'+
+  '<p data-business-profile-status role="status"></p></form></details>';
+}
 function introMarkup(){
  const data=summary();
  return '<div class="dm-init-intro"><div class="dm-init-emblem" aria-hidden="true"><span>✦</span></div>'+
@@ -163,6 +177,7 @@ function introMarkup(){
   '<p>Можешь поручить мне рутину. Я сам замечу новые обращения в «Продажах», составлю черновики ответов и покажу, что получилось. Тебе не нужно каждый раз создавать задание.</p>'+
   '<button class="dm-init-main-button" type="button" data-init-consent>Разрешить подготовку ↗</button>'+
   (data.stored?'<p>Уже сохранено черновиков: '+data.stored+'. Они не удалены.</p>':'')+
+  businessProfileMarkup()+
   infoFoot+'</div>';
 }
 function consentMarkup(){
@@ -190,6 +205,7 @@ function statusMarkup(){
     '<button type="button" data-init-open="'+esc(x.saleId)+'" aria-label="Посмотреть черновик для '+esc(x.sale.person)+'">↗</button></article>').join('')+'</section>';
   if(all.length>40)main+='<p class="dm-init-fine">Показаны первые 40 обращений из '+all.length+'.</p>';
  }
+ main+=businessProfileMarkup();
  main+='<details class="dm-init-history"><summary>Что я действительно сделал · история</summary>'+
  (state.events.length?'<ol>'+state.events.slice(0,35).map(e=>'<li><small>'+esc(e.at)+'</small>'+esc(e.text)+'</li>').join('')+'</ol>':'<p>Пока нет записанных действий.</p>')+'</details>'+
  infoFoot;
@@ -290,6 +306,18 @@ function handleClick(event){
  }
 }
 function handleSubmit(event){
+ if(event.target.id==='dmBusinessProfileForm'){
+  event.preventDefault();
+  const field=event.target.querySelector('[name="description"]');
+  const result=window.DMBusinessContext?.saveProfile?.(String(field?.value||''));
+  if(!result?.ok){
+   const status=event.target.querySelector('[data-business-profile-status]');
+   if(status)status.textContent=result?.reason==='storage'?'Не удалось сохранить описание. Текст остался в поле.':'Пожалуйста, опиши свой бизнес хотя бы тремя символами.';
+   return;
+  }
+  feedback='Запомнил, чем живёт твой бизнес. Теперь учту это в своих выводах — без выдуманных показателей.';
+  render();return;
+ }
  if(event.target.id!=='dmInitConsentForm')return;
  event.preventDefault();
  const values=new FormData(event.target);
@@ -301,6 +329,9 @@ function init(){
  document.addEventListener('click',event=>{
   const trigger=event.target.closest('#dmInitPlasma,#dmInitManagement,#dmInitAssistant');
   if(trigger){event.preventDefault();open()}
+ });
+ window.addEventListener('dm:business-context-changed',()=>{
+  if(root&&!root.hidden&&view!=='editor')render();
  });
  window.addEventListener('dm:sales-changed',scan);
  window.addEventListener('pageshow',scan);
