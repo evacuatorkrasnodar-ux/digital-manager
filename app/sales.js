@@ -2,7 +2,7 @@
 (()=>{'use strict';
 const KEY='dm-sales-records-v1', LEGACY='digital-manager-black-velvet-v2';
 const statuses={new:'Написал',talk:'Обсуждаем',offer:'Предложили',won:'Купил',lost:'Не сложилось'};
-const channels=['Сайт','VK','Telegram','MAX','OK','Дзен','Avito','Другое'];
+const channels=['Сайт','VK','Telegram','MAX','OK','Дзен','Avito','Ozon','Wildberries','Яндекс Маркет','Мегамаркет','Другое'];
 const reasons=['Не знаем','Цена не подошла','Долго отвечали','Купил в другом месте','Передумал','Другое'];
 const PROMOTION_KEY='dm-promotion-expenses-v1';
 let promotion=[];
