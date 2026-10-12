@@ -1,0 +1,134 @@
+/* Appearance modes: default BEAUTIFUL has no overrides whatsoever.
+   Reduced profiles affect only decoration. Navigation and interactions stay live. */
+
+/* Shared decoration selector: avoids global animation shutdown for progress
+   indicators, dialogs and screen transitions. */
+html[data-dm-performance="eco"] :is(
+  .dm-voice-waves-electric .dm-laser-track,
+  .dm-launcher-waves .dm-laser-track,
+  .mg-standalone-waves .dm-laser-track,
+  .dm-myday-plasma-stage .dm-laser-track,
+  .dm-voice-waves .dm-laser-track,
+  .dm-voice-waves path,
+  .dm-shared-plasma .dm-shared-edge::after
+){
+  animation-play-state:paused!important;
+}
+html[data-dm-performance="eco"] :is(
+  .dm-voice-orb .dm-orb-halo,
+  .dm-launcher-plasma .dm-orb-halo,
+  .dm-shared-plasma .dm-shared-halo
+){
+  filter:blur(4px)!important;
+  opacity:.68!important;
+}
+/* Use a shorter blur on the actual glass panels (rather than all elements). */
+html[data-dm-performance="eco"] :is(
+  .bottom-nav,.dock-quick-actions,.dm-world-orb-menu,
+  .voice-pref,.voice-mock,.dm-chat-panel,
+  .day-shell .day-tabs,.day-shell .day-tab,
+  .day-shell .calendar-panel,.day-shell .health-card,
+  .day-shell .health-summary,.day-shell .world-spotlight
+){
+  -webkit-backdrop-filter:blur(6px)!important;
+  backdrop-filter:blur(6px)!important;
+}
+
+/* SIMPLE: rings retain geometry, state colors and emblems.
+   Heavy animation and animated laser tracks are stopped entirely. */
+html[data-dm-performance="simple"] :is(
+  .dm-shared-plasma,.dm-shared-plasma *,
+  .dm-voice-orb,.dm-voice-orb *,
+  .dm-voice-waves,.dm-voice-waves *,
+  .dm-launcher-waves,.dm-launcher-waves *,
+  .mg-standalone-waves,.mg-standalone-waves *,
+  .dm-plasma-example,.dm-plasma-example *,
+  .assistant-ring,.assistant-ring *,
+  .dm-myday-plasma-stage .dm-laser-track,
+  .dock-launcher .dm-laser-track
+),
+html[data-dm-performance="simple"] :is(
+  .dm-shared-plasma,.dm-shared-plasma *,
+  .dm-voice-orb,.dm-voice-orb *,
+  .assistant-ring,.assistant-ring *
+)::before,
+html[data-dm-performance="simple"] :is(
+  .dm-shared-plasma,.dm-shared-plasma *,
+  .dm-voice-orb,.dm-voice-orb *,
+  .assistant-ring,.assistant-ring *
+)::after{
+  animation:none!important;
+  transition:none!important;
+}
+/* Disable GPU-intensive background blurs across all glass cards in simple mode.
+   Existing dark gradient fills remain; user data and element visibility do not change. */
+html[data-dm-performance="simple"] *,
+html[data-dm-performance="simple"] *::before,
+html[data-dm-performance="simple"] *::after{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+html[data-dm-performance="simple"] :is(
+  .dm-voice-orb .dm-orb-halo,
+  .dm-launcher-plasma .dm-orb-halo,
+  .dm-shared-plasma .dm-shared-halo
+){opacity:.32!important;filter:none!important}
+html[data-dm-performance="simple"] :is(
+  .dm-voice-orb .dm-orb-spectral,
+  .dm-launcher-plasma .dm-orb-spectral,
+  .dm-shared-plasma .dm-shared-spectral
+){filter:none!important}
+html[data-dm-performance="simple"] :is(
+  .dm-voice-orb,
+  .dm-launcher-plasma,
+  .dm-shared-plasma
+){filter:none!important}
+
+/* A background tab doesn't need to paint animated decorations, in ANY mode.
+   Everything resumes on visibilitychange; the chosen style is unchanged. */
+html.dm-decorations-paused :is(
+  .dm-voice-orb,.dm-voice-orb *,
+  .dm-shared-plasma,.dm-shared-plasma *,
+  .dm-voice-waves,.dm-voice-waves *,
+  .dm-launcher-waves,.dm-launcher-waves *,
+  .assistant-ring,.assistant-ring *
+){
+  animation-play-state:paused!important;
+}
+
+/* The radio cards appear inside the existing Appearance screen. */
+#managementScreen .dm-performance-pref{padding:14px 13px 15px;display:grid;gap:12px}
+#managementScreen .dm-performance-pref h3{margin:0;font-size:15px;font-weight:600;color:#f0f7ff}
+#managementScreen .dm-performance-pref .dm-performance-intro{margin:3px 0 0;font-size:11px;line-height:1.5;color:#b5c9dc}
+#managementScreen .dm-performance-choices{
+  border:0;min-width:0;margin:0;padding:0;display:grid;gap:7px;
+}
+#managementScreen .dm-performance-choice{
+  position:relative;display:flex;align-items:center;gap:11px;
+  padding:12px 11px;border:1px solid rgba(130,165,203,.27);
+  border-radius:15px;background:linear-gradient(142deg,rgba(29,45,63,.57),rgba(6,13,23,.8));
+  cursor:pointer;transition:border-color .2s,background .2s;
+}
+#managementScreen .dm-performance-choice:has(input:checked){
+  border-color:rgba(186,216,245,.72);
+  background:linear-gradient(135deg,rgba(40,66,91,.66),rgba(7,20,34,.88));
+  box-shadow:inset 0 1px rgba(255,255,255,.1);
+}
+#managementScreen .dm-performance-choice:has(input:focus-visible){outline:2px solid #e0f3ff;outline-offset:2px}
+#managementScreen .dm-performance-choice input{
+  position:relative;flex:none;appearance:none;-webkit-appearance:none;
+  width:18px;height:18px;margin:0;border:1.5px solid #92a9c4;border-radius:50%;
+  background:#08111f;display:grid;place-items:center;cursor:pointer;
+}
+#managementScreen .dm-performance-choice input:checked{border-color:#e9f6ff}
+#managementScreen .dm-performance-choice input:checked::after{
+  content:"";width:8px;height:8px;background:#e5f5ff;border-radius:50%;
+}
+#managementScreen .dm-performance-choice .dm-performance-symbol{
+  flex:none;display:grid;place-items:center;width:31px;height:31px;border-radius:11px;
+  color:#d4e8ff;background:rgba(75,119,163,.15);font-size:17px;
+}
+#managementScreen .dm-performance-copy{display:grid;gap:3px;min-width:0}
+#managementScreen .dm-performance-copy strong{font-size:13px;font-weight:600;color:#f3f8ff}
+#managementScreen .dm-performance-copy small{font-size:11px;line-height:1.45;color:#b8c8d8}
+#managementScreen .dm-performance-note{margin:0;font-size:11px;line-height:1.5;color:#b5c9dc}
