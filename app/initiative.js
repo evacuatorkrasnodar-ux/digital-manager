@@ -74,7 +74,10 @@ function scan(){
   const next={...state,items:updated.slice(0,MAX_ITEMS)};
   if(newOnes.length)log(next,'Подготовлено '+newOnes.length+' черновиков по обращениям из «Продаж». Ничего не отправлено.');
   else log(next,'Обновлены черновики после изменения этапа обращения. Ничего не отправлено.');
-  if(!commit(next)){feedback='Не удалось сохранить подготовленные ответы. Проверьте память устройства.'}
+  if(!commit(next))feedback='Не удалось сохранить подготовленные ответы. Проверьте память устройства.';
+  else if(newOnes.length)try{
+   window.dispatchEvent(new CustomEvent('dm:initiative-prepared',{detail:{count:newOnes.length}}));
+  }catch(_){}
  }
  lastScan=Date.now();updateEntrances();
  if(root&&!root.hidden&&view==='board')render();
