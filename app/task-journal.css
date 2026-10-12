@@ -20,3 +20,13 @@
 .dm-journal-entry li small{font-size:10px;color:#9fb5c9}
 .dm-journal-entry>button{padding:10px;border:1px solid #8daac0;border-radius:11px;background:#b8ccdc;color:#0a1824;font-size:12px}
 .dm-journal-empty{border:1px dashed rgba(169,198,218,.29);border-radius:14px;padding:18px;font-size:12px;line-height:1.6;color:#b4c7d7}
+
+/* Existing gold recommendation: same geometry, green acknowledgement state. */
+#homeScreen .recommendation-card[data-task-state="accepted"]{
+ border-color:rgba(91,189,126,.58);
+ background:radial-gradient(ellipse 130% 85% at 110% 100%,rgba(49,150,93,.14),transparent 67%),linear-gradient(145deg,#101e19,#09140f 61%,#070b09);
+ transition:background .35s ease,border-color .35s ease;
+}
+#homeScreen .recommendation-card[data-task-state="accepted"] .recommendation-waves{filter:hue-rotate(85deg) saturate(.84);transition:filter .4s ease}
+#homeScreen .recommendation-card[data-task-state="accepted"] .spark-icon{color:#b5f4c7;fill:#b6f2c5;stroke:#dfffe7;filter:drop-shadow(0 0 8px #5fca8b)}
+#homeScreen .recommendation-card[data-task-state="accepted"] .advice-cta{background:linear-gradient(135deg,#b9f1c8,#74c995);color:#0b2918;box-shadow:0 0 12px rgba(96,195,124,.26)}
