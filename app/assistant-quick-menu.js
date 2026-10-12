@@ -48,6 +48,7 @@ function init(){
  function close(){
   clearTimeout(hideTimer);menu.hidden=true;
   menu.classList.remove('dm-plasma-orbit');
+  document.documentElement.classList.remove('dm-plasma-orbit-open');
   triggers.forEach(t=>t.setAttribute('aria-expanded','false'));
  }
  function toggle(event){
@@ -62,6 +63,9 @@ function init(){
    const plasmaMode=Boolean((dayPlasma&&dayStage&&!dayStage.hidden)||
     (worldPlasma&&!worldPlasma.hidden));
    menu.classList.toggle('dm-plasma-orbit',plasmaMode);
+   // The clean black orbital scene is active only around a real, visible
+   // dock-free plasma and never during the standard navigation mode.
+   document.documentElement.classList.toggle('dm-plasma-orbit-open',plasmaMode);
    menu.hidden=false;
    hideTimer=setTimeout(close,6000);
   }
