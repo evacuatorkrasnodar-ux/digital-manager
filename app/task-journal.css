@@ -1,0 +1,22 @@
+/* Task journal only: no modification of shared cards, plasma, dock, or home geometry. */
+.dm-journal-entry-links{display:flex;gap:8px;margin:12px 0}
+.dm-journal-entry-links button{flex:1;min-width:0;display:flex;justify-content:space-between;align-items:center;gap:5px;padding:12px;border:1px solid rgba(168,193,212,.3);border-radius:13px;background:linear-gradient(135deg,#15202b,#080d15);color:#e2edf6;font-size:11px;text-align:left}
+.dm-journal-overlay[hidden]{display:none!important}
+.dm-journal-overlay{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.82);display:flex;justify-content:center;align-items:flex-start;overflow-y:auto;padding:calc(20px + env(safe-area-inset-top,0px)) 12px 25px}
+.dm-journal-frame{width:100%;max-width:430px;max-height:calc(100dvh - 40px);overflow:auto;border:1px solid rgba(174,202,223,.37);border-radius:23px;background:linear-gradient(160deg,#162431,#05090e 64%);color:#ebf5fd;padding:16px;box-shadow:0 16px 50px #000}
+.dm-journal-frame header{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.dm-journal-frame header small{font-size:9px;letter-spacing:.13em;color:#a7bed0}
+.dm-journal-frame h2{margin:7px 0 14px;font-size:23px;font-weight:540}
+.dm-journal-frame [data-journal-close]{width:36px;height:36px;border-radius:50%;border:1px solid rgba(180,210,230,.4);background:#12212c;color:#e5f1fb;font-size:22px}
+.dm-journal-frame nav{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:13px}
+.dm-journal-frame nav button{padding:11px 5px;border:1px solid rgba(175,203,224,.25);border-radius:11px;background:#0c1721;color:#b7cbdc;font-size:12px}
+.dm-journal-frame nav button[aria-pressed=true]{background:#2b4053;border-color:#b3cedf;color:#f1f8ff}
+.dm-journal-entry{padding:13px;border:1px solid rgba(169,198,218,.27);border-radius:14px;background:rgba(118,155,183,.07)}
+.dm-journal-entry>span{font-size:9px;letter-spacing:.1em;color:#aac3d5}
+.dm-journal-entry h3{font-size:15px;font-weight:540;margin:9px 0}
+.dm-journal-entry p,.dm-journal-entry li{font-size:12px;line-height:1.5;color:#b9cedd}
+.dm-journal-entry ul{padding-left:17px}
+.dm-journal-entry li{margin:8px 0}
+.dm-journal-entry li small{font-size:10px;color:#9fb5c9}
+.dm-journal-entry>button{padding:10px;border:1px solid #8daac0;border-radius:11px;background:#b8ccdc;color:#0a1824;font-size:12px}
+.dm-journal-empty{border:1px dashed rgba(169,198,218,.29);border-radius:14px;padding:18px;font-size:12px;line-height:1.6;color:#b4c7d7}
