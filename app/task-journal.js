@@ -169,7 +169,7 @@ function transferSelected(ids){
  const stamp=Date.now(),dated=now();
  const nextPersonal=personal.map(t=>selected.some(x=>x.id===t.id)?{...t,status:'delegated',assignedAt:stamp}:t);
  const nextDelegated=[...selected.map(t=>({
-  id:'owner-task:'+t.id,origin:'owner-task',personalId:t.id,
+  id:'owner-task:'+t.id+':'+stamp+'-'+Math.random().toString(36).slice(2,7),origin:'owner-task',personalId:t.id,
   title:t.title,status:'queued',created:dated,createdMs:stamp,
   log:[{at:dated,ms:stamp,message:'Вы передали дело управляющему после подтверждения. Внешних действий не выполнялось.'}]
  })),...delegated];
@@ -220,7 +220,7 @@ function delegatedList(){
  const pending=delegated.filter(t=>t.status!=='reviewed'&&t.status!=='returned');
  if(!pending.length)return '<p class="dm-journal-empty">Активных поручений управляющему пока нет.</p>';
  return pending.map(t=>'<article class="dm-journal-entry"><span>'+(t.origin==='owner-task'?'ПЕРЕДАНО ВАМИ · ОЖИДАЕТ':'ПЛАН · ДЕМО · НЕ ВЫПОЛНЕНО')+'</span><h3>'+esc(t.title)+'</h3>'+
- '<p>'+(t.origin==='owner-task'?'Дело передано в очередь управляющему. Я могу помочь подготовить дальнейшие шаги. Ничего вовне не отправлено, не оплачено и не выполнено.':'План подготовлен к проверке. Рекламные данные и реальные интеграции не подключены.')+'</p>'+
+ '<p>'+(t.origin==='owner-task'?'Дело в очереди. Могу помочь продумать следующие шаги, но пока ничего вовне не отправлено, не оплачено и не выполнено.':'План подготовлен к проверке. Рекламные данные и реальные интеграции не подключены.')+'</p>'+
  '<ul>'+(Array.isArray(t.log)?t.log:[]).map(l=>'<li><small>'+esc(l.at)+'</small> '+esc(l.message)+'</li>').join('')+'</ul>'+
  (t.origin==='owner-task'&&t.status==='queued'?'<button type="button" data-transfer-reclaim="'+esc(t.id)+'">Забрать себе ↩</button>':t.status==='planned'?'<button type="button" data-delegation-review="'+esc(t.id)+'">Я посмотрел план · в историю</button>':'')+'</article>').join('');
 }
