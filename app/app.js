@@ -846,7 +846,9 @@
   requestAnimationFrame(mgSyncCarouselNav);
   function dmSyncQuickHome(){
     const home=byId('dockOpenHome');
-    if(home)home.hidden=tab==='home';
+    // In dock-free plasma mode all four orbital actions stay visible,
+    // even on Home. The normal dock keeps its original redundant-Home rule.
+    if(home)home.hidden=voicePrefs.dock&&tab==='home';
   }
   dmSyncQuickHome();
   let dmQuickMenuTimer=null;
