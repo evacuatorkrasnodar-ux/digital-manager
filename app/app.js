@@ -1519,6 +1519,7 @@
   // Internal deep links from the unified personal OS dock.
   const jump=new URLSearchParams(window.location.search).get('jump');
   if(['assistant','management'].includes(jump))setTab(jump);
+  else if(jump==='attention'){setTab('home');dmOpenAttention();}
   else if(jump==='profile'){setTab('management');profileModal();}
   if(jump)window.history.replaceState(null,'',window.location.pathname);
   // Preserve the original analytics date picker through My Day's report link.
