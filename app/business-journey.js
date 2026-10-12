@@ -38,12 +38,12 @@ function read(){
  try{const raw=JSON.parse(localStorage.getItem(KEY)||'null');
   if(raw?.version===1&&['start','existing'].includes(raw.mode))
    return {version:1,mode:raw.mode,description:compact(raw.description||''),have:compact(raw.have||''),
-    unknownIdea:Boolean(raw.unknownIdea),startedAt:Number(raw.startedAt)||Date.now(),savedAt:Number(raw.savedAt)||Date.now()};
+    unknownIdea:Boolean(raw.unknownIdea),location:compact(raw.location||'').slice(0,180),locationFixed:Boolean(raw.locationFixed),startedAt:Number(raw.startedAt)||Date.now(),savedAt:Number(raw.savedAt)||Date.now()};
  }catch(_){}
  return null;
 }
 function draft(){return state?{...state}:{
- version:1,mode:null,description:'',have:'',unknownIdea:false,startedAt:Date.now(),savedAt:Date.now()}}
+ version:1,mode:null,description:'',have:'',location:'',locationFixed:false,unknownIdea:false,startedAt:Date.now(),savedAt:Date.now()}}
 let working=draft();
 function store(next){
  const record={...next,savedAt:Date.now()};
@@ -71,14 +71,22 @@ function markup(){
   '</div>'+
   '<p class="dm-journey-small">Можно всё изменить позже. Пока мы ничего не оформляем, не публикуем и не оплачиваем.</p></section>';
  if(view==='idea')return '<form id="dmJourneyIdeaForm" class="dm-journey-chat">'+
-  '<span class="dm-journey-eyebrow">ЗНАКОМИМСЯ · 1 ИЗ 2</span><h2>'+escape(suggestIdea(working.mode))+'</h2>'+
+  '<span class="dm-journey-eyebrow">ЗНАКОМИМСЯ · ШАГ 1</span><h2>'+escape(suggestIdea(working.mode))+'</h2>'+
   '<p>'+(working.mode==='start'?'Мы не обязаны сразу выбирать идею. Я помогу найти направление по твоим интересам и возможностям.':'Пойму, чем занимается компания, а не буду навязывать ей чужой шаблон.')+'</p>'+
   '<textarea id="dmJourneyIdea" name="idea" rows="4" maxlength="600" placeholder="'+(working.mode==='start'?'Например: люблю цветы, но не знаю, как на них заработать':'Например: магазин цветов, букеты на заказ и доставка')+'">'+escape(working.description)+'</textarea>'+
   '<div class="dm-journey-bottom"><button type="button" data-journey-back>← Назад</button>'+
   (working.mode==='start'?'<button type="button" data-journey-unknown>Пока не знаю</button>':'')+
   '<button type="submit">Дальше ↗</button></div></form>';
+ if(view==='location')return '<form id="dmJourneyLocationForm" class="dm-journey-chat">'+
+  '<span class="dm-journey-eyebrow">ЗНАКОМИМСЯ · ШАГ 2</span>'+
+  '<h2>'+(working.mode==='start'?'Где хочешь открыть своё дело?':'В каком городе или районе работаешь?')+'</h2>'+
+  '<p>Город, район или улица — как тебе удобно. Я не буду оценивать конкурентов наугад. Сначала проверим реальную обстановку и возможности.</p>'+
+  '<textarea name="location" rows="3" maxlength="180" placeholder="Например: Краснодар, район Фестивальный">'+escape(working.location||'')+'</textarea>'+
+  '<div class="dm-journey-bottom"><button type="button" data-journey-back>← Назад</button>'+
+  '<button type="button" data-journey-skip-location>Пока не решил</button>'+
+  '<button type="submit">Дальше ↗</button></div></form>';
  if(view==='have')return '<form id="dmJourneyHaveForm" class="dm-journey-chat">'+
-  '<span class="dm-journey-eyebrow">ЗНАКОМИМСЯ · 2 ИЗ 2</span><h2>'+escape(havePrompt(working.mode))+'</h2>'+
+  '<span class="dm-journey-eyebrow">ЗНАКОМИМСЯ · ПОСЛЕДНИЙ ШАГ</span><h2>'+escape(havePrompt(working.mode))+'</h2>'+
   '<p>Пиши как есть. Можно коротко, без цифр и специальных слов. Это не экзамен и не анкета.</p>'+
   '<textarea id="dmJourneyHave" name="have" rows="4" maxlength="600" placeholder="Например: есть свободное время и телефон, но нет сайта и клиентов">'+escape(working.have)+'</textarea>'+
   '<div class="dm-journey-bottom"><button type="button" data-journey-back>← Назад</button><button type="submit">Построим маршрут ↗</button></div></form>';
@@ -134,11 +142,12 @@ function onClick(e){
  const button=e.target.closest('button');if(!button)return;
  if(button.hasAttribute('data-journey-close'))return close();
  if(button.dataset.journeyMode){
-  working={...working,mode:button.dataset.journeyMode,description:'',have:'',unknownIdea:false};
+  working={...working,mode:button.dataset.journeyMode,description:'',have:'',location:'',locationFixed:false,unknownIdea:false};
   view='idea';return render();
  }
- if(button.hasAttribute('data-journey-back')){view=view==='have'?'idea':'welcome';return render()}
- if(button.hasAttribute('data-journey-unknown')){working.description='';working.unknownIdea=true;view='have';return render()}
+ if(button.hasAttribute('data-journey-back')){view=view==='have'?(working.description?'location':'idea'):view==='location'?'idea':'welcome';return render()}
+ if(button.hasAttribute('data-journey-unknown')){working.description='';working.unknownIdea=true;working.location='';working.locationFixed=false;view='have';return render()}
+ if(button.hasAttribute('data-journey-skip-location')){working.location='';working.locationFixed=false;view='have';return render()}
  if(button.hasAttribute('data-journey-edit')){working=draft();view='idea';return render()}
  if(button.hasAttribute('data-journey-finish'))return close();
 }
@@ -147,6 +156,12 @@ function onSubmit(e){
   e.preventDefault();
   working.description=compact(e.target.querySelector('[name="idea"]')?.value);
   working.unknownIdea=working.mode==='start'&&!working.description;
+  view=working.description?'location':'have';return render();
+ }
+ if(e.target.id==='dmJourneyLocationForm'){
+  e.preventDefault();
+  working.location=compact(e.target.querySelector('[name="location"]')?.value).slice(0,180);
+  working.locationFixed=state?.location===working.location&&Boolean(state?.locationFixed);
   view='have';return render();
  }
  if(e.target.id==='dmJourneyHaveForm'){
@@ -168,6 +183,7 @@ function onSubmit(e){
 function getState(){return state?Object.freeze({...state}):null}
 function getPlan(){return state?Object.freeze({mode:state.mode,modeLabel:titles[state.mode],description:state.description,
  have:state.have,unknownIdea:state.unknownIdea,
+ location:state.location||'',locationFixed:Boolean(state.locationFixed),
  steps:journeySteps(state).map(x=>({...x,status:'planned'})),source:'owner-entered-local-plan'}):null}
 function explain(){
  const p=getPlan();if(!p)return null;
