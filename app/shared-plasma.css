@@ -1,20 +1,99 @@
-/* Universal approved waiting plasma; self-contained for the personal pages. */
+/* Approved 11 Oct 22:28 plasma, accurately restored from Home.
+   One isolated source for the secondary pages; no legacy ring layers. */
 .dm-shared-socket{display:grid!important;place-items:center}
-.dm-shared-plasma{--dm-size:60px;position:relative;display:block;flex:none;width:var(--dm-size);height:var(--dm-size);border-radius:50%;isolation:isolate;background:radial-gradient(circle,rgba(0,2,10,.97) 0 48%,rgba(1,5,22,.93) 57%,transparent 70%);filter:drop-shadow(0 0 5px rgba(225,240,255,.55)) drop-shadow(0 0 9px rgba(183,206,237,.18))}
-.dm-shared-plasma i{display:block;position:absolute;border-radius:50%;pointer-events:none}
-.dm-shared-plasma .dm-shared-halo{inset:-24%;background:radial-gradient(circle,transparent 38%,rgba(237,246,255,.04) 49%,rgba(229,241,255,.18) 56%,rgba(191,215,248,.09) 66%,transparent 76%);filter:blur(8px)}
-.dm-shared-plasma .dm-shared-rim{inset:4%;background:conic-gradient(from 15deg,#c7d7e6,#fff 27deg,#eaf6ff 46deg,#f8fcff 90deg,#b9cfe7 141deg,#f3f4ff 197deg,#d5e1f5 217deg,#fff 248deg,#c9d9e8 288deg,#f5fbff 330deg,#c7d7e6);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4.6px),#000 calc(100% - 2.1px));mask:radial-gradient(farthest-side,transparent calc(100% - 4.6px),#000 calc(100% - 2.1px));filter:drop-shadow(0 0 3px rgba(225,240,255,.78));animation:dm-shared-rotate 13s linear infinite}
-.dm-shared-plasma .dm-shared-edge{inset:8%;border:1px solid rgba(151,216,255,.44);box-shadow:inset 0 0 8px rgba(25,63,238,.48),0 0 7px rgba(93,153,255,.53)}
-.dm-shared-plasma .dm-shared-spectral{position:absolute;inset:-13%;z-index:2;width:126%;height:126%;overflow:visible;filter:grayscale(1) saturate(0) brightness(1.42) drop-shadow(0 0 3px rgba(232,246,255,.72))}
-.dm-shared-plasma .dm-shared-arc{transform-origin:60px 60px;animation:dm-shared-rotate 16s linear infinite}
-.dm-shared-plasma .dm-shared-violet{animation-direction:reverse}
-.dm-shared-plasma .dm-shared-brand{position:absolute;left:50%;top:50%;width:42%;height:46%;transform:translate(-50%,-50%);z-index:5;opacity:.20;display:grid;place-items:center;pointer-events:none}
-.dm-shared-plasma .dm-shared-brand img{display:block;width:100%;height:100%;object-fit:contain;filter:brightness(.58) saturate(.35) drop-shadow(0 0 2px rgba(171,207,240,.16))}
-[data-mode]:not([data-mode="idle"]) .dm-shared-plasma .dm-shared-brand{opacity:0!important;visibility:hidden!important}
-.dm-shared-plasma[data-mode]:not([data-mode="idle"]) .dm-shared-brand{opacity:0!important}
-.dm-shared-plasma[data-mode="idle"] .dm-shared-brand{opacity:.20}
-@keyframes dm-shared-rotate{to{transform:rotate(360deg)}}
-@media(prefers-reduced-motion:reduce){.dm-shared-plasma .dm-shared-rim,.dm-shared-plasma .dm-shared-arc{animation:none!important}}
-
-/* Attention screen also shows the same white waiting plasma, without creating a dock. */
-#dmAttentionPanel .dm-attention-head .dm-attention-approved-plasma{--dm-size:53px;position:absolute;right:17px;bottom:15px;z-index:2;pointer-events:none}
+.dm-shared-plasma{
+ --dm-size:43px;
+ width:var(--dm-size);height:var(--dm-size);
+ display:block;position:relative;z-index:2;flex:none;border-radius:50%;isolation:isolate;
+ background:radial-gradient(circle,rgba(0,2,10,.97) 0 48%,rgba(1,5,22,.93) 57%,transparent 70%);
+ filter:drop-shadow(0 0 5px rgba(225,240,255,.69)) drop-shadow(0 0 9px rgba(183,206,237,.23));
+ animation:dm-approved-breathe 4.6s ease-in-out infinite;
+}
+.dm-shared-plasma i{position:absolute;display:block;pointer-events:none;border-radius:50%}
+.dm-shared-plasma .dm-shared-halo{
+ inset:-24%;
+ background:radial-gradient(circle,transparent 38%,rgba(237,246,255,.05) 49%,rgba(229,241,255,.23) 56%,rgba(191,215,248,.11) 66%,transparent 76%);
+ filter:blur(8px);
+}
+.dm-shared-plasma .dm-shared-rim{
+ inset:4%;opacity:.44;
+ background:conic-gradient(from 15deg,#c7d7e6,#fff 27deg,#eaf6ff 46deg,#f8fcff 90deg,#b9cfe7 141deg,#f3f4ff 197deg,#d5e1f5 217deg,#fff 248deg,#c9d9e8 288deg,#f5fbff 330deg,#c7d7e6);
+ -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4.6px),#000 calc(100% - 2.1px));
+ mask:radial-gradient(farthest-side,transparent calc(100% - 4.6px),#000 calc(100% - 2.1px));
+ animation:dm-approved-rotate 13s linear infinite;
+ filter:drop-shadow(0 0 3px rgba(225,240,255,.78));
+}
+.dm-shared-plasma .dm-shared-edge{
+ inset:8%;border:1px solid rgba(151,216,255,.44);
+ box-shadow:inset 0 0 8px rgba(25,63,238,.48),0 0 7px rgba(93,153,255,.53);
+}
+.dm-shared-plasma .dm-shared-spectral{
+ position:absolute;inset:-13%;z-index:2;width:126%;height:126%;
+ overflow:visible;pointer-events:none;
+ filter:grayscale(1) saturate(0) brightness(1.42) drop-shadow(0 0 3px rgba(232,246,255,.72));
+}
+.dm-shared-plasma .dm-shared-spectral .dm-shared-arc{
+ transform-origin:60px 60px;animation:dm-approved-rotate 8s linear infinite;
+}
+.dm-shared-plasma .dm-shared-ice{animation-duration:10.4s!important;filter:drop-shadow(0 0 2px rgba(119,197,255,.74))}
+.dm-shared-plasma .dm-shared-violet{animation-duration:12.2s!important;animation-direction:reverse!important;filter:drop-shadow(0 0 4px #a368ff)}
+/* Original travelling silver highlight; never a second ring element. */
+.dm-shared-plasma::after{
+ content:"";position:absolute;inset:5%;border-radius:50%;
+ border:1.3px solid transparent;border-top-color:#effaff;
+ border-right-color:rgba(148,202,255,.50);
+ filter:drop-shadow(0 0 5px #5fbaff);
+ transform:rotate(-21deg);pointer-events:none;
+}
+/* Original black-matter depth, with floating particles suppressed under logo. */
+.dm-shared-plasma .dm-shared-edge::before,
+.dm-shared-plasma .dm-shared-edge::after{
+ content:"";position:absolute;inset:18%;border-radius:50%;pointer-events:none;
+ opacity:.48;transition:opacity .48s ease;
+}
+.dm-shared-plasma .dm-shared-edge::before{
+ inset:8%;
+ background:radial-gradient(circle at 24% 31%,rgba(242,249,255,.65) 0 .8px,transparent 1.55px),
+ radial-gradient(circle at 76% 58%,rgba(205,231,255,.58) 0 .7px,transparent 1.5px),
+ radial-gradient(circle at 51% 78%,rgba(213,221,251,.36) 0 .65px,transparent 1.35px),
+ radial-gradient(circle at 64% 20%,rgba(238,245,255,.47) 0 .65px,transparent 1.4px);
+ animation:dm-approved-rotate 11s linear infinite;
+}
+.dm-shared-plasma .dm-shared-edge::after{
+ inset:24%;
+ background:radial-gradient(ellipse at 52% 47%,rgba(148,181,231,.075),rgba(115,130,175,.025) 43%,transparent 76%);
+ box-shadow:inset 0 0 6px rgba(160,190,237,.035);
+ animation:dm-approved-core-breath 7.8s ease-in-out infinite;
+}
+.dm-shared-plasma:has(.dm-shared-brand) .dm-shared-edge::before{opacity:0;animation-play-state:paused}
+.dm-shared-plasma .dm-shared-brand{
+ position:absolute;left:50%;top:50%;z-index:4;width:42%;height:46%;
+ display:grid;place-items:center;pointer-events:none;
+ transform:translate(-50%,-50%);opacity:0;transition:opacity .45s ease;
+}
+.dm-shared-plasma .dm-shared-brand img{
+ display:block;width:100%;height:100%;object-fit:contain;
+ filter:brightness(.46) saturate(.30);
+}
+.dm-shared-plasma[data-mode="idle"] .dm-shared-brand{opacity:.17}
+.dm-shared-plasma:not([data-mode="idle"]) .dm-shared-brand{opacity:0;visibility:hidden}
+.dm-myday-plasma-stage .dm-shared-plasma{--dm-size:clamp(58px,15vw,60px)}
+.dm-world-standalone .dm-shared-plasma{--dm-size:60px}
+#dmAttentionPanel .dm-attention-head .dm-attention-approved-plasma{
+ --dm-size:53px;position:absolute;right:17px;bottom:15px;z-index:2;pointer-events:none;
+}
+@keyframes dm-approved-breathe{
+ 0%,100%{transform:scale(.95);opacity:.88}
+ 50%{transform:scale(1.055);opacity:1}
+}
+@keyframes dm-approved-rotate{to{transform:rotate(360deg)}}
+@keyframes dm-approved-core-breath{
+ 0%,100%{transform:scale(.83);opacity:.17}
+ 50%{transform:scale(1.02);opacity:.47}
+}
+@media(prefers-reduced-motion:reduce){
+ .dm-shared-plasma,.dm-shared-plasma .dm-shared-rim,
+ .dm-shared-plasma .dm-shared-arc,
+ .dm-shared-plasma .dm-shared-edge::before,.dm-shared-plasma .dm-shared-edge::after{animation:none!important}
+ .dm-shared-plasma .dm-shared-brand{transition:none}
+}
