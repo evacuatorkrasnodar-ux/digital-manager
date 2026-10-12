@@ -46,11 +46,6 @@
 #managementScreen .mg-home .mg-manager{
   min-height:96px;
 }
-#managementScreen .mg-home .mg-manager .mg-astronaut{
-  flex:0 0 70px;
-  width:70px;
-  height:70px;
-}
 #managementScreen .mg-home > .mg-main{
   padding:11px 10px 10px;
 }
