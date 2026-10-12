@@ -33,22 +33,7 @@ function init(){
    button.setAttribute('aria-label','Открыть '+label);
    button.addEventListener('click',()=>location.assign(url));
   });
-  const menu=document.createElement('nav');
-  menu.className='dm-world-orb-menu';menu.hidden=true;
-  menu.setAttribute('aria-label','Быстрые действия помощника');
-  menu.innerHTML='<a href="./index.html">Главная</a><a href="./world.html?tab=assistant">Чат</a><a href="./index.html?jump=management">Управление</a>';
-  document.body.append(menu);
-  let timer=null;
-  function close(){clearTimeout(timer);menu.hidden=true;}
-  function toggle(){
-   const next=menu.hidden;close();menu.hidden=!next;
-   if(next)timer=setTimeout(close,6000);
-  }
-  centre.addEventListener('click',toggle);
-  document.addEventListener('pointerdown',event=>{
-   if(!menu.hidden&&!menu.contains(event.target)&&!centre.contains(event.target)&&!event.target.closest('#worldStandalonePlasma'))close();
-  });
-  document.addEventListener('keydown',event=>{if(event.key==='Escape')close();});
+  // The shared icon-only quick menu attaches to the assistant button.
   if(prefs.dock===false){
    dock.hidden=true;
    const launcher=document.createElement('button');
@@ -59,7 +44,6 @@ function init(){
    launcher.dataset.mode='idle';
    launcher.append(plasma); // MOVE the same instance: never clone the ring or SVG IDs.
    document.body.append(launcher);
-   launcher.addEventListener('click',toggle);
   }
  }catch(error){console.error('My World dock:',error);}
  finally{document.documentElement.classList.remove('dm-world-loading');}
