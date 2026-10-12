@@ -55,15 +55,26 @@ function viewMarkup(){
  return intro+nav+content+'<p class="dm-trace-disclaimer">Это рабочая локальная аналитика. Подключения к банкам, соцсетям и сайтам пока не настроены; данные не синхронизируются между устройствами.</p>';
 }
 function render(){
- const parent=screen()?.querySelector('.dm-trace-body');if(!parent)return;
- // Always render into the persistent screen container, even after switching tabs.
- parent.innerHTML=viewMarkup();
+ const parent=screen()?.querySelector('.dm-trace-body');if(!parent)return false;
+ try{
+  const markup=viewMarkup();
+  parent.innerHTML=markup;
+  return true;
+ }catch(error){
+  console.error('Digital Trace render:',error);
+  parent.innerHTML='<div class="dm-trace-panel"><h3>Не удалось показать данные</h3><p>Вернитесь назад и попробуйте снова. Сохранённые замеры не удалены.</p></div>';
+  return false;
+ }
 }
 function open(from='management'){
  const el=screen();if(!el)return;
  returnTab=from==='home'?'home':'management';
+ // Prepare the content first: no blank screen when storage or rendering fails.
+ render();
  ['homeScreen','assistantScreen','managementScreen'].forEach(x=>{if($(x))$(x).hidden=true});
- el.hidden=false;render();window.scrollTo(0,0);
+ el.hidden=false;
+ el.removeAttribute('hidden');
+ window.scrollTo(0,0);
 }
 function close(){
  if(screen())screen().hidden=true;
