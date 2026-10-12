@@ -49,7 +49,7 @@ function workLine(){
 function taskAnswer(){
  const x=workflow();
  if(!x)return 'Пока не могу прочитать текущие дела. Ничего придумывать не стану.';
- const due=x.tasksOverdue?' Из них просрочено '+x.tasksOverdue+'.':x.tasksDueToday?' Сегодня требуют внимания '+x.tasksDueToday+'.':'';
+ const due=!x.tasksOverdue&&x.tasksDueToday?' Сегодня требуют внимания '+counted(x.tasksDueToday,'дело','дела','дел')+'.':'';
  if(!x.ownerTasks&&!x.assistantQueue)return 'По сохранённому журналу незавершённых дел и поручений сейчас нет. '+progressSentence();
  return workLine()+due+' '+progressSentence();
 }
@@ -103,7 +103,11 @@ function progressSentence(){
 }
 function brief(){
  const d=facts();
- if(!d)return {headline:'Готов разобраться с бизнесом',message:contextNote()+' '+workLine()+' Данных о продажах пока нет.',priority:workSignals()[0]||null};
+ if(!d){const important=workSignals()[0]||null;
+  return {headline:important?.title||'Готов разобраться с бизнесом',
+   message:contextNote()+' '+(important?important.body+' ':'')+workLine()+' Данных о продажах пока нет.',
+   priority:important};
+ }
  if(!d.total){
   const priority=combinedSignals(d)[0]||null;
   return {headline:priority?.title||(business().configured?'Я изучаю устройство твоего бизнеса':'Жду реальные обращения'),
@@ -142,10 +146,10 @@ function answer(question){
  if(!q)return null;
  const recognized=/(бизнес|как дела|что происходит|как идут|что нового|что успел|успел|сделал|делал|занимаешься|занимал|работаешь|поручен|мои дела|отчет|отчёт|итог|ситуаци|ошибк|проблем|что дальше|что делать|помоги|продаж|клиент|покупк|заявк|выручк|денег|деньг|доход|прибыл|финанс|расход|трат|бюджет|реклам|продвижен|задач|поручени|мои дела|дела на сегодня|что у меня|сроки|просроч|автопилот|самостоятельн|услуг|производ|склад|остатк|поставщик|доставк|график|брон|сотрудник|персонал|смены|магазин|цвет|цех|филиал|бизнес.модел)/i.test(q);
  if(!recognized)return null;
+ if(/задач|поручени|мои дела|дела на сегодня|сроки|просроч/.test(q))return taskAnswer();
  const d=facts();
  if(!d)return processAnswer(q)||contextNote()+' Записи «Продаж» пока недоступны. Ничего не стану придумывать.';
  const w=work();
- if(/задач|поручени|мои дела|дела на сегодня|сроки|просроч/.test(q))return taskAnswer();
  if(/автопилот|самостоятельн|успел|сделал|делал|занимаешься|чем занимал|работаешь/.test(q))return progressSentence()+' '+workLine()+
   (d.newLeads?' Сейчас новых обращений: '+d.newLeads+'.':'');
  if(/расход|трат|бюджет|реклам|продвижен/.test(q))return spendingAnswer(d);
