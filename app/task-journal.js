@@ -130,7 +130,7 @@ function personalList(){
  groups.map(([key,label])=>{
   const tasks=active.filter(t=>taskDay(t)===key);
   return '<section class="dm-journal-group"><h3>'+label+(key==='today'?' <small>и просроченные</small>':'')+'</h3>'+
-    (tasks.length?tasks.map(t=>'<article class="dm-journal-personal"><span>'+esc(t.title)+(t.dueDate&&t.dueDate<dayString(Date.now())?' <small>· Давно ждёт</small>':'')+'</span><button type="button" data-personal-done="'+esc(t.id)+'" aria-label="Отметить выполненным: '+esc(t.title)+'">✓</button></article>').join(''):'<p class="dm-journal-empty">Пока пусто</p>')+
+    (tasks.length?tasks.map(t=>'<article class="dm-journal-personal"><span>'+esc(t.title)+(t.dueDate&&t.dueDate<dayString(Date.now())?' <small>· Давно ждёт</small>':'')+'</span><div class="dm-journal-personal-actions">'+(t.source==='sales'&&t.saleId?'<button type="button" data-journal-sale="'+esc(t.saleId)+'" aria-label="Открыть клиента из продаж">К клиенту ↗</button>':'')+'<button type="button" data-personal-done="'+esc(t.id)+'" aria-label="Отметить выполненным: '+esc(t.title)+'">✓</button></div></article>').join(''):'<p class="dm-journal-empty">Пока пусто</p>')+
    '</section>';
  }).join('')+
  '<p class="dm-journal-hint">Дела человека сохраняются на этом устройстве. Поручения управляющему находятся отдельно.</p>';
@@ -228,7 +228,11 @@ function init(){
   else if(b.hasAttribute('data-journal-close'))close();
   else if(b.dataset.journalTab)show(b.dataset.journalTab);
   else if(b.hasAttribute('data-delegation-review'))reviewDelegation(b.dataset.delegationReview);
-  else if(b.dataset.personalDone)completePersonal(b.dataset.personalDone);
+  else if(b.dataset.journalSale){
+   const saleId=b.dataset.journalSale;
+   close();
+   window.DMSalesScreen?.openClient?.(saleId);
+  }else if(b.dataset.personalDone)completePersonal(b.dataset.personalDone);
  });
  document.addEventListener('submit',e=>{
   if(e.target.id==='dmPersonalTaskForm'){e.preventDefault();submitPersonal(e.target)}
