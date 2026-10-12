@@ -1,11 +1,11 @@
 /* App-only service worker: fresh documents, styles and scripts; cached offline assets. */
-const CACHE = 'digital-manager-black-velvet-v656-20261012';
+const CACHE = 'digital-manager-black-velvet-v657-20261012';
 const CACHE_PREFIX = 'digital-manager-black-velvet-';
 const OFFLINE_FILES = [
   './index.html',
   './style.css?v=619',
   './dock.css?v=297',
-  './app.js?v=630',
+  './app.js?v=631',
   './assets/plasma-glass-mark.webp',
   './myday.html',
   './myday-plasma-mode.css?v=5',
@@ -24,6 +24,8 @@ const OFFLINE_FILES = [
   './world-modern-dock.css?v=6',
   './shared-plasma.js?v=4',
   './shared-plasma.css?v=4',
+  './performance-modes.js?v=1',
+  './performance-modes.css?v=2',
   './health.html',
   './health.css?v=249',
   './health-bridge.js?v=286',
