@@ -10,7 +10,24 @@ let delegated=read(DELEGATED_KEY).filter(x=>x&&typeof x.id==='string'&&typeof x.
 let personal=read(PERSONAL_KEY).filter(x=>x&&typeof x.id==='string'&&typeof x.title==='string');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 const now=()=>new Date().toLocaleString('ru-RU');
-const save=(key,data)=>{try{localStorage.setItem(key,JSON.stringify(data.slice(0,100)))}catch(e){console.warn('Task storage unavailable',e)}};
+const dayString=date=>{
+ const d=new Date(date);
+ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+};
+const dueDate=(when,created=Date.now())=>{
+ if(when==='later')return null;
+ const date=new Date(created);
+ if(when==='tomorrow')date.setDate(date.getDate()+1);
+ return dayString(date);
+};
+const taskDay=task=>{
+ if(task.when==='later')return 'later';
+ const due=task.dueDate||dueDate(task.when,Number(task.createdMs)||Date.now());
+ const today=dayString(Date.now());
+ const tomorrowDate=new Date();tomorrowDate.setDate(tomorrowDate.getDate()+1);
+ return due<=today?'today':due===dayString(tomorrowDate)?'tomorrow':'later';
+};
+const save=(key,data)=>{try{localStorage.setItem(key,JSON.stringify(data.slice(0,100)));return true}catch(e){console.warn('Task storage unavailable',e);return false}};
 const findAdvice=()=>delegated.find(x=>x.id===ADVICE_ID);
 let lastFocus=null;
 
@@ -111,9 +128,9 @@ function personalList(){
  '<input id="dmTaskTitle" name="title" maxlength="120" required placeholder="Например, позвонить поставщику">'+
  '<div class="dm-journal-add-row"><select name="when" aria-label="Когда выполнить"><option value="today">Сегодня</option><option value="tomorrow">Завтра</option><option value="later">Позже</option></select><button type="submit">Добавить</button></div></form>'+
  groups.map(([key,label])=>{
-  const tasks=active.filter(t=>t.when===key);
-  return '<section class="dm-journal-group"><h3>'+label+'</h3>'+
-    (tasks.length?tasks.map(t=>'<article class="dm-journal-personal"><span>'+esc(t.title)+'</span><button type="button" data-personal-done="'+esc(t.id)+'" aria-label="Отметить выполненным: '+esc(t.title)+'">✓</button></article>').join(''):'<p class="dm-journal-empty">Пока пусто</p>')+
+  const tasks=active.filter(t=>taskDay(t)===key);
+  return '<section class="dm-journal-group"><h3>'+label+(key==='today'?' <small>и просроченные</small>':'')+'</h3>'+
+    (tasks.length?tasks.map(t=>'<article class="dm-journal-personal"><span>'+esc(t.title)+(t.dueDate&&t.dueDate<dayString(Date.now())?' <small>· Давно ждёт</small>':'')+'</span><button type="button" data-personal-done="'+esc(t.id)+'" aria-label="Отметить выполненным: '+esc(t.title)+'">✓</button></article>').join(''):'<p class="dm-journal-empty">Пока пусто</p>')+
    '</section>';
  }).join('')+
  '<p class="dm-journal-hint">Дела человека сохраняются на этом устройстве. Поручения управляющему находятся отдельно.</p>';
@@ -158,13 +175,36 @@ function submitPersonal(form){
  const title=String(data.get('title')||'').trim().slice(0,120);
  const when=String(data.get('when')||'today');
  if(!title||!['today','tomorrow','later'].includes(when))return;
- personal.unshift({id:'personal-'+Date.now()+'-'+Math.random().toString(36).slice(2,9),title,when,status:'open',created:now(),createdMs:Date.now()});
+ personal.unshift({id:'personal-'+Date.now()+'-'+Math.random().toString(36).slice(2,9),title,when,dueDate:dueDate(when),status:'open',created:now(),createdMs:Date.now()});
  save(PERSONAL_KEY,personal);show('mine');
 }
 function completePersonal(id){
  const task=personal.find(t=>t.id===id&&t.status!=='done');if(!task)return;
  task.status='done';task.completed=now();task.completedMs=Date.now();
- save(PERSONAL_KEY,personal);show('mine');
+ if(!save(PERSONAL_KEY,personal)){task.status='open';task.completed=null;task.completedMs=null;return}
+ if(task.source==='sales')try{window.dispatchEvent(new CustomEvent('dm:personal-tasks-changed',{detail:{saleId:task.saleId}}))}catch(_){}
+ show('mine');
+}
+/* A genuine owner task created from a deliberate button press in Sales. */
+function forSale(saleId){
+ return personal.filter(t=>t.source==='sales'&&t.saleId===saleId&&t.status!=='done')
+  .map(t=>({id:t.id,title:t.title,when:taskDay(t),kind:t.kind,dueDate:t.dueDate||null}));
+}
+function createForSale({saleId,person,subject,when='today',kind='reply'}={}){
+ if(typeof saleId!=='string'||!saleId.trim()||typeof person!=='string'||!person.trim()
+    ||!['today','tomorrow'].includes(when)||!['reply','remind'].includes(kind))return {ok:false};
+ const existing=personal.find(t=>t.source==='sales'&&t.saleId===saleId&&t.kind===kind&&t.status!=='done');
+ if(existing){show('mine');return {ok:true,created:false,taskId:existing.id}}
+ const title=(kind==='remind'?'Связаться с ':'Ответить: ')+person.trim()+' — '+String(subject||'обращение').trim();
+ const created=Date.now();
+ const task={id:'sale-task-'+created+'-'+Math.random().toString(36).slice(2,8),
+  title:title.slice(0,120),when,dueDate:dueDate(when,created),
+  status:'open',created:now(),createdMs:created,source:'sales',saleId,kind};
+ personal.unshift(task);
+ if(!save(PERSONAL_KEY,personal)){personal.shift();return {ok:false}}
+ try{window.dispatchEvent(new CustomEvent('dm:personal-tasks-changed',{detail:{saleId}}))}catch(_){}
+ show('mine');
+ return {ok:true,created:true,taskId:task.id};
 }
 function init(){
  const button=document.getElementById('openAdvice');
@@ -195,7 +235,7 @@ function init(){
  });
  document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
  document.addEventListener('click',e=>{const root=document.getElementById('dmTaskJournal');if(root&&!root.hidden&&e.target===root)close()});
- window.DMTaskJournal=Object.freeze({open:show});
+ window.DMTaskJournal=Object.freeze({open:show,createForSale,forSale});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
