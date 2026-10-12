@@ -201,6 +201,107 @@ function reclaimTransfer(id){
  contactFeedback='Дело снова у вас.';
  transferDraft=null;show('mine');return true;
 }
+
+/* Preparing a draft is local, not an AI model call. Nothing is sent or executed. */
+function draftSuggestion(item){
+ const task=personal.find(t=>t.id===item.personalId);
+ const facts=task?.source==='sales'&&task.saleId?window.DMSalesScreen?.getDraftContext?.(task.saleId):null;
+ if(facts){
+  const person=String(facts.person||'клиент').trim(),subject=String(facts.title||'вашего обращения').trim();
+  let body;
+  if(facts.stage==='won'){
+   body='Здравствуйте, '+person+'! Спасибо за обращение по поводу «'+subject+'». Подскажите, пожалуйста, всё ли в порядке и нужна ли дополнительная помощь?';
+  }else if(facts.stage==='lost'){
+   body='Здравствуйте, '+person+'! Возвращаюсь к вашему обращению по поводу «'+subject+'». Если вопрос ещё актуален, буду рад уточнить детали. Если нет — всё в порядке.';
+  }else if(facts.stage==='offer'){
+   body='Здравствуйте, '+person+'! Возвращаюсь к нашему предложению по «'+subject+'». Подскажите, остались ли вопросы и какие детали нам ещё стоит обсудить?';
+  }else{
+   body='Здравствуйте, '+person+'! Вы обращались по поводу «'+subject+'». Подскажите, вопрос ещё актуален? Могу уточнить детали и предложить следующий шаг.';
+  }
+  return {kind:'message',text:body,description:'По записи клиента в «Продажах». Проверьте текст перед использованием.'};
+ }
+ const title=String(task?.title||item.title||'поручение').trim();
+ return {kind:'plan',text:'Дело: '+title+'\n\n1. Уточнить, какой результат нужен и что уже известно.\n2. Проверить необходимые сведения, сроки и ограничения.\n3. Подготовить конкретное решение и показать владельцу.\n4. Выполнить только то, на что владелец отдельно даст разрешение.',
+  description:'Заготовка плана по названию дела. Детали не проверены; можно исправить вручную.'};
+}
+let assistantFeedback='';
+function draftUpdate(id,makeChange){
+ const item=delegated.find(t=>t.id===id&&t.origin==='owner-task'&&t.status==='queued');
+ if(!item)return false;
+ const modified=makeChange(item);
+ if(!modified)return false;
+ const newer=delegated.map(t=>t.id===id?modified:t);
+ if(!save(DELEGATED_KEY,newer)){
+  assistantFeedback='Не удалось сохранить черновик. Предыдущее состояние осталось без изменений.';
+  show('delegated');return false;
+ }
+ delegated=newer;
+ show('delegated');return true;
+}
+function prepareSolution(id,refresh=false){
+ const item=delegated.find(t=>t.id===id&&t.origin==='owner-task'&&t.status==='queued');
+ if(!item)return false;
+ if(item.draft&&!refresh)return false;
+ if(refresh&&item.draft&&!window.confirm('Заменить текущий черновик новым? Ваши правки будут потеряны.'))return false;
+ const prepared=draftSuggestion(item),stamp=Date.now(),dated=now();
+ const updated=draftUpdate(id,t=>({...t,draft:{kind:prepared.kind,text:prepared.text.slice(0,3000),
+  description:prepared.description,preparedAt:stamp,reviewedAt:null,source:'local-template'},
+  log:[...(Array.isArray(t.log)?t.log:[]),{at:dated,ms:stamp,message:refresh?'Черновик подготовлен заново по доступным записям.':'Подготовлен редактируемый черновик по доступным записям. Ничего вовне не отправлено.'}]}));
+ if(updated)assistantFeedback='';
+ return updated;
+}
+function editedDraftText(id){
+ const root=document.getElementById('dmTaskJournal');
+ const fields=root?.querySelectorAll('[data-assistant-editor]')||[];
+ const field=[...fields].find(x=>x.dataset.assistantEditor===id);
+ return field&&typeof field.value==='string'?field.value:null;
+}
+function saveSolution(id){
+ const text=editedDraftText(id);
+ if(text===null||!text.trim()||text.length>3000){
+  assistantFeedback='Проверьте текст: он не должен быть пустым или длиннее 3000 знаков.';
+  show('delegated');return false;
+ }
+ const item=delegated.find(t=>t.id===id&&t.origin==='owner-task'&&t.status==='queued'&&t.draft);
+ if(!item)return false;
+ if(text===item.draft.text){assistantFeedback='Этот черновик уже сохранён.';show('delegated');return true}
+ const stamp=Date.now(),dated=now();
+ const success=draftUpdate(id,t=>({...t,draft:{...t.draft,text,reviewedAt:null,updatedAt:stamp},
+  log:[...(Array.isArray(t.log)?t.log:[]),{at:dated,ms:stamp,message:'Вы изменили и сохранили черновик. Ничего не отправлено.'}]}));
+ if(success)assistantFeedback='Правки сохранены на этом устройстве.';
+ return success;
+}
+function reviewSolution(id){
+ const item=delegated.find(t=>t.id===id&&t.origin==='owner-task'&&t.status==='queued'&&t.draft);
+ if(!item)return false;
+ const text=editedDraftText(id);
+ if(text!==item.draft.text){
+  assistantFeedback='Сначала сохраните изменения, а затем отмечайте просмотр.';
+  show('delegated');return false;
+ }
+ if(item.draft.reviewedAt){assistantFeedback='Черновик уже просмотрен.';show('delegated');return true}
+ const stamp=Date.now(),dated=now();
+ const success=draftUpdate(id,t=>({...t,draft:{...t.draft,reviewedAt:stamp},
+  log:[...(Array.isArray(t.log)?t.log:[]),{at:dated,ms:stamp,message:'Вы посмотрели черновик. Это не подтверждение отправки или выполнения дела.'}]}));
+ if(success)assistantFeedback='Черновик просмотрен. Ничего клиенту не отправлено.';
+ return success;
+}
+async function copySolution(id){
+ const text=editedDraftText(id);if(!text)return;
+ const root=document.getElementById('dmTaskJournal');
+ const info=root?.querySelector('[data-assistant-copy-status]');
+ const status=[...(root?.querySelectorAll('[data-assistant-copy-status]')||[])].find(x=>x.dataset.assistantCopyStatus===id)||info;
+ try{
+  if(!navigator.clipboard?.writeText)throw Error('no clipboard');
+  await navigator.clipboard.writeText(text);
+  if(status)status.textContent='Текст скопирован. Отправка не выполнялась.';
+ }catch(_){
+  const fields=[...(root?.querySelectorAll('[data-assistant-editor]')||[])];
+  const field=fields.find(x=>x.dataset.assistantEditor===id);
+  field?.select();
+  if(status)status.textContent='Текст выделен — скопируйте его вручную. Ничего не отправлено.';
+ }
+}
 function personalList(){
  const active=personal.filter(t=>t.status!=='done'&&t.status!=='delegated');
  const groups=[['today','Сегодня'],['tomorrow','Завтра'],['later','Позже']];
