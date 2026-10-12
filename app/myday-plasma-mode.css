@@ -1,7 +1,7 @@
 /* Calendar only: the preference saved in Management controls which navigation is visible.
    These ring/wave rules below are reused verbatim from the approved Home plasma. */
 html.dm-myday-no-dock body > nav.bottom-nav{display:none!important}
-.dm-myday-plasma-stage[hidden],.dm-myday-plasma-menu[hidden]{display:none!important}
+.dm-myday-plasma-stage[hidden]{display:none!important}
 .dm-myday-plasma-stage{
   position:fixed;z-index:42;left:50%;bottom:calc(8px + env(safe-area-inset-bottom,0px));
   width:114px;height:118px;transform:translateX(-50%);pointer-events:none;
@@ -9,28 +9,6 @@ html.dm-myday-no-dock body > nav.bottom-nav{display:none!important}
 }
 .dm-myday-plasma-stage>.dock-launcher{pointer-events:auto}
 .dm-myday-plasma-stage .dm-voice-waves path{fill:none;stroke-linecap:round;stroke-linejoin:round}
-.dm-myday-plasma-menu{
-  position:absolute;z-index:5;left:50%;bottom:111px;transform:translateX(-50%);
-  display:flex;gap:7px;padding:7px;align-items:center;justify-content:center;
-  border:1px solid rgba(150,195,228,.45);border-radius:18px;
-  background:linear-gradient(152deg,rgba(25,43,61,.87),rgba(5,16,29,.93));
-  -webkit-backdrop-filter:blur(17px);backdrop-filter:blur(17px);
-  box-shadow:inset 0 1px rgba(248,253,255,.12),0 9px 25px rgba(0,0,0,.49);
-  pointer-events:auto;
-}
-.dm-myday-plasma-menu a{
-  width:66px;min-height:54px;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;gap:4px;padding:6px 3px;border-radius:12px;
-  text-decoration:none;color:#e5f3ff;font:400 10px/1.18 inherit;
-  font-size:10px;line-height:1.18;
-  -webkit-tap-highlight-color:transparent;
-}
-.dm-myday-plasma-menu svg{
-  width:20px;height:20px;fill:none;stroke:currentColor;
-  stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;
-}
-.dm-myday-plasma-menu a:is(:focus-visible,:hover){background:rgba(91,141,183,.26);outline:1px solid rgba(175,214,243,.45)}
-.dm-myday-plasma-menu a:active{background:rgba(91,141,183,.36)}
 @media(prefers-reduced-motion:reduce){
   .dm-myday-plasma-stage .dm-launcher-plasma,
   .dm-myday-plasma-stage .dm-orb-rim,
