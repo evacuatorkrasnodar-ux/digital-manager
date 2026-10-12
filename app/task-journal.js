@@ -26,7 +26,7 @@ function syncRecommendation(){
  if(button){
   // Keep the approved arrow SVG and button geometry intact.
   if(!button.firstChild||button.firstChild.nodeType!==3)button.prepend(document.createTextNode(''));
-  button.firstChild.textContent=planned?'Поручения ':'Исполнить ';
+  button.firstChild.textContent=task?.status==='reviewed'?'История ':planned?'Поручения ':'Исполнить ';
   button.setAttribute('aria-label',planned?'Посмотреть поручение управляющему':'Создать демонстрационное поручение на проверку');
  }
 }
@@ -35,7 +35,7 @@ function addDelegation(){
   delegated.unshift({id:ADVICE_ID,title:ADVICE_TITLE,status:'planned',created:now(),createdMs:Date.now(),log:[{at:now(),message:'Создано демонстрационное поручение на проверку. Интеграции не подключены, проверка не выполнялась.'}]});
   save(DELEGATED_KEY,delegated);
  }
- syncRecommendation();show('delegated');
+ syncRecommendation();show(findAdvice()?.status==='reviewed'?'history':'delegated');
 }
 function reviewDelegation(){
  const task=findAdvice();
