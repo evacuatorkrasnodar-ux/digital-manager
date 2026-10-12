@@ -53,7 +53,7 @@ function viewMarkup(){
   content='<div class="dm-trace-panel"><h3>История решений</h3><p>Ваши заметки и решения остаются в этом браузере. Внешние действия не выполняются.</p><form id="traceDecisionForm" class="dm-trace-form"><label>Что решили или сделали?<textarea name="text" maxlength="400" rows="3" required placeholder="Например, проверить форму заявки"></textarea></label><button type="submit">Записать в историю</button></form>'+
   (store.decisions.length?store.decisions.slice().reverse().map(x=>'<div class="dm-trace-row"><div><strong>'+E(x.text)+'</strong><small>'+E(when(x.time))+' · запись пользователя</small></div><button type="button" data-trace-delete-decision="'+E(x.id)+'" aria-label="Удалить запись">×</button></div>').join(''):'<p class="dm-trace-empty">Решений пока нет.</p>')+'</div>';
  }
- return intro+nav+content+'<p class="dm-trace-disclaimer">Это рабочая локальная аналитика. Подключения к банкам, соцсетям и сайтам пока не настроены; данные не синхронизируются между устройствами.</p>';
+ return nav+intro+content+'<p class="dm-trace-disclaimer">Это рабочая локальная аналитика. Подключения к банкам, соцсетям и сайтам пока не настроены; данные не синхронизируются между устройствами.</p>';
 }
 function render(){
  const parent=screen()?.querySelector('.dm-trace-body');if(!parent)return false;
@@ -75,7 +75,10 @@ function open(from='management'){
  ['homeScreen','assistantScreen','managementScreen'].forEach(x=>{if($(x))$(x).hidden=true});
  el.hidden=false;
  el.removeAttribute('hidden');
- window.scrollTo(0,0);
+ el.scrollTop=0;
+ const shell=document.getElementById('app');if(shell)shell.scrollTop=0;
+ document.scrollingElement?.scrollTo({top:0,behavior:'instant'});
+ window.scrollTo({top:0,behavior:'instant'});
 }
 function close(){
  if(screen())screen().hidden=true;
