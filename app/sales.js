@@ -147,6 +147,78 @@ function action(type,id){
  if(type==='reply')draftPanel('Ответ клиенту','Здравствуйте, '+lead.person+'! Спасибо за обращение по поводу «'+lead.title+'». Подскажите, пожалуйста, что для вас сейчас самое важное?');
  if(type==='offer')draftPanel('Предложение клиенту','Здравствуйте, '+lead.person+'! Подготовили для вас предложение по «'+lead.title+'».'+(lead.amount>0?' Ориентировочная стоимость: '+rub(lead.amount)+'.':'')+' Давайте уточним детали, сроки и окончательную стоимость.');
 }
+
+/* Linked picture: only manual sales and promotional spending.
+   Home finance demo data must never be added to these calculations. */
+function renderPicture(){
+ if(!screen)return;
+ const host=screen.querySelector('#dmBusinessPicture');if(!host)return;
+ const won=records.filter(x=>x.stage==='won');
+ const income=totalWon(),spent=promotionTotal();
+ const sources=channels.map(source=>{
+  const leads=records.filter(x=>x.source===source);
+  const paid=won.filter(x=>x.source===source);
+  const expenses=promotion.filter(x=>x.source===source);
+  return {source,leads:leads.length,purchases:paid.length,income:paid.reduce((n,x)=>n+(Number(x.amount)||0),0),spend:expenses.reduce((n,x)=>n+x.amount,0)};
+ }).filter(x=>x.leads||x.spend);
+ const interval=7*86400000,now=Date.now();
+ const week=won.filter(x=>Number.isFinite(x.wonAt)&&x.wonAt>=now-interval&&x.wonAt<=now);
+ const lastWeek=won.filter(x=>Number.isFinite(x.wonAt)&&x.wonAt>=now-2*interval&&x.wonAt<now-interval);
+ const sumAmount=list=>list.reduce((n,x)=>n+(Number(x.amount)||0),0);
+ const amountWeek=sumAmount(week),amountLastWeek=sumAmount(lastWeek);
+ const notAnswered=records.filter(x=>x.stage==='new').length;
+ const spentWithoutSales=sources.find(x=>x.spend>0&&x.leads>=2&&x.purchases===0);
+ let note;
+ if(!records.length&&!promotion.length){
+  note='Пока данных мало. Добавьте обращения и запишите расходы на продвижение — тогда я смогу показать, как всё связано.';
+ }else if(spentWithoutSales){
+  note='На '+esc(spentWithoutSales.source)+' записано '+spentWithoutSales.leads+' обращений и '+rub(spentWithoutSales.spend)+' расходов, но ни одной отмеченной покупки. Стоит проверить ответы и предложения. Это ещё не означает, что реклама не работает.';
+ }else if(week.length>=2&&lastWeek.length>=2){
+  const change=amountWeek-amountLastWeek;
+  note=change===0?'В последние две недели суммы отмеченных покупок одинаковые. Для объяснения причин нужны дополнительные данные.':'За последние 7 дней отмечены покупки на '+rub(amountWeek)+' — '+(change>0?'на '+rub(change)+' больше':'на '+rub(-change)+' меньше')+', чем за предыдущие 7 дней. Пока неизвестно, связано ли это с продвижением.';
+ }else if(notAnswered>=3){
+  note='Есть '+notAnswered+' новых обращений без отметки об ответе. Я бы начал с них: возможно, кто-то уже готов купить.';
+ }else{
+  note='По вашим записям '+won.length+' покупок на '+rub(income)+'. Чтобы увидеть причины роста или падения, понадобятся более полные данные по датам, людям и расходам.';
+ }
+ const rowHtml=sources.length?sources.map(x=>'<article class="dm-picture-source"><div class="dm-picture-source-top"><strong>'+esc(x.source)+'</strong><small>Написали '+x.leads+' · Купили '+x.purchases+'</small></div><div><span>Продажи: '+rub(x.income)+'</span><span>Продвижение: '+rub(x.spend)+'</span></div></article>').join(''):'<p class="dm-sales-muted">Когда появятся обращения с источниками или расходы на продвижение, я покажу их рядом.</p>';
+ const costsHtml=promotion.length?promotion.slice(0,30).map(x=>'<div class="dm-picture-expense"><span>'+esc(x.source)+' · '+new Date(x.createdAt).toLocaleDateString('ru-RU')+'</span><strong>'+rub(x.amount)+'</strong><button type="button" data-expense-delete="'+esc(x.id)+'" aria-label="Удалить запись расхода">×</button></div>').join(''):'<p class="dm-sales-muted">Пока не записано ни одного расхода.</p>';
+ host.innerHTML=
+ '<section class="dm-sales-section dm-picture-intro"><span>ПО ВАШИМ ЗАПИСЯМ</span><h2>Вот что я вижу</h2><p>Я сопоставляю покупки, откуда пришли люди, и расходы на продвижение. Подключений к банкам и рекламе здесь пока нет.</p></section>'+
+ '<section class="dm-sales-section"><h2>Деньги и продвижение</h2><div class="dm-picture-metrics">'+
+ '<div><span>Сумма покупок</span><strong>'+rub(income)+'</strong></div>'+
+ '<div><span>Расходы на продвижение</span><strong>'+rub(spent)+'</strong></div>'+
+ '<div><span>Разница</span><strong>'+rub(income-spent)+'</strong></div>'+
+ '</div><p class="dm-sales-hint">Это не прибыль и не остаток в банке: другие расходы и даты оплаты неизвестны. Учитываются суммы покупок, отмеченных вами как состоявшиеся.</p></section>'+
+ '<section class="dm-sales-section"><h2>Откуда приходят люди</h2><p class="dm-sales-muted">Сумму покупки показываю рядом с источником, который вы сами указали.</p><div class="dm-picture-sources">'+rowHtml+'</div></section>'+
+ '<section class="dm-sales-section dm-sales-insight"><span>НАБЛЮДЕНИЕ УПРАВЛЯЮЩЕГО</span><h2>Что я заметил</h2><p>'+note+'</p><small>Это подсказка по ручным записям, а не проверенный вывод о работе рекламных площадок.</small></section>'+
+ '<form id="dmPromotionExpenseForm" class="dm-sales-form"><h2>Записать расход на продвижение</h2><p class="dm-sales-muted">Например, сколько заплатили за рекламу во VK.</p><div class="dm-sales-two"><label>Где потратили<select name="source">'+options(channels,'VK')+'</select></label><label>Сколько, ₽<input name="amount" type="number" min="1" max="999999999" step="1" required placeholder="3000"></label></div><button type="submit">Сохранить расход <span>↗</span></button></form>'+
+ '<section class="dm-sales-section"><h2>Записанные расходы</h2><div class="dm-picture-expenses">'+costsHtml+'</div></section>'+
+ '<section class="dm-sales-section dm-sales-terms"><details><summary>Для Уолл-стрит 😉</summary><p><b>Выручка</b> — сумма отмеченных продаж.</p><p><b>Расходы на привлечение</b> — деньги, потраченные, чтобы о вас узнали.</p><p><b>Рентабельность</b> — сколько бизнес в итоге заработал с учётом всех расходов. Здесь мы её пока не считаем.</p><p><b>Атрибуция</b> — определение того, откуда пришёл покупатель.</p></details></section>'+
+ '<button type="button" class="dm-picture-return" data-picture-go-sales>← Вернуться к продажам</button>';
+}
+function showPicture(){
+ if(!screen)return;
+ pictureOpen=true;
+ const body=screen.querySelector('#dmSalesBody'),picture=screen.querySelector('#dmBusinessPicture');
+ renderPicture();body.hidden=true;picture.hidden=false;
+ screen.querySelector('.dm-sales-head h1').textContent='Что происходит с бизнесом?';
+ screen.querySelector('.dm-sales-head p').textContent='Откуда приходят люди, сколько приносят и что стоит реклама.';
+ screen.querySelector('#dmSalesBack').setAttribute('aria-label','Назад к продажам');
+ window.scrollTo({top:0,behavior:'instant'});
+ screen.querySelector('#dmSalesBack').focus({preventScroll:true});
+}
+function closePicture(){
+ if(!screen)return;
+ pictureOpen=false;
+ screen.querySelector('#dmSalesBody').hidden=false;
+ screen.querySelector('#dmBusinessPicture').hidden=true;
+ screen.querySelector('.dm-sales-head h1').textContent='Продажи';
+ screen.querySelector('.dm-sales-head p').textContent='Кто написал, кому ответить и сколько заработали.';
+ screen.querySelector('#dmSalesBack').setAttribute('aria-label','Вернуться на главную');
+ window.scrollTo({top:0,behavior:'instant'});
+ screen.querySelector('#dmBusinessPictureOpen')?.focus({preventScroll:true});
+}
 function open(){
  create();
  if(pictureOpen)closePicture();
