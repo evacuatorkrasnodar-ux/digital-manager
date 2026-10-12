@@ -14,10 +14,10 @@ function normalise(item){
 }
 function render(){
  if(!section)return;
- const entries=[...signals.values()].sort((a,b)=>b.timestamp-a.timestamp).slice(0,3);
+ const entries=[...signals.values()].sort((a,b)=>b.timestamp-a.timestamp).slice(0,1);
  const current=entries[0]||null; section.dataset.signal=current?current.type:'idle';
  const titles={decision:'ТРЕБУЕТ РЕШЕНИЯ',opportunity:'ВОЗМОЖНОСТЬ',completed:'Я УЖЕ СДЕЛАЛ'};
- section.innerHTML='<div class="dm-future-title"><span>УПРАВЛЯЮЩИЙ РЯДОМ</span><small>Новые события</small></div>'+(current?[current]:[{id:'',type:'idle',title:'Новых событий пока нет',summary:'Когда появятся подтверждённые события, управляющий расскажет о них здесь.',source:'Ожидание данных'}]).map(x=>'<article class="dm-future-card"><div class="dm-future-card-head"><span>'+(titles[x.type]||'НА СВЯЗИ')+'</span><button type="button" data-future-detail="'+esc(x.id)+'" aria-label="Подробнее: '+esc(x.title)+'">↗</button></div><strong>'+esc(x.title)+'</strong><p>'+esc(x.summary)+'</p><small class="dm-future-caption">Источник: '+esc(x.source)+'</small></article>').join('');
+ section.innerHTML='<div class="dm-future-title"><span>УПРАВЛЯЮЩИЙ РЯДОМ</span><small>Новые события</small></div>'+(current?[current]:[{id:'',type:'idle',title:'Новых событий пока нет',summary:'Когда появятся подтверждённые события, управляющий расскажет о них здесь.',source:'Ожидание данных'}]).map(x=>'<article class="dm-future-card"><div class="dm-future-card-head"><span>'+(titles[x.type]||'НА СВЯЗИ')+'</span>'+(x.id?'<button type="button" data-future-detail="'+esc(x.id)+'" aria-label="Подробнее: '+esc(x.title)+'">↗</button>':'<span aria-hidden="true">◌</span>')+'</div><strong>'+esc(x.title)+'</strong><p>'+esc(x.summary)+'</p><small class="dm-future-caption">Источник: '+esc(x.source)+'</small></article>').join('');
 }
 function ensure(){
  if(section)return;
