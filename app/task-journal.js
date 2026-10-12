@@ -29,7 +29,7 @@ const taskDay=task=>{
 };
 const save=(key,data)=>{try{localStorage.setItem(key,JSON.stringify(data.slice(0,100)));return true}catch(e){console.warn('Task storage unavailable',e);return false}};
 const findAdvice=()=>delegated.find(x=>x.id===ADVICE_ID);
-let lastFocus=null;
+let lastFocus=null,contactCheck=null,contactFeedback='';
 
 /* One approved dashboard card, many messages; no second card and no fake execution. */
 const currentInsight=()=>{
@@ -155,6 +155,7 @@ function historyList(){
 }
 function show(tab='mine'){
  const selected=tab==='tasks'?'delegated':(['mine','delegated','history'].includes(tab)?tab:'mine');
+ if(selected!=='mine')contactCheck=null;
  const root=makePanel(),body=root.querySelector('#dmJournalContent');
  if(root.hidden)lastFocus=document.activeElement;
  root.hidden=false;root.dataset.tab=selected;
@@ -162,12 +163,18 @@ function show(tab='mine'){
  root.querySelector('#dmJournalTitle').textContent=names[selected];
  root.querySelectorAll('[data-journal-tab]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.journalTab===selected)));
  body.innerHTML=selected==='mine'?personalList():selected==='delegated'?delegatedList():historyList();
+ if(selected==='mine'&&contactCheck){
+  body.insertAdjacentHTML('afterbegin','<section class="dm-journal-contact" aria-label="Результат общения с клиентом"><small>ДЕЛО ОТМЕЧЕНО ВЫПОЛНЕННЫМ</small><p>'+esc(contactCheck.title)+'</p><strong>Удалось связаться с клиентом?</strong><div><button type="button" data-contact-reached="yes">Да, общаемся</button><button type="button" data-contact-reached="no">Нет, только закрыл дело</button></div></section>');
+ }else if(selected==='mine'&&contactFeedback){
+  body.insertAdjacentHTML('afterbegin','<p class="dm-journal-contact-feedback" role="status">'+esc(contactFeedback)+'</p>');
+ }
  root.querySelector('.dm-journal-frame').scrollTop=0;
  root.querySelector('[data-journal-tab="'+selected+'"]').focus({preventScroll:true});
+ if(contactCheck&&selected==='mine')root.querySelector('[data-contact-reached="yes"]')?.focus({preventScroll:true});
 }
 function close(){
  const root=document.getElementById('dmTaskJournal');if(!root||root.hidden)return;
- root.hidden=true;if(lastFocus&&lastFocus.isConnected&&typeof lastFocus.focus==='function')lastFocus.focus({preventScroll:true});
+ root.hidden=true;contactCheck=null;contactFeedback='';if(lastFocus&&lastFocus.isConnected&&typeof lastFocus.focus==='function')lastFocus.focus({preventScroll:true});
  lastFocus=null;
 }
 function submitPersonal(form){
@@ -183,6 +190,22 @@ function completePersonal(id){
  task.status='done';task.completed=now();task.completedMs=Date.now();
  if(!save(PERSONAL_KEY,personal)){task.status='open';task.completed=null;task.completedMs=null;return}
  if(task.source==='sales')try{window.dispatchEvent(new CustomEvent('dm:personal-tasks-changed',{detail:{saleId:task.saleId}}))}catch(_){}
+ const ask=task.source==='sales'&&['reply','remind'].includes(task.kind)&&window.DMSalesScreen?.getClientStage?.(task.saleId)==='new';
+ contactCheck=ask?{saleId:task.saleId,title:task.title}:null;
+ contactFeedback=ask?'':'Дело отмечено выполненным.';
+ show('mine');
+}
+function answerContact(reached){
+ const task=contactCheck;if(!task)return;
+ contactCheck=null;
+ if(reached){
+  const result=window.DMSalesScreen?.confirmContact?.(task.saleId);
+  contactFeedback=result?.ok?'Отметил в «Продажах»: теперь вы обсуждаете заказ.':
+   result?.reason==='unchanged'?'У клиента уже другой этап в «Продажах». Ничего не менял.':
+   'Не удалось обновить обращение. Дело всё равно сохранено в истории.';
+ }else{
+  contactFeedback='Дело закрыто. Клиента в «Продажах» не менял.';
+ }
  show('mine');
 }
 /* A genuine owner task created from a deliberate button press in Sales. */
@@ -228,6 +251,7 @@ function init(){
   else if(b.hasAttribute('data-journal-close'))close();
   else if(b.dataset.journalTab)show(b.dataset.journalTab);
   else if(b.hasAttribute('data-delegation-review'))reviewDelegation(b.dataset.delegationReview);
+  else if(b.dataset.contactReached==='yes'||b.dataset.contactReached==='no')answerContact(b.dataset.contactReached==='yes');
   else if(b.dataset.journalSale){
    const saleId=b.dataset.journalSale;
    close();
