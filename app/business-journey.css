@@ -67,3 +67,26 @@
 .dm-journey-prepared-item textarea{display:block;box-sizing:border-box;width:100%;min-height:104px;max-height:38dvh;resize:vertical;font-family:inherit;font-size:11px;line-height:1.65;color:#d4e9fb;padding:9px;background:rgba(6,14,25,.8);border:1px solid rgba(143,182,212,.21);border-radius:10px}
 .dm-journey-prepared-item textarea:focus-visible{outline:2px solid rgba(175,219,255,.8)}
 .dm-journey-copy-status{min-height:15px;color:#bdd9ef!important}
+
+/* Business-before-business demand test stays optional inside the route. */
+.dm-journey-demand{border:1px solid rgba(172,206,232,.32);border-radius:14px;padding:12px;background:linear-gradient(140deg,rgba(45,76,109,.22),rgba(8,19,32,.86))}
+.dm-journey-demand>summary{cursor:pointer;display:grid;gap:5px;font-size:12px;color:#d3edff}
+.dm-journey-demand>summary small{font-size:10px;line-height:1.5;color:#a5c5dc}
+.dm-journey-demand-content{display:grid;gap:13px;padding-top:12px}
+.dm-journey-demand-content>p{margin:0;font-size:11px;line-height:1.65;color:#b4cede}
+.dm-journey-demand-content .dm-journey-demand-advice{border-radius:11px;padding:11px;background:rgba(129,180,229,.11);color:#d1e7f7;font-size:12px}
+.dm-journey-demand-content form{display:grid;gap:10px}
+.dm-journey-demand-content label{display:grid;gap:6px;color:#c6dded;font-size:11px;line-height:1.5}
+.dm-journey-demand-content label small{font-size:10px;color:#91acc1}
+.dm-journey-demand-content select,.dm-journey-demand-content textarea{box-sizing:border-box;width:100%;min-width:0;padding:10px;border:1px solid rgba(148,189,221,.43);border-radius:10px;background:#0d1e2e;color:#e9f4ff;font:inherit;font-size:12px;line-height:1.5}
+.dm-journey-demand-content textarea{min-height:65px;max-height:150px;resize:vertical}
+.dm-journey-demand-content :is(select,textarea,button):focus-visible{outline:2px solid #c3e4fc;outline-offset:2px}
+.dm-journey-demand-content form>button{justify-self:start;min-height:38px;padding:9px 13px;border:1px solid rgba(177,215,239,.75);border-radius:10px;background:linear-gradient(130deg,#cce5f3,#accfe5);color:#0e2b3d;font-size:11px;font-weight:540}
+.dm-journey-demand-content [data-demand-message]{margin:0;color:#f5d2bb;font-size:11px;line-height:1.5}
+.dm-journey-demand-history{padding:10px;border:1px solid rgba(147,183,208,.3);border-radius:11px}
+.dm-journey-demand-history>summary{font-size:11px;color:#b9d8ed;cursor:pointer}
+.dm-journey-demand-history ol{margin:12px 0 0;padding-left:18px;display:grid;gap:10px}
+.dm-journey-demand-history li{position:relative;min-width:0;padding-right:29px;color:#dceef7;font-size:11px;line-height:1.5}
+.dm-journey-demand-history li div small{display:block;color:#8daec4;font-size:9px}
+.dm-journey-demand-history li p{margin:4px 0;color:#b6d2e5;overflow-wrap:anywhere}
+.dm-journey-demand-history li button{position:absolute;right:0;top:0;width:26px;height:26px;border:1px solid rgba(151,193,225,.39);border-radius:50%;background:#10283c;color:#cfe9fb;font-size:16px}
