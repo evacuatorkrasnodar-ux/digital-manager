@@ -46,6 +46,10 @@
     document.querySelectorAll('[data-ring-preview]').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.ringPreview===mode)));
     if(resetAfter>0) ringResetTimer=setTimeout(()=>setRingMode('idle'),resetAfter);
   }
+  // The existing approved plasma acknowledges actual SAVED local work, not demo counts.
+  window.addEventListener('dm:initiative-prepared',event=>{
+    if(event.detail?.count>0&&byId('tabAssistant')?.dataset.mode==='idle')setRingMode('attention',1900);
+  });
   function setTab(next){
     hideBrandCard();hideProfileCard();tab=next;
     const traceScreen=byId('digitalTraceScreen');if(traceScreen)traceScreen.hidden=true;
