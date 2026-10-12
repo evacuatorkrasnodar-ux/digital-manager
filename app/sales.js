@@ -4,27 +4,55 @@ const KEY='dm-sales-records-v1', LEGACY='digital-manager-black-velvet-v2';
 const statuses={new:'Написал',talk:'Обсуждаем',offer:'Предложили',won:'Купил',lost:'Не сложилось'};
 const channels=['Сайт','VK','Telegram','MAX','OK','Дзен','Avito','Другое'];
 const reasons=['Не знаем','Цена не подошла','Долго отвечали','Купил в другом месте','Передумал','Другое'];
+const PROMOTION_KEY='dm-promotion-expenses-v1';
+let promotion=[];
+try{
+ const saved=JSON.parse(localStorage.getItem(PROMOTION_KEY)||'[]');
+ if(Array.isArray(saved))promotion=saved.filter(x=>x&&typeof x.id==='string'&&channels.includes(x.source)&&Number.isFinite(x.amount)&&x.amount>0&&Number.isFinite(x.createdAt)).slice(0,200);
+}catch(_){}
+
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 const rub=n=>new Intl.NumberFormat('ru-RU',{style:'currency',currency:'RUB',maximumFractionDigits:0}).format(Number(n)||0);
 const today=ts=>Boolean(ts)&&new Date(ts).toDateString()===new Date().toDateString();
 const uid=()=>Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8);
 let records=[];
 try{const r=JSON.parse(localStorage.getItem(KEY)||'[]');if(Array.isArray(r))records=r.filter(x=>x&&typeof x.id==='string'&&statuses[x.stage]&&typeof x.person==='string').slice(0,400)}catch(_){}
-let screen, previousFocus;
+let screen, previousFocus, pictureOpen=false;
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(records.slice(0,400)));window.dispatchEvent(new CustomEvent('dm:sales-changed',{detail:totals()}));return true}catch(e){console.warn(e);return false}};
 const totalWon=()=>records.filter(x=>x.stage==='won').reduce((n,x)=>n+(Number(x.amount)||0),0);
 const totals=()=>({sales:records.filter(x=>x.stage==='won').length,revenue:totalWon(),source:'user-entered-sales'});
+const promotionTotal=()=>promotion.reduce((sum,x)=>sum+x.amount,0);
+function savePromotion(){
+ try{
+  localStorage.setItem(PROMOTION_KEY,JSON.stringify(promotion.slice(0,200)));
+  window.dispatchEvent(new CustomEvent('dm:promotion-changed',{detail:{total:promotionTotal(),source:'manual'}}));
+  return true;
+ }catch(e){console.warn('Promotion data storage unavailable',e);return false}
+}
+function addPromotion(form){
+ const data=new FormData(form),source=String(data.get('source')||'');
+ const amount=Number(data.get('amount'));
+ if(!channels.includes(source)||!Number.isFinite(amount)||amount<=0||amount>999999999)return;
+ promotion.unshift({id:uid(),source,amount,createdAt:Date.now()});
+ savePromotion();renderPicture();
+}
+function removePromotion(id){
+ const entry=promotion.find(x=>x.id===id);if(!entry)return;
+ if(!window.confirm('Удалить запись расхода «'+entry.source+'» на '+rub(entry.amount)+'?'))return;
+ promotion=promotion.filter(x=>x.id!==id);savePromotion();renderPicture();
+}
 function legacyOrders(){try{let obj=JSON.parse(localStorage.getItem(LEGACY)||'{}');return Array.isArray(obj.orders)?obj.orders.filter(x=>x&&typeof x.title==='string').slice(0,50):[]}catch(_){return []}}
 const options=(arr,current)=>arr.map(x=>'<option value="'+esc(x)+'"'+(x===current?' selected':'')+'>'+esc(x)+'</option>').join('');
 function create(){
  if(screen)return;
  screen=document.createElement('section');screen.id='salesScreen';screen.className='screen dm-sales-screen';screen.hidden=true;
  screen.setAttribute('aria-label','Продажи');
- screen.innerHTML='<header class="dm-sales-head"><span>ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><button type="button" id="dmSalesBack" aria-label="Вернуться на главную">←</button><h1>Продажи</h1><p>Кто написал, кому ответить и сколько заработали.</p></header><div id="dmSalesBody" class="dm-sales-body"></div>';
+ screen.innerHTML='<header class="dm-sales-head"><span>ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><button type="button" id="dmSalesBack" aria-label="Вернуться на главную">←</button><h1>Продажи</h1><p>Кто написал, кому ответить и сколько заработали.</p></header><div id="dmSalesBody" class="dm-sales-body"></div><div id="dmBusinessPicture" class="dm-sales-body" hidden></div>';
  const anchor=document.getElementById('digitalTraceScreen')||document.getElementById('managementScreen');
  if(anchor)anchor.before(screen);else document.getElementById('app')?.append(screen);
- screen.querySelector('#dmSalesBack').addEventListener('click',close);
+ screen.querySelector('#dmSalesBack').addEventListener('click',()=>pictureOpen?closePicture():close());
  screen.addEventListener('submit',e=>{
+  if(e.target.id==='dmPromotionExpenseForm'){e.preventDefault();addPromotion(e.target);return}
   if(e.target.id!=='dmSalesForm')return;
   e.preventDefault();let f=new FormData(e.target);
   let person=String(f.get('person')||'').trim().slice(0,100),title=String(f.get('title')||'').trim().slice(0,140);
@@ -48,6 +76,9 @@ function create(){
  });
  screen.addEventListener('click',e=>{
   let b=e.target.closest('button');if(!b)return;
+  if(b.id==='dmBusinessPictureOpen'){showPicture();return}
+  if(b.dataset.expenseDelete){removePromotion(b.dataset.expenseDelete);return}
+  if(b.dataset.pictureGoSales){closePicture();return}
   if(b.dataset.saleAction){action(b.dataset.saleAction,b.dataset.saleId);return}
   if(b.dataset.saleCopy){copyDraft();return}
  });
@@ -86,6 +117,7 @@ function render(){
  '<section class="dm-sales-section"><h2>Продажи и деньги</h2><strong class="dm-sales-money">'+rub(totalWon())+'</strong><p class="dm-sales-muted">Всего покупок по новым записям. Сумма обновляется, когда отмечаешь «Купил». С реальными финансами пока не сверяется.</p>'+
  (legacy.length?'<details class="dm-sales-legacy"><summary>Ранее добавленные заказы ('+legacy.length+')</summary><p>Эти записи сохранены в старом разделе, но у них нет дат и источников. Поэтому мы не включаем их в показатели за сегодня.</p>'+legacy.map(x=>'<div><span>'+esc(x.title)+'</span><strong>'+rub(x.amount)+'</strong></div>').join('')+'</details>':'')+'</section>'+
  form+'<section class="dm-sales-section dm-sales-terms"><details><summary>Для Уолл-стрит 😉</summary><p><b>Воронка продаж</b> — путь от «написал» до «купил».</p><p><b>Конверсия</b> — какая доля обратившихся купила.</p><p><b>Источник клиента</b> — откуда человек узнал о вас.</p><p><b>Потерянная сделка</b> — покупка, которая не состоялась.</p><p>Эти слова знать необязательно. Управляющий всё объяснит по-человечески.</p></details></section>';
+ document.getElementById('dmSalesBody').insertAdjacentHTML('afterbegin','<button type="button" id="dmBusinessPictureOpen" class="dm-picture-open"><span><b>Что происходит с бизнесом?</b><small>Продажи · Деньги · Продвижение</small></span><span aria-hidden="true">↗</span></button>');
 }
 function draftPanel(title,text){
  const old=document.getElementById('dmSalesDraft');
@@ -117,6 +149,7 @@ function action(type,id){
 }
 function open(){
  create();
+ if(pictureOpen)closePicture();
  previousFocus=document.activeElement;
  ['homeScreen','assistantScreen','managementScreen','digitalTraceScreen'].forEach(id=>{let el=document.getElementById(id);if(el)el.hidden=true});
  screen.hidden=false;render();
@@ -131,6 +164,6 @@ function close(){
  const target=document.getElementById('ordersCard');
  if(target)target.focus({preventScroll:true});
 }
-function hide(){if(screen)screen.hidden=true}
-window.DMSalesScreen=Object.freeze({open,close,hide,getTotals:totals});
+function hide(){if(screen){screen.hidden=true;if(pictureOpen)closePicture()}}
+window.DMSalesScreen=Object.freeze({open,close,hide,getTotals:totals,getBusinessSummary:()=>({salesRevenue:totalWon(),promotionExpenses:promotionTotal(),source:'manual-local-records'})});
 })();
