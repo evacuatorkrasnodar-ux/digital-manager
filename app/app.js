@@ -668,9 +668,9 @@
       dockCard.querySelector('.voice-setting-top').after(dockConfig,samples);
       // One persistent graphics setting for the entire application.
       const performanceModes=[
-        ['beautiful','✨','Красивый','Все оригинальные свечения, стекло, живая плазма и лазеры.'],
-        ['eco','🔋','Экономичный','Меньше размытия и лишнего движения. Плазма остаётся живой.'],
-        ['simple','🍃','Простой','Статичная плазма, без движущихся лазеров и тяжёлого размытия.']
+        ['beautiful','✦','Красивый','Все оригинальные свечения, стекло, живая плазма и лазеры.'],
+        ['eco','◐','Экономичный','Меньше размытия и лишнего движения. Плазма остаётся живой.'],
+        ['simple','○','Простой','Статичная плазма, без движущихся лазеров и тяжёлого размытия.']
       ];
       const performance=document.createElement('section');
       performance.className='dm-performance-pref voice-pref';
