@@ -65,6 +65,7 @@ const options=(arr,current)=>arr.map(x=>'<option value="'+esc(x)+'"'+(x===curren
 /* Short, explicit outcome confirmation; an unconfirmed select must never record a purchase. */
 function setStage(entry,stage,detail={}){
  if(!entry||!statuses[stage])return false;
+ const snapshot={...entry};
  const stamp=Date.now(),previous=entry.stage;
  if(stage==='won'){
   const amount=Number(detail.amount);
@@ -82,7 +83,8 @@ function setStage(entry,stage,detail={}){
  }
  entry.stage=stage;
  entry.changedAt=stamp;
- save();render();
+ if(!save()){Object.assign(entry,snapshot);return false}
+ render();
  return true;
 }
 function outcomeDialog(entry,stage){
@@ -340,6 +342,7 @@ function close(){
 function hide(){if(screen){screen.hidden=true;if(pictureOpen)closePicture()}}
 /* A finished human task is not proof of contacting the customer.
    Only an explicit follow-up confirmation may advance a NEW lead. */
+const getClientStage=id=>records.find(x=>x.id===id)?.stage||null;
 function confirmContact(id){
  const entry=records.find(x=>x.id===id);
  if(!entry)return {ok:false,reason:'missing'};
@@ -354,7 +357,7 @@ function openClient(id){
  if(target){target.scrollIntoView({block:'center',behavior:'instant'});target.focus?.({preventScroll:true})}
 }
 function openPicture(){open();showPicture()}
-window.DMSalesScreen=Object.freeze({open,openPicture,openClient,confirmContact,close,hide,getInsight,getTotals:totals,getBusinessSummary:()=>({salesRevenue:totalWon(),promotionExpenses:promotionTotal(),source:'manual-local-records'})});
+window.DMSalesScreen=Object.freeze({open,openPicture,openClient,confirmContact,getClientStage,close,hide,getInsight,getTotals:totals,getBusinessSummary:()=>({salesRevenue:totalWon(),promotionExpenses:promotionTotal(),source:'manual-local-records'})});
 window.addEventListener('dm:personal-tasks-changed',()=>{
  if(screen&&!screen.hidden&&!pictureOpen)render();
 });
