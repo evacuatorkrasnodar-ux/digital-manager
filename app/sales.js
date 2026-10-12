@@ -170,6 +170,12 @@ function create(){
   if(b.dataset.saleCopy){copyDraft();return}
  });
 }
+function followupLine(saleId){
+ const tasks=window.DMTaskJournal?.forSale?.(saleId)||[];
+ if(!tasks.length)return '';
+ const byDay={today:'сегодня',tomorrow:'завтра',later:'позже'};
+ return '<p class="dm-sales-follow-up">✓ В «Моих делах»: '+tasks.slice(0,2).map(t=>esc(t.kind==='remind'?'связаться':'ответить')+' '+(byDay[t.when]||'позже')).join(', ')+(tasks.length>2?' и ещё '+(tasks.length-2):'')+'</p>';
+}
 function render(){
  if(!screen)return;
  const newToday=records.filter(x=>today(x.createdAt)).length;
@@ -193,10 +199,13 @@ function render(){
  '<section class="dm-sales-section"><h2>Как идут продажи</h2><p class="dm-sales-muted">От первого сообщения до покупки — простыми словами.</p><div class="dm-sales-steps">'+
  stages.map((s,i)=>'<div class="dm-sales-step"><span>'+statuses[s]+'</span><strong>'+tally(s)+'</strong></div>').join('')+'</div><small class="dm-sales-hint">Здесь показано, на каком этапе сейчас ваши записи, а не количество всех прошлых переходов.</small></section>'+
  '<section class="dm-sales-section"><h2>Откуда приходят</h2>'+(srcRows.length?'<div class="dm-sales-sources">'+srcRows.map(x=>'<div><span>'+esc(x.name)+'</span><strong>'+x.count+'</strong></div>').join('')+'</div>':'<p class="dm-sales-muted">Пока неизвестно. Источник можно указать, когда добавляешь обращение.</p>')+'</section>'+
- '<section class="dm-sales-section"><h2>Кому уделить внимание</h2>'+
+ '<section class="dm-sales-section"><h2>Кому уделить внимание</h2><p class="dm-sales-muted">«Напомнить» добавляет дело на завтра. Само сообщение клиенту пока не отправляется.</p>'+
  (active.length?'<div class="dm-sales-clients">'+active.slice(0,25).map(x=>'<article class="dm-sales-client"><div class="dm-sales-client-top"><div><strong>'+esc(x.person)+'</strong><p>'+esc(x.title)+' · '+esc(x.source)+'</p></div><select data-sale-stage="'+esc(x.id)+'" aria-label="Состояние обращения: '+esc(x.person)+'">'+Object.entries(statuses).map(([k,v])=>'<option value="'+k+'"'+(k===x.stage?' selected':'')+'>'+v+'</option>').join('')+'</select></div><div class="dm-sales-client-actions">'+
- [['remind','Напомнить'],['reply','Ответить'],['task','Создать дело'],['offer','Предложение']].map(([key,label])=>'<button type="button" data-sale-action="'+key+'" data-sale-id="'+esc(x.id)+'">'+label+'</button>').join('')+
- '</div><div class="dm-sales-result-actions"><button type="button" data-sale-outcome="won" data-sale-id="'+esc(x.id)+'">✓ Купил</button><button type="button" data-sale-outcome="lost" data-sale-id="'+esc(x.id)+'">Не сложилось</button></div></article>').join('')+'</div>':'<p class="dm-sales-muted">Сейчас нет обращений, которые ждут продолжения.</p>')+'</section>'+
+ [['remind','Напомнить'],['reply','Ответить'],['task','Создать дело'],['offer','Предложение']].map(([key,label])=>{
+ const exist=(key==='remind'||key==='task')&&(window.DMTaskJournal?.forSale?.(x.id)||[]).some(t=>t.kind===(key==='remind'?'remind':'reply'));
+ return '<button type="button" data-sale-action="'+key+'" data-sale-id="'+esc(x.id)+'">'+(exist?'В моих делах ✓':label)+'</button>';
+}).join('')+
+ '</div>'+followupLine(x.id)+'<div class="dm-sales-result-actions"><button type="button" data-sale-outcome="won" data-sale-id="'+esc(x.id)+'">✓ Купил</button><button type="button" data-sale-outcome="lost" data-sale-id="'+esc(x.id)+'">Не сложилось</button></div></article>').join('')+'</div>':'<p class="dm-sales-muted">Сейчас нет обращений, которые ждут продолжения.</p>')+'</section>'+
  '<section class="dm-sales-section"><h2>Кто уже купил</h2>'+
  (records.some(x=>x.stage==='won')?'<div class="dm-sales-clients">'+records.filter(x=>x.stage==='won').slice(0,20).map(x=>'<article class="dm-sales-client"><div class="dm-sales-client-top"><div><strong>'+esc(x.person)+'</strong><p>'+esc(x.title)+' · '+esc(x.source)+' · '+(Number(x.amount)>0?rub(x.amount):'Сумма ещё неизвестна')+'</p></div></div><div class="dm-sales-result-actions"><button type="button" data-sale-outcome="won" data-sale-id="'+esc(x.id)+'">Изменить сумму</button><button type="button" data-sale-reopen="'+esc(x.id)+'">Вернуть в работу</button></div></article>').join('')+'</div>':'<p class="dm-sales-muted">Покупки появятся здесь, когда отметите, что клиент купил.</p>')+'</section>'+
  '<section class="dm-sales-section"><h2>Где не получилось</h2><p class="dm-sales-muted">'+(lost.length?'Отмечено как «Не сложилось»: '+lost.length+'.':'Пока нет записей о потерянных продажах.')+'</p>'+
@@ -227,11 +236,13 @@ async function copyDraft(){
 function action(type,id){
  const lead=records.find(x=>x.id===id);if(!lead)return;
  if(type==='task'||type==='remind'){
-  if(!window.DMTaskJournal?.open){draftPanel('Напоминание','Связаться с '+lead.person+' по поводу «'+lead.title+'».');return}
-  window.DMTaskJournal.open('mine');
-  const text=document.getElementById('dmTaskTitle'),date=document.querySelector('#dmPersonalTaskForm [name="when"]');
-  if(text){text.value=(type==='remind'?'Напомнить: ':'Ответить: ')+lead.person+' — '+lead.title;text.focus()}
-  if(date)date.value=type==='remind'?'tomorrow':'today';
+  // "Напомнить" stores a tomorrow task, not a push notification or sent message.
+  const result=window.DMTaskJournal?.createForSale?.({
+   saleId:lead.id,person:lead.person,subject:lead.title,
+   when:type==='remind'?'tomorrow':'today',kind:type==='remind'?'remind':'reply'
+  });
+  if(!result?.ok){window.alert('Не удалось сохранить дело. Проверьте память устройства.');return}
+  // The journal opens on the saved task; a second click will not duplicate it.
   return;
  }
  if(type==='reply')draftPanel('Ответ клиенту','Здравствуйте, '+lead.person+'! Спасибо за обращение по поводу «'+lead.title+'». Подскажите, пожалуйста, что для вас сейчас самое важное?');
@@ -329,6 +340,9 @@ function close(){
 function hide(){if(screen){screen.hidden=true;if(pictureOpen)closePicture()}}
 function openPicture(){open();showPicture()}
 window.DMSalesScreen=Object.freeze({open,openPicture,close,hide,getInsight,getTotals:totals,getBusinessSummary:()=>({salesRevenue:totalWon(),promotionExpenses:promotionTotal(),source:'manual-local-records'})});
+window.addEventListener('dm:personal-tasks-changed',()=>{
+ if(screen&&!screen.hidden&&!pictureOpen)render();
+});
 // Restore the living recommendation after a reload, even without a new sale.
 notifyInsight();
 })();
