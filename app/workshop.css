@@ -1,0 +1,22 @@
+/* Workshop: dedicated Black Velvet settings surface, no global selectors. */
+.dm-workshop{display:grid;gap:14px;padding:4px 0 18px;color:#e9f3ff}
+.dm-workshop-lead,.dm-workshop-foot,.dm-workshop-empty{font-size:12px;line-height:1.5;color:#a8bfd3;margin:0}
+.dm-workshop h3{font-size:14px;font-weight:540;margin:6px 0 0}
+.dm-workshop-presets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.dm-workshop-presets button,.dm-workshop-tool,.dm-workshop-editor{border:1px solid rgba(148,178,206,.3);border-radius:17px;background:linear-gradient(146deg,rgba(25,39,54,.8),rgba(5,12,22,.95))}
+.dm-workshop-presets button{text-align:left;color:#edf5ff;padding:15px 12px;display:grid;gap:8px;cursor:pointer}
+.dm-workshop-presets button>span{font-size:21px}.dm-workshop-presets strong{font-size:12px}.dm-workshop-presets small{font-size:10px;line-height:1.4;color:#b7c7d6}
+.dm-workshop-tool{display:flex;align-items:center;gap:9px;padding:9px;margin-top:7px;min-width:0}
+.dm-workshop-tool-icon{font-size:19px;flex:none}.dm-workshop-tool-copy{display:grid;gap:3px;flex:1;min-width:0}
+.dm-workshop-tool-copy strong{font-size:12px;overflow-wrap:anywhere}.dm-workshop-tool-copy small{font-size:10px;color:#b1c5d5}
+.dm-workshop-tool button{color:#e3f2fd;background:rgba(49,77,102,.22);border:1px solid rgba(139,177,211,.32);border-radius:10px;padding:7px 9px;cursor:pointer}
+.dm-workshop-editor{display:grid;gap:11px;padding:13px}
+.dm-workshop-editor p{font-size:12px;font-weight:550;margin:4px 0 0}
+.dm-workshop-name,.dm-workshop-field{display:grid;gap:5px;font-size:12px;color:#dbeaf7}
+.dm-workshop-editor input{width:100%;min-width:0;background:#0a1829;color:#f1f7fd;border:1px solid rgba(151,185,214,.44);border-radius:10px;padding:10px;font:inherit}
+.dm-workshop-field{grid-template-columns:1fr 112px 35px;align-items:center}
+.dm-workshop-field small{font-size:10px;color:#b3c9da}
+.dm-workshop-total{font-size:18px;color:#f1f7ff;font-weight:550;padding:14px;border:1px solid rgba(202,224,242,.36);border-radius:12px;background:#081321}
+.dm-workshop-actions{display:flex;gap:7px}.dm-workshop-actions button{flex:1;min-width:0;padding:11px 7px;border:1px solid rgba(191,217,238,.5);border-radius:11px;color:#e9f4ff;background:#203850;font-size:11px;cursor:pointer}
+.dm-workshop-actions button+button{background:#0b1724}.dm-workshop #wsSaved{margin:0;color:#dcece3;font-size:11px}
+@media(max-width:350px){.dm-workshop-field{grid-template-columns:1fr 82px 29px}.dm-workshop-presets{gap:5px}}
