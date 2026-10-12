@@ -116,13 +116,17 @@ function demandProgress(){
  return window.DMDemandTest?.report?.()||'Пока нет сохранённого плана проверки спроса.';
 }
 function selectedPlaceAnswer(){
+ const opportunity=window.DMMarketOpportunities?.suggest?.(journey());
+ const suggested=opportunity?.hasSpecificEvidence?
+  ' Из записанного тобой наблюдения у меня появилась гипотеза: '+opportunity.headline+'. '+opportunity.action+
+  ' Это не подтверждённая проблема всего района; источник и вопрос для проверки есть в «Разведке района».':'';
  const record=window.DMMarketScout?.summary?.(journey());
  const verifiedLine=record?.hasLocation?' '+(window.DMMarketScout?.report?.()||record.conclusion):'';
  const advice=window.DMBusinessJourney?.getLocationAdvice?.();
  if(!advice?.knownLocation)return 'Место пока не выбрано. Расскажи, в каком городе или районе планируешь работать — затем проверим конкурентов, спрос и условия.';
  return advice.observation+verifiedLine+' Первые проверки: '+advice.evidence.slice(0,3).join('; ')+
   '. Что можно сделать после проверки: '+advice.plan.slice(0,2).join('; ')+
-  '. Автоматическая проверка конкурентов пока не подключена: это планы и сохранённые пользователем наблюдения.';
+  '. Автоматическая проверка конкурентов пока не подключена: это планы и сохранённые пользователем наблюдения.'+suggested;
 }
 function work(){
  const result=window.DMInitiative?.getSummary?.();
@@ -194,6 +198,10 @@ function answer(question){
  if(path?.mode==='start'&&/(что со спросом|проверили спрос|проверка спроса|есть спрос|первые отклики|есть отклики|реакци|что говорят люди|что думают люди|заинтересовал)/.test(q))
   return demandProgress()+' Это первые сигналы; перед значительными расходами стоит проверить реальные потребности и возможность оплачивать предложение.';
  if(path?.mode==='start'&&/(что.{0,18}подготовил|что успел|первые материалы|черновик сайта|текст сайта|проверить спрос)/.test(q))return startupMaterials()+' '+startingPath();
+ if(path&&/(как выделиться|чем отличаться|что улучшить|где возможность|какая возможность|какое преимущество|как привлечь клиентов)/.test(q)){
+  const hypothesis=window.DMMarketOpportunities?.report?.();
+  if(hypothesis)return hypothesis+' Посмотреть источники и взять вопрос для проверки можно в «Мой путь с управляющим» → «Разведка района».';
+ }
  if(/(?:район|улиц|локаци|помещен|конкурент|где открыть|открыват.{0,18}где|соседн.{0,16}бизнес)/.test(q)&&path)return selectedPlaceAnswer();
  if(path&&/(с нуля|сво[её] дел[оа]|начать бизнес|откр[ыо].{0,18}бизнес|первые клиенты|с чего нач|что сначала|план развития|путь развития|иде[яю]|чем заняться)/i.test(q))
   return startingPath()+' Продолжить знакомство и изменить планы можно в «Управлении» → «Мой управляющий» → «Мой путь с управляющим».';
