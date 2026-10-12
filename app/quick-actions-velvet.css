@@ -15,10 +15,10 @@
  box-shadow:inset 0 1px rgba(240,248,255,.11),inset 0 -1px rgba(0,0,0,.35),0 7px 19px rgba(0,0,0,.36);
  isolation:isolate;
 }
-html:not(.dock-is-hidden) #dockQuickActions.dock-quick-actions,
-html:not(.dm-mini-no-dock) .dm-assistant-mini-menu{
+html:not(.dock-is-hidden) #dockQuickActions.dock-quick-actions{
  bottom:calc(94px + env(safe-area-inset-bottom,0px));
 }
+/* Personal-page docks are taller: keep the same little tray fully ABOVE them. */
 :is(#dockQuickActions.dock-quick-actions,.dm-assistant-mini-menu)[hidden]{display:none!important}
 #dockQuickActions.dock-quick-actions button,
 .dm-assistant-mini-menu a{
