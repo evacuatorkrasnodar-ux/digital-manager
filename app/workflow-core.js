@@ -8,6 +8,7 @@
  const stage=Object.freeze({new:'new',talk:'in_progress',offer:'in_progress'});
  const finite=t=>Number.isFinite(Number(t))&&Number(t)>0?Number(t):0;
  const safe=(v,n=140)=>String(v??'').trim().slice(0,n);
+ const counted=(n,one,few,many)=>{const x=Math.abs(n),d=x%10,h=x%100;return n+' '+(h>=11&&h<=14?many:d===1?one:d>=2&&d<=4?few:many)};
  const sources=new Map();
  function registerSource(name,read){
   // Adapters are installed by the app itself, never by a stored setting or a chat.
@@ -75,15 +76,15 @@
   const notes=[];
   if(current.tasksOverdue>0)notes.push({id:'late-owner-work',kind:'attention',priority:0,
    title:'Есть дела с просроченным сроком',
-   body:'По твоим записям '+current.tasksOverdue+' дел с просроченной датой. Я могу помочь подготовить план, но пока не умею выполнить их без отдельного подтверждения и подключения нужных сервисов.',
+   body:'По твоим записям просрочено '+counted(current.tasksOverdue,'дело','дела','дел')+'. Я могу помочь подготовить план, но пока не умею выполнить их без отдельного подтверждения и подключения нужных сервисов.',
    next:'Проверь срочные обязательства или передай подходящие дела управляющему.'});
   else if(current.tasksDueToday>0)notes.push({id:'today-owner-work',kind:'attention',priority:2.6,
    title:'Сегодня есть обязательства',
-   body:'По твоим записям на сегодня '+current.tasksDueToday+' дел. Не оставим их без внимания.',
+   body:'На сегодня записано '+counted(current.tasksDueToday,'дело','дела','дел')+'. Не оставим их без внимания.',
    next:'Могу помочь подготовить решение; выполненным назову только то, что действительно подтверждено.'});
   if(current.assistantQueue>0)notes.push({id:'assistant-queue',kind:'progress',priority:7,
    title:'В очереди управляющего',
-   body:'В очереди '+current.assistantQueue+' поручений, из них '+current.draftsPrepared+' с подготовленным черновиком.',
+   body:'В очереди '+counted(current.assistantQueue,'поручение','поручения','поручений')+', для '+counted(current.draftsPrepared,'поручения','поручений','поручений')+' есть черновик.',
    next:'Поручение в очереди ещё не означает, что внешняя работа выполнена.'});
   return notes;
  }
