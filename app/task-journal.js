@@ -454,6 +454,35 @@ function answerContact(reached){
  }
  show('mine');
 }
+/* Read-only work facts for the manager's universal workflow layer.
+   A queued delegation is NOT a completed action. Do not expose demo plans. */
+function getWorkSnapshot(){
+ const nowMs=Date.now(),today=dayString(nowMs);
+ const taskRows=personal.filter(t=>t.status==='open'||t.status==='delegated').slice(0,100)
+  .map(t=>{
+   const due=t.when==='later'?null:(typeof t.dueDate==='string'?t.dueDate:dueDate(t.when,Number(t.createdMs)||nowMs));
+   return {id:String(t.id).slice(0,100),title:String(t.title||'Дело').slice(0,120),
+    owner:t.status==='delegated'?'assistant-queue':'person',
+    status:t.status,dueDate:due,overdue:Boolean(due&&due<today),
+    today:Boolean(due&&due<=today),
+    source:t.source==='sales'?'sales':'manual-task',createdAt:Number(t.createdMs)||0};
+  });
+ const queued=delegated.filter(t=>t.origin==='owner-task'&&t.status==='queued').slice(0,100).map(t=>({
+  id:String(t.id).slice(0,120),title:String(t.title||'Поручение').slice(0,120),
+  personalId:String(t.personalId||'').slice(0,100),
+  draftReady:Boolean(t.draft&&typeof t.draft.text==='string'),
+  reviewed:Boolean(t.draft?.reviewedAt),
+  createdAt:Number(t.createdMs)||0
+ }));
+ return {source:'user-entered-local-work',recordedTasks:personal.length,
+  owned:taskRows.filter(t=>t.status==='open').length,
+  delegated:taskRows.filter(t=>t.status==='delegated').length,
+  overdue:taskRows.filter(t=>t.overdue&&t.status==='open').length,
+  dueToday:taskRows.filter(t=>t.today&&t.status==='open').length,
+  queued:queued.length,prepared:queued.filter(t=>t.draftReady).length,
+  reviewed:queued.filter(t=>t.reviewed).length,
+  tasks:taskRows,queue:queued,asOf:nowMs};
+}
 /* A genuine owner task created from a deliberate button press in Sales. */
 function forSale(saleId){
  return personal.filter(t=>t.source==='sales'&&t.saleId===saleId&&t.status!=='done')
@@ -540,7 +569,7 @@ function init(){
  });
  document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
  document.addEventListener('click',e=>{const root=document.getElementById('dmTaskJournal');if(root&&!root.hidden&&e.target===root)close()});
- window.DMTaskJournal=Object.freeze({open:show,createForSale,forSale});
+ window.DMTaskJournal=Object.freeze({open:show,createForSale,forSale,getWorkSnapshot});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
