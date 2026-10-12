@@ -15,13 +15,17 @@ const findAdvice=()=>delegated.find(x=>x.id===ADVICE_ID);
 let lastFocus=null;
 
 /* One approved dashboard card, many messages; no second card and no fake execution. */
-const currentInsight=()=>window.DMSalesScreen?.getInsight?.()||null;
+const currentInsight=()=>{
+ const item=window.DMSalesScreen?.getInsight?.()||null;
+ return item&&!delegated.some(t=>t.id==='sales-insight:'+item.id&&t.status==='reviewed')?item:null;
+};
 const pendingTask=()=>delegated.find(t=>t.status==='planned'&&String(t.id).startsWith('sales-insight:'))||delegated.find(t=>t.status==='planned'&&t.id===ADVICE_ID)||null;
 function syncRecommendation(){
  const card=document.querySelector('#homeScreen .recommendation-card');
  if(!card)return;
  const pending=pendingTask(),insight=currentInsight(),old=findAdvice();
  const head=card.querySelector('.advice-head'),body=card.querySelector('.advice-body'),button=document.getElementById('openAdvice');
+ const archived=delegated.find(t=>t.status==='reviewed'&&String(t.id).startsWith('sales-insight:'));
  let title,description,action,colour='attention';
  if(pending){
   colour='accepted';title='Поручение принято';
@@ -30,9 +34,9 @@ function syncRecommendation(){
  }else if(insight){
   colour=insight.kind==='opportunity'?'opportunity':'attention';
   title=insight.title;description=insight.body;action='Исполнить ';
- }else if(old?.status==='reviewed'){
+ }else if(old?.status==='reviewed'||archived){
   colour='accepted';title='План просмотрен';
-  description='План сохранён в истории. Реальной проверки рекламы не было.';
+  description='План сохранён в истории. Реальных внешних действий не было.';
   action='История ';
  }else{
   title='Есть потенциал для роста в рекламных каналах.';
@@ -62,7 +66,7 @@ function addDelegation(){
    });
    save(DELEGATED_KEY,delegated);
   }
- }else if(findAdvice()?.status==='reviewed'){
+ }else if(findAdvice()?.status==='reviewed'||delegated.some(t=>t.status==='reviewed'&&String(t.id).startsWith('sales-insight:'))){
   show('history');return;
  }else if(!findAdvice()){
   delegated.unshift({id:ADVICE_ID,title:ADVICE_TITLE,status:'planned',created:now(),createdMs:Date.now(),log:[{at:now(),message:'Создано демонстрационное поручение на проверку. Интеграции не подключены, проверка не выполнялась.'}]});
@@ -72,7 +76,7 @@ function addDelegation(){
 }
 function openRecommendationDetail(event){
  const task=pendingTask(),insight=currentInsight(),old=findAdvice();
- if(!task&&!insight&&old?.status!=='reviewed')return; // retain the original detail modal for demo
+ if(!task&&!insight&&old?.status!=='reviewed'&&!delegated.some(t=>t.status==='reviewed'&&String(t.id).startsWith('sales-insight:')))return; // retain the original detail modal for demo
  event.preventDefault();event.stopImmediatePropagation();
  if(task){show('delegated');return}
  if(insight){
@@ -82,13 +86,13 @@ function openRecommendationDetail(event){
  }
  show('history');
 }
-function reviewDelegation(){
- const task=findAdvice();
- if(!task||task.status!=='planned')return;
+function reviewDelegation(id){
+ const task=delegated.find(t=>t.id===id&&t.status==='planned');
+ if(!task)return;
  task.status='reviewed';task.reviewedMs=Date.now();
  if(!Array.isArray(task.log))task.log=[];
- task.log.push({at:now(),message:'План отмечен просмотренным и архивирован. Реальная проверка не выполнялась.'});
- save(DELEGATED_KEY,delegated);show('history');
+ task.log.push({at:now(),message:'Пользователь посмотрел план и перенёс его в историю. Никаких внешних действий не выполнялось.'});
+ save(DELEGATED_KEY,delegated);syncRecommendation();show('history');
 }
 function makePanel(){
  let root=document.getElementById('dmTaskJournal');
@@ -120,7 +124,7 @@ function delegatedList(){
  return pending.map(t=>'<article class="dm-journal-entry"><span>ПЛАН · ДЕМО · НЕ ВЫПОЛНЕНО</span><h3>'+esc(t.title)+'</h3>'+
  '<p>План подготовлен к проверке. Рекламные данные и реальные интеграции не подключены.</p>'+
  '<ul>'+(Array.isArray(t.log)?t.log:[]).map(l=>'<li><small>'+esc(l.at)+'</small> '+esc(l.message)+'</li>').join('')+'</ul>'+
- (t.id===ADVICE_ID&&t.status==='planned'?'<button type="button" data-delegation-review>Архивировать просмотренный план</button>':'')+'</article>').join('');
+ (t.status==='planned'?'<button type="button" data-delegation-review="'+esc(t.id)+'">Я посмотрел план · в историю</button>':'')+'</article>').join('');
 }
 function historyList(){
  const entries=[];
@@ -183,7 +187,7 @@ function init(){
   if(b.dataset.journalOpen){show(b.dataset.journalOpen)}
   else if(b.hasAttribute('data-journal-close'))close();
   else if(b.dataset.journalTab)show(b.dataset.journalTab);
-  else if(b.hasAttribute('data-delegation-review'))reviewDelegation();
+  else if(b.hasAttribute('data-delegation-review'))reviewDelegation(b.dataset.delegationReview);
   else if(b.dataset.personalDone)completePersonal(b.dataset.personalDone);
  });
  document.addEventListener('submit',e=>{
