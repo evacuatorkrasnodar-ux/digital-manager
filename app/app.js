@@ -106,6 +106,10 @@
   function datesModal(){modal('Выбрать дату',`<form id="dateForm" class="form-fields"><label>Дата для просмотра<input name="date" type="date" required value="${safe(chosenDate||new Date().toLocaleDateString('en-CA'))}"></label><p class="modal-note">Выбор даты меняет заголовок, но историческая аналитика пока не подключена: график остаётся демонстрационным.</p><button class="primary-button" type="submit">Показать дату</button></form>`,()=>byId('dateForm').addEventListener('submit',e=>{e.preventDefault();const d=new FormData(e.currentTarget);const selectedDate=String(d.get('date')||'');updatePeriod('day');chosenDate=selectedDate;if(chosenDate){byId('revenueLabel').textContent='Выручка · '+chosenDate.split('-').reverse().join('.');}closeModal();notify('Для этой даты показаны демонстрационные данные');}));}
   function demoAnswer(q){const grounded=window.DMBusinessBrain?.answer?.(q);if(grounded)return grounded;const lower=q.toLowerCase();if(/расход|затрат|прибыл/.test(lower))return 'Начните с категорий расходов: постоянные, переменные и маркетинг. Сравните их с выручкой за одинаковые периоды. Это общий совет, не анализ ваших счетов.';if(/клиент|продаж/.test(lower))return 'Разделите клиентов на новых, активных и вернувшихся. Проверьте время ответа на заявки и внедрите повторные касания. Данные этой панели пока демонстрационные.';if(/реклам|выруч|рост/.test(lower))return 'Сначала измерьте рентабельность каждого канала. Увеличивайте бюджет небольшими шагами только там, где подтверждена окупаемость. Конкретный прогноз потребует реальных данных.';return 'Я пока работаю в демонстрационном режиме. Могу подсказать общие действия по выручке, клиентам и расходам. Реальное ИИ-подключение появится позже.';}
   function chat(q){
+    // An invitation to build a business opens the relationship, not demo CRM advice.
+    if(/(?:хочу|давай|помоги|как|начать|созда(?:ть|ю)|откры(?:ть|ваю)|построить).{0,48}(?:бизнес|сво[её] дело)|не знаю.{0,36}чем заняться/i.test(q)&&window.DMBusinessJourney?.open){
+      window.DMBusinessJourney.open();return;
+    }
     const log=byId('chatLog');
     const user=document.createElement('div'); user.className='chat-bubble user'; user.textContent=q;
     const reply=document.createElement('div'); reply.className='chat-bubble'; reply.textContent=window.DMBusinessBrain?.answer?.(q)?'Сверяю записи бизнеса…':'Готовлю демонстрационный ответ…';
@@ -649,7 +653,9 @@
         ['voice','ic-settings','Основные','Плазма · Док · Имя · Общение'],
         ['autopilot','ic-shield','Автопилот','Навыки · Правила · Самостоятельность']
       ];
-      content='<div class="mg-unified-hub">'+parts.map(([key,icon,label,description])=>
+      content='<div class="mg-unified-hub">'+
+        '<button type="button" id="mgOpenBusinessJourney" class="mg-unified-item"><span class="mg-unified-icon"><svg class="ico" aria-hidden="true"><use href="#ic-spark"/></svg></span><span class="mg-copy"><strong>Мой путь с управляющим</strong><small>Создать бизнес с нуля или развивать действующий</small></span><span class="mg-chevron" aria-hidden="true"><svg class="ico"><use href="#ic-chevron"/></svg></span></button>'+
+        parts.map(([key,icon,label,description])=>
         '<button type="button" class="mg-unified-item mg-unified-'+key+'" data-mg-open="'+key+'">'+
           '<span class="mg-unified-icon"><svg class="ico" aria-hidden="true"><use href="#'+icon+'"/></svg></span>'+
           '<span class="mg-copy"><strong>'+label+'</strong><small>'+description+'</small></span>'+
@@ -771,6 +777,7 @@
   byId('mgDetail').addEventListener('click',event=>{
     if(event.target.closest('#mgOpenDigitalTrace')){window.DMDigitalTrace?.open('management');return;}
     if(event.target.closest('#mgOpenInitiative')){window.DMInitiative?.open?.();return;}
+    if(event.target.closest('#mgOpenBusinessJourney')){window.DMBusinessJourney?.open?.();return;}
     const link=event.target.closest('[data-mg-open]');if(link)mgSettingsPage(link.dataset.mgOpen);
   });
   byId('mgDetail').addEventListener('change',event=>{
