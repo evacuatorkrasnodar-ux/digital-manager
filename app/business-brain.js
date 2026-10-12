@@ -30,6 +30,34 @@ function processAnswer(q){
  return contextNote()+' Сейчас из фактических записей мне доступны только обращения, покупки и вручную указанные рекламные расходы — состояние запасов, графиков и выполнения работ я пока не вижу.';
 }
 const counted=(n,one,few,many)=>{const x=Math.abs(number(n)),last=x%10,last100=x%100;return String(n)+' '+(last100>=11&&last100<=14?many:last===1?one:last>=2&&last<=4?few:many)};
+function workflow(){
+ const report=window.DMWorkflowCore?.snapshot?.();
+ return report&&report.origin==='local-user-entered-records'?report:null;
+}
+function workSignals(){
+ const flow=workflow();
+ return flow?window.DMWorkflowCore?.signals?.(flow)||[]:[];
+}
+function workLine(){
+ const x=workflow();if(!x)return '';
+ const pieces=[];
+ if(x.ownerTasks)pieces.push('у тебя '+counted(x.ownerTasks,'дело','дела','дел'));
+ if(x.assistantQueue)pieces.push('у управляющего в очереди '+counted(x.assistantQueue,'поручение','поручения','поручений')+(x.draftsPrepared?' ('+counted(x.draftsPrepared,'черновик подготовлен','черновика подготовлены','черновиков подготовлено')+')':''));
+ if(x.tasksOverdue)pieces.push(counted(x.tasksOverdue,'дело просрочено','дела просрочены','дел просрочено'));
+ return pieces.length?'По «Моим делам»: '+pieces.join('; ')+'. Очередь не равна выполнению.':'';
+}
+function taskAnswer(){
+ const x=workflow();
+ if(!x)return 'Пока не могу прочитать текущие дела. Ничего придумывать не стану.';
+ const due=x.tasksOverdue?' Из них просрочено '+x.tasksOverdue+'.':x.tasksDueToday?' Сегодня требуют внимания '+x.tasksDueToday+'.':'';
+ if(!x.ownerTasks&&!x.assistantQueue)return 'По сохранённому журналу незавершённых дел и поручений сейчас нет. '+progressSentence();
+ return workLine()+due+' '+progressSentence();
+}
+function combinedSignals(data){
+ const sales=observations(data);
+ const operations=workSignals().map(x=>({priority:x.priority,type:'work-'+x.id,title:x.title,text:x.body,next:x.next}));
+ return [...sales,...operations].sort((a,b)=>a.priority-b.priority);
+}
 function observations(data){
  if(!data||!data.total)return [];
  const notes=[];
@@ -75,13 +103,18 @@ function progressSentence(){
 }
 function brief(){
  const d=facts();
- if(!d)return {headline:'Готов разобраться с бизнесом',message:'В этой части приложения ещё нет доступа к данным «Продаж». Ничего придумывать не стану.',priority:null};
- if(!d.total)return {headline:business().configured?'Я изучаю устройство твоего бизнеса':'Жду реальные обращения',
-  message:contextNote()+' В «Продажах» пока нет учётных записей, и другие процессы ещё не подключены. Я не стану придумывать прибыль или выполненную работу. '+progressSentence(),priority:null};
- const priority=observations(d)[0]||null;
+ if(!d)return {headline:'Готов разобраться с бизнесом',message:contextNote()+' '+workLine()+' Данных о продажах пока нет.',priority:workSignals()[0]||null};
+ if(!d.total){
+  const priority=combinedSignals(d)[0]||null;
+  return {headline:priority?.title||(business().configured?'Я изучаю устройство твоего бизнеса':'Жду реальные обращения'),
+   message:contextNote()+' '+(priority?priority.text+' '+priority.next+' ':'')+workLine()+
+    ' В «Продажах» пока нет записей, а другие внешние источники не подключены. Я не стану придумывать прибыль или выполненную работу. '+progressSentence(),
+   priority};
+ }
+ const priority=combinedSignals(d)[0]||null;
  const first=(business().configured?'В твоём бизнесе по доступным записям: ':'По твоим записям: ')+counted(d.total,'обращение','обращения','обращений')+', '+counted(d.purchases,'покупка','покупки','покупок')+', в работе: '+d.active+'.';
  return {headline:priority?.title||'Дела под контролем по доступным записям',
-  message:first+' '+(priority?priority.text+' '+priority.next:'Пока срочных сигналов из записей нет.')+' '+progressSentence()+(business().configured?' При этом '+contextNote():'') ,
+  message:first+' '+(priority?priority.text+' '+priority.next:'Пока срочных сигналов из записей нет.')+' '+workLine()+' '+progressSentence()+(business().configured?' При этом '+contextNote():'') ,
   priority};
 }
 function spendingAnswer(d){
@@ -107,12 +140,13 @@ function salesAnswer(d){
 function answer(question){
  const q=String(question||'').trim().toLowerCase();
  if(!q)return null;
- const recognized=/(бизнес|как дела|что происходит|как идут|что нового|что успел|успел|сделал|делал|занимаешься|занимал|работаешь|поручен|мои дела|отчет|отчёт|итог|ситуаци|ошибк|проблем|что дальше|что делать|помоги|продаж|клиент|покупк|заявк|выручк|денег|деньг|доход|прибыл|финанс|расход|трат|бюджет|реклам|продвижен|автопилот|самостоятельн|услуг|производ|склад|остатк|поставщик|доставк|график|брон|сотрудник|персонал|смены|магазин|цвет|цех|филиал|бизнес.модел)/i.test(q);
+ const recognized=/(бизнес|как дела|что происходит|как идут|что нового|что успел|успел|сделал|делал|занимаешься|занимал|работаешь|поручен|мои дела|отчет|отчёт|итог|ситуаци|ошибк|проблем|что дальше|что делать|помоги|продаж|клиент|покупк|заявк|выручк|денег|деньг|доход|прибыл|финанс|расход|трат|бюджет|реклам|продвижен|задач|поручени|мои дела|дела на сегодня|что у меня|сроки|просроч|автопилот|самостоятельн|услуг|производ|склад|остатк|поставщик|доставк|график|брон|сотрудник|персонал|смены|магазин|цвет|цех|филиал|бизнес.модел)/i.test(q);
  if(!recognized)return null;
  const d=facts();
  if(!d)return processAnswer(q)||contextNote()+' Записи «Продаж» пока недоступны. Ничего не стану придумывать.';
  const w=work();
- if(/автопилот|самостоятельн|успел|сделал|делал|занимаешься|чем занимал|работаешь|поручен/.test(q))return progressSentence()+
+ if(/задач|поручени|мои дела|дела на сегодня|сроки|просроч/.test(q))return taskAnswer();
+ if(/автопилот|самостоятельн|успел|сделал|делал|занимаешься|чем занимал|работаешь/.test(q))return progressSentence()+' '+workLine()+
   (d.newLeads?' Сейчас новых обращений: '+d.newLeads+'.':'');
  if(/расход|трат|бюджет|реклам|продвижен/.test(q))return spendingAnswer(d);
  if(/денег|деньг|доход|прибыл|выручк|финанс/.test(q))return moneyAnswer(d);
@@ -123,5 +157,5 @@ function answer(question){
  const rec=brief();
  return 'Я посмотрел текущие записи. '+rec.message;
 }
-window.DMBusinessBrain=Object.freeze({answer,brief,observations:()=>observations(facts()),getSnapshot:facts,getProgress:progressSentence});
+window.DMBusinessBrain=Object.freeze({answer,brief,observations:()=>combinedSignals(facts()),getSnapshot:facts,getProgress:progressSentence,getWorkSummary:workLine});
 })();
