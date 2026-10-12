@@ -164,3 +164,96 @@ html.dock-is-hidden.dm-plasma-orbit-open #homeScreen .shortcuts{
 @media(prefers-reduced-motion:reduce){
   html.dock-is-hidden #homeScreen .shortcuts{transition:none}
 }
+
+/* Shared personal-page plasma orbit.
+   My Day and My World have their own approved plasma instances; give their
+   existing four-link assistant tray the exact same arc as the main app.
+   The flat capsule stays unchanged when the regular dock is visible. */
+.dm-assistant-mini-menu.dm-plasma-orbit{
+  left:50%;
+  right:auto;
+  bottom:calc(8px + env(safe-area-inset-bottom,0px));
+  width:0;
+  height:0;
+  min-width:0;
+  max-width:none;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  display:block;
+  overflow:visible;
+  background:transparent;
+  box-shadow:none;
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+  pointer-events:none;
+  transform:translateX(-50%);
+}
+.dm-assistant-mini-menu.dm-plasma-orbit > a{
+  position:absolute;
+  left:0;
+  right:auto;
+  flex:none;
+  box-sizing:border-box;
+  width:44px;
+  height:44px;
+  min-width:44px;
+  min-height:44px;
+  padding:0;
+  margin:0;
+  border-radius:50%;
+  pointer-events:auto;
+  transform:translateX(-50%);
+  background:linear-gradient(145deg,rgba(31,53,74,.7),rgba(5,15,27,.83));
+  border-color:rgba(162,198,226,.47);
+  box-shadow:inset 0 1px rgba(243,251,255,.13),0 4px 17px rgba(0,0,0,.33),
+    0 0 11px rgba(97,152,207,.09);
+  -webkit-backdrop-filter:blur(11px);
+  backdrop-filter:blur(11px);
+  animation:dm-plasma-menu-fan .28s cubic-bezier(.18,.76,.24,1) both;
+}
+.dm-assistant-mini-menu.dm-plasma-orbit > a svg{width:20px;height:20px}
+.dm-assistant-mini-menu.dm-plasma-orbit > a[data-action="home"]{left:-65px;bottom:53px}
+.dm-assistant-mini-menu.dm-plasma-orbit > a[data-action="chat"]{left:-25px;bottom:99px;animation-delay:.035s}
+.dm-assistant-mini-menu.dm-plasma-orbit > a[data-action="attention"]{left:25px;bottom:99px;animation-delay:.07s}
+.dm-assistant-mini-menu.dm-plasma-orbit > a[data-action="manage"]{left:65px;bottom:53px;animation-delay:.105s}
+.dm-assistant-mini-menu.dm-plasma-orbit > a:active{transform:translateX(-50%) scale(.94)}
+@media(max-width:340px){
+  .dm-assistant-mini-menu.dm-plasma-orbit > a[data-action="home"]{left:-61px;bottom:51px}
+  .dm-assistant-mini-menu.dm-plasma-orbit > a[data-action="chat"]{left:-24px;bottom:95px}
+  .dm-assistant-mini-menu.dm-plasma-orbit > a[data-action="attention"]{left:24px;bottom:95px}
+  .dm-assistant-mini-menu.dm-plasma-orbit > a[data-action="manage"]{left:61px;bottom:51px}
+}
+@media(prefers-reduced-motion:reduce){
+  .dm-assistant-mini-menu.dm-plasma-orbit > a{animation:none}
+}
+/* On the few personal documents without a plasma dock, give an explicit
+   way back to Home. Do not inject an imitation plasma into these screens. */
+.dm-personal-home-link{
+  display:inline-grid;
+  flex:none;
+  place-items:center;
+  width:39px;
+  height:39px;
+  margin-left:auto;
+  border-radius:50%;
+  border:1px solid rgba(165,202,227,.44);
+  background:linear-gradient(135deg,rgba(24,49,70,.77),rgba(5,14,25,.9));
+  color:#e0f1ff;
+  text-decoration:none;
+  box-shadow:inset 0 1px rgba(247,252,255,.09);
+}
+.dm-personal-home-link svg{
+  width:20px;
+  height:20px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.dm-personal-home-link:focus-visible{
+  outline:2px solid #d2ecff;
+  outline-offset:3px;
+}
