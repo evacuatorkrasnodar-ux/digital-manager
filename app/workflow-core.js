@@ -48,7 +48,7 @@
    try{rows=read()}catch(e){errors.push(name);continue}
    if(!Array.isArray(rows)){errors.push(name);continue}
    for(const item of rows.slice(0,MAX)){
-    if(!item||typeof item!=='object'||!['inquiry','task','delegation'].includes(item.kind)||typeof item.id!=='string'||seen.has(item.id))continue;
+    if(!item||typeof item!=='object'||!/^[a-z][a-z0-9-]{0,30}$/.test(item.kind)||typeof item.id!=='string'||seen.has(item.id))continue;
     seen.add(item.id);items.push({...item});
     if(items.length>=MAX)break;
    }
@@ -58,10 +58,11 @@
   const pending=unique.filter(x=>x.kind==='inquiry');
   const owned=unique.filter(x=>x.kind==='task'&&x.owner==='person');
   const queue=unique.filter(x=>x.kind==='delegation');
+  const other=unique.filter(x=>!['inquiry','task','delegation'].includes(x.kind)&&!['completed','cancelled','closed'].includes(x.state));
   return {
    origin:'local-user-entered-records',collectedAt:Date.now(),
-   open:pending.length+owned.length+queue.length,
-   inquiries:pending.length,ownerTasks:owned.length,assistantQueue:queue.length,
+   open:pending.length+owned.length+queue.length+other.length,
+   inquiries:pending.length,ownerTasks:owned.length,assistantQueue:queue.length,otherWork:other.length,
    tasksDueToday:owned.filter(t=>t.today).length,
    tasksOverdue:owned.filter(t=>t.overdue).length,
    draftsPrepared:queue.filter(t=>t.draftReady).length,
