@@ -9,25 +9,7 @@ function init(){
   document.getElementById('mydayPlasmaLauncher'),
   document.getElementById('worldStandalonePlasma')
  ].filter(Boolean);
- if(!triggers.length){
-  // Health and Care are often embedded inside My Day (which already owns
-  // the plasma). When opened alone they need a visible Home link too.
-  let standalone=false;
-  try{standalone=window.self===window.top}catch(_){}
-  if(standalone&&!document.querySelector('.dm-personal-home-link')){
-   const header=document.querySelector('.day-header');
-   if(header){
-    const home=document.createElement('a');
-    home.className='dm-personal-home-link';
-    home.href='./index.html';
-    home.setAttribute('aria-label','Главная — открыть приложение');
-    home.setAttribute('title','Главная');
-    home.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v11h-7v-7h-4v7H3z"/></svg>';
-    header.append(home);
-   }
-  }
-  return;
- }
+ if(!triggers.length)return;
  const old=document.querySelector('.dm-assistant-mini-menu');
  if(old)old.remove();
  const menu=document.createElement('nav');
@@ -47,29 +29,14 @@ function init(){
  let hideTimer;
  function close(){
   clearTimeout(hideTimer);menu.hidden=true;
-  menu.classList.remove('dm-plasma-orbit');
-  document.documentElement.classList.remove('dm-plasma-orbit-open');
   triggers.forEach(t=>t.setAttribute('aria-expanded','false'));
  }
  function toggle(event){
   event.preventDefault();event.stopPropagation();
   const open=menu.hidden;
-  close();
-  if(open){
-   // Only the actual dock-free plasma gets the four-button semicircle.
-   const dayPlasma=document.getElementById('mydayPlasmaLauncher');
-   const dayStage=dayPlasma?.closest('.dm-myday-plasma-stage');
-   const worldPlasma=document.getElementById('worldStandalonePlasma');
-   const plasmaMode=Boolean((dayPlasma&&dayStage&&!dayStage.hidden)||
-    (worldPlasma&&!worldPlasma.hidden));
-   menu.classList.toggle('dm-plasma-orbit',plasmaMode);
-   // The clean black orbital scene is active only around a real, visible
-   // dock-free plasma and never during the standard navigation mode.
-   document.documentElement.classList.toggle('dm-plasma-orbit-open',plasmaMode);
-   menu.hidden=false;
-   hideTimer=setTimeout(close,6000);
-  }
+  close();menu.hidden=!open;
   triggers.forEach(t=>t.setAttribute('aria-expanded',String(open)));
+  if(open)hideTimer=setTimeout(close,6000);
  }
  for(const trigger of triggers){
   trigger.setAttribute('aria-haspopup','true');
