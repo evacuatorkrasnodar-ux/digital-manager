@@ -1,8 +1,8 @@
-/* Management overview polish v1 — approved Black Velvet / premium glass.
+/* Management overview polish v2 — approved Black Velvet / premium glass.
    Only the top-level Management screen. No dashboard, personal pages, dock,
    preference persistence, settings detail pages, or plasma changes. */
 #managementScreen .mg-home{
-  gap:9px;
+  gap:7px;
   min-width:0;
 }
 #managementScreen .mg-home > :is(.mg-row,.mg-main,.mg-extras){
@@ -15,12 +15,13 @@
   box-shadow:inset 0 1px rgba(235,247,255,.105),0 5px 16px rgba(0,0,0,.22);
 }
 #managementScreen .mg-home > .mg-row{
-  gap:11px;
-  padding-inline:12px;
+  gap:10px;
+  padding-inline:11px;
+  padding-block:7px;
 }
 #managementScreen .mg-home .mg-copy{
   min-width:0;
-  gap:4px;
+  gap:3px;
 }
 #managementScreen .mg-home .mg-copy strong{
   font-size:clamp(13.5px,3.5vw,15px);
@@ -29,14 +30,14 @@
 }
 #managementScreen .mg-home .mg-copy small{
   color:#afc4d6;
-  line-height:1.32;
+  line-height:1.29;
 }
 #managementScreen .mg-home .mg-icon{
   border-radius:15px;
   box-shadow:inset 0 1px rgba(237,251,255,.14),0 3px 12px rgba(0,0,0,.22);
 }
 #managementScreen .mg-home .mg-theme{
-  min-height:70px;
+  min-height:62px;
 }
 #managementScreen .mg-home .mg-theme-controls{
   border-color:rgba(153,190,218,.39);
@@ -44,15 +45,15 @@
   box-shadow:inset 0 1px rgba(245,251,255,.06);
 }
 #managementScreen .mg-home .mg-manager{
-  min-height:96px;
+  min-height:84px;
 }
 #managementScreen .mg-home > .mg-main{
-  padding:11px 10px 10px;
+  padding:9px 10px 8px;
 }
 #managementScreen .mg-main-head{
   position:relative;
   gap:9px;
-  padding:1px 1px 10px;
+  padding:1px 1px 7px;
 }
 #managementScreen .mg-main-head .mg-copy{
   padding-right:2px;
@@ -103,7 +104,7 @@
   grid-template-columns:none;
   grid-auto-columns:clamp(78px,22%,105px);
   gap:7px;
-  padding:2px 1px 8px;
+  padding:2px 1px 5px;
   overflow-x:auto;
   overflow-y:hidden;
   touch-action:auto; /* vertical page scrolling remains available over the row */
@@ -117,15 +118,15 @@
 }
 #managementScreen .mg-switch-grid .mg-tile{
   box-sizing:border-box;
-  min-height:112px;
-  padding:10px 5px 9px;
-  gap:5px;
+  min-height:99px;
+  padding:8px 5px 7px;
+  gap:4px;
   border-radius:15px;
   border-color:rgba(138,175,205,.35);
   scroll-snap-align:start;
 }
 #managementScreen .mg-switch-grid .mg-tile-caption{
-  min-height:30px;
+  min-height:27px;
   line-height:1.16;
   font-size:11px;
   font-weight:430;
@@ -133,13 +134,13 @@
   hyphens:none;
 }
 #managementScreen .mg-main .mg-card-note{
-  margin:8px 3px 1px;
+  margin:5px 3px 0;
   color:#a7c2d5;
   font-size:10.7px;
-  line-height:1.47;
+  line-height:1.43;
 }
 #managementScreen .mg-home > .mg-connections{
-  min-height:84px;
+  min-height:76px;
 }
 #managementScreen .mg-connections .mg-copy{
   padding-right:4px;
@@ -161,17 +162,17 @@
   min-height:72px;
 }
 #managementScreen .mg-home > .mg-section{
-  margin:8px 3px 0;
+  margin:5px 3px 0;
   color:#9bb4ca;
   font-size:10px;
   letter-spacing:.12em;
 }
 #managementScreen .mg-extras{
-  gap:7px;
+  gap:6px;
 }
 #managementScreen .mg-extras > .mg-extra-row{
-  min-height:69px;
-  padding:9px 12px;
+  min-height:60px;
+  padding:7px 11px;
 }
 #managementScreen .mg-extras .mg-accessory{
   opacity:.68;
@@ -183,7 +184,7 @@
   #managementScreen .mg-home .mg-main-head .mg-grid-icon{width:43px;height:43px}
   #managementScreen .mg-main-head .mg-copy strong{font-size:15px}
   #managementScreen .mg-switch-grid{grid-auto-columns:clamp(76px,24%,92px);gap:6px}
-  #managementScreen .mg-switch-grid .mg-tile{min-height:108px}
+  #managementScreen .mg-switch-grid .mg-tile{min-height:96px}
   #managementScreen .mg-connections .mg-connected-icons span:nth-child(n+3){display:none}
   #managementScreen .mg-connections .mg-copy small:last-child{font-size:10px}
 }
