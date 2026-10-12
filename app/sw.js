@@ -1,16 +1,16 @@
 /* App-only service worker: fresh documents, styles and scripts; cached offline assets. */
-const CACHE = 'digital-manager-black-velvet-v653-20261012';
+const CACHE = 'digital-manager-black-velvet-v654-20261012';
 const CACHE_PREFIX = 'digital-manager-black-velvet-';
 const OFFLINE_FILES = [
   './index.html',
-  './style.css?v=609',
+  './style.css?v=618',
   './dock.css?v=297',
-  './app.js?v=626',
+  './app.js?v=630',
   './assets/plasma-glass-mark.webp',
   './myday.html',
-  './myday-plasma-mode.css?v=1',
+  './myday-plasma-mode.css?v=4',
   './myday-back-glass.css?v=1',
-  './myday-plasma-mode.js?v=1',
+  './myday-plasma-mode.js?v=3',
   './myday.css?v=250',
   './russia-calendar.js?v=250',
   './myday.js?v=287',
@@ -20,6 +20,10 @@ const OFFLINE_FILES = [
   './world.html',
   './world.css?v=249',
   './world.js?v=284',
+  './world-modern-dock.js?v=6',
+  './world-modern-dock.css?v=6',
+  './shared-plasma.js?v=4',
+  './shared-plasma.css?v=3',
   './health.html',
   './health.css?v=249',
   './health-bridge.js?v=286',
@@ -118,7 +122,7 @@ self.addEventListener('fetch', event => {
         if (response.ok) event.waitUntil(cache.put(request, response.clone()));
         return response;
       } catch (_) {
-        const saved = await cache.match(request, { ignoreSearch: true });
+        const saved = await cache.match(request, { ignoreSearch: documentRequest });
         if (saved) return saved;
         return documentRequest
           ? (await cache.match('./index.html') || Response.error())
