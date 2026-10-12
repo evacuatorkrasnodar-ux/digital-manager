@@ -31,7 +31,11 @@ function journeySteps(record=state){
  const path=steps[record.mode]||[];
  // If an idea is already named, the next honest step is testing it,
  // not pretending that we must look for an idea from scratch.
- return record.mode==='start'&&!record.unknownIdea&&record.description?path.slice(1):path;
+ const base=record.mode==='start'&&!record.unknownIdea&&record.description?path.slice(1):path;
+ if(!record.location)return base;
+ return [{title:record.locationFixed?'Найдём преимущество в выбранном месте':'Проверим место и конкуренцию',
+  note:record.locationFixed?'Ты выбрал место. Найдём, почему клиенты захотят прийти именно сюда, и проверим риски, прежде чем вкладывать серьёзные деньги.':
+   'Изучим реальные соседние компании, отзывы, цены, спрос, доступность, аренду и ограничения. Без проверенных данных не будем делать вид, что рынок уже изучен.'},...base];
 }
 let state=read(),view='welcome',root=null,lastFocus=null,previousPage='';
 function read(){
@@ -60,6 +64,29 @@ const suggestIdea=mode=>{
 const havePrompt=mode=>mode==='existing'
  ?'Что у тебя уже есть: сайт, клиенты, помещение, соцсети, техника, команда? А чего пока не хватает?'
  :'Что у тебя уже есть для старта: время, навыки, оборудование, деньги, знакомые? Даже если ничего — так и скажи.';
+function locationAdvice(){
+ if(!state?.location||!window.DMBusinessLocation)return null;
+ return window.DMBusinessLocation.evaluate({description:state.description,location:state.location,fixed:state.locationFixed});
+}
+function locationMarkup(){
+ const advice=locationAdvice();
+ if(!advice)return '';
+ return '<section class="dm-journey-local">'+
+  '<span class="dm-journey-eyebrow">Я ДУМАЮ О ВЫБРАННОМ МЕСТЕ</span>'+
+  '<h3>'+escape(advice.headline)+'</h3>'+
+  '<p>'+escape(advice.observation)+'</p>'+
+  '<div class="dm-journey-local-actions">'+
+  (advice.fixed?'<span>✓ Твой выбор зафиксирован</span><button type="button" data-journey-reconsider>Сравнить варианты</button>':
+   '<button type="button" data-journey-keep-location>Хочу открываться именно здесь ↗</button>')+
+  '</div>'+
+  '<details><summary>Что проверю перед открытием</summary><ol>'+
+  advice.evidence.map(item=>'<li>'+escape(item)+'</li>').join('')+
+  '</ol><small>Пункты проверки, а не результаты исследования. Карты и данные конкурентов пока не подключены.</small></details>'+
+  '<details><summary>Как будем привлекать клиентов, если остаёмся здесь</summary><ol>'+
+  advice.plan.map(item=>'<li>'+escape(item)+'</li>').join('')+
+  '</ol><small>Варианты действий, а не обещание продаж или уже выполненная реклама.</small></details>'+
+  '</section>';
+}
 function markup(){
  if(view==='welcome')return '<section class="dm-journey-chat">'+
   '<div class="dm-journey-halo" aria-hidden="true">✦</div><span class="dm-journey-eyebrow">НАШЕ ПЕРВОЕ ЗНАКОМСТВО</span>'+
@@ -99,6 +126,7 @@ function markup(){
    'Вот первые ориентиры. Будем идти постепенно, не перекладывая на тебя всю работу.</p>'+
   '<div class="dm-journey-next"><small>НАЧНЁМ С ЭТОГО</small><strong>'+escape(roadmap[0].title)+'</strong>'+
   '<p>'+escape(roadmap[0].note)+'</p><span>План составлен, действие ещё не выполнено.</span></div>'+
+  locationMarkup()+
   '<details class="dm-journey-steps"><summary>Как пойдём дальше · '+roadmap.length+' этапов</summary>'+
   '<ol>'+roadmap.map(item=>'<li><strong>'+escape(item.title)+'</strong><small>'+escape(item.note)+'</small></li>').join('')+'</ol></details>'+
   '<p class="dm-journey-small">Я пока не подключён к сайтам, госуслугам или площадкам. Здесь сохранён твой маршрут, а не выполненные регистрации или заработанные деньги.</p>'+
@@ -148,6 +176,16 @@ function onClick(e){
  if(button.hasAttribute('data-journey-back')){view=view==='have'?(working.description?'location':'idea'):view==='location'?'idea':'welcome';return render()}
  if(button.hasAttribute('data-journey-unknown')){working.description='';working.unknownIdea=true;working.location='';working.locationFixed=false;view='have';return render()}
  if(button.hasAttribute('data-journey-skip-location')){working.location='';working.locationFixed=false;view='have';return render()}
+ if(button.hasAttribute('data-journey-keep-location')||button.hasAttribute('data-journey-reconsider')){
+  if(!state?.location)return;
+  const fixed=button.hasAttribute('data-journey-keep-location');
+  if(!store({...state,locationFixed:fixed})){
+   const panel=root?.querySelector('.dm-journey-local');
+   if(panel)panel.insertAdjacentHTML('beforeend','<p role="alert">Не удалось сохранить выбор. Попробуй ещё раз.</p>');
+   return;
+  }
+  return render();
+ }
  if(button.hasAttribute('data-journey-edit')){working=draft();view='idea';return render()}
  if(button.hasAttribute('data-journey-finish'))return close();
 }
@@ -212,7 +250,7 @@ function init(){
   const trigger=e.target.closest('#mgOpenBusinessJourney,[data-open-business-journey]');
   if(trigger){e.preventDefault();open()}
  });
- window.DMBusinessJourney=Object.freeze({open,close,getState,getPlan,explain});
+ window.DMBusinessJourney=Object.freeze({open,close,getState,getPlan,explain,getLocationAdvice:locationAdvice});
  if(!oldUser()&&!new URLSearchParams(location.search).has('jump')){
   // A new visitor meets the assistant, while existing owners are not interrupted.
   setTimeout(()=>{if(!state&&root.hidden)open()},380);
