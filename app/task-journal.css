@@ -1,6 +1,6 @@
 /* Task journal only: no modification of shared cards, plasma, dock, or home geometry. */
-.dm-journal-entry-links{display:flex;gap:8px;margin:12px 0}
-.dm-journal-entry-links button{flex:1;min-width:0;display:flex;justify-content:space-between;align-items:center;gap:5px;padding:12px;border:1px solid rgba(168,193,212,.3);border-radius:13px;background:linear-gradient(135deg,#15202b,#080d15);color:#e2edf6;font-size:11px;text-align:left}
+.dm-journal-entry-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:12px 0}
+.dm-journal-entry-links button{flex:1;min-width:0;display:flex;justify-content:space-between;align-items:center;gap:5px;padding:11px 8px;border:1px solid rgba(168,193,212,.3);border-radius:13px;background:linear-gradient(135deg,#15202b,#080d15);color:#e2edf6;font-size:11px;text-align:left;overflow-wrap:anywhere}
 .dm-journal-overlay[hidden]{display:none!important}
 .dm-journal-overlay{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.82);display:flex;justify-content:center;align-items:flex-start;overflow-y:auto;padding:calc(20px + env(safe-area-inset-top,0px)) 12px 25px}
 .dm-journal-frame{width:100%;max-width:430px;max-height:calc(100dvh - 40px);overflow:auto;border:1px solid rgba(174,202,223,.37);border-radius:23px;background:linear-gradient(160deg,#162431,#05090e 64%);color:#ebf5fd;padding:16px;box-shadow:0 16px 50px #000}
@@ -8,8 +8,8 @@
 .dm-journal-frame header small{font-size:9px;letter-spacing:.13em;color:#a7bed0}
 .dm-journal-frame h2{margin:7px 0 14px;font-size:23px;font-weight:540}
 .dm-journal-frame [data-journal-close]{width:36px;height:36px;border-radius:50%;border:1px solid rgba(180,210,230,.4);background:#12212c;color:#e5f1fb;font-size:22px}
-.dm-journal-frame nav{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:13px}
-.dm-journal-frame nav button{padding:11px 5px;border:1px solid rgba(175,203,224,.25);border-radius:11px;background:#0c1721;color:#b7cbdc;font-size:12px}
+.dm-journal-frame nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin-bottom:13px}
+.dm-journal-frame nav button{padding:11px 5px;border:1px solid rgba(175,203,224,.25);border-radius:11px;background:#0c1721;color:#b7cbdc;font-size:clamp(10px,2.8vw,12px)}
 .dm-journal-frame nav button[aria-pressed=true]{background:#2b4053;border-color:#b3cedf;color:#f1f8ff}
 .dm-journal-entry{padding:13px;border:1px solid rgba(169,198,218,.27);border-radius:14px;background:rgba(118,155,183,.07)}
 .dm-journal-entry>span{font-size:9px;letter-spacing:.1em;color:#aac3d5}
@@ -30,3 +30,20 @@
 #homeScreen .recommendation-card[data-task-state="accepted"] .recommendation-waves{filter:hue-rotate(85deg) saturate(.84);transition:filter .4s ease}
 #homeScreen .recommendation-card[data-task-state="accepted"] .spark-icon{color:#b5f4c7;fill:#b6f2c5;stroke:#dfffe7;filter:drop-shadow(0 0 8px #5fca8b)}
 #homeScreen .recommendation-card[data-task-state="accepted"] .advice-cta{background:linear-gradient(135deg,#b9f1c8,#74c995);color:#0b2918;box-shadow:0 0 12px rgba(96,195,124,.26)}
+
+/* Personal tasks in their own tab, not mixed with delegated assistant plans. */
+.dm-journal-add{display:grid;gap:9px;padding:13px;border:1px solid rgba(153,184,208,.28);border-radius:14px;background:rgba(105,148,181,.07);margin-bottom:15px}
+.dm-journal-add label{font-size:12px;color:#d2e4f2}
+.dm-journal-add input,.dm-journal-add select{min-width:0;width:100%;box-sizing:border-box;padding:11px;border-radius:10px;border:1px solid rgba(157,185,209,.36);background:#0b1620;color:#edf6ff;font-size:13px}
+.dm-journal-add input::placeholder{color:#8fa8bc}
+.dm-journal-add-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.dm-journal-add button{border:1px solid #8eacc2;border-radius:10px;background:linear-gradient(135deg,#d3e5f1,#a6bfd2);color:#0c1e2b;font-size:12px;padding:10px 13px}
+.dm-journal-group{display:grid;gap:8px;margin:14px 0}
+.dm-journal-group h3{font-size:12px;letter-spacing:.02em;font-weight:500;color:#c2d8e9;margin:0}
+.dm-journal-personal{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;padding:9px 10px 9px 13px;border:1px solid rgba(159,190,213,.25);background:rgba(93,131,162,.09);border-radius:12px;font-size:13px;line-height:1.4}
+.dm-journal-personal span{min-width:0;overflow-wrap:anywhere}
+.dm-journal-personal button{flex:none;width:32px;height:32px;border:1px solid rgba(163,200,225,.46);background:#192b39;color:#d5edf8;border-radius:50%;font-size:16px}
+.dm-journal-hint{margin:16px 0 3px;color:#98b2c7;font-size:11px;line-height:1.5}
+.dm-journal-timestamp{display:block;font-size:10px;color:#9ab6cd;margin-top:8px}
+.dm-journal-entry + .dm-journal-entry{margin-top:10px}
+@media(max-width:360px){.dm-journal-entry-links button{font-size:10px;padding:9px 6px}.dm-journal-frame nav button{padding:10px 3px}}
