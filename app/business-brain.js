@@ -10,6 +10,21 @@ function facts(){
  if(!raw||raw.source!=='user-entered-local-records')return null;
  return raw;
 }
+function business(){
+ return window.DMBusinessContext?.getContext?.()||{description:'',configured:false,hints:[],areas:[]};
+}
+function contextNote(){
+ const c=business();
+ if(!c.configured)return 'Если расскажешь, чем занимается бизнес, я смогу учитывать не только продажи, но и другие процессы.';
+ return 'Учитываю твоё описание бизнеса: «'+c.description+'». Направления внимания: '+c.areas.slice(0,4).join(', ')+'. Показатели по этим направлениям ещё нужно подключать отдельно.';
+}
+function processAnswer(q){
+ const c=business();
+ const asksProcess=/(услуг|производ|завод|склад|остатк|поставщик|доставк|логист|график|запис|брон|сотрудник|персонал|смены|магазин|цвет|цех|филиал|управлят|специфик|бизнес.модел)/.test(q);
+ if(!asksProcess)return null;
+ if(!c.configured)return 'Могу учитывать товары, услуги, запасы, производство, сроки, команды и филиалы. Опиши свой бизнес одной фразой в «Мой управляющий», и я выделю главные процессы. Без их данных я не буду изображать контроль.';
+ return contextNote()+' Сейчас из фактических записей мне доступны только обращения, покупки и вручную указанные рекламные расходы — состояние запасов, графиков и выполнения работ я пока не вижу.';
+}
 const counted=(n,one,few,many)=>{const x=Math.abs(number(n)),last=x%10,last100=x%100;return String(n)+' '+(last100>=11&&last100<=14?many:last===1?one:last>=2&&last<=4?few:many)};
 function observations(data){
  if(!data||!data.total)return [];
@@ -57,11 +72,12 @@ function progressSentence(){
 function brief(){
  const d=facts();
  if(!d)return {headline:'Готов разобраться с бизнесом',message:'В этой части приложения ещё нет доступа к данным «Продаж». Ничего придумывать не стану.',priority:null};
- if(!d.total)return {headline:'Жду реальные обращения',message:'Пока в «Продажах» нет твоих записей. Поэтому я не буду изображать занятость и придумывать прибыль. '+progressSentence(),priority:null};
+ if(!d.total)return {headline:business().configured?'Я изучаю устройство твоего бизнеса':'Жду реальные обращения',
+  message:contextNote()+' В «Продажах» пока нет учётных записей, и другие процессы ещё не подключены. Я не стану придумывать прибыль или выполненную работу. '+progressSentence(),priority:null};
  const priority=observations(d)[0]||null;
- const first='По твоим записям: '+counted(d.total,'обращение','обращения','обращений')+', '+counted(d.purchases,'покупка','покупки','покупок')+', в работе: '+d.active+'.';
+ const first=(business().configured?'В твоём бизнесе по доступным записям: ':'По твоим записям: ')+counted(d.total,'обращение','обращения','обращений')+', '+counted(d.purchases,'покупка','покупки','покупок')+', в работе: '+d.active+'.';
  return {headline:priority?.title||'Дела под контролем по доступным записям',
-  message:first+' '+(priority?priority.text+' '+priority.next:'Пока срочных сигналов из записей нет.')+' '+progressSentence(),
+  message:first+' '+(priority?priority.text+' '+priority.next:'Пока срочных сигналов из записей нет.')+' '+progressSentence()+(business().configured?' При этом '+contextNote():'') ,
   priority};
 }
 function spendingAnswer(d){
@@ -87,10 +103,12 @@ function salesAnswer(d){
 function answer(question){
  const q=String(question||'').trim().toLowerCase();
  if(!q)return null;
- const recognized=/(бизнес|как дела|что происходит|как идут|что нового|что успел|успел|сделал|делал|занимаешься|занимал|работаешь|поручен|мои дела|отчет|отчёт|итог|ситуаци|ошибк|проблем|что дальше|что делать|помоги|продаж|клиент|покупк|заявк|выручк|денег|деньг|доход|прибыл|финанс|расход|трат|бюджет|реклам|продвижен|автопилот|самостоятельн)/i.test(q);
+ const recognized=/(бизнес|как дела|что происходит|как идут|что нового|что успел|успел|сделал|делал|занимаешься|занимал|работаешь|поручен|мои дела|отчет|отчёт|итог|ситуаци|ошибк|проблем|что дальше|что делать|помоги|продаж|клиент|покупк|заявк|выручк|денег|деньг|доход|прибыл|финанс|расход|трат|бюджет|реклам|продвижен|автопилот|самостоятельн|услуг|производ|склад|остатк|поставщик|доставк|график|брон|сотрудник|персонал|смены|магазин|цвет|цех|филиал|бизнес.модел)/i.test(q);
  if(!recognized)return null;
  const d=facts();
- if(!d)return 'Я пока не вижу записи «Продаж». Не стану выдавать общий совет за проверку твоего бизнеса.';
+ const process=processAnswer(q);
+ if(process)return process;
+ if(!d)return contextNote()+' Записи «Продаж» пока недоступны. Ничего не стану придумывать.';
  const w=work();
  if(/автопилот|самостоятельн|успел|сделал|делал|занимаешься|чем занимал|работаешь|поручен/.test(q))return progressSentence()+
   (d.newLeads?' Сейчас новых обращений: '+d.newLeads+'.':'');
