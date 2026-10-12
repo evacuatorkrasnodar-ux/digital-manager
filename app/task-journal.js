@@ -218,13 +218,19 @@ function draftSuggestion(item){
   }else{
    body='Здравствуйте, '+person+'! Вы обращались по поводу «'+subject+'». Подскажите, вопрос ещё актуален? Могу уточнить детали и предложить следующий шаг.';
   }
-  return {kind:'message',text:body,description:'По записи клиента в «Продажах». Проверьте текст перед использованием.'};
+  return {kind:'message',text:body,description:'Шаблон по записи клиента в «Продажах». Проверьте текст и факты перед использованием.'};
  }
  const title=String(task?.title||item.title||'поручение').trim();
  return {kind:'plan',text:'Дело: '+title+'\n\n1. Уточнить, какой результат нужен и что уже известно.\n2. Проверить необходимые сведения, сроки и ограничения.\n3. Подготовить конкретное решение и показать владельцу.\n4. Выполнить только то, на что владелец отдельно даст разрешение.',
   description:'Заготовка плана по названию дела. Детали не проверены; можно исправить вручную.'};
 }
 let assistantFeedback='';
+function draftNotice(id,message){
+ const root=document.getElementById('dmTaskJournal');
+ const status=[...(root?.querySelectorAll('[data-assistant-copy-status]')||[])].find(el=>el.dataset.assistantCopyStatus===id);
+ if(status)status.textContent=message;
+ else assistantFeedback=message;
+}
 function draftUpdate(id,makeChange){
  const item=delegated.find(t=>t.id===id&&t.origin==='owner-task'&&t.status==='queued');
  if(!item)return false;
@@ -232,8 +238,8 @@ function draftUpdate(id,makeChange){
  if(!modified)return false;
  const newer=delegated.map(t=>t.id===id?modified:t);
  if(!save(DELEGATED_KEY,newer)){
-  assistantFeedback='Не удалось сохранить черновик. Предыдущее состояние осталось без изменений.';
-  show('delegated');return false;
+  draftNotice(id,'Не удалось сохранить черновик. Ваши правки остались в поле, попробуйте снова.');
+  return false;
  }
  delegated=newer;
  show('delegated');return true;
@@ -259,16 +265,16 @@ function editedDraftText(id){
 function saveSolution(id){
  const text=editedDraftText(id);
  if(text===null||!text.trim()||text.length>3000){
-  assistantFeedback='Проверьте текст: он не должен быть пустым или длиннее 3000 знаков.';
-  show('delegated');return false;
+  draftNotice(id,'Проверьте текст: он не должен быть пустым или длиннее 3000 знаков.');
+  return false;
  }
  const item=delegated.find(t=>t.id===id&&t.origin==='owner-task'&&t.status==='queued'&&t.draft);
  if(!item)return false;
- if(text===item.draft.text){assistantFeedback='Этот черновик уже сохранён.';show('delegated');return true}
+ if(text===item.draft.text){draftNotice(id,'Этот черновик уже сохранён.');return true}
  const stamp=Date.now(),dated=now();
  const success=draftUpdate(id,t=>({...t,draft:{...t.draft,text,reviewedAt:null,updatedAt:stamp},
   log:[...(Array.isArray(t.log)?t.log:[]),{at:dated,ms:stamp,message:'Вы изменили и сохранили черновик. Ничего не отправлено.'}]}));
- if(success)assistantFeedback='Правки сохранены на этом устройстве.';
+ if(success)draftNotice(id,'Правки сохранены на этом устройстве. Ничего не отправлено.');
  return success;
 }
 function reviewSolution(id){
@@ -276,14 +282,14 @@ function reviewSolution(id){
  if(!item)return false;
  const text=editedDraftText(id);
  if(text!==item.draft.text){
-  assistantFeedback='Сначала сохраните изменения, а затем отмечайте просмотр.';
-  show('delegated');return false;
+  draftNotice(id,'Сначала сохраните изменения, а затем отмечайте просмотр.');
+  return false;
  }
- if(item.draft.reviewedAt){assistantFeedback='Черновик уже просмотрен.';show('delegated');return true}
+ if(item.draft.reviewedAt){draftNotice(id,'Черновик уже просмотрен.');return true}
  const stamp=Date.now(),dated=now();
  const success=draftUpdate(id,t=>({...t,draft:{...t.draft,reviewedAt:stamp},
   log:[...(Array.isArray(t.log)?t.log:[]),{at:dated,ms:stamp,message:'Вы посмотрели черновик. Это не подтверждение отправки или выполнения дела.'}]}));
- if(success)assistantFeedback='Черновик просмотрен. Ничего клиенту не отправлено.';
+ if(success)draftNotice(id,'Черновик просмотрен. Ничего клиенту не отправлено.');
  return success;
 }
 async function copySolution(id){
@@ -325,7 +331,7 @@ function assistantDraftControls(item){
  const reviewed=Number.isFinite(draft.reviewedAt)&&draft.reviewedAt>0;
  const kind=draft.kind==='message'?'Черновик ответа клиенту':'Черновик плана';
  return '<div class="dm-assistant-result">'+
-  '<small>ПОДГОТОВЛЕНО ПО ЗАПИСЯМ · НЕ ОТПРАВЛЕНО</small><h4>'+kind+'</h4>'+
+  '<small>ЛОКАЛЬНЫЙ ШАБЛОН · ПОКА БЕЗ ИИ · НЕ ОТПРАВЛЕНО</small><h4>'+kind+'</h4>'+
   '<p>'+esc(draft.description||'Шаблон, который можно исправить перед использованием.')+'</p>'+
   '<textarea data-assistant-editor="'+esc(item.id)+'" maxlength="3000" rows="7" aria-label="'+kind+'">'+esc(draft.text)+'</textarea>'+
   '<div class="dm-assistant-draft-actions">'+
