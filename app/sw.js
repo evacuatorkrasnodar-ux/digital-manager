@@ -1,16 +1,16 @@
 /* App-only service worker: fresh documents, styles and scripts; cached offline assets. */
-const CACHE = 'digital-manager-black-velvet-v667-20261012';
+const CACHE = 'digital-manager-black-velvet-v668-20261012';
 const CACHE_PREFIX = 'digital-manager-black-velvet-';
 const OFFLINE_FILES = [
   './index.html',
   './style.css?v=622',
   './dock.css?v=297',
-  './app.js?v=637',
+  './app.js?v=638',
   './assets/plasma-glass-mark.webp',
   './myday.html',
-  './myday-plasma-mode.css?v=5',
+  './myday-plasma-mode.css?v=6',
   './myday-back-glass.css?v=1',
-  './myday-plasma-mode.js?v=4',
+  './myday-plasma-mode.js?v=5',
   './myday.css?v=250',
   './russia-calendar.js?v=250',
   './myday.js?v=287',
@@ -20,8 +20,8 @@ const OFFLINE_FILES = [
   './world.html',
   './world.css?v=249',
   './world.js?v=284',
-  './world-modern-dock.js?v=6',
-  './world-modern-dock.css?v=6',
+  './world-modern-dock.js?v=7',
+  './world-modern-dock.css?v=7',
   './shared-plasma.js?v=4',
   './shared-plasma.css?v=4',
   './performance-modes.js?v=1',
@@ -39,7 +39,8 @@ const OFFLINE_FILES = [
   './home-design-sync.css?v=2',
   './composer-quiet-actions.css?v=2',
   './composer-history.css?v=4',
-  './quick-actions-velvet.css?v=1',
+  './quick-actions-velvet.css?v=2',
+  './assistant-quick-menu.js?v=1',
   './notebook-action-menu.css?v=1',
   './management-home-polish.css?v=3',
   './management-unified.css?v=1',
