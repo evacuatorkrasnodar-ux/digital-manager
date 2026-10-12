@@ -338,6 +338,15 @@ function close(){
  if(target)target.focus({preventScroll:true});
 }
 function hide(){if(screen){screen.hidden=true;if(pictureOpen)closePicture()}}
+/* A finished human task is not proof of contacting the customer.
+   Only an explicit follow-up confirmation may advance a NEW lead. */
+function confirmContact(id){
+ const entry=records.find(x=>x.id===id);
+ if(!entry)return {ok:false,reason:'missing'};
+ if(entry.stage!=='new')return {ok:false,reason:'unchanged',stage:entry.stage};
+ const done=setStage(entry,'talk');
+ return done?{ok:true,stage:'talk'}:{ok:false,reason:'save'};
+}
 function openClient(id){
  open();
  if(typeof id!=='string')return;
@@ -345,7 +354,7 @@ function openClient(id){
  if(target){target.scrollIntoView({block:'center',behavior:'instant'});target.focus?.({preventScroll:true})}
 }
 function openPicture(){open();showPicture()}
-window.DMSalesScreen=Object.freeze({open,openPicture,openClient,close,hide,getInsight,getTotals:totals,getBusinessSummary:()=>({salesRevenue:totalWon(),promotionExpenses:promotionTotal(),source:'manual-local-records'})});
+window.DMSalesScreen=Object.freeze({open,openPicture,openClient,confirmContact,close,hide,getInsight,getTotals:totals,getBusinessSummary:()=>({salesRevenue:totalWon(),promotionExpenses:promotionTotal(),source:'manual-local-records'})});
 window.addEventListener('dm:personal-tasks-changed',()=>{
  if(screen&&!screen.hidden&&!pictureOpen)render();
 });
