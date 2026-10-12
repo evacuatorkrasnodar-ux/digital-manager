@@ -108,3 +108,29 @@
 .dm-journey-choice-note{color:#aac9df!important;font-size:11px!important;line-height:1.6!important}
 .dm-journey-choice-note button{font-size:11px;padding:4px 7px;border:1px solid rgba(141,188,224,.29);border-radius:9px;background:#122b42;color:#d9edfb}
 .dm-journey-ideas [role="alert"],.dm-journey-choice-note [role="alert"]{font-size:10px;line-height:1.5;color:#f5d2c1}
+
+/* Local market reconnaissance, scoped to Business Builder only. */
+.dm-journey-market{border:1px solid rgba(155,197,232,.33);border-radius:14px;padding:12px;background:linear-gradient(125deg,rgba(42,76,111,.21),rgba(8,19,34,.87))}
+.dm-journey-market>summary{display:grid;gap:4px;cursor:pointer;color:#d9efff;font-size:12px;line-height:1.5}
+.dm-journey-market>summary small{font-size:10px;color:#9ebdd4}
+.dm-journey-market-body{display:grid;gap:13px;padding-top:13px}
+.dm-journey-market-body>p{margin:0;color:#b8d3e8;font-size:11px;line-height:1.6}
+.dm-journey-market-links{display:grid;gap:8px}
+.dm-journey-market-links a,.dm-journey-market-results a{display:inline-flex;align-items:center;justify-content:flex-start;gap:5px;word-break:break-word;font-size:11px;line-height:1.55;color:#c8e8ff;text-decoration:underline;text-underline-offset:3px}
+.dm-journey-market-links a{padding:11px;border:1px solid rgba(146,191,225,.36);background:#102a42;border-radius:11px;text-decoration:none}
+.dm-journey-market-facts{background:rgba(140,180,220,.09);padding:11px;border-radius:10px}
+.dm-journey-market form{display:grid;gap:10px}
+.dm-journey-market label{display:grid;gap:6px;color:#c9e4f7;font-size:11px}
+.dm-journey-market label small{font-size:10px;color:#91adc2;line-height:1.5}
+.dm-journey-market :is(input,textarea){box-sizing:border-box;display:block;width:100%;min-width:0;padding:10px;background:#0d1e30;border:1px solid rgba(147,185,215,.41);border-radius:10px;color:#edf8ff;font:inherit;font-size:11px;line-height:1.5}
+.dm-journey-market textarea{min-height:65px;resize:vertical}
+.dm-journey-market form>button{justify-self:start;padding:10px 12px;border-radius:10px;border:1px solid rgba(167,205,236,.64);background:#bedef1;color:#10283c;font-size:11px;font-weight:560}
+.dm-journey-market [data-market-status],.dm-journey-market [role=alert]{margin:0;color:#f4c9b5;font-size:11px}
+.dm-journey-market-results{border:1px solid rgba(157,193,221,.25);border-radius:11px;padding:11px}
+.dm-journey-market-results>strong{font-size:11px;font-weight:550;color:#d4eaff}
+.dm-journey-market-results ol{display:grid;gap:12px;margin:12px 0 0;padding-left:20px}
+.dm-journey-market-results li{position:relative;padding-right:28px;color:#daeffc;font-size:11px;line-height:1.5}
+.dm-journey-market-results li strong{display:block;font-size:12px;font-weight:540;overflow-wrap:anywhere}
+.dm-journey-market-results li p{margin:4px 0;color:#abc8dc;overflow-wrap:anywhere}
+.dm-journey-market-results li button{position:absolute;right:0;top:0;width:27px;height:27px;border-radius:50%;border:1px solid rgba(170,208,236,.35);color:#d5ecfb;background:#10283d;font-size:16px}
+.dm-journey-market :is(input,textarea,a,button):focus-visible{outline:2px solid #c6e7fb;outline-offset:2px}
