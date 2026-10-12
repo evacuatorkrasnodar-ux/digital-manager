@@ -71,3 +71,17 @@
 .dm-init-editor-status,.dm-init-feedback{padding:10px 12px;border:1px solid rgba(141,192,169,.28);border-radius:11px;color:#bddbcc!important;background:rgba(42,109,85,.12);font-size:11px!important;line-height:1.5!important}
 @media(max-width:360px){.dm-init-frame{padding:13px;border-radius:19px}.dm-init-work-row{padding:9px 7px}.dm-init-consent>label{padding:11px}.dm-init-editor-actions button{font-size:11px;padding:10px 7px}}
 @media(prefers-reduced-motion:reduce){.dm-init-trigger,.dm-init-emblem{animation:none!important;transition:none!important}}
+
+/* Universal business description inside assistant workflow. */
+.dm-init-business-profile{box-sizing:border-box;margin:8px 0;border:1px solid rgba(154,194,233,.32);border-radius:14px;padding:11px;background:rgba(94,151,214,.065);min-width:0}
+.dm-init-business-profile summary{cursor:pointer;color:#d2e9fb;font-size:12px;line-height:1.45;overflow-wrap:anywhere}
+.dm-init-business-profile[open] summary{margin-bottom:10px}
+.dm-init-business-form{display:grid;gap:9px}
+.dm-init-business-form>p{margin:2px 0;color:#b0cfe5;font-size:11px;line-height:1.6;text-align:left}
+.dm-init-business-form label{font-size:11px;color:#d4e9fb}
+.dm-init-business-form textarea{box-sizing:border-box;width:100%;min-width:0;min-height:78px;max-height:200px;resize:vertical;border-radius:11px;padding:11px;background:#0a1929;border:1px solid rgba(155,193,228,.45);color:#e9f6ff;font:inherit;font-size:12px;line-height:1.55}
+.dm-init-business-form textarea:focus-visible{outline:2px solid #aacff4;outline-offset:2px}
+.dm-init-business-form>button{justify-self:start;border:1px solid rgba(171,205,233,.5);background:#bedcee;color:#0c2737;padding:10px 12px;border-radius:10px;font-size:12px}
+.dm-init-business-form .dm-init-business-areas{text-align:left;font-size:10px;line-height:1.6;color:#bcd9ec}
+.dm-init-business-form>small{font-size:10px;line-height:1.5;color:#96b0c5}
+.dm-init-business-form [data-business-profile-status]{font-size:11px;color:#b9dfce;margin:0}
