@@ -6,6 +6,7 @@
 (()=>{
 'use strict';
 const KEY='dm-market-scout-v1',MAX=60;
+const ISSUES=Object.freeze({none:'Конкретной проблемы не заметили',booking:'Запись неудобна',hours:'Не хватает удобных часов',prices:'Цены непонятны',offer:'Сложно понять услуги',delivery:'Получение или доставка неудобны'});
 const clean=(s,max=180)=>String(s??'').replace(/\s+/g,' ').trim().slice(0,max);
 const allowedLink=value=>{
  try{
@@ -48,7 +49,7 @@ function load(){
    typeof x.name==='string'&&typeof x.note==='string'&&
    Number.isFinite(x.at)&&allowedLink(x.url))
    .map(x=>({id:x.id,key:x.key,name:clean(x.name,100),url:allowedLink(x.url),
-    note:clean(x.note,250),at:x.at})).filter(x=>x.name);
+    note:clean(x.note,250),issue:Object.hasOwn(ISSUES,x.issue)?x.issue:'none',at:x.at})).filter(x=>x.name);
  }catch(_){return []}
 }
 let saved=load();
@@ -67,18 +68,22 @@ function summary(plan){
    ' из публичных карт. Это не полный список организаций и не оценка спроса, поэтому называть район свободным или переполненным конкурентами пока рано.'
  });
 }
-function add(plan,{name,url,note=''}={}){
+function add(plan,{name,url,note='',issue='none'}={}){
  const key=areaKey(plan);
  if(!key)return {ok:false,error:'Сначала укажи дело и конкретное место.'};
  if(typeof name!=='string'||!name.trim()||name.length>100)return {ok:false,error:'Укажи название организации (до 100 символов).'};
  const safeUrl=allowedLink(url);
  if(!safeUrl)return {ok:false,error:'Нужна настоящая HTTPS-ссылка на карточку в 2ГИС или Яндекс Картах.'};
+ const isCard=/(?:\/firm\/|\/org\/)/.test(new URL(safeUrl).pathname)||
+  (new URL(safeUrl).hostname.includes('yandex')&&new URL(safeUrl).searchParams.has('oid'));
+ if(!isCard)return {ok:false,error:'Нужна ссылка на конкретную организацию, а не на общий поиск по карте.'};
  if(typeof note!=='string'||note.length>250)return {ok:false,error:'Примечание слишком длинное (максимум 250 символов).'};
+ if(!Object.hasOwn(ISSUES,issue))return {ok:false,error:'Выбери одну из предложенных характеристик.'};
  if(saved.length>=MAX)return {ok:false,error:'Сохранено уже 60 наблюдений. Ничего автоматически не удаляю.'};
  if(saved.some(x=>x.key===key&&(x.url===safeUrl||x.name.toLowerCase()===clean(name,100).toLowerCase())))
   return {ok:false,error:'Похоже, эта организация уже есть в списке.'};
  const next={id:'market-'+Date.now()+'-'+Math.random().toString(36).slice(2,8),
-  key,name:clean(name,100),url:safeUrl,note:clean(note,250),at:Date.now()};
+  key,name:clean(name,100),url:safeUrl,note:clean(note,250),issue,at:Date.now()};
  const all=[...saved,next];
  try{localStorage.setItem(KEY,JSON.stringify(all));saved=all}
  catch(_){return {ok:false,error:'Не удалось сохранить наблюдение. Старые записи остались на месте.'}}
@@ -103,5 +108,5 @@ function report(){
 window.addEventListener?.('storage',e=>{
  if(e.key===KEY){saved=load();try{window.dispatchEvent(new CustomEvent('dm:market-scout-changed'))}catch(_){}}
 });
-window.DMMarketScout=Object.freeze({search,summary,add,remove,report});
+window.DMMarketScout=Object.freeze({search,summary,add,remove,report,issues:ISSUES});
 })();
