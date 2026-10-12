@@ -253,6 +253,8 @@ function updateDraft(action){
   log(next,action==='save'?'Вы сохранили правки к ответу для '+(sources().find(x=>x.id===selectedId)?.person||'клиента')+'. Ничего не отправлено.':
     'Вы посмотрели подготовленный ответ. Это не отправка клиенту.');
   if(!commit(next)){note('Не удалось сохранить. Текст остался в поле; попробуйте ещё раз.');return}
+  const reviewButton=root?.querySelector('[data-init-review]');
+  if(reviewButton)reviewButton.textContent=action==='save'?'Я посмотрел ✓':'Просмотрено ✓';
   note(action==='save'?'Правки сохранены на этом устройстве. Ничего не отправлено.':'Отметил просмотр. Сообщение ещё не отправлено.');
   updateEntrances();
  }
