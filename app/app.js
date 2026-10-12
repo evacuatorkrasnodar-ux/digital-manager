@@ -49,6 +49,7 @@
   function setTab(next){
     hideBrandCard();hideProfileCard();tab=next;
     const traceScreen=byId('digitalTraceScreen');if(traceScreen)traceScreen.hidden=true;
+    window.DMSalesScreen?.hide?.();
     dmSyncQuickHome();
     if(next==='management')mgSettingsPage('home');
     ['home','assistant','management'].forEach(x=>{
@@ -1422,7 +1423,7 @@
   document.addEventListener('click',event=>{if(!byId('openProfileCard').hidden && !event.target.closest('#openProfile, #openProfileCard'))hideProfileCard();});
   document.addEventListener('keydown',event=>{if(event.key==='Escape' && !byId('openProfileCard').hidden)hideProfileCard();});
   byId('clientsCard').addEventListener('click',clientsModal);
-  byId('ordersCard').addEventListener('click',ordersModal);
+  byId('ordersCard').addEventListener('click',()=>window.DMSalesScreen?.open ? window.DMSalesScreen.open() : ordersModal());
   byId('openAdvice').addEventListener('click',adviceModal);
   // A warning is a behavior, not a permanent color theme. The gold ring
   // activates only when an action inside an attention-type card is opened.
