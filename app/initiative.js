@@ -176,11 +176,12 @@ function consentMarkup(){
 }
 function statusMarkup(){
  const data=summary(),all=currentItems(),insight=window.DMSalesScreen?.getInsight?.()||null;
+ const brain=window.DMBusinessBrain?.brief?.()||null,priority=brain?.priority||null;
  let main='<section class="dm-init-summary"><span class="dm-init-eyebrow">МОЙ ХОД · ПО РЕАЛЬНЫМ ЗАПИСЯМ</span><h3>'+esc(headline())+'</h3>'+
   '<p>'+(all.length?'Я сам подготовил черновики по вашим обращениям. Список ниже — только текущие клиенты.': 'Как появятся обращения в «Продажах», я подготовлю ответы без отдельной команды.')+'</p>'+
   '<div class="dm-init-metrics"><div><strong>'+data.prepared+'</strong><small>Черновиков по клиентам</small></div><div><strong>'+data.awaitingReview+'</strong><small>Нужно посмотреть</small></div><div><strong>'+data.reviewed+'</strong><small>Просмотрено</small></div></div>'+
   '<button class="dm-init-pause" type="button" data-init-pause>Приостановить подготовку</button></section>';
- if(insight&&insight.body)main+='<section class="dm-init-insight"><small>Я заметил</small><p>'+esc(insight.body)+'</p><span>Вывод по вашим записям, не по подключённой рекламе.</span></section>';
+ if(priority)main+='<section class="dm-init-insight"><small>Я заметил · по твоим записям</small><p>'+esc(priority.text)+'</p><span>'+esc(priority.next)+' Никаких внешних действий пока не было.</span></section>';
  if(all.length){
   main+='<section class="dm-init-work"><h3>Что я подготовил</h3>'+
    all.slice(0,40).map((x,i)=>'<article class="dm-init-work-row"><span class="dm-init-work-index">'+String(i+1).padStart(2,'0')+'</span><div>'+
