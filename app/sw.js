@@ -1,11 +1,11 @@
 /* App-only service worker: fresh documents, styles and scripts; cached offline assets. */
-const CACHE = 'digital-manager-black-velvet-v660-20261012';
+const CACHE = 'digital-manager-black-velvet-v661-20261012';
 const CACHE_PREFIX = 'digital-manager-black-velvet-';
 const OFFLINE_FILES = [
   './index.html',
   './style.css?v=621',
   './dock.css?v=297',
-  './app.js?v=634',
+  './app.js?v=635',
   './assets/plasma-glass-mark.webp',
   './myday.html',
   './myday-plasma-mode.css?v=5',
