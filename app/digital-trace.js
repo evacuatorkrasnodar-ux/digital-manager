@@ -67,6 +67,21 @@ function render(){
   return false;
  }
 }
+// Reset the actual page scroller after a hidden screen becomes visible.
+// A synchronous scroll alone can be undone by layout and scroll anchoring.
+function resetTraceScroll(){
+ const el=screen();if(!el||el.hidden)return;
+ const reset=()=>{
+  if(el.hidden)return;
+  el.scrollTop=0;
+  const shell=document.getElementById('app');
+  if(shell)shell.scrollTop=0;
+  document.scrollingElement?.scrollTo({top:0,behavior:'instant'});
+  window.scrollTo({top:0,behavior:'instant'});
+ };
+ reset();
+ requestAnimationFrame(()=>{reset();requestAnimationFrame(reset)});
+}
 function open(from='management'){
  const el=screen();if(!el)return;
  returnTab=from==='home'?'home':'management';
@@ -75,10 +90,7 @@ function open(from='management'){
  ['homeScreen','assistantScreen','managementScreen'].forEach(x=>{if($(x))$(x).hidden=true});
  el.hidden=false;
  el.removeAttribute('hidden');
- el.scrollTop=0;
- const shell=document.getElementById('app');if(shell)shell.scrollTop=0;
- document.scrollingElement?.scrollTo({top:0,behavior:'instant'});
- window.scrollTo({top:0,behavior:'instant'});
+ resetTraceScroll();
 }
 function close(){
  if(screen())screen().hidden=true;
@@ -88,9 +100,9 @@ function init(){
  $('dmTraceBack')?.addEventListener('click',close);
  screen()?.addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
-  if(b.hasAttribute('data-trace-demo-history')){section='history';render();return;}
+  if(b.hasAttribute('data-trace-demo-history')){section='history';render();resetTraceScroll();return;}
   if(b.hasAttribute('data-trace-connections')){if(screen())screen().hidden=true;$('tabManagement')?.click();document.querySelector('[data-mg-open="connections"]')?.click();return;}
-  if(b.dataset.traceTab){section=b.dataset.traceTab;render();return;}
+  if(b.dataset.traceTab){section=b.dataset.traceTab;render();resetTraceScroll();return;}
   for(const [kind,key] of [['source','sources'],['metric','metrics'],['decision','decisions']]){
    const prop='traceDelete'+kind[0].toUpperCase()+kind.slice(1);
    if(b.dataset[prop]){
