@@ -42,12 +42,12 @@ function read(){
  try{const raw=JSON.parse(localStorage.getItem(KEY)||'null');
   if(raw?.version===1&&['start','existing'].includes(raw.mode))
    return {version:1,mode:raw.mode,description:compact(raw.description||''),have:compact(raw.have||''),
-    unknownIdea:Boolean(raw.unknownIdea),location:compact(raw.location||'').slice(0,180),locationFixed:Boolean(raw.locationFixed),startedAt:Number(raw.startedAt)||Date.now(),savedAt:Number(raw.savedAt)||Date.now()};
+    unknownIdea:Boolean(raw.unknownIdea),ideaHypothesisId:typeof raw.ideaHypothesisId==='string'?raw.ideaHypothesisId.slice(0,40):'',location:compact(raw.location||'').slice(0,180),locationFixed:Boolean(raw.locationFixed),startedAt:Number(raw.startedAt)||Date.now(),savedAt:Number(raw.savedAt)||Date.now()};
  }catch(_){}
  return null;
 }
 function draft(){return state?{...state}:{
- version:1,mode:null,description:'',have:'',location:'',locationFixed:false,unknownIdea:false,startedAt:Date.now(),savedAt:Date.now()}}
+ version:1,mode:null,description:'',have:'',location:'',locationFixed:false,unknownIdea:false,ideaHypothesisId:'',startedAt:Date.now(),savedAt:Date.now()}}
 let working=draft();
 function store(next){
  const record={...next,savedAt:Date.now()};
@@ -89,7 +89,7 @@ function locationMarkup(){
 }
 function demandMarkup(){
  const plan=getPlan();
- if(plan?.mode!=='start')return '';
+ if(plan?.mode!=='start'||plan.unknownIdea||!plan.description)return '';
  const result=window.DMDemandTest?.summary?.(plan);
  if(!result?.hasPlan)return '';
  const reactions={interested:'Интересно',question:'Есть вопросы',not_interested:'Не заинтересовало'};
@@ -120,7 +120,26 @@ function demandMarkup(){
   '<p class="dm-journey-small">Здесь только твои записи о разговорах. Это не доказанные заказы, оплаченные услуги или статистически надёжное исследование рынка.</p>'+
   '</div></details>';
 }
+function ideasMarkup(){
+ const plan=getPlan(),found=window.DMIdeaExplorer?.explore?.(plan);
+ if(!found)return '';
+ return '<section class="dm-journey-ideas"><span class="dm-journey-eyebrow">Я ПОДГОТОВИЛ ИДЕИ ДЛЯ НАЧАЛА</span>'+
+  '<h3>Уже есть три направления, которые можно проверить</h3>'+
+  '<p>'+escape(found.intro)+'</p>'+
+  found.found.map((item,i)=>'<article class="dm-journey-idea">'+
+   '<small>ВАРИАНТ '+(i+1)+'</small><strong>'+escape(item.title)+'</strong>'+
+   '<p>'+escape(item.why)+'</p><p><b>Первый безопасный шаг:</b> '+escape(item.launch)+'</p>'+
+   '<button type="button" data-journey-pick-idea="'+escape(item.id)+'">Проверим эту идею ↗</button>'+
+   '<details><summary>Как проверим и какие риски</summary>'+
+    '<p><b>Спрос:</b> '+escape(item.test)+'</p><p><b>Риски:</b> '+escape(item.beware)+'</p>'+
+    '<p><b>Что потребуется:</b> '+escape(item.setup)+'</p></details></article>').join('')+
+  '<p class="dm-journey-small">'+escape(found.caution)+
+  ' Это не актуальное исследование рынка и не обещание дохода. Выбор не создаёт бизнес и не тратит деньги.</p>'+
+  '<button type="button" class="dm-journey-ideas-refine" data-journey-edit>Хочу подробнее рассказать о себе</button></section>';
+}
 function preparedMarkup(){
+ const plan=getPlan();
+ if(plan?.mode==='start'&&(plan.unknownIdea||!plan.description))return '';
  const result=window.DMFirstResult?.build?.(getPlan());
  if(!result)return '';
  return '<details class="dm-journey-prepared">'+
@@ -175,6 +194,8 @@ function markup(){
   '<div class="dm-journey-next"><small>НАЧНЁМ С ЭТОГО</small><strong>'+escape(roadmap[0].title)+'</strong>'+
   '<p>'+escape(roadmap[0].note)+'</p><span>План составлен, действие ещё не выполнено.</span></div>'+
   locationMarkup()+
+  ideasMarkup()+
+  (state.ideaHypothesisId?'<p class="dm-journey-choice-note">Это гипотеза для проверки, а не окончательное решение. <button type="button" data-journey-other-ideas>Посмотреть другие варианты</button></p>':'')+
   preparedMarkup()+
   demandMarkup()+
   '<details class="dm-journey-steps"><summary>Как пойдём дальше · '+roadmap.length+' этапов</summary>'+
@@ -223,7 +244,7 @@ function onClick(e){
  const button=e.target.closest('button');if(!button)return;
  if(button.hasAttribute('data-journey-close'))return close();
  if(button.dataset.journeyMode){
-  working={...working,mode:button.dataset.journeyMode,description:'',have:'',location:'',locationFixed:false,unknownIdea:false};
+  working={...working,mode:button.dataset.journeyMode,description:'',have:'',location:'',locationFixed:false,unknownIdea:false,ideaHypothesisId:''};
   view='idea';return render();
  }
  if(button.hasAttribute('data-journey-back')){view=view==='have'?(working.description?'location':'idea'):view==='location'?'idea':'welcome';return render()}
@@ -264,6 +285,25 @@ function onClick(e){
   }
   return render({focusDemand:true});
  }
+ if(button.hasAttribute('data-journey-pick-idea')){
+  const candidate=window.DMIdeaExplorer?.getById?.(getPlan(),button.dataset.journeyPickIdea);
+  if(!candidate||!state)return;
+  if(!store({...state,description:candidate.title,unknownIdea:false,ideaHypothesisId:candidate.id})){
+   const box=root?.querySelector('.dm-journey-ideas');
+   if(box)box.insertAdjacentHTML('beforeend','<p role="alert">Не удалось сохранить гипотезу. Ничего не изменено.</p>');
+   return;
+  }
+  return render();
+ }
+ if(button.hasAttribute('data-journey-other-ideas')){
+  if(!state?.ideaHypothesisId)return;
+  if(!store({...state,description:'',unknownIdea:true,ideaHypothesisId:''})){
+   const note=root?.querySelector('.dm-journey-choice-note');
+   if(note)note.insertAdjacentHTML('beforeend','<span role="alert">Не удалось сохранить изменение.</span>');
+   return;
+  }
+  return render();
+ }
  if(button.hasAttribute('data-journey-edit')){working=draft();view='idea';return render()}
  if(button.hasAttribute('data-journey-finish'))return close();
 }
@@ -286,6 +326,7 @@ function onSubmit(e){
   e.preventDefault();
   working.description=compact(e.target.querySelector('[name="idea"]')?.value);
   working.unknownIdea=working.mode==='start'&&!working.description;
+  working.ideaHypothesisId='';
   view=working.description?'location':'have';return render();
  }
  if(e.target.id==='dmJourneyLocationForm'){
@@ -312,7 +353,7 @@ function onSubmit(e){
 }
 function getState(){return state?Object.freeze({...state}):null}
 function getPlan(){return state?Object.freeze({mode:state.mode,modeLabel:titles[state.mode],description:state.description,
- have:state.have,unknownIdea:state.unknownIdea,
+ have:state.have,unknownIdea:state.unknownIdea,ideaHypothesisId:state.ideaHypothesisId||'',
  location:state.location||'',locationFixed:Boolean(state.locationFixed),
  steps:journeySteps(state).map(x=>({...x,status:'planned'})),source:'owner-entered-local-plan'}):null}
 function explain(){
