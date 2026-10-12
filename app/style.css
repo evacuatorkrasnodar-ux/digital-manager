@@ -365,8 +365,8 @@
 #managementScreen .mg-tile input{position:absolute;opacity:0;width:1px;height:1px}
 #managementScreen .mg-tile i{width:30px;height:17px;position:relative;display:block;border-radius:20px;background:#233448;border:1px solid #b5c5dc33;flex:none}
 #managementScreen .mg-tile i::before{content:"";position:absolute;left:2px;top:2px;width:11px;height:11px;background:#bdc8d8;border-radius:50%;transition:transform .15s}
-#managementScreen .mg-tile input:checked+i{background:linear-gradient(135deg,#138cf9,#1459cd);box-shadow:0 0 8px #2087df77}
-#managementScreen .mg-tile input:checked+i::before{background:#fff;transform:translateX(12px)}
+#managementScreen .mg-tile input:checked+i{background:linear-gradient(145deg,#eef6fc,#aebfcf);border-color:rgba(240,249,255,.82);box-shadow:inset 0 1px rgba(255,255,255,.85),0 0 7px rgba(202,224,243,.24)}
+#managementScreen .mg-tile input:checked+i::before{background:#29445e;transform:translateX(12px)}
 #managementScreen .mg-tile:has(input:focus-visible){outline:2px solid #c8e2ff;outline-offset:2px}
 #managementScreen .mg-connections{min-height:78px}
 #managementScreen .mg-link-icon{font-size:31px;color:#e0b7ff}
@@ -509,8 +509,8 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 #managementScreen .voice-switch input{position:absolute;opacity:0}
 #managementScreen .voice-switch i{width:57px;height:31px;border-radius:22px;border:1px solid #739cce;background:#293a52;position:relative;transition:background .2s}
 #managementScreen .voice-switch i::before{content:"";position:absolute;top:3px;left:3px;width:23px;height:23px;border-radius:50%;background:#f0f5ff;transition:transform .2s}
-#managementScreen .voice-switch input:checked+i{background:linear-gradient(140deg,#209afa,#1538c8);box-shadow:inset 0 1px #ffffff88,0 0 11px #246ddd70}
-#managementScreen .voice-switch input:checked+i::before{transform:translateX(26px)}
+#managementScreen .voice-switch input:checked+i{background:linear-gradient(145deg,#edf6fd,#a9bfd1);border-color:rgba(235,247,255,.85);box-shadow:inset 0 1px rgba(255,255,255,.87),0 0 9px rgba(196,222,243,.22)}
+#managementScreen .voice-switch input:checked+i::before{background:#29445e;transform:translateX(26px)}
 #managementScreen .voice-switch input:focus-visible+i{outline:2px solid #f4f9ff;outline-offset:3px}
 #managementScreen .voice-ring-icon{display:block;width:24px;height:24px;border:2px solid #9183ff;border-radius:50%;box-shadow:0 0 7px #7966fa,inset 0 0 5px #5c45f9}
 #managementScreen .voice-mock{height:194px;overflow:hidden;position:relative;isolation:isolate;border:1px solid #a8c7de88;border-radius:18px;background:#03060b}
