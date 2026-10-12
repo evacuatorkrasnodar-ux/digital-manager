@@ -351,7 +351,7 @@
   }
   let mgCurrent='home';
   const mgNames={manager:'Мой управляющий',
-    voice:'Внешний вид',autopilot:'Автопилот',connections:'Связи',documents:'Документы',
+    voice:'Основные',autopilot:'Автопилот',connections:'Связи',documents:'Документы',
     payments:'Платежи',learning:'Обучение'};
   const mgInfo={
     connections:'Связи объединят ваш сайт, почту, календарь, банки, продажи, маркетплейсы и ЭДО. Реальные подключения пока не настроены.',
@@ -639,7 +639,7 @@
     let content='';
     if(page==='manager'){
       const parts=[
-        ['voice','ic-settings','Внешний вид','Плазма · Док · Имя · Общение'],
+        ['voice','ic-settings','Основные','Плазма · Док · Имя · Общение'],
         ['autopilot','ic-shield','Автопилот','Навыки · Правила · Самостоятельность']
       ];
       content='<div class="mg-unified-hub">'+parts.map(([key,icon,label,description])=>
