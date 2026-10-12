@@ -339,9 +339,6 @@
 #managementScreen .mg-theme-controls button[aria-pressed=true]{color:#fff;background:linear-gradient(130deg,#277df0,#061f9d);box-shadow:inset 0 1px 2px #fff8,0 0 12px #3f83ee90}
 #managementScreen .mg-manager{min-height:87px;background:radial-gradient(ellipse at 98% 80%,rgba(19,67,162,.22),transparent 50%),linear-gradient(130deg,#101b2b,#02050a)}
 #managementScreen .mg-manager::after{content:"";position:absolute;right:-2%;bottom:-8px;width:100px;height:95px;pointer-events:none;background:repeating-radial-gradient(ellipse at 100% 100%,transparent 0 16px,rgba(54,118,232,.19) 17px 17.8px,transparent 19px 27px);transform:rotate(-19deg)}
-#managementScreen .mg-astronaut{position:relative;width:75px;height:72px;flex:none;display:grid;place-items:center;border-radius:15px;background:radial-gradient(ellipse at 46% 20%,#19335a,#050911 80%);box-shadow:inset 0 0 11px #3868b34d;overflow:hidden}
-#managementScreen .mg-astronaut::after{content:"";position:absolute;bottom:-14px;left:7px;width:58px;height:31px;border:2px solid #4f6b91;border-radius:21px;background:linear-gradient(120deg,#1b2335,#020409);box-shadow:inset 0 2px #f6f6ff19}
-#managementScreen .mg-orb{width:53px;height:53px;border-radius:50%;z-index:1;border:1px solid rgba(172,211,251,.4);background:radial-gradient(circle at 49% 46%,#061125 48%,#113fd7 55%,#b7dcff 62%,#164deb 67%,#09182b 75%);filter:drop-shadow(0 0 7px #348bff)}
 #managementScreen .mg-auto{min-height:91px;border-color:rgba(236,171,98,.67);background:radial-gradient(ellipse at 98% 63%,rgba(154,78,23,.19),transparent 60%),linear-gradient(130deg,#22160f,#07080a 68%)}
 #managementScreen .mg-auto .mg-zap{font-size:43px;line-height:1;font-weight:700;color:#ffe1a7;text-shadow:0 0 12px #f7ae4c}
 #managementScreen .mg-gold-waves{position:absolute;right:0;top:0;width:135px;height:100%;opacity:.8;pointer-events:none}
