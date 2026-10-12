@@ -10,7 +10,9 @@ function init(){
   if(!dock||!centre||!socket||!factory?.create)throw Error('World dock/plasma source missing');
   const plasma=factory.create('world');
   plasma.dataset.mode='idle';
-  socket.replaceChildren(plasma);
+  const waves=socket.querySelector('.dm-launcher-waves');
+  if(!waves)throw Error('Approved laser wave tracks missing');
+  socket.replaceChildren(waves,plasma);
   dock.dataset.mode='idle';centre.dataset.mode='idle';
   const targets={
    clients:['Клиенты','ic-users','./index.html?jump=clients'],
@@ -42,7 +44,7 @@ function init(){
    launcher.className='dm-world-standalone';
    launcher.setAttribute('aria-label','Открыть действия помощника');
    launcher.dataset.mode='idle';
-   launcher.append(plasma); // MOVE the same instance: never clone the ring or SVG IDs.
+   launcher.append(waves,plasma); // MOVE the same instance: never clone the ring or SVG IDs.
    document.body.append(launcher);
   }
  }catch(error){console.error('My World dock:',error);}
