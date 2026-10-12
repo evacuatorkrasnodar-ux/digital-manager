@@ -25,15 +25,15 @@ const promotionTotal=()=>promotion.reduce((sum,x)=>sum+x.amount,0);
 /* Signals derived exclusively from local entries. They are observations, never verified external AI. */
 function getInsight(){
  const awaiting=records.filter(x=>x.stage==='new');
- if(awaiting.length>=3)return {id:'waiting-replies',kind:'attention',title:'Люди ждут ответа',body:'По вашим записям '+awaiting.length+' обращения пока без отметки об ответе. Стоит проверить.',view:'sales'};
+ if(awaiting.length>=3)return {id:'waiting-replies-'+awaiting.length,kind:'attention',title:'Люди ждут ответа',body:'По вашим записям '+awaiting.length+' обращения пока без отметки об ответе. Стоит проверить.',view:'sales'};
  const byChannel=channels.map(source=>{
   const leads=records.filter(x=>x.source===source);
   return {source,leads:leads.length,bought:leads.filter(x=>x.stage==='won').length,spend:promotion.filter(x=>x.source===source).reduce((n,x)=>n+x.amount,0)};
  });
  const warning=byChannel.find(x=>x.spend>0&&x.leads>=2&&x.bought===0);
- if(warning)return {id:'spend-'+warning.source,kind:'attention',title:'Проверим продвижение?',body:'На '+warning.source+' есть расходы и '+warning.leads+' обращения, но покупок пока не отмечено.',view:'picture'};
+ if(warning)return {id:'spend-'+warning.source+'-'+warning.leads+'-'+warning.spend,kind:'attention',title:'Проверим продвижение?',body:'На '+warning.source+' есть расходы и '+warning.leads+' обращения, но покупок пока не отмечено.',view:'picture'};
  const possible=byChannel.find(x=>x.bought>=2);
- if(possible)return {id:'buyers-'+possible.source,kind:'opportunity',title:'Есть хорошая зацепка',body:'Из '+possible.source+' уже '+possible.bought+' покупки по вашим записям. Посмотрим, что помогло?',view:'picture'};
+ if(possible)return {id:'buyers-'+possible.source+'-'+possible.bought,kind:'opportunity',title:'Есть хорошая зацепка',body:'Из '+possible.source+' уже '+possible.bought+' покупки по вашим записям. Посмотрим, что помогло?',view:'picture'};
  return null;
 }
 function notifyInsight(){
