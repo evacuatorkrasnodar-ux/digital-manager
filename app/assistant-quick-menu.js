@@ -54,6 +54,6 @@ function init(){
  document.addEventListener('visibilitychange',()=>{if(document.hidden)close();});
  window.addEventListener('pageshow',close);
 }
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
-else init();
+if(document.readyState==='complete')init();
+else document.addEventListener('DOMContentLoaded',init,{once:true});
 })();
