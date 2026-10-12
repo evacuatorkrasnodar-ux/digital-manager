@@ -352,7 +352,7 @@
   let mgCurrent='home';
   const mgNames={manager:'Мой управляющий',
     voice:'Основные',autopilot:'Автопилот',connections:'Связи',documents:'Документы',
-    payments:'Платежи',learning:'Обучение',security:'Безопасность'};
+    payments:'Платежи',learning:'Обучение',security:'Безопасность',workshop:'Моя мастерская'};
   const mgInfo={
     connections:'Связи объединят ваш сайт, почту, календарь, банки, продажи, маркетплейсы и ЭДО. Реальные подключения пока не настроены.',
     documents:'Здесь будут договоры, счета, акты, накладные и шаблоны. Важные документы не будут отправляться или подписываться без разрешения.',
@@ -633,7 +633,7 @@
     byId('mgHome').hidden=page!=='home';
     byId('mgDetail').hidden=page==='home';
     byId('mgTitle').textContent=mgNames[page]||'Управление';
-    byId('mgSubtitle').textContent=({home:'Настройки приложения',manager:'Все настройки одного помощника',autopilot:'Навыки и границы самостоятельности',connections:'Сервисы и источники данных',documents:'Файлы и шаблоны',payments:'Счета и регулярные расходы',learning:'Возможности приложения',voice:'Плазма · Док · Имя · Общение'})[page]||'Настройки приложения';
+    byId('mgSubtitle').textContent=({home:'Настройки приложения',manager:'Все настройки одного помощника',autopilot:'Навыки и границы самостоятельности',connections:'Сервисы и источники данных',documents:'Файлы и шаблоны',payments:'Счета и регулярные расходы',learning:'Возможности приложения',voice:'Плазма · Док · Имя · Общение',workshop:'Инструменты и калькуляторы'})[page]||'Настройки приложения';
     clearTimeout(voicePreviewTimer);
     if(dmSettingsGlyphTimer!==null){clearTimeout(dmSettingsGlyphTimer);dmSettingsGlyphTimer=null;}
     if(page==='home'){byId('mgDetail').innerHTML='';window.scrollTo(0,0);requestAnimationFrame(mgSyncCarouselNav);return;}
@@ -649,6 +649,8 @@
           '<span class="mg-copy"><strong>'+label+'</strong><small>'+description+'</small></span>'+
           '<span class="mg-chevron" aria-hidden="true"><svg class="ico"><use href="#ic-chevron"/></svg></span>'+
         '</button>').join('')+'</div>';
+    }else if(page==='workshop'){
+      content='<div id="dmWorkshopMount"></div>';
     }else if(page==='voice'){
       content="<div class=\"voice-pref\"><div class=\"voice-setting-top\"><span class=\"mg-icon mg-blue\"><svg class=\"ico\"><use href=\"#ic-grid\"/></svg></span><span class=\"mg-copy\"><strong>Показывать док</strong><small>Постоянная панель внизу экрана</small></span><label class=\"voice-switch\"><input id=\"voiceDock\" type=\"checkbox\" aria-label=\"Показывать док\"><i></i></label></div><div class=\"voice-mock voice-mock-dock-scene\" role=\"img\" aria-label=\"Айфон с настоящим доком главного экрана\"><div class=\"voice-iphone-device\"><div class=\"voice-iphone-screen\"><div class=\"voice-iphone-status\" aria-hidden=\"true\">9:41</div><div class=\"voice-iphone-island\" aria-hidden=\"true\"></div><div class=\"voice-iphone-title\" aria-hidden=\"true\">ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</div><div class=\"voice-iphone-dock-mount\" id=\"mgDockPreviewMount\"></div></div></div></div><p class=\"voice-caption\">Док обеспечивает быстрый доступ к приложению. При выключении останется плазма помощника с быстрыми действиями.</p></div><div class=\"voice-setting-top voice-simple\"><span class=\"mg-icon mg-blue\"><svg class=\"ico\"><use href=\"#ic-bars\"/></svg></span><span class=\"mg-copy\"><strong>Голосовая активация</strong><small>Распознавание фразы — в разработке</small></span><span class=\"voice-coming\">Скоро</span></div><div class=\"voice-setting-top voice-simple\"><span class=\"mg-icon mg-purple\"><svg class=\"ico\"><use href=\"#ic-spark\"/></svg></span><span class=\"mg-copy\"><strong>Голосовые ответы</strong><small>Озвучивание после подключения голоса</small></span><span class=\"voice-coming\">Скоро</span></div><p class=\"mg-disclaimer\">Микрофон не включается автоматически. Голосовая активация потребует разрешения на доступ и работающего распознавания.</p>";
     }else if(page==='autopilot'){
@@ -661,6 +663,7 @@
       content+=mgSkillsPanels();
     }else{content='<p class="mg-explain">'+mgInfo[page]+'</p><p class="mg-disclaimer">Этот раздел готовится. Подключённые данные и действия не имитируются.</p>';}
     byId('mgDetail').innerHTML=content;
+    if(page==='workshop')window.DMWorkshop?.mount(byId('dmWorkshopMount'));
     if(page==='voice'){
       dmSyncDockItems();
       dmMountRealDockPreview();
