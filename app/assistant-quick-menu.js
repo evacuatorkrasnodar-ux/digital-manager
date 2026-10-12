@@ -52,15 +52,7 @@ function init(){
   if(event.key==='Escape'&&!menu.hidden){close();triggers.find(t=>t.getClientRects().length)?.focus();}
  });
  document.addEventListener('visibilitychange',()=>{if(document.hidden)close();});
- function syncDock(){
-  let prefs={};try{prefs=JSON.parse(localStorage.getItem('digital-manager-black-velvet-v2')||'{}')?.management?.voice||{};}catch(_){}
-  const dockOff=prefs.dock===false;
-  document.documentElement.classList.toggle('dm-mini-no-dock',dockOff);
-  close();
- }
- window.addEventListener('storage',event=>{if(event.key==='digital-manager-black-velvet-v2'||event.key===null)syncDock();});
- window.addEventListener('pageshow',syncDock);
- syncDock();
+ window.addEventListener('pageshow',close);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
 else init();
