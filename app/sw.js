@@ -1,5 +1,5 @@
 /* App-only service worker: fresh documents, styles and scripts; cached offline assets. */
-const CACHE = 'digital-manager-black-velvet-v693-20261012';
+const CACHE = 'digital-manager-black-velvet-v694-20261012';
 const CACHE_PREFIX = 'digital-manager-black-velvet-';
 const OFFLINE_FILES = [
   './index.html',
@@ -14,10 +14,11 @@ const OFFLINE_FILES = [
   './task-journal.css?v=9',
   './initiative.js?v=5',
   './initiative.css?v=2',
-  './business-brain.js?v=6',
+  './business-brain.js?v=7',
   './business-location.js?v=1',
-  './business-journey.js?v=3',
-  './business-journey.css?v=2',
+  './business-first-result.js?v=1',
+  './business-journey.js?v=4',
+  './business-journey.css?v=3',
   './assets/plasma-glass-mark.webp',
   './myday.html',
   './myday-plasma-mode.css?v=6',
