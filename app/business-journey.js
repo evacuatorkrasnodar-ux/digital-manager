@@ -87,6 +87,39 @@ function locationMarkup(){
   '</ol><small>Варианты действий, а не обещание продаж или уже выполненная реклама.</small></details>'+
   '</section>';
 }
+function demandMarkup(){
+ const plan=getPlan();
+ if(plan?.mode!=='start')return '';
+ const result=window.DMDemandTest?.summary?.(plan);
+ if(!result?.hasPlan)return '';
+ const reactions={interested:'Интересно',question:'Есть вопросы',not_interested:'Не заинтересовало'};
+ const sources={conversation:'Личный разговор',message:'Переписка',survey:'Опрос',other:'Другой способ'};
+ const total=result.total;
+ return '<details class="dm-journey-demand">'+
+  '<summary><span>✦ Проверим спрос до вложений</span><small>'+
+  (total?'Записано откликов: '+total+' · интерес: '+result.interested:'Ещё нет откликов · начнём с реальных людей')+
+  '</small></summary>'+
+  '<div class="dm-journey-demand-content"><p>Предлагаю для начала поговорить хотя бы с пятью потенциальными клиентами. Это ориентир для первых вопросов, а не доказательство спроса. Никакие опросы автоматически не отправлялись.</p>'+
+  '<p class="dm-journey-demand-advice">'+escape(result.note)+'</p>'+
+  '<form id="dmDemandTestForm">'+
+  '<label>Что человек ответил?<select name="reaction" required>'+
+  '<option value="interested">Заинтересовался</option><option value="question">Задал вопросы</option>'+
+  '<option value="not_interested">Не заинтересовался</option></select></label>'+
+  '<label>Откуда ответ?<select name="channel" required>'+
+  '<option value="conversation">Личный разговор</option><option value="message">Переписка</option>'+
+  '<option value="survey">Опрос</option><option value="other">Другое</option></select></label>'+
+  '<label>Что полезного сказал? <small>Не записывай имена, телефоны и чужие личные данные</small>'+
+  '<textarea name="note" maxlength="250" rows="2" placeholder="Например: спросил про время работы"></textarea></label>'+
+  '<button type="submit">Записать отклик ↗</button><p data-demand-message role="status"></p></form>'+
+  (total?'<details class="dm-journey-demand-history"><summary>Мои записи · '+total+'</summary><ol>'+
+   result.feedback.slice(0,10).map(x=>'<li><div><strong>'+escape(reactions[x.type]||'Отклик')+'</strong> · '+
+    escape(sources[x.channel]||'Запись')+'<small>'+escape(new Date(x.at).toLocaleDateString('ru-RU'))+'</small></div>'+
+    (x.note?'<p>'+escape(x.note)+'</p>':'')+
+    '<button type="button" data-demand-remove="'+escape(x.id)+'" aria-label="Убрать ошибочную запись">×</button></li>').join('')+
+   '</ol></details>':'')+
+  '<p class="dm-journey-small">Здесь только твои записи о разговорах. Это не доказанные заказы, оплаченные услуги или статистически надёжное исследование рынка.</p>'+
+  '</div></details>';
+}
 function preparedMarkup(){
  const result=window.DMFirstResult?.build?.(getPlan());
  if(!result)return '';
@@ -143,6 +176,7 @@ function markup(){
   '<p>'+escape(roadmap[0].note)+'</p><span>План составлен, действие ещё не выполнено.</span></div>'+
   locationMarkup()+
   preparedMarkup()+
+  demandMarkup()+
   '<details class="dm-journey-steps"><summary>Как пойдём дальше · '+roadmap.length+' этапов</summary>'+
   '<ol>'+roadmap.map(item=>'<li><strong>'+escape(item.title)+'</strong><small>'+escape(item.note)+'</small></li>').join('')+'</ol></details>'+
   '<p class="dm-journey-small">Я пока не подключён к сайтам, госуслугам или площадкам. Здесь сохранён твой маршрут, а не выполненные регистрации или заработанные деньги.</p>'+
@@ -161,12 +195,15 @@ function mount(){
  root.addEventListener('click',e=>{if(e.target===root)close()});
  return root;
 }
-function render(){
+function render({focusDemand=false}={}){
  if(!root||root.hidden)return;
  const body=root.querySelector('#dmJourneyBody');
  if(body)body.innerHTML=markup();
  const h=body?.querySelector('h2');if(h){h.id='dmJourneyHeading';h.tabIndex=-1;h.focus({preventScroll:true})}
- root.querySelector('.dm-journey-panel')?.scrollTo({top:0,behavior:'instant'});
+ if(focusDemand){
+  const el=root.querySelector('.dm-journey-demand');
+  if(el){el.open=true;el.scrollIntoView?.({block:'nearest',behavior:'instant'})}
+ }else root.querySelector('.dm-journey-panel')?.scrollTo({top:0,behavior:'instant'});
 }
 function open(){
  mount();
@@ -217,10 +254,34 @@ function onClick(e){
   }catch(_){field.select();say('Текст выделен — скопируй вручную. Ничего не отправлено.')}
   return;
  }
+ if(button.hasAttribute('data-demand-remove')){
+  if(!window.confirm('Убрать эту записанную оценку? Другие отклики останутся.'))return;
+  const result=window.DMDemandTest?.remove?.(getPlan(),button.dataset.demandRemove);
+  if(!result?.ok){
+   const status=root?.querySelector('[data-demand-message]');
+   if(status)status.textContent=result?.error||'Не получилось убрать запись.';
+   return;
+  }
+  return render({focusDemand:true});
+ }
  if(button.hasAttribute('data-journey-edit')){working=draft();view='idea';return render()}
  if(button.hasAttribute('data-journey-finish'))return close();
 }
 function onSubmit(e){
+ if(e.target.id==='dmDemandTestForm'){
+  e.preventDefault();
+  const form=e.target;
+  const type=form.querySelector('[name="reaction"]')?.value;
+  const channel=form.querySelector('[name="channel"]')?.value;
+  const note=form.querySelector('[name="note"]')?.value||'';
+  const result=window.DMDemandTest?.add?.(getPlan(),{type,channel,note});
+  if(!result?.ok){
+   const status=form.querySelector('[data-demand-message]');
+   if(status)status.textContent=result?.error||'Не удалось сохранить. Твой текст остался в поле.';
+   return;
+  }
+  return render({focusDemand:true});
+ }
  if(e.target.id==='dmJourneyIdeaForm'){
   e.preventDefault();
   working.description=compact(e.target.querySelector('[name="idea"]')?.value);
