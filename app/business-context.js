@@ -29,7 +29,11 @@ function read(){
 }
 let current=read();
 function derive(text){
- const description=safe(text),matches=special.filter(item=>item.re.test(description));
+ const description=safe(text);
+ // Very common negations are not positive evidence of a business capability.
+ // This remains a limited local keyword hint, not language understanding.
+ const evidence=description.replace(/(?:без|нет|не делаем|не оказываем|не занимаемся)\s+(?:своей\s+|собственной\s+)?достав\w*/gi,'');
+ const matches=special.filter(item=>item.re.test(evidence));
  // Mixed businesses retain *all* matching processes rather than one industry.
  const areas=[...new Set([...matches.flatMap(item=>item.areas),...COMMON])].slice(0,16);
  return Object.freeze({description,configured:Boolean(description),
