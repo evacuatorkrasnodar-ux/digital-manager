@@ -25,10 +25,9 @@ html[data-dm-performance="eco"] :is(
 /* Use a shorter blur on the actual glass panels (rather than all elements). */
 html[data-dm-performance="eco"] :is(
   .bottom-nav,.dock-quick-actions,.dm-world-orb-menu,
-  .voice-pref,.voice-mock,.dm-chat-panel,
-  .day-shell .day-tabs,.day-shell .day-tab,
-  .day-shell .calendar-panel,.day-shell .health-card,
-  .day-shell .health-summary,.day-shell .world-spotlight
+  .day-shell .day-tabs,.day-shell .calendar-panel,
+  .day-shell .health-card,.day-shell .health-summary,
+  .day-shell .world-spotlight
 ){
   -webkit-backdrop-filter:blur(6px)!important;
   backdrop-filter:blur(6px)!important;
