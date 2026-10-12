@@ -248,7 +248,12 @@ function onClick(e){
   view='idea';return render();
  }
  if(button.hasAttribute('data-journey-back')){view=view==='have'?(working.description?'location':'idea'):view==='location'?'idea':'welcome';return render()}
- if(button.hasAttribute('data-journey-unknown')){working.description='';working.unknownIdea=true;working.location='';working.locationFixed=false;view='have';return render()}
+ if(button.hasAttribute('data-journey-unknown')){
+  const interests=compact(root?.querySelector('#dmJourneyIdea')?.value||'');
+  if(interests&&!working.have)working.have=interests;
+  working.description='';working.unknownIdea=true;working.ideaHypothesisId='';
+  working.location='';working.locationFixed=false;view='have';return render();
+ }
  if(button.hasAttribute('data-journey-skip-location')){working.location='';working.locationFixed=false;view='have';return render()}
  if(button.hasAttribute('data-journey-keep-location')||button.hasAttribute('data-journey-reconsider')){
   if(!state?.location)return;
@@ -324,8 +329,11 @@ function onSubmit(e){
  }
  if(e.target.id==='dmJourneyIdeaForm'){
   e.preventDefault();
-  working.description=compact(e.target.querySelector('[name="idea"]')?.value);
-  working.unknownIdea=working.mode==='start'&&!working.description;
+  const input=compact(e.target.querySelector('[name="idea"]')?.value);
+  const undecided=working.mode==='start'&&(!input||/(?:не знаю|нет идеи|ищу идею|не определил(?:ся|ась)|пока не реш)/i.test(input));
+  working.description=undecided?'':input;
+  working.unknownIdea=undecided;
+  if(undecided&&input&&!working.have)working.have=input;
   working.ideaHypothesisId='';
   view=working.description?'location':'have';return render();
  }
