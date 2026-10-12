@@ -14,28 +14,73 @@ const save=(key,data)=>{try{localStorage.setItem(key,JSON.stringify(data.slice(0
 const findAdvice=()=>delegated.find(x=>x.id===ADVICE_ID);
 let lastFocus=null;
 
+/* One approved dashboard card, many messages; no second card and no fake execution. */
+const currentInsight=()=>window.DMSalesScreen?.getInsight?.()||null;
+const pendingTask=()=>delegated.find(t=>t.status==='planned'&&String(t.id).startsWith('sales-insight:'))||delegated.find(t=>t.status==='planned'&&t.id===ADVICE_ID)||null;
 function syncRecommendation(){
  const card=document.querySelector('#homeScreen .recommendation-card');
  if(!card)return;
- const task=findAdvice(),planned=Boolean(task);
- card.dataset.taskState=planned?'accepted':'attention';
- const head=card.querySelector('.advice-head'),body=card.querySelector('.advice-body');
- const button=document.getElementById('openAdvice');
- if(head)head.textContent=task?.status==='reviewed'?'План просмотрен':planned?'Поручение принято':'Есть потенциал для роста в рекламных каналах.';
- if(body)body.textContent=task?.status==='reviewed'?'План сохранён в истории. Реальная проверка и изменения рекламы не выполнялись.':planned?'Проверка рекламных каналов добавлена в план. Внешних действий пока не было.':'Увеличьте бюджет на 20% — прогнозируемый рост выручки до +35% в течение 30 дней.';
+ const pending=pendingTask(),insight=currentInsight(),old=findAdvice();
+ const head=card.querySelector('.advice-head'),body=card.querySelector('.advice-body'),button=document.getElementById('openAdvice');
+ let title,description,action,colour='attention';
+ if(pending){
+  colour='accepted';title='Поручение принято';
+  description='Проверка добавлена в поручения. Внешних действий пока не было.';
+  action='Поручения ';
+ }else if(insight){
+  colour=insight.kind==='opportunity'?'opportunity':'attention';
+  title=insight.title;description=insight.body;action='Исполнить ';
+ }else if(old?.status==='reviewed'){
+  colour='accepted';title='План просмотрен';
+  description='План сохранён в истории. Реальной проверки рекламы не было.';
+  action='История ';
+ }else{
+  title='Есть потенциал для роста в рекламных каналах.';
+  description='ДЕМО: проверьте расходы и реальные продажи перед увеличением бюджета.';
+  action='Исполнить ';
+ }
+ card.dataset.taskState=colour;
+ if(head)head.textContent=title;
+ if(body)body.textContent=description;
  if(button){
-  // Keep the approved arrow SVG and button geometry intact.
+  // Change the label, never replace the approved SVG arrow.
   if(!button.firstChild||button.firstChild.nodeType!==3)button.prepend(document.createTextNode(''));
-  button.firstChild.textContent=task?.status==='reviewed'?'История ':planned?'Поручения ':'Исполнить ';
-  button.setAttribute('aria-label',planned?'Посмотреть поручение управляющему':'Создать демонстрационное поручение на проверку');
+  button.firstChild.textContent=action;
+  button.setAttribute('aria-label',action.trim()==='Исполнить'?'Создать поручение на проверку':'Открыть '+action.trim().toLowerCase());
  }
 }
 function addDelegation(){
- if(!findAdvice()){
+ const pending=pendingTask();
+ if(pending){show('delegated');return}
+ const signal=currentInsight();
+ if(signal){
+  const id='sales-insight:'+signal.id;
+  if(!delegated.some(t=>t.id===id&&t.status==='planned')){
+   delegated.unshift({
+    id,title:'Проверить: '+signal.title,status:'planned',created:now(),createdMs:Date.now(),
+    log:[{at:now(),message:'По вашим записям: '+signal.body},{at:now(),message:'Поручение создано. Данные внешних сервисов не проверялись, никаких изменений не выполнялось.'}]
+   });
+   save(DELEGATED_KEY,delegated);
+  }
+ }else if(findAdvice()?.status==='reviewed'){
+  show('history');return;
+ }else if(!findAdvice()){
   delegated.unshift({id:ADVICE_ID,title:ADVICE_TITLE,status:'planned',created:now(),createdMs:Date.now(),log:[{at:now(),message:'Создано демонстрационное поручение на проверку. Интеграции не подключены, проверка не выполнялась.'}]});
   save(DELEGATED_KEY,delegated);
  }
- syncRecommendation();show(findAdvice()?.status==='reviewed'?'history':'delegated');
+ syncRecommendation();show('delegated');
+}
+function openRecommendationDetail(event){
+ const task=pendingTask(),insight=currentInsight(),old=findAdvice();
+ if(!task&&!insight&&old?.status!=='reviewed')return; // retain the original detail modal for demo
+ event.preventDefault();event.stopImmediatePropagation();
+ if(task){show('delegated');return}
+ if(insight){
+  if(insight.view==='picture')window.DMSalesScreen?.openPicture?.();
+  else window.DMSalesScreen?.open?.();
+  return;
+ }
+ show('history');
 }
 function reviewDelegation(){
  const task=findAdvice();
@@ -123,6 +168,9 @@ function init(){
   syncRecommendation();
   button.addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();addDelegation()},true);
  }
+ const details=document.querySelector('#homeScreen .recommendation-card .rec-chevron');
+ if(details)details.addEventListener('click',openRecommendationDetail,true);
+ window.addEventListener('dm:sales-insight-changed',syncRecommendation);
  const management=document.getElementById('mgHome');
  if(management&&!management.querySelector('[data-journal-open]')){
   const anchor=management.querySelector('.mg-main'),box=document.createElement('div');
