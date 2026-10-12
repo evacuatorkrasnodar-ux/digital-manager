@@ -111,25 +111,26 @@ html.dock-is-hidden #dockQuickActions.dock-quick-actions > button .ico{
   width:20px;
   height:20px;
 }
-/* Four points on one upper semicircular arc, around the plasma at bottom 8px.
-   Outer centres are 118px to each side; inner centres are 48px from centre. */
+/* Compact, symmetrical upper semicircle around the original plasma.
+   Outer centres are 85px aside, inner centres 31px: significantly tighter,
+   while keeping the 44px tap targets separate from each other and the orb. */
 html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenHome{
-  left:-118px;
-  bottom:101px;
+  left:-85px;
+  bottom:82px;
 }
 html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenChat{
-  left:-48px;
-  bottom:160px;
+  left:-31px;
+  bottom:131px;
   animation-delay:.035s;
 }
 html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenAttention{
-  left:48px;
-  bottom:160px;
+  left:31px;
+  bottom:131px;
   animation-delay:.07s;
 }
 html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenManage{
-  left:118px;
-  bottom:101px;
+  left:85px;
+  bottom:82px;
   animation-delay:.105s;
 }
 html.dock-is-hidden #dockQuickActions.dock-quick-actions > button:active{
@@ -140,10 +141,10 @@ html.dock-is-hidden #dockQuickActions.dock-quick-actions > button:active{
   to{opacity:1;transform:translate(-50%,0) scale(1)}
 }
 @media(max-width:340px){
-  html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenHome{left:-106px;bottom:95px}
-  html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenChat{left:-43px;bottom:148px}
-  html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenAttention{left:43px;bottom:148px}
-  html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenManage{left:106px;bottom:95px}
+  html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenHome{left:-77px;bottom:79px}
+  html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenChat{left:-29px;bottom:126px}
+  html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenAttention{left:29px;bottom:126px}
+  html.dock-is-hidden #dockQuickActions.dock-quick-actions #dockOpenManage{left:77px;bottom:79px}
 }
 @media(prefers-reduced-motion:reduce){
   html.dock-is-hidden #dockQuickActions.dock-quick-actions > button{
