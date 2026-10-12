@@ -1,0 +1,40 @@
+/* The first acquaintance belongs to the approved Black Velvet family.
+   Scoped overlay only: never change dashboard, plasma, dock or gold card. */
+.dm-journey-overlay[hidden]{display:none!important}
+.dm-journey-overlay{position:fixed;inset:0;z-index:18000;box-sizing:border-box;display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;overscroll-behavior:contain;padding:calc(16px + env(safe-area-inset-top,0px)) 12px calc(25px + env(safe-area-inset-bottom,0px));background:rgba(0,3,10,.93);color:#eaf6ff;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.dm-journey-panel{box-sizing:border-box;width:min(100%,445px);max-height:calc(100dvh - 42px);overflow-y:auto;min-height:180px;border:1px solid rgba(162,202,235,.37);border-radius:22px;padding:15px 16px 20px;background:radial-gradient(ellipse at 50% -5%,rgba(62,115,188,.23),transparent 55%),linear-gradient(150deg,#142333,#060b13 90%);box-shadow:0 25px 85px rgba(0,0,0,.75),inset 0 1px rgba(246,251,255,.07)}
+.dm-journey-panel header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:10px;border-bottom:1px solid rgba(166,199,224,.15)}
+.dm-journey-panel header>span{font-size:9px;letter-spacing:.14em;color:#aacce3}
+.dm-journey-panel header button{flex:none;width:34px;height:34px;border:1px solid rgba(158,198,230,.43);border-radius:50%;background:#0e2031;color:#e7f4ff;font-size:22px}
+.dm-journey-chat{display:grid;gap:13px;margin:0;padding:19px 2px 2px}
+.dm-journey-eyebrow{font-size:9px;letter-spacing:.15em;color:#add0ed}
+.dm-journey-chat h2{margin:0;font-size:clamp(19px,5vw,25px);font-weight:520;line-height:1.24;color:#f0f9ff;letter-spacing:-.019em}
+.dm-journey-chat>p{margin:0;color:#bdd6e9;font-size:12px;line-height:1.7}
+.dm-journey-chat p.dm-journey-small{color:#9fb7c9;font-size:10px;line-height:1.65}
+.dm-journey-halo{display:grid;place-items:center;margin:3px auto 5px;width:124px;height:124px;border:1px solid rgba(143,200,251,.66);border-radius:50%;background:radial-gradient(circle at 39% 36%,rgba(138,204,248,.41),rgba(31,80,170,.18) 42%,rgba(21,20,72,.13) 72%,transparent);box-shadow:0 0 25px rgba(94,157,240,.17),inset 0 0 28px rgba(104,154,233,.14);color:#d4efff;font-size:45px;text-shadow:0 0 14px rgba(153,211,255,.8)}
+.dm-journey-chat:has(.dm-journey-halo)>h2,.dm-journey-chat:has(.dm-journey-halo)>p,.dm-journey-chat:has(.dm-journey-halo)>.dm-journey-eyebrow{text-align:center}
+.dm-journey-options{display:grid;gap:9px;margin-top:4px}
+.dm-journey-options button{display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:9px;row-gap:4px;text-align:left;min-width:0;padding:16px 14px;border:1px solid rgba(162,195,226,.39);border-radius:15px;background:linear-gradient(115deg,rgba(39,64,95,.72),rgba(11,20,34,.9));color:#e5f4ff}
+.dm-journey-options button strong{grid-column:1;font-size:14px;font-weight:520}
+.dm-journey-options button small{grid-column:1;font-size:11px;color:#a2c1d7}
+.dm-journey-options button>span{grid-row:1/3;grid-column:2;font-size:20px;color:#b0d5f4}
+.dm-journey-chat textarea{display:block;box-sizing:border-box;width:100%;max-height:48dvh;min-height:124px;resize:vertical;padding:12px;border:1px solid rgba(150,197,232,.48);border-radius:13px;color:#e9f6ff;background:rgba(8,21,36,.94);font:inherit;font-size:13px;line-height:1.65}
+.dm-journey-chat textarea::placeholder{color:#799caf}
+.dm-journey-chat :is(button,textarea,summary):focus-visible{outline:2px solid #c2e7fa;outline-offset:3px}
+.dm-journey-bottom{display:flex;gap:7px;align-items:stretch;justify-content:flex-end;flex-wrap:wrap}
+.dm-journey-bottom button{box-sizing:border-box;min-height:40px;padding:9px 11px;border:1px solid rgba(150,191,228,.41);border-radius:12px;background:#112539;color:#d8efff;font-size:11px}
+.dm-journey-bottom button:last-child{background:linear-gradient(130deg,#cde8f9,#a6cee9);border-color:rgba(206,233,249,.7);color:#0c2539;font-weight:560}
+.dm-journey-next{display:grid;gap:9px;padding:13px;border:1px solid rgba(157,201,232,.42);border-radius:16px;background:linear-gradient(135deg,rgba(38,80,124,.32),rgba(9,22,35,.88))}
+.dm-journey-next>small{font-size:9px;letter-spacing:.12em;color:#a9cfec}
+.dm-journey-next>strong{font-size:16px;font-weight:540;color:#ebf7ff}
+.dm-journey-next p{margin:0;color:#c3dced;font-size:12px;line-height:1.6}
+.dm-journey-next>span{font-size:10px;color:#a5bbc9}
+.dm-journey-steps{border:1px solid rgba(153,188,220,.26);border-radius:13px;padding:11px;background:rgba(149,187,227,.045)}
+.dm-journey-steps summary{font-size:12px;color:#cce6f8;cursor:pointer}
+.dm-journey-steps ol{display:grid;gap:13px;padding-left:21px;margin:15px 0 0}
+.dm-journey-steps li{font-size:12px;color:#d9edf9;line-height:1.5}
+.dm-journey-steps li>strong{display:block;font-size:12px;font-weight:540}
+.dm-journey-steps li>small{display:block;font-size:11px;line-height:1.55;color:#9fbcd1;margin-top:3px}
+.dm-journey-chat [data-journey-error]{font-size:11px;color:#f0c5b0;border:1px solid rgba(210,148,124,.36);border-radius:10px;padding:9px}
+@media(max-width:350px){.dm-journey-panel{padding:13px 12px 18px}.dm-journey-options button{padding:13px 11px}.dm-journey-bottom button{padding:9px 7px;font-size:10px}}
+@media(prefers-reduced-motion:reduce){.dm-journey-halo{animation:none!important}}
