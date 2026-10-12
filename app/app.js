@@ -845,10 +845,8 @@
   window.addEventListener('pageshow',mgSyncCarouselNav);
   requestAnimationFrame(mgSyncCarouselNav);
   function dmSyncQuickHome(){
-    // The four quick actions are consistent on every app tab:
-    // "Главная" is always shown, including inside Management and Assistant.
     const home=byId('dockOpenHome');
-    if(home)home.hidden=false;
+    if(home)home.hidden=tab==='home';
   }
   dmSyncQuickHome();
   let dmQuickMenuTimer=null;
@@ -859,7 +857,6 @@
   function closeDockQuickActions(){
     clearTimeout(dmQuickMenuTimer);
     byId('dockQuickActions').hidden=true;
-    document.documentElement.classList.remove('dm-plasma-orbit-open');
     const stillChatOpen=!byId('plasmaChatPanel').hidden;
     byId('dockLauncher').setAttribute('aria-expanded',String(stillChatOpen));
     byId('tabAssistant').setAttribute('aria-expanded',String(stillChatOpen));
@@ -1338,9 +1335,6 @@
     if(shouldOpen){
       dmSyncQuickHome();
       menu.hidden=false;
-      // Temporarily clear shortcut cards behind the orbital glass buttons.
-      // Scope to dock-free plasma, and undo on every close path.
-      document.documentElement.classList.toggle('dm-plasma-orbit-open',!voicePrefs.dock);
       dmScheduleQuickMenuHide();
       plasmaTriggers.forEach(button=>button.setAttribute('aria-expanded','true'));
     }
