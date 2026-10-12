@@ -87,6 +87,22 @@ function locationMarkup(){
   '</ol><small>Варианты действий, а не обещание продаж или уже выполненная реклама.</small></details>'+
   '</section>';
 }
+function marketOpportunityMarkup(){
+ const item=window.DMMarketOpportunities?.suggest?.(getPlan());
+ if(!item)return '';
+ return '<details class="dm-market-opportunity">'+
+  '<summary>✦ Мой следующий вывод · '+escape(item.headline)+'</summary>'+
+  '<div class="dm-market-opportunity-detail">'+
+  '<p>'+escape(item.reason)+'</p><p><strong>Мой план:</strong> '+escape(item.action)+'</p>'+
+  (item.evidence.length?'<p><strong>По записям о:</strong> '+item.evidence.map(x=>
+   '<a href="'+escape(x.url)+'" target="_blank" rel="noopener noreferrer">'+escape(x.name)+'</a>').join(' · ')+'</p>':'')+
+  '<label>Вопрос для проверки на реальных людях'+
+   '<textarea readonly rows="3" data-market-question>'+escape(item.testQuestion)+'</textarea></label>'+
+  '<button type="button" data-market-copy>Скопировать вопрос ↗</button>'+
+  '<p data-market-copy-status role="status"></p><small>'+escape(item.next)+' '+escape(item.demandNote)+
+  ' Никаких сообщений не отправлено, сайт не опубликован, эксперимент ещё не проведён.</small>'+
+  '</div></details>';
+}
 function marketMarkup(){
  const plan=getPlan();
  const search=window.DMMarketScout?.search?.(plan),report=window.DMMarketScout?.summary?.(plan);
@@ -101,12 +117,18 @@ function marketMarkup(){
   '<form id="dmMarketScoutForm">'+
    '<label>Нашёл организацию рядом<input name="name" maxlength="100" required placeholder="Название из карточки на карте"></label>'+
    '<label>Ссылка на карточку в 2ГИС или Яндекс Картах<input type="url" name="url" maxlength="800" required placeholder="https://2gis.ru/..."></label>'+
+   '<label>Какая конкретная трудность заметна?<small>Выбирай только то, что действительно увидел в этой карточке</small>'+
+    '<select name="issue"><option value="none">Пока ничего определённого</option>'+
+    '<option value="booking">Неудобная запись</option><option value="hours">Неудобные часы</option>'+
+    '<option value="prices">Непонятные цены</option><option value="offer">Непонятное предложение</option>'+
+    '<option value="delivery">Получение или доставка неудобны</option></select></label>'+
    '<label>Что заметил?<small>Например: специализация, заявленные цены или удобство записи; без личных данных</small>'+
    '<textarea name="note" maxlength="250" rows="2" placeholder="Необязательное наблюдение"></textarea></label>'+
    '<button type="submit">Сохранить наблюдение ↗</button><p role="status" data-market-status></p>'+
-  '</form>'+
+  '</form>'+marketOpportunityMarkup()+
   (report.count?'<div class="dm-journey-market-results"><strong>Посмотренные карточки · '+report.count+'</strong><ol>'+
    report.entries.slice(0,12).map(x=>'<li><strong>'+escape(x.name)+'</strong>'+
+    (x.issue&&x.issue!=='none'?'<p>'+escape(window.DMMarketScout?.issues?.[x.issue]||'')+'</p>':'')+
     (x.note?'<p>'+escape(x.note)+'</p>':'')+
     '<a href="'+escape(x.url)+'" target="_blank" rel="noopener noreferrer">Открыть источник ↗</a>'+
     '<button type="button" data-market-remove="'+escape(x.id)+'" aria-label="Убрать эту запись">×</button></li>').join('')+
@@ -308,6 +330,20 @@ function onClick(e){
   }catch(_){field.select();say('Текст выделен — скопируй вручную. Ничего не отправлено.')}
   return;
  }
+ if(button.hasAttribute('data-market-copy')){
+  const question=window.DMMarketOpportunities?.suggest?.(getPlan())?.testQuestion;
+  const field=root?.querySelector('[data-market-question]');
+  const status=root?.querySelector('[data-market-copy-status]');
+  const tell=message=>{if(status)status.textContent=message};
+  if(!question||!field)return;
+  try{
+   if(!navigator.clipboard?.writeText)throw new Error('clipboard');
+   navigator.clipboard.writeText(question).then(()=>tell('Скопировано. Никому не отправлено.')).catch(()=>{
+    field.select();tell('Вопрос выделен — скопируй вручную. Никому не отправлено.');
+   });
+  }catch(_){field.select();tell('Вопрос выделен — скопируй вручную. Никому не отправлено.')}
+  return;
+ }
  if(button.hasAttribute('data-market-remove')){
   if(!window.confirm('Убрать это наблюдение? Остальные записи останутся.'))return;
   const result=window.DMMarketScout?.remove?.(getPlan(),button.dataset.marketRemove);
@@ -357,7 +393,8 @@ function onSubmit(e){
   const result=window.DMMarketScout?.add?.(getPlan(),{
    name:form.querySelector('[name="name"]')?.value,
    url:form.querySelector('[name="url"]')?.value,
-   note:form.querySelector('[name="note"]')?.value||''
+   note:form.querySelector('[name="note"]')?.value||'',
+   issue:form.querySelector('[name="issue"]')?.value||'none'
   });
   if(!result?.ok){
    const status=form.querySelector('[data-market-status]');
