@@ -1,85 +1,59 @@
-/* Assistant quick navigation — Home Black Velvet reference, 2026-10-11.
-   Only the floating three-action menu. Original plasma, dock, dashboard,
-   shortcuts and existing click handlers stay exactly as they are. */
-#dockQuickActions.dock-quick-actions{
-  box-sizing:border-box;
-  position:fixed;
-  left:50%;
-  right:auto;
-  bottom:calc(130px + env(safe-area-inset-bottom,0px));
-  transform:translateX(-50%);
-  z-index:37;
-  width:max-content;
-  max-width:calc(100vw - 24px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-  padding:6px 8px;
-  border:1px solid rgba(151,181,204,.37);
-  border-radius:999px;
-  background:
-    radial-gradient(ellipse at 50% -45%,rgba(120,165,203,.08),transparent 72%),
-    linear-gradient(151deg,rgba(15,29,41,.88),rgba(3,9,17,.91) 60%,rgba(1,5,11,.93));
-  -webkit-backdrop-filter:blur(18px) saturate(.78);
-  backdrop-filter:blur(18px) saturate(.78);
-  box-shadow:
-    inset 0 1px rgba(240,248,255,.11),
-    inset 0 -1px rgba(0,0,0,.35),
-    0 9px 22px rgba(0,0,0,.35),
-    0 0 10px rgba(54,118,195,.035);
-  isolation:isolate;
+/* ONE miniature assistant quick menu on all app pages.
+   The live Home buttons keep their original handlers; personal pages use
+   the same visual tokens and their own semantic links. */
+:is(#dockQuickActions.dock-quick-actions,.dm-assistant-mini-menu){
+ box-sizing:border-box;
+ position:fixed;z-index:57;left:50%;right:auto;
+ bottom:calc(130px + env(safe-area-inset-bottom,0px));
+ transform:translateX(-50%);
+ display:flex;align-items:center;justify-content:center;
+ width:max-content;max-width:calc(100vw - 20px);
+ gap:4px;padding:4px 6px;border:1px solid rgba(151,181,204,.37);
+ border-radius:999px;
+ background:radial-gradient(ellipse at 50% -45%,rgba(120,165,203,.08),transparent 72%),linear-gradient(151deg,rgba(15,29,41,.9),rgba(3,9,17,.94) 60%,rgba(1,5,11,.96));
+ -webkit-backdrop-filter:blur(13px) saturate(.78);backdrop-filter:blur(13px) saturate(.78);
+ box-shadow:inset 0 1px rgba(240,248,255,.11),inset 0 -1px rgba(0,0,0,.35),0 7px 19px rgba(0,0,0,.36);
+ isolation:isolate;
 }
-html:not(.dock-is-hidden) #dockQuickActions.dock-quick-actions{
-  bottom:calc(93px + env(safe-area-inset-bottom,0px));
+html:not(.dock-is-hidden) #dockQuickActions.dock-quick-actions,
+html:not(.dm-mini-no-dock) .dm-assistant-mini-menu{
+ bottom:calc(94px + env(safe-area-inset-bottom,0px));
 }
-#dockQuickActions.dock-quick-actions button{
-  box-sizing:border-box;
-  position:relative;
-  flex:0 0 auto;
-  width:43px;
-  height:43px;
-  display:grid;
-  place-items:center;
-  padding:0;
-  border:1px solid rgba(164,193,217,.28);
-  border-radius:50%;
-  background:linear-gradient(150deg,rgba(32,51,68,.31),rgba(4,13,23,.48));
-  box-shadow:inset 0 1px rgba(246,252,255,.075);
-  color:#cbdce9;
-  cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
-  transition:border-color .2s ease,background .2s ease,color .2s ease,transform .2s ease;
+:is(#dockQuickActions.dock-quick-actions,.dm-assistant-mini-menu)[hidden]{display:none!important}
+#dockQuickActions.dock-quick-actions button,
+.dm-assistant-mini-menu a{
+ box-sizing:border-box;position:relative;flex:0 0 32px;
+ width:32px;height:32px;min-width:32px;min-height:32px;
+ display:grid;place-items:center;padding:0;margin:0;
+ border:1px solid rgba(164,193,217,.31);border-radius:50%;
+ background:linear-gradient(150deg,rgba(32,51,68,.32),rgba(4,13,23,.55));
+ box-shadow:inset 0 1px rgba(246,252,255,.075);
+ color:#d5e7f4;text-decoration:none;cursor:pointer;
+ -webkit-tap-highlight-color:transparent;
+ transition:border-color .18s,background .18s,color .18s;
 }
-#dockQuickActions.dock-quick-actions button .ico{
-  width:20px;
-  height:20px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:1.65;
-  filter:none;
+#dockQuickActions.dock-quick-actions button .ico,
+.dm-assistant-mini-menu a svg{
+ display:block;width:16px;height:16px;
+ fill:none;stroke:currentColor;stroke-width:1.7;
+ stroke-linejoin:round;stroke-linecap:round;filter:none;
 }
-#dockQuickActions.dock-quick-actions #dockOpenChat{
-  border-color:rgba(146,188,222,.42);
-  background:linear-gradient(149deg,rgba(31,62,89,.37),rgba(4,16,31,.57));
-  box-shadow:inset 0 1px rgba(231,248,255,.095),0 0 7px rgba(52,123,227,.09);
-  color:#e4f2ff;
+#dockQuickActions.dock-quick-actions #dockOpenChat,
+.dm-assistant-mini-menu a[data-action="chat"]{
+ border-color:rgba(146,188,222,.46);
+ background:linear-gradient(149deg,rgba(31,62,89,.39),rgba(4,16,31,.59));
+ color:#e4f2ff;
 }
-#dockQuickActions.dock-quick-actions button:is(:hover,:focus-visible){
-  color:#f3f9ff;
-  border-color:rgba(193,226,250,.7);
-  background:linear-gradient(148deg,rgba(48,80,108,.54),rgba(8,26,44,.72));
-  box-shadow:inset 0 1px rgba(251,253,255,.16),0 0 8px rgba(86,155,229,.13);
+#dockQuickActions.dock-quick-actions button:is(:hover,:focus-visible),
+.dm-assistant-mini-menu a:is(:hover,:focus-visible){
+ border-color:rgba(193,226,250,.7);
+ background:linear-gradient(148deg,rgba(48,80,108,.54),rgba(8,26,44,.72));
+ color:#f3f9ff;outline:2px solid rgba(194,230,255,.42);outline-offset:1px;
 }
-#dockQuickActions.dock-quick-actions button:focus-visible{
-  outline:2px solid rgba(194,230,255,.74);
-  outline-offset:2px;
-}
-#dockQuickActions.dock-quick-actions button:active{transform:scale(.95)}
-@media(max-width:350px){
-  #dockQuickActions.dock-quick-actions{gap:5px;padding:5px 7px}
-  #dockQuickActions.dock-quick-actions button{width:42px;height:42px}
-}
+#dockQuickActions.dock-quick-actions button:active,
+.dm-assistant-mini-menu a:active{transform:scale(.95)}
+#dockQuickActions.dock-quick-actions #dockOpenHome[hidden]{display:none!important}
+#dockQuickActions.dock-quick-actions .dm-attention-dot{right:3px;top:2px}
 @media(prefers-reduced-motion:reduce){
-  #dockQuickActions.dock-quick-actions button{transition:none}
+ #dockQuickActions.dock-quick-actions button,.dm-assistant-mini-menu a{transition:none}
 }
