@@ -345,6 +345,30 @@ function hide(){if(screen){screen.hidden=true;if(pictureOpen)closePicture()}}
    Only an explicit follow-up confirmation may advance a NEW lead. */
 const getClientStage=id=>records.find(x=>x.id===id)?.stage||null;
 /* Return only manually recorded facts needed for an owner-approved draft. */
+/* Aggregate business picture for the local, non-AI business brain.
+   Dates and sources are entered by the owner, not verified with any external service. */
+function getBusinessSnapshot(){
+ const now=Date.now(),valid=records.filter(x=>statuses[x.stage]);
+ const getAmount=x=>Number.isFinite(Number(x.amount))&&Number(x.amount)>0?Number(x.amount):0;
+ const newLeads=valid.filter(x=>x.stage==='new');
+ const pending=valid.filter(x=>['new','talk','offer'].includes(x.stage));
+ const waitingDay=newLeads.filter(x=>Number.isFinite(x.createdAt)&&x.createdAt>0&&now-x.createdAt>=86400000).length;
+ const bySource=channels.map(source=>{
+  const selected=valid.filter(x=>x.source===source),won=selected.filter(x=>x.stage==='won');
+  return {source,leads:selected.length,purchases:won.length,
+   revenue:won.reduce((sum,x)=>sum+getAmount(x),0),
+   promotion:promotion.filter(x=>x.source===source).reduce((sum,x)=>sum+x.amount,0)};
+ }).filter(x=>x.leads||x.promotion);
+ const won=valid.filter(x=>x.stage==='won');
+ return Object.freeze({source:'user-entered-local-records',total:valid.length,
+  newLeads:newLeads.length,waitingDay,active:pending.length,
+  inTalk:valid.filter(x=>x.stage==='talk').length,inOffer:valid.filter(x=>x.stage==='offer').length,
+  purchases:won.length,lost:valid.filter(x=>x.stage==='lost').length,
+  knownRevenue:won.reduce((sum,x)=>sum+getAmount(x),0),
+  unknownAmounts:won.filter(x=>getAmount(x)===0).length,
+  promotionSpend:promotionTotal(),
+  bySource,recordedAt:now});
+}
 /* Read-only, bounded candidates for local proactive preparation. Never fabricate clients. */
 function getWorkCandidates(){
  return records.filter(x=>['new','talk','offer'].includes(x.stage))
@@ -374,7 +398,7 @@ function openClient(id){
  if(target){target.scrollIntoView({block:'center',behavior:'instant'});target.focus?.({preventScroll:true})}
 }
 function openPicture(){open();showPicture()}
-window.DMSalesScreen=Object.freeze({open,openPicture,openClient,confirmContact,getClientStage,getDraftContext,getWorkCandidates,close,hide,getInsight,getTotals:totals,getBusinessSummary:()=>({salesRevenue:totalWon(),promotionExpenses:promotionTotal(),source:'manual-local-records'})});
+window.DMSalesScreen=Object.freeze({open,openPicture,openClient,confirmContact,getClientStage,getDraftContext,getWorkCandidates,getBusinessSnapshot,close,hide,getInsight,getTotals:totals,getBusinessSummary:()=>({salesRevenue:totalWon(),promotionExpenses:promotionTotal(),source:'manual-local-records'})});
 window.addEventListener('dm:personal-tasks-changed',()=>{
  if(screen&&!screen.hidden&&!pictureOpen)render();
 });
