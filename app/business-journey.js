@@ -87,6 +87,21 @@ function locationMarkup(){
   '</ol><small>Варианты действий, а не обещание продаж или уже выполненная реклама.</small></details>'+
   '</section>';
 }
+function preparedMarkup(){
+ const result=window.DMFirstResult?.build?.(getPlan());
+ if(!result)return '';
+ return '<details class="dm-journey-prepared">'+
+  '<summary><span>✦ Уже подготовил первые материалы</span><small>'+result.docs.length+' черновика · не опубликованы</small></summary>'+
+  '<div class="dm-journey-prepared-body">'+
+  '<p>Я взялся за первые заготовки по твоим ответам. Их можно посмотреть и скопировать; перед использованием проверь факты и поправь текст под себя.</p>'+
+  result.docs.map(doc=>'<article class="dm-journey-prepared-item">'+
+    '<div class="dm-journey-prepared-title"><strong>'+escape(doc.title)+'</strong>'+
+    '<button type="button" data-journey-copy="'+escape(doc.id)+'">Скопировать ↗</button></div>'+
+    '<textarea readonly rows="5" aria-label="'+escape(doc.title)+'">'+escape(doc.text)+'</textarea>'+
+    '</article>').join('')+
+  '<p class="dm-journey-small">Это локальные шаблоны, не рыночное исследование и не работа настоящего ИИ. Сообщения не отправлены, сайт не создан, публикаций и расходов не было.</p>'+
+  '<p class="dm-journey-copy-status" data-journey-copy-status role="status"></p></div></details>';
+}
 function markup(){
  if(view==='welcome')return '<section class="dm-journey-chat">'+
   '<div class="dm-journey-halo" aria-hidden="true">✦</div><span class="dm-journey-eyebrow">НАШЕ ПЕРВОЕ ЗНАКОМСТВО</span>'+
@@ -127,6 +142,7 @@ function markup(){
   '<div class="dm-journey-next"><small>НАЧНЁМ С ЭТОГО</small><strong>'+escape(roadmap[0].title)+'</strong>'+
   '<p>'+escape(roadmap[0].note)+'</p><span>План составлен, действие ещё не выполнено.</span></div>'+
   locationMarkup()+
+  preparedMarkup()+
   '<details class="dm-journey-steps"><summary>Как пойдём дальше · '+roadmap.length+' этапов</summary>'+
   '<ol>'+roadmap.map(item=>'<li><strong>'+escape(item.title)+'</strong><small>'+escape(item.note)+'</small></li>').join('')+'</ol></details>'+
   '<p class="dm-journey-small">Я пока не подключён к сайтам, госуслугам или площадкам. Здесь сохранён твой маршрут, а не выполненные регистрации или заработанные деньги.</p>'+
@@ -185,6 +201,21 @@ function onClick(e){
    return;
   }
   return render();
+ }
+ if(button.hasAttribute('data-journey-copy')){
+  const id=button.dataset.journeyCopy;
+  const doc=window.DMFirstResult?.build?.(getPlan())?.docs.find(x=>x.id===id);
+  const field=button.closest('.dm-journey-prepared-item')?.querySelector('textarea');
+  const status=root?.querySelector('[data-journey-copy-status]');
+  const say=message=>{if(status)status.textContent=message};
+  if(!doc||!field)return;
+  try{
+   if(!navigator.clipboard?.writeText)throw new Error('Clipboard unavailable');
+   navigator.clipboard.writeText(doc.text).then(()=>say('Текст скопирован. Ничего не опубликовано и не отправлено.')).catch(()=>{
+    field.select();say('Текст выделен — скопируй вручную. Ничего не отправлено.');
+   });
+  }catch(_){field.select();say('Текст выделен — скопируй вручную. Ничего не отправлено.')}
+  return;
  }
  if(button.hasAttribute('data-journey-edit')){working=draft();view='idea';return render()}
  if(button.hasAttribute('data-journey-finish'))return close();
