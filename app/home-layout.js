@@ -62,17 +62,8 @@
     const sub=document.createElement('small');sub.textContent=sections[id].subtitle;
     words.append(title,sub);el.append(words);
     if(inEditor){
-      const arrows=document.createElement('span');arrows.className='dm-home-section-arrows';
-      const visible=visibleSectionIds(),index=visible.indexOf(id);
-      for(const [direction,symbol,label] of [[-1,'↑','Поднять'],[1,'↓','Опустить']]){
-        const btn=document.createElement('button');btn.type='button';
-        btn.dataset.dmSectionShift=String(direction);btn.dataset.sectionId=id;
-        btn.setAttribute('aria-label',label+' раздел «'+sections[id].title+'»');
-        btn.title=label+' раздел';btn.textContent=symbol;
-        btn.disabled=direction<0?index<=0:index>=visible.length-1;
-        arrows.append(btn);
-      }
-      el.append(arrows);
+      el.tabIndex=0;
+      el.setAttribute('aria-label','Удерживайте, чтобы переместить раздел «'+sections[id].title+'»');
     }
     return el;
   }
@@ -119,25 +110,17 @@
     }else defaultLabels.get('health').remove();
   }
 
-  const toolbar=document.createElement('section');
-  toolbar.className='dm-layout-toolbar';
-  toolbar.hidden=true;
-  toolbar.setAttribute('aria-label','Конструктор главной');
-  toolbar.innerHTML='<div class="dm-layout-heading"><span class="dm-layout-title">✦ Моя главная</span>'+
-    '<span class="dm-layout-caption" id="dmLayoutCaption">За ⠿ — перетащить, либо нажмите две карточки</span></div>'+
-    '<div class="dm-layout-actions">'+
-    '<button type="button" data-dm-layout-action="edit" id="dmLayoutEdit" aria-label="Изменить расположение карточек">✎ Изменить</button>'+
-
-    '<button type="button" data-dm-layout-action="reset" id="dmLayoutReset" hidden>↶ Исходный вид</button>'+
-    '<button type="button" data-dm-layout-action="done" id="dmLayoutDone" hidden>✓ Готово</button></div>'+
-    '<div class="dm-layout-library" id="dmLayoutLibrary" hidden aria-label="Скрытые карточки"></div>';
   const board=document.createElement('section');
   board.className='dm-layout-board';
   board.id='dmLayoutBoard';
   board.hidden=true;
   board.setAttribute('aria-label','Настраиваемые карточки главной');
-  dashboard.insertBefore(toolbar,parts.revenue);
   dashboard.insertBefore(board,dashboard.querySelector('.shortcuts'));
+  // Restore chips only appear after an optional widget is hidden; no editor bar.
+  const library=document.createElement('div');
+  library.id='dmLayoutLibrary';
+  library.className='dm-layout-library';
+  library.setAttribute('aria-label','Вернуть скрытые карточки');
   // All optional director tools share one compact two-column shelf in default
   // mode. Business and Quick Actions remain separate, untouched DOM blocks.
   const directorShelf=document.createElement('div');
@@ -187,26 +170,21 @@
     const b=document.createElement('button');b.type='button';b.className='dm-layout-control';b.dataset.dmUnitAction=name;b.innerHTML=html;return b;
   }
   function unitControls(id){
-    const controls=document.createElement('div');controls.className='dm-unit-controls';
-    const grab=node('drag','<span aria-hidden="true">⠿</span><span class="dm-drag-caption">Перетащить</span>');
-    grab.classList.add('dm-unit-grab');
-    grab.setAttribute('aria-label','Переместить '+names[id]+'; можно также использовать Alt и стрелки');
-    grab.title='Удерживайте и перетащите карточку';
-    controls.append(grab);
+    // The main business sculpture, manager departments and revenue cannot be
+    // hidden or resized; optional cards alone receive two quiet circle controls.
+    if(fixedBlocks.has(id)||id==='revenue')return null;
+    const controls=document.createElement('div');
+    controls.className='dm-unit-controls';
     if(!fixedWide.has(id)){
-      const b=node('size','↔');b.classList.add('dm-layout-circle');
-      b.setAttribute('aria-label','Изменить ширину: '+names[id]);
-      b.title='Изменить ширину';controls.append(b);
+      const size=node('size','↔');
+      size.classList.add('dm-layout-circle');
+      size.setAttribute('aria-label','Изменить ширину: '+names[id]);
+      size.title='Изменить ширину';controls.append(size);
     }
-    if(fixedBlocks.has(id)){
-      const lock=document.createElement('span');lock.className='dm-fixed-business-label';
-      lock.textContent=id==='business'?'4 карточки · защищены':'Блок защищён';
-      controls.append(lock);
-    }else{
-      const hide=node('hide','×');hide.classList.add('dm-layout-circle');
-      hide.setAttribute('aria-label','Скрыть дополнительную карточку «'+names[id]+'»');
-      hide.title='Скрыть карточку';controls.append(hide);
-    }
+    const remove=node('hide','×');
+    remove.classList.add('dm-layout-circle');
+    remove.setAttribute('aria-label','Убрать дополнительную карточку «'+names[id]+'»');
+    remove.title='Скрыть карточку';controls.append(remove);
     return controls;
   }
   function makeUnit(id){
@@ -214,7 +192,13 @@
     outer.className='dm-layout-unit';outer.dataset.cardId=id;
     const size=fixedWide.has(id)?'wide':preferences.sizes[id]==='wide'?'wide':'compact';
     outer.dataset.size=size;
-    if(editing)outer.append(unitControls(id));
+    if(editing){
+      const controls=unitControls(id);
+      if(controls)outer.append(controls);
+      outer.tabIndex=0;
+      outer.setAttribute('role','group');
+      outer.setAttribute('aria-label',names[id]+' — удерживайте и перетащите; Alt+стрелки для клавиатуры');
+    }
     const content=document.createElement('div');content.className='dm-layout-content';outer.append(content);
     if(id==='business'){
       // Move the actual five-element grid (four cards + Clients outline).
@@ -253,13 +237,12 @@
     // Existing widget module owns its own visibility and data refresh.
     window.dispatchEvent(new Event('dm:cards-changed'));
     board.replaceChildren();
-    board.hidden=true;toolbar.hidden=true;pickedId=null;
+    board.hidden=true;pickedId=null;
     document.documentElement.classList.remove('dm-custom-home-layout','dm-layout-editing');
     syncDefaultSectionLabels();
     window.dispatchEvent(new Event('dm:layout-reset'));
   }
   function renderLibrary(){
-    const library=document.getElementById('dmLayoutLibrary');
     library.replaceChildren();
     if(!editing){library.hidden=true;return;}
     const hidden=defaultOrder.filter(id=>!fixedBlocks.has(id)&&preferences.hidden.includes(id));
@@ -270,6 +253,7 @@
       library.append(b);
     }
     library.hidden=hidden.length===0;
+    if(!library.hidden)board.append(library);
   }
   function render(){
     if(!preferences.enabled){restoreOriginal();return;}
@@ -298,25 +282,11 @@
         board.append(makeUnit(id));
       }
     }
-    board.querySelectorAll('.dm-layout-unit').forEach(tile=>{
-      const chosen=tile.dataset.cardId===pickedId;
-      tile.classList.toggle('dm-unit-picked',chosen);
-      if(editing)tile.setAttribute('aria-label',names[tile.dataset.cardId]+(chosen?' — выбрана для перемещения':' — нажмите для перемещения'));
-    });
     board.hidden=false;
     // Original metric-grid is now inside its unified movable wrapper.
     widgetHost.hidden=true;
-    // The editor toolbar is only shown while customizing. After "Done", the
-    // user's cards remain in place without a permanent settings block.
-    toolbar.hidden=!editing;
     document.documentElement.classList.add('dm-custom-home-layout');
     document.documentElement.classList.toggle('dm-layout-editing',editing);
-    document.getElementById('dmLayoutCaption').textContent=editing?
-      'За ⠿ — перетащить. Две карточки — поменять порядок. ↑↓ — разделы.':'Расположение сохранено';
-    for(const b of toolbar.querySelectorAll('[data-dm-layout-action]')){
-      const action=b.dataset.dmLayoutAction;
-      b.hidden=(editing?action==='edit':action!=='edit');
-    }
     renderLibrary();
     // Notify any other dashboard listeners without changing the card contours.
     window.dispatchEvent(new CustomEvent('dm:layout-rendered',{detail:{businessGrouped:true,editing}}));
@@ -334,11 +304,8 @@
     preferences.enabled=true;editing=true;
     // Preview only: entering edit mode is not itself a layout change.
     render();
-    // Direct long-press editing should not jump the screen away from the card.
-    if(source!=='hold'){
-      window.scrollTo({top:0,behavior:'instant'});
-      document.getElementById('dmLayoutDone').focus();
-    }
+    // No "Done" button or jump to top. Each change saves immediately.
+    // The user exits by tapping the free background or pressing Escape.
   }
   function done(){
     pickedId=null;
@@ -405,194 +372,191 @@
     preferences.order=normalize(arr);
     save();render();
   }
-  toolbar.addEventListener('click',e=>{
-    const restoreButton=e.target.closest('[data-dm-restore-id]');
-    if(restoreButton){restore(restoreButton.dataset.dmRestoreId);return;}
-    const b=e.target.closest('[data-dm-layout-action]');if(!b)return;
-    const act=b.dataset.dmLayoutAction;
-    if(act==='edit')edit();
-    if(act==='done')done();
-    if(act==='reset')reset();
-  });
-  board.addEventListener('click',e=>{
-    if(!editing)return;
-    const sectionArrow=e.target.closest('[data-dm-section-shift]');
-    if(sectionArrow){
-      sectionShift(sectionArrow.dataset.sectionId,Number(sectionArrow.dataset.dmSectionShift));
-      return;
+  // Mobile-native editing: a stationary long-press starts the drag. A normal
+  // swipe is left to the browser to scroll; no giant grab bars or arrows.
+  const homeScreen=document.getElementById('homeScreen');
+  const HOLD_MS=560,TRAVEL_LIMIT=12;
+  let pressed=null,dragging=null,edgeFrame=0,blockTapUntil=0;
+
+  function targetInfo(el){
+    if(!(el instanceof Element)||!dashboard.contains(el))return null;
+    if(el.closest('.dm-unit-controls,.dm-layout-library,input,textarea,select,[contenteditable="true"],dialog'))return null;
+    const group=el.closest('.dm-home-section-title[data-home-section]');
+    if(group)return {kind:'section',id:group.dataset.homeSection};
+    const unit=el.closest('.dm-layout-unit[data-card-id]');
+    if(unit)return {kind:'card',id:unit.dataset.cardId};
+    if(editing)return null;
+    if(originalGrid.contains(el))return {kind:'card',id:'business'};
+    if(parts.shortcuts.contains(el))return {kind:'card',id:'quick'};
+    const map={revenue:parts.revenue,inbox:parts.inbox,briefing:parts.briefing,tax:parts.tax,
+      day:parts.day,steps:parts.steps,breathe:parts.breathe,calendar:parts.calendar};
+    for(const [id,node] of Object.entries(map)){
+      if(node?.contains(el))return {kind:'card',id};
     }
-    const b=e.target.closest('[data-dm-unit-action]');
-    if(b){
-      const id=b.closest('[data-card-id]')?.dataset.cardId,act=b.dataset.dmUnitAction;
-      if(!id)return;
-      if(act==='size')resize(id);
-      if(act==='hide')hide(id);
-      return;
-    }
-  });
-  // Tap-to-place is reliable on phones: a tap selects the card, the user
-  // scrolls naturally, and a second tap chooses its destination.
-  board.addEventListener('click',e=>{
-    if(!editing||e.target.closest('[data-dm-unit-action],[data-dm-section-shift]'))return;
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    if(Date.now()<skipTileTapUntil)return;
-    const tile=e.target.closest('.dm-layout-unit');
-    if(!tile)return;
-    const id=tile.dataset.cardId;
-    if(pickedId===id){
-      pickedId=null;render();
-    }else if(pickedId){
-      const moving=pickedId;
-      pickedId=null;
-      moveTo(moving,id);
-    }else{
-      pickedId=id;
-      board.querySelectorAll('.dm-layout-unit').forEach(el=>el.classList.toggle('dm-unit-picked',el.dataset.cardId===id));
-      document.getElementById('dmLayoutCaption').textContent='Выбрана «'+names[id]+'». Листайте и нажмите другую карточку — переместим.';
-    }
-  },true);
-  board.addEventListener('keydown',e=>{
-    const handle=e.target.closest('.dm-unit-grab');
-    if(!editing||!handle||!e.altKey||!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;
-    e.preventDefault();
-    const id=handle.closest('[data-card-id]')?.dataset.cardId;
-    shift(id,['ArrowLeft','ArrowUp'].includes(e.key)?-1:1);
-    board.querySelector('[data-card-id="'+id+'"] .dm-unit-grab')?.focus();
-  });
-  let dragging=null;
-  board.addEventListener('pointerdown',e=>{
-    if(!editing||e.button>0)return;
-    // Never capture a card touch: the screen must scroll normally over cards.
-    // Only the ⠿ grip captures a pointer for actual drag-and-drop.
-    const handle=e.target.closest('.dm-unit-grab');
-    if(!handle)return;
-    const tile=handle.closest('.dm-layout-unit');
-    const id=tile?.dataset.cardId;
-    if(!id)return;
-    pickedId=null;
-    dragging={id,startX:e.clientX,startY:e.clientY,pointerId:e.pointerId,
-      x:e.clientX,y:e.clientY,active:false,target:null,handle};
-    handle.setPointerCapture?.(e.pointerId);
-  });
-  // Auto-scroll continuously while the grip is held near the top/bottom;
-  // iOS otherwise stops scrolling as soon as the finger pauses at the edge.
-  let edgeFrame=0;
-  function chooseDropTarget(x,y){
-    if(!dragging||!dragging.active)return;
-    let closest=null,best=Infinity;
-    for(const tile of board.querySelectorAll('.dm-layout-unit:not(.dm-unit-dragging)')){
-      const rect=tile.getBoundingClientRect();
-      const px=Math.max(rect.left,Math.min(x,rect.right));
-      const py=Math.max(rect.top,Math.min(y,rect.bottom));
-      const distance=Math.hypot(px-x,py-y);
-      if(distance<best){best=distance;closest=tile;}
-    }
-    board.querySelectorAll('.dm-unit-drop-target').forEach(el=>el.classList.remove('dm-unit-drop-target'));
-    closest?.classList.add('dm-unit-drop-target');
-    dragging.target=closest?.dataset.cardId||null;
+    return null;
   }
-  function tickEdgeScroll(){
-    edgeFrame=0;
-    if(!dragging?.active)return;
-    const y=dragging.y,top=70,bottom=window.innerHeight-105;
-    let speed=0;
-    if(y<top)speed=-Math.min(17,Math.max(3,(top-y)*.25));
-    else if(y>bottom)speed=Math.min(17,Math.max(3,(y-bottom)*.25));
-    if(speed){
-      window.scrollBy(0,speed);
-      chooseDropTarget(dragging.x,y);
-    }
-    edgeFrame=requestAnimationFrame(tickEdgeScroll);
+  function clearPressed(){
+    if(pressed){clearTimeout(pressed.timer);pressed=null;}
   }
   function clearDrag(){
     if(edgeFrame){cancelAnimationFrame(edgeFrame);edgeFrame=0;}
     dragging=null;
-    board.querySelectorAll('.dm-unit-dragging,.dm-unit-drop-target').forEach(el=>{
-      el.classList.remove('dm-unit-dragging','dm-unit-drop-target');
-    });
+    board.querySelectorAll('.dm-unit-dragging,.dm-unit-drop-target,.dm-section-dragging,.dm-section-drop-target')
+      .forEach(el=>el.classList.remove('dm-unit-dragging','dm-unit-drop-target','dm-section-dragging','dm-section-drop-target'));
   }
-  board.addEventListener('pointermove',e=>{
-    if(!dragging||e.pointerId!==dragging.pointerId)return;
-    dragging.x=e.clientX;dragging.y=e.clientY;
-    const dx=e.clientX-dragging.startX,dy=e.clientY-dragging.startY;
-    if(!dragging.active&&Math.hypot(dx,dy)<7)return;
-    if(!dragging.active){
-      dragging.active=true;
-      board.querySelector('[data-card-id="'+dragging.id+'"]')?.classList.add('dm-unit-dragging');
-      edgeFrame=requestAnimationFrame(tickEdgeScroll);
+  function chooseDropTarget(x,y){
+    if(!dragging)return;
+    const selector=dragging.kind==='section'
+      ?'.dm-home-section-title[data-home-section]':'.dm-layout-unit[data-card-id]';
+    let closest=null,best=Infinity;
+    for(const el of board.querySelectorAll(selector)){
+      const id=dragging.kind==='section'?el.dataset.homeSection:el.dataset.cardId;
+      if(id===dragging.id)continue;
+      const rect=el.getBoundingClientRect();
+      const px=Math.max(rect.left,Math.min(x,rect.right));
+      const py=Math.max(rect.top,Math.min(y,rect.bottom));
+      const distance=Math.hypot(px-x,py-y);
+      if(distance<best){best=distance;closest=el;}
     }
-    chooseDropTarget(e.clientX,e.clientY);
-  });
-  function finishDrag(e){
-    if(!dragging||e.pointerId!==dragging.pointerId)return;
-    const {id,target,active}=dragging;
+    board.querySelectorAll('.dm-unit-drop-target,.dm-section-drop-target')
+      .forEach(el=>el.classList.remove('dm-unit-drop-target','dm-section-drop-target'));
+    if(closest)closest.classList.add(dragging.kind==='section'?'dm-section-drop-target':'dm-unit-drop-target');
+    dragging.target=closest?(dragging.kind==='section'?closest.dataset.homeSection:closest.dataset.cardId):null;
+    dragging.after=closest?y>closest.getBoundingClientRect().top+closest.getBoundingClientRect().height/2:false;
+  }
+  function edgeScroll(){
+    edgeFrame=0;
+    if(!dragging)return;
+    const y=dragging.y,top=65,bottom=window.innerHeight-90;
+    const speed=y<top?-Math.min(16,Math.max(3,(top-y)*.22)):
+      y>bottom?Math.min(16,Math.max(3,(y-bottom)*.22)):0;
+    if(speed){window.scrollBy(0,speed);chooseDropTarget(dragging.x,y);}
+    edgeFrame=requestAnimationFrame(edgeScroll);
+  }
+  function activateHold(info,current){
+    if(pressed!==current||document.hidden)return;
+    clearPressed();
+    if(!editing)edit('hold');
+    if(!editing)return;
+    pickedId=null;
+    dragging={...info,pointerId:current.pointerId,pointerType:current.pointerType,
+      x:current.x,y:current.y,active:true,target:null,after:false};
+    const selected=info.kind==='section'
+      ?board.querySelector('[data-home-section="'+info.id+'"]')
+      :board.querySelector('[data-card-id="'+info.id+'"]');
+    selected?.classList.add(info.kind==='section'?'dm-section-dragging':'dm-unit-dragging');
+    try{navigator.vibrate?.(13);}catch(_){}
+    blockTapUntil=Date.now()+750;
+    // Capture desktop mouse events. Touch movement is handled by nonpassive
+    // touchmove below so iOS can prevent scrolling only AFTER long-press.
+    if(current.pointerType!=='touch'){
+      try{homeScreen.setPointerCapture(current.pointerId);}catch(_){}
+    }
+    edgeFrame=requestAnimationFrame(edgeScroll);
+  }
+  function updateDrag(x,y){
+    if(!dragging)return;
+    dragging.x=x;dragging.y=y;
+    chooseDropTarget(x,y);
+  }
+  function releaseDrag(){
+    if(!dragging)return;
+    const {kind,id,target,after}=dragging;
     clearDrag();
-    if(active){
-      skipTileTapUntil=Date.now()+420;
-      if(target)moveTo(id,target);
+    blockTapUntil=Date.now()+450;
+    if(!target||target===id)return;
+    if(kind==='section')moveSection(id,target,after);
+    else moveTo(id,target);
+  }
+
+  homeScreen.addEventListener('pointerdown',e=>{
+    if(e.button!==0||e.isPrimary===false)return;
+    const info=targetInfo(e.target);
+    if(!info)return;
+    clearPressed();
+    const current={pointerId:e.pointerId,pointerType:e.pointerType,
+      x:e.clientX,y:e.clientY,startX:e.clientX,startY:e.clientY,timer:0};
+    pressed=current;
+    current.timer=setTimeout(()=>activateHold(info,current),HOLD_MS);
+  },{passive:true});
+  homeScreen.addEventListener('pointermove',e=>{
+    if(dragging&&e.pointerId===dragging.pointerId&&dragging.pointerType!=='touch'){
+      updateDrag(e.clientX,e.clientY);
+      if(e.cancelable)e.preventDefault();
+      return;
     }
-  }
-  board.addEventListener('pointerup',finishDrag);
-  board.addEventListener('pointercancel',e=>{
-    if(dragging?.pointerId===e.pointerId)clearDrag();
+    if(pressed&&e.pointerId===pressed.pointerId){
+      pressed.x=e.clientX;pressed.y=e.clientY;
+      if(Math.hypot(e.clientX-pressed.startX,e.clientY-pressed.startY)>TRAVEL_LIMIT)clearPressed();
+    }
   });
-  window.addEventListener('blur',clearDrag);
-  // Hold a card or free dashboard space to enter jiggle mode. Ordinary taps,
-  // vertical scrolling and multi-touch must never accidentally start editing.
-  const homeScreen=document.getElementById('homeScreen');
-  const HOLD_MS=630,TRAVEL_LIMIT=12;
-  let hold=null,blockTapUntil=0;
-  function cancelHold(){
-    if(hold){clearTimeout(hold.timer);hold=null;}
-  }
-  function holdCandidate(target){
-    if(!(target instanceof Element)||!dashboard.contains(target))return false;
-    if(target.closest('.dm-layout-toolbar,.dm-unit-controls,dialog,input,textarea,select,[contenteditable="true"]'))return false;
-    // Long-press on a quick-action button enters edit mode as well. A normal
-    // short tap still invokes its existing action.
-    if(target.closest('.metric-card,.dm-home-widget,.dm-layout-unit,.shortcuts,.shortcut,.dm-workspace-card'))return true;
-    if(target.closest('button,a,[role="button"]'))return false;
-    return Boolean(target.closest('.dashboard'));
-  }
-  homeScreen.addEventListener('pointerdown',event=>{
-    if(editing||event.button!==0||event.isPrimary===false||!holdCandidate(event.target))return;
-    cancelHold();
-    const current={pointerId:event.pointerId,x:event.clientX,y:event.clientY,timer:null};
-    hold=current;
-    current.timer=setTimeout(()=>{
-      if(hold!==current||editing||document.hidden)return;
-      hold=null;
-      blockTapUntil=Date.now()+850;
-      try{navigator.vibrate?.(15);}catch(_){}
-      edit('hold');
-    },HOLD_MS);
+  homeScreen.addEventListener('touchmove',e=>{
+    if(!dragging||dragging.pointerType!=='touch')return;
+    const touch=[...e.changedTouches].find(t=>t.identifier===dragging.touchId)
+      ||(e.touches.length===1?e.touches[0]:null);
+    if(!touch)return;
+    if(e.cancelable)e.preventDefault();
+    updateDrag(touch.clientX,touch.clientY);
+  },{passive:false});
+  homeScreen.addEventListener('touchstart',e=>{
+    if(e.touches.length>1){clearPressed();clearDrag();return;}
+    // Touch identifiers remain stable if the browser re-targets after rendering.
+    if(pressed&&pressed.pointerType==='touch'&&e.changedTouches[0])
+      pressed.touchId=e.changedTouches[0].identifier;
   },{passive:true});
-  homeScreen.addEventListener('pointermove',event=>{
-    if(!hold||event.pointerId!==hold.pointerId)return;
-    if(Math.hypot(event.clientX-hold.x,event.clientY-hold.y)>TRAVEL_LIMIT)cancelHold();
+  homeScreen.addEventListener('touchend',e=>{
+    if(dragging?.pointerType!=='touch')return;
+    const matched=[...e.changedTouches].some(t=>t.identifier===dragging.touchId);
+    if(matched||e.touches.length===0)releaseDrag();
   },{passive:true});
-  for(const type of ['pointerup','pointercancel','lostpointercapture']){
-    homeScreen.addEventListener(type,event=>{
-      if(hold&&event.pointerId===hold.pointerId)cancelHold();
-    },{passive:true});
-  }
-  homeScreen.addEventListener('touchstart',event=>{
-    if(event.touches.length>1)cancelHold();
-  },{passive:true});
-  homeScreen.addEventListener('scroll',cancelHold,{capture:true,passive:true});
-  window.addEventListener('blur',cancelHold);
-  homeScreen.addEventListener('contextmenu',event=>{
-    if(Date.now()<blockTapUntil&&dashboard.contains(event.target))event.preventDefault();
+  homeScreen.addEventListener('pointerup',e=>{
+    if(pressed?.pointerId===e.pointerId)clearPressed();
+    if(dragging?.pointerId===e.pointerId&&dragging.pointerType!=='touch')releaseDrag();
+  });
+  homeScreen.addEventListener('pointercancel',e=>{
+    if(pressed?.pointerId===e.pointerId)clearPressed();
+    if(dragging?.pointerId===e.pointerId&&dragging.pointerType!=='touch')clearDrag();
+  });
+  homeScreen.addEventListener('scroll',()=>{
+    if(!dragging)clearPressed();
+  },{capture:true,passive:true});
+  window.addEventListener('blur',()=>{clearPressed();clearDrag();if(editing)done();});
+  // Ignore the click synthesized after a long press, without disabling the
+  // normal click behavior of cards when not customizing.
+  document.addEventListener('click',e=>{
+    if(Date.now()>=blockTapUntil||!homeScreen.contains(e.target))return;
+    e.preventDefault();e.stopImmediatePropagation();blockTapUntil=0;
   },true);
-  // Ignore the synthetic click emitted after a long press that remounts cards.
-  document.addEventListener('click',event=>{
-    if(Date.now()>=blockTapUntil||!homeScreen.contains(event.target))return;
-    if(event.target.closest('.dm-layout-toolbar,.dm-unit-controls'))return;
-    blockTapUntil=0;
-    event.preventDefault();
-    event.stopImmediatePropagation();
-  },true);
+  board.addEventListener('click',e=>{
+    if(!editing)return;
+    const restoreButton=e.target.closest('[data-dm-restore-id]');
+    if(restoreButton){restore(restoreButton.dataset.dmRestoreId);return;}
+    const control=e.target.closest('[data-dm-unit-action]');
+    if(!control)return;
+    const id=control.closest('[data-card-id]')?.dataset.cardId;
+    if(!id)return;
+    if(control.dataset.dmUnitAction==='size')resize(id);
+    if(control.dataset.dmUnitAction==='hide')hide(id);
+  });
+  // Full keyboard accessibility: Alt+arrows moves focused cards/sections,
+  // and Escape closes customization; direct touch does not require buttons.
+  board.addEventListener('keydown',e=>{
+    const unit=e.target.closest('.dm-layout-unit[data-card-id]');
+    const group=e.target.closest('.dm-home-section-title[data-home-section]');
+    if(!editing||!e.altKey||!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;
+    const by=['ArrowLeft','ArrowUp'].includes(e.key)?-1:1;
+    e.preventDefault();
+    if(unit)shift(unit.dataset.cardId,by);
+    else if(group)sectionShift(group.dataset.homeSection,by);
+  });
+  document.addEventListener('keydown',e=>{
+    if(editing&&e.key==='Escape'){e.preventDefault();done();}
+  });
+  homeScreen.addEventListener('click',e=>{
+    if(!editing||!dashboard.contains(e.target))return;
+    if(e.target.closest('.dm-layout-unit,.dm-home-section-title,.dm-layout-library'))return;
+    done();
+  });
   window.addEventListener('dm:cards-changed',event=>{
     // A switch explicitly turned on in Management must also restore the card
     // from the custom-layout hidden library. The director remains in control.
