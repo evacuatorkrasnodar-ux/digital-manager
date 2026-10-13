@@ -95,6 +95,14 @@ function candidate(){
    source:'Локальный «Налоговый контроль»: сроки директора',
    next:'Откроем календарь сроков. Не отмечайте «выполнено» без подтверждения.'};
  }
+ const pendingTax=window.DMTaxControl?.snapshot?.();
+ if(pendingTax?.nearest?.kind==='Декларация'&&
+    pendingTax.nearest.left>=8&&pendingTax.nearest.left<=30){
+  return {id:'tax-declaration-preparation',kind:'taxprep',title:'Могу помочь подготовить декларацию',
+   body:'По вашему собственному налоговому календарю до срока декларации '+pendingTax.nearest.left+' дн. Я помогу собрать исходные данные, проверить режим и подготовиться к бесплатной подаче через ФНС.',
+   source:'Вручную введённый срок в «Налоговом контроле»',
+   next:'Сначала проверим, нужна ли декларация для вашего режима. Отправка в ФНС и электронная подпись ещё не подключены.'};
+ }
  const missing=remaining(),context=businessText();
  const serious=window.DMBusinessBrain?.brief?.()?.priority;
  // A real saved task or sales signal takes precedence over a generic suggestion.
@@ -287,6 +295,9 @@ function approve(){
  }
  if(p.kind==='tax'){
   close();window.DMTaxControl?.open?.();return;
+ }
+ if(p.kind==='taxprep'){
+  close();window.DMTaxControl?.prepare?.();return;
  }
  if(p.origin==='workspace'){
   ledger('approved',p,p.kind==='message'?
