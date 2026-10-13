@@ -2,7 +2,7 @@
    Restore the approved graphite-and-gold material regardless of journal state.
    The original four-card SVG silhouettes, sizes, placements and golden ribbons
    are exclusively owned by dashboard-reference.css; do not modify their geometry.
-   Only the signature CTA changes color when Director Office has a real proposal. */
+   Signature CTA uses the existing Home segmented-control gloss. */
 
 #homeScreen .metric-grid .recommendation-card,
 #homeScreen .metric-grid .recommendation-card:hover{
@@ -28,74 +28,29 @@
   filter:drop-shadow(0 0 7px rgba(255,181,90,.80))!important;
 }
 
-/* Idle: pearl/platinum — a quiet invitation, never a fake pending signature. */
-#homeScreen .metric-grid .recommendation-card .advice-cta,
-#homeScreen .metric-grid .recommendation-card .advice-cta:hover{
-  color:#172632!important;
-  background:linear-gradient(154deg,#fffdfa 0%,#eef3f7 53%,#d5dfe8 100%)!important;
-  border-color:rgba(253,254,255,.84)!important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.94),
-    inset 0 -1px 0 rgba(115,137,155,.24),
-    0 2px 9px rgba(153,188,218,.13)!important;
-}
-#homeScreen .metric-grid .recommendation-card .advice-cta .ico{
-  color:#273644!important;
-}
-#homeScreen .metric-grid .recommendation-card .advice-cta{
-  transition:background-color .34s ease,border-color .34s ease,
-    box-shadow .34s ease,color .34s ease;
-}
-#homeScreen .metric-grid .recommendation-card .advice-cta:focus-visible{
-  outline:2px solid #f4deb5;
-  outline-offset:2px;
-}
-
-/* Ready for the human director: a champagne-gold signature signal.
-   Its color is not driven by demo data, task acceptance or estimates. */
-#homeScreen .metric-grid .recommendation-card[data-signature-state="ready"] .advice-cta,
-#homeScreen .metric-grid .recommendation-card[data-signature-state="ready"] .advice-cta:hover{
-  color:#2e1b0b!important;
-  background:linear-gradient(154deg,#fff8e8 0%,#ffe6b5 37%,#eeb66b 80%,#e5a85a 100%)!important;
-  border-color:rgba(255,221,165,.94)!important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.94),
-    inset 0 -1px 0 rgba(152,90,32,.18),
-    0 0 11px rgba(251,188,93,.32),
-    0 0 20px rgba(245,157,57,.16)!important;
-}
-#homeScreen .metric-grid .recommendation-card[data-signature-state="ready"] .advice-cta .ico{
-  color:#4a2a12!important;
-}
-
-/* A single arrival glow, not a distracting or endless flashing animation. */
-@keyframes dmSignatureArrival{
-  from{box-shadow:inset 0 1px 0 rgba(255,255,255,.94),0 0 0 rgba(251,188,93,0);}
-  50%{box-shadow:inset 0 1px 0 rgba(255,255,255,.94),0 0 17px rgba(251,188,93,.38);}
-  to{box-shadow:inset 0 1px 0 rgba(255,255,255,.94),0 0 11px rgba(251,188,93,.32);}
-}
-#homeScreen .metric-grid .recommendation-card[data-signature-state="ready"] .advice-cta{
-  animation:dmSignatureArrival .75s ease-out 1;
-}
-@media(prefers-reduced-motion:reduce){
-  #homeScreen .metric-grid .recommendation-card .advice-cta{
-    transition:none!important;
-    animation:none!important;
-  }
-}
-/* Signature CTA matches the approved selected 'Сегодня' segmented-control glass. */
+/* One canonical signature-button material — shared with the active “Сегодня” control.
+   All approval states keep the same appearance; state remains functional in JS. */
 #homeScreen .metric-grid .recommendation-card .advice-cta,
 #homeScreen .metric-grid .recommendation-card .advice-cta:hover,
 #homeScreen .metric-grid .recommendation-card .advice-cta:active,
-#homeScreen .metric-grid .recommendation-card[data-signature-state="ready"] .advice-cta,
-#homeScreen .metric-grid .recommendation-card[data-signature-state="ready"] .advice-cta:hover {
- color:#102538!important;
- border-color:rgba(210,237,255,.95)!important;
- background:radial-gradient(ellipse 67% 145% at 31% 3%,rgba(255,255,255,.96) 0%,rgba(244,251,255,.94) 27%,rgba(213,231,251,.73) 50%,transparent 94%),linear-gradient(110deg,#c9e2f7,#9ebfdf 68%,#6b94b5)!important;
- box-shadow:inset 0 1px 1px rgba(255,255,255,1),inset 0 -3px 8px rgba(43,82,122,.22),0 0 5px rgba(147,201,248,.32)!important;
- animation:none!important;
+#homeScreen .metric-grid .recommendation-card[data-signature-state="ready"] .advice-cta{
+  color:#0a2744!important;
+  border:1px solid rgba(219,244,255,.99)!important;
+  background:var(--dm-control-gloss)!important;
+  box-shadow:var(--dm-control-active-shadow)!important;
+  text-shadow:0 1px rgba(255,255,255,.57);
+  font-weight:520;
+  transition:filter .2s ease;
+  animation:none!important;
 }
-#homeScreen .metric-grid .recommendation-card .advice-cta .ico,
-#homeScreen .metric-grid .recommendation-card[data-signature-state="ready"] .advice-cta .ico{
- color:#102538!important;stroke:#102538!important;
+#homeScreen .metric-grid .recommendation-card .advice-cta .ico{
+  color:#0a2744!important;
+  stroke:#0a2744!important;
+}
+#homeScreen .metric-grid .recommendation-card .advice-cta:focus-visible{
+  outline:2px solid #d6f0ff;
+  outline-offset:2px;
+}
+@media(prefers-reduced-motion:reduce){
+  #homeScreen .metric-grid .recommendation-card .advice-cta{transition:none!important}
 }
