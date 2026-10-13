@@ -1106,7 +1106,8 @@ html.dm-plasma-panel-open .dock-launcher .dm-launcher-waves{
   }
   html.dm-plasma-panel-open .dm-chat-panel:not(.dm-chat-editor){
     left:12px;
-    width:calc(100% - 104px);
+    /* Reserve the orb radius plus a visible gap: glass never goes under the plasma. */
+    width:calc(100% - 126px);
     max-width:302px;
     min-width:0;
   }
