@@ -109,7 +109,7 @@ function entries(){
  const sub=count.enabled?count.awaitingReview+' ждут просмотра · '+count.reviewed+' просмотрено':
   'Включается только после вашего согласия';
  const label=count.enabled?'Я разбираю обращения':'Можно доверить мне подготовку';
- for(const [id] of [['dmInitPlasma'],['dmInitManagement'],['dmInitAssistant']]){
+ for(const [id] of [['dmInitPlasma'],['dmInitManagement']]){
   const el=document.getElementById(id);
   if(el){const name=el.querySelector('[data-initiative-head]'),hint=el.querySelector('[data-initiative-hint]');
    if(name)name.textContent=label;if(hint)hint.textContent=sub;
@@ -133,13 +133,7 @@ function mountEntrances(){
   button.innerHTML='<span class="dm-init-pulse" aria-hidden="true">✦</span><span class="dm-init-trigger-copy"><strong data-initiative-head>Я разбираю обращения</strong><small data-initiative-hint>Посмотреть ход работы</small></span>';
   manager.insertAdjacentElement('afterend',button);
  }
- const welcome=document.querySelector('#assistantScreen .assistant-welcome');
- if(welcome&&!document.getElementById('dmInitAssistant')){
-  const button=document.createElement('button');button.type='button';button.id='dmInitAssistant';
-  button.className='dm-init-trigger dm-init-in-assistant';
-  button.innerHTML='<span class="dm-init-pulse" aria-hidden="true">✦</span><span class="dm-init-trigger-copy"><strong data-initiative-head>Я разбираю обращения</strong><small data-initiative-hint>Посмотреть ход работы</small></span><span class="dm-circle-arrow" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span>';
-  welcome.insertAdjacentElement('afterend',button);
- }
+
  updateEntrances();
 }
 function buildPanel(){
@@ -328,7 +322,7 @@ function handleSubmit(event){
 function init(){
  mountEntrances();buildPanel();root.hidden=true;
  document.addEventListener('click',event=>{
-  const trigger=event.target.closest('#dmInitPlasma,#dmInitManagement,#dmInitAssistant');
+  const trigger=event.target.closest('#dmInitPlasma,#dmInitManagement');
   if(trigger){event.preventDefault();open()}
  });
  window.addEventListener('dm:business-context-changed',()=>{
