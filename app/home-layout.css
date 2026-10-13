@@ -222,8 +222,10 @@ html.dm-layout-editing #homeScreen #dmLayoutBoard>.dm-home-section-title.dm-sect
 /* Departments: one real section title, raised slightly above the four
    fixed manager buttons. The redundant "Быстрые действия" heading is gone.
    Do not alter the buttons' approved sizes, grid or click behavior. */
-#homeScreen .dm-home-section-title[data-home-section="departments"]{
-  margin-top:2px;
-  margin-bottom:4px;
+/* Compact only the space between business cards and manager departments. */
+#homeScreen #dmLayoutBoard>.dm-home-section-title[data-home-section="departments"]{
+  margin-top:-8px;
+  margin-bottom:0;
 }
+#homeScreen #dmLayoutBoard>.dm-layout-unit[data-card-id="quick"]{margin-top:-5px;}
 #homeScreen .shortcuts>.shortcut-grid{margin-top:0}
