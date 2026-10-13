@@ -100,7 +100,10 @@ function renderPanel(){
   const art=el('span','dm-tools-item-icon',tool.icon);art.setAttribute('aria-hidden','true');
   const copy=el('div','dm-tools-item-copy');
   copy.append(el('strong','',tool.title),el('span','',tool.purpose),el('small','',tool.status));
-  const openButton=el('button','dm-tools-open','Открыть ↗');
+  const openButton=el('button','dm-tools-open','Открыть');
+  const circle=el('span','dm-circle-arrow dm-tools-inline-arrow');
+  circle.setAttribute('aria-hidden','true');circle.innerHTML='<svg class="ico" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg>';
+  openButton.append(circle);
   openButton.type='button';openButton.dataset.toolOpen=key;
   openButton.setAttribute('aria-label','Открыть '+tool.title);
   item.append(art,copy,openButton);
