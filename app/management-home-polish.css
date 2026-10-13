@@ -196,3 +196,80 @@
 @media(prefers-reduced-motion:reduce){
   #managementScreen .mg-carousel-nav .ico{transition:none!important}
 }
+
+
+/* Unified personal destinations — compact Black Velvet link cards.
+   These link into My Day instead of creating extra dashboards or duplicate stores. */
+#managementScreen .mg-personal-section{padding:10px 10px 9px;min-width:0}
+#managementScreen .mg-personal-section .mg-main-head{padding-bottom:9px}
+#managementScreen .mg-personal-grid{
+  display:grid;
+  grid-auto-flow:column;
+  grid-auto-columns:clamp(93px,26%,114px);
+  gap:7px;
+  overflow-x:auto;
+  overscroll-behavior-inline:contain;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+  scroll-snap-type:x proximity;
+  touch-action:auto;
+  padding:2px 1px 6px;
+}
+#managementScreen .mg-personal-grid::-webkit-scrollbar{display:none}
+#managementScreen .mg-personal-card{
+  box-sizing:border-box;
+  min-height:110px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  padding:9px 5px;
+  border:1px solid rgba(155,184,217,.40);
+  border-radius:15px;
+  background:radial-gradient(ellipse at 50% 0%,rgba(42,75,125,.32),transparent 78%),linear-gradient(160deg,#111b2c,#03070e);
+  box-shadow:inset 0 1px rgba(233,246,255,.10),0 3px 9px rgba(0,0,0,.20);
+  text-decoration:none;
+  text-align:center;
+  color:#f2f7ff;
+  cursor:pointer;
+  scroll-snap-align:start;
+  -webkit-tap-highlight-color:transparent;
+}
+#managementScreen .mg-personal-symbol{
+  display:grid;
+  place-items:center;
+  width:35px;
+  height:35px;
+  border-radius:12px;
+  border:1px solid rgba(160,197,231,.39);
+  background:linear-gradient(145deg,rgba(54,93,142,.43),rgba(5,14,27,.8));
+  color:#cee9ff;
+  box-shadow:inset 0 1px rgba(244,252,255,.14);
+}
+#managementScreen .mg-personal-symbol .ico{width:22px;height:22px}
+#managementScreen .mg-personal-card strong{font-size:11.5px;font-weight:550;line-height:1.18;letter-spacing:-.012em}
+#managementScreen .mg-personal-card small{font-size:9.5px;line-height:1.18;color:#afc4d6}
+#managementScreen .mg-personal-health{
+  background:radial-gradient(ellipse at 50% 0%,rgba(96,61,118,.26),transparent 75%),linear-gradient(160deg,#1b1429,#05060d);
+  border-color:rgba(183,151,218,.42);
+}
+#managementScreen .mg-personal-health .mg-personal-symbol{color:#e4c5f5;border-color:rgba(191,152,232,.44)}
+#managementScreen .mg-personal-cycle{
+  background:radial-gradient(ellipse at 50% 0%,rgba(111,72,113,.25),transparent 75%),linear-gradient(160deg,#211626,#07060b);
+}
+#managementScreen .mg-personal-cycle .mg-personal-symbol{color:#f2c7df}
+#managementScreen .mg-personal-card:is(:hover,:focus-visible){
+  border-color:rgba(222,238,255,.76);
+  background-color:#152337;
+}
+#managementScreen .mg-personal-card:focus-visible{outline:2px solid #d5eafa;outline-offset:2px}
+#managementScreen .mg-personal-card:active{transform:scale(.98)}
+#managementScreen .mg-personal-section .mg-card-note{margin-top:5px}
+@media(max-width:365px){
+  #managementScreen .mg-personal-grid{grid-auto-columns:clamp(89px,29%,101px);gap:6px}
+  #managementScreen .mg-personal-card{min-height:104px}
+}
+@media(prefers-reduced-motion:reduce){
+  #managementScreen .mg-personal-card:active{transform:none}
+}
