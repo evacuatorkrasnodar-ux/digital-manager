@@ -193,6 +193,7 @@
   background:linear-gradient(140deg,#35577a,#13283e);color:#f4f9ff;
   font:550 11.3px/1.3 system-ui;cursor:pointer
 }
+#dmCardCatalogPreview button[data-catalog-toggle]:disabled{cursor:default;opacity:.58;border-color:rgba(149,177,205,.22);background:#162332}
 #dmCardCatalogPreview button:focus-visible{outline:2px solid #d9edff;outline-offset:2px}
 @media(max-width:352px){
  #managementScreen .mg-switch-grid>.dm-catalog-tile{min-height:124px}
