@@ -52,7 +52,7 @@ html:not(.dock-is-hidden) #dockQuickActions.dock-quick-actions{
 }
 #dockQuickActions.dock-quick-actions button:active,
 .dm-assistant-mini-menu a:active{transform:scale(.95)}
-#dockQuickActions.dock-quick-actions #dockOpenHome[hidden]{display:none!important}
+#dockQuickActions.dock-quick-actions button[hidden]{display:none!important}
 #dockQuickActions.dock-quick-actions .dm-attention-dot{right:3px;top:2px}
 @media(prefers-reduced-motion:reduce){
  #dockQuickActions.dock-quick-actions button,.dm-assistant-mini-menu a{transition:none}
