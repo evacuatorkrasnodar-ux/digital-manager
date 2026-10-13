@@ -238,3 +238,51 @@ html.dm-layout-editing #homeScreen .dm-layout-unit.dm-unit-picked::before{
   white-space:normal;
   background:rgba(12,25,42,.44);
 }
+
+
+/* Intelligent Home sections — airy captions only, not new card shells.
+   Never override the approved metric-grid/Clients clip, recommendation shape,
+   quick-action dimensions, or the existing widget surfaces. */
+#homeScreen .dm-home-section-title[hidden]{display:none!important}
+#homeScreen .dm-home-section-title{
+  display:flex;align-items:center;gap:8px;min-width:0;
+  width:100%;box-sizing:border-box;
+  margin:8px 0 2px;padding:0 3px;
+  color:#dceafb;background:none;border:0;
+  font-family:inherit;pointer-events:auto;
+}
+#homeScreen .dm-home-section-title::after{
+  content:'';display:block;flex:1;min-width:12px;height:1px;
+  background:linear-gradient(90deg,rgba(164,194,220,.29),rgba(164,194,220,0));
+}
+#homeScreen .dm-home-section-words{display:flex;gap:2px;flex-direction:column;min-width:0;max-width:84%}
+#homeScreen .dm-home-section-words strong{
+  display:block;font-size:11px;font-weight:550;letter-spacing:.018em;line-height:1.4;
+  color:rgba(224,238,251,.92);
+}
+#homeScreen .dm-home-section-words small{
+  display:block;font-size:9px;font-weight:400;line-height:1.35;letter-spacing:.015em;
+  color:rgba(158,184,204,.84);
+}
+#homeScreen #dmHomeWidgets>.dm-home-section-title,
+#homeScreen #dmLayoutBoard>.dm-home-section-title{
+  grid-column:1/-1;align-self:end;
+}
+#homeScreen #dmHomeWidgets>.dm-home-section-title{margin:6px 0 0}
+#homeScreen #dmLayoutBoard>.dm-home-section-title{margin:11px 0 0}
+#homeScreen #dmLayoutBoard>.dm-home-section-title:first-child{margin-top:3px}
+#homeScreen #dmLayoutBoard>.dm-home-section-title::after{order:0}
+#homeScreen .dm-home-section-arrows{display:flex;gap:4px;order:1;margin-left:auto;flex:none}
+#homeScreen .dm-home-section-arrows button{
+  min-width:30px;min-height:29px;display:grid;place-items:center;
+  color:#d9eafd;font:500 14px/1 system-ui,sans-serif;
+  border-radius:9px;border:1px solid rgba(152,190,223,.43);
+  background:linear-gradient(145deg,#21374e,#0b1827);cursor:pointer;
+}
+#homeScreen .dm-home-section-arrows button:focus-visible{
+  outline:2px solid #ecf7ff;outline-offset:2px;
+}
+html.dm-layout-editing #homeScreen .dm-layout-board>.dm-home-section-title{
+  margin-top:14px;padding-top:3px;
+}
+#homeScreen #dmHomeWidgets{min-width:0}
