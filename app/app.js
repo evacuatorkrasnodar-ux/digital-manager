@@ -182,6 +182,39 @@
   function generalModal(type){if(type==='strategy')return adviceModal();if(type==='finance')return detailModal('finance');const title=type==='automation'?'Автоматизация процессов':'Информация';modal(title,`<p class="modal-note">Здесь будут сценарии автоматизации задач компании: уведомления, напоминания и действия по событиям. На текущем этапе этот раздел ещё не подключён к внешним сервисам.</p><button class="primary-button" type="button" id="genericDone">Понятно</button>`,()=>byId('genericDone').addEventListener('click',closeModal));}
   function datesModal(){modal('Выбрать дату',`<form id="dateForm" class="form-fields"><label>Дата для просмотра<input name="date" type="date" required value="${safe(chosenDate||new Date().toLocaleDateString('en-CA'))}"></label><p class="modal-note">Выбор даты меняет заголовок, но историческая аналитика пока не подключена: график остаётся демонстрационным.</p><button class="primary-button" type="submit">Показать дату</button></form>`,()=>byId('dateForm').addEventListener('submit',e=>{e.preventDefault();const d=new FormData(e.currentTarget);const selectedDate=String(d.get('date')||'');updatePeriod('day');chosenDate=selectedDate;if(chosenDate){byId('revenueLabel').textContent='Выручка · '+chosenDate.split('-').reverse().join('.');}closeModal();notify('Для этой даты показаны демонстрационные данные');}));}
   function demoAnswer(q){const grounded=window.DMBusinessBrain?.answer?.(q);if(grounded)return grounded;const lower=q.toLowerCase();if(/расход|затрат|прибыл/.test(lower))return 'Начните с категорий расходов: постоянные, переменные и маркетинг. Сравните их с выручкой за одинаковые периоды. Это общий совет, не анализ ваших счетов.';if(/клиент|продаж/.test(lower))return 'Разделите клиентов на новых, активных и вернувшихся. Проверьте время ответа на заявки и внедрите повторные касания. Данные этой панели пока демонстрационные.';if(/реклам|выруч|рост/.test(lower))return 'Сначала измерьте рентабельность каждого канала. Увеличивайте бюджет небольшими шагами только там, где подтверждена окупаемость. Конкретный прогноз потребует реальных данных.';return 'Я пока работаю в демонстрационном режиме. Могу подсказать общие действия по выручке, клиентам и расходам. Реальное ИИ-подключение появится позже.';}
+  // Private on-device history of assistant Q&A, not a simulated cloud archive.
+  const DM_CHAT_HISTORY_KEY='digital-manager-assistant-history-v1';
+  let dmHistory=[];
+  try{
+    const saved=JSON.parse(localStorage.getItem(DM_CHAT_HISTORY_KEY)||'[]');
+    if(Array.isArray(saved))dmHistory=saved.filter(x=>x&&typeof x.q==='string'&&typeof x.answer==='string').slice(-300);
+  }catch(_){}
+  function dmSaveHistory(){
+    try{localStorage.setItem(DM_CHAT_HISTORY_KEY,JSON.stringify(dmHistory.slice(-300)));}
+    catch(err){console.warn('Chat history local storage unavailable',err);}
+  }
+  function dmRenderHistory(){
+    const host=byId('dmHistoryList'),empty=byId('dmHistoryEmpty');
+    if(!host||!empty)return;
+    const query=(byId('dmHistorySearch')?.value||'').trim().toLocaleLowerCase('ru-RU');
+    host.replaceChildren();
+    const found=dmHistory.filter(item=>(item.q+' '+item.answer).toLocaleLowerCase('ru-RU').includes(query)).reverse();
+    empty.hidden=found.length>0;
+    empty.textContent=dmHistory.length===0
+      ?'Разговоров пока нет. Задайте первый вопрос через плазму внизу.'
+      :'По вашему запросу ничего не найдено.';
+    for(const record of found){
+      const row=document.createElement('article');row.className='dm-history-item';row.setAttribute('role','listitem');
+      const date=document.createElement('time');date.className='dm-history-date';
+      date.dateTime=new Date(record.at||Date.now()).toISOString();
+      date.textContent=new Date(record.at||Date.now()).toLocaleString('ru-RU',{day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'});
+      const question=document.createElement('h3');question.textContent=record.q;
+      const answer=document.createElement('p');answer.textContent=record.answer;
+      row.append(date,question,answer);host.append(row);
+    }
+  }
+  byId('dmHistorySearch')?.addEventListener('input',dmRenderHistory);
+  dmRenderHistory();
   function chat(q){
     // Real local tools answer concrete director commands; don't print generic
     // demo chat text when the user asks for an Inbox, briefing or negotiation.
@@ -205,6 +238,7 @@
     setRingMode('thinking');
     setTimeout(()=>{
       const answer=demoAnswer(q);reply.textContent=answer;miniReply.textContent=answer;
+      dmHistory.push({q,answer,at:Date.now()});dmSaveHistory();dmRenderHistory();
       miniLog.scrollTop=miniLog.scrollHeight;
       // Text-only demo: never imply that speech or a real AI service is connected.
       setRingMode('idle');
@@ -1444,11 +1478,10 @@
   byId('plasmaClose').addEventListener('click',closePlasmaPanel);
   byId('plasmaChatForm').addEventListener('submit',event=>{
     event.preventDefault();
-    if(dmComposerIntent(plasmaInput.value)==='question')dmSendComposerText();
-    else if(plasmaInput.value.trim())dmActionMessage('Текст готов ✦ Выберите действие или «Спросить помощника».');
+    if(plasmaInput.value.trim())dmSendComposerText();
   });
   dmSyncComposer();
-  byId('plasmaOpenChat').addEventListener('click',()=>{closePlasmaPanel();setTab('assistant');});
+  byId('plasmaOpenChat').addEventListener('click',()=>{closePlasmaPanel();setTab('assistant');dmRenderHistory();});
   document.addEventListener('pointerdown',event=>{
     if(!plasmaPanel.hidden&&!event.target.closest('#plasmaChatPanel,#tabAssistant,#dockLauncher'))closePlasmaPanel();
   });
@@ -1557,8 +1590,8 @@
 
   byId('closeDialog').addEventListener('click',closeModal);
   byId('modal').addEventListener('click',e=>{if(e.target===byId('modal'))closeModal();});
-  document.querySelectorAll('[data-question]').forEach(b=>b.addEventListener('click',()=>chat(b.dataset.question)));
-  byId('chatForm').addEventListener('submit',e=>{e.preventDefault();const i=byId('chatInput');const q=i.value.trim();if(!q)return;chat(q);i.value='';});
+
+  // The only composer belongs to the bottom plasma; history is read-only.
   // Card-to-laser palette. Every present/future dashboard card can provide
   // data-laser-accent or --dm-card-laser-accent; a visible SVG line also works.
   // This updates only the five side-laser gradients, never the approved orb.
