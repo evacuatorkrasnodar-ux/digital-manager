@@ -1119,13 +1119,21 @@ html.dm-plasma-panel-open .dock-launcher .dm-launcher-waves{
   }
 }
 
-/* Expanded writing surface owns the screen; the separate plasma stays below it. */
+/* Writing on iPhone: generous editor below the notch, with a dedicated
+   space for the original plasma. 100vh avoids subtracting the keyboard twice
+   on Safari versions where 100dvh already shrinks with visualViewport. */
 @media(max-width:700px){
   html.dm-plasma-panel-open.dm-compose-editor .dm-chat-panel.dm-chat-editor{
-    bottom:calc(104px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
-    max-height:max(110px,calc(100dvh - 124px - max(48px,env(safe-area-inset-top,0px)) - env(safe-area-inset-bottom,0px) - var(--dm-chat-kb,0px)));
+    bottom:calc(116px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
+    max-height:max(110px,calc(100vh - 136px - max(30px,env(safe-area-inset-top,0px)) - env(safe-area-inset-bottom,0px) - var(--dm-chat-kb,0px)));
   }
   html.dm-plasma-panel-open.dm-compose-editor .dock-launcher{
     transform:translateX(clamp(0px,calc(50vw - 50px),142px)) translateY(12px);
+  }
+  html.dm-plasma-panel-open.dm-compose-editor.dm-compose-keyboard-open .dock-hidden-controls{
+    z-index:40;
+  }
+  html.dm-plasma-panel-open.dm-compose-editor.dm-compose-keyboard-open .dock-launcher{
+    transform:translateX(clamp(0px,calc(50vw - 50px),142px)) translateY(20px);
   }
 }
