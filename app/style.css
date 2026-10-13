@@ -310,8 +310,7 @@
 #managementScreen .mg-blue{color:#9bd4ff;background:linear-gradient(145deg,#183f77,#071321);border-color:#4f83cd7a}
 #managementScreen .mg-purple{color:#dfb4ff;background:linear-gradient(140deg,#342041,#0b0714);border-color:#a46bca76}
 #managementScreen .mg-gold{color:#ffcf8b;background:linear-gradient(150deg,#47301c,#0e0b07);border-color:#e9af6988}
-#managementScreen .mg-chevron{margin-left:auto;display:grid;place-items:center;width:20px;height:23px;flex:none;color:#dceaf3;position:relative;z-index:3}
-#managementScreen .mg-chevron .ico{width:17px;height:17px}
+#managementScreen .mg-chevron{margin-left:auto;position:relative;z-index:3}
 #managementScreen .mg-theme{min-height:58px;background:linear-gradient(140deg,#162331,#05090e)}
 #managementScreen .mg-theme-icon{font-size:26px;color:#fff}
 #managementScreen .mg-theme-controls{display:flex;align-items:center;gap:3px;flex:none;padding:3px;border:1px solid rgba(166,194,212,.5);border-radius:30px;background:#030913;position:relative;z-index:2}
