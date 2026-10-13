@@ -426,7 +426,7 @@
   }
   function edgeScroll(){
     edgeFrame=0;
-    if(!dragging)return;
+    if(!dragging?.moved)return;
     const y=dragging.y,top=65,bottom=window.innerHeight-90;
     const speed=y<top?-Math.min(16,Math.max(3,(top-y)*.22)):
       y>bottom?Math.min(16,Math.max(3,(y-bottom)*.22)):0;
@@ -440,7 +440,8 @@
     if(!editing)return;
     pickedId=null;
     dragging={...info,pointerId:current.pointerId,pointerType:current.pointerType,
-      x:current.x,y:current.y,active:true,target:null,after:false};
+      x:current.x,y:current.y,startX:current.startX,startY:current.startY,
+      touchId:current.touchId,active:true,moved:false,target:null,after:false};
     const selected=info.kind==='section'
       ?board.querySelector('[data-home-section="'+info.id+'"]')
       :board.querySelector('[data-card-id="'+info.id+'"]');
@@ -457,14 +458,18 @@
   function updateDrag(x,y){
     if(!dragging)return;
     dragging.x=x;dragging.y=y;
+    if(!dragging.moved){
+      if(Math.hypot(x-dragging.startX,y-dragging.startY)<16)return;
+      dragging.moved=true;
+    }
     chooseDropTarget(x,y);
   }
   function releaseDrag(){
     if(!dragging)return;
-    const {kind,id,target,after}=dragging;
+    const {kind,id,target,after,moved}=dragging;
     clearDrag();
     blockTapUntil=Date.now()+450;
-    if(!target||target===id)return;
+    if(!moved||!target||target===id)return;
     if(kind==='section')moveSection(id,target,after);
     else moveTo(id,target);
   }
@@ -504,6 +509,9 @@
     if(pressed&&pressed.pointerType==='touch'&&e.changedTouches[0])
       pressed.touchId=e.changedTouches[0].identifier;
   },{passive:true});
+  homeScreen.addEventListener('touchcancel',e=>{
+    clearPressed();if(dragging?.pointerType==='touch')clearDrag();
+  },{passive:true});
   homeScreen.addEventListener('touchend',e=>{
     if(dragging?.pointerType!=='touch')return;
     const matched=[...e.changedTouches].some(t=>t.identifier===dragging.touchId);
@@ -516,6 +524,9 @@
   homeScreen.addEventListener('pointercancel',e=>{
     if(pressed?.pointerId===e.pointerId)clearPressed();
     if(dragging?.pointerId===e.pointerId&&dragging.pointerType!=='touch')clearDrag();
+  });
+  homeScreen.addEventListener('contextmenu',e=>{
+    if((dragging||Date.now()<blockTapUntil)&&dashboard.contains(e.target))e.preventDefault();
   });
   homeScreen.addEventListener('scroll',()=>{
     if(!dragging)clearPressed();
@@ -553,7 +564,7 @@
     if(editing&&e.key==='Escape'){e.preventDefault();done();}
   });
   homeScreen.addEventListener('click',e=>{
-    if(!editing||!dashboard.contains(e.target))return;
+    if(!editing)return;
     if(e.target.closest('.dm-layout-unit,.dm-home-section-title,.dm-layout-library'))return;
     done();
   });
