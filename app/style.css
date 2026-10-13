@@ -467,8 +467,8 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 /* Conversation-only electric SVG. The dock mini-orb retains its existing style. */
 .dm-voice-orb-electric{background:radial-gradient(circle,#000 0 51%,rgba(1,2,5,.99) 59%,transparent 71%)!important;filter:drop-shadow(0 0 5px rgba(255,255,255,.83)) drop-shadow(0 0 12px rgba(239,247,255,.43))!important}
 .dm-voice-orb-electric .dm-orb-halo{inset:-24%;background:radial-gradient(circle,transparent 38%,rgba(255,255,255,.05) 49%,rgba(255,255,255,.28) 56%,rgba(236,245,255,.12) 66%,transparent 76%);filter:blur(8px)}
-.dm-voice-orb-electric .dm-orb-spectral{position:absolute;inset:-13%;z-index:2;width:126%;height:126%;overflow:visible;pointer-events:none;filter:grayscale(1) saturate(0) brightness(1.4) drop-shadow(0 0 3px rgba(255,255,255,.7))}
-.dm-voice-orb-electric .dm-orb-rim{opacity:.65;filter:grayscale(1) saturate(0) brightness(1.2) drop-shadow(0 0 3px rgba(255,255,255,.83))}
+.dm-voice-orb-electric .dm-orb-spectral{position:absolute;inset:-13%;z-index:2;width:126%;height:126%;overflow:visible;pointer-events:none;filter:drop-shadow(0 0 2px rgba(110,175,255,.78)) drop-shadow(0 0 3px rgba(27,83,242,.58))}
+.dm-voice-orb-electric .dm-orb-rim{opacity:.65;filter:brightness(1.12) saturate(1.1) drop-shadow(0 0 3px rgba(45,113,250,.67))}
 .dm-voice-orb-electric .dm-orb-edge{border-color:rgba(248,251,255,.58);box-shadow:inset 0 0 7px rgba(255,255,255,.12),0 0 7px rgba(248,251,255,.48)}
 .dm-orb-spectral .dm-orb-arc{transform-origin:60px 60px;animation:dm-electric-arc 8s linear infinite}
 .dm-orb-spectral .dm-arc-ice{animation-duration:10.4s;filter:drop-shadow(0 0 2px rgba(255,255,255,.77))}
@@ -506,6 +506,11 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 .dm-voice-waves path:nth-of-type(3){stroke-width:1;opacity:.7;animation-delay:-3.4s;animation-duration:8s}
 .dm-voice-waves .dm-wave-junction{fill:rgba(204,237,255,.82);opacity:.72;filter:drop-shadow(0 0 3px rgba(105,173,255,.79));pointer-events:none}
 .assistant-live[data-mode="speaking"] .dm-voice-orb{animation-duration:1.4s;filter:drop-shadow(0 0 12px #a477ffb0)}
+/* White optics belong to waiting only; do not desaturate Thinking. */
+#assistantLive[data-mode="idle"] .dm-voice-orb-electric .dm-orb-spectral,
+#assistantScreen .dm-welcome-plasma .dm-orb-spectral{filter:grayscale(1) saturate(0) brightness(1.42) drop-shadow(0 0 3px rgba(232,246,255,.72))}
+#assistantLive[data-mode="idle"] .dm-voice-orb-electric .dm-orb-rim,
+#assistantScreen .dm-welcome-plasma .dm-orb-rim{filter:grayscale(1) saturate(0) brightness(1.32) drop-shadow(0 0 3px rgba(255,255,255,.83))}
 @keyframes dm-breathe{0%,100%{transform:scale(.95);opacity:.88}50%{transform:scale(1.055);opacity:1}}
 @keyframes dm-rotate{to{transform:rotate(360deg)}}
 @keyframes dm-wave{0%,100%{transform:translateX(-1.8px) scaleY(.97);opacity:.68}50%{transform:translateX(1.8px) scaleY(1.03);opacity:.94}}
