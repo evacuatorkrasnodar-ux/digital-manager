@@ -91,7 +91,10 @@
     return [...new Set([...expanded,...allowed])].filter(x=>allowed.includes(x));
   }
   let preferences=load(),editing=false,pickedId=null,skipTileTapUntil=0;
+  let startedFromOriginal=false,madeLayoutChange=false;
   function save(){
+    // A real card change promotes the preview into a saved custom layout.
+    if(editing)madeLayoutChange=true;
     preferences.order=normalize(preferences.order,preferences.linked);
     try{localStorage.setItem(KEY,JSON.stringify(preferences));}catch(_){}
   }
@@ -234,8 +237,11 @@
   function edit(source='settings'){
     if(editing)return;
     pickedId=null;
+    startedFromOriginal=!preferences.enabled;
+    madeLayoutChange=false;
     preferences.enabled=true;editing=true;
-    save();render();
+    // Preview only: entering edit mode is not itself a layout change.
+    render();
     // Direct long-press editing should not jump the screen away from the card.
     if(source!=='hold'){
       window.scrollTo({top:0,behavior:'instant'});
@@ -244,10 +250,20 @@
   }
   function done(){
     pickedId=null;
-    editing=false;save();render();
+    const noChangesToOriginal=startedFromOriginal&&!madeLayoutChange;
+    startedFromOriginal=false;
+    editing=false;
+    if(noChangesToOriginal){
+      preferences=defaults();
+      restoreOriginal();
+      return;
+    }
+    save();render();
   }
   function reset(){
     pickedId=null;
+    startedFromOriginal=false;
+    madeLayoutChange=false;
     preferences=defaults();editing=false;
     try{localStorage.removeItem(KEY);}catch(_){}
     restoreOriginal();
