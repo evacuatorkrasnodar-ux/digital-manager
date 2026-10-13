@@ -83,3 +83,20 @@
     animation:none!important;
   }
 }
+/* Signature action: same discreet dark glass as the app's other buttons.
+   Override both previous pearl idle and champagne ready themes. */
+#homeScreen .metric-grid .recommendation-card .advice-cta,
+#homeScreen .metric-grid .recommendation-card .advice-cta:hover,
+#homeScreen .metric-grid .recommendation-card .advice-cta:active,
+#homeScreen .metric-grid .recommendation-card[data-signature-state="ready"] .advice-cta,
+#homeScreen .metric-grid .recommendation-card[data-signature-state="ready"] .advice-cta:hover {
+ color:#eaf4fc!important;
+ border-color:rgba(164,195,221,.62)!important;
+ background:linear-gradient(155deg,#2b4256,#101f2e 68%,#070e17)!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.20),0 3px 9px rgba(0,0,0,.35),0 0 9px rgba(100,157,202,.12)!important;
+}
+#homeScreen .metric-grid .recommendation-card .advice-cta .ico,
+#homeScreen .metric-grid .recommendation-card[data-signature-state="ready"] .advice-cta .ico{
+ color:#eaf4fc!important;
+ stroke:#eaf4fc!important;
+}
