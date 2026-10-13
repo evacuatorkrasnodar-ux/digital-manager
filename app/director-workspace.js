@@ -338,7 +338,26 @@ window.addEventListener('dm:director-approved',event=>{
  if(!m)return;
  m.status='approved';save();
 });
-window.DMDirectorWorkspace=Object.freeze({open,close,count:()=>entries().length,
+function routeQuestion(question){
+ const t=safe(question,320).toLowerCase();
+ if(!t)return false;
+ if(/план[её]рк|инструктаж|что.{0,25}сказать.{0,18}сотрудник|собрани[ея].{0,30}сотрудник|план.{0,8}на неделю/.test(t)){
+  open('brief');
+  selected='';
+  mode=/план.{0,8}на неделю/.test(t)?'week':'detail';
+  render();
+  if(mode==='week')$('dmWorkspaceAgendaText').value=weekPlan();
+  return true;
+ }
+ if(/(?:покажи|проверь|разбер[иё]|открой|посмотри).{0,45}(?:почт|письм|входящ|сообщени)|(?:почт|входящ).{0,25}(?:клиент|разобрать)/.test(t)){
+  open('inbox');return true;
+ }
+ if(/переговор|предложени[ея].{0,25}поставщик|проверь.{0,28}контрагент|оцен[иь].{0,25}договор/.test(t)){
+  open('meeting');return true;
+ }
+ return false;
+}
+window.DMDirectorWorkspace=Object.freeze({open,close,routeQuestion,count:()=>entries().length,
  summary:()=>({total:entries().length,awaiting:entries().filter(x=>['new','draft','approval'].includes(x.status)).length,
  important:entries().filter(x=>x.status!=='archived'&&classify(x).urgent).length}),
  refresh:updateCards});
