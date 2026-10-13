@@ -8,7 +8,10 @@
   const originalGrid=document.querySelector('#homeScreen .dashboard>.metric-grid');
   const widgetHost=document.getElementById('dmHomeWidgets');
   const managementCards='digital-manager-black-velvet-v2';
-  const KEY='dm-personal-home-layout-v1';
+  // New layout profile resets the earlier constructor experiment to the
+  // approved Home composition on all devices. The old profile remains stored,
+  // but is no longer applied. Other settings, widget switches and data stay.
+  const KEY='dm-personal-home-layout-v2';
   if(!dashboard||!originalGrid||!widgetHost)return;
 
   const parts={
