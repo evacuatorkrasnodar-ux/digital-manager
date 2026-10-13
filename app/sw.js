@@ -1,5 +1,5 @@
 /* App-only service worker: fresh documents, styles and scripts; cached offline assets. */
-const CACHE = 'digital-manager-black-velvet-v745-20261013';
+const CACHE = 'digital-manager-black-velvet-v746-20261013';
 const CACHE_PREFIX = 'digital-manager-black-velvet-';
 const OFFLINE_FILES = [
   './index.html',
@@ -9,6 +9,7 @@ const OFFLINE_FILES = [
   './card-catalog.css?v=2',
   './manager-tools.js?v=1',
   './manager-tools.css?v=1',
+  './recommendation-premium.css?v=1',
   './app.js?v=659',
   './home-widgets.js?v=1',
   './director-workspace.js?v=5',
@@ -17,7 +18,7 @@ const OFFLINE_FILES = [
   './tax-control.css?v=2',
   './home-layout.js?v=18',
   './home-layout.css?v=8',
-  './director-office.js?v=7',
+  './director-office.js?v=8',
   './director-office.css?v=2',
   './business-pulse.js?v=2',
   './business-pulse.css?v=1',
@@ -26,8 +27,8 @@ const OFFLINE_FILES = [
   './business-context.js?v=2',
   './workflow-core.js?v=1',
   './sales.css?v=4',
-  './task-journal.js?v=10',
-  './task-journal.css?v=9',
+  './task-journal.js?v=11',
+  './task-journal.css?v=10',
   './initiative.js?v=5',
   './initiative.css?v=2',
   './business-brain.js?v=12',
