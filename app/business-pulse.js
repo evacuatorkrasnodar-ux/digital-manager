@@ -62,6 +62,9 @@ function collect(period){
  const salesSnapshot=window.DMSalesScreen?.getBusinessSnapshot?.()||null;
  const active=Math.max(0,Number(salesSnapshot?.active)||0);
  const warnings=[];
+ const tax=window.DMTaxControl?.snapshot?.();
+ if(tax?.overdue>0)warnings.push({label:'Налоговые сроки просрочены по вашим записям',count:tax.overdue,target:'tax'});
+ if(tax?.urgent>0)warnings.push({label:'Налоговые сроки в ближайшие 7 дней',count:tax.urgent,target:'tax'});
  if(flow?.tasksOverdue>0)warnings.push({label:'Просроченные дела',count:flow.tasksOverdue,target:'tasks'});
  if(inbox?.awaiting>0)warnings.push({label:'Обращения в «Единых входящих» без завершённого ответа',count:inbox.awaiting,target:'inbox'});
  if(salesSnapshot?.waitingDay>0)warnings.push({label:'Новые заявки старше суток без изменения статуса',count:salesSnapshot.waitingDay,target:'sales'});
@@ -115,7 +118,8 @@ function actionable(p){
  if(!p.warnings.length)return '<p class="dm-pulse-empty">По доступным записям отдельных срочных сигналов сейчас нет. Это не проверка всех систем компании.</p>';
  return '<div class="dm-pulse-alert-list">'+p.warnings.map(x=>
   '<div class="dm-pulse-alert"><span><strong>'+x.count+'</strong> '+x.label+'</span>'+
-  (x.target==='inbox'?'<button type="button" data-pulse-target="inbox">Открыть ↗</button>':
+  (x.target==='tax'?'<button type="button" data-pulse-target="tax">Проверить ↗</button>':
+   x.target==='inbox'?'<button type="button" data-pulse-target="inbox">Открыть ↗</button>':
    x.target==='sales'?'<button type="button" data-pulse-target="sales">Проверить ↗</button>':
     '<button type="button" data-pulse-target="tasks">К делам ↗</button>')+'</div>').join('')+'</div>';
 }
@@ -163,16 +167,17 @@ overlay.addEventListener('click',event=>{
  const btn=event.target.closest('[data-pulse-close],[data-pulse-target]');if(!btn)return;
  if(btn.hasAttribute('data-pulse-close')){close();return;}
  const target=btn.dataset.pulseTarget;close();
- if(target==='inbox')window.DMDirectorWorkspace?.open?.('inbox');
+ if(target==='tax')window.DMTaxControl?.open?.();
+ else if(target==='inbox')window.DMDirectorWorkspace?.open?.('inbox');
  else if(target==='sales')window.DMSalesScreen?.open?.();
  else if(target==='tasks')window.DMTaskJournal?.open?.('mine');
 });
 overlay.addEventListener('keydown',e=>{if(e.key==='Escape'){e.stopPropagation();close();}});
-for(const event of ['dm:period-changed','dm:sales-changed','dm:personal-tasks-changed','dm:workspace-updated','dm:director-updated']){
+for(const event of ['dm:period-changed','dm:sales-changed','dm:personal-tasks-changed','dm:workspace-updated','dm:director-updated','dm:tax-changed']){
  window.addEventListener(event,refresh);
 }
 window.addEventListener('storage',e=>{
- if(['dm-sales-records-v1','dm-promotion-expenses-v1','dm-director-workspace-v1','dm-personal-tasks-v1'].includes(e.key))refresh();
+ if(['dm-sales-records-v1','dm-promotion-expenses-v1','dm-director-workspace-v1','dm-personal-tasks-v1','dm-tax-control-v1'].includes(e.key))refresh();
 });
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh();});
 function routeQuestion(query){
