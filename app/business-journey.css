@@ -2,7 +2,7 @@
    Scoped overlay only: never change dashboard, plasma, dock or gold card. */
 .dm-journey-overlay[hidden]{display:none!important}
 .dm-journey-overlay{position:fixed;inset:0;z-index:18000;box-sizing:border-box;display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;overscroll-behavior:contain;padding:calc(16px + env(safe-area-inset-top,0px)) 12px calc(25px + env(safe-area-inset-bottom,0px));background:rgba(0,3,10,.93);color:#eaf6ff;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
-.dm-journey-panel{box-sizing:border-box;width:min(100%,445px);max-height:calc(100dvh - 42px);overflow-y:auto;min-height:180px;border:1px solid var(--dm-ui-edge,rgba(157,199,228,.46));border-radius:23px;padding:17px 17px 21px;background:radial-gradient(ellipse at 12% -6%,rgba(106,169,216,.14),transparent 64%),var(--dm-ui-surface);box-shadow:0 23px 70px rgba(0,0,0,.68),inset 0 1px rgba(246,251,255,.14);}
+.dm-journey-panel{box-sizing:border-box;width:min(100%,445px);max-height:calc(100dvh - 42px);overflow-y:auto;min-height:180px;border:1px solid var(--dm-ui-edge,rgba(157,199,228,.46));border-radius:23px;padding:17px 17px 21px;background:var(--dm-ui-surface);box-shadow:0 23px 70px rgba(0,0,0,.68),inset 0 1px rgba(246,251,255,.14);}
 .dm-journey-panel header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:10px;border-bottom:1px solid rgba(166,199,224,.15)}
 .dm-journey-panel header>span{font-size:9px;letter-spacing:.14em;color:#aacce3}
 
