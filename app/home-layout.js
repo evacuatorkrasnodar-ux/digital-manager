@@ -270,6 +270,8 @@
     const previousScrollY=window.scrollY;
     // Move existing cards: never clone their event handlers or generate mock data.
     holdCards();
+    // Default-mode headings must never duplicate the grouped editor headings.
+    for(const label of defaultLabels.values())label.remove();
     board.replaceChildren();
     preferences.order=normalize(preferences.order);
     preferences.sectionOrder=normalizeSections(preferences.sectionOrder);
