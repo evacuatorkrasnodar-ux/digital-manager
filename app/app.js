@@ -651,7 +651,7 @@
     byId('mgSubtitle').textContent=({home:'Настройки приложения',manager:'Все настройки одного помощника',autopilot:'Навыки и границы самостоятельности',connections:'Сервисы и источники данных',documents:'Файлы и шаблоны',payments:'Счета и регулярные расходы',learning:'Возможности приложения',voice:'Плазма · Док · Имя · Общение',workshop:'Инструменты и калькуляторы'})[page]||'Настройки приложения';
     clearTimeout(voicePreviewTimer);
     if(dmSettingsGlyphTimer!==null){clearTimeout(dmSettingsGlyphTimer);dmSettingsGlyphTimer=null;}
-    if(page==='home'){byId('mgDetail').innerHTML='';window.scrollTo(0,0);requestAnimationFrame(mgSyncCarouselNav);return;}
+    if(page==='home'){byId('mgDetail').innerHTML='';window.scrollTo(0,0);requestAnimationFrame(mgSyncCarouselNav);window.dispatchEvent(new Event('dm:management-home'));return;}
     let content='';
     if(page==='manager'){
       const parts=[
