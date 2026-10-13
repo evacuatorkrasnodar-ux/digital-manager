@@ -31,8 +31,7 @@
   width:min(430px,100%);height:min(750px,91dvh);min-height:0;
   display:flex;flex-direction:column;overflow:hidden;
   border:1px solid rgba(147,183,210,.44);border-radius:23px;
-  background:radial-gradient(ellipse at 100% 0,rgba(54,99,137,.18),transparent 65%),
-    linear-gradient(155deg,#101d2c,#070d16 67%,#03070b);
+  background:var(--dm-ui-surface);
   box-shadow:0 25px 65px rgba(0,0,0,.7),inset 0 1px rgba(255,255,255,.06);
 }
 #dmBusinessPulseOverlay .dm-pulse-head{
@@ -50,7 +49,7 @@
 #dmBusinessPulseOverlay .dm-pulse-section{
   padding:14px 12px;margin:0 0 13px;
   border:1px solid rgba(142,178,205,.29);border-radius:16px;
-  background:linear-gradient(155deg,rgba(24,44,62,.64),rgba(4,13,22,.78));
+  background:var(--dm-ui-inset);
   box-shadow:inset 0 1px rgba(255,255,255,.035);
 }
 #dmBusinessPulseOverlay .dm-pulse-eyebrow{font-size:10px;letter-spacing:.045em;line-height:1.5;color:#cca980}
