@@ -1,36 +1,21 @@
 /* Home screen layout editor v1. The untouched default metric grid is never restyled. */
-#homeScreen .dm-layout-toolbar[hidden],#homeScreen .dm-layout-board[hidden]{display:none!important}
+#homeScreen .dm-layout-board[hidden]{display:none!important}
 html.dm-custom-home-layout #homeScreen .dashboard>.metric-grid,
 html.dm-custom-home-layout #homeScreen #dmHomeWidgets{display:none!important}
 #homeScreen .dashboard>.metric-grid[hidden]{display:none!important}
-#homeScreen .dm-layout-toolbar{
-  position:sticky;top:calc(4px + env(safe-area-inset-top,0px));z-index:85;
-  display:flex;flex-wrap:wrap;gap:9px 12px;align-items:center;justify-content:space-between;
-  box-sizing:border-box;min-width:0;width:100%;margin:3px 0 14px;padding:12px 13px;
-  border:1px solid rgba(186,215,236,.65);border-radius:21px;
-  background:radial-gradient(ellipse at 7% 0%,rgba(121,179,219,.15),transparent 67%),linear-gradient(148deg,rgba(19,34,48,.96),rgba(5,12,21,.98));
-  color:#edf7ff;box-shadow:inset 0 1px rgba(247,252,255,.19),0 9px 24px rgba(0,0,0,.45);
-  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+/* There is no editor toolbar. Reordering happens from the card surface,
+   and optional widgets receive only two compact chrome circle actions. */
+#homeScreen .dm-layout-library[hidden]{display:none!important}
+#homeScreen .dm-layout-library{
+  grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;
+  margin-top:5px;padding:7px 3px;color:#bdd0df;
 }
-#homeScreen .dm-layout-heading{display:grid;gap:4px;min-width:180px;flex:1 1 170px;}
-#homeScreen .dm-layout-title{font-size:clamp(12px,3.3vw,14px);font-weight:620;letter-spacing:.006em;color:#f4f9ff;}
-#homeScreen .dm-layout-caption{font-size:clamp(10px,2.75vw,11px);line-height:1.34;color:#adcce1;}
-#homeScreen .dm-layout-actions{display:flex;flex-wrap:nowrap;align-items:center;justify-content:flex-end;gap:7px;flex:0 0 auto;}
-#homeScreen .dm-layout-actions button,#homeScreen .dm-layout-library button{
-  min-height:35px;max-width:100%;padding:8px 12px;border:1px solid var(--dm-circle-edge,rgba(175,207,229,.58));
-  border-radius:17px;background:var(--dm-circle-bg,linear-gradient(145deg,#1a3041,#071521));
-  box-shadow:var(--dm-circle-shadow,inset 0 1px rgba(255,255,255,.2),0 3px 10px rgba(0,0,0,.3));
-  color:#f1f8ff;font:540 clamp(10px,2.7vw,12px)/1.25 system-ui,sans-serif;cursor:pointer;
+#homeScreen .dm-layout-library::before{content:'Вернуть карточку:';font-size:11px;align-self:center}
+#homeScreen .dm-layout-library button{
+  border:1px solid var(--dm-circle-edge);border-radius:20px;
+  background:var(--dm-circle-bg);color:var(--dm-circle-ink);
+  padding:8px 12px;font:500 11px/1.2 system-ui,sans-serif;
 }
-#homeScreen #dmLayoutDone{
-  color:#112a40;border-color:rgba(224,241,252,.96);
-  background:var(--dm-ui-gloss,linear-gradient(145deg,#ecf8ff,#8fb2ce));
-  box-shadow:var(--dm-ui-gloss-shadow,inset 0 1px #fff,0 3px 10px rgba(0,0,0,.3));
-  font-weight:650;
-}
-#homeScreen .dm-layout-actions button[hidden],#homeScreen .dm-layout-library[hidden]{display:none!important}
-#homeScreen .dm-layout-library{display:flex;flex-wrap:wrap;align-items:center;gap:6px;flex:0 0 100%;padding-top:9px;border-top:1px solid rgba(176,211,236,.25);}
-#homeScreen .dm-layout-library::before{content:'Вернуть:';font-size:10px;color:#a5bdd1}
 #homeScreen .dm-layout-board{
   display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
   grid-auto-flow:row;gap:9px;margin:0 0 9px;min-width:0;width:100%;isolation:isolate;
@@ -63,21 +48,27 @@ html.dm-custom-home-layout #homeScreen #dmHomeWidgets{display:none!important}
 #homeScreen .dm-layout-unit[data-size=wide] .dm-home-widget{min-height:140px}
 #homeScreen .dm-layout-unit[data-card-id=revenue] .chart-wrap{inset:43px 11px 18px}
 html.dm-layout-editing #homeScreen .dm-layout-board{row-gap:13px}
-#homeScreen .dm-unit-controls{display:flex;align-items:center;gap:6px;min-width:0;padding:2px 1px 7px;min-height:36px;}
+/* No grab bar, move arrows, pinned-size pill or floating Done overlay. */
+#homeScreen .dm-unit-controls{
+  position:absolute;right:7px;top:7px;z-index:30;
+  display:flex;align-items:center;gap:5px;
+  padding:0;margin:0;border:0;min-height:0;
+  pointer-events:auto;
+}
 #homeScreen .dm-unit-controls .dm-layout-control{
-  display:inline-flex;justify-content:center;align-items:center;gap:7px;min-width:32px;min-height:32px;padding:6px 9px;
-  border:1px solid var(--dm-circle-edge,rgba(184,214,235,.59));border-radius:16px;
-  background:var(--dm-circle-bg,linear-gradient(145deg,#162b3c,#071522));
-  box-shadow:var(--dm-circle-shadow,inset 0 1px rgba(255,255,255,.17),0 3px 8px rgba(0,0,0,.27));
-  color:var(--dm-circle-ink,#f1f8ff);font:530 13px/1 system-ui,sans-serif;cursor:pointer;
+  box-sizing:border-box;display:grid;place-items:center;
+  flex:0 0 29px;width:29px;min-width:29px;height:29px;min-height:29px;
+  margin:0;padding:0;border:1px solid var(--dm-circle-edge);
+  border-radius:50%;background:var(--dm-circle-bg);
+  box-shadow:var(--dm-circle-shadow);color:var(--dm-circle-ink);
+  font:500 16px/1 system-ui,sans-serif;cursor:pointer;
 }
-#homeScreen .dm-unit-controls .dm-unit-grab{
-  display:inline-flex;align-items:center;justify-content:flex-start;gap:7px;flex:1 1 auto;min-width:0;
-  touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;
-  padding-left:12px;
+#homeScreen .dm-unit-controls .dm-layout-control:is(:hover,:focus-visible){
+  border-color:var(--dm-circle-edge-hover);
 }
-#homeScreen .dm-drag-caption{font-size:clamp(10px,2.65vw,12px);line-height:1.1;white-space:nowrap;}
-#homeScreen .dm-unit-controls .dm-layout-control:focus-visible{outline:2px solid #e9f7ff;outline-offset:2px}
+#homeScreen .dm-unit-controls .dm-layout-control:focus-visible{
+  outline:2px solid rgba(225,241,253,.96);outline-offset:2px;
+}
 #homeScreen .dm-unit-dragging>.dm-layout-content{opacity:.65}
 #homeScreen .dm-unit-drop-target{outline:2px dashed rgba(171,214,255,.8);outline-offset:2px;border-radius:19px}
 #homeScreen .dm-layout-board .dm-unit-controls button:active{filter:brightness(1.17);}
@@ -85,30 +76,17 @@ html.dm-layout-editing #homeScreen .dm-layout-board .dm-layout-content{pointer-e
 html.dm-layout-editing #homeScreen .dm-layout-board .dm-layout-unit .dm-unit-controls{pointer-events:auto}
 @media(max-width:360px){
   #homeScreen .dm-layout-board{gap:7px}
-  #homeScreen .dm-unit-controls{flex-wrap:nowrap;gap:4px}
-  #homeScreen .dm-layout-heading{flex-basis:100%}
+  #homeScreen .dm-unit-controls{right:5px;top:5px;gap:4px}
 }
 @media(prefers-reduced-motion:reduce){
   #homeScreen .dm-layout-unit,#homeScreen .dm-layout-content{transition:none!important}
 }
 
 
-#homeScreen .dm-unit-controls .dm-layout-circle{
-  flex:0 0 32px;width:32px;min-width:32px;height:32px;padding:0;border-radius:50%;
-  font-size:16px;
+/* The Home composition is unchanged by editor-only controls. */
+html.dm-layout-editing #homeScreen .dm-layout-board .dm-layout-unit{
+  scroll-margin-top:35px;
 }
-#homeScreen .dm-layout-actions button:is(:hover,:focus-visible),
-#homeScreen .dm-unit-controls .dm-layout-control:is(:hover,:focus-visible),
-#homeScreen .dm-home-section-arrows button:is(:hover,:focus-visible){border-color:var(--dm-circle-edge-hover,rgba(225,239,250,.9))}
-#homeScreen .dm-home-section-arrows button:disabled{opacity:.3;cursor:default;filter:none}
-html.dm-layout-editing #homeScreen .dm-layout-board .dm-layout-unit{scroll-margin-top:110px}
-@media(max-width:510px){
-  #homeScreen .dm-layout-toolbar{gap:9px;padding:10px 12px}
-  #homeScreen .dm-layout-heading{min-width:0;flex:1 1 135px}
-  #homeScreen .dm-layout-actions{gap:6px}
-  #homeScreen .dm-layout-actions button{padding:8px 10px}
-}
-
 /* Management entry — quiet premium glass, consistent with the settings screen. */
 #managementScreen .mg-layout-edit-action{display:flex;align-items:center;gap:10px;width:100%;min-height:60px;margin:9px 0 1px;padding:9px 11px;text-align:left;cursor:pointer;border:1px solid var(--dm-ui-edge);border-radius:19px;color:#f3f8ff;background:var(--dm-ui-surface);box-shadow:var(--dm-ui-shadow);}
 #managementScreen .mg-layout-edit-action .mg-layout-edit-icon{display:grid;place-items:center;flex:none;width:38px;height:38px;border:1px solid rgba(153,191,222,.45);border-radius:13px;background:var(--dm-ui-inset);font-size:24px;color:#c3e0ff;}
@@ -132,9 +110,11 @@ html.dm-layout-editing #homeScreen .dm-layout-board .dm-layout-unit:nth-child(ev
   from{transform:rotate(-.55deg)}
   to{transform:rotate(.55deg)}
 }
-html.dm-layout-editing #homeScreen .dm-layout-toolbar{
-  border-color:rgba(161,203,238,.66);
-  box-shadow:inset 0 1px rgba(246,252,255,.14),0 0 13px rgba(76,138,202,.13);
+html.dm-layout-editing #homeScreen .dm-layout-board .dm-section-dragging{
+  opacity:.58;cursor:grabbing;
+}
+html.dm-layout-editing #homeScreen .dm-layout-board .dm-section-drop-target{
+  outline:1px dashed rgba(193,223,244,.87);outline-offset:3px;border-radius:12px;
 }
 html.dm-layout-editing #homeScreen .dm-layout-board .dm-unit-dragging>.dm-layout-content{
   animation:none;
@@ -156,14 +136,10 @@ html.dm-layout-editing #homeScreen .dm-layout-board .dm-unit-dragging>.dm-layout
   user-select:none;
 }
 
-/* Keep native iPhone page scrolling ON while editing. Drag uses only ⠿.
-   Tapping a card selects it, then tapping a destination moves it there. */
+/* Native scrolling stays on. Only a stationary long press captures a card;
+   thereafter the JS touchmove handler suspends scrolling during the drag. */
 html.dm-layout-editing #homeScreen .dm-layout-board .dm-layout-unit{
   touch-action:pan-y;
-  cursor:pointer;
-}
-html.dm-layout-editing #homeScreen .dm-layout-board .dm-unit-grab{
-  touch-action:none;
   cursor:grab;
 }
 html.dm-layout-editing #homeScreen .dm-layout-board .dm-unit-dragging{
@@ -171,26 +147,6 @@ html.dm-layout-editing #homeScreen .dm-layout-board .dm-unit-dragging{
 }
 html.dm-layout-editing #homeScreen .dashboard{
   padding-bottom:calc(102px + env(safe-area-inset-bottom,0px));
-}
-html.dm-layout-editing #homeScreen .dm-layout-unit.dm-unit-picked{
-  border-radius:19px;
-  outline:2px solid rgba(180,217,251,.88);
-  outline-offset:3px;
-  box-shadow:0 0 15px rgba(67,141,211,.23);
-}
-html.dm-layout-editing #homeScreen .dm-layout-unit.dm-unit-picked::before{
-  content:'✦ Выбрана';
-  display:block;
-  position:absolute;
-  top:30px;left:4px;
-  z-index:25;
-  padding:4px 7px;
-  border-radius:10px;
-  border:1px solid rgba(175,214,241,.65);
-  color:#f0f8ff;
-  background:rgba(10,26,47,.94);
-  font-size:10px;
-  pointer-events:none;
 }
 /* Approved four-card business sculpture: don't change a single inside tile.
  * The original metric-grid remains the sizing/grid authority in edit mode. */
@@ -224,14 +180,6 @@ html.dm-layout-editing #homeScreen .dm-layout-unit.dm-unit-picked::before{
   padding:0;
   overflow:visible;
 }
-#homeScreen .dm-layout-board .dm-fixed-business-label{
-  display:inline-flex;align-items:center;justify-content:center;flex:none;
-  font-size:clamp(9px,2.35vw,10px);line-height:1.2;color:#abc7db;
-  border:1px solid rgba(153,190,217,.30);border-radius:14px;padding:7px 9px;
-  white-space:normal;background:rgba(9,24,38,.8);
-}
-
-
 /* Intelligent Home sections — airy captions only, not new card shells.
    Never override the approved metric-grid/Clients clip, recommendation shape,
    quick-action dimensions, or the existing widget surfaces. */
@@ -264,20 +212,10 @@ html.dm-layout-editing #homeScreen .dm-layout-unit.dm-unit-picked::before{
 #homeScreen #dmLayoutBoard>.dm-home-section-title{margin:11px 0 0}
 #homeScreen #dmLayoutBoard>.dm-home-section-title:first-child{margin-top:3px}
 #homeScreen #dmLayoutBoard>.dm-home-section-title::after{order:0}
-#homeScreen .dm-home-section-arrows{display:flex;align-items:center;gap:6px;order:1;margin-left:auto;flex:none;}
-#homeScreen .dm-home-section-arrows button{
-  box-sizing:border-box;min-width:31px;width:31px;height:31px;min-height:31px;padding:0;
-  display:grid;place-items:center;color:var(--dm-circle-ink,#f3f8fd);font:550 16px/1 system-ui,sans-serif;
-  border-radius:50%;border:1px solid var(--dm-circle-edge,rgba(192,216,235,.64));
-  background:var(--dm-circle-bg,linear-gradient(145deg,#182b3c,#06121d));
-  box-shadow:var(--dm-circle-shadow,inset 0 1px rgba(255,255,255,.21),0 3px 9px rgba(0,0,0,.28));cursor:pointer;
+html.dm-layout-editing #homeScreen #dmLayoutBoard>.dm-home-section-title{
+  cursor:grab;touch-action:pan-y;-webkit-user-select:none;user-select:none;
 }
-#homeScreen .dm-home-section-arrows button:focus-visible{
-  outline:2px solid #ecf7ff;outline-offset:2px;
-}
-html.dm-layout-editing #homeScreen .dm-layout-board>.dm-home-section-title{
-  margin-top:14px;padding-top:3px;
-}
+html.dm-layout-editing #homeScreen #dmLayoutBoard>.dm-home-section-title.dm-section-dragging{cursor:grabbing}
 #homeScreen #dmHomeWidgets{min-width:0}
 
 
