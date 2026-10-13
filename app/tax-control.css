@@ -32,12 +32,7 @@
 }
 #dmTaxOverlay .dm-tax-head small{display:block;font-size:9px;line-height:1.4;letter-spacing:.10em;color:#cba77e}
 #dmTaxOverlay .dm-tax-head h2{margin:5px 0 0;font-size:19px;line-height:1.3;font-weight:560}
-#dmTaxOverlay .dm-tax-head button{
- flex:none;display:grid;place-items:center;width:34px;height:34px;
- border:1px solid rgba(157,192,220,.43);border-radius:12px;
- color:#eaf5ff;background:linear-gradient(140deg,#28415b,#071525);
- font:400 24px/1 system-ui;cursor:pointer
-}
+
 #dmTaxOverlay .dm-tax-tabs{display:flex;gap:7px;flex:none;padding:10px 13px;border-bottom:1px solid rgba(135,174,202,.16)}
 #dmTaxOverlay .dm-tax-tabs button{
  flex:1;min-height:36px;padding:8px 9px;
