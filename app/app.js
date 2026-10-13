@@ -98,13 +98,86 @@
   function toggleProfileCard(){const card=byId('openProfileCard');const isOpening=card.hidden;if(isOpening)hideBrandCard();card.hidden=!isOpening;byId('openProfile').setAttribute('aria-expanded',String(isOpening));}
   function closeModal(){const el=byId('modal');if(el.open)el.close();}
   function modal(title,html,init){byId('dialogTitle').textContent=title;byId('dialogContent').innerHTML=html;if(!byId('modal').open)byId('modal').showModal();if(init)init();}
+  /* Real printable/shareable passports from the current local profile.
+     Nothing is uploaded or sent without a separate user gesture. */
+  function passportPlain(kind){
+    if(kind==='brand')return [
+      'ПАСПОРТ ПРИЛОЖЕНИЯ',
+      'Продукт: Цифровой управляющий',
+      'Разработчик: Цифровой бизнес',
+      'Версия: '+VERSION,
+      'Тип лицензии: Демонстрация',
+      'Покупка: не подтверждена',
+      'Подписка: не подключена',
+      'Статус: демонстрационный, без сервера лицензирования',
+      'Источник: сведения этой версии приложения'
+    ].join('\n');
+    return [
+      'ПАСПОРТ КОМПАНИИ · ДЕМОНСТРАЦИОННЫЙ ПРОФИЛЬ',
+      'Компания: '+(state.company||'Не указано'),
+      'Представитель: '+(state.name||'Не указано'),
+      'Направление: '+(state.industry||'Не указано'),
+      'Город: '+(state.city||'Не указано'),
+      'Источник: записи, сохранённые в этом браузере',
+      'Этот паспорт — информационная карточка, не юридическая выписка'
+    ].join('\n');
+  }
+  function passportButtons(kind){
+    return '<div class="dm-passport-actions" role="group" aria-label="Действия с паспортом">'+
+      '<button type="button" class="dm-passport-button" data-passport-action="share" data-passport-kind="'+kind+'">Поделиться</button>'+
+      '<button type="button" class="dm-passport-button" data-passport-action="print" data-passport-kind="'+kind+'">Распечатать</button>'+
+      '</div>';
+  }
+  function passportRows(){
+    return '<div class="dm-passport-rows" aria-label="Паспорт компании">'+
+      '<div><span>Компания</span><strong>'+safe(state.company||'Моя компания')+'</strong></div>'+
+      '<div><span>Представитель</span><strong>'+safe(state.name||'Не указано')+'</strong></div>'+
+      '<div><span>Направление</span><strong>'+safe(state.industry||'Не указано')+'</strong></div>'+
+      '<div><span>Город</span><strong>'+safe(state.city||'Не указано')+'</strong></div>'+
+      '</div>';
+  }
+  async function sharePassport(kind){
+    const label=kind==='brand'?'Паспорт приложения':'Паспорт компании',value=passportPlain(kind);
+    if(typeof navigator.share==='function'){
+      try{await navigator.share({title:label,text:value});return;}
+      catch(err){if(err?.name==='AbortError')return;}
+    }
+    if(navigator.clipboard?.writeText){
+      try{await navigator.clipboard.writeText(value);notify('Паспорт скопирован — можно переслать');return;}
+      catch(_){}
+    }
+    window.prompt('Скопируйте паспорт и перешлите его',value);
+  }
+  function printPassport(kind){
+    const label=kind==='brand'?'Паспорт приложения':'Паспорт компании';
+    // Text content is HTML-escaped before being inserted in print markup.
+    const body=passportPlain(kind).split('\n').map(line=>safe(line)).join('<br>');
+    const page=window.open('','_blank');
+    if(!page){notify('Для печати разрешите открыть новое окно в Safari');return;}
+    page.document.open();
+    page.document.write('<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>'+safe(label)+
+      '</title><meta name="viewport" content="width=device-width,initial-scale=1">'+
+      '<style>body{margin:0;padding:36px;max-width:720px;font:15px/1.8 system-ui,sans-serif;color:#192534}'+
+      'h1{font-size:24px;margin:0 0 18px}main{padding:25px;border:1px solid #a6b8c8;border-radius:12px}'+
+      'button{margin:0 0 20px;padding:10px 18px}small{color:#627282}'+
+      '@media print{button{display:none}body{padding:0}main{border:0}}</style></head><body>'+
+      '<button onclick="window.print()" type="button">Распечатать паспорт</button>'+
+      '<main><h1>'+safe(label)+'</h1><p>'+body+'</p></main>'+
+      '<small>Сведения сформированы из локального демонстрационного приложения.</small></body></html>');
+    page.document.close();
+    page.focus();
+    // Print button inside the document is a reliable fallback for iOS Safari.
+    try{page.print();}catch(_){}
+  }
+
   function brandModal(){modal('О продукте и лицензии',`
     <div class="modal-brand"><img src="./assets/logo-air.png" alt=""><div><strong>Цифровой бизнес</strong><small>Компания-разработчик приложения «Цифровой управляющий»</small></div></div>
     <div class="modal-rows"><div class="modal-row"><span>Приложение</span><strong>Цифровой управляющий</strong></div><div class="modal-row"><span>Установленная версия</span><strong>${VERSION}</strong></div><div class="modal-row"><span>Тип лицензии</span><span class="demo-tag">Демонстрация</span></div><div class="modal-row"><span>Покупка</span><strong>Не подтверждена</strong></div><div class="modal-row"><span>Подписка</span><strong>Не подключена</strong></div></div>
     <p class="modal-note">В этой локальной сборке нет сервера лицензирования. Мы не показываем выдуманную оплаченную подписку: после подключения системы оплаты здесь появится реальный тип лицензии, срок действия и статус.</p>
+    ${passportButtons('brand')}
     <div class="mg-brand-feedback"><strong>Нашли баг или есть идея?</strong><a target="_blank" rel="noopener noreferrer" href="https://github.com/evacuatorkrasnodar-ux/digital-manager/issues/new">Написать разработчикам →</a><small>Обращения открываются на GitHub.</small></div><div class="dialog-actions"><button class="primary-button" type="button" id="brandDone">Понятно</button></div>`,()=>byId('brandDone').addEventListener('click',closeModal));}
   function profileModal(){modal('Мой профиль',`<form id="profileForm" class="form-fields"><label>Как к вам обращаться?<input name="name" maxlength="42" required value="${safe(state.name)}" placeholder="Имя"></label><button class="primary-button" type="submit">Сохранить имя</button></form>`,()=>byId('profileForm').addEventListener('submit',e=>{e.preventDefault();const form=new FormData(e.currentTarget);const name=String(form.get('name')||'').trim();if(!name)return;state.name=name;save();applyUser();announceProfile();closeModal();notify('Имя сохранено на этом устройстве');}));}
-  function companyModal(){modal('Карточка бизнеса',`<form id="companyForm" class="form-fields"><label>Название компании<input name="company" maxlength="70" required value="${safe(state.company)}"></label><label>Направление деятельности<input name="industry" maxlength="65" value="${safe(state.industry)}"></label><label>Город<input name="city" maxlength="45" value="${safe(state.city)}"></label><button class="primary-button" type="submit">Сохранить компанию</button></form><p class="modal-note">Данные карточки сохраняются только в браузере. В будущем они будут синхронизироваться с аккаунтом.</p>`,()=>byId('companyForm').addEventListener('submit',e=>{e.preventDefault();const data=new FormData(e.currentTarget);state.company=String(data.get('company')||'').trim()||'Моя компания';state.industry=String(data.get('industry')||'').trim();state.city=String(data.get('city')||'').trim();save();applyUser();announceProfile();closeModal();notify('Карточка бизнеса сохранена');}));}
+  function companyModal(){modal('Паспорт компании',`<p class="dm-passport-lead">Демонстрационная карточка компании · сведения из профиля на этом устройстве</p>${passportRows()}${passportButtons('company')}<form id="companyForm" class="form-fields"><label>Название компании<input name="company" maxlength="70" required value="${safe(state.company)}"></label><label>Направление деятельности<input name="industry" maxlength="65" value="${safe(state.industry)}"></label><label>Город<input name="city" maxlength="45" value="${safe(state.city)}"></label><button class="primary-button" type="submit">Сохранить компанию</button></form><p class="modal-note">Данные карточки сохраняются только в браузере. В будущем они будут синхронизироваться с аккаунтом.</p>`,()=>byId('companyForm').addEventListener('submit',e=>{e.preventDefault();const data=new FormData(e.currentTarget);state.company=String(data.get('company')||'').trim()||'Моя компания';state.industry=String(data.get('industry')||'').trim();state.city=String(data.get('city')||'').trim();save();applyUser();announceProfile();closeModal();notify('Карточка бизнеса сохранена');}));}
   function clientsModal(){const list=state.clients.length?`<ul class="modal-list">${state.clients.map(x=>`<li><span>${safe(x.name)}</span><small>${safe(x.phone||'Без телефона')}</small></li>`).join('')}</ul>`:'<p class="empty-hint">Вы пока не добавили тестовых клиентов.</p>';modal('Работа с клиентами',`<p class="modal-note">На главной показаны примерные 248 клиентов. Ниже — ваши собственные записи, сохранённые на этом устройстве.</p>${list}<form id="clientForm" class="form-fields"><label>Имя клиента<input name="name" required maxlength="80" placeholder="Например, Мария"></label><label>Контакт<input name="phone" maxlength="70" placeholder="Телефон или e-mail"></label><button class="primary-button" type="submit">Добавить клиента</button></form>`,()=>byId('clientForm').addEventListener('submit',e=>{e.preventDefault();const d=new FormData(e.currentTarget);const name=String(d.get('name')||'').trim();if(!name)return;state.clients.unshift({name,phone:String(d.get('phone')||'').trim()});save();clientsModal();notify('Клиент добавлен');}));}
   function ordersModal(){const list=state.orders.length?`<ul class="modal-list">${state.orders.map(x=>`<li><span>${safe(x.title)}</span><small>${money(x.amount)}</small></li>`).join('')}</ul>`:'<p class="empty-hint">Вы пока не добавили тестовых заказов.</p>';modal('Заказы',`<p class="modal-note">На главной — демонстрационная аналитика. Ваши записи заказов хранятся локально и не влияют на образцовые графики.</p>${list}<form id="orderForm" class="form-fields"><label>Название заказа<input name="title" maxlength="80" required placeholder="Например, Консультация"></label><label>Сумма в рублях<input name="amount" type="number" min="0" max="999999999" required placeholder="5000"></label><button class="primary-button" type="submit">Добавить заказ</button></form>`,()=>byId('orderForm').addEventListener('submit',e=>{e.preventDefault();const d=new FormData(e.currentTarget);const title=String(d.get('title')||'').trim(),amount=Number(d.get('amount'));if(!title||!Number.isFinite(amount)||amount<0)return;state.orders.unshift({title,amount});save();ordersModal();notify('Заказ добавлен');}));}
   function detailModal(which){const d=demo[period];const entries={revenue:{title:'Аналитика выручки',figure:money(d.revenue),note:`Показатели за выбранный период — демонстрационные. Рост ${d.revChange} ${d.compare}.`},profit:{title:'Аналитика прибыли',figure:money(d.profit),note:`Прибыль в примере за выбранный период. Рост ${d.profitChange} ${d.compare}.`},finance:{title:'Финансовый анализ',figure:money(d.profit),note:'В рабочей версии эта страница будет собирать расходы, доходы и рентабельность из подключённых источников.'}};const item=entries[which];if(!item)return;modal(item.title,`<div class="modal-brand"><svg class="ico" style="width:38px;height:38px;color:#86caff"><use href="#ic-bars"/></svg><div><strong>${item.figure}</strong><small>Демонстрационные данные</small></div></div><p class="modal-note">${item.note}</p><div class="modal-actions"><button class="secondary-button" id="closeMetric" type="button">Вернуться на главную</button></div>`,()=>byId('closeMetric').addEventListener('click',closeModal));}
@@ -1453,6 +1526,12 @@
   document.addEventListener('keydown',event=>{if(event.key==='Escape' && !byId('openBrandCard').hidden)hideBrandCard();});
   byId('openProfile').addEventListener('click',toggleProfileCard);
   byId('openProfileCard').addEventListener('click',()=>{hideProfileCard();companyModal();});
+  byId('modal').addEventListener('click',event=>{
+    const btn=event.target.closest('[data-passport-action]');
+    if(!btn)return;
+    if(btn.dataset.passportAction==='share')sharePassport(btn.dataset.passportKind);
+    else if(btn.dataset.passportAction==='print')printPassport(btn.dataset.passportKind);
+  });
   document.addEventListener('click',event=>{if(!byId('openProfileCard').hidden && !event.target.closest('#openProfile, #openProfileCard'))hideProfileCard();});
   document.addEventListener('keydown',event=>{if(event.key==='Escape' && !byId('openProfileCard').hidden)hideProfileCard();});
   byId('clientsCard').addEventListener('click',clientsModal);
