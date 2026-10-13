@@ -265,6 +265,6 @@
 }
 
 /* iPhone X-sized portrait PWA: viewport height changes with iOS safe-area / standalone mode. */
-@media (min-width:370px) and (max-width:380px) and (min-height:690px) and (max-height:850px) and (orientation:portrait){
+@media (min-width:370px) and (max-width:380px) and (orientation:portrait){
   .bottom-nav[data-layout="five"] #tabAssistant{transform:translateY(6px)}
 }
