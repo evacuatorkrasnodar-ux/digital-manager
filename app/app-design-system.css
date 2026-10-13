@@ -1,4 +1,4 @@
-/* Digital Manager — unified Black Velvet visual language (v1).
+/* Digital Manager — unified Black Velvet visual language (v3).
    Source of truth for shared chrome across Home, My Day, Care, Health and World.
    Geometry, data, special card contours, meaningful status colors and behavior belong
    to their feature stylesheets. Add new shared refinements HERE, not inline in HTML. */
@@ -55,7 +55,8 @@
 #dmDirectorOffice .dm-director-head [data-director-close],
 #dmTaxOverlay .dm-tax-head [data-tax-close],
 #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
-#dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"]{
+#dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
+.dm-journey-panel header [data-journey-close]{
   position:relative;
   box-sizing:border-box;
   display:grid;
@@ -68,6 +69,7 @@
   color:var(--dm-ui-ink);
   background:var(--dm-ui-small-glass);
   box-shadow:inset 0 1px rgba(255,255,255,.24),0 3px 10px rgba(0,5,15,.29);
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
 }
 :where(.day-dialog .dialog-x,#modal .dialog-close,#plasmaClose) svg{
   display:block;width:17px;height:17px;fill:none;
@@ -78,19 +80,22 @@
 #dmDirectorOffice .dm-director-head [data-director-close],
 #dmTaxOverlay .dm-tax-head [data-tax-close],
 #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
-#dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"]{
+#dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
+.dm-journey-panel header [data-journey-close]{
   font-size:0;line-height:0;
 }
 :is(#dmWorkspaceOverlay .dm-workspace-head [data-ws-close],
 #dmDirectorOffice .dm-director-head [data-director-close],
 #dmTaxOverlay .dm-tax-head [data-tax-close],
 #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
-#dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"])::before,
+#dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
+.dm-journey-panel header [data-journey-close])::before,
 :is(#dmWorkspaceOverlay .dm-workspace-head [data-ws-close],
 #dmDirectorOffice .dm-director-head [data-director-close],
 #dmTaxOverlay .dm-tax-head [data-tax-close],
 #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
-#dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"])::after{
+#dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
+.dm-journey-panel header [data-journey-close])::after{
   content:"";position:absolute;left:50%;top:50%;
   width:16px;height:1.9px;border-radius:2px;
   background:currentColor;transform:translate(-50%,-50%) rotate(45deg);
@@ -99,7 +104,8 @@
 #dmDirectorOffice .dm-director-head [data-director-close],
 #dmTaxOverlay .dm-tax-head [data-tax-close],
 #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
-#dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"])::after{
+#dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
+.dm-journey-panel header [data-journey-close])::after{
   transform:translate(-50%,-50%) rotate(-45deg);
 }
 /* Shared action hierarchy: active/primary controls match 'Сегодня'.
