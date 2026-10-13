@@ -1,4 +1,4 @@
-/* Digital Manager — unified Black Velvet visual language (v3).
+/* Digital Manager — unified Black Velvet visual language (v5).
    Source of truth for shared chrome across Home, My Day, Care, Health and World.
    Geometry, data, special card contours, meaningful status colors and behavior belong
    to their feature stylesheets. Add new shared refinements HERE, not inline in HTML. */
@@ -19,95 +19,181 @@
   box-shadow:inset 0 1px rgba(247,253,255,.085),0 6px 18px rgba(0,0,0,.19);
 }
 .day-shell :is(.day-heading h1,.world-intro h2,.day-section-heading h2){color:var(--dm-ui-ink)}
-/* One circular glass-chevron language for real navigation controls.
-   Never add phantom tap targets. Brand/logo back links on embedded personal pages
-   intentionally retain their existing illustration. */
-#managementScreen .mg-back,
-#assistantScreen .assistant-home-return,
-#digitalTraceScreen #dmTraceBack,
-#dmAttentionPanel #dmAttentionClose,
-.day-shell .month-arrow,
-.day-shell:not(.care-shell):not(.health-shell):not(.world-shell) .day-back{
+/* Approved chrome-on-graphite control, based on the Home card chevron.
+   One material for arrows and crosses; no blue/black variants.
+   Buttons keep their existing behavior, position and accessible names. */
+:root{
+  --dm-circle-size:34px;
+  --dm-circle-icon-size:16px;
+  --dm-circle-ink:#f3f8fd;
+  --dm-circle-edge:rgba(192,216,235,.64);
+  --dm-circle-edge-hover:rgba(229,241,251,.90);
+  --dm-circle-bg:
+    radial-gradient(ellipse at 28% 11%,rgba(241,249,255,.105),transparent 58%),
+    linear-gradient(151deg,#172735 0%,#0d1c29 57%,#08131e 100%);
+  --dm-circle-shadow:
+    inset 0 1px 0 rgba(255,255,255,.26),
+    inset 0 -1px 0 rgba(91,127,153,.24),
+    inset 0 0 0 1px rgba(255,255,255,.055),
+    0 3px 10px rgba(0,0,0,.33),
+    0 0 0 1px rgba(174,203,225,.08);
+}
+:is(
+ .dm-circle-control,
+ .dm-circle-arrow,
+ #managementScreen .mg-back,
+ #managementScreen .mg-carousel-nav,
+ #assistantScreen .assistant-home-return,
+ #digitalTraceScreen #dmTraceBack,
+ #dmAttentionPanel #dmAttentionClose,
+ #homeScreen .tile-chevron,
+ .day-shell .month-arrow,
+ .day-shell:not(.care-shell):not(.health-shell):not(.world-shell) .day-back,
+ .day-dialog .dialog-x,
+ #modal .dialog-close,
+ #plasmaClose,
+ #dmWorkspaceOverlay .dm-workspace-head [data-ws-close],
+ #dmDirectorOffice .dm-director-head [data-director-close],
+ #dmTaxOverlay .dm-tax-head [data-tax-close],
+ #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
+ #dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
+ .dm-journey-panel header [data-journey-close]
+){
   box-sizing:border-box;
-  display:grid;
+  display:inline-grid;
   place-items:center;
-  width:34px;
-  height:34px;
-  min-width:34px;
+  flex-shrink:0;
+  width:var(--dm-circle-size);
+  height:var(--dm-circle-size);
+  min-width:var(--dm-circle-size);
   padding:0;
-  border:1px solid var(--dm-ui-edge);
+  border:1px solid var(--dm-circle-edge);
   border-radius:50%;
-  background:var(--dm-ui-small-glass);
-  color:var(--dm-ui-ink);
-  flex:none;
-  box-shadow:inset 0 1px rgba(255,255,255,.23),0 3px 10px rgba(0,5,15,.28);
+  color:var(--dm-circle-ink);
+  background:var(--dm-circle-bg);
+  box-shadow:var(--dm-circle-shadow);
+  line-height:1;
+  -webkit-tap-highlight-color:transparent;
 }
-.day-shell .month-arrow{width:31px;height:31px;min-width:31px}
-:is(#managementScreen .mg-back,#assistantScreen .assistant-home-return,#digitalTraceScreen #dmTraceBack,#dmAttentionPanel #dmAttentionClose,.day-shell .month-arrow,.day-shell .day-back) svg{
-  width:17px;height:17px;stroke:currentColor;stroke-width:1.9;
-  stroke-linecap:round;stroke-linejoin:round;
+:is(.dm-circle-control,.dm-circle-arrow) {
+  --dm-circle-size:22px;
+  --dm-circle-icon-size:13px;
 }
-/* One cross icon: same glass, size and linework for modal dismiss buttons.
-   Text glyphs in JS-generated dialog headers are drawn as precise CSS lines. */
-.day-dialog .dialog-x,
-#modal .dialog-close,
-#plasmaClose,
-#dmWorkspaceOverlay .dm-workspace-head [data-ws-close],
-#dmDirectorOffice .dm-director-head [data-director-close],
-#dmTaxOverlay .dm-tax-head [data-tax-close],
-#dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
-#dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
-.dm-journey-panel header [data-journey-close]{
-  position:relative;
-  box-sizing:border-box;
-  display:grid;
-  place-items:center;
-  flex:none;
-  width:34px;height:34px;min-width:34px;
-  padding:0;
-  border:1px solid var(--dm-ui-edge);
-  border-radius:50%;
-  color:var(--dm-ui-ink);
-  background:var(--dm-ui-small-glass);
-  box-shadow:inset 0 1px rgba(255,255,255,.24),0 3px 10px rgba(0,5,15,.29);
-  cursor:pointer;-webkit-tap-highlight-color:transparent;
+.dm-circle-control:not(.dm-circle-control--sm){--dm-circle-size:34px;--dm-circle-icon-size:16px}
+.dm-circle-control--sm{--dm-circle-size:22px;--dm-circle-icon-size:13px}
+.dm-action-circle.dm-circle-arrow{--dm-circle-size:17px;--dm-circle-icon-size:10px}
+#homeScreen #openBrandCard .license-arrow.dm-circle-arrow,
+#homeScreen #openProfileCard .profile-arrow.dm-circle-arrow{
+  --dm-circle-size:21px;
+  --dm-circle-icon-size:11px;
 }
-:is(.day-dialog .dialog-x,#modal .dialog-close,#plasmaClose) svg{
-  display:block;width:17px;height:17px;fill:none;
-  stroke:currentColor;stroke-width:1.85;
-  stroke-linecap:round;stroke-linejoin:round;
+#homeScreen .tile-chevron{--dm-circle-size:25px;--dm-circle-icon-size:14px}
+#managementScreen .mg-carousel-nav{--dm-circle-size:35px;--dm-circle-icon-size:18px}
+.day-shell .month-arrow{--dm-circle-size:32px;--dm-circle-icon-size:17px}
+:is(
+ .dm-circle-control,
+ .dm-circle-arrow,
+ #managementScreen .mg-back,
+ #managementScreen .mg-carousel-nav,
+ #assistantScreen .assistant-home-return,
+ #digitalTraceScreen #dmTraceBack,
+ #dmAttentionPanel #dmAttentionClose,
+ #homeScreen .tile-chevron,
+ .day-shell .month-arrow,
+ .day-shell .day-back,
+ .day-dialog .dialog-x,
+ #modal .dialog-close,
+ #plasmaClose
+) svg{
+  display:block;
+  width:var(--dm-circle-icon-size,16px);
+  height:var(--dm-circle-icon-size,16px);
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.9;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  opacity:1;
 }
-#dmWorkspaceOverlay .dm-workspace-head [data-ws-close],
-#dmDirectorOffice .dm-director-head [data-director-close],
-#dmTaxOverlay .dm-tax-head [data-tax-close],
-#dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
-#dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
-.dm-journey-panel header [data-journey-close]{
-  font-size:0;line-height:0;
+.dm-circle-control--left svg{transform:rotate(180deg)}
+/* Text-based legacy dismiss buttons use the same rim but CSS-drawn X.
+   The ring uses border + inset shadows, reserving pseudo-elements for the X. */
+:is(
+ .dm-circle-control--close,
+ #dmWorkspaceOverlay .dm-workspace-head [data-ws-close],
+ #dmDirectorOffice .dm-director-head [data-director-close],
+ #dmTaxOverlay .dm-tax-head [data-tax-close],
+ #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
+ #dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
+ .dm-journey-panel header [data-journey-close]
+){position:relative;font-size:0;line-height:0}
+:is(
+ .dm-circle-control--close,
+ #dmWorkspaceOverlay .dm-workspace-head [data-ws-close],
+ #dmDirectorOffice .dm-director-head [data-director-close],
+ #dmTaxOverlay .dm-tax-head [data-tax-close],
+ #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
+ #dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
+ .dm-journey-panel header [data-journey-close]
+)::before,
+:is(
+ .dm-circle-control--close,
+ #dmWorkspaceOverlay .dm-workspace-head [data-ws-close],
+ #dmDirectorOffice .dm-director-head [data-director-close],
+ #dmTaxOverlay .dm-tax-head [data-tax-close],
+ #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
+ #dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
+ .dm-journey-panel header [data-journey-close]
+)::after{
+  content:"";
+  position:absolute;left:50%;top:50%;
+  width:15px;height:1.8px;border-radius:2px;
+  background:currentColor;
+  transform:translate(-50%,-50%) rotate(45deg);
+  pointer-events:none;
 }
-:is(#dmWorkspaceOverlay .dm-workspace-head [data-ws-close],
-#dmDirectorOffice .dm-director-head [data-director-close],
-#dmTaxOverlay .dm-tax-head [data-tax-close],
-#dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
-#dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
-.dm-journey-panel header [data-journey-close])::before,
-:is(#dmWorkspaceOverlay .dm-workspace-head [data-ws-close],
-#dmDirectorOffice .dm-director-head [data-director-close],
-#dmTaxOverlay .dm-tax-head [data-tax-close],
-#dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
-#dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
-.dm-journey-panel header [data-journey-close])::after{
-  content:"";position:absolute;left:50%;top:50%;
-  width:16px;height:1.9px;border-radius:2px;
-  background:currentColor;transform:translate(-50%,-50%) rotate(45deg);
-}
-:is(#dmWorkspaceOverlay .dm-workspace-head [data-ws-close],
-#dmDirectorOffice .dm-director-head [data-director-close],
-#dmTaxOverlay .dm-tax-head [data-tax-close],
-#dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
-#dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
-.dm-journey-panel header [data-journey-close])::after{
-  transform:translate(-50%,-50%) rotate(-45deg);
+:is(
+ .dm-circle-control--close,
+ #dmWorkspaceOverlay .dm-workspace-head [data-ws-close],
+ #dmDirectorOffice .dm-director-head [data-director-close],
+ #dmTaxOverlay .dm-tax-head [data-tax-close],
+ #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
+ #dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
+ .dm-journey-panel header [data-journey-close]
+)::after{transform:translate(-50%,-50%) rotate(-45deg)}
+:is(
+ .dm-circle-control,
+ #managementScreen .mg-back,
+ #managementScreen .mg-carousel-nav,
+ #assistantScreen .assistant-home-return,
+ #digitalTraceScreen #dmTraceBack,
+ #dmAttentionPanel #dmAttentionClose,
+ .day-shell .month-arrow,
+ .day-shell .day-back,
+ .day-dialog .dialog-x,
+ #modal .dialog-close,
+ #plasmaClose,
+ #dmWorkspaceOverlay .dm-workspace-head [data-ws-close],
+ #dmDirectorOffice .dm-director-head [data-director-close],
+ #dmTaxOverlay .dm-tax-head [data-tax-close],
+ #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
+ #dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
+ .dm-journey-panel header [data-journey-close]
+){cursor:pointer}
+:is(.dm-circle-control,.dm-circle-arrow,#managementScreen .mg-back,
+ #managementScreen .mg-carousel-nav,#assistantScreen .assistant-home-return,
+ #digitalTraceScreen #dmTraceBack,#dmAttentionPanel #dmAttentionClose,
+ #homeScreen .tile-chevron,.day-shell .month-arrow,
+ .day-shell .day-back,.day-dialog .dialog-x,#modal .dialog-close,
+ #plasmaClose,#dmWorkspaceOverlay .dm-workspace-head [data-ws-close],
+ #dmDirectorOffice .dm-director-head [data-director-close],
+ #dmTaxOverlay .dm-tax-head [data-tax-close],
+ #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
+ #dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
+ .dm-journey-panel header [data-journey-close]
+):is(:hover,:focus-visible){border-color:var(--dm-circle-edge-hover);filter:brightness(1.07)}
+:is(.dm-circle-control,.day-dialog .dialog-x,#modal .dialog-close,.day-shell .month-arrow):focus-visible{
+  outline:2px solid rgba(224,241,253,.95);outline-offset:2px;
 }
 /* Shared action hierarchy: active/primary controls match 'Сегодня'.
    Secondary actions remain charcoal glass. No application data are modified. */
