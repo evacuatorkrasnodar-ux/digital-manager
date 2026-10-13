@@ -1540,13 +1540,10 @@
     }
   });
   plasmaExpand.addEventListener('click',()=>{
-    const alreadyFocused=document.activeElement===plasmaInput;
-    dmToggleDraftEditor(!plasmaPanel.classList.contains('dm-chat-editor'));
-    // iOS PWA: switching compact/expanded geometry and forcing focus in the
-    // same frame causes a brief viewport jump and broken-looking composition.
-    if(!alreadyFocused)requestAnimationFrame(()=>{
-      if(!plasmaPanel.hidden)plasmaInput.focus({preventScroll:true});
-    });
+    // Let the enlarged editor settle before the user opens the iOS keyboard.
+    const expand=!plasmaPanel.classList.contains('dm-chat-editor');
+    if(document.activeElement===plasmaInput)plasmaInput.blur();
+    dmToggleDraftEditor(expand);
   });
   byId('plasmaClearDraft').addEventListener('click',()=>{
     if(plasmaInput.value&&!window.confirm('Очистить сохранённый черновик?'))return;
