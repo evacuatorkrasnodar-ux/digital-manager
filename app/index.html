@@ -68,23 +68,23 @@
 #homeScreen #openBrandCard .license-arrow.dm-circle-arrow,
 #homeScreen #openProfileCard .profile-arrow.dm-circle-arrow {
  position:absolute!important;z-index:20!important;display:grid!important;place-items:center!important;
- width:27px!important;height:27px!important;min-width:27px!important;flex:none!important;
+ width:20px!important;height:20px!important;min-width:20px!important;flex:none!important;
  margin:0!important;padding:0!important;border-radius:50%!important;
  border:1px solid rgba(190,226,255,.84)!important;
  background:linear-gradient(145deg,#426887,#101d2b)!important;
  box-shadow:inset 0 1px 1px rgba(255,255,255,.38),0 3px 10px rgba(0,0,0,.4),0 0 9px rgba(98,178,241,.28)!important;
  opacity:1!important;visibility:visible!important;transform:none!important;
 }
-#homeScreen #openBrandCard .license-arrow.dm-circle-arrow{right:12px!important;bottom:14px!important;left:auto!important;top:auto!important}
-#homeScreen #openProfileCard .profile-arrow.dm-circle-arrow{left:12px!important;bottom:14px!important;right:auto!important;top:auto!important}
+#homeScreen #openBrandCard .license-arrow.dm-circle-arrow{right:13px!important;bottom:13px!important;left:auto!important;top:auto!important}
+#homeScreen #openProfileCard .profile-arrow.dm-circle-arrow{left:13px!important;bottom:13px!important;right:auto!important;top:auto!important}
 #homeScreen #openBrandCard .license-arrow.dm-circle-arrow svg,
 #homeScreen #openProfileCard .profile-arrow.dm-circle-arrow svg{display:none!important}
 #homeScreen #openBrandCard .license-arrow.dm-circle-arrow::after,
 #homeScreen #openProfileCard .profile-arrow.dm-circle-arrow::after{
- content:"";display:block;width:9px;height:9px;border-top:2px solid #f2faff;
- border-right:2px solid #f2faff;transform:rotate(45deg);margin-left:-3px;
+ content:"";display:block;width:7px;height:7px;border-top:2px solid #f2faff;
+ border-right:2px solid #f2faff;transform:rotate(45deg);margin-left:-2px;
 }
-#homeScreen #openProfileCard .profile-arrow.dm-circle-arrow::after{transform:rotate(-135deg);margin-left:3px}
+#homeScreen #openProfileCard .profile-arrow.dm-circle-arrow::after{transform:rotate(-135deg);margin-left:2px}
 </style>
 </head>
 <body>
@@ -166,8 +166,8 @@
           <div class="license-top">
             <img class="license-mini-logo" src="./assets/logo-air.png" alt="" aria-hidden="true">
             <div class="license-brand-text"><strong>Digital Business</strong><small>IT · AI Automation</small></div>
-            <span class="license-arrow dm-circle-arrow" aria-hidden="true"><svg class="ico mini-chevron" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>
-          </div>
+            </div>
+          <span class="license-arrow dm-circle-arrow" aria-hidden="true"><svg class="ico mini-chevron" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>
           <div class="license-lines">
             <span><svg class="ico"><use href="#ic-cube"/></svg><span>Версия <b id="versionPreview">1.0.0</b></span></span>
             <span><svg class="ico gold"><use href="#ic-crown"/></svg><span>Лицензия <b id="licensePreview">Pro</b></span></span>
@@ -182,8 +182,8 @@
           <span class="profile-top">
             <span class="profile-mini-logo" aria-hidden="true"><svg class="ico"><use href="#ic-building"/></svg></span>
             <span class="profile-brand-text"><strong id="profilePreviewCompany">Моя компания</strong><small>Карточка организации</small></span>
-            <span class="profile-arrow dm-circle-arrow" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>
-          </span>
+            </span>
+          <span class="profile-arrow dm-circle-arrow" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>
           <span class="profile-lines">
             <span><svg class="ico" aria-hidden="true"><use href="#ic-person"/></svg><span id="profilePreviewOwner">Алексей</span></span>
             <span><svg class="ico" aria-hidden="true"><use href="#ic-building"/></svg><span id="profilePreviewIndustry">Услуги</span></span>
