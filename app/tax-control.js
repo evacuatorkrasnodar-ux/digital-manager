@@ -214,6 +214,12 @@ overlay.addEventListener('keydown',e=>{if(e.key==='Escape'){e.stopPropagation();
 window.addEventListener('storage',e=>{if(e.key===KEY){data=load();update();if(!overlay.hidden)render();}});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)update();});
 window.addEventListener('focus',update);
-window.DMTaxControl=Object.freeze({open,refresh:update,snapshot,source:'owner-entered-local-dates'});
+function routeQuestion(query){
+ const q=safe(query,300).toLowerCase();
+ if(!/(?:покажи|открой|проверь|напомни|когда|что|какие|срок|календарь)/.test(q)||
+ !/налог|декларац|взнос|отч[её]тност|фнс/.test(q))return false;
+ open();return true;
+}
+window.DMTaxControl=Object.freeze({open,refresh:update,snapshot,routeQuestion,source:'owner-entered-local-dates'});
 update();
 })();
