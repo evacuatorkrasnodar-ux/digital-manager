@@ -77,13 +77,13 @@
     const visible=visibleSectionIds();
     const from=visible.indexOf(sectionId),target=visible[from+by];
     if(from<0||!target)return;
-    moveSection(sectionId,target);
+    moveSection(sectionId,target,by>0);
   }
-  function moveSection(source,target){
+  function moveSection(source,target,after=false){
     if(source===target||!defaultSections.includes(source)||!defaultSections.includes(target))return;
     const rest=preferences.sectionOrder.filter(s=>s!==source);
     const at=rest.indexOf(target);
-    rest.splice(at,0,source);
+    rest.splice(at+(after?1:0),0,source);
     preferences.sectionOrder=normalizeSections(rest);
     pickedId=null;
     save();render();
@@ -379,7 +379,8 @@
     pickedId=null;
     if(!target||target===id)return;
     if(sectionFor(id)!==sectionFor(target)){
-      moveSection(sectionFor(id),sectionFor(target));
+      const from=sectionFor(id),to=sectionFor(target);
+      moveSection(from,to,preferences.sectionOrder.indexOf(from)<preferences.sectionOrder.indexOf(to));
       return;
     }
     const arr=preferences.order.filter(x=>x!==id);
