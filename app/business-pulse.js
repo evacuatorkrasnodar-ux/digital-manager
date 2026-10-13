@@ -101,12 +101,13 @@ function refresh(){
  const d=collect(currentPeriod);
  $('dmPulseHeading').textContent='Пульс бизнеса · '+label[currentPeriod];
  const extra=d.warnings.length?' · '+d.warnings.length+' требуют внимания':'';
- const text=d.recorded?'Финансы на карточках — демо · обращений: '+d.created+' · покупок: '+d.won+extra:
-  'Финансы на карточках — демо · записи пока не внесены'+(d.warnings.length?extra:'');
+ const text=d.recorded?'По вашим записям · обращений: '+d.created+' · покупок: '+d.won+extra:
+  'Записи о продажах пока не внесены'+(d.warnings.length?extra:'');
  $('dmPulseSummary').textContent=text;
  bar.dataset.attention=d.warnings.length?'yes':'no';
  bar.setAttribute('aria-label','Пульс бизнеса за '+label[currentPeriod].toLowerCase()+'. '+text+'. Открыть подробности.');
- bar.title='Показатели за выбранный период — из ручных записей; финансовые карточки пока демо';
+ bar.title='Сводка и карточки за выбранный период — по ручным записям';
+ window.DMHomeMetricsRefresh?.();
  if(!overlay.hidden)render();
  return d;
 }
@@ -146,7 +147,7 @@ function render(){
   '<section class="dm-pulse-section"><small class="dm-pulse-eyebrow">ВАЖНО СЕЙЧАС · НЕ ЗАВИСИТ ОТ ПЕРИОДА</small>'+
    '<h3>Что требует внимания директора</h3>'+actionable(x)+'</section>'+
   '<section class="dm-pulse-section"><small class="dm-pulse-eyebrow">ГРАНИЦЫ ДАННЫХ</small>'+
-   '<p>Четыре большие бизнес-карточки и график выручки пока содержат <strong>демонстрационные показатели</strong>. Они не относятся к фактическим расчётам выше.</p>'+
+   '<p>Карточки главной используют те же ручные записи за выбранный период. При отсутствии данных показывается отсутствие сведений. Без полного учёта расходов прибыль не определяется, а график не имитирует рост.</p>'+
    '<p>«Покупка» — отмеченная вручную сделка, а не подтверждённая банком оплата. Расходы показываются только по внесённой рекламе. Реальную выручку, прибыль, налоги и остаток денег без учётных источников не рассчитываем.</p>'+
    (x.undated||x.undatedWon?'<p>В истории есть записи без необходимых дат ('+fmtCount(x.undated)+' обращений, '+fmtCount(x.undatedWon)+' покупок). Мы не приписываем их произвольному периоду.</p>':'')+
    (x.flowErrors.length?'<p>Часть источников дел временно не прочитана: '+x.flowErrors.length+'. Сводка может быть неполной.</p>':'')+
@@ -195,6 +196,6 @@ function routeQuestion(query){
  }
  open();return true;
 }
-window.DMBusinessPulse=Object.freeze({open,refresh,routeQuestion,snapshot:()=>collect(currentPeriod)});
+window.DMBusinessPulse=Object.freeze({open,refresh,routeQuestion,snapshot:(requested=currentPeriod)=>collect(accepted.has(requested)?requested:currentPeriod)});
 refresh();
 })();
