@@ -1,5 +1,5 @@
 /* App-only service worker: fresh documents, styles and scripts; cached offline assets. */
-const CACHE = 'digital-manager-black-velvet-v758-20261013';
+const CACHE = 'digital-manager-black-velvet-v759-20261013';
 const CACHE_PREFIX = 'digital-manager-black-velvet-';
 
 self.addEventListener('install', event => {
