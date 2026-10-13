@@ -6,6 +6,8 @@ const KEY='dm-director-office-v1',DAY=86400000;
 const $=selector=>document.querySelector(selector);
 const escaped=s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[ch]));
 const clean=(x,n=220)=>String(x??'').replace(/\s+/g,' ').trim().slice(0,n);
+const personName=()=>escaped(clean(window.DMUserProfile?.getName?.()||'Алексей',42));
+const companyName=()=>escaped(clean(window.DMUserProfile?.getCompany?.()||'Моя компания',70));
 const QUESTIONS=[
  {id:'business',label:'Чем занимается наша компания?',hint:'Можно одной фразой. Например: «Эвакуатор и помощь на дороге в Краснодаре».',kind:'text'},
  {id:'goal',label:'Какая главная цель сейчас?',options:['Больше клиентов и заказов','Повысить прибыль','Навести порядок в процессах','Открыть новое направление']},
@@ -39,7 +41,7 @@ root.className='dm-director-office';
 root.id='dmDirectorOffice';
 root.hidden=true;
 root.innerHTML='<div class="dm-director-frame" role="dialog" aria-modal="true" aria-labelledby="dmDirectorTitle" tabindex="-1">'+
- '<header class="dm-director-head"><div><small>ЦИФРОВОЙ УПРАВЛЯЮЩИЙ · ДИРЕКТОРСКАЯ</small><h2 id="dmDirectorTitle">На подпись директору</h2></div>'+
+ '<header class="dm-director-head"><div><small>ЦИФРОВОЙ УПРАВЛЯЮЩИЙ · ДИРЕКТОРСКАЯ</small><h2 id="dmDirectorTitle">На подпись</h2></div>'+
  '<button type="button" data-director-close aria-label="Закрыть">×</button></header>'+
  '<div id="dmDirectorBody" class="dm-director-body"></div></div>';
 document.body.append(root);
@@ -183,7 +185,7 @@ function historyMarkup(){
 function deskMarkup(){
  proposal=candidate();
  const p=proposal,progressText=progress();
- return '<section class="dm-director-proposal"><small>✦ НА ПОДПИСЬ ДИРЕКТОРУ</small><h3>'+escaped(p.title)+'</h3>'+
+ return '<section class="dm-director-proposal"><small>✦ НА СОГЛАСОВАНИЕ</small><h3>'+escaped(p.title)+'</h3>'+
  '<p>'+escaped(p.body)+'</p><div class="dm-director-evidence"><strong>Основание:</strong> '+escaped(p.source)+'</div>'+
  '<p class="dm-director-next">'+escaped(p.next)+'</p>'+
  '<div class="dm-director-actions">'+button('approve','✓ Исполнить')+button('revise','✎ Исправить')+button('later','Позже')+'</div></section>'+
@@ -199,7 +201,7 @@ function nextQuestion(){
 }
 function introMarkup(){
  const p=progress(),q=nextQuestion();
- if(!q)return '<section class="dm-director-welcome"><small>ЗНАКОМСТВО С БИЗНЕСОМ</small><h3>На сегодня всё, директор! ☕</h3><p>'+
+ if(!q)return '<section class="dm-director-welcome"><small>ЗНАКОМСТВО С БИЗНЕСОМ</small><h3>На сегодня всё, '+personName()+'! ☕</h3><p>'+
  (p.remaining.length?'Я запомнил '+p.remaining.length+' незаполненных пунктов. Вернёмся к ним позже — ответы уже сохранены.':'Вы рассказали обо всех основных направлениях. Спасибо!')+
  '</p>'+button('desk','К решениям ↗')+button('close','Закрыть')+'</section>';
  const idx=QUESTIONS.indexOf(q)+1;
@@ -210,7 +212,7 @@ function introMarkup(){
  else control='<h3>'+escaped(q.label)+'</h3><div class="dm-director-choices">'+q.options.map((x,i)=>button('option',escaped(x),' data-choice="'+i+'"')).join('')+'</div>';
  return '<section class="dm-director-welcome"><small>ЗНАКОМСТВО · ВОПРОС '+idx+' ИЗ '+QUESTIONS.length+
  '</small><p class="dm-director-progress">'+p.answered+' из '+p.total+' уже известно · '+p.remaining.length+' ещё можно уточнить</p>'+
- '<p>Директор, хочу разобраться в вашем деле. Ответьте, как удобно; лишнего спрашивать не буду. 😁</p>'+
+ '<p>'+personName()+', хочу лучше понять ваш бизнес — «'+companyName()+'». Ответьте, как удобно; лишнего спрашивать не буду. 😁</p>'+
  control+'<div class="dm-director-secondary">'+button('skip','Пропустить')+button('pause','Продолжить позже')+'</div>'+
  '<p class="dm-director-muted">Всё сохраняется только в этом браузере. Пропущенное можно дополнять в «Управлении → Знакомство».</p></section>';
 }
@@ -234,14 +236,14 @@ function deptMarkup(){
 function revisionMarkup(){
  proposal=proposal||candidate();
  return '<section class="dm-director-proposal"><small>ИСПРАВИТЬ РЕШЕНИЕ</small><h3>'+escaped(proposal.title)+'</h3>'+
- '<p>Что изменить, директор? Одного замечания достаточно; я сохраню его вместе с предложением. Настоящая генерация новой версии ИИ потребует подключения.</p>'+
+ '<p>'+personName()+', что изменить? Одного замечания достаточно; я сохраню его вместе с предложением. Настоящая генерация новой версии ИИ потребует подключения.</p>'+
  '<form id="dmDirectorRevision"><label for="dmDirectorRevisionText">Ваше замечание</label><textarea id="dmDirectorRevisionText" maxlength="600" required rows="4" placeholder="Например: не предлагай скидки, сначала проверь расходы"></textarea>'+
  '<div class="dm-director-actions"><button type="submit">Сохранить замечание ↗</button>'+button('desk','Отмена')+'</div></form></section>';
 }
 function resultMarkup(){
  const item=data.history.at(-1),status=item?.status;
  const report=status==='approved'
- ?'Директор согласовал материал. Письма и сообщения не отправлены; для отправки нужен подключённый сервис или отдельное действие человека.'
+ ?'Вы согласовали материал. Письма и сообщения не отправлены; для отправки нужен подключённый сервис или отдельное действие человека.'
  :status==='blocked'?'Поручение согласовано, но внешнее выполнение ещё недоступно и не подтверждено.'
  :'Замечание сохранено. Чтобы подготовить новую версию, потребуется дополнительная работа.';
  return '<section class="dm-director-proposal"><small>РЕШЕНИЕ ЗАФИКСИРОВАНО</small><h3>'+
@@ -394,6 +396,7 @@ for(const ev of ['dm:sales-changed','dm:sales-insight-changed','dm:business-cont
 window.addEventListener('storage',event=>{if(event.key===KEY){data=load();refresh();}});
 window.addEventListener('dm:tax-changed',()=>queueMicrotask(refresh));
 window.addEventListener('dm:workspace-updated',()=>queueMicrotask(refresh));
+window.addEventListener('dm:profile-changed',()=>{if(!root.hidden)render();refresh();});
 window.DMDirectorOffice=Object.freeze({open,close,progress,refresh,propose,dismiss,proposal:candidate,getAnswers:()=>({...data.answers})});
 createSettingsEntry();
 refresh();
