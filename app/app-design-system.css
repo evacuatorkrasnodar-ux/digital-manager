@@ -52,12 +52,14 @@
  .day-dialog .dialog-x,
  #modal .dialog-close,
  #plasmaClose,
+ #dmSalesBack,
  #dmWorkspaceOverlay .dm-workspace-head [data-ws-close],
  #dmDirectorOffice .dm-director-head [data-director-close],
  #dmTaxOverlay .dm-tax-head [data-tax-close],
  #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
  #dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
- .dm-journey-panel header [data-journey-close]
+ .dm-journey-panel header [data-journey-close],
+ .dm-sales-draft-inner header button
 ){
   box-sizing:border-box;
   display:inline-grid;
@@ -103,7 +105,8 @@
  .day-shell .day-back,
  .day-dialog .dialog-x,
  #modal .dialog-close,
- #plasmaClose
+ #plasmaClose,
+ #dmSalesBack
 ) svg{
   display:block;
   width:var(--dm-circle-icon-size,16px);
@@ -125,7 +128,8 @@
  #dmTaxOverlay .dm-tax-head [data-tax-close],
  #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
  #dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
- .dm-journey-panel header [data-journey-close]
+ .dm-journey-panel header [data-journey-close],
+ .dm-sales-draft-inner header button
 ){position:relative;font-size:0;line-height:0}
 :is(
  .dm-circle-control--close,
@@ -134,7 +138,8 @@
  #dmTaxOverlay .dm-tax-head [data-tax-close],
  #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
  #dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
- .dm-journey-panel header [data-journey-close]
+ .dm-journey-panel header [data-journey-close],
+ .dm-sales-draft-inner header button
 )::before,
 :is(
  .dm-circle-control--close,
@@ -143,7 +148,8 @@
  #dmTaxOverlay .dm-tax-head [data-tax-close],
  #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
  #dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
- .dm-journey-panel header [data-journey-close]
+ .dm-journey-panel header [data-journey-close],
+ .dm-sales-draft-inner header button
 )::after{
   content:"";
   position:absolute;left:50%;top:50%;
@@ -159,7 +165,8 @@
  #dmTaxOverlay .dm-tax-head [data-tax-close],
  #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
  #dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
- .dm-journey-panel header [data-journey-close]
+ .dm-journey-panel header [data-journey-close],
+ .dm-sales-draft-inner header button
 )::after{transform:translate(-50%,-50%) rotate(-45deg)}
 :is(
  .dm-circle-control,
@@ -173,24 +180,28 @@
  .day-dialog .dialog-x,
  #modal .dialog-close,
  #plasmaClose,
+ #dmSalesBack,
  #dmWorkspaceOverlay .dm-workspace-head [data-ws-close],
  #dmDirectorOffice .dm-director-head [data-director-close],
  #dmTaxOverlay .dm-tax-head [data-tax-close],
  #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
  #dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
- .dm-journey-panel header [data-journey-close]
+ .dm-journey-panel header [data-journey-close],
+ .dm-sales-draft-inner header button
 ){cursor:pointer}
 :is(.dm-circle-control,.dm-circle-arrow,#managementScreen .mg-back,
  #managementScreen .mg-carousel-nav,#assistantScreen .assistant-home-return,
  #digitalTraceScreen #dmTraceBack,#dmAttentionPanel #dmAttentionClose,
  #homeScreen .tile-chevron,.day-shell .month-arrow,
  .day-shell .day-back,.day-dialog .dialog-x,#modal .dialog-close,
- #plasmaClose,#dmWorkspaceOverlay .dm-workspace-head [data-ws-close],
+ #plasmaClose,
+ #dmSalesBack,#dmWorkspaceOverlay .dm-workspace-head [data-ws-close],
  #dmDirectorOffice .dm-director-head [data-director-close],
  #dmTaxOverlay .dm-tax-head [data-tax-close],
  #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
  #dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
- .dm-journey-panel header [data-journey-close]
+ .dm-journey-panel header [data-journey-close],
+ .dm-sales-draft-inner header button
 ):is(:hover,:focus-visible){border-color:var(--dm-circle-edge-hover);filter:brightness(1.07)}
 :is(.dm-circle-control,.day-dialog .dialog-x,#modal .dialog-close,.day-shell .month-arrow):focus-visible{
   outline:2px solid rgba(224,241,253,.95);outline-offset:2px;
@@ -247,6 +258,7 @@ body .day-shell.health-shell .health-native-sync{
   outline-offset:2px;
 }
 :where(.day-dialog .dialog-x,#modal .dialog-close,#plasmaClose,
+ #dmSalesBack,
 #managementScreen .mg-back,#assistantScreen .assistant-home-return,
 .day-shell .month-arrow):is(:hover,:active){
   border-color:var(--dm-ui-edge-strong);
