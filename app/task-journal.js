@@ -524,7 +524,7 @@ function init(){
  if(management&&!management.querySelector('[data-journal-open]')){
   const anchor=management.querySelector('.mg-main'),box=document.createElement('div');
   box.className='dm-journal-entry-links';
-  box.innerHTML='<button type="button" data-journal-open="mine">Мои дела <span class="mg-chevron" aria-hidden="true"></span></button><button type="button" data-journal-open="history">История действий <span class="mg-chevron" aria-hidden="true"></span></button>';
+  box.innerHTML='<button type="button" data-journal-open="mine">Мои дела</button><button type="button" data-journal-open="history">История действий</button>';
   if(anchor)anchor.before(box);else management.append(box);
  }
  document.addEventListener('click',e=>{
