@@ -21,7 +21,7 @@ const QUESTIONS=[
  {id:'social',label:'Где общаетесь с клиентами?',options:['В мессенджерах','В социальных сетях','И там и там','Почти не общаемся онлайн']},
  {id:'rights',label:'Какой уровень самостоятельности предпочитаете?',options:['Анализируй и готовь, решение за мной','Каждый шаг сначала согласуй','Обсудим полномочия позже']}
 ];
-function empty(){return {version:1,answers:{},skipped:{},reminderAt:0,remindersOff:false,history:[],updatedAt:0};}
+function empty(){return {version:1,answers:{},skipped:{},reminderAt:0,remindersOff:false,history:[],proposals:[],updatedAt:0};}
 function load(){
  try{
   const v=JSON.parse(localStorage.getItem(KEY)||'null');
@@ -29,7 +29,8 @@ function load(){
   return {...empty(),...v,
     answers:v.answers&&typeof v.answers==='object'?v.answers:{},
     skipped:v.skipped&&typeof v.skipped==='object'?v.skipped:{},
-    history:Array.isArray(v.history)?v.history.slice(-45):[]};
+    history:Array.isArray(v.history)?v.history.slice(-45):[],
+    proposals:Array.isArray(v.proposals)?v.proposals.filter(p=>p&&typeof p.id==='string').slice(-25):[]};
  }catch(_){return empty();}
 }
 let data=load(),view='desk',department='strategy',sessionSeen=new Set(),previousFocus=null,proposal=null,editorOpened=false;
@@ -81,6 +82,8 @@ function close(){
 }
 function button(action,label,extra=''){return '<button type="button" data-do="'+action+'"'+extra+'>'+label+'</button>';}
 function candidate(){
+ const offered=data.proposals.find(p=>p&&p.id&&p.title);
+ if(offered)return {...offered,origin:'workspace'};
  const missing=remaining(),context=businessText();
  const serious=window.DMBusinessBrain?.brief?.()?.priority;
  // A real saved task or sales signal takes precedence over a generic suggestion.
@@ -109,6 +112,19 @@ function candidate(){
     source:'Ваш ответ о рабочей почте',next:'Предусмотрим подключение через безопасную авторизацию с разрешения владельца.'};
  return {id:'connect',kind:'connection',title:'Хочу лучше узнать ваш бизнес',body:'Я знаю основное из наших разговоров. Следующий шаг — подключать рабочие источники по одному: почту, заявки, учёт и платежи. Пока никаких внешних данных я не читаю.',
   source:'Сохранённое описание компании',next:'Начнём с того источника, где больше всего обращений и ручной работы.'};
+}
+function propose(details){
+ if(!details||!/^((inbox|deal):)[a-z0-9-]+$/i.test(String(details.id||'')))return false;
+ const p={id:clean(details.id,110),kind:details.kind==='message'?'message':'briefing',
+ title:clean(details.title,110),body:clean(details.body,550),
+ source:clean(details.source,160),next:clean(details.next,240)};
+ if(!p.title||!p.body)return false;
+ data.proposals=data.proposals.filter(x=>x.id!==p.id);
+ data.proposals.unshift(p);data.proposals=data.proposals.slice(0,25);
+ const done=persist();if(done)refresh();return done;
+}
+function clearProposal(id){
+ data.proposals=data.proposals.filter(x=>x.id!==id);persist();
 }
 function entryFor(p){return data.history.find(x=>x.proposalId===p.id&&!['revised','dismissed'].includes(x.status))||null;}
 function ledger(status,p,notes=''){
@@ -191,13 +207,15 @@ function revisionMarkup(){
  '<div class="dm-director-actions"><button type="submit">Сохранить замечание ↗</button>'+button('desk','Отмена')+'</div></form></section>';
 }
 function resultMarkup(){
- const item=data.history.at(-1);
+ const item=data.history.at(-1),status=item?.status;
+ const report=status==='approved'
+ ?'Директор согласовал материал. Письма и сообщения не отправлены; для отправки нужен подключённый сервис или отдельное действие человека.'
+ :status==='blocked'?'Поручение согласовано, но внешнее выполнение ещё недоступно и не подтверждено.'
+ :'Замечание сохранено. Чтобы подготовить новую версию, потребуется дополнительная работа.';
  return '<section class="dm-director-proposal"><small>РЕШЕНИЕ ЗАФИКСИРОВАНО</small><h3>'+
- escaped(item?.title||'Поручение')+'</h3><p>'+
- (item?.status==='blocked'?'Директор согласовал предложение, но сейчас нет подключённого инструмента для внешнего исполнения. Никакие письма, платежи, операции в 1С или сообщения не отправлены.':
-  'Замечание сохранено. Я не буду выдавать черновик за готовую исправленную рекомендацию.')+
- '</p><div class="dm-director-evidence">Статус: '+(item?.status==='blocked'?'Ожидает подключения / исполнителя':'Нужно переработать')+'</div>'+
- '<p>'+escaped(item?.notes||'')+'</p>'+button('desk','Вернуться к рекомендациям')+'</section>'+historyMarkup();
+ escaped(item?.title||'Поручение')+'</h3><p>'+report+'</p><div class="dm-director-evidence">Статус: '+
+ (status==='approved'?'Одобрено · не отправлено':status==='blocked'?'Ожидает подключения / исполнителя':'Нужно переработать')+
+ '</div><p>'+escaped(item?.notes||'')+'</p>'+button('desk','Вернуться к рекомендациям')+'</section>'+historyMarkup();
 }
 function render(){
  const title=$('#dmDirectorTitle'),body=$('#dmDirectorBody');
@@ -240,6 +258,14 @@ function approve(){
  const p=proposal||candidate();
  if(p.kind==='intro'){view='intro';sessionSeen=new Set();render();return;}
  if(p.kind==='gap'){view='intro';sessionSeen=new Set();render();return;}
+ if(p.origin==='workspace'){
+  ledger('approved',p,p.kind==='message'?
+    'Подготовленный ответ одобрен. Ни одного сообщения не отправлено. Одобренный текст доступен в «Входящих» для копирования.':
+    'Директор одобрил проверку условий. Это не означает принятие оферты, подписание договора или проверку контрагента.');
+  clearProposal(p.id);
+  window.dispatchEvent(new CustomEvent('dm:director-approved',{detail:{proposalId:p.id,kind:p.kind}}));
+  view='result';render();refresh();return;
+ }
  ledger('blocked',p,p.kind==='connection'?
   'Разрешение на подготовку идеи зафиксировано. Для реальной интеграции необходим официальный интерфейс, настройка прав и отдельное подтверждение. Ничего не подключено.':
   'Поручение принято в директорский журнал. Чтобы действительно решить задачу, требуется доступ к нужному инструменту или действие человека. Результат не подтверждён.');
@@ -249,6 +275,7 @@ function postpone(){
  if(!proposal)proposal=candidate();
  if(proposal.kind==='intro')data.reminderAt=Date.now()+7*DAY;
  ledger('dismissed',proposal,'Отложено директором, без каких-либо действий.');
+ if(proposal.origin==='workspace')clearProposal(proposal.id);
  view='desk';render();refresh();
 }
 root.addEventListener('click',event=>{
@@ -310,7 +337,7 @@ for(const ev of ['dm:sales-changed','dm:sales-insight-changed','dm:business-cont
  window.addEventListener(ev,()=>queueMicrotask(refresh));
 }
 window.addEventListener('storage',event=>{if(event.key===KEY){data=load();refresh();}});
-window.DMDirectorOffice=Object.freeze({open,close,progress,refresh,proposal:candidate,getAnswers:()=>({...data.answers})});
+window.DMDirectorOffice=Object.freeze({open,close,progress,refresh,propose,proposal:candidate,getAnswers:()=>({...data.answers})});
 createSettingsEntry();
 refresh();
 document.addEventListener('DOMContentLoaded',()=>queueMicrotask(refresh),{once:true});
