@@ -252,6 +252,8 @@
   const mgData={...mgDefaults,...mgSaved,cards:{...mgDefaults.cards,...(mgSaved.cards||{})},
     skills:{...mgDefaults.skills,...(mgSaved.skills||{})},
     rules:{...mgDefaults.rules,...(mgSaved.rules||{})}};
+  // Obsolete manual tones are no longer selectable; use the single automatic mode.
+  mgData.tone='auto';
   // The Home sculpture is permanent. Ignore older saved off-states for its
   // core cards; Management no longer exposes their switches.
   const lockedHomeCards=new Set(['promotion','sales','clients','money']);
@@ -742,15 +744,9 @@
         '<label class="mg-field mg-wake-name">Короткое имя для обращения<input id="mgManagerName" maxlength="42" autocomplete="off" placeholder="Например, Вася" value="'+mgEsc(wakeName)+'"></label>'+
         '<p class="mg-unified-note">Название приложения остаётся «Цифровой управляющий». Обращение по имени заработает после подключения распознавания речи и разрешения на микрофон.</p>'+
         '</section>'+
-        '<section class="mg-unified-panel"><h2>Стиль общения</h2>'+
-        '<label class="mg-field">Как отвечать<select id="mgTone">'+
-          '<option value="auto">Подстраивается под меня</option>'+
-          '<option value="human">Как друг</option>'+
-          '<option value="brief">По делу</option>'+
-          '<option value="business">Спокойно и официально</option>'+
-        '</select></label>'+
-        '<p class="mg-unified-note">Необязательная настройка манеры общения. На самостоятельные действия и права доступа не влияет; полноценная персонализация появится с подключением ИИ.</p>'+
-        '</section>';
+        '<div class="mg-communication-mode" aria-label="Общение: Подстраивается под меня">'+
+          '<span>Общение</span><strong>Подстраивается под меня</strong>'+
+        '</div>';
   }
   function mgSkillsPanels(){
     const choices=[['market','Следить за рынком'],['opportunities','Замечать проблемы и возможности'],['rules','Следить за правилами'],['documents','Помогать с документами']];
@@ -871,7 +867,6 @@
       byId('plasmaTapMode').value=voicePrefs.tapAction;
     }
 
-    if(page==='voice')byId('mgTone').value=mgData.tone||'human';
     if(page==='autopilot')mgAutoLabel();
     if(page==='voice')byId('mgDetail').querySelector('#voiceDock').checked=voicePrefs.dock;
     window.scrollTo(0,0);
@@ -943,7 +938,6 @@
     }
     else if(el.id==='plasmaTapMode'){voicePrefs.tapAction=el.value;save();}
     else if(el.id==='mgManagerName'){mgData.managerName=el.value.trim()||'Цифровой управляющий';el.value=mgData.managerName==='Цифровой управляющий'?'':mgData.managerName;}
-    else if(el.id==='mgTone')mgData.tone=el.value;
     else if(el.id==='mgAutonomy'){mgData.autonomy=Number(el.value);mgAutoLabel();}
     else if(el.dataset.mgSkill)mgData.skills[el.dataset.mgSkill]=el.checked;
     else if(el.dataset.mgRule)mgData.rules[el.dataset.mgRule]=el.checked;
