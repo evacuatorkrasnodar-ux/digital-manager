@@ -83,20 +83,19 @@
     animation:none!important;
   }
 }
-/* Signature action: same discreet dark glass as the app's other buttons.
-   Override both previous pearl idle and champagne ready themes. */
+/* Signature CTA matches the approved selected 'Сегодня' segmented-control glass. */
 #homeScreen .metric-grid .recommendation-card .advice-cta,
 #homeScreen .metric-grid .recommendation-card .advice-cta:hover,
 #homeScreen .metric-grid .recommendation-card .advice-cta:active,
 #homeScreen .metric-grid .recommendation-card[data-signature-state="ready"] .advice-cta,
 #homeScreen .metric-grid .recommendation-card[data-signature-state="ready"] .advice-cta:hover {
- color:#f1f9ff!important;
- border-color:rgba(139,205,255,.78)!important;
- background:radial-gradient(ellipse at 24% 5%,rgba(108,190,255,.32),transparent 67%),linear-gradient(145deg,#224b72 0%,#103554 50%,#071c34 100%)!important;
- box-shadow:inset 0 1px rgba(235,249,255,.33),0 3px 10px rgba(0,0,0,.37),0 0 12px rgba(69,162,236,.28)!important;
+ color:#102538!important;
+ border-color:rgba(210,237,255,.95)!important;
+ background:radial-gradient(ellipse 67% 145% at 31% 3%,rgba(255,255,255,.96) 0%,rgba(244,251,255,.94) 27%,rgba(213,231,251,.73) 50%,transparent 94%),linear-gradient(110deg,#c9e2f7,#9ebfdf 68%,#6b94b5)!important;
+ box-shadow:inset 0 1px 1px rgba(255,255,255,1),inset 0 -3px 8px rgba(43,82,122,.22),0 0 5px rgba(147,201,248,.32)!important;
+ animation:none!important;
 }
 #homeScreen .metric-grid .recommendation-card .advice-cta .ico,
 #homeScreen .metric-grid .recommendation-card[data-signature-state="ready"] .advice-cta .ico{
- color:#eaf4fc!important;
- stroke:#eaf4fc!important;
+ color:#102538!important;stroke:#102538!important;
 }
