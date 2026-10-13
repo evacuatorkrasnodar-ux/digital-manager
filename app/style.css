@@ -158,7 +158,7 @@
 .ring-preview-controls button[aria-pressed="true"]{border-color:#b8c0cd;background:#2c3036;color:white}
 .ring-preview p{font-size:11px;line-height:1.35;color:#93aebf;margin:7px 0 0}
 .secondary-screen{padding:calc(20px + env(safe-area-inset-top,0px)) 15px 25px;min-height:calc(100dvh - 90px);background:#000}.subhead{display:flex;gap:12px;align-items:center;padding:4px 0 22px;border-bottom:1px solid #ffffff1c}.subhead .brand-icon{width:var(--brand-mark-size);height:var(--brand-mark-size);border-radius:10px}.subhead small{color:#aabed3;font-size:12px}.subhead h1{margin:3px 0;font-size:27px;letter-spacing:-.024em;font-family:var(--font-display);font-weight:440}.assistant-welcome{text-align:center;padding:32px 20px 14px}.assistant-orb{height:90px;width:90px;border-radius:50%;border:1px solid #9acfff88;display:grid;place-items:center;margin:0 auto 22px;background:radial-gradient(#1c4676,#09121d 72%);box-shadow:0 0 35px #397fdd4e}.assistant-orb .brand-icon{height:var(--brand-mark-size);width:var(--brand-mark-size);border-radius:10px}.assistant-welcome h2{font-size:24px;margin:0 0 10px;font-family:var(--font-display);font-weight:450;letter-spacing:-.03em}.assistant-welcome p{color:#a9bfd4;font-size:13px;line-height:1.5;margin:0}.assistant-suggestions{display:grid;gap:8px;margin-top:20px}.assistant-suggestions button{width:100%;border:1px solid rgba(163,175,187,.28);border-radius:13px;padding:13px 15px;background:linear-gradient(145deg,#1b1e22,#090b0e);text-align:left;display:flex;align-items:center;justify-content:space-between;font-size:13px}.assistant-suggestions .ico>.ico{width:16px;height:16px;color:#bdd9eb}.chat-log{display:grid;gap:10px;margin:18px 0 15px}.chat-bubble{max-width:91%;border-radius:15px;padding:12px;color:#dce8f6;font-size:13px;line-height:1.45;background:#191b1f;border:1px solid rgba(157,171,187,.30)}.chat-bubble.user{justify-self:end;background:#292d35}.chat-form{display:flex;gap:8px;position:sticky;bottom:93px;padding:10px;background:rgba(16,17,20,.94);border:1px solid rgba(164,174,186,.28);border-radius:13px;margin-top:20px}.chat-form input{min-width:0;flex:1;background:transparent;border:0;color:white;outline:none;font-size:14px}.chat-form button{width:34px;height:34px;display:grid;place-items:center;background:#28639d;border:0;border-radius:11px}
-#modal{border:1px solid rgba(166,175,185,.36);background:linear-gradient(155deg,#1b1d21,#060708 75%);color:#f8fbff;border-radius:20px;padding:0;width:min(92vw,390px);max-height:min(85dvh,760px);box-shadow:0 25px 65px #000c,inset 0 1px #ffffff1d;overflow:auto}#modal::backdrop{background:#000a;backdrop-filter:blur(8px)}.dialog-inner{padding:19px}.dialog-head{display:flex;align-items:start;justify-content:space-between;margin-bottom:18px;gap:12px}.dialog-eyebrow{font-size:9px;letter-spacing:1.2px;color:#80a6c8}.dialog-head h2{font-size:21px;letter-spacing:-.03em;margin:6px 0 0;font-family:var(--font-display);font-weight:450}.dialog-close{border:1px solid rgba(166,176,189,.28);background:#22252a;border-radius:50%;width:32px;height:32px;display:grid;place-items:center}.dialog-close .ico{width:15px;height:15px}.modal-brand{display:flex;gap:12px;align-items:center;background:rgba(37,39,44,.76);border-radius:13px;padding:12px;margin-bottom:14px}.modal-brand img{width:var(--brand-mark-size);height:var(--brand-mark-size);border-radius:10px}.modal-brand strong{display:block;font-size:17px}.modal-brand small{display:block;color:#aec4d5;font-size:12px;margin-top:4px}/* Developer / license dialog: same matte, translucent shape and typography as the preview card. */
+#modal{border:1px solid rgba(166,175,185,.36);background:linear-gradient(155deg,#1b1d21,#060708 75%);color:#f8fbff;border-radius:20px;padding:0;width:min(92vw,390px);max-height:min(85dvh,760px);box-shadow:0 25px 65px #000c,inset 0 1px #ffffff1d;overflow:auto}#modal::backdrop{background:#000a;backdrop-filter:blur(8px)}.dialog-inner{padding:19px}.dialog-head{display:flex;align-items:start;justify-content:space-between;margin-bottom:18px;gap:12px}.dialog-eyebrow{font-size:9px;letter-spacing:1.2px;color:#80a6c8}.dialog-head h2{font-size:21px;letter-spacing:-.03em;margin:6px 0 0;font-family:var(--font-display);font-weight:450}.modal-brand{display:flex;gap:12px;align-items:center;background:rgba(37,39,44,.76);border-radius:13px;padding:12px;margin-bottom:14px}.modal-brand img{width:var(--brand-mark-size);height:var(--brand-mark-size);border-radius:10px}.modal-brand strong{display:block;font-size:17px}.modal-brand small{display:block;color:#aec4d5;font-size:12px;margin-top:4px}/* Developer / license dialog: same matte, translucent shape and typography as the preview card. */
 #modal.developer-dialog{
   width:min(92vw,366px);
   border:1px solid rgba(153,184,207,.36);
@@ -280,16 +280,8 @@
 }
 
 /* v283 — main dialog chevron matches all other blue glass navigation. */
-#modal .dialog-close{
- display:grid;place-items:center;box-sizing:border-box;
- width:34px;height:34px;min-width:34px;padding:0;
- border:1px solid rgba(156,208,249,.64);border-radius:50%;
- background:radial-gradient(ellipse at 26% 3%,rgba(231,248,255,.22),transparent 75%),
- linear-gradient(148deg,rgba(39,83,121,.85),rgba(8,27,47,.94));
- box-shadow:inset 0 1px rgba(255,255,255,.26),0 4px 12px rgba(0,7,20,.30);
- color:#f2faff;
-}
-#modal .dialog-close .ico{width:18px;height:18px;stroke:currentColor;stroke-width:1.85}
+
+
 /* v284 — personal assistant link uses the round glass chevron, no bare arrows. */
 #assistantScreen .assistant-world-link{
   display:inline-flex;align-items:center;justify-content:center;
@@ -315,8 +307,8 @@
 #managementScreen .mg-head::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#000 0%,rgba(0,0,0,.86) 38%,rgba(0,0,0,.16) 100%),linear-gradient(0deg,#000 0%,transparent 54%),url('./assets/architecture-hero.png') center 45% / cover no-repeat}
 #managementScreen .mg-head h1{font-size:clamp(25px,7vw,30px);font-weight:520;letter-spacing:-.046em;line-height:1.15;margin:0 0 3px}
 #managementScreen .mg-head p{font-size:12px;color:#abbfd0;margin:0}
-#managementScreen .mg-back{width:40px;height:40px;flex:none;border:1px solid rgba(155,178,199,.45);border-radius:12px;display:grid;place-items:center;background:linear-gradient(145deg,#192634,#05090c);color:#fff}
-#managementScreen .mg-back .ico{width:20px;height:20px}
+
+
 #managementScreen :is(.mg-home,.mg-detail)[hidden]{display:none!important}
 #managementScreen .mg-home{display:grid;gap:7px}
 #managementScreen .mg-row,#managementScreen .mg-main,#managementScreen .mg-extra-row{position:relative;overflow:hidden;border:1px solid rgba(150,170,185,.40);border-radius:17px;background:linear-gradient(145deg,#121a23 0%,#070c11 48%,#020406 100%);box-shadow:inset 0 1px rgba(244,249,255,.11),0 5px 16px rgba(0,0,0,.26);color:#f7f8fc}
@@ -1085,7 +1077,7 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
 .dm-attention-dot{position:absolute;right:8px;top:5px;width:7px;height:7px;border-radius:50%;background:#f0ba75;box-shadow:0 0 8px #f0ba75}
 .dm-attention-panel{position:fixed;z-index:110;inset:0;overflow:auto;background:rgba(1,6,12,.91);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);color:#edf7ff;padding:calc(22px + env(safe-area-inset-top,0px)) max(16px,calc((100vw - 430px)/2 + 16px)) 32px}
 .dm-attention-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}.dm-attention-head small{font-size:10px;letter-spacing:.09em;color:#8db5d7}.dm-attention-head h2{font-size:25px;font-weight:510;letter-spacing:-.03em;margin:9px 0 5px}.dm-attention-head p{font-size:13px;color:#a8c5de;margin:0}
-#dmAttentionClose{width:38px;height:38px;border-radius:50%;border:1px solid #436079;background:#0c1b2c;color:#e5f4ff;font-size:24px}
+
 .dm-attention-filters{display:flex;gap:7px;overflow-x:auto;margin:24px 0 15px}.dm-attention-filters button{border:1px solid #324b64;border-radius:20px;background:#0e1c2c;color:#b8d1e7;padding:9px 12px;white-space:nowrap;font-size:12px}.dm-attention-filters button[aria-pressed="true"]{background:#24425f;border-color:#75afe2;color:#fff}
 .dm-attention-list{display:grid;gap:10px}.dm-attention-entry{display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(140deg,#122336,#091522);border:1px solid #2c4358;border-radius:17px;padding:15px}.dm-attention-entry strong{font-size:14px;font-weight:520}.dm-attention-entry p{font-size:12px;color:#b7cce1;line-height:1.4;margin:6px 0}.dm-attention-entry small{color:#86a9c6;font-size:10px}.dm-attention-entry button{flex:none;border:1px solid #40627b;background:#152d42;border-radius:12px;padding:9px;color:#d9eeff;font-size:11px}.dm-attention-entry button:disabled{opacity:.5}.dm-attention-empty{text-align:center;padding:50px 15px;color:#a8c5dc;font-size:14px;border:1px solid #24384d;border-radius:17px;background:#091724}.dm-attention-foot{font-size:11px;color:#8eacc5;line-height:1.5;margin-top:20px}
 
@@ -1110,11 +1102,7 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
 #dmAttentionPanel .dm-attention-head small{font-size:10px;letter-spacing:.1em;color:#c6dff2;font-weight:400}
 #dmAttentionPanel .dm-attention-head h2{font-family:var(--font-display);font-weight:440;letter-spacing:-.025em;font-size:clamp(22px,6vw,26px);margin:20px 0 7px;line-height:1.1}
 #dmAttentionPanel .dm-attention-head p{font-size:12px;color:#d6e7f5;font-weight:350;line-height:1.4}
-#dmAttentionPanel #dmAttentionClose{
- flex:none;width:34px;height:34px;font-size:23px;font-weight:350;border:1px solid rgba(167,201,225,.37);
- background:linear-gradient(145deg,rgba(18,33,46,.77),rgba(4,10,18,.85));
- box-shadow:inset 0 1px rgba(255,255,255,.09);backdrop-filter:blur(8px);
-}
+
 #dmAttentionPanel .dm-attention-filters{gap:6px;margin:17px 0 14px;padding:0 1px;scrollbar-width:none}
 #dmAttentionPanel .dm-attention-filters button{
  font-size:11px;font-weight:400;padding:8px 12px;border-radius:12px;
@@ -1144,11 +1132,11 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
 @media (max-width:350px){#dmAttentionPanel .dm-attention-filters{gap:4px}#dmAttentionPanel .dm-attention-filters button{padding:8px 9px;font-size:10px}}
 
 /* Approved small glass back button, same arrow language as the rest of the app. */
-#dmAttentionPanel #dmAttentionClose{display:grid;place-items:center;border-radius:12px;width:34px;height:34px;padding:0}
-#dmAttentionPanel #dmAttentionClose .ico{display:block;width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+
 
 /* Attention centre: approved circular glass back control. */
-#dmAttentionPanel #dmAttentionClose{border-radius:50%!important;width:36px;height:36px;min-width:36px;min-height:36px}
+
 
 /* Approved plasma inside the legacy assistant welcome: no separate old logo. */
 #assistantScreen .assistant-orb:has(.dm-welcome-plasma){background:transparent;border:0;box-shadow:none;display:grid;place-items:center}
