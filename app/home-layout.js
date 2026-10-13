@@ -52,6 +52,16 @@
   board.setAttribute('aria-label','Настраиваемые карточки главной');
   dashboard.insertBefore(toolbar,parts.revenue);
   dashboard.insertBefore(board,dashboard.querySelector('.shortcuts'));
+  // Finish is always reachable even when the user scrolls to the last card.
+  const floatDone=document.createElement('button');
+  floatDone.type='button';
+  floatDone.id='dmLayoutFloatDone';
+  floatDone.className='dm-layout-float-done';
+  floatDone.textContent='✓ Готово';
+  floatDone.setAttribute('aria-label','Сохранить расположение карточек');
+  floatDone.hidden=true;
+  document.body.append(floatDone);
+  floatDone.addEventListener('click',()=>done());
 
   function defaults(){return {enabled:false,linked:true,order:defaultOrder.slice(),sizes:{},hidden:[]};}
   function load(){
@@ -77,7 +87,7 @@
     }
     return [...new Set([...expanded,...allowed])].filter(x=>allowed.includes(x));
   }
-  let preferences=load(),editing=false;
+  let preferences=load(),editing=false,pickedId=null,skipTileTapUntil=0;
   function save(){
     preferences.order=normalize(preferences.order,preferences.linked);
     try{localStorage.setItem(KEY,JSON.stringify(preferences));}catch(_){}
@@ -156,7 +166,7 @@
     // Existing widget module owns its own visibility and data refresh.
     window.dispatchEvent(new Event('dm:cards-changed'));
     board.replaceChildren();
-    board.hidden=true;toolbar.hidden=true;
+    board.hidden=true;toolbar.hidden=true;floatDone.hidden=true;pickedId=null;
     document.documentElement.classList.remove('dm-custom-home-layout','dm-layout-editing');
     window.dispatchEvent(new Event('dm:layout-reset'));
   }
@@ -183,7 +193,13 @@
     for(const id of preferences.order){
       if(!isHidden(id))board.append(makeUnit(id));
     }
+    board.querySelectorAll('.dm-layout-unit').forEach(tile=>{
+      const chosen=tile.dataset.cardId===pickedId;
+      tile.classList.toggle('dm-unit-picked',chosen);
+      if(editing)tile.setAttribute('aria-label',names[tile.dataset.cardId]+(chosen?' — выбрана для перемещения':' — нажмите для перемещения'));
+    });
     board.hidden=false;
+    floatDone.hidden=!editing;
     originalGrid.hidden=true;
     widgetHost.hidden=true;
     // The editor toolbar is only shown while customizing. After "Done", the
@@ -192,7 +208,7 @@
     document.documentElement.classList.add('dm-custom-home-layout');
     document.documentElement.classList.toggle('dm-layout-editing',editing);
     document.getElementById('dmLayoutCaption').textContent=editing?
-      'Карточки ожили ✦ Перемещайте за ⠿ или стрелками':'Расположение сохранено';
+      'Листайте экран. Нажмите карточку, затем другую — переместим. За ⠿ можно тянуть. ↔ — размер.':'Расположение сохранено';
     for(const b of toolbar.querySelectorAll('[data-dm-layout-action]')){
       const action=b.dataset.dmLayoutAction;
       b.hidden=(editing?action==='edit':action!=='edit');
@@ -208,6 +224,7 @@
   }
   function edit(source='settings'){
     if(editing)return;
+    pickedId=null;
     preferences.enabled=true;editing=true;
     save();render();
     // Direct long-press editing should not jump the screen away from the card.
@@ -217,9 +234,11 @@
     }
   }
   function done(){
+    pickedId=null;
     editing=false;save();render();
   }
   function reset(){
+    pickedId=null;
     preferences=defaults();editing=false;
     try{localStorage.removeItem(KEY);}catch(_){}
     restoreOriginal();
@@ -231,6 +250,7 @@
     save();render();
   }
   function shift(id,by){
+    pickedId=null;
     const list=preferences.order;
     const i=list.indexOf(id);
     if(i<0)return;
@@ -241,20 +261,24 @@
     save();render();
   }
   function resize(id){
+    pickedId=null;
     if(fixedWide.has(id))return;
     preferences.sizes[id]=preferences.sizes[id]==='wide'?'compact':'wide';
     save();render();
   }
   function hide(id){
+    pickedId=null;
     const keys=id==='signature'?['clients','advice']:[id];
     for(const key of keys)if(!preferences.hidden.includes(key))preferences.hidden.push(key);
     save();render();
   }
   function restore(id){
+    pickedId=null;
     preferences.hidden=preferences.hidden.filter(x=>id==='signature'?!['clients','advice'].includes(x):x!==id);
     save();render();
   }
   function moveTo(id,target){
+    pickedId=null;
     if(!target||target===id)return;
     if(!preferences.linked&&['clients','advice'].includes(id)&&['clients','advice'].includes(target)){
       // A real magnetic connection: dropping one shaped card onto the other links them.
@@ -292,10 +316,26 @@
       return;
     }
   });
-  // Block opening the underlying revenue/client/advice buttons while editing.
+  // Tap-to-place is reliable on phones: a tap selects the card, the user
+  // scrolls naturally, and a second tap chooses its destination.
   board.addEventListener('click',e=>{
-    if(editing&&!e.target.closest('[data-dm-unit-action]')){
-      e.preventDefault();e.stopImmediatePropagation();
+    if(!editing||e.target.closest('[data-dm-unit-action]'))return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    if(Date.now()<skipTileTapUntil)return;
+    const tile=e.target.closest('.dm-layout-unit');
+    if(!tile)return;
+    const id=tile.dataset.cardId;
+    if(pickedId===id){
+      pickedId=null;render();
+    }else if(pickedId){
+      const moving=pickedId;
+      pickedId=null;
+      moveTo(moving,id);
+    }else{
+      pickedId=id;
+      board.querySelectorAll('.dm-layout-unit').forEach(el=>el.classList.toggle('dm-unit-picked',el.dataset.cardId===id));
+      document.getElementById('dmLayoutCaption').textContent='Выбрана «'+names[id]+'». Листайте и нажмите другую карточку — переместим.';
     }
   },true);
   board.addEventListener('keydown',e=>{
@@ -309,107 +349,81 @@
   let dragging=null;
   board.addEventListener('pointerdown',e=>{
     if(!editing||e.button>0)return;
-    // In edit mode the entire card acts as a grab surface, not just ⠿.
-    // Keep the arrow, resize, and hide buttons independently tappable.
-    const control=e.target.closest('.dm-layout-control');
-    if(control&&!control.classList.contains('dm-unit-grab'))return;
-    const tile=e.target.closest('.dm-layout-unit');
-    if(!tile)return;
-    const id=tile.dataset.cardId;
+    // Never capture a card touch: the screen must scroll normally over cards.
+    // Only the ⠿ grip captures a pointer for actual drag-and-drop.
+    const handle=e.target.closest('.dm-unit-grab');
+    if(!handle)return;
+    const tile=handle.closest('.dm-layout-unit');
+    const id=tile?.dataset.cardId;
     if(!id)return;
-    const handle=control||tile;
-    dragging={id,startX:e.clientX,startY:e.clientY,pointerId:e.pointerId,active:false,target:null,handle};
+    pickedId=null;
+    dragging={id,startX:e.clientX,startY:e.clientY,pointerId:e.pointerId,
+      x:e.clientX,y:e.clientY,active:false,target:null,handle};
     handle.setPointerCapture?.(e.pointerId);
   });
-  board.addEventListener('pointermove',e=>{
-    if(!dragging||e.pointerId!==dragging.pointerId)return;
-    const dx=e.clientX-dragging.startX,dy=e.clientY-dragging.startY;
-    if(!dragging.active&&Math.hypot(dx,dy)<9)return;
-    dragging.active=true;
-    const active=board.querySelector('[data-card-id="'+dragging.id+'"]');
-    active?.classList.add('dm-unit-dragging');
-    if(e.clientY>innerHeight-65)window.scrollBy(0,13);
-    if(e.clientY<65)window.scrollBy(0,-13);
+  // Auto-scroll continuously while the grip is held near the top/bottom;
+  // iOS otherwise stops scrolling as soon as the finger pauses at the edge.
+  let edgeFrame=0;
+  function chooseDropTarget(x,y){
+    if(!dragging||!dragging.active)return;
     let closest=null,best=Infinity;
     for(const tile of board.querySelectorAll('.dm-layout-unit:not(.dm-unit-dragging)')){
       const rect=tile.getBoundingClientRect();
-      const x=Math.max(rect.left,Math.min(e.clientX,rect.right));
-      const y=Math.max(rect.top,Math.min(e.clientY,rect.bottom));
-      const dist=Math.hypot(x-e.clientX,y-e.clientY);
-      if(dist<best){best=dist;closest=tile;}
+      const px=Math.max(rect.left,Math.min(x,rect.right));
+      const py=Math.max(rect.top,Math.min(y,rect.bottom));
+      const distance=Math.hypot(px-x,py-y);
+      if(distance<best){best=distance;closest=tile;}
     }
-    board.querySelectorAll('.dm-unit-drop-target').forEach(x=>x.classList.remove('dm-unit-drop-target'));
+    board.querySelectorAll('.dm-unit-drop-target').forEach(el=>el.classList.remove('dm-unit-drop-target'));
     closest?.classList.add('dm-unit-drop-target');
     dragging.target=closest?.dataset.cardId||null;
+  }
+  function tickEdgeScroll(){
+    edgeFrame=0;
+    if(!dragging?.active)return;
+    const y=dragging.y,top=70,bottom=window.innerHeight-105;
+    let speed=0;
+    if(y<top)speed=-Math.min(17,Math.max(3,(top-y)*.25));
+    else if(y>bottom)speed=Math.min(17,Math.max(3,(y-bottom)*.25));
+    if(speed){
+      window.scrollBy(0,speed);
+      chooseDropTarget(dragging.x,y);
+    }
+    edgeFrame=requestAnimationFrame(tickEdgeScroll);
+  }
+  function clearDrag(){
+    if(edgeFrame){cancelAnimationFrame(edgeFrame);edgeFrame=0;}
+    dragging=null;
+    board.querySelectorAll('.dm-unit-dragging,.dm-unit-drop-target').forEach(el=>{
+      el.classList.remove('dm-unit-dragging','dm-unit-drop-target');
+    });
+  }
+  board.addEventListener('pointermove',e=>{
+    if(!dragging||e.pointerId!==dragging.pointerId)return;
+    dragging.x=e.clientX;dragging.y=e.clientY;
+    const dx=e.clientX-dragging.startX,dy=e.clientY-dragging.startY;
+    if(!dragging.active&&Math.hypot(dx,dy)<7)return;
+    if(!dragging.active){
+      dragging.active=true;
+      board.querySelector('[data-card-id="'+dragging.id+'"]')?.classList.add('dm-unit-dragging');
+      edgeFrame=requestAnimationFrame(tickEdgeScroll);
+    }
+    chooseDropTarget(e.clientX,e.clientY);
   });
   function finishDrag(e){
     if(!dragging||e.pointerId!==dragging.pointerId)return;
     const {id,target,active}=dragging;
-    dragging=null;
-    board.querySelectorAll('.dm-unit-dragging,.dm-unit-drop-target').forEach(x=>x.classList.remove('dm-unit-dragging','dm-unit-drop-target'));
-    if(active&&target)moveTo(id,target);
+    clearDrag();
+    if(active){
+      skipTileTapUntil=Date.now()+420;
+      if(target)moveTo(id,target);
+    }
   }
   board.addEventListener('pointerup',finishDrag);
   board.addEventListener('pointercancel',e=>{
-    if(dragging?.pointerId===e.pointerId){dragging=null;board.querySelectorAll('.dm-unit-dragging,.dm-unit-drop-target').forEach(x=>x.classList.remove('dm-unit-dragging','dm-unit-drop-target'));}
+    if(dragging?.pointerId===e.pointerId)clearDrag();
   });
-  // Hold a card (or empty dashboard background) to enter iOS-style edit mode.
-  // A short tap keeps every original card action intact. A scroll cancels holding.
-  const homeScreen=document.getElementById('homeScreen');
-  const HOLD_MS=630,TRAVEL_LIMIT=12;
-  let hold=null,blockTapUntil=0;
-  function cancelHold(){
-    if(hold){clearTimeout(hold.timer);hold=null;}
-  }
-  function holdCandidate(target){
-    if(!(target instanceof Element)||!dashboard.contains(target))return false;
-    if(target.closest('.dm-layout-toolbar,.dm-unit-controls,.shortcut,dialog,input,textarea,select,[contenteditable="true"]'))return false;
-    if(target.closest('.metric-card,.dm-home-widget,.dm-layout-unit'))return true;
-    // Blank dashboard space is eligible, but never hijack other action buttons.
-    if(target.closest('button,a,[role="button"]'))return false;
-    return Boolean(target.closest('.dashboard'));
-  }
-  homeScreen.addEventListener('pointerdown',event=>{
-    if(editing||event.button!==0||event.isPrimary===false||!holdCandidate(event.target))return;
-    cancelHold();
-    const current={pointerId:event.pointerId,x:event.clientX,y:event.clientY,
-      timer:null,activated:false};
-    hold=current;
-    current.timer=setTimeout(()=>{
-      if(hold!==current||editing||document.hidden)return;
-      hold=null;
-      blockTapUntil=Date.now()+850;
-      try{navigator.vibrate?.(15);}catch(_){}
-      edit('hold');
-    },HOLD_MS);
-  },{passive:true});
-  homeScreen.addEventListener('pointermove',event=>{
-    if(!hold||event.pointerId!==hold.pointerId)return;
-    if(Math.hypot(event.clientX-hold.x,event.clientY-hold.y)>TRAVEL_LIMIT)cancelHold();
-  },{passive:true});
-  for(const type of ['pointerup','pointercancel','lostpointercapture']){
-    homeScreen.addEventListener(type,event=>{
-      if(hold&&event.pointerId===hold.pointerId)cancelHold();
-    },{passive:true});
-  }
-  homeScreen.addEventListener('touchstart',event=>{
-    if(event.touches.length>1)cancelHold();
-  },{passive:true});
-  homeScreen.addEventListener('scroll',cancelHold,{capture:true,passive:true});
-  window.addEventListener('blur',cancelHold);
-  homeScreen.addEventListener('contextmenu',event=>{
-    if(Date.now()<blockTapUntil&&dashboard.contains(event.target))event.preventDefault();
-  },true);
-  // After the long press, swallow the synthetic click which could otherwise
-  // open a card/modal under the finger. Toolbar buttons remain usable.
-  document.addEventListener('click',event=>{
-    if(Date.now()>=blockTapUntil)return;
-    if(!homeScreen.contains(event.target))return;
-    if(event.target.closest('.dm-layout-toolbar,.dm-unit-controls'))return;
-    blockTapUntil=0;
-    event.preventDefault();
-    event.stopImmediatePropagation();
-  },true);
+  window.addEventListener('blur',clearDrag);
   window.addEventListener('dm:cards-changed',()=>{if(preferences.enabled)render();});
   window.addEventListener('storage',e=>{
     if(e.key===KEY){preferences=load();editing=false;render();}
