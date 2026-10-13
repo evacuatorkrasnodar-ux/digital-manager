@@ -84,7 +84,6 @@
     const at=rest.indexOf(target);
     rest.splice(at+(after?1:0),0,source);
     preferences.sectionOrder=normalizeSections(rest);
-    pickedId=null;
     save();render();
   }
   function syncDefaultSectionLabels(){
@@ -146,7 +145,7 @@
     const collapsed=listed.map(id=>legacyBusiness.has(id)?'business':id);
     return [...new Set([...collapsed,...defaultOrder])].filter(id=>defaultOrder.includes(id));
   }
-  let preferences=load(),editing=false,pickedId=null,skipTileTapUntil=0;
+  let preferences=load(),editing=false;
   let startedFromOriginal=false,madeLayoutChange=false;
   function save(){
     // A real card change promotes the preview into a saved custom layout.
@@ -237,7 +236,7 @@
     // Existing widget module owns its own visibility and data refresh.
     window.dispatchEvent(new Event('dm:cards-changed'));
     board.replaceChildren();
-    board.hidden=true;pickedId=null;
+    board.hidden=true;
     document.documentElement.classList.remove('dm-custom-home-layout','dm-layout-editing');
     syncDefaultSectionLabels();
     window.dispatchEvent(new Event('dm:layout-reset'));
@@ -296,9 +295,8 @@
       window.dispatchEvent(new Event('resize'));
     });
   }
-  function edit(source='settings'){
+  function edit(){
     if(editing)return;
-    pickedId=null;
     startedFromOriginal=!preferences.enabled;
     madeLayoutChange=false;
     preferences.enabled=true;editing=true;
@@ -308,7 +306,6 @@
     // The user exits by tapping the free background or pressing Escape.
   }
   function done(){
-    pickedId=null;
     const noChangesToOriginal=startedFromOriginal&&!madeLayoutChange;
     startedFromOriginal=false;
     editing=false;
@@ -320,7 +317,6 @@
     save();render();
   }
   function reset(){
-    pickedId=null;
     startedFromOriginal=false;
     madeLayoutChange=false;
     preferences=defaults();editing=false;
@@ -328,7 +324,6 @@
     restoreOriginal();
   }
   function shift(id,by){
-    pickedId=null;
     const sectionId=sectionFor(id);
     const visible=preferences.order.filter(x=>sectionFor(x)===sectionId&&!isHidden(x));
     const index=visible.indexOf(id),target=visible[index+by];
@@ -341,24 +336,20 @@
     save();render();
   }
   function resize(id){
-    pickedId=null;
     if(fixedWide.has(id))return;
     preferences.sizes[id]=preferences.sizes[id]==='wide'?'compact':'wide';
     save();render();
   }
   function hide(id){
-    pickedId=null;
     if(fixedBlocks.has(id))return;
     if(!preferences.hidden.includes(id))preferences.hidden.push(id);
     save();render();
   }
   function restore(id){
-    pickedId=null;
     preferences.hidden=preferences.hidden.filter(x=>x!==id);
     save();render();
   }
   function moveTo(id,target){
-    pickedId=null;
     if(!target||target===id)return;
     if(sectionFor(id)!==sectionFor(target)){
       const from=sectionFor(id),to=sectionFor(target);
@@ -436,9 +427,8 @@
   function activateHold(info,current){
     if(pressed!==current||document.hidden)return;
     clearPressed();
-    if(!editing)edit('hold');
+    if(!editing)edit();
     if(!editing)return;
-    pickedId=null;
     dragging={...info,pointerId:current.pointerId,pointerType:current.pointerType,
       x:current.x,y:current.y,startX:current.startX,startY:current.startY,
       touchId:current.touchId,active:true,moved:false,target:null,after:false};
