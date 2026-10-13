@@ -195,3 +195,12 @@ html.dm-layout-editing #homeScreen .dm-layout-board .dm-unit-dragging>.dm-layout
   -webkit-user-select:none;
   user-select:none;
 }
+
+/* Once editing starts, touching the card itself allows repositioning. */
+html.dm-layout-editing #homeScreen .dm-layout-board .dm-layout-unit{
+  touch-action:none;
+  cursor:grab;
+}
+html.dm-layout-editing #homeScreen .dm-layout-board .dm-layout-unit.dm-unit-dragging{
+  cursor:grabbing;
+}
