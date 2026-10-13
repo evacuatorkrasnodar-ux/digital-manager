@@ -114,14 +114,15 @@ function stat(title,value,detail=''){
  return '<div class="dm-pulse-stat"><span>'+title+'</span><strong>'+value+'</strong>'+
  (detail?'<small>'+detail+'</small>':'')+'</div>';
 }
+const circle='<span class="dm-circle-arrow dm-action-circle" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>';
 function actionable(p){
  if(!p.warnings.length)return '<p class="dm-pulse-empty">По доступным записям отдельных срочных сигналов сейчас нет. Это не проверка всех систем компании.</p>';
  return '<div class="dm-pulse-alert-list">'+p.warnings.map(x=>
   '<div class="dm-pulse-alert"><span><strong>'+x.count+'</strong> '+x.label+'</span>'+
-  (x.target==='tax'?'<button type="button" data-pulse-target="tax">Проверить ↗</button>':
-   x.target==='inbox'?'<button type="button" data-pulse-target="inbox">Открыть ↗</button>':
-   x.target==='sales'?'<button type="button" data-pulse-target="sales">Проверить ↗</button>':
-    '<button type="button" data-pulse-target="tasks">К делам ↗</button>')+'</div>').join('')+'</div>';
+  (x.target==='tax'?'<button type="button" data-pulse-target="tax">Проверить '+circle+'</button>':
+   x.target==='inbox'?'<button type="button" data-pulse-target="inbox">Открыть '+circle+'</button>':
+   x.target==='sales'?'<button type="button" data-pulse-target="sales">Проверить '+circle+'</button>':
+    '<button type="button" data-pulse-target="tasks">К делам '+circle+'</button>')+'</div>').join('')+'</div>';
 }
 function render(){
  const x=collect(currentPeriod);
@@ -149,7 +150,7 @@ function render(){
    '<p>«Покупка» — отмеченная вручную сделка, а не подтверждённая банком оплата. Расходы показываются только по внесённой рекламе. Реальную выручку, прибыль, налоги и остаток денег без учётных источников не рассчитываем.</p>'+
    (x.undated||x.undatedWon?'<p>В истории есть записи без необходимых дат ('+fmtCount(x.undated)+' обращений, '+fmtCount(x.undatedWon)+' покупок). Мы не приписываем их произвольному периоду.</p>':'')+
    (x.flowErrors.length?'<p>Часть источников дел временно не прочитана: '+x.flowErrors.length+'. Сводка может быть неполной.</p>':'')+
-   '<div class="dm-pulse-buttons"><button type="button" data-pulse-target="sales">Открыть продажи ↗</button>'+
+   '<div class="dm-pulse-buttons"><button type="button" data-pulse-target="sales">Открыть продажи '+circle+'</button>'+
    '<button type="button" data-pulse-close>Готово</button></div></section>';
 }
 function open(){
