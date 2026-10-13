@@ -63,6 +63,29 @@
   <link rel="stylesheet" href="./manager-tools.css?v=1">
   <link rel="stylesheet" href="./recommendation-premium.css?v=1">
   <link rel="stylesheet" href="./brand-navigation.css?v=3">
+<style id="passport-visible-navigation">
+/* Explicit, always-visible glass arrows on the two passport previews. */
+#homeScreen #openBrandCard .license-arrow.dm-circle-arrow,
+#homeScreen #openProfileCard .profile-arrow.dm-circle-arrow {
+ position:absolute!important;z-index:20!important;display:grid!important;place-items:center!important;
+ width:27px!important;height:27px!important;min-width:27px!important;flex:none!important;
+ margin:0!important;padding:0!important;border-radius:50%!important;
+ border:1px solid rgba(190,226,255,.84)!important;
+ background:linear-gradient(145deg,#426887,#101d2b)!important;
+ box-shadow:inset 0 1px 1px rgba(255,255,255,.38),0 3px 10px rgba(0,0,0,.4),0 0 9px rgba(98,178,241,.28)!important;
+ opacity:1!important;visibility:visible!important;transform:none!important;
+}
+#homeScreen #openBrandCard .license-arrow.dm-circle-arrow{right:12px!important;bottom:14px!important;left:auto!important;top:auto!important}
+#homeScreen #openProfileCard .profile-arrow.dm-circle-arrow{left:12px!important;bottom:14px!important;right:auto!important;top:auto!important}
+#homeScreen #openBrandCard .license-arrow.dm-circle-arrow svg,
+#homeScreen #openProfileCard .profile-arrow.dm-circle-arrow svg{display:none!important}
+#homeScreen #openBrandCard .license-arrow.dm-circle-arrow::after,
+#homeScreen #openProfileCard .profile-arrow.dm-circle-arrow::after{
+ content:"";display:block;width:9px;height:9px;border-top:2px solid #f2faff;
+ border-right:2px solid #f2faff;transform:rotate(45deg);margin-left:-3px;
+}
+#homeScreen #openProfileCard .profile-arrow.dm-circle-arrow::after{transform:rotate(-135deg);margin-left:3px}
+</style>
 </head>
 <body>
 <!-- All pictograms are real independent SVG elements, not fragments of the reference picture. -->
