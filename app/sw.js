@@ -1,5 +1,5 @@
 /* App-only service worker: fresh documents, styles and scripts; cached offline assets. */
-const CACHE = 'digital-manager-black-velvet-v753-20261013';
+const CACHE = 'digital-manager-black-velvet-v754-20261013';
 const CACHE_PREFIX = 'digital-manager-black-velvet-';
 const OFFLINE_FILES = [
   './index.html',
@@ -157,28 +157,30 @@ self.addEventListener('fetch', event => {
   if (url.origin !== self.location.origin || !url.pathname.startsWith(scopePath)) return;
 
   const documentRequest = request.mode === 'navigate' || request.destination === 'document';
-  const freshRequest = documentRequest || request.destination === 'style' || request.destination === 'script';
-
   event.respondWith((async () => {
     const cache = await caches.open(CACHE);
-    if (freshRequest) {
+    if (documentRequest) {
+      // Never render an old HTML shell merely because a versioned asset is slow.
       try {
-        const response = await fetch(request, { cache: 'no-store' });
+        const response = await fetch(request, {cache:'no-cache'});
         if (response.ok) event.waitUntil(cache.put(request, response.clone()));
         return response;
       } catch (_) {
-        const saved = await cache.match(request, { ignoreSearch: documentRequest });
-        if (saved) return saved;
-        return documentRequest
-          ? (await cache.match('./index.html') || Response.error())
-          : Response.error();
+        return (await cache.match(request, {ignoreSearch:true}))
+          || (await cache.match('./index.html'))
+          || Response.error();
       }
     }
-
+    // CSS and JS URLs have explicit version identifiers. Reuse matching cached
+    // resources instantly instead of making every reload wait on the network.
     const saved = await cache.match(request);
     if (saved) return saved;
-    const response = await fetch(request);
-    if (response.ok) event.waitUntil(cache.put(request, response.clone()));
-    return response;
+    try {
+      const response = await fetch(request);
+      if (response.ok) event.waitUntil(cache.put(request, response.clone()));
+      return response;
+    } catch (_) {
+      return Response.error();
+    }
   })());
 });
