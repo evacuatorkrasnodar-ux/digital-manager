@@ -8,7 +8,6 @@
 .dm-init-trigger[data-enabled="true"] .dm-init-pulse{border-color:rgba(142,209,244,.75);box-shadow:0 0 12px rgba(99,174,242,.21)}
 .dm-init-in-chat{width:calc(100% - 16px);margin:8px;z-index:1}
 .dm-init-in-management{width:100%;margin:9px 0 12px}
-.dm-init-in-assistant{width:calc(100% - 24px);max-width:420px;margin:10px auto 14px}
 .dm-init-trigger:focus-visible,.dm-init-overlay button:focus-visible,.dm-init-overlay textarea:focus-visible{outline:2px solid #a9d9ff;outline-offset:3px}
 .dm-init-overlay[hidden]{display:none!important}
 .dm-init-overlay{position:fixed;inset:0;z-index:16000;overflow-y:auto;overscroll-behavior:contain;display:flex;align-items:flex-start;justify-content:center;padding:calc(18px + env(safe-area-inset-top,0px)) 12px calc(24px + env(safe-area-inset-bottom,0px));background:rgba(0,2,8,.88);-webkit-backdrop-filter:blur(13px);backdrop-filter:blur(13px);color:#e8f4ff}
