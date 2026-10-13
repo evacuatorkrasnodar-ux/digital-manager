@@ -4,7 +4,7 @@
 .dm-trace-eyebrow{display:block;font-size:9px;letter-spacing:.17em;color:#a0b4c8}
 .dm-trace-head h1{font-size:23px;letter-spacing:-.035em;font-weight:510;margin:8px 0 3px}
 .dm-trace-head p{font-size:12px;color:#b5c9dc;line-height:1.5;margin:0;max-width:270px}
-#dmTraceBack{position:absolute;right:0;top:calc(12px + env(safe-area-inset-top,0px));width:37px;height:37px;border-radius:50%;border:1px solid rgba(192,220,241,.5);background:linear-gradient(145deg,#243746,#07121e);display:grid;place-items:center}
+#dmTraceBack{position:absolute;right:0;top:calc(12px + env(safe-area-inset-top,0px));width:37px;height:37px;min-width:37px;display:grid;place-items:center;padding:0;}
 #dmTraceBack .ico{width:18px;height:18px}
 .dm-trace-body{display:grid;gap:10px;margin-top:10px}
 .dm-trace-hero{padding:21px 16px;border:1px solid rgba(186,208,226,.36);border-radius:18px;background:radial-gradient(ellipse at 85% 0%,rgba(126,167,196,.14),transparent 57%),linear-gradient(148deg,#17232e,#060b11 75%)}
@@ -28,7 +28,7 @@
 @media(max-width:350px){#digitalTraceScreen.dm-trace-screen{padding-left:8px;padding-right:8px}.dm-trace-head h1{font-size:24px}}
 
 /* Connected working panels: local source register, measurements, comparisons, decisions. */
-.dm-trace-summary{border:1px solid rgba(182,207,228,.38);border-radius:19px;padding:12px 13px;background:radial-gradient(ellipse at 85% 0%,rgba(143,179,213,.15),transparent 65%),linear-gradient(145deg,#142232,#050a11)}
+.dm-trace-summary{border:1px solid var(--dm-ui-edge,rgba(157,199,228,.46));border-radius:21px;padding:16px;background:radial-gradient(ellipse 85% 75% at 8% 0%,rgba(106,166,213,.11),transparent 68%),var(--dm-ui-surface);box-shadow:inset 0 1px rgba(248,253,255,.12),0 7px 20px rgba(0,0,0,.25);}
 .dm-trace-summary>span{font-size:9px;letter-spacing:.14em;color:#b3c8da}
 .dm-trace-summary h2{font-size:16px;font-weight:520;line-height:1.35;margin:6px 0 5px}
 .dm-trace-summary p,.dm-trace-panel>p{font-size:12px;line-height:1.5;color:#aebfd0;margin:0 0 12px}
@@ -39,7 +39,7 @@
 .dm-trace-tabs{position:sticky;top:0;z-index:8;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:4px;border:1px solid rgba(182,209,231,.31);border-radius:18px;background:#07111b}
 .dm-trace-tabs button{min-width:0;border:0;border-radius:14px;padding:10px 2px;font-size:11px;color:#b7c9d9;background:transparent;cursor:pointer}
 .dm-trace-tabs button[aria-pressed="true"]{color:#0b2235;background:linear-gradient(135deg,#edf6fd,#aabed0);box-shadow:inset 0 1px rgba(255,255,255,.9)}
-.dm-trace-panel{display:grid;gap:11px;padding:15px 13px;border:1px solid rgba(154,184,208,.31);border-radius:17px;background:linear-gradient(143deg,#111c28,#050a10)}
+.dm-trace-panel{display:grid;gap:12px;padding:16px;border:1px solid var(--dm-ui-edge,rgba(157,199,228,.46));border-radius:20px;background:radial-gradient(ellipse at 12% 0%,rgba(104,162,207,.08),transparent 65%),var(--dm-ui-surface);box-shadow:inset 0 1px rgba(251,255,255,.11),0 6px 18px rgba(0,0,0,.23);}
 .dm-trace-panel h3{font-size:15px;font-weight:520;margin:0}
 .dm-trace-panel>p{margin:0}
 .dm-trace-form{display:grid;gap:10px}
