@@ -59,7 +59,7 @@
   line-height:1.35;
   color:#adc4d6;
 }
-#managementScreen .mg-unified-item .mg-chevron{margin-left:0;color:#c6dce9}
+#managementScreen .mg-unified-item .mg-chevron{margin-left:0}
 #managementScreen .mg-unified-autopilot{
   border-color:rgba(203,151,91,.43);
   background:linear-gradient(148deg,#221a13,#090d10 67%,#050709);
