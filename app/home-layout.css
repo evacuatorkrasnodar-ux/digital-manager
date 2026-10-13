@@ -4,23 +4,32 @@ html.dm-custom-home-layout #homeScreen .dashboard>.metric-grid,
 html.dm-custom-home-layout #homeScreen #dmHomeWidgets{display:none!important}
 #homeScreen .dashboard>.metric-grid[hidden]{display:none!important}
 #homeScreen .dm-layout-toolbar{
-  display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;justify-content:space-between;
-  border:1px solid rgba(142,176,206,.37);border-radius:16px;
-  background:linear-gradient(150deg,rgba(22,37,54,.92),rgba(5,9,14,.95));
-  color:#eaf5ff;margin:3px 0 10px;padding:9px;box-shadow:inset 0 1px rgba(255,255,255,.07);
+  position:sticky;top:calc(4px + env(safe-area-inset-top,0px));z-index:85;
+  display:flex;flex-wrap:wrap;gap:9px 12px;align-items:center;justify-content:space-between;
+  box-sizing:border-box;min-width:0;width:100%;margin:3px 0 14px;padding:12px 13px;
+  border:1px solid rgba(186,215,236,.65);border-radius:21px;
+  background:radial-gradient(ellipse at 7% 0%,rgba(121,179,219,.15),transparent 67%),linear-gradient(148deg,rgba(19,34,48,.96),rgba(5,12,21,.98));
+  color:#edf7ff;box-shadow:inset 0 1px rgba(247,252,255,.19),0 9px 24px rgba(0,0,0,.45);
+  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
 }
-#homeScreen .dm-layout-heading{display:grid;gap:2px;min-width:120px;flex:1}
-#homeScreen .dm-layout-title{font-size:12px;font-weight:550}
-#homeScreen .dm-layout-caption{font-size:10px;line-height:1.3;color:#9bb4cb}
-#homeScreen .dm-layout-actions{display:flex;flex-wrap:wrap;align-items:center;gap:5px}
+#homeScreen .dm-layout-heading{display:grid;gap:4px;min-width:180px;flex:1 1 170px;}
+#homeScreen .dm-layout-title{font-size:clamp(12px,3.3vw,14px);font-weight:620;letter-spacing:.006em;color:#f4f9ff;}
+#homeScreen .dm-layout-caption{font-size:clamp(10px,2.75vw,11px);line-height:1.34;color:#adcce1;}
+#homeScreen .dm-layout-actions{display:flex;flex-wrap:nowrap;align-items:center;justify-content:flex-end;gap:7px;flex:0 0 auto;}
 #homeScreen .dm-layout-actions button,#homeScreen .dm-layout-library button{
-  min-height:30px;max-width:100%;padding:5px 8px;border:1px solid rgba(151,183,216,.43);
-  border-radius:10px;background:linear-gradient(145deg,#253a51,#101927);
-  color:#eef8ff;font-family:inherit;font-size:10.5px;font-weight:500;line-height:1.25;cursor:pointer;
+  min-height:35px;max-width:100%;padding:8px 12px;border:1px solid var(--dm-circle-edge,rgba(175,207,229,.58));
+  border-radius:17px;background:var(--dm-circle-bg,linear-gradient(145deg,#1a3041,#071521));
+  box-shadow:var(--dm-circle-shadow,inset 0 1px rgba(255,255,255,.2),0 3px 10px rgba(0,0,0,.3));
+  color:#f1f8ff;font:540 clamp(10px,2.7vw,12px)/1.25 system-ui,sans-serif;cursor:pointer;
 }
-#homeScreen #dmLayoutDone{background:linear-gradient(145deg,#476e98,#203a62);border-color:#9bc9ef88}
+#homeScreen #dmLayoutDone{
+  color:#112a40;border-color:rgba(224,241,252,.96);
+  background:var(--dm-ui-gloss,linear-gradient(145deg,#ecf8ff,#8fb2ce));
+  box-shadow:var(--dm-ui-gloss-shadow,inset 0 1px #fff,0 3px 10px rgba(0,0,0,.3));
+  font-weight:650;
+}
 #homeScreen .dm-layout-actions button[hidden],#homeScreen .dm-layout-library[hidden]{display:none!important}
-#homeScreen .dm-layout-library{display:flex;flex-wrap:wrap;align-items:center;gap:5px;flex:0 0 100%;padding-top:6px;border-top:1px solid #b5d9ed24}
+#homeScreen .dm-layout-library{display:flex;flex-wrap:wrap;align-items:center;gap:6px;flex:0 0 100%;padding-top:9px;border-top:1px solid rgba(176,211,236,.25);}
 #homeScreen .dm-layout-library::before{content:'Вернуть:';font-size:10px;color:#a5bdd1}
 #homeScreen .dm-layout-board{
   display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
@@ -54,18 +63,24 @@ html.dm-custom-home-layout #homeScreen #dmHomeWidgets{display:none!important}
 #homeScreen .dm-layout-unit[data-size=wide] .dm-home-widget{min-height:140px}
 #homeScreen .dm-layout-unit[data-card-id=revenue] .chart-wrap{inset:43px 11px 18px}
 html.dm-layout-editing #homeScreen .dm-layout-board{row-gap:13px}
-#homeScreen .dm-unit-controls{display:flex;align-items:center;gap:3px;min-width:0;padding:2px 3px 5px}
+#homeScreen .dm-unit-controls{display:flex;align-items:center;gap:6px;min-width:0;padding:2px 1px 7px;min-height:36px;}
 #homeScreen .dm-unit-controls .dm-layout-control{
-  display:grid;place-items:center;min-width:24px;min-height:27px;padding:2px 4px;
-  border:1px solid rgba(153,188,221,.47);border-radius:9px;
-  background:linear-gradient(140deg,#243d57,#0b1829);color:#e9f6ff;font:500 13px/1 system-ui;cursor:pointer;
+  display:inline-flex;justify-content:center;align-items:center;gap:7px;min-width:32px;min-height:32px;padding:6px 9px;
+  border:1px solid var(--dm-circle-edge,rgba(184,214,235,.59));border-radius:16px;
+  background:var(--dm-circle-bg,linear-gradient(145deg,#162b3c,#071522));
+  box-shadow:var(--dm-circle-shadow,inset 0 1px rgba(255,255,255,.17),0 3px 8px rgba(0,0,0,.27));
+  color:var(--dm-circle-ink,#f1f8ff);font:530 13px/1 system-ui,sans-serif;cursor:pointer;
 }
-#homeScreen .dm-unit-controls .dm-unit-grab{display:flex;align-items:center;justify-content:center;gap:3px;flex:1;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab}
-#homeScreen .dm-drag-caption{font-size:9px;line-height:1.1}
+#homeScreen .dm-unit-controls .dm-unit-grab{
+  display:inline-flex;align-items:center;justify-content:flex-start;gap:7px;flex:1 1 auto;min-width:0;
+  touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;
+  padding-left:12px;
+}
+#homeScreen .dm-drag-caption{font-size:clamp(10px,2.65vw,12px);line-height:1.1;white-space:nowrap;}
 #homeScreen .dm-unit-controls .dm-layout-control:focus-visible{outline:2px solid #e9f7ff;outline-offset:2px}
 #homeScreen .dm-unit-dragging>.dm-layout-content{opacity:.65}
 #homeScreen .dm-unit-drop-target{outline:2px dashed rgba(171,214,255,.8);outline-offset:2px;border-radius:19px}
-#homeScreen .dm-layout-board .dm-unit-controls button:active{background:#325b80}
+#homeScreen .dm-layout-board .dm-unit-controls button:active{filter:brightness(1.17);}
 html.dm-layout-editing #homeScreen .dm-layout-board .dm-layout-content{pointer-events:none}
 html.dm-layout-editing #homeScreen .dm-layout-board .dm-layout-unit .dm-unit-controls{pointer-events:auto}
 @media(max-width:360px){
@@ -75,6 +90,23 @@ html.dm-layout-editing #homeScreen .dm-layout-board .dm-layout-unit .dm-unit-con
 }
 @media(prefers-reduced-motion:reduce){
   #homeScreen .dm-layout-unit,#homeScreen .dm-layout-content{transition:none!important}
+}
+
+
+#homeScreen .dm-unit-controls .dm-layout-circle{
+  flex:0 0 32px;width:32px;min-width:32px;height:32px;padding:0;border-radius:50%;
+  font-size:16px;
+}
+#homeScreen .dm-layout-actions button:is(:hover,:focus-visible),
+#homeScreen .dm-unit-controls .dm-layout-control:is(:hover,:focus-visible),
+#homeScreen .dm-home-section-arrows button:is(:hover,:focus-visible){border-color:var(--dm-circle-edge-hover,rgba(225,239,250,.9))}
+#homeScreen .dm-home-section-arrows button:disabled{opacity:.3;cursor:default;filter:none}
+html.dm-layout-editing #homeScreen .dm-layout-board .dm-layout-unit{scroll-margin-top:110px}
+@media(max-width:510px){
+  #homeScreen .dm-layout-toolbar{gap:9px;padding:10px 12px}
+  #homeScreen .dm-layout-heading{min-width:0;flex:1 1 135px}
+  #homeScreen .dm-layout-actions{gap:6px}
+  #homeScreen .dm-layout-actions button{padding:8px 10px}
 }
 
 /* Management entry — quiet premium glass, consistent with the settings screen. */
@@ -148,7 +180,7 @@ html.dm-layout-editing #homeScreen .dm-layout-board .dm-unit-dragging{
   cursor:grabbing;
 }
 html.dm-layout-editing #homeScreen .dashboard{
-  padding-bottom:calc(150px + env(safe-area-inset-bottom,0px));
+  padding-bottom:calc(102px + env(safe-area-inset-bottom,0px));
 }
 html.dm-layout-editing #homeScreen .dm-layout-unit.dm-unit-picked{
   border-radius:19px;
@@ -170,29 +202,6 @@ html.dm-layout-editing #homeScreen .dm-layout-unit.dm-unit-picked::before{
   font-size:10px;
   pointer-events:none;
 }
-#dmLayoutFloatDone[hidden]{display:none!important}
-#dmLayoutFloatDone.dm-layout-float-done{
-  position:fixed;
-  right:max(12px,calc((100vw - 410px)/2 + 12px));
-  bottom:calc(89px + env(safe-area-inset-bottom,0px));
-  z-index:90;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:43px;
-  min-width:106px;
-  padding:9px 17px;
-  border:1px solid rgba(164,207,243,.8);
-  border-radius:19px;
-  background:linear-gradient(145deg,rgba(63,113,160,.96),rgba(21,47,78,.98));
-  color:#f7fbff;
-  font:600 13px/1.3 system-ui,sans-serif;
-  box-shadow:inset 0 1px rgba(255,255,255,.19),0 7px 23px rgba(0,0,0,.52),0 0 13px rgba(96,165,229,.25);
-  -webkit-tap-highlight-color:transparent;
-  cursor:pointer;
-}
-#dmLayoutFloatDone:focus-visible{outline:2px solid #fff;outline-offset:3px}
-
 /* Approved four-card business sculpture: don't change a single inside tile.
  * The original metric-grid remains the sizing/grid authority in edit mode. */
 #homeScreen .dm-layout-board>.dm-layout-unit[data-card-id=business],
@@ -226,16 +235,10 @@ html.dm-layout-editing #homeScreen .dm-layout-unit.dm-unit-picked::before{
   overflow:visible;
 }
 #homeScreen .dm-layout-board .dm-fixed-business-label{
-  display:flex;
-  align-items:center;
-  font-size:9px;
-  line-height:1.25;
-  color:#a9c6df;
-  border:1px solid rgba(136,172,200,.24);
-  border-radius:9px;
-  padding:5px 7px;
-  white-space:normal;
-  background:rgba(12,25,42,.44);
+  display:inline-flex;align-items:center;justify-content:center;flex:none;
+  font-size:clamp(9px,2.35vw,10px);line-height:1.2;color:#abc7db;
+  border:1px solid rgba(153,190,217,.30);border-radius:14px;padding:7px 9px;
+  white-space:normal;background:rgba(9,24,38,.8);
 }
 
 
@@ -271,12 +274,13 @@ html.dm-layout-editing #homeScreen .dm-layout-unit.dm-unit-picked::before{
 #homeScreen #dmLayoutBoard>.dm-home-section-title{margin:11px 0 0}
 #homeScreen #dmLayoutBoard>.dm-home-section-title:first-child{margin-top:3px}
 #homeScreen #dmLayoutBoard>.dm-home-section-title::after{order:0}
-#homeScreen .dm-home-section-arrows{display:flex;gap:4px;order:1;margin-left:auto;flex:none}
+#homeScreen .dm-home-section-arrows{display:flex;align-items:center;gap:6px;order:1;margin-left:auto;flex:none;}
 #homeScreen .dm-home-section-arrows button{
-  min-width:30px;min-height:29px;display:grid;place-items:center;
-  color:#d9eafd;font:500 14px/1 system-ui,sans-serif;
-  border-radius:9px;border:1px solid rgba(152,190,223,.43);
-  background:linear-gradient(145deg,#21374e,#0b1827);cursor:pointer;
+  box-sizing:border-box;min-width:31px;width:31px;height:31px;min-height:31px;padding:0;
+  display:grid;place-items:center;color:var(--dm-circle-ink,#f3f8fd);font:550 16px/1 system-ui,sans-serif;
+  border-radius:50%;border:1px solid var(--dm-circle-edge,rgba(192,216,235,.64));
+  background:var(--dm-circle-bg,linear-gradient(145deg,#182b3c,#06121d));
+  box-shadow:var(--dm-circle-shadow,inset 0 1px rgba(255,255,255,.21),0 3px 9px rgba(0,0,0,.28));cursor:pointer;
 }
 #homeScreen .dm-home-section-arrows button:focus-visible{
   outline:2px solid #ecf7ff;outline-offset:2px;
