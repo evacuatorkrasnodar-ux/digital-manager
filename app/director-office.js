@@ -45,8 +45,10 @@ root.innerHTML='<div class="dm-director-frame" role="dialog" aria-modal="true" a
 document.body.append(root);
 function persist(){
  data.updatedAt=Date.now();
- try{localStorage.setItem(KEY,JSON.stringify(data));window.dispatchEvent(new Event('dm:director-updated'));return true;}
+ try{localStorage.setItem(KEY,JSON.stringify(data));}
  catch(_){return false;}
+ try{window.dispatchEvent(new Event('dm:director-updated'));}catch(_){}
+ return true;
 }
 function businessText(){
  const existing=window.DMBusinessContext?.getProfile?.()?.description||'';
