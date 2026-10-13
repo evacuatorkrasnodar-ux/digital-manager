@@ -194,7 +194,7 @@ function render(){
  for(const tab of overlay.querySelectorAll('[data-ws-screen]'))tab.setAttribute('aria-current',tab.dataset.wsScreen===screen?'page':'false');
  let html='';
  if(screen==='inbox')html=mode==='new'?messageForm():mode==='detail'?messageDetail():inboxList();
- if(screen==='brief')html=mode==='detail'?planEditor():briefing();
+ if(screen==='brief')html=(mode==='detail'||mode==='week')?planEditor():briefing();
  if(screen==='meeting')html=mode==='new'?negotiationForm():mode==='detail'?negotiationDetail():negotiationList();
  body().innerHTML=html+(notification?'<p class="dm-workspace-feedback" role="status">'+esc(notification)+'</p>':'');
  body().scrollTop=0;notification='';
@@ -210,7 +210,7 @@ function officeProposal(p){
  const api=window.DMDirectorOffice;
  if(api?.propose){
   const ok=api.propose(p);
-  if(ok){api.open('desk');return true;}
+  if(ok){close();api.open('desk');return true;}
  }
  notification='Предложение сохранено здесь, но директорский центр недоступен. Откройте золотую рекомендацию.';
  return false;
@@ -220,7 +220,11 @@ async function copy(text){
  if(!s)return;
  try{if(!navigator.clipboard?.writeText)throw Error('Clipboard unavailable');await navigator.clipboard.writeText(s);notification='Скопировано. Ничего никому не отправлено.';}
  catch(_){notification='Не удалось скопировать. Выделите текст в поле вручную.';}
- render();
+ if(screen==='brief'&&(mode==='detail'||mode==='week')){
+  body()?.querySelector('.dm-workspace-feedback')?.remove();
+  const status=document.createElement('p');status.className='dm-workspace-feedback';status.setAttribute('role','status');
+  status.textContent=notification;body()?.append(status);notification='';
+ }else render();
 }
 function planText(){return $('dmWorkspaceAgendaText')?.value?.trim()||'';}
 function savePlan(){
@@ -264,7 +268,7 @@ overlay.addEventListener('click',event=>{
  if(act==='back'){mode='list';selected='';render();return;}
  if(act==='new-message'||act==='new-deal'){mode='new';selected='';render();return;}
  if(act==='make-agenda'){screen='brief';mode='detail';selected='';render();return;}
- if(act==='week'){screen='brief';mode='detail';selected='';body().innerHTML=planEditor();$('dmWorkspaceAgendaText').value=weekPlan();return;}
+ if(act==='week'){screen='brief';mode='week';selected='';render();$('dmWorkspaceAgendaText').value=weekPlan();return;}
  if(act==='save-draft'&&m){if(updateDraft())notification='Черновик сохранён. Ничего не отправлено.';render();return;}
  if(act==='request-approval'&&m){
   if(!updateDraft()){render();return;}
@@ -282,6 +286,7 @@ overlay.addEventListener('click',event=>{
  }
  if(act==='delete-message'&&m){
   if(!window.confirm('Удалить запись обращения и черновик с этого устройства?'))return;
+  window.DMDirectorOffice?.dismiss?.('inbox:'+m.id);
   data.inbox=data.inbox.filter(x=>x.id!==m.id);save();selected='';mode='list';render();return;
  }
  if(act==='save-plan'){savePlan();return;}
@@ -297,6 +302,7 @@ overlay.addEventListener('click',event=>{
  }
  if(act==='delete-deal'&&d){
   if(!window.confirm('Удалить сохранённые заметки этой встречи?'))return;
+  window.DMDirectorOffice?.dismiss?.('deal:'+d.id);
   data.negotiations=data.negotiations.filter(x=>x.id!==d.id);save();selected='';mode='list';render();return;
  }
 });
