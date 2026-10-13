@@ -515,7 +515,8 @@
 #homeScreen .metric-grid .recommendation-card{
   grid-column:10/span 11;
   grid-row:2;
-  top:-15px;
+  /* The gold card starts 8px below Sales, using Sales' actual height. */
+  top:calc(var(--bv-order-h) - var(--bv-client-h));
   height:calc(var(--bv-gold-h) + 8px);
   min-height:calc(var(--bv-gold-h) + 8px);
   margin-left:3px!important;
@@ -776,8 +777,7 @@
     padding:6px 7px!important;
   }
   #homeScreen .metric-grid .recommendation-card{
-    /* Keep the approved tall gold shape; adjust only its vertical position. */
-    top:-26px;
+    /* Keep the tall gold silhouette; position comes from Sales above. */
     padding:6px 8px 6px!important;
   }
   /* Small title badges echo the original Digital Business card's details. */
@@ -1057,16 +1057,16 @@
   z-index:30!important;
 }
 
-/* Home spacing, 2026-10-11 — remove the visual void above "Быстрые действия".
-   The gold card is lifted inside its reserved grid track. Pull up the NEXT
-   section in normal document flow; do not translate/reposition any card. */
+/* Home spacing, 2026-10-13 — gold aligns 8px below Sales.
+   Remove the old negative shortcut offset so both rows keep even spacing. */
 @media (min-width:360px) and (max-width:539px){
   #homeScreen .dashboard > .shortcuts{
-    margin-top:-16px;
+    /* The lowered gold card now clears this section naturally. */
+    margin-top:0;
   }
 }
 @media (min-width:540px){
   #homeScreen .dashboard > .shortcuts{
-    margin-top:-8px;
+    margin-top:0;
   }
 }
