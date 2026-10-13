@@ -7,7 +7,7 @@
 #dmTraceBack{position:absolute;right:0;top:calc(12px + env(safe-area-inset-top,0px));width:37px;height:37px;min-width:37px;display:grid;place-items:center;padding:0;}
 #dmTraceBack .ico{width:18px;height:18px}
 .dm-trace-body{display:grid;gap:10px;margin-top:10px}
-.dm-trace-hero{padding:21px 16px;border:1px solid rgba(186,208,226,.36);border-radius:18px;background:radial-gradient(ellipse at 85% 0%,rgba(126,167,196,.14),transparent 57%),linear-gradient(148deg,#17232e,#060b11 75%)}
+.dm-trace-hero{padding:21px 16px;border:1px solid rgba(186,208,226,.36);border-radius:18px;background:var(--dm-ui-surface)}
 .dm-trace-status{display:inline-flex;align-items:center;gap:7px;color:#d4e6f5;font-size:9px;letter-spacing:.12em}
 .dm-trace-status i{width:6px;height:6px;border-radius:50%;background:#adbdca;box-shadow:0 0 7px #b5c9da77}
 .dm-trace-hero h2{font-size:17px;font-weight:510;line-height:1.35;margin:14px 0 7px}
@@ -28,7 +28,7 @@
 @media(max-width:350px){#digitalTraceScreen.dm-trace-screen{padding-left:8px;padding-right:8px}.dm-trace-head h1{font-size:24px}}
 
 /* Connected working panels: local source register, measurements, comparisons, decisions. */
-.dm-trace-summary{border:1px solid var(--dm-ui-edge,rgba(157,199,228,.46));border-radius:21px;padding:16px;background:radial-gradient(ellipse 85% 75% at 8% 0%,rgba(106,166,213,.11),transparent 68%),var(--dm-ui-surface);box-shadow:inset 0 1px rgba(248,253,255,.12),0 7px 20px rgba(0,0,0,.25);}
+.dm-trace-summary{border:1px solid var(--dm-ui-edge,rgba(157,199,228,.46));border-radius:21px;padding:16px;background:var(--dm-ui-surface);box-shadow:inset 0 1px rgba(248,253,255,.12),0 7px 20px rgba(0,0,0,.25);}
 .dm-trace-summary>span{font-size:9px;letter-spacing:.14em;color:#b3c8da}
 .dm-trace-summary h2{font-size:16px;font-weight:520;line-height:1.35;margin:6px 0 5px}
 .dm-trace-summary p,.dm-trace-panel>p{font-size:12px;line-height:1.5;color:#aebfd0;margin:0 0 12px}
@@ -39,7 +39,7 @@
 .dm-trace-tabs{position:sticky;top:0;z-index:8;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:4px;border:1px solid rgba(182,209,231,.31);border-radius:18px;background:#07111b}
 .dm-trace-tabs button{min-width:0;border:0;border-radius:14px;padding:10px 2px;font-size:11px;color:#b7c9d9;background:transparent;cursor:pointer}
 .dm-trace-tabs button[aria-pressed="true"]{color:#0b2235;background:linear-gradient(135deg,#edf6fd,#aabed0);box-shadow:inset 0 1px rgba(255,255,255,.9)}
-.dm-trace-panel{display:grid;gap:12px;padding:16px;border:1px solid var(--dm-ui-edge,rgba(157,199,228,.46));border-radius:20px;background:radial-gradient(ellipse at 12% 0%,rgba(104,162,207,.08),transparent 65%),var(--dm-ui-surface);box-shadow:inset 0 1px rgba(251,255,255,.11),0 6px 18px rgba(0,0,0,.23);}
+.dm-trace-panel{display:grid;gap:12px;padding:16px;border:1px solid var(--dm-ui-edge,rgba(157,199,228,.46));border-radius:20px;background:var(--dm-ui-surface);box-shadow:inset 0 1px rgba(251,255,255,.11),0 6px 18px rgba(0,0,0,.23);}
 .dm-trace-panel h3{font-size:15px;font-weight:520;margin:0}
 .dm-trace-panel>p{margin:0}
 .dm-trace-form{display:grid;gap:10px}
@@ -82,7 +82,7 @@
 .dm-trace-market-kicker{display:block;font-size:9px;letter-spacing:.1em;color:#a8c4da;margin-bottom:7px}
 .dm-trace-market-demo{font-size:10px;letter-spacing:.07em;border:1px solid rgba(190,215,235,.4);border-radius:999px;padding:5px 8px;color:#bbd2e5}
 .dm-trace-market-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.dm-trace-market-card{min-width:0;min-height:103px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:6px;text-align:left;padding:13px;border:1px solid rgba(156,191,219,.32);border-radius:16px;background:radial-gradient(ellipse at 100% 0%,rgba(143,193,229,.12),transparent 75%),linear-gradient(145deg,#172636,#080e16);color:#f1f7fc}
+.dm-trace-market-card{min-width:0;min-height:103px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:6px;text-align:left;padding:13px;border:1px solid rgba(156,191,219,.32);border-radius:16px;background:var(--dm-ui-inset);color:#f1f7fc}
 .dm-trace-market-card strong{font-size:14px;font-weight:540}
 .dm-trace-market-card small{font-size:10px;color:#acc4d6}
 .dm-trace-market-card span{font-size:10px;color:#d3e6f4}
