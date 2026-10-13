@@ -1,7 +1,5 @@
-/* Personalized Home layout v1 — no alteration to the approved initial geometry.
- * Moves the actual interactive DOM cards, preserving event listeners and saved data.
- * The Clients clip and its independent outline always travel as one unit.
- */
+/* Personalized Home layout v3 — move all four business cards as ONE.
+ * Reuse the approved original grid and contours without resizing or restyling. */
 (() => {
   'use strict';
   const dashboard=document.querySelector('#homeScreen .dashboard');
@@ -27,14 +25,12 @@
     calendar:document.getElementById('dmWidgetCalendar')
   };
   if(Object.values(parts).some(x=>!x))return;
-  const defaultOrder=['revenue','signature','orders','profit','day','steps','breathe','calendar'];
-  const names={
-    revenue:'Выручка',signature:'Клиенты + Рекомендация',clients:'Клиенты',orders:'Продажи',
-    profit:'Прибыль',advice:'Рекомендация',day:'Мой день',
-    steps:'Шаги',breathe:'Дыхание',calendar:'Календарь'
-  };
-  const available={day:'dayWidget',steps:'healthSteps',breathe:'breathing',calendar:'calendarWidget',clients:'clients',orders:'sales',profit:'money'};
-  const fixedWide=new Set(['revenue','signature','calendar']);
+  const defaultOrder=['revenue','business','day','steps','breathe','calendar'];
+  const names={revenue:'Выручка',business:'Бизнес · 4 карточки',day:'Мой день',
+    steps:'Шаги',breathe:'Дыхание',calendar:'Календарь'};
+  const available={day:'dayWidget',steps:'healthSteps',breathe:'breathing',calendar:'calendarWidget'};
+  const fixedWide=new Set(['revenue','business','calendar']);
+  const legacyBusiness=new Set(['business','signature','clients','advice','orders','profit']);
 
   const toolbar=document.createElement('section');
   toolbar.className='dm-layout-toolbar';
@@ -44,7 +40,7 @@
     '<span class="dm-layout-caption" id="dmLayoutCaption">Мой порядок карточек</span></div>'+
     '<div class="dm-layout-actions">'+
     '<button type="button" data-dm-layout-action="edit" id="dmLayoutEdit" aria-label="Изменить расположение карточек">✎ Изменить</button>'+
-    '<button type="button" data-dm-layout-action="link" id="dmLayoutLink" hidden></button>'+
+
     '<button type="button" data-dm-layout-action="reset" id="dmLayoutReset" hidden>↶ Исходный вид</button>'+
     '<button type="button" data-dm-layout-action="done" id="dmLayoutDone" hidden>✓ Готово</button></div>'+
     '<div class="dm-layout-library" id="dmLayoutLibrary" hidden aria-label="Скрытые карточки"></div>';
@@ -66,36 +62,30 @@
   document.body.append(floatDone);
   floatDone.addEventListener('click',()=>done());
 
-  function defaults(){return {enabled:false,linked:true,order:defaultOrder.slice(),sizes:{},hidden:[]};}
+  function defaults(){return {enabled:false,order:defaultOrder.slice(),sizes:{},hidden:[]};}
   function load(){
     let saved;
     try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(_){saved={};}
     if(!saved||typeof saved!=='object')saved={};
     const o={...defaults(),...saved};
-    o.linked=o.linked!==false;
     o.sizes=(o.sizes&&typeof o.sizes==='object'&&!Array.isArray(o.sizes))?o.sizes:{};
-    o.hidden=Array.isArray(o.hidden)?o.hidden.filter(x=>typeof x==='string'):[];
-    o.order=normalize(o.order,o.linked);
+    o.hidden=Array.isArray(o.hidden)?o.hidden.filter(x=>typeof x==='string'&&!legacyBusiness.has(x)):[];
+    o.order=normalize(o.order);
     return o;
   }
-  function normalize(items,linked){
-    const allowed=linked?defaultOrder:['revenue','clients','orders','profit','advice','day','steps','breathe','calendar'];
-    const listed=Array.isArray(items)?items:[];
-    const expanded=[];
-    for(const id of listed){
-      if(linked&&id==='clients'){expanded.push('signature');continue;}
-      if(linked&&id==='advice')continue;
-      if(!linked&&id==='signature'){expanded.push('clients','advice');continue;}
-      expanded.push(id);
-    }
-    return [...new Set([...expanded,...allowed])].filter(x=>allowed.includes(x));
+  function normalize(items){
+    // Preserve the user's optional widget order while collapsing all former
+    // individual business cards into one permanent four-card block.
+    const listed=Array.isArray(items)?items:defaultOrder;
+    const collapsed=listed.map(id=>legacyBusiness.has(id)?'business':id);
+    return [...new Set([...collapsed,...defaultOrder])].filter(id=>defaultOrder.includes(id));
   }
   let preferences=load(),editing=false,pickedId=null,skipTileTapUntil=0;
   let startedFromOriginal=false,madeLayoutChange=false;
   function save(){
     // A real card change promotes the preview into a saved custom layout.
     if(editing)madeLayoutChange=true;
-    preferences.order=normalize(preferences.order,preferences.linked);
+    preferences.order=normalize(preferences.order);
     try{localStorage.setItem(KEY,JSON.stringify(preferences));}catch(_){}
   }
   function visibleByManagement(id){
@@ -106,9 +96,8 @@
     return ['day','steps','breathe','calendar'].includes(id)?cards[flag]===true:cards[flag]!==false;
   }
   function isHidden(id){
-    const ids=id==='signature'?['clients','advice']:[id];
-    return ids.every(key=>preferences.hidden.includes(key)) ||
-      (id==='signature'?!visibleByManagement('clients'):!visibleByManagement(id));
+    if(id==='business')return false;
+    return preferences.hidden.includes(id)||!visibleByManagement(id);
   }
   function node(name,html){
     const b=document.createElement('button');b.type='button';b.className='dm-layout-control';b.dataset.dmUnitAction=name;b.innerHTML=html;return b;
@@ -128,16 +117,13 @@
       b.setAttribute('aria-label','Изменить размер: '+names[id]);
       b.title='Узкая / широкая';controls.append(b);
     }
-    const hide=node('hide','×');hide.setAttribute('aria-label','Убрать карточку '+names[id]);hide.title='Скрыть с главной';controls.append(hide);
+    if(id==='business'){
+      const lock=document.createElement('span');lock.className='dm-fixed-business-label';
+      lock.textContent='4 карточки · размер закреплён';controls.append(lock);
+    }else{
+      const hide=node('hide','×');hide.setAttribute('aria-label','Убрать карточку '+names[id]);hide.title='Скрыть с главной';controls.append(hide);
+    }
     return controls;
-  }
-  function appendClientWithEdge(host){
-    // Management may have previously hidden Clients while they were detached.
-    // Re-show the real clipped card and its matching independent contour together.
-    parts.clients.hidden=false;
-    parts.clientEdge.hidden=false;
-    const wrap=document.createElement('div');wrap.className='dm-client-sculpt';
-    wrap.append(parts.clients,parts.clientEdge);host.append(wrap);
   }
   function makeUnit(id){
     const outer=document.createElement('div');
@@ -146,28 +132,26 @@
     outer.dataset.size=size;
     if(editing)outer.append(unitControls(id));
     const content=document.createElement('div');content.className='dm-layout-content';outer.append(content);
-    if(id==='signature'){
-      const pair=document.createElement('div');pair.className='dm-signature-combo';
-      const left=document.createElement('div');left.className='dm-combo-clients';appendClientWithEdge(left);
-      const right=document.createElement('div');right.className='dm-combo-gold';right.append(parts.advice);
-      pair.append(left,right);content.append(pair);
-    }else if(id==='clients')appendClientWithEdge(content);
-    else{
-      const map={revenue:parts.revenue,orders:parts.orders,profit:parts.profit,advice:parts.advice,
-        day:parts.day,steps:parts.steps,breathe:parts.breathe,calendar:parts.calendar};
+    if(id==='business'){
+      // Move the actual five-element grid (four cards + Clients outline).
+      // It retains every approved CSS column, height, SVG clip and border.
+      originalGrid.hidden=false;
+      content.append(originalGrid);
+    }else{
+      const map={revenue:parts.revenue,day:parts.day,steps:parts.steps,breathe:parts.breathe,calendar:parts.calendar};
       if(map[id]){map[id].hidden=false;content.append(map[id]);}
     }
     return outer;
   }
   function holdCards(){
     const detached=document.createDocumentFragment();
-    Object.values(parts).forEach(el=>detached.append(el));
+    detached.append(parts.revenue,originalGrid,parts.day,parts.steps,parts.breathe,parts.calendar);
     return detached;
   }
   function restoreOriginal(){
-    originalGrid.replaceChildren(parts.clients,parts.clientEdge,parts.orders,parts.profit,parts.advice);
     widgetHost.replaceChildren(parts.day,parts.steps,parts.breathe,parts.calendar);
     dashboard.insertBefore(parts.revenue,widgetHost);
+    dashboard.insertBefore(originalGrid,board);
     originalGrid.hidden=false;
     // Existing widget module owns its own visibility and data refresh.
     window.dispatchEvent(new Event('dm:cards-changed'));
@@ -180,8 +164,7 @@
     const library=document.getElementById('dmLayoutLibrary');
     library.replaceChildren();
     if(!editing){library.hidden=true;return;}
-    const ids=preferences.linked?defaultOrder:['revenue','clients','orders','profit','advice','day','steps','breathe','calendar'];
-    const hidden=ids.filter(id=>preferences.hidden.includes(id)||id==='signature'&&preferences.hidden.includes('clients'));
+    const hidden=defaultOrder.filter(id=>id!=='business'&&preferences.hidden.includes(id));
     for(const id of hidden){
       const b=document.createElement('button');
       b.type='button';b.dataset.dmRestoreId=id;
@@ -198,7 +181,7 @@
     // Move existing cards: never clone their event handlers or generate mock data.
     holdCards();
     board.replaceChildren();
-    preferences.order=normalize(preferences.order,preferences.linked);
+    preferences.order=normalize(preferences.order);
     for(const id of preferences.order){
       if(!isHidden(id))board.append(makeUnit(id));
     }
@@ -209,7 +192,7 @@
     });
     board.hidden=false;
     floatDone.hidden=!editing;
-    originalGrid.hidden=true;
+    // Original metric-grid is now inside its unified movable wrapper.
     widgetHost.hidden=true;
     // The editor toolbar is only shown while customizing. After "Done", the
     // user's cards remain in place without a permanent settings block.
@@ -222,12 +205,9 @@
       const action=b.dataset.dmLayoutAction;
       b.hidden=(editing?action==='edit':action!=='edit');
     }
-    const link=document.getElementById('dmLayoutLink');
-    link.textContent=preferences.linked?'⛓ Разъединить пару':'⛓ Соединить пару';
-    link.setAttribute('aria-label',preferences.linked?'Разъединить Клиентов и Рекомендацию':'Соединить Клиентов и Рекомендацию');
     renderLibrary();
     // Notify any other dashboard listeners without changing the card contours.
-    window.dispatchEvent(new CustomEvent('dm:layout-rendered',{detail:{linked:preferences.linked,editing}}));
+    window.dispatchEvent(new CustomEvent('dm:layout-rendered',{detail:{businessGrouped:true,editing}}));
     // Keep the lower cards in view after a resize, reorder or change of size.
     requestAnimationFrame(()=>{
       if(editing)window.scrollTo({top:previousScrollY,behavior:'instant'});
@@ -268,12 +248,6 @@
     try{localStorage.removeItem(KEY);}catch(_){}
     restoreOriginal();
   }
-  function linkPair(){
-    preferences.linked=!preferences.linked;
-    preferences.order=normalize(preferences.order,preferences.linked);
-    preferences.hidden=preferences.hidden.filter(x=>x!=='signature');
-    save();render();
-  }
   function shift(id,by){
     pickedId=null;
     const list=preferences.order;
@@ -293,29 +267,23 @@
   }
   function hide(id){
     pickedId=null;
-    const keys=id==='signature'?['clients','advice']:[id];
-    for(const key of keys)if(!preferences.hidden.includes(key))preferences.hidden.push(key);
+    if(id==='business')return;
+    if(!preferences.hidden.includes(id))preferences.hidden.push(id);
     save();render();
   }
   function restore(id){
     pickedId=null;
-    preferences.hidden=preferences.hidden.filter(x=>id==='signature'?!['clients','advice'].includes(x):x!==id);
+    preferences.hidden=preferences.hidden.filter(x=>x!==id);
     save();render();
   }
   function moveTo(id,target){
     pickedId=null;
     if(!target||target===id)return;
-    if(!preferences.linked&&['clients','advice'].includes(id)&&['clients','advice'].includes(target)){
-      // A real magnetic connection: dropping one shaped card onto the other links them.
-      preferences.linked=true;
-      preferences.order=normalize(preferences.order,true);
-      save();render();return;
-    }
     const arr=preferences.order.filter(x=>x!==id);
     const at=arr.indexOf(target);
     if(at<0)return;
     arr.splice(at,0,id);
-    preferences.order=normalize(arr,preferences.linked);
+    preferences.order=normalize(arr);
     save();render();
   }
   toolbar.addEventListener('click',e=>{
@@ -326,7 +294,6 @@
     if(act==='edit')edit();
     if(act==='done')done();
     if(act==='reset')reset();
-    if(act==='link')linkPair();
   });
   board.addEventListener('click',e=>{
     if(!editing)return;
