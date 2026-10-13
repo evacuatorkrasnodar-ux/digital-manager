@@ -1125,7 +1125,8 @@ html.dm-plasma-panel-open .dock-launcher .dm-launcher-waves{
 @media(max-width:700px){
   html.dm-plasma-panel-open.dm-compose-editor .dm-chat-panel.dm-chat-editor{
     bottom:calc(116px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
-    max-height:max(110px,calc(100vh - 136px - max(30px,env(safe-area-inset-top,0px)) - env(safe-area-inset-bottom,0px) - var(--dm-chat-kb,0px)));
+    /* Fixed top clearance for the notch even during the first keyboard frame. */
+    max-height:max(110px,calc(100vh - 136px - max(54px,env(safe-area-inset-top,0px)) - env(safe-area-inset-bottom,0px) - var(--dm-chat-kb,0px)));
   }
   html.dm-plasma-panel-open.dm-compose-editor .dock-launcher{
     transform:translateX(clamp(0px,calc(50vw - 50px),142px)) translateY(12px);
