@@ -51,14 +51,7 @@
  background:rgba(0,3,8,.82);backdrop-filter:blur(11px);-webkit-backdrop-filter:blur(11px);
  color:#eef7ff;font-family:inherit;
 }
-#dmManagerToolsPanel .dm-tools-frame{
- width:min(440px,100%);max-height:min(785px,92dvh);min-height:0;
- display:flex;flex-direction:column;overflow:hidden;
- border-radius:23px;border:1px solid rgba(152,192,220,.43);
- background:radial-gradient(ellipse at 98% 0,rgba(85,132,171,.14),transparent 65%),
- linear-gradient(155deg,#142235,#08101b 67%,#03070c);
- box-shadow:0 24px 66px rgba(0,0,0,.72),inset 0 1px rgba(255,255,255,.09);
-}
+#dmManagerToolsPanel .dm-tools-frame{width:min(440px,100%);max-height:min(785px,92dvh);min-height:0;display:flex;flex-direction:column;overflow:hidden;border-radius:23px;border:1px solid var(--dm-ui-edge,rgba(157,199,228,.46));background:radial-gradient(ellipse at 13% 0%,rgba(102,164,218,.13),transparent 63%),var(--dm-ui-surface);box-shadow:0 22px 62px rgba(0,0,0,.65),inset 0 1px rgba(255,255,255,.13);}
 #dmManagerToolsPanel .dm-tools-head{
  flex:none;display:flex;justify-content:space-between;align-items:center;gap:8px;
  padding:17px 15px 13px;border-bottom:1px solid rgba(154,185,211,.2)
