@@ -465,8 +465,9 @@ html.assistant-conversation-active #app{padding-bottom:calc(165px + env(safe-are
 .dm-orb-rim{inset:4%;background:conic-gradient(from 15deg,#3b85ff,#f1fbff 27deg,#83d9ff 46deg,#2978fa 90deg,#285ce2 141deg,#b79bff 197deg,#e3bafa 217deg,#8650f5 248deg,#247af9 288deg,#b1ecff 330deg,#3b85ff);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4.6px),#000 calc(100% - 2.1px));mask:radial-gradient(farthest-side,transparent calc(100% - 4.6px),#000 calc(100% - 2.1px));animation:dm-rotate 13s linear infinite;filter:drop-shadow(0 0 2px rgba(152,212,255,.8)) drop-shadow(0 0 5px rgba(72,117,255,.6))}
 
 /* Conversation-only electric SVG. The dock mini-orb retains its existing style. */
-.dm-voice-orb-electric{background:radial-gradient(circle,#000 0 51%,rgba(1,2,5,.99) 59%,transparent 71%)!important;filter:drop-shadow(0 0 5px rgba(255,255,255,.83)) drop-shadow(0 0 12px rgba(239,247,255,.43))!important}
-.dm-voice-orb-electric .dm-orb-halo{inset:-24%;background:radial-gradient(circle,transparent 38%,rgba(255,255,255,.05) 49%,rgba(255,255,255,.28) 56%,rgba(236,245,255,.12) 66%,transparent 76%);filter:blur(8px)}
+/* One actual plasma glow; each state supplies its own colour, idle defaults to silver white. */
+.dm-voice-orb-electric{background:radial-gradient(circle,#000 0 51%,rgba(1,2,5,.99) 59%,transparent 71%)!important;filter:drop-shadow(0 0 5px var(--dm-plasma-glow-core,rgba(255,255,255,.83))) drop-shadow(0 0 12px var(--dm-plasma-glow-outer,rgba(239,247,255,.43)))!important}
+.dm-voice-orb-electric .dm-orb-halo{inset:-24%;background:radial-gradient(circle,transparent 38%,var(--dm-plasma-halo-inner,rgba(255,255,255,.05)) 49%,var(--dm-plasma-halo-main,rgba(255,255,255,.28)) 56%,var(--dm-plasma-halo-edge,rgba(236,245,255,.12)) 66%,transparent 76%);filter:blur(8px)}
 .dm-voice-orb-electric .dm-orb-spectral{position:absolute;inset:-13%;z-index:2;width:126%;height:126%;overflow:visible;pointer-events:none;filter:drop-shadow(0 0 2px rgba(110,175,255,.78)) drop-shadow(0 0 3px rgba(27,83,242,.58))}
 .dm-voice-orb-electric .dm-orb-rim{opacity:.65;filter:brightness(1.12) saturate(1.1) drop-shadow(0 0 3px rgba(45,113,250,.67))}
 .dm-voice-orb-electric .dm-orb-edge{border-color:rgba(248,251,255,.58);box-shadow:inset 0 0 7px rgba(255,255,255,.12),0 0 7px rgba(248,251,255,.48)}
