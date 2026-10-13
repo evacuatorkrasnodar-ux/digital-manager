@@ -60,3 +60,15 @@ html.dm-layout-editing #homeScreen .dm-layout-board .dm-unit-drop-target::after{
   #homeScreen .dm-layout-unit .dm-morph-outline,
   #homeScreen .dm-layout-unit.dm-magnetic-signature .dm-signature-combo{filter:none}
 }
+/* A subtle magnetic settling motion. Only custom-layout cards are affected. */
+#homeScreen .dm-layout-board.dm-magnets-present{column-gap:6px}
+#homeScreen .dm-layout-unit.dm-has-magnet .dm-morph-outline{
+  animation:dmMagnetForm .34s cubic-bezier(.18,.68,.16,1) both;
+}
+@keyframes dmMagnetForm{
+  0%{opacity:.52;filter:drop-shadow(0 0 7px rgba(177,222,255,.56))}
+  100%{opacity:1;filter:drop-shadow(0 0 2px rgba(184,217,246,.31))}
+}
+@media(prefers-reduced-motion:reduce){
+  #homeScreen .dm-layout-unit.dm-has-magnet .dm-morph-outline{animation:none}
+}
