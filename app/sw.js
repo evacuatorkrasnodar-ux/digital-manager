@@ -1,5 +1,5 @@
 /* App-only service worker: fresh documents, styles and scripts; cached offline assets. */
-const CACHE = 'digital-manager-black-velvet-v746-20261013';
+const CACHE = 'digital-manager-black-velvet-v747-20261013';
 const CACHE_PREFIX = 'digital-manager-black-velvet-';
 const OFFLINE_FILES = [
   './index.html',
@@ -17,7 +17,7 @@ const OFFLINE_FILES = [
   './tax-control.js?v=5',
   './tax-control.css?v=2',
   './home-layout.js?v=18',
-  './home-layout.css?v=8',
+  './home-layout.css?v=9',
   './director-office.js?v=8',
   './director-office.css?v=2',
   './business-pulse.js?v=2',
@@ -117,12 +117,13 @@ const OFFLINE_FILES = [
   './polish.js?v=260',
   './assets/glass-waves.svg',
   './assets/logo-air.png',
-  './manifest.json',
+  './manifest.json?v=3',
   './assets/architecture-hero.png',
   './assets/brand-logo.svg',
   './assets/assistant-mark.svg',
-  './assets/icon-192.png',
-  './assets/icon-512.png'
+  './assets/icon-current-192.png?v=1',
+  './assets/icon-brand.svg?v=1',
+  './assets/icon-current-512.png?v=1'
 ];
 
 self.addEventListener('install', event => {
