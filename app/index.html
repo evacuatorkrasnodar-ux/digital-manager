@@ -250,6 +250,31 @@
 <label class="mg-tile mg-tile-pink"><span class="mg-tile-art"><svg class="ico" aria-hidden="true"><use href="#mg-tasks"/></svg></span><span class="mg-tile-caption">Мои дела</span><input type="checkbox" data-mg-card="tasks" checked><i aria-hidden="true"></i></label></div>
         <p class="mg-card-note">Пока на Главной доступны Клиенты, Продажи и Деньги. Остальные предпочтения сохраняются для новых разделов.</p>
       </section>
+      <!-- Personal destinations link to the existing unified My Day, never duplicate its data. -->
+      <section class="mg-main mg-personal-section" aria-labelledby="mgPersonalTitle">
+        <div class="mg-main-head">
+          <span class="mg-icon mg-purple mg-grid-icon"><svg class="ico" aria-hidden="true"><use href="#ic-calendar"/></svg></span>
+          <span class="mg-copy"><strong id="mgPersonalTitle">Мои личные разделы</strong><small>Всё уже работает внутри «Моего дня».</small><small>Листайте карточки в сторону →</small></span>
+        </div>
+        <nav class="mg-personal-grid" aria-label="Перейти в личный раздел">
+          <a class="mg-personal-card mg-personal-day" href="./myday.html" aria-label="Открыть Мой день">
+            <span class="mg-personal-symbol"><svg class="ico" aria-hidden="true"><use href="#ic-spark"/></svg></span><strong>Мой день</strong><small>Цифровой день</small>
+          </a>
+          <a class="mg-personal-card mg-personal-calendar" href="./myday.html?view=calendar" aria-label="Открыть Календарь">
+            <span class="mg-personal-symbol"><svg class="ico" aria-hidden="true"><use href="#ic-calendar"/></svg></span><strong>Календарь</strong><small>Планы и даты</small>
+          </a>
+          <a class="mg-personal-card mg-personal-notes" href="./myday.html?view=notes" aria-label="Открыть Блокнот">
+            <span class="mg-personal-symbol"><svg class="ico" aria-hidden="true"><use href="#ic-file"/></svg></span><strong>Блокнот</strong><small>Мысли и записи</small>
+          </a>
+          <a class="mg-personal-card mg-personal-health" href="./myday.html?view=health" aria-label="Открыть Здоровье">
+            <span class="mg-personal-symbol"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 5.5a5.3 5.3 0 0 0-7.5 0L12 6.6l-1.1-1.1a5.3 5.3 0 0 0-7.5 7.5L12 21l8.6-8a5.3 5.3 0 0 0 0-7.5Z"/><path d="M7.4 12h2.4l1.4-2.7 2.1 5.4 1.4-2.7h2"/></svg></span><strong>Здоровье</strong><small>Мои показатели</small>
+          </a>
+          <a class="mg-personal-card mg-personal-cycle" href="./myday.html?view=cycle" aria-label="Открыть Женский календарь">
+            <span class="mg-personal-symbol"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2M8 3.4v2.2M16 3.4v2.2"/></svg></span><strong>Цикл</strong><small>Женский календарь</small>
+          </a>
+        </nav>
+        <p class="mg-card-note">Все записи остаются в существующих разделах. Это быстрые переходы, а не новые копии карточек.</p>
+      </section>
       <button type="button" class="mg-row mg-workshop-row" data-mg-open="workshop">
         <span class="mg-icon mg-blue"><svg class="ico" aria-hidden="true"><use href="#ic-grid"/></svg></span>
         <span class="mg-copy"><strong>Моя мастерская</strong><small>Создавайте свои калькуляторы и инструменты</small></span>
