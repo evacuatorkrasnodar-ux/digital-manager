@@ -126,6 +126,10 @@ function propose(details){
 function clearProposal(id){
  data.proposals=data.proposals.filter(x=>x.id!==id);persist();
 }
+function dismiss(id){
+ if(!data.proposals.some(p=>p.id===id))return false;
+ clearProposal(id);refresh();return true;
+}
 function entryFor(p){return data.history.find(x=>x.proposalId===p.id&&!['revised','dismissed'].includes(x.status))||null;}
 function ledger(status,p,notes=''){
  const stamp=Date.now();
@@ -337,7 +341,7 @@ for(const ev of ['dm:sales-changed','dm:sales-insight-changed','dm:business-cont
  window.addEventListener(ev,()=>queueMicrotask(refresh));
 }
 window.addEventListener('storage',event=>{if(event.key===KEY){data=load();refresh();}});
-window.DMDirectorOffice=Object.freeze({open,close,progress,refresh,propose,proposal:candidate,getAnswers:()=>({...data.answers})});
+window.DMDirectorOffice=Object.freeze({open,close,progress,refresh,propose,dismiss,proposal:candidate,getAnswers:()=>({...data.answers})});
 createSettingsEntry();
 refresh();
 document.addEventListener('DOMContentLoaded',()=>queueMicrotask(refresh),{once:true});
