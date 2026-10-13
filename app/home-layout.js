@@ -453,7 +453,7 @@
     if(current.pointerType!=='touch'){
       try{homeScreen.setPointerCapture(current.pointerId);}catch(_){}
     }
-    edgeFrame=requestAnimationFrame(edgeScroll);
+    // Edge scrolling starts only once the finger actually moves.
   }
   function updateDrag(x,y){
     if(!dragging)return;
@@ -461,6 +461,7 @@
     if(!dragging.moved){
       if(Math.hypot(x-dragging.startX,y-dragging.startY)<16)return;
       dragging.moved=true;
+      if(!edgeFrame)edgeFrame=requestAnimationFrame(edgeScroll);
     }
     chooseDropTarget(x,y);
   }
