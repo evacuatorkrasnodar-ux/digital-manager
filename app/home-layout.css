@@ -224,19 +224,19 @@ html.dm-layout-editing #homeScreen #dmLayoutBoard>.dm-home-section-title.dm-sect
    Do not alter the buttons' approved sizes, grid or click behavior. */
 /* Compact only the space between business cards and manager departments. */
 #homeScreen #dmLayoutBoard>.dm-home-section-title[data-home-section="departments"]{
-  margin-top:-18px;
+  margin-top:-7px;
   margin-bottom:0;
 }
-#homeScreen #dmLayoutBoard>.dm-layout-unit[data-card-id="quick"]{margin-top:-8px;}
+#homeScreen #dmLayoutBoard>.dm-layout-unit[data-card-id="quick"]{margin-top:-2px;}
 #homeScreen .shortcuts>.shortcut-grid{margin-top:0}
 
 /* Default Home uses direct dashboard children, not dmLayoutBoard. */
 @media(max-width:700px){
   html:not(.dm-custom-home-layout) #homeScreen .dashboard>.dm-home-section-title[data-home-section="departments"]{
-    margin-top:-18px;
+    margin-top:-7px;
     margin-bottom:0;
   }
   html:not(.dm-custom-home-layout) #homeScreen .dashboard>.shortcuts{
-    margin-top:-6px!important;
+    margin-top:0!important;
   }
 }
