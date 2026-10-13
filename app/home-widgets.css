@@ -1,0 +1,40 @@
+/* Opt-in mini widgets on the existing Home, matching Black Velvet without altering approved metric cards. */
+#dmHomeWidgets[hidden],#dmHomeWidgets .dm-home-widget[hidden]{display:none!important}
+#dmHomeWidgets.dm-home-widgets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0 0 9px}
+#dmHomeWidgets .dm-home-widget{position:relative;min-width:0;min-height:137px;display:flex;flex-direction:column;gap:5px;overflow:hidden;border-radius:20px;border:1px solid rgba(152,186,217,.46);background:radial-gradient(ellipse at 15% 0%,rgba(40,85,140,.20),transparent 60%),linear-gradient(145deg,#111c28 0%,#070c13 62%,#030509);box-shadow:inset 0 1px rgba(238,250,255,.10),0 6px 20px rgba(0,0,0,.27);padding:11px;color:#f4f8fd;font-family:inherit}
+#dmHomeWidgets .dm-widget-heading{display:flex;align-items:center;gap:6px;min-width:0;font-size:11px;font-weight:500;white-space:nowrap}
+#dmHomeWidgets .dm-widget-icon{display:grid;place-items:center;flex:none;width:25px;height:25px;border-radius:9px;border:1px solid #91bbdf64;background:linear-gradient(140deg,#1c3658,#07111e);color:#d4eaff;font-size:18px}
+#dmHomeWidgets .dm-widget-heading>a,#dmHomeWidgets .dm-widget-heading-end{margin-left:auto;flex:none;text-decoration:none;color:#b7cfe2;font-size:15px;min-width:23px;min-height:24px;display:grid;place-items:center;border-radius:50%;background:rgba(103,143,179,.09)}
+#dmHomeWidgets .dm-widget-heading-end{font-size:10px;padding:1px 5px;border-radius:13px}
+#dmHomeWidgets .dm-widget-big{margin-top:9px;font:400 clamp(27px,7.3vw,37px)/1.03 Inter,system-ui,sans-serif;letter-spacing:-.045em;font-variant-numeric:tabular-nums}
+#dmHomeWidgets .dm-widget-copy{font-size:11px;color:#d0dce8;line-height:1.28;margin:0;min-height:14px}
+#dmHomeWidgets .dm-widget-foot{font-size:10px;color:#8ea8bf;line-height:1.3;margin-top:auto;overflow-wrap:anywhere}
+#dmHomeWidgets .dm-widget-steps{border-color:rgba(152,182,219,.48);background:radial-gradient(ellipse at 0% 0%,rgba(103,81,154,.19),transparent 68%),linear-gradient(145deg,#161727,#070b12)}
+#dmHomeWidgets .dm-widget-steps .dm-widget-big{color:#e2f0ff}
+#dmHomeWidgets .dm-widget-breathe{background:radial-gradient(ellipse at 70% 30%,rgba(82,120,170,.17),transparent 67%),linear-gradient(150deg,#141b27,#03070e)}
+#dmHomeWidgets .dm-breath-body{display:flex;align-items:center;gap:9px;flex:1;margin-top:2px}
+#dmHomeWidgets .dm-breath-orb{width:57px;height:57px;flex:none;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#6e99cf38 0%,#163b7280 38%,#08132c 70%,#091426);border:1px solid #9ecaf378;box-shadow:inset 0 0 16px #69a5ed28,0 0 14px #327ab732;transition:transform 3.8s ease-in-out,box-shadow .4s}
+#dmHomeWidgets .dm-breath-orb>span{color:#c2e4ff;font-size:28px;line-height:1}
+#dmHomeWidgets .dm-breath-orb[data-phase=in]{transform:scale(1.14);box-shadow:inset 0 0 20px #72b9f755,0 0 20px #327ab766}
+#dmHomeWidgets .dm-breath-orb[data-phase=out]{transform:scale(.80)}
+#dmHomeWidgets .dm-breath-copy{flex:1;min-width:0;display:grid;gap:5px;justify-items:start}
+#dmHomeWidgets .dm-breath-copy strong{font-size:12px;line-height:1.2;font-weight:500}
+#dmHomeWidgets .dm-breath-copy small{font-size:10px;line-height:1.2;color:#a8c1d7}
+#dmHomeWidgets #dmBreathToggle{font-size:11px;line-height:1.2;padding:7px 10px;border-radius:12px;border:1px solid #98bde07c;color:#e9f5ff;background:linear-gradient(145deg,#294f79,#0b1830);cursor:pointer}
+#dmHomeWidgets #dmBreathToggle:focus-visible{outline:2px solid #e0f3ff;outline-offset:2px}
+#dmHomeWidgets .dm-widget-calendar{grid-column:1/-1;min-height:unset;padding:11px 12px 13px;background:radial-gradient(ellipse at 0 0,rgba(49,78,114,.20),transparent 68%),linear-gradient(155deg,#0f1a26,#05080d)}
+#dmHomeWidgets .dm-calendar-month-head{display:flex;align-items:center;justify-content:center;gap:13px;margin-top:5px}
+#dmHomeWidgets .dm-calendar-month-head strong{min-width:138px;text-align:center;font-size:13px;font-weight:500;text-transform:capitalize}
+#dmHomeWidgets .dm-calendar-month-head button{border:1px solid rgba(154,193,227,.37);border-radius:50%;width:24px;height:24px;font-size:19px;color:#e4f2ff;background:#112137;display:grid;place-items:center;line-height:1}
+#dmHomeWidgets .dm-calendar-weekdays,#dmHomeWidgets .dm-calendar-dates{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;text-align:center}
+#dmHomeWidgets .dm-calendar-weekdays{margin-top:5px}
+#dmHomeWidgets .dm-calendar-weekdays>span{font-size:9px;color:#8da6c0;padding:3px 0}
+#dmHomeWidgets .dm-calendar-day{position:relative;min-width:0;min-height:27px;display:grid;place-items:center;padding:2px 0 5px;border:1px solid transparent;border-radius:9px;color:#cdddea;background:transparent;font-size:11px;font-variant-numeric:tabular-nums;cursor:pointer}
+#dmHomeWidgets .dm-calendar-day.outside{opacity:.29}
+#dmHomeWidgets .dm-calendar-day.today{border-color:rgba(143,191,232,.55)}
+#dmHomeWidgets .dm-calendar-day.selected{color:#fff;background:linear-gradient(145deg,#376ba5,#193454);border-color:#6ca6e099}
+#dmHomeWidgets .dm-calendar-dot{position:absolute;bottom:2px;width:3px;height:3px;border-radius:50%;background:#f1c28e}
+#dmHomeWidgets .dm-calendar-reminder{font-size:11px;line-height:1.4;padding:8px 9px;margin-top:7px;border:1px solid rgba(150,176,205,.25);border-radius:10px;color:#d4e6f7;background:rgba(10,25,42,.55);overflow-wrap:anywhere}
+#dmHomeWidgets a:focus-visible,#dmHomeWidgets .dm-calendar-day:focus-visible,#dmHomeWidgets .dm-calendar-month-head button:focus-visible{outline:2px solid #e3f5ff;outline-offset:2px}
+@media(max-width:350px){#dmHomeWidgets .dm-home-widget{padding:9px}#dmHomeWidgets .dm-breath-body{gap:5px}#dmHomeWidgets .dm-breath-orb{width:48px;height:48px}#dmHomeWidgets .dm-widget-heading{font-size:10px}}
+@media(prefers-reduced-motion:reduce){#dmHomeWidgets .dm-breath-orb{transition:none}}
