@@ -71,6 +71,19 @@
   border-color:rgba(152,189,214,.46);
   color:#eef7ff;
 }
+/* A single unobtrusive communication status, not another settings card. */
+#managementScreen .mg-communication-mode{
+  display:flex;align-items:baseline;justify-content:space-between;
+  flex-wrap:wrap;column-gap:14px;row-gap:5px;
+  padding:7px 3px 9px;
+  border-bottom:1px solid rgba(150,185,211,.18);
+}
+#managementScreen .mg-communication-mode span{
+  font-size:12px;color:#9eb7c9;
+}
+#managementScreen .mg-communication-mode strong{
+  font-size:13px;font-weight:500;color:#edf7ff;
+}
 #managementScreen .mg-unified-note{
   margin:0;
   font-size:11px;
