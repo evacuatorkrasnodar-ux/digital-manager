@@ -48,7 +48,7 @@
  #dmAttentionPanel #dmAttentionClose,
  #homeScreen .tile-chevron,
  .day-shell .month-arrow,
- .day-shell:not(.care-shell):not(.health-shell):not(.world-shell) .day-back,
+ .day-shell .day-back,
  .day-dialog .dialog-x,
  #modal .dialog-close,
  #plasmaClose,
