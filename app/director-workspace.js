@@ -76,7 +76,8 @@ overlay.innerHTML='<div class="dm-workspace-frame" role="dialog" aria-modal="tru
  '<div id="dmWorkspaceBody" class="dm-workspace-body"></div></div>';
 document.body.append(overlay);
 const body=()=> $('dmWorkspaceBody');
-const btn=(act,label,extra='')=>'<button type="button" data-ws="'+act+'"'+extra+'>'+label+'</button>';
+const circle='<span class="dm-circle-arrow dm-action-circle" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>';
+const btn=(act,label,extra='')=>'<button type="button" data-ws="'+act+'"'+extra+'>'+label.replace(/↗/g,circle)+'</button>';
 const note='<p class="dm-workspace-honest">Работает локально на этом устройстве. Подключения к почте, соцсетям, микрофону и внешняя отправка пока отсутствуют.</p>';
 function open(where='inbox',itemId=''){
  focusBefore=document.activeElement;screen=where;mode=itemId?'detail':'list';selected=itemId;notification='';
@@ -107,7 +108,7 @@ function messageForm(){
  '<label>От кого<input name="sender" maxlength="80" placeholder="Имя или компания"></label>'+
  '<label>Тема<input name="title" maxlength="110" placeholder="Например: запрос на сотрудничество" required></label>'+
  '<label>Текст сообщения<textarea name="body" rows="6" maxlength="4000" placeholder="Вставьте обращение клиента…" required></textarea></label>'+
- '<div class="dm-workspace-actions"><button type="submit">Сохранить и разобрать ↗</button>'+btn('back','Отмена')+'</div>'+
+ '<div class="dm-workspace-actions"><button type="submit">Сохранить и разобрать '+circle+'</button>'+btn('back','Отмена')+'</div>'+
  '<p class="dm-workspace-honest">Не копируйте сюда пароли, реквизиты карт или ненужные персональные данные.</p></form>';
 }
 function messageDetail(){
@@ -143,7 +144,7 @@ function briefing(){
  const prepared=data.briefs.slice(0,8);
  return '<div class="dm-workspace-intro"><h3>Утренняя планёрка</h3><p>Я соберу речь по доступным записям о делах. Не буду придумывать результаты сотрудников. План можно исправить, сохранить, скопировать или озвучить на этом устройстве.</p>'+
  '<div class="dm-workspace-actions">'+btn('make-agenda','✦ Подготовить планёрку')+btn('week','План на неделю')+'</div></div>'+
- (prepared.length?'<section class="dm-workspace-list"><h3>Сохранённые планы</h3>'+prepared.map(x=>'<button class="dm-workspace-row" type="button" data-ws-plan="'+esc(x.id)+'"><span><strong>'+esc(x.title)+'</strong><small>'+esc(date(x.at))+'</small></span><span>↗</span></button>').join('')+'</section>':'')+note;
+ (prepared.length?'<section class="dm-workspace-list"><h3>Сохранённые планы</h3>'+prepared.map(x=>'<button class="dm-workspace-row" type="button" data-ws-plan="'+esc(x.id)+'"><span><strong>'+esc(x.title)+'</strong><small>'+esc(date(x.at))+'</small></span>'+circle+'</button>').join('')+'</section>':'')+note;
 }
 function planEditor(){
  const p=data.briefs.find(x=>x.id===selected),text=p?p.text:makeAgenda();
@@ -170,7 +171,7 @@ function negotiationForm(){
  '<label>С кем переговоры?<input name="partner" maxlength="120" placeholder="Название компании или представитель" required></label>'+
  '<label>Что предлагает и на каких условиях?<textarea name="offer" rows="7" maxlength="5000" placeholder="Договор, цены, предоплата, штрафы, сроки или заметки разговора…" required></textarea></label>'+
  '<label>Что важно для вас?<textarea name="goal" rows="3" maxlength="1500" placeholder="Например: прибыль не ниже…, оплата не позднее…"></textarea></label>'+
- '<div class="dm-workspace-actions"><button type="submit">Разобрать условия ↗</button>'+btn('back','Отмена')+'</div>'+
+ '<div class="dm-workspace-actions"><button type="submit">Разобрать условия '+circle+'</button>'+btn('back','Отмена')+'</div>'+
  '<p class="dm-workspace-honest">Этот экран не записывает и не прослушивает разговор. Если вы вставляете запись или расшифровку, убедитесь, что имеете на это право.</p></form>';
 }
 function negotiationList(){
@@ -178,7 +179,7 @@ function negotiationList(){
  return '<div class="dm-workspace-intro"><h3>Переговорный помощник</h3>'+
  '<p>До встречи подготовлю вопросы, после — помогу разобрать записанные условия и найти места, где стоит быть осторожнее. Проверку реестров и живое прослушивание добавим после надёжных подключений.</p>'+
  btn('new-deal','+ Разобрать переговоры')+'</div>'+
- (items.length?'<section class="dm-workspace-list">'+items.map(x=>'<button class="dm-workspace-row" type="button" data-ws-deal="'+esc(x.id)+'"><span><strong>'+esc(x.partner)+'</strong><small>'+date(x.at)+'</small></span><span>↗</span></button>').join('')+'</section>':
+ (items.length?'<section class="dm-workspace-list">'+items.map(x=>'<button class="dm-workspace-row" type="button" data-ws-deal="'+esc(x.id)+'"><span><strong>'+esc(x.partner)+'</strong><small>'+date(x.at)+'</small></span>'+circle+'</button>').join('')+'</section>':
  '<section class="dm-workspace-empty"><strong>Пока нет переговоров</strong><p>Можно начать с любого конкретного предложения, которое вам принесли.</p></section>')+note;
 }
 function negotiationDetail(){
