@@ -86,6 +86,15 @@ function button(action,label,extra=''){return '<button type="button" data-do="'+
 function candidate(){
  const offered=data.proposals.find(p=>p&&p.id&&p.title);
  if(offered)return {...offered,origin:'workspace'};
+ const tax=window.DMTaxControl?.snapshot?.();
+ if(tax&&(tax.overdue>0||tax.urgent>0)){
+  return {id:'tax-deadline-attention',kind:'tax',title:'Налоговый срок требует проверки',
+   body:(tax.overdue?'В ваших записях просрочено обязательств: '+tax.overdue+'. ':'')+
+    (tax.urgent?'В ближайшие 7 дней запланировано обязательств: '+tax.urgent+'. ':'')+
+    'Даты введены вручную, не получены из ФНС. Надо сверить исполнение и актуальность сроков.',
+   source:'Локальный «Налоговый контроль»: сроки директора',
+   next:'Откроем календарь сроков. Не отмечайте «выполнено» без подтверждения.'};
+ }
  const missing=remaining(),context=businessText();
  const serious=window.DMBusinessBrain?.brief?.()?.priority;
  // A real saved task or sales signal takes precedence over a generic suggestion.
@@ -276,6 +285,9 @@ function approve(){
  if(p.kind==='inbox'){
   close();window.DMDirectorWorkspace?.open?.('inbox');return;
  }
+ if(p.kind==='tax'){
+  close();window.DMTaxControl?.open?.();return;
+ }
  if(p.origin==='workspace'){
   ledger('approved',p,p.kind==='message'?
     'Подготовленный ответ одобрен. Ни одного сообщения не отправлено. Одобренный текст доступен в «Входящих» для копирования.':
@@ -355,6 +367,7 @@ for(const ev of ['dm:sales-changed','dm:sales-insight-changed','dm:business-cont
  window.addEventListener(ev,()=>queueMicrotask(refresh));
 }
 window.addEventListener('storage',event=>{if(event.key===KEY){data=load();refresh();}});
+window.addEventListener('dm:tax-changed',()=>queueMicrotask(refresh));
 window.addEventListener('dm:workspace-updated',()=>queueMicrotask(refresh));
 window.DMDirectorOffice=Object.freeze({open,close,progress,refresh,propose,dismiss,proposal:candidate,getAnswers:()=>({...data.answers})});
 createSettingsEntry();
