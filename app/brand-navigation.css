@@ -1,0 +1,98 @@
+/* Approved compact arrow-in-circle language.
+   This is a single decorative affordance INSIDE existing clickable cards;
+   it must not create new invisible click targets or change silhouettes. */
+.dm-circle-arrow{
+  display:inline-grid;place-items:center;flex:none;
+  width:22px;height:22px;min-width:22px;
+  box-sizing:border-box;border-radius:50%;
+  border:1px solid rgba(158,206,245,.59);
+  background:radial-gradient(ellipse at 29% 14%,rgba(220,239,255,.27),transparent 70%),
+    linear-gradient(145deg,rgba(44,88,128,.92),rgba(9,27,44,.97));
+  color:#f6fbff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 3px 9px rgba(1,9,20,.32);
+  line-height:1;opacity:1;visibility:visible;
+}
+.dm-circle-arrow>.ico{
+  display:block;width:13px;height:13px;flex:none;
+  color:#f5faff;fill:none;stroke:currentColor;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round;opacity:1;visibility:visible;
+}
+/* The two mirrored hero previews have their own elegant silhouettes.
+   Their round navigation marks must sit visibly above outlines/effects. */
+#homeScreen #openBrandCard .license-top>.license-arrow.dm-circle-arrow,
+#homeScreen #openProfileCard .profile-top>.profile-arrow.dm-circle-arrow{
+  position:relative;z-index:8;flex:0 0 22px;
+  width:22px;height:22px;min-width:22px;
+  border-radius:50%;border:1px solid rgba(157,205,240,.67);
+  background:radial-gradient(ellipse at 27% 12%,rgba(224,245,255,.28),transparent 67%),
+    linear-gradient(146deg,#2b587c,#0b2033);
+  box-shadow:inset 0 1px rgba(255,255,255,.28),0 0 9px rgba(105,172,226,.17);
+  transform:none!important;filter:none!important;
+}
+#homeScreen #openBrandCard .license-arrow.dm-circle-arrow>.ico,
+#homeScreen #openProfileCard .profile-arrow.dm-circle-arrow>.ico{
+  display:block;flex:none;width:13px;height:13px;
+  fill:none;stroke:#f4fbff;stroke-width:2.15;opacity:1;
+}
+#homeScreen #openProfileCard .profile-arrow.dm-circle-arrow>.ico{transform:rotate(180deg)}
+#homeScreen #openBrandCard:focus-visible,
+#homeScreen #openProfileCard:focus-visible{outline:2px solid #d3edff;outline-offset:2px}
+/* New optional cards and Business Pulse now follow the same visual grammar. */
+#homeScreen .dm-workspace-card .dm-workspace-arrow.dm-circle-arrow{
+  display:grid!important;place-items:center!important;
+  position:absolute;top:12px;right:12px;align-self:auto;
+  width:23px;height:23px;min-width:23px;
+  margin:0;font-size:initial;
+}
+#homeScreen .dm-workspace-card .dm-workspace-arrow.dm-circle-arrow>.ico{width:13px;height:13px}
+#homeScreen #dmBusinessPulse .dm-pulse-chevron.dm-circle-arrow{
+  display:grid;place-items:center;width:22px;height:22px;min-width:22px;
+  font-size:initial;
+}
+#managementScreen .dm-director-chevron.dm-circle-arrow{
+  flex:none;width:23px;height:23px;min-width:23px;margin-left:auto;font-size:initial;
+}
+#dmManagerToolsPanel .dm-tools-open{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+}
+#dmManagerToolsPanel .dm-tools-inline-arrow.dm-circle-arrow{
+  width:18px;height:18px;min-width:18px;
+}
+#dmManagerToolsPanel .dm-tools-inline-arrow.dm-circle-arrow>.ico{
+  width:10px;height:10px;
+}
+/* Actual printable/shareable passports in the existing modal.
+   A full form stays available underneath the company passport. */
+#modal .dm-passport-lead{
+  font-size:11.4px;line-height:1.5;color:#b7d0e2;margin:0 0 12px
+}
+#modal .dm-passport-rows{
+  display:grid;gap:0;margin:3px 0 12px;
+  border:1px solid rgba(152,191,218,.33);
+  border-radius:15px;overflow:hidden;
+  background:linear-gradient(145deg,rgba(20,41,58,.6),rgba(7,16,27,.88))
+}
+#modal .dm-passport-rows>div{
+  display:flex;justify-content:space-between;align-items:baseline;
+  flex-wrap:wrap;gap:8px;padding:10px 12px;
+  border-bottom:1px solid rgba(138,181,209,.17);
+  font-size:11.6px;line-height:1.4
+}
+#modal .dm-passport-rows>div:last-child{border-bottom:0}
+#modal .dm-passport-rows span{color:#a7c1d4}
+#modal .dm-passport-rows strong{font-weight:550;color:#eff8ff;text-align:right;overflow-wrap:anywhere}
+#modal .dm-passport-actions{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+#modal .dm-passport-actions .dm-passport-button{
+  min-height:37px;flex:1 1 125px;max-width:100%;
+  padding:9px 11px;border:1px solid rgba(155,199,227,.49);
+  border-radius:12px;color:#f0f8ff;
+  background:linear-gradient(145deg,#294964,#0a1b2a);
+  font:540 11.5px/1.3 system-ui;
+  cursor:pointer
+}
+#modal .dm-passport-actions .dm-passport-button:focus-visible{
+  outline:2px solid #e7f5ff;outline-offset:2px
+}
+@media(prefers-reduced-motion:reduce){
+  .dm-circle-arrow{transition:none!important;animation:none!important}
+}
