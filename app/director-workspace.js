@@ -24,8 +24,11 @@ function load(){
 let data=load(),screen='inbox',mode='list',selected='',focusBefore=null,notification='',spoken=false;
 function save(){
  const next={...data,updatedAt:Date.now()};
- try{localStorage.setItem(KEY,JSON.stringify(next));data=next;updateCards();window.dispatchEvent(new Event('dm:workspace-updated'));return true;}
+ try{localStorage.setItem(KEY,JSON.stringify(next));data=next;}
  catch(_){notification='Не удалось сохранить в этом браузере. Возможно, мало свободного места.';return false;}
+ updateCards();
+ try{window.dispatchEvent(new Event('dm:workspace-updated'));}catch(_){}
+ return true;
 }
 function classify(item){
  const body=(item.title+' '+item.body).toLowerCase();
