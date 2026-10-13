@@ -1408,7 +1408,9 @@
       if(forceText){dmToggleDraftEditor(false);plasmaInput.focus();return;}
       closePlasmaPanel();return;
     }
-    if(forceText)dmToggleDraftEditor(false);
+    // Each fresh assistant interaction starts with the compact input.
+    // The large document editor remains an explicit separate choice.
+    dmToggleDraftEditor(false);
     plasmaPanel.hidden=false;plasmaPanel.setAttribute('aria-hidden','false');
     plasmaTriggers.forEach(button=>button.setAttribute('aria-expanded','true'));
     // Make the existing full plasma available in both dock modes.
