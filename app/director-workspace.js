@@ -81,6 +81,8 @@ const note='<p class="dm-workspace-honest">Работает локально н�
 function open(where='inbox',itemId=''){
  focusBefore=document.activeElement;screen=where;mode=itemId?'detail':'list';selected=itemId;notification='';
  overlay.hidden=false;render();overlay.querySelector('[data-ws-close]')?.focus({preventScroll:true});
+ // Only explicit user openings count towards voluntary card suggestions.
+ try{window.dispatchEvent(new CustomEvent('dm:tool-opened',{detail:{kind:where}}));}catch(_){}
 }
 function close(){
  if(overlay.hidden)return;
