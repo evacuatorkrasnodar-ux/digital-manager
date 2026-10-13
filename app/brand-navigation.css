@@ -44,10 +44,7 @@
   display:grid;place-items:center;
   font-size:initial;
 }
-#managementScreen .dm-director-chevron.dm-circle-arrow{
-  --dm-circle-size:23px;
-  flex:none;margin-left:auto;font-size:initial;
-}
+
 #dmManagerToolsPanel .dm-tools-open{
   display:inline-flex;align-items:center;justify-content:center;gap:6px;
 }
