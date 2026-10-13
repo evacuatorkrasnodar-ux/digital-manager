@@ -93,6 +93,15 @@ function candidate(){
   return {id:'observed:'+clean(serious.id||t,55),kind:'review',title:t,body:b,
     source:'Фактические записи в приложении',next:clean(serious.next||'Предлагаю проверить данные и подготовить решение.',220)};
  }
+ const inboxSummary=window.DMDirectorWorkspace?.summary?.();
+ if(inboxSummary?.awaiting>0){
+  return {id:'workspace-inbox-attention',kind:'inbox',title:'Входящие требуют внимания',
+   body:'Среди вручную сохранённых обращений '+inboxSummary.awaiting+' ожидают ответа'+
+     (inboxSummary.important?' · '+inboxSummary.important+' требуют дополнительной проверки':'')+
+     '. Подключённой почты и сообщений соцсетей пока нет.',
+   source:'Локальные записи «Единых входящих»',
+   next:'Я могу помочь подготовить ответы и принести их на подпись.'};
+ }
  if(!context){
   const deferred=data.reminderAt>Date.now()||data.remindersOff;
   return deferred?
@@ -262,6 +271,9 @@ function approve(){
  const p=proposal||candidate();
  if(p.kind==='intro'){view='intro';sessionSeen=new Set();render();return;}
  if(p.kind==='gap'){view='intro';sessionSeen=new Set();render();return;}
+ if(p.kind==='inbox'){
+  close();window.DMDirectorWorkspace?.open?.('inbox');return;
+ }
  if(p.origin==='workspace'){
   ledger('approved',p,p.kind==='message'?
     'Подготовленный ответ одобрен. Ни одного сообщения не отправлено. Одобренный текст доступен в «Входящих» для копирования.':
@@ -341,6 +353,7 @@ for(const ev of ['dm:sales-changed','dm:sales-insight-changed','dm:business-cont
  window.addEventListener(ev,()=>queueMicrotask(refresh));
 }
 window.addEventListener('storage',event=>{if(event.key===KEY){data=load();refresh();}});
+window.addEventListener('dm:workspace-updated',()=>queueMicrotask(refresh));
 window.DMDirectorOffice=Object.freeze({open,close,progress,refresh,propose,dismiss,proposal:candidate,getAnswers:()=>({...data.answers})});
 createSettingsEntry();
 refresh();
