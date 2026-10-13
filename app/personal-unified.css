@@ -125,15 +125,6 @@
   gap:8px;
   align-items:center;
 }
-.day-shell:is(.care-shell,.world-shell,.health-shell) .day-back{
-  flex:none;
-  width:43px;
-  height:47px;
-  border:0;
-  background:url('./assets/logo-air.png') center/98% auto no-repeat;
-  filter:drop-shadow(0 4px 11px rgba(57,160,255,.31));
-}
-.day-shell:is(.care-shell,.world-shell,.health-shell) .day-back svg{opacity:0}
 .day-shell:is(.care-shell,.world-shell,.health-shell) .day-heading{min-width:0;flex:1}
 .day-shell:is(.care-shell,.world-shell,.health-shell) .day-heading>span{
   color:#d9ecfc;
