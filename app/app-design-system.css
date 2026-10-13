@@ -105,8 +105,9 @@
 /* Shared action hierarchy: active/primary controls match 'Сегодня'.
    Secondary actions remain charcoal glass. No application data are modified. */
 .day-dialog .primary-btn,
-.day-shell .care-primary,
-.day-shell .health-native-sync{
+body .day-shell.care-shell .care-primary,
+body .day-shell.health-shell .care-primary,
+body .day-shell.health-shell .health-native-sync{
   color:#0a2744;
   border:1px solid rgba(219,244,255,.99);
   background:var(--dm-ui-gloss);
