@@ -180,6 +180,7 @@
     return rows.join('\\n');
   }
   function passportButtons(kind){
+    if(kind==='brand')return '<div class="dm-passport-actions" role="group" aria-label="Рекомендовать приложение"><button type="button" class="dm-passport-button" data-passport-action="share-app">Поделиться приложением ↗</button></div>';
     return '<div class="dm-passport-actions" role="group" aria-label="Действия с паспортом">'+
       '<button type="button" class="dm-passport-button" data-passport-action="share" data-passport-kind="'+kind+'">Поделиться</button>'+
       '<button type="button" class="dm-passport-button" data-passport-action="print" data-passport-kind="'+kind+'">Распечатать</button>'+
@@ -215,6 +216,18 @@
       '</details>'
     ];
     return common.join('');
+  }
+  async function shareAppLink(){
+    const url='https://evacuatorkrasnodar-ux.github.io/digital-manager/';
+    const title='Цифровой управляющий';
+    const text='Посмотри «Цифровой управляющий» — приложение для управления бизнесом.';
+    if(typeof navigator.share==='function'){
+      try{await navigator.share({title,text,url});return;}catch(error){if(error?.name==='AbortError')return;}
+    }
+    if(navigator.clipboard?.writeText){
+      try{await navigator.clipboard.writeText(url);notify('Ссылка на приложение скопирована');return;}catch(_){}
+    }
+    window.prompt('Скопируйте ссылку на приложение',url);
   }
   async function sharePassport(kind){
     const label=kind==='brand'?'Паспорт приложения':'Паспорт компании',value=passportPlain(kind);
@@ -1715,7 +1728,8 @@
   byId('modal').addEventListener('click',event=>{
     const btn=event.target.closest('[data-passport-action]');
     if(!btn)return;
-    if(btn.dataset.passportAction==='share')sharePassport(btn.dataset.passportKind);
+    if(btn.dataset.passportAction==='share-app')shareAppLink();
+    else if(btn.dataset.passportAction==='share')sharePassport(btn.dataset.passportKind);
     else if(btn.dataset.passportAction==='print')printPassport(btn.dataset.passportKind);
   });
   document.addEventListener('click',event=>{if(!byId('openProfileCard').hidden && !event.target.closest('#openProfile, #openProfileCard'))hideProfileCard();});
