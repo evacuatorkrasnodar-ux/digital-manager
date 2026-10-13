@@ -149,3 +149,8 @@
   }
   .dm-chat-panel:not(.dm-chat-editor) .dm-chat-compose textarea{padding-right:67px}
 }
+
+/* iOS standalone PWA must never zoom the whole page when typing in the long editor. */
+@media(max-width:700px){
+  #plasmaChatPanel.dm-chat-panel.dm-chat-editor textarea#plasmaChatInput{font-size:16px}
+}
