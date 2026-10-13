@@ -145,7 +145,6 @@
     'M7 3.5h8.5l3.2 3.2v12.1c0 1-.8 1.7-1.7 1.7H7c-1 0-1.7-.7-1.7-1.7V5.2c0-1 .7-1.7 1.7-1.7Z',
     'M15.5 3.5v3.4h3.2','M8.4 10.9h7.2','M8.4 13.9h7.2','M8.4 16.9h5.1'
   ]);}
-  function littleChevron(){return strokeSvg(['m9 5 7 7-7 7']);}
   // Compact interactive empty cards, without fabricating appointments or notes.
   function compactDayEmpty(list,type,title,message,open){
     // The whole empty card is the action; no redundant arrow or hidden hotspot.
