@@ -177,24 +177,26 @@
     }
   });
   const phases=[['Вдох',4,'in'],['Пауза',4,'hold'],['Выдох',4,'out'],['Отдых',4,'rest']];
+  // The layout editor temporarily detaches cards from document during reorder.
+  // Resolve controls from the retained widget node, not document.getElementById.
   function stopBreathing(finished=false){
     clearInterval(breathTimer);breathTimer=null;
-    $('dmBreathOrb').dataset.phase='rest';
-    $('dmBreathPhase').textContent=finished?'Готово ✦':'Минута для себя';
-    $('dmBreathClock').textContent=finished?'Четыре спокойных цикла завершены':'4 с вдох · 4 с пауза · 4 с выдох · 4 с отдых';
-    $('dmBreathToggle').textContent='Начать';
+    widgets.breathe.querySelector('#dmBreathOrb').dataset.phase='rest';
+    widgets.breathe.querySelector('#dmBreathPhase').textContent=finished?'Готово ✦':'Минута для себя';
+    widgets.breathe.querySelector('#dmBreathClock').textContent=finished?'Четыре спокойных цикла завершены':'4 с вдох · 4 с пауза · 4 с выдох · 4 с отдых';
+    widgets.breathe.querySelector('#dmBreathToggle').textContent='Начать';
   }
   function tick(){
     const elapsed=Math.floor((Date.now()-breathStartedAt)/1000);
     if(elapsed>=64){stopBreathing(true);return;}
     const index=Math.floor(elapsed/4)%4,phase=phases[index];
-    $('dmBreathOrb').dataset.phase=phase[2];
-    $('dmBreathPhase').textContent=phase[0];
-    $('dmBreathClock').textContent=String(4-elapsed%4)+' с · '+String(64-elapsed)+' с осталось';
+    widgets.breathe.querySelector('#dmBreathOrb').dataset.phase=phase[2];
+    widgets.breathe.querySelector('#dmBreathPhase').textContent=phase[0];
+    widgets.breathe.querySelector('#dmBreathClock').textContent=String(4-elapsed%4)+' с · '+String(64-elapsed)+' с осталось';
   }
-  $('dmBreathToggle').addEventListener('click',()=>{
+  widgets.breathe.querySelector('#dmBreathToggle').addEventListener('click',()=>{
     if(breathTimer){stopBreathing();return;}
-    breathStartedAt=Date.now();$('dmBreathToggle').textContent='Остановить';
+    breathStartedAt=Date.now();widgets.breathe.querySelector('#dmBreathToggle').textContent='Остановить';
     tick();breathTimer=setInterval(tick,240);
   });
   window.addEventListener('dm:cards-changed',refresh);
