@@ -243,7 +243,7 @@
       '@media print{button{display:none}body{padding:0}main{border:0}}</style></head><body>'+
       '<button onclick="window.print()" type="button">Распечатать паспорт</button>'+
       '<main><h1>'+safe(label)+'</h1><p>'+body+'</p></main>'+
-      '<small>Сведения сформированы из локального демонстрационного приложения.</small></body></html>');
+      '<small>'+safe(kind==='brand'?'Сведения о демонстрационном приложении.':'Сведения внесены владельцем и не подтверждены выпиской ФНС.')+'</small></body></html>');
     page.document.close();
     page.focus();
     // Print button inside the document is a reliable fallback for iOS Safari.
