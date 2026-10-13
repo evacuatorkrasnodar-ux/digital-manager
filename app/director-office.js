@@ -35,7 +35,7 @@ function load(){
     proposals:Array.isArray(v.proposals)?v.proposals.filter(p=>p&&typeof p.id==='string').slice(-25):[]};
  }catch(_){return empty();}
 }
-let data=load(),view='desk',department='strategy',sessionSeen=new Set(),previousFocus=null,proposal=null,editorOpened=false;
+let data=load(),view='desk',sessionSeen=new Set(),previousFocus=null,proposal=null,editorOpened=false;
 const root=document.createElement('section');
 root.className='dm-director-office';
 root.id='dmDirectorOffice';
@@ -69,10 +69,9 @@ function saveAnswer(id,answer){
  if(id==='business'&&value.length>=3)window.DMBusinessContext?.saveProfile?.(value);
  return persist();
 }
-function open(mode='desk',dept=null){
+function open(mode='desk'){
  previousFocus=document.activeElement;
  view=mode;
- if(dept)department=dept;
  sessionSeen=new Set();
  editorOpened=false;
  root.hidden=false;render();
@@ -217,23 +216,6 @@ function introMarkup(){
  control+'<div class="dm-director-secondary">'+button('skip','Пропустить')+button('pause','Продолжить позже')+'</div>'+
  '<p class="dm-director-muted">Всё сохраняется только в этом браузере. Пропущенное можно дополнять в «Управлении → Знакомство».</p></section>';
 }
-const AREAS={
- strategy:{name:'Стратегия',text:'Я помогаю искать направления роста и проверять гипотезы. Сейчас опираюсь на ваши сохранённые записи, а не на выдуманный анализ конкурентов.'},
- clients:{name:'Клиенты',text:'Могу отслеживать занесённые обращения, готовить ответы и искать незавершённые договорённости. Для автоматического чтения почты, звонков и CRM потребуется разрешённое подключение.'},
- finance:{name:'Финансы',text:'Я различаю записанные продажи, расходы и подтверждённые поступления. Для сверки бухгалтерии понадобятся реальные данные 1С и банка — сейчас их нет.'},
- automation:{name:'Автоматизация',text:'Я могу предложить сценарии и подготовить черновики. Самостоятельная отправка сообщений, платежи и изменения внешних систем пока не подключены.'}
-};
-function deptMarkup(){
- const d=AREAS[department]||AREAS.strategy;
- const actual=window.DMWorkflowCore?.snapshot?.();
- let fact='';
- if(actual&&department==='clients')fact='По сохранённым записям: обращений в работе — '+actual.inquiries+'.';
- if(actual&&department==='automation')fact='В очереди управляющего — '+actual.assistantQueue+'. Очередь не равна выполнению.';
- return '<section class="dm-director-proposal"><small>ОТДЕЛ УПРАВЛЯЮЩЕГО</small><h3>'+d.name+'</h3><p>'+d.text+'</p>'+
- (fact?'<div class="dm-director-evidence">'+escaped(fact)+'</div>':'')+
- '<p>Главные решения этого отдела поступают на золотую карточку.</p>'+
- '<div class="dm-director-actions">'+button('desk','На подпись ↗')+button('intro','Уточнить сведения')+'</div></section>';
-}
 function revisionMarkup(){
  proposal=proposal||candidate();
  return '<section class="dm-director-proposal"><small>ИСПРАВИТЬ РЕШЕНИЕ</small><h3>'+escaped(proposal.title)+'</h3>'+
@@ -254,9 +236,9 @@ function resultMarkup(){
 }
 function render(){
  const title=$('#dmDirectorTitle'),body=$('#dmDirectorBody');
- const titles={desk:'Директорская подпись',intro:'Знакомство с бизнесом',department:'Мои отделы',revision:'Исправление решения',result:'Поручение директора'};
+ const titles={desk:'Директорская подпись',intro:'Знакомство с бизнесом',revision:'Исправление решения',result:'Поручение директора'};
  title.textContent=titles[view]||titles.desk;
- body.innerHTML=view==='intro'?introMarkup():view==='department'?deptMarkup():view==='revision'?revisionMarkup():view==='result'?resultMarkup():deskMarkup();
+ body.innerHTML=view==='intro'?introMarkup():view==='revision'?revisionMarkup():view==='result'?resultMarkup():deskMarkup();
  body.scrollTop=0;refreshSettings();
 }
 function refreshSettings(){
@@ -379,13 +361,8 @@ root.addEventListener('submit',event=>{
 });
 root.addEventListener('keydown',event=>{if(event.key==='Escape'){event.stopPropagation();close();}});
 document.addEventListener('click',event=>{
- const btn=event.target.closest('#openAdvice,#homeScreen .recommendation-card .rec-chevron,.shortcuts .shortcut[data-action]');
+ const btn=event.target.closest('#openAdvice,#homeScreen .recommendation-card .rec-chevron');
  if(!btn||!root.hidden||document.documentElement.classList.contains('dm-layout-editing'))return;
- const action=btn.dataset.action;
- if(action&&['strategy','clients','finance','automation'].includes(action)){
-  event.preventDefault();event.stopImmediatePropagation();
-  open('department',action);return;
- }
  if(btn.id==='openAdvice'||btn.matches('.rec-chevron')){
   event.preventDefault();event.stopImmediatePropagation();open('desk');
  }
