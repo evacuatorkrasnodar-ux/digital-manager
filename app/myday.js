@@ -148,16 +148,17 @@
   function littleChevron(){return strokeSvg(['m9 5 7 7-7 7']);}
   // Compact interactive empty cards, without fabricating appointments or notes.
   function compactDayEmpty(list,type,title,message,open){
-    const row=elem('div','day-compact-empty '+type);
+    // The whole empty card is the action; no redundant arrow or hidden hotspot.
+    const row=elem('button','day-compact-empty '+type);
+    row.type='button';
+    row.setAttribute('aria-label',type==='compact-note'?'Создать заметку':'Добавить событие');
+    row.addEventListener('click',open);
     const symbol=elem('span','compact-empty-symbol',type==='compact-note'?'':'✦');
     if(type==='compact-note')symbol.append(noteOutline());
     symbol.setAttribute('aria-hidden','true');
-    const body=elem('div','compact-empty-content');
+    const body=elem('span','compact-empty-content');
     body.append(elem('strong','',title),elem('small','',message));
-    const arrow=action('',type==='compact-note'?'Создать заметку':'Добавить событие',open);
-    arrow.classList.add('compact-empty-action');
-    arrow.append(littleChevron());
-    row.append(symbol,body,arrow);
+    row.append(symbol,body);
     list.replaceChildren(row);
   }
   function action(symbol,label,callback){
@@ -211,10 +212,8 @@
       const toPlan=action('','Создать событие из заметки «'+item.title+'»',()=>openEventFromNote(item));
       toPlan.classList.add('note-to-plan');
       toPlan.append(strokeSvg(['M4 12h15','m13 6 6 6-6 6']),elem('span','','В план'));
-      const arrow=action('','Открыть запись «'+item.title+'»',()=>openNote(item));
-      arrow.classList.add('note-mini-chevron');
-      arrow.append(littleChevron());
-      row.append(symbol,button,toPlan,arrow);
+      // The note title already opens this record; no duplicate arrow button.
+      row.append(symbol,button,toPlan);
       list.append(row);
     }
     if(items.length>4){const more=elem('button','day-add subtle','Все записи: '+items.length);more.type='button';more.addEventListener('click',()=>setView('notes'));list.append(more);}
