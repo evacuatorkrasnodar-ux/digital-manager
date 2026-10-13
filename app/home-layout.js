@@ -158,6 +158,7 @@
     board.replaceChildren();
     board.hidden=true;toolbar.hidden=true;
     document.documentElement.classList.remove('dm-custom-home-layout','dm-layout-editing');
+    window.dispatchEvent(new Event('dm:layout-reset'));
   }
   function renderLibrary(){
     const library=document.getElementById('dmLayoutLibrary');
@@ -189,7 +190,7 @@
     document.documentElement.classList.add('dm-custom-home-layout');
     document.documentElement.classList.toggle('dm-layout-editing',editing);
     document.getElementById('dmLayoutCaption').textContent=editing?
-      'Зажмите ⠿ и перемещайте. Стрелки и ↔ тоже работают.':'Карточки расположены по вашему выбору';
+      'Зажмите ⠿ и перемещайте. Карточки сами подстраивают изгибы ✦':'Магнитные формы подстроены под ваше расположение';
     for(const b of toolbar.querySelectorAll('[data-dm-layout-action]')){
       const action=b.dataset.dmLayoutAction;
       b.hidden=(editing?action==='edit':action!=='edit');
@@ -198,6 +199,8 @@
     link.textContent=preferences.linked?'⛓ Разъединить пару':'⛓ Соединить пару';
     link.setAttribute('aria-label',preferences.linked?'Разъединить Клиентов и Рекомендацию':'Соединить Клиентов и Рекомендацию');
     renderLibrary();
+    // Magnetic geometry listens for every reorder, resize, group or visibility change.
+    window.dispatchEvent(new CustomEvent('dm:layout-rendered',{detail:{linked:preferences.linked,editing}}));
     // Update the original optics only in this independent layout.
     requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')));
   }
