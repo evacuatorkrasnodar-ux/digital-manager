@@ -435,8 +435,8 @@
 .dock-launcher .dm-launcher-waves .dm-electric-wave-3{animation-delay:-1.1s;animation-duration:7.2s}
 .dock-launcher .dm-launcher-waves .dm-electric-wave-4{animation-delay:-1.7s;animation-duration:9.2s}
 .dock-launcher .dm-launcher-waves .dm-laser-track path{fill:none;stroke-linecap:round;stroke-linejoin:round;animation:none;transform:none;shape-rendering:geometricPrecision;pointer-events:none}
-.dock-launcher .dm-launcher-waves .dm-laser-bloom{stroke-width:5.2;opacity:.20;filter:blur(2.15px)}
-.dock-launcher .dm-launcher-waves .dm-laser-halo{stroke-width:2.1;opacity:.37;filter:blur(.6px)}
+.dock-launcher .dm-launcher-waves .dm-laser-bloom{stroke-width:3.2;opacity:.08;filter:blur(1.15px)}
+.dock-launcher .dm-launcher-waves .dm-laser-halo{stroke-width:1.4;opacity:.22;filter:blur(.4px)}
 .dock-launcher .dm-launcher-waves .dm-laser-core{stroke-width:.80;opacity:.97;filter:none;vector-effect:non-scaling-stroke}
 .dock-launcher .dm-launcher-waves .dm-electric-wave-1 .dm-laser-core{stroke-width:.72;opacity:.82}
 .dock-launcher .dm-launcher-waves .dm-electric-wave-2 .dm-laser-core{stroke-width:.70;opacity:.88}
@@ -444,8 +444,8 @@
 .dock-launcher .dm-launcher-waves .dm-electric-wave-3 .dm-laser-halo{opacity:.23}
 .dock-launcher .dm-launcher-waves .dm-electric-wave-3 .dm-laser-bloom{opacity:.12}
 .dock-launcher .dm-launcher-waves .dm-electric-wave-4 .dm-laser-core{stroke-width:.86;opacity:.96}
-.dock-launcher .dm-launcher-waves .dm-electric-wave-4 .dm-laser-halo{opacity:.44}
-.dock-launcher .dm-launcher-waves .dm-electric-wave-4 .dm-laser-bloom{opacity:.23}
+.dock-launcher .dm-launcher-waves .dm-electric-wave-4 .dm-laser-halo{opacity:.22}
+.dock-launcher .dm-launcher-waves .dm-electric-wave-4 .dm-laser-bloom{opacity:.08}
 @media(prefers-reduced-motion:reduce){.dock-launcher .dm-launcher-waves .dm-laser-track{animation:none!important}}
 .dock-launcher .dm-launcher-plasma .dm-orb-spectral{overflow:visible}
 .dock-launcher .dm-launcher-plasma::after{inset:5%}
