@@ -1,5 +1,5 @@
 /* App-only service worker: fresh documents, styles and scripts; cached offline assets. */
-const CACHE = 'digital-manager-black-velvet-v754-20261013';
+const CACHE = 'digital-manager-black-velvet-v755-20261013';
 const CACHE_PREFIX = 'digital-manager-black-velvet-';
 const OFFLINE_FILES = [
   './index.html',
@@ -160,16 +160,21 @@ self.addEventListener('fetch', event => {
   event.respondWith((async () => {
     const cache = await caches.open(CACHE);
     if (documentRequest) {
-      // Never render an old HTML shell merely because a versioned asset is slow.
-      try {
-        const response = await fetch(request, {cache:'no-cache'});
+      // Try a current document first, but avoid an indefinite launch stall.
+      const saved = await cache.match(request, {ignoreSearch:true})
+        || await cache.match('./index.html');
+      const network = fetch(request, {cache:'no-cache'}).then(response => {
         if (response.ok) event.waitUntil(cache.put(request, response.clone()));
         return response;
-      } catch (_) {
-        return (await cache.match(request, {ignoreSearch:true}))
-          || (await cache.match('./index.html'))
-          || Response.error();
-      }
+      }).catch(() => null);
+      if (!saved) return await network || Response.error();
+      const response = await Promise.race([
+        network,
+        new Promise(resolve => setTimeout(() => resolve(null), 1400))
+      ]);
+      if (response && response.ok) return response;
+      event.waitUntil(network);
+      return saved;
     }
     // CSS and JS URLs have explicit version identifiers. Reuse matching cached
     // resources instantly instead of making every reload wait on the network.
