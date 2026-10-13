@@ -660,6 +660,7 @@
   // The five settings controls demonstrate signs in a nearby real-orb preview,
   // and in the existing iPhone conversation example. These are not notifications.
   let dmSettingsGlyphTimer=null;
+  let dmSettingsGlyphFrame=null;
   function dmMountGlyphShowcase(){
     const stage=byId('dmGlyphStageOrb');
     const source=document.querySelector('#tabAssistant .dm-dock-plasma');
@@ -697,6 +698,7 @@
     const scene=byId('dmGlyphStage');
     if(!scene)return;
     if(dmSettingsGlyphTimer!==null)clearTimeout(dmSettingsGlyphTimer);
+    if(dmSettingsGlyphFrame!==null){cancelAnimationFrame(dmSettingsGlyphFrame);dmSettingsGlyphFrame=null;}
     const label=({
       mail:'Почта',health:'Здоровье',task:'Задача',
       calendar:'Календарь',attention:'Внимание'
@@ -712,12 +714,16 @@
       layer.dataset.kind=kind;
       layer.firstElementChild.innerHTML=dmGlyphDrawings[kind];
       layer.classList.remove('is-visible');
-      void layer.offsetWidth;
-      layer.classList.add('is-visible');
     });
     scene.classList.remove('is-playing');
-    void scene.offsetWidth;
-    scene.classList.add('is-playing');
+    // Allow a paint between demo states; no synchronous layout flush or scroll jump.
+    dmSettingsGlyphFrame=requestAnimationFrame(()=>{
+      dmSettingsGlyphFrame=requestAnimationFrame(()=>{
+        layers.forEach(layer=>layer.classList.add('is-visible'));
+        scene.classList.add('is-playing');
+        dmSettingsGlyphFrame=null;
+      });
+    });
     dmSettingsGlyphTimer=setTimeout(()=>{
       layers.forEach(layer=>layer.classList.remove('is-visible'));
       scene.classList.remove('is-playing');
