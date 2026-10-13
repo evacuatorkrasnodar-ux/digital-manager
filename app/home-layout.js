@@ -186,6 +186,9 @@
   }
   function render(){
     if(!preferences.enabled){restoreOriginal();return;}
+    // Keep the user's vertical position while the DOM cards are rearranged.
+    // Otherwise Safari scroll anchoring can jump to the top during a move.
+    const previousScrollY=window.scrollY;
     // Move existing cards: never clone their event handlers or generate mock data.
     holdCards();
     board.replaceChildren();
@@ -219,8 +222,11 @@
     renderLibrary();
     // Notify any other dashboard listeners without changing the card contours.
     window.dispatchEvent(new CustomEvent('dm:layout-rendered',{detail:{linked:preferences.linked,editing}}));
-    // Update the original optics only in this independent layout.
-    requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')));
+    // Keep the lower cards in view after a resize, reorder or change of size.
+    requestAnimationFrame(()=>{
+      if(editing)window.scrollTo({top:previousScrollY,behavior:'instant'});
+      window.dispatchEvent(new Event('resize'));
+    });
   }
   function edit(source='settings'){
     if(editing)return;
