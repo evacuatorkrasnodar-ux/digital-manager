@@ -524,7 +524,8 @@ function init(){
  if(management&&!management.querySelector('[data-journal-open]')){
   const anchor=management.querySelector('.mg-main'),box=document.createElement('div');
   box.className='dm-journal-entry-links';
-  box.innerHTML='<button type="button" data-journal-open="mine">Мои дела</button><button type="button" data-journal-open="history">История действий</button>';
+  // One entry point; the History and Delegated tabs remain available inside.
+   box.innerHTML='<button type="button" data-journal-open="mine">Мои дела</button>';
   if(anchor)anchor.before(box);else management.append(box);
  }
  document.addEventListener('click',e=>{
