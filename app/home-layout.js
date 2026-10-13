@@ -17,6 +17,7 @@
     shortcuts:dashboard.querySelector('.shortcuts'),
     inbox:document.getElementById('dmWorkspaceInboxCard'),
     briefing:document.getElementById('dmWorkspaceBriefCard'),
+    tax:document.getElementById('dmTaxCard'),
     clients:document.getElementById('clientsCard'),
     clientEdge:originalGrid.querySelector('.bv-clients-edge'),
     orders:document.getElementById('ordersCard'),
@@ -30,12 +31,12 @@
   if(Object.values(parts).some(x=>!x))return;
   // Match the untouched Home: revenue, optional personal widgets, the
   // four-card business sculpture, and finally the Quick Actions block.
-  const defaultOrder=['revenue','day','steps','breathe','calendar','business','quick','inbox','briefing'];
+  const defaultOrder=['revenue','day','steps','breathe','calendar','business','quick','inbox','briefing','tax'];
   const names={revenue:'Выручка',business:'Бизнес · 4 карточки',quick:'Быстрые действия',
-    inbox:'Входящие',briefing:'Штаб директора',
+    inbox:'Входящие',briefing:'Штаб директора',tax:'Налоговый контроль',
     day:'Мой день',steps:'Шаги',breathe:'Дыхание',calendar:'Календарь'};
   const available={day:'dayWidget',steps:'healthSteps',breathe:'breathing',calendar:'calendarWidget'};
-  const fixedWide=new Set(['revenue','business','quick','calendar','inbox','briefing']);
+  const fixedWide=new Set(['revenue','business','quick','calendar','inbox','briefing','tax']);
   const fixedBlocks=new Set(['business','quick']);
   const legacyBusiness=new Set(['business','signature','clients','advice','orders','profit']);
   // Categories belong to the card's purpose, not its position. Widgets never
@@ -44,6 +45,7 @@
     business:{title:'Картина бизнеса',subtitle:'Главное о компании',ids:['revenue','business']},
     departments:{title:'Отделы управляющего',subtitle:'Стратегия · клиенты · финансы · процессы',ids:['quick']},
     communication:{title:'Связь',subtitle:'Письма и обращения в одном месте',ids:['inbox']},
+    control:{title:'Контроль',subtitle:'Налоги и важные обязательства',ids:['tax']},
     day:{title:'Мой день',subtitle:'Планёрки, встречи и задачи',ids:['briefing','day','calendar']},
     health:{title:'Моё здоровье',subtitle:'Забота о себе',ids:['steps','breathe']}
   };
@@ -221,7 +223,7 @@
       originalGrid.hidden=false;
       content.append(originalGrid);
     }else{
-      const map={revenue:parts.revenue,quick:parts.shortcuts,inbox:parts.inbox,briefing:parts.briefing,
+      const map={revenue:parts.revenue,quick:parts.shortcuts,inbox:parts.inbox,briefing:parts.briefing,tax:parts.tax,
         day:parts.day,steps:parts.steps,breathe:parts.breathe,calendar:parts.calendar};
       if(map[id]){map[id].hidden=false;content.append(map[id]);}
     }
@@ -229,7 +231,7 @@
   }
   function holdCards(){
     const detached=document.createDocumentFragment();
-    detached.append(parts.revenue,originalGrid,parts.shortcuts,parts.inbox,parts.briefing,
+    detached.append(parts.revenue,originalGrid,parts.shortcuts,parts.inbox,parts.tax,parts.briefing,
       parts.day,parts.steps,parts.breathe,parts.calendar);
     return detached;
   }
@@ -241,12 +243,14 @@
     dashboard.insertBefore(originalGrid,board);
     dashboard.insertBefore(parts.shortcuts,board);
     dashboard.insertBefore(parts.inbox,board);
+    dashboard.insertBefore(parts.tax,board);
     dashboard.insertBefore(parts.briefing,board);
     dashboard.insertBefore(widgetHost,board);
     for(const [id,element] of defaultLabels){
       if(id==='business')dashboard.insertBefore(element,parts.revenue);
       if(id==='departments')dashboard.insertBefore(element,parts.shortcuts);
       if(id==='communication')dashboard.insertBefore(element,parts.inbox);
+      if(id==='control')dashboard.insertBefore(element,parts.tax);
       if(id==='day')dashboard.insertBefore(element,parts.briefing);
     }
     originalGrid.hidden=false;
