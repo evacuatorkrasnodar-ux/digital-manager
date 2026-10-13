@@ -209,8 +209,8 @@ function markup(){
   '<h2>Привет! Я твой цифровой управляющий.</h2>'+
   '<p>Не нужно разбираться в сотне кнопок. Будем вместе искать возможности, решать задачи и развивать твоё дело. С чего начнём?</p>'+
   '<div class="dm-journey-options">'+
-  '<button type="button" data-journey-mode="start"><strong>Создаю бизнес с нуля</strong><small>Даже если ещё нет идеи</small><span>↗</span></button>'+
-  '<button type="button" data-journey-mode="existing"><strong>У меня уже есть бизнес</strong><small>Помоги развивать и управлять</small><span>↗</span></button>'+
+  '<button type="button" data-journey-mode="start"><strong>Создаю бизнес с нуля</strong><small>Даже если ещё нет идеи</small><span class="dm-circle-arrow" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span></button>'+
+  '<button type="button" data-journey-mode="existing"><strong>У меня уже есть бизнес</strong><small>Помоги развивать и управлять</small><span class="dm-circle-arrow" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span></button>'+
   '</div>'+
   '<p class="dm-journey-small">Можно всё изменить позже. Пока мы ничего не оформляем, не публикуем и не оплачиваем.</p></section>';
  if(view==='idea')return '<form id="dmJourneyIdeaForm" class="dm-journey-chat">'+
