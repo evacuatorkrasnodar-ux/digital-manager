@@ -65,20 +65,13 @@
   color:#91b8d1;
   font-size:10px;
 }
+/* The carousel keeps its existing 35px slot; chrome and rim come from
+   app-design-system.css alongside all other Management navigation. */
 #managementScreen .mg-carousel-nav{
   flex:0 0 35px;
-  width:35px;
-  height:35px;
-  padding:0;
-  border:1px solid rgba(148,189,220,.38);
-  border-radius:50%;
-  color:#e5f3ff;
-  background:linear-gradient(147deg,rgba(40,72,99,.39),rgba(5,17,29,.55));
-  box-shadow:inset 0 1px rgba(238,250,255,.105);
   display:grid;
   place-items:center;
   cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
 }
 #managementScreen .mg-carousel-nav[hidden]{display:none!important}
 #managementScreen .mg-carousel-nav .ico{
@@ -89,10 +82,6 @@
 }
 #managementScreen .mg-carousel-nav[data-direction="back"] .ico{
   transform:rotate(180deg);
-}
-#managementScreen .mg-carousel-nav:is(:hover,:focus-visible){
-  background:linear-gradient(145deg,rgba(52,91,119,.54),rgba(6,24,42,.76));
-  border-color:rgba(191,229,253,.74);
 }
 #managementScreen .mg-carousel-nav:focus-visible{
   outline:2px solid #d7efff;
