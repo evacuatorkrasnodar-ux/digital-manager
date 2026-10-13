@@ -1102,7 +1102,7 @@ html.dm-plasma-panel-open .dock-launcher .dm-launcher-waves{
 }
 @media(max-width:420px){
   html.dm-plasma-panel-open .dock-launcher{
-    transform:translateX(clamp(0px,calc(50vw - 67px),125px));
+    transform:translateX(clamp(0px,calc(50vw - 57px),135px));
   }
   html.dm-plasma-panel-open .dm-chat-panel:not(.dm-chat-editor){
     left:12px;
