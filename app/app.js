@@ -768,6 +768,7 @@
     mgSettingsPage(el.dataset.mgOpen);
   }));
   byId('mgBack').addEventListener('click',()=>{if(mgCurrent==='home')setTab('home');else if(mgCurrent==='manager')mgSettingsPage('home');else if(['voice','autopilot'].includes(mgCurrent))mgSettingsPage('manager');else mgSettingsPage('home');});
+  byId('mgEditHomeLayout').addEventListener('click',()=>{setTab('home');window.DMHomeLayout?.edit?.();});
   document.querySelectorAll('[data-mg-card]').forEach(el=>el.addEventListener('change',()=>{
     mgData.cards[el.dataset.mgCard]=el.checked;save();mgApplyCards();
     // Recolor the laser tracks immediately to match cards actually shown on Home.
