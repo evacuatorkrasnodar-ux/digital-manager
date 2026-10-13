@@ -1654,7 +1654,9 @@
           // Keep the cyan/violet glow at the plasma junction subtly present,
           // without changing the recognizable accent of the selected card.
           const towardViolet=x>.40&&x<.64;
-          const color=laserMix(base,towardViolet?glowViolet:glowIce,towardViolet?.12:.06);
+          // Keep the fifth low horizon line neutral if a warm card accent would read as a yellow glow beneath the white plasma.
+          const warmHorizon=wave===4&&base[0]>base[2]*1.15&&base[0]>base[1]*1.08;
+          const color=warmHorizon?laserMix(base,[231,239,247],.92):laserMix(base,towardViolet?glowViolet:glowIce,towardViolet?.12:.06);
           stop.setAttribute('stop-color',laserColorHex(color));
         });
       }
