@@ -38,12 +38,16 @@
     success: 'Мятное кольцо: действие завершено.',
     error: 'Красноватое кольцо: операция не удалась.'
   };
-  function setRingMode(mode, resetAfter = 0) {
+  function setRingMode(mode, resetAfter = 0, previewOnly = false) {
     if (!Object.hasOwn(ringDescriptions,mode)) return;
     clearTimeout(ringResetTimer);
     const button = byId('tabAssistant');
-    if(['thinking','speaking'].includes(mode))showLiveRing(mode,resetAfter||2500);
-    else hideLiveRing(); // Clear the previous live animation for every non-live state.
+    // The four "Live ring" preview buttons ONLY change one dock ring's glow.
+    // Never open the larger conversation overlay, hide the dock or resize it.
+    if(!previewOnly){
+      if(['thinking','speaking'].includes(mode))showLiveRing(mode,resetAfter||2500);
+      else hideLiveRing();
+    }
     button.dataset.mode = mode;
     document.querySelector('.bottom-nav').dataset.mode = mode;
     byId('dockLauncher').dataset.mode = mode;
@@ -1521,7 +1525,10 @@
 
 
   // Explicitly wire every visual action; unused marketing routes remain untouched.
-  document.querySelectorAll('[data-ring-preview]').forEach(b=>b.addEventListener('click',()=>setRingMode(b.dataset.ringPreview,b.dataset.ringPreview==='idle'?0:4200)));
+  document.querySelectorAll('[data-ring-preview]').forEach(b=>b.addEventListener('click',()=>{
+    hideLiveRing(true); // A prior real conversation overlay must not cover the preview.
+    setRingMode(b.dataset.ringPreview,0,true);
+  }));
   byId('tabClients').addEventListener('click',()=>dmOpenDockTarget(voicePrefs.dockItems[0]));
   byId('assistantReturnHome').addEventListener('click',()=>setTab('home'));
   byId('tabDay').addEventListener('click',()=>dmOpenDockTarget(voicePrefs.dockItems[1]));
