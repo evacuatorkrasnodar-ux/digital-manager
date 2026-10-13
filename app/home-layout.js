@@ -309,10 +309,15 @@
   let dragging=null;
   board.addEventListener('pointerdown',e=>{
     if(!editing||e.button>0)return;
-    const handle=e.target.closest('.dm-unit-grab');
-    if(!handle)return;
-    const id=handle.closest('[data-card-id]')?.dataset.cardId;
+    // In edit mode the entire card acts as a grab surface, not just ⠿.
+    // Keep the arrow, resize, and hide buttons independently tappable.
+    const control=e.target.closest('.dm-layout-control');
+    if(control&&!control.classList.contains('dm-unit-grab'))return;
+    const tile=e.target.closest('.dm-layout-unit');
+    if(!tile)return;
+    const id=tile.dataset.cardId;
     if(!id)return;
+    const handle=control||tile;
     dragging={id,startX:e.clientX,startY:e.clientY,pointerId:e.pointerId,active:false,target:null,handle};
     handle.setPointerCapture?.(e.pointerId);
   });
