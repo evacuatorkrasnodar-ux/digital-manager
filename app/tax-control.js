@@ -86,8 +86,9 @@ function update(){
  if(x.urgent)labels.push('В ближайшие 7 дней: '+x.urgent);
  if(!labels.length&&x.nearest)labels.push('Ближайший срок: '+x.nearest.due.split('-').reverse().join('.'));
  if(!labels.length)labels.push(x.total?'Нет открытых сроков':'Добавьте свои сроки');
- $('dmTaxCardStatus').textContent=labels.join(' · ');
- $('dmTaxManagementStatus').textContent=labels.join(' · ');
+ const cardStatus=$('dmTaxCardStatus'),managementStatus=$('dmTaxManagementStatus');
+ if(cardStatus)cardStatus.textContent=labels.join(' · ');
+ if(managementStatus)managementStatus.textContent=labels.join(' · ');
  card.dataset.attention=x.overdue||x.urgent?'yes':'no';
  card.setAttribute('aria-label','Налоговый контроль: '+labels.join(', '));
 }
