@@ -9,7 +9,7 @@
 #dmDirectorOffice .dm-director-frame{
  display:flex;flex-direction:column;width:min(430px,100%);height:min(770px,92dvh);
  min-height:0;border:1px solid rgba(153,191,218,.43);border-radius:25px;
- background:radial-gradient(ellipse at 88% 0,rgba(141,102,65,.10),transparent 55%),linear-gradient(160deg,#101d2d,#060b11 66%,#020408);
+ background:var(--dm-ui-surface);
  box-shadow:0 26px 70px #000b,inset 0 1px rgba(255,255,255,.08);
  overflow:hidden;isolation:isolate;
 }
@@ -27,7 +27,7 @@
 }
 #dmDirectorOffice .dm-director-body section{
  margin:0 0 15px;border:1px solid rgba(145,169,192,.25);
- border-radius:17px;background:linear-gradient(160deg,rgba(29,44,62,.58),rgba(6,14,23,.70));
+ border-radius:17px;background:var(--dm-ui-inset);
  padding:15px 13px;box-shadow:inset 0 1px rgba(255,255,255,.045);
 }
 #dmDirectorOffice .dm-director-proposal>small,
