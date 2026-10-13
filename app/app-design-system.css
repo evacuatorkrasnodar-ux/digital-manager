@@ -59,7 +59,8 @@
  #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
  #dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
  .dm-journey-panel header [data-journey-close],
- .dm-sales-draft-inner header button
+ .dm-sales-draft-inner header button,
+ .dm-journal-frame [data-journal-close]
 ){
   box-sizing:border-box;
   display:inline-grid;
@@ -129,7 +130,8 @@
  #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
  #dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
  .dm-journey-panel header [data-journey-close],
- .dm-sales-draft-inner header button
+ .dm-sales-draft-inner header button,
+ .dm-journal-frame [data-journal-close]
 ){position:relative;font-size:0;line-height:0}
 :is(
  .dm-circle-control--close,
@@ -139,7 +141,8 @@
  #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
  #dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
  .dm-journey-panel header [data-journey-close],
- .dm-sales-draft-inner header button
+ .dm-sales-draft-inner header button,
+ .dm-journal-frame [data-journal-close]
 )::before,
 :is(
  .dm-circle-control--close,
@@ -149,7 +152,8 @@
  #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
  #dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
  .dm-journey-panel header [data-journey-close],
- .dm-sales-draft-inner header button
+ .dm-sales-draft-inner header button,
+ .dm-journal-frame [data-journal-close]
 )::after{
   content:"";
   position:absolute;left:50%;top:50%;
@@ -166,7 +170,8 @@
  #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
  #dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
  .dm-journey-panel header [data-journey-close],
- .dm-sales-draft-inner header button
+ .dm-sales-draft-inner header button,
+ .dm-journal-frame [data-journal-close]
 )::after{transform:translate(-50%,-50%) rotate(-45deg)}
 :is(
  .dm-circle-control,
@@ -187,7 +192,8 @@
  #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
  #dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
  .dm-journey-panel header [data-journey-close],
- .dm-sales-draft-inner header button
+ .dm-sales-draft-inner header button,
+ .dm-journal-frame [data-journal-close]
 ){cursor:pointer}
 :is(.dm-circle-control,.dm-circle-arrow,#managementScreen .mg-back,
  #managementScreen .mg-carousel-nav,#assistantScreen .assistant-home-return,
@@ -201,7 +207,8 @@
  #dmManagerToolsPanel [data-tools-close][aria-label="Закрыть"],
  #dmBusinessPulseOverlay [data-pulse-close][aria-label="Закрыть"],
  .dm-journey-panel header [data-journey-close],
- .dm-sales-draft-inner header button
+ .dm-sales-draft-inner header button,
+ .dm-journal-frame [data-journal-close]
 ):is(:hover,:focus-visible){border-color:var(--dm-circle-edge-hover);filter:brightness(1.07)}
 :is(.dm-circle-control,.day-dialog .dialog-x,#modal .dialog-close,.day-shell .month-arrow):focus-visible{
   outline:2px solid rgba(224,241,253,.95);outline-offset:2px;
