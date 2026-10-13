@@ -1,0 +1,102 @@
+/* PULSE | quiet Black Velvet business-time overview.
+   Does not restyle the approved period pills, metric-grid or gold contours. */
+#homeScreen .dashboard>#dmBusinessPulse.dm-business-pulse{
+  display:flex;gap:8px;align-items:center;width:100%;min-width:0;min-height:39px;
+  box-sizing:border-box;margin:0 0 8px;padding:7px 6px 7px 7px;
+  border:0;border-bottom:1px solid rgba(155,188,211,.23);border-radius:0;
+  text-align:left;font-family:inherit;color:#e9f4ff;background:transparent;
+  box-shadow:none;cursor:pointer;
+}
+#homeScreen .dm-pulse-glow{color:#b9d5ec;font-size:17px;line-height:1;flex:none}
+#homeScreen .dm-pulse-copy{display:grid;gap:3px;flex:1;min-width:0}
+#homeScreen .dm-pulse-copy strong{
+  font-size:10.7px;line-height:1.25;font-weight:570;letter-spacing:.012em;color:#dcecf8;
+}
+#homeScreen .dm-pulse-copy small{
+  overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
+  font-size:9.8px;line-height:1.33;font-weight:400;color:#91b0c7;
+}
+#homeScreen .dm-pulse-chevron{flex:none;font-size:13px;color:#adcde5}
+#homeScreen .dm-business-pulse[data-attention=yes] .dm-pulse-glow{color:#f2c48e}
+#homeScreen .dm-business-pulse:focus-visible{outline:2px solid #bfdeee;outline-offset:1px;border-radius:9px}
+#dmBusinessPulseOverlay[hidden]{display:none!important}
+#dmBusinessPulseOverlay.dm-business-pulse-overlay{
+  position:fixed;inset:0;z-index:1250;display:grid;place-items:end center;
+  padding:calc(env(safe-area-inset-top,0px) + 12px) 8px calc(env(safe-area-inset-bottom,0px) + 11px);
+  color:#eff7ff;background:rgba(0,3,8,.83);
+  backdrop-filter:blur(11px);-webkit-backdrop-filter:blur(11px);
+  font-family:inherit;
+}
+#dmBusinessPulseOverlay .dm-pulse-frame{
+  width:min(430px,100%);height:min(750px,91dvh);min-height:0;
+  display:flex;flex-direction:column;overflow:hidden;
+  border:1px solid rgba(147,183,210,.44);border-radius:23px;
+  background:radial-gradient(ellipse at 100% 0,rgba(54,99,137,.18),transparent 65%),
+    linear-gradient(155deg,#101d2c,#070d16 67%,#03070b);
+  box-shadow:0 25px 65px rgba(0,0,0,.7),inset 0 1px rgba(255,255,255,.06);
+}
+#dmBusinessPulseOverlay .dm-pulse-head{
+  display:flex;align-items:center;justify-content:space-between;gap:9px;
+  flex:none;padding:17px 16px 13px;border-bottom:1px solid rgba(154,187,213,.18);
+}
+#dmBusinessPulseOverlay .dm-pulse-head small{font-size:9px;letter-spacing:.11em;color:#c6a583}
+#dmBusinessPulseOverlay .dm-pulse-head h2{font-size:18px;font-weight:560;line-height:1.3;margin:5px 0 0}
+#dmBusinessPulseOverlay .dm-pulse-head button{
+  width:34px;height:34px;flex:none;display:grid;place-items:center;
+  border:1px solid rgba(163,199,225,.41);border-radius:12px;
+  background:linear-gradient(135deg,#263f56,#0a1929);color:#eaf4ff;
+  font:400 23px/1 system-ui;cursor:pointer;
+}
+#dmBusinessPulseOverlay .dm-pulse-detail{
+  flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;padding:15px 13px 27px;
+  scrollbar-color:#43586c transparent;
+}
+#dmBusinessPulseOverlay .dm-pulse-section{
+  padding:14px 12px;margin:0 0 13px;
+  border:1px solid rgba(142,178,205,.29);border-radius:16px;
+  background:linear-gradient(155deg,rgba(24,44,62,.64),rgba(4,13,22,.78));
+  box-shadow:inset 0 1px rgba(255,255,255,.035);
+}
+#dmBusinessPulseOverlay .dm-pulse-eyebrow{font-size:10px;letter-spacing:.045em;line-height:1.5;color:#cca980}
+#dmBusinessPulseOverlay .dm-pulse-section h3{font-weight:550;font-size:15px;margin:9px 0 12px}
+#dmBusinessPulseOverlay .dm-pulse-section p{font-size:11.2px;line-height:1.55;color:#c1d3e3;margin:10px 0}
+#dmBusinessPulseOverlay .dm-pulse-section p strong{color:#f1dfc8;font-weight:550}
+#dmBusinessPulseOverlay .dm-pulse-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:11px 0 3px}
+#dmBusinessPulseOverlay .dm-pulse-stat{
+  min-width:0;display:flex;flex-direction:column;gap:5px;
+  padding:11px 9px;border:1px solid rgba(148,179,205,.18);
+  border-radius:13px;background:rgba(5,17,31,.66);
+}
+#dmBusinessPulseOverlay .dm-pulse-stat>span{font-size:10.3px;line-height:1.3;color:#a9bed2}
+#dmBusinessPulseOverlay .dm-pulse-stat>strong{
+  font-size:clamp(14px,4.1vw,18px);line-height:1.22;font-weight:550;
+  font-variant-numeric:tabular-nums;overflow-wrap:anywhere;color:#f0f8ff;
+}
+#dmBusinessPulseOverlay .dm-pulse-stat>small{font-size:9.4px;line-height:1.4;color:#91b1c6}
+#dmBusinessPulseOverlay .dm-pulse-alert-list{display:grid;gap:7px}
+#dmBusinessPulseOverlay .dm-pulse-alert{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:10px;border-radius:12px;border:1px solid rgba(185,153,106,.33);
+  background:linear-gradient(145deg,rgba(68,50,35,.36),rgba(18,23,31,.46));
+  color:#e4ebf3;font-size:11px;line-height:1.42;
+}
+#dmBusinessPulseOverlay .dm-pulse-alert strong{color:#f1d3ac}
+#dmBusinessPulseOverlay .dm-pulse-alert button,
+#dmBusinessPulseOverlay .dm-pulse-buttons button{
+  min-height:33px;flex:none;max-width:100%;padding:8px 9px;border-radius:10px;
+  border:1px solid rgba(165,196,217,.41);
+  color:#f1f8ff;background:linear-gradient(145deg,#28445e,#0d1b2d);
+  font-size:10.5px;font-family:inherit;cursor:pointer;
+}
+#dmBusinessPulseOverlay .dm-pulse-buttons{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+#dmBusinessPulseOverlay button:focus-visible{outline:2px solid #d9f0ff;outline-offset:2px}
+@media(max-width:352px){
+ #dmBusinessPulseOverlay .dm-pulse-detail{padding:12px 10px}
+ #dmBusinessPulseOverlay .dm-pulse-stats{gap:5px}
+ #dmBusinessPulseOverlay .dm-pulse-stat{padding:9px 7px}
+ #dmBusinessPulseOverlay .dm-pulse-alert{flex-wrap:wrap}
+}
+@media(prefers-reduced-motion:reduce){
+ #dmBusinessPulseOverlay *{scroll-behavior:auto!important;animation:none!important}
+}
