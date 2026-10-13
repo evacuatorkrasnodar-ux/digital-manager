@@ -54,7 +54,7 @@
     hideBrandCard();hideProfileCard();tab=next;
     const traceScreen=byId('digitalTraceScreen');if(traceScreen)traceScreen.hidden=true;
     window.DMSalesScreen?.hide?.();
-    dmSyncQuickHome();
+    dmSyncQuickDestinations();
     if(next==='management')mgSettingsPage('home');
     ['home','assistant','management'].forEach(x=>{
       byId(x+'Screen').hidden=x!==next;
@@ -844,11 +844,14 @@
   window.addEventListener('resize',mgSyncCarouselNav);
   window.addEventListener('pageshow',mgSyncCarouselNav);
   requestAnimationFrame(mgSyncCarouselNav);
-  function dmSyncQuickHome(){
+  function dmSyncQuickDestinations(){
+    // Don't offer navigation to the section that is already open.
     const home=byId('dockOpenHome');
+    const management=byId('dockOpenManage');
     if(home)home.hidden=tab==='home';
+    if(management)management.hidden=tab==='management';
   }
-  dmSyncQuickHome();
+  dmSyncQuickDestinations();
   let dmQuickMenuTimer=null;
   function dmScheduleQuickMenuHide(){
     clearTimeout(dmQuickMenuTimer);
@@ -1333,7 +1336,7 @@
     const shouldOpen=menu.hidden;
     closePlasmaPanel();closeDockQuickActions();
     if(shouldOpen){
-      dmSyncQuickHome();
+      dmSyncQuickDestinations();
       menu.hidden=false;
       dmScheduleQuickMenuHide();
       plasmaTriggers.forEach(button=>button.setAttribute('aria-expanded','true'));
