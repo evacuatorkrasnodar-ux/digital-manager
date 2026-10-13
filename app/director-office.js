@@ -84,7 +84,8 @@ function close(){
  if(previousFocus?.isConnected&&typeof previousFocus.focus==='function')previousFocus.focus({preventScroll:true});
  refresh();
 }
-function button(action,label,extra=''){return '<button type="button" data-do="'+action+'"'+extra+'>'+label+'</button>';}
+const circle='<span class="dm-circle-arrow dm-action-circle" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>';
+function button(action,label,extra=''){return '<button type="button" data-do="'+action+'"'+extra+'>'+label.replace(/↗/g,circle)+'</button>';}
 function candidate(){
  const offered=data.proposals.find(p=>p&&p.id&&p.title);
  if(offered)return {...offered,origin:'workspace'};
@@ -208,7 +209,7 @@ function introMarkup(){
  let control='';
  if(q.kind==='text')control='<form id="dmDirectorQuestion" data-question="'+q.id+'"><label for="dmDirectorAnswer">'+escaped(q.label)+'</label>'+
  '<p>'+escaped(q.hint||'')+'</p><textarea id="dmDirectorAnswer" name="answer" maxlength="500" rows="3" placeholder="Можно коротко своими словами" required>'+escaped(filled(q.id))+'</textarea>'+
- '<div class="dm-director-actions"><button type="submit">Сохранить и дальше ↗</button></div></form>';
+ '<div class="dm-director-actions"><button type="submit">Сохранить и дальше '+circle+'</button></div></form>';
  else control='<h3>'+escaped(q.label)+'</h3><div class="dm-director-choices">'+q.options.map((x,i)=>button('option',escaped(x),' data-choice="'+i+'"')).join('')+'</div>';
  return '<section class="dm-director-welcome"><small>ЗНАКОМСТВО · ВОПРОС '+idx+' ИЗ '+QUESTIONS.length+
  '</small><p class="dm-director-progress">'+p.answered+' из '+p.total+' уже известно · '+p.remaining.length+' ещё можно уточнить</p>'+
@@ -238,7 +239,7 @@ function revisionMarkup(){
  return '<section class="dm-director-proposal"><small>ИСПРАВИТЬ РЕШЕНИЕ</small><h3>'+escaped(proposal.title)+'</h3>'+
  '<p>'+personName()+', что изменить? Одного замечания достаточно; я сохраню его вместе с предложением. Настоящая генерация новой версии ИИ потребует подключения.</p>'+
  '<form id="dmDirectorRevision"><label for="dmDirectorRevisionText">Ваше замечание</label><textarea id="dmDirectorRevisionText" maxlength="600" required rows="4" placeholder="Например: не предлагай скидки, сначала проверь расходы"></textarea>'+
- '<div class="dm-director-actions"><button type="submit">Сохранить замечание ↗</button>'+button('desk','Отмена')+'</div></form></section>';
+ '<div class="dm-director-actions"><button type="submit">Сохранить замечание '+circle+'</button>'+button('desk','Отмена')+'</div></form></section>';
 }
 function resultMarkup(){
  const item=data.history.at(-1),status=item?.status;
