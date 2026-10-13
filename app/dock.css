@@ -263,3 +263,8 @@
   .bottom-nav .assistant-socket .dm-dock-plasma .dm-orb-rim,
   .bottom-nav .assistant-socket .dm-dock-plasma .dm-orb-arc{animation:none!important}
 }
+
+/* iPhone X / XS / 11 Pro-sized portrait screens: lower only the live plasma. */
+@media (width:375px) and (height:812px) and (orientation:portrait){
+  .bottom-nav[data-layout="five"] #tabAssistant{transform:translateY(-3px)}
+}
