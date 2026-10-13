@@ -32,7 +32,7 @@
   // Match the untouched Home: revenue, optional personal widgets, the
   // four-card business sculpture, and finally the Quick Actions block.
   const defaultOrder=['revenue','day','steps','breathe','calendar','business','quick','inbox','briefing','tax'];
-  const names={revenue:'Выручка',business:'Бизнес · 4 карточки',quick:'Быстрые действия',
+  const names={revenue:'Выручка',business:'Бизнес · 4 карточки',quick:'Отделы управляющего',
     inbox:'Входящие',briefing:'Штаб директора',tax:'Налоговый контроль',
     day:'Мой день',steps:'Шаги',breathe:'Дыхание',calendar:'Календарь'};
   const available={day:'dayWidget',steps:'healthSteps',breathe:'breathing',calendar:'calendarWidget',inbox:'inboxWidget',briefing:'briefingWidget',tax:'taxWidget'};
