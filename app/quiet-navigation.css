@@ -2,11 +2,9 @@
    One back control; no repeated forward chevrons on already-clickable cards.
    Functional calendar navigation and chat send controls remain visible. */
 
-/* Decorative forward arrows do not need their own visual button. */
-#homeScreen .license-arrow,
-#homeScreen .profile-arrow,
+/* Nonessential icons stay quiet; passport and business-card navigation marks
+   are intentional branded affordances and must remain visible. */
 #homeScreen .profile-open-hint > .ico,
-#homeScreen .tile-heading > .tile-chevron,
 #homeScreen .advice-cta > .ico,
 #assistantScreen .assistant-suggestions button > .ico,
 #assistantScreen .assistant-world-link .dm-inline-chevron,
