@@ -82,7 +82,7 @@ function collect(period){
 const bar=document.createElement('button');bar.id='dmBusinessPulse';bar.className='dm-business-pulse';bar.type='button';bar.setAttribute('aria-haspopup','dialog');
 bar.innerHTML='<span class="dm-pulse-glow" aria-hidden="true">✦</span><span class="dm-pulse-copy">'+
  '<strong id="dmPulseHeading">Пульс бизнеса</strong><small id="dmPulseSummary">Данные из ваших записей · без выдуманных показателей</small>'+
- '</span><span class="dm-pulse-chevron" aria-hidden="true">↗</span>';
+ '</span><span class="dm-pulse-chevron dm-circle-arrow" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>';
 dashboard.prepend(bar);
 const overlay=document.createElement('section');
 overlay.id='dmBusinessPulseOverlay';overlay.className='dm-business-pulse-overlay';overlay.hidden=true;
