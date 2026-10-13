@@ -47,7 +47,7 @@ function syncRecommendation(){
  const card=document.querySelector('#homeScreen .recommendation-card');
  if(!card)return;
  const pending=pendingTask(),insight=currentInsight(),old=findAdvice();
- const head=card.querySelector('.advice-head'),body=card.querySelector('.advice-body'),button=document.getElementById('openAdvice');
+ const head=card.querySelector('.advice-head'),body=card.querySelector('.advice-body');
  const archived=delegated.find(t=>t.status==='reviewed'&&String(t.id).startsWith('sales-insight:'));
  let title,description,action,colour='attention';
  if(pending){
@@ -69,12 +69,8 @@ function syncRecommendation(){
  card.dataset.taskState=colour;
  if(head)head.textContent=title;
  if(body)body.textContent=description;
- if(button){
-  // Change the label, never replace the approved SVG arrow.
-  if(!button.firstChild||button.firstChild.nodeType!==3)button.prepend(document.createTextNode(''));
-  button.firstChild.textContent=action;
-  button.setAttribute('aria-label',action.trim()==='Исполнить'?'Создать поручение на проверку':'Открыть '+action.trim().toLowerCase());
- }
+ // The Director Office owns the single gold signature CTA and its readiness.
+ // Journal status may update its own content, never its color or button label.
 }
 function addDelegation(){
  const pending=pendingTask();
