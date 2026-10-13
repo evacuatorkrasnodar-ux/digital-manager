@@ -24,7 +24,7 @@ html.dm-custom-home-layout #homeScreen #dmHomeWidgets{display:none!important}
 #homeScreen .dm-layout-library::before{content:'Вернуть:';font-size:10px;color:#a5bdd1}
 #homeScreen .dm-layout-board{
   display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-  grid-auto-flow:row dense;gap:9px;margin:0 0 9px;min-width:0;width:100%;isolation:isolate;
+  grid-auto-flow:row;gap:9px;margin:0 0 9px;min-width:0;width:100%;isolation:isolate;
 }
 #homeScreen .dm-layout-unit{
   position:relative;min-width:0;grid-column:span 1;align-self:stretch;
