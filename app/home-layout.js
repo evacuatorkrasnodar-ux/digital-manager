@@ -1,5 +1,5 @@
-/* Personalized Home layout v3 — move all four business cards as ONE.
- * Reuse the approved original grid and contours without resizing or restyling. */
+/* Personalized Home layout v4 — intelligent business/day/health sections.
+ * Preserve the approved four-card sculpture, Quick Actions and original contours. */
 (() => {
   'use strict';
   const dashboard=document.querySelector('#homeScreen .dashboard');
@@ -35,6 +35,78 @@
   const fixedWide=new Set(['revenue','business','quick','calendar']);
   const fixedBlocks=new Set(['business','quick']);
   const legacyBusiness=new Set(['business','signature','clients','advice','orders','profit']);
+  // Categories belong to the card's purpose, not its position. Widgets never
+  // float into a wrong section, while complete sections may be reordered.
+  const sections={
+    business:{title:'Картина бизнеса',subtitle:'Главное о компании',ids:['revenue','business']},
+    departments:{title:'Отделы управляющего',subtitle:'Стратегия · клиенты · финансы · процессы',ids:['quick']},
+    day:{title:'Мой день',subtitle:'Задачи и планы',ids:['day','calendar']},
+    health:{title:'Моё здоровье',subtitle:'Забота о себе',ids:['steps','breathe']}
+  };
+  const defaultSections=Object.keys(sections);
+  const sectionFor=id=>defaultSections.find(s=>sections[s].ids.includes(id));
+  const defaultLabels=new Map();
+  function sectionLabel(id,inEditor=false){
+    const el=document.createElement('div');
+    el.className='dm-home-section-title';
+    el.dataset.homeSection=id;
+    el.setAttribute('role','heading');
+    el.setAttribute('aria-level','2');
+    const words=document.createElement('span');words.className='dm-home-section-words';
+    const title=document.createElement('strong');title.textContent=sections[id].title;
+    const sub=document.createElement('small');sub.textContent=sections[id].subtitle;
+    words.append(title,sub);el.append(words);
+    if(inEditor){
+      const arrows=document.createElement('span');arrows.className='dm-home-section-arrows';
+      for(const [direction,symbol,label] of [[-1,'↑','Выше'],[1,'↓','Ниже']]){
+        const btn=document.createElement('button');btn.type='button';
+        btn.dataset.dmSectionShift=String(direction);btn.dataset.sectionId=id;
+        btn.setAttribute('aria-label',label+': раздел «'+sections[id].title+'»');
+        btn.textContent=symbol;arrows.append(btn);
+      }
+      el.append(arrows);
+    }
+    return el;
+  }
+  const visibleSectionIds=()=>preferences.sectionOrder.filter(s=>sections[s].ids.some(id=>!isHidden(id)));
+  function normalizeSections(items){
+    const chosen=Array.isArray(items)?items.filter(s=>defaultSections.includes(s)):[];
+    return [...new Set([...chosen,...defaultSections])];
+  }
+  function sectionShift(sectionId,by){
+    const visible=visibleSectionIds();
+    const from=visible.indexOf(sectionId),target=visible[from+by];
+    if(from<0||!target)return;
+    moveSection(sectionId,target);
+  }
+  function moveSection(source,target){
+    if(source===target||!defaultSections.includes(source)||!defaultSections.includes(target))return;
+    const rest=preferences.sectionOrder.filter(s=>s!==source);
+    const at=rest.indexOf(target);
+    rest.splice(at,0,source);
+    preferences.sectionOrder=normalizeSections(rest);
+    pickedId=null;
+    save();render();
+  }
+  function syncDefaultSectionLabels(){
+    if(preferences.enabled)return;
+    const hasDay=sections.day.ids.some(id=>!isHidden(id));
+    const hasHealth=sections.health.ids.some(id=>!isHidden(id));
+    for(const [id,el] of defaultLabels)el.hidden=(id==='day'&&!hasDay)||(id==='health'&&!hasHealth);
+    // Home widgets live in the same existing grid; headings span both columns.
+    // Move the real widgets, never duplicate them or their listeners.
+    if(hasDay){
+      if(!defaultLabels.get('day').isConnected)widgetHost.prepend(defaultLabels.get('day'));
+      for(const id of sections.day.ids)widgetHost.append(parts[id]);
+    }
+    if(hasHealth){
+      widgetHost.append(defaultLabels.get('health'));
+      for(const id of sections.health.ids)widgetHost.append(parts[id]);
+    }
+    // Removing empty headings keeps the widget grid clean when toggles change.
+    if(!hasDay)defaultLabels.get('day').remove();
+    if(!hasHealth)defaultLabels.get('health').remove();
+  }
 
   const toolbar=document.createElement('section');
   toolbar.className='dm-layout-toolbar';
@@ -66,7 +138,7 @@
   document.body.append(floatDone);
   floatDone.addEventListener('click',()=>done());
 
-  function defaults(){return {enabled:false,order:defaultOrder.slice(),sizes:{},hidden:[]};}
+  function defaults(){return {enabled:false,order:defaultOrder.slice(),sectionOrder:defaultSections.slice(),sizes:{},hidden:[]};}
   function load(){
     let saved;
     try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(_){saved={};}
@@ -75,6 +147,7 @@
     o.sizes=(o.sizes&&typeof o.sizes==='object'&&!Array.isArray(o.sizes))?o.sizes:{};
     o.hidden=Array.isArray(o.hidden)?o.hidden.filter(x=>typeof x==='string'&&!legacyBusiness.has(x)):[];
     o.order=normalize(o.order);
+    o.sectionOrder=normalizeSections(o.sectionOrder);
     return o;
   }
   function normalize(items){
@@ -90,6 +163,7 @@
     // A real card change promotes the preview into a saved custom layout.
     if(editing)madeLayoutChange=true;
     preferences.order=normalize(preferences.order);
+    preferences.sectionOrder=normalizeSections(preferences.sectionOrder);
     try{localStorage.setItem(KEY,JSON.stringify(preferences));}catch(_){}
   }
   function visibleByManagement(id){
@@ -156,16 +230,24 @@
     return detached;
   }
   function restoreOriginal(){
-    widgetHost.replaceChildren(parts.day,parts.steps,parts.breathe,parts.calendar);
-    dashboard.insertBefore(parts.revenue,widgetHost);
+    // Approved original card geometry stays untouched: only DOM placement and
+    // small separate section headings are used to organize the Home.
+    widgetHost.replaceChildren(parts.day,parts.calendar,parts.steps,parts.breathe);
+    dashboard.insertBefore(parts.revenue,board);
     dashboard.insertBefore(originalGrid,board);
     dashboard.insertBefore(parts.shortcuts,board);
+    dashboard.insertBefore(widgetHost,board);
+    for(const [id,element] of defaultLabels){
+      if(id==='business')dashboard.insertBefore(element,parts.revenue);
+      if(id==='departments')dashboard.insertBefore(element,parts.shortcuts);
+    }
     originalGrid.hidden=false;
     // Existing widget module owns its own visibility and data refresh.
     window.dispatchEvent(new Event('dm:cards-changed'));
     board.replaceChildren();
     board.hidden=true;toolbar.hidden=true;floatDone.hidden=true;pickedId=null;
     document.documentElement.classList.remove('dm-custom-home-layout','dm-layout-editing');
+    syncDefaultSectionLabels();
     window.dispatchEvent(new Event('dm:layout-reset'));
   }
   function renderLibrary(){
@@ -190,8 +272,15 @@
     holdCards();
     board.replaceChildren();
     preferences.order=normalize(preferences.order);
-    for(const id of preferences.order){
-      if(!isHidden(id))board.append(makeUnit(id));
+    preferences.sectionOrder=normalizeSections(preferences.sectionOrder);
+    const editorSections=[];
+    for(const sectionId of preferences.sectionOrder){
+      const ids=preferences.order.filter(id=>sectionFor(id)===sectionId&&!isHidden(id));
+      // Empty groups have no heading or wasted vertical space.
+      if(!ids.length)continue;
+      editorSections.push(sectionId);
+      board.append(sectionLabel(sectionId,editing));
+      for(const id of ids)board.append(makeUnit(id));
     }
     board.querySelectorAll('.dm-layout-unit').forEach(tile=>{
       const chosen=tile.dataset.cardId===pickedId;
@@ -208,7 +297,7 @@
     document.documentElement.classList.add('dm-custom-home-layout');
     document.documentElement.classList.toggle('dm-layout-editing',editing);
     document.getElementById('dmLayoutCaption').textContent=editing?
-      'Листайте экран. Нажмите карточку, затем другую — переместим. За ⠿ можно тянуть. ↔ — размер.':'Расположение сохранено';
+      'Разделы: ↑ ↓. Внутри раздела карточки перемещаются нажатием или за ⠿. ↔ — размер.':'Расположение сохранено';
     for(const b of toolbar.querySelectorAll('[data-dm-layout-action]')){
       const action=b.dataset.dmLayoutAction;
       b.hidden=(editing?action==='edit':action!=='edit');
@@ -258,13 +347,15 @@
   }
   function shift(id,by){
     pickedId=null;
-    const list=preferences.order;
-    const i=list.indexOf(id);
-    if(i<0)return;
-    let next=i+by;
-    while(next>=0&&next<list.length&&isHidden(list[next]))next+=by;
-    if(next<0||next>=list.length)return;
-    [list[i],list[next]]=[list[next],list[i]];
+    const sectionId=sectionFor(id);
+    const visible=preferences.order.filter(x=>sectionFor(x)===sectionId&&!isHidden(x));
+    const index=visible.indexOf(id),target=visible[index+by];
+    if(index<0)return;
+    if(!target){sectionShift(sectionId,by);return;}
+    const arr=preferences.order.filter(x=>x!==id);
+    const targetIndex=arr.indexOf(target);
+    arr.splice(by>0?targetIndex+1:targetIndex,0,id);
+    preferences.order=normalize(arr);
     save();render();
   }
   function resize(id){
@@ -287,6 +378,10 @@
   function moveTo(id,target){
     pickedId=null;
     if(!target||target===id)return;
+    if(sectionFor(id)!==sectionFor(target)){
+      moveSection(sectionFor(id),sectionFor(target));
+      return;
+    }
     const arr=preferences.order.filter(x=>x!==id);
     const at=arr.indexOf(target);
     if(at<0)return;
@@ -305,6 +400,11 @@
   });
   board.addEventListener('click',e=>{
     if(!editing)return;
+    const sectionArrow=e.target.closest('[data-dm-section-shift]');
+    if(sectionArrow){
+      sectionShift(sectionArrow.dataset.sectionId,Number(sectionArrow.dataset.dmSectionShift));
+      return;
+    }
     const b=e.target.closest('[data-dm-unit-action]');
     if(b){
       const id=b.closest('[data-card-id]')?.dataset.cardId,act=b.dataset.dmUnitAction;
@@ -319,7 +419,7 @@
   // Tap-to-place is reliable on phones: a tap selects the card, the user
   // scrolls naturally, and a second tap chooses its destination.
   board.addEventListener('click',e=>{
-    if(!editing||e.target.closest('[data-dm-unit-action]'))return;
+    if(!editing||e.target.closest('[data-dm-unit-action],[data-dm-section-shift]'))return;
     e.preventDefault();
     e.stopImmediatePropagation();
     if(Date.now()<skipTileTapUntil)return;
@@ -479,11 +579,15 @@
     event.preventDefault();
     event.stopImmediatePropagation();
   },true);
-  window.addEventListener('dm:cards-changed',()=>{if(preferences.enabled)render();});
+  window.addEventListener('dm:cards-changed',()=>{if(preferences.enabled)render();else syncDefaultSectionLabels();});
   window.addEventListener('storage',e=>{
     if(e.key===KEY){preferences=load();editing=false;render();}
     if(e.key===managementCards&&preferences.enabled)render();
   });
+  // The original default Home is sectioned too; labels are tiny standalone
+  // elements, never wrappers around the protected business/Quick Actions cards.
+  for(const id of defaultSections)defaultLabels.set(id,sectionLabel(id));
+  if(!preferences.enabled)restoreOriginal();
   window.DMHomeLayout={edit,done,reset};
   if(preferences.enabled)render();
 })();
