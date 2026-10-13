@@ -63,11 +63,14 @@
     words.append(title,sub);el.append(words);
     if(inEditor){
       const arrows=document.createElement('span');arrows.className='dm-home-section-arrows';
-      for(const [direction,symbol,label] of [[-1,'↑','Выше'],[1,'↓','Ниже']]){
+      const visible=visibleSectionIds(),index=visible.indexOf(id);
+      for(const [direction,symbol,label] of [[-1,'↑','Поднять'],[1,'↓','Опустить']]){
         const btn=document.createElement('button');btn.type='button';
         btn.dataset.dmSectionShift=String(direction);btn.dataset.sectionId=id;
-        btn.setAttribute('aria-label',label+': раздел «'+sections[id].title+'»');
-        btn.textContent=symbol;arrows.append(btn);
+        btn.setAttribute('aria-label',label+' раздел «'+sections[id].title+'»');
+        btn.title=label+' раздел';btn.textContent=symbol;
+        btn.disabled=direction<0?index<=0:index>=visible.length-1;
+        arrows.append(btn);
       }
       el.append(arrows);
     }
@@ -121,7 +124,7 @@
   toolbar.hidden=true;
   toolbar.setAttribute('aria-label','Конструктор главной');
   toolbar.innerHTML='<div class="dm-layout-heading"><span class="dm-layout-title">✦ Моя главная</span>'+
-    '<span class="dm-layout-caption" id="dmLayoutCaption">Мой порядок карточек</span></div>'+
+    '<span class="dm-layout-caption" id="dmLayoutCaption">За ⠿ — перетащить, либо нажмите две карточки</span></div>'+
     '<div class="dm-layout-actions">'+
     '<button type="button" data-dm-layout-action="edit" id="dmLayoutEdit" aria-label="Изменить расположение карточек">✎ Изменить</button>'+
 
@@ -141,17 +144,6 @@
   directorShelf.className='dm-director-shelf';directorShelf.id='dmDirectorShelf';
   directorShelf.hidden=true;
   dashboard.insertBefore(directorShelf,board);
-  // Finish is always reachable even when the user scrolls to the last card.
-  const floatDone=document.createElement('button');
-  floatDone.type='button';
-  floatDone.id='dmLayoutFloatDone';
-  floatDone.className='dm-layout-float-done';
-  floatDone.textContent='✓ Готово';
-  floatDone.setAttribute('aria-label','Сохранить расположение карточек');
-  floatDone.hidden=true;
-  document.body.append(floatDone);
-  floatDone.addEventListener('click',()=>done());
-
   function defaults(){return {enabled:false,order:defaultOrder.slice(),sectionOrder:defaultSections.slice(),sizes:{},hidden:[]};}
   function load(){
     let saved;
@@ -196,25 +188,24 @@
   }
   function unitControls(id){
     const controls=document.createElement('div');controls.className='dm-unit-controls';
-    const grab=node('drag','<span aria-hidden="true">⠿</span><span class="dm-drag-caption">Переместить</span>');
+    const grab=node('drag','<span aria-hidden="true">⠿</span><span class="dm-drag-caption">Перетащить</span>');
     grab.classList.add('dm-unit-grab');
     grab.setAttribute('aria-label','Переместить '+names[id]+'; можно также использовать Alt и стрелки');
     grab.title='Удерживайте и перетащите карточку';
     controls.append(grab);
-    for(const [kind,html,label] of [['previous','←','Сдвинуть раньше'],['next','→','Сдвинуть позже']]){
-      const b=node(kind,html);b.setAttribute('aria-label',label+': '+names[id]);b.title=label;controls.append(b);
-    }
     if(!fixedWide.has(id)){
-      const b=node('size','↔');
-      b.setAttribute('aria-label','Изменить размер: '+names[id]);
-      b.title='Узкая / широкая';controls.append(b);
+      const b=node('size','↔');b.classList.add('dm-layout-circle');
+      b.setAttribute('aria-label','Изменить ширину: '+names[id]);
+      b.title='Изменить ширину';controls.append(b);
     }
     if(fixedBlocks.has(id)){
       const lock=document.createElement('span');lock.className='dm-fixed-business-label';
-      lock.textContent=id==='business'?'4 карточки · размер закреплён':'Блок · размер закреплён';
+      lock.textContent=id==='business'?'4 карточки · защищены':'Блок защищён';
       controls.append(lock);
     }else{
-      const hide=node('hide','×');hide.setAttribute('aria-label','Убрать карточку '+names[id]);hide.title='Скрыть с главной';controls.append(hide);
+      const hide=node('hide','×');hide.classList.add('dm-layout-circle');
+      hide.setAttribute('aria-label','Скрыть дополнительную карточку «'+names[id]+'»');
+      hide.title='Скрыть карточку';controls.append(hide);
     }
     return controls;
   }
@@ -262,7 +253,7 @@
     // Existing widget module owns its own visibility and data refresh.
     window.dispatchEvent(new Event('dm:cards-changed'));
     board.replaceChildren();
-    board.hidden=true;toolbar.hidden=true;floatDone.hidden=true;pickedId=null;
+    board.hidden=true;toolbar.hidden=true;pickedId=null;
     document.documentElement.classList.remove('dm-custom-home-layout','dm-layout-editing');
     syncDefaultSectionLabels();
     window.dispatchEvent(new Event('dm:layout-reset'));
@@ -313,7 +304,6 @@
       if(editing)tile.setAttribute('aria-label',names[tile.dataset.cardId]+(chosen?' — выбрана для перемещения':' — нажмите для перемещения'));
     });
     board.hidden=false;
-    floatDone.hidden=!editing;
     // Original metric-grid is now inside its unified movable wrapper.
     widgetHost.hidden=true;
     // The editor toolbar is only shown while customizing. After "Done", the
@@ -322,7 +312,7 @@
     document.documentElement.classList.add('dm-custom-home-layout');
     document.documentElement.classList.toggle('dm-layout-editing',editing);
     document.getElementById('dmLayoutCaption').textContent=editing?
-      'Разделы: ↑ ↓. Внутри раздела карточки перемещаются нажатием или за ⠿. ↔ — размер.':'Расположение сохранено';
+      'За ⠿ — перетащить. Две карточки — поменять порядок. ↑↓ — разделы.':'Расположение сохранено';
     for(const b of toolbar.querySelectorAll('[data-dm-layout-action]')){
       const action=b.dataset.dmLayoutAction;
       b.hidden=(editing?action==='edit':action!=='edit');
@@ -435,8 +425,6 @@
     if(b){
       const id=b.closest('[data-card-id]')?.dataset.cardId,act=b.dataset.dmUnitAction;
       if(!id)return;
-      if(act==='previous')shift(id,-1);
-      if(act==='next')shift(id,1);
       if(act==='size')resize(id);
       if(act==='hide')hide(id);
       return;
