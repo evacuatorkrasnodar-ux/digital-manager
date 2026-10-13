@@ -1517,6 +1517,7 @@
     const occluded=viewport?Math.max(0,window.innerHeight-viewport.height-viewport.offsetTop):0;
     const keyboardOpen=!plasmaPanel.hidden&&document.activeElement===plasmaInput&&occluded>120;
     plasmaPanel.classList.toggle('dm-chat-keyboard-open',keyboardOpen);
+    document.documentElement.classList.toggle('dm-compose-keyboard-open',keyboardOpen);
     const value=keyboardOpen?Math.round(occluded)+'px':'0px';
     plasmaPanel.style.setProperty('--dm-chat-kb',value);
     document.documentElement.style.setProperty('--dm-chat-kb',value);
@@ -1528,6 +1529,7 @@
   plasmaInput.addEventListener('focus',positionPlasmaPanelForKeyboard);
   plasmaInput.addEventListener('blur',()=>{
     plasmaPanel.classList.remove('dm-chat-keyboard-open');
+    document.documentElement.classList.remove('dm-compose-keyboard-open');
     plasmaPanel.style.setProperty('--dm-chat-kb','0px');
     document.documentElement.style.setProperty('--dm-chat-kb','0px');
   });
@@ -1558,6 +1560,7 @@
     plasmaHint.hidden=true;
     document.documentElement.classList.remove('dm-plasma-panel-open','dm-compose-editor');
     plasmaPanel.classList.remove('dm-chat-keyboard-open');
+    document.documentElement.classList.remove('dm-compose-keyboard-open');
     plasmaPanel.style.setProperty('--dm-chat-kb','0px');
     document.documentElement.style.setProperty('--dm-chat-kb','0px');
     clearTimeout(dmAckTimer);dmAckTimer=null;dmActionGlyphKind='';
