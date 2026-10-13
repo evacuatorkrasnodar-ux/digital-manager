@@ -19,12 +19,7 @@
 }
 #dmDirectorOffice .dm-director-head small{font-size:9px;letter-spacing:.12em;color:#bc9b72}
 #dmDirectorOffice .dm-director-head h2{font-size:19px;font-weight:500;line-height:1.25;margin:5px 0 0;color:#f1f6fd}
-#dmDirectorOffice .dm-director-head button{
- width:35px;height:35px;flex:none;display:grid;place-items:center;
- border:1px solid rgba(173,198,224,.34);border-radius:13px;
- background:linear-gradient(145deg,#1a2c40,#08121f);color:#eaf4ff;
- font-size:24px;line-height:1;cursor:pointer;
-}
+
 #dmDirectorOffice .dm-director-body{
  flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;
  -webkit-overflow-scrolling:touch;padding:17px 15px 30px;
