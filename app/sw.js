@@ -1,5 +1,5 @@
 /* App-only service worker: fresh documents, styles and scripts; cached offline assets. */
-const CACHE = 'digital-manager-black-velvet-v752-20261013';
+const CACHE = 'digital-manager-black-velvet-v753-20261013';
 const CACHE_PREFIX = 'digital-manager-black-velvet-';
 const OFFLINE_FILES = [
   './index.html',
@@ -9,18 +9,19 @@ const OFFLINE_FILES = [
   './card-catalog.css?v=2',
   './manager-tools.js?v=2',
   './manager-tools.css?v=1',
-  './recommendation-premium.css?v=1',
+  
   './brand-navigation.css?v=3',
   './app.js?v=662',
   './home-widgets.js?v=1',
   './director-workspace.js?v=8',
   './director-workspace.css?v=1',
-  './tax-control.js?v=7',
+  './tax-control.js?v=8',
   './tax-control.css?v=2',
   './home-layout.js?v=19',
   './home-layout.css?v=9',
   './director-office.js?v=11',
   './director-office.css?v=2',
+  './recommendation-premium.css?v=2',
   './business-pulse.js?v=4',
   './business-pulse.css?v=1',
   './home-widgets.css?v=4',
@@ -102,7 +103,7 @@ const OFFLINE_FILES = [
   './unified-quiet-glass.css?v=293',
   './card-outline-theme.css?v=336',
   './home-width.css?v=297',
-  './dashboard-reference.css?v=362',
+  './dashboard-reference.css?v=363',
   './voice-hints.js?v=290',
   './system-ui.css?v=283',
   './system-ui.js?v=283',
@@ -130,7 +131,8 @@ const OFFLINE_FILES = [
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE)
-      .then(cache => cache.addAll(OFFLINE_FILES))
+      // Install the new worker promptly; individual resources cache on first use.
+      .then(cache => cache.addAll(['./index.html']))
       .then(() => self.skipWaiting())
   );
 });
