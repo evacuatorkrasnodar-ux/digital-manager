@@ -84,8 +84,8 @@ html.dm-layout-editing #homeScreen .dm-layout-board{row-gap:13px}
 html.dm-layout-editing #homeScreen .dm-layout-board .dm-layout-content{pointer-events:none}
 html.dm-layout-editing #homeScreen .dm-layout-board .dm-layout-unit .dm-unit-controls{pointer-events:auto}
 @media(max-width:360px){
-  #homeScreen .dm-layout-board{gap:6px}
-  #homeScreen .dm-unit-controls{flex-wrap:wrap}
+  #homeScreen .dm-layout-board{gap:7px}
+  #homeScreen .dm-unit-controls{flex-wrap:nowrap;gap:4px}
   #homeScreen .dm-layout-heading{flex-basis:100%}
 }
 @media(prefers-reduced-motion:reduce){
