@@ -53,7 +53,8 @@
   <link rel="stylesheet" href="./sales.css?v=4">
   <link rel="stylesheet" href="./initiative.css?v=2">
   <link rel="stylesheet" href="./business-journey.css?v=8">
-  <link rel="stylesheet" href="./home-widgets.css?v=3">
+  <link rel="stylesheet" href="./home-widgets.css?v=4">
+  <link rel="stylesheet" href="./home-layout.css?v=4">
 </head>
 <body>
 <!-- All pictograms are real independent SVG elements, not fragments of the reference picture. -->
@@ -254,7 +255,8 @@
 <label class="mg-tile mg-tile-blue"><span class="mg-tile-art"><svg class="ico" aria-hidden="true"><use href="#ic-calendar"/></svg></span><span class="mg-tile-caption">Календарь</span><input type="checkbox" data-mg-card="calendarWidget"><i aria-hidden="true"></i></label>
 <label class="mg-tile mg-tile-cyan"><span class="mg-tile-art"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 6c-4-1-8 1-11 5-2 3-3 6-3 9 6-1 10-3 12-7 1-2 2-5 2-7Z"/><path d="M5 20c3-5 7-7 11-11"/></svg></span><span class="mg-tile-caption">Шаги</span><input type="checkbox" data-mg-card="healthSteps"><i aria-hidden="true"></i></label>
 <label class="mg-tile mg-tile-silver"><span class="mg-tile-art"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v10M7 12h10"/></svg></span><span class="mg-tile-caption">Дыхание</span><input type="checkbox" data-mg-card="breathing"><i aria-hidden="true"></i></label></div>
-        <p class="mg-card-note">Включите нужные виджеты — они появятся на Главной над основными карточками. Шаги показываются только из вашего личного журнала. Остальные будущие разделы пока сохраняют выбор.</p>
+        <p class="mg-card-note">Включайте нужные карточки и выбирайте, что видеть на Главной. Их можно переставлять и менять размер в конструкторе. Шаги берутся только из вашего журнала здоровья.</p>
+        <button id="mgEditHomeLayout" class="mg-layout-edit-action" type="button"><span class="mg-layout-edit-icon" aria-hidden="true">✥</span><span><strong>Настроить расположение</strong><small>Двигать карточки, менять размеры, сохранять свой экран</small></span><svg class="ico" aria-hidden="true"><use href="#ic-chevron"/></svg></button>
       </section>
       <button type="button" class="mg-row mg-workshop-row" data-mg-open="workshop">
         <span class="mg-icon mg-blue"><svg class="ico" aria-hidden="true"><use href="#ic-grid"/></svg></span>
@@ -423,7 +425,7 @@
   </nav>
 <dialog id="modal" aria-labelledby="dialogTitle"><div class="dialog-inner"><div class="dialog-head"><div><span class="dialog-eyebrow">ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h2 id="dialogTitle">Информация</h2></div><button class="dialog-close" id="closeDialog" type="button" aria-label="Закрыть"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button></div><div id="dialogContent"></div></div></dialog>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-<script src="./app.js?v=653" defer></script>
+<script src="./app.js?v=654" defer></script>
   <script src="./voice-hints.js?v=290" defer></script>
 <script src="./system-ui.js?v=283" defer></script>
   <script src="./task-journal.js?v=10" defer></script>
@@ -440,5 +442,6 @@
   <script src="./market-opportunities.js?v=1" defer></script>
   <script src="./business-journey.js?v=9" defer></script>
   <script src="./home-widgets.js?v=1" defer></script>
+  <script src="./home-layout.js?v=4" defer></script>
 </body>
 </html>
