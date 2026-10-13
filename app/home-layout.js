@@ -133,7 +133,7 @@
     if(!saved||typeof saved!=='object')saved={};
     const o={...defaults(),...saved};
     o.sizes=(o.sizes&&typeof o.sizes==='object'&&!Array.isArray(o.sizes))?o.sizes:{};
-    o.hidden=Array.isArray(o.hidden)?o.hidden.filter(x=>typeof x==='string'&&!legacyBusiness.has(x)):[];
+    o.hidden=Array.isArray(o.hidden)?o.hidden.filter(x=>typeof x==='string'&&x!=='revenue'&&!legacyBusiness.has(x)):[];
     o.order=normalize(o.order);
     o.sectionOrder=normalizeSections(o.sectionOrder);
     return o;
@@ -162,7 +162,7 @@
     return ['day','steps','breathe','calendar','inbox','briefing','tax'].includes(id)?cards[flag]===true:cards[flag]!==false;
   }
   function isHidden(id){
-    if(fixedBlocks.has(id))return false;
+    if(fixedBlocks.has(id)||id==='revenue')return false;
     return preferences.hidden.includes(id)||!visibleByManagement(id);
   }
   function node(name,html){
@@ -341,7 +341,7 @@
     save();render();
   }
   function hide(id){
-    if(fixedBlocks.has(id))return;
+    if(fixedBlocks.has(id)||id==='revenue')return;
     if(!preferences.hidden.includes(id))preferences.hidden.push(id);
     save();render();
   }
