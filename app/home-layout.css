@@ -229,3 +229,14 @@ html.dm-layout-editing #homeScreen #dmLayoutBoard>.dm-home-section-title.dm-sect
 }
 #homeScreen #dmLayoutBoard>.dm-layout-unit[data-card-id="quick"]{margin-top:-8px;}
 #homeScreen .shortcuts>.shortcut-grid{margin-top:0}
+
+/* Default Home uses direct dashboard children, not dmLayoutBoard. */
+@media(max-width:700px){
+  html:not(.dm-custom-home-layout) #homeScreen .dashboard>.dm-home-section-title[data-home-section="departments"]{
+    margin-top:-18px;
+    margin-bottom:0;
+  }
+  html:not(.dm-custom-home-layout) #homeScreen .dashboard>.shortcuts{
+    margin-top:-6px!important;
+  }
+}
