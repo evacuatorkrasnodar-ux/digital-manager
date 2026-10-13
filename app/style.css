@@ -961,68 +961,6 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
 }
 
 
-/* Black-matter core: quiet depth inside the EXISTING ring.
-   No second orb, no asset, and no fake event. Symbols always win. */
-.dm-voice-orb-electric .dm-orb-edge::before,
-.dm-voice-orb-electric .dm-orb-edge::after{
-  content:"";
-  position:absolute;
-  inset:18%;
-  border-radius:50%;
-  pointer-events:none;
-  opacity:.48;
-  transition:opacity .48s ease;
-}
-.dm-voice-orb-electric .dm-orb-edge::before{
-  inset:8%;
-  background:
-    radial-gradient(circle at 24% 31%,rgba(242,249,255,.65) 0 .8px,transparent 1.55px),
-    radial-gradient(circle at 76% 58%,rgba(205,231,255,.58) 0 .7px,transparent 1.5px),
-    radial-gradient(circle at 51% 78%,rgba(213,221,251,.36) 0 .65px,transparent 1.35px),
-    radial-gradient(circle at 64% 20%,rgba(238,245,255,.47) 0 .65px,transparent 1.4px);
-  animation:dm-core-drift 11s linear infinite;
-}
-.dm-voice-orb-electric .dm-orb-edge::after{
-  inset:24%;
-  background:radial-gradient(ellipse at 52% 47%,rgba(148,181,231,.075),rgba(115,130,175,.025) 43%,transparent 76%);
-  box-shadow:inset 0 0 6px rgba(160,190,237,.035);
-  animation:dm-core-breath 7.8s ease-in-out infinite;
-}
-/* All glyph kinds, including the quiet ambient sign and the composer mic,
-   take complete priority. No particles or breathing under visible symbols. */
-.dm-voice-orb-electric:has(.dm-core-glyph.is-visible) .dm-orb-edge::before,
-.dm-voice-orb-electric:has(.dm-core-glyph.is-visible) .dm-orb-edge::after{
-  opacity:0;
-  animation-play-state:paused;
-}
-/* A processing/voice state is conveyed primarily by the approved outer rim.
-   Keep the inner depth dark and understated. */
-.bottom-nav[data-mode="thinking"] .dm-orb-edge::after,
-#dockLauncher[data-mode="thinking"] .dm-orb-edge::after,
-#assistantLive[data-mode="thinking"] .dm-orb-edge::after{
-  background:radial-gradient(circle,rgba(73,147,255,.13),rgba(40,89,190,.04) 44%,transparent 76%);
-}
-.bottom-nav[data-mode="speaking"] .dm-orb-edge::after,
-#dockLauncher[data-mode="speaking"] .dm-orb-edge::after,
-#assistantLive[data-mode="speaking"] .dm-orb-edge::after{
-  background:radial-gradient(ellipse at center,rgba(145,101,243,.105),rgba(106,75,183,.03) 45%,transparent 75%);
-}
-@keyframes dm-core-drift{
-  from{transform:rotate(0deg)}
-  to{transform:rotate(360deg)}
-}
-@keyframes dm-core-breath{
-  0%,100%{transform:scale(.83);opacity:.17}
-  50%{transform:scale(1.02);opacity:.47}
-}
-@media(prefers-reduced-motion:reduce){
-  .dm-voice-orb-electric .dm-orb-edge::before,
-  .dm-voice-orb-electric .dm-orb-edge::after{
-    animation:none!important;
-  }
-}
-
-
 /* Existing real brand mark in the black matter: barely visible at rest.
    It is NOT another ring; all event/composer glyphs cover it cleanly. */
 .dm-voice-orb-electric .dm-core-brand{
@@ -1047,11 +985,6 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
    whenever any important sign or compose action is visible. */
 .dm-voice-orb-electric:has(.dm-core-glyph.is-visible) .dm-core-brand{
   opacity:0!important;
-}
-/* When the logo is present, stop drifting particles beneath it. */
-.dm-voice-orb-electric:has(.dm-core-brand) .dm-orb-edge::before{
-  opacity:0;
-  animation-play-state:paused;
 }
 @media(prefers-reduced-motion:reduce){
   .dm-voice-orb-electric .dm-core-brand{transition:none!important}
