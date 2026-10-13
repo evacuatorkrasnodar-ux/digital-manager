@@ -13,7 +13,6 @@ const read=(key,cap=450)=>{
  try{const data=JSON.parse(localStorage.getItem(key)||'null');return Array.isArray(data)?data.slice(0,cap):[];}
  catch(_){return []}
 };
-const dateKey=t=>{const d=new Date(t);return Number.isFinite(d.getTime())?new Date(d.getFullYear(),d.getMonth(),d.getDate()).getTime():null};
 const today=()=>new Date();
 function interval(period,relative=0){
  const now=today(),y=now.getFullYear(),m=now.getMonth(),d=now.getDate(),weekday=(now.getDay()+6)%7;
@@ -38,7 +37,7 @@ const rangeString=span=>{
 function collect(period){
  const current=interval(period),past=interval(period,-1);
  const sales=read('dm-sales-records-v1').filter(x=>x&&typeof x.id==='string'&&typeof x.stage==='string');
- const spends=read('dm-promotion-expenses-v1',230).filter(x=>x&&Number(x.amount)>0);
+ const spends=read('dm-promotion-expenses-v1',230).filter(x=>x&&Number.isFinite(Number(x.amount))&&Number(x.amount)>0);
  const created=sales.filter(x=>inSpan(x.createdAt,current));
  const won=sales.filter(x=>x.stage==='won'&&inSpan(x.wonAt,current));
  const lost=sales.filter(x=>x.stage==='lost'&&inSpan(x.lostAt,current));
@@ -99,8 +98,8 @@ function refresh(){
  const d=collect(currentPeriod);
  $('dmPulseHeading').textContent='Пульс бизнеса · '+label[currentPeriod];
  const extra=d.warnings.length?' · '+d.warnings.length+' требуют внимания':'';
- const text=d.recorded?'Новых обращений: '+d.created+' · покупок отмечено: '+d.won+extra:
-  'Записи о продажах пока не внесены'+(d.warnings.length?extra:'');
+ const text=d.recorded?'Финансы на карточках — демо · обращений: '+d.created+' · покупок: '+d.won+extra:
+  'Финансы на карточках — демо · записи пока не внесены'+(d.warnings.length?extra:'');
  $('dmPulseSummary').textContent=text;
  bar.dataset.attention=d.warnings.length?'yes':'no';
  bar.setAttribute('aria-label','Пульс бизнеса за '+label[currentPeriod].toLowerCase()+'. '+text+'. Открыть подробности.');
@@ -176,6 +175,20 @@ window.addEventListener('storage',e=>{
  if(['dm-sales-records-v1','dm-promotion-expenses-v1','dm-director-workspace-v1','dm-personal-tasks-v1'].includes(e.key))refresh();
 });
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh();});
-window.DMBusinessPulse=Object.freeze({open,refresh,snapshot:()=>collect(currentPeriod)});
+function routeQuestion(query){
+ const q=String(query??'').toLowerCase().trim();
+ if(!/пульс бизнеса|(?:покажи|открой|проверь|сравни|итоги|отч[её]т).{0,42}(?:за сегодня|за день|за неделю|за месяц|за год|бизнес)|(?:как дела|как идут дела).{0,20}(?:недел|месяц|год)/.test(q))return false;
+ let target=null;
+ if(/сегодня|за день/.test(q))target='day';
+ else if(/недел/.test(q))target='week';
+ else if(/месяц/.test(q))target='month';
+ else if(/за год|годов|год/.test(q))target='year';
+ if(target){
+  const b=periodButtons.find(el=>el.dataset.period===target);
+  b?.click();
+ }
+ open();return true;
+}
+window.DMBusinessPulse=Object.freeze({open,refresh,routeQuestion,snapshot:()=>collect(currentPeriod)});
 refresh();
 })();
