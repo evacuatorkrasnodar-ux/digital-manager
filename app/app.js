@@ -88,7 +88,57 @@
     byId('revDot').setAttribute('cx',fp[0]);byId('revDot').setAttribute('cy',fp[1]);
     byId('revDotGlow').setAttribute('cx',fp[0]);byId('revDotGlow').setAttribute('cy',fp[1]);
   }
-  function updatePeriod(next){period=next;chosenDate='';document.querySelectorAll('.period').forEach(b=>{const is=b.dataset.period===next;b.classList.toggle('selected',is);b.setAttribute('aria-pressed',String(is));});const d=demo[next];byId('revenueLabel').textContent=d.label;byId('revenueValue').textContent=money(d.revenue);byId('profitValue').textContent=money(d.profit);byId('ordersValue').textContent=new Intl.NumberFormat('ru-RU').format(d.orders);document.querySelector('.revenue-card .delta span').textContent='▲ '+d.revChange;byId('revenueCompare').textContent=d.compare;document.querySelector('.profit-card .delta').innerHTML=`▲ ${d.profitChange} <small>${safe(d.compare)}</small>`;byId('chartTooltip').textContent=new Intl.NumberFormat('ru-RU',{maximumFractionDigits:1}).format(d.revenue/1000000)+' млн ₽';byId('chartAxis').replaceChildren(...d.axis.map(s=>{const el=document.createElement('span');el.textContent=s;return el;}));renderChart();window.dispatchEvent(new CustomEvent('dm:period-changed',{detail:{period:next}}));}
+  // Home metrics share the same locally recorded sources and reporting periods as Business Pulse.
+  function refreshHomeMetrics(){
+    const d=window.DMBusinessPulse?.snapshot?.(period);
+    if(!d)return;
+    const names={day:'сегодня',week:'за неделю',month:'за месяц',year:'за год'};
+    const title=names[period]||names.day;
+    byId('revenueLabel').textContent='Отмеченные продажи · '+title;
+    byId('revenueValue').textContent=d.amountCount?money(d.amount):'Нет данных';
+    byId('ordersValue').textContent=new Intl.NumberFormat('ru-RU').format(d.won);
+    byId('profitValue').textContent='Нет данных';
+    const revenueDelta=document.querySelector('.revenue-card .delta span');
+    if(revenueDelta)revenueDelta.textContent='По вашим записям';
+    byId('revenueCompare').textContent=d.missingAmounts?'· не все суммы указаны':'· не банковские поступления';
+    const profitDelta=document.querySelector('.profit-card .delta');
+    if(profitDelta)profitDelta.textContent='Требуется полный учёт расходов';
+    const ordersDelta=document.querySelector('.orders-card .delta');
+    if(ordersDelta)ordersDelta.textContent='Отмечено покупок';
+    const clientsCount=byId('clientTotal');
+    if(clientsCount)clientsCount.textContent=new Intl.NumberFormat('ru-RU').format(d.created);
+    const clientLabels=document.querySelectorAll('.clients-card .donut-legend b');
+    const clientsNote=document.querySelector('.clients-card .donut-core small');
+    if(clientsNote)clientsNote.textContent='за период';
+    if(clientLabels.length===3){
+      // Stage-level client categories are not recorded as new/active/repeat.
+      clientLabels[0].textContent=d.created;
+      clientLabels[1].textContent='—';
+      clientLabels[2].textContent='—';
+    }
+    const donutLabels=document.querySelectorAll('.clients-card .donut-legend span');
+    if(donutLabels.length===3){donutLabels[0].textContent='Обращения';donutLabels[1].textContent='Активные*';donutLabels[2].textContent='Повторные*';}
+    byId('chartTooltip').textContent=d.amountCount?money(d.amount):'Нет записанных сумм';
+    // No fictional time-series points: use a flat, neutral chart until dated
+    // source-level transactions permit a meaningful trend.
+    byId('revLine').setAttribute('d','M0 88 L650 88');
+    byId('revArea').setAttribute('d','');
+    byId('revFocus').setAttribute('d','');
+    byId('revDot').setAttribute('cx','650');
+    byId('revDot').setAttribute('cy','88');
+    byId('revDotGlow').setAttribute('cx','650');
+    byId('revDotGlow').setAttribute('cy','88');
+    const axis={day:['00:00','04:00','08:00','12:00','16:00','20:00'],week:['Пн','Вт','Ср','Чт','Пт','Сб'],month:['1','6','12','18','24','30'],year:['Янв','Мар','Май','Июл','Сен','Ноя']};
+    byId('chartAxis').replaceChildren(...axis[period].map(label=>{const node=document.createElement('span');node.textContent=label;return node;}));
+  }
+  window.DMHomeMetricsRefresh=refreshHomeMetrics;
+  function updatePeriod(next){
+    if(!['day','week','month','year'].includes(next))return;
+    period=next;chosenDate='';
+    document.querySelectorAll('.period').forEach(b=>{const active=b.dataset.period===next;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));});
+    refreshHomeMetrics();
+    window.dispatchEvent(new CustomEvent('dm:period-changed',{detail:{period:next}}));
+  }
   function hideBrandCard(){byId('openBrandCard').hidden=true;byId('openBrand').setAttribute('aria-expanded','false');}
   function toggleBrandCard(){const card=byId('openBrandCard');const isOpening=card.hidden;if(isOpening)hideProfileCard();card.hidden=!isOpening;byId('openBrand').setAttribute('aria-expanded',String(isOpening));}
   function hideProfileCard(){byId('openProfileCard').hidden=true;byId('openProfile').setAttribute('aria-expanded','false');}
@@ -177,7 +227,17 @@
   function companyModal(){modal('Паспорт компании',`<p class="dm-passport-lead">Демонстрационная карточка компании · сведения из профиля на этом устройстве</p>${passportRows()}${passportButtons('company')}<form id="companyForm" class="form-fields"><label>Название компании<input name="company" maxlength="70" required value="${safe(state.company)}"></label><label>Направление деятельности<input name="industry" maxlength="65" value="${safe(state.industry)}"></label><label>Город<input name="city" maxlength="45" value="${safe(state.city)}"></label><button class="primary-button" type="submit">Сохранить компанию</button></form><p class="modal-note">Данные карточки сохраняются только в браузере. В будущем они будут синхронизироваться с аккаунтом.</p>`,()=>byId('companyForm').addEventListener('submit',e=>{e.preventDefault();const data=new FormData(e.currentTarget);state.company=String(data.get('company')||'').trim()||'Моя компания';state.industry=String(data.get('industry')||'').trim();state.city=String(data.get('city')||'').trim();save();applyUser();announceProfile();closeModal();notify('Карточка бизнеса сохранена');}));}
   function clientsModal(){const list=state.clients.length?`<ul class="modal-list">${state.clients.map(x=>`<li><span>${safe(x.name)}</span><small>${safe(x.phone||'Без телефона')}</small></li>`).join('')}</ul>`:'<p class="empty-hint">Вы пока не добавили тестовых клиентов.</p>';modal('Работа с клиентами',`<p class="modal-note">На главной показаны примерные 248 клиентов. Ниже — ваши собственные записи, сохранённые на этом устройстве.</p>${list}<form id="clientForm" class="form-fields"><label>Имя клиента<input name="name" required maxlength="80" placeholder="Например, Мария"></label><label>Контакт<input name="phone" maxlength="70" placeholder="Телефон или e-mail"></label><button class="primary-button" type="submit">Добавить клиента</button></form>`,()=>byId('clientForm').addEventListener('submit',e=>{e.preventDefault();const d=new FormData(e.currentTarget);const name=String(d.get('name')||'').trim();if(!name)return;state.clients.unshift({name,phone:String(d.get('phone')||'').trim()});save();clientsModal();notify('Клиент добавлен');}));}
   function ordersModal(){const list=state.orders.length?`<ul class="modal-list">${state.orders.map(x=>`<li><span>${safe(x.title)}</span><small>${money(x.amount)}</small></li>`).join('')}</ul>`:'<p class="empty-hint">Вы пока не добавили тестовых заказов.</p>';modal('Заказы',`<p class="modal-note">На главной — демонстрационная аналитика. Ваши записи заказов хранятся локально и не влияют на образцовые графики.</p>${list}<form id="orderForm" class="form-fields"><label>Название заказа<input name="title" maxlength="80" required placeholder="Например, Консультация"></label><label>Сумма в рублях<input name="amount" type="number" min="0" max="999999999" required placeholder="5000"></label><button class="primary-button" type="submit">Добавить заказ</button></form>`,()=>byId('orderForm').addEventListener('submit',e=>{e.preventDefault();const d=new FormData(e.currentTarget);const title=String(d.get('title')||'').trim(),amount=Number(d.get('amount'));if(!title||!Number.isFinite(amount)||amount<0)return;state.orders.unshift({title,amount});save();ordersModal();notify('Заказ добавлен');}));}
-  function detailModal(which){const d=demo[period];const entries={revenue:{title:'Аналитика выручки',figure:money(d.revenue),note:`Показатели за выбранный период — демонстрационные. Рост ${d.revChange} ${d.compare}.`},profit:{title:'Аналитика прибыли',figure:money(d.profit),note:`Прибыль в примере за выбранный период. Рост ${d.profitChange} ${d.compare}.`},finance:{title:'Финансовый анализ',figure:money(d.profit),note:'В рабочей версии эта страница будет собирать расходы, доходы и рентабельность из подключённых источников.'}};const item=entries[which];if(!item)return;modal(item.title,`<div class="modal-brand"><svg class="ico" style="width:38px;height:38px;color:#86caff"><use href="#ic-bars"/></svg><div><strong>${item.figure}</strong><small>Демонстрационные данные</small></div></div><p class="modal-note">${item.note}</p><div class="modal-actions"><button class="secondary-button" id="closeMetric" type="button">Вернуться на главную</button></div>`,()=>byId('closeMetric').addEventListener('click',closeModal));}
+  function detailModal(which){
+    const d=window.DMBusinessPulse?.snapshot?.(period);
+    const valid=['revenue','profit','finance'].includes(which);
+    if(!valid)return;
+    const title=which==='revenue'?'Отмеченные продажи':which==='profit'?'Прибыль':'Финансовый анализ';
+    const figure=which==='revenue'&&d?.amountCount?money(d.amount):'Нет данных';
+    const description=which==='revenue'
+      ?'Это сумма покупок, вручную отмеченных в продажах, а не подтверждённая банком выручка. Сделки без суммы не учитываются.'
+      :'Реальная прибыль пока неизвестна: не подключён полный учёт расходов, поступлений и налогов. Не подменяем её демонстрационными миллионами.';
+    modal(title,'<div class="modal-brand"><svg class="ico" style="width:38px;height:38px;color:#86caff"><use href="#ic-bars"/></svg><div><strong>'+safe(figure)+'</strong><small>По вашим записям · '+safe(period)+'</small></div></div><p class="modal-note">'+description+'</p><div class="modal-actions"><button class="secondary-button" id="closeMetric" type="button">Вернуться на главную</button></div>',()=>byId('closeMetric').addEventListener('click',closeModal));
+  }
   function adviceModal(){modal('План роста',`<p class="modal-note">Пример рекомендации. Прогноз +35% не рассчитан по вашим данным и не является гарантией результата.</p><div class="plan-step"><b>01</b> · Проверьте окупаемость текущих рекламных каналов.</div><div class="plan-step"><b>02</b> · Отберите кампании с положительной маржинальностью.</div><div class="plan-step"><b>03</b> · Тестируйте увеличение бюджета на 10–20%, контролируя стоимость лида.</div><div class="plan-step"><b>04</b> · Через 7 дней сравните конверсии и реальные продажи.</div><div class="dialog-actions"><button class="primary-button" type="button" id="savePlan">${state.savedPlan?'План сохранён':'Сохранить план'}</button></div>`,()=>byId('savePlan').addEventListener('click',()=>{state.savedPlan=true;save();closeModal();notify('План сохранён на этом устройстве');}));}
   /* Each Home business shortcut opens an existing working tool, never a descriptive department popup. */
   function openBusinessArea(type){
