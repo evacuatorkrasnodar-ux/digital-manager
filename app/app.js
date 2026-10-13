@@ -183,7 +183,7 @@
   function openBusinessArea(type){
     const routes={
       strategy:()=>window.DMBusinessJourney?.open?.(),
-      clients:()=>window.DMSalesScreen?.open?.(),
+      clients:()=>window.DMSalesScreen?.open?.('clients'),
       finance:()=>window.DMSalesScreen?.openPicture?.('finance'),
       automation:()=>window.DMInitiative?.open?.()
     };
