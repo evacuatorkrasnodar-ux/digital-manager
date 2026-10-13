@@ -300,7 +300,12 @@
       if(!ids.length)continue;
       editorSections.push(sectionId);
       board.append(sectionLabel(sectionId,editing));
-      for(const id of ids)board.append(makeUnit(id));
+      for(const id of ids){
+        // A card may have been hidden on the default Home before switching
+        // into the editor; clear native hidden when it is enabled here.
+        if(['inbox','briefing','tax'].includes(id))parts[id].hidden=false;
+        board.append(makeUnit(id));
+      }
     }
     board.querySelectorAll('.dm-layout-unit').forEach(tile=>{
       const chosen=tile.dataset.cardId===pickedId;
