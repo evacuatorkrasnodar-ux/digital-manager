@@ -110,18 +110,8 @@ html.dm-layout-editing #homeScreen .dm-layout-board .dm-layout-unit{scroll-margi
 }
 
 /* Management entry — quiet premium glass, consistent with the settings screen. */
-#managementScreen .mg-layout-edit-action{
-  display:flex;align-items:center;gap:10px;width:100%;min-height:60px;
-  margin:9px 0 1px;padding:9px 11px;text-align:left;cursor:pointer;
-  border:1px solid rgba(157,190,218,.44);border-radius:16px;
-  color:#f3f8ff;background:radial-gradient(ellipse at 0 0,rgba(67,115,174,.18),transparent 64%),linear-gradient(150deg,#152538,#060c13);
-  box-shadow:inset 0 1px rgba(246,252,255,.10),0 4px 11px rgba(0,0,0,.20);
-}
-#managementScreen .mg-layout-edit-action .mg-layout-edit-icon{
-  display:grid;place-items:center;flex:none;width:38px;height:38px;
-  border:1px solid rgba(153,191,222,.5);border-radius:13px;
-  background:linear-gradient(140deg,#264669,#0a1726);font-size:24px;color:#c3e0ff;
-}
+#managementScreen .mg-layout-edit-action{display:flex;align-items:center;gap:10px;width:100%;min-height:60px;margin:9px 0 1px;padding:9px 11px;text-align:left;cursor:pointer;border:1px solid var(--dm-ui-edge);border-radius:19px;color:#f3f8ff;background:var(--dm-ui-surface);box-shadow:var(--dm-ui-shadow);}
+#managementScreen .mg-layout-edit-action .mg-layout-edit-icon{display:grid;place-items:center;flex:none;width:38px;height:38px;border:1px solid rgba(153,191,222,.45);border-radius:13px;background:var(--dm-ui-inset);font-size:24px;color:#c3e0ff;}
 #managementScreen .mg-layout-edit-action>span:nth-child(2){display:grid;gap:4px;flex:1;min-width:0}
 #managementScreen .mg-layout-edit-action strong{font-size:13px;font-weight:540}
 #managementScreen .mg-layout-edit-action small{font-size:10.4px;line-height:1.35;color:#a9c5db}
