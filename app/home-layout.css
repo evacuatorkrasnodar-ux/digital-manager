@@ -212,11 +212,9 @@ html.dm-layout-editing #homeScreen .dm-layout-unit.dm-unit-picked::before{
   overflow:visible;
 }
 #homeScreen .dm-layout-board>.dm-layout-unit[data-card-id=business] .metric-grid{
+  /* Do not override the existing responsive width, margin, row heights,
+     column ratios or Gold-to-Sales vertical alignment. */
   display:grid;
-  position:relative;
-  width:100%;
-  max-width:100%;
-  box-sizing:border-box;
   overflow:visible;
 }
 /* Quick Actions is a single draggable strip, preserving all four buttons'
@@ -227,9 +225,6 @@ html.dm-layout-editing #homeScreen .dm-layout-unit.dm-unit-picked::before{
   margin:0!important;
   padding:0;
   overflow:visible;
-}
-#homeScreen .dm-layout-board>.dm-layout-unit[data-card-id=quick] .shortcut-grid{
-  grid-template-columns:repeat(4,minmax(0,1fr));
 }
 #homeScreen .dm-layout-board .dm-fixed-business-label{
   display:flex;
