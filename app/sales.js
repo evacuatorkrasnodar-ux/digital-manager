@@ -132,7 +132,7 @@ function create(){
  if(screen)return;
  screen=document.createElement('section');screen.id='salesScreen';screen.className='screen dm-sales-screen';screen.hidden=true;
  screen.setAttribute('aria-label','Продажи');
- screen.innerHTML='<header class="dm-sales-head"><span>ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><button type="button" id="dmSalesBack" aria-label="Вернуться на главную">←</button><h1>Продажи</h1><p>Кто написал, кому ответить и сколько заработали.</p></header><div id="dmSalesBody" class="dm-sales-body"></div><div id="dmBusinessPicture" class="dm-sales-body" hidden></div>';
+ screen.innerHTML='<header class="dm-sales-head"><span>ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><button type="button" id="dmSalesBack" aria-label="Вернуться на главную"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button><h1>Продажи</h1><p>Кто написал, кому ответить и сколько заработали.</p></header><div id="dmSalesBody" class="dm-sales-body"></div><div id="dmBusinessPicture" class="dm-sales-body" hidden></div>';
  const anchor=document.getElementById('digitalTraceScreen')||document.getElementById('managementScreen');
  if(anchor)anchor.before(screen);else document.getElementById('app')?.append(screen);
  screen.querySelector('#dmSalesBack').addEventListener('click',()=>pictureOpen?closePicture():close());
@@ -218,7 +218,7 @@ function render(){
  '<section class="dm-sales-section"><h2>Продажи и деньги</h2><strong class="dm-sales-money">'+rub(totalWon())+'</strong><p class="dm-sales-muted">Сумма покупок, которые вы отметили и для которых указали стоимость. Неизвестные суммы считаются нулём. С банковскими поступлениями пока не сверяется.</p>'+
  (legacy.length?'<details class="dm-sales-legacy"><summary>Ранее добавленные заказы ('+legacy.length+')</summary><p>Эти записи сохранены в старом разделе, но у них нет дат и источников. Поэтому мы не включаем их в показатели за сегодня.</p>'+legacy.map(x=>'<div><span>'+esc(x.title)+'</span><strong>'+rub(x.amount)+'</strong></div>').join('')+'</details>':'')+'</section>'+
  form+'<section class="dm-sales-section dm-sales-terms"><details><summary>Для Уолл-стрит 😉</summary><p><b>Воронка продаж</b> — путь от «написал» до «купил».</p><p><b>Конверсия</b> — какая доля обратившихся купила.</p><p><b>Источник клиента</b> — откуда человек узнал о вас.</p><p><b>Потерянная сделка</b> — покупка, которая не состоялась.</p><p>Эти слова знать необязательно. Управляющий всё объяснит по-человечески.</p></details></section>';
- document.getElementById('dmSalesBody').insertAdjacentHTML('afterbegin','<button type="button" id="dmBusinessPictureOpen" class="dm-picture-open"><span><b>Что происходит с бизнесом?</b><small>Продажи · Деньги · Продвижение</small></span><span aria-hidden="true">↗</span></button>');
+ document.getElementById('dmSalesBody').insertAdjacentHTML('afterbegin','<button type="button" id="dmBusinessPictureOpen" class="dm-picture-open"><span><b>Что происходит с бизнесом?</b><small>Продажи · Деньги · Продвижение</small></span><span class="dm-circle-arrow" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></button>');
  document.getElementById('dmBusinessPictureOpen').insertAdjacentHTML('afterend','<button type="button" id="dmSalesNewLead" class="dm-sales-add-shortcut">+ Добавить обращение</button>');
 }
 function draftPanel(title,text){
