@@ -212,7 +212,7 @@
 }
 .assistant-tab[data-mode="thinking"] { --rim:#9ed2ff; --halo:rgba(62,147,255,.50); --sheen:rgba(107,183,255,.33); }
 .assistant-tab[data-mode="speaking"] { --rim:#d0b7ff; --halo:rgba(169,126,255,.48); --sheen:rgba(191,162,255,.28); }
-.assistant-tab[data-mode="attention"] { --rim:#ffe0a6; --halo:rgba(245,168,80,.41); --sheen:rgba(245,183,116,.28); }
+.assistant-tab[data-mode="attention"] { --rim:#f8fcff; --halo:rgba(216,238,255,.42); --sheen:rgba(240,249,255,.32); }
 .assistant-tab[data-mode="success"] { --rim:#a1e5c9; --halo:rgba(102,212,160,.41); }
 .assistant-tab[data-mode="error"] { --rim:#ffc0c0; --halo:rgba(244,115,115,.44); }
 .assistant-tab:is([data-mode="thinking"],[data-mode="speaking"],[data-mode="attention"]) .assistant-ring::after { animation:assistant-wave 2.3s ease-out infinite; }
