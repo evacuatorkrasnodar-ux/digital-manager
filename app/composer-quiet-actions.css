@@ -139,3 +139,42 @@
 @media(prefers-reduced-motion:reduce){
   .dm-chat-panel .dm-draft-actions-grid button{transition:none}
 }
+
+/* Expanded editor: compact utilities leave more room for the actual text.
+   Keep all eight actions, labels, and touch targets (>=44px) intact. */
+#plasmaChatPanel.dm-chat-editor .dm-draft-actions{
+  margin-top:7px;
+  padding-top:7px;
+  gap:6px;
+}
+#plasmaChatPanel.dm-chat-editor .dm-draft-actions-grid{
+  gap:5px;
+}
+#plasmaChatPanel.dm-chat-editor .dm-draft-actions-grid button{
+  min-height:49px;
+  padding:5px 2px 4px;
+  gap:1px;
+  border-radius:11px;
+}
+#plasmaChatPanel.dm-chat-editor .dm-draft-actions-grid button:not([data-draft-action="ask"]) svg{
+  width:17px;
+  height:17px;
+  padding:3px;
+}
+#plasmaChatPanel.dm-chat-editor .dm-draft-actions-grid button[data-draft-action="ask"]::before{
+  width:25px;
+  height:25px;
+  top:4px;
+}
+#plasmaChatPanel.dm-chat-editor .dm-draft-actions-grid button[data-draft-action="ask"] svg.dm-assistant-plasma-mark{
+  width:15px;
+  height:15px;
+  padding:5px;
+}
+#plasmaChatPanel.dm-chat-editor .dm-draft-actions-grid button span{
+  font-size:9px;
+  line-height:1.1;
+}
+#plasmaChatPanel.dm-chat-editor .dm-draft-actions-heading{
+  line-height:1.15;
+}
