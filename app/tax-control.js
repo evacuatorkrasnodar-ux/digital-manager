@@ -23,7 +23,7 @@ function daysLeft(text){
 const entities=['Пока не указано','Самозанятый','ИП','ООО','Другая форма'];
 const regimes=['Пока не указано','НПД','УСН','ОСНО','ПСН','АУСН','ЕСХН','Другой'];
 const types=['Декларация','Налоговый платёж','Уведомление','Страховые взносы','Отчётность','Другое'];
-function fresh(){return {version:1,profile:{entity:'Пока не указано',regime:'Пока не указано',region:''},events:[]};}
+function fresh(){return {version:1,profile:{entity:'Пока не указано',regime:'Пока не указано',region:'',usnObject:'Не указано'},events:[],drafts:[]};}
 function load(){
  try{
   const value=JSON.parse(localStorage.getItem(KEY)||'null');
@@ -32,8 +32,10 @@ function load(){
   return {version:1,profile:{
    entity:entities.includes(profile.entity)?profile.entity:entities[0],
    regime:regimes.includes(profile.regime)?profile.regime:regimes[0],
-   region:safe(profile.region,70)
-  },events:value.events.filter(e=>e&&typeof e.id==='string'&&dueTime(e.due)!==null).slice(0,MAX)};
+   region:safe(profile.region,70),
+   usnObject:['Не указано','Доходы','Доходы минус расходы'].includes(profile.usnObject)?profile.usnObject:'Не указано'
+  },events:value.events.filter(e=>e&&typeof e.id==='string'&&dueTime(e.due)!==null).slice(0,MAX),
+  drafts:Array.isArray(value.drafts)?value.drafts.filter(x=>x&&Number.isInteger(x.year)).slice(0,12):[]};
  }catch(_){return fresh();}
 }
 let data=load(),page='list',selected='',previousFocus=null,message='';
@@ -75,7 +77,7 @@ overlay.innerHTML='<div class="dm-tax-frame" role="dialog" aria-modal="true" ari
  '<header class="dm-tax-head"><div><small>ЦИФРОВОЙ УПРАВЛЯЮЩИЙ · КОНТРОЛЬ СРОКОВ</small><h2 id="dmTaxTitle">Налоговый контроль</h2></div>'+
  '<button type="button" data-tax-close aria-label="Закрыть">×</button></header>'+
  '<nav class="dm-tax-tabs" aria-label="Налоговый контроль"><button type="button" data-tax-page="list">Календарь</button>'+
- '<button type="button" data-tax-page="profile">Мой режим</button></nav>'+
+ '<button type="button" data-tax-page="profile">Мой режим</button><button type="button" data-tax-page="declaration">Декларация</button></nav>'+
  '<div id="dmTaxBody" class="dm-tax-body"></div></div>';
 document.body.append(overlay);
 const button=(action,title)=>'<button type="button" data-tax-action="'+action+'">'+title+'</button>';
@@ -110,7 +112,7 @@ function list(){
  '<h3>'+(first&&first.left<=7?'Есть срок, который пора проверить':'Всё о налоговых сроках — в одном месте')+'</h3>'+
  '<p>Ваша форма: '+esc(data.profile.entity)+' · режим: '+esc(data.profile.regime)+
  (data.profile.region?' · '+esc(data.profile.region):'')+'</p>'+
- '<div class="dm-tax-actions">'+button('new','+ Добавить срок')+button('profile','Уточнить мой режим')+'</div>'+
+ '<div class="dm-tax-actions">'+button('new','+ Добавить срок')+button('profile','Уточнить мой режим')+button('declaration','✦ Помощь с декларацией')+'</div>'+
  '<p>Налоговая декларация, платёж, уведомление, отчётность — записывайте только подтверждённые обязательства.</p></section>'+
  (all.length?'<section class="dm-tax-list">'+all.map(e=>'<button type="button" class="dm-tax-event" data-tax-event="'+esc(e.id)+'"><span><strong>'+esc(e.name)+'</strong>'+
  '<small>'+esc(e.kind)+' · '+e.due.split('-').reverse().join('.')+'</small></span>'+statusLine(e)+'</button>').join('')+'</section>':
@@ -122,7 +124,8 @@ function profileForm(){
  return '<form id="dmTaxProfileForm" class="dm-tax-panel">'+
  '<small>ЗНАКОМСТВО С НАЛОГОВОЙ СИСТЕМОЙ</small><h3>Чей календарь ведём?</h3>'+
  '<label>Форма бизнеса'+select('entity',entities,data.profile.entity)+'</label>'+
- '<label>Налоговый режим'+select('regime',regimes,data.profile.regime)+'</label>'+
+ '<label>Налоговый режим'+select('regime',regimes,data.profile.regime)+'</label>'+ 
+ '<label>Объект УСН (если применяется)'+select('usnObject',['Не указано','Доходы','Доходы минус расходы'],data.profile.usnObject||'Не указано')+'</label>'+
  '<label>Регион<input name="region" maxlength="70" placeholder="Например: Краснодарский край" value="'+esc(data.profile.region)+'"></label>'+
  '<p>Эти настройки пока нужны для будущей персонализации. Никакие декларации, обязанности или сроки автоматически не назначаются.</p>'+
  '<div class="dm-tax-actions"><button type="submit">Сохранить</button>'+button('back','← К срокам')+'</div></form>'+
@@ -151,14 +154,14 @@ function detail(){
  button('edit','✎ Исправить')+button('back','← Все сроки')+button('delete','Удалить')+'</div></section>'+official+caution;
 }
 function render(){
- $('dmTaxTitle').textContent=page==='profile'?'Мой налоговый режим':page==='edit'||page==='new'?'Срок и документы':'Налоговый контроль';
- overlay.querySelectorAll('[data-tax-page]').forEach(btn=>btn.setAttribute('aria-current',btn.dataset.taxPage===(page==='profile'?'profile':'list')?'page':'false'));
- $('dmTaxBody').innerHTML=(page==='profile'?profileForm():['edit','new'].includes(page)?deadlineForm():page==='detail'?detail():list())+
+ $('dmTaxTitle').textContent=page==='declaration'?'Помощь с декларацией':page==='profile'?'Мой налоговый режим':page==='edit'||page==='new'?'Срок и документы':'Налоговый контроль';
+ overlay.querySelectorAll('[data-tax-page]').forEach(btn=>btn.setAttribute('aria-current',btn.dataset.taxPage===(page==='profile'?'profile':page==='declaration'?'declaration':'list')?'page':'false'));
+ $('dmTaxBody').innerHTML=(page==='declaration'?declarationView():page==='profile'?profileForm():['edit','new'].includes(page)?deadlineForm():page==='detail'?detail():list())+
  (message?'<p class="dm-tax-message" role="status">'+esc(message)+'</p>':'');
  $('dmTaxBody').scrollTop=0;message='';
 }
 function open(to='list'){
- previousFocus=document.activeElement;page=to==='profile'?'profile':'list';selected='';
+ previousFocus=document.activeElement;page=['profile','declaration'].includes(to)?to:'list';selected='';
  overlay.hidden=false;render();
  overlay.querySelector('[data-tax-close]')?.focus({preventScroll:true});
 }
@@ -180,6 +183,7 @@ overlay.addEventListener('click',e=>{
  if(act==='back'){page='list';selected='';render();return;}
  if(act==='new'){page='new';selected='';render();return;}
  if(act==='profile'){page='profile';selected='';render();return;}
+ if(act==='declaration'){page='declaration';selected='';render();return;}
  if(act==='edit'){page='edit';render();return;}
  const item=data.events.find(x=>x.id===selected);
  if(!item)return;
@@ -196,9 +200,9 @@ overlay.addEventListener('click',e=>{
 overlay.addEventListener('submit',e=>{
  e.preventDefault();const f=e.target,fields=new FormData(f);
  if(f.id==='dmTaxProfileForm'){
-  const entity=safe(fields.get('entity'),40),regime=safe(fields.get('regime'),30),region=safe(fields.get('region'),70);
+  const entity=safe(fields.get('entity'),40),regime=safe(fields.get('regime'),30),region=safe(fields.get('region'),70),usnObject=safe(fields.get('usnObject'),30);
   if(!entities.includes(entity)||!regimes.includes(regime)){message='Проверьте параметры режима.';render();return;}
-  data.profile={entity,regime,region};
+  data.profile={entity,regime,region,usnObject:['Не указано','Доходы','Доходы минус расходы'].includes(usnObject)?usnObject:'Не указано'};
   if(persist()){message='Режим сохранён. Обязательные сроки ещё надо сверить.';page='profile';render();}
  }else if(f.id==='dmTaxDeadlineForm'){
   const name=safe(fields.get('name'),120),kind=safe(fields.get('kind'),40),due=safe(fields.get('due'),10),note=safe(fields.get('note'),800);
@@ -221,10 +225,10 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden)recheckOnR
 window.addEventListener('focus',recheckOnReturn);
 function routeQuestion(query){
  const q=safe(query,300).toLowerCase();
- if(!/(?:покажи|открой|проверь|напомни|когда|что|какие|срок|календарь)/.test(q)||
+ if(!/(?:покажи|открой|проверь|напомни|когда|что|какие|срок|календарь|составь|подготовь|отправить|подать)/.test(q)||
  !/налог|декларац|взнос|отч[её]тност|фнс/.test(q))return false;
- open();return true;
+ open(/(?:составь|подготовь|отправить|подать).{0,45}декларац|декларац.{0,40}(?:составить|подготовить|отправить|подать)/.test(q)?'declaration':'list');return true;
 }
-window.DMTaxControl=Object.freeze({open,refresh:update,snapshot,routeQuestion,source:'owner-entered-local-dates'});
+window.DMTaxControl=Object.freeze({open,refresh:update,snapshot,routeQuestion,prepare:()=>open('declaration'),source:'owner-entered-local-dates'});
 update();
 })();
