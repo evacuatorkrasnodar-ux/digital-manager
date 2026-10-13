@@ -41,12 +41,7 @@
 }
 #dmBusinessPulseOverlay .dm-pulse-head small{font-size:9px;letter-spacing:.11em;color:#c6a583}
 #dmBusinessPulseOverlay .dm-pulse-head h2{font-size:18px;font-weight:560;line-height:1.3;margin:5px 0 0}
-#dmBusinessPulseOverlay .dm-pulse-head button{
-  width:34px;height:34px;flex:none;display:grid;place-items:center;
-  border:1px solid rgba(163,199,225,.41);border-radius:12px;
-  background:linear-gradient(135deg,#263f56,#0a1929);color:#eaf4ff;
-  font:400 23px/1 system-ui;cursor:pointer;
-}
+
 #dmBusinessPulseOverlay .dm-pulse-detail{
   flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;
   -webkit-overflow-scrolling:touch;padding:15px 13px 27px;
