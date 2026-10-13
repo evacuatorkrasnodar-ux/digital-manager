@@ -232,7 +232,7 @@
       </div></section>
     </main>
   </div>
-  <div class="screen secondary-screen" id="assistantScreen" hidden><header class="subhead"><img class="brand-icon" src="./assets/logo-air.png" alt="" aria-hidden="true"><div><small>Цифровой управляющий</small><h1>Помощник</h1></div><button id="assistantReturnHome" class="assistant-home-return" type="button" aria-label="Вернуться на главную" title="На главную"><svg class="ico" aria-hidden="true"><use href="#ic-chevron-back"/></svg></button></header><div class="assistant-welcome"><h2>Ваш цифровой помощник</h2><p>Задавайте вопросы о бизнесе. Помощник использует сохранённые записи и может предложить ответ клиенту для вашего согласования. Остальные ответы пока демонстрационные — настоящий ИИ ещё не подключён.</p><p><a class="assistant-world-link" href="./world.html?tab=assistant">Личный помощник <span class="dm-inline-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></a></p></div><div class="assistant-suggestions" aria-label="Примеры вопросов"><button data-question="Как увеличить выручку?">Как увеличить выручку? <svg class="ico"><use href="#ic-chevron"/></svg></button><button data-question="Как улучшить работу с клиентами?">Как улучшить работу с клиентами? <svg class="ico"><use href="#ic-chevron"/></svg></button><button data-question="Как контролировать расходы?">Как контролировать расходы? <svg class="ico"><use href="#ic-chevron"/></svg></button></div><div id="chatLog" class="chat-log" role="log" aria-live="polite"></div><form id="chatForm" class="chat-form"><label for="chatInput" class="sr-only">Написать помощнику</label><input id="chatInput" autocomplete="off" placeholder="Спросите о бизнесе…"><button type="submit" aria-label="Отправить"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 21 3l-7.7 18-2.7-7.6L3 11.5zM10.6 13.4 21 3"/></svg></button></form></div>
+  <div class="screen secondary-screen" id="assistantScreen" hidden><header class="subhead"><img class="brand-icon" src="./assets/logo-air.png" alt="" aria-hidden="true"><div><small>Цифровой управляющий</small><h1>Помощник</h1></div><button id="assistantReturnHome" class="assistant-home-return" type="button" aria-label="Вернуться на главную" title="На главную"><svg class="ico" aria-hidden="true"><use href="#ic-chevron-back"/></svg></button></header><section class="dm-history" aria-label="История разговоров"><header class="dm-history-head"><div><h2>История чатов</h2><p>Найдите и перечитайте разговор. Чтобы продолжить, нажмите на плазму внизу.</p></div></header><label class="dm-history-search-label" for="dmHistorySearch">Поиск по переписке</label><input id="dmHistorySearch" class="dm-history-search" type="search" placeholder="Название, вопрос или слово из ответа…" autocomplete="off"><div id="dmHistoryList" class="dm-history-list" role="list" aria-live="polite"></div><p id="dmHistoryEmpty" class="dm-history-empty" hidden>Разговоров пока нет. Задайте первый вопрос через плазму внизу.</p></section></div>
 
   <div class="screen secondary-screen" id="managementScreen" hidden>
 
@@ -307,7 +307,7 @@
     <form id="plasmaChatForm" class="dm-chat-compose" aria-label="Написать помощнику">
       <div class="dm-chat-edit-tools">
         <span class="dm-chat-draft-title" id="plasmaComposerTitle">Сообщение или текст</span>
-        <button id="plasmaOpenChat" class="dm-chat-history-trigger" type="button" aria-label="История чата — открыть текущий диалог" title="Открыть текущую переписку"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 9.2a8 8 0 1 1-.2 5.7"/><path d="M4.5 4.6v4.8h4.8M12 7.6V12l3 2"/></svg><span>История чата</span></button>
+        <button id="plasmaOpenChat" class="dm-chat-history-trigger" type="button" aria-label="История чатов — найти разговор" title="Найти разговор"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 9.2a8 8 0 1 1-.2 5.7"/><path d="M4.5 4.6v4.8h4.8M12 7.6V12l3 2"/></svg><span>История чата</span></button>
         <div class="dm-chat-edit-buttons">
           <button type="button" id="plasmaExpandDraft" aria-label="Развернуть чат" aria-expanded="false" title="Развернуть чат"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 4H20v6.5M20 4l-7.5 7.5M10.5 20H4v-6.5M4 20l7.5-7.5"/></svg></button>
           <button type="button" id="plasmaClose" aria-label="Закрыть ввод" title="Закрыть"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8l8 8M16 8l-8 8"/></svg></button>
@@ -426,7 +426,7 @@
 <dialog id="modal" aria-labelledby="dialogTitle"><div class="dialog-inner"><div class="dialog-head"><div><span class="dialog-eyebrow">ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h2 id="dialogTitle">Информация</h2></div><button class="dialog-close" id="closeDialog" type="button" aria-label="Закрыть"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button></div><div id="dialogContent"></div></div></dialog>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
   <script src="./card-catalog.js?v=3" defer></script>
-<script src="./app.js?v=667" defer></script>
+<script src="./app.js?v=668" defer></script>
   <script src="./voice-hints.js?v=291" defer></script>
 <script src="./system-ui.js?v=283" defer></script>
   <script src="./task-journal.js?v=13" defer></script>
