@@ -63,7 +63,7 @@ card.type='button';card.id='dmTaxCard';card.className='dm-workspace-card dm-tax-
 card.innerHTML='<span class="dm-workspace-emblem" aria-hidden="true">◈</span><span class="dm-workspace-copy">'+
  '<strong>Налоговый контроль</strong><small>Декларации · платежи · отчётность</small>'+
  '<em id="dmTaxCardStatus">Добавьте свои сроки — ничего не придумаем</em></span>'+
- '<span class="dm-workspace-arrow" aria-hidden="true">↗</span>';
+ '<span class="dm-workspace-arrow dm-circle-arrow" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span>';
 shortcuts.after(card);
 // Working tools are grouped under Management → «Рабочие инструменты».
 // Don't duplicate a standalone tax-settings row on the Management overview.
