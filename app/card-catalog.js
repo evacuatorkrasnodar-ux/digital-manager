@@ -80,13 +80,13 @@ function render(){
  details.append(text('p','',info.works));
  container.append(details);
  const group=document.createElement('div');group.className='dm-catalog-bottom';
- const state=text('small','dm-catalog-current',input.checked?'Сейчас показана на главной':'Сейчас скрыта с главной');
+ const state=text('small','dm-catalog-current',info.ready?(input.checked?'Сейчас показана на главной':'Сейчас скрыта с главной'):'Карточка ещё готовится · показ на главной пока недоступен');
  group.append(state);
  const toggle=document.createElement('button');toggle.type='button';toggle.dataset.catalogToggle='true';
  toggle.textContent=input.checked?'Убрать с главной':'Добавить на главную';
  // Old incomplete toggles still retain their existing behavior — we never
  // describe an unavailable dashboard card as installed.
- if(!info.ready){toggle.textContent='Сохранить выбор';}
+ if(!info.ready){toggle.disabled=true;toggle.textContent='В разработке';}
  group.append(toggle);container.append(group);
 }
 function open(key){
