@@ -1059,14 +1059,6 @@
 
 /* Home spacing, 2026-10-13 — gold aligns 8px below Sales.
    Remove the old negative shortcut offset so both rows keep even spacing. */
-@media (min-width:360px) and (max-width:539px){
-  #homeScreen .dashboard > .shortcuts{
-    /* The lowered gold card now clears this section naturally. */
-    margin-top:0;
-  }
-}
-@media (min-width:540px){
-  #homeScreen .dashboard > .shortcuts{
-    margin-top:0;
-  }
+@media (min-width:360px){
+  #homeScreen .dashboard > .shortcuts{margin-top:0}
 }
