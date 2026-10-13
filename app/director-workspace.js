@@ -58,7 +58,7 @@ function updateCards(){
 const card=(id,icon,title,text,count)=>'<button type="button" id="'+id+'" class="dm-workspace-card" aria-label="'+title+' — открыть">'+
  '<span class="dm-workspace-emblem" aria-hidden="true">'+icon+'</span><span class="dm-workspace-copy"><strong>'+title+'</strong>'+
  '<small id="'+text+'">'+(count||'')+'</small><em id="'+(id==='dmWorkspaceInboxCard'?'dmWorkspaceInboxCount':'dmWorkspaceBriefStatus')+'"></em></span>'+
- '<span class="dm-workspace-arrow" aria-hidden="true">↗</span></button>';
+ '<span class="dm-workspace-arrow dm-circle-arrow" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><use href="#ic-chevron"/></svg></span></button>';
 const dashboard=document.querySelector('#homeScreen .dashboard');
 const quick=dashboard?.querySelector('.shortcuts');
 if(!dashboard||!quick)return;
