@@ -93,7 +93,6 @@ html.dm-layout-editing #homeScreen .dm-layout-board .dm-layout-unit .dm-unit-con
 #managementScreen .mg-layout-edit-action>span:nth-child(2){display:grid;gap:4px;flex:1;min-width:0}
 #managementScreen .mg-layout-edit-action strong{font-size:13px;font-weight:540}
 #managementScreen .mg-layout-edit-action small{font-size:10.4px;line-height:1.35;color:#a9c5db}
-#managementScreen .mg-layout-edit-action>.ico{width:16px;height:16px;flex:none;color:#d3e7f6}
 #managementScreen .mg-layout-edit-action:focus-visible{outline:2px solid #d4ecff;outline-offset:2px}
 
 /* Long-press edit mode: the cards give a gentle iPhone-style visual cue.
