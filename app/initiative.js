@@ -130,7 +130,7 @@ function mountEntrances(){
  if(manager&&!document.getElementById('dmInitManagement')){
   const button=document.createElement('button');button.type='button';button.id='dmInitManagement';
   button.className='dm-init-trigger dm-init-in-management';
-  button.innerHTML='<span class="dm-init-pulse" aria-hidden="true">✦</span><span class="dm-init-trigger-copy"><strong data-initiative-head>Я разбираю обращения</strong><small data-initiative-hint>Посмотреть ход работы</small></span><span aria-hidden="true">↗</span>';
+  button.innerHTML='<span class="dm-init-pulse" aria-hidden="true">✦</span><span class="dm-init-trigger-copy"><strong data-initiative-head>Я разбираю обращения</strong><small data-initiative-hint>Посмотреть ход работы</small></span><span class="mg-chevron" aria-hidden="true"></span>';
   manager.insertAdjacentElement('afterend',button);
  }
  const welcome=document.querySelector('#assistantScreen .assistant-welcome');
