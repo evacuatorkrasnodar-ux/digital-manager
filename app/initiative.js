@@ -123,7 +123,7 @@ function mountEntrances(){
  if(chat&&!document.getElementById('dmInitPlasma')){
   const button=document.createElement('button');button.type='button';button.id='dmInitPlasma';
   button.className='dm-init-trigger dm-init-in-chat';
-  button.innerHTML='<span class="dm-init-pulse" aria-hidden="true">✦</span><span class="dm-init-trigger-copy"><strong data-initiative-head>Я разбираю обращения</strong><small data-initiative-hint>Посмотреть ход работы</small></span><span aria-hidden="true">↗</span>';
+  button.innerHTML='<span class="dm-init-pulse" aria-hidden="true">✦</span><span class="dm-init-trigger-copy"><strong data-initiative-head>Я разбираю обращения</strong><small data-initiative-hint>Посмотреть ход работы</small></span><span class="dm-circle-arrow" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span>';
   chat.insertBefore(button,chat.querySelector('form')||null);
  }
  const manager=document.querySelector('#mgHome .mg-manager');
@@ -137,7 +137,7 @@ function mountEntrances(){
  if(welcome&&!document.getElementById('dmInitAssistant')){
   const button=document.createElement('button');button.type='button';button.id='dmInitAssistant';
   button.className='dm-init-trigger dm-init-in-assistant';
-  button.innerHTML='<span class="dm-init-pulse" aria-hidden="true">✦</span><span class="dm-init-trigger-copy"><strong data-initiative-head>Я разбираю обращения</strong><small data-initiative-hint>Посмотреть ход работы</small></span><span aria-hidden="true">↗</span>';
+  button.innerHTML='<span class="dm-init-pulse" aria-hidden="true">✦</span><span class="dm-init-trigger-copy"><strong data-initiative-head>Я разбираю обращения</strong><small data-initiative-hint>Посмотреть ход работы</small></span><span class="dm-circle-arrow" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span>';
   welcome.insertAdjacentElement('afterend',button);
  }
  updateEntrances();
