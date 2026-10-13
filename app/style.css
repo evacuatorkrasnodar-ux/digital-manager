@@ -1102,7 +1102,8 @@ html.dm-plasma-panel-open .dock-launcher .dm-launcher-waves{
 }
 @media(max-width:420px){
   html.dm-plasma-panel-open .dock-launcher{
-    transform:translateX(clamp(0px,calc(50vw - 57px),135px));
+    /* Optical centering in the gap between the text field and the screen edge. */
+    transform:translateX(clamp(0px,calc(50vw - 50px),142px));
   }
   html.dm-plasma-panel-open .dm-chat-panel:not(.dm-chat-editor){
     left:12px;
