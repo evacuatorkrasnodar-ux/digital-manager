@@ -212,8 +212,13 @@ overlay.addEventListener('submit',e=>{
 });
 overlay.addEventListener('keydown',e=>{if(e.key==='Escape'){e.stopPropagation();close();}});
 window.addEventListener('storage',e=>{if(e.key===KEY){data=load();update();if(!overlay.hidden)render();}});
-document.addEventListener('visibilitychange',()=>{if(!document.hidden)update();});
-window.addEventListener('focus',update);
+function recheckOnReturn(){
+ update();
+ // Recompute the director's golden recommendation when the date has changed.
+ try{window.dispatchEvent(new Event('dm:tax-changed'));}catch(_){}
+}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)recheckOnReturn();});
+window.addEventListener('focus',recheckOnReturn);
 function routeQuestion(query){
  const q=safe(query,300).toLowerCase();
  if(!/(?:покажи|открой|проверь|напомни|когда|что|какие|срок|календарь)/.test(q)||
