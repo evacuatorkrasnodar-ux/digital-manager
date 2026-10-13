@@ -1539,7 +1539,15 @@
       event.preventDefault();byId('plasmaChatForm').requestSubmit();
     }
   });
-  plasmaExpand.addEventListener('click',()=>{dmToggleDraftEditor(!plasmaPanel.classList.contains('dm-chat-editor'));plasmaInput.focus();});
+  plasmaExpand.addEventListener('click',()=>{
+    const alreadyFocused=document.activeElement===plasmaInput;
+    dmToggleDraftEditor(!plasmaPanel.classList.contains('dm-chat-editor'));
+    // iOS PWA: switching compact/expanded geometry and forcing focus in the
+    // same frame causes a brief viewport jump and broken-looking composition.
+    if(!alreadyFocused)requestAnimationFrame(()=>{
+      if(!plasmaPanel.hidden)plasmaInput.focus({preventScroll:true});
+    });
+  });
   byId('plasmaClearDraft').addEventListener('click',()=>{
     if(plasmaInput.value&&!window.confirm('Очистить сохранённый черновик?'))return;
     plasmaInput.value='';dmSaveDraft();dmSyncComposer();plasmaInput.focus();
