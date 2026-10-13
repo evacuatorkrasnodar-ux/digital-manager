@@ -323,10 +323,14 @@ function closePicture(){
  window.scrollTo({top:0,behavior:'instant'});
  screen.querySelector('#dmBusinessPictureOpen')?.focus({preventScroll:true});
 }
-function open(){
+function open(source='sales'){
  create();
  if(pictureOpen)closePicture();
  previousFocus=document.activeElement;
+ const clients=source==='clients';
+ screen.querySelector('.dm-sales-head h1').textContent=clients?'Клиенты и заявки':'Продажи';
+ screen.querySelector('.dm-sales-head p').textContent=clients?'Все сохранённые обращения и задачи по клиентам.':'Кто написал, кому ответить и сколько заработали.';
+ screen.setAttribute('aria-label',clients?'Клиенты и заявки':'Продажи');
  ['homeScreen','assistantScreen','managementScreen','digitalTraceScreen'].forEach(id=>{let el=document.getElementById(id);if(el)el.hidden=true});
  screen.hidden=false;render();
  window.scrollTo({top:0,behavior:'instant'});
@@ -397,7 +401,13 @@ function openClient(id){
  const target=[...screen.querySelectorAll('[data-sale-client-id]')].find(el=>el.dataset.saleClientId===id);
  if(target){target.scrollIntoView({block:'center',behavior:'instant'});target.focus?.({preventScroll:true})}
 }
-function openPicture(){open();showPicture()}
+function openPicture(source='picture'){
+ open();showPicture();
+ if(source==='finance'){
+  screen.querySelector('.dm-sales-head h1').textContent='Финансовый анализ';
+  screen.querySelector('.dm-sales-head p').textContent='Отмеченные продажи, рекламные расходы и их источники.';
+ }
+}
 window.DMSalesScreen=Object.freeze({open,openPicture,openClient,confirmContact,getClientStage,getDraftContext,getWorkCandidates,getBusinessSnapshot,close,hide,getInsight,getTotals:totals,getBusinessSummary:()=>({salesRevenue:totalWon(),promotionExpenses:promotionTotal(),source:'manual-local-records'})});
 window.addEventListener('dm:personal-tasks-changed',()=>{
  if(screen&&!screen.hidden&&!pictureOpen)render();
