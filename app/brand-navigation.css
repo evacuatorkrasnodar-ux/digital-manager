@@ -1,68 +1,36 @@
 /* Approved compact arrow-in-circle language.
    This is a single decorative affordance INSIDE existing clickable cards;
    it must not create new invisible click targets or change silhouettes. */
+/* Decorative arrows inherit the ONE chrome circle from app-design-system.css.
+   Only sizing, layout and direction belong to this feature file. */
 .dm-circle-arrow{
-  display:inline-grid;place-items:center;flex:none;
-  width:22px;height:22px;min-width:22px;
-  box-sizing:border-box;border-radius:50%;
-  border:1px solid rgba(158,206,245,.59);
-  background:radial-gradient(ellipse at 29% 14%,rgba(220,239,255,.27),transparent 70%),
-    linear-gradient(145deg,rgba(44,88,128,.92),rgba(9,27,44,.97));
-  color:#f6fbff;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 3px 9px rgba(1,9,20,.32);
-  line-height:1;opacity:1;visibility:visible;
-}
-.dm-circle-arrow>.ico{
-  display:block;width:13px;height:13px;flex:none;
-  color:#f5faff;fill:none;stroke:currentColor;stroke-width:2;
-  stroke-linecap:round;stroke-linejoin:round;opacity:1;visibility:visible;
-}
-/* Passport arrows live INSIDE the header row, not in a clipped absolute overlay.
-   Brand opens toward the right; the mirrored company card opens left. */
-#homeScreen #openBrandCard .license-top > .license-arrow.dm-circle-arrow,
-#homeScreen #openProfileCard .profile-top > .profile-arrow.dm-circle-arrow{
-  position:relative;
-  z-index:8;
+  --dm-circle-size:22px;
+  --dm-circle-icon-size:13px;
   display:inline-grid;
   place-items:center;
-  align-self:center;
-  flex:0 0 21px;
-  box-sizing:border-box;
-  width:21px;
-  height:21px;
-  min-width:21px;
-  margin:0;
-  padding:0;
-  border:1px solid rgba(190,226,255,.84);
-  border-radius:50%;
-  background:linear-gradient(145deg,#426887,#101d2b);
-  color:#f2faff;
-  box-shadow:inset 0 1px 1px rgba(255,255,255,.38),0 3px 10px rgba(0,0,0,.4),0 0 9px rgba(98,178,241,.28);
+  flex:none;
+  line-height:1;
   opacity:1;
   visibility:visible;
-  transform:none;
-  pointer-events:none;
 }
-#homeScreen #openBrandCard .license-top > .license-arrow.dm-circle-arrow > svg,
-#homeScreen #openProfileCard .profile-top > .profile-arrow.dm-circle-arrow > svg{
-  display:block;
-  flex:none;
-  width:11px;
-  height:11px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:2.2;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  opacity:1;
+.dm-circle-arrow>.ico{display:block;fill:none;stroke:currentColor;opacity:1}
+#homeScreen #openBrandCard .license-top > .license-arrow.dm-circle-arrow,
+#homeScreen #openProfileCard .profile-top > .profile-arrow.dm-circle-arrow{
+  --dm-circle-size:21px;
+  --dm-circle-icon-size:11px;
+  position:relative;
+  z-index:8;
+  align-self:center;
+  flex:0 0 21px;
+  margin:0;
+  pointer-events:none;
 }
 #homeScreen #openProfileCard .profile-top > .profile-arrow.dm-circle-arrow > svg{
   transform:rotate(180deg);
 }
 #homeScreen #openBrandCard:focus-visible,
 #homeScreen #openProfileCard:focus-visible{
-  outline:2px solid #d3edff;
-  outline-offset:2px;
+  outline:2px solid #d3edff;outline-offset:2px;
 }
 /* New optional cards and Business Pulse now follow the same visual grammar. */
 #homeScreen .dm-workspace-card .dm-workspace-arrow.dm-circle-arrow{
@@ -92,7 +60,6 @@
 .dm-action-circle.dm-circle-arrow{
   display:inline-grid;place-items:center;vertical-align:middle;
   width:17px;height:17px;min-width:17px;margin-left:3px;
-  border-color:rgba(168,204,232,.43);
 }
 .dm-action-circle.dm-circle-arrow>.ico{width:10px;height:10px;stroke-width:2.05}
 #dmWorkspaceOverlay .dm-workspace-row>.dm-action-circle{margin-left:auto}
