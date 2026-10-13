@@ -118,9 +118,9 @@ function messageDetail(){
  '<h3>'+esc(m.title)+'</h3><p>Отправитель: '+esc(m.sender||'не указан')+'</p>'+
  '<div class="dm-workspace-quote">'+esc(m.body)+'</div>'+
  '<p class="dm-workspace-honest">Пометка «'+esc(tag.name)+'» получена простыми локальными правилами, не является проверкой фактов или анализом нейросети.</p>'+
- '<label>Черновик ответа — директор может исправить<textarea id="dmWorkspaceReply" rows="7" maxlength="4000">'+esc(m.draft||initialReply(m))+'</textarea></label>'+
+ '<label>Черновик ответа — проверьте и исправьте<textarea id="dmWorkspaceReply" rows="7" maxlength="4000">'+esc(m.draft||initialReply(m))+'</textarea></label>'+
  '<p class="dm-workspace-honest">Статус: '+statusText(m.status)+'. Одобрение не отправляет сообщение. Внешняя отправка потребует отдельного подключения.</p>'+
- '<div class="dm-workspace-actions">'+btn('save-draft','Сохранить правки')+btn('request-approval','На подпись директору')+
+ '<div class="dm-workspace-actions">'+btn('save-draft','Сохранить правки')+btn('request-approval','На подпись')+
  (m.status==='approved'?btn('copy-reply','Скопировать одобренный ответ'):'')+
  btn('back','← К обращениям')+'</div>'+
  '<div class="dm-workspace-actions">'+btn('manual-close','Отметить завершённым вручную')+btn('delete-message','Удалить запись')+'</div></section>'+note;
@@ -136,7 +136,7 @@ function makeAgenda(){
  '2. Пока у меня нет подтверждённых записей о выполненной работе. Спросим ответственных о фактах.\n')+
  '3. '+safe(insight?.headline||'Обсудим текущие обращения и сроки.',190)+'.\n'+
  '4. Каждый сотрудник называет одну главную задачу, ожидаемый результат и срок.\n'+
- '5. Выявляем, где нужна помощь директора, и подтверждаем поручения.\n\n'+
+ '5. Выявляем, где нужна ваша помощь, и подтверждаем поручения.\n\n'+
  'В завершение: благодарю команду. Договорённости запишем и проверим по фактическому выполнению.';
 }
 function briefing(){
@@ -187,14 +187,14 @@ function negotiationDetail(){
  const questions=dealQuestions(d.offer);
  return '<section class="dm-workspace-detail"><small class="dm-ws-eyebrow">РАЗБОР УСЛОВИЙ · '+date(d.at)+'</small>'+
  '<h3>'+esc(d.partner)+'</h3><p>Предложение / заметки:</p><div class="dm-workspace-quote">'+esc(d.offer)+'</div>'+
- (d.goal?'<p>Цель директора: '+esc(d.goal)+'</p>':'')+
+ (d.goal?'<p>Ваша цель: '+esc(d.goal)+'</p>':'')+
  '<h3>Что стоит уточнить</h3><ol class="dm-workspace-questions">'+questions.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ol>'+
  '<p class="dm-workspace-honest">Это подсказки по ключевым словам, а не достоверная оценка добросовестности партнёра. Реальная проверка юрлица потребует идентификации по ИНН/ОГРН, официальных источников и правовой оценки условий.</p>'+
  '<div class="dm-workspace-actions">'+btn('copy-deal','Скопировать вопросы')+
  btn('approve-deal','На подпись: проверить условия')+btn('delete-deal','Удалить')+btn('back','← К переговорам')+'</div></section>';
 }
 function render(){
- const titles={inbox:'Единые входящие',brief:'Планёрка директора',meeting:'Переговоры и сделки'};
+ const titles={inbox:'Единые входящие',brief:'Планёрка',meeting:'Переговоры и сделки'};
  $('dmWorkspaceTitle').textContent=titles[screen]||titles.inbox;
  for(const tab of overlay.querySelectorAll('[data-ws-screen]'))tab.setAttribute('aria-current',tab.dataset.wsScreen===screen?'page':'false');
  let html='';
