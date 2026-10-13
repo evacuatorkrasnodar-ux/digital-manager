@@ -17,28 +17,40 @@
   color:#f5faff;fill:none;stroke:currentColor;stroke-width:2;
   stroke-linecap:round;stroke-linejoin:round;opacity:1;visibility:visible;
 }
-/* The two mirrored hero previews have their own elegant silhouettes.
-   Their round navigation marks must sit visibly above outlines/effects. */
-#homeScreen #openBrandCard .license-top>.license-arrow.dm-circle-arrow,
-#homeScreen #openProfileCard .profile-top>.profile-arrow.dm-circle-arrow{
-  position:relative;z-index:8;flex:0 0 22px;
-  width:22px;height:22px;min-width:22px;
-  border-radius:50%;border:1px solid rgba(157,205,240,.67);
-  background:radial-gradient(ellipse at 27% 12%,rgba(224,245,255,.28),transparent 67%),
-    linear-gradient(146deg,#2b587c,#0b2033);
-  box-shadow:inset 0 1px rgba(255,255,255,.28),0 0 9px rgba(105,172,226,.17);
-  transform:none!important;filter:none!important;
+/* Two mirrored passport arrows, anchored to their actual clickable cards.
+   The arrows are decorative: the entire preview remains the hit target. */
+#homeScreen #openBrandCard .license-arrow.dm-circle-arrow,
+#homeScreen #openProfileCard .profile-arrow.dm-circle-arrow{
+  position:absolute;z-index:20;display:grid;place-items:center;
+  flex:none;box-sizing:border-box;width:20px;height:20px;min-width:20px;
+  margin:0;padding:0;border-radius:50%;
+  border:1px solid rgba(190,226,255,.84);
+  background:linear-gradient(145deg,#426887,#101d2b);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.38),0 3px 10px rgba(0,0,0,.4),0 0 9px rgba(98,178,241,.28);
+  opacity:1;visibility:visible;transform:none;
 }
-#homeScreen #openBrandCard .license-arrow.dm-circle-arrow>.ico,
-#homeScreen #openProfileCard .profile-arrow.dm-circle-arrow>.ico{
-  display:block;flex:none;width:13px;height:13px;
-  fill:none;stroke:#f4fbff;stroke-width:2.15;opacity:1;
+#homeScreen #openBrandCard .license-arrow.dm-circle-arrow{
+  right:13px;top:18px;left:auto;bottom:auto;
 }
-#homeScreen #openProfileCard .profile-arrow.dm-circle-arrow>.ico{transform:rotate(180deg)}
+#homeScreen #openProfileCard .profile-arrow.dm-circle-arrow{
+  left:13px;top:18px;right:auto;bottom:auto;
+}
+#homeScreen #openBrandCard .license-arrow.dm-circle-arrow svg,
+#homeScreen #openProfileCard .profile-arrow.dm-circle-arrow svg{display:none}
+#homeScreen #openBrandCard .license-arrow.dm-circle-arrow::after,
+#homeScreen #openProfileCard .profile-arrow.dm-circle-arrow::after{
+  content:"";display:block;width:7px;height:7px;
+  border-top:2px solid #f2faff;border-right:2px solid #f2faff;
+  transform:rotate(45deg);margin-left:-2px;
+}
+#homeScreen #openProfileCard .profile-arrow.dm-circle-arrow::after{
+  transform:rotate(-135deg);margin-left:2px;
+}
 #homeScreen #openBrandCard:focus-visible,
-#homeScreen #openProfileCard:focus-visible{outline:2px solid #d3edff;outline-offset:2px}
-/* Respect the opposing cut corners: keep each arrow fully inside
-   its mirrored upper contour rather than letting clip-path crop it. */
+#homeScreen #openProfileCard:focus-visible{
+  outline:2px solid #d3edff;outline-offset:2px;
+}
+/* Keep each heading comfortably clear of its mirrored navigation mark. */
 #homeScreen #openBrandCard .license-top{padding-right:9px}
 #homeScreen #openProfileCard .profile-top{padding-left:12px}
 /* New optional cards and Business Pulse now follow the same visual grammar. */
