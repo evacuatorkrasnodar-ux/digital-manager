@@ -192,7 +192,7 @@
     document.documentElement.classList.add('dm-custom-home-layout');
     document.documentElement.classList.toggle('dm-layout-editing',editing);
     document.getElementById('dmLayoutCaption').textContent=editing?
-      'Зажмите ⠿ и перемещайте. Карточки сами подстраивают изгибы ✦':'Магнитные формы подстроены под ваше расположение';
+      'Карточки ожили ✦ Перемещайте за ⠿ или стрелками':'Расположение сохранено';
     for(const b of toolbar.querySelectorAll('[data-dm-layout-action]')){
       const action=b.dataset.dmLayoutAction;
       b.hidden=(editing?action==='edit':action!=='edit');
@@ -201,16 +201,20 @@
     link.textContent=preferences.linked?'⛓ Разъединить пару':'⛓ Соединить пару';
     link.setAttribute('aria-label',preferences.linked?'Разъединить Клиентов и Рекомендацию':'Соединить Клиентов и Рекомендацию');
     renderLibrary();
-    // Magnetic geometry listens for every reorder, resize, group or visibility change.
+    // Notify any other dashboard listeners without changing the card contours.
     window.dispatchEvent(new CustomEvent('dm:layout-rendered',{detail:{linked:preferences.linked,editing}}));
     // Update the original optics only in this independent layout.
     requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')));
   }
-  function edit(){
+  function edit(source='settings'){
+    if(editing)return;
     preferences.enabled=true;editing=true;
     save();render();
-    window.scrollTo({top:0,behavior:'instant'});
-    document.getElementById('dmLayoutDone').focus();
+    // Direct long-press editing should not jump the screen away from the card.
+    if(source!=='hold'){
+      window.scrollTo({top:0,behavior:'instant'});
+      document.getElementById('dmLayoutDone').focus();
+    }
   }
   function done(){
     editing=false;save();render();
@@ -344,6 +348,63 @@
   board.addEventListener('pointercancel',e=>{
     if(dragging?.pointerId===e.pointerId){dragging=null;board.querySelectorAll('.dm-unit-dragging,.dm-unit-drop-target').forEach(x=>x.classList.remove('dm-unit-dragging','dm-unit-drop-target'));}
   });
+  // Hold a card (or empty dashboard background) to enter iOS-style edit mode.
+  // A short tap keeps every original card action intact. A scroll cancels holding.
+  const homeScreen=document.getElementById('homeScreen');
+  const HOLD_MS=630,TRAVEL_LIMIT=12;
+  let hold=null,blockTapUntil=0;
+  function cancelHold(){
+    if(hold){clearTimeout(hold.timer);hold=null;}
+  }
+  function holdCandidate(target){
+    if(!(target instanceof Element)||!dashboard.contains(target))return false;
+    if(target.closest('.dm-layout-toolbar,.dm-unit-controls,.shortcut,dialog,input,textarea,select,[contenteditable="true"]'))return false;
+    if(target.closest('.metric-card,.dm-home-widget,.dm-layout-unit'))return true;
+    // Blank dashboard space is eligible, but never hijack other action buttons.
+    if(target.closest('button,a,[role="button"]'))return false;
+    return Boolean(target.closest('.dashboard'));
+  }
+  homeScreen.addEventListener('pointerdown',event=>{
+    if(editing||event.button!==0||event.isPrimary===false||!holdCandidate(event.target))return;
+    cancelHold();
+    const current={pointerId:event.pointerId,x:event.clientX,y:event.clientY,
+      timer:null,activated:false};
+    hold=current;
+    current.timer=setTimeout(()=>{
+      if(hold!==current||editing||document.hidden)return;
+      hold=null;
+      blockTapUntil=Date.now()+850;
+      try{navigator.vibrate?.(15);}catch(_){}
+      edit('hold');
+    },HOLD_MS);
+  },{passive:true});
+  homeScreen.addEventListener('pointermove',event=>{
+    if(!hold||event.pointerId!==hold.pointerId)return;
+    if(Math.hypot(event.clientX-hold.x,event.clientY-hold.y)>TRAVEL_LIMIT)cancelHold();
+  },{passive:true});
+  for(const type of ['pointerup','pointercancel','lostpointercapture']){
+    homeScreen.addEventListener(type,event=>{
+      if(hold&&event.pointerId===hold.pointerId)cancelHold();
+    },{passive:true});
+  }
+  homeScreen.addEventListener('touchstart',event=>{
+    if(event.touches.length>1)cancelHold();
+  },{passive:true});
+  homeScreen.addEventListener('scroll',cancelHold,{capture:true,passive:true});
+  window.addEventListener('blur',cancelHold);
+  homeScreen.addEventListener('contextmenu',event=>{
+    if(Date.now()<blockTapUntil&&dashboard.contains(event.target))event.preventDefault();
+  },true);
+  // After the long press, swallow the synthetic click which could otherwise
+  // open a card/modal under the finger. Toolbar buttons remain usable.
+  document.addEventListener('click',event=>{
+    if(Date.now()>=blockTapUntil)return;
+    if(!homeScreen.contains(event.target))return;
+    if(event.target.closest('.dm-layout-toolbar,.dm-unit-controls'))return;
+    blockTapUntil=0;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  },true);
   window.addEventListener('dm:cards-changed',()=>{if(preferences.enabled)render();});
   window.addEventListener('storage',e=>{
     if(e.key===KEY){preferences=load();editing=false;render();}
