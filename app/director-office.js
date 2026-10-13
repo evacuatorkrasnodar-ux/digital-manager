@@ -296,8 +296,7 @@ function createSettingsEntry(){
  const mg=$('#mgHome');if(!mg||$('#dmDirectorSetupEntry'))return;
  const btn=document.createElement('button');
  btn.type='button';btn.id='dmDirectorSetupEntry';btn.className='dm-director-settings-entry';
- btn.innerHTML='<span class="dm-director-mark" aria-hidden="true">✦</span><span><strong>Продолжить знакомство</strong><small>Ваши ответы сохраняются</small></span>'+
- '';
+ btn.innerHTML='<span class="dm-director-mark" aria-hidden="true">✦</span><span><strong>Продолжить знакомство</strong><small>Ваши ответы сохраняются</small></span>';
  const manager=mg.querySelector('.mg-manager');
  if(manager)manager.after(btn);else mg.prepend(btn);
  btn.addEventListener('click',()=>open('intro'));
