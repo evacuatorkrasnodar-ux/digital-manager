@@ -37,6 +37,10 @@
 #homeScreen #openProfileCard .profile-arrow.dm-circle-arrow>.ico{transform:rotate(180deg)}
 #homeScreen #openBrandCard:focus-visible,
 #homeScreen #openProfileCard:focus-visible{outline:2px solid #d3edff;outline-offset:2px}
+/* Respect the opposing cut corners: keep each arrow fully inside
+   its mirrored upper contour rather than letting clip-path crop it. */
+#homeScreen #openBrandCard .license-top{padding-right:9px}
+#homeScreen #openProfileCard .profile-top{padding-left:12px}
 /* New optional cards and Business Pulse now follow the same visual grammar. */
 #homeScreen .dm-workspace-card .dm-workspace-arrow.dm-circle-arrow{
   display:grid!important;place-items:center!important;
