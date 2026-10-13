@@ -35,8 +35,8 @@
   const names={revenue:'Выручка',business:'Бизнес · 4 карточки',quick:'Быстрые действия',
     inbox:'Входящие',briefing:'Штаб директора',tax:'Налоговый контроль',
     day:'Мой день',steps:'Шаги',breathe:'Дыхание',calendar:'Календарь'};
-  const available={day:'dayWidget',steps:'healthSteps',breathe:'breathing',calendar:'calendarWidget'};
-  const fixedWide=new Set(['revenue','business','quick','calendar','inbox','briefing','tax']);
+  const available={day:'dayWidget',steps:'healthSteps',breathe:'breathing',calendar:'calendarWidget',inbox:'inboxWidget',briefing:'briefingWidget',tax:'taxWidget'};
+  const fixedWide=new Set(['revenue','business','quick','calendar']);
   const fixedBlocks=new Set(['business','quick']);
   const legacyBusiness=new Set(['business','signature','clients','advice','orders','profit']);
   // Categories belong to the card's purpose, not its position. Widgets never
@@ -44,9 +44,8 @@
   const sections={
     business:{title:'Картина бизнеса',subtitle:'Главное о компании',ids:['revenue','business']},
     departments:{title:'Отделы управляющего',subtitle:'Стратегия · клиенты · финансы · процессы',ids:['quick']},
-    communication:{title:'Связь',subtitle:'Письма и обращения в одном месте',ids:['inbox']},
-    control:{title:'Контроль',subtitle:'Налоги и важные обязательства',ids:['tax']},
-    day:{title:'Мой день',subtitle:'Планёрки, встречи и задачи',ids:['briefing','day','calendar']},
+    director:{title:'Инструменты управляющего',subtitle:'Связь · планёрки · контроль',ids:['inbox','briefing','tax']},
+    day:{title:'Мой день',subtitle:'Личные задачи и планы',ids:['day','calendar']},
     health:{title:'Моё здоровье',subtitle:'Забота о себе',ids:['steps','breathe']}
   };
   const defaultSections=Object.keys(sections);
@@ -76,7 +75,7 @@
   }
   const visibleSectionIds=()=>preferences.sectionOrder.filter(s=>sections[s].ids.some(id=>!isHidden(id)));
   function normalizeSections(items){
-    const chosen=Array.isArray(items)?items.filter(s=>defaultSections.includes(s)):[];
+    const chosen=Array.isArray(items)?items.map(s=>s==='communication'||s==='control'?'director':s).filter(s=>defaultSections.includes(s)):[];
     return [...new Set([...chosen,...defaultSections])];
   }
   function sectionShift(sectionId,by){
@@ -96,22 +95,25 @@
   }
   function syncDefaultSectionLabels(){
     if(preferences.enabled)return;
+    const directorIds=sections.director.ids;
+    const hasDirector=directorIds.some(id=>!isHidden(id));
     const hasDay=sections.day.ids.some(id=>!isHidden(id));
     const hasHealth=sections.health.ids.some(id=>!isHidden(id));
-    for(const [id,el] of defaultLabels)el.hidden=(id==='day'&&!hasDay)||(id==='health'&&!hasHealth);
-    // Home widgets live in the same existing grid; headings span both columns.
-    // Move the real widgets, never duplicate them or their listeners.
+    directorShelf.hidden=!hasDirector;
+    for(const id of directorIds)parts[id].hidden=isHidden(id);
+    if(hasDirector){
+      if(!defaultLabels.get('director').isConnected)dashboard.insertBefore(defaultLabels.get('director'),directorShelf);
+      defaultLabels.get('director').hidden=false;
+    }else defaultLabels.get('director').remove();
+    // Personal widgets use their existing grid; labels span its two columns.
     if(hasDay){
-      if(!defaultLabels.get('day').isConnected)dashboard.insertBefore(defaultLabels.get('day'),parts.briefing);
+      if(!defaultLabels.get('day').isConnected)widgetHost.prepend(defaultLabels.get('day'));
       for(const id of sections.day.ids)widgetHost.append(parts[id]);
-    }
+    }else defaultLabels.get('day').remove();
     if(hasHealth){
       widgetHost.append(defaultLabels.get('health'));
       for(const id of sections.health.ids)widgetHost.append(parts[id]);
-    }
-    // Removing empty headings keeps the widget grid clean when toggles change.
-    if(!hasDay)defaultLabels.get('day').remove();
-    if(!hasHealth)defaultLabels.get('health').remove();
+    }else defaultLabels.get('health').remove();
   }
 
   const toolbar=document.createElement('section');
@@ -133,6 +135,12 @@
   board.setAttribute('aria-label','Настраиваемые карточки главной');
   dashboard.insertBefore(toolbar,parts.revenue);
   dashboard.insertBefore(board,dashboard.querySelector('.shortcuts'));
+  // All optional director tools share one compact two-column shelf in default
+  // mode. Business and Quick Actions remain separate, untouched DOM blocks.
+  const directorShelf=document.createElement('div');
+  directorShelf.className='dm-director-shelf';directorShelf.id='dmDirectorShelf';
+  directorShelf.hidden=true;
+  dashboard.insertBefore(directorShelf,board);
   // Finish is always reachable even when the user scrolls to the last card.
   const floatDone=document.createElement('button');
   floatDone.type='button';
@@ -177,7 +185,7 @@
     let cards={};
     try{cards=JSON.parse(localStorage.getItem(managementCards)||'{}')?.management?.cards||{};}catch(_){}
     const flag=available[id];
-    return ['day','steps','breathe','calendar'].includes(id)?cards[flag]===true:cards[flag]!==false;
+    return ['day','steps','breathe','calendar','inbox','briefing','tax'].includes(id)?cards[flag]===true:cards[flag]!==false;
   }
   function isHidden(id){
     if(fixedBlocks.has(id))return false;
@@ -239,19 +247,16 @@
     // Approved original card geometry stays untouched: only DOM placement and
     // small separate section headings are used to organize the Home.
     widgetHost.replaceChildren(parts.day,parts.calendar,parts.steps,parts.breathe);
+    directorShelf.replaceChildren(parts.inbox,parts.briefing,parts.tax);
     dashboard.insertBefore(parts.revenue,board);
     dashboard.insertBefore(originalGrid,board);
     dashboard.insertBefore(parts.shortcuts,board);
-    dashboard.insertBefore(parts.inbox,board);
-    dashboard.insertBefore(parts.tax,board);
-    dashboard.insertBefore(parts.briefing,board);
+    dashboard.insertBefore(directorShelf,board);
     dashboard.insertBefore(widgetHost,board);
     for(const [id,element] of defaultLabels){
       if(id==='business')dashboard.insertBefore(element,parts.revenue);
       if(id==='departments')dashboard.insertBefore(element,parts.shortcuts);
-      if(id==='communication')dashboard.insertBefore(element,parts.inbox);
-      if(id==='control')dashboard.insertBefore(element,parts.tax);
-      if(id==='day')dashboard.insertBefore(element,parts.briefing);
+      if(id==='director'&&!directorShelf.hidden)dashboard.insertBefore(element,directorShelf);
     }
     originalGrid.hidden=false;
     // Existing widget module owns its own visibility and data refresh.
@@ -282,6 +287,7 @@
     const previousScrollY=window.scrollY;
     // Move existing cards: never clone their event handlers or generate mock data.
     holdCards();
+    directorShelf.hidden=true;
     // Default-mode headings must never duplicate the grouped editor headings.
     for(const label of defaultLabels.values())label.remove();
     board.replaceChildren();
@@ -594,7 +600,17 @@
     event.preventDefault();
     event.stopImmediatePropagation();
   },true);
-  window.addEventListener('dm:cards-changed',()=>{if(preferences.enabled)render();else syncDefaultSectionLabels();});
+  window.addEventListener('dm:cards-changed',event=>{
+    // A switch explicitly turned on in Management must also restore the card
+    // from the custom-layout hidden library. The director remains in control.
+    if(event?.detail?.enabled===true){
+      const changed=Object.keys(available).find(id=>available[id]===event.detail.key);
+      if(changed&&preferences.hidden.includes(changed)){
+        preferences.hidden=preferences.hidden.filter(id=>id!==changed);save();
+      }
+    }
+    if(preferences.enabled)render();else syncDefaultSectionLabels();
+  });
   window.addEventListener('storage',e=>{
     if(e.key===KEY){preferences=load();editing=false;render();}
     if(e.key===managementCards&&preferences.enabled)render();
