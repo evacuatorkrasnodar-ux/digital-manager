@@ -666,8 +666,8 @@ html.dm-plasma-panel-open .dock-hidden-controls{
 .dm-chat-panel.dm-chat-editor{
   overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(116,165,201,.48) transparent;
   left:50%;width:min(430px,calc(100vw - 24px));
-  bottom:calc(128px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
-  max-height:calc(100dvh - 147px - var(--dm-chat-kb,0px));
+  bottom:calc(12px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
+  max-height:max(110px,calc(100dvh - 32px - env(safe-area-inset-bottom,0px) - var(--dm-chat-kb,0px)));
   transform:translateX(-50%);animation:none;gap:9px;
 }
 .dm-chat-editor .dm-chat-compose{padding:13px 14px 12px;border-radius:23px;min-height:0}
@@ -719,8 +719,8 @@ html.dm-plasma-panel-open .dock-hidden-controls{
 
 .dm-chat-panel.dm-chat-keyboard-open{max-height:max(125px,calc(100dvh - 24px - var(--dm-chat-kb,0px)))}
 .dm-chat-panel.dm-chat-keyboard-open.dm-chat-editor{
-  bottom:calc(96px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
-  max-height:max(135px,calc(100dvh - 109px - var(--dm-chat-kb,0px)));
+  bottom:calc(10px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
+  max-height:max(110px,calc(100dvh - 28px - env(safe-area-inset-bottom,0px) - var(--dm-chat-kb,0px)));
 }
 .dm-chat-panel.dm-chat-keyboard-open.dm-chat-editor .dm-chat-compose textarea{
   height:min(28dvh,225px)!important;max-height:min(28dvh,225px);
