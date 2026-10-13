@@ -288,7 +288,7 @@ root.addEventListener('submit',event=>{
 root.addEventListener('keydown',event=>{if(event.key==='Escape'){event.stopPropagation();close();}});
 document.addEventListener('click',event=>{
  const btn=event.target.closest('#openAdvice,#homeScreen .recommendation-card .rec-chevron,.shortcuts .shortcut[data-action]');
- if(!btn||!root.hidden)return;
+ if(!btn||!root.hidden||document.documentElement.classList.contains('dm-layout-editing'))return;
  const action=btn.dataset.action;
  if(action&&['strategy','clients','finance','automation'].includes(action)){
   event.preventDefault();event.stopImmediatePropagation();
@@ -302,12 +302,8 @@ for(const ev of ['dm:sales-changed','dm:sales-insight-changed','dm:business-cont
  window.addEventListener(ev,()=>queueMicrotask(refresh));
 }
 window.addEventListener('storage',event=>{if(event.key===KEY){data=load();refresh();}});
-document.addEventListener('click',event=>{
- if(event.target.closest('[data-journey-finish]')&&!remaining().every(q=>data.skipped[q.id])){
-  setTimeout(()=>{if(root.hidden)open('intro');},220);
- }
-},true);
 window.DMDirectorOffice=Object.freeze({open,close,progress,refresh,proposal:candidate,getAnswers:()=>({...data.answers})});
 createSettingsEntry();
 refresh();
+document.addEventListener('DOMContentLoaded',()=>queueMicrotask(refresh),{once:true});
 })();
