@@ -136,7 +136,7 @@
 
   // Единственный экран Управления. Удалено старое тестовое меню CRM.
   const mgDefaults={managerName:'Цифровой управляющий',tone:'auto',autonomy:0,
-    cards:{promotion:true,sales:true,clients:true,money:true,inside:true,picture:true,tasks:true,dayWidget:false,calendarWidget:false,healthSteps:false,breathing:false},
+    cards:{promotion:true,sales:true,clients:true,money:true,inside:true,picture:true,tasks:true,dayWidget:false,calendarWidget:false,healthSteps:false,breathing:false,inboxWidget:false,briefingWidget:false,taxWidget:false},
     skills:{market:true,opportunities:true,rules:true,documents:true},
     rules:{advertising:false,tools:false,prices:false,spending:false}};
   const mgSaved=state.management&&typeof state.management==='object'?state.management:{};
@@ -778,10 +778,10 @@
     mgData.cards[el.dataset.mgCard]=el.checked;save();mgApplyCards();
     // Recolor the laser tracks immediately to match cards actually shown on Home.
     requestAnimationFrame(updateCardLaserPalette);
-    if(['dayWidget','calendarWidget','healthSteps','breathing'].includes(el.dataset.mgCard)){
+    if(['dayWidget','calendarWidget','healthSteps','breathing','inboxWidget','briefingWidget','taxWidget'].includes(el.dataset.mgCard)){
       window.dispatchEvent(new CustomEvent('dm:cards-changed',{detail:{key:el.dataset.mgCard,enabled:el.checked}}));
       notify(el.checked?'Виджет добавлен на Главную ✦':'Виджет скрыт с Главной ✦');
-    }else if(!['clients','sales','money'].includes(el.dataset.mgCard))notify('Выбор сохранён. Эта постоянная карточка появится на Главной после подключения раздела.');
+    }else if(!['clients','sales','money'].includes(el.dataset.mgCard))notify('Выбор сохранён. Некоторые инструменты пока только готовятся.');
   }));
   byId('mgDetail').addEventListener('click',event=>{
     if(event.target.closest('#mgOpenDigitalTrace')){window.DMDigitalTrace?.open('management');return;}
