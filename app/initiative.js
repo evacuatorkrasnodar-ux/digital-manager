@@ -141,7 +141,7 @@ function buildPanel(){
  root=document.createElement('section');root.id='dmInitiativeScreen';root.className='dm-init-overlay';
  root.hidden=true;root.setAttribute('role','dialog');root.setAttribute('aria-modal','true');
  root.setAttribute('aria-labelledby','dmInitTitle');
- root.innerHTML='<div class="dm-init-frame"><header class="dm-init-head"><div><small>ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</small><h2 id="dmInitTitle">Я на связи</h2></div><button type="button" data-init-close aria-label="Закрыть">×</button></header><div class="dm-init-content" id="dmInitBody"></div></div>';
+ root.innerHTML='<div class="dm-init-frame"><header class="dm-init-head"><div><small>ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</small><h2 id="dmInitTitle">Автоматизация</h2></div><button type="button" data-init-close aria-label="Закрыть">×</button></header><div class="dm-init-content" id="dmInitBody"></div></div>';
  document.body.append(root);
  root.addEventListener('click',handleClick);
  root.addEventListener('submit',handleSubmit);
@@ -170,6 +170,7 @@ function introMarkup(){
   '<span class="dm-init-eyebrow">ИНИЦИАТИВА УПРАВЛЯЮЩЕГО</span><h3>'+esc(headline())+'</h3>'+
   '<p>Можешь поручить мне рутину. Я сам замечу новые обращения в «Продажах», составлю черновики ответов и покажу, что получилось. Тебе не нужно каждый раз создавать задание.</p>'+
   '<button class="dm-init-main-button" type="button" data-init-consent>Разрешить подготовку ↗</button>'+
+  '<button class="dm-init-pause" type="button" data-init-delegated>Поручения управляющему ↗</button>'+
   (data.stored?'<p>Уже сохранено черновиков: '+data.stored+'. Они не удалены.</p>':'')+
   businessProfileMarkup()+
   infoFoot+'</div>';
@@ -190,7 +191,8 @@ function statusMarkup(){
  let main='<section class="dm-init-summary"><span class="dm-init-eyebrow">МОЙ ХОД · ПО РЕАЛЬНЫМ ЗАПИСЯМ</span><h3>'+esc(headline())+'</h3>'+
   '<p>'+(all.length?'Я сам подготовил черновики по вашим обращениям. Список ниже — только текущие клиенты.': 'Как появятся обращения в «Продажах», я подготовлю ответы без отдельной команды.')+(workSummary?' '+esc(workSummary):'')+'</p>'+
   '<div class="dm-init-metrics"><div><strong>'+data.prepared+'</strong><small>Черновиков по клиентам</small></div><div><strong>'+data.awaitingReview+'</strong><small>Нужно посмотреть</small></div><div><strong>'+data.reviewed+'</strong><small>Просмотрено</small></div></div>'+
-  '<button class="dm-init-pause" type="button" data-init-pause>Приостановить подготовку</button></section>';
+  '<button class="dm-init-pause" type="button" data-init-pause>Приостановить подготовку</button>'+
+  '<button class="dm-init-pause" type="button" data-init-delegated>Поручения управляющему ↗</button></section>';
  if(priority)main+='<section class="dm-init-insight"><small>Я заметил · по твоим записям</small><p>'+esc(priority.text)+'</p><span>'+esc(priority.next)+' Никаких внешних действий пока не было.</span></section>';
  if(all.length){
   main+='<section class="dm-init-work"><h3>Что я подготовил</h3>'+
@@ -227,7 +229,7 @@ function editorMarkup(){
 function render(){
  if(!root||root.hidden)return;
  const title=root.querySelector('#dmInitTitle'),body=root.querySelector('#dmInitBody');
- if(title)title.textContent=view==='editor'?'Готовый ответ':state.enabled?'Мои дела в работе':'Я на связи';
+ if(title)title.textContent=view==='editor'?'Готовый ответ':'Автоматизация';
  if(body)body.innerHTML=(view==='consent'?consentMarkup():view==='editor'?editorMarkup():state.enabled?statusMarkup():introMarkup())+
   (feedback?'<p class="dm-init-feedback" role="status">'+esc(feedback)+'</p>':'');
  const closeButton=root.querySelector('[data-init-close]');
@@ -287,6 +289,7 @@ async function copyCurrent(){
 function handleClick(event){
  const button=event.target.closest('button');if(!button)return;
  if(button.hasAttribute('data-init-close')){close();return}
+ if(button.hasAttribute('data-init-delegated')){close();window.DMTaskJournal?.open?.('delegated');return}
  if(button.hasAttribute('data-init-consent')){view='consent';feedback='';render();return}
  if(button.hasAttribute('data-init-cancel')){view='intro';feedback='';render();return}
  if(button.hasAttribute('data-init-pause')){pause();return}
