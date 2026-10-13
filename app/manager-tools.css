@@ -1,0 +1,124 @@
+/* Management working tools — new isolated Black Velvet surfaces.
+   Keep the Home dashboard, protected metric sculpture and plasma untouched. */
+#managementScreen .mg-home>.dm-manager-tools-entry{
+ display:flex;align-items:center;gap:10px;width:100%;min-height:73px;
+ padding:8px 12px;border-radius:20px;
+ border:1px solid rgba(148,184,210,.37);
+ background:radial-gradient(ellipse at 6% 0,rgba(82,142,194,.13),transparent 73%),
+ linear-gradient(150deg,rgba(23,37,54,.85),rgba(6,13,22,.96));
+ box-shadow:inset 0 1px rgba(235,247,255,.10),0 5px 16px rgba(0,0,0,.20);
+ color:#f0f6fc;text-align:left;cursor:pointer;font-family:inherit;
+}
+#managementScreen .dm-manager-tools-entry .dm-tools-icon{
+ display:grid;place-items:center;width:46px;height:46px;flex:none;
+ font-size:25px;font-weight:300;color:#d3e8fa;border-radius:14px;
+ background:linear-gradient(145deg,#274563,#0b1b2d);
+ border:1px solid rgba(164,205,234,.37);
+}
+#managementScreen .dm-manager-tools-entry>.mg-copy{
+ display:flex;flex-direction:column;gap:3px;flex:1;min-width:0;
+}
+#managementScreen .dm-manager-tools-entry .mg-copy strong{font-size:14px;line-height:1.24;font-weight:570;color:#f1f7ff}
+#managementScreen .dm-manager-tools-entry .mg-copy small{font-size:10px;line-height:1.33;color:#a8c5dc}
+#managementScreen .dm-manager-tools-entry>.mg-chevron{font-size:24px;line-height:1;color:#b7d2e5}
+#managementScreen .dm-manager-tools-entry:focus-visible{outline:2px solid #c8e6fa;outline-offset:2px}
+#managementScreen .dm-management-suggestion[hidden]{display:none!important}
+#managementScreen .mg-home>.dm-management-suggestion{
+ display:flex;flex-direction:column;gap:9px;
+ padding:12px 13px;margin:0;
+ border:1px solid rgba(191,159,113,.38);border-radius:17px;
+ background:radial-gradient(ellipse at 5% 0,rgba(163,115,58,.14),transparent 70%),
+ linear-gradient(145deg,#221d1f,#0a1018);
+ box-shadow:inset 0 1px rgba(255,255,255,.07);
+}
+#managementScreen .dm-management-suggestion-copy{display:grid;gap:6px}
+#managementScreen .dm-management-suggestion-copy small{color:#ddc29f;font-size:9px;letter-spacing:.08em}
+#managementScreen .dm-management-suggestion-copy strong{color:#f1e7d8;font-size:12.4px;line-height:1.35;font-weight:580}
+#managementScreen .dm-management-suggestion-copy p{color:#c9d7e3;font-size:10.7px;line-height:1.5;margin:0}
+#managementScreen .dm-management-suggestion-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+#managementScreen .dm-management-suggestion-actions button{
+ min-height:32px;padding:8px 13px;border-radius:10px;cursor:pointer;
+ border:1px solid rgba(186,196,211,.43);
+ font:520 10.5px/1.3 system-ui;color:#f0f6fc;
+ background:linear-gradient(140deg,#31465a,#0b1a29);
+}
+#managementScreen .dm-management-suggestion-actions button:first-child{
+ border-color:rgba(213,173,117,.52);background:linear-gradient(140deg,#55422e,#1e2026)
+}
+#dmManagerToolsPanel[hidden]{display:none!important}
+#dmManagerToolsPanel.dm-tools-overlay{
+ position:fixed;inset:0;z-index:1450;display:grid;place-items:end center;
+ padding:calc(env(safe-area-inset-top,0px) + 12px) 8px calc(env(safe-area-inset-bottom,0px) + 11px);
+ background:rgba(0,3,8,.82);backdrop-filter:blur(11px);-webkit-backdrop-filter:blur(11px);
+ color:#eef7ff;font-family:inherit;
+}
+#dmManagerToolsPanel .dm-tools-frame{
+ width:min(440px,100%);max-height:min(785px,92dvh);min-height:0;
+ display:flex;flex-direction:column;overflow:hidden;
+ border-radius:23px;border:1px solid rgba(152,192,220,.43);
+ background:radial-gradient(ellipse at 98% 0,rgba(85,132,171,.14),transparent 65%),
+ linear-gradient(155deg,#142235,#08101b 67%,#03070c);
+ box-shadow:0 24px 66px rgba(0,0,0,.72),inset 0 1px rgba(255,255,255,.09);
+}
+#dmManagerToolsPanel .dm-tools-head{
+ flex:none;display:flex;justify-content:space-between;align-items:center;gap:8px;
+ padding:17px 15px 13px;border-bottom:1px solid rgba(154,185,211,.2)
+}
+#dmManagerToolsPanel .dm-tools-head small{font-size:9px;letter-spacing:.11em;color:#d1ad85}
+#dmManagerToolsPanel .dm-tools-head h2{font-size:19px;line-height:1.28;font-weight:560;margin:5px 0 0}
+#dmManagerToolsPanel [data-tools-close]{
+ flex:none;display:grid;place-items:center;width:35px;height:35px;
+ border-radius:12px;border:1px solid rgba(159,192,221,.45);
+ background:linear-gradient(145deg,#2b4861,#0b1b2c);color:#f2f8ff;
+ font:400 24px/1 system-ui;cursor:pointer
+}
+#dmManagerToolsPanel .dm-tools-body{
+ flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;
+ -webkit-overflow-scrolling:touch;padding:13px 12px 23px
+}
+#dmManagerToolsPanel .dm-tools-intro{font-size:11.6px;line-height:1.55;color:#d0deeb;margin:4px 3px 13px}
+#dmManagerToolsPanel .dm-tools-list{display:grid;gap:9px}
+#dmManagerToolsPanel .dm-tools-item{
+ display:grid;grid-template-columns:43px minmax(0,1fr) auto;gap:10px;align-items:start;
+ padding:11px 10px;border:1px solid rgba(151,188,214,.29);border-radius:15px;
+ background:linear-gradient(145deg,rgba(24,41,61,.70),rgba(5,13,24,.83));
+ box-shadow:inset 0 1px rgba(255,255,255,.04)
+}
+#dmManagerToolsPanel .dm-tools-item-icon{
+ display:grid;place-items:center;width:43px;height:43px;border-radius:13px;
+ border:1px solid rgba(152,196,231,.33);
+ background:linear-gradient(145deg,#284463,#101d30);color:#dcefff;
+ font-size:23px;font-weight:370
+}
+#dmManagerToolsPanel .dm-tools-item-copy{display:flex;flex-direction:column;gap:5px;min-width:0;padding:2px 0 0}
+#dmManagerToolsPanel .dm-tools-item-copy strong{font-size:12.4px;line-height:1.35;font-weight:560}
+#dmManagerToolsPanel .dm-tools-item-copy span{font-size:10.8px;line-height:1.4;color:#c4d8e9}
+#dmManagerToolsPanel .dm-tools-item-copy small{font-size:9.8px;line-height:1.4;color:#8eafca}
+#dmManagerToolsPanel .dm-tools-open{
+ padding:8px 9px;min-height:33px;border-radius:10px;
+ border:1px solid rgba(160,197,225,.4);
+ color:#ecf6ff;background:linear-gradient(145deg,#2e4a68,#0e1f30);
+ font:540 10.4px/1.3 system-ui;white-space:nowrap;cursor:pointer
+}
+#dmManagerToolsPanel .dm-tools-dock{
+ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
+ grid-column:2/4;padding-top:7px;margin-top:2px;border-top:1px solid rgba(155,187,209,.16)
+}
+#dmManagerToolsPanel .dm-tools-dock>span{font-size:9.8px;color:#a9c1d3;line-height:1.35}
+#dmManagerToolsPanel .dm-tools-dock>button{
+ padding:7px 10px;min-height:31px;border-radius:9px;
+ border:1px solid rgba(200,176,135,.35);
+ background:linear-gradient(145deg,#40342f,#101b29);color:#e9edf4;
+ font:540 10.2px/1.25 system-ui;cursor:pointer
+}
+#dmManagerToolsPanel .dm-tools-note{font-size:10.3px;line-height:1.53;color:#91acc2;margin:16px 3px 0}
+#dmManagerToolsPanel button:focus-visible{outline:2px solid #d5eeff;outline-offset:2px}
+@media(max-width:353px){
+ #dmManagerToolsPanel .dm-tools-item{grid-template-columns:37px minmax(0,1fr);gap:8px}
+ #dmManagerToolsPanel .dm-tools-item-icon{width:36px;height:36px;font-size:20px}
+ #dmManagerToolsPanel .dm-tools-open{grid-column:2;justify-self:start}
+ #dmManagerToolsPanel .dm-tools-dock{grid-column:1/3}
+}
+@media(prefers-reduced-motion:reduce){
+ #dmManagerToolsPanel *{animation:none!important;transition:none!important}
+}
