@@ -69,7 +69,7 @@ toolsRow.innerHTML='<span class="mg-icon mg-blue dm-tools-icon" aria-hidden="tru
  '<span class="mg-copy"><strong>Рабочие инструменты</strong>'+
  '<small>Входящие · планёрки · переговоры · налоги</small>'+
  '<small>Доступны, даже когда карточки скрыты с Главной</small></span>'+
- '<span class="mg-chevron" aria-hidden="true"></span>';
+ '';
 managerRow.after(toolsRow);
 const suggestion=document.createElement('section');
 suggestion.className='dm-management-suggestion';suggestion.id='dmManagementSuggestion';suggestion.hidden=true;
