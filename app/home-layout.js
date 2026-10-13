@@ -116,6 +116,10 @@
     return controls;
   }
   function appendClientWithEdge(host){
+    // Management may have previously hidden Clients while they were detached.
+    // Re-show the real clipped card and its matching independent contour together.
+    parts.clients.hidden=false;
+    parts.clientEdge.hidden=false;
     const wrap=document.createElement('div');wrap.className='dm-client-sculpt';
     wrap.append(parts.clients,parts.clientEdge);host.append(wrap);
   }
