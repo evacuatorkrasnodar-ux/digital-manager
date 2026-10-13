@@ -430,6 +430,59 @@
     if(dragging?.pointerId===e.pointerId)clearDrag();
   });
   window.addEventListener('blur',clearDrag);
+  // Hold a card or free dashboard space to enter jiggle mode. Ordinary taps,
+  // vertical scrolling and multi-touch must never accidentally start editing.
+  const homeScreen=document.getElementById('homeScreen');
+  const HOLD_MS=630,TRAVEL_LIMIT=12;
+  let hold=null,blockTapUntil=0;
+  function cancelHold(){
+    if(hold){clearTimeout(hold.timer);hold=null;}
+  }
+  function holdCandidate(target){
+    if(!(target instanceof Element)||!dashboard.contains(target))return false;
+    if(target.closest('.dm-layout-toolbar,.dm-unit-controls,.shortcut,dialog,input,textarea,select,[contenteditable="true"]'))return false;
+    if(target.closest('.metric-card,.dm-home-widget,.dm-layout-unit'))return true;
+    if(target.closest('button,a,[role="button"]'))return false;
+    return Boolean(target.closest('.dashboard'));
+  }
+  homeScreen.addEventListener('pointerdown',event=>{
+    if(editing||event.button!==0||event.isPrimary===false||!holdCandidate(event.target))return;
+    cancelHold();
+    const current={pointerId:event.pointerId,x:event.clientX,y:event.clientY,timer:null};
+    hold=current;
+    current.timer=setTimeout(()=>{
+      if(hold!==current||editing||document.hidden)return;
+      hold=null;
+      blockTapUntil=Date.now()+850;
+      try{navigator.vibrate?.(15);}catch(_){}
+      edit('hold');
+    },HOLD_MS);
+  },{passive:true});
+  homeScreen.addEventListener('pointermove',event=>{
+    if(!hold||event.pointerId!==hold.pointerId)return;
+    if(Math.hypot(event.clientX-hold.x,event.clientY-hold.y)>TRAVEL_LIMIT)cancelHold();
+  },{passive:true});
+  for(const type of ['pointerup','pointercancel','lostpointercapture']){
+    homeScreen.addEventListener(type,event=>{
+      if(hold&&event.pointerId===hold.pointerId)cancelHold();
+    },{passive:true});
+  }
+  homeScreen.addEventListener('touchstart',event=>{
+    if(event.touches.length>1)cancelHold();
+  },{passive:true});
+  homeScreen.addEventListener('scroll',cancelHold,{capture:true,passive:true});
+  window.addEventListener('blur',cancelHold);
+  homeScreen.addEventListener('contextmenu',event=>{
+    if(Date.now()<blockTapUntil&&dashboard.contains(event.target))event.preventDefault();
+  },true);
+  // Ignore the synthetic click emitted after a long press that remounts cards.
+  document.addEventListener('click',event=>{
+    if(Date.now()>=blockTapUntil||!homeScreen.contains(event.target))return;
+    if(event.target.closest('.dm-layout-toolbar,.dm-unit-controls'))return;
+    blockTapUntil=0;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  },true);
   window.addEventListener('dm:cards-changed',()=>{if(preferences.enabled)render();});
   window.addEventListener('storage',e=>{
     if(e.key===KEY){preferences=load();editing=false;render();}
