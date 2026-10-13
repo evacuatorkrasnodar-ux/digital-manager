@@ -87,7 +87,7 @@ function close(){
 }
 const statusText=x=>({new:'Новое',draft:'Черновик',approval:'На подпись',approved:'Одобрено, не отправлено',archived:'Завершено вручную'}[x]||'Записано');
 function inboxList(){
- const items=entries().slice().reverse();
+ const items=entries().slice();
  return '<div class="dm-workspace-intro"><h3>Все обращения — в одном месте</h3>'+
  '<p>Когда появятся реальные подключения, управляющий сможет собирать письма и заявки автоматически. Сейчас можно сохранить обращение и подготовить на него ответ.</p>'+
  btn('new-message','+ Добавить обращение')+'</div>'+
@@ -135,7 +135,7 @@ function makeAgenda(){
  'В завершение: благодарю команду. Договорённости запишем и проверим по фактическому выполнению.';
 }
 function briefing(){
- const prepared=data.briefs.slice().reverse().slice(0,8);
+ const prepared=data.briefs.slice(0,8);
  return '<div class="dm-workspace-intro"><h3>Утренняя планёрка</h3><p>Я соберу речь по доступным записям о делах. Не буду придумывать результаты сотрудников. План можно исправить, сохранить, скопировать или озвучить на этом устройстве.</p>'+
  '<div class="dm-workspace-actions">'+btn('make-agenda','✦ Подготовить планёрку')+btn('week','План на неделю')+'</div></div>'+
  (prepared.length?'<section class="dm-workspace-list"><h3>Сохранённые планы</h3>'+prepared.map(x=>'<button class="dm-workspace-row" type="button" data-ws-plan="'+esc(x.id)+'"><span><strong>'+esc(x.title)+'</strong><small>'+esc(date(x.at))+'</small></span><span>↗</span></button>').join('')+'</section>':'')+note;
@@ -169,7 +169,7 @@ function negotiationForm(){
  '<p class="dm-workspace-honest">Этот экран не записывает и не прослушивает разговор. Если вы вставляете запись или расшифровку, убедитесь, что имеете на это право.</p></form>';
 }
 function negotiationList(){
- const items=data.negotiations.slice().reverse();
+ const items=data.negotiations.slice();
  return '<div class="dm-workspace-intro"><h3>Переговорный помощник</h3>'+
  '<p>До встречи подготовлю вопросы, после — помогу разобрать записанные условия и найти места, где стоит быть осторожнее. Проверку реестров и живое прослушивание добавим после надёжных подключений.</p>'+
  btn('new-deal','+ Разобрать переговоры')+'</div>'+
@@ -335,6 +335,9 @@ window.addEventListener('dm:director-approved',event=>{
  if(!m)return;
  m.status='approved';save();
 });
-window.DMDirectorWorkspace=Object.freeze({open,close,count:()=>entries().length,refresh:updateCards});
+window.DMDirectorWorkspace=Object.freeze({open,close,count:()=>entries().length,
+ summary:()=>({total:entries().length,awaiting:entries().filter(x=>['new','draft','approval'].includes(x.status)).length,
+ important:entries().filter(x=>x.status!=='archived'&&classify(x).urgent).length}),
+ refresh:updateCards});
 updateCards();
 })();
