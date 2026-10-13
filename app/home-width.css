@@ -46,12 +46,3 @@ body .app-shell #homeScreen .shortcuts{
   background:transparent!important;
 }
 
-/* Dock-free Home: reserve the bottom breathing room INSIDE the black Home
-   surface, not as an exposed app-shell footer when scrolled to the end.
-   Normal five-button dock and all other screens retain their geometry. */
-html.dock-is-hidden body .app-shell{
-  padding-bottom:0;
-}
-html.dock-is-hidden body .app-shell #homeScreen{
-  padding-bottom:calc(79px + env(safe-area-inset-bottom,0px));
-}
