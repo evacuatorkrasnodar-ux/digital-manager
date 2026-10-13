@@ -90,8 +90,14 @@ function candidate(){
   return {id:'observed:'+clean(serious.id||t,55),kind:'review',title:t,body:b,
     source:'Фактические записи в приложении',next:clean(serious.next||'Предлагаю проверить данные и подготовить решение.',220)};
  }
- if(!context)return {id:'intro',kind:'intro',title:'Давайте познакомимся',body:'Расскажите, чем занимается компания. Я буду постепенно изучать дело, чтобы приносить на подпись полезные решения.',
-   source:'Данных о бизнесе пока недостаточно',next:'Можно отвечать постепенно и продолжить позже в настройках.'};
+ if(!context){
+  const deferred=data.reminderAt>Date.now()||data.remindersOff;
+  return deferred?
+   {id:'awaiting-context',kind:'gap',title:'Готов принять дела',body:'Пока у меня нет описания вашей компании. Я не буду придумывать показатели или торопить с вопросами. Когда удобно, продолжим знакомство в Управлении.',
+    source:'Знакомство отложено по вашему выбору',next:'Можно продолжить в любой момент.'}:
+   {id:'intro',kind:'intro',title:'Давайте познакомимся',body:'Расскажите, чем занимается компания. Я буду постепенно изучать дело, чтобы приносить на подпись полезные решения.',
+    source:'Данных о бизнесе пока недостаточно',next:'Можно отвечать постепенно и продолжить позже в настройках.'};
+ }
  if(missing.length&&(data.reminderAt===0||Date.now()>=data.reminderAt)&&!data.remindersOff)
   return {id:'continue',kind:'intro',title:'Продолжим знакомство?',body:'Я уже знаю кое-что о компании, но '+missing.length+' '+(missing.length===1?'вопрос остался':'вопросов осталось')+' без ответа. Чем лучше знаю процессы, тем полезнее мои решения.',
     source:'Сохранённые ответы директора',next:'Достаточно ответить на один вопрос; остальное можно отложить.'};
@@ -139,8 +145,9 @@ function deskMarkup(){
  button('intro','Продолжить знакомство ↗')+'</section>'+historyMarkup();
 }
 function nextQuestion(){
- const unanswered=remaining();
- return unanswered.find(q=>!sessionSeen.has(q.id))||null;
+ const unanswered=remaining().filter(q=>!sessionSeen.has(q.id));
+ // Ask entirely new questions before revisiting something the director skipped.
+ return unanswered.find(q=>!data.skipped[q.id])||unanswered[0]||null;
 }
 function introMarkup(){
  const p=progress(),q=nextQuestion();
@@ -232,6 +239,7 @@ function createSettingsEntry(){
 function approve(){
  const p=proposal||candidate();
  if(p.kind==='intro'){view='intro';sessionSeen=new Set();render();return;}
+ if(p.kind==='gap'){view='intro';sessionSeen=new Set();render();return;}
  ledger('blocked',p,p.kind==='connection'?
   'Разрешение на подготовку идеи зафиксировано. Для реальной интеграции необходим официальный интерфейс, настройка прав и отдельное подтверждение. Ничего не подключено.':
   'Поручение принято в директорский журнал. Чтобы действительно решить задачу, требуется доступ к нужному инструменту или действие человека. Результат не подтверждён.');
