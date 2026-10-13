@@ -61,6 +61,19 @@
 #dmManagerToolsPanel .dm-tools-inline-arrow.dm-circle-arrow>.ico{
   width:10px;height:10px;
 }
+/* A compact version of the same mark inside dialog/action buttons. */
+.dm-action-circle.dm-circle-arrow{
+  display:inline-grid;place-items:center;vertical-align:middle;
+  width:17px;height:17px;min-width:17px;margin-left:3px;
+  border-color:rgba(168,204,232,.43);
+}
+.dm-action-circle.dm-circle-arrow>.ico{width:10px;height:10px;stroke-width:2.05}
+#dmWorkspaceOverlay .dm-workspace-row>.dm-action-circle{margin-left:auto}
+#dmWorkspaceOverlay button[type="submit"] .dm-action-circle,
+#dmBusinessPulseOverlay button[data-pulse-target] .dm-action-circle,
+#dmDirectorOffice button[type="submit"] .dm-action-circle{
+  margin-left:5px;
+}
 /* Actual printable/shareable passports in the existing modal.
    A full form stays available underneath the company passport. */
 #modal .dm-passport-lead{
