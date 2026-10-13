@@ -56,7 +56,7 @@
  min-height:38px;padding:9px 12px;
  border-radius:12px;border:1px solid rgba(142,184,219,.43);
  background:linear-gradient(155deg,#243d54,#0d1b2a);
- color:#eff6ff;font:500 12px/1.25 inherit;cursor:pointer;
+ color:#eff6ff;font-size:12px;font-weight:500;line-height:1.25;font-family:inherit;cursor:pointer;
 }
 #dmDirectorOffice button[data-do=approve],
 #dmDirectorOffice button[data-do=option],
@@ -106,8 +106,8 @@
  color:#e4c39c;background:linear-gradient(140deg,#332a26,#0d1826);font-size:21px;
 }
 #mgHome #dmDirectorSetupEntry>span:nth-child(2){display:grid;gap:5px;min-width:0;flex:1}
-#mgHome #dmDirectorSetupEntry strong{font:550 13px/1.3 inherit;color:#eff6fc}
-#mgHome #dmDirectorSetupEntry small{font:400 10.4px/1.45 inherit;color:#a8c2d7}
+#mgHome #dmDirectorSetupEntry strong{font-size:13px;font-weight:550;line-height:1.3;font-family:inherit;color:#eff6fc}
+#mgHome #dmDirectorSetupEntry small{font-size:10.4px;font-weight:400;line-height:1.45;font-family:inherit;color:#a8c2d7}
 #mgHome #dmDirectorSetupEntry .dm-director-chevron{font-size:24px;color:#b9d0e5}
 #dmDirectorOffice button:focus-visible,#mgHome #dmDirectorSetupEntry:focus-visible{
  outline:2px solid #dcefff;outline-offset:3px;
