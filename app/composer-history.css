@@ -98,7 +98,7 @@
   max-height:30px;
   padding:5px 72px 4px 0;
   margin:0;
-  font-size:13px;
+  font-size:16px; /* Prevent iOS PWA input-focus auto-zoom and sideways viewport pan. */
   line-height:1.42;
 }
 .dm-chat-panel:not(.dm-chat-editor) .dm-chat-edit-tools{
