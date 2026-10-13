@@ -32,6 +32,10 @@
   border-color:rgba(183,148,103,.39);
   background:radial-gradient(ellipse at 7% 0%,rgba(177,126,65,.20),transparent 73%),linear-gradient(147deg,#221d1d,#110f14 72%,#06080c)
 }
+/* A hidden catalog item must stay invisible even with the explicit flex card rule. */
+#homeScreen .dm-director-shelf>#dmWorkspaceInboxCard[hidden],
+#homeScreen .dm-director-shelf>#dmWorkspaceBriefCard[hidden],
+#homeScreen .dm-director-shelf>#dmTaxCard[hidden]{display:none!important}
 #homeScreen .dm-workspace-card:is(#dmWorkspaceInboxCard,#dmWorkspaceBriefCard,#dmTaxCard):active{transform:scale(.989)}
 #homeScreen .dm-workspace-card:is(#dmWorkspaceInboxCard,#dmWorkspaceBriefCard,#dmTaxCard):focus-visible{outline:2px solid rgba(207,233,255,.92);outline-offset:2px}
 #homeScreen .dm-workspace-card:is(#dmWorkspaceInboxCard,#dmWorkspaceBriefCard,#dmTaxCard)>.dm-workspace-emblem{
