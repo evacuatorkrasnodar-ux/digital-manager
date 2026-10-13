@@ -225,19 +225,17 @@
     if(/(?:хочу|давай|помоги|как|начать|созда(?:ть|ю)|откры(?:ть|ваю)|построить).{0,48}(?:бизнес|сво[её] дело)|не знаю.{0,36}чем заняться/i.test(q)&&window.DMBusinessJourney?.open){
       window.DMBusinessJourney.open();return;
     }
-    const log=byId('chatLog');
-    const user=document.createElement('div'); user.className='chat-bubble user'; user.textContent=q;
-    const reply=document.createElement('div'); reply.className='chat-bubble'; reply.textContent=window.DMBusinessBrain?.answer?.(q)?'Сверяю записи бизнеса…':'Готовлю демонстрационный ответ…';
-    log.append(user,reply);
-    if(byId('assistantScreen').hidden===false)reply.scrollIntoView({behavior:'smooth',block:'nearest'});
-    // The compact panel and full assistant share the same demo conversation.
+    // The only live conversation UI is the original plasma composer.
+    // The Assistant screen now reads from saved on-device history.
+    const initialAnswer=window.DMBusinessBrain?.answer?.(q)?'Сверяю записи бизнеса…':'Готовлю демонстрационный ответ…';
+    // The compact panel and history share the same demo conversation.
     const miniLog=byId('plasmaChatLog');
     const miniUser=document.createElement('div');miniUser.className='dm-chat-message user';miniUser.textContent=q;
-    const miniReply=document.createElement('div');miniReply.className='dm-chat-message assistant';miniReply.textContent=reply.textContent;
+    const miniReply=document.createElement('div');miniReply.className='dm-chat-message assistant';miniReply.textContent=initialAnswer;
     miniLog.hidden=false;miniLog.append(miniUser,miniReply);miniLog.scrollTop=miniLog.scrollHeight;
     setRingMode('thinking');
     setTimeout(()=>{
-      const answer=demoAnswer(q);reply.textContent=answer;miniReply.textContent=answer;
+      const answer=demoAnswer(q);miniReply.textContent=answer;
       dmHistory.push({q,answer,at:Date.now()});dmSaveHistory();dmRenderHistory();
       miniLog.scrollTop=miniLog.scrollHeight;
       // Text-only demo: never imply that speech or a real AI service is connected.
@@ -1298,9 +1296,8 @@
     // The collapsed one-line bar is deliberately slender. Its content stays
     // scrollable; opening the editor restores the full multiline input.
     plasmaInput.style.height=(plasmaPanel.classList.contains('dm-chat-editor')?desired:30)+'px';
-    if(!plasmaPanel.classList.contains('dm-chat-editor')&&!dmDraftAutoExpanded&&(text.length>850||text.split('\n').length>8)){
-      dmDraftAutoExpanded=true;dmToggleDraftEditor(true);
-    }
+    // Questions never trigger the expanded letter editor automatically.
+    // Users can still explicitly expand a long document with the editor control.
     const intent=dmComposerIntent(text);
     plasmaPanel.dataset.intent=intent;
     const heading=byId('plasmaComposerTitle');
@@ -1408,9 +1405,10 @@
   function openPlasmaPanel(forceText=false){
     closeDockQuickActions();
     if(!plasmaPanel.hidden){
-      if(forceText){plasmaInput.focus();return;}
+      if(forceText){dmToggleDraftEditor(false);plasmaInput.focus();return;}
       closePlasmaPanel();return;
     }
+    if(forceText)dmToggleDraftEditor(false);
     plasmaPanel.hidden=false;plasmaPanel.setAttribute('aria-hidden','false');
     plasmaTriggers.forEach(button=>button.setAttribute('aria-expanded','true'));
     // Make the existing full plasma available in both dock modes.
