@@ -185,3 +185,13 @@ html.dm-layout-editing #homeScreen .dm-layout-board .dm-unit-dragging>.dm-layout
     animation:none!important;transform:none!important;
   }
 }
+
+/* A held Home card should not open the native iOS text selection/callout. */
+#homeScreen .dashboard>.metric-card,
+#homeScreen .dashboard>.metric-grid>.metric-card,
+#homeScreen .dashboard .dm-home-widget,
+#homeScreen .dm-layout-board .dm-layout-content{
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  user-select:none;
+}
