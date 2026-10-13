@@ -286,3 +286,13 @@ html.dm-layout-editing #homeScreen .dm-layout-board>.dm-home-section-title{
   margin-top:14px;padding-top:3px;
 }
 #homeScreen #dmHomeWidgets{min-width:0}
+
+
+/* Departments: one real section title, raised slightly above the four
+   fixed manager buttons. The redundant "Быстрые действия" heading is gone.
+   Do not alter the buttons' approved sizes, grid or click behavior. */
+#homeScreen .dm-home-section-title[data-home-section="departments"]{
+  margin-top:2px;
+  margin-bottom:4px;
+}
+#homeScreen .shortcuts>.shortcut-grid{margin-top:0}
