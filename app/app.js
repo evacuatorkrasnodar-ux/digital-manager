@@ -131,7 +131,7 @@
 
   // Единственный экран Управления. Удалено старое тестовое меню CRM.
   const mgDefaults={managerName:'Цифровой управляющий',tone:'auto',autonomy:0,
-    cards:{promotion:true,sales:true,clients:true,money:true,inside:true,picture:true,tasks:true},
+    cards:{promotion:true,sales:true,clients:true,money:true,inside:true,picture:true,tasks:true,dayWidget:false,calendarWidget:false,healthSteps:false,breathing:false},
     skills:{market:true,opportunities:true,rules:true,documents:true},
     rules:{advertising:false,tools:false,prices:false,spending:false}};
   const mgSaved=state.management&&typeof state.management==='object'?state.management:{};
@@ -757,7 +757,7 @@
     if(el)el.textContent=['Спрашивать обо всём','Показать план и спросить','Действовать в рамках правил'][mgData.autonomy]||'Спрашивать обо всём';
   }
   function mgApplyCards(){
-    document.querySelectorAll('[data-mg-card]').forEach(el=>{el.checked=mgData.cards[el.dataset.mgCard]!==false;});
+    document.querySelectorAll('[data-mg-card]').forEach(el=>{el.checked=Boolean(mgData.cards[el.dataset.mgCard]);});
     const mapping={clients:['#clientsCard','.bv-clients-edge'],sales:['#ordersCard'],money:['.profit-card']};
     Object.entries(mapping).forEach(([key,targets])=>targets.forEach(sel=>{
       const el=document.querySelector('#homeScreen '+sel);
@@ -772,7 +772,10 @@
     mgData.cards[el.dataset.mgCard]=el.checked;save();mgApplyCards();
     // Recolor the laser tracks immediately to match cards actually shown on Home.
     requestAnimationFrame(updateCardLaserPalette);
-    if(!['clients','sales','money'].includes(el.dataset.mgCard))notify('Выбор сохранён. Эта постоянная карточка появится на Главной после подключения раздела.');
+    if(['dayWidget','calendarWidget','healthSteps','breathing'].includes(el.dataset.mgCard)){
+      window.dispatchEvent(new CustomEvent('dm:cards-changed',{detail:{key:el.dataset.mgCard,enabled:el.checked}}));
+      notify(el.checked?'Виджет добавлен на Главную ✦':'Виджет скрыт с Главной ✦');
+    }else if(!['clients','sales','money'].includes(el.dataset.mgCard))notify('Выбор сохранён. Эта постоянная карточка появится на Главной после подключения раздела.');
   }));
   byId('mgDetail').addEventListener('click',event=>{
     if(event.target.closest('#mgOpenDigitalTrace')){window.DMDigitalTrace?.open('management');return;}
