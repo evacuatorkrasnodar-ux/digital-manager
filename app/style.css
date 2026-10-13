@@ -694,7 +694,7 @@ html.dm-plasma-panel-open .dock-hidden-controls{
 .dm-draft-actions-grid button:is(:hover,:focus-visible){border-color:rgba(198,230,250,.83);background:rgba(60,105,146,.36);color:#fff}
 .dm-draft-actions-grid button svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round}
 .dm-draft-actions-grid button span{font-size:9px;line-height:1.1;white-space:nowrap;font-weight:390}
-@media(max-width:345px){.dm-draft-actions-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
 .dm-notebook-open{display:none;color:#aacbe6;text-decoration:none;font-size:11px;align-self:end}
 .dm-chat-editor .dm-notebook-open{display:block}
 .dm-notebook-open:is(:hover,:focus-visible){color:#f2faff;text-decoration:underline;text-underline-offset:3px}
@@ -811,7 +811,7 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
 .dm-chat-draft-foot button{color:#c9c5c2}
 .dm-chat-draft-foot button:is(:hover,:focus-visible){background:rgba(255,255,255,.09)}
 .dm-chat-editor .dm-chat-draft-foot,.dm-chat-editor .dm-draft-actions{border-top-color:rgba(238,231,226,.15)}
-.dm-draft-actions-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+
 .dm-draft-actions-grid button{
  min-height:61px;border-color:rgba(230,224,219,.18);border-radius:13px;
  background:linear-gradient(145deg,rgba(57,54,53,.52),rgba(18,17,18,.8));
@@ -836,7 +836,7 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
 .dm-chat-message.user{background:linear-gradient(145deg,rgba(76,72,72,.93),rgba(42,39,41,.95));border-color:rgba(230,225,220,.19)}
 .dm-chat-message.assistant{background:rgba(24,23,25,.94);border-color:rgba(230,225,220,.15)}
 .dm-chat-panel.dm-chat-editor{scrollbar-color:rgba(172,164,158,.4) transparent}
-@media(max-width:345px){.dm-draft-actions-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
 
 
 /* Velvet glass composer v3: true translucent graphite, circular controls and pictograms. */
