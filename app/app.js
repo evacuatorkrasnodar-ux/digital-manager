@@ -223,6 +223,10 @@
   const mgData={...mgDefaults,...mgSaved,cards:{...mgDefaults.cards,...(mgSaved.cards||{})},
     skills:{...mgDefaults.skills,...(mgSaved.skills||{})},
     rules:{...mgDefaults.rules,...(mgSaved.rules||{})}};
+  // The Home sculpture is permanent. Ignore older saved off-states for its
+  // core cards; Management no longer exposes their switches.
+  const lockedHomeCards=new Set(['promotion','sales','clients','money']);
+  for(const key of lockedHomeCards)mgData.cards[key]=true;
   state.management=mgData;
 
   // Explicit opt-in preference: no hidden mic use; this is an animated UI prototype.
@@ -842,12 +846,15 @@
     if(el)el.textContent=['Спрашивать обо всём','Показать план и спросить','Действовать в рамках правил'][mgData.autonomy]||'Спрашивать обо всём';
   }
   function mgApplyCards(){
-    document.querySelectorAll('[data-mg-card]').forEach(el=>{el.checked=Boolean(mgData.cards[el.dataset.mgCard]);});
-    const mapping={clients:['#clientsCard','.bv-clients-edge'],sales:['#ordersCard'],money:['.profit-card']};
-    Object.entries(mapping).forEach(([key,targets])=>targets.forEach(sel=>{
-      const el=document.querySelector('#homeScreen '+sel);
-      if(el)el.hidden=mgData.cards[key]===false;
-    }));
+    for(const key of lockedHomeCards)mgData.cards[key]=true;
+    document.querySelectorAll('[data-mg-card]').forEach(el=>{
+      el.checked=lockedHomeCards.has(el.dataset.mgCard)||Boolean(mgData.cards[el.dataset.mgCard]);
+    });
+    // Even a previously saved disabled flag cannot hide the approved four-card composition.
+    for(const selector of ['#clientsCard','.bv-clients-edge','#ordersCard','.profit-card','.recommendation-card']){
+      const el=document.querySelector('#homeScreen .metric-grid '+selector);
+      if(el)el.hidden=false;
+    }
   }
   document.querySelectorAll('[data-mg-open]').forEach(el=>el.addEventListener('click',()=>{
     mgSettingsPage(el.dataset.mgOpen);
@@ -855,6 +862,9 @@
   byId('mgBack').addEventListener('click',()=>{if(mgCurrent==='home')setTab('home');else if(mgCurrent==='manager')mgSettingsPage('home');else if(['voice','autopilot'].includes(mgCurrent))mgSettingsPage('manager');else mgSettingsPage('home');});
   byId('mgEditHomeLayout').addEventListener('click',()=>{setTab('home');window.DMHomeLayout?.edit?.();});
   document.querySelectorAll('[data-mg-card]').forEach(el=>el.addEventListener('change',()=>{
+    if(lockedHomeCards.has(el.dataset.mgCard)){
+      el.checked=true;mgApplyCards();return;
+    }
     mgData.cards[el.dataset.mgCard]=el.checked;save();mgApplyCards();
     // Recolor the laser tracks immediately to match cards actually shown on Home.
     requestAnimationFrame(updateCardLaserPalette);
