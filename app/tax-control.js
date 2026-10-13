@@ -133,6 +133,89 @@ function profileForm(){
  '<p>По налогу на профессиональный доход декларацию не подают. Сумму и срок платежа нужно сверять в приложении «Мой налог». Другие обязанности могут зависеть от вашей ситуации.</p>'+
  '<a class="dm-tax-official" href="https://www.nalog.gov.ru/rn77/taxation/princtax/" target="_blank" rel="noopener noreferrer">Порядок НПД на сайте ФНС ↗</a></section>':'')+official+caution;
 }
+
+const dmTaxLinks={
+ ip:'https://lkip2.nalog.ru/lk',
+ personal:'https://www.nalog.gov.ru/3ndfl/',
+ company:'https://lkul.nalog.ru/',
+ npd:'https://npd.nalog.ru/',
+ usn:'https://www.nalog.gov.ru/rn92/news/activities_fts/16616046/',
+ program:'https://www.nalog.gov.ru/rn77/program/5961229/'
+};
+const taxLink=(u,title)=>'<a class="dm-tax-official" href="'+u+'" target="_blank" rel="noopener noreferrer">'+title+' ↗</a>';
+const moneyOrBlank=x=>x===''||x===undefined?'не указано':new Intl.NumberFormat('ru-RU',{maximumFractionDigits:2}).format(Number(x))+' ₽';
+function declarationMemo(x){
+ const p=data.profile;
+ return [
+  'ПАМЯТКА ПО ДЕКЛАРАЦИИ — НЕ ОФИЦИАЛЬНЫЙ ДОКУМЕНТ И НЕ XML',
+  'Форма: '+p.entity,'Налоговый режим: '+p.regime,'Объект УСН: '+(p.usnObject||'не указан'),
+  'Налоговый год: '+x.year,'',
+  'Сведения для сверки с первичными документами:',
+  'Доходы: '+moneyOrBlank(x.income),
+  'Расходы: '+moneyOrBlank(x.expense),
+  'Страховые взносы: '+moneyOrBlank(x.insurance),
+  'Уплаченные авансы: '+moneyOrBlank(x.advances),
+  'Происхождение данных и комментарии: '+(x.notes||'не указаны'), '',
+  'ЧТО ПРОВЕРИТЬ ПЕРЕД ПОДАЧЕЙ:',
+  '— правильность налогового режима и объекта обложения;',
+  '— налоговый период, актуальную форму, состав обязательных разделов;',
+  '— КУДиР, первичные документы и порядок признания доходов и расходов;',
+  '— действующие ставки, региональные льготы, взносы и авансовые платежи;',
+  '— реквизиты, контрольные соотношения и срок подачи;',
+  '— формулу налога в официальной системе ФНС.',
+  '',
+  'ДАЛЬШЕ: войти в личный кабинет ИП ФНС с КЭП, заполнить актуальную форму',
+  'по проверенным данным, подписать и отправить самостоятельно.',
+  'Сохранить подтверждение отправки и результат приёма ФНС.',
+  'ЭТА ПАМЯТКА НЕ ПОДАВАЛАСЬ В ФНС. Налог здесь не рассчитывался.'
+ ].join('\n');
+}
+function declarationView(){
+ const p=data.profile;
+ const header='<section class="dm-tax-panel"><small>✦ ПОМОЩНИК ДИРЕКТОРА</small><h3>Помогу обойтись без ненужных посредников</h3>';
+ if(p.entity==='Пока не указано'||p.regime==='Пока не указано'){
+  return header+'<p>Сначала уточните форму бизнеса и налоговый режим. Нельзя всем подряд предлагать одну декларацию.</p>'+
+   '<div class="dm-tax-actions">'+button('profile','Указать мой режим')+'</div></section>'+caution;
+ }
+ if(p.regime==='НПД'&&['Самозанятый','ИП'].includes(p.entity)){
+  return header+'<p><strong>Директор, декларацию по НПД подавать не нужно!</strong> 😁 ФНС прямо указывает, что по этому налогу декларация не представляется.</p>'+
+   '<p>Контролируем чеки, доходы и начисления в «Моём налоге». Другие обязанности возможны в зависимости от ситуации.</p>'+
+   taxLink(dmTaxLinks.npd,'Официальный сервис для НПД')+
+   '<div class="dm-tax-actions">'+button('profile','Изменить режим')+'</div></section>'+caution;
+ }
+ const usn=p.entity==='ИП'&&p.regime==='УСН';
+ const url=p.entity==='ИП'?dmTaxLinks.ip:p.entity==='ООО'?dmTaxLinks.company:dmTaxLinks.personal;
+ const urlTitle=p.entity==='ИП'?'Бесплатный кабинет ИП ФНС':p.entity==='ООО'?'Кабинет организации ФНС':'Информация ФНС о декларации 3-НДФЛ';
+ const intro=header+'<p>Ваш профиль: '+esc(p.entity)+' · '+esc(p.regime)+'. Я помогу подготовить исходные сведения, но сначала нужно убедиться, что именно эта декларация вам требуется.</p>'+
+  '<p>Подписание, отправка и квитанция о приёме выполняются в официальном сервисе. Без настоящего подключения и электронной подписи я не буду изображать, что отправил документ.</p>'+
+  taxLink(url,urlTitle)+
+  (usn?taxLink(dmTaxLinks.usn,'Инструкция ФНС: УСН онлайн'):'')+
+  taxLink(dmTaxLinks.program,'Бесплатная программа ФНС «Налогоплательщик ЮЛ»')+
+  '<div class="dm-tax-actions">'+button('profile','Уточнить режим')+'</div></section>';
+ if(!usn){
+  return intro+'<section class="dm-tax-panel"><h3>Следующий шаг</h3><p>Для '+esc(p.entity)+' на режиме '+esc(p.regime)+' нельзя безопасно сформировать конкретную форму только по названию режима. Уточните вид обязательства, операции и документы; затем подавайте через официальный сервис. Помощник не должен выдумывать сумму и поля декларации.</p></section>'+caution;
+ }
+ const draft=data.drafts.find(x=>x.entity==='ИП'&&x.regime==='УСН');
+ const year=new Date().getFullYear(),declYear=draft?.year||year-1;
+ const val=(key)=>esc(draft?.[key]??'');
+ const form='<form id="dmTaxDeclarationForm" class="dm-tax-panel">'+
+  '<small>ИП · УСН · ПОДГОТОВКА ДАННЫХ</small><h3>Составим памятку для заполнения декларации</h3>'+
+  '<p>Это не декларация, а рабочий черновик директора. Суммы вводятся только по проверенным документам. Приложение пока не умеет сверять банк, 1С и ФНС.</p>'+
+  '<p>Объект: <strong>'+esc(p.usnObject||'Не указано')+'</strong>. '+(p.usnObject==='Не указано'?'Уточните объект УСН в разделе «Мой режим».':'')+'</p>'+
+  '<label>Отчётный год<input name="year" type="number" min="2020" max="'+year+'" step="1" value="'+declYear+'" required></label>'+
+  '<label>Подтверждённые доходы, ₽<input type="number" name="income" step="0.01" min="0" max="9999999999999" placeholder="Необязательно" value="'+val('income')+'"></label>'+
+  '<label>Документально подтверждённые расходы, ₽<input type="number" name="expense" step="0.01" min="0" max="9999999999999" placeholder="Необязательно" value="'+val('expense')+'"></label>'+
+  '<label>Страховые взносы, ₽<input type="number" name="insurance" step="0.01" min="0" max="9999999999999" placeholder="Необязательно" value="'+val('insurance')+'"></label>'+
+  '<label>Уплаченные авансы, ₽<input type="number" name="advances" step="0.01" min="0" max="9999999999999" placeholder="Необязательно" value="'+val('advances')+'"></label>'+
+  '<label>Источники и важные замечания<textarea name="notes" rows="4" maxlength="1500" placeholder="КУДиР, акты, чеки, банковские документы…">'+val('notes')+'</textarea></label>'+
+  '<div class="dm-tax-actions"><button type="submit">✦ Подготовить памятку</button></div></form>';
+ const output=draft?'<section class="dm-tax-panel"><small>СОХРАНЕНО НА УСТРОЙСТВЕ · НЕ ДЕКЛАРАЦИЯ</small>'+
+  '<h3>Проверьте перед подачей</h3>'+
+  '<textarea id="dmTaxDraftOutput" readonly rows="15" aria-label="Памятка для самостоятельной подачи">'+esc(declarationMemo(draft))+'</textarea>'+
+  '<div class="dm-tax-actions">'+button('copy-declaration','Скопировать сведения')+'</div></section>':'';
+ return intro+form+output+caution;
+}
+
 function deadlineForm(){
  const editing=data.events.find(e=>e.id===selected);
  return '<form id="dmTaxDeadlineForm" class="dm-tax-panel">'+
