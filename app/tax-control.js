@@ -268,6 +268,19 @@ overlay.addEventListener('click',e=>{
  if(act==='profile'){page='profile';selected='';render();return;}
  if(act==='declaration'){page='declaration';selected='';render();return;}
  if(act==='edit'){page='edit';render();return;}
+ if(act==='copy-declaration'){
+  const output=$('dmTaxDraftOutput')?.value;
+  if(!output){message='Сначала подготовьте памятку.';render();return;}
+  if(navigator.clipboard?.writeText){
+   navigator.clipboard.writeText(output).then(()=>{
+    const status=document.createElement('p');status.className='dm-tax-message';status.setAttribute('role','status');
+    status.textContent='Сведения скопированы. В ФНС ничего не отправлено.';$('dmTaxBody').append(status);
+   }).catch(()=>{
+    const status=document.createElement('p');status.className='dm-tax-message';status.textContent='Выделите текст в поле и скопируйте вручную.';$('dmTaxBody').append(status);
+   });
+  }else{message='Выделите и скопируйте текст вручную.';render();}
+  return;
+ }
  const item=data.events.find(x=>x.id===selected);
  if(!item)return;
  if(act==='done'||act==='reopen'){
@@ -287,6 +300,23 @@ overlay.addEventListener('submit',e=>{
   if(!entities.includes(entity)||!regimes.includes(regime)){message='Проверьте параметры режима.';render();return;}
   data.profile={entity,regime,region,usnObject:['Не указано','Доходы','Доходы минус расходы'].includes(usnObject)?usnObject:'Не указано'};
   if(persist()){message='Режим сохранён. Обязательные сроки ещё надо сверить.';page='profile';render();}
+ }else if(f.id==='dmTaxDeclarationForm'){
+  const year=Number(fields.get('year')),currentYear=new Date().getFullYear();
+  if(data.profile.entity!=='ИП'||data.profile.regime!=='УСН'||!Number.isInteger(year)||year<2020||year>currentYear){
+   message='Уточните налоговый режим и год.';render();return;
+  }
+  const amount=name=>{
+   const raw=String(fields.get(name)??'').trim();
+   if(!raw)return '';
+   const n=Number(raw);
+   return Number.isFinite(n)&&n>=0&&n<=9999999999999?String(n):null;
+  };
+  const amounts={income:amount('income'),expense:amount('expense'),insurance:amount('insurance'),advances:amount('advances')};
+  if(Object.values(amounts).some(x=>x===null)){message='Проверьте введённые суммы.';render();return;}
+  const draft={...amounts,entity:'ИП',regime:'УСН',year,notes:safe(fields.get('notes'),1500),at:Date.now()};
+  data.drafts=data.drafts.filter(x=>!(x.year===year&&x.entity==='ИП'&&x.regime==='УСН'));
+  data.drafts.unshift(draft);data.drafts=data.drafts.slice(0,12);
+  if(persist()){message='Памятка сохранена. Это ещё не декларация и ничего не отправлено.';page='declaration';render();}
  }else if(f.id==='dmTaxDeadlineForm'){
   const name=safe(fields.get('name'),120),kind=safe(fields.get('kind'),40),due=safe(fields.get('due'),10),note=safe(fields.get('note'),800);
   if(!name||!types.includes(kind)||dueTime(due)===null){message='Проверьте название и действительную дату.';render();return;}
