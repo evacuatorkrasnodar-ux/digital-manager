@@ -1,6 +1,6 @@
 /* Digital Manager | Initiative, scoped to its own overlay and entry points.
    Approved home cards, plasma, dock and corner geometry are untouched. */
-.dm-init-trigger{box-sizing:border-box;display:flex;align-items:center;gap:10px;min-width:0;border:1px solid rgba(144,189,224,.38);border-radius:15px;padding:10px 12px;background:linear-gradient(135deg,#17283a,#0a121d);color:#e8f4fd;text-align:left;cursor:pointer;box-shadow:inset 0 1px rgba(241,251,255,.055)}
+.dm-init-trigger{box-sizing:border-box;display:flex;align-items:center;gap:10px;min-width:0;border:1px solid rgba(144,189,224,.38);border-radius:15px;padding:10px 12px;background:var(--dm-ui-surface);color:#e8f4fd;text-align:left;cursor:pointer;box-shadow:inset 0 1px rgba(241,251,255,.055)}
 .dm-init-trigger-copy{display:grid;gap:4px;flex:1;min-width:0}
 .dm-init-trigger-copy strong{font-size:12px;line-height:1.3;font-weight:550}
 .dm-init-trigger-copy small{font-size:10px;line-height:1.4;color:#a2bbcf}
@@ -12,7 +12,7 @@
 .dm-init-trigger:focus-visible,.dm-init-overlay button:focus-visible,.dm-init-overlay textarea:focus-visible{outline:2px solid #a9d9ff;outline-offset:3px}
 .dm-init-overlay[hidden]{display:none!important}
 .dm-init-overlay{position:fixed;inset:0;z-index:16000;overflow-y:auto;overscroll-behavior:contain;display:flex;align-items:flex-start;justify-content:center;padding:calc(18px + env(safe-area-inset-top,0px)) 12px calc(24px + env(safe-area-inset-bottom,0px));background:rgba(0,2,8,.88);-webkit-backdrop-filter:blur(13px);backdrop-filter:blur(13px);color:#e8f4ff}
-.dm-init-frame{box-sizing:border-box;width:100%;max-width:455px;min-width:0;min-height:180px;max-height:calc(100dvh - 46px);overflow-y:auto;border:1px solid rgba(162,199,231,.37);border-radius:24px;padding:16px;background:radial-gradient(ellipse at 50% -10%,rgba(50,98,175,.19),transparent 53%),linear-gradient(155deg,#111e2b,#050910 80%);box-shadow:0 20px 80px rgba(0,0,0,.64),inset 0 1px rgba(233,247,255,.07)}
+.dm-init-frame{box-sizing:border-box;width:100%;max-width:455px;min-width:0;min-height:180px;max-height:calc(100dvh - 46px);overflow-y:auto;border:1px solid rgba(162,199,231,.37);border-radius:24px;padding:16px;background:var(--dm-ui-surface);box-shadow:0 20px 80px rgba(0,0,0,.64),inset 0 1px rgba(233,247,255,.07)}
 .dm-init-head{display:flex;justify-content:space-between;align-items:start;gap:9px;border-bottom:1px solid rgba(151,190,225,.14);padding-bottom:11px}
 .dm-init-head small{display:block;font-size:9px;letter-spacing:.15em;color:#95b9d6}
 .dm-init-head h2{font-size:21px;line-height:1.2;font-weight:560;margin:7px 0 3px}
@@ -48,7 +48,7 @@
 .dm-init-insight span{font-size:10px;color:#9ea9c5;line-height:1.5}
 .dm-init-work{display:grid;gap:9px}
 .dm-init-work h3{margin:2px 0 4px}
-.dm-init-work-row{display:flex;align-items:center;gap:10px;padding:11px 9px;border:1px solid rgba(155,187,210,.23);border-radius:13px;background:rgba(93,139,184,.065)}
+.dm-init-work-row{display:flex;align-items:center;gap:10px;padding:11px 9px;border:1px solid rgba(155,187,210,.23);border-radius:13px;background:var(--dm-ui-inset)}
 .dm-init-work-row>div{flex:1;min-width:0;display:grid;gap:3px}
 .dm-init-work-row strong{font-size:12px;font-weight:540;overflow-wrap:anywhere}
 .dm-init-work-row p{margin:0;font-size:11px;color:#b5cfe2;overflow-wrap:anywhere}
