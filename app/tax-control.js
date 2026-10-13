@@ -6,6 +6,7 @@ const KEY='dm-tax-control-v1',MAX=120;
 const $=id=>document.getElementById(id);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 const safe=(s,n=180)=>String(s??'').trim().slice(0,n);
+const personName=()=>esc(safe(window.DMUserProfile?.getName?.()||'Алексей',42));
 const unique=()=>Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8);
 const todayLocal=()=>{const d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate(),12).getTime();};
 function dueTime(text){
@@ -103,7 +104,7 @@ function statusLine(e){
 function list(){
  const all=data.events.slice().sort((a,b)=>Number(a.done)-Number(b.done)||a.due.localeCompare(b.due));
  const x=snapshot(),first=x.nearest;
- return '<section class="dm-tax-panel"><small>КОНТРОЛЬ ДИРЕКТОРА</small>'+
+ return '<section class="dm-tax-panel"><small>ВАШ НАЛОГОВЫЙ КАЛЕНДАРЬ</small>'+
  '<h3>'+(first&&first.left<=7?'Есть срок, который пора проверить':'Всё о налоговых сроках — в одном месте')+'</h3>'+
  '<p>Ваша форма: '+esc(data.profile.entity)+' · режим: '+esc(data.profile.regime)+
  (data.profile.region?' · '+esc(data.profile.region):'')+'</p>'+
@@ -167,13 +168,13 @@ function declarationMemo(x){
 }
 function declarationView(){
  const p=data.profile;
- const header='<section class="dm-tax-panel"><small>✦ ПОМОЩНИК ДИРЕКТОРА</small><h3>Помогу обойтись без ненужных посредников</h3>';
+ const header='<section class="dm-tax-panel"><small>✦ ВАШ УПРАВЛЯЮЩИЙ</small><h3>Помогу обойтись без ненужных посредников</h3>';
  if(p.entity==='Пока не указано'||p.regime==='Пока не указано'){
   return header+'<p>Сначала уточните форму бизнеса и налоговый режим. Нельзя всем подряд предлагать одну декларацию.</p>'+
    '<div class="dm-tax-actions">'+button('profile','Указать мой режим')+'</div></section>'+caution;
  }
  if(p.regime==='НПД'&&['Самозанятый','ИП'].includes(p.entity)){
-  return header+'<p><strong>Директор, декларацию по НПД подавать не нужно!</strong> 😁 ФНС прямо указывает, что по этому налогу декларация не представляется.</p>'+
+  return header+'<p><strong>'+personName()+', декларацию по НПД подавать не нужно!</strong> 😁 ФНС прямо указывает, что по этому налогу декларация не представляется.</p>'+
    '<p>Контролируем чеки, доходы и начисления в «Моём налоге». Другие обязанности возможны в зависимости от ситуации.</p>'+
    taxLink(dmTaxLinks.npd,'Официальный сервис для НПД')+
    '<div class="dm-tax-actions">'+button('profile','Изменить режим')+'</div></section>'+caution;
@@ -195,7 +196,7 @@ function declarationView(){
  const val=(key)=>esc(draft?.[key]??'');
  const form='<form id="dmTaxDeclarationForm" class="dm-tax-panel">'+
   '<small>ИП · УСН · ПОДГОТОВКА ДАННЫХ</small><h3>Составим памятку для заполнения декларации</h3>'+
-  '<p>Это не декларация, а рабочий черновик директора. Суммы вводятся только по проверенным документам. Приложение пока не умеет сверять банк, 1С и ФНС.</p>'+
+  '<p>Это не декларация, а ваш рабочий черновик. Суммы вводятся только по проверенным документам. Приложение пока не умеет сверять банк, 1С и ФНС.</p>'+
   '<p>Объект: <strong>'+esc(p.usnObject||'Не указано')+'</strong>. '+(p.usnObject==='Не указано'?'Уточните объект УСН в разделе «Мой режим».':'')+'</p>'+
   '<label>Отчётный год<input name="year" type="number" min="2020" max="'+year+'" step="1" value="'+declYear+'" required></label>'+
   '<label>Подтверждённые доходы, ₽<input type="number" name="income" step="0.01" min="0" max="9999999999999" placeholder="Необязательно" value="'+val('income')+'"></label>'+
@@ -331,6 +332,7 @@ function recheckOnReturn(){
 }
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)recheckOnReturn();});
 window.addEventListener('focus',recheckOnReturn);
+window.addEventListener('dm:profile-changed',()=>{if(!overlay.hidden)render();});
 function routeQuestion(query){
  const q=safe(query,300).toLowerCase();
  if(!/(?:покажи|открой|проверь|напомни|когда|что|какие|срок|календарь|составь|составить|сделай|подготовь|подготовить|помоги|отправить|подать|сдать)/.test(q)||
