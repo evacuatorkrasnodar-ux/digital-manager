@@ -64,13 +64,8 @@ card.innerHTML='<span class="dm-workspace-emblem" aria-hidden="true">◈</span><
  '<em id="dmTaxCardStatus">Добавьте свои сроки — ничего не придумаем</em></span>'+
  '<span class="dm-workspace-arrow" aria-hidden="true">↗</span>';
 shortcuts.after(card);
-const mgEntry=document.createElement('button');
-mgEntry.type='button';mgEntry.id='dmTaxManagementEntry';mgEntry.className='mg-row dm-tax-management-entry';
-mgEntry.innerHTML='<span class="mg-icon mg-blue" aria-hidden="true">◈</span>'+
- '<span class="mg-copy"><strong>Налоговый контроль</strong><small>Режим · отчётность · платежи · сроки</small><small id="dmTaxManagementStatus">Сроки и предупреждения</small></span>'+
- '<span class="mg-chevron" aria-hidden="true">›</span>';
-const anchor=mg.querySelector('.mg-connections');
-(anchor||mg.lastElementChild).after(mgEntry);
+// Working tools are grouped under Management → «Рабочие инструменты».
+// Don't duplicate a standalone tax-settings row on the Management overview.
 const overlay=document.createElement('section');
 overlay.id='dmTaxOverlay';overlay.className='dm-tax-overlay';overlay.hidden=true;
 overlay.innerHTML='<div class="dm-tax-frame" role="dialog" aria-modal="true" aria-labelledby="dmTaxTitle" tabindex="-1">'+
@@ -247,6 +242,7 @@ function open(to='list'){
  previousFocus=document.activeElement;page=['profile','declaration'].includes(to)?to:'list';selected='';
  overlay.hidden=false;render();
  overlay.querySelector('[data-tax-close]')?.focus({preventScroll:true});
+ try{window.dispatchEvent(new CustomEvent('dm:tool-opened',{detail:{kind:'tax'}}));}catch(_){}
 }
 function close(){
  if(overlay.hidden)return;
@@ -254,7 +250,6 @@ function close(){
  if(previousFocus?.isConnected&&typeof previousFocus.focus==='function')previousFocus.focus({preventScroll:true});
 }
 card.addEventListener('click',()=>open());
-mgEntry.addEventListener('click',()=>open('profile'));
 overlay.addEventListener('click',e=>{
  if(e.target===overlay){close();return;}
  const btn=e.target.closest('button');if(!btn)return;
