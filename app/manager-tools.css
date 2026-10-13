@@ -1,20 +1,7 @@
 /* Management working tools — new isolated Black Velvet surfaces.
    Keep the Home dashboard, protected metric sculpture and plasma untouched. */
-#managementScreen .mg-home>.dm-manager-tools-entry{
- display:flex;align-items:center;gap:10px;width:100%;min-height:73px;
- padding:8px 12px;border-radius:20px;
- border:1px solid rgba(148,184,210,.37);
- background:radial-gradient(ellipse at 6% 0,rgba(82,142,194,.13),transparent 73%),
- linear-gradient(150deg,rgba(23,37,54,.85),rgba(6,13,22,.96));
- box-shadow:inset 0 1px rgba(235,247,255,.10),0 5px 16px rgba(0,0,0,.20);
- color:#f0f6fc;text-align:left;cursor:pointer;font-family:inherit;
-}
-#managementScreen .dm-manager-tools-entry .dm-tools-icon{
- display:grid;place-items:center;width:46px;height:46px;flex:none;
- font-size:25px;font-weight:300;color:#d3e8fa;border-radius:14px;
- background:linear-gradient(145deg,#274563,#0b1b2d);
- border:1px solid rgba(164,205,234,.37);
-}
+#managementScreen .mg-home>.dm-manager-tools-entry{display:flex;align-items:center;gap:10px;width:100%;min-height:73px;padding:8px 12px;border-radius:20px;border:1px solid var(--dm-ui-edge);background:var(--dm-ui-surface);box-shadow:var(--dm-ui-shadow);color:#f0f6fc;text-align:left;cursor:pointer;font-family:inherit;}
+#managementScreen .dm-manager-tools-entry .dm-tools-icon{display:grid;place-items:center;width:46px;height:46px;flex:none;font-size:25px;font-weight:300;color:#d3e8fa;border-radius:14px;background:var(--dm-ui-inset);border:1px solid rgba(164,205,234,.37);}
 #managementScreen .dm-manager-tools-entry>.mg-copy{
  display:flex;flex-direction:column;gap:3px;flex:1;min-width:0;
 }
