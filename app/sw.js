@@ -1,5 +1,5 @@
 /* App-only service worker: fresh documents, styles and scripts; cached offline assets. */
-const CACHE = 'digital-manager-black-velvet-v738-20261013';
+const CACHE = 'digital-manager-black-velvet-v739-20261013';
 const CACHE_PREFIX = 'digital-manager-black-velvet-';
 const OFFLINE_FILES = [
   './index.html',
@@ -9,7 +9,7 @@ const OFFLINE_FILES = [
   './home-widgets.js?v=1',
   './director-workspace.js?v=4',
   './director-workspace.css?v=1',
-  './tax-control.js?v=1',
+  './tax-control.js?v=2',
   './tax-control.css?v=1',
   './home-layout.js?v=16',
   './home-layout.css?v=8',
