@@ -42,7 +42,6 @@
  .dm-circle-control,
  .dm-circle-arrow,
  #managementScreen .mg-back,
- #managementScreen .mg-chevron,
  #managementScreen .mg-carousel-nav,
  #assistantScreen .assistant-home-return,
  #digitalTraceScreen #dmTraceBack,
@@ -90,33 +89,6 @@
 }
 #homeScreen .tile-chevron{--dm-circle-size:25px;--dm-circle-icon-size:14px}
 #managementScreen .mg-carousel-nav{--dm-circle-size:35px;--dm-circle-icon-size:18px}
-/* Every Management destination arrow uses the same circle material.
-   Compact journal shortcuts reserve a smaller footprint, not a new color. */
-#managementScreen .mg-chevron{
-  --dm-circle-size:31px;
-  --dm-circle-icon-size:15px;
-  position:relative;
-  z-index:3;
-  margin-left:auto;
-  font-size:0;
-  line-height:0;
-  pointer-events:none;
-}
-#managementScreen .dm-journal-entry-links .mg-chevron{
-  --dm-circle-size:26px;
-  --dm-circle-icon-size:13px;
-}
-#managementScreen .mg-chevron > svg{display:none}
-#managementScreen .mg-chevron::after{
-  content:"";display:block;
-  width:8px;height:8px;
-  margin-left:-3px;
-  border-top:1.9px solid currentColor;
-  border-right:1.9px solid currentColor;
-  border-radius:.7px;
-  transform:rotate(45deg);
-}
-
 .day-shell .month-arrow{--dm-circle-size:32px;--dm-circle-icon-size:17px}
 :is(
  .dm-circle-control,
