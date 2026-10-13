@@ -110,6 +110,7 @@
     // demo chat text when the user asks for an Inbox, briefing or negotiation.
     if(window.DMDirectorWorkspace?.routeQuestion?.(q))return;
     if(window.DMBusinessPulse?.routeQuestion?.(q))return;
+    if(window.DMTaxControl?.routeQuestion?.(q))return;
     // An invitation to build a business opens the relationship, not demo CRM advice.
     if(/(?:хочу|давай|помоги|как|начать|созда(?:ть|ю)|откры(?:ть|ваю)|построить).{0,48}(?:бизнес|сво[её] дело)|не знаю.{0,36}чем заняться/i.test(q)&&window.DMBusinessJourney?.open){
       window.DMBusinessJourney.open();return;
