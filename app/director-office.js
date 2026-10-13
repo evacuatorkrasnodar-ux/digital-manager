@@ -271,8 +271,22 @@ function refreshGold(){
  if(heading)heading.textContent=clean(p.title,52);
  if(body)body.textContent=clean(p.body,96);
  const cta=card.querySelector('#openAdvice');
- const textNode=cta&&[...cta.childNodes].find(n=>n.nodeType===Node.TEXT_NODE);
- if(textNode)textNode.textContent='На подпись ';
+ // Only a real prepared item from the director's proposal queue is ready
+ // for signature. Advice, reminders and demo content are NOT signatures.
+ const ready=p.origin==='workspace'&&data.proposals.some(item=>item.id===p.id);
+ card.dataset.signatureState=ready?'ready':'idle';
+ card.setAttribute('aria-label',ready?
+  'Рекомендация управляющего. Есть подготовленное решение на подпись.':
+  'Рекомендация управляющего. Решений на подпись сейчас нет.');
+ if(cta){
+  cta.dataset.signatureState=ready?'ready':'idle';
+  cta.setAttribute('aria-label',ready?
+   'Открыть подготовленное решение на подпись':
+   'Открыть советы управляющего. Решений на подпись пока нет.');
+  cta.title=ready?'Решение ждёт согласования директора':'Подготовленных решений на подпись пока нет';
+  const textNode=[...cta.childNodes].find(n=>n.nodeType===Node.TEXT_NODE);
+  if(textNode)textNode.textContent='На подпись ';
+ }
 }
 function refresh(){refreshSettings();refreshGold();}
 function createSettingsEntry(){
