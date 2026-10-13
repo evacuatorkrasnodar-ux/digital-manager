@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css?v=637">
+  <link rel="stylesheet" href="./style.css?v=638">
   <link rel="stylesheet" href="./dock.css?v=298">
   <link rel="stylesheet" href="./system-ui.css?v=283">
   <link rel="stylesheet" href="./voice-hints.css?v=290">
@@ -181,7 +181,7 @@
       </div>
     </section>
     <main class="dashboard">
-      <section class="metric-card revenue-card" data-laser-accent="#56b6ff" aria-label="Выручка">
+      <section class="metric-card revenue-card" data-laser-accent="#56b6ff" role="button" tabindex="0" aria-label="Открыть подробности по выручке">
         <div class="revenue-top"><div><h2 id="revenueLabel">Выручка сегодня</h2><strong class="big-number" id="revenueValue">Нет данных</strong><div class="delta"><span>По вашим записям</span> <small id="revenueCompare"></small></div></div><button class="icon-circle metric-link" data-detail="revenue" aria-label="Подробнее о выручке" type="button"><svg class="ico"><use href="#ic-bars"/></svg></button></div>
         <div class="chart-wrap"><svg id="revenueChart" role="img" aria-label="График выручки" viewBox="0 0 650 124" preserveAspectRatio="none"><defs><linearGradient id="revenueArea" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#178dff" stop-opacity=".39"/><stop offset="1" stop-color="#0b519d" stop-opacity="0"/></linearGradient><filter id="lineGlow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g class="gridlines"><path d="M0 31H650M0 65H650M0 99H650"/><path d="M92 0V124M185 0V124M279 0V124M371 0V124M463 0V124M558 0V124"/></g><path id="revArea" fill="url(#revenueArea)" d=""/><path id="revLine" class="blue-line" d=""/><path id="revFocus" class="focus-stem" d=""/><circle id="revDotGlow" fill="#52b1ff" opacity=".35" r="10"/><circle id="revDot" fill="#dffbff" r="4.6"/></svg><div class="chart-tooltip" id="chartTooltip">Нет записанных сумм</div></div>
         <div class="chart-axis" id="chartAxis"><span>00:00</span><span>04:00</span><span>08:00</span><span>12:00</span><span>16:00</span><span>20:00</span></div>
@@ -426,7 +426,7 @@
 <dialog id="modal" aria-labelledby="dialogTitle"><div class="dialog-inner"><div class="dialog-head"><div><span class="dialog-eyebrow">ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h2 id="dialogTitle">Информация</h2></div><button class="dialog-close" id="closeDialog" type="button" aria-label="Закрыть"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button></div><div id="dialogContent"></div></div></dialog>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
   <script src="./card-catalog.js?v=3" defer></script>
-<script src="./app.js?v=674" defer></script>
+<script src="./app.js?v=675" defer></script>
   <script src="./voice-hints.js?v=291" defer></script>
 <script src="./system-ui.js?v=283" defer></script>
   <script src="./task-journal.js?v=14" defer></script>
