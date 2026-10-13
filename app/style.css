@@ -1089,3 +1089,30 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
 #assistantScreen .assistant-orb .dm-welcome-plasma{--dm-size:90px;width:90px;height:90px;display:block;position:relative;flex:none}
 #assistantScreen .assistant-orb .dm-welcome-plasma .dm-core-brand{opacity:.17}
 #assistantScreen .assistant-orb .dm-welcome-plasma .dm-core-state-fx{opacity:0}
+
+/* Compact iPhone PWA: opening the assistant may not widen the document.
+   Keep the original orb inside the visible viewport, including its hidden lasers. */
+html.dm-plasma-panel-open,
+html.dm-plasma-panel-open body{
+  max-width:100%;
+  overflow-x:clip;
+}
+html.dm-plasma-panel-open .dock-launcher .dm-launcher-waves{
+  display:none!important;
+}
+@media(max-width:420px){
+  html.dm-plasma-panel-open .dock-launcher{
+    transform:translateX(clamp(0px,calc(50vw - 67px),125px));
+  }
+  html.dm-plasma-panel-open .dm-chat-panel:not(.dm-chat-editor){
+    left:12px;
+    width:calc(100% - 104px);
+    max-width:302px;
+    min-width:0;
+  }
+  html.dm-plasma-panel-open .dm-chat-panel.dm-chat-editor{
+    left:50%;
+    width:calc(100% - 24px);
+    max-width:430px;
+  }
+}
