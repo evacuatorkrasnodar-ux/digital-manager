@@ -147,27 +147,37 @@
   function modal(title,html,init){byId('dialogTitle').textContent=title;byId('dialogContent').innerHTML=html;if(!byId('modal').open)byId('modal').showModal();if(init)init();}
   /* Real printable/shareable passports from the current local profile.
      Nothing is uploaded or sent without a separate user gesture. */
+  const COMPANY_CARD_KEY='dm-company-card-v1';
+  const cardFields=[
+    ['legalName','Официальное имя / наименование'],
+    ['inn','ИНН'],['kpp','КПП'],['ogrn','ОГРН'],['ogrnip','ОГРНИП'],
+    ['owner','Руководитель / представитель'],['address','Адрес для документов'],
+    ['phone','Телефон'],['email','Электронная почта'],['website','Сайт'],
+    ['bank','Банк'],['account','Расчётный счёт'],['bik','БИК'],['corr','Корреспондентский счёт']
+  ];
+  function getCompanyCard(){
+    try{const x=JSON.parse(localStorage.getItem(COMPANY_CARD_KEY)||'{}');return x&&typeof x==='object'?x:{}}catch(_){return {}}
+  }
   function passportPlain(kind){
     if(kind==='brand')return [
-      'ПАСПОРТ ПРИЛОЖЕНИЯ',
-      'Продукт: Цифровой управляющий',
-      'Разработчик: Цифровой бизнес',
-      'Версия: '+VERSION,
-      'Тип лицензии: Демонстрация',
-      'Покупка: не подтверждена',
+      'ПАСПОРТ ПРИЛОЖЕНИЯ','Продукт: Цифровой управляющий',
+      'Разработчик: Цифровой бизнес','Версия: '+VERSION,
+      'Тип лицензии: Демонстрация','Покупка: не подтверждена',
       'Подписка: не подключена',
       'Статус: демонстрационный, без сервера лицензирования',
       'Источник: сведения этой версии приложения'
-    ].join('\n');
-    return [
-      'ПАСПОРТ КОМПАНИИ · ДЕМОНСТРАЦИОННЫЙ ПРОФИЛЬ',
-      'Компания: '+(state.company||'Не указано'),
-      'Представитель: '+(state.name||'Не указано'),
-      'Направление: '+(state.industry||'Не указано'),
-      'Город: '+(state.city||'Не указано'),
-      'Источник: записи, сохранённые в этом браузере',
-      'Этот паспорт — информационная карточка, не юридическая выписка'
-    ].join('\n');
+    ].join('\\n');
+    const card=getCompanyCard();
+    const types={npd:'Самозанятый (физлицо)',ip:'Индивидуальный предприниматель',company:'Организация'};
+    const allowed=card.type==='company'?['legalName','inn','kpp','ogrn','owner','address','phone','email','website','bank','account','bik','corr']:
+      card.type==='ip'?['legalName','inn','ogrnip','address','phone','email','website','bank','account','bik','corr']:
+      ['legalName','inn','address','phone','email','website','bank','account','bik','corr'];
+    const rows=['КАРТОЧКА БИЗНЕСА','Статус: '+(types[card.type]||'Не выбран'),
+      'Название: '+(state.company||'Не указано'),
+      'Сфера: '+(state.industry||'Не указано'),'Город: '+(state.city||'Не указано')];
+    for(const [key,label] of cardFields){if(allowed.includes(key)&&card[key])rows.push(label+': '+card[key]);}
+    rows.push('Сведения предоставлены владельцем и не проверены по государственным реестрам.');
+    return rows.join('\\n');
   }
   function passportButtons(kind){
     return '<div class="dm-passport-actions" role="group" aria-label="Действия с паспортом">'+
@@ -176,12 +186,35 @@
       '</div>';
   }
   function passportRows(){
-    return '<div class="dm-passport-rows" aria-label="Паспорт компании">'+
+    const card=getCompanyCard();
+    const important=[['ИНН',card.inn],['КПП',card.type==='company'?card.kpp:''],['ОГРН',card.type==='company'?card.ogrn:''],['ОГРНИП',card.type==='ip'?card.ogrnip:''],['Телефон',card.phone],['Сайт',card.website]];
+    return '<div class="dm-passport-rows" aria-label="Карточка компании">'+
       '<div><span>Компания</span><strong>'+safe(state.company||'Моя компания')+'</strong></div>'+
-      '<div><span>Представитель</span><strong>'+safe(state.name||'Не указано')+'</strong></div>'+
-      '<div><span>Направление</span><strong>'+safe(state.industry||'Не указано')+'</strong></div>'+
-      '<div><span>Город</span><strong>'+safe(state.city||'Не указано')+'</strong></div>'+
+      important.filter(pair=>pair[1]).map(([label,value])=>'<div><span>'+safe(label)+'</span><strong>'+safe(value)+'</strong></div>').join('')+
       '</div>';
+  }
+  function companyInput(key,label,card,opts=''){
+    return '<label>'+safe(label)+'<input name="'+key+'" value="'+safe(card[key]||'')+'" '+opts+'></label>';
+  }
+  function companyFields(card){
+    const type=card.type||'npd';
+    const common=[
+      companyInput('legalName',type==='company'?'Полное юридическое название':'ФИО полностью',card,'maxlength="150"'),
+      companyInput('inn','ИНН',card,'inputmode="numeric" maxlength="12" pattern="[0-9]{10}|[0-9]{12}" title="ИНН: 10 или 12 цифр"'),
+      ...(type==='company'?[companyInput('kpp','КПП',card,'inputmode="numeric" maxlength="9" pattern="[0-9]{9}"'),companyInput('ogrn','ОГРН',card,'inputmode="numeric" maxlength="13" pattern="[0-9]{13}"'),companyInput('owner','Руководитель',card,'maxlength="120"')]:[]),
+      ...(type==='ip'?[companyInput('ogrnip','ОГРНИП',card,'inputmode="numeric" maxlength="15" pattern="[0-9]{15}"')]:[]),
+      companyInput('address','Адрес для документов (необязательно)',card,'maxlength="220"'),
+      companyInput('phone','Рабочий телефон',card,'type="tel" maxlength="40"'),
+      companyInput('email','Электронная почта',card,'type="email" maxlength="130"'),
+      companyInput('website','Сайт',card,'type="url" maxlength="190" placeholder="https://..."'),
+      '<details><summary>Банковские реквизиты · необязательно</summary>'+
+      companyInput('bank','Название банка',card,'maxlength="130"')+
+      companyInput('account','Расчётный счёт',card,'inputmode="numeric" maxlength="20" pattern="[0-9]{20}"')+
+      companyInput('bik','БИК',card,'inputmode="numeric" maxlength="9" pattern="[0-9]{9}"')+
+      companyInput('corr','Корреспондентский счёт',card,'inputmode="numeric" maxlength="20" pattern="[0-9]{20}"')+
+      '</details>'
+    ];
+    return common.join('');
   }
   async function sharePassport(kind){
     const label=kind==='brand'?'Паспорт приложения':'Паспорт компании',value=passportPlain(kind);
@@ -224,7 +257,40 @@
     ${passportButtons('brand')}
     <div class="mg-brand-feedback"><strong>Нашли баг или есть идея?</strong><a target="_blank" rel="noopener noreferrer" href="https://github.com/evacuatorkrasnodar-ux/digital-manager/issues/new">Написать разработчикам →</a><small>Обращения открываются на GitHub.</small></div><div class="dialog-actions"><button class="primary-button" type="button" id="brandDone">Понятно</button></div>`,()=>byId('brandDone').addEventListener('click',closeModal));}
   function profileModal(){modal('Мой профиль',`<form id="profileForm" class="form-fields"><label>Как к вам обращаться?<input name="name" maxlength="42" required value="${safe(state.name)}" placeholder="Имя"></label><button class="primary-button" type="submit">Сохранить имя</button></form>`,()=>byId('profileForm').addEventListener('submit',e=>{e.preventDefault();const form=new FormData(e.currentTarget);const name=String(form.get('name')||'').trim();if(!name)return;state.name=name;save();applyUser();announceProfile();closeModal();notify('Имя сохранено на этом устройстве');}));}
-  function companyModal(){modal('Паспорт компании',`<p class="dm-passport-lead">Демонстрационная карточка компании · сведения из профиля на этом устройстве</p>${passportRows()}${passportButtons('company')}<form id="companyForm" class="form-fields"><label>Название компании<input name="company" maxlength="70" required value="${safe(state.company)}"></label><label>Направление деятельности<input name="industry" maxlength="65" value="${safe(state.industry)}"></label><label>Город<input name="city" maxlength="45" value="${safe(state.city)}"></label><button class="primary-button" type="submit">Сохранить компанию</button></form><p class="modal-note">Данные карточки сохраняются только в браузере. В будущем они будут синхронизироваться с аккаунтом.</p>`,()=>byId('companyForm').addEventListener('submit',e=>{e.preventDefault();const data=new FormData(e.currentTarget);state.company=String(data.get('company')||'').trim()||'Моя компания';state.industry=String(data.get('industry')||'').trim();state.city=String(data.get('city')||'').trim();save();applyUser();announceProfile();closeModal();notify('Карточка бизнеса сохранена');}));}
+  function companyModal(){
+    const card=getCompanyCard();
+    modal('Карточка компании','<p class="dm-passport-lead">Ваши реквизиты · сохраняются только на этом устройстве. Данные не проверены по ФНС.</p>'+
+      passportRows()+passportButtons('company')+
+      '<form id="companyForm" class="form-fields">'+
+      '<label>Статус владельца<select name="type" id="dmCompanyType"><option value="npd"'+((card.type||'npd')==='npd'?' selected':'')+'>Самозанятый (физлицо)</option><option value="ip"'+(card.type==='ip'?' selected':'')+'>ИП</option><option value="company"'+(card.type==='company'?' selected':'')+'>Организация (ООО и др.)</option></select></label>'+
+      '<label>Название для клиентов<input name="company" maxlength="70" required value="'+safe(state.company)+'"></label>'+
+      '<label>Направление деятельности<input name="industry" maxlength="65" value="'+safe(state.industry)+'"></label>'+
+      '<label>Город<input name="city" maxlength="45" value="'+safe(state.city)+'"></label>'+
+      '<div id="dmCompanyFields">'+companyFields(card)+'</div>'+
+      '<button class="primary-button" type="submit">Сохранить реквизиты</button></form>'+
+      '<p class="modal-note">При отправке карточки передаются только заполненные реквизиты. Перед отправкой проверьте получателя и содержимое. Это не официальная выписка из ФНС.</p>',()=>{
+        const form=byId('companyForm'),select=byId('dmCompanyType');
+        select.addEventListener('change',()=>{
+          const latest={...getCompanyCard()};
+          new FormData(form).forEach((value,key)=>{if(key!=='type')latest[key]=String(value);});
+          latest.type=select.value;
+          byId('dmCompanyFields').innerHTML=companyFields(latest);
+        });
+        form.addEventListener('submit',e=>{
+          e.preventDefault();
+          const data=new FormData(form),next={type:String(data.get('type')||'npd')};
+          for(const [key] of cardFields)next[key]=String(data.get(key)||'').trim().slice(0,240);
+          const numeric=['inn','kpp','ogrn','ogrnip','account','bik','corr'];
+          if(numeric.some(k=>next[k]&&!/^\\d+$/.test(next[k]))){notify('Проверьте цифровые реквизиты');return;}
+          if(next.inn&&next.inn.length!==(next.type==='company'?10:12)){notify('Проверьте длину ИНН');return;}
+          try{localStorage.setItem(COMPANY_CARD_KEY,JSON.stringify(next));}catch(_){notify('Не удалось сохранить реквизиты');return;}
+          state.company=String(data.get('company')||'').trim()||'Моя компания';
+          state.industry=String(data.get('industry')||'').trim();
+          state.city=String(data.get('city')||'').trim();
+          save();applyUser();announceProfile();companyModal();notify('Реквизиты сохранены');
+        });
+      });
+  }
   function clientsModal(){const list=state.clients.length?`<ul class="modal-list">${state.clients.map(x=>`<li><span>${safe(x.name)}</span><small>${safe(x.phone||'Без телефона')}</small></li>`).join('')}</ul>`:'<p class="empty-hint">Вы пока не добавили тестовых клиентов.</p>';modal('Работа с клиентами',`<p class="modal-note">На главной показаны примерные 248 клиентов. Ниже — ваши собственные записи, сохранённые на этом устройстве.</p>${list}<form id="clientForm" class="form-fields"><label>Имя клиента<input name="name" required maxlength="80" placeholder="Например, Мария"></label><label>Контакт<input name="phone" maxlength="70" placeholder="Телефон или e-mail"></label><button class="primary-button" type="submit">Добавить клиента</button></form>`,()=>byId('clientForm').addEventListener('submit',e=>{e.preventDefault();const d=new FormData(e.currentTarget);const name=String(d.get('name')||'').trim();if(!name)return;state.clients.unshift({name,phone:String(d.get('phone')||'').trim()});save();clientsModal();notify('Клиент добавлен');}));}
   function ordersModal(){const list=state.orders.length?`<ul class="modal-list">${state.orders.map(x=>`<li><span>${safe(x.title)}</span><small>${money(x.amount)}</small></li>`).join('')}</ul>`:'<p class="empty-hint">Вы пока не добавили тестовых заказов.</p>';modal('Заказы',`<p class="modal-note">На главной — демонстрационная аналитика. Ваши записи заказов хранятся локально и не влияют на образцовые графики.</p>${list}<form id="orderForm" class="form-fields"><label>Название заказа<input name="title" maxlength="80" required placeholder="Например, Консультация"></label><label>Сумма в рублях<input name="amount" type="number" min="0" max="999999999" required placeholder="5000"></label><button class="primary-button" type="submit">Добавить заказ</button></form>`,()=>byId('orderForm').addEventListener('submit',e=>{e.preventDefault();const d=new FormData(e.currentTarget);const title=String(d.get('title')||'').trim(),amount=Number(d.get('amount'));if(!title||!Number.isFinite(amount)||amount<0)return;state.orders.unshift({title,amount});save();ordersModal();notify('Заказ добавлен');}));}
   function detailModal(which){
