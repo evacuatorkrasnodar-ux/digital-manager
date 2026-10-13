@@ -14,6 +14,7 @@
 
   const parts={
     revenue:dashboard.querySelector('.revenue-card'),
+    shortcuts:dashboard.querySelector('.shortcuts'),
     clients:document.getElementById('clientsCard'),
     clientEdge:originalGrid.querySelector('.bv-clients-edge'),
     orders:document.getElementById('ordersCard'),
@@ -25,11 +26,14 @@
     calendar:document.getElementById('dmWidgetCalendar')
   };
   if(Object.values(parts).some(x=>!x))return;
-  const defaultOrder=['revenue','business','day','steps','breathe','calendar'];
-  const names={revenue:'Выручка',business:'Бизнес · 4 карточки',day:'Мой день',
-    steps:'Шаги',breathe:'Дыхание',calendar:'Календарь'};
+  // Match the untouched Home: revenue, optional personal widgets, the
+  // four-card business sculpture, and finally the Quick Actions block.
+  const defaultOrder=['revenue','day','steps','breathe','calendar','business','quick'];
+  const names={revenue:'Выручка',business:'Бизнес · 4 карточки',quick:'Быстрые действия',
+    day:'Мой день',steps:'Шаги',breathe:'Дыхание',calendar:'Календарь'};
   const available={day:'dayWidget',steps:'healthSteps',breathe:'breathing',calendar:'calendarWidget'};
-  const fixedWide=new Set(['revenue','business','calendar']);
+  const fixedWide=new Set(['revenue','business','quick','calendar']);
+  const fixedBlocks=new Set(['business','quick']);
   const legacyBusiness=new Set(['business','signature','clients','advice','orders','profit']);
 
   const toolbar=document.createElement('section');
@@ -96,7 +100,7 @@
     return ['day','steps','breathe','calendar'].includes(id)?cards[flag]===true:cards[flag]!==false;
   }
   function isHidden(id){
-    if(id==='business')return false;
+    if(fixedBlocks.has(id))return false;
     return preferences.hidden.includes(id)||!visibleByManagement(id);
   }
   function node(name,html){
@@ -117,9 +121,10 @@
       b.setAttribute('aria-label','Изменить размер: '+names[id]);
       b.title='Узкая / широкая';controls.append(b);
     }
-    if(id==='business'){
+    if(fixedBlocks.has(id)){
       const lock=document.createElement('span');lock.className='dm-fixed-business-label';
-      lock.textContent='4 карточки · размер закреплён';controls.append(lock);
+      lock.textContent=id==='business'?'4 карточки · размер закреплён':'Блок · размер закреплён';
+      controls.append(lock);
     }else{
       const hide=node('hide','×');hide.setAttribute('aria-label','Убрать карточку '+names[id]);hide.title='Скрыть с главной';controls.append(hide);
     }
@@ -138,20 +143,23 @@
       originalGrid.hidden=false;
       content.append(originalGrid);
     }else{
-      const map={revenue:parts.revenue,day:parts.day,steps:parts.steps,breathe:parts.breathe,calendar:parts.calendar};
+      const map={revenue:parts.revenue,quick:parts.shortcuts,
+        day:parts.day,steps:parts.steps,breathe:parts.breathe,calendar:parts.calendar};
       if(map[id]){map[id].hidden=false;content.append(map[id]);}
     }
     return outer;
   }
   function holdCards(){
     const detached=document.createDocumentFragment();
-    detached.append(parts.revenue,originalGrid,parts.day,parts.steps,parts.breathe,parts.calendar);
+    detached.append(parts.revenue,originalGrid,parts.shortcuts,
+      parts.day,parts.steps,parts.breathe,parts.calendar);
     return detached;
   }
   function restoreOriginal(){
     widgetHost.replaceChildren(parts.day,parts.steps,parts.breathe,parts.calendar);
     dashboard.insertBefore(parts.revenue,widgetHost);
     dashboard.insertBefore(originalGrid,board);
+    dashboard.insertBefore(parts.shortcuts,board);
     originalGrid.hidden=false;
     // Existing widget module owns its own visibility and data refresh.
     window.dispatchEvent(new Event('dm:cards-changed'));
@@ -164,7 +172,7 @@
     const library=document.getElementById('dmLayoutLibrary');
     library.replaceChildren();
     if(!editing){library.hidden=true;return;}
-    const hidden=defaultOrder.filter(id=>id!=='business'&&preferences.hidden.includes(id));
+    const hidden=defaultOrder.filter(id=>!fixedBlocks.has(id)&&preferences.hidden.includes(id));
     for(const id of hidden){
       const b=document.createElement('button');
       b.type='button';b.dataset.dmRestoreId=id;
@@ -267,7 +275,7 @@
   }
   function hide(id){
     pickedId=null;
-    if(id==='business')return;
+    if(fixedBlocks.has(id))return;
     if(!preferences.hidden.includes(id))preferences.hidden.push(id);
     save();render();
   }
@@ -426,8 +434,10 @@
   }
   function holdCandidate(target){
     if(!(target instanceof Element)||!dashboard.contains(target))return false;
-    if(target.closest('.dm-layout-toolbar,.dm-unit-controls,.shortcut,dialog,input,textarea,select,[contenteditable="true"]'))return false;
-    if(target.closest('.metric-card,.dm-home-widget,.dm-layout-unit'))return true;
+    if(target.closest('.dm-layout-toolbar,.dm-unit-controls,dialog,input,textarea,select,[contenteditable="true"]'))return false;
+    // Long-press on a quick-action button enters edit mode as well. A normal
+    // short tap still invokes its existing action.
+    if(target.closest('.metric-card,.dm-home-widget,.dm-layout-unit,.shortcuts,.shortcut'))return true;
     if(target.closest('button,a,[role="button"]'))return false;
     return Boolean(target.closest('.dashboard'));
   }
