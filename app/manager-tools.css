@@ -20,7 +20,6 @@
 }
 #managementScreen .dm-manager-tools-entry .mg-copy strong{font-size:14px;line-height:1.24;font-weight:570;color:#f1f7ff}
 #managementScreen .dm-manager-tools-entry .mg-copy small{font-size:10px;line-height:1.33;color:#a8c5dc}
-#managementScreen .dm-manager-tools-entry>.mg-chevron{font-size:24px;line-height:1;color:#b7d2e5}
 #managementScreen .dm-manager-tools-entry:focus-visible{outline:2px solid #c8e6fa;outline-offset:2px}
 #managementScreen .dm-management-suggestion[hidden]{display:none!important}
 #managementScreen .mg-home>.dm-management-suggestion{
