@@ -338,9 +338,9 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden)recheckOnR
 window.addEventListener('focus',recheckOnReturn);
 function routeQuestion(query){
  const q=safe(query,300).toLowerCase();
- if(!/(?:покажи|открой|проверь|напомни|когда|что|какие|срок|календарь|составь|подготовь|отправить|подать)/.test(q)||
+ if(!/(?:покажи|открой|проверь|напомни|когда|что|какие|срок|календарь|составь|составить|сделай|подготовь|подготовить|помоги|отправить|подать|сдать)/.test(q)||
  !/налог|декларац|взнос|отч[её]тност|фнс/.test(q))return false;
- open(/(?:составь|подготовь|отправить|подать).{0,45}декларац|декларац.{0,40}(?:составить|подготовить|отправить|подать)/.test(q)?'declaration':'list');return true;
+ open(/(?:составь|составить|сделай|подготовь|подготовить|помоги|отправить|подать|сдать).{0,45}декларац|декларац.{0,40}(?:составить|подготовить|отправить|подать|сдать)/.test(q)?'declaration':'list');return true;
 }
 window.DMTaxControl=Object.freeze({open,refresh:update,snapshot,routeQuestion,prepare:()=>open('declaration'),source:'owner-entered-local-dates'});
 update();
