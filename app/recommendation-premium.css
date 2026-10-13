@@ -90,10 +90,10 @@
 #homeScreen .metric-grid .recommendation-card .advice-cta:active,
 #homeScreen .metric-grid .recommendation-card[data-signature-state="ready"] .advice-cta,
 #homeScreen .metric-grid .recommendation-card[data-signature-state="ready"] .advice-cta:hover {
- color:#eaf4fc!important;
- border-color:rgba(164,195,221,.62)!important;
- background:linear-gradient(155deg,#2b4256,#101f2e 68%,#070e17)!important;
- box-shadow:inset 0 1px rgba(255,255,255,.20),0 3px 9px rgba(0,0,0,.35),0 0 9px rgba(100,157,202,.12)!important;
+ color:#f1f9ff!important;
+ border-color:rgba(139,205,255,.78)!important;
+ background:radial-gradient(ellipse at 24% 5%,rgba(108,190,255,.32),transparent 67%),linear-gradient(145deg,#224b72 0%,#103554 50%,#071c34 100%)!important;
+ box-shadow:inset 0 1px rgba(235,249,255,.33),0 3px 10px rgba(0,0,0,.37),0 0 12px rgba(69,162,236,.28)!important;
 }
 #homeScreen .metric-grid .recommendation-card .advice-cta .ico,
 #homeScreen .metric-grid .recommendation-card[data-signature-state="ready"] .advice-cta .ico{
