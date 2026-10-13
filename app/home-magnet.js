@@ -39,6 +39,15 @@
     return clip;
   }
   const length=n=>Number(n.toFixed(2));
+  // Match the SVG objectBoundingBox coordinate model already used by the
+  // approved Clients/Gold clips. This is more portable on iOS than a scaled path.
+  function clipCoordinates(d,w,h){
+    return d.replace(/([MLQCZ])([^MLQCZ]*)/g,(_,command,values)=>{
+      if(command==='Z')return 'Z';
+      const numbers=values.trim().split(/\s+/).map(Number);
+      return command+numbers.map((number,i)=>(number/(i%2?h:w)).toFixed(6)).join(' ');
+    });
+  }
   function sculpt(id,w,h,contact){
     const s=signatures[id]||signatures.day;
     const scale=Math.min(1,w/165,h/130);
@@ -168,8 +177,8 @@
     const d=sculpt(id,w,h,contact);
     const clip=ensureClip(id);
     const path=clip.firstElementChild;
-    path.setAttribute('d',d);
-    path.setAttribute('transform','scale('+length(1/w*100000)/100000+' '+length(1/h*100000)/100000+')');
+    path.setAttribute('d',clipCoordinates(d,w,h));
+    path.removeAttribute('transform');
     const url='url(#'+clip.id+')';
     content.classList.add('dm-morph-active');
     content.style.setProperty('clip-path',url);
