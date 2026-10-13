@@ -15,6 +15,8 @@
   const parts={
     revenue:dashboard.querySelector('.revenue-card'),
     shortcuts:dashboard.querySelector('.shortcuts'),
+    inbox:document.getElementById('dmWorkspaceInboxCard'),
+    briefing:document.getElementById('dmWorkspaceBriefCard'),
     clients:document.getElementById('clientsCard'),
     clientEdge:originalGrid.querySelector('.bv-clients-edge'),
     orders:document.getElementById('ordersCard'),
@@ -28,11 +30,12 @@
   if(Object.values(parts).some(x=>!x))return;
   // Match the untouched Home: revenue, optional personal widgets, the
   // four-card business sculpture, and finally the Quick Actions block.
-  const defaultOrder=['revenue','day','steps','breathe','calendar','business','quick'];
+  const defaultOrder=['revenue','day','steps','breathe','calendar','business','quick','inbox','briefing'];
   const names={revenue:'Выручка',business:'Бизнес · 4 карточки',quick:'Быстрые действия',
+    inbox:'Входящие',briefing:'Штаб директора',
     day:'Мой день',steps:'Шаги',breathe:'Дыхание',calendar:'Календарь'};
   const available={day:'dayWidget',steps:'healthSteps',breathe:'breathing',calendar:'calendarWidget'};
-  const fixedWide=new Set(['revenue','business','quick','calendar']);
+  const fixedWide=new Set(['revenue','business','quick','calendar','inbox','briefing']);
   const fixedBlocks=new Set(['business','quick']);
   const legacyBusiness=new Set(['business','signature','clients','advice','orders','profit']);
   // Categories belong to the card's purpose, not its position. Widgets never
@@ -40,7 +43,8 @@
   const sections={
     business:{title:'Картина бизнеса',subtitle:'Главное о компании',ids:['revenue','business']},
     departments:{title:'Отделы управляющего',subtitle:'Стратегия · клиенты · финансы · процессы',ids:['quick']},
-    day:{title:'Мой день',subtitle:'Задачи и планы',ids:['day','calendar']},
+    communication:{title:'Связь',subtitle:'Письма и обращения в одном месте',ids:['inbox']},
+    day:{title:'Мой день',subtitle:'Планёрки, встречи и задачи',ids:['briefing','day','calendar']},
     health:{title:'Моё здоровье',subtitle:'Забота о себе',ids:['steps','breathe']}
   };
   const defaultSections=Object.keys(sections);
@@ -96,7 +100,7 @@
     // Home widgets live in the same existing grid; headings span both columns.
     // Move the real widgets, never duplicate them or their listeners.
     if(hasDay){
-      if(!defaultLabels.get('day').isConnected)widgetHost.prepend(defaultLabels.get('day'));
+      if(!defaultLabels.get('day').isConnected)dashboard.insertBefore(defaultLabels.get('day'),parts.briefing);
       for(const id of sections.day.ids)widgetHost.append(parts[id]);
     }
     if(hasHealth){
@@ -217,7 +221,7 @@
       originalGrid.hidden=false;
       content.append(originalGrid);
     }else{
-      const map={revenue:parts.revenue,quick:parts.shortcuts,
+      const map={revenue:parts.revenue,quick:parts.shortcuts,inbox:parts.inbox,briefing:parts.briefing,
         day:parts.day,steps:parts.steps,breathe:parts.breathe,calendar:parts.calendar};
       if(map[id]){map[id].hidden=false;content.append(map[id]);}
     }
@@ -225,7 +229,7 @@
   }
   function holdCards(){
     const detached=document.createDocumentFragment();
-    detached.append(parts.revenue,originalGrid,parts.shortcuts,
+    detached.append(parts.revenue,originalGrid,parts.shortcuts,parts.inbox,parts.briefing,
       parts.day,parts.steps,parts.breathe,parts.calendar);
     return detached;
   }
@@ -236,10 +240,14 @@
     dashboard.insertBefore(parts.revenue,board);
     dashboard.insertBefore(originalGrid,board);
     dashboard.insertBefore(parts.shortcuts,board);
+    dashboard.insertBefore(parts.inbox,board);
+    dashboard.insertBefore(parts.briefing,board);
     dashboard.insertBefore(widgetHost,board);
     for(const [id,element] of defaultLabels){
       if(id==='business')dashboard.insertBefore(element,parts.revenue);
       if(id==='departments')dashboard.insertBefore(element,parts.shortcuts);
+      if(id==='communication')dashboard.insertBefore(element,parts.inbox);
+      if(id==='day')dashboard.insertBefore(element,parts.briefing);
     }
     originalGrid.hidden=false;
     // Existing widget module owns its own visibility and data refresh.
@@ -540,7 +548,7 @@
     if(target.closest('.dm-layout-toolbar,.dm-unit-controls,dialog,input,textarea,select,[contenteditable="true"]'))return false;
     // Long-press on a quick-action button enters edit mode as well. A normal
     // short tap still invokes its existing action.
-    if(target.closest('.metric-card,.dm-home-widget,.dm-layout-unit,.shortcuts,.shortcut'))return true;
+    if(target.closest('.metric-card,.dm-home-widget,.dm-layout-unit,.shortcuts,.shortcut,.dm-workspace-card'))return true;
     if(target.closest('button,a,[role="button"]'))return false;
     return Boolean(target.closest('.dashboard'));
   }
