@@ -310,7 +310,7 @@
 #managementScreen .mg-blue{color:#9bd4ff;background:linear-gradient(145deg,#183f77,#071321);border-color:#4f83cd7a}
 #managementScreen .mg-purple{color:#dfb4ff;background:linear-gradient(140deg,#342041,#0b0714);border-color:#a46bca76}
 #managementScreen .mg-gold{color:#ffcf8b;background:linear-gradient(150deg,#47301c,#0e0b07);border-color:#e9af6988}
-#managementScreen .mg-chevron{margin-left:auto;position:relative;z-index:3}
+
 #managementScreen .mg-theme{min-height:58px;background:linear-gradient(140deg,#162331,#05090e)}
 #managementScreen .mg-theme-icon{font-size:26px;color:#fff}
 #managementScreen .mg-theme-controls{display:flex;align-items:center;gap:3px;flex:none;padding:3px;border:1px solid rgba(166,194,212,.5);border-radius:30px;background:#030913;position:relative;z-index:2}
@@ -365,7 +365,7 @@
 #managementScreen .mg-scene{width:100%;height:100%;display:block}
 #managementScreen .mg-extra-payments{border-color:#af876167}
 #managementScreen .mg-extra-payments .mg-accessory{opacity:.86}
-#managementScreen .mg-extra-row .mg-chevron{z-index:3}
+
 #managementScreen .mg-detail{display:grid;gap:10px;padding:4px 1px}
 #managementScreen .mg-detail h2{font-size:15px;margin:12px 0 0}
 #managementScreen .mg-explain,#managementScreen .mg-disclaimer{line-height:1.55;color:#bbcddd;font-size:13px;background:linear-gradient(145deg,#101d28,#05090d);border:1px solid #7c9ab854;border-radius:15px;padding:15px;margin:0}
@@ -389,7 +389,7 @@
 #managementScreen .mg-detail .mg-autopilot-link .mg-zap{width:49px;height:49px;flex:none}
 #managementScreen .mg-detail .mg-autopilot-link .mg-copy{position:relative;z-index:2}
 #managementScreen .mg-detail .mg-autopilot-link .mg-copy small{font-size:11px}
-#managementScreen .mg-detail .mg-autopilot-link .mg-chevron{flex:none}
+
 
 
 /* Assistant Experience v2 — one unified layer for voice previews and the live ring. */
