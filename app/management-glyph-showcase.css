@@ -108,9 +108,15 @@
 #managementScreen .voice-mock-conversation .dm-settings-demo-glyph.is-visible{
   opacity:.92;
 }
+/* Different demo captions must not change the page height when a sign is tapped. */
 #managementScreen .dm-glyph-preview-status{
   margin-top:9px;
+  min-height:4.35em; /* stable three-line slot on narrow screens */
   font-size:10.5px;line-height:1.45;color:#a8c4d9;
+  overflow-anchor:none;
+}
+#managementScreen .dm-glyph-showcase .dm-glyph-preview-actions button{
+  touch-action:manipulation;
 }
 @media(max-width:350px){
   #managementScreen .dm-glyph-showcase{gap:6px;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
