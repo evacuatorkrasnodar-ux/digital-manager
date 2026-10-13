@@ -5,7 +5,7 @@
 .dm-journey-panel{box-sizing:border-box;width:min(100%,445px);max-height:calc(100dvh - 42px);overflow-y:auto;min-height:180px;border:1px solid rgba(162,202,235,.37);border-radius:22px;padding:15px 16px 20px;background:radial-gradient(ellipse at 50% -5%,rgba(62,115,188,.23),transparent 55%),linear-gradient(150deg,#142333,#060b13 90%);box-shadow:0 25px 85px rgba(0,0,0,.75),inset 0 1px rgba(246,251,255,.07)}
 .dm-journey-panel header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:10px;border-bottom:1px solid rgba(166,199,224,.15)}
 .dm-journey-panel header>span{font-size:9px;letter-spacing:.14em;color:#aacce3}
-.dm-journey-panel header button{flex:none;width:34px;height:34px;border:1px solid rgba(158,198,230,.43);border-radius:50%;background:#0e2031;color:#e7f4ff;font-size:22px}
+
 .dm-journey-chat{display:grid;gap:13px;margin:0;padding:19px 2px 2px}
 .dm-journey-eyebrow{font-size:9px;letter-spacing:.15em;color:#add0ed}
 .dm-journey-chat h2{margin:0;font-size:clamp(19px,5vw,25px);font-weight:520;line-height:1.24;color:#f0f9ff;letter-spacing:-.019em}
