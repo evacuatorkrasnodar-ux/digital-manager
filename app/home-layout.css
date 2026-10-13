@@ -224,8 +224,8 @@ html.dm-layout-editing #homeScreen #dmLayoutBoard>.dm-home-section-title.dm-sect
    Do not alter the buttons' approved sizes, grid or click behavior. */
 /* Compact only the space between business cards and manager departments. */
 #homeScreen #dmLayoutBoard>.dm-home-section-title[data-home-section="departments"]{
-  margin-top:-8px;
+  margin-top:-18px;
   margin-bottom:0;
 }
-#homeScreen #dmLayoutBoard>.dm-layout-unit[data-card-id="quick"]{margin-top:-5px;}
+#homeScreen #dmLayoutBoard>.dm-layout-unit[data-card-id="quick"]{margin-top:-8px;}
 #homeScreen .shortcuts>.shortcut-grid{margin-top:0}
