@@ -1667,6 +1667,20 @@
   });
 
   document.querySelectorAll('[data-detail]').forEach(b=>b.addEventListener('click',()=>b.dataset.detail==='advice'?adviceModal():detailModal(b.dataset.detail)));
+  // Entire revenue card is a touch target; the small details icon still works once.
+  const revenueCard=document.querySelector('#homeScreen .revenue-card');
+  if(revenueCard){
+    revenueCard.addEventListener('click',event=>{
+      if(event.target.closest('[data-detail]'))return;
+      detailModal('revenue');
+    });
+    revenueCard.addEventListener('keydown',event=>{
+      if(event.target!==revenueCard||!['Enter',' '].includes(event.key))return;
+      event.preventDefault();
+      detailModal('revenue');
+    });
+  }
+
   document.querySelectorAll('#homeScreen .shortcuts [data-action]').forEach(b=>b.addEventListener('click',()=>openBusinessArea(b.dataset.action)));
 
   byId('closeDialog').addEventListener('click',closeModal);
