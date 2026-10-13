@@ -186,7 +186,9 @@
     board.hidden=false;
     originalGrid.hidden=true;
     widgetHost.hidden=true;
-    toolbar.hidden=false;
+    // The editor toolbar is only shown while customizing. After "Done", the
+    // user's cards remain in place without a permanent settings block.
+    toolbar.hidden=!editing;
     document.documentElement.classList.add('dm-custom-home-layout');
     document.documentElement.classList.toggle('dm-layout-editing',editing);
     document.getElementById('dmLayoutCaption').textContent=editing?
