@@ -743,12 +743,12 @@
         ['autopilot','ic-shield','Автопилот','Навыки · Правила · Самостоятельность']
       ];
       content='<div class="mg-unified-hub">'+
-        '<button type="button" id="mgOpenBusinessJourney" class="mg-unified-item"><span class="mg-unified-icon"><svg class="ico" aria-hidden="true"><use href="#ic-spark"/></svg></span><span class="mg-copy"><strong>Мой путь с управляющим</strong><small>Создать бизнес с нуля или развивать действующий</small></span><span class="mg-chevron" aria-hidden="true"><svg class="ico"><use href="#ic-chevron"/></svg></span></button>'+
+        '<button type="button" id="mgOpenBusinessJourney" class="mg-unified-item"><span class="mg-unified-icon"><svg class="ico" aria-hidden="true"><use href="#ic-spark"/></svg></span><span class="mg-copy"><strong>Мой путь с управляющим</strong><small>Создать бизнес с нуля или развивать действующий</small></span></button>'+
         parts.map(([key,icon,label,description])=>
         '<button type="button" class="mg-unified-item mg-unified-'+key+'" data-mg-open="'+key+'">'+
           '<span class="mg-unified-icon"><svg class="ico" aria-hidden="true"><use href="#'+icon+'"/></svg></span>'+
           '<span class="mg-copy"><strong>'+label+'</strong><small>'+description+'</small></span>'+
-          '<span class="mg-chevron" aria-hidden="true"><svg class="ico"><use href="#ic-chevron"/></svg></span>'+
+          ''+
         '</button>').join('')+'</div>';
     }else if(page==='workshop'){
       content='<div id="dmWorkshopMount"></div>';
@@ -758,14 +758,14 @@
       const choices=[['advertising','Реклама до 5 000 ₽'],['tools','Создание рабочих инструментов'],['prices','Изменение цен'],['spending','Новые расходы']];
       content='<div class="mg-auto-intro">✦ &nbsp; Ты задаёшь направление. Я беру подготовку на себя.</div>'+
         '<p class="mg-explain">Первое реальное действие — сам замечаю новые обращения из «Продаж» и готовлю ответы. Только по твоему разрешению, только на этом устройстве. Никаких отправок и трат.</p>'+
-        '<button type="button" id="mgOpenInitiative" class="mg-unified-item mg-init-active-link"><span class="mg-unified-icon"><svg class="ico" aria-hidden="true"><use href="#ic-spark"/></svg></span><span class="mg-copy"><strong>Посмотреть, что я делаю</strong><small>Включить или остановить подготовку · результаты работы</small></span><span class="mg-chevron" aria-hidden="true"><svg class="ico"><use href="#ic-chevron"/></svg></span></button>'+
+        '<button type="button" id="mgOpenInitiative" class="mg-unified-item mg-init-active-link"><span class="mg-unified-icon"><svg class="ico" aria-hidden="true"><use href="#ic-spark"/></svg></span><span class="mg-copy"><strong>Посмотреть, что я делаю</strong><small>Включить или остановить подготовку · результаты работы</small></span></button>'+
         '<details class="mg-init-future"><summary>Будущая самостоятельность и навыки</summary>'+
         '<p class="mg-disclaimer">Настройки ниже пока только прототип. Они не дают разрешения на внешние действия. Для связи с сервисами потребуются отдельные подключения и ограничения.</p>'+
         '<label class="mg-field">Уровень самостоятельности<input id="mgAutonomy" type="range" min="0" max="2" step="1" value="'+Number(mgData.autonomy)+'"><span id="mgAutonomyLabel"></span></label>'+
         '<h2>Правила на будущее</h2>'+choices.map(([key,label])=>'<label class="mg-choice">'+label+'<input type="checkbox" data-mg-rule="'+key+'" '+(mgData.rules[key]?'checked':'')+'></label>').join('')+
         mgSkillsPanels()+'</details>';
     }else if(page==='connections'){
-      content='<p class="mg-explain">'+mgInfo[page]+'</p><button type="button" class="mg-unified-item" id="mgOpenDigitalTrace"><span class="mg-unified-icon"><svg class="ico"><use href="#ic-bars"/></svg></span><span class="mg-copy"><strong>Цифровой след</strong><small>Источники, события и выводы управляющего</small></span><span class="mg-chevron"><svg class="ico"><use href="#ic-chevron"/></svg></span></button><p class="mg-disclaimer">Реальные источники пока не подключены. Показатели не имитируются.</p>';
+      content='<p class="mg-explain">'+mgInfo[page]+'</p><button type="button" class="mg-unified-item" id="mgOpenDigitalTrace"><span class="mg-unified-icon"><svg class="ico"><use href="#ic-bars"/></svg></span><span class="mg-copy"><strong>Цифровой след</strong><small>Источники, события и выводы управляющего</small></span></button><p class="mg-disclaimer">Реальные источники пока не подключены. Показатели не имитируются.</p>';
     }else{content='<p class="mg-explain">'+mgInfo[page]+'</p><p class="mg-disclaimer">Этот раздел готовится. Подключённые данные и действия не имитируются.</p>';}
     byId('mgDetail').innerHTML=content;
     if(page==='workshop')window.DMWorkshop?.mount(byId('dmWorkshopMount'));
