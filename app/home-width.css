@@ -33,16 +33,14 @@
   #homeScreen .metric-grid{column-gap:6px}
 }
 
-/* v297 — neutral velvet below Home cards.
-   The underlying app shell was #01050a (blue-green). The calendar is the
-   established design reference; only Home's exposed gaps become neutral black.
-   Leave revenue, client, order and profit cards, their cyan/gold charts,
-   the entire photographic hero and bottom dock unchanged. */
+/* Neutral black surface behind the Home cards and floating plasma.
+   No blue-tinted band or secondary backdrop; cards, hero and lasers retain
+   their own original materials. */
 body .app-shell #homeScreen{
-  background:#020203;
+  background:#000;
 }
 body .app-shell #homeScreen .dashboard{
-  background:#020203!important;
+  background:#000!important;
 }
 body .app-shell #homeScreen .shortcuts{
   background:transparent!important;
