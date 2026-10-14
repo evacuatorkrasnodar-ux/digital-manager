@@ -671,7 +671,7 @@
     },3600);
   }
   let mgCurrent='home';
-  const mgNames={manager:'Мой помощник',
+  const mgNames={theme:'Тема',manager:'Управляющий',
     voice:'Внешний вид и общение',autopilot:'Автопилот',layout:'Главная страница',application:'Приложение',connections:'Подключения',documents:'Документы',
     payments:'Платежи',learning:'Обучение',security:'Безопасность',workshop:'Моя мастерская'};
   const mgInfo={
@@ -957,24 +957,30 @@
     byId('mgHomeLayoutPanel').hidden=!mgIsLayout;
     byId('mgDetail').hidden=page==='home'||mgIsLayout;
     byId('mgTitle').textContent=mgNames[page]||'Управление';
-    byId('mgSubtitle').textContent=({home:'Пять разделов — всё на своём месте',layout:'Карточки и расположение',application:'Оформление · Безопасность · Данные',manager:'Все настройки одного помощника',autopilot:'Навыки и границы самостоятельности',connections:'Сервисы и источники данных',documents:'Файлы и шаблоны',payments:'Счета и регулярные расходы',learning:'Возможности приложения',voice:'Плазма · Док · Голос · Имя',workshop:'Инструменты и калькуляторы'})[page]||'Настройки приложения';
+    byId('mgSubtitle').textContent=({home:'Три раздела — всё на своём месте',layout:'Карточки и расположение',application:'Знакомство · Подключения · Данные',theme:'Оформление · Плазма · Док',manager:'Анализ · Рекомендации · Исполнение',autopilot:'Навыки и границы самостоятельности',connections:'Сервисы и источники данных',documents:'Файлы и шаблоны',payments:'Счета и регулярные расходы',learning:'Возможности приложения',voice:'Плазма · Док · Голос · Имя',workshop:'Инструменты и калькуляторы'})[page]||'Настройки приложения';
     clearTimeout(voicePreviewTimer);
     if(dmSettingsGlyphTimer!==null){clearTimeout(dmSettingsGlyphTimer);dmSettingsGlyphTimer=null;}
     if(page==='home'){byId('mgDetail').innerHTML='';requestAnimationFrame(mgSyncCarouselNav);window.dispatchEvent(new Event('dm:management-home'));return;}
     let content='';
-    if(page==='application'){
+    if(page==='theme'){
       content='<div class="mg-unified-hub">'+
-        '<div class="mg-unified-panel"><h2>Оформление</h2><p class="mg-unified-note">Сейчас доступна фирменная тёмная тема. Светлую добавим позднее.</p></div>'+
+        '<div class="mg-unified-panel"><h2>Тема оформления</h2><p class="mg-unified-note">Сейчас доступен фирменный тёмный Black Velvet. Светлая и системная темы появятся после разработки — пока не показываем неработающие переключатели.</p></div>'+
+        '<button type="button" class="mg-unified-item" data-mg-open="voice"><span class="mg-unified-icon"><svg class="ico" aria-hidden="true"><use href="#ic-spark"/></svg></span><span class="mg-copy"><strong>Плазма, док и общение</strong><small>Внешний вид · Расположение · Голос · Имя</small></span></button>'+
+        '</div>';
+    }else if(page==='application'){
+      content='<div class="mg-unified-hub">'+
+        '<button type="button" class="mg-unified-item" id="mgOpenBusinessJourney"><span class="mg-unified-icon"><svg class="ico" aria-hidden="true"><use href="#ic-target"/></svg></span><span class="mg-copy"><strong>Знакомство и настройка</strong><small>Создать бизнес или продолжить работу</small></span></button>'+
+        '<button type="button" class="mg-unified-item" data-mg-open="connections"><span class="mg-unified-icon"><svg class="ico" aria-hidden="true"><use href="#ic-bars"/></svg></span><span class="mg-copy"><strong>Подключения и ресурсы</strong><small>Сайты · Сервисы · Цифровой след</small></span></button>'+
+        '<button type="button" class="mg-unified-item" data-mg-open="layout"><span class="mg-unified-icon"><svg class="ico" aria-hidden="true"><use href="#ic-grid"/></svg></span><span class="mg-copy"><strong>Главная страница</strong><small>Карточки и расположение</small></span></button>'+
         '<button type="button" class="mg-unified-item" data-mg-open="security"><span class="mg-unified-icon"><svg class="ico" aria-hidden="true"><use href="#ic-shield"/></svg></span><span class="mg-copy"><strong>Безопасность и данные</strong><small>Доступ, разрешения и защита</small></span></button>'+
         '<button type="button" class="mg-unified-item" data-mg-open="learning"><span class="mg-unified-icon"><svg class="ico" aria-hidden="true"><use href="#ic-target"/></svg></span><span class="mg-copy"><strong>Помощь и обучение</strong><small>Подсказки по приложению</small></span></button>'+
         '</div>';
     }else if(page==='manager'){
       const parts=[
-        ['voice','ic-settings','Внешний вид и общение','Плазма · Док · Голос · Имя'],
-        ['autopilot','ic-shield','Автопилот','Навыки · Правила · Самостоятельность']
+        ['autopilot','ic-shield','Анализ и самостоятельность','Рекомендации · Правила · Разрешения'],
+        ['workshop','ic-settings','Моя мастерская','Инструменты · Калькуляторы · Исполнение']
       ];
       content='<div class="mg-unified-hub">'+
-        '<button type="button" id="mgOpenBusinessJourney" class="mg-unified-item"><span class="mg-unified-icon mg-manager-art mg-manager-art-journey"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19c2.2-4.8 5.4-3 8.1-7.2 2.2-3.4 4.3-3.8 7.8-4.5"/><path d="m16.4 7.3 3.5 0 .2 3.5"/><circle cx="5" cy="18.8" r="1.4"/><path d="m7 5 .8 2.1L10 8l-2.2.8L7 11l-.8-2.2L4 8l2.2-.9z"/></svg></span><span class="mg-copy"><strong>Мой путь с управляющим</strong><small>Создать бизнес с нуля или развивать действующий</small></span></button>'+
         parts.map(([key,icon,label,description])=>
         '<button type="button" class="mg-unified-item mg-unified-'+key+'" data-mg-open="'+key+'">'+
           '<span class="mg-unified-icon mg-manager-art mg-manager-art-'+key+'"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(key==='voice'?'<circle cx="12" cy="12" r="7.4"/><path d="M12 4.6c-3.4 2.7-4.7 6-4.2 9.4M5.3 15.1c2.8-2.5 6.2-3 11.7-.8"/><path d="M12 9v6M9.5 12h5"/>':'<path d="M12 2.5 20 6v5.5c0 5-3.1 8.1-8 10-4.9-1.9-8-5-8-10V6z"/><path d="m8.2 12.1 2.5 2.5 5-5"/>')+'</svg></span>'+
@@ -1123,7 +1129,7 @@
   document.querySelectorAll('[data-mg-open]').forEach(el=>el.addEventListener('click',()=>{
     mgSettingsPage(el.dataset.mgOpen);
   }));
-  byId('mgBack').addEventListener('click',()=>{if(mgCurrent==='home')setTab('home');else if(mgCurrent==='manager')mgSettingsPage('home');else if(['voice','autopilot'].includes(mgCurrent))mgSettingsPage('manager');else if(['security','learning'].includes(mgCurrent))mgSettingsPage('application');else mgSettingsPage('home');});
+  byId('mgBack').addEventListener('click',()=>{if(mgCurrent==='home')setTab('home');else if(mgCurrent==='manager')mgSettingsPage('home');else if(mgCurrent==='voice')mgSettingsPage('theme');else if(mgCurrent==='autopilot')mgSettingsPage('manager');else if(['security','learning','connections','layout'].includes(mgCurrent))mgSettingsPage('application');else mgSettingsPage('home');});
   byId('mgEditHomeLayout').addEventListener('click',()=>{setTab('home');window.DMHomeLayout?.edit?.();});
   document.querySelectorAll('[data-mg-card]').forEach(el=>el.addEventListener('change',()=>{
     if(lockedHomeCards.has(el.dataset.mgCard)){
