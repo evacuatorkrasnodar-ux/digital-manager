@@ -167,7 +167,8 @@ function create(){
   if(b.id==='dmBusinessPictureOpen'){showPicture();return}
   if(b.dataset.expenseDelete){removePromotion(b.dataset.expenseDelete);return}
   if(b.dataset.pictureGoSales){closePicture();return}
-  if(b.id==='dmSalesNewLead'){goToNewSale();return}
+  if(b.id==='dmSalesNewLead'){screen.querySelector('#dmSalesFullLedger').open=true;goToNewSale();return}
+  if(b.dataset.saleOpen){openClient(b.dataset.saleOpen);return}
   if(b.dataset.saleOutcome){outcomeDialog(records.find(x=>x.id===b.dataset.saleId),b.dataset.saleOutcome);return}
   if(b.dataset.saleReopen){reopenSale(b.dataset.saleReopen);return}
   if(b.dataset.saleAction){action(b.dataset.saleAction,b.dataset.saleId);return}
@@ -222,6 +223,31 @@ function render(){
  form+'<section class="dm-sales-section dm-sales-terms"><details><summary>Для Уолл-стрит 😉</summary><p><b>Воронка продаж</b> — путь от «написал» до «купил».</p><p><b>Конверсия</b> — какая доля обратившихся купила.</p><p><b>Источник клиента</b> — откуда человек узнал о вас.</p><p><b>Потерянная сделка</b> — покупка, которая не состоялась.</p><p>Эти слова знать необязательно. Управляющий всё объяснит по-человечески.</p></details></section>';
  document.getElementById('dmSalesBody').insertAdjacentHTML('afterbegin','<button type="button" id="dmBusinessPictureOpen" class="dm-picture-open"><span><b>Что происходит с бизнесом?</b><small>Продажи · Деньги · Продвижение</small></span><span class="dm-circle-arrow" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></button>');
  document.getElementById('dmBusinessPictureOpen').insertAdjacentHTML('afterend','<button type="button" id="dmSalesNewLead" class="dm-sales-add-shortcut">+ Добавить обращение</button>');
+ // Decision-first overview. Full original records and controls stay available,
+ // but the owner no longer has to navigate dozens of dropdowns.
+ const host=document.getElementById('dmSalesBody');
+ const details=document.createElement('details');
+ details.className='dm-sales-full-ledger';
+ details.id='dmSalesFullLedger';
+ details.innerHTML='<summary>Полный учёт и настройки</summary>';
+ while(host.firstChild)details.append(host.firstChild);
+ const first=active.find(x=>x.stage==='new')||active[0]||null;
+ const intro=document.createElement('section');
+ intro.className='dm-sales-decision';
+ const main=first?
+   '<strong>'+esc(first.person)+'</strong><p>'+esc(first.title)+' · '+esc(statuses[first.stage])+'</p>'+
+   '<button type="button" data-sale-action="'+(first.stage==='offer'?'offer':'reply')+'" data-sale-id="'+esc(first.id)+'">'+(first.stage==='offer'?'Готовое предложение':'Готовый ответ')+' ↗</button>'
+   :'<strong>Сейчас всё спокойно</strong><p>В ваших записях нет обращений, ожидающих продолжения.</p>';
+ intro.innerHTML='<small>УПРАВЛЯЮЩИЙ · СЛЕДУЮЩЕЕ ДЕЙСТВИЕ</small>'+main;
+ host.append(intro);
+ const queue=document.createElement('section');
+ queue.className='dm-sales-queue';
+ queue.innerHTML='<h2>Клиенты в работе <span>'+active.length+'</span></h2>'+
+  (active.length?'<div class="dm-sales-queue-list">'+active.slice(0,25).map(x=>
+    '<div class="dm-sales-queue-row"><div><strong>'+esc(x.person)+'</strong><small>'+esc(statuses[x.stage])+' · '+esc(x.title)+'</small></div>'+
+    '<button type="button" data-sale-open="'+esc(x.id)+'" aria-label="Открыть карточку клиента '+esc(x.person)+'">Подробнее ↗</button></div>'
+  ).join('')+'</div>':'<p>Новых дел пока нет.</p>');
+ host.append(queue,details);
 }
 function draftPanel(title,text){
  const old=document.getElementById('dmSalesDraft');
@@ -401,7 +427,7 @@ function openClient(id){
  open();
  if(typeof id!=='string')return;
  const target=[...screen.querySelectorAll('[data-sale-client-id]')].find(el=>el.dataset.saleClientId===id);
- if(target){target.scrollIntoView({block:'center',behavior:'instant'});target.focus?.({preventScroll:true})}
+ if(target){const ledger=screen.querySelector('#dmSalesFullLedger');if(ledger)ledger.open=true;target.scrollIntoView({block:'center',behavior:'instant'});target.focus?.({preventScroll:true})}
 }
 function openPicture(source='picture'){
  open();showPicture();
