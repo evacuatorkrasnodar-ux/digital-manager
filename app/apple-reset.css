@@ -198,3 +198,42 @@
  animation:none!important;scroll-behavior:auto!important;
  }
 }
+
+/* Black Velvet — My Assistant grouped settings, phase 2.
+   Preserve all existing handlers and the three working navigation entries. */
+#managementScreen #mgDetail .mg-unified-hub:has(#mgOpenBusinessJourney){
+ display:flex!important;flex-direction:column!important;gap:0!important;
+ overflow:hidden;border-radius:17px!important;
+ background:#1c1c1e!important;
+ border:1px solid rgba(255,255,255,.08)!important;
+}
+#managementScreen #mgDetail .mg-unified-hub:has(#mgOpenBusinessJourney)>.mg-unified-item{
+ border:0!important;border-radius:0!important;
+ min-height:73px!important;
+ background:#1c1c1e!important;
+ padding:12px 14px!important;box-shadow:none!important;
+}
+#managementScreen #mgDetail .mg-unified-hub:has(#mgOpenBusinessJourney)>.mg-unified-item + .mg-unified-item{
+ border-top:1px solid rgba(255,255,255,.09)!important;
+}
+#managementScreen #mgDetail .mg-unified-hub:has(#mgOpenBusinessJourney)>.mg-unified-item:is(:hover,:active){
+ background:#29292c!important;
+}
+#managementScreen #mgDetail .mg-unified-hub:has(#mgOpenBusinessJourney) .mg-manager-art{
+ background:#303034!important;border:1px solid rgba(255,255,255,.08)!important;
+ width:42px!important;height:42px!important;flex:0 0 42px!important;
+ border-radius:12px!important;filter:none!important;
+}
+#managementScreen #mgDetail .mg-unified-hub:has(#mgOpenBusinessJourney) .mg-manager-art::before,
+#managementScreen #mgDetail .mg-unified-hub:has(#mgOpenBusinessJourney) .mg-manager-art::after{
+ display:none!important;
+}
+#managementScreen #mgDetail .mg-unified-hub:has(#mgOpenBusinessJourney) .mg-manager-art .ico{
+ animation:none!important;transform:none!important;filter:none!important;
+}
+#managementScreen #mgDetail .mg-unified-hub:has(#mgOpenBusinessJourney) .mg-copy strong{
+ font-size:14.5px!important;font-weight:530!important;
+}
+#managementScreen #mgDetail .mg-unified-hub:has(#mgOpenBusinessJourney) .mg-copy small{
+ font-size:11.5px!important;line-height:1.36!important;color:#9a9aa1!important;
+}
