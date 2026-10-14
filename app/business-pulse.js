@@ -189,31 +189,45 @@ function render(){
  const x=collect(currentPeriod);
  $('dmPulseTitle').textContent='Пульс бизнеса · '+label[currentPeriod];
  const comparison=x.previous;
- const summary=x.recorded||x.promoCount||x.tasksDue?
-  'Сводка построена только по внесённым записям и указанным датам. Текущий период ещё не завершился.':
-  'За выбранный период подтверждённых записей для сводки пока нет. Это не означает отсутствие работы.';
- $('dmPulseDetail').innerHTML=romanAssistantBrief(x)+
-  '<section class="dm-pulse-section"><small class="dm-pulse-eyebrow">ПЕРИОД: '+x.range+'</small>'+
-   '<p>'+summary+'</p><div class="dm-pulse-stats">'+
-   stat('Новых обращений',String(x.created),'За период · ранее: '+comparison.created)+
-   stat('Отмечено покупок',String(x.won),'За период · ранее: '+comparison.won)+
-   stat('Суммы отмеченных покупок',x.amountCount?fmtMoney(x.amount):'—',
-      x.missingAmounts?'У '+x.missingAmounts+' покупок сумма не указана.':'Это не подтверждённые банковские поступления.')+
-   stat('Записано на рекламу',x.promoCount?fmtMoney(x.promo):'—',
-      x.promoCount?'Только внесённые расходы · ранее: '+fmtMoney(comparison.promo):'Расходы на продвижение за период не внесены.')+
-   stat('Потерянные сделки',String(x.lost),'Только с записанной датой изменения этапа')+
-   stat('Открытые задачи со сроком',String(x.tasksDue),'На текущий момент · срок внутри периода')+
-   '</div></section>'+
-  '<section class="dm-pulse-section"><small class="dm-pulse-eyebrow">ВАЖНО СЕЙЧАС · НЕ ЗАВИСИТ ОТ ПЕРИОДА</small>'+
-   '<h3>Что требует внимания директора</h3>'+actionable(x)+'</section>'+
-  '<section class="dm-pulse-section"><small class="dm-pulse-eyebrow">ГРАНИЦЫ ДАННЫХ</small>'+
-   '<p>Карточки главной используют те же ручные записи за выбранный период. При отсутствии данных показывается отсутствие сведений. Без полного учёта расходов прибыль не определяется, а график не имитирует рост.</p>'+
-   '<p>«Покупка» — отмеченная вручную сделка, а не подтверждённая банком оплата. Расходы показываются только по внесённой рекламе. Реальную выручку, прибыль, налоги и остаток денег без учётных источников не рассчитываем.</p>'+
-   (x.undated||x.undatedWon?'<p>В истории есть записи без необходимых дат ('+fmtCount(x.undated)+' обращений, '+fmtCount(x.undatedWon)+' покупок). Мы не приписываем их произвольному периоду.</p>':'')+
-   (x.flowErrors.length?'<p>Часть источников дел временно не прочитана: '+x.flowErrors.length+'. Сводка может быть неполной.</p>':'')+
-   '<div class="dm-pulse-buttons"><button type="button" data-pulse-target="sales">Открыть продажи '+circle+'</button>'+
-   '<button type="button" data-pulse-close>Готово</button></div></section>';
+ const candidates=localStorage.getItem('dm-roman-demo-active-v1')==='1'
+   ?(window.DMSalesScreen?.getWorkCandidates?.()||[]):[];
+ const lead=candidates.find(c=>c.stage==='new')||candidates.find(c=>c.stage==='talk'||c.stage==='offer');
+ const top=x.warnings[0];
+ const priority=top
+   ?top.count+' · '+top.label
+   :lead?'Следующий шаг — '+String(lead.person||'клиент')+': '+String(lead.title||'обращение')
+   :x.created?'Есть '+x.created+' обращений за период. Проверь, кто ждёт ответа.'
+   :'Срочных сигналов в доступных записях нет.';
+ const safe=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\\'' :'&#39;'}[c]));
+ const button=top?
+   '<button type="button" data-pulse-target="'+top.target+'">Перейти к делу '+circle+'</button>'
+   :lead?'<button type="button" data-pulse-client-draft="'+safe(lead.id)+'">Подготовленный следующий шаг '+circle+'</button>'
+   :'<button type="button" data-pulse-close>Понятно</button>';
+ const comparisonNote=x.recorded?
+   'По вашим записям: обращений '+x.created+', отмеченных покупок '+x.won+'.'
+   :'Для полного анализа пока не хватает записей о продажах.';
+ const details='<section class="dm-pulse-section"><small class="dm-pulse-eyebrow">ДАННЫЕ ЗА '+x.range+'</small>'+
+  '<p>Цифры взяты из ваших записей. «Покупка» — отмеченная сделка, а не банковское поступление.</p><div class="dm-pulse-stats">'+
+  stat('Новых обращений',String(x.created),'Ранее: '+comparison.created)+
+  stat('Отмечено покупок',String(x.won),'Ранее: '+comparison.won)+
+  stat('Суммы отмеченных покупок',x.amountCount?fmtMoney(x.amount):'—','Не банковская выписка')+
+  stat('Реклама по записям',x.promoCount?fmtMoney(x.promo):'—','Не все расходы компании')+
+  stat('Потерянные сделки',String(x.lost))+
+  stat('Задачи со сроком',String(x.tasksDue))+
+  '</div></section>'+
+  '<section class="dm-pulse-section"><h3>Остальные сигналы</h3>'+actionable(x)+'</section>'+
+  '<section class="dm-pulse-section"><h3>Что важно знать</h3>'+
+  '<p>Мы видим только подключённые или внесённые вручную данные. Прибыль без полного учёта расходов не рассчитываем. Внешние действия, отправка сообщений и расходы требуют разрешения.</p>'+
+  (x.flowErrors.length?'<p>Не удалось прочитать источники: '+x.flowErrors.length+'.</p>':'')+
+  '</section>';
+ $('dmPulseDetail').innerHTML=
+  '<section class="dm-pulse-section dm-pulse-decision" aria-label="Главный вывод помощника">'+
+  '<small class="dm-pulse-eyebrow">УПРАВЛЯЮЩИЙ УЖЕ ПРОВЕРИЛ ДОСТУПНЫЕ ЗАПИСИ</small>'+
+  '<h3>Главное сейчас</h3><p>'+safe(priority)+'</p><p>'+safe(comparisonNote)+'</p>'+
+  '<div class="dm-pulse-buttons">'+button+'</div></section>'+
+  '<details class="dm-pulse-extra"><summary>Подробный анализ и остальные сигналы</summary>'+details+'</details>';
 }
+
 function open(){
  currentPeriod=choosePeriod();priorFocus=document.activeElement;
  overlay.hidden=false;render();overlay.querySelector('[data-pulse-close]')?.focus({preventScroll:true});
