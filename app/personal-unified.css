@@ -275,6 +275,7 @@
 .care-shell .care-hero-note{margin:7px 0 0;font-size:11px;line-height:1.35;color:#bad7ed}
 .care-shell .care-health-entry{
   display:grid;
+  grid-template-columns:33px minmax(0,1fr) 34px;
   align-items:center;
   gap:9px;
   margin:9px 0;
@@ -734,9 +735,6 @@
   stroke-width:1.95;
   stroke-linecap:round;
   stroke-linejoin:round;
-}
-.care-shell .care-health-entry{
-  grid-template-columns:33px minmax(0,1fr) 34px;
 }
 .care-shell .care-health-entry>.care-health-entry-arrow{
   justify-self:end;
