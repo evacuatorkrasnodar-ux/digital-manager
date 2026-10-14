@@ -85,19 +85,24 @@ body.dm-calendar-photo > .day-shell.day-shell::after{
 }
 
 
-/* Desktop: My Day must share the same 430px centered app frame as Home.
-   Previously the fixed wallpaper covered the whole browser window. */
+/* The personal calendar uses exactly the same centered 430px app column
+   as Home at every viewport width, including resized desktop windows. */
+body.dm-calendar-photo > .day-shell.day-shell{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:430px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+body.dm-calendar-photo::before{
+  left:50%!important;
+  right:auto!important;
+  width:min(430px,100vw)!important;
+  transform:translateX(-50%)!important;
+}
 @media (min-width:701px){
   body.dm-calendar-photo > .day-shell.day-shell{
-    box-sizing:border-box;
-    width:100%;max-width:430px;
-    margin-left:auto;margin-right:auto;
     border-left:1px solid rgba(123,142,162,.30);
     border-right:1px solid rgba(123,142,162,.30);
-  }
-  body.dm-calendar-photo::before{
-    left:50%;right:auto;
-    width:430px;max-width:100%;
-    transform:translateX(-50%);
   }
 }
