@@ -95,8 +95,10 @@ function open(from='management'){
  resetTraceScroll();
 }
 function close(){
+ const destination=returnTab==='home'?'home':'management';
+ // Navigate through app state, not legacy tabHome/tabManagement dock buttons.
+ window.dispatchEvent(new CustomEvent('dm:navigate-tab',{detail:{tab:destination}}));
  if(screen())screen().hidden=true;
- const button=$(returnTab==='home'?'tabHome':'tabManagement');if(button)button.click();
 }
 function init(){
  $('dmTraceBack')?.addEventListener('click',close);
