@@ -136,7 +136,7 @@ function buildPanel(){
  root=document.createElement('section');root.id='dmInitiativeScreen';root.className='dm-init-overlay';
  root.hidden=true;root.setAttribute('role','dialog');root.setAttribute('aria-modal','true');
  root.setAttribute('aria-labelledby','dmInitTitle');
- root.innerHTML='<div class="dm-init-frame"><header class="dm-init-head"><div><small>ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</small><h2 id="dmInitTitle">Автоматизация</h2></div><button type="button" data-init-close aria-label="Закрыть">×</button></header><div class="dm-init-content" id="dmInitBody"></div></div>';
+ root.innerHTML='<div class="dm-init-frame"><header class="dm-init-head"><div><small>ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</small><h2 id="dmInitTitle">Автоматизация</h2></div><button type="button" data-init-close aria-label="Закрыть"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6 18 18M18 6 6 18"/></svg></button></header><div class="dm-init-content" id="dmInitBody"></div></div>';
  document.body.append(root);
  root.addEventListener('click',handleClick);
  root.addEventListener('submit',handleSubmit);
@@ -186,7 +186,7 @@ function statusMarkup(){
   '<h3>'+(data.awaitingReview?esc(data.awaitingReview+' ответов ждут проверки'):'Все черновики просмотрены')+'</h3>'+
   '<div class="dm-init-metrics"><div><strong>'+data.prepared+'</strong><small>Подготовлено</small></div><div><strong>'+data.awaitingReview+'</strong><small>Проверить</small></div><div><strong>'+data.reviewed+'</strong><small>Просмотрено</small></div></div>'+
   '<div class="dm-init-summary-actions"><button class="dm-init-pause" type="button" data-init-pause>Приостановить</button>'+
-  '<button class="dm-init-pause" type="button" data-init-delegated>Поручения ↗</button></div></section>';
+  '<button class="dm-init-pause" type="button" data-init-delegated>Поручения <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></button></div></section>';
  if(priority)main+='<section class="dm-init-insight"><small>ОБРАТИ ВНИМАНИЕ</small><p>'+esc(priority.text)+'</p></section>';
  if(all.length){
   main+='<section class="dm-init-work"><h3>Черновики ответов</h3>'+
