@@ -78,6 +78,29 @@
   }
   return tasks;
  }
+
+ const PROJECT_KEY='dm-roman-projects-v1';
+ function projectReview(){
+  const day=new Date().toISOString().slice(0,10);
+  const sales=JSON.parse(localStorage.getItem(SALES)||'[]');
+  let state=JSON.parse(localStorage.getItem(PROJECT_KEY)||'null')||{projects:[],events:[]};
+  if(!Array.isArray(state.projects)||!Array.isArray(state.events))state={projects:[],events:[]};
+  let changed=false;
+  for(const sale of sales.filter(x=>x.stage==='won'&&typeof x.id==='string')){
+   let p=state.projects.find(x=>x.id===sale.id);
+   if(!p){
+    p={id:sale.id,name:sale.title,client:sale.person,step:0,date:day};
+    state.projects.push(p);
+    state.events.unshift('Составлен учебный план: '+p.name);
+    changed=true;
+   }else if(p.date!==day&&p.step<2){
+    p.step++;p.date=day;changed=true;
+    state.events.unshift('Пересмотрен внутренний план: '+p.name);
+   }
+  }
+  if(changed)localStorage.setItem(PROJECT_KEY,JSON.stringify({projects:state.projects,events:state.events.slice(0,20)}));
+  return state;
+ }
  function inject(){
   const hub=document.querySelector('#managementScreen #mgDetail .mg-unified-hub');
   if(!hub||!document.querySelector('#mgOpenBusinessJourney')||hub.querySelector('#dmRomanDemoToggle'))return;
