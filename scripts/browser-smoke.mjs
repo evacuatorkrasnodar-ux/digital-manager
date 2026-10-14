@@ -12,6 +12,10 @@ async function open(path){
 try{
  await open('index.html');
  if(!await page.locator('#homeScreen').count())throw new Error('Main dashboard missing');
+ const composer=page.locator('#plasmaChatForm');
+ if(!await composer.count())throw new Error('Assistant text composer missing');
+ if(!await page.locator('#plasmaChatInput').count())throw new Error('Assistant text input missing');
+ if(!await page.locator('#plasmaOpenChat').count())throw new Error('Assistant text-open action missing');
  const mainPlasma=await page.locator('#tabAssistant, .dm-plasma, .dm-shared-plasma').count();
  if(!mainPlasma)throw new Error('Assistant plasma/launcher missing from dashboard');
  await open('world.html');
