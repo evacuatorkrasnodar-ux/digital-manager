@@ -626,7 +626,6 @@ html.dm-plasma-panel-open .dock-hidden-controls{
   box-shadow:inset 0 1px 0 rgba(228,246,255,.14),0 9px 27px rgba(0,0,0,.33),0 0 20px rgba(78,148,232,.07);
   transition:border-color .2s ease,box-shadow .2s ease,border-radius .24s ease;
 }
-.dm-chat-compose:focus-within{border-color:rgba(181,222,255,.69);box-shadow:inset 0 1px rgba(225,246,255,.18),0 7px 26px rgba(0,0,0,.4),0 0 15px rgba(77,153,246,.12)}
 .dm-chat-compose textarea{
   width:100%;min-width:0;min-height:38px;max-height:135px;
   padding:6px 70px 4px 0;margin:0;border:0;outline:0;
@@ -634,7 +633,6 @@ html.dm-plasma-panel-open .dock-hidden-controls{
   background:transparent;color:#f0f8ff;caret-color:#d5f2ff;
   font-family:inherit;font-size:13.5px;line-height:1.55;font-weight:400;letter-spacing:0;
 }
-.dm-chat-compose textarea::placeholder{color:#8faac2}
 .dm-chat-edit-tools{position:absolute;right:7px;top:9px;display:flex;align-items:center;justify-content:flex-end;z-index:1}
 .dm-chat-draft-title{display:none}
 .dm-chat-edit-buttons{display:flex;gap:2px}
@@ -643,7 +641,6 @@ html.dm-plasma-panel-open .dock-hidden-controls{
   padding:5px;background:rgba(18,36,55,.34);
   border:0;border-radius:9px;color:#adcae0;cursor:pointer;
 }
-.dm-chat-edit-buttons button:is(:hover,:focus-visible){background:rgba(67,111,156,.36);color:#e9f5ff}
 .dm-chat-edit-buttons button svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .dm-chat-draft-foot{display:none}
 .dm-chat-hint{
@@ -654,7 +651,6 @@ html.dm-plasma-panel-open .dock-hidden-controls{
 }
 .dm-chat-expand{align-self:start;margin-left:8px;border:0;background:transparent;padding:0;
   color:#9ebedb;font-family:inherit;font-size:11px;line-height:1.45;cursor:pointer}
-.dm-chat-expand:is(:hover,:focus-visible){color:#f1f8ff}
 .dm-chat-panel button:focus-visible{outline:2px solid #c5ebff;outline-offset:2px}
 .dm-chat-log{overflow-y:auto;overscroll-behavior:contain;display:grid;align-content:start;gap:7px;
   max-height:min(170px,30dvh);padding:5px 2px;scrollbar-width:thin;scrollbar-color:#6d8dac transparent}
@@ -696,7 +692,6 @@ html.dm-plasma-panel-open .dock-hidden-controls{
   border:1px solid rgba(140,178,210,.28);border-radius:12px;padding:8px 2px;cursor:pointer;
   background:linear-gradient(150deg,rgba(32,58,83,.55),rgba(8,22,39,.64));color:#dfedfc;
 }
-.dm-draft-actions-grid button:is(:hover,:focus-visible){border-color:rgba(198,230,250,.83);background:rgba(60,105,146,.36);color:#fff}
 .dm-draft-actions-grid button svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round}
 .dm-draft-actions-grid button span{font-size:9px;line-height:1.1;white-space:nowrap;font-weight:390}
 
@@ -713,11 +708,8 @@ html.dm-plasma-panel-open .dock-hidden-controls{
 .dm-saved-note-open strong{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11px;font-weight:480}
 .dm-saved-note-open small{font-size:10px;color:#91aac1}
 .dm-saved-note-delete{flex:none;width:33px;height:35px;font-size:22px;color:#bdd3e6;background:transparent;border:0;cursor:pointer}
-.dm-saved-note:is(:hover,:focus-within){border-color:rgba(168,211,244,.65)}
 .dm-notes-empty{margin:0;padding:12px 7px;color:#a9bfd4;font-size:11px}
 .dm-draft-status{margin:0;padding:8px 10px;border:1px solid rgba(127,170,205,.32);border-radius:10px;background:rgba(12,30,50,.55);font-size:10.5px;line-height:1.5;color:#b9ddf7}
-
-.dm-chat-panel.dm-chat-keyboard-open{max-height:max(125px,calc(100dvh - 24px - var(--dm-chat-kb,0px)))}
 .dm-chat-panel.dm-chat-keyboard-open.dm-chat-editor{
   bottom:calc(10px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
   max-height:max(110px,calc(100dvh - 28px - env(safe-area-inset-bottom,0px) - var(--dm-chat-kb,0px)));
@@ -803,13 +795,8 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
  backdrop-filter:blur(22px) saturate(.75);
  box-shadow:inset 0 1px rgba(255,255,255,.11),0 10px 29px rgba(0,0,0,.46);
 }
-.dm-chat-compose:focus-within{
- border-color:rgba(244,239,233,.50);
- box-shadow:inset 0 1px rgba(255,255,255,.16),0 10px 27px rgba(0,0,0,.47),0 0 12px rgba(255,255,255,.045);
-}
 .dm-chat-compose textarea{color:#f5f3f1;caret-color:#eeeae6;scrollbar-color:rgba(180,177,174,.4) transparent}
 .dm-chat-compose textarea::placeholder{color:#a19d99}
-.dm-chat-edit-buttons button{background:rgba(255,255,255,.045);color:#c7c3c0}
 .dm-chat-edit-buttons button:is(:hover,:focus-visible){background:rgba(255,255,255,.12);color:#fff}
 .dm-chat-editor .dm-chat-draft-title,.dm-draft-actions-heading strong{color:#f1eeeb}
 .dm-chat-draft-foot span,.dm-draft-actions-heading small,.dm-draft-actions-meta small{color:#a9a5a2}
@@ -823,9 +810,6 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
  color:#e6e2df;box-shadow:inset 0 1px rgba(255,255,255,.055);
 }
 .dm-draft-actions-grid button:is(:hover,:focus-visible){border-color:rgba(242,237,232,.57);background:rgba(95,91,88,.39);color:#fff}
-.dm-draft-actions-grid button svg{width:20px;height:20px;stroke-width:1.45}
-.dm-draft-actions-grid button span{font-size:9.5px}
-.dm-draft-actions-grid button[data-draft-action="ask"]{border-color:rgba(235,229,223,.38);background:linear-gradient(145deg,rgba(104,98,96,.40),rgba(34,31,33,.85))}
 .dm-notebook-open,.dm-draft-actions-meta button{color:#d7d1cc}
 .dm-notebook-open:is(:hover,:focus-visible){color:#fff}
 .dm-saved-note{border-color:rgba(230,223,216,.17);background:rgba(29,27,28,.8)}
@@ -852,10 +836,6 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
   backdrop-filter:blur(15px) saturate(.64);
   box-shadow:inset 0 1px rgba(255,255,255,.12),0 8px 25px rgba(0,0,0,.26);
 }
-.dm-chat-compose:focus-within{
-  border-color:rgba(238,233,230,.39);
-  box-shadow:inset 0 1px rgba(255,255,255,.15),0 9px 24px rgba(0,0,0,.30);
-}
 .dm-chat-edit-buttons{gap:7px}
 .dm-chat-edit-buttons button{
   width:29px;height:29px;min-width:29px;padding:6px;border-radius:50%;
@@ -879,12 +859,6 @@ html.dm-plasma-panel-open #assistantLive .dm-voice-waves{
   background:linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,.018));
   stroke:#ebe6e2;stroke-width:1.5;
 }
-.dm-draft-actions-grid button span{font-size:9px;color:#ddd8d4}
-.dm-draft-actions-grid button[data-draft-action="ask"]{
-  border-color:rgba(236,232,228,.21);
-  background:rgba(84,78,78,.23);
-}
-.dm-draft-actions-grid button:is(:hover,:focus-visible){background:rgba(103,97,97,.29)}
 .dm-chat-hint,.dm-draft-status{background:rgba(34,32,34,.60);backdrop-filter:blur(12px)}
 @media(max-width:345px){.dm-draft-actions-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
