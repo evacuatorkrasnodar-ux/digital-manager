@@ -151,3 +151,39 @@
 #managementScreen #mgMenu .dm-manager-menu-orange-plasma::after{
  border-top-color:#ffe4a4;border-right-color:rgba(255,120,25,.63);filter:drop-shadow(0 0 4px #ff8c24);
 }
+
+/* Subtle life in the five existing Management menu miniatures.
+   Uses the existing BEAUTIFUL / ECO / SIMPLE performance choice. */
+#managementScreen #mgMenu .mg-menu-row .mg-icon > svg.ico{
+ transform-origin:50% 50%;
+ animation:dm-management-icon-glimmer 7.8s ease-in-out infinite;
+}
+#managementScreen #mgMenu .mg-menu-row[data-mg-open="layout"] .mg-icon > svg.ico{animation-delay:-1.5s}
+#managementScreen #mgMenu .mg-menu-row[data-mg-open="workshop"] .mg-icon > svg.ico{animation-delay:-3s}
+#managementScreen #mgMenu .mg-menu-row[data-mg-open="connections"] .mg-icon > svg.ico{animation-delay:-4.5s}
+#managementScreen #mgMenu .mg-menu-row[data-mg-open="application"] .mg-icon > svg.ico{
+ animation:dm-management-settings-breathe 12s ease-in-out infinite;
+}
+@keyframes dm-management-icon-glimmer{
+ 0%,100%{opacity:.88;filter:drop-shadow(0 0 0 transparent);transform:translateY(0)}
+ 50%{opacity:1;filter:drop-shadow(0 0 2px rgba(225,243,255,.34));transform:translateY(-.5px)}
+}
+@keyframes dm-management-settings-breathe{
+ 0%,100%{transform:rotate(0);opacity:.9}
+ 50%{transform:rotate(8deg);opacity:1}
+}
+html[data-dm-performance="eco"] #managementScreen #mgMenu .mg-menu-row .mg-icon > svg.ico{
+ animation-duration:18s;
+ filter:none;
+}
+html[data-dm-performance="eco"] #managementScreen #mgMenu .dm-manager-menu-orange-plasma,
+html[data-dm-performance="eco"] #managementScreen #mgMenu .dm-manager-menu-orange-plasma *{
+ animation-duration:18s!important;
+}
+html[data-dm-performance="simple"] #managementScreen #mgMenu .mg-menu-row .mg-icon > svg.ico,
+html.dm-decorations-paused #managementScreen #mgMenu .mg-menu-row .mg-icon > svg.ico{
+ animation:none!important;transform:none!important;filter:none!important;
+}
+@media(prefers-reduced-motion:reduce){
+ #managementScreen #mgMenu .mg-menu-row .mg-icon > svg.ico{animation:none!important;transform:none!important}
+}
