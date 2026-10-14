@@ -26,6 +26,10 @@ try{
  if(!await page.locator('#plasmaOpenChat').count())throw new Error('Assistant text-open action missing');
  const mainPlasma=await page.locator('#tabAssistant, .dm-plasma, .dm-shared-plasma').count();
  if(!mainPlasma)throw new Error('Assistant plasma/launcher missing from dashboard');
+ const welcome=page.locator('#dmBusinessJourneyScreen');
+ if(await welcome.isVisible()){
+   await welcome.locator('[data-journey-close]').click();
+ }
  const orb=page.locator('#tabAssistant');
  if(!await orb.isVisible())throw new Error('Center plasma launcher not visible');
  const box=await orb.boundingBox();
