@@ -25,7 +25,7 @@ try{
     icon:ico?[parseFloat(ico.width),parseFloat(ico.height)]:[],
     inside:!!row&&rect.left>=row.left&&rect.right<=row.right+1,
     bareSymbol:el.textContent?.trim()||'',label:button?.getAttribute('data-mg-open')};
-  })));
+  }));
   if(circles.length!==5)throw Error('Expected 5 Management circle chevrons, found '+circles.length);
   for(const c of circles){
    if(!c.hasSvg||c.bareSymbol)throw Error('Legacy text chevron remains: '+JSON.stringify(c));
