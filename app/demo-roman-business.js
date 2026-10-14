@@ -119,6 +119,27 @@
   section.append(title,intro,button);
   hub.append(section);
  }
+ function mountHomeDemo(){
+  const menu=document.querySelector('#managementScreen #mgMenu');
+  if(!menu||document.getElementById('dmRomanHomeToggle'))return;
+  const panel=document.createElement('section');
+  panel.className='dm-roman-home-preview';
+  panel.setAttribute('aria-label','Проверка приложения на примере Романа');
+  const label=document.createElement('strong');
+  label.textContent=isActive()?'Роман · деморежим включён':'Деморежим · Роман';
+  const description=document.createElement('p');
+  description.textContent=isActive()?'Открывай разделы и проверяй реальные локальные действия. Можно вернуть свои данные.':'Учебная компания с клиентами и сделками: нажимай кнопки, меняй данные и смотри результат. Без внешних отправок.';
+  const button=document.createElement('button');
+  button.id='dmRomanHomeToggle';button.type='button';
+  button.textContent=isActive()?'Выйти из примера и восстановить данные':'Запустить пример Романа';
+  button.addEventListener('click',()=>{
+    if(isActive()){
+      if(confirm('Завершить пример Романа и восстановить прежние данные?'))restore();
+    }else if(confirm('Включить учебный бизнес Романа? Твои данные будут сохранены для возврата.'))seed();
+  });
+  panel.append(label,description,button);
+  menu.insertAdjacentElement('afterend',panel);
+ }
  function mountAutopilot(){
   if(!isActive())return;
   const container=document.querySelector('#managementScreen #mgDetail .mg-auto-compact');
@@ -220,7 +241,7 @@
   if(!root)return;
   const observer=new MutationObserver(()=>{inject();mountAutopilot()});
   observer.observe(root,{childList:true,subtree:false});
-  inject();mountAutopilot();
+  inject();mountAutopilot();mountHomeDemo();
   if(isActive()){
    scheduleCheck();
    window.addEventListener('dm:sales-changed',scheduleCheck);
