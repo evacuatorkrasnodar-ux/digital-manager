@@ -115,3 +115,74 @@
 @media(prefers-reduced-motion:reduce){
  #dmDirectorOffice *{scroll-behavior:auto!important;animation:none!important}
 }
+
+/* Director's Signature — same charcoal/silver glass as the approved Home.
+   Keep proposal history, consent state and buttons fully functional. */
+#dmDirectorOffice.dm-director-office{background:rgba(0,0,0,.79);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+#dmDirectorOffice .dm-director-frame{
+ border-color:rgba(168,182,194,.35);background:#06080a;
+ box-shadow:0 22px 56px rgba(0,0,0,.75),inset 0 1px rgba(255,255,255,.08)
+}
+#dmDirectorOffice .dm-director-head{
+ background:linear-gradient(150deg,#191e24,#080a0d 80%);
+ border-bottom-color:rgba(181,196,207,.16);
+}
+#dmDirectorOffice .dm-director-head small,
+#dmDirectorOffice .dm-director-proposal>small,
+#dmDirectorOffice .dm-director-welcome>small{color:#bbc3cb;letter-spacing:.055em}
+#dmDirectorOffice .dm-director-body{background:#06080a;scrollbar-width:none}
+#dmDirectorOffice .dm-director-body::-webkit-scrollbar{display:none}
+#dmDirectorOffice .dm-director-body section{
+ background:linear-gradient(153deg,#14191e,#070a0d 73%);
+ border-color:rgba(161,182,197,.29);border-radius:20px;
+ box-shadow:inset 0 1px rgba(255,255,255,.08);
+}
+#dmDirectorOffice h3{font-size:17px;font-weight:540;color:#f3f6fa}
+#dmDirectorOffice p{color:#c6d0d9;line-height:1.55}
+#dmDirectorOffice .dm-director-evidence{
+ background:linear-gradient(155deg,#1b2229,#10151a);
+ border-color:rgba(163,183,198,.26);
+ color:#c4d0da;border-radius:14px;
+}
+#dmDirectorOffice .dm-director-evidence strong{color:#eef4f9}
+#dmDirectorOffice .dm-director-next{color:#cbb89c}
+#dmDirectorOffice button[data-do],
+#dmDirectorOffice #dmDirectorQuestion button[type=submit],
+#dmDirectorOffice #dmDirectorRevision button[type=submit]{
+ min-height:44px;padding:10px 16px;border-radius:23px;
+ border:1px solid rgba(159,177,190,.35);
+ background:linear-gradient(150deg,#222c34,#0c1217);
+ box-shadow:inset 0 1px rgba(255,255,255,.10);
+ color:#ecf2f7;font-size:12px;
+}
+#dmDirectorOffice button[data-do=approve],
+#dmDirectorOffice button[data-do=option],
+#dmDirectorOffice #dmDirectorQuestion button[type=submit],
+#dmDirectorOffice #dmDirectorRevision button[type=submit]{
+ border:1px solid rgba(223,240,252,.96);
+ background:var(--dm-ui-gloss,linear-gradient(145deg,#e5f1fa,#9db9d0));
+ box-shadow:var(--dm-ui-gloss-shadow,inset 0 1px rgba(255,255,255,.88));
+ color:#122a3e;text-shadow:0 1px rgba(255,255,255,.32);
+ font-weight:560;
+}
+#dmDirectorOffice .dm-director-choices button[data-do=option]{
+ background:linear-gradient(150deg,#202832,#0c1219);
+ border-color:rgba(165,182,197,.35);color:#f0f4f8;
+ text-shadow:none;border-radius:16px;justify-content:flex-start;
+}
+#dmDirectorOffice .dm-director-choices button[data-do=option]:focus-visible{
+ border-color:rgba(224,242,253,.95);
+}
+#dmDirectorOffice .dm-director-progress,
+#dmDirectorOffice .dm-director-sidenote,
+#dmDirectorOffice .dm-director-muted{color:#aab7c3}
+#dmDirectorOffice textarea{
+ background:#0b1117;border-color:rgba(169,187,202,.38);
+ border-radius:15px;color:#f3f8fb;
+}
+#dmDirectorOffice .dm-director-history article{border-top-color:rgba(178,194,205,.14)}
+#dmDirectorOffice .dm-director-history article small{color:#bfb2a1}
+#mgHome #dmDirectorSetupEntry.dm-director-settings-entry{
+ background:linear-gradient(150deg,#191e24,#070b10);
+ border-color:rgba(162,184,200,.35);
+}
