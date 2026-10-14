@@ -146,7 +146,14 @@
    const tasks=autopilot(),projects=projectReview();
    const summaryData=window.DMInitiative?.getSummary?.()||{};
    const leads=tasks.find(t=>t.id==='new');
+   const sales=readObject(SALES);
+   const initiative=readObject('dm-initiative-v1');
+   const pending=Array.isArray(sales)?sales.filter(x=>['new','talk','offer'].includes(x.stage)):[];
+   const drafts=Array.isArray(initiative.items)?initiative.items:[];
+   const proposals=pending.filter(x=>drafts.some(d=>d.saleId===x.id));
+   const rub=n=>new Intl.NumberFormat('ru-RU',{style:'currency',currency:'RUB',maximumFractionDigits:0}).format(Number(n)||0);
    note.textContent='Подготовлено ответов: '+Number(summaryData.prepared||0)+
+    ' · Предложений к обсуждению: '+proposals.length+
     ' · Учебных планов: '+projects.projects.length+
     ' · '+(leads?.detail||'Обращения проверены')+'.';
    if(!details.open)return;
@@ -154,11 +161,17 @@
    const stages=['План составлен','В работе (учебный план)','Внутренняя проверка'];
    heading('Что подготовлено');
    for(const t of tasks)line(list,(t.done?'✓ ':'→ ')+t.text+' · '+t.detail);
+   heading('Предложения клиентам · ожидают решения');
+   if(!proposals.length)line(list,'Открытых обращений с подготовленными черновиками пока нет.');
+   for(const p of proposals.slice(0,8)){
+    const sum=Number(p.amount)>0?' · ориентир '+rub(p.amount):' · стоимость уточняется';
+    line(list,p.person+' — '+p.title+sum+' · черновик подготовлен, не отправлен; заказ не подтверждён.');
+   }
    heading('Проекты студии');
    if(!projects.projects.length)line(list,'Подтверждённых учебных проектов пока нет.');
    for(const p of projects.projects)line(list,p.name+' — '+stages[Math.min(2,p.step)]+' · '+p.client);
    heading('История решений');
-   const local=readObject(AUTO),initiative=readObject('dm-initiative-v1');
+   const local=readObject(AUTO);
    const events=[
     ...projects.events.map((text,i)=>({time:projects.projects[0]?.date||'',text,order:100-i})),
     ...(Array.isArray(local.events)?local.events:[]).map(e=>({time:e.at||e.date||'',text:e.text||'',order:Number(e.atMs)||0})),
