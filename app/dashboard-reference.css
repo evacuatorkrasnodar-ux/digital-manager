@@ -1062,3 +1062,67 @@
 @media (min-width:360px){
   #homeScreen .dashboard > .shortcuts{margin-top:0}
 }
+
+/* Readability pass: approved four silhouettes, positions and graph artwork stay intact.
+   Bring headings and meaning toward the top as in the Home reference. */
+#homeScreen .metric-grid .clients-card .tile-heading,
+#homeScreen .metric-grid .orders-card .tile-heading,
+#homeScreen .metric-grid .profit-card .tile-heading{
+  margin-top:0!important;
+  line-height:1.15!important;
+}
+#homeScreen .metric-grid .clients-card .clients-inner{
+  align-items:flex-start!important;
+  margin-top:3px!important;
+}
+#homeScreen .metric-grid .clients-card .donut{
+  width:clamp(62px,17vw,75px);
+  height:clamp(62px,17vw,75px);
+}
+#homeScreen .metric-grid .clients-card .donut-core small{
+  font-size:clamp(8px,2.15vw,10px)!important;
+  white-space:nowrap;
+  letter-spacing:-.035em;
+}
+#homeScreen .metric-grid .clients-card .donut-legend{
+  align-content:start!important;
+  gap:7px!important;
+  padding-top:3px;
+}
+#homeScreen .metric-grid .clients-card .donut-legend > div{
+  line-height:1.12!important;
+}
+#homeScreen .metric-grid .orders-card .orders-inner{
+  margin-top:7px!important;
+  align-items:flex-end;
+}
+#homeScreen .metric-grid .orders-card .tile-number{
+  font-size:clamp(31px,7.7vw,39px)!important;
+}
+#homeScreen .metric-grid .profit-card .profit-number{
+  margin-top:5px!important;
+  line-height:1.1!important;
+}
+#homeScreen .metric-grid .profit-card .delta{
+  margin-top:5px!important;
+  line-height:1.19!important;
+}
+#homeScreen .metric-grid .recommendation-card .recommendation-top{
+  align-items:flex-start!important;
+  gap:7px!important;
+  line-height:1.12!important;
+}
+#homeScreen .metric-grid .recommendation-card .advice-head{
+  margin:5px 0 4px!important;
+  line-height:1.19!important;
+  font-size:clamp(12px,3.3vw,16px)!important;
+}
+#homeScreen .metric-grid .recommendation-card .advice-body{
+  margin:0 0 7px!important;
+  font-size:clamp(11px,2.85vw,13px)!important;
+  line-height:1.28!important;
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
