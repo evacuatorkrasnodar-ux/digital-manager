@@ -203,6 +203,27 @@ function statusMarkup(){
  infoFoot;
  return main;
 }
+function romanProposal(candidate){
+ if(localStorage.getItem('dm-roman-demo-active-v1')!=='1'||!candidate)return '';
+ const context=window.DMSalesScreen?.getDraftContext?.(candidate.id);
+ if(!context)return '';
+ const title=String(context.title||'Проект').slice(0,140);
+ const price=Number(context.amount)>0?
+  new Intl.NumberFormat('ru-RU',{style:'currency',currency:'RUB',maximumFractionDigits:0}).format(context.amount):
+  'после уточнения объёма работ';
+ const kind=/сайт|лендинг|веб|корпоративн/i.test(title)?
+  ['Уточнить задачи, аудиторию и материалы','Согласовать структуру и прототип','Подготовить дизайн и разработку','Провести проверку и согласовать запуск']:
+  /запис|автоматизац|интеграц/i.test(title)?
+  ['Выяснить текущий порядок работы','Согласовать сценарий и нужные интеграции','Настроить учебный процесс','Проверить результат на тестовых данных']:
+  ['Уточнить ожидания и исходные материалы','Согласовать план и состав работ','Подготовить первый вариант','Проверить и согласовать результат'];
+ return '<section class="dm-init-roman-proposal" style="margin-top:17px;padding:13px;border:1px solid rgba(180,201,221,.23);border-radius:14px;background:rgba(20,30,44,.42)">'+
+  '<strong>Предварительное предложение · студия «Цифровой бизнес»</strong>'+
+  '<p>Проект: '+esc(title)+'</p>'+
+  '<p>Ориентир по стоимости из карточки обращения: <strong>'+esc(price)+'</strong>. Не согласован с клиентом, не является оплатой.</p>'+
+  '<p style="margin-bottom:5px">План работ:</p><ol style="padding-left:21px;margin:5px 0 10px">'+kind.map(step=>'<li>'+esc(step)+'</li>').join('')+'</ol>'+
+  '<small>Сроки и итоговую стоимость уточним после обсуждения задачи. Это внутренний учебный проект предложения, ничего не отправлено.</small>'+
+  '</section>';
+}
 function editorMarkup(){
  const work=state.items.find(t=>t.saleId===selectedId);
  const candidate=sources().find(x=>x.id===selectedId);
@@ -214,6 +235,7 @@ function editorMarkup(){
   (stale?'<p class="dm-init-warning">Этап клиента изменился. Этот черновик мог устареть. Проверьте его прежде чем использовать.</p>':'')+
   '<label for="dmInitDraft">Я подготовил текст. Можешь поправить:</label>'+
   '<textarea id="dmInitDraft" maxlength="2500" rows="8">'+esc(work.draft)+'</textarea>'+
+  romanProposal(candidate)+
   '<div class="dm-init-editor-actions"><button type="button" data-init-save>Сохранить правки</button>'+
   '<button type="button" data-init-copy>Скопировать ↗</button>'+
   '<button type="button" data-init-review>'+(work.reviewedAt?'Просмотрено ✓':'Я посмотрел ✓')+'</button>'+
