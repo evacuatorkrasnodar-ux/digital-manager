@@ -167,6 +167,21 @@
     const sum=Number(p.amount)>0?' · ориентир '+rub(p.amount):' · стоимость уточняется';
     line(list,p.person+' — '+p.title+sum+' · черновик подготовлен, не отправлен; заказ не подтверждён.');
    }
+   heading('План действий на сегодня');
+   const fresh=pending.filter(p=>p.stage==='new');
+   const negotiating=pending.filter(p=>p.stage==='talk'||p.stage==='offer');
+   const leader=fresh[0]||negotiating[0];
+   if(leader){
+    line(list,'Приоритет №1: '+(leader.stage==='new'?'проверить новое обращение':'продвинуть переговоры')+' — '+leader.person+' · '+leader.title+'.');
+    line(list,'Управляющий подготовил внутренние материалы. Следующее действие: проверить ответ и условия. До подтверждения клиента это не продажа.');
+   }else line(list,'Срочных открытых обращений в записях не найдено.');
+   const expenses=readObject(PROMO);
+   const spent=Array.isArray(expenses)?expenses.reduce((sum,e)=>sum+(Number(e.amount)>0?Number(e.amount):0),0):0;
+   const completed=Array.isArray(sales)?sales.filter(e=>e.stage==='won'):[];
+   const total=completed.reduce((sum,e)=>sum+(Number(e.amount)>0?Number(e.amount):0),0);
+   heading('Финансовый контроль');
+   line(list,'Отмеченные завершённые заказы: '+rub(total)+' · записанные расходы на продвижение: '+rub(spent)+'.');
+   line(list,'Проверка: это не чистая прибыль и не подтверждённые банковские поступления. Для решения о бюджете нужен учёт остальных затрат.');
    heading('Проекты студии');
    if(!projects.projects.length)line(list,'Подтверждённых учебных проектов пока нет.');
    for(const p of projects.projects)line(list,p.name+' — '+stages[Math.min(2,p.step)]+' · '+p.client);
