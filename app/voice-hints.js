@@ -7,15 +7,6 @@
   'use strict';
   const hints=[
     {
-      id:'notebook',
-      before:'#notesView .notebook-tools',
-      kicker:'✦ МАЛЕНЬКИЙ ЛАЙФХАК',
-      title:'Клавиатуру можно отправить в отпуск 😉',
-      description:'Открой запись, нажми микрофон на клавиатуре телефона и продиктуй мысль. Проверь текст, сохрани — и он останется в твоём блокноте.',
-      button:'Записать мысль',
-      click:'#addNote'
-    },
-    {
       id:'memory',
       before:'[data-world-view="memory"] .search-wrap',
       kicker:'✦ УМНАЯ ПАМЯТЬ',
