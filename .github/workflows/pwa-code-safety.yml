@@ -6,6 +6,7 @@ on:
       - refactor/clean-legacy-styles-20261014
       - refactor/css-rule-dedup-20261014
       - refactor/black-velvet-unity-20261014
+      - refactor/shared-controls-20261014
   pull_request:
     paths:
       - 'app/**'

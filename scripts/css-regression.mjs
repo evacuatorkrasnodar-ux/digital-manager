@@ -28,7 +28,13 @@ const personalSelectors=[
  '.world-spotlight',
  '.day-panel',
  '.care-panel',
- '.month-arrow'
+ '.month-arrow',
+ '.care-shell .care-calendar-panel .calendar-toolbar h2',
+ '.care-shell .care-calendar-panel .month-arrow',
+ '.care-shell .care-grid .calendar-day.selected',
+ '.care-shell .care-health-entry',
+ '.care-shell .care-health-entry-arrow',
+ '.day-shell .world-entry-arrow'
 ];
 const pages=[
  {path:'index.html',selectors:dashboardSelectors},
