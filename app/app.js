@@ -54,12 +54,12 @@
   window.addEventListener('dm:initiative-prepared',event=>{
     if(event.detail?.count>0&&byId('tabAssistant')?.dataset.mode==='idle')setRingMode('attention',1900);
   });
-  function setTab(next){
+  function setTab(next, managementPage='home'){
     hideBrandCard();hideProfileCard();tab=next;
     const traceScreen=byId('digitalTraceScreen');if(traceScreen)traceScreen.hidden=true;
     window.DMSalesScreen?.hide?.();
     dmSyncQuickDestinations();
-    if(next==='management')mgSettingsPage('home');
+    if(next==='management')mgSettingsPage(managementPage);
     ['home','assistant','management'].forEach(x=>{
       byId(x+'Screen').hidden=x!==next;
       const button=byId('tab'+x[0].toUpperCase()+x.slice(1));
@@ -481,7 +481,7 @@
     if(key==='home'){setTab('home');return;}
     if(key==='management'){setTab('management');return;}
     if(key==='clients'){setTab('home');clientsModal();return;}
-    if(key==='docs'){setTab('management');mgSettingsPage('documents');return;}
+    if(key==='docs'){setTab('management','documents');return;}
     if(key==='finance'){setTab('home');detailModal('finance');}
   }
   dmSyncDockItems();
@@ -1379,7 +1379,7 @@
     if(kind==='notebook'){dmToggleNotebookMenu();return;}
     const content=plasmaInput.value.trim();
     if(!content){dmActionMessage('Сначала напишите текст, чтобы выбрать действие.');return;}
-    if(kind==='documents'){closePlasmaPanel();setTab('management');mgSettingsPage('documents');return;}
+    if(kind==='documents'){closePlasmaPanel();setTab('management','documents');return;}
     if(kind==='ask'){dmSendComposerText();return;}
     if(kind==='note'){await dmSaveAsNote();return;}
     if(kind==='download'){
@@ -2056,6 +2056,7 @@
   // Internal deep links from the unified personal OS dock.
   const jump=new URLSearchParams(window.location.search).get('jump');
   if(['assistant','management'].includes(jump))setTab(jump);
+  else if(jump==='documents')setTab('management','documents');
   else if(jump==='attention'){setTab('home');dmOpenAttention();}
   else if(jump==='profile'){setTab('management');profileModal();}
   if(jump)window.history.replaceState(null,'',window.location.pathname);
