@@ -501,7 +501,7 @@
     attention:'<path d="M12 3.2 21 19H3L12 3.2Z"/><path d="M12 9v4.8M12 17.1h.01"/>',
     ambient:'<circle cx="12" cy="12" r="6.2" stroke-dasharray="7.3 4.5 3.1 6.2 9.4 4.1"/><path d="M12 3.2v3.1M12 17.7v3.1M3.2 12h3.1M17.7 12h3.1"/><circle cx="12" cy="12" r="1.1"/>'
   });
-  const dmGlyphTypes=['mail','health','task','calendar','attention'];
+  const dmGlyphTypes=['mail','health','task','calendar','attention','mic','send'];
   const dmGlyphLayers=[
     ...document.querySelectorAll('#dockLauncher .dm-launcher-plasma,#tabAssistant .dm-dock-plasma,#assistantLive>.dm-voice-orb')
   ].map(orb=>{
@@ -862,7 +862,7 @@
     if(dmSettingsGlyphFrame!==null){cancelAnimationFrame(dmSettingsGlyphFrame);dmSettingsGlyphFrame=null;}
     const label=({
       mail:'Почта',health:'Здоровье',task:'Задача',
-      calendar:'Календарь',attention:'Внимание'
+      calendar:'Календарь',attention:'Внимание',mic:'Микрофон',send:'Отправка'
     })[kind];
     const caption=byId('dmGlyphStageLabel');
     if(caption)caption.textContent=label+' · демонстрация';
@@ -979,7 +979,7 @@
       settings.className='dm-chat-settings voice-pref';
       settings.innerHTML='<div class="dm-glyph-settings"><strong>Знаки внутри плазмы</strong><small>Тонкие белые символы появляются при значимых событиях. Нажмите на знак, чтобы посмотреть анимацию.</small>'+
         '<div class="dm-glyph-showcase"><div class="dm-glyph-preview-actions">'+[
-          ['mail','Почта'],['health','Здоровье'],['task','Задача'],['calendar','Календарь'],['attention','Внимание']
+          ['mail','Почта'],['health','Здоровье'],['task','Задача'],['calendar','Календарь'],['attention','Внимание'],['mic','Микрофон'],['send','Отправка']
         ].map(([kind,label])=>'<button type="button" data-dm-glyph-preview="'+kind+'" aria-pressed="false" aria-label="Показать символ: '+label+'"><svg viewBox="0 0 24 24" aria-hidden="true">'+dmGlyphDrawings[kind]+'</svg><span>'+label+'</span></button>').join('')+'</div><div class="dm-glyph-stage" id="dmGlyphStage" role="img" aria-label="Плазма ждёт выбранный знак"><span class="dm-glyph-stage-demo">ДЕМО</span><div class="dm-glyph-stage-orb" id="dmGlyphStageOrb"></div><span class="dm-glyph-stage-label" id="dmGlyphStageLabel">Выберите знак ✦</span></div></div>'+
         '<p class="dm-glyph-preview-status" id="dmGlyphPreviewStatus" aria-live="polite">Это предпросмотр. Реальные сигналы появятся после подключения источников событий.</p>'+
         '</div>';
