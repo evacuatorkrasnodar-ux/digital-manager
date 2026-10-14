@@ -1138,3 +1138,15 @@ html.dm-plasma-panel-open .dock-launcher .dm-launcher-waves{
     transform:translateX(clamp(0px,calc(50vw - 50px),142px)) translateY(20px);
   }
 }
+
+/* Compact first input only: settle the small glass bar and its plasma
+   14px closer to the open iOS keyboard, keeping them together. */
+@media(max-width:700px){
+  html.dm-plasma-panel-open.dm-compose-keyboard-open:not(.dm-compose-editor) .dm-chat-panel:not(.dm-chat-editor){
+    transform:translateY(14px);
+    animation:none;
+  }
+  html.dm-plasma-panel-open.dm-compose-keyboard-open:not(.dm-compose-editor) .dock-hidden-controls{
+    transform:translate(-50%,14px);
+  }
+}
