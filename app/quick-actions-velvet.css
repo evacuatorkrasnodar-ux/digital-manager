@@ -58,3 +58,12 @@ html:not(.dock-is-hidden) #dockQuickActions.dock-quick-actions{
  #dockQuickActions.dock-quick-actions button,.dm-assistant-mini-menu a{transition:none}
 }
 
+
+/* Keep iOS from showing Select/Copy or callouts when holding the orb. */
+:is(#tabAssistant,#dockLauncher,#mydayPlasmaLauncher),
+:is(#tabAssistant,#dockLauncher,#mydayPlasmaLauncher) *{
+  -webkit-user-select:none!important;
+  user-select:none!important;
+  -webkit-touch-callout:none!important;
+}
+:is(#tabAssistant,#dockLauncher,#mydayPlasmaLauncher){touch-action:manipulation;}
