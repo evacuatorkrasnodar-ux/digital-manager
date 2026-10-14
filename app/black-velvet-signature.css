@@ -1,0 +1,78 @@
+/* BLACK VELVET SIGNATURE — approved shared secondary-screen design tokens.
+   Not applied to #homeScreen, the landing site, assistant dock, or global body.
+   Functional elements keep their existing event handlers and state. */
+#managementScreen,
+.dm-signature-screen {
+  --bvs-base:#08090b;
+  --bvs-surface:#17191d;
+  --bvs-elevated:#292c32;
+  --bvs-icon:#34383f;
+  --bvs-text:#f5f6f8;
+  --bvs-muted:#9299a5;
+  --bvs-line:rgba(194,203,217,.12);
+  --bvs-accent:#b8c9e0;
+  color-scheme:dark;
+  background-color:var(--bvs-base);
+  color:var(--bvs-text);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Arial,sans-serif;
+}
+#managementScreen :is(.mg-head,.mg-home,.mg-detail) {
+  background-color:transparent!important;
+  background-image:none!important;
+}
+#managementScreen #mgMenu,
+#managementScreen #mgDetail .mg-unified-hub:has(#mgOpenBusinessJourney){
+  border-radius:18px!important;
+  background:var(--bvs-surface)!important;
+  border:1px solid var(--bvs-line)!important;
+  box-shadow:none!important;
+}
+#managementScreen #mgMenu .mg-menu-row,
+#managementScreen #mgDetail .mg-unified-hub:has(#mgOpenBusinessJourney)>.mg-unified-item {
+  background:var(--bvs-surface)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+#managementScreen #mgMenu .mg-menu-row+.mg-menu-row,
+#managementScreen #mgDetail .mg-unified-hub:has(#mgOpenBusinessJourney)>.mg-unified-item+.mg-unified-item{
+  border-top:1px solid var(--bvs-line)!important;
+}
+#managementScreen #mgMenu .mg-menu-row:active,
+#managementScreen #mgDetail .mg-unified-item:active {
+  background:var(--bvs-elevated)!important;
+}
+#managementScreen :is(.mg-unified-panel,.mg-auto-active,.mg-auto-future,.dm-roman-home-preview,#dmDirectorSetupEntry){
+  background:var(--bvs-surface)!important;
+  background-image:none!important;
+  border:1px solid var(--bvs-line)!important;
+  border-radius:18px!important;
+  box-shadow:none!important;
+}
+#managementScreen :is(.mg-copy strong,.mg-headline h1,.mg-unified-panel h2,.dm-roman-home-preview strong,#dmDirectorSetupEntry strong){
+  color:var(--bvs-text)!important;
+}
+#managementScreen :is(.mg-copy small,.mg-unified-note,.mg-explain,.dm-roman-home-preview p,#dmDirectorSetupEntry small){
+  color:var(--bvs-muted)!important;
+}
+#managementScreen :is(.mg-menu-row .mg-icon:not(.dm-manager-menu-plasma-socket),.mg-unified-icon,#dmDirectorSetupEntry .dm-director-mark){
+  background:var(--bvs-icon)!important;
+  background-image:none!important;
+  color:var(--bvs-accent)!important;
+  border-color:var(--bvs-line)!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+#managementScreen :is(.mg-menu-row .ico,.mg-unified-icon .ico){
+  filter:none!important;
+  animation:none!important;
+}
+#managementScreen :is(button,input,select,textarea):focus-visible{
+  outline:2px solid var(--bvs-accent)!important;
+  outline-offset:2px;
+}
+@media(prefers-reduced-motion:reduce){
+  #managementScreen *,#managementScreen *::before,#managementScreen *::after{
+    animation:none!important;
+    scroll-behavior:auto!important;
+  }
+}
