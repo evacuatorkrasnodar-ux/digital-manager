@@ -205,7 +205,7 @@ function preparedMarkup(){
 }
 function markup(){
  if(view==='welcome')return '<section class="dm-journey-chat">'+
-  '<div class="dm-journey-halo" aria-hidden="true">✦</div><span class="dm-journey-eyebrow">НАШЕ ПЕРВОЕ ЗНАКОМСТВО</span>'+
+  '<div class="dm-journey-halo" aria-hidden="true"></div><span class="dm-journey-eyebrow">НАШЕ ПЕРВОЕ ЗНАКОМСТВО</span>'+
   '<h2>Привет! Я твой цифровой управляющий.</h2>'+
   '<p>Не нужно разбираться в сотне кнопок. Будем вместе искать возможности, решать задачи и развивать твоё дело. С чего начнём?</p>'+
   '<div class="dm-journey-options">'+
@@ -266,10 +266,36 @@ function mount(){
  root.addEventListener('click',e=>{if(e.target===root)close()});
  return root;
 }
+// Reuse the actual animated assistant plasma instead of a decorative picture.
+function mountJourneyPlasma(body){
+ const mount=body?.querySelector('.dm-journey-halo');
+ const source=document.querySelector('#tabAssistant .dm-dock-plasma');
+ if(!mount||!source)return;
+ const orb=source.cloneNode(true);
+ orb.classList.add('dm-journey-live-plasma');
+ orb.dataset.mode='idle';
+ const ids=new Map();
+ orb.querySelectorAll('[id]').forEach((node,i)=>{
+  const previous=node.id,next='dm-journey-orb-'+i+'-'+previous;
+  ids.set(previous,next);node.id=next;
+ });
+ orb.querySelectorAll('*').forEach(node=>{
+  for(const attr of [...node.attributes]){
+   let value=attr.value;
+   for(const [oldId,newId] of ids){
+    value=value.replaceAll('url(#'+oldId+')','url(#'+newId+')');
+    if((attr.name==='href'||attr.name==='xlink:href')&&value==='#'+oldId)value='#'+newId;
+   }
+   if(value!==attr.value)node.setAttribute(attr.name,value);
+  }
+ });
+ mount.replaceChildren(orb);
+}
 function render({focusDemand=false,focusMarket=false}={}){
  if(!root||root.hidden)return;
  const body=root.querySelector('#dmJourneyBody');
  if(body)body.innerHTML=markup();
+ if(view==='welcome')mountJourneyPlasma(body);
  const h=body?.querySelector('h2');if(h){h.id='dmJourneyHeading';h.tabIndex=-1;h.focus({preventScroll:true})}
  if(focusDemand||focusMarket){
   const el=root.querySelector(focusDemand?'.dm-journey-demand':'.dm-journey-market');
