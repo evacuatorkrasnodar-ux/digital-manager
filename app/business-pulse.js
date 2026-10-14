@@ -139,10 +139,22 @@ function romanAssistantBrief(x){
  const summary=x.amountCount?
   'За '+label[currentPeriod].toLowerCase()+' отмечено продаж на '+fmtMoney(x.amount)+'.':
   'За '+label[currentPeriod].toLowerCase()+' в записях нет завершённых продаж с суммами.';
+ const sales=read('dm-sales-records-v1').filter(item=>item?.stage==='won'&&inSpan(item.wonAt,x.span));
+ const projects=sales.filter(item=>Number(item.amount)>0).sort((a,b)=>Number(b.amount)-Number(a.amount));
+ const biggest=projects[0];
+ const finance=x.amountCount||x.promoCount?
+  'По проектам отмечено '+fmtMoney(x.amount)+'; на рекламу записано '+fmtMoney(x.promo)+'.'+
+  (biggest?' Самый крупный завершённый проект за этот период — «'+String(biggest.title||'Проект').slice(0,75)+'» ('+fmtMoney(biggest.amount)+').':'')+
+  ' Рекламу можно сопоставить с результатами, но эти две суммы ещё не дают чистой прибыли.':
+  'В этом периоде нет завершённых проектов или рекламных расходов с указанными датами. Сначала проверим записи, а не будем угадывать цифры.';
+ const next=x.promoCount?
+  'Я предлагаю проверить, какие рекламные каналы дали заказы, прежде чем увеличивать бюджет.':
+  'Я предлагаю сравнить завершённые проекты и обращения: увидим, какие услуги стоит развивать.';
  return '<section class="dm-pulse-section" aria-label="Обзор управляющего для Романа">'+
   '<small class="dm-pulse-eyebrow">ЦИФРОВОЙ УПРАВЛЯЮЩИЙ · СТУДИЯ «ЦИФРОВОЙ БИЗНЕС» · ПРИМЕР</small>'+
   '<h3>Роман, я посмотрел наши дела</h3>'+
   '<p>'+esc(summary)+' '+esc(guidance)+'</p>'+
+  '<h3>Что с деньгами и проектами</h3><p>'+esc(finance)+'</p><p>'+esc(next)+'</p>'+
   '<p>Без паники: сначала клиенты, потом всё остальное. Деньги любят порядок, а клиенты — своевременные ответы. 🙂</p>'+
   '<div class="dm-pulse-buttons">'+(lead?'<button type="button" data-pulse-client-draft="'+esc(lead.id)+'">Готовый ответ '+circle+'</button>':'')+'<button type="button" data-pulse-target="sales">Посмотреть клиентов '+circle+'</button></div>'+
   '</section>';
