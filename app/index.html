@@ -3,6 +3,7 @@
 <head>
   <script src="./performance-modes.js?v=1"></script>
   <meta charset="utf-8">
+  <meta name="dm-app-build" content="20261014-roman-business-2">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#000000">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -75,9 +76,32 @@ if('serviceWorker' in navigator){
       navigator.serviceWorker.addEventListener('controllerchange',()=>{
         if(!didRefresh){didRefresh=true;location.reload();}
       });
+      // iOS standalone can keep a page alive for days after a deploy.
+      // Compare with the published document; don't alter application data.
+      let checking=false;
+      async function checkPublishedVersion(){
+        if(checking||document.hidden||!navigator.onLine)return;
+        checking=true;
+        try{
+          const url=new URL('./index.html',location.href);
+          url.searchParams.set('dm_update_check',String(Date.now()));
+          const response=await fetch(url,{cache:'no-store'});
+          if(!response.ok)return;
+          const live=(await response.text()).match(/<meta name="dm-app-build" content="([^"]+)"/);
+          const current=document.querySelector('meta[name="dm-app-build"]')?.content;
+          if(live&&current&&live[1]!==current){
+            // Avoid reloading while the owner is editing a draft.
+            if(document.activeElement?.matches('input,textarea,[contenteditable="true"]'))return;
+            location.reload();
+          }
+        }catch(_){}
+        finally{checking=false;}
+      }
       document.addEventListener('visibilitychange',()=>{
-        if(!document.hidden)reg.update().catch(()=>{});
+        if(!document.hidden){reg.update().catch(()=>{});checkPublishedVersion();}
       });
+      window.addEventListener('pageshow',checkPublishedVersion);
+      window.addEventListener('focus',checkPublishedVersion);
     }).catch(()=>{});
   },{once:true});
 }
