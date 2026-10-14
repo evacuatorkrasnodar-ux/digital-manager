@@ -198,7 +198,7 @@ function render(){
    :lead?'Следующий шаг — '+String(lead.person||'клиент')+': '+String(lead.title||'обращение')
    :x.created?'Есть '+x.created+' обращений за период. Проверь, кто ждёт ответа.'
    :'Срочных сигналов в доступных записях нет.';
- const safe=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\\'' :'&#39;'}[c]));
+ const safe=v=>String(v??'').replace(/[&<>"']/g,c=>c==="'"?'&#39;':({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
  const button=top?
    '<button type="button" data-pulse-target="'+top.target+'">Перейти к делу '+circle+'</button>'
    :lead?'<button type="button" data-pulse-client-draft="'+safe(lead.id)+'">Подготовленный следующий шаг '+circle+'</button>'
