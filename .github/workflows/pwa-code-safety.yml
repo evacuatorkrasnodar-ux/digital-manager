@@ -18,6 +18,7 @@ on:
       - refactor/personal-text-contrast-20261014
       - refactor/management-label-consistency-20261014
       - refactor/assistant-settings-clarity-20261014
+      - refactor/assistant-settings-priority-20261014
       - test/visual-screen-audit-20261014
   pull_request:
     paths:
