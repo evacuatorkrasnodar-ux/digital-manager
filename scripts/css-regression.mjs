@@ -100,6 +100,8 @@ try{
        selector==='body.dm-calendar-photo::before'
      );
      if(personalBackground&&['backgroundImage','backgroundColor'].includes(prop))continue;
+     // Intentional glass repaint of personal cards, with geometry and borders unchanged.
+     if(path!=='index.html'&&['.world-spotlight','.day-panel','.care-panel'].includes(selector)&&prop==='backgroundImage')continue;
      if(old[i][prop]!==updated[i][prop]){
       diffs.push(`${selector}[${i}].${prop}: ${old[i][prop]} => ${updated[i][prop]}`);
      }
