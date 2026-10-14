@@ -1,46 +1,96 @@
-/* Digital Manager — Apple-style reset, 2026-10-14.
-   Home screen and its visual identity remain unchanged.
-   Archived legacy screens stay in source until their dependencies are migrated. */
-#managementScreen {
-  color-scheme: dark;
-  background: #101114 !important;
-  background-image: none !important;
+/* Black Velvet / Apple-like Management reset.
+   IMPORTANT: styles are scoped to #managementScreen. Home screen is untouched. */
+#managementScreen{
+ color-scheme:dark;
+ background:#101114!important;
+ background-image:none!important;
+ color:#f5f5f7;
 }
-#managementScreen::before,
-#managementScreen::after,
-#managementScreen .mg-home::before,
-#managementScreen .mg-home::after {
-  background-image: none !important;
-  box-shadow: none !important;
+#managementScreen :is(.mg-home,.mg-detail,.mg-head,.mg-compact-menu,.mg-row,.mg-menu-row,.mg-unified-item,.mg-unified-panel,.mg-main,.mg-extras,.mg-extra-row,.voice-iphone-screen,.voice-scene,.mg-field){
+ background-image:none!important;
 }
-#managementScreen .mg-home,
-#managementScreen .mg-detail,
-#managementScreen .mg-head,
-#managementScreen .mg-compact-menu {
-  background-image: none !important;
+#managementScreen :is(.mg-home,.mg-detail,.mg-head,.mg-compact-menu)::before,
+#managementScreen :is(.mg-home,.mg-detail,.mg-head,.mg-compact-menu)::after{
+ background-image:none!important;
 }
-#managementScreen .mg-row,
-#managementScreen .mg-menu-row {
-  background-image: none !important;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+#managementScreen .mg-head{
+ background:#101114!important;
+ border-bottom:1px solid rgba(255,255,255,.08);
+ box-shadow:none!important;
 }
-#managementScreen .mg-copy strong {
-  letter-spacing: -.015em;
+#managementScreen :is(.mg-headline h1,#mgTitle){
+ font-weight:600;letter-spacing:-.035em;color:#f5f5f7;
 }
-#managementScreen .mg-copy small {
-  color: #999ba3;
+#managementScreen :is(.mg-headline p,#mgSubtitle){color:#8e8e93!important}
+#managementScreen #mgMenu{
+ display:flex;flex-direction:column;gap:0!important;
+ padding:0!important;overflow:hidden;
+ background:#1c1c1e!important;border:1px solid rgba(255,255,255,.065);
+ border-radius:17px;box-shadow:none!important;
 }
-/* Temporarily remove old independent pages from the interface.
-   Keep their nodes present for the existing assistant, history and event handlers. */
-#assistantScreen,
-#digitalTraceScreen {
-  display: none !important;
+#managementScreen #mgMenu .mg-menu-row{
+ width:100%;min-height:67px!important;margin:0!important;
+ padding:11px 13px!important;gap:13px!important;
+ border:0!important;border-radius:0!important;
+ background:#1c1c1e!important;box-shadow:none!important;
+ backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+ color:#f5f5f7!important;transition:background-color .16s ease!important;
 }
-@media (prefers-reduced-motion: reduce) {
-  #managementScreen,
-  #managementScreen * {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
-  }
+#managementScreen #mgMenu .mg-menu-row + .mg-menu-row{
+ border-top:1px solid rgba(255,255,255,.09)!important;
+}
+#managementScreen #mgMenu .mg-menu-row:active,
+#managementScreen #mgMenu .mg-menu-row:hover{background:#29292c!important}
+#managementScreen #mgMenu .mg-icon:not(.dm-manager-menu-plasma-socket){
+ width:39px!important;height:39px!important;flex:0 0 39px!important;
+ display:grid;place-items:center;
+ border-radius:11px!important;border:1px solid rgba(255,255,255,.08)!important;
+ background:#303034!important;color:#e5e5ea!important;
+ box-shadow:none!important;filter:none!important;
+}
+#managementScreen #mgMenu .mg-icon .ico{
+ width:20px!important;height:20px!important;
+ animation:none!important;filter:none!important;transform:none!important;
+ will-change:auto!important;
+}
+#managementScreen #mgMenu .dm-manager-menu-plasma-socket{
+ width:39px!important;height:39px!important;flex:0 0 39px!important;
+ filter:none!important;
+}
+#managementScreen #mgMenu .dm-manager-menu-orange-plasma,
+#managementScreen #mgMenu .dm-manager-menu-orange-plasma *{
+ animation:none!important;filter:none!important;
+}
+#managementScreen #mgMenu .mg-copy strong{font-size:15px!important;font-weight:530!important;color:#f5f5f7!important}
+#managementScreen #mgMenu .mg-copy small{font-size:11.5px!important;color:#98989f!important;line-height:1.35!important}
+#managementScreen #mgMenu .mg-menu-chevron{
+ color:#8e8e93!important;box-shadow:none!important;
+ background:transparent!important;border:0!important;
+}
+#managementScreen #mgMenu .mg-menu-chevron .ico{width:17px!important;height:17px!important}
+#managementScreen :is(.mg-unified-item,.mg-unified-panel,.mg-main,.mg-extra-row){
+ background:#1c1c1e!important;
+ border-color:rgba(255,255,255,.075)!important;
+ box-shadow:none!important;
+}
+#managementScreen .mg-unified-icon{
+ color:#e5e5ea!important;background:#303034!important;
+ border-color:rgba(255,255,255,.08)!important;box-shadow:none!important;
+}
+#managementScreen :is(.mg-unified-item .mg-copy small,.mg-unified-note,.mg-card-note){color:#a1a1a8!important}
+#managementScreen :is(.voice-iphone-screen,.voice-scene,.voice-phone-frame){
+ background:#17171a!important;background-image:none!important;
+}
+#managementScreen .mg-field{
+ background:#252528!important;border-color:rgba(255,255,255,.1)!important;
+}
+#managementScreen .mg-field :is(input,select){
+ background:#131316!important;color:#f5f5f7!important;
+ border-color:rgba(255,255,255,.15)!important;
+}
+#assistantScreen,#digitalTraceScreen{display:none!important}
+@media(prefers-reduced-motion:reduce){
+ #managementScreen,#managementScreen *{
+ animation-duration:.01ms!important;transition-duration:.01ms!important;
+ }
 }
