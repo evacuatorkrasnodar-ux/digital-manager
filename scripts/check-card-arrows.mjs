@@ -12,8 +12,8 @@ try{
   if(!response?.ok())throw Error('Main screen unavailable');
   const welcome=page.locator('#dmBusinessJourneyScreen');
   if(await welcome.isVisible())await welcome.locator('[data-journey-close]').click();
-  const tab=page.locator('#tabManagement');
-  if(!await tab.count())throw Error('Management dock tab missing');
+  const tab=page.locator('#dockOpenManage');
+  if(!await tab.count())throw Error('Real Management dock launcher missing');
   await tab.click();
   await page.locator('#managementScreen').waitFor({state:'visible',timeout:10000});
   const circles=await page.locator('#mgMenu .mg-menu-row > .mg-menu-chevron.dm-circle-arrow').evaluateAll(nodes=>nodes.map(el=>{
