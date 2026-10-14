@@ -94,3 +94,68 @@
  animation-duration:.01ms!important;transition-duration:.01ms!important;
  }
 }
+
+/* Consistent native-style detail pages; no markup or application logic changed. */
+#managementScreen #mgDetail{
+ background:transparent!important;
+ background-image:none!important;
+ color:#f5f5f7;
+}
+#managementScreen #mgDetail :is(.mg-unified-hub,.mg-unified-panel,.mg-section,.mg-card,.mg-group,.mg-list,.mg-choice,.mg-field){
+ background-image:none!important;
+}
+#managementScreen #mgDetail .mg-unified-hub{gap:10px!important}
+#managementScreen #mgDetail .mg-unified-panel{
+ padding:14px!important;border-radius:16px!important;
+ background:#1c1c1e!important;border:1px solid rgba(255,255,255,.07)!important;
+ box-shadow:none!important;
+}
+#managementScreen #mgDetail .mg-unified-item{
+ min-height:64px!important;padding:10px 13px!important;gap:12px!important;
+ background:#1c1c1e!important;border:1px solid rgba(255,255,255,.07)!important;
+ border-radius:15px!important;box-shadow:none!important;
+}
+#managementScreen #mgDetail .mg-unified-icon{
+ flex-basis:40px!important;height:40px!important;
+ border-radius:11px!important;color:#e5e5ea!important;
+ background:#303034!important;filter:none!important;
+}
+#managementScreen #mgDetail .mg-unified-icon .ico{
+ width:20px!important;height:20px!important;
+ animation:none!important;filter:none!important;transform:none!important;
+}
+#managementScreen #mgDetail :is(h2,.mg-copy strong){
+ color:#f5f5f7!important;letter-spacing:-.02em!important;
+}
+#managementScreen #mgDetail :is(.mg-copy small,.mg-unified-note,.mg-communication-mode span){
+ color:#a1a1a8!important;
+}
+#managementScreen #mgDetail .mg-choice{
+ min-height:51px!important;padding:10px 4px!important;
+ background:transparent!important;
+ border-bottom:1px solid rgba(255,255,255,.09)!important;
+ box-shadow:none!important;
+}
+#managementScreen #mgDetail .mg-choice:last-child{border-bottom:0!important}
+#managementScreen #mgDetail .mg-field{
+ border-radius:12px!important;
+ background:#29292c!important;color:#d1d1d6!important;
+ box-shadow:none!important;
+}
+#managementScreen #mgDetail :is(input:not([type="checkbox"]),select,textarea){
+ background:#141416!important;color:#f5f5f7!important;
+ border:1px solid rgba(255,255,255,.16)!important;
+ border-radius:10px!important;box-shadow:none!important;
+}
+#managementScreen #mgDetail input[type="checkbox"]{accent-color:#a9b3c3}
+#managementScreen #mgDetail :is(.voice-mock,.voice-iphone-screen,.voice-scene){
+ background-image:none!important;
+}
+#managementScreen #mgDetail :is(.mg-unified-autopilot,.mg-unified-autopilot .mg-unified-icon){
+ background:#1c1c1e!important;color:#f5f5f7!important;
+ border-color:rgba(255,255,255,.07)!important;
+}
+#managementScreen #mgDetail :is(.mg-manager-art,.mg-manager-art-journey){
+ background:#252528!important;background-image:none!important;
+ box-shadow:none!important;
+}
