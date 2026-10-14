@@ -1855,6 +1855,7 @@
   function dmRenderAttention(){
     const unread=dmAttentionEvents.some(x=>!x.read);
     dmAttentionDot.hidden=!unread;
+    byId('dockOpenAttention').classList.toggle('dm-has-attention',unread);
     byId('dockOpenAttention').setAttribute('aria-label',unread?'Центр внимания: есть новые события':'Центр внимания');
     const container=byId('dmAttentionList');
     container.replaceChildren();
