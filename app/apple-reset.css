@@ -1,0 +1,46 @@
+/* Digital Manager — Apple-style reset, 2026-10-14.
+   Home screen and its visual identity remain unchanged.
+   Archived legacy screens stay in source until their dependencies are migrated. */
+#managementScreen {
+  color-scheme: dark;
+  background: #101114 !important;
+  background-image: none !important;
+}
+#managementScreen::before,
+#managementScreen::after,
+#managementScreen .mg-home::before,
+#managementScreen .mg-home::after {
+  background-image: none !important;
+  box-shadow: none !important;
+}
+#managementScreen .mg-home,
+#managementScreen .mg-detail,
+#managementScreen .mg-head,
+#managementScreen .mg-compact-menu {
+  background-image: none !important;
+}
+#managementScreen .mg-row,
+#managementScreen .mg-menu-row {
+  background-image: none !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+#managementScreen .mg-copy strong {
+  letter-spacing: -.015em;
+}
+#managementScreen .mg-copy small {
+  color: #999ba3;
+}
+/* Temporarily remove old independent pages from the interface.
+   Keep their nodes present for the existing assistant, history and event handlers. */
+#assistantScreen,
+#digitalTraceScreen {
+  display: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  #managementScreen,
+  #managementScreen * {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
