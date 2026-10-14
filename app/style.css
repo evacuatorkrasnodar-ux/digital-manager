@@ -1159,7 +1159,7 @@ html.dm-plasma-panel-open .dock-launcher .dm-launcher-waves{
   @media(max-width:700px){
     html.dm-plasma-panel-open:not(.dm-compose-editor):has(#plasmaChatInput:focus) .dm-chat-panel:not(.dm-chat-editor),
     html.dm-plasma-panel-open:not(.dm-compose-editor):has(#plasmaChatInput:focus) .dock-hidden-controls{
-      translate:0 36px;
+      translate:0 18px;
     }
   }
 }
