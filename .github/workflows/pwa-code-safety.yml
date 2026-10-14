@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - refactor/unify-app-20261014
+      - refactor/clean-legacy-styles-20261014
   pull_request:
     paths:
       - 'app/**'
@@ -20,6 +21,8 @@ jobs:
           node-version: '22'
       - name: Check shared imports
         run: node scripts/check-app-assets.mjs
+      - name: Check cross-page visual foundations
+        run: node scripts/check-style-unity.mjs
       - name: Check PWA navigation and storage contract
         run: node scripts/check-pwa-contract.mjs
       - name: Check application JavaScript syntax
