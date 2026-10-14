@@ -83,3 +83,26 @@ html.dm-myday-no-dock body > nav.bottom-nav{display:none!important}
 .dm-myday-plasma-stage .dm-voice-waves-electric .dm-electric-wave-4 .dm-laser-halo{stroke-width:2.1;opacity:.44;filter:blur(.5px)}
 .dm-myday-plasma-stage .dm-voice-waves-electric .dm-electric-wave-4 .dm-laser-bloom{stroke-width:4.2;opacity:.23;filter:blur(1.8px)}
 .dm-myday-plasma-stage .dock-launcher{transition:transform .28s cubic-bezier(.18,.76,.24,1)}
+
+/* Stable dock-free plasma: same 60px launcher geometry as its actual button.
+   The 82px generic scene orb must never enlarge this miniature. */
+.dm-myday-plasma-stage .dock-launcher .dm-launcher-plasma.dm-voice-orb{
+  --dm-size:60px!important;
+  width:60px!important;
+  height:60px!important;
+  flex:0 0 60px;
+  justify-self:center;
+  align-self:center;
+  transform-origin:center center;
+}
+.dm-myday-plasma-stage .dock-launcher .dm-launcher-plasma .dm-orb-halo{
+  filter:blur(4px);
+  opacity:.65;
+}
+.dm-myday-plasma-stage .dock-launcher .dm-launcher-waves{
+  width:min(430px,100vw);
+  left:50%;
+  transform:translateX(-50%);
+  bottom:0;
+  overflow:visible;
+}
