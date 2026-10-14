@@ -18,9 +18,13 @@
       if(!frame||!panel||panel.hidden)continue;
       const main=panel.closest('main');
       if(!main)continue;
-      // The main panel scrolls; the header and both docks never do.
-      const available=main.clientHeight-(frame.getBoundingClientRect().top-main.getBoundingClientRect().top);
-      frame.style.height=Math.max(220,Math.floor(available))+'px';
+      // One scroll owner: parent main. A viewport-height iframe causes a
+      // second nested scroll and clips measurements behind the plasma.
+      try{
+        const doc=frame.contentDocument;
+        const height=Math.max(220,doc.documentElement.scrollHeight,doc.body?.scrollHeight||0);
+        frame.style.height=Math.ceil(height+4)+'px';
+      }catch(_){frame.style.height=Math.max(220,main.clientHeight)+'px';}
     }
   }
   function showHealthSubsection(view){
@@ -127,6 +131,13 @@
         frames[kind].dataset.ready='true';
         panels[kind].classList.add('loaded');
         requestAnimationFrame(sizeFrames);
+        const doc=frames[kind].contentDocument;
+        if(doc){
+          const observer=new ResizeObserver(()=>requestAnimationFrame(sizeFrames));
+          observer.observe(doc.documentElement);
+          if(doc.body)observer.observe(doc.body);
+          const body=doc.querySelector('.day-shell');if(body)observer.observe(body);
+        }
       });
     }
     initialized=true;
