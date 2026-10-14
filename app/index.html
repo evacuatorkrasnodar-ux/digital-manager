@@ -66,6 +66,23 @@
 
   <link rel="stylesheet" href="./app-design-system.css?v=10">
   <link rel="stylesheet" href="./demo-roman.css?v=1">
+<script>
+/* Refresh installed iOS PWA workers when opened or brought to foreground. */
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(reg=>{
+      reg.update().catch(()=>{});
+      let didRefresh=false;
+      navigator.serviceWorker.addEventListener('controllerchange',()=>{
+        if(!didRefresh){didRefresh=true;location.reload();}
+      });
+      document.addEventListener('visibilitychange',()=>{
+        if(!document.hidden)reg.update().catch(()=>{});
+      });
+    }).catch(()=>{});
+  },{once:true});
+}
+</script>
 </head>
 <body>
 <!-- All pictograms are real independent SVG elements, not fragments of the reference picture. -->
