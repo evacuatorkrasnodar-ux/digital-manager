@@ -6,29 +6,27 @@ const base='http://127.0.0.1:8765/app/';
 const cases=[
  {file:'myday.html',selector:'.day-shell:not(.care-shell,.world-shell) .day-back',target:'index.html'},
  {file:'world.html',selector:'.world-shell .day-back',target:'myday.html'},
- {file:'care.html',selector:'.care-shell .day-back',target:'myday.html',embedded:true}
+ {file:'care.html',selector:'.day-shell:not(.care-shell,.world-shell) .day-back',target:'index.html',embedded:true}
 ];
 try{
  for(const width of [320,390,1280]){
   const context=await browser.newContext({viewport:{width,height:844},reducedMotion:'reduce'});
   const page=await context.newPage();
   for(const test of cases){
-   const response=await page.goto(base+(test.embedded?'world.html':test.file),{waitUntil:'networkidle',timeout:30000});
+   const response=await page.goto(base+(test.embedded?'myday.html?view=cycle':test.file),{waitUntil:'networkidle',timeout:30000});
    if(!response?.ok())throw Error('Unable to open '+test.file);
-   let frame=page;
    if(test.embedded){
-    await page.evaluate(width=>{
-     const el=document.createElement('iframe');
-     el.id='navUnityCareFrame';
-     el.src='./care.html?embedded=1';
-     el.style.cssText='position:fixed;top:0;left:0;width:'+Math.min(width,430)+'px;height:844px;opacity:.01;pointer-events:none;';
-     document.body.appendChild(el);
-    },width);
-    await page.waitForFunction(()=>!!document.querySelector('#navUnityCareFrame')?.contentDocument?.querySelector('.care-shell'),{timeout:20000});
-    frame=page.frames().find(f=>f.url().includes('care.html?embedded=1'));
-    if(!frame)throw Error('Embedded Care UI unavailable');
+    await page.waitForFunction(()=>!!document.querySelector('#cycleFrame')?.contentDocument?.querySelector('.care-shell'),null,{timeout:20000});
+    const care=page.frames().find(f=>f.url().includes('care.html?embedded=1'));
+    if(!care)throw Error('Care embedded page not loaded through parent router');
+    const hidden=await care.evaluate(()=>{
+     const back=document.querySelector('.care-shell header.day-header .day-back');
+     if(!back)throw Error('Embedded Care source Back anchor missing');
+     return getComputedStyle(back.closest('header')).display==='none';
+    });
+    if(!hidden)throw Error('Duplicate Back control visible inside embedded Care');
    }
-   const result=await frame.evaluate(selector=>{
+   const result=await page.evaluate(selector=>{
     const a=document.querySelector(selector);
     if(!a)throw Error('Back control missing for '+selector);
     const header=a.closest('header.day-header');
