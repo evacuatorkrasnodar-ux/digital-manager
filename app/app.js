@@ -1437,8 +1437,8 @@
       layer.firstElementChild.innerHTML=dmGlyphDrawings[kind];
       layer.classList.add('is-visible','is-composer-glyph');
     });
-    byId('dockLauncher').setAttribute('aria-label',kind==='send'?'Отправить сообщение':kind==='done'?'Сообщение отправлено':'Голосовая функция — информация');
-    byId('dockLauncher').title=kind==='send'?'Отправить сообщение':kind==='done'?'Сообщение отправлено':'Голосовое общение пока недоступно';
+    byId('dockLauncher').setAttribute('aria-label',kind==='send'?'Отправить сообщение':kind==='done'?'Сообщение отправлено':'Начать голосовой ввод');
+    byId('dockLauncher').title=kind==='send'?'Отправить сообщение':kind==='done'?'Сообщение отправлено':'Нажмите, чтобы продиктовать сообщение';
   }
   // A lightweight local hint, never a claim that an AI classified the message.
   // The user can always override it using «Спросить помощника».
