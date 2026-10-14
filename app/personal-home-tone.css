@@ -61,7 +61,7 @@ body > .day-shell.day-shell :is(
    Cover the full shell without stretching the picture; soften the dark bottom. */
 body > .day-shell.day-shell:not(.care-shell,.world-shell,.health-shell)::before{
   background:
-    linear-gradient(to bottom,rgba(0,0,0,.28) 0%,rgba(0,0,0,.12) 32%,rgba(0,0,0,.08) 55%,rgba(0,0,0,.36) 83%,#020203 100%),
+    linear-gradient(to bottom,rgba(0,0,0,.28) 0%,rgba(0,0,0,.12) 32%,rgba(0,0,0,.08) 55%,rgba(0,0,0,.13) 83%,rgba(0,0,0,.14) 100%),
     url('./assets/myday-long-v263.avif') center top/cover no-repeat,
     #020203!important;
 }
