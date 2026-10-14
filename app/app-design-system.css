@@ -10,6 +10,9 @@
   --dm-ui-section-title-compact-size:clamp(15px,4vw,17px);
   --dm-ui-section-title-weight:460;
   --dm-ui-section-title-spacing:-.03em;
+  /* Shared rhythm for ordinary list cards; compact calendar tiles keep their own density. */
+  --dm-ui-list-card-gap:8px;
+  --dm-ui-list-card-padding:10px;
   /* Exact graphite family of the approved Home metric cards, not a blue wash.
      Keep luminous charts, gold accents and semantic statuses in their components. */
   --dm-ui-edge:rgba(136,172,200,.34);

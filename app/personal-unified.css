@@ -329,11 +329,11 @@
   background:linear-gradient(146deg,rgba(102,64,97,.72),rgba(30,29,52,.84));
 }
 .care-shell .care-day-details{margin:8px 0 2px}
-.care-shell .care-day-item{padding:9px;margin-bottom:6px}
+.care-shell .care-day-item{padding:var(--dm-ui-list-card-padding);margin-bottom:var(--dm-ui-list-card-gap)}
 .care-shell .care-settings-panel{padding:12px}
 .care-shell .care-settings-panel form{margin-top:9px}
 .care-shell .care-history-wrap{margin-top:11px}
-.care-shell .care-history-item{padding:9px;margin-bottom:6px}
+.care-shell .care-history-item{padding:var(--dm-ui-list-card-padding);margin-bottom:var(--dm-ui-list-card-gap)}
 .care-shell .care-data-settings{margin-top:14px;padding-top:11px}
 .care-shell .care-disclaimer{padding:12px 3px 0}
 .care-shell .day-footer{margin:10px 0 0;padding:10px 2px 0}
@@ -397,8 +397,8 @@
 .world-shell .world-fact strong{font-size:17px}
 .world-shell .world-fact span{margin-top:4px;font-size:9px}
 .world-shell .world-head{margin:13px 1px 7px}
-.world-shell .world-list{gap:7px}
-.world-shell .world-item{align-items:center;gap:9px;padding:10px}
+.world-shell .world-list{gap:var(--dm-ui-list-card-gap)}
+.world-shell .world-item{align-items:center;gap:9px;padding:var(--dm-ui-list-card-padding)}
 .world-shell .world-item-icon{
   flex:none;
   width:31px;height:31px;border-radius:50%;
