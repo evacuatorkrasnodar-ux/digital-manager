@@ -337,7 +337,16 @@ function init(){
  });
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)scan()});
  scan();updateEntrances();
- window.DMInitiative=Object.freeze({open,scan,getSummary:summary});
+ function openForClient(id){
+  if(typeof id!=='string'||!sources().some(x=>x.id===id))return false;
+  open();
+  if(state.enabled){
+    scan();
+    if(state.items.some(x=>x.saleId===id)){selectedId=id;view='editor';feedback='';render();}
+  }
+  return true;
+ }
+ window.DMInitiative=Object.freeze({open,openForClient,scan,getSummary:summary});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
