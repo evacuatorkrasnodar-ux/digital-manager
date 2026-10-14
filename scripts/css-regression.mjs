@@ -93,6 +93,13 @@ try{
      if(['myday.html','care.html'].includes(path)&&selector==='.day-header'&&prop==='minHeight')continue;
      // Section titles intentionally receive the newly unified type scale.
      if(['.day-section-heading h2','.day-section-heading:not(.notebook-title) h2','.world-head h2'].includes(selector)&&['fontSize','fontWeight','letterSpacing','lineHeight','width','height'].includes(prop))continue;
+     // The deliberate redesign changes only background paint on personal shells.
+     const personalBackground=path!=='index.html'&&(
+       selector==='body > .day-shell.day-shell'||
+       selector==='body.dm-calendar-photo > .day-shell.day-shell'||
+       selector==='body.dm-calendar-photo::before'
+     );
+     if(personalBackground&&['backgroundImage','backgroundColor'].includes(prop))continue;
      if(old[i][prop]!==updated[i][prop]){
       diffs.push(`${selector}[${i}].${prop}: ${old[i][prop]} => ${updated[i][prop]}`);
      }
