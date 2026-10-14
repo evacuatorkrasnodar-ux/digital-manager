@@ -1861,8 +1861,11 @@
         detail.textContent=person+': '+(item.stage==='new'?'обращение ещё ждёт ответа.':item.stage==='talk'?'разговор начат, следующий шаг не отмечен.':'предложение отправлено, итог пока не отмечен.');
         const note=document.createElement('small');note.textContent='По записям о клиентах · Предложение управляющего';
         info.append(title,detail,note);row.append(info);
-        const action=document.createElement('button');action.type='button';action.textContent='К клиенту';
-        action.addEventListener('click',()=>{dmCloseAttention();window.DMSalesScreen?.openClient?.(item.id);});
+        const action=document.createElement('button');action.type='button';action.textContent='Готовый ответ';
+        action.addEventListener('click',()=>{
+          dmCloseAttention();
+          if(!window.DMInitiative?.openForClient?.(item.id))window.DMSalesScreen?.openClient?.(item.id);
+        });
         row.append(action);container.append(row);
       }
     }
