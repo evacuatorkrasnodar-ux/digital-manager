@@ -672,7 +672,7 @@
   }
   let mgCurrent='home';
   const mgNames={manager:'Мой помощник',
-    voice:'Основные',autopilot:'Автопилот',layout:'Главная страница',application:'Приложение',connections:'Подключения',documents:'Документы',
+    voice:'Внешний вид и общение',autopilot:'Автопилот',layout:'Главная страница',application:'Приложение',connections:'Подключения',documents:'Документы',
     payments:'Платежи',learning:'Обучение',security:'Безопасность',workshop:'Моя мастерская'};
   const mgInfo={
     connections:'Связи объединят ваш сайт, почту, календарь, банки, продажи, маркетплейсы и ЭДО. Реальные подключения пока не настроены.',
@@ -957,7 +957,7 @@
     byId('mgHomeLayoutPanel').hidden=!mgIsLayout;
     byId('mgDetail').hidden=page==='home'||mgIsLayout;
     byId('mgTitle').textContent=mgNames[page]||'Управление';
-    byId('mgSubtitle').textContent=({home:'Пять разделов — всё на своём месте',layout:'Карточки и расположение',application:'Оформление · Безопасность · Данные',manager:'Все настройки одного помощника',autopilot:'Навыки и границы самостоятельности',connections:'Сервисы и источники данных',documents:'Файлы и шаблоны',payments:'Счета и регулярные расходы',learning:'Возможности приложения',voice:'Плазма · Док · Имя · Общение',workshop:'Инструменты и калькуляторы'})[page]||'Настройки приложения';
+    byId('mgSubtitle').textContent=({home:'Пять разделов — всё на своём месте',layout:'Карточки и расположение',application:'Оформление · Безопасность · Данные',manager:'Все настройки одного помощника',autopilot:'Навыки и границы самостоятельности',connections:'Сервисы и источники данных',documents:'Файлы и шаблоны',payments:'Счета и регулярные расходы',learning:'Возможности приложения',voice:'Плазма · Док · Голос · Имя',workshop:'Инструменты и калькуляторы'})[page]||'Настройки приложения';
     clearTimeout(voicePreviewTimer);
     if(dmSettingsGlyphTimer!==null){clearTimeout(dmSettingsGlyphTimer);dmSettingsGlyphTimer=null;}
     if(page==='home'){byId('mgDetail').innerHTML='';requestAnimationFrame(mgSyncCarouselNav);window.dispatchEvent(new Event('dm:management-home'));return;}
@@ -970,7 +970,7 @@
         '</div>';
     }else if(page==='manager'){
       const parts=[
-        ['voice','ic-settings','Имя, голос и плазма','Общение · Внешний вид · Док'],
+        ['voice','ic-settings','Внешний вид и общение','Плазма · Док · Голос · Имя'],
         ['autopilot','ic-shield','Автопилот','Навыки · Правила · Самостоятельность']
       ];
       content='<div class="mg-unified-hub">'+
