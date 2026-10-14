@@ -144,7 +144,7 @@ function romanAssistantBrief(x){
   '<h3>Роман, я посмотрел наши дела</h3>'+
   '<p>'+esc(summary)+' '+esc(guidance)+'</p>'+
   '<p>Без паники: сначала клиенты, потом всё остальное. Деньги любят порядок, а клиенты — своевременные ответы. 🙂</p>'+
-  '<div class="dm-pulse-buttons"><button type="button" data-pulse-target="sales">Посмотреть клиентов '+circle+'</button></div>'+
+  '<div class="dm-pulse-buttons">'+(lead?'<button type="button" data-pulse-client-draft="'+esc(lead.id)+'">Готовый ответ '+circle+'</button>':'')+'<button type="button" data-pulse-target="sales">Посмотреть клиентов '+circle+'</button></div>'+
   '</section>';
 }
 function render(){
@@ -155,7 +155,7 @@ function render(){
   'Сводка построена только по внесённым записям и указанным датам. Текущий период ещё не завершился.':
   'За выбранный период подтверждённых записей для сводки пока нет. Это не означает отсутствие работы.';
  $('dmPulseDetail').innerHTML=romanAssistantBrief(x)+
-  '<section class="dm-pulse-section"<small class="dm-pulse-eyebrow">ПЕРИОД: '+x.range+'</small>'+
+  '<section class="dm-pulse-section"><small class="dm-pulse-eyebrow">ПЕРИОД: '+x.range+'</small>'+
    '<p>'+summary+'</p><div class="dm-pulse-stats">'+
    stat('Новых обращений',String(x.created),'За период · ранее: '+comparison.created)+
    stat('Отмечено покупок',String(x.won),'За период · ранее: '+comparison.won)+
@@ -188,8 +188,14 @@ function close(){
 bar.addEventListener('click',open);
 overlay.addEventListener('click',event=>{
  if(event.target===overlay){close();return;}
- const btn=event.target.closest('[data-pulse-close],[data-pulse-target]');if(!btn)return;
+ const btn=event.target.closest('[data-pulse-close],[data-pulse-target],[data-pulse-client-draft]');if(!btn)return;
  if(btn.hasAttribute('data-pulse-close')){close();return;}
+ if(btn.dataset.pulseClientDraft){
+   const id=btn.dataset.pulseClientDraft;
+   close();
+   if(!window.DMInitiative?.openForClient?.(id))window.DMSalesScreen?.openClient?.(id);
+   return;
+ }
  const target=btn.dataset.pulseTarget;close();
  if(target==='tax')window.DMTaxControl?.open?.();
  else if(target==='inbox')window.DMDirectorWorkspace?.open?.('inbox');
