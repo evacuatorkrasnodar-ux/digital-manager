@@ -88,7 +88,11 @@
   let state=JSON.parse(localStorage.getItem(PROJECT_KEY)||'null')||{projects:[],events:[]};
   if(!Array.isArray(state.projects)||!Array.isArray(state.events))state={projects:[],events:[]};
   let changed=false;
-  for(const sale of sales.filter(x=>x.stage==='won'&&typeof x.id==='string')){
+  const confirmed=sales.filter(x=>x.stage==='won'&&typeof x.id==='string');
+  const ids=new Set(confirmed.map(x=>x.id));
+  const valid=state.projects.filter(x=>ids.has(x.id));
+  if(valid.length!==state.projects.length){state.projects=valid;changed=true;}
+  for(const sale of confirmed){
    let p=state.projects.find(x=>x.id===sale.id);
    if(!p){
     p={id:sale.id,name:sale.title,client:sale.person,step:0,date:day};
@@ -115,39 +119,45 @@
   button.textContent=active?'Вернуть мои данные':'Пожить в бизнесе Романа';
   button.addEventListener('click',()=>{if(active){if(confirm('Завершить пример Романа и восстановить прежние данные?'))restore()}else if(confirm('Включить учебный бизнес Романа? Текущее состояние приложения будет сохранено для возврата.'))seed()});
   section.append(title,intro,button);
-  if(active){
-   const auto=document.createElement('div');auto.className='dm-roman-autopilot';
-   const autoTitle=document.createElement('h3');autoTitle.textContent='Автопилот · полная свобода в учебной студии';
-   const autoNote=document.createElement('p');autoNote.textContent='Сам анализирует записи и готовит черновики. Внешние сообщения и платежи не выполняются.';
-   const details=document.createElement('details');
-   const summary=document.createElement('summary');summary.textContent='Решения и действия управляющего';
-   const body=document.createElement('div');body.className='dm-roman-autopilot-items';
-   const refresh=()=>{
-    window.DMInitiative?.scan?.();
-    const tasks=autopilot();body.replaceChildren();
-    for(const t of tasks){
-     const p=document.createElement('p');p.textContent=(t.done?'✓ Выполнено: ':'→ Приоритет: ')+t.text+' — '+t.detail;body.append(p);
-    }
-    const projects=projectReview(),steps=['План составлен','В работе (учебный план)','Внутренняя проверка'];
-    const heading=document.createElement('h4');heading.textContent='Проекты студии · внутренние этапы';body.append(heading);
-    for(const item of projects.projects){
-     const p=document.createElement('p');p.textContent=item.name+' · '+item.client+' — '+steps[item.step];body.append(p);
-    }
-    const journal=document.createElement('h4');journal.textContent='Журнал решений';body.append(journal);
-    for(const event of projects.events.slice(0,5)){const p=document.createElement('p');p.textContent=event;body.append(p)}
-
-   };
-   details.addEventListener('toggle',()=>{if(details.open)refresh()});
-   details.append(summary,body);auto.append(autoTitle,autoNote,details);section.append(auto);
-  }
   hub.append(section);
+ }
+ function mountAutopilot(){
+  if(!isActive())return;
+  const container=document.querySelector('#managementScreen #mgDetail .mg-auto-compact');
+  if(!container||container.querySelector('#dmRomanAutopilot'))return;
+  const section=document.createElement('section');
+  section.id='dmRomanAutopilot';section.className='mg-auto-active';
+  const title=document.createElement('h2');title.textContent='Роман · учебный автопилот';
+  const note=document.createElement('p');note.textContent='Внутренние планы и черновики. Без внешней отправки и платежей.';
+  const details=document.createElement('details');
+  const summary=document.createElement('summary');summary.textContent='Проекты и журнал решений';
+  const list=document.createElement('div');list.style.cssText='font-size:13px;line-height:1.5;margin-top:12px';
+  const display=()=>{
+   if(!details.open)return;
+   window.DMInitiative?.scan?.();
+   const tasks=autopilot(),projectState=projectReview();
+   const stages=['План составлен','В работе (учебный план)','Внутренняя проверка'];
+   list.replaceChildren();
+   const sectionTitle=t=>{const h=document.createElement('h3');h.textContent=t;h.style.cssText='font-size:14px;margin:12px 0 6px';list.append(h)};
+   const line=t=>{const p=document.createElement('p');p.textContent=t;p.style.cssText='font-size:13px;line-height:1.5;margin:6px 0';list.append(p)};
+   sectionTitle('Сделано и запланировано');
+   for(const task of tasks)line((task.done?'✓ ':'→ ')+task.text+' · '+task.detail);
+   sectionTitle('Учебные проекты');
+   for(const p of projectState.projects)line(p.name+' — '+stages[p.step]);
+   if(!projectState.projects.length)line('Завершённых продаж для учебных проектов пока нет.');
+   sectionTitle('История решений');
+   for(const entry of projectState.events.slice(0,5))line(entry);
+  };
+  details.addEventListener('toggle',display);
+  details.append(summary,list);section.append(title,note,details);
+  container.insertBefore(section,container.firstChild);
  }
  function boot(){
   const root=document.querySelector('#managementScreen #mgDetail');
   if(!root)return;
-  const observer=new MutationObserver(()=>inject());
+  const observer=new MutationObserver(()=>{inject();mountAutopilot()});
   observer.observe(root,{childList:true,subtree:false});
-  inject();
+  inject();mountAutopilot();
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
  window.DMRomanDemo=Object.freeze({isActive});
