@@ -412,7 +412,10 @@ function submitPersonal(form){
  if(!save(PERSONAL_KEY,personal)){
   personal.shift();
   contactFeedback='Не удалось сохранить дело. Проверьте память устройства.';
- }else contactFeedback='Новое дело записано.';
+ }else{
+  contactFeedback='Новое дело записано.';
+  window.dispatchEvent(new CustomEvent('dm:local-glyph',{detail:{kind:'task'}}));
+ }
  show('mine');
 }
 function movePersonal(id,when){
