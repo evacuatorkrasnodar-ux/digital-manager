@@ -148,3 +148,24 @@
 }
 #managementScreen .dm-glyph-stage-orb .dm-core-brand{opacity:.17}
 #managementScreen .dm-glyph-stage-orb .dm-voice-orb:has(.dm-core-glyph.is-visible) .dm-core-brand{opacity:0}
+
+/* Seven compact preview buttons, with comfortable touch targets. */
+#managementScreen .dm-glyph-showcase .dm-glyph-preview-actions{
+  grid-auto-rows:minmax(44px,auto);
+  gap:5px;
+}
+#managementScreen .dm-glyph-showcase .dm-glyph-preview-actions button{
+  min-height:44px;
+  padding:4px 3px;
+  border-radius:11px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:3px;
+}
+#managementScreen .dm-glyph-showcase .dm-glyph-preview-actions svg{width:18px;height:18px;flex:none}
+#managementScreen .dm-glyph-showcase .dm-glyph-preview-actions span{font-size:9px;line-height:1.1}
+@media(max-width:350px){
+  #managementScreen .dm-glyph-showcase .dm-glyph-preview-actions button{min-height:44px;padding:3px 2px}
+}
