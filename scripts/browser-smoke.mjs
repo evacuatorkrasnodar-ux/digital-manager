@@ -12,7 +12,10 @@ async function open(path){
 try{
  await open('index.html');
  if(!await page.locator('#homeScreen').count())throw new Error('Main dashboard missing');
+ const mainPlasma=await page.locator('#tabAssistant, .dm-plasma, .dm-shared-plasma').count();
+ if(!mainPlasma)throw new Error('Assistant plasma/launcher missing from dashboard');
  await open('world.html');
+ if(!await page.locator('#tabAssistant, .dm-world-socket, .dm-shared-plasma').count())throw new Error('My World assistant launcher missing');
  if(!await page.locator('[data-world="memory"]').count())throw new Error('My World memory tab missing');
  await page.locator('[data-world="memory"]').first().click();
  if(!await page.locator('[data-world-view="memory"]').isVisible())throw new Error('Memory tab did not open');
