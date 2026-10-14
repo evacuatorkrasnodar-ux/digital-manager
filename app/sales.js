@@ -145,7 +145,8 @@ function create(){
   if(!person||!title||!statuses[stage]||!channels.includes(source)||!Number.isFinite(amount)||amount<0||amount>999999999)return;
   let at=Date.now();
   records.unshift({id:uid(),person,title,amount,stage,source,createdAt:at,wonAt:stage==='won'?at:null,lostAt:stage==='lost'?at:null,lossReason:'Не знаем'});
-  save();render();
+  if(save())window.dispatchEvent(new CustomEvent('dm:local-glyph',{detail:{kind:'clients'}}));
+  render();
  });
  screen.addEventListener('change',e=>{
   let el=e.target, id=el.dataset.saleStage||el.dataset.saleReason;
