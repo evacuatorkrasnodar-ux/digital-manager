@@ -641,7 +641,7 @@
   }
   let mgCurrent='home';
   const mgNames={manager:'Мой управляющий',
-    voice:'Основные',autopilot:'Автопилот',connections:'Связи',documents:'Документы',
+    voice:'Основные',autopilot:'Автопилот',layout:'Главная страница',application:'Приложение',connections:'Подключения',documents:'Документы',
     payments:'Платежи',learning:'Обучение',security:'Безопасность',workshop:'Моя мастерская'};
   const mgInfo={
     connections:'Связи объединят ваш сайт, почту, календарь, банки, продажи, маркетплейсы и ЭДО. Реальные подключения пока не настроены.',
@@ -920,15 +920,24 @@
     if(page==='communication')page='voice';
     if(page==='capabilities')page='autopilot';
     mgCurrent=page;
-    byId('mgHome').hidden=page!=='home';
-    byId('mgDetail').hidden=page==='home';
+    const mgIsLayout=page==='layout';
+    byId('mgHome').hidden=page!=='home'&&!mgIsLayout;
+    byId('mgMenu').hidden=page!=='home';
+    byId('mgHomeLayoutPanel').hidden=!mgIsLayout;
+    byId('mgDetail').hidden=page==='home'||mgIsLayout;
     byId('mgTitle').textContent=mgNames[page]||'Управление';
-    byId('mgSubtitle').textContent=({home:'Настройки приложения',manager:'Все настройки одного помощника',autopilot:'Навыки и границы самостоятельности',connections:'Сервисы и источники данных',documents:'Файлы и шаблоны',payments:'Счета и регулярные расходы',learning:'Возможности приложения',voice:'Плазма · Док · Имя · Общение',workshop:'Инструменты и калькуляторы'})[page]||'Настройки приложения';
+    byId('mgSubtitle').textContent=({home:'Пять разделов — всё на своём месте',layout:'Карточки и расположение',application:'Оформление · Безопасность · Данные',manager:'Все настройки одного помощника',autopilot:'Навыки и границы самостоятельности',connections:'Сервисы и источники данных',documents:'Файлы и шаблоны',payments:'Счета и регулярные расходы',learning:'Возможности приложения',voice:'Плазма · Док · Имя · Общение',workshop:'Инструменты и калькуляторы'})[page]||'Настройки приложения';
     clearTimeout(voicePreviewTimer);
     if(dmSettingsGlyphTimer!==null){clearTimeout(dmSettingsGlyphTimer);dmSettingsGlyphTimer=null;}
     if(page==='home'){byId('mgDetail').innerHTML='';window.scrollTo(0,0);requestAnimationFrame(mgSyncCarouselNav);window.dispatchEvent(new Event('dm:management-home'));return;}
     let content='';
-    if(page==='manager'){
+    if(page==='application'){
+      content='<div class="mg-unified-hub">'+
+        '<div class="mg-unified-panel"><h2>Оформление</h2><p class="mg-unified-note">Сейчас доступна фирменная тёмная тема. Светлую добавим позднее.</p></div>'+
+        '<button type="button" class="mg-unified-item" data-mg-open="security"><span class="mg-unified-icon"><svg class="ico" aria-hidden="true"><use href="#ic-shield"/></svg></span><span class="mg-copy"><strong>Безопасность и данные</strong><small>Доступ, разрешения и защита</small></span></button>'+
+        '<button type="button" class="mg-unified-item" data-mg-open="learning"><span class="mg-unified-icon"><svg class="ico" aria-hidden="true"><use href="#ic-target"/></svg></span><span class="mg-copy"><strong>Помощь и обучение</strong><small>Подсказки по приложению</small></span></button>'+
+        '</div>';
+    }else if(page==='manager'){
       const parts=[
         ['voice','ic-settings','Основные','Плазма · Док · Имя · Общение'],
         ['autopilot','ic-shield','Автопилот','Навыки · Правила · Самостоятельность']
@@ -1049,7 +1058,7 @@
   document.querySelectorAll('[data-mg-open]').forEach(el=>el.addEventListener('click',()=>{
     mgSettingsPage(el.dataset.mgOpen);
   }));
-  byId('mgBack').addEventListener('click',()=>{if(mgCurrent==='home')setTab('home');else if(mgCurrent==='manager')mgSettingsPage('home');else if(['voice','autopilot'].includes(mgCurrent))mgSettingsPage('manager');else mgSettingsPage('home');});
+  byId('mgBack').addEventListener('click',()=>{if(mgCurrent==='home')setTab('home');else if(mgCurrent==='manager')mgSettingsPage('home');else if(['voice','autopilot'].includes(mgCurrent))mgSettingsPage('manager');else if(['security','learning'].includes(mgCurrent))mgSettingsPage('application');else mgSettingsPage('home');});
   byId('mgEditHomeLayout').addEventListener('click',()=>{setTab('home');window.DMHomeLayout?.edit?.();});
   document.querySelectorAll('[data-mg-card]').forEach(el=>el.addEventListener('change',()=>{
     if(lockedHomeCards.has(el.dataset.mgCard)){
