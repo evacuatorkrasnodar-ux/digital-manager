@@ -189,3 +189,50 @@
   border-radius:50%;
   color:#f2f7fc;
 }
+
+/* Unified internal-screen template v1: decision / glance / optional context.
+   Scoped to Pulse, never changes Home's approved card silhouettes. */
+#dmBusinessPulseOverlay .dm-pulse-decision{
+  padding:15px 16px 17px;
+  margin:0 0 15px;
+  border:1px solid rgba(174,185,194,.32);
+  border-radius:19px;
+  background:linear-gradient(148deg,#151a1f 0%,#090b0e 75%);
+  box-shadow:inset 0 1px rgba(255,255,255,.09);
+}
+#dmBusinessPulseOverlay .dm-pulse-decision h3{
+  margin:9px 0 10px;font-size:18px;font-weight:530;color:#f7f9fc;
+}
+#dmBusinessPulseOverlay .dm-pulse-decision p{
+  margin:0;font-size:13px;line-height:1.55;color:#d1d7dd;
+}
+#dmBusinessPulseOverlay .dm-pulse-decision .dm-pulse-buttons{margin:15px 0 0}
+#dmBusinessPulseOverlay .dm-pulse-glance{margin:0 0 14px}
+#dmBusinessPulseOverlay .dm-pulse-glance h3{
+  margin:0 0 10px 2px;font-weight:520;font-size:14px;color:#ebf0f5;
+}
+#dmBusinessPulseOverlay .dm-pulse-compact-stats{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;
+}
+#dmBusinessPulseOverlay .dm-pulse-compact-stats .dm-pulse-stat{
+  min-height:73px;padding:10px 12px;gap:5px;
+  border-color:rgba(160,174,185,.24);
+  background:linear-gradient(150deg,#11161b,#06080b);
+}
+#dmBusinessPulseOverlay .dm-pulse-compact-stats .dm-pulse-stat strong{
+  font-size:21px;font-weight:520;line-height:1.2;
+}
+#dmBusinessPulseOverlay .dm-pulse-extra>summary{
+  padding:12px 4px;min-height:44px;color:#bfc9d3;
+}
+#dmBusinessPulseOverlay .dm-pulse-expanded{padding:10px 0 0}
+#dmBusinessPulseOverlay .dm-pulse-other-signals{
+  margin-top:15px;border-top:1px solid rgba(180,191,198,.16);padding:13px 3px 0;
+  font-size:12px;color:#c4cbd2;
+}
+#dmBusinessPulseOverlay .dm-pulse-other-signals ul{margin:8px 0;padding-left:18px}
+#dmBusinessPulseOverlay .dm-pulse-other-signals li{margin:5px 0;line-height:1.5}
+#dmBusinessPulseOverlay .dm-pulse-disclaimer{
+  font-size:10.5px!important;line-height:1.55!important;color:#9caab6!important;
+  padding:9px 3px 0;
+}
