@@ -485,6 +485,14 @@
     if(key==='finance'){setTab('home');detailModal('finance');}
   }
   dmSyncDockItems();
+  // Reuse our actual animated plasma in the small Management menu icon only.
+  const dmManagerMenuSocket=document.querySelector('#mgMenu [data-mg-open="manager"] .dm-manager-menu-plasma-socket');
+  if(dmManagerMenuSocket && window.DMSharedPlasma?.create){
+    const dmManagerMenuOrb=window.DMSharedPlasma.create('management-orange');
+    dmManagerMenuOrb.classList.add('dm-manager-menu-orange-plasma');
+    dmManagerMenuSocket.replaceChildren(dmManagerMenuOrb);
+  }
+
 
 
   // EVENT GLYPHS: a separate, weightless layer inside the approved black plasma.
