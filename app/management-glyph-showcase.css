@@ -175,3 +175,6 @@
 #managementScreen .dm-glyph-showcase .dm-glyph-preview-actions button{min-height:44px;padding:4px 1px}
 #managementScreen .dm-glyph-showcase .dm-glyph-preview-actions span{font-size:8px;overflow-wrap:anywhere}
 @media(max-width:350px){#managementScreen .dm-glyph-showcase .dm-glyph-preview-actions{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* Keep the final glyph centered when the number of examples is 3n + 1. */
+#managementScreen .dm-glyph-showcase .dm-glyph-preview-actions > button:last-child:nth-child(3n + 1){grid-column:2}
