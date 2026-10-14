@@ -523,13 +523,14 @@ function init(){
  const details=document.querySelector('#homeScreen .recommendation-card .rec-chevron');
  if(details)details.addEventListener('click',openRecommendationDetail,true);
  window.addEventListener('dm:sales-insight-changed',syncRecommendation);
- const management=document.getElementById('mgHome');
- if(management&&!management.querySelector('[data-journal-open]')){
-  const anchor=management.querySelector('.mg-main'),box=document.createElement('div');
-  box.className='dm-journal-entry-links';
-  // One entry point; the History and Delegated tabs remain available inside.
-   box.innerHTML='<button type="button" data-journal-open="mine">Мои дела</button>';
-  if(anchor)anchor.before(box);else management.append(box);
+ // The task journal belongs to the working day, not the Management settings.
+ // Keep its existing records, delegation workflow and recommendation entry point.
+ const journalRoute=new URLSearchParams(location.search).get('journal');
+ if(['mine','delegated','history'].includes(journalRoute)){
+  // Remove the one-shot deep link so refresh does not reopen the overlay.
+  const clean=new URL(location.href);clean.searchParams.delete('journal');
+  history.replaceState(history.state,'',clean.pathname+clean.search+clean.hash);
+  requestAnimationFrame(()=>show(journalRoute));
  }
  document.addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
