@@ -1255,3 +1255,7 @@ body:has(#dmAttentionPanel:not([hidden])) #dmAttentionPanel .dm-attention-foot{
 @media(prefers-reduced-motion:reduce){
   #dockOpenAttention.dm-has-attention .dm-attention-dot{animation:none!important}
 }
+
+/* Attention hero is decorative only. The assistant lives exclusively in the bottom dock. */
+#dmAttentionPanel .dm-attention-head{background-image:linear-gradient(180deg,rgba(1,4,8,.28),rgba(0,0,0,.78)),url('./assets/myday-villa-sunset.jpg')!important;background-position:center 42%!important;background-size:cover!important}
+#dmAttentionPanel .dm-attention-head::before{content:none!important;display:none!important}
