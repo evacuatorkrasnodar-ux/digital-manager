@@ -1846,7 +1846,27 @@
     const container=byId('dmAttentionList');
     container.replaceChildren();
     const visible=dmAttentionEvents.filter(x=>dmAttentionFilter==='all'||x.kind===dmAttentionFilter);
-    if(!visible.length){const empty=document.createElement('p');empty.className='dm-attention-empty';empty.textContent=dmAttentionFilter==='all'?'Пока всё спокойно. Новых событий нет.':'В этой категории пока нет событий.';container.append(empty);return;}
+    // Helpful next steps from actual local client records; derived on each opening,
+    // never stored as fake notifications or counted as verified external events.
+    if(dmAttentionFilter==='all'||dmAttentionFilter==='attention'){
+      const candidates=window.DMSalesScreen?.getWorkCandidates?.()||[];
+      const pending=candidates.filter(x=>['new','talk','offer'].includes(x.stage)).slice(0,3);
+      for(const item of pending){
+        const row=document.createElement('article');row.className='dm-attention-entry dm-attention-suggestion';
+        const info=document.createElement('div');
+        const title=document.createElement('strong');
+        title.textContent=item.stage==='new'?'Предлагаю ответить клиенту':item.stage==='talk'?'Предлагаю продолжить разговор':'Предлагаю уточнить решение';
+        const detail=document.createElement('p');
+        const person=String(item.person||'Клиент').slice(0,80);
+        detail.textContent=person+': '+(item.stage==='new'?'обращение ещё ждёт ответа.':item.stage==='talk'?'разговор начат, следующий шаг не отмечен.':'предложение отправлено, итог пока не отмечен.');
+        const note=document.createElement('small');note.textContent='По записям о клиентах · Предложение управляющего';
+        info.append(title,detail,note);row.append(info);
+        const action=document.createElement('button');action.type='button';action.textContent='К клиенту';
+        action.addEventListener('click',()=>{dmCloseAttention();window.DMSalesScreen?.openClient?.(item.id);});
+        row.append(action);container.append(row);
+      }
+    }
+    if(!visible.length&&!container.children.length){const empty=document.createElement('p');empty.className='dm-attention-empty';empty.textContent=dmAttentionFilter==='all'?'Пока всё спокойно. Новых событий нет.':'В этой категории пока нет событий.';container.append(empty);return;}
     for(const event of visible){
       const row=document.createElement('article');row.className='dm-attention-entry';
       const info=document.createElement('div');
