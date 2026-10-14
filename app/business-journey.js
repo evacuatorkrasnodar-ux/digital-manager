@@ -269,28 +269,16 @@ function mount(){
 // Reuse the actual animated assistant plasma instead of a decorative picture.
 function mountJourneyPlasma(body){
  const mount=body?.querySelector('.dm-journey-halo');
- const source=document.querySelector('#tabAssistant .dm-dock-plasma');
- if(!mount||!source)return;
- const orb=source.cloneNode(true);
+ if(!mount)return;
+ // The approved shared waiting plasma has its own isolated CSS.
+ // Never clone the blue legacy navigation orb into this welcome dialog.
+ const orb=window.DMSharedPlasma?.create?.('first-acquaintance');
+ if(!orb)return;
  orb.classList.add('dm-journey-live-plasma');
  orb.dataset.mode='idle';
- const ids=new Map();
- orb.querySelectorAll('[id]').forEach((node,i)=>{
-  const previous=node.id,next='dm-journey-orb-'+i+'-'+previous;
-  ids.set(previous,next);node.id=next;
- });
- orb.querySelectorAll('*').forEach(node=>{
-  for(const attr of [...node.attributes]){
-   let value=attr.value;
-   for(const [oldId,newId] of ids){
-    value=value.replaceAll('url(#'+oldId+')','url(#'+newId+')');
-    if((attr.name==='href'||attr.name==='xlink:href')&&value==='#'+oldId)value='#'+newId;
-   }
-   if(value!==attr.value)node.setAttribute(attr.name,value);
-  }
- });
  mount.replaceChildren(orb);
 }
+
 function render({focusDemand=false,focusMarket=false}={}){
  if(!root||root.hidden)return;
  const body=root.querySelector('#dmJourneyBody');
