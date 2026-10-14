@@ -20,6 +20,8 @@ jobs:
           node-version: '22'
       - name: Check shared imports
         run: node scripts/check-app-assets.mjs
+      - name: Check PWA navigation and storage contract
+        run: node scripts/check-pwa-contract.mjs
       - name: Check application JavaScript syntax
         shell: bash
         run: |
