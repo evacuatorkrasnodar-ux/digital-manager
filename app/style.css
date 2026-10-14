@@ -1143,12 +1143,12 @@ html.dm-plasma-panel-open .dock-launcher .dm-launcher-waves{
    The previous extra 18px focus translation made the pair too low. */
 @media(max-width:700px){
   html.dm-plasma-panel-open:not(.dm-compose-editor) .dm-chat-panel:not(.dm-chat-editor){
-    bottom:calc(20px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
+    bottom:calc(11px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
     translate:none!important;
     animation:none;
   }
   html.dm-plasma-panel-open:not(.dm-compose-editor) .dock-hidden-controls{
-    bottom:calc(-18px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
+    bottom:calc(-27px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
     translate:none!important;
     transform:translateX(-50%);
   }
