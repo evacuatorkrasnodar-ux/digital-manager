@@ -12,6 +12,7 @@ on:
       - refactor/shared-card-rhythm-20261014
       - refactor/navigation-unity-20261014
       - refactor/unified-card-arrows-20261014
+      - refactor/inner-card-chevrons-20261014
   pull_request:
     paths:
       - 'app/**'
