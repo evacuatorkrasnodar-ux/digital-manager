@@ -490,6 +490,12 @@
   if(dmManagerMenuSocket && window.DMSharedPlasma?.create){
     const dmManagerMenuOrb=window.DMSharedPlasma.create('management-orange');
     dmManagerMenuOrb.classList.add('dm-manager-menu-orange-plasma');
+    // A warning mark belongs only to this decorative menu miniature.
+    // Do not alter the live assistant's brand, events or navigation.
+    const warning=document.createElement('span');
+    warning.className='dm-manager-menu-warning';
+    warning.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 21 19.7H3L12 3.2Z"/><path d="M12 9v5.2M12 17.5h.01"/></svg>';
+    dmManagerMenuOrb.append(warning);
     dmManagerMenuSocket.replaceChildren(dmManagerMenuOrb);
   }
 
