@@ -5,10 +5,11 @@ on:
       - refactor/unify-app-20261014
       - refactor/clean-legacy-styles-20261014
       - refactor/css-rule-dedup-20261014
+      - refactor/black-velvet-unity-20261014
   pull_request:
     paths:
       - 'app/**'
-      - 'scripts/check-app-assets.mjs'
+      - 'scripts/**'
       - '.github/workflows/pwa-code-safety.yml'
 permissions:
   contents: read
