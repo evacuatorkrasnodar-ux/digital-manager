@@ -264,18 +264,8 @@
   .bottom-nav .assistant-socket .dm-dock-plasma .dm-orb-arc{animation:none!important}
 }
 
-/* iPhone X-sized portrait PWA: viewport height changes with iOS safe-area / standalone mode. */
-@media (min-width:370px) and (max-width:380px) and (orientation:portrait){
-  .bottom-nav[data-layout="five"] #tabAssistant{transform:translateY(6px)}
-}
-
-/* Move the actual centre plasma socket down, not just its navigation button.
-   All iPhone-sized standalone viewports; the neighbouring icons stay put. */
-@media (max-width:430px){
-  .bottom-nav[data-layout="five"] #tabAssistant .assistant-socket{
-    transform:translateY(8px);
-  }
-  .bottom-nav[data-layout="five"] #tabAssistant:active .assistant-socket{
-    transform:translateY(8px) scale(.97);
-  }
-}
+/* Keep the assistant centred in the dock on all phone sizes.
+   Earlier iPhone-specific offsets pushed the plasma below the icons. */
+.bottom-nav[data-layout="five"] #tabAssistant{transform:translateY(-9px)}
+.bottom-nav[data-layout="five"] #tabAssistant .assistant-socket{transform:translateY(-4px)}
+.bottom-nav[data-layout="five"] #tabAssistant:active .assistant-socket{transform:translateY(-4px) scale(.97)}
