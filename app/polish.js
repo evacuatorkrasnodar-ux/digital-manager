@@ -43,10 +43,9 @@ function addDock(shell){
   a.id=middle?'tabAssistant':'tabPersonalDock'+i;
   if(middle){
    a.dataset.mode='idle';a.setAttribute('aria-label','Открыть помощника');
-   const socket=el('span','assistant-socket'),ring=el('span','assistant-ring'),core=el('span','assistant-core');
-   socket.setAttribute('aria-hidden','true');
-   const img=el('img','nav-mark');img.src='./assets/logo-air.png';img.alt='';img.setAttribute('aria-hidden','true');
-   core.append(img);ring.append(core);socket.append(ring);a.append(socket);
+   const template=document.createElement('template');
+   template.innerHTML="<span class=\"assistant-socket\" aria-hidden=\"true\">\n        <span class=\"dm-voice-orb dm-voice-orb-electric dm-dock-plasma\" aria-hidden=\"true\"><i class=\"dm-orb-halo\"></i><i class=\"dm-orb-rim\"></i><i class=\"dm-orb-edge\"></i><svg class=\"dm-orb-spectral\" viewBox=\"0 0 120 120\" aria-hidden=\"true\"><defs><linearGradient id=\"dmDockElectricStroke\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#68bfff\"/><stop offset=\".22\" stop-color=\"#d7fbff\"/><stop offset=\".43\" stop-color=\"#2d82ff\"/><stop offset=\".63\" stop-color=\"#264be5\"/><stop offset=\".82\" stop-color=\"#a080ff\"/><stop offset=\"1\" stop-color=\"#5960f4\"/></linearGradient><linearGradient id=\"dmDockElectricInner\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#89ceff\"/><stop offset=\".34\" stop-color=\"#1b6af7\"/><stop offset=\".62\" stop-color=\"#0b26a7\"/><stop offset=\".87\" stop-color=\"#b394ff\"/><stop offset=\"1\" stop-color=\"#376eff\"/></linearGradient></defs><circle cx=\"60\" cy=\"60\" r=\"53\" fill=\"none\" stroke=\"#3564ec\" stroke-width=\".65\" opacity=\".42\"/><circle cx=\"60\" cy=\"60\" r=\"50.5\" fill=\"none\" stroke=\"url(#dmDockElectricStroke)\" stroke-width=\"2.1\" opacity=\".9\"/><circle cx=\"60\" cy=\"60\" r=\"47\" fill=\"none\" stroke=\"url(#dmDockElectricInner)\" stroke-width=\"1.1\" opacity=\".83\"/><circle class=\"dm-orb-arc dm-arc-ice\" cx=\"60\" cy=\"60\" r=\"50.5\" fill=\"none\" stroke=\"#c5efff\" stroke-width=\"2.05\" stroke-linecap=\"round\" stroke-dasharray=\"80 238\"/><circle class=\"dm-orb-arc dm-arc-violet\" cx=\"60\" cy=\"60\" r=\"50\" fill=\"none\" stroke=\"#d2aaff\" stroke-width=\"2.15\" stroke-linecap=\"round\" stroke-dasharray=\"53 261\"/></svg></span>\n      </span>";
+   a.append(template.content.firstElementChild);
   }else{a.setAttribute('aria-label','Открыть '+info.label);a.append(iconFor(info.svg));}
   a.append(el('span','nav-label',middle?'Помощник':info.label));
   if(!middle)a.append(el('i','nav-underline'));
