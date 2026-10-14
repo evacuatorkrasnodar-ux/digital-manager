@@ -73,16 +73,12 @@ function render(){
 // A synchronous scroll alone can be undone by layout and scroll anchoring.
 function resetTraceScroll(){
  const el=screen();if(!el||el.hidden)return;
- const reset=()=>{
-  if(el.hidden)return;
-  el.scrollTop=0;
-  const shell=document.getElementById('app');
-  if(shell)shell.scrollTop=0;
-  document.scrollingElement?.scrollTo({top:0,behavior:'instant'});
-  window.scrollTo({top:0,behavior:'instant'});
- };
- reset();
- requestAnimationFrame(()=>{reset();requestAnimationFrame(reset)});
+ // One synchronous reset. Repeating it in animation frames used to jump
+ // the entire app while the user was transitioning between sections.
+ el.scrollTop=0;
+ const shell=document.getElementById('app');
+ if(shell)shell.scrollTop=0;
+ window.scrollTo(0,0);
 }
 function open(from='management'){
  const el=screen();if(!el)return;
