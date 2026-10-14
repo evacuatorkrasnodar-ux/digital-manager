@@ -671,7 +671,7 @@
     },3600);
   }
   let mgCurrent='home';
-  const mgNames={manager:'Мой управляющий',
+  const mgNames={manager:'Мой помощник',
     voice:'Основные',autopilot:'Автопилот',layout:'Главная страница',application:'Приложение',connections:'Подключения',documents:'Документы',
     payments:'Платежи',learning:'Обучение',security:'Безопасность',workshop:'Моя мастерская'};
   const mgInfo={

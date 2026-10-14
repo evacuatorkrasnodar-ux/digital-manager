@@ -37,6 +37,8 @@ try{
   }
   await page.locator('#mgMenu [data-mg-open="manager"]').click();
   if(!await page.locator('#mgDetail').isVisible())throw Error('Management card click no longer opens detail');
+  if((await page.locator('#mgTitle').textContent())?.trim()!=='Мой помощник')
+   throw Error('Management assistant heading differs from menu label');
   console.log('PASS Management at '+width+'px: 5 matching chrome circles and working menu click');
   const day=await page.goto(base+'myday.html',{waitUntil:'networkidle',timeout:35000});
   if(!day?.ok())throw Error('My Day unavailable');

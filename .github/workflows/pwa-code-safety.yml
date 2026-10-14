@@ -16,6 +16,7 @@ on:
       - refactor/personal-graphite-background-20261014
       - refactor/personal-glass-polish-20261014
       - refactor/personal-text-contrast-20261014
+      - refactor/management-label-consistency-20261014
       - test/visual-screen-audit-20261014
   pull_request:
     paths:
