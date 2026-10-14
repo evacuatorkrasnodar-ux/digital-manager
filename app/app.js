@@ -55,6 +55,9 @@
     if(event.detail?.count>0&&byId('tabAssistant')?.dataset.mode==='idle')setRingMode('attention',1900);
   });
   function setTab(next, managementPage='home'){
+    // Apple reset: retire the old standalone History page without disabling
+    // the plasma/chat controls. Keep the former DOM for legacy event handlers.
+    if(next==='assistant') next='home';
     const incoming=byId(next+'Screen');
     const traceScreen=byId('digitalTraceScreen');
     const wasVisible=!!(incoming&&incoming.hidden);
