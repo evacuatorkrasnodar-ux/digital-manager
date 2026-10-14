@@ -28,6 +28,8 @@ const personalSelectors=[
  '.day-heading h1',
  '.world-tab',
  '.world-spotlight',
+ '.world-item-text small',
+ '.care-history-item small',
  '.day-panel',
  '.care-panel',
  '.month-arrow',
@@ -102,6 +104,8 @@ try{
      if(personalBackground&&['backgroundImage','backgroundColor'].includes(prop))continue;
      // Intentional glass repaint of personal cards, with geometry and borders unchanged.
      if(path!=='index.html'&&['.world-spotlight','.day-panel','.care-panel'].includes(selector)&&prop==='backgroundImage')continue;
+     if(path==='world.html'&&selector==='.world-item-text small'&&prop==='color')continue;
+     if(path==='care.html'&&selector==='.care-history-item small'&&prop==='color')continue;
      if(old[i][prop]!==updated[i][prop]){
       diffs.push(`${selector}[${i}].${prop}: ${old[i][prop]} => ${updated[i][prop]}`);
      }
