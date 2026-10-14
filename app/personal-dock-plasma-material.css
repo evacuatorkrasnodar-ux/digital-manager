@@ -1,0 +1,16 @@
+/* My Day: exact plasma materials from Home, scoped to personal dock only.
+   The standalone dock-free plasma keeps its own independent stylesheet. */
+.bottom-nav .dm-voice-orb {--dm-size:82px;width:var(--dm-size);height:var(--dm-size);display:block;position:relative;z-index:2;flex:none;border-radius:50%;background:radial-gradient(circle at 49% 48%,rgba(1,5,16,.26) 0 45%,rgba(6,12,31,.34) 53%,rgba(2,8,26,.14) 63%,transparent 73%);filter:drop-shadow(0 0 7px rgba(50,118,255,.74)) drop-shadow(0 0 13px rgba(91,77,244,.37));animation:dm-breathe 3.8s ease-in-out infinite}
+.bottom-nav .dm-voice-orb i {position:absolute;display:block;pointer-events:none;border-radius:50%}
+.bottom-nav .dm-orb-halo {inset:-20%;background:radial-gradient(circle,transparent 38%,rgba(39,112,244,.06) 47%,rgba(61,135,255,.30) 54%,rgba(123,108,255,.23) 62%,rgba(117,69,205,.06) 70%,transparent 77%);filter:blur(8px)}
+.bottom-nav .dm-orb-rim {inset:4%;background:conic-gradient(from 15deg,#3b85ff,#f1fbff 27deg,#83d9ff 46deg,#2978fa 90deg,#285ce2 141deg,#b79bff 197deg,#e3bafa 217deg,#8650f5 248deg,#247af9 288deg,#b1ecff 330deg,#3b85ff);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4.6px),#000 calc(100% - 2.1px));mask:radial-gradient(farthest-side,transparent calc(100% - 4.6px),#000 calc(100% - 2.1px));animation:dm-rotate 13s linear infinite;filter:drop-shadow(0 0 2px rgba(152,212,255,.8)) drop-shadow(0 0 5px rgba(72,117,255,.6))}
+.bottom-nav .dm-voice-orb-electric .dm-orb-halo {inset:-24%;background:radial-gradient(circle,transparent 38%,var(--dm-plasma-halo-inner,rgba(255,255,255,.05)) 49%,var(--dm-plasma-halo-main,rgba(255,255,255,.28)) 56%,var(--dm-plasma-halo-edge,rgba(236,245,255,.12)) 66%,transparent 76%);filter:blur(8px)}
+.bottom-nav .dm-voice-orb-electric .dm-orb-spectral {position:absolute;inset:-13%;z-index:2;width:126%;height:126%;overflow:visible;pointer-events:none;filter:drop-shadow(0 0 2px rgba(110,175,255,.78)) drop-shadow(0 0 3px rgba(27,83,242,.58))}
+.bottom-nav .dm-voice-orb-electric .dm-orb-rim {opacity:.65;filter:brightness(1.12) saturate(1.1) drop-shadow(0 0 3px rgba(45,113,250,.67))}
+.bottom-nav .dm-voice-orb-electric .dm-orb-edge {border-color:rgba(248,251,255,.58);box-shadow:inset 0 0 7px rgba(255,255,255,.12),0 0 7px rgba(248,251,255,.48)}
+.bottom-nav .dm-orb-spectral .dm-orb-arc {transform-origin:60px 60px;animation:dm-electric-arc 8s linear infinite}
+.bottom-nav .dm-orb-spectral .dm-arc-ice {animation-duration:10.4s;filter:drop-shadow(0 0 2px rgba(255,255,255,.77))}
+.bottom-nav .dm-orb-spectral .dm-arc-violet {animation-duration:12.2s;animation-direction:reverse;filter:drop-shadow(0 0 4px rgba(255,255,255,.74))}
+.bottom-nav .dm-orb-edge {inset:8%;border:1px solid rgba(157,213,255,.44);box-shadow:inset 0 0 4px rgba(46,107,243,.35),0 0 4px rgba(91,132,255,.32)}
+.bottom-nav .dm-voice-orb::after {content:"";position:absolute;inset:5%;border-radius:50%;border:1.3px solid transparent;border-top-color:rgba(239,251,255,.96);border-right-color:rgba(170,221,255,.31);filter:drop-shadow(0 0 4px rgba(138,219,255,.85));transform:rotate(-21deg);pointer-events:none}
+.bottom-nav .dm-voice-orb-electric::after {border-top-color:#fff;border-right-color:rgba(248,251,255,.56);filter:drop-shadow(0 0 5px rgba(255,255,255,.82))}
