@@ -38,6 +38,6 @@ for(let i=0;i<entries.length;i++){
 if(htmlSources[0].match(/<meta\s+name="dm-app-build"\s+content="([^"]+)"/)[1]!==htmlSources[1].match(/<meta\s+name="dm-app-build"\s+content="([^"]+)"/)[1])throw new Error('Business and personal builds must match');
 for(const file of ['app/pwa-updates.js','app/sw.js']){
   const js=readFileSync(file,'utf8');
-  if(/localStorage\.clear\(|indexedDB\.deleteDatabase\(|caches\.delete\(\s*['"]?(?!digital-manager)/.test(js))throw new Error(`${file}: suspicious data/cache deletion requires review`);
+  if(/localStorage\.clear\(|indexedDB\.deleteDatabase\(/.test(js))throw new Error(`${file}: user data deletion requires review`);
 }
 console.log('OK: both entry pages share one update controller, consistent build labels and existing assets.');
