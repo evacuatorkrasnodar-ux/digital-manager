@@ -100,7 +100,9 @@ try{
     const sectionSelector=path==='world.html'?'.world-head h2':'.day-section-heading h2';
     const headings=candidate[sectionSelector]||[];
     if(!headings.length)throw new Error(`Missing unified section titles on ${path}`);
-    const expectedSize=Math.max(18,Math.min(19,width*.048));
+    // Calendar-fixed is intentionally more compact on portrait phones.
+    const compactCalendar=path==='myday.html'&&width<=700;
+    const expectedSize=compactCalendar?Math.max(15,Math.min(17,width*.04)):Math.max(18,Math.min(19,width*.048));
     for(const heading of headings){
      if(Math.abs(Number.parseFloat(heading.fontSize)-expectedSize)>.13)
       throw new Error(`Section typography mismatch on ${path}: ${heading.fontSize} vs ${expectedSize}px`);
