@@ -133,3 +133,9 @@
 .dm-init-extra .dm-init-business-profile{margin-top:12px}
 .dm-init-extra .dm-init-fine{margin-top:12px}
 .dm-init-empty{font-size:12px;color:#a8bccd}
+
+/* Branded controls: consistent thin-outline icon language. */
+.dm-init-head [data-init-close]{display:grid;place-items:center;background:rgba(176,202,221,.065);border:1px solid rgba(176,202,221,.3)}
+.dm-init-head [data-init-close] svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round}
+.dm-init-work-row button svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.dm-init-summary-actions [data-init-delegated] svg{width:14px;height:14px;vertical-align:-2px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
