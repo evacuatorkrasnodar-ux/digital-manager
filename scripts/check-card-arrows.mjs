@@ -13,8 +13,10 @@ try{
   const welcome=page.locator('#dmBusinessJourneyScreen');
   if(await welcome.isVisible())await welcome.locator('[data-journey-close]').click();
   const tab=page.locator('#dockOpenManage');
-  if(!await tab.count())throw Error('Real Management dock launcher missing');
-  await tab.click();
+  if(!await tab.count())throw Error('Management action missing');
+  // The assistant quick menu is deliberately hidden in the default tap-to-compose mode.
+  // Trigger the unchanged button handler without changing the user's voice preferences.
+  await tab.evaluate(el=>el.click());
   await page.locator('#managementScreen').waitFor({state:'visible',timeout:10000});
   const circles=await page.locator('#mgMenu .mg-menu-row > .mg-menu-chevron.dm-circle-arrow').evaluateAll(nodes=>nodes.map(el=>{
    const rect=el.getBoundingClientRect(),s=getComputedStyle(el);
