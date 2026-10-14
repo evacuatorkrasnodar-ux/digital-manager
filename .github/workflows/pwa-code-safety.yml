@@ -1,0 +1,39 @@
+name: PWA code safety
+on:
+  push:
+    branches:
+      - refactor/unify-app-20261014
+  pull_request:
+    paths:
+      - 'app/**'
+      - 'scripts/check-app-assets.mjs'
+      - '.github/workflows/pwa-code-safety.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check shared imports
+        run: node scripts/check-app-assets.mjs
+      - name: Check PWA navigation and storage contract
+        run: node scripts/check-pwa-contract.mjs
+      - name: Check application JavaScript syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          find app -maxdepth 1 -name '*.js' -print0 | while IFS= read -r -d '' file; do
+            node --check "$file"
+          done
+      - name: Install browser test dependencies
+        run: |
+          npm install --no-save --no-package-lock playwright
+          npx playwright install --with-deps chromium
+      - name: Browser smoke tests
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/pwa-http.log 2>&1 &
+          node scripts/browser-smoke.mjs

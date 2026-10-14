@@ -3,7 +3,7 @@
 <head>
   <script src="./performance-modes.js?v=1"></script>
   <meta charset="utf-8">
-  <meta name="dm-app-build" content="20261014-roman-business-2">
+  <meta name="dm-app-build" content="20261014-unified-app-refactor-1">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#000000">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -62,46 +62,7 @@
   <link rel="stylesheet" href="./brand-navigation.css?v=7">
 
   <link rel="stylesheet" href="./app-design-system.css?v=11">
-<script>
-/* Refresh installed iOS PWA workers when opened or brought to foreground. */
-if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(reg=>{
-      reg.update().catch(()=>{});
-      let didRefresh=false;
-      navigator.serviceWorker.addEventListener('controllerchange',()=>{
-        if(!didRefresh){didRefresh=true;location.reload();}
-      });
-      // iOS standalone can keep a page alive for days after a deploy.
-      // Compare with the published document; don't alter application data.
-      let checking=false;
-      async function checkPublishedVersion(){
-        if(checking||document.hidden||!navigator.onLine)return;
-        checking=true;
-        try{
-          const url=new URL('./index.html',location.href);
-          url.searchParams.set('dm_update_check',String(Date.now()));
-          const response=await fetch(url,{cache:'no-store'});
-          if(!response.ok)return;
-          const live=(await response.text()).match(/<meta name="dm-app-build" content="([^"]+)"/);
-          const current=document.querySelector('meta[name="dm-app-build"]')?.content;
-          if(live&&current&&live[1]!==current){
-            // Avoid reloading while the owner is editing a draft.
-            if(document.activeElement?.matches('input,textarea,[contenteditable="true"]'))return;
-            location.reload();
-          }
-        }catch(_){}
-        finally{checking=false;}
-      }
-      document.addEventListener('visibilitychange',()=>{
-        if(!document.hidden){reg.update().catch(()=>{});checkPublishedVersion();}
-      });
-      window.addEventListener('pageshow',checkPublishedVersion);
-      window.addEventListener('focus',checkPublishedVersion);
-    }).catch(()=>{});
-  },{once:true});
-}
-</script>
+<script src="./pwa-updates.js?v=1" defer></script>
   <link rel="stylesheet" href="./demo-roman-business.css?v=1">
 </head>
 <body>
@@ -453,7 +414,7 @@ if('serviceWorker' in navigator){
 <dialog id="modal" aria-labelledby="dialogTitle"><div class="dialog-inner"><div class="dialog-head"><div><span class="dialog-eyebrow">ЦИФРОВОЙ УПРАВЛЯЮЩИЙ</span><h2 id="dialogTitle">Информация</h2></div><button class="dialog-close" id="closeDialog" type="button" aria-label="Закрыть"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 18 18M18 6 6 18"/></svg></button></div><div id="dialogContent"></div></div></dialog>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
   <script src="./card-catalog.js?v=3" defer></script>
-<script src="./app.js?v=697" defer></script>
+<script src="./app.js?v=698" defer></script>
   <script src="./voice-hints.js?v=291" defer></script>
 <script src="./system-ui.js?v=283" defer></script>
   <script src="./task-journal.js?v=15" defer></script>
