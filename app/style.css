@@ -1139,14 +1139,15 @@ html.dm-plasma-panel-open .dock-launcher .dm-launcher-waves{
   }
 }
 
-/* Compact first input only: settle the small glass bar and its plasma
-   14px closer to the open iOS keyboard, keeping them together. */
+/* Compact composer: move the actual fixed positions down 19px, regardless
+   of iOS keyboard class timing. The full editor retains its own placement. */
 @media(max-width:700px){
-  html.dm-plasma-panel-open.dm-compose-keyboard-open:not(.dm-compose-editor) .dm-chat-panel:not(.dm-chat-editor){
-    transform:translateY(14px);
+  html.dm-plasma-panel-open:not(.dm-compose-editor) .dm-chat-panel:not(.dm-chat-editor){
+    bottom:calc(27px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
     animation:none;
   }
-  html.dm-plasma-panel-open.dm-compose-keyboard-open:not(.dm-compose-editor) .dock-hidden-controls{
-    transform:translate(-50%,14px);
+  html.dm-plasma-panel-open:not(.dm-compose-editor) .dock-hidden-controls{
+    bottom:calc(-11px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
+    transform:translateX(-50%);
   }
 }
