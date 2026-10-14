@@ -14,3 +14,5 @@
 .bottom-nav .dm-orb-edge {inset:8%;border:1px solid rgba(157,213,255,.44);box-shadow:inset 0 0 4px rgba(46,107,243,.35),0 0 4px rgba(91,132,255,.32)}
 .bottom-nav .dm-voice-orb::after {content:"";position:absolute;inset:5%;border-radius:50%;border:1.3px solid transparent;border-top-color:rgba(239,251,255,.96);border-right-color:rgba(170,221,255,.31);filter:drop-shadow(0 0 4px rgba(138,219,255,.85));transform:rotate(-21deg);pointer-events:none}
 .bottom-nav .dm-voice-orb-electric::after {border-top-color:#fff;border-right-color:rgba(248,251,255,.56);filter:drop-shadow(0 0 5px rgba(255,255,255,.82))}
+
+.bottom-nav .dm-voice-orb-electric{background:radial-gradient(circle,#000 0 51%,rgba(1,2,5,.99) 59%,transparent 71%)!important;filter:drop-shadow(0 0 5px var(--dm-plasma-glow-core,rgba(255,255,255,.83))) drop-shadow(0 0 12px var(--dm-plasma-glow-outer,rgba(239,247,255,.43)))!important}
