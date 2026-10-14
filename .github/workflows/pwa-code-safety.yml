@@ -13,6 +13,7 @@ on:
       - refactor/navigation-unity-20261014
       - refactor/unified-card-arrows-20261014
       - refactor/inner-card-chevrons-20261014
+      - test/visual-screen-audit-20261014
   pull_request:
     paths:
       - 'app/**'
@@ -63,6 +64,15 @@ jobs:
         run: node scripts/check-card-arrows.mjs
       - name: Check shared Back navigation
         run: node scripts/check-navigation-unity.mjs
+      - name: Capture real-screen visual audit
+        run: node scripts/visual-screen-audit.mjs
+      - name: Upload visual review screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: black-velvet-screen-audit
+          path: visual-audit/
+          if-no-files-found: ignore
       - name: Browser smoke tests
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/pwa-http.log 2>&1 &
