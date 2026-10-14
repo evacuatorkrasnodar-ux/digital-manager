@@ -190,7 +190,7 @@
   font-weight:var(--dm-ui-section-title-weight);
   letter-spacing:var(--dm-ui-section-title-spacing);
   line-height:1.18;
-  color:var(--dm-ui-ink);
+  color:#f7fbff;
 }
 .day-shell:is(.care-shell,.world-shell,.health-shell) .day-section-heading .day-eyebrow{margin:0 0 4px}
 .day-shell:is(.care-shell,.world-shell,.health-shell) :is(.day-add,.world-mini,.care-primary,.care-action,.care-secondary){
