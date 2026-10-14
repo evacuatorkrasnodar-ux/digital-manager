@@ -128,30 +128,50 @@
   const section=document.createElement('section');
   section.id='dmRomanAutopilot';section.className='mg-auto-active';
   const title=document.createElement('h2');title.textContent='Роман · учебный автопилот';
-  const note=document.createElement('p');note.textContent='Внутренние планы и черновики. Без внешней отправки и платежей.';
+  const note=document.createElement('p');
   const details=document.createElement('details');
-  const summary=document.createElement('summary');summary.textContent='Проекты и журнал решений';
+  const summary=document.createElement('summary');
+  summary.textContent='Подробности работы управляющего';
   const list=document.createElement('div');list.style.cssText='font-size:13px;line-height:1.5;margin-top:12px';
-  const display=()=>{
-   if(!details.open)return;
-   window.DMInitiative?.scan?.();
-   const tasks=autopilot(),projectState=projectReview();
-   const stages=['План составлен','В работе (учебный план)','Внутренняя проверка'];
-   list.replaceChildren();
-   const sectionTitle=t=>{const h=document.createElement('h3');h.textContent=t;h.style.cssText='font-size:14px;margin:12px 0 6px';list.append(h)};
-   const line=t=>{const p=document.createElement('p');p.textContent=t;p.style.cssText='font-size:13px;line-height:1.5;margin:6px 0';list.append(p)};
-   sectionTitle('Сделано и запланировано');
-   for(const task of tasks)line((task.done?'✓ ':'→ ')+task.text+' · '+task.detail);
-   sectionTitle('Учебные проекты');
-   for(const p of projectState.projects)line(p.name+' — '+stages[p.step]);
-   if(!projectState.projects.length)line('Завершённых продаж для учебных проектов пока нет.');
-   sectionTitle('История решений');
-   for(const entry of projectState.events.slice(0,5))line(entry);
+  const readObject=key=>{try{return JSON.parse(localStorage.getItem(key)||'null')||{}}catch(_){return {}}};
+  const line=(target,value)=>{
+   const p=document.createElement('p');p.textContent=value;p.style.cssText='font-size:13px;line-height:1.5;margin:7px 0';target.append(p);
   };
-  details.addEventListener('toggle',display);
+  const heading=value=>{
+   const h=document.createElement('h3');h.textContent=value;h.style.cssText='font-size:14px;margin:15px 0 6px';list.append(h);
+  };
+  function renderLog(){
+   if(!isActive())return;
+   window.DMInitiative?.scan?.();
+   const tasks=autopilot(),projects=projectReview();
+   const summaryData=window.DMInitiative?.getSummary?.()||{};
+   const leads=tasks.find(t=>t.id==='new');
+   note.textContent='Подготовлено ответов: '+Number(summaryData.prepared||0)+
+    ' · Учебных планов: '+projects.projects.length+
+    ' · '+(leads?.detail||'Обращения проверены')+'.';
+   if(!details.open)return;
+   list.replaceChildren();
+   const stages=['План составлен','В работе (учебный план)','Внутренняя проверка'];
+   heading('Что подготовлено');
+   for(const t of tasks)line(list,(t.done?'✓ ':'→ ')+t.text+' · '+t.detail);
+   heading('Проекты студии');
+   if(!projects.projects.length)line(list,'Подтверждённых учебных проектов пока нет.');
+   for(const p of projects.projects)line(list,p.name+' — '+stages[Math.min(2,p.step)]+' · '+p.client);
+   heading('История решений');
+   const local=readObject(AUTO),initiative=readObject('dm-initiative-v1');
+   const events=[
+    ...projects.events.map((text,i)=>({time:projects.projects[0]?.date||'',text,order:100-i})),
+    ...(Array.isArray(local.events)?local.events:[]).map(e=>({time:e.at||e.date||'',text:e.text||'',order:Number(e.atMs)||0})),
+    ...(Array.isArray(initiative.events)?initiative.events:[]).map(e=>({time:e.at||'',text:e.text||'',order:Number(e.atMs)||0}))
+   ].filter(e=>e.text).sort((a,b)=>b.order-a.order).slice(0,12);
+   if(!events.length)line(list,'Пока нет сохранённых действий.');
+   for(const event of events)line(list,(event.time?event.time+' · ':'')+event.text);
+   line(list,'Внешних отправок и платежей автопилот не выполнял.');
+  }
+  details.addEventListener('toggle',renderLog);
   details.append(summary,list);section.append(title,note,details);
   container.insertBefore(section,container.firstChild);
- }
+  renderLog(); }
  function boot(){
   const root=document.querySelector('#managementScreen #mgDetail');
   if(!root)return;
