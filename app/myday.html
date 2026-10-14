@@ -61,6 +61,24 @@
 .day-shell .dm-day-work-link>span:last-child{font-size:23px;color:#b8d0e1}
 .day-shell .dm-day-work-link:focus-visible{outline:2px solid #d0e8ff;outline-offset:2px}
 </style>
+<style id="dmMyDayDockAlignment">
+/* My Day: match the approved Home five-position dock; no full-box glow. */
+body > nav.bottom-nav[data-layout="five"]{
+  height:calc(65px + env(safe-area-inset-bottom,0px));
+  bottom:calc(-4px - min(10px,env(safe-area-inset-bottom,0px)));
+  padding:0 10px calc(5px + env(safe-area-inset-bottom,0px));
+}
+body > nav.bottom-nav[data-layout="five"] .assistant-socket .dm-dock-plasma{
+  filter:none!important;
+  -webkit-filter:none!important;
+}
+body > nav.bottom-nav[data-layout="five"] .assistant-socket .dm-dock-plasma .dm-orb-halo{
+  filter:blur(3px);opacity:.45;
+}
+body > nav.bottom-nav[data-layout="five"] .assistant-socket .dm-dock-plasma .dm-orb-spectral{
+  filter:none;
+}
+</style>
 </head>
 <body class="dm-calendar-photo">
   <div class="day-shell">
