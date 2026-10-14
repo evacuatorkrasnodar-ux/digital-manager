@@ -1560,6 +1560,7 @@
     plasmaInput.value='';dmSaveDraft();dmSyncComposer();plasmaInput.focus();
   });
   function closePlasmaPanel(){
+    dmStopVoiceInput();
     dmCancelComposerIdle();
     dmToggleNotebookMenu(false);
     plasmaPanel.hidden=true;
@@ -1600,16 +1601,80 @@
     plasmaHint.hidden=true;
     dmSyncComposer();
     if(!forceText&&voicePrefs.tapAction==='voice'){
-      dmExplainUnavailableVoice();
+      dmStartVoiceInput();
     }else{
       plasmaInput.focus();
     }
     dmScheduleComposerIdle();
   }
-  function dmExplainUnavailableVoice(){
-    plasmaHint.textContent='Пока диктовка не подключена: микрофон не включается. Напишите сообщение или откройте полную переписку.';
-    plasmaHint.hidden=false;
-    dmSetComposerGlyph('mic');
+  // Voice input is optional: Web Speech availability varies across browsers,
+  // especially installed iOS PWAs. Never pretend that a microphone is active.
+  let dmVoiceRecognition=null;
+  let dmVoiceListening=false;
+  function dmStopVoiceInput(){
+    if(dmVoiceRecognition){
+      try{dmVoiceRecognition.abort();}catch(_){}
+    }
+    dmVoiceRecognition=null;
+    dmVoiceListening=false;
+    document.documentElement.classList.remove('dm-voice-listening');
+  }
+  function dmStartVoiceInput(){
+    if(dmVoiceListening){dmStopVoiceInput();plasmaHint.textContent='Прослушивание остановлено.';plasmaHint.hidden=false;return;}
+    const Recognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+    if(!Recognition){
+      plasmaHint.textContent='На этом устройстве браузерная диктовка недоступна. Можно использовать микрофон на клавиатуре iPhone.';
+      plasmaHint.hidden=false;
+      dmSetComposerGlyph('mic');
+      return;
+    }
+    let recognition;
+    try{recognition=new Recognition();}catch(_){
+      plasmaHint.textContent='Не удалось запустить распознавание речи. Попробуйте микрофон клавиатуры.';
+      plasmaHint.hidden=false;return;
+    }
+    dmVoiceRecognition=recognition;
+    recognition.lang='ru-RU';
+    recognition.interimResults=false;
+    recognition.continuous=false;
+    recognition.maxAlternatives=1;
+    recognition.onstart=()=>{
+      if(dmVoiceRecognition!==recognition)return;
+      dmVoiceListening=true;
+      document.documentElement.classList.add('dm-voice-listening');
+      plasmaHint.textContent='Слушаю… Говорите. Нажмите на плазму, чтобы остановить.';
+      plasmaHint.hidden=false;
+    };
+    recognition.onresult=event=>{
+      if(dmVoiceRecognition!==recognition)return;
+      const spoken=Array.from(event.results||[]).map(result=>result[0]?.transcript||'').join(' ').trim();
+      if(!spoken)return;
+      const next=(plasmaInput.value.trim()?plasmaInput.value.trim()+' ':'')+spoken;
+      plasmaInput.value=next.slice(0,plasmaInput.maxLength||next.length);
+      plasmaInput.dispatchEvent(new Event('input',{bubbles:true}));
+      plasmaHint.textContent='Готово! Проверьте текст и отправьте, когда будете готовы.';
+      plasmaHint.hidden=false;
+    };
+    recognition.onerror=event=>{
+      if(dmVoiceRecognition!==recognition)return;
+      const reason=event.error;
+      plasmaHint.textContent=reason==='not-allowed'||reason==='service-not-allowed'
+        ?'Доступ к микрофону запрещён. Разрешите его в настройках браузера или используйте клавиатуру.'
+        :reason==='no-speech'?'Речь не услышана. Нажмите на плазму, чтобы попробовать ещё раз.'
+        :'Диктовка сейчас недоступна. Попробуйте микрофон клавиатуры.';
+      plasmaHint.hidden=false;
+    };
+    recognition.onend=()=>{
+      if(dmVoiceRecognition!==recognition)return;
+      dmVoiceRecognition=null;
+      dmVoiceListening=false;
+      document.documentElement.classList.remove('dm-voice-listening');
+    };
+    try{recognition.start();}catch(_){
+      dmVoiceRecognition=null;
+      plasmaHint.textContent='Не удалось включить микрофон. Попробуйте ещё раз или используйте клавиатуру.';
+      plasmaHint.hidden=false;
+    }
   }
   function dmSendComposerText(){
     const question=plasmaInput.value.trim();if(!question)return false;
@@ -1632,7 +1697,7 @@
       dmActionMessage('Текст готов ✦ Выберите действие ниже или нажмите «Спросить помощника».');
       return;
     }
-    dmExplainUnavailableVoice();
+    dmStartVoiceInput();
   }
   function togglePlasmaQuickMenu(){
     if(!plasmaPanel.hidden){dmComposerOrbClick();return;}
