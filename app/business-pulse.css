@@ -94,3 +94,13 @@
 @media(prefers-reduced-motion:reduce){
  #dmBusinessPulseOverlay *{scroll-behavior:auto!important;animation:none!important}
 }
+
+/* Decision first: optional explanation never blocks the one useful action. */
+.dm-pulse-decision{padding-bottom:16px}
+.dm-pulse-decision h3{margin:7px 0 8px}
+.dm-pulse-decision .dm-pulse-buttons{margin-top:14px}
+.dm-pulse-extra{margin-top:10px;border-top:1px solid rgba(162,198,226,.20)}
+.dm-pulse-extra>summary{cursor:pointer;list-style:none;padding:15px 4px;color:#cae6fa;font-size:13px;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;touch-action:manipulation}
+.dm-pulse-extra>summary::-webkit-details-marker{display:none}
+.dm-pulse-extra>summary::after{content:'⌄';font-size:19px;line-height:1}
+.dm-pulse-extra[open]>summary::after{transform:rotate(180deg)}
