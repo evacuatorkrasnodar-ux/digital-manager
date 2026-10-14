@@ -560,7 +560,7 @@
     const caption=byId('dmGlyphPreviewStatus');
     if(caption)caption.textContent='Демонстрация: '+({
       mail:'важное письмо',health:'напоминание о здоровье',
-      task:'важная задача',calendar:'событие из календаря',attention:'предупреждение'
+      task:'важная задача',calendar:'событие из календаря',attention:'предупреждение',mic:'значок голосового ввода',send:'значок отправки сообщения'
     })[kind]+'. Реального события сейчас нет.';
   }
   // Integration contract for the future event hub: the verified flag must
