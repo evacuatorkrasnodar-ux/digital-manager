@@ -1172,3 +1172,23 @@ html.dm-plasma-panel-open .dock-launcher .dm-launcher-waves{
 #managementScreen .mg-menu-row .mg-copy small{display:block;margin-top:3px;line-height:1.35;font-size:11px;opacity:.68}
 #managementScreen .mg-menu-chevron{font-size:27px;line-height:1;color:rgba(206,227,248,.74)}
 #managementScreen #mgHomeLayoutPanel{margin-top:8px}
+
+/* The assistant settings reuse original live controls in four compact sections. */
+#managementScreen .mg-voice-compact{display:grid;gap:10px;padding:2px 0 20px}
+#managementScreen .mg-voice-group{
+  min-width:0;overflow:hidden;border:1px solid rgba(172,203,234,.18);
+  border-radius:19px;background:linear-gradient(145deg,rgba(34,46,62,.52),rgba(5,9,17,.78));
+}
+#managementScreen .mg-voice-group>summary{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  cursor:pointer;padding:15px 16px;list-style:none;
+}
+#managementScreen .mg-voice-group>summary::-webkit-details-marker{display:none}
+#managementScreen .mg-voice-group-title{font-weight:650;font-size:14px;line-height:1.3}
+#managementScreen .mg-voice-group-title small{display:block;opacity:.64;font-size:11px;font-weight:400;margin-top:4px}
+#managementScreen .mg-voice-group-arrow{opacity:.7;font-size:21px;transition:transform .2s}
+#managementScreen .mg-voice-group[open] .mg-voice-group-arrow{transform:rotate(180deg)}
+#managementScreen .mg-voice-group>:not(summary){margin:0 10px 12px;max-width:calc(100% - 20px)}
+#managementScreen .mg-voice-group>.voice-pref,
+#managementScreen .mg-voice-group>.dm-chat-settings{width:calc(100% - 20px)}
+#managementScreen .mg-voice-compact-note{margin:6px 5px;color:rgba(197,213,231,.68);font-size:12px;line-height:1.5}
