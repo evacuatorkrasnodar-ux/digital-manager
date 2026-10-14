@@ -20,6 +20,8 @@
   --dm-ui-edge:rgba(136,172,200,.34);
   --dm-ui-edge-strong:rgba(195,222,239,.66);
   --dm-ui-surface:radial-gradient(ellipse 110% 72% at 8% 0%,rgba(103,163,204,.09),transparent 66%),linear-gradient(153deg,#0c1824 0%,#080f17 48%,#02080f 100%);
+  /* Slightly translucent variant for cards over the personal graphite backdrop. */
+  --dm-ui-personal-glass:radial-gradient(ellipse 110% 72% at 8% 0%,rgba(103,163,204,.09),transparent 66%),linear-gradient(153deg,rgba(12,24,36,.94) 0%,rgba(8,15,23,.95) 48%,rgba(2,8,15,.96) 100%);
   --dm-ui-inset:radial-gradient(ellipse 100% 64% at 7% 0%,rgba(103,163,204,.055),transparent 70%),linear-gradient(153deg,#0b151f 0%,#07111a 54%,#03080e 100%);
   --dm-ui-shadow:inset 0 1px rgba(255,255,255,.11),inset 0 -1px rgba(0,0,0,.68),0 9px 23px rgba(0,1,5,.42);
   --dm-ui-small-glass:radial-gradient(ellipse at 27% 5%,rgba(226,246,255,.19),transparent 72%),linear-gradient(148deg,#2b516f,#0b2033 77%);
