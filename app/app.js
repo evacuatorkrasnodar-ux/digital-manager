@@ -939,7 +939,7 @@
         '</div>';
     }else if(page==='manager'){
       const parts=[
-        ['voice','ic-settings','Основные','Плазма · Док · Имя · Общение'],
+        ['voice','ic-settings','Имя, голос и плазма','Общение · Внешний вид · Док'],
         ['autopilot','ic-shield','Автопилот','Навыки · Правила · Самостоятельность']
       ];
       content='<div class="mg-unified-hub">'+
@@ -1034,6 +1034,37 @@
       dmMountPlasmaExamples();
       dmSyncAppearanceDockMode();
       byId('plasmaTapMode').value=voicePrefs.tapAction;
+
+      // Compact settings: same working controls, grouped by purpose. Grouping
+      // only moves existing DOM nodes; input IDs, save handlers and previews stay.
+      const detail=byId('mgDetail');
+      const name=detail.querySelector('.mg-unified-panel:has(#mgManagerName)');
+      const communication=detail.querySelector('.mg-communication-mode');
+      const groups=[
+        {title:'Имя и общение',hint:'Как обращаться к помощнику',nodes:[name,communication],open:true},
+        {title:'Голос и действия',hint:'Обычное нажатие · Голосовой ввод · Символы',nodes:[settings],open:false},
+        {title:'Док и расположение',hint:'Панель внизу · Четыре раздела · Предпросмотр',nodes:[dockCard],open:false},
+        {title:'Эффекты и производительность',hint:'Красивый · Экономичный · Простой',nodes:[performance],open:false}
+      ];
+      const overview=document.createElement('div');
+      overview.className='mg-voice-compact';
+      for(const group of groups){
+        const box=document.createElement('details');
+        box.className='mg-voice-group';
+        box.open=group.open;
+        const summary=document.createElement('summary');
+        summary.innerHTML='<span class="mg-voice-group-title">'+group.title+
+          '<small>'+group.hint+'</small></span><span aria-hidden="true" class="mg-voice-group-arrow">⌄</span>';
+        box.append(summary);
+        for(const node of group.nodes)if(node)box.append(node);
+        overview.append(box);
+      }
+      // Keep actual voice status visible; it must not imply always-on listening.
+      const notice=document.createElement('p');
+      notice.className='mg-voice-compact-note';
+      notice.textContent='Активация по ключевому слову и голосовые ответы пока в разработке.';
+      overview.append(notice);
+      detail.replaceChildren(overview);
     }
 
     if(page==='autopilot')mgAutoLabel();
