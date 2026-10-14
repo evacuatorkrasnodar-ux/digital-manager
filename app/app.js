@@ -1063,10 +1063,21 @@
       const detail=byId('mgDetail');
       const name=detail.querySelector('.mg-unified-panel:has(#mgManagerName)');
       const communication=detail.querySelector('.mg-communication-mode');
+      // Keep everyday controls ahead of visual demos. Nothing is recreated:
+      // the same live nodes, event handlers and saved preferences are retained.
+      const glyphDemo=settings.querySelector('.dm-glyph-settings');
+      if(glyphDemo){
+        const demoDisclosure=document.createElement('details');
+        demoDisclosure.className='mg-voice-demo-disclosure';
+        const demoSummary=document.createElement('summary');
+        demoSummary.textContent='Посмотреть знаки внутри плазмы · ДЕМО';
+        demoDisclosure.append(demoSummary,glyphDemo);
+        settings.append(demoDisclosure);
+      }
       const groups=[
         {title:'Имя и общение',hint:'Как обращаться к помощнику',nodes:[name,communication],open:true},
-        {title:'Голос и действия',hint:'Обычное нажатие · Голосовой ввод · Символы',nodes:[settings],open:false},
         {title:'Док и расположение',hint:'Панель внизу · Четыре раздела · Предпросмотр',nodes:[dockCard],open:false},
+        {title:'Голос и действия',hint:'Голосовой ввод · Состояние функций · Демонстрация знаков',nodes:[settings],open:false},
         {title:'Эффекты и производительность',hint:'Красивый · Экономичный · Простой',nodes:[performance],open:false}
       ];
       const overview=document.createElement('div');

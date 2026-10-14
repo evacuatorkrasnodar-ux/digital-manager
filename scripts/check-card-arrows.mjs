@@ -48,6 +48,19 @@ try{
    throw Error('Assistant communication settings title mismatch');
   if(!await page.locator('#voiceDock').count()||!await page.locator('.dm-dock-customize').count())
    throw Error('Dock settings were lost while simplifying assistant navigation');
+  const groupTitles=await page.locator('.mg-voice-group > summary .mg-voice-group-title').allTextContents();
+  const expected=['Имя и общение','Док и расположение','Голос и действия','Эффекты и производительность'];
+  if(groupTitles.length!==4||expected.some((label,i)=>!groupTitles[i]?.trim().startsWith(label)))
+   throw Error('Assistant settings group priority changed: '+JSON.stringify(groupTitles));
+  if(!await page.locator('.mg-voice-demo-disclosure').count())
+   throw Error('Optional plasma symbols demo disclosure missing');
+  const demo=page.locator('.mg-voice-demo-disclosure');
+  if(await demo.evaluate(el=>el.open))throw Error('Optional plasma symbol demo should begin collapsed');
+  await page.locator('.mg-voice-group').nth(2).locator('summary').first().click();
+  await demo.locator('summary').click();
+  if(!await demo.locator('[data-dm-glyph-preview]').count())
+   throw Error('Plasma symbol previews lost');
+
   console.log('PASS Assistant navigation at '+width+'px: label, voice/dock settings intact');
   console.log('PASS Management at '+width+'px: 5 matching chrome circles and working menu click');
   const day=await page.goto(base+'myday.html',{waitUntil:'networkidle',timeout:35000});
