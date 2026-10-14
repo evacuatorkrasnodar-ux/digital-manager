@@ -117,3 +117,19 @@
 .dm-init-history{padding:10px 12px;border-color:rgba(150,183,207,.18);background:rgba(145,175,200,.025)}
 .dm-init-history summary{font-size:11px}
 @media(max-width:360px){.dm-init-frame{padding:12px}.dm-init-summary{padding:12px}.dm-init-work-row{padding:9px 8px}.dm-init-pause + .dm-init-pause{margin-left:8px}}
+
+/* Automation: concise dashboard with secondary details tucked away. */
+.dm-init-summary h3{margin:7px 0 13px}
+.dm-init-summary-actions{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:14px;margin-top:11px}
+.dm-init-summary-actions .dm-init-pause,.dm-init-summary-actions .dm-init-pause+.dm-init-pause{margin:0;padding:3px 0}
+.dm-init-work-row{min-height:0;padding:9px 12px}
+.dm-init-work-row>div{gap:2px}
+.dm-init-work-row strong{font-size:12px}
+.dm-init-work-row p{font-size:11px}
+.dm-init-work-row small{font-size:10px}
+.dm-init-insight{padding:11px 13px}
+.dm-init-insight p{margin:5px 0 0}
+.dm-init-extra[open]{padding-bottom:12px}
+.dm-init-extra .dm-init-business-profile{margin-top:12px}
+.dm-init-extra .dm-init-fine{margin-top:12px}
+.dm-init-empty{font-size:12px;color:#a8bccd}
