@@ -61,7 +61,7 @@
     hideBrandCard();hideProfileCard();tab=next;
     window.DMSalesScreen?.hide?.();
     dmSyncQuickDestinations();
-    if(next==='management')mgSettingsPage(managementPage);
+    if(next==='management')mgSettingsPage(managementPage,false);
     // Commit visibility together; the dock stays mounted throughout.
     ['home','assistant','management'].forEach(x=>{
       byId(x+'Screen').hidden=x!==next;
@@ -74,11 +74,7 @@
     });
     if(traceScreen)traceScreen.hidden=true;
     window.scrollTo(0,0);
-    // A short opacity-only transition avoids moving fixed plasma and dock.
-    if(wasVisible&&incoming?.animate&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-      incoming.getAnimations().forEach(animation=>animation.cancel());
-      incoming.animate([{opacity:.72},{opacity:1}],{duration:170,easing:'ease-out'});
-    }
+    // No per-screen opacity animation: it flashed the entire page on navigation.
   }
   // Internal navigation for feature screens; independent of customizable dock slots.
   window.addEventListener('dm:navigate-tab',event=>{
@@ -950,7 +946,7 @@
         '</section>'+
         '<p class="mg-unified-note mg-unified-footnote">Выбор навыков сохраняется. Реальное наблюдение за рынком и документами начнётся только после подключения источников и соответствующих возможностей.</p>';
   }
-  function mgSettingsPage(page){
+  function mgSettingsPage(page, resetScroll=true){
     // Preserve old links to relocated controls without rendering duplicates.
     if(page==='communication')page='voice';
     if(page==='capabilities')page='autopilot';
@@ -1096,7 +1092,7 @@
 
     if(page==='autopilot')mgAutoLabel();
     if(page==='voice')byId('mgDetail').querySelector('#voiceDock').checked=voicePrefs.dock;
-    window.scrollTo(0,0);
+    if(resetScroll)window.scrollTo(0,0);
   }
   function mgAutoLabel(){
     const el=byId('mgAutonomyLabel');
