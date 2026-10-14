@@ -7,6 +7,7 @@
   --dm-ui-muted:#b8ccdd;
   /* Identical section-title rhythm in My Day, My World and Care. */
   --dm-ui-section-title-size:clamp(18px,4.8vw,19px);
+  --dm-ui-section-title-compact-size:clamp(15px,4vw,17px);
   --dm-ui-section-title-weight:460;
   --dm-ui-section-title-spacing:-.03em;
   /* Exact graphite family of the approved Home metric cards, not a blue wash.
