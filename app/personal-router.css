@@ -335,3 +335,18 @@ body > .day-shell.day-shell > nav.personal-health-tabs > button.active + button:
     padding:5px 9px!important;
   }
 }
+
+/* Medical journals: only the outer My Day content region scrolls.
+   No clipped inner iframe, and the fixed assistant dock is never moved. */
+body > .day-shell.day-shell.calendar-fixed:has(#healthEmbedded).personal-medical-open > main{
+  display:block!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  overscroll-behavior-y:contain!important;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))!important;
+}
+body > .day-shell.day-shell.personal-medical-open main > .personal-embedded-view > iframe{
+  min-height:220px;
+  overflow:visible!important;
+}
