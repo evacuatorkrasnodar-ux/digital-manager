@@ -1782,44 +1782,47 @@
   // Hold the center dock plasma for voice. A normal tap keeps its existing
   // three actions / text behavior. Start recognition on pointerup so iOS can
   // treat it as a direct user gesture; never require holding while speaking.
-  const dmCenterOrb=byId('tabAssistant');
-  let dmHoldStart=0,dmHoldX=0,dmHoldY=0,dmHoldCancelled=false;
-  let dmSuppressCenterClick=false;
-  dmCenterOrb.addEventListener('pointerdown',event=>{
-    if(event.button!==0)return;
-    dmHoldStart=performance.now();
-    dmHoldX=event.clientX;dmHoldY=event.clientY;
-    dmHoldCancelled=false;
-  });
-  dmCenterOrb.addEventListener('pointermove',event=>{
-    if(Math.hypot(event.clientX-dmHoldX,event.clientY-dmHoldY)>14)dmHoldCancelled=true;
-  });
-  dmCenterOrb.addEventListener('pointercancel',()=>{dmHoldStart=0;dmHoldCancelled=true;});
-  dmCenterOrb.addEventListener('pointerup',event=>{
-    if(!dmHoldStart)return;
-    const held=performance.now()-dmHoldStart;
-    dmHoldStart=0;
-    if(dmHoldCancelled||held<550)return;
-    dmSuppressCenterClick=true;
-    setTimeout(()=>{dmSuppressCenterClick=false;},450);
-    event.preventDefault();
-    if(plasmaPanel.hidden){
-      closeDockQuickActions();
-      openPlasmaPanel(false);
-      if(voicePrefs.tapAction!=='voice')dmStartVoiceInput();
-    }else{
-      dmStartVoiceInput();
-    }
-  });
-  dmCenterOrb.addEventListener('click',event=>{
-    if(!dmSuppressCenterClick)return;
-    dmSuppressCenterClick=false;
-    event.preventDefault();
-    event.stopImmediatePropagation();
-  },true);
-  dmCenterOrb.addEventListener('contextmenu',event=>{
-    if(dmHoldStart||dmSuppressCenterClick)event.preventDefault();
-  });
+  // Shared iPhone-safe press-and-hold for both dock modes.
+  // Only release starts speech (a direct user gesture). A short tap is unchanged.
+  let dmSuppressOrbClick=false;
+  for(const orb of [byId('tabAssistant'),byId('dockLauncher')]){
+    if(!orb)continue;
+    let press=null;
+    orb.addEventListener('pointerdown',event=>{
+      if(event.button!==0)return;
+      press={time:performance.now(),x:event.clientX,y:event.clientY,moved:false};
+    });
+    orb.addEventListener('pointermove',event=>{
+      if(press&&Math.hypot(event.clientX-press.x,event.clientY-press.y)>14)press.moved=true;
+    });
+    orb.addEventListener('pointercancel',()=>{press=null;});
+    orb.addEventListener('pointerleave',event=>{
+      if(press&&event.pointerType==='mouse')press=null;
+    });
+    orb.addEventListener('pointerup',event=>{
+      if(!press)return;
+      const held=performance.now()-press.time;
+      const moved=press.moved;
+      press=null;
+      if(moved||held<550)return;
+      dmSuppressOrbClick=true;
+      setTimeout(()=>{dmSuppressOrbClick=false;},600);
+      event.preventDefault();
+      if(plasmaPanel.hidden){
+        closeDockQuickActions();
+        openPlasmaPanel(false);
+        if(voicePrefs.tapAction!=='voice')dmStartVoiceInput();
+      }else dmStartVoiceInput();
+    });
+    orb.addEventListener('click',event=>{
+      if(!dmSuppressOrbClick)return;
+      dmSuppressOrbClick=false;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    },true);
+    orb.addEventListener('contextmenu',event=>event.preventDefault());
+    orb.addEventListener('dragstart',event=>event.preventDefault());
+  }
   byId('dockLauncher').addEventListener('click',dmComposerOrbClick);
   byId('plasmaClose').addEventListener('click',closePlasmaPanel);
   byId('plasmaChatForm').addEventListener('submit',event=>{
