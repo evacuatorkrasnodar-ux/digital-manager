@@ -1139,27 +1139,17 @@ html.dm-plasma-panel-open .dock-launcher .dm-launcher-waves{
   }
 }
 
-/* Compact composer: move the actual fixed positions down 19px, regardless
-   of iOS keyboard class timing. The full editor retains its own placement. */
+/* Compact chat: one stable offset for the small field and orb on iPhone.
+   The previous extra 18px focus translation made the pair too low. */
 @media(max-width:700px){
   html.dm-plasma-panel-open:not(.dm-compose-editor) .dm-chat-panel:not(.dm-chat-editor){
-    bottom:calc(2px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
+    bottom:calc(20px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
+    translate:none!important;
     animation:none;
   }
   html.dm-plasma-panel-open:not(.dm-compose-editor) .dock-hidden-controls{
-    bottom:calc(-36px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
+    bottom:calc(-18px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
+    translate:none!important;
     transform:translateX(-50%);
-  }
-}
-
-/* iPhone standalone keyboard: translate the compact pair together.
-   `translate` is independent of the WebKit fixed-bottom keyboard calculations;
-   focus is used because visualViewport keyboard detection can lag on iOS. */
-@supports selector(:has(*)){
-  @media(max-width:700px){
-    html.dm-plasma-panel-open:not(.dm-compose-editor):has(#plasmaChatInput:focus) .dm-chat-panel:not(.dm-chat-editor),
-    html.dm-plasma-panel-open:not(.dm-compose-editor):has(#plasmaChatInput:focus) .dock-hidden-controls{
-      translate:0 18px;
-    }
   }
 }
