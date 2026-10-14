@@ -10,6 +10,14 @@ async function open(path){
  await page.waitForTimeout(900);
 }
 try{
+ await page.addInitScript(()=>{
+   window.__dmVoiceStarts=0;
+   window.SpeechRecognition=class {
+     start(){window.__dmVoiceStarts++;this.onstart?.();}
+     stop(){this.onend?.();}
+     abort(){this.onend?.();}
+   };
+ });
  await open('index.html');
  if(!await page.locator('#homeScreen').count())throw new Error('Main dashboard missing');
  const composer=page.locator('#plasmaChatForm');
@@ -18,6 +26,16 @@ try{
  if(!await page.locator('#plasmaOpenChat').count())throw new Error('Assistant text-open action missing');
  const mainPlasma=await page.locator('#tabAssistant, .dm-plasma, .dm-shared-plasma').count();
  if(!mainPlasma)throw new Error('Assistant plasma/launcher missing from dashboard');
+ const orb=page.locator('#dockLauncher');
+ if(!await orb.isVisible())throw new Error('Center plasma launcher not visible');
+ const box=await orb.boundingBox();
+ if(!box)throw new Error('Center plasma has no hitbox');
+ await page.mouse.move(box.x+box.width/2,box.y+box.height/2);
+ await page.mouse.down();
+ await page.waitForTimeout(760);
+ const voiceStarts=await page.evaluate(()=>window.__dmVoiceStarts);
+ await page.mouse.up();
+ if(voiceStarts!==1)throw new Error('Mouse long press did not activate voice exactly once: '+voiceStarts);
  await open('world.html');
  if(!await page.locator('#tabAssistant, .dm-world-socket, .dm-shared-plasma').count())throw new Error('My World assistant launcher missing');
  if(!await page.locator('[data-world="memory"]').count())throw new Error('My World memory tab missing');
