@@ -71,6 +71,11 @@
     });
     window.scrollTo({top:0,behavior:'instant'});
   }
+  // Internal navigation for feature screens; independent of customizable dock slots.
+  window.addEventListener('dm:navigate-tab',event=>{
+    const target=event.detail?.tab;
+    if(target==='home'||target==='management'||target==='assistant')setTab(target);
+  });
   function applyUser(){byId('greetingName').textContent=state.name;byId('profilePreviewCompany').textContent=state.company||'Моя компания';byId('profilePreviewOwner').textContent=state.name||'Не указано';byId('profilePreviewIndustry').textContent=state.industry||'Направление не указано';}
   function renderChart(){
     // Independent, resolution-independent SVG lines generated from numeric data.
