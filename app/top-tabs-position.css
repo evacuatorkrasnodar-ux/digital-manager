@@ -6,8 +6,8 @@
   body > .day-shell.day-shell{
     box-sizing:border-box!important;
     width:100%!important;
-    max-width:none!important;
-    margin-inline:0!important;
+    max-width:430px!important;
+    margin-inline:auto!important;
     padding-left:max(8px,env(safe-area-inset-left,0px))!important;
     padding-right:max(8px,env(safe-area-inset-right,0px))!important;
     padding-top:calc(7px + env(safe-area-inset-top,0px))!important;
