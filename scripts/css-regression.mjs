@@ -21,6 +21,9 @@ const dashboardSelectors=[
 ];
 const personalSelectors=[
  'body > .day-shell.day-shell',
+ 'body.dm-calendar-photo > .day-shell.day-shell',
+ 'body.dm-calendar-photo::before',
+ '.calendar-legend',
  '.day-header',
  '.day-heading h1',
  '.day-back',
@@ -57,9 +60,11 @@ async function snapshot(port,width,height,path,selectors){
  const values=await page.evaluate(({selectors,props})=>{
   const result={};
   for(const selector of selectors){
-   const els=[...document.querySelectorAll(selector)].slice(0,3);
+   const pseudo=selector.endsWith('::before')?'::before':null;
+   const baseSelector=pseudo?selector.slice(0,-pseudo.length):selector;
+   const els=[...document.querySelectorAll(baseSelector)].slice(0,3);
    result[selector]=els.map(el=>{
-    const style=getComputedStyle(el),o={};
+    const style=getComputedStyle(el,pseudo),o={};
     for(const prop of props)o[prop]=String(style[prop]??'').replaceAll(location.origin,'<origin>');
     return o;
    });
