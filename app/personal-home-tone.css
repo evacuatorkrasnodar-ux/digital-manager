@@ -66,7 +66,7 @@ body.dm-calendar-photo::before{
   top:0;right:0;bottom:0;left:0;
   z-index:0;pointer-events:none;
   /* Photograph without a tint or a second blurred overlay. */
-  background-image:url('./assets/myday-villa-sunset.jpg'),url('./assets/myday-long-v263.avif');
+  background-image:url('./assets/myday-villa-sunset.jpg');
   background-position:center center;
   background-size:cover;
   background-repeat:no-repeat;
@@ -79,3 +79,8 @@ body.dm-calendar-photo > .day-shell.day-shell{
 body.dm-calendar-photo > .day-shell.day-shell::before{
   display:none!important;content:none!important;
 }
+/* Remove legacy shell fades; the calendar uses the body photograph alone. */
+body.dm-calendar-photo > .day-shell.day-shell::after{
+  display:none!important;content:none!important;
+}
+
