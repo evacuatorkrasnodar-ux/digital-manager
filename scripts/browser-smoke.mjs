@@ -31,11 +31,13 @@ try{
  const box=await orb.boundingBox();
  if(!box)throw new Error('Center plasma has no hitbox');
  await page.mouse.move(box.x+box.width/2,box.y+box.height/2);
+ const hit=await page.evaluate(({x,y})=>{const el=document.elementFromPoint(x,y);return {tag:el?.tagName,id:el?.id,cls:el?.className?.baseVal||el?.className,withinOrb:!!el?.closest('#tabAssistant'),rect:document.querySelector('#tabAssistant')?.getBoundingClientRect().toJSON()};},{x:box.x+box.width/2,y:box.y+box.height/2});
+ console.log('Plasma hit-test:',JSON.stringify(hit));
  await page.mouse.down();
  await page.waitForTimeout(760);
  const voiceStarts=await page.evaluate(()=>window.__dmVoiceStarts);
  await page.mouse.up();
- if(voiceStarts!==1)throw new Error('Mouse long press did not activate voice exactly once: '+voiceStarts);
+ if(voiceStarts!==1)throw new Error('Mouse long press did not activate voice exactly once: '+voiceStarts+'; hit='+JSON.stringify(hit));
  await open('world.html');
  if(!await page.locator('#tabAssistant, .dm-world-socket, .dm-shared-plasma').count())throw new Error('My World assistant launcher missing');
  if(!await page.locator('[data-world="memory"]').count())throw new Error('My World memory tab missing');
