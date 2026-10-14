@@ -964,10 +964,10 @@
         ['autopilot','ic-shield','Автопилот','Навыки · Правила · Самостоятельность']
       ];
       content='<div class="mg-unified-hub">'+
-        '<button type="button" id="mgOpenBusinessJourney" class="mg-unified-item"><span class="mg-unified-icon"><svg class="ico" aria-hidden="true"><use href="#ic-spark"/></svg></span><span class="mg-copy"><strong>Мой путь с управляющим</strong><small>Создать бизнес с нуля или развивать действующий</small></span></button>'+
+        '<button type="button" id="mgOpenBusinessJourney" class="mg-unified-item"><span class="mg-unified-icon mg-manager-art mg-manager-art-journey"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19c2.2-4.8 5.4-3 8.1-7.2 2.2-3.4 4.3-3.8 7.8-4.5"/><path d="m16.4 7.3 3.5 0 .2 3.5"/><circle cx="5" cy="18.8" r="1.4"/><path d="m7 5 .8 2.1L10 8l-2.2.8L7 11l-.8-2.2L4 8l2.2-.9z"/></svg></span><span class="mg-copy"><strong>Мой путь с управляющим</strong><small>Создать бизнес с нуля или развивать действующий</small></span></button>'+
         parts.map(([key,icon,label,description])=>
         '<button type="button" class="mg-unified-item mg-unified-'+key+'" data-mg-open="'+key+'">'+
-          '<span class="mg-unified-icon"><svg class="ico" aria-hidden="true"><use href="#'+icon+'"/></svg></span>'+
+          '<span class="mg-unified-icon mg-manager-art mg-manager-art-'+key+'"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(key==='voice'?'<circle cx="12" cy="12" r="7.4"/><path d="M12 4.6c-3.4 2.7-4.7 6-4.2 9.4M5.3 15.1c2.8-2.5 6.2-3 11.7-.8"/><path d="M12 9v6M9.5 12h5"/>':'<path d="M12 2.5 20 6v5.5c0 5-3.1 8.1-8 10-4.9-1.9-8-5-8-10V6z"/><path d="m8.2 12.1 2.5 2.5 5-5"/>')+'</svg></span>'+
           '<span class="mg-copy"><strong>'+label+'</strong><small>'+description+'</small></span>'+
           ''+
         '</button>').join('')+'</div>';
