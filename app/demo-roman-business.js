@@ -5,7 +5,7 @@
  const FLAG='dm-roman-demo-active-v1',BACKUP='dm-roman-demo-backup-v1';
  const PROFILE='digital-manager-black-velvet-v2';
  const SALES='dm-sales-records-v1',PROMO='dm-promotion-expenses-v1';
- const keys=[PROFILE,SALES,PROMO,'dm-initiative-v1','dm-personal-tasks-v1','dm-task-journal-v1'];
+ const keys=[PROFILE,SALES,PROMO,'dm-initiative-v1','dm-personal-tasks-v1','dm-task-journal-v1','dm-roman-projects-v1'];
  const isActive=()=>localStorage.getItem(FLAG)==='1';
  const day=(offset,hour=11)=>{const d=new Date();d.setDate(d.getDate()+offset);d.setHours(hour,20,0,0);return d.getTime()};
  const clients=[
@@ -40,6 +40,7 @@
    localStorage.setItem('dm-initiative-v1',JSON.stringify({enabled:true,items:[],events:[]}));
    localStorage.setItem('dm-personal-tasks-v1','[]');
    localStorage.setItem('dm-task-journal-v1','[]');
+   localStorage.removeItem(PROJECT_KEY);
    localStorage.setItem(FLAG,'1');
    location.reload();
   }catch(error){
@@ -54,6 +55,7 @@
   if(!backup){alert('Исходная копия не найдена. Данные не изменены.');return}
   try{
    for(const key of keys){if(backup[key]===null||backup[key]===undefined)localStorage.removeItem(key);else localStorage.setItem(key,backup[key])}
+   if(!Object.prototype.hasOwnProperty.call(backup,PROJECT_KEY))localStorage.removeItem(PROJECT_KEY);
    localStorage.removeItem(FLAG);localStorage.removeItem(BACKUP);location.reload();
   }catch(_){alert('Не удалось восстановить данные. Резервная копия сохранена.')}
  }
@@ -126,6 +128,14 @@
     for(const t of tasks){
      const p=document.createElement('p');p.textContent=(t.done?'✓ Выполнено: ':'→ Приоритет: ')+t.text+' — '+t.detail;body.append(p);
     }
+    const projects=projectReview(),steps=['План составлен','В работе (учебный план)','Внутренняя проверка'];
+    const heading=document.createElement('h4');heading.textContent='Проекты студии · внутренние этапы';body.append(heading);
+    for(const item of projects.projects){
+     const p=document.createElement('p');p.textContent=item.name+' · '+item.client+' — '+steps[item.step];body.append(p);
+    }
+    const journal=document.createElement('h4');journal.textContent='Журнал решений';body.append(journal);
+    for(const event of projects.events.slice(0,5)){const p=document.createElement('p');p.textContent=event;body.append(p)}
+
    };
    details.addEventListener('toggle',()=>{if(details.open)refresh()});
    details.append(summary,body);auto.append(autoTitle,autoNote,details);section.append(auto);
