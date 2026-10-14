@@ -28,26 +28,42 @@ try{
     inside:!!row&&rect.left>=row.left&&rect.right<=row.right+1,
     bareSymbol:el.textContent?.trim()||'',label:button?.getAttribute('data-mg-open')};
   }));
-  if(circles.length!==5)throw Error('Expected 5 Management circle chevrons, found '+circles.length);
+  if(circles.length!==3)throw Error('Expected 3 Management circle chevrons, found '+circles.length);
+  if(circles.map(c=>c.label).join(',')!=='theme,application,manager')throw Error('Wrong Management pillars');
   for(const c of circles){
    if(!c.hasSvg||c.bareSymbol)throw Error('Legacy text chevron remains: '+JSON.stringify(c));
    if(c.size.some(x=>Math.abs(x-22)>EPS)||c.icon.some(x=>Math.abs(x-13)>EPS))
     throw Error('Management icon geometry differs: '+JSON.stringify(c));
    if(c.round!=='50%'||!c.inside)throw Error('Chevron not inside its card: '+JSON.stringify(c));
   }
+  await page.locator('#mgMenu [data-mg-open="application"]').click();
+  if((await page.locator('#mgTitle').textContent())?.trim()!=='Приложение')
+   throw Error('Application pillar not opened');
+  for(const key of ['connections','layout','security','learning']){
+   if(!await page.locator('#mgDetail [data-mg-open="'+key+'"]').count())throw Error('Missing original Application feature: '+key);
+  }
+  if(!await page.locator('#mgOpenBusinessJourney').count())throw Error('Onboarding entry missing');
+  await page.locator('#mgDetail [data-mg-open="connections"]').click();
+  if((await page.locator('#mgTitle').textContent())?.trim()!=='Подключения')throw Error('Connections route broken');
+  await page.locator('#mgBack').click();
+  if((await page.locator('#mgTitle').textContent())?.trim()!=='Приложение')throw Error('Connections Back navigation broken');
+  await page.locator('#mgBack').click();
+
   await page.locator('#mgMenu [data-mg-open="manager"]').click();
-  if(!await page.locator('#mgDetail').isVisible())throw Error('Management card click no longer opens detail');
-  if((await page.locator('#mgTitle').textContent())?.trim()!=='Мой помощник')
-   throw Error('Management assistant heading differs from menu label');
+  if((await page.locator('#mgTitle').textContent())?.trim()!=='Управляющий')throw Error('Manager pillar title mismatch');
+  for(const key of ['autopilot','workshop']){
+   if(!await page.locator('#mgDetail [data-mg-open="'+key+'"]').count())throw Error('Manager feature missing: '+key);
+  }
+  await page.locator('#mgBack').click();
+  await page.locator('#mgMenu [data-mg-open="theme"]').click();
+  if((await page.locator('#mgTitle').textContent())?.trim()!=='Тема')throw Error('Theme pillar title mismatch');
   const assistantSettings=page.locator('#mgDetail [data-mg-open="voice"]');
-  if(!await assistantSettings.count())throw Error('Assistant communication settings link missing');
-  if((await assistantSettings.locator('strong').textContent())?.trim()!=='Внешний вид и общение')
-   throw Error('Assistant subcategory name not clear');
+  if(!await assistantSettings.count())throw Error('Theme appearance link missing');
   await assistantSettings.click();
   if((await page.locator('#mgTitle').textContent())?.trim()!=='Внешний вид и общение')
-   throw Error('Assistant communication settings title mismatch');
+   throw Error('Theme appearance settings title mismatch');
   if(!await page.locator('#voiceDock').count()||!await page.locator('.dm-dock-customize').count())
-   throw Error('Dock settings were lost while simplifying assistant navigation');
+   throw Error('Dock settings were lost while simplifying management');
   const groupTitles=await page.locator('.mg-voice-group > summary .mg-voice-group-title').allTextContents();
   const expected=['Имя и общение','Док и расположение','Голос и действия','Эффекты и производительность'];
   if(groupTitles.length!==4||expected.some((label,i)=>!groupTitles[i]?.trim().startsWith(label)))
