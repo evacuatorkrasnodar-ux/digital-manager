@@ -2090,5 +2090,5 @@
     window.history.replaceState(null,'',window.location.pathname);
     datesModal();
   }
-  if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js',{scope:'./',updateViaCache:'none'}).catch(err=>console.warn('PWA offline unavailable:',err)));
+  // The shared PWA update controller is initialized once by index.html.
 })();
