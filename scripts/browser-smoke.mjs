@@ -22,6 +22,36 @@ try{
  await page.evaluate(()=>localStorage.setItem('dm-smoke-sentinel','keep-user-data'));
  await page.reload({waitUntil:'domcontentloaded'});
  if(await page.evaluate(()=>localStorage.getItem('dm-smoke-sentinel'))!=='keep-user-data')throw new Error('User storage lost after reload');
+ // Verify that IndexedDB survives a real page reload, without touching app stores.
+ await page.evaluate(async()=>{
+   await new Promise((resolve,reject)=>{
+     const request=indexedDB.open('dm-ci-isolated-sentinel',1);
+     request.onupgradeneeded=()=>request.result.createObjectStore('records');
+     request.onerror=()=>reject(request.error);
+     request.onsuccess=()=>{
+       const db=request.result;
+       const tx=db.transaction('records','readwrite');
+       tx.objectStore('records').put('preserved','key');
+       tx.oncomplete=()=>{db.close();resolve();};
+       tx.onerror=()=>reject(tx.error);
+     };
+   });
+ });
+ await page.reload({waitUntil:'domcontentloaded'});
+ const indexedDbValue=await page.evaluate(async()=>new Promise((resolve,reject)=>{
+   const request=indexedDB.open('dm-ci-isolated-sentinel');
+   request.onerror=()=>reject(request.error);
+   request.onsuccess=()=>{
+     const db=request.result;
+     const tx=db.transaction('records','readonly');
+     const get=tx.objectStore('records').get('key');
+     get.onsuccess=()=>resolve(get.result);
+     get.onerror=()=>reject(get.error);
+     tx.oncomplete=()=>db.close();
+   };
+ }));
+ if(indexedDbValue!=='preserved')throw new Error('IndexedDB test record did not persist after reload');
+ await page.waitForFunction(()=>!!navigator.serviceWorker?.controller,{timeout:12000});
  await open('index.html?jump=clients');
  await page.waitForTimeout(700);
  if(!await page.locator('#dmSalesBody').count())throw new Error('Clients destination did not initialize');
