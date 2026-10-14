@@ -268,3 +268,36 @@
  color:#f2f2f5!important;
  border-color:rgba(200,210,225,.15)!important;
 }
+
+/* Approved Black Velvet: turn the old orange warning thumbnail into calm silver.
+   The warning symbol remains visible and meaningful. */
+#managementScreen #mgMenu .dm-manager-menu-plasma-socket{
+ overflow:hidden!important;border-radius:12px!important;
+ background:#303238!important;box-shadow:none!important;
+ width:43px!important;height:43px!important;flex-basis:43px!important;
+}
+#managementScreen #mgMenu .dm-manager-menu-orange-plasma{
+ --dm-size:36px!important;width:36px!important;height:36px!important;
+ background:radial-gradient(circle at 45% 38%,#414955,#15191f 63%,#090b0f 80%)!important;
+ filter:none!important;box-shadow:none!important;
+}
+#managementScreen #mgMenu .dm-manager-menu-orange-plasma .dm-shared-rim{
+ background:conic-gradient(#7e8c9e,#e5ecf5,#728398,#c9d5e4,#7e8c9e)!important;
+ filter:none!important;
+}
+#managementScreen #mgMenu .dm-manager-menu-orange-plasma :is(.dm-shared-halo,.dm-shared-spectral){
+ opacity:.20!important;filter:none!important;
+}
+#managementScreen #mgMenu .dm-manager-menu-orange-plasma .dm-shared-edge{
+ border-color:#b1bdcd!important;box-shadow:none!important;
+}
+#managementScreen #mgMenu .dm-manager-menu-orange-plasma::after{
+ border-color:#b9c7d8!important;filter:none!important;
+}
+#managementScreen #mgMenu .dm-manager-menu-orange-plasma .dm-manager-menu-warning svg{
+ stroke:#f1f3f7!important;filter:none!important;animation:none!important;
+}
+#managementScreen #mgMenu .dm-manager-menu-orange-plasma,
+#managementScreen #mgMenu .dm-manager-menu-orange-plasma *{
+ animation:none!important;
+}
