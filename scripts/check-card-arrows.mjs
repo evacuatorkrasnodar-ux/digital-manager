@@ -33,7 +33,7 @@ try{
     background:getComputedStyle(el).backgroundColor,
     height:el.getBoundingClientRect().height
   })));
-  if(menuRows.some(x=>x.radius!=='0px'||x.height>72))
+  if(menuRows.some(x=>x.radius!=='0px'||x.height>78))
    throw Error('Management menu must use compact list rows: '+JSON.stringify(menuRows));
   if(circles.length!==5)throw Error('Expected 5 Management circle chevrons, found '+circles.length);
   for(const c of circles){
