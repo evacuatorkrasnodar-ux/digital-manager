@@ -2081,6 +2081,8 @@
   // Internal deep links from the unified personal OS dock.
   const jump=new URLSearchParams(window.location.search).get('jump');
   if(['assistant','management'].includes(jump))setTab(jump);
+  else if(jump==='clients')window.DMSalesScreen?.open?.('clients');
+  else if(jump==='finance')window.DMSalesScreen?.openPicture?.('finance');
   else if(jump==='documents')setTab('management','documents');
   else if(jump==='attention'){setTab('home');dmOpenAttention();}
   else if(jump==='profile'){setTab('management');profileModal();}
