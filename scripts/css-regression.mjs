@@ -67,7 +67,7 @@ async function snapshot(port,width,height,path,selectors){
    const baseSelector=pseudo?selector.slice(0,-pseudo.length):selector;
    const els=[...document.querySelectorAll(baseSelector)].slice(0,3);
    result[selector]=els.map(el=>{
-    const style=getComputedStyle(el,pseudo),o={};
+    const style=getComputedStyle(el,pseudo),o={__text:(el.textContent||'').trim().slice(0,80),__section:el.closest('.day-section-heading')?.className||''};
     for(const prop of props)o[prop]=String(style[prop]??'').replaceAll(location.origin,'<origin>');
     return o;
    });
@@ -106,7 +106,7 @@ try{
     const expectedSize=compactCalendar?Math.max(15,Math.min(17,width*.04)):Math.max(18,Math.min(19,width*.048));
     for(const heading of headings){
      if(Math.abs(Number.parseFloat(heading.fontSize)-expectedSize)>.13)
-      throw new Error(`Section typography mismatch on ${path}: ${heading.fontSize} vs ${expectedSize}px`);
+      throw new Error(`Section typography mismatch on ${path} (${heading.__text}; ${heading.__section}): ${heading.fontSize} vs ${expectedSize}px`);
      if(heading.fontWeight!=='460')
       throw new Error(`Section weight mismatch on ${path}: ${heading.fontWeight}`);
     }
