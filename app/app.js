@@ -499,9 +499,15 @@
     done:'<path d="M4.7 12.7 10 18l9.3-10.2"/>',
     calendar:'<rect x="3.3" y="5.3" width="17.4" height="15" rx="2.1"/><path d="M7.5 3.6v3.7M16.5 3.6v3.7M3.8 9.4h16.4"/><circle cx="14.7" cy="15" r="3.3"/><path d="M14.7 13.2v1.9l1.3.9"/>',
     attention:'<path d="M12 3.2 21 19H3L12 3.2Z"/><path d="M12 9v4.8M12 17.1h.01"/>',
+    clients:'<circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6M18 15a5 5 0 0 1 3 4"/>',
+    finance:'<path d="M7 3.5h6a4.5 4.5 0 0 1 0 9H7M7 3.5v17M4 16h12M4 12.5h9"/>',
+    docs:'<path d="M6 2.8h8l4 4V21H6zM14 2.8v4h4M9 12h6M9 16h6"/>',
+    insight:'<path d="m12 2 2.4 6.8L21 11l-6.6 2.2L12 20l-2.4-6.8L3 11l6.6-2.2z"/>',
+    security:'<path d="M12 2.5 20 6v5.5c0 5-3.1 8.1-8 10-4.9-1.9-8-5-8-10V6zM8.5 12l2.3 2.3 4.8-5"/>',
+    world:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-5 4-5 14 0 18M12 3c5 4 5 14 0 18"/>',
     ambient:'<circle cx="12" cy="12" r="6.2" stroke-dasharray="7.3 4.5 3.1 6.2 9.4 4.1"/><path d="M12 3.2v3.1M12 17.7v3.1M3.2 12h3.1M17.7 12h3.1"/><circle cx="12" cy="12" r="1.1"/>'
   });
-  const dmGlyphTypes=['mail','health','task','calendar','attention','mic','send'];
+  const dmGlyphTypes=['mail','health','task','calendar','attention','mic','send','clients','finance','docs','insight','security','world'];
   const dmGlyphLayers=[
     ...document.querySelectorAll('#dockLauncher .dm-launcher-plasma,#tabAssistant .dm-dock-plasma,#assistantLive>.dm-voice-orb')
   ].map(orb=>{
@@ -554,15 +560,17 @@
   }
   function dmPreviewGlyph(kind){
     if(!dmGlyphTypes.includes(kind))return;
-    dmRevealGlyph(kind);
     dmShowGlyphInSettings(kind);
-    if(kind==='attention')setRingMode('attention',3300);
     const caption=byId('dmGlyphPreviewStatus');
     if(caption)caption.textContent='Демонстрация: '+({
       mail:'важное письмо',health:'напоминание о здоровье',
-      task:'важная задача',calendar:'событие из календаря',attention:'предупреждение',mic:'значок голосового ввода',send:'значок отправки сообщения'
+      task:'важная задача',calendar:'событие из календаря',attention:'предупреждение',mic:'значок голосового ввода',send:'значок отправки сообщения',clients:'запись клиента',finance:'финансовые данные',docs:'документы',insight:'совет',security:'безопасность',world:'мировые события'
     })[kind]+'. Реального события сейчас нет.';
   }
+  // A saved local action is not a new external notification.
+  window.addEventListener('dm:local-glyph',event=>{
+    if(['task','clients','finance'].includes(event.detail?.kind))dmRevealGlyph(event.detail.kind);
+  });
   // Integration contract for the future event hub: the verified flag must
   // come from a connected event processor, not from a timer or demo data.
   document.addEventListener('dm:assistant-event',event=>{
@@ -862,7 +870,7 @@
     if(dmSettingsGlyphFrame!==null){cancelAnimationFrame(dmSettingsGlyphFrame);dmSettingsGlyphFrame=null;}
     const label=({
       mail:'Почта',health:'Здоровье',task:'Задача',
-      calendar:'Календарь',attention:'Внимание',mic:'Микрофон',send:'Отправка'
+      calendar:'Календарь',attention:'Внимание',mic:'Микрофон',send:'Отправка',clients:'Клиенты',finance:'Финансы',docs:'Документы',insight:'Совет',security:'Защита',world:'Мир'
     })[kind];
     const caption=byId('dmGlyphStageLabel');
     if(caption)caption.textContent=label+' · демонстрация';
@@ -979,7 +987,7 @@
       settings.className='dm-chat-settings voice-pref';
       settings.innerHTML='<div class="dm-glyph-settings"><strong>Знаки внутри плазмы</strong><small>Тонкие белые символы появляются при значимых событиях. Нажмите на знак, чтобы посмотреть анимацию.</small>'+
         '<div class="dm-glyph-showcase"><div class="dm-glyph-preview-actions">'+[
-          ['mail','Почта'],['health','Здоровье'],['task','Задача'],['calendar','Календарь'],['attention','Внимание'],['mic','Микрофон'],['send','Отправка']
+          ['mail','Почта'],['health','Здоровье'],['task','Задача'],['calendar','Календарь'],['attention','Внимание'],['mic','Микрофон'],['send','Отправка'],['clients','Клиенты'],['finance','Финансы'],['docs','Документы'],['insight','Совет'],['security','Защита'],['world','Мир']
         ].map(([kind,label])=>'<button type="button" data-dm-glyph-preview="'+kind+'" aria-pressed="false" aria-label="Показать символ: '+label+'"><svg viewBox="0 0 24 24" aria-hidden="true">'+dmGlyphDrawings[kind]+'</svg><span>'+label+'</span></button>').join('')+'</div><div class="dm-glyph-stage" id="dmGlyphStage" role="img" aria-label="Плазма ждёт выбранный знак"><span class="dm-glyph-stage-demo">ДЕМО</span><div class="dm-glyph-stage-orb" id="dmGlyphStageOrb"></div><span class="dm-glyph-stage-label" id="dmGlyphStageLabel">Выберите знак ✦</span></div></div>'+
         '<p class="dm-glyph-preview-status" id="dmGlyphPreviewStatus" aria-live="polite">Это предпросмотр. Реальные сигналы появятся после подключения источников событий.</p>'+
         '</div>';
