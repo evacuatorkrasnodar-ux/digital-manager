@@ -271,7 +271,6 @@ function render(){
  host.append(addRecord);
  if(add){add.remove();}
 }
-}
 function draftPanel(title,text){
  const old=document.getElementById('dmSalesDraft');
  if(old)old.remove();
