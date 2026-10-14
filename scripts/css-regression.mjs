@@ -37,7 +37,10 @@ const personalSelectors=[
  '.care-shell .care-grid .calendar-day.selected',
  '.care-shell .care-health-entry',
  '.care-shell .care-health-entry-arrow',
- '.day-shell .world-entry-arrow'
+ '.day-shell .world-entry-arrow',
+ '.day-section-heading h2',
+ '.day-section-heading:not(.notebook-title) h2',
+ '.world-head h2'
 ];
 const pages=[
  {path:'index.html',selectors:dashboardSelectors},
@@ -64,7 +67,7 @@ async function snapshot(port,width,height,path,selectors){
    const baseSelector=pseudo?selector.slice(0,-pseudo.length):selector;
    const els=[...document.querySelectorAll(baseSelector)].slice(0,3);
    result[selector]=els.map(el=>{
-    const style=getComputedStyle(el,pseudo),o={};
+    const style=getComputedStyle(el,pseudo),o={__text:(el.textContent||'').trim().slice(0,80),__section:el.closest('.day-section-heading')?.className||''};
     for(const prop of props)o[prop]=String(style[prop]??'').replaceAll(location.origin,'<origin>');
     return o;
    });
@@ -87,9 +90,25 @@ try{
      continue;
     }
     for(let i=0;i<old.length;i++)for(const prop of props){
+     // Section titles intentionally receive the newly unified type scale.
+     if(['.day-section-heading h2','.day-section-heading:not(.notebook-title) h2','.world-head h2'].includes(selector)&&['fontSize','fontWeight','letterSpacing','lineHeight','width','height'].includes(prop))continue;
      if(old[i][prop]!==updated[i][prop]){
       diffs.push(`${selector}[${i}].${prop}: ${old[i][prop]} => ${updated[i][prop]}`);
      }
+    }
+   }
+   if(path!=='index.html'){
+    const sectionSelector=path==='world.html'?'.world-head h2':'.day-section-heading:not(.notebook-title) h2';
+    const headings=candidate[sectionSelector]||[];
+    if(!headings.length)throw new Error(`Missing unified section titles on ${path}`);
+    // Calendar-fixed is intentionally more compact on portrait phones.
+    const compactCalendar=path==='myday.html'&&width<=700;
+    const expectedSize=compactCalendar?Math.max(15,Math.min(17,width*.04)):Math.max(18,Math.min(19,width*.048));
+    for(const heading of headings){
+     if(Math.abs(Number.parseFloat(heading.fontSize)-expectedSize)>.13)
+      throw new Error(`Section typography mismatch on ${path} (${heading.__text}; ${heading.__section}): ${heading.fontSize} vs ${expectedSize}px`);
+     if(heading.fontWeight!=='460')
+      throw new Error(`Section weight mismatch on ${path}: ${heading.fontWeight}`);
     }
    }
    if(diffs.length)throw new Error(`CSS regressions on ${path} at ${width}px:\\n`+diffs.slice(0,35).join('\\n'));

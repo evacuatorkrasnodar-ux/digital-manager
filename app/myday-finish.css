@@ -982,10 +982,10 @@
   justify-content:space-between;
 }
 .day-shell:not(.care-shell,.world-shell,.health-shell) .day-section-heading h2{
-  font-size:clamp(16px,4.5vw,19px);
-  line-height:1.15;
-  font-weight:465;
-  letter-spacing:-.03em;
+  font-size:var(--dm-ui-section-title-size);
+  line-height:1.18;
+  font-weight:var(--dm-ui-section-title-weight);
+  letter-spacing:var(--dm-ui-section-title-spacing);
 }
 .day-shell:not(.care-shell,.world-shell,.health-shell) .notes-in-day{margin-top:13px}
 .day-shell:not(.care-shell,.world-shell,.health-shell) .day-section-heading .day-add{
@@ -1350,7 +1350,7 @@
     margin-top:6px;
   }
   .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .day-section-heading h2{
-    font-size:clamp(15px,4vw,17px);
+    font-size:var(--dm-ui-section-title-compact-size);
   }
   .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .day-section-heading .day-add{
     width:98px;

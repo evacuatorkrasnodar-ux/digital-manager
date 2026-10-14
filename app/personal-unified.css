@@ -186,9 +186,9 @@
 }
 .day-shell:is(.care-shell,.world-shell,.health-shell) :is(.day-section-heading h2,.world-head h2){
   margin:0;
-  font-size:clamp(16px,4.5vw,19px);
-  font-weight:460;
-  letter-spacing:-.03em;
+  font-size:var(--dm-ui-section-title-size);
+  font-weight:var(--dm-ui-section-title-weight);
+  letter-spacing:var(--dm-ui-section-title-spacing);
   line-height:1.18;
   color:#f7fbff;
 }
