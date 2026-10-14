@@ -15,6 +15,7 @@ on:
       - refactor/inner-card-chevrons-20261014
       - refactor/personal-graphite-background-20261014
       - refactor/personal-glass-polish-20261014
+      - refactor/personal-text-contrast-20261014
       - test/visual-screen-audit-20261014
   pull_request:
     paths:
@@ -77,6 +78,8 @@ jobs:
           if-no-files-found: ignore
       - name: Verify photograph-free personal backgrounds
         run: node scripts/check-personal-graphite.mjs
+      - name: Check personal label contrast
+        run: node scripts/check-personal-text-contrast.mjs
       - name: Browser smoke tests
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/pwa-http.log 2>&1 &
