@@ -57,35 +57,26 @@ body > .day-shell.day-shell :is(
     #020203!important;
 }
 
-/* Calendar iPhone: the old 100%-width photo ran out before the viewport ended.
-   Cover the full shell without stretching the picture; soften the dark bottom. */
-body > .day-shell.day-shell:not(.care-shell,.world-shell,.health-shell)::before{
-  background:
-    linear-gradient(to bottom,rgba(0,0,0,.28) 0%,rgba(0,0,0,.12) 32%,rgba(0,0,0,.08) 55%,rgba(0,0,0,.13) 83%,rgba(0,0,0,.14) 100%),
-    url('./assets/myday-long-v263.avif') center top/cover no-repeat,
-    #020203!important;
-}
-
-/* My Day only: a viewport-anchored photo, independent of the calendar's
-   locked / scrollable content height. Prevent iOS clipping during gestures. */
+/* A single fixed scene for My Day only, outside the scroll-locked calendar.
+   Suppress legacy shell photo layers; do not alter other personal pages. */
+body.dm-calendar-photo{background:#020203!important;}
 body.dm-calendar-photo::before{
   content:"";
   position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  background:
-    linear-gradient(180deg,rgba(0,0,0,.27),rgba(0,0,0,.08) 55%,rgba(0,0,0,.12)),
-    url('./assets/myday-long-v263.avif') center center / cover no-repeat,
-    #020203;
+  top:0;right:0;bottom:0;left:0;
+  z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.06) 58%,rgba(0,0,0,.10)),
+    url('./assets/myday-long-v263.avif');
+  background-position:center,center center;
+  background-size:100% 100%,cover;
+  background-repeat:no-repeat;
 }
 body.dm-calendar-photo > .day-shell.day-shell{
-  position:relative;
-  z-index:1;
+  position:relative;z-index:1;
   background:transparent!important;
   background-color:transparent!important;
 }
 body.dm-calendar-photo > .day-shell.day-shell::before{
-  content:none!important;
-  display:none!important;
+  display:none!important;content:none!important;
 }
