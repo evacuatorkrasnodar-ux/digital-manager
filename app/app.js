@@ -1894,6 +1894,17 @@
       action.addEventListener('click',()=>{event.read=true;dmSaveAttention();dmRenderAttention();});
       row.append(action);container.append(row);
     }
+    // Only one decision is shown upfront. Other records stay intact and accessible.
+    const entries=[...container.querySelectorAll(':scope > .dm-attention-entry')];
+    if(entries.length>1){
+      const more=document.createElement('details');
+      more.className='dm-attention-more';
+      const summary=document.createElement('summary');
+      summary.textContent='Остальные события · '+(entries.length-1);
+      more.append(summary);
+      entries.slice(1).forEach(entry=>more.append(entry));
+      container.append(more);
+    }
   }
   function dmSaveAttention(){try{localStorage.setItem(dmAttentionKey,JSON.stringify(dmAttentionEvents.slice(0,80)));}catch(_){}}
   function dmOpenAttention(){closeDockQuickActions();dmAttentionPanel.hidden=false;dmRenderAttention();byId('dmAttentionClose').focus();}
