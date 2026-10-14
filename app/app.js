@@ -422,9 +422,8 @@
 
   // Explicit opt-in preference: no hidden mic use; this is an animated UI prototype.
   const savedVoice=mgSaved.voice&&typeof mgSaved.voice==='object'?mgSaved.voice:{};
-  const allowedPlasmaActions=['panel','voice','text'];
   const allowedPerformanceModes=['beautiful','eco','simple'];
-  const voicePrefs={dock:savedVoice.dock!==false,tapAction:allowedPlasmaActions.includes(savedVoice.tapAction)?savedVoice.tapAction:'panel',
+  const voicePrefs={dock:savedVoice.dock!==false,tapAction:'panel',
     performanceMode:allowedPerformanceModes.includes(savedVoice.performanceMode)?savedVoice.performanceMode:'beautiful'};
   const dockTargets={
     clients:{label:'Клиенты',icon:'ic-users'},
@@ -978,16 +977,7 @@
       // engine and microphone permission, so its status is explicitly informational.
       const settings=document.createElement('section');
       settings.className='dm-chat-settings voice-pref';
-      settings.innerHTML='<div class="dm-chat-settings-title"><svg class="ico" aria-hidden="true"><use href="#ic-grid"/></svg><div><strong>Нажатие на плазму</strong><small>Что открывать при касании помощника</small></div></div>'+
-        '<label class="dm-chat-settings-label" for="plasmaTapMode">Действие при нажатии</label>'+
-        '<select id="plasmaTapMode" class="dm-chat-settings-select" aria-label="Действие при нажатии на плазму">'+
-          '<option value="panel">Три действия: Главная · Чат · Управление</option>'+
-          '<option value="voice">Голосовое общение</option>'+
-          '<option value="text">Сразу написать сообщение</option>'+
-        '</select>'+
-        
-        
-        '<div class="dm-glyph-settings"><strong>Знаки внутри плазмы</strong><small>Тонкие белые символы появляются при значимых событиях. Нажмите на знак, чтобы посмотреть анимацию.</small>'+
+      settings.innerHTML='<div class="dm-glyph-settings"><strong>Знаки внутри плазмы</strong><small>Тонкие белые символы появляются при значимых событиях. Нажмите на знак, чтобы посмотреть анимацию.</small>'+
         '<div class="dm-glyph-showcase"><div class="dm-glyph-preview-actions">'+[
           ['mail','Почта'],['health','Здоровье'],['task','Задача'],['calendar','Календарь'],['attention','Внимание']
         ].map(([kind,label])=>'<button type="button" data-dm-glyph-preview="'+kind+'" aria-pressed="false" aria-label="Показать символ: '+label+'"><svg viewBox="0 0 24 24" aria-hidden="true">'+dmGlyphDrawings[kind]+'</svg><span>'+label+'</span></button>').join('')+'</div><div class="dm-glyph-stage" id="dmGlyphStage" role="img" aria-label="Плазма ждёт выбранный знак"><span class="dm-glyph-stage-demo">ДЕМО</span><div class="dm-glyph-stage-orb" id="dmGlyphStageOrb"></div><span class="dm-glyph-stage-label" id="dmGlyphStageLabel">Выберите знак ✦</span></div></div>'+
@@ -1035,7 +1025,6 @@
       dmMountGlyphShowcase();
       dmMountPlasmaExamples();
       dmSyncAppearanceDockMode();
-      byId('plasmaTapMode').value=voicePrefs.tapAction;
 
       // Compact settings: same working controls, grouped by purpose. Grouping
       // only moves existing DOM nodes; input IDs, save handlers and previews stay.
@@ -1138,7 +1127,6 @@
       dmSyncDockPreviewSlots();
       dmSyncAppearanceDockMode();
     }
-    else if(el.id==='plasmaTapMode'){voicePrefs.tapAction=el.value;save();}
     else if(el.id==='mgManagerName'){mgData.managerName=el.value.trim()||'Цифровой управляющий';el.value=mgData.managerName==='Цифровой управляющий'?'':mgData.managerName;}
     else if(el.id==='mgAutonomy'){mgData.autonomy=Number(el.value);mgAutoLabel();}
     else if(el.dataset.mgSkill)mgData.skills[el.dataset.mgSkill]=el.checked;
