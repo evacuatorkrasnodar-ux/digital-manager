@@ -1143,11 +1143,11 @@ html.dm-plasma-panel-open .dock-launcher .dm-launcher-waves{
    of iOS keyboard class timing. The full editor retains its own placement. */
 @media(max-width:700px){
   html.dm-plasma-panel-open:not(.dm-compose-editor) .dm-chat-panel:not(.dm-chat-editor){
-    bottom:calc(27px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
+    bottom:calc(2px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
     animation:none;
   }
   html.dm-plasma-panel-open:not(.dm-compose-editor) .dock-hidden-controls{
-    bottom:calc(-11px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
+    bottom:calc(-36px + env(safe-area-inset-bottom,0px) + var(--dm-chat-kb,0px));
     transform:translateX(-50%);
   }
 }
