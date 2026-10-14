@@ -11,7 +11,7 @@ html.dm-myday-no-dock body > nav.bottom-nav{display:none!important}
 .dm-myday-plasma-stage .dm-voice-waves path{fill:none;stroke-linecap:round;stroke-linejoin:round}
 @media(prefers-reduced-motion:reduce){
   .dm-myday-plasma-stage .dm-launcher-plasma,
-  .dm-myday-plasma-stage .dm-myday-plasma-stage .dm-orb-rim,
+  .dm-myday-plasma-stage .dm-orb-rim,
   .dm-myday-plasma-stage .dm-orb-arc,
   .dm-myday-plasma-stage .dm-laser-track{animation:none!important}
 }
@@ -50,36 +50,36 @@ html.dm-myday-no-dock body > nav.bottom-nav{display:none!important}
 .dm-myday-plasma-stage .dm-voice-orb-electric .dm-orb-spectral{position:absolute;inset:-13%;z-index:2;width:126%;height:126%;overflow:visible;pointer-events:none;filter:drop-shadow(0 0 2px rgba(110,175,255,.78)) drop-shadow(0 0 3px rgba(27,83,242,.58))}
 .dm-myday-plasma-stage .dm-voice-orb-electric .dm-myday-plasma-stage .dm-orb-rim{opacity:.44;filter:brightness(1.12) saturate(1.1) drop-shadow(0 0 3px rgba(45,113,250,.67))}
 .dm-myday-plasma-stage .dm-voice-orb-electric .dm-myday-plasma-stage .dm-orb-edge{border-color:rgba(151,216,255,.44);box-shadow:inset 0 0 8px rgba(25,63,238,.48),0 0 7px rgba(93,153,255,.53)}
-.dm-orb-spectral .dm-orb-arc{transform-origin:60px 60px;animation:dm-electric-arc 8s linear infinite}
-.dm-orb-spectral .dm-arc-ice{animation-duration:10.4s;filter:drop-shadow(0 0 2px rgba(119,197,255,.74))}
-.dm-orb-spectral .dm-arc-violet{animation-duration:12.2s;animation-direction:reverse;filter:drop-shadow(0 0 4px #a368ff)}
+.dm-myday-plasma-stage .dm-orb-spectral .dm-orb-arc{transform-origin:60px 60px;animation:dm-electric-arc 8s linear infinite}
+.dm-myday-plasma-stage .dm-orb-spectral .dm-arc-ice{animation-duration:10.4s;filter:drop-shadow(0 0 2px rgba(119,197,255,.74))}
+.dm-myday-plasma-stage .dm-orb-spectral .dm-arc-violet{animation-duration:12.2s;animation-direction:reverse;filter:drop-shadow(0 0 4px #a368ff)}
 @keyframes dm-electric-arc{to{transform:rotate(360deg)}}
-.dm-voice-waves-electric{filter:none!important}
-.dm-voice-waves-electric .dm-laser-track{transform-origin:center 70%;animation:dm-electric-wave 7.1s ease-in-out infinite}
-.dm-voice-waves-electric .dm-electric-wave-1{animation-delay:-2s;animation-duration:5.8s}
-.dm-voice-waves-electric .dm-electric-wave-2{animation-delay:-3.6s;animation-duration:6.6s}
-.dm-voice-waves-electric .dm-electric-wave-3{animation-delay:-1.1s;animation-duration:7.2s}
+.dm-myday-plasma-stage .dm-voice-waves-electric{filter:none!important}
+.dm-myday-plasma-stage .dm-voice-waves-electric .dm-laser-track{transform-origin:center 70%;animation:dm-electric-wave 7.1s ease-in-out infinite}
+.dm-myday-plasma-stage .dm-voice-waves-electric .dm-electric-wave-1{animation-delay:-2s;animation-duration:5.8s}
+.dm-myday-plasma-stage .dm-voice-waves-electric .dm-electric-wave-2{animation-delay:-3.6s;animation-duration:6.6s}
+.dm-myday-plasma-stage .dm-voice-waves-electric .dm-electric-wave-3{animation-delay:-1.1s;animation-duration:7.2s}
 @keyframes dm-electric-wave{0%,100%{transform:translateY(-3px) scaleY(.92);opacity:.55}50%{transform:translateY(2px) scaleY(1.08);opacity:.95}}
 .dm-myday-plasma-stage .dm-orb-edge{inset:8%;border:1px solid rgba(157,213,255,.44);box-shadow:inset 0 0 4px rgba(46,107,243,.35),0 0 4px rgba(91,132,255,.32)}
 .dm-myday-plasma-stage .dm-voice-orb::after{content:"";position:absolute;inset:5%;border-radius:50%;border:1.3px solid transparent;border-top-color:rgba(239,251,255,.96);border-right-color:rgba(170,221,255,.31);filter:drop-shadow(0 0 4px rgba(138,219,255,.85));transform:rotate(-21deg);pointer-events:none}
 .dm-myday-plasma-stage .dm-voice-orb-electric::after{border-top-color:#effaff;border-right-color:rgba(148,202,255,.50);filter:drop-shadow(0 0 5px #5fbaff)}
-.dm-voice-waves{position:absolute;left:0;bottom:0;width:100%;height:100%;z-index:1;overflow:visible;filter:drop-shadow(0 0 3px #3a7cfa55)}
-.dm-voice-waves path{fill:none;stroke-width:1.45;stroke-linecap:round;opacity:.9;transform-origin:center 88%;animation:dm-wave 6.4s ease-in-out infinite}
-.dm-voice-waves .dm-wave-junction{fill:rgba(204,237,255,.82);opacity:.72;filter:drop-shadow(0 0 3px rgba(105,173,255,.79));pointer-events:none}
+.dm-myday-plasma-stage .dm-voice-waves{position:absolute;left:0;bottom:0;width:100%;height:100%;z-index:1;overflow:visible;filter:drop-shadow(0 0 3px #3a7cfa55)}
+.dm-myday-plasma-stage .dm-voice-waves path{fill:none;stroke-width:1.45;stroke-linecap:round;opacity:.9;transform-origin:center 88%;animation:dm-wave 6.4s ease-in-out infinite}
+.dm-myday-plasma-stage .dm-voice-waves .dm-wave-junction{fill:rgba(204,237,255,.82);opacity:.72;filter:drop-shadow(0 0 3px rgba(105,173,255,.79));pointer-events:none}
 @keyframes dm-breathe{0%,100%{transform:scale(.95);opacity:.88}50%{transform:scale(1.055);opacity:1}}
 @keyframes dm-rotate{to{transform:rotate(360deg)}}
 @keyframes dm-wave{0%,100%{transform:translateX(-1.8px) scaleY(.97);opacity:.68}50%{transform:translateX(1.8px) scaleY(1.03);opacity:.94}}
-.dm-voice-waves-electric .dm-laser-track path{fill:none;stroke-linecap:round;stroke-linejoin:round;animation:none;transform:none;shape-rendering:geometricPrecision;pointer-events:none}
-.dm-voice-waves-electric .dm-laser-track .dm-laser-bloom{stroke-width:5.2;opacity:.20;filter:blur(2.15px)}
-.dm-voice-waves-electric .dm-laser-track .dm-laser-halo{stroke-width:2.1;opacity:.37;filter:blur(.6px)}
-.dm-voice-waves-electric .dm-laser-track .dm-laser-core{stroke-width:.80;opacity:.97;filter:none;vector-effect:non-scaling-stroke}
-.dm-voice-waves-electric .dm-electric-wave-1 .dm-laser-core{stroke-width:.72;opacity:.82}
-.dm-voice-waves-electric .dm-electric-wave-2 .dm-laser-core{stroke-width:.70;opacity:.88}
-.dm-voice-waves-electric .dm-electric-wave-3 .dm-laser-core{stroke-width:.55;opacity:.55}
-.dm-voice-waves-electric .dm-electric-wave-3 .dm-laser-halo{opacity:.23}
-.dm-voice-waves-electric .dm-electric-wave-3 .dm-laser-bloom{opacity:.12}
-.dm-voice-waves-electric .dm-electric-wave-4{animation-delay:-1.7s;animation-duration:9.2s;transform-origin:center 90%}
-.dm-voice-waves-electric .dm-electric-wave-4 .dm-laser-core{stroke-width:.86;opacity:.96}
-.dm-voice-waves-electric .dm-electric-wave-4 .dm-laser-halo{stroke-width:2.1;opacity:.44;filter:blur(.5px)}
-.dm-voice-waves-electric .dm-electric-wave-4 .dm-laser-bloom{stroke-width:4.2;opacity:.23;filter:blur(1.8px)}
-.dock-launcher{transition:transform .28s cubic-bezier(.18,.76,.24,1)}
+.dm-myday-plasma-stage .dm-voice-waves-electric .dm-laser-track path{fill:none;stroke-linecap:round;stroke-linejoin:round;animation:none;transform:none;shape-rendering:geometricPrecision;pointer-events:none}
+.dm-myday-plasma-stage .dm-voice-waves-electric .dm-laser-track .dm-laser-bloom{stroke-width:5.2;opacity:.20;filter:blur(2.15px)}
+.dm-myday-plasma-stage .dm-voice-waves-electric .dm-laser-track .dm-laser-halo{stroke-width:2.1;opacity:.37;filter:blur(.6px)}
+.dm-myday-plasma-stage .dm-voice-waves-electric .dm-laser-track .dm-laser-core{stroke-width:.80;opacity:.97;filter:none;vector-effect:non-scaling-stroke}
+.dm-myday-plasma-stage .dm-voice-waves-electric .dm-electric-wave-1 .dm-laser-core{stroke-width:.72;opacity:.82}
+.dm-myday-plasma-stage .dm-voice-waves-electric .dm-electric-wave-2 .dm-laser-core{stroke-width:.70;opacity:.88}
+.dm-myday-plasma-stage .dm-voice-waves-electric .dm-electric-wave-3 .dm-laser-core{stroke-width:.55;opacity:.55}
+.dm-myday-plasma-stage .dm-voice-waves-electric .dm-electric-wave-3 .dm-laser-halo{opacity:.23}
+.dm-myday-plasma-stage .dm-voice-waves-electric .dm-electric-wave-3 .dm-laser-bloom{opacity:.12}
+.dm-myday-plasma-stage .dm-voice-waves-electric .dm-electric-wave-4{animation-delay:-1.7s;animation-duration:9.2s;transform-origin:center 90%}
+.dm-myday-plasma-stage .dm-voice-waves-electric .dm-electric-wave-4 .dm-laser-core{stroke-width:.86;opacity:.96}
+.dm-myday-plasma-stage .dm-voice-waves-electric .dm-electric-wave-4 .dm-laser-halo{stroke-width:2.1;opacity:.44;filter:blur(.5px)}
+.dm-myday-plasma-stage .dm-voice-waves-electric .dm-electric-wave-4 .dm-laser-bloom{stroke-width:4.2;opacity:.23;filter:blur(1.8px)}
+.dm-myday-plasma-stage .dock-launcher{transition:transform .28s cubic-bezier(.18,.76,.24,1)}
