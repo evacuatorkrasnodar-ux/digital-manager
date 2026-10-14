@@ -57,6 +57,27 @@
    localStorage.removeItem(FLAG);localStorage.removeItem(BACKUP);location.reload();
   }catch(_){alert('Не удалось восстановить данные. Резервная копия сохранена.')}
  }
+ const AUTO='dm-roman-autopilot-v1';
+ function autopilot(){
+  if(!isActive())return [];
+  const read=key=>{try{const x=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(x)?x:[]}catch(_){return []}};
+  const rows=read(SALES);
+  const drafts=window.DMInitiative?.getSummary?.()||{};
+  // Only actions verifiable from local state; no invented outbound messages.
+  const tasks=[
+   {id:'drafts',text:'Подготовка персональных ответов',detail:'Готовых черновиков: '+Number(drafts.prepared||0),done:Number(drafts.prepared||0)>0},
+   {id:'new',text:'Первым делом — новые обращения',detail:'Ожидают обработки: '+rows.filter(x=>x.stage==='new').length,done:false},
+   {id:'talk',text:'Переговоры и предложения',detail:'В работе: '+rows.filter(x=>x.stage==='talk'||x.stage==='offer').length,done:false},
+   {id:'finance',text:'Контроль завершённых проектов',detail:'Отмечено завершённых сделок: '+rows.filter(x=>x.stage==='won').length,done:true}
+  ];
+  let old={events:[],signature:''};try{old=JSON.parse(localStorage.getItem(AUTO)||'null')||old}catch(_){}
+  const signature=tasks.map(x=>x.id+':'+x.detail+':'+x.done).join('|');
+  if(old.signature!==signature){
+   const event={date:new Date().toLocaleString('ru-RU'),text:'Проведена локальная проверка: '+tasks.map(x=>x.detail).join(' · ')};
+   try{localStorage.setItem(AUTO,JSON.stringify({signature,events:[event,...(old.events||[])].slice(0,20)}))}catch(_){}
+  }
+  return tasks;
+ }
  function inject(){
   const hub=document.querySelector('#managementScreen #mgDetail .mg-unified-hub');
   if(!hub||!document.querySelector('#mgOpenBusinessJourney')||hub.querySelector('#dmRomanDemoToggle'))return;
@@ -68,7 +89,25 @@
   const button=document.createElement('button');button.type='button';button.id='dmRomanDemoToggle';
   button.textContent=active?'Вернуть мои данные':'Пожить в бизнесе Романа';
   button.addEventListener('click',()=>{if(active){if(confirm('Завершить пример Романа и восстановить прежние данные?'))restore()}else if(confirm('Включить учебный бизнес Романа? Текущее состояние приложения будет сохранено для возврата.'))seed()});
-  section.append(title,intro,button);hub.append(section);
+  section.append(title,intro,button);
+  if(active){
+   const auto=document.createElement('div');auto.className='dm-roman-autopilot';
+   const autoTitle=document.createElement('h3');autoTitle.textContent='Автопилот · полная свобода в учебной студии';
+   const autoNote=document.createElement('p');autoNote.textContent='Сам анализирует записи и готовит черновики. Внешние сообщения и платежи не выполняются.';
+   const details=document.createElement('details');
+   const summary=document.createElement('summary');summary.textContent='Решения и действия управляющего';
+   const body=document.createElement('div');body.className='dm-roman-autopilot-items';
+   const refresh=()=>{
+    window.DMInitiative?.scan?.();
+    const tasks=autopilot();body.replaceChildren();
+    for(const t of tasks){
+     const p=document.createElement('p');p.textContent=(t.done?'✓ Выполнено: ':'→ Приоритет: ')+t.text+' — '+t.detail;body.append(p);
+    }
+   };
+   details.addEventListener('toggle',()=>{if(details.open)refresh()});
+   details.append(summary,body);auto.append(autoTitle,autoNote,details);section.append(auto);
+  }
+  hub.append(section);
  }
  function boot(){
   const root=document.querySelector('#managementScreen #mgDetail');
