@@ -147,6 +147,22 @@ function romanAssistantBrief(x){
   (biggest?' Самый крупный завершённый проект за этот период — «'+String(biggest.title||'Проект').slice(0,75)+'» ('+fmtMoney(biggest.amount)+').':'')+
   ' Рекламу можно сопоставить с результатами, но эти две суммы ещё не дают чистой прибыли.':
   'В этом периоде нет завершённых проектов или рекламных расходов с указанными датами. Сначала проверим записи, а не будем угадывать цифры.';
+ const entries=read('dm-sales-records-v1');
+ const expenses=read('dm-promotion-expenses-v1',230);
+ const channels=[...new Set([...entries.map(e=>e?.source),...expenses.map(e=>e?.source)].filter(Boolean))];
+ const channelRows=channels.map(name=>{
+  const leads=entries.filter(e=>e.source===name&&inSpan(e.createdAt,x.span));
+  const wins=entries.filter(e=>e.source===name&&e.stage==='won'&&inSpan(e.wonAt,x.span));
+  const spend=expenses.filter(e=>e.source===name&&inSpan(e.createdAt,x.span)).reduce((a,e)=>a+Math.max(0,Number(e.amount)||0),0);
+  return {name,leads:leads.length,wins:wins.length,spend};
+ }).filter(row=>row.leads||row.wins||row.spend).sort((a,b)=>b.wins-a.wins||b.leads-a.leads||b.spend-a.spend);
+ const channelAdvice=channelRows.length?
+  channelRows.map(row=>row.name+': обращений '+row.leads+', продаж '+row.wins+', рекламных затрат '+fmtMoney(row.spend)).join('; ')+
+  '. Это сопоставление записей, не доказательство окупаемости рекламы: заказ мог прийти без платного продвижения.':
+  'В выбранном периоде пока нет записей по каналам. Анализировать эффективность рекламы рано.';
+ const channelDecision=channelRows.some(r=>r.spend>0&&r.wins===0)?
+  'По каналам с расходами без отмеченных покупок сначала проверь заявки и качество обращений; пока не увеличивай бюджет вслепую.':
+  'Сравни стоимость привлечения и качество заявок, а затем решай, какой канал развивать.';
  const next=x.promoCount?
   'Я предлагаю проверить, какие рекламные каналы дали заказы, прежде чем увеличивать бюджет.':
   'Я предлагаю сравнить завершённые проекты и обращения: увидим, какие услуги стоит развивать.';
@@ -155,6 +171,7 @@ function romanAssistantBrief(x){
   '<h3>Роман, я посмотрел наши дела</h3>'+
   '<p>'+esc(summary)+' '+esc(guidance)+'</p>'+
   '<h3>Что с деньгами и проектами</h3><p>'+esc(finance)+'</p><p>'+esc(next)+'</p>'+
+  '<h3>Откуда приходят заказы</h3><p>'+esc(channelAdvice)+'</p><p>'+esc(channelDecision)+'</p>'+
   '<p>Без паники: сначала клиенты, потом всё остальное. Деньги любят порядок, а клиенты — своевременные ответы. 🙂</p>'+
   '<div class="dm-pulse-buttons">'+(lead?'<button type="button" data-pulse-client-draft="'+esc(lead.id)+'">Готовый ответ '+circle+'</button>':'')+'<button type="button" data-pulse-target="sales">Посмотреть клиентов '+circle+'</button></div>'+
   '</section>';
