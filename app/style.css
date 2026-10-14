@@ -1144,7 +1144,7 @@ html.dm-plasma-panel-open .dock-launcher .dm-launcher-waves{
 #managementScreen .mg-menu-row .mg-copy{flex:1;min-width:0}
 #managementScreen .mg-menu-row .mg-copy strong{display:block;font-size:15px}
 #managementScreen .mg-menu-row .mg-copy small{display:block;margin-top:3px;line-height:1.35;font-size:11px;opacity:.68}
-#managementScreen .mg-menu-chevron{font-size:27px;line-height:1;color:rgba(206,227,248,.74)}
+
 #managementScreen #mgHomeLayoutPanel{margin-top:8px}
 
 /* The assistant settings reuse original live controls in four compact sections. */
