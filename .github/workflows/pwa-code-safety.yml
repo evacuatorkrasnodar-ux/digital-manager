@@ -10,6 +10,7 @@ on:
       - refactor/card-surface-cleanup-20261014
       - refactor/visual-unity-components-20261014
       - refactor/shared-card-rhythm-20261014
+      - refactor/navigation-unity-20261014
   pull_request:
     paths:
       - 'app/**'
@@ -55,6 +56,8 @@ jobs:
           node scripts/css-regression.mjs
       - name: Verify shared card rhythm
         run: node scripts/check-card-rhythm.mjs
+      - name: Check shared Back navigation
+        run: node scripts/check-navigation-unity.mjs
       - name: Browser smoke tests
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/pwa-http.log 2>&1 &
