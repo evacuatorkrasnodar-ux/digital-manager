@@ -206,26 +206,31 @@ function render(){
  const comparisonNote=x.recorded?
    'По вашим записям: обращений '+x.created+', отмеченных покупок '+x.won+'.'
    :'Для полного анализа пока не хватает записей о продажах.';
- const details='<section class="dm-pulse-section"><small class="dm-pulse-eyebrow">ДАННЫЕ ЗА '+x.range+'</small>'+
-  '<p>Цифры взяты из ваших записей. «Покупка» — отмеченная сделка, а не банковское поступление.</p><div class="dm-pulse-stats">'+
-  stat('Новых обращений',String(x.created),'Ранее: '+comparison.created)+
-  stat('Отмечено покупок',String(x.won),'Ранее: '+comparison.won)+
-  stat('Суммы отмеченных покупок',x.amountCount?fmtMoney(x.amount):'—','Не банковская выписка')+
-  stat('Реклама по записям',x.promoCount?fmtMoney(x.promo):'—','Не все расходы компании')+
-  stat('Потерянные сделки',String(x.lost))+
-  stat('Задачи со сроком',String(x.tasksDue))+
-  '</div></section>'+
-  '<section class="dm-pulse-section"><h3>Остальные сигналы</h3>'+actionable(x)+'</section>'+
-  '<section class="dm-pulse-section"><h3>Что важно знать</h3>'+
-  '<p>Мы видим только подключённые или внесённые вручную данные. Прибыль без полного учёта расходов не рассчитываем. Внешние действия, отправка сообщений и расходы требуют разрешения.</p>'+
-  (x.flowErrors.length?'<p>Не удалось прочитать источники: '+x.flowErrors.length+'.</p>':'')+
-  '</section>';
+ const stats='<div class="dm-pulse-compact-stats" aria-label="Краткая картина">'+
+  stat('Обращения',String(x.created))+
+  stat('Покупки',String(x.won))+
+  stat('Потери',String(x.lost))+
+  stat('Дела со сроком',String(x.tasksDue))+'</div>';
+ const rest=x.warnings.filter(w=>w!==top);
+ const details='<div class="dm-pulse-expanded">'+
+  '<div class="dm-pulse-stats">'+
+  stat('Покупки по записям',x.amountCount?fmtMoney(x.amount):'—','Не банковское поступление')+
+  stat('Реклама',x.promoCount?fmtMoney(x.promo):'—','Только внесённые расходы')+
+  stat('Обращения ранее',String(comparison.created))+
+  stat('Покупки ранее',String(comparison.won))+'</div>'+
+  (rest.length?'<div class="dm-pulse-other-signals"><strong>Другие сигналы</strong><ul>'+
+    rest.map(w=>'<li>'+safe(w.count+' · '+w.label)+'</li>').join('')+'</ul></div>':'')+
+  '<p class="dm-pulse-disclaimer">По внесённым записям. Покупка не означает банковское поступление; прибыль без всех расходов не рассчитываем. Внешние действия — только с разрешения.</p>'+
+  (x.flowErrors.length?'<p class="dm-pulse-disclaimer">Часть данных недоступна: '+x.flowErrors.length+'.</p>':'')+
+  '</div>';
  $('dmPulseDetail').innerHTML=
-  '<section class="dm-pulse-section dm-pulse-decision" aria-label="Главный вывод помощника">'+
-  '<small class="dm-pulse-eyebrow">УПРАВЛЯЮЩИЙ УЖЕ ПРОВЕРИЛ ДОСТУПНЫЕ ЗАПИСИ</small>'+
-  '<h3>Главное сейчас</h3><p>'+safe(priority)+'</p><p>'+safe(comparisonNote)+'</p>'+
+  '<section class="dm-pulse-decision" aria-label="Главный вывод помощника">'+
+  '<small class="dm-pulse-eyebrow">УПРАВЛЯЮЩИЙ · ГЛАВНОЕ</small>'+
+  '<h3>Главное сейчас</h3><p>'+safe(priority)+'</p>'+
   '<div class="dm-pulse-buttons">'+button+'</div></section>'+
-  '<details class="dm-pulse-extra"><summary>Подробный анализ и остальные сигналы</summary>'+details+'</details>';
+  '<section class="dm-pulse-glance"><h3>Краткая картина</h3>'+stats+'</section>'+
+  '<details class="dm-pulse-extra"><summary>Подробности и сигналы</summary>'+details+'</details>';
+
 }
 
 function open(){
