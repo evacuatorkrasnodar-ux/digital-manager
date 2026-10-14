@@ -1215,3 +1215,25 @@ body:has(.app-shell)::-webkit-scrollbar{display:none;width:0;height:0}
 #dmAttentionList .dm-attention-more{margin-top:10px;border-top:1px solid rgba(150,191,226,.21)}
 #dmAttentionList .dm-attention-more>summary{display:flex;align-items:center;min-height:44px;padding:12px 6px;color:#beddf4;font-size:12px;cursor:pointer;touch-action:manipulation}
 #dmAttentionList .dm-attention-more>.dm-attention-entry{margin-top:8px}
+
+/* Attention Center shares the main shell dock, not a full-screen replacement.
+   The overlay stops above the dock and the original plasma stays mounted. */
+body:has(#dmAttentionPanel:not([hidden])) #dmAttentionPanel.dm-attention-panel{
+ bottom:calc(88px + env(safe-area-inset-bottom,0px))!important;
+ z-index:110!important;
+ overflow-y:auto!important;
+ overscroll-behavior:contain;
+ background:#020304!important;
+ scrollbar-width:none;
+}
+body:has(#dmAttentionPanel:not([hidden])) #dmAttentionPanel::-webkit-scrollbar{display:none}
+body:has(#dmAttentionPanel:not([hidden])) .bottom-nav{
+ z-index:140!important;
+ visibility:visible!important;
+}
+body:has(#dmAttentionPanel:not([hidden])) .dock-hidden-controls{
+ z-index:141!important;
+}
+body:has(#dmAttentionPanel:not([hidden])) #dmAttentionPanel .dm-attention-foot{
+ margin-bottom:14px;
+}
