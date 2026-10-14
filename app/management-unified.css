@@ -187,3 +187,48 @@ html.dm-decorations-paused #managementScreen #mgMenu .mg-menu-row .mg-icon > svg
 @media(prefers-reduced-motion:reduce){
  #managementScreen #mgMenu .mg-menu-row .mg-icon > svg.ico{animation:none!important;transform:none!important}
 }
+
+
+/* Management-menu-only orange warning core; the normal product logo is untouched. */
+#managementScreen #mgMenu .dm-manager-menu-orange-plasma .dm-shared-brand{display:none!important}
+#managementScreen #mgMenu .dm-manager-menu-orange-plasma .dm-manager-menu-warning{
+ position:absolute;inset:0;z-index:7;display:grid;place-items:center;pointer-events:none;
+}
+#managementScreen #mgMenu .dm-manager-menu-orange-plasma .dm-manager-menu-warning svg{
+ width:42%;height:42%;overflow:visible;fill:none;stroke:#ffe7a6;stroke-width:1.8;
+ stroke-linecap:round;stroke-linejoin:round;
+ filter:drop-shadow(0 0 3px rgba(255,145,33,.78));
+ animation:dm-menu-warning-pulse 3.1s ease-in-out infinite;
+}
+@keyframes dm-menu-warning-pulse{0%,100%{opacity:.76;transform:scale(.92)}50%{opacity:1;transform:scale(1.08)}}
+/* More readable fine motion on a phone: still restrained and scoped to the five menu items. */
+#managementScreen #mgMenu .mg-menu-row .mg-icon > svg.ico{
+ animation:dm-menu-visible-shimmer 4.4s ease-in-out infinite!important;
+ transform-origin:50% 50%;
+ will-change:transform,filter;
+}
+#managementScreen #mgMenu .mg-menu-row[data-mg-open="application"] .mg-icon > svg.ico{
+ animation:dm-menu-visible-turn 8s ease-in-out infinite!important;
+}
+@keyframes dm-menu-visible-shimmer{
+ 0%,100%{transform:translateY(1px) scale(.94);opacity:.78;filter:drop-shadow(0 0 0 transparent)}
+ 50%{transform:translateY(-1px) scale(1.075);opacity:1;filter:drop-shadow(0 0 4px rgba(225,243,255,.67))}
+}
+@keyframes dm-menu-visible-turn{
+ 0%,100%{transform:rotate(-8deg) scale(.97);opacity:.84}
+ 50%{transform:rotate(13deg) scale(1.07);opacity:1}
+}
+html[data-dm-performance="eco"] #managementScreen #mgMenu .mg-menu-row .mg-icon > svg.ico{
+ animation-duration:11s!important;
+}
+html[data-dm-performance="eco"] #managementScreen #mgMenu .dm-manager-menu-warning svg{animation-duration:8s}
+html[data-dm-performance="simple"] #managementScreen #mgMenu .mg-menu-row .mg-icon > svg.ico,
+html.dm-decorations-paused #managementScreen #mgMenu .mg-menu-row .mg-icon > svg.ico,
+html[data-dm-performance="simple"] #managementScreen #mgMenu .dm-manager-menu-warning svg,
+html.dm-decorations-paused #managementScreen #mgMenu .dm-manager-menu-warning svg{
+ animation:none!important;transform:none!important;
+}
+@media(prefers-reduced-motion:reduce){
+ #managementScreen #mgMenu .mg-menu-row .mg-icon > svg.ico,
+ #managementScreen #mgMenu .dm-manager-menu-warning svg{animation:none!important;transform:none!important}
+}
