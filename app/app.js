@@ -55,11 +55,14 @@
     if(event.detail?.count>0&&byId('tabAssistant')?.dataset.mode==='idle')setRingMode('attention',1900);
   });
   function setTab(next, managementPage='home'){
+    const incoming=byId(next+'Screen');
+    const traceScreen=byId('digitalTraceScreen');
+    const wasVisible=!!(incoming&&incoming.hidden);
     hideBrandCard();hideProfileCard();tab=next;
-    const traceScreen=byId('digitalTraceScreen');if(traceScreen)traceScreen.hidden=true;
     window.DMSalesScreen?.hide?.();
     dmSyncQuickDestinations();
     if(next==='management')mgSettingsPage(managementPage);
+    // Commit visibility together; the dock stays mounted throughout.
     ['home','assistant','management'].forEach(x=>{
       byId(x+'Screen').hidden=x!==next;
       const button=byId('tab'+x[0].toUpperCase()+x.slice(1));
@@ -69,7 +72,13 @@
         else button.removeAttribute('aria-current');
       }
     });
-    window.scrollTo({top:0,behavior:'instant'});
+    if(traceScreen)traceScreen.hidden=true;
+    window.scrollTo(0,0);
+    // A short opacity-only transition avoids moving fixed plasma and dock.
+    if(wasVisible&&incoming?.animate&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      incoming.getAnimations().forEach(animation=>animation.cancel());
+      incoming.animate([{opacity:.72},{opacity:1}],{duration:170,easing:'ease-out'});
+    }
   }
   // Internal navigation for feature screens; independent of customizable dock slots.
   window.addEventListener('dm:navigate-tab',event=>{
@@ -955,7 +964,7 @@
     byId('mgSubtitle').textContent=({home:'Пять разделов — всё на своём месте',layout:'Карточки и расположение',application:'Оформление · Безопасность · Данные',manager:'Все настройки одного помощника',autopilot:'Навыки и границы самостоятельности',connections:'Сервисы и источники данных',documents:'Файлы и шаблоны',payments:'Счета и регулярные расходы',learning:'Возможности приложения',voice:'Плазма · Док · Имя · Общение',workshop:'Инструменты и калькуляторы'})[page]||'Настройки приложения';
     clearTimeout(voicePreviewTimer);
     if(dmSettingsGlyphTimer!==null){clearTimeout(dmSettingsGlyphTimer);dmSettingsGlyphTimer=null;}
-    if(page==='home'){byId('mgDetail').innerHTML='';window.scrollTo(0,0);requestAnimationFrame(mgSyncCarouselNav);window.dispatchEvent(new Event('dm:management-home'));return;}
+    if(page==='home'){byId('mgDetail').innerHTML='';requestAnimationFrame(mgSyncCarouselNav);window.dispatchEvent(new Event('dm:management-home'));return;}
     let content='';
     if(page==='application'){
       content='<div class="mg-unified-hub">'+
