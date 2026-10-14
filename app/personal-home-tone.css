@@ -65,3 +65,27 @@ body > .day-shell.day-shell:not(.care-shell,.world-shell,.health-shell)::before{
     url('./assets/myday-long-v263.avif') center top/cover no-repeat,
     #020203!important;
 }
+
+/* My Day only: a viewport-anchored photo, independent of the calendar's
+   locked / scrollable content height. Prevent iOS clipping during gestures. */
+body.dm-calendar-photo::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.27),rgba(0,0,0,.08) 55%,rgba(0,0,0,.12)),
+    url('./assets/myday-long-v263.avif') center center / cover no-repeat,
+    #020203;
+}
+body.dm-calendar-photo > .day-shell.day-shell{
+  position:relative;
+  z-index:1;
+  background:transparent!important;
+  background-color:transparent!important;
+}
+body.dm-calendar-photo > .day-shell.day-shell::before{
+  content:none!important;
+  display:none!important;
+}
