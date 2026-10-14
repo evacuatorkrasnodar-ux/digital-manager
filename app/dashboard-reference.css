@@ -1126,3 +1126,8 @@
   -webkit-box-orient:vertical;
   overflow:hidden;
 }
+
+/* Profit card: lift only its information, keep approved gold chart and contour. */
+#homeScreen .metric-grid .profit-card .tile-heading{transform:translateY(-8px)!important}
+#homeScreen .metric-grid .profit-card .profit-number{margin-top:0!important;transform:translateY(-8px)!important}
+#homeScreen .metric-grid .profit-card .delta{margin-top:1px!important;transform:translateY(-8px)!important}
