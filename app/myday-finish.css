@@ -173,30 +173,8 @@
   overflow:hidden;
   text-overflow:ellipsis;
 }
-.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry-arrow{
-  display:grid;
-  place-items:center;
-  flex:none;
-  width:34px;
-  height:34px;
-  border:1px solid rgba(130,188,238,.55);
-  border-radius:50%;
-  background:linear-gradient(145deg,
-    rgba(23,51,81,.76),rgba(4,15,29,.89));
-  box-shadow:inset 0 1px rgba(245,252,255,.20),
-    0 1px 8px rgba(0,5,16,.35);
-  color:#f2f9ff;
-}
-.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry-arrow svg{
-  display:block;
-  width:18px;
-  height:18px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:1.8;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-}
+
+
 .day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry:focus-visible{
   outline:2px solid #cff2ff;
   outline-offset:3px;
@@ -211,7 +189,7 @@
   .day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry-symbol{width:40px;height:40px;font-size:21px}
   .day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry strong{font-size:13px}
   .day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry small{font-size:9px}
-  .day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry-arrow{width:31px;height:31px}
+  
 }
 
 /* Sized to reference: bright rim, dark translucent body, blue/gold details */
@@ -940,9 +918,7 @@
   height:38px;width:38px;
   font-size:20px;
 }
-.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry-arrow{
-  width:31px;height:31px;
-}
+
 .day-shell:not(.care-shell,.world-shell,.health-shell) .calendar-panel{
   padding:10px 9px 9px;
   border-radius:18px;
@@ -1243,9 +1219,7 @@
   .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .world-entry-symbol{
     width:30px;height:30px;font-size:17px;
   }
-  .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .world-entry-arrow{
-    width:27px;height:27px;
-  }
+  
   .day-shell.calendar-fixed:not(.care-shell,.world-shell,.health-shell) .world-entry strong{
     font-size:12px;
   }
