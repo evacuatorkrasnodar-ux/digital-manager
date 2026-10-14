@@ -2,7 +2,7 @@
 // Run: node scripts/check-style-unity.mjs
 import {readFileSync,existsSync} from 'node:fs';
 const pages=['app/index.html','app/world.html','app/myday.html','app/care.html'];
-const foundations=['dock.css','unified-quiet-glass.css','quick-actions-velvet.css','black-velvet-premium.css','card-outline-theme.css','shared-plasma.css','app-design-system.css','personal-home-tone.css','top-tabs-position.css'];
+const foundations=['dock.css','unified-quiet-glass.css','quick-actions-velvet.css','black-velvet-premium.css','card-outline-theme.css','shared-plasma.css','app-design-system.css','personal-home-tone.css','top-tabs-position.css','personal-unified.css'];
 const refs=new Map();
 const required=['dock.css','black-velvet-premium.css','unified-quiet-glass.css','card-outline-theme.css','shared-plasma.css','app-design-system.css'];
 for(const page of pages){
@@ -19,5 +19,6 @@ for(const page of pages){
   else if(refs.get(file).revision!==revision)throw new Error(`${file}: ${page} uses ${revision}, but ${refs.get(file).page} uses ${refs.get(file).revision}`);
  }
  for(const file of required)if(!seen.has(file))throw new Error(`${page}: missing shared visual foundation ${file}`);
+ if(page!=='app/index.html'&&!seen.has('personal-unified.css'))throw new Error(`${page}: shared personal components CSS is missing`);
 }
 console.log('OK: no missing/duplicate CSS; core Black Velvet foundations use consistent revisions.');
