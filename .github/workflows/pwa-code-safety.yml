@@ -9,6 +9,7 @@ on:
       - refactor/shared-controls-20261014
       - refactor/card-surface-cleanup-20261014
       - refactor/visual-unity-components-20261014
+      - refactor/shared-card-rhythm-20261014
   pull_request:
     paths:
       - 'app/**'
@@ -52,6 +53,8 @@ jobs:
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/pwa-head-http.log 2>&1 &
           python3 -m http.server 8766 --bind 127.0.0.1 --directory "$RUNNER_TEMP/dm-baseline" >/tmp/pwa-base-http.log 2>&1 &
           node scripts/css-regression.mjs
+      - name: Verify shared card rhythm
+        run: node scripts/check-card-rhythm.mjs
       - name: Browser smoke tests
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/pwa-http.log 2>&1 &
