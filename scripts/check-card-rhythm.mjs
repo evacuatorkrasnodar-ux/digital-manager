@@ -11,9 +11,25 @@ try{
   const context=await browser.newContext({viewport:{width,height:840},reducedMotion:'reduce'});
   const page=await context.newPage();
   for(const cfg of pages){
-   const response=await page.goto('http://127.0.0.1:8765/app/'+cfg.file,{waitUntil:'networkidle'});
-   if(!response?.ok())throw Error(cfg.file+': page did not load');
-   const stats=await page.evaluate(cfg=>{
+   // Care redirects top-level visitors to My Day; its actual UI loads in an embedded frame.
+   // Test the same embedded mode instead of bypassing production routing.
+   const url='http://127.0.0.1:8765/app/';
+   const response=await page.goto(url+(cfg.file==='care.html'?'world.html':cfg.file),{waitUntil:'networkidle'});
+   if(!response?.ok())throw Error(cfg.file+': host page did not load');
+   let target=page;
+   if(cfg.file==='care.html'){
+    await page.evaluate(width=>{
+     const iframe=document.createElement('iframe');
+     iframe.id='dmRhythmCareTestFrame';
+     iframe.src='./care.html?embedded=1';
+     iframe.style.cssText='position:fixed;left:0;top:0;z-index:-1;pointer-events:none;height:900px;width:'+Math.min(width,430)+'px;';
+     document.body.appendChild(iframe);
+    },width);
+    await page.waitForFunction(()=>!!document.querySelector('#dmRhythmCareTestFrame')?.contentDocument?.querySelector('.care-shell'),{timeout:20000});
+    target=page.frames().find(frame=>frame.url().includes('care.html?embedded=1'));
+    if(!target)throw Error('Embedded Care frame not loaded');
+   }
+   const stats=await target.evaluate(cfg=>{
     const root=document.querySelector(cfg.root);
     if(!root)throw Error('Missing shell '+cfg.root);
     const host=document.createElement('section');
