@@ -4,6 +4,7 @@ on:
     branches:
       - refactor/unify-app-20261014
       - refactor/clean-legacy-styles-20261014
+      - refactor/css-rule-dedup-20261014
   pull_request:
     paths:
       - 'app/**'
@@ -38,6 +39,15 @@ jobs:
         run: |
           npm install --no-save --no-package-lock playwright
           npx playwright install --with-deps chromium
+      - name: Compare CSS visuals with main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git worktree add --detach "$RUNNER_TEMP/dm-baseline" FETCH_HEAD
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/pwa-head-http.log 2>&1 &
+          python3 -m http.server 8766 --bind 127.0.0.1 --directory "$RUNNER_TEMP/dm-baseline" >/tmp/pwa-base-http.log 2>&1 &
+          node scripts/css-regression.mjs
       - name: Browser smoke tests
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/pwa-http.log 2>&1 &
