@@ -180,27 +180,25 @@ function consentMarkup(){
   infoFoot+'</form>';
 }
 function statusMarkup(){
- const data=summary(),all=currentItems(),insight=window.DMSalesScreen?.getInsight?.()||null;
- const brain=window.DMBusinessBrain?.brief?.()||null,priority=brain?.priority||null;
- const workSummary=window.DMBusinessBrain?.getWorkSummary?.()||'';
- let main='<section class="dm-init-summary"><span class="dm-init-eyebrow">МОЙ ХОД · ПО РЕАЛЬНЫМ ЗАПИСЯМ</span><h3>'+esc(headline())+'</h3>'+
-  '<p>'+(all.length?'Я сам подготовил черновики по вашим обращениям. Список ниже — только текущие клиенты.': 'Как появятся обращения в «Продажах», я подготовлю ответы без отдельной команды.')+(workSummary?' '+esc(workSummary):'')+'</p>'+
-  '<div class="dm-init-metrics"><div><strong>'+data.prepared+'</strong><small>Черновиков по клиентам</small></div><div><strong>'+data.awaitingReview+'</strong><small>Нужно посмотреть</small></div><div><strong>'+data.reviewed+'</strong><small>Просмотрено</small></div></div>'+
-  '<button class="dm-init-pause" type="button" data-init-pause>Приостановить подготовку</button>'+
-  '<button class="dm-init-pause" type="button" data-init-delegated>Поручения управляющему ↗</button></section>';
- if(priority)main+='<section class="dm-init-insight"><small>Я заметил · по твоим записям</small><p>'+esc(priority.text)+'</p><span>'+esc(priority.next)+' Никаких внешних действий пока не было.</span></section>';
+ const data=summary(),all=currentItems();
+ const priority=window.DMBusinessBrain?.brief?.()?.priority||null;
+ let main='<section class="dm-init-summary"><span class="dm-init-eyebrow">ПО ТВОИМ ЗАПИСЯМ</span>'+
+  '<h3>'+(data.awaitingReview?esc(data.awaitingReview+' ответов ждут проверки'):'Все черновики просмотрены')+'</h3>'+
+  '<div class="dm-init-metrics"><div><strong>'+data.prepared+'</strong><small>Подготовлено</small></div><div><strong>'+data.awaitingReview+'</strong><small>Проверить</small></div><div><strong>'+data.reviewed+'</strong><small>Просмотрено</small></div></div>'+
+  '<div class="dm-init-summary-actions"><button class="dm-init-pause" type="button" data-init-pause>Приостановить</button>'+
+  '<button class="dm-init-pause" type="button" data-init-delegated>Поручения ↗</button></div></section>';
+ if(priority)main+='<section class="dm-init-insight"><small>ОБРАТИ ВНИМАНИЕ</small><p>'+esc(priority.text)+'</p></section>';
  if(all.length){
-  main+='<section class="dm-init-work"><h3>Что я подготовил</h3>'+
-   all.slice(0,40).map((x,i)=>'<article class="dm-init-work-row"><span class="dm-init-work-index">'+String(i+1).padStart(2,'0')+'</span><div>'+
+  main+='<section class="dm-init-work"><h3>Черновики ответов</h3>'+
+   all.slice(0,40).map((x,i)=>'<article class="dm-init-work-row"><div>'+
     '<strong>'+esc(x.sale.person||'Клиент')+'</strong><p>'+esc(x.sale.title||'Обращение')+'</p>'+
-    '<small>'+esc(labels[x.sale.stage]||'Обращение')+' · '+(x.stale?'Нужно обновить':x.reviewedAt?'Просмотрено':'Черновик готов')+'</small></div>'+
+    '<small>'+esc(labels[x.sale.stage]||'Обращение')+' · '+(x.stale?'Нужно обновить':x.reviewedAt?'Просмотрено':'Готов к проверке')+'</small></div>'+
     '<button type="button" data-init-open="'+esc(x.saleId)+'" aria-label="Посмотреть черновик для '+esc(x.sale.person)+'">↗</button></article>').join('')+'</section>';
   if(all.length>40)main+='<p class="dm-init-fine">Показаны первые 40 обращений из '+all.length+'.</p>';
- }
- main+=businessProfileMarkup();
- main+='<details class="dm-init-history"><summary>Что я действительно сделал · история</summary>'+
- (state.events.length?'<ol>'+state.events.slice(0,35).map(e=>'<li><small>'+esc(e.at)+'</small>'+esc(e.text)+'</li>').join('')+'</ol>':'<p>Пока нет записанных действий.</p>')+'</details>'+
- infoFoot;
+ }else main+='<p class="dm-init-empty">Пока нет черновиков. Новые обращения появятся здесь.</p>';
+ main+='<details class="dm-init-history"><summary>История действий</summary>'+
+ (state.events.length?'<ol>'+state.events.slice(0,35).map(e=>'<li><small>'+esc(e.at)+'</small>'+esc(e.text)+'</li>').join('')+'</ol>':'<p>Пока нет записанных действий.</p>')+'</details>';
+ main+='<details class="dm-init-history dm-init-extra"><summary>Настройки и сведения</summary>'+businessProfileMarkup()+infoFoot+'</details>';
  return main;
 }
 function romanProposal(candidate){
