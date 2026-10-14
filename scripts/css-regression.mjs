@@ -36,7 +36,6 @@ const personalSelectors=[
  '.care-shell .care-grid .calendar-day.selected',
  '.care-shell .care-health-entry',
  '.care-shell .care-health-entry-arrow',
- '.day-shell .world-entry-arrow',
  '.day-section-heading h2',
  '.day-section-heading:not(.notebook-title) h2',
  '.world-head h2'

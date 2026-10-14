@@ -11,6 +11,7 @@ on:
       - refactor/visual-unity-components-20261014
       - refactor/shared-card-rhythm-20261014
       - refactor/navigation-unity-20261014
+      - refactor/unified-card-arrows-20261014
   pull_request:
     paths:
       - 'app/**'
@@ -41,6 +42,7 @@ jobs:
           find app -maxdepth 1 -name '*.js' -print0 | while IFS= read -r -d '' file; do
             node --check "$file"
           done
+          node --check scripts/check-card-arrows.mjs
       - name: Install browser test dependencies
         run: |
           npm install --no-save --no-package-lock playwright
@@ -56,6 +58,8 @@ jobs:
           node scripts/css-regression.mjs
       - name: Verify shared card rhythm
         run: node scripts/check-card-rhythm.mjs
+      - name: Check shared card chevrons
+        run: node scripts/check-card-arrows.mjs
       - name: Check shared Back navigation
         run: node scripts/check-navigation-unity.mjs
       - name: Browser smoke tests

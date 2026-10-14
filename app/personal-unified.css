@@ -697,13 +697,10 @@
   }
 }
 
-/* v281 — app navigation chevron standard (approved screenshot).
-   Every end-of-card forward link has a ROUND BLUE GLASS LENS with a slim
-   WHITE STROKED CHEVRON, never an unframed pink/text arrow.
-   Keep the whole surrounding link/card clickable, not just the lens. */
+/* v281 — legacy Care link lenses retain their existing styling.
+   My World and Management now use the shared chrome circle from app-design-system.css. */
 .dm-round-chevron,
-.care-shell .care-health-entry>.care-health-entry-arrow,
-.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry-arrow{
+.care-shell .care-health-entry>.care-health-entry-arrow{
   box-sizing:border-box;
   display:grid;
   place-items:center;
@@ -725,8 +722,7 @@
   backdrop-filter:blur(16px);
 }
 .dm-round-chevron svg,
-.care-shell .care-health-entry>.care-health-entry-arrow svg,
-.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry-arrow svg{
+.care-shell .care-health-entry>.care-health-entry-arrow svg{
   display:block;
   width:18px;
   height:18px;
@@ -740,8 +736,7 @@
   justify-self:end;
   font-size:0; /* avoid any old inherited text-arrow metrics */
 }
-.care-shell .care-health-entry:is(:hover,:focus-visible)>.care-health-entry-arrow,
-.day-shell:not(.care-shell,.world-shell,.health-shell) .world-entry:is(:hover,:focus-visible) .world-entry-arrow{
+.care-shell .care-health-entry:is(:hover,:focus-visible)>.care-health-entry-arrow{
   border-color:rgba(203,235,255,.91);
   box-shadow:inset 0 1px rgba(255,255,255,.33),0 0 12px rgba(75,162,247,.30);
 }
