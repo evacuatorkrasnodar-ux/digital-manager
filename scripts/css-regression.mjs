@@ -26,7 +26,6 @@ const personalSelectors=[
  '.calendar-legend',
  '.day-header',
  '.day-heading h1',
- '.day-back',
  '.world-tab',
  '.world-spotlight',
  '.day-panel',
