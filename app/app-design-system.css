@@ -279,3 +279,40 @@ body .day-shell.health-shell .health-native-sync{
   :is(.day-shell,#homeScreen,#managementScreen,#assistantScreen,#modal)
   :is(button,a,input,select,textarea){transition:none}
 }
+
+/* Workspaces v11 — common quiet interaction rules.
+   Scope away from Home metric cards and from the approved bottom plasma dock. */
+:is(#salesScreen,#digitalTraceScreen,#managementScreen,#dmBusinessPulseOverlay,
+    #dmAttentionPanel,#dmWorkspaceOverlay,#dmDirectorOffice,#dmTaxOverlay)
+:is(button,a,summary):focus-visible{
+  outline:2px solid rgba(216,237,250,.95);
+  outline-offset:2px;
+}
+:is(#salesScreen,#digitalTraceScreen,#managementScreen,#dmBusinessPulseOverlay,
+    #dmAttentionPanel,#dmWorkspaceOverlay,#dmDirectorOffice,#dmTaxOverlay)
+summary{
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+:is(#salesScreen,#digitalTraceScreen,#managementScreen,#dmBusinessPulseOverlay,
+    #dmAttentionPanel,#dmWorkspaceOverlay,#dmDirectorOffice,#dmTaxOverlay)
+details > summary{
+  box-sizing:border-box;
+  min-height:44px;
+  align-content:center;
+}
+:is(#salesScreen,#digitalTraceScreen,#managementScreen,#dmBusinessPulseOverlay,
+    #dmAttentionPanel,#dmWorkspaceOverlay,#dmDirectorOffice,#dmTaxOverlay)
+:is(button,a){
+  -webkit-tap-highlight-color:transparent;
+}
+/* A change in content length must not make working-panel text overflow its phone frame. */
+:is(#salesScreen,#digitalTraceScreen,#dmBusinessPulseOverlay,#dmAttentionPanel)
+:is(p,small,strong,h2,h3){
+  overflow-wrap:break-word;
+}
+@media(prefers-reduced-motion:reduce){
+  :is(#salesScreen,#digitalTraceScreen,#managementScreen,#dmBusinessPulseOverlay,
+  #dmAttentionPanel,#dmWorkspaceOverlay,#dmDirectorOffice,#dmTaxOverlay)
+  :is(button,a,summary){transition:none!important}
+}
