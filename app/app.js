@@ -1779,41 +1779,41 @@
   }
   byId('dockQuickActions').addEventListener('pointerdown',dmScheduleQuickMenuHide);
   byId('dockQuickActions').addEventListener('focusin',dmScheduleQuickMenuHide);
-  // Hold the center dock plasma for voice. A normal tap keeps its existing
-  // three actions / text behavior. Start recognition on pointerup so iOS can
-  // treat it as a direct user gesture; never require holding while speaking.
-  // Shared iPhone-safe press-and-hold for both dock modes.
-  // Only release starts speech (a direct user gesture). A short tap is unchanged.
+  // Long press activates voice on both desktop and touch devices.
+  // Keep the short click action intact and suppress its synthetic click after a hold.
   let dmSuppressOrbClick=false;
   for(const orb of [byId('tabAssistant'),byId('dockLauncher')]){
     if(!orb)continue;
     let press=null;
+    const clearPress=()=>{if(press){clearTimeout(press.timer);press=null;}};
+    const triggerVoice=()=>{
+      dmSuppressOrbClick=true;
+      setTimeout(()=>{dmSuppressOrbClick=false;},650);
+      closeDockQuickActions();
+      if(plasmaPanel.hidden)openPlasmaPanel(true);
+      dmStartVoiceInput();
+    };
     orb.addEventListener('pointerdown',event=>{
-      if(event.button!==0)return;
-      press={time:performance.now(),x:event.clientX,y:event.clientY,moved:false};
+      if(event.button!==0||press)return;
+      const pointerId=event.pointerId;
+      press={pointerId,x:event.clientX,y:event.clientY,timer:null,triggered:false};
+      try{orb.setPointerCapture(pointerId);}catch(_){}
+      press.timer=setTimeout(()=>{
+        if(!press||press.pointerId!==pointerId)return;
+        press.triggered=true;
+        triggerVoice();
+      },600);
     });
     orb.addEventListener('pointermove',event=>{
-      if(press&&Math.hypot(event.clientX-press.x,event.clientY-press.y)>14)press.moved=true;
-    });
-    orb.addEventListener('pointercancel',()=>{press=null;});
-    orb.addEventListener('pointerleave',event=>{
-      if(press&&event.pointerType==='mouse')press=null;
+      if(!press||press.pointerId!==event.pointerId)return;
+      if(Math.hypot(event.clientX-press.x,event.clientY-press.y)>18&&!press.triggered)clearPress();
     });
     orb.addEventListener('pointerup',event=>{
-      if(!press)return;
-      const held=performance.now()-press.time;
-      const moved=press.moved;
-      press=null;
-      if(moved||held<550)return;
-      dmSuppressOrbClick=true;
-      setTimeout(()=>{dmSuppressOrbClick=false;},600);
-      event.preventDefault();
-      if(plasmaPanel.hidden){
-        closeDockQuickActions();
-        openPlasmaPanel(false);
-        if(voicePrefs.tapAction!=='voice')dmStartVoiceInput();
-      }else dmStartVoiceInput();
+      if(!press||press.pointerId!==event.pointerId)return;
+      clearPress();
     });
+    orb.addEventListener('pointercancel',clearPress);
+    orb.addEventListener('lostpointercapture',clearPress);
     orb.addEventListener('click',event=>{
       if(!dmSuppressOrbClick)return;
       dmSuppressOrbClick=false;
