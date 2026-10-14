@@ -104,3 +104,88 @@
 .dm-pulse-extra>summary::-webkit-details-marker{display:none}
 .dm-pulse-extra>summary::after{content:'⌄';font-size:19px;line-height:1}
 .dm-pulse-extra[open]>summary::after{transform:rotate(180deg)}
+
+/* v5 — Pulse visually belongs to the approved Home Black Velvet.
+   Scoped to the Pulse overlay; never changes Home cards, dock or plasma. */
+#dmBusinessPulseOverlay.dm-business-pulse-overlay{
+  background:rgba(0,0,0,.78);
+  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
+}
+#dmBusinessPulseOverlay .dm-pulse-frame{
+  background:#050608;
+  border:1px solid rgba(166,177,187,.34);
+  box-shadow:0 18px 48px rgba(0,0,0,.72),inset 0 1px rgba(255,255,255,.075);
+}
+#dmBusinessPulseOverlay .dm-pulse-head{
+  background:linear-gradient(160deg,#171b20,#080a0d 78%);
+  border-bottom-color:rgba(188,201,211,.13);
+}
+#dmBusinessPulseOverlay .dm-pulse-head small,
+#dmBusinessPulseOverlay .dm-pulse-eyebrow{
+  color:#acb8c5;
+  letter-spacing:.06em;
+}
+#dmBusinessPulseOverlay .dm-pulse-head h2{color:#f5f7fb;font-weight:520}
+#dmBusinessPulseOverlay .dm-pulse-detail{
+  scrollbar-width:none;
+  background:#050608;
+}
+#dmBusinessPulseOverlay .dm-pulse-detail::-webkit-scrollbar{display:none}
+#dmBusinessPulseOverlay .dm-pulse-section{
+  background:linear-gradient(155deg,#12181e,#070b10 69%,#05070a);
+  border-color:rgba(157,176,192,.28);
+  border-radius:19px;
+  box-shadow:inset 0 1px rgba(255,255,255,.07);
+}
+#dmBusinessPulseOverlay .dm-pulse-decision{padding:16px}
+#dmBusinessPulseOverlay .dm-pulse-decision h3{
+  font-size:17px;
+  color:#f5f7fb;
+}
+#dmBusinessPulseOverlay .dm-pulse-section p{font-size:12px;color:#c1c9d1}
+#dmBusinessPulseOverlay .dm-pulse-stat{
+  background:linear-gradient(153deg,#111820,#070b10);
+  border-color:rgba(164,180,194,.20);
+  border-radius:16px;
+}
+#dmBusinessPulseOverlay .dm-pulse-stat>span,
+#dmBusinessPulseOverlay .dm-pulse-stat>small{color:#aebcc9}
+#dmBusinessPulseOverlay .dm-pulse-alert{
+  background:linear-gradient(155deg,#171a1e,#090b0d);
+  border-color:rgba(182,166,140,.27);
+  border-radius:15px;
+}
+#dmBusinessPulseOverlay .dm-pulse-buttons button{
+  min-height:44px;
+  border-radius:24px;
+  padding:10px 19px;
+  border:1px solid rgba(234,246,255,.95);
+  background:var(--dm-ui-gloss,linear-gradient(145deg,#e6f1fc,#9ebaca));
+  box-shadow:var(--dm-ui-gloss-shadow,inset 0 1px rgba(255,255,255,.9),0 2px 9px rgba(175,206,234,.25));
+  color:#102436;
+  font-size:12px;
+  font-weight:600;
+  text-shadow:0 1px rgba(255,255,255,.35);
+}
+#dmBusinessPulseOverlay .dm-pulse-buttons button .dm-circle-arrow{display:none}
+#dmBusinessPulseOverlay .dm-pulse-alert button{
+  min-height:44px;
+  border-radius:22px;
+  padding:8px 13px;
+  border-color:rgba(165,182,195,.30);
+  background:linear-gradient(155deg,#232c34,#0c1219);
+  color:#ebf2f8;
+  font-size:12px;
+}
+#dmBusinessPulseOverlay .dm-pulse-alert button .dm-circle-arrow{display:none}
+#dmBusinessPulseOverlay .dm-pulse-extra{
+  border-top:1px solid rgba(166,180,193,.16);
+}
+#dmBusinessPulseOverlay .dm-pulse-extra>summary{color:#c3ced8}
+#dmBusinessPulseOverlay .dm-pulse-head [data-pulse-close]{
+  background:linear-gradient(145deg,#28323c,#0d141b);
+  border:1px solid rgba(185,203,218,.42);
+  border-radius:50%;
+  color:#f2f7fc;
+}
