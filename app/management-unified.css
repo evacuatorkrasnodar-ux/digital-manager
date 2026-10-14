@@ -232,3 +232,30 @@ html.dm-decorations-paused #managementScreen #mgMenu .dm-manager-menu-warning sv
  #managementScreen #mgMenu .mg-menu-row .mg-icon > svg.ico,
  #managementScreen #mgMenu .dm-manager-menu-warning svg{animation:none!important;transform:none!important}
 }
+
+/* Three living miniatures in My Assistant, matched to the five-card menu. */
+#managementScreen #mgDetail .mg-unified-hub .mg-manager-art{
+ position:relative;overflow:hidden;
+ background:radial-gradient(circle at 28% 20%,rgba(126,178,221,.30),transparent 55%),linear-gradient(145deg,rgba(32,61,91,.64),rgba(4,15,29,.90));
+}
+#managementScreen #mgDetail .mg-manager-art-journey{color:#ffdca5;border-color:rgba(238,185,112,.48)}
+#managementScreen #mgDetail .mg-manager-art-voice{color:#e8f7ff}
+#managementScreen #mgDetail .mg-manager-art-autopilot{color:#d2e9ff}
+#managementScreen #mgDetail .mg-manager-art .ico{
+ width:25px;height:25px;overflow:visible;transform-origin:50% 50%;
+ animation:dm-manager-detail-glow 4.4s ease-in-out infinite;
+}
+#managementScreen #mgDetail .mg-manager-art-voice .ico{animation-delay:-1.3s}
+#managementScreen #mgDetail .mg-manager-art-autopilot .ico{animation-delay:-2.5s}
+@keyframes dm-manager-detail-glow{
+ 0%,100%{opacity:.82;transform:translateY(.6px) scale(.95);filter:drop-shadow(0 0 0 transparent)}
+ 50%{opacity:1;transform:translateY(-.7px) scale(1.07);filter:drop-shadow(0 0 4px currentColor)}
+}
+html[data-dm-performance="eco"] #managementScreen #mgDetail .mg-manager-art .ico{animation-duration:11s}
+html[data-dm-performance="simple"] #managementScreen #mgDetail .mg-manager-art .ico,
+html.dm-decorations-paused #managementScreen #mgDetail .mg-manager-art .ico{
+ animation:none!important;transform:none!important;filter:none!important;
+}
+@media(prefers-reduced-motion:reduce){
+ #managementScreen #mgDetail .mg-manager-art .ico{animation:none!important;transform:none!important}
+}
