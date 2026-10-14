@@ -99,10 +99,8 @@
     state.projects.push(p);
     state.events.unshift('Составлен учебный план: '+p.name);
     changed=true;
-   }else if(p.date!==day&&p.step<2){
-    p.step++;p.date=day;changed=true;
-    state.events.unshift('Пересмотрен внутренний план: '+p.name);
    }
+   // Do not claim execution merely because another day has passed.
   }
   if(changed)localStorage.setItem(PROJECT_KEY,JSON.stringify({projects:state.projects,events:state.events.slice(0,20)}));
   return state;
@@ -200,12 +198,35 @@
   details.append(summary,list);section.append(title,note,details);
   container.insertBefore(section,container.firstChild);
   renderLog(); }
+ // Demo autopilot works while a page is open. It is not a server worker:
+ // every pass is idempotent and uses only local records.
+ let scheduled=null,running=false;
+ function runAutonomousCheck(){
+  if(!isActive()||running)return;
+  running=true;
+  try{
+   window.DMInitiative?.scan?.();
+   autopilot();
+   projectReview();
+  }catch(e){console.warn('Roman demo autopilot check failed',e)}
+  finally{running=false}
+ }
+ function scheduleCheck(){
+  if(scheduled!==null)clearTimeout(scheduled);
+  scheduled=setTimeout(()=>{scheduled=null;runAutonomousCheck()},500);
+ }
  function boot(){
   const root=document.querySelector('#managementScreen #mgDetail');
   if(!root)return;
   const observer=new MutationObserver(()=>{inject();mountAutopilot()});
   observer.observe(root,{childList:true,subtree:false});
   inject();mountAutopilot();
+  if(isActive()){
+   scheduleCheck();
+   window.addEventListener('dm:sales-changed',scheduleCheck);
+   window.addEventListener('focus',scheduleCheck);
+   document.addEventListener('visibilitychange',()=>{if(!document.hidden)scheduleCheck()});
+  }
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
  window.DMRomanDemo=Object.freeze({isActive});
