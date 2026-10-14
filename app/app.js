@@ -1521,6 +1521,12 @@
     const value=keyboardOpen?Math.round(occluded)+'px':'0px';
     plasmaPanel.style.setProperty('--dm-chat-kb',value);
     document.documentElement.style.setProperty('--dm-chat-kb',value);
+    // Compact input: anchor the actual fixed elements to the visible keyboard
+    // edge instead of stacking safe-area and dock offsets on iOS.
+    const compactKeyboard=keyboardOpen&&!plasmaPanel.classList.contains('dm-chat-editor');
+    const controls=byId('dockHiddenControls');
+    plasmaPanel.style.bottom=compactKeyboard?(Math.round(occluded)+6)+'px':'';
+    controls.style.bottom=compactKeyboard?(Math.round(occluded)-32)+'px':'';
   }
   if(window.visualViewport){
     window.visualViewport.addEventListener('resize',positionPlasmaPanelForKeyboard);
@@ -1532,6 +1538,8 @@
     document.documentElement.classList.remove('dm-compose-keyboard-open');
     plasmaPanel.style.setProperty('--dm-chat-kb','0px');
     document.documentElement.style.setProperty('--dm-chat-kb','0px');
+    plasmaPanel.style.bottom='';
+    byId('dockHiddenControls').style.bottom='';
   });
   plasmaInput.addEventListener('input',()=>{dmSaveDraft();dmSyncComposer();dmScheduleComposerIdle();});
   plasmaPanel.addEventListener('pointerdown',dmScheduleComposerIdle);
@@ -1563,6 +1571,8 @@
     document.documentElement.classList.remove('dm-compose-keyboard-open');
     plasmaPanel.style.setProperty('--dm-chat-kb','0px');
     document.documentElement.style.setProperty('--dm-chat-kb','0px');
+    plasmaPanel.style.bottom='';
+    byId('dockHiddenControls').style.bottom='';
     clearTimeout(dmAckTimer);dmAckTimer=null;dmActionGlyphKind='';
     dmGlyphLayers.forEach(layer=>layer.classList.remove('is-visible','is-composer-glyph'));
     byId('dockLauncher').setAttribute('aria-label','Открыть действия помощника');
