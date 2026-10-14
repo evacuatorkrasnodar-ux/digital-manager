@@ -1,16 +1,12 @@
-/* Digital Manager OS · My Day Black Velvet v268
-   Authentic long photographic sunset. No image processing, cropping, or fake UI.
-   Overrides only visual styling of the personal calendar, not storage/navigation. */
+/* Digital Manager OS · My Day Black Velvet.
+   Neutral graphite background; preserve calendar geometry, storage and navigation. */
 .day-shell:not(.care-shell,.world-shell,.health-shell){
   background:#01040b;
-  --dm-scene:url('./assets/myday-long-v263.avif');
 }
 .day-shell:not(.care-shell,.world-shell,.health-shell)::before{
   content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;
   background:
-    linear-gradient(180deg,rgba(1,7,20,.36) 0%,rgba(0,7,17,.22) 105px,rgba(0,4,13,.05) 230px,rgba(0,3,11,.04) 475px,transparent 720px),
-    var(--dm-scene) center top/100% auto no-repeat,
-    #01040b;
+    var(--dm-personal-graphite-bg);
   filter:none;opacity:1;
 }
 .day-shell:not(.care-shell,.world-shell,.health-shell)::after{display:none!important;content:none!important}

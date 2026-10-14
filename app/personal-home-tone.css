@@ -1,24 +1,13 @@
-/* v2 — Home Black Velvet is the color reference for personal screens.
-   Keep the original sunset photo intact: no blue color wash, hue shift,
-   saturation filter or extra pseudo-element overlay.
-   This stylesheet changes paint only, never sizes, layout or interactions. */
+/* Personal background: consistent photographic-free Black Velvet graphite. Layout, components and Home hero stay untouched. */
 body > .day-shell.day-shell{
   background-color:#020203!important;
   --personal-glass:var(--dm-ui-surface)!important;
   --personal-shadow:inset 0 1px rgba(255,255,255,.095),0 7px 20px rgba(0,0,0,.35)!important;
 }
-/* The single photographic layer on Calendar, My World, Health and Cycle.
-   A neutral black contrast veil replaces the former blue-black veil. */
+/* One graphite foundation for My Day, My World, Care and Health. */
 body > .day-shell.day-shell::before{
   background:
-    linear-gradient(180deg,
-      rgba(0,0,0,.35) 0%,
-      rgba(0,0,0,.22) 105px,
-      rgba(0,0,0,.06) 230px,
-      rgba(0,0,0,.04) 475px,
-      transparent 720px),
-    url('./assets/myday-long-v263.avif') center top/100% auto no-repeat,
-    #020203!important;
+    var(--dm-personal-graphite-bg)!important;
   opacity:1!important;
   filter:none!important;
   -webkit-filter:none!important;
@@ -41,8 +30,7 @@ body > .day-shell.day-shell :is(
 ){
   background:var(--dm-ui-surface)!important;
 }
-/* Keep the photo and the same neutral contrast at every viewport width.
-   Existing responsive layout rules continue to control all geometry. */
+/* Preserve existing responsive geometry at every viewport width. */
 
 /* Business subpages use the same neutral Home foundation, too.
    The Home screen (#homeScreen) and its architectural hero stay untouched. */
@@ -56,19 +44,14 @@ body > .day-shell.day-shell :is(
     #020203!important;
 }
 
-/* A single fixed scene for My Day only, outside the scroll-locked calendar.
-   Suppress legacy shell photo layers; do not alter other personal pages. */
+/* My Day's fixed background is now the same graphite, not a photo. */
 body.dm-calendar-photo{background:#020203!important;}
 body.dm-calendar-photo::before{
   content:"";
   position:fixed;
   top:0;right:0;bottom:0;left:0;
   z-index:0;pointer-events:none;
-  /* Photograph without a tint or a second blurred overlay. */
-  background-image:url('./assets/myday-villa-sunset.jpg');
-  background-position:center center;
-  background-size:cover;
-  background-repeat:no-repeat;
+  background:var(--dm-personal-graphite-bg)!important;
 }
 body.dm-calendar-photo > .day-shell.day-shell{
   position:relative;z-index:1;
@@ -83,7 +66,7 @@ body.dm-calendar-photo > .day-shell.day-shell{
 body.dm-calendar-photo > .day-shell.day-shell::before{
   display:none!important;content:none!important;
 }
-/* Remove legacy shell fades; the calendar uses the body photograph alone. */
+/* Remove legacy shell fades; the calendar uses the single body graphite layer. */
 body.dm-calendar-photo > .day-shell.day-shell::after{
   display:none!important;content:none!important;
 }

@@ -88,7 +88,7 @@
 .day-shell #notesView .note-card-meta{font-size:10px;gap:7px;color:#a6c7df}
 .day-shell #notesView .note-card-to-plan{height:29px;min-height:29px}
 
-/* Other personal areas: same full-bleed night atmosphere as the calendar.
+/* Other personal areas: same graphite night background as the calendar.
    Real hardware safe insets remain managed by system-ui.css. */
 .day-shell:is(.care-shell,.world-shell,.health-shell){
   --personal-top:calc(10px + env(safe-area-inset-top,0px));
@@ -109,9 +109,7 @@
   z-index:-1;
   pointer-events:none;
   background:
-    linear-gradient(180deg,rgba(1,7,20,.40) 0%,rgba(1,9,21,.28) 130px,rgba(0,5,16,.50) 290px,rgba(1,5,14,.89) 530px,#01040b 820px),
-    url('./assets/myday-long-v263.avif') center top/100% auto no-repeat,
-    #01040b;
+    var(--dm-personal-graphite-bg);
   opacity:1;
   filter:none;
 }

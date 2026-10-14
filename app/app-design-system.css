@@ -5,6 +5,8 @@
 :root{
   --dm-ui-ink:#f1f8ff;
   --dm-ui-muted:#b8ccdd;
+  /* Single photo-free background for personal pages; the Home hero is independent. */
+  --dm-personal-graphite-bg:radial-gradient(ellipse 115% 65% at 22% 0%,rgba(75,92,107,.14),transparent 71%),linear-gradient(180deg,#090d12 0%,#06090d 48%,#020304 100%);
   /* Identical section-title rhythm in My Day, My World and Care. */
   --dm-ui-section-title-size:clamp(18px,4.8vw,19px);
   --dm-ui-section-title-compact-size:clamp(15px,4vw,17px);

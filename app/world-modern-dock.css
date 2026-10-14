@@ -51,16 +51,14 @@ body > .dm-world-standalone .dm-shared-plasma{z-index:2}
  :is(body > .bottom-nav[data-layout="five"] .dm-world-socket,body > .dm-world-standalone) .dm-laser-track{animation:none!important}
 }
 
-/* World-only scenic continuity: use the newly approved villa photograph,
-   not the old 100%-width sunset which ended halfway down the screen.
-   A single image covers the full 100dvh shell, including beneath the orb. */
+/* My World uses the shared photograph-free graphite layer. */
 body > .day-shell.world-shell.world-shell::before{
   content:""!important;
   display:block!important;
   position:absolute!important;
   inset:0!important;
   z-index:-2!important;
-  background:url('./assets/myday-villa-sunset.jpg') center center/cover no-repeat!important;
+  background:var(--dm-personal-graphite-bg)!important;
   opacity:1!important;
   filter:none!important;
   -webkit-filter:none!important;

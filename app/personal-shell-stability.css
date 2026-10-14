@@ -5,7 +5,7 @@ body > .day-shell.day-shell{
   position:relative;
   isolation:isolate;
 }
-/* The same photographic scene and identical gradient/position on every page. */
+/* Same neutral graphite foundation on all personal screens. */
 body > .day-shell.day-shell::before{
   content:"";
   position:absolute;
@@ -13,9 +13,7 @@ body > .day-shell.day-shell::before{
   z-index:-2;
   pointer-events:none;
   background:
-    linear-gradient(180deg,rgba(1,7,20,.36) 0%,rgba(0,7,17,.22) 105px,rgba(0,4,13,.05) 230px,rgba(0,3,11,.04) 475px,transparent 720px),
-    url('./assets/myday-long-v263.avif') center top/100% auto no-repeat,
-    #01040b!important;
+    var(--dm-personal-graphite-bg)!important;
   opacity:1!important;
   filter:none!important;
 }

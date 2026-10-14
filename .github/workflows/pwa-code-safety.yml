@@ -13,6 +13,7 @@ on:
       - refactor/navigation-unity-20261014
       - refactor/unified-card-arrows-20261014
       - refactor/inner-card-chevrons-20261014
+      - refactor/personal-graphite-background-20261014
       - test/visual-screen-audit-20261014
   pull_request:
     paths:
@@ -73,6 +74,8 @@ jobs:
           name: black-velvet-screen-audit
           path: visual-audit/
           if-no-files-found: ignore
+      - name: Verify photograph-free personal backgrounds
+        run: node scripts/check-personal-graphite.mjs
       - name: Browser smoke tests
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/pwa-http.log 2>&1 &
