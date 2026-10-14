@@ -17,7 +17,7 @@ const today=ts=>Boolean(ts)&&new Date(ts).toDateString()===new Date().toDateStri
 const uid=()=>Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8);
 let records=[];
 try{const r=JSON.parse(localStorage.getItem(KEY)||'[]');if(Array.isArray(r))records=r.filter(x=>x&&typeof x.id==='string'&&statuses[x.stage]&&typeof x.person==='string').slice(0,400)}catch(_){}
-let screen, previousFocus, pictureOpen=false;
+let screen, previousFocus, pictureOpen=false, selectedSaleId=null;
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(records.slice(0,400)));window.dispatchEvent(new CustomEvent('dm:sales-changed',{detail:totals()}));notifyInsight();return true}catch(e){console.warn(e);return false}};
 const totalWon=()=>records.filter(x=>x.stage==='won').reduce((n,x)=>n+(Number(x.amount)||0),0);
 const totals=()=>({sales:records.filter(x=>x.stage==='won').length,revenue:totalWon(),source:'user-entered-sales'});
@@ -167,8 +167,9 @@ function create(){
   if(b.id==='dmBusinessPictureOpen'){showPicture();return}
   if(b.dataset.expenseDelete){removePromotion(b.dataset.expenseDelete);return}
   if(b.dataset.pictureGoSales){closePicture();return}
-  if(b.id==='dmSalesNewLead'){screen.querySelector('#dmSalesFullLedger').open=true;goToNewSale();return}
+  if(b.id==='dmSalesNewLead'){const d=screen.querySelector('#dmSalesFullLedger');if(d)d.open=true;goToNewSale();return}
   if(b.dataset.saleOpen){openClient(b.dataset.saleOpen);return}
+  if(b.hasAttribute('data-sale-collapse')){selectedSaleId=null;render();return}
   if(b.dataset.saleOutcome){outcomeDialog(records.find(x=>x.id===b.dataset.saleId),b.dataset.saleOutcome);return}
   if(b.dataset.saleReopen){reopenSale(b.dataset.saleReopen);return}
   if(b.dataset.saleAction){action(b.dataset.saleAction,b.dataset.saleId);return}
@@ -223,31 +224,53 @@ function render(){
  form+'<section class="dm-sales-section dm-sales-terms"><details><summary>Для Уолл-стрит 😉</summary><p><b>Воронка продаж</b> — путь от «написал» до «купил».</p><p><b>Конверсия</b> — какая доля обратившихся купила.</p><p><b>Источник клиента</b> — откуда человек узнал о вас.</p><p><b>Потерянная сделка</b> — покупка, которая не состоялась.</p><p>Эти слова знать необязательно. Управляющий всё объяснит по-человечески.</p></details></section>';
  document.getElementById('dmSalesBody').insertAdjacentHTML('afterbegin','<button type="button" id="dmBusinessPictureOpen" class="dm-picture-open"><span><b>Что происходит с бизнесом?</b><small>Продажи · Деньги · Продвижение</small></span><span class="dm-circle-arrow" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></button>');
  document.getElementById('dmBusinessPictureOpen').insertAdjacentHTML('afterend','<button type="button" id="dmSalesNewLead" class="dm-sales-add-shortcut">+ Добавить обращение</button>');
- // Decision-first overview. Full original records and controls stay available,
- // but the owner no longer has to navigate dozens of dropdowns.
+ // One work surface: only the selected client has edit controls.
  const host=document.getElementById('dmSalesBody');
- const details=document.createElement('details');
- details.className='dm-sales-full-ledger';
- details.id='dmSalesFullLedger';
- details.innerHTML='<summary>Полный учёт и настройки</summary>';
- while(host.firstChild)details.append(host.firstChild);
+ const picture=host.querySelector('#dmBusinessPictureOpen');
+ const add=host.querySelector('#dmSalesNewLead');
+ const formEl=host.querySelector('#dmSalesForm');
+ host.replaceChildren();
+ if(picture)host.append(picture);
  const first=active.find(x=>x.stage==='new')||active[0]||null;
  const intro=document.createElement('section');
  intro.className='dm-sales-decision';
- const main=first?
-   '<strong>'+esc(first.person)+'</strong><p>'+esc(first.title)+' · '+esc(statuses[first.stage])+'</p>'+
-   '<button type="button" data-sale-action="'+(first.stage==='offer'?'offer':'reply')+'" data-sale-id="'+esc(first.id)+'">'+(first.stage==='offer'?'Готовое предложение':'Готовый ответ')+' ↗</button>'
-   :'<strong>Сейчас всё спокойно</strong><p>В ваших записях нет обращений, ожидающих продолжения.</p>';
- intro.innerHTML='<small>УПРАВЛЯЮЩИЙ · СЛЕДУЮЩЕЕ ДЕЙСТВИЕ</small>'+main;
+ intro.innerHTML='<small>УПРАВЛЯЮЩИЙ · ГЛАВНОЕ</small>'+
+   (first?'<strong>'+esc(first.person)+'</strong><p>'+esc(first.title)+' · '+esc(statuses[first.stage])+'</p>'+
+   '<button type="button" data-sale-action="'+(first.stage==='offer'?'offer':'reply')+'" data-sale-id="'+esc(first.id)+'">'+(first.stage==='offer'?'Готовое предложение':'Готовый ответ')+'</button>'
+   :'<strong>Сейчас всё спокойно</strong><p>Открытых обращений в записях нет.</p>');
  host.append(intro);
- const queue=document.createElement('section');
- queue.className='dm-sales-queue';
- queue.innerHTML='<h2>Клиенты в работе <span>'+active.length+'</span></h2>'+
-  (active.length?'<div class="dm-sales-queue-list">'+active.slice(0,25).map(x=>
+ const queue=document.createElement('section');queue.className='dm-sales-queue';
+ const ordered=[...active,...records.filter(x=>x.stage==='won'),...lost].slice(0,70);
+ queue.innerHTML='<h2>Клиенты <span>'+records.length+'</span></h2>'+
+  (ordered.length?'<div class="dm-sales-queue-list">'+ordered.map(x=>
     '<div class="dm-sales-queue-row"><div><strong>'+esc(x.person)+'</strong><small>'+esc(statuses[x.stage])+' · '+esc(x.title)+'</small></div>'+
-    '<button type="button" data-sale-open="'+esc(x.id)+'" aria-label="Открыть карточку клиента '+esc(x.person)+'">Подробнее ↗</button></div>'
-  ).join('')+'</div>':'<p>Новых дел пока нет.</p>');
- host.append(queue,details);
+    '<button type="button" data-sale-open="'+esc(x.id)+'" aria-label="Открыть '+esc(x.person)+'">Открыть</button></div>'
+   ).join('')+'</div>':'<p>Когда появятся клиенты, управляющий покажет их здесь.</p>');
+ host.append(queue);
+ const chosen=records.find(x=>x.id===selectedSaleId);
+ if(chosen){
+   const panel=document.createElement('section');panel.className='dm-sales-client-editor';
+   panel.setAttribute('data-sale-client-id',chosen.id);
+   panel.innerHTML='<div class="dm-sales-editor-head"><div><small>КАРТОЧКА КЛИЕНТА</small><h2>'+esc(chosen.person)+'</h2><p>'+esc(chosen.title)+' · '+esc(chosen.source)+'</p></div>'+
+     '<button type="button" data-sale-collapse aria-label="Закрыть карточку">×</button></div>'+
+     '<label>Этап обращения<select data-sale-stage="'+esc(chosen.id)+'">'+Object.entries(statuses).map(([k,v])=>'<option value="'+k+'"'+(k===chosen.stage?' selected':'')+'>'+v+'</option>').join('')+'</select></label>'+
+     (chosen.stage==='lost'?'<label>Причина<select data-sale-reason="'+esc(chosen.id)+'">'+options(reasons,chosen.lossReason||'Не знаем')+'</select></label>':'')+
+     (chosen.stage==='won'?'<p class="dm-sales-muted">Отмеченная сумма: '+rub(chosen.amount)+'</p><button type="button" data-sale-outcome="won" data-sale-id="'+esc(chosen.id)+'">Изменить сумму</button>':
+       '<button type="button" data-sale-action="'+(chosen.stage==='offer'?'offer':'reply')+'" data-sale-id="'+esc(chosen.id)+'">'+(chosen.stage==='offer'?'Подготовить предложение':'Готовый ответ')+'</button>')+
+     '<details class="dm-sales-editor-extra"><summary>Другие действия</summary><div class="dm-sales-editor-actions">'+
+     '<button type="button" data-sale-action="remind" data-sale-id="'+esc(chosen.id)+'">Напомнить</button>'+
+     '<button type="button" data-sale-action="task" data-sale-id="'+esc(chosen.id)+'">Создать дело</button>'+
+     (chosen.stage==='won'||chosen.stage==='lost'?'<button type="button" data-sale-reopen="'+esc(chosen.id)+'">Вернуть в работу</button>':
+       '<button type="button" data-sale-outcome="won" data-sale-id="'+esc(chosen.id)+'">Купил</button><button type="button" data-sale-outcome="lost" data-sale-id="'+esc(chosen.id)+'">Не сложилось</button>')+
+     '</div></details>';
+   host.append(panel);
+ }
+ const addRecord=document.createElement('details');addRecord.id='dmSalesFullLedger';
+ addRecord.className='dm-sales-full-ledger';addRecord.innerHTML='<summary>Добавить обращение</summary>';
+ if(formEl)addRecord.append(formEl);
+ host.append(addRecord);
+ if(add){add.remove();}
+}
 }
 function draftPanel(title,text){
  const old=document.getElementById('dmSalesDraft');
@@ -424,10 +447,12 @@ function confirmContact(id){
  return done?{ok:true,stage:'talk'}:{ok:false,reason:'save'};
 }
 function openClient(id){
+ if(typeof id!=='string'||!records.some(x=>x.id===id)){open();return}
+ selectedSaleId=id;
  open();
- if(typeof id!=='string')return;
- const target=[...screen.querySelectorAll('[data-sale-client-id]')].find(el=>el.dataset.saleClientId===id);
- if(target){const ledger=screen.querySelector('#dmSalesFullLedger');if(ledger)ledger.open=true;target.scrollIntoView({block:'center',behavior:'instant'});target.focus?.({preventScroll:true})}
+ render();
+ const target=screen?.querySelector('.dm-sales-client-editor');
+ target?.scrollIntoView({block:'nearest',behavior:'instant'});
 }
 function openPicture(source='picture'){
  open();showPicture();
