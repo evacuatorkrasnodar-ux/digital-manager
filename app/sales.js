@@ -84,6 +84,7 @@ function setStage(entry,stage,detail={}){
  entry.stage=stage;
  entry.changedAt=stamp;
  if(!save()){Object.assign(entry,snapshot);return false}
+ if(stage==='won'&&previous!=='won')window.dispatchEvent(new CustomEvent('dm:local-glyph',{detail:{kind:'finance'}}));
  render();
  return true;
 }
