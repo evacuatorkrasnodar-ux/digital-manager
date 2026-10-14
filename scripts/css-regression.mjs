@@ -39,6 +39,7 @@ const personalSelectors=[
  '.care-shell .care-health-entry-arrow',
  '.day-shell .world-entry-arrow',
  '.day-section-heading h2',
+ '.day-section-heading:not(.notebook-title) h2',
  '.world-head h2'
 ];
 const pages=[
@@ -97,7 +98,7 @@ try{
     }
    }
    if(path!=='index.html'){
-    const sectionSelector=path==='world.html'?'.world-head h2':'.day-section-heading h2';
+    const sectionSelector=path==='world.html'?'.world-head h2':path==='myday.html'?'.day-section-heading:not(.notebook-title) h2':'.day-section-heading h2';
     const headings=candidate[sectionSelector]||[];
     if(!headings.length)throw new Error(`Missing unified section titles on ${path}`);
     // Calendar-fixed is intentionally more compact on portrait phones.
