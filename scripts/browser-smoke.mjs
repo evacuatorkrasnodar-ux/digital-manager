@@ -86,6 +86,8 @@ try{
  await open('index.html?jump=finance');
  await page.waitForTimeout(700);
  if(!await page.locator('#dmBusinessPicture').count())throw new Error('Finance destination did not initialize');
+ await open('myday.html');
+ await open('care.html');
  if(errors.length)throw new Error('Uncaught page errors: '+errors.slice(0,8).join(' | '));
- console.log('PASS: main page, My World tabs, reload persistence, client and finance routes.');
+ console.log('PASS: main, My World, My Day and Care pages; storage persistence and deep links.');
 }finally{await browser.close();}
