@@ -28,6 +28,13 @@ try{
     inside:!!row&&rect.left>=row.left&&rect.right<=row.right+1,
     bareSymbol:el.textContent?.trim()||'',label:button?.getAttribute('data-mg-open')};
   }));
+  const menuRows=await page.locator('#mgMenu .mg-menu-row').evaluateAll(rows=>rows.map(el=>({
+    radius:getComputedStyle(el).borderRadius,
+    background:getComputedStyle(el).backgroundColor,
+    height:el.getBoundingClientRect().height
+  })));
+  if(menuRows.some(x=>x.radius!=='0px'||x.height>78))
+   throw Error('Management menu must use compact list rows: '+JSON.stringify(menuRows));
   if(circles.length!==5)throw Error('Expected 5 Management circle chevrons, found '+circles.length);
   for(const c of circles){
    if(!c.hasSvg||c.bareSymbol)throw Error('Legacy text chevron remains: '+JSON.stringify(c));
@@ -63,6 +70,8 @@ try{
 
   console.log('PASS Assistant navigation at '+width+'px: label, voice/dock settings intact');
   console.log('PASS Management at '+width+'px: 5 matching chrome circles and working menu click');
+  if(await page.locator('.dm-laser-track, .dm-laser-bloom, .dm-laser-core').count())
+    throw Error('Decorative laser SVG remains in Home');
   const day=await page.goto(base+'myday.html',{waitUntil:'networkidle',timeout:35000});
   if(!day?.ok())throw Error('My Day unavailable');
 

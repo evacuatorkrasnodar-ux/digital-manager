@@ -1130,20 +1130,28 @@ html.dm-plasma-panel-open .dock-launcher .dm-launcher-waves{
 
 /* Management overview: five tidy destinations, no duplicated controls. */
 #managementScreen #mgMenu.mg-compact-menu{
-  display:grid;gap:9px;padding:10px 0 22px;
+  display:grid;gap:0;padding:0;margin:12px 0 22px;
+  overflow:hidden;border:1px solid rgba(190,201,213,.13);
+  border-radius:17px;background:#14171c;
 }
 #managementScreen #mgMenu[hidden],
 #managementScreen #mgHomeLayoutPanel[hidden]{display:none!important}
 #managementScreen .mg-menu-row{
-  width:100%;min-height:68px;padding:12px 14px;display:flex;
+  width:100%;min-height:61px;padding:11px 14px;display:flex;
   align-items:center;gap:12px;text-align:left;
-  border:1px solid rgba(171,203,233,.17);border-radius:20px;
-  background:linear-gradient(125deg,rgba(34,47,65,.54),rgba(5,10,18,.78));
-  color:inherit;
+  border:0;border-radius:0;
+  border-bottom:1px solid rgba(211,219,227,.10);
+  background:transparent;color:inherit;
+}
+#managementScreen .mg-menu-row:last-child{border-bottom:0}
+#managementScreen .mg-menu-row:focus-visible{outline:2px solid #bbc9d7;outline-offset:-3px}
+#managementScreen .mg-menu-row .mg-icon{
+  width:32px;height:32px;min-width:32px;border-radius:9px;
+  background:#2d323a;box-shadow:none;border:1px solid rgba(255,255,255,.08)
 }
 #managementScreen .mg-menu-row .mg-copy{flex:1;min-width:0}
-#managementScreen .mg-menu-row .mg-copy strong{display:block;font-size:15px}
-#managementScreen .mg-menu-row .mg-copy small{display:block;margin-top:3px;line-height:1.35;font-size:11px;opacity:.68}
+#managementScreen .mg-menu-row .mg-copy strong{display:block;font-size:14px;font-weight:550}
+#managementScreen .mg-menu-row .mg-copy small{display:block;margin-top:2px;line-height:1.35;font-size:11px;opacity:.70}
 
 #managementScreen #mgHomeLayoutPanel{margin-top:8px}
 
