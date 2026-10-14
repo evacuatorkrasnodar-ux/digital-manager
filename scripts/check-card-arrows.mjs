@@ -40,6 +40,30 @@ try{
   console.log('PASS Management at '+width+'px: 5 matching chrome circles and working menu click');
   const day=await page.goto(base+'myday.html',{waitUntil:'networkidle',timeout:35000});
   if(!day?.ok())throw Error('My Day unavailable');
+
+  const tasks=await page.locator('a.dm-day-work-link').evaluate(el=>{
+   const arrow=el.querySelector(':scope > .dm-circle-arrow');
+   if(!arrow)throw Error('Tasks card has no shared circle arrow');
+   const card=el.getBoundingClientRect(),r=arrow.getBoundingClientRect();
+   const label=el.children[1]?.getBoundingClientRect();
+   const st=getComputedStyle(arrow),svg=arrow.querySelector('svg');
+   const icon=svg?getComputedStyle(svg):null;
+   return {href:el.getAttribute('href'),size:[r.width,r.height],icon:icon?[parseFloat(icon.width),parseFloat(icon.height)]:[],
+    round:st.borderRadius,display:st.display,svg:!!svg,
+    inside:r.left>=card.left-1&&r.right<=card.right+1,
+    textClear:!!label&&label.right<=r.left+1,
+    cardWidth:card.width};
+  });
+  if(!tasks.svg||tasks.display==='none'||!tasks.inside||!tasks.textClear||tasks.round!=='50%')
+   throw Error('Tasks arrow display/overlap problem at '+width+': '+JSON.stringify(tasks));
+  if(tasks.size.some(n=>Math.abs(n-22)>EPS)||tasks.icon.some(n=>Math.abs(n-13)>EPS))
+   throw Error('Tasks card lacks approved 22px/13px chrome arrow at '+width+': '+JSON.stringify(tasks));
+  if(!tasks.href?.includes('journal=mine'))throw Error('Tasks card navigation destination changed');
+  await page.locator('a.dm-day-work-link').click();
+  await page.waitForURL(/\/index\.html\?journal=mine(?:&|$)/,{timeout:12000});
+  console.log('PASS Tasks at '+width+'px: round arrow visible and whole-card link opens');
+  await page.goto(base+'myday.html',{waitUntil:'networkidle',timeout:35000});
+
   const arrow=await page.locator('a.world-entry').evaluate(el=>{
    const arrow=el.querySelector('.world-entry-arrow.dm-circle-arrow');
    if(!arrow)throw Error('Shared My World circle missing');
