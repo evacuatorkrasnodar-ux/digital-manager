@@ -125,6 +125,28 @@ function actionable(p){
    x.target==='sales'?'<button type="button" data-pulse-target="sales">Проверить '+circle+'</button>':
     '<button type="button" data-pulse-target="tasks">К делам '+circle+'</button>')+'</div>').join('')+'</div>';
 }
+function romanAssistantBrief(x){
+ if(localStorage.getItem('dm-roman-demo-active-v1')!=='1')return '';
+ const candidates=window.DMSalesScreen?.getWorkCandidates?.()||[];
+ const waiting=candidates.filter(item=>item.stage==='new');
+ const inTalk=candidates.filter(item=>item.stage==='talk'||item.stage==='offer');
+ const lead=waiting[0]||inTalk[0]||null;
+ const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const guidance=lead?
+  (waiting.length?'У нас '+waiting.length+' новых обращения без отметки об ответе. Я бы начал с '+lead.person+' — подготовленный ответ уже ждёт проверки.':
+   'В переговорах '+inTalk.length+' клиента. Предлагаю проверить следующий шаг по обращению '+lead.person+'.'):
+  'Сейчас среди записанных клиентов нет открытых обращений. Самое время посмотреть, какие услуги приносят больше заказов.';
+ const summary=x.amountCount?
+  'За '+label[currentPeriod].toLowerCase()+' отмечено продаж на '+fmtMoney(x.amount)+'.':
+  'За '+label[currentPeriod].toLowerCase()+' в записях нет завершённых продаж с суммами.';
+ return '<section class="dm-pulse-section" aria-label="Обзор управляющего для Романа">'+
+  '<small class="dm-pulse-eyebrow">ЦИФРОВОЙ УПРАВЛЯЮЩИЙ · СТУДИЯ «ЦИФРОВОЙ БИЗНЕС» · ПРИМЕР</small>'+
+  '<h3>Роман, я посмотрел наши дела</h3>'+
+  '<p>'+esc(summary)+' '+esc(guidance)+'</p>'+
+  '<p>Без паники: сначала клиенты, потом всё остальное. Деньги любят порядок, а клиенты — своевременные ответы. 🙂</p>'+
+  '<div class="dm-pulse-buttons"><button type="button" data-pulse-target="sales">Посмотреть клиентов '+circle+'</button></div>'+
+  '</section>';
+}
 function render(){
  const x=collect(currentPeriod);
  $('dmPulseTitle').textContent='Пульс бизнеса · '+label[currentPeriod];
@@ -132,8 +154,8 @@ function render(){
  const summary=x.recorded||x.promoCount||x.tasksDue?
   'Сводка построена только по внесённым записям и указанным датам. Текущий период ещё не завершился.':
   'За выбранный период подтверждённых записей для сводки пока нет. Это не означает отсутствие работы.';
- $('dmPulseDetail').innerHTML=
-  '<section class="dm-pulse-section"><small class="dm-pulse-eyebrow">ПЕРИОД: '+x.range+'</small>'+
+ $('dmPulseDetail').innerHTML=romanAssistantBrief(x)+
+  '<section class="dm-pulse-section"<small class="dm-pulse-eyebrow">ПЕРИОД: '+x.range+'</small>'+
    '<p>'+summary+'</p><div class="dm-pulse-stats">'+
    stat('Новых обращений',String(x.created),'За период · ранее: '+comparison.created)+
    stat('Отмечено покупок',String(x.won),'За период · ранее: '+comparison.won)+
