@@ -91,7 +91,7 @@ try{
     }
     for(let i=0;i<old.length;i++)for(const prop of props){
      // Section titles intentionally receive the newly unified type scale.
-     if(['.day-section-heading h2','.world-head h2'].includes(selector)&&['fontSize','fontWeight','letterSpacing','lineHeight','width','height'].includes(prop))continue;
+     if(['.day-section-heading h2','.day-section-heading:not(.notebook-title) h2','.world-head h2'].includes(selector)&&['fontSize','fontWeight','letterSpacing','lineHeight','width','height'].includes(prop))continue;
      if(old[i][prop]!==updated[i][prop]){
       diffs.push(`${selector}[${i}].${prop}: ${old[i][prop]} => ${updated[i][prop]}`);
      }
