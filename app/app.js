@@ -1717,6 +1717,47 @@
   }
   byId('dockQuickActions').addEventListener('pointerdown',dmScheduleQuickMenuHide);
   byId('dockQuickActions').addEventListener('focusin',dmScheduleQuickMenuHide);
+  // Hold the center dock plasma for voice. A normal tap keeps its existing
+  // three actions / text behavior. Start recognition on pointerup so iOS can
+  // treat it as a direct user gesture; never require holding while speaking.
+  const dmCenterOrb=byId('tabAssistant');
+  let dmHoldStart=0,dmHoldX=0,dmHoldY=0,dmHoldCancelled=false;
+  let dmSuppressCenterClick=false;
+  dmCenterOrb.addEventListener('pointerdown',event=>{
+    if(event.button!==0)return;
+    dmHoldStart=performance.now();
+    dmHoldX=event.clientX;dmHoldY=event.clientY;
+    dmHoldCancelled=false;
+  });
+  dmCenterOrb.addEventListener('pointermove',event=>{
+    if(Math.hypot(event.clientX-dmHoldX,event.clientY-dmHoldY)>14)dmHoldCancelled=true;
+  });
+  dmCenterOrb.addEventListener('pointercancel',()=>{dmHoldStart=0;dmHoldCancelled=true;});
+  dmCenterOrb.addEventListener('pointerup',event=>{
+    if(!dmHoldStart)return;
+    const held=performance.now()-dmHoldStart;
+    dmHoldStart=0;
+    if(dmHoldCancelled||held<550)return;
+    dmSuppressCenterClick=true;
+    setTimeout(()=>{dmSuppressCenterClick=false;},450);
+    event.preventDefault();
+    if(plasmaPanel.hidden){
+      closeDockQuickActions();
+      openPlasmaPanel(false);
+      if(voicePrefs.tapAction!=='voice')dmStartVoiceInput();
+    }else{
+      dmStartVoiceInput();
+    }
+  });
+  dmCenterOrb.addEventListener('click',event=>{
+    if(!dmSuppressCenterClick)return;
+    dmSuppressCenterClick=false;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  },true);
+  dmCenterOrb.addEventListener('contextmenu',event=>{
+    if(dmHoldStart||dmSuppressCenterClick)event.preventDefault();
+  });
   byId('dockLauncher').addEventListener('click',dmComposerOrbClick);
   byId('plasmaClose').addEventListener('click',closePlasmaPanel);
   byId('plasmaChatForm').addEventListener('submit',event=>{
