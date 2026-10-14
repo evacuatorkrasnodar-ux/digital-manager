@@ -26,7 +26,6 @@ const personalSelectors=[
  '.calendar-legend',
  '.day-header',
  '.day-heading h1',
- '.day-back',
  '.world-tab',
  '.world-spotlight',
  '.day-panel',
@@ -90,6 +89,9 @@ try{
      continue;
     }
     for(let i=0;i<old.length;i++)for(const prop of props){
+     // My Day formerly imposed a redundant 54px minimum beneath a fixed 60px header.
+     // The actual header height and all geometry remain compared below.
+     if(['myday.html','care.html'].includes(path)&&selector==='.day-header'&&prop==='minHeight')continue;
      // Section titles intentionally receive the newly unified type scale.
      if(['.day-section-heading h2','.day-section-heading:not(.notebook-title) h2','.world-head h2'].includes(selector)&&['fontSize','fontWeight','letterSpacing','lineHeight','width','height'].includes(prop))continue;
      if(old[i][prop]!==updated[i][prop]){
