@@ -178,3 +178,58 @@
 
 /* Keep the final glyph centered when the number of examples is 3n + 1. */
 #managementScreen .dm-glyph-showcase .dm-glyph-preview-actions > button:last-child:nth-child(3n + 1){grid-column:2}
+
+
+/* BLACK VELVET — DEEP REVEAL v1
+   Scope: appearance preview only. No dock, home screen, or assistant behavior changes.
+   Motion is an interior focus pull, not a surface flash. */
+#managementScreen .dm-glyph-stage-orb {
+  isolation:isolate;
+}
+#managementScreen .dm-glyph-stage-orb .dm-settings-demo-glyph {
+  z-index:6;
+  transform-origin:center center;
+  pointer-events:none;
+  will-change:auto;
+}
+#managementScreen .dm-glyph-stage-orb .dm-settings-demo-glyph.is-visible {
+  animation:dm-deep-reveal-focus 4.15s cubic-bezier(.22,1,.36,1) both;
+}
+#managementScreen .dm-glyph-stage-orb .dm-settings-demo-glyph.is-visible svg {
+  filter:drop-shadow(0 0 2px rgba(255,255,255,.25));
+}
+/* Focus pull: slightly small and diffuse within the glass, settle, then recede. */
+@keyframes dm-deep-reveal-focus {
+  0% {opacity:0;transform:translateZ(0) scale(.77);filter:blur(5px); }
+  9% {opacity:.13;transform:translateZ(0) scale(.81);filter:blur(4px); }
+  37% {opacity:.89;transform:translateZ(0) scale(.98);filter:blur(.6px); }
+  46%,68% {opacity:.93;transform:translateZ(0) scale(1);filter:blur(0); }
+  84% {opacity:.65;transform:translateZ(0) scale(.95);filter:blur(1px); }
+  100% {opacity:0;transform:translateZ(0) scale(.78);filter:blur(5px); }
+}
+/* A small inner light responds to the reveal; the sphere rim itself stays intact. */
+#managementScreen .dm-glyph-stage-orb::after {
+  content:"";
+  position:absolute;
+  inset:24%;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:3;
+  opacity:0;
+  background:radial-gradient(circle,rgba(255,255,255,.095) 0%,rgba(245,248,255,.025) 48%,transparent 75%);
+}
+#managementScreen .dm-glyph-stage.is-playing .dm-glyph-stage-orb::after {
+  animation:dm-deep-reveal-inner-light 4.15s ease-in-out both;
+}
+@keyframes dm-deep-reveal-inner-light {
+  0%,100%{opacity:0}
+  18%{opacity:.3}
+  45%,67%{opacity:.75}
+  85%{opacity:.12}
+}
+@media(prefers-reduced-motion:reduce) {
+  #managementScreen .dm-glyph-stage-orb .dm-settings-demo-glyph.is-visible{
+    animation:none!important;opacity:.92!important;transform:none!important;filter:none!important;
+  }
+  #managementScreen .dm-glyph-stage.is-playing .dm-glyph-stage-orb::after{animation:none!important}
+}
