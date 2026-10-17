@@ -91,65 +91,34 @@
  // Metrics are opt-in and local, stored separately from medications and cycle data.
  // Pressure and pulse may have multiple readings per day; manual steps represent
  // one total per day. Imported steps must already be daily aggregated totals.
- const metricNames={pressure:'Давление',pulse:'Пульс',steps:'Шаги'};
+ const metricNames={pressure:'Давление',pulse:'Пульс'};
  const metricOrigin=entry=>entry.source==='apple-health'?'Apple Health':entry.source==='health-connect'?'Health Connect':'Ручная запись';
  const timeNow=()=>{const d=new Date();return pad(d.getHours())+':'+pad(d.getMinutes());};
- const niceNum=n=>new Intl.NumberFormat('ru-RU').format(n);
  function metricValue(entry){
   if(entry.type==='pressure')return entry.systolic+'/'+entry.diastolic+' мм рт. ст.';
   if(entry.type==='pulse')return entry.bpm+' уд/мин';
-  return niceNum(entry.steps)+' шагов';
+  return '—';
  }
- function latestFor(type){
-  // Prefer the manually entered step count if multiple sources report one day.
-  const rows=metrics.filter(m=>m.type===type);
-  if(type==='steps'&&rows.length){
-   const same=rows.filter(m=>m.date===rows[0].date);
-   return same.find(m=>m.source==='manual')||same[0];
-  }
-  return rows[0]||null;
- }
+ function latestFor(type){return metrics.find(m=>m.type===type)||null;}
  function renderMetrics(){
   for(const [kind,valueId,metaId] of [
    ['pressure','healthPressureValue','healthPressureMeta'],
-   ['pulse','healthPulseValue','healthPulseMeta'],
-   ['steps','healthStepsValue','healthStepsMeta']
+   ['pulse','healthPulseValue','healthPulseMeta']
   ]){
    const entry=latestFor(kind);
-   $(valueId).textContent=entry?(kind==='pressure'?entry.systolic+'/'+entry.diastolic:kind==='pulse'?String(entry.bpm):niceNum(entry.steps)):'—';
+   $(valueId).textContent=entry?(kind==='pressure'?entry.systolic+'/'+entry.diastolic:String(entry.bpm)):'—';
    // The animated artwork is decorative; it must never suggest a live sensor.
    $(valueId).closest('.health-metric-tile').dataset.reading=entry?'saved':'empty';
-   $(metaId).textContent=entry?nice(entry.date)+(kind==='steps'?'':' · '+entry.time)+' · '+metricOrigin(entry):'Нет записей';
+   $(metaId).textContent=entry?nice(entry.date)+' · '+entry.time+' · '+metricOrigin(entry):'Нет записей';
   }
-  const chart=$('healthStepsChart');chart.replaceChildren();
-  const now=new Date();
-  let description=[];
-  const todayDate=new Date(now.getFullYear(),now.getMonth(),now.getDate());
-  const max=Math.max(1,...metrics.filter(m=>m.type==='steps'&&m.date<=today()&&m.date>=key(new Date(todayDate.getFullYear(),todayDate.getMonth(),todayDate.getDate()-6))).map(m=>Number(m.steps)||0));
-  for(let offset=6;offset>=0;offset--){
-   const d=new Date(todayDate);d.setDate(todayDate.getDate()-offset);
-   const date=key(d),samples=metrics.filter(m=>m.type==='steps'&&m.date===date);
-   const row=samples.find(m=>m.source==='manual')||samples[0];
-   const day=node('div','health-chart-day');
-   day.dataset.empty=String(!row);
-   const track=node('div','health-chart-track'),bar=node('span','health-chart-bar');
-   bar.style.height=row&&row.steps>0?Math.max(3,Math.round((row.steps/max)*100))+'%':'0%';
-   track.append(bar);
-   const label=node('small','',new Intl.DateTimeFormat('ru-RU',{weekday:'short'}).format(d));
-   day.append(track,label);
-   day.title=nice(date)+': '+(row?niceNum(row.steps)+' шагов':'нет данных');
-   chart.append(day);
-   description.push((offset===0?'Сегодня':nice(date))+': '+(row?row.steps+' шагов':'нет данных'));
-  }
-  chart.setAttribute('aria-label','Шаги за 7 дней. '+description.join('; '));
   const container=$('healthMetricsHistory');container.replaceChildren();
   const filter=$('healthMetricFilter').value;
-  const rows=metrics.filter(m=>filter==='all'||filter===m.type).slice(0,60);
+  const rows=metrics.filter(m=>m.type!=='steps'&&(filter==='all'||filter===m.type)).slice(0,60);
   if(!rows.length){blank(container,'Измерений пока нет. Нажми «+ Запись», чтобы сохранить своё первое значение.');return;}
   for(const entry of rows){
    const {row}=card(entry.type==='pressure'?'♡':entry.type==='pulse'?'◡':'◈',
     metricNames[entry.type]+' · '+metricValue(entry),
-    entry.note||'',nice(entry.date)+(entry.type==='steps'?'':' · '+entry.time)+' · '+metricOrigin(entry));
+    entry.note||'',nice(entry.date)+' · '+entry.time+' · '+metricOrigin(entry));
    if(entry.source==='manual')controls(row,()=>openMetric(entry),()=>eraseOne('metrics',entry));
    else{
     const actions=node('div','health-actions');
@@ -160,7 +129,7 @@
    }
    container.append(row);
   }
-  if(metrics.length>60)container.append(node('p','health-hint','Показаны последние 60 записей. Вся история входит в резервную копию.'));
+  if(metrics.filter(m=>m.type!=='steps').length>60)container.append(node('p','health-hint','Показаны последние 60 записей. Вся история входит в резервную копию.'));
  }
  function metricFields(){
   const kind=$('healthMetricType').value;
@@ -182,7 +151,6 @@
   $('healthMetricSys').value=entry?.systolic??'';
   $('healthMetricDia').value=entry?.diastolic??'';
   $('healthMetricBpm').value=entry?.bpm??'';
-  $('healthMetricSteps').value=entry?.steps??'';
   $('healthMetricNote').value=entry?.note||'';
   metricFields();
   $('healthMetricDialog').showModal();
@@ -200,7 +168,7 @@
   const previousId=$('healthMetricId').value;
   const prev=metrics.find(m=>m.id===previousId&&m.source==='manual');
   if(previousId&&!prev){toast('Импортированные данные нельзя менять вручную');return;}
-  const id=type==='steps'?'manual:steps:'+date:(prev?.type===type?prev.id:uid());
+  const id=prev?.type===type?prev.id:uid();
   const row={id,type,date,time,source:'manual',note:$('healthMetricNote').value.trim().slice(0,500),
    updatedAt:Date.now(),createdAt:prev?.createdAt||Date.now()};
   if(type==='pressure'){
@@ -210,9 +178,6 @@
   }else if(type==='pulse'){
    row.bpm=validMetricNumber($('healthMetricBpm').value,25,250);
    if(row.bpm===null){toast('Проверь пульс');return;}
-  }else{
-   row.steps=validMetricNumber($('healthMetricSteps').value,0,200000);
-   if(row.steps===null){toast('Проверь количество шагов');return;}
   }
   try{
    if(prev&&previousId!==id){
@@ -395,14 +360,18 @@
   }catch(err){error(err);}
  }
  async function eraseAll(){
-  if(!confirm('Удалить ВСЁ из этого раздела: показатели, воду, паузы, лекарства, сон и медицинские файлы?'))return;
-  if(!confirm('Подтвердить окончательное удаление всех медицинских данных из этого браузера?'))return;
+  if(!enabled||!db)return;
+  if(!confirm('Удалить давление, пульс, лекарства, сон и медицинские документы? Записи «Заботы» и шаги останутся.'))return;
+  if(!confirm('Подтвердить удаление медицинского журнала с этого устройства?'))return;
   try{
    await new Promise((resolve,reject)=>{
-    const t=db.transaction(STORES,'readwrite');for(const name of STORES)t.objectStore(name).clear();
+    const t=db.transaction(['settings',...JOURNAL_STORES],'readwrite');
+    for(const name of ['settings','meds','logs','sleep','docs'])t.objectStore(name).clear();
+    const cursor=t.objectStore('metrics').openCursor();
+    cursor.onsuccess=()=>{const cur=cursor.result;if(!cur)return;if(cur.value.type!=='steps')cur.delete();cur.continue();};
     t.oncomplete=resolve;t.onerror=()=>reject(t.error||new Error('Delete failed'));t.onabort=()=>reject(t.error||new Error('Delete canceled'));
    });
-   $('healthConsent').checked=false;$('healthEnable').disabled=true;await reload();toast('Все медицинские записи удалены');
+   $('healthConsent').checked=false;$('healthEnable').disabled=true;await reload();toast('Медицинский журнал удалён. Забота и шаги сохранены.');
   }catch(e){error(e);}
  }
  function reminderCheck(){
@@ -424,7 +393,7 @@
  function init(){
   document.querySelectorAll('[data-health]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.health)));
   const requested=new URLSearchParams(location.search).get('view');
-  setView(['metrics','wellness','meds','sleep','files'].includes(requested)?requested:'metrics');
+  setView(['metrics','meds','sleep','files'].includes(requested)?requested:'metrics');
   $('healthConsent').addEventListener('change',()=>$('healthEnable').disabled=!$('healthConsent').checked);
   $('healthEnable').addEventListener('click',async()=>{
    if(!$('healthConsent').checked||!db)return;
