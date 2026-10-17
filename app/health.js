@@ -1,7 +1,9 @@
 /* Health diary — explicit local opt-in, no server, no medical prescribing, no system push. */
 (() => {
  'use strict';
- const DB='digital-manager-private-health-v1',STORES=['settings','meds','logs','sleep','docs','metrics','wellness'];
+ const DB='digital-manager-private-health-v1';
+ const JOURNAL_STORES=['meds','logs','sleep','docs','metrics'];
+ const STORES=['settings',...JOURNAL_STORES,'wellness'];
  const $=id=>document.getElementById(id),pad=n=>String(n).padStart(2,'0');
  const key=d=>[d.getFullYear(),pad(d.getMonth()+1),pad(d.getDate())].join('-');
  const today=()=>key(new Date());
@@ -45,7 +47,7 @@
  }
  function uid(){return crypto?.randomUUID?.()||'health-'+Date.now()+'-'+Math.random().toString(36).slice(2);}
  async function reload(){
-  const [settings,...lists]=await Promise.all([tx('settings','readonly',s=>s.get('consent')),...STORES.slice(1).map(n=>tx(n,'readonly',s=>s.getAll()))]);
+  const [settings,...lists]=await Promise.all([tx('settings','readonly',s=>s.get('consent')),...JOURNAL_STORES.map(n=>tx(n,'readonly',s=>s.getAll()))]);
   enabled=settings?.enabled===true;
   [meds,logs,sleep,docs,metrics]=lists;
   meds.sort((a,b)=>(a.name||'').localeCompare(b.name||'','ru'));
