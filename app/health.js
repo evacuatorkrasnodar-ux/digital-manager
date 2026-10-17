@@ -1,7 +1,7 @@
 /* Health diary — explicit local opt-in, no server, no medical prescribing, no system push. */
 (() => {
  'use strict';
- const DB='digital-manager-private-health-v1',STORES=['settings','meds','logs','sleep','docs','metrics'];
+ const DB='digital-manager-private-health-v1',STORES=['settings','meds','logs','sleep','docs','metrics','wellness'];
  const $=id=>document.getElementById(id),pad=n=>String(n).padStart(2,'0');
  const key=d=>[d.getFullYear(),pad(d.getMonth()+1),pad(d.getDate())].join('-');
  const today=()=>key(new Date());
@@ -28,7 +28,7 @@
  function openDB(){
   return new Promise((resolve,reject)=>{
    if(!('indexedDB' in window)){reject(new Error('IndexedDB unavailable'));return;}
-   const r=indexedDB.open(DB,2);
+   const r=indexedDB.open(DB,3);
    r.onupgradeneeded=()=>{for(const name of STORES)if(!r.result.objectStoreNames.contains(name))r.result.createObjectStore(name,{keyPath:'id'});};
    r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error||new Error('DB unavailable'));
    r.onblocked=()=>reject(new Error('Close other tabs'));
@@ -380,16 +380,20 @@
    await reload();toast('Удалено');
   }catch(e){error(e);}
  }
- function exportRecords(){
+ async function exportRecords(){
   if(!db||!enabled)return;
-  const out={format:'digital-manager-health-journal',version:2,exportedAt:new Date().toISOString(),meds,logs,sleep,metrics,documentsExcluded:true,metricsNote:'Ручные измерения или явно разрешённый локальный импорт из нативного приложения'};
-  const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});
-  const url=URL.createObjectURL(blob),a=node('a');a.href=url;a.download='zhurnal-zdorovya-'+today()+'.json';
-  document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),5000);
-  toast('Копия записей создана. Документы в неё не входят.');
+  try{
+   // Read right before export: wellness tools update their own IndexedDB connection.
+   const wellness=await tx('wellness','readonly',s=>s.getAll());
+   const out={format:'digital-manager-health-journal',version:3,exportedAt:new Date().toISOString(),meds,logs,sleep,metrics,wellness,documentsExcluded:true,metricsNote:'Ручные измерения или явно разрешённый локальный импорт из нативного приложения'};
+   const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});
+   const url=URL.createObjectURL(blob),a=node('a');a.href=url;a.download='zhurnal-zdorovya-'+today()+'.json';
+   document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),5000);
+   toast('Копия записей создана, включая воду и паузы. Документы в неё не входят.');
+  }catch(err){error(err);}
  }
  async function eraseAll(){
-  if(!confirm('Удалить ВСЁ из этого раздела: лекарства, отметки, сон, медицинские файлы?'))return;
+  if(!confirm('Удалить ВСЁ из этого раздела: показатели, воду, паузы, лекарства, сон и медицинские файлы?'))return;
   if(!confirm('Подтвердить окончательное удаление всех медицинских данных из этого браузера?'))return;
   try{
    await new Promise((resolve,reject)=>{
