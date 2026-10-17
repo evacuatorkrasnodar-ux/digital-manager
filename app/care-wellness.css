@@ -135,3 +135,10 @@ body.theme-light .care-shell .wellness-panel h3 { color:#17202a; }
 .care-shell .care-cycle-entry small{font-size:11px;color:#aab6c2}
 .care-shell .care-cycle-arrow{font-size:23px;color:#b9c6d1}
 .care-shell #careCycleContent[hidden],.care-shell #healthWellness[hidden]{display:none!important}
+
+.care-shell .care-wellness-data{margin:4px 0 12px;padding:10px 12px;border:1px solid rgba(159,172,184,.25);border-radius:17px;color:#b7c4cf;background:rgba(19,24,31,.52)}
+.care-shell .care-wellness-data summary{cursor:pointer;font-size:11px;font-weight:480;color:#c9d2da;list-style:inside disclosure-closed;-webkit-tap-highlight-color:transparent}
+.care-shell .care-wellness-data[open] summary{margin-bottom:10px}
+.care-shell .care-wellness-data p{margin:9px 0;font-size:11px;line-height:1.5;color:#b7c4cf}
+.care-shell .care-wellness-data .wellness-buttons{gap:7px}
+.care-shell .care-wellness-data .wellness-buttons button{padding:9px 12px;min-height:36px}
