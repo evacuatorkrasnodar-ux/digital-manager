@@ -72,6 +72,7 @@
  <section class="health-head"><span class="day-eyebrow">МОЁ ЗДОРОВЬЕ ♡</span><h2>Здоровье любит внимание. И выходные.</h2><p>Пульс, сон и записи — всё под рукой. Без очереди в регистратуру.</p></section>
  <nav class="health-tabs" aria-label="Разделы здоровья">
    <button class="active" data-health="metrics" aria-pressed="true" type="button">♡ Показатели</button>
+   <button data-health="wellness" aria-pressed="false" type="button">♡ Забота</button>
    <button data-health="meds" aria-pressed="false" type="button">◈ Лекарства</button>
    <button data-health="sleep" aria-pressed="false" type="button">☾ Сон</button>
    <button data-health="files" aria-pressed="false" type="button">▤ Документы</button>
@@ -134,6 +135,26 @@
     </article>
    </div>
 
+   <div class="health-week-panel"><div class="health-week-heading"><h3>Шаги за 7 дней</h3><span>По сохранённым данным</span></div><div id="healthStepsChart" class="health-week-chart" role="img" aria-label="Шаги за последние семь дней"></div></div>
+   <div class="day-section-heading health-history-heading"><h2>История измерений</h2><label class="health-filter-label"><span class="sr-only">Фильтр измерений</span><select id="healthMetricFilter"><option value="all">Все</option><option value="pressure">Давление</option><option value="pulse">Пульс</option><option value="steps">Шаги</option></select></label></div>
+   <div id="healthMetricsHistory" class="health-list"></div>
+   <section class="health-device-panel" aria-labelledby="healthDeviceTitle">
+    <div class="health-device-heading"><h3 id="healthDeviceTitle">Телефон и смарт-часы</h3><span class="health-device-label">Подготовка</span></div>
+    <p>Apple Health / Apple Watch и Health Connect / Android: интерфейс подключения подготовлен. В веб-версии прямой доступ к данным часов отсутствует.</p>
+    <div class="health-provider-row health-provider-link-row">
+     <div class="health-provider-info"><strong>Apple Health</strong><span id="healthAppleStatus">Синхронизация не подключена</span></div>
+     <a class="health-provider-open" href="https://apps.apple.com/app/apple-health/id1242545199" target="_blank" rel="noopener noreferrer" aria-label="Открыть Apple Health в App Store"><svg class="health-store-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 4.2 18.6 20M14.8 4.2 5.4 20M4.3 15.8h15.4"/></svg><span>App Store</span></a>
+    </div>
+    <div class="health-provider-row health-provider-link-row">
+     <div class="health-provider-info"><strong>Health Connect</strong><span id="healthAndroidStatus">Синхронизация не подключена</span></div>
+     <a class="health-provider-open" href="https://play.google.com/store/apps/details?id=com.google.android.apps.healthdata" target="_blank" rel="noopener noreferrer" aria-label="Открыть Health Connect в Google Play"><svg class="health-store-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 3.5v17l14-8.5z"/></svg><span>Google Play</span></a>
+    </div>
+    <p class="health-device-platform-help">На iPhone приложение «Здоровье» обычно уже установлено. На Android 14 и новее Health Connect находится в настройках телефона. <a href="https://support.google.com/android/answer/12201227?hl=ru" target="_blank" rel="noopener noreferrer">Где найти в Android</a></p>
+    <button type="button" class="health-native-sync" id="healthSync" hidden>Получить разрешённые показатели</button>
+    <p class="health-device-foot">Только с вашего разрешения. Облачная синхронизация и отображение на часах пока не реализованы.</p>
+   </section>
+  </section>
+  <section class="health-view" data-health-view="wellness" hidden>
    <section class="health-wellness" id="healthWellness" aria-labelledby="healthWellnessTitle">
     <header class="health-wellness-head">
      <p class="day-eyebrow">SEYVEO · ЗАБОТА О СЕБЕ</p>
@@ -213,24 +234,6 @@
     </section>
    </section>
 
-   <div class="health-week-panel"><div class="health-week-heading"><h3>Шаги за 7 дней</h3><span>По сохранённым данным</span></div><div id="healthStepsChart" class="health-week-chart" role="img" aria-label="Шаги за последние семь дней"></div></div>
-   <div class="day-section-heading health-history-heading"><h2>История измерений</h2><label class="health-filter-label"><span class="sr-only">Фильтр измерений</span><select id="healthMetricFilter"><option value="all">Все</option><option value="pressure">Давление</option><option value="pulse">Пульс</option><option value="steps">Шаги</option></select></label></div>
-   <div id="healthMetricsHistory" class="health-list"></div>
-   <section class="health-device-panel" aria-labelledby="healthDeviceTitle">
-    <div class="health-device-heading"><h3 id="healthDeviceTitle">Телефон и смарт-часы</h3><span class="health-device-label">Подготовка</span></div>
-    <p>Apple Health / Apple Watch и Health Connect / Android: интерфейс подключения подготовлен. В веб-версии прямой доступ к данным часов отсутствует.</p>
-    <div class="health-provider-row health-provider-link-row">
-     <div class="health-provider-info"><strong>Apple Health</strong><span id="healthAppleStatus">Синхронизация не подключена</span></div>
-     <a class="health-provider-open" href="https://apps.apple.com/app/apple-health/id1242545199" target="_blank" rel="noopener noreferrer" aria-label="Открыть Apple Health в App Store"><svg class="health-store-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 4.2 18.6 20M14.8 4.2 5.4 20M4.3 15.8h15.4"/></svg><span>App Store</span></a>
-    </div>
-    <div class="health-provider-row health-provider-link-row">
-     <div class="health-provider-info"><strong>Health Connect</strong><span id="healthAndroidStatus">Синхронизация не подключена</span></div>
-     <a class="health-provider-open" href="https://play.google.com/store/apps/details?id=com.google.android.apps.healthdata" target="_blank" rel="noopener noreferrer" aria-label="Открыть Health Connect в Google Play"><svg class="health-store-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 3.5v17l14-8.5z"/></svg><span>Google Play</span></a>
-    </div>
-    <p class="health-device-platform-help">На iPhone приложение «Здоровье» обычно уже установлено. На Android 14 и новее Health Connect находится в настройках телефона. <a href="https://support.google.com/android/answer/12201227?hl=ru" target="_blank" rel="noopener noreferrer">Где найти в Android</a></p>
-    <button type="button" class="health-native-sync" id="healthSync" hidden>Получить разрешённые показатели</button>
-    <p class="health-device-foot">Только с вашего разрешения. Облачная синхронизация и отображение на часах пока не реализованы.</p>
-   </section>
   </section>
   <section class="health-view" data-health-view="meds" hidden>
    <div class="day-section-heading"><div><p class="day-eyebrow">ПРИЁМ ПО НАЗНАЧЕНИЮ</p><h2>Мои лекарства</h2></div><button class="day-add" id="healthAddMed" type="button">+ Добавить</button></div>
