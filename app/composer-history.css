@@ -177,7 +177,9 @@ html.dm-plasma-panel-open.dm-compose-keyboard-open #dockLauncher.dock-launcher{
 }
 html.dm-plasma-panel-open.dm-compose-editor.dm-compose-keyboard-open #plasmaChatPanel.dm-chat-panel.dm-chat-editor{
   bottom:calc(var(--dm-chat-visible-bottom,0px) + 90px)!important;
-  max-height:max(90px,calc(var(--dm-chat-visible-height,100dvh) - 125px))!important;
+  /* Bottom reserves 90px for the plasma. Top reserves the greater of
+     54px or the camera/status-bar safe inset + 12px. */
+  max-height:max(90px,calc(var(--dm-chat-visible-height,100dvh) - 90px - max(54px,calc(env(safe-area-inset-top,0px) + 12px))))!important;
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
   overscroll-behavior:contain;
