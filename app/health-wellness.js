@@ -239,6 +239,11 @@
   function init() {
     if (!$('healthWellnessDetail')) return;
     document.querySelectorAll('[data-wellness-open]').forEach(b => b.addEventListener('click', () => toggle(b.dataset.wellnessOpen)));
+    // A wellness session must never continue invisibly on a different health tab.
+    document.querySelectorAll('[data-health]').forEach(b => b.addEventListener('click', () => {
+      if (b.dataset.health !== 'wellness' && session) stop(false);
+    }));
+    window.addEventListener('dm-health-leave', () => { if (session) stop(false); });
     document.querySelectorAll('[data-water-add]').forEach(b => b.addEventListener('click', () => void saveWater(Number(b.dataset.waterAdd))));
     $('wellnessWaterUndo').addEventListener('click', () => { if (lastWaterAdded) void saveWater(-lastWaterAdded); });
     $('wellnessGoalSave').addEventListener('click', () => void saveGoal());
