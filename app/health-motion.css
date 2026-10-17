@@ -31,11 +31,6 @@
   --metric-soft:rgba(231,83,146,.23);
   --metric-bright:#ffe0eb;
 }
-.health-shell .health-metric-tile--steps{
-  --metric-light:#7fe9d6;
-  --metric-soft:rgba(42,201,177,.21);
-  --metric-bright:#ddfff6;
-}
 .health-shell .health-metric-tile::before{
   content:"";
   position:absolute;
@@ -138,21 +133,6 @@
   stroke-dashoffset:74;
   animation:dmHeartTrace 3.6s ease-in-out infinite;
 }
-.health-shell .health-art-steps{
-  fill:rgba(109,235,210,.41);
-  stroke:var(--metric-bright);
-  stroke-width:2;
-}
-.health-shell .health-step-left{
-  transform-box:fill-box;
-  transform-origin:center;
-  animation:dmStepLeft 3s ease-in-out infinite;
-}
-.health-shell .health-step-right{
-  transform-box:fill-box;
-  transform-origin:center;
-  animation:dmStepRight 3s ease-in-out infinite;
-}
 .health-shell .health-metric-tile strong{
   width:100%;
   margin:7px 0 2px;
@@ -194,10 +174,6 @@
 .health-shell .health-metric-tile[data-reading="empty"] .health-heart-trace{
   animation-duration:6s;
 }
-.health-shell .health-chart-bar{
-  transform-origin:center bottom;
-  animation:dmStepsGrow .85s cubic-bezier(.2,.75,.25,1) both;
-}
 @keyframes dmMetricOrbit{
   to{transform:rotate(360deg)}
 }
@@ -219,18 +195,6 @@
   42%,69%{stroke-dashoffset:0;opacity:1}
   100%{stroke-dashoffset:-74;opacity:.1}
 }
-@keyframes dmStepLeft{
-  0%,100%{opacity:.64;translate:0 1px}
-  38%{opacity:1;translate:0 -3px}
-}
-@keyframes dmStepRight{
-  0%,100%{opacity:1;translate:0 -2px}
-  62%{opacity:.58;translate:0 2px}
-}
-@keyframes dmStepsGrow{
-  from{transform:scaleY(.03);opacity:.2}
-  to{transform:scaleY(1);opacity:1}
-}
 @media(max-width:370px){
   .health-shell .health-metric-tile{min-height:177px;padding:9px 5px 8px}
   .health-shell .health-metric-tile .health-metric-art{
@@ -245,10 +209,7 @@
   .health-shell .health-metric-orbit,
   .health-shell .health-pressure-needle,
   .health-shell .health-art-heart,
-  .health-shell .health-heart-trace,
-  .health-shell .health-step-left,
-  .health-shell .health-step-right,
-  .health-shell .health-chart-bar{
+  .health-shell .health-heart-trace{
     animation:none!important;
     transition:none!important;
   }
