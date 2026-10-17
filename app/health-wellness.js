@@ -18,7 +18,7 @@
     { duration: 15, title: 'Поморгай спокойно', hint: 'Несколько мягких морганий. Не жмурься и не напрягай глаза.' },
     { duration: 25, title: 'Близко и далеко', hint: 'Без усилий переводи взгляд с близкого предмета на далёкий.' }
   ];
-  let db = null, busy = false, tab = '', lastWaterAdded = 0, today = dateKey();
+  let db = null, connecting = false, busy = false, tab = '', lastWaterAdded = 0, today = dateKey();
   let water = 0, goal = 0, breathingDone = 0, eyesDone = 0;
   let session = null, interval = null;
 
@@ -152,6 +152,7 @@
       $('wellnessEyeTitle').textContent = completed ? 'Готово. Глазам пора отдохнуть от экрана.' : eyeSteps[0].title;
       $('wellnessEyeHint').textContent = completed ? 'Ты завершил короткую паузу.' : eyeSteps[0].hint;
       $('wellnessEyeTime').textContent = completed ? '00:00' : '01:00';
+      $('wellnessEyeProgress').style.width = completed ? '100%' : '0%';
     }
     if (completed && old) {
       message(old.kind === 'breathing' ? 'Дыхательная пауза завершена.' : 'Отдых для глаз завершён.');
@@ -212,15 +213,25 @@
     const host = $('healthMain');
     if (!host) return;
     const init = async () => {
-      if (host.hidden || db) return;
+      if (host.hidden || db || connecting) return;
+      connecting = true;
       try {
-        db = await open();
+        const opened = await open();
+        if (host.hidden) { opened.close(); return; }
+        db = opened;
         db.onversionchange = () => { db.close(); db = null; stop(false); message('Страница обновлена в другой вкладке. Перезагрузи её.'); };
         await load();
       } catch (err) { console.error('Health wellness startup:', err); message('Локальное хранилище сейчас недоступно.'); }
+      finally { connecting = false; }
     };
     new MutationObserver(() => {
-      if (host.hidden) { stop(false); lastWaterAdded = 0; return; }
+      if (host.hidden) {
+        stop(false); lastWaterAdded = 0;
+        if (db) { db.close(); db = null; }
+        water = 0; goal = 0; breathingDone = 0; eyesDone = 0;
+        render();
+        return;
+      }
       void init();
     }).observe(host, { attributes: true, attributeFilter: ['hidden'] });
     void init();
