@@ -142,3 +142,15 @@ body.theme-light .care-shell .wellness-panel h3 { color:#17202a; }
 .care-shell .care-wellness-data p{margin:9px 0;font-size:11px;line-height:1.5;color:#b7c4cf}
 .care-shell .care-wellness-data .wellness-buttons{gap:7px}
 .care-shell .care-wellness-data .wellness-buttons button{padding:9px 12px;min-height:36px}
+
+/* Light counterpart — same layout, dark ink and subtle platinum borders. */
+:is(:root[data-theme="light"],html.theme-light,body.theme-light) .care-shell .wellness-card svg{stroke:#536274}
+:is(:root[data-theme="light"],html.theme-light,body.theme-light) .care-shell .wellness-card small{color:#606f80}
+:is(:root[data-theme="light"],html.theme-light,body.theme-light) .care-shell .wellness-stat span,
+:is(:root[data-theme="light"],html.theme-light,body.theme-light) .care-shell .wellness-panel p{color:#556475}
+:is(:root[data-theme="light"],html.theme-light,body.theme-light) .care-shell .wellness-steps-day span{color:#283442}
+:is(:root[data-theme="light"],html.theme-light,body.theme-light) .care-shell .care-cycle-entry button{color:#202a34;border-color:#d2dbe4;background:linear-gradient(145deg,#fff,#f2f5f7)}
+:is(:root[data-theme="light"],html.theme-light,body.theme-light) .care-shell .care-cycle-entry small{color:#627282}
+:is(:root[data-theme="light"],html.theme-light,body.theme-light) .care-shell .care-wellness-data{color:#334153;border-color:#d0dae4;background:#f8fafc}
+:is(:root[data-theme="light"],html.theme-light,body.theme-light) .care-shell .care-wellness-data summary{color:#334153}
+:is(:root[data-theme="light"],html.theme-light,body.theme-light) .care-shell .care-wellness-data p{color:#586a7c}
