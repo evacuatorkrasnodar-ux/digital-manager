@@ -154,3 +154,40 @@
 @media(max-width:700px){
   #plasmaChatPanel.dm-chat-panel.dm-chat-editor textarea#plasmaChatInput{font-size:16px}
 }
+
+/* iPhone keyboard stability, v6: the composer and its real plasma use ONE
+   visible-viewport anchor. The body, Home cards and dock geometry stay intact.
+   Scrolling long text happens inside the expanded glass panel, not by sliding
+   the entire interface under the keyboard. */
+html.dm-compose-keyboard-open #plasmaChatPanel.dm-chat-panel{
+  animation:none!important;
+  transition:none!important;
+  overscroll-behavior:contain;
+}
+html.dm-plasma-panel-open.dm-compose-keyboard-open #plasmaChatPanel.dm-chat-panel:not(.dm-chat-editor){
+  bottom:calc(var(--dm-chat-visible-bottom,0px) + 16px)!important;
+  max-height:max(90px,calc(var(--dm-chat-visible-height,100dvh) - 48px))!important;
+}
+html.dm-plasma-panel-open.dm-compose-keyboard-open #dockHiddenControls.dock-hidden-controls{
+  bottom:calc(var(--dm-chat-visible-bottom,0px) - 22px)!important;
+  transition:none!important;
+}
+html.dm-plasma-panel-open.dm-compose-keyboard-open #dockLauncher.dock-launcher{
+  transition:none!important;
+}
+html.dm-plasma-panel-open.dm-compose-editor.dm-compose-keyboard-open #plasmaChatPanel.dm-chat-panel.dm-chat-editor{
+  bottom:calc(var(--dm-chat-visible-bottom,0px) + 90px)!important;
+  max-height:max(90px,calc(var(--dm-chat-visible-height,100dvh) - 125px))!important;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+}
+html.dm-plasma-panel-open.dm-compose-editor.dm-compose-keyboard-open #plasmaChatPanel.dm-chat-editor textarea#plasmaChatInput{
+  height:clamp(86px,calc(var(--dm-chat-visible-height,100dvh) * .28),150px)!important;
+  min-height:86px!important;
+  max-height:150px!important;
+}
+html.dm-compose-keyboard-open,
+html.dm-compose-keyboard-open body{
+  overscroll-behavior-y:contain;
+}
