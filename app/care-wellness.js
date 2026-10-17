@@ -265,6 +265,47 @@
     }catch(err){console.error('Care steps:',err);message('Не удалось сохранить шаги.');}
     finally{busy=false;}
   }
+
+  async function exportCare() {
+    if(!db)return;
+    try {
+      const wellness=await transact('readonly',store=>store.getAll());
+      const metrics=(await transact('readonly',store=>store.getAll(),'metrics')).filter(row=>row.type==='steps');
+      const backup={format:'seyveo-care-journal',version:1,exportedAt:new Date().toISOString(),wellness,steps:metrics,cycleExcluded:true};
+      const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});
+      const url=URL.createObjectURL(blob),a=document.createElement('a');
+      a.href=url;a.download='seyveo-zabota-'+dateKey()+'.json';
+      document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),5000);
+      message('Копия воды, шагов и пауз создана. Женский цикл хранится отдельно.');
+    }catch(err){console.error('Care export:',err);message('Не удалось создать копию.');}
+  }
+  async function eraseCare() {
+    if(!db||busy)return;
+    if(!confirm('Удалить воду, шаги и записи пауз? Женский цикл и медицинские данные останутся.'))return;
+    if(!confirm('Удалить записи «Заботы» из этого браузера без возможности восстановления?'))return;
+    busy=true;
+    try {
+      if(session)stop(false);
+      await new Promise((resolve,reject)=>{
+        const transaction=db.transaction(['wellness','metrics'],'readwrite');
+        transaction.objectStore('wellness').clear();
+        const query=transaction.objectStore('metrics').openCursor();
+        query.onsuccess=()=>{
+          const cur=query.result;if(!cur)return;
+          if(cur.value.type==='steps')cur.delete();
+          cur.continue();
+        };
+        transaction.oncomplete=resolve;
+        transaction.onerror=()=>reject(transaction.error||new Error('Deletion failed'));
+        transaction.onabort=()=>reject(transaction.error||new Error('Deletion aborted'));
+      });
+      lastWaterAdded=0;stepsRecords=[];
+      await load();
+      message('Записи «Заботы» удалены. Женский цикл не затронут.');
+    }catch(err){console.error('Care erase:',err);message('Не удалось удалить записи.');}
+    finally{busy=false;}
+  }
+
   function toggleCycle() {
     const content=$('careCycleContent'),opening=content.hidden;
     content.hidden=!opening;
@@ -316,6 +357,8 @@
     $('wellnessStepsSave').addEventListener('click',()=>void saveSteps());
     $('wellnessStepsDelete').addEventListener('click',()=>void saveSteps(true));
     $('careToggleCycle').addEventListener('click',toggleCycle);
+    $('careWellnessExport').addEventListener('click',()=>void exportCare());
+    $('careWellnessErase').addEventListener('click',()=>void eraseCare());
     if(new URLSearchParams(location.search).get('view')==='cycle')toggleCycle();
     initStorage();
   }
