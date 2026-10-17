@@ -34,9 +34,10 @@
   <link rel="stylesheet" href="./top-tabs.css?v=288">
   <link rel="stylesheet" href="./control-dock.css?v=291">
   <script src="./care.js?v=283" defer></script>
+  <script src="./care-wellness.js?v=1" defer></script>
   <script src="./system-ui.js?v=283" defer></script>
   <script src="./polish.js?v=260" defer></script>
-  <title>Женский календарь — Моё здоровье · Цифровой управляющий</title>
+  <title>Забота о себе — SEYVEO</title>
   <link rel="stylesheet" href="./black-velvet-premium.css?v=294">
   <link rel="stylesheet" href="./unified-quiet-glass.css?v=295">
   <link rel="stylesheet" href="./card-outline-theme.css?v=336">
@@ -56,6 +57,7 @@
   <link rel="stylesheet" href="./quick-actions-velvet.css?v=13">
   <script src="./assistant-quick-menu.js?v=6" defer></script>
   <link rel="stylesheet" href="./app-design-system.css?v=15">
+  <link rel="stylesheet" href="./care-wellness.css?v=1">
 </head>
 <body>
   <div class="day-shell care-shell">
@@ -70,16 +72,115 @@
       <a class="day-tab" href="./myday.html?view=notes"><svg class="day-tab-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h11l3 3v15H5z"/><path d="M16 3v4h3M8 12h8M8 16h5"/></svg>Блокнот</a>
       <span class="day-tab active" aria-current="page"><svg class="day-tab-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 5a5.5 5.5 0 0 0-7.8 0L12 6l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.2A5.5 5.5 0 0 0 20.8 5z"/></svg>Здоровье</span>
     </nav>
-    <section class="health-head care-section-intro" aria-label="О разделе «Цикл»"><span class="day-eyebrow">ЖЕНСКОЕ ЗДОРОВЬЕ ♡</span><h2>Цикл под контролем. Ну, насколько он согласен.</h2><p>Даты и самочувствие — здесь. Память может взять выходной.</p></section>
+    <section class="health-head care-section-intro" aria-label="Забота о себе"><span class="day-eyebrow">ЗАБОТА ♡</span><h2>Немного времени для себя.</h2><p>Вода, шаги, дыхание и отдых для глаз. Спокойно, в своём ритме.</p></section>
     <nav class="health-tabs health-cycle-nav" aria-label="Разделы здоровья">
       <a href="./health.html?view=metrics">♡ Показатели</a>
-      <a href="./health.html?view=wellness">♡ Забота</a>
       <a href="./health.html?view=meds">◈ Лекарства</a>
       <a href="./health.html?view=sleep">☾ Сон</a>
       <a href="./health.html?view=files">▤ Документы</a>
-      <span class="active" aria-current="page">♡ Цикл</span>
+      <span class="active" aria-current="page">♡ Забота</span>
     </nav>
     <main class="care-main">
+   <section class="health-wellness" id="healthWellness" aria-labelledby="healthWellnessTitle">
+    <header class="health-wellness-head">
+     <p class="day-eyebrow">SEYVEO · ЗАБОТА О СЕБЕ</p>
+     <h2 id="healthWellnessTitle">Маленькие паузы для себя</h2>
+     <p>Четыре полезные привычки. Без соревнований и лишних уведомлений.</p>
+    </header>
+    <div class="wellness-cards">
+     <button type="button" class="wellness-card" data-wellness-open="breathing" aria-controls="healthWellnessDetail" aria-expanded="false">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 13c4-7 9-6 10-2s-3 6-5 4M3 21c6-4 12-4 15 0s-1 6-4 4M17 8c4-5 10-3 11 1s-4 7-7 5"/></svg>
+      <strong>Дыхание</strong><small id="wellnessBreathCardMeta">1–5 минут</small>
+     </button>
+     <button type="button" class="wellness-card" data-wellness-open="water" aria-controls="healthWellnessDetail" aria-expanded="false">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C12 9 7 15 7 20a9 9 0 0 0 18 0c0-5-5-11-9-17Z"/><path d="M12 22a5 5 0 0 0 5 4"/></svg>
+      <strong>Вода</strong><small id="wellnessWaterCardMeta">Начни с первого стакана</small>
+     </button>
+     <button type="button" class="wellness-card" data-wellness-open="eyes" aria-controls="healthWellnessDetail" aria-expanded="false">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 16s5-8 13-8 13 8 13 8-5 8-13 8S3 16 3 16Z"/><circle cx="16" cy="16" r="4"/></svg>
+      <strong>Глаза</strong><small id="wellnessEyesCardMeta">1 минута отдыха</small>
+     </button>
+
+     <button type="button" class="wellness-card" data-wellness-open="steps" aria-controls="healthWellnessDetail" aria-expanded="false">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M11 27c-3-2-4-6-2-9l4-5c2-2 5-1 5 2v5c0 4-3 8-7 7Z"/><path d="M19 11c-2-2-2-5 0-7s5-1 6 2-2 5-6 5ZM8 13l-3-2M12 9l-2-3"/></svg>
+      <strong>Шаги</strong><small id="wellnessStepsCardMeta">Сегодня: нет записи</small>
+     </button>
+    </div>
+    <section class="wellness-detail" id="healthWellnessDetail" aria-label="Инструмент заботы" hidden>
+     <div class="wellness-panel" data-wellness-panel="breathing" hidden>
+      <h3>Минута спокойствия</h3>
+      <p>Вдох на 4 секунды, выдох на 6. Дыши в комфортном ритме, без задержек и усилий.</p>
+      <label class="wellness-session-select">Длительность
+       <select id="wellnessBreathDuration" aria-label="Длительность дыхательной паузы">
+        <option value="1">1 минута</option><option value="3">3 минуты</option><option value="5">5 минут</option>
+       </select>
+      </label>
+      <div class="wellness-session">
+       <div class="wellness-breath-visual" id="wellnessBreathVisual" aria-hidden="true"><div class="wellness-breath-disc"></div></div>
+       <p class="wellness-session-stage" id="wellnessBreathStage" aria-live="polite">Вдох — 4 сек · выдох — 6 сек</p>
+       <output class="wellness-session-time" id="wellnessBreathTime">01:00</output>
+       <div class="wellness-session-actions">
+        <button type="button" class="wellness-primary" id="wellnessBreathStart">Начать</button>
+        <button type="button" id="wellnessBreathStop" hidden>Завершить</button>
+       </div>
+      </div>
+      <p class="wellness-caption">Если почувствуешь головокружение или дискомфорт — остановись и вернись к обычному дыханию.</p>
+     </div>
+     <div class="wellness-panel" data-wellness-panel="water" hidden>
+      <h3>Мой водный баланс</h3>
+      <p>Отмечай, сколько воды выпито. Объёмы вводятся вручную и хранятся только в этом браузере.</p>
+      <div class="wellness-stat"><strong id="wellnessWaterValue">0 мл</strong><span id="wellnessWaterGoal">Личная цель не задана</span></div>
+      <div class="wellness-progress" role="progressbar" aria-label="Доля личной цели воды" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="wellnessWaterBar"></span></div>
+      <div class="wellness-buttons">
+       <button type="button" class="wellness-primary" data-water-add="250">+ 250 мл</button>
+       <button type="button" data-water-add="150">+ 150 мл</button>
+       <button type="button" data-water-add="500">+ 500 мл</button>
+       <button type="button" id="wellnessWaterUndo" disabled>Отменить</button>
+      </div>
+      <div class="wellness-inline">
+       <label>Моя цель на день, мл
+        <input type="number" inputmode="numeric" min="250" max="6000" step="50" id="wellnessGoalInput" placeholder="Не задана">
+       </label>
+       <button type="button" id="wellnessGoalSave">Сохранить цель</button>
+      </div>
+      <p class="wellness-caption">Потребность в жидкости индивидуальна. Не старайся пить через силу; при медицинских ограничениях ориентируйся на врача.</p>
+     </div>
+     <div class="wellness-panel" data-wellness-panel="eyes" hidden>
+      <h3>Отдых для глаз</h3>
+      <p>Короткая пауза по принципу 20–20–20 и мягкое переключение фокуса.</p>
+      <div class="wellness-session">
+       <div class="wellness-eye-focus" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M7 32s10-15 25-15 25 15 25 15-10 15-25 15S7 32 7 32Z"/><circle cx="32" cy="32" r="8"/></svg></div>
+       <p id="wellnessEyeTitle" class="wellness-session-stage">Посмотри вдаль</p>
+       <p id="wellnessEyeHint" class="wellness-eye-hint">Оторвись от экрана. Найди предмет примерно в шести метрах или дальше.</p>
+       <output class="wellness-session-time" id="wellnessEyeTime">01:00</output>
+       <div class="wellness-progress" aria-hidden="true"><span id="wellnessEyeProgress"></span></div>
+       <div class="wellness-session-actions">
+        <button type="button" class="wellness-primary" id="wellnessEyeStart">Начать</button>
+        <button type="button" id="wellnessEyeStop" hidden>Завершить</button>
+       </div>
+      </div>
+      <p class="wellness-caption">Упражнения помогают сделать перерыв от экрана, но не лечат зрение. При боли или головокружении прекрати сеанс.</p>
+     </div>
+
+     <div class="wellness-panel" data-wellness-panel="steps" hidden>
+      <h3>Мои шаги</h3>
+      <p>Шаги за день из ручных записей или разрешённого импорта. Веб-версия не считает их автоматически.</p>
+      <div class="wellness-stat"><strong id="wellnessStepsValue">—</strong><span id="wellnessStepsSource">Нет записи на сегодня</span></div>
+      <div class="wellness-inline">
+       <label>Дата<input type="date" id="wellnessStepsDate"></label>
+       <label>Шагов за день<input type="number" min="0" max="200000" step="1" inputmode="numeric" id="wellnessStepsInput" placeholder="Например, 6500"></label>
+      </div>
+      <div class="wellness-buttons"><button type="button" class="wellness-primary" id="wellnessStepsSave">Сохранить шаги</button><button type="button" id="wellnessStepsDelete" hidden>Убрать мою запись</button></div>
+      <div class="wellness-steps-week"><p>Последние семь дней</p><div id="wellnessStepsWeek" class="wellness-steps-bars" aria-label="Записи шагов за семь дней"></div></div>
+      <p class="wellness-caption">Одна ручная запись на день. Импортированные показатели не удаляются при изменении ручных данных.</p>
+     </div>
+     <p id="wellnessNotice" class="wellness-notice" role="status" aria-live="polite"></p>
+    </section>
+   </section>
+      <section class="care-cycle-entry">
+       <button type="button" id="careToggleCycle" aria-expanded="false" aria-controls="careCycleContent"><span aria-hidden="true">♡</span><span><strong>Женский цикл</strong><small>Личный календарь · только по желанию</small></span><span class="care-cycle-arrow" aria-hidden="true">›</span></button>
+      </section>
+      <section id="careCycleContent" hidden>
       <section class="care-hero care-cycle-hero" aria-label="Женский календарь">
         <span class="care-eyebrow">♡ ЖЕНСКОЕ ЗДОРОВЬЕ</span>
         <div class="care-hero-line"><div><h2>Женский календарь<span class="care-heart">♡</span></h2><p>У организма свой календарь. Без совещаний.</p></div><span class="care-moon" aria-hidden="true">☾</span></div>
@@ -150,6 +251,7 @@
         </section>
       </section>
       <p class="care-disclaimer">Календарь предназначен только для личных заметок. Он не диагностирует заболевания, не определяет безопасные дни и не подходит для контрацепции или установления беременности. При необычных симптомах лучше обратиться к врачу.</p>
+      </section>
     </main>
     
   </div>
