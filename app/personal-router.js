@@ -90,6 +90,10 @@
     if(!initialized)return;
     const changed=current!==view;
     current=view;
+    if(view!=='health'){
+      // Stop a running breathing/eye session when its iframe leaves the screen.
+      try{frames.health?.contentWindow?.dispatchEvent(new Event('dm-health-leave'));}catch(_){}
+    }
     for(const kind of ['health','cycle']){
       const panel=panels[kind];
       panel.hidden=view!==kind;
