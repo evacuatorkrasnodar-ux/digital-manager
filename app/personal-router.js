@@ -28,7 +28,7 @@
     }
   }
   function showHealthSubsection(view){
-    if(!['metrics','meds','sleep','files'].includes(view))return;
+    if(!['metrics','wellness','meds','sleep','files'].includes(view))return;
     pendingHealthView=view;
     healthSection=view;
     updateMedicalDock();
@@ -142,7 +142,7 @@
     }
     initialized=true;
     pendingHealthView=new URLSearchParams(location.search).get('healthView')||'';
-    if(['metrics','meds','sleep','files'].includes(pendingHealthView))healthSection=pendingHealthView;
+    if(['metrics','wellness','meds','sleep','files'].includes(pendingHealthView))healthSection=pendingHealthView;
     document.getElementById('personalHealthTabs')?.addEventListener('click',event=>{
       const button=event.target.closest('[data-personal-health]');
       if(!button)return;
