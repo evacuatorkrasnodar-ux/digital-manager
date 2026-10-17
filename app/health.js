@@ -422,7 +422,7 @@
  function init(){
   document.querySelectorAll('[data-health]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.health)));
   const requested=new URLSearchParams(location.search).get('view');
-  setView(['metrics','meds','sleep','files'].includes(requested)?requested:'metrics');
+  setView(['metrics','wellness','meds','sleep','files'].includes(requested)?requested:'metrics');
   $('healthConsent').addEventListener('change',()=>$('healthEnable').disabled=!$('healthConsent').checked);
   $('healthEnable').addEventListener('click',async()=>{
    if(!$('healthConsent').checked||!db)return;
