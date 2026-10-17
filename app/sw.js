@@ -1,5 +1,5 @@
 /* PWA updates: network-first documents and code; cached assets usable offline. */
-const CACHE='digital-manager-black-velvet-v808-20261017';
+const CACHE='digital-manager-black-velvet-v809-20261017';
 const CACHE_PREFIX='digital-manager-black-velvet-';
 self.addEventListener('install',event=>{
  event.waitUntil(self.skipWaiting());
