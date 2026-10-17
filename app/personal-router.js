@@ -28,7 +28,7 @@
     }
   }
   function showHealthSubsection(view){
-    if(!['metrics','wellness','meds','sleep','files'].includes(view))return;
+    if(!['metrics','meds','sleep','files'].includes(view))return;
     pendingHealthView=view;
     healthSection=view;
     updateMedicalDock();
@@ -49,9 +49,9 @@
     const eyebrow=document.getElementById('personalHealthEyebrow');
     const title=document.getElementById('personalHealthTitle');
     const description=document.getElementById('personalHealthDescription');
-    if(eyebrow)eyebrow.textContent=cycle?'ЖЕНСКОЕ ЗДОРОВЬЕ ♡':'МОЁ ЗДОРОВЬЕ ♡';
-    if(title)title.textContent=cycle?'Цикл под контролем. Ну, насколько он согласен.':'Здоровье любит внимание. И выходные.';
-    if(description)description.textContent=cycle?'Даты и самочувствие — здесь. Память может взять выходной.':'Пульс, сон и записи — всё под рукой. Без очереди в регистратуру.';
+    if(eyebrow)eyebrow.textContent=cycle?'ЗАБОТА ♡':'МОЁ ЗДОРОВЬЕ ♡';
+    if(title)title.textContent=cycle?'Немного времени для себя.':'Здоровье любит внимание. И выходные.';
+    if(description)description.textContent=cycle?'Дыхание, вода, глаза и шаги. Женский цикл — отдельно, по желанию.':'Давление, пульс и назначения — всё под рукой.';
     const selected=cycle?'cycle':healthSection;
     dock.querySelectorAll('[data-personal-health]').forEach(button=>{
       const active=button.dataset.personalHealth===selected;
@@ -89,6 +89,9 @@
     view=safeView(view);
     if(!initialized)return;
     const changed=current!==view;
+    if(changed&&current==='cycle'){
+      try{frames.cycle?.contentWindow?.dispatchEvent(new Event('dm-care-leave'));}catch(_){}
+    }
     current=view;
     if(view!=='health'){
       // Stop a running breathing/eye session when its iframe leaves the screen.
@@ -115,6 +118,9 @@
       // Reset only the content scroller. Never scroll the page or move the dock.
       const main=shell?.querySelector('main');
       if(main)main.scrollTop=0;
+    }
+    if(view==='cycle'){
+      try{frames.cycle?.contentWindow?.dispatchEvent(new Event('dm-care-show'));}catch(_){}
     }
     requestAnimationFrame(sizeFrames);
   }
@@ -146,7 +152,7 @@
     }
     initialized=true;
     pendingHealthView=new URLSearchParams(location.search).get('healthView')||'';
-    if(['metrics','wellness','meds','sleep','files'].includes(pendingHealthView))healthSection=pendingHealthView;
+    if(['metrics','meds','sleep','files'].includes(pendingHealthView))healthSection=pendingHealthView;
     document.getElementById('personalHealthTabs')?.addEventListener('click',event=>{
       const button=event.target.closest('[data-personal-health]');
       if(!button)return;
