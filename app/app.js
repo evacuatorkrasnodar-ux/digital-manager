@@ -1586,36 +1586,57 @@
     positionPlasmaPanelForKeyboard();
     dmScheduleComposerIdle();
   }
-  // The visualViewport moves the composer's glass and its original plasma
-  // together. This avoids a floating send button behind a mobile keyboard.
+  // One keyboard geometry for the small composer, expanded editor and plasma.
+  // iOS moves the visual viewport independently of the layout viewport; never
+  // stack the keyboard height with safe-area or dvh offsets.
+  let dmKeyboardFrame=0;
   function positionPlasmaPanelForKeyboard(){
     const viewport=window.visualViewport;
-    const occluded=viewport?Math.max(0,window.innerHeight-viewport.height-viewport.offsetTop):0;
-    const keyboardOpen=!plasmaPanel.hidden&&document.activeElement===plasmaInput&&occluded>120;
+    const visibleHeight=viewport?viewport.height:window.innerHeight;
+    const obscured=viewport
+      ?Math.max(0,window.innerHeight-viewport.height-viewport.offsetTop)
+      :0;
+    const previous=plasmaPanel.classList.contains('dm-chat-keyboard-open');
+    const focused=document.activeElement===plasmaInput;
+    // Keep the anchored geometry while iOS animates the keyboard away after
+    // a toolbar tap; otherwise the editor briefly drops behind the keyboard.
+    const keyboardOpen=!plasmaPanel.hidden&&obscured>110&&(focused||previous);
     plasmaPanel.classList.toggle('dm-chat-keyboard-open',keyboardOpen);
     document.documentElement.classList.toggle('dm-compose-keyboard-open',keyboardOpen);
-    const value=keyboardOpen?Math.round(occluded)+'px':'0px';
-    plasmaPanel.style.setProperty('--dm-chat-kb',value);
-    document.documentElement.style.setProperty('--dm-chat-kb',value);
-    // Compact input: anchor the actual fixed elements to the visible keyboard
-    // edge instead of stacking safe-area and dock offsets on iOS.
-    const compactKeyboard=keyboardOpen&&!plasmaPanel.classList.contains('dm-chat-editor');
-    const controls=byId('dockHiddenControls');
-    plasmaPanel.style.bottom=compactKeyboard?(Math.round(occluded)+6)+'px':'';
-    controls.style.bottom=compactKeyboard?(Math.round(occluded)-32)+'px':'';
-  }
-  if(window.visualViewport){
-    window.visualViewport.addEventListener('resize',positionPlasmaPanelForKeyboard);
-    window.visualViewport.addEventListener('scroll',positionPlasmaPanelForKeyboard);
-  }
-  plasmaInput.addEventListener('focus',positionPlasmaPanelForKeyboard);
-  plasmaInput.addEventListener('blur',()=>{
-    plasmaPanel.classList.remove('dm-chat-keyboard-open');
-    document.documentElement.classList.remove('dm-compose-keyboard-open');
-    plasmaPanel.style.setProperty('--dm-chat-kb','0px');
+    // Legacy keyboard offsets must stay neutral. Both surfaces use the SAME
+    // visual-viewport coordinates through the final composer CSS layer.
     document.documentElement.style.setProperty('--dm-chat-kb','0px');
+    plasmaPanel.style.removeProperty('--dm-chat-kb');
     plasmaPanel.style.bottom='';
     byId('dockHiddenControls').style.bottom='';
+    if(keyboardOpen){
+      document.documentElement.style.setProperty('--dm-chat-visible-bottom',Math.round(obscured)+'px');
+      document.documentElement.style.setProperty('--dm-chat-visible-height',Math.round(visibleHeight)+'px');
+    }else{
+      document.documentElement.style.removeProperty('--dm-chat-visible-bottom');
+      document.documentElement.style.removeProperty('--dm-chat-visible-height');
+    }
+  }
+  function dmQueueKeyboardPosition(){
+    if(dmKeyboardFrame)return;
+    dmKeyboardFrame=requestAnimationFrame(()=>{
+      dmKeyboardFrame=0;
+      positionPlasmaPanelForKeyboard();
+    });
+  }
+  if(window.visualViewport){
+    window.visualViewport.addEventListener('resize',dmQueueKeyboardPosition);
+    window.visualViewport.addEventListener('scroll',dmQueueKeyboardPosition);
+  }
+  window.addEventListener('resize',dmQueueKeyboardPosition);
+  plasmaInput.addEventListener('focus',()=>{
+    dmQueueKeyboardPosition();
+    // Keyboard first appears after focus; geometry follows viewport resize.
+  });
+  plasmaInput.addEventListener('blur',()=>{
+    dmQueueKeyboardPosition();
+    // Some iOS versions deliver their final visualViewport frame after blur.
+    setTimeout(dmQueueKeyboardPosition,350);
   });
   plasmaInput.addEventListener('input',()=>{dmSaveDraft();dmSyncComposer();dmScheduleComposerIdle();});
   plasmaPanel.addEventListener('pointerdown',dmScheduleComposerIdle);
@@ -1633,7 +1654,7 @@
   });
   byId('plasmaClearDraft').addEventListener('click',()=>{
     if(plasmaInput.value&&!window.confirm('Очистить сохранённый черновик?'))return;
-    plasmaInput.value='';dmSaveDraft();dmSyncComposer();plasmaInput.focus();
+    plasmaInput.value='';dmSaveDraft();dmSyncComposer();plasmaInput.focus({preventScroll:true});
   });
   function closePlasmaPanel(){
     dmStopVoiceInput();
@@ -1646,7 +1667,8 @@
     document.documentElement.classList.remove('dm-plasma-panel-open','dm-compose-editor');
     plasmaPanel.classList.remove('dm-chat-keyboard-open');
     document.documentElement.classList.remove('dm-compose-keyboard-open');
-    plasmaPanel.style.setProperty('--dm-chat-kb','0px');
+    document.documentElement.style.removeProperty('--dm-chat-visible-bottom');
+    document.documentElement.style.removeProperty('--dm-chat-visible-height');
     document.documentElement.style.setProperty('--dm-chat-kb','0px');
     plasmaPanel.style.bottom='';
     byId('dockHiddenControls').style.bottom='';
@@ -1660,7 +1682,7 @@
   function openPlasmaPanel(forceText=false){
     closeDockQuickActions();
     if(!plasmaPanel.hidden){
-      if(forceText){dmToggleDraftEditor(false);plasmaInput.focus();return;}
+      if(forceText){dmToggleDraftEditor(false);plasmaInput.focus({preventScroll:true});return;}
       closePlasmaPanel();return;
     }
     // Each fresh assistant interaction starts with the compact input.
@@ -1679,7 +1701,7 @@
     if(!forceText&&voicePrefs.tapAction==='voice'){
       dmStartVoiceInput();
     }else{
-      plasmaInput.focus();
+      plasmaInput.focus({preventScroll:true});
     }
     dmScheduleComposerIdle();
   }
