@@ -111,12 +111,12 @@
 }
 .health-shell .health-tabs>:is(button,a,span):first-child,
 .care-shell .health-cycle-nav>:is(button,a,span):first-child{min-width:86px}
-.health-shell .health-tabs>:is(button,a,span):nth-child(3),
-.care-shell .health-cycle-nav>:is(button,a,span):nth-child(3){min-width:56px}
-.health-shell .health-tabs>:is(button,a,span):nth-child(4),
-.care-shell .health-cycle-nav>:is(button,a,span):nth-child(4){min-width:86px}
-.health-shell .health-tabs>:is(button,a,span):nth-child(5),
-.care-shell .health-cycle-nav>:is(button,a,span):nth-child(5){min-width:62px}
+.health-shell .health-tabs>[data-health="sleep"],
+.care-shell .health-cycle-nav>a[href*="view=sleep"]{min-width:56px}
+.health-shell .health-tabs>[data-health="files"],
+.care-shell .health-cycle-nav>a[href*="view=files"]{min-width:86px}
+.health-shell .health-tabs>.health-cycle-link,
+.care-shell .health-cycle-nav>.active{min-width:62px}
 .health-shell .health-tabs>.active,
 .care-shell .health-cycle-nav>.active{
   z-index:2;
