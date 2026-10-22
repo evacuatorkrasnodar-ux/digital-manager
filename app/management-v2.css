@@ -1,0 +1,9 @@
+/* SEYVEO Management v2 — restrained Black Velvet hierarchy */
+#mgMenu.dm-management-v2{display:flex;flex-direction:column;gap:23px}
+#mgMenu.dm-management-v2[hidden]{display:none}
+.dm-mg-group{min-width:0;display:flex;flex-direction:column}
+.dm-mg-group-title{font-size:11px!important;letter-spacing:.075em!important;font-weight:500!important;color:rgba(235,235,240,.51)!important;margin:0 0 8px 14px!important;text-transform:uppercase}
+.dm-mg-group .mg-menu-row{min-height:64px}
+.dm-mg-group .mg-copy strong{font-weight:500}
+.dm-mg-group .mg-copy small{font-weight:400}
+@media(prefers-reduced-motion:reduce){.dm-mg-group *{animation:none!important;transition:none!important}}
