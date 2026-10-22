@@ -674,8 +674,8 @@
     },3600);
   }
   let mgCurrent='home';
-  const mgNames={manager:'Мой помощник',
-    voice:'Внешний вид и общение',autopilot:'Автопилот',layout:'Главная страница',application:'Приложение',connections:'Подключения',documents:'Документы',
+  const mgNames={profile:'О вас и вашем деле',appearance:'Внешний вид',notifications:'Уведомления',backup:'Данные и резервные копии',subscription:'Подписка',about:'О приложении',manager:'Мой помощник',
+    voice:'Внешний вид и общение',autopilot:'Самостоятельность Сэйви',layout:'Главная страница',application:'Приложение',connections:'Подключения',documents:'Документы',
     payments:'Платежи',learning:'Обучение',security:'Безопасность',workshop:'Моя мастерская'};
   const mgInfo={
     connections:'Связи объединят ваш сайт, почту, календарь, банки, продажи, маркетплейсы и ЭДО. Реальные подключения пока не настроены.',
@@ -960,12 +960,24 @@
     byId('mgHomeLayoutPanel').hidden=!mgIsLayout;
     byId('mgDetail').hidden=page==='home'||mgIsLayout;
     byId('mgTitle').textContent=mgNames[page]||'Управление';
-    byId('mgSubtitle').textContent=({home:'Пять разделов — всё на своём месте',layout:'Карточки и расположение',application:'Оформление · Безопасность · Данные',manager:'Все настройки одного помощника',autopilot:'Навыки и границы самостоятельности',connections:'Сервисы и источники данных',documents:'Файлы и шаблоны',payments:'Счета и регулярные расходы',learning:'Возможности приложения',voice:'Плазма · Док · Голос · Имя',workshop:'Инструменты и калькуляторы'})[page]||'Настройки приложения';
+    byId('mgSubtitle').textContent=({home:'Сэйви · Приложение · SEYVEO',layout:'Карточки и расположение',application:'Оформление · Безопасность · Данные',manager:'Все настройки одного помощника',autopilot:'Навыки и границы самостоятельности',connections:'Сервисы и источники данных',documents:'Файлы и шаблоны',payments:'Счета и регулярные расходы',learning:'Возможности приложения',voice:'Плазма · Док · Голос · Имя',workshop:'Инструменты и калькуляторы'})[page]||'Настройки приложения';
     clearTimeout(voicePreviewTimer);
     if(dmSettingsGlyphTimer!==null){clearTimeout(dmSettingsGlyphTimer);dmSettingsGlyphTimer=null;}
     if(page==='home'){byId('mgDetail').innerHTML='';requestAnimationFrame(mgSyncCarouselNav);window.dispatchEvent(new Event('dm:management-home'));return;}
     let content='';
-    if(page==='application'){
+    if(page==='profile'){
+      content='<div class="mg-unified-hub"><p class="mg-unified-note">Ваши сведения, цели и планы помогают Сэйви давать более полезные рекомендации. Проверяйте и уточняйте их в любое время.</p><button type="button" id="mgOpenBusinessJourney" class="mg-unified-item"><span class="mg-copy"><strong>Продолжить знакомство</strong><small>Ваше дело, планы и важные подробности</small></span></button><p class="mg-disclaimer">Сведения, которые Сэйви предполагает, не считаются подтверждёнными, пока вы их не проверите.</p></div>';
+    }else if(page==='appearance'){
+      content='<div class="mg-unified-hub"><button type="button" class="mg-unified-item" data-mg-open="voice"><span class="mg-copy"><strong>Плазма, голос и док</strong><small>Существующие настройки помощницы</small></span></button><button type="button" class="mg-unified-item" data-mg-open="layout"><span class="mg-copy"><strong>Главная страница</strong><small>Карточки и расположение</small></span></button><p class="mg-disclaimer">Оформление Black Velvet активно. Другие темы и системные эффекты показываются только после реализации.</p></div>';
+    }else if(page==='notifications'){
+      content='<div class="mg-unified-hub"><h2>Напоминания и приватность</h2><p class="mg-unified-note">Здесь будут настройки приоритетов и тихих часов.</p><div class="mg-unified-item"><span class="mg-copy"><strong>Рядом люди</strong><small>Скрывать содержание личных уведомлений и не произносить их вслух</small></span><span class="voice-coming">В разработке</span></div><p class="mg-disclaimer">Режим пока не защищает реальные уведомления и голосовые ответы. Не полагайтесь на него для конфиденциальности.</p></div>';
+    }else if(page==='backup'){
+      content='<div class="mg-unified-hub"><h2>Данные и резервные копии</h2><p class="mg-unified-note">Здесь появятся сведения о хранении, синхронизации и восстановлении. Подключить облачный источник можно в разделе «Подключения».</p><button type="button" class="mg-unified-item" data-mg-open="connections"><span class="mg-copy"><strong>Открыть подключения</strong><small>Поддерживаемые сервисы и источники</small></span></button><p class="mg-disclaimer">Автоматическое резервное копирование пока не настроено. Не удаляйте приложение в расчёте на восстановление данных.</p></div>';
+    }else if(page==='subscription'){
+      content='<div class="mg-unified-hub"><h2>Подписка SEYVEO</h2><p class="mg-unified-note">Планы, срок действия и управление подпиской появятся после подключения реальной системы оплаты.</p><p class="mg-disclaimer">Статус «Активна» не отображается без подтверждения сервера лицензирования.</p></div>';
+    }else if(page==='about'){
+      content='<div class="mg-unified-hub"><h2>SEYVEO</h2><p class="mg-unified-note">Цифровой управляющий · Black Velvet</p><button type="button" class="mg-unified-item" data-mg-open="learning"><span class="mg-copy"><strong>Помощь и обучение</strong><small>Знакомство с возможностями приложения</small></span></button><p class="mg-disclaimer">Некоторые возможности находятся в разработке.</p></div>';
+    }else     if(page==='application'){
       content='<div class="mg-unified-hub">'+
         '<div class="mg-unified-panel"><h2>Оформление</h2><p class="mg-unified-note">Сейчас доступна фирменная тёмная тема. Светлую добавим позднее.</p></div>'+
         '<button type="button" class="mg-unified-item" data-mg-open="security"><span class="mg-unified-icon"><svg class="ico" aria-hidden="true"><use href="#ic-shield"/></svg></span><span class="mg-copy"><strong>Безопасность и данные</strong><small>Доступ, разрешения и защита</small></span></button>'+
@@ -1126,7 +1138,7 @@
   document.querySelectorAll('[data-mg-open]').forEach(el=>el.addEventListener('click',()=>{
     mgSettingsPage(el.dataset.mgOpen);
   }));
-  byId('mgBack').addEventListener('click',()=>{if(mgCurrent==='home')setTab('home');else if(mgCurrent==='manager')mgSettingsPage('home');else if(['voice','autopilot'].includes(mgCurrent))mgSettingsPage('manager');else if(['security','learning'].includes(mgCurrent))mgSettingsPage('application');else mgSettingsPage('home');});
+  byId('mgBack').addEventListener('click',()=>{if(mgCurrent==='home')setTab('home');else if(mgCurrent==='manager')mgSettingsPage('home');else if(mgCurrent==='voice')mgSettingsPage('appearance');else if(mgCurrent==='autopilot')mgSettingsPage('home');else if(['security','notifications','backup','subscription','about','profile','appearance'].includes(mgCurrent))mgSettingsPage('home');else if(mgCurrent==='layout')mgSettingsPage('appearance');else mgSettingsPage('home');});
   byId('mgEditHomeLayout').addEventListener('click',()=>{setTab('home');window.DMHomeLayout?.edit?.();});
   document.querySelectorAll('[data-mg-card]').forEach(el=>el.addEventListener('change',()=>{
     if(lockedHomeCards.has(el.dataset.mgCard)){
